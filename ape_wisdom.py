@@ -310,19 +310,20 @@ def filter_and_process(stocks):
         )
 
     print(f"{C_GREEN}--- ANALYSIS COMPLETE ---{C_RESET}")
-    
+
+    # --- ADVANCED METRICS ---
     tracker = HistoryTracker(HISTORY_FILE)
     
-    velocity_list = []
-    divergence_list = []
-
+    vel_list, div_list, streak_list = [], [], []
     for _, row in df.iterrows():
-        m = tracker.get_metrics(row['Sym'])
-        velocity_list.append(m['velocity'])
-        divergence_list.append(m['divergence'])
+        m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
+        vel_list.append(m['vel'])
+        div_list.append(m['div'])
+        streak_list.append(m['streak'])
 
-    df['Velocity'] = velocity_list
-    df['Divergence'] = divergence_list
+    df['Velocity'] = vel_list
+    df['Divergence'] = div_list
+    df['Streak'] = streak_list
 
     # Save current run to history
     tracker.save(df)
