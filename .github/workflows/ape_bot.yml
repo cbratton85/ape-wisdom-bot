@@ -1,6 +1,7 @@
 name: Market Momentum Tracker
 
 on:
+  push:
   schedule:
     - cron: '15 * * * *'
   workflow_dispatch:      # Allows manual testing
