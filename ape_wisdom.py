@@ -16,8 +16,9 @@ import shutil
 #                  CONFIGURATION
 # ==========================================
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-# We create a 'public' folder for the website files
+# The script will save the HTML here for the website
 PUBLIC_DIR = os.path.join(SCRIPT_DIR, "public") 
+
 CACHE_FILE = os.path.join(SCRIPT_DIR, "ape_cache.json")
 MARKET_DATA_CACHE_FILE = os.path.join(SCRIPT_DIR, "market_data.pkl")
 HISTORY_FILE = os.path.join(SCRIPT_DIR, "market_history.json")
@@ -98,7 +99,6 @@ def save_cache(cache_data):
     except: pass
 
 def fetch_meta_data_robust(ticker):
-    # Simplified for brevity, same logic as before
     name, meta, quote_type, mcap = ticker, "Unknown", "EQUITY", 0
     try:
         dat = yf.Ticker(ticker) 
@@ -211,7 +211,8 @@ def get_all_trending_stocks():
 def export_interactive_html(df):
     try:
         export_df = df.copy()
-        # --- ENSURE PUBLIC DIR EXISTS ---
+        
+        # --- CREATE PUBLIC FOLDER FOR WEBSITE ---
         if not os.path.exists(PUBLIC_DIR):
             os.makedirs(PUBLIC_DIR)
 
@@ -259,7 +260,7 @@ def export_interactive_html(df):
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
-        # Compact HTML Template
+        # HTML Template
         html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Ape Wisdom</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
@@ -286,13 +287,13 @@ def export_interactive_html(df):
         var d=new Date($("#time").data("utc"));$("#time").text(d.toLocaleString());}});
         </script></body></html>"""
 
-        # 1. Save Unique File (History)
+        # 1. Save with timestamp (History)
         timestamp = time.strftime("%Y-%m-%d_%H-%M")
         filename = f"scan_{timestamp}.html"
         filepath = os.path.join(PUBLIC_DIR, filename)
         with open(filepath, "w", encoding="utf-8") as f: f.write(html_content)
 
-        # 2. Save Index File (Current Link)
+        # 2. Save as Index (Current Link)
         index_path = os.path.join(PUBLIC_DIR, "index.html")
         shutil.copy(filepath, index_path)
 
@@ -308,24 +309,25 @@ def send_discord_link(filename):
     DISCORD_URL = os.environ.get('DISCORD_WEBHOOK')
     REPO_NAME = os.environ.get('GITHUB_REPOSITORY') # e.g. "username/my-repo"
     
-    if not DISCORD_URL or not REPO_NAME: return
+    if not DISCORD_URL or not REPO_NAME: 
+        print("Missing Discord URL or Repo Name")
+        return
 
     # Construct the Website URL
     try:
         user, repo = REPO_NAME.split('/')
-        # The URL for GitHub Pages is standard
+        # This is the standard GitHub Pages URL format
         website_url = f"https://{user}.github.io/{repo}/{filename}"
-        index_url = f"https://{user}.github.io/{repo}/"
         
-        # NOTE: GitHub Pages takes ~30 seconds to update. 
         msg = (f"🚀 **Market Scan Complete**\n"
                f"The dashboard has been updated.\n\n"
                f"🔗 **[Click Here to Open Dashboard]({website_url})**\n"
-               f"*(Note: It may take ~1 min for the link to go live)*")
+               f"*(Note: It may take ~30s for the link to go live)*")
 
         requests.post(DISCORD_URL, json={"content": msg})
         print(f"{C_GREEN}[+] Discord Link Sent!{C_RESET}")
-    except: pass
+    except Exception as e:
+        print(f"Error sending Discord link: {e}")
 
 if __name__ == "__main__":
     if "--auto" in sys.argv:
@@ -342,4 +344,4 @@ if __name__ == "__main__":
     raw = get_all_trending_stocks()
     df = filter_and_process(raw)
     export_interactive_html(df)
-    print("Done. Check 'public' folder.")
+    print("Done.")
