@@ -265,7 +265,7 @@ def get_all_trending_stocks():
 
 def export_interactive_html(df):
     try:
-        # FIX 1: Convert to object immediately so we can overwrite numbers with HTML strings
+        # Convert to object immediately so we can overwrite numbers with HTML strings
         export_df = df.copy().astype(object)
         
         if not os.path.exists(PUBLIC_DIR):
@@ -281,7 +281,7 @@ def export_interactive_html(df):
         export_df['Type_Tag'] = 'STOCK'
         tracker = HistoryTracker(HISTORY_FILE)
         
-        # FIX 2: Initialize Vel as String to avoid FutureWarning
+        # Initialize Vel as String to avoid FutureWarning
         export_df['Vel'] = ""; export_df['Sig'] = ""
 
         # Create Readable Volume Column
@@ -322,13 +322,13 @@ def export_interactive_html(df):
 
         export_df.rename(columns={'Meta': 'Industry/Sector', 'Vol_Display': 'Avg Vol'}, inplace=True)
 
-        # ADD 'Rank' to the start of the list
+        # Columns: 0=Rank, 1=Name, 2=Sym, 3=Vel, 4=Sig, 5=Rank+, 6=Price, 7=Avg Vol, 
+        #          8=Surge, 9=Mnt%, 10=Upvotes, 11=Squeeze, 12=Industry, 13=Type, 14=RawVol
         cols = ['Rank', 'Name', 'Sym', 'Vel', 'Sig', 'Rank+', 'Price', 'Avg Vol', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol']
         final_df = export_df[cols]
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
-        # HTML + JS Logic (NOTE: Double braces {{ }} are used for JS/CSS, Single braces { } for Python vars)
         html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Ape Wisdom Analysis</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
@@ -336,7 +336,7 @@ def export_interactive_html(df):
             body{{background-color:#121212;color:#e0e0e0;font-family:'Consolas','Monaco',monospace;padding:20px}}
             .table-dark{{--bs-table-bg:#1e1e1e;color:#ccc}} 
             th{{color:#00ff00;border-bottom:2px solid #444; font-size: 14px;}} 
-            /* FIX: Shifted from 4 to 5 because of new Rank column */
+            /* Child 5 is the "Sig" column (1-based index in CSS, matches Col 4 in JS) */
             th:nth-child(5), td:nth-child(5) {{ width: 1%; white-space: nowrap; }}
             td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
@@ -468,12 +468,12 @@ def export_interactive_html(df):
 
         $(document).ready(function(){{ 
             var table=$('.table').DataTable({{
-                "order":[[0,"asc"]], // FIX: Default Sort by Rank (Column 0)
+                "order":[[0,"asc"]], // Rank (0)
                 "pageLength": 25,
                 "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 "columnDefs": [ 
-                    {{ "visible": false, "targets": [13, 14] }}, // FIX: Shifted indices +1
-                    {{ "orderData": [14], "targets": [7] }}       // FIX: Shifted indices +1
+                    {{ "visible": false, "targets": [13, 14] }}, // Hidden: Type (13), RawVol (14)
+                    {{ "orderData": [14], "targets": [7] }}       // Sort AvgVol (7) by RawVol (14)
                 ],
                 
                 "drawCallback": function(settings) {{
@@ -485,18 +485,19 @@ def export_interactive_html(df):
             }});
             
             $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {{
-                var typeTag = data[12] || ""; 
+                // FIX INDICES FOR RANK COLUMN SHIFT (+1 to everything)
+                var typeTag = data[13] || ""; // Was 12
                 var viewMode = $('input[name="btnradio"]:checked').attr('id');
                 if (viewMode == 'btnradio2' && typeTag == 'ETF') return false;
                 if (viewMode == 'btnradio3' && typeTag == 'STOCK') return false;
 
                 var minPrice = parseFloat($('#minPrice').val()) || 0;
-                var priceStr = data[5] || "0"; 
+                var priceStr = data[6] || "0"; // Was 5
                 var price = parseFloat(priceStr.replace(/[$,]/g, '')) || 0;
                 if (price < minPrice) return false;
 
                 var minVol = parseFloat($('#minVol').val()) || 0;
-                var rawVol = parseFloat(data[13]) || 0; 
+                var rawVol = parseFloat(data[14]) || 0; // Was 13
                 if (rawVol < minVol) return false;
 
                 return true;
@@ -511,7 +512,8 @@ def export_interactive_html(df):
                 if (mode == 'btnradio2') headerTxt = "Industry";
                 else if (mode == 'btnradio3') headerTxt = "Sector";
                 
-                $(table.column(11).header()).text(headerTxt);
+                // Target Col 12 (Industry) instead of 11 (Squeeze)
+                $(table.column(12).header()).text(headerTxt);
                 table.draw(); 
             }};
             
