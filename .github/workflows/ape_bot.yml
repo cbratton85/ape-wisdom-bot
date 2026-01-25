@@ -6,6 +6,9 @@ on:
     - cron: '0 13-21 * * 1-5'
   workflow_dispatch:      # Allows manual testing
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,7 +22,7 @@ jobs:
         with:
           python-version: '3.9'
 
-      # --- RESTORE & SAVE CACHE (Keeps History) ---
+      # --- RESTORE CACHE ---
       - name: Cache JSON Data
         uses: actions/cache@v3
         with:
@@ -34,7 +37,16 @@ jobs:
         run: |
           pip install pandas yfinance requests lxml
 
+      # --- RUN SCRIPT (Generates HTML in 'public' folder) ---
       - name: Run Script
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          GITHUB_REPOSITORY: ${{ github.repository }} # Passes 'username/repo' to python
         run: python ape_wisdom.py --auto
+
+      # --- DEPLOY TO GITHUB PAGES ---
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public  # The script will now save HTML here
