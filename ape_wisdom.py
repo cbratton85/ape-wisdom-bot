@@ -784,7 +784,7 @@ if __name__ == "__main__":
             print(f" {C_BOLD}{labels_header}{C_RESET}\n" + DASH_LINE.replace("-", "="))
 
             for _, row in df_page.iterrows():
-                # Color Logic
+                # 1. Calculate Colors
                 z_r = row['z_Rank+']
                 r_color = C_YELLOW if z_r >= 2.0 else (C_GREEN if z_r >= 1.0 else "")
 
@@ -804,16 +804,20 @@ if __name__ == "__main__":
                 elif row['Master_Score'] > 1.5: name_color = C_YELLOW
                 else:                           name_color = ""
 
+                # 2. Prepare Strings (Do this HERE to avoid the SyntaxError)
                 clean_name = str(row['Name']).replace('\n', '').strip()[:NAME_MAX_WIDTH]
                 clean_meta = str(row['Meta']).replace('\n', '').strip()[:INDUSTRY_MAX_WIDTH]
-                
+                surge_str = f"{row['Surge']:.0f}%"  # <--- Calculating this here fixes the error
+                mnt_str = f"{row['Mnt%']:.0f}%"     # <--- Calculating this here fixes the error
+
+                # 3. Print
                 print(
                     f" {name_color}{clean_name:<{COL_WIDTHS[0]}}{C_RESET}"
                     f"{row['Sym']:<{COL_WIDTHS[1]}}"
                     f"{r_color}{row['Rank+']:<{COL_WIDTHS[2]}}{C_RESET}"
-                    f"${row['Price']:<{COL_WIDTHS[3]}.2f} " # Added space for Price alignment
-                    f"{s_color}{f'{row['Surge']:.0f}%':<{COL_WIDTHS[4]}}{C_RESET}"
-                    f"{m_color}{f'{row['Mnt%']:.0f}%':<{COL_WIDTHS[5]}}{C_RESET}"
+                    f"${row['Price']:<{COL_WIDTHS[3]}.2f} " 
+                    f"{s_color}{surge_str:<{COL_WIDTHS[4]}}{C_RESET}"  # <--- Use the variable
+                    f"{m_color}{mnt_str:<{COL_WIDTHS[5]}}{C_RESET}"    # <--- Use the variable
                     f"{v_color}{row['Upvotes']:<{COL_WIDTHS[6]}}{C_RESET}"
                     f"{sq_color}{int(row['Squeeze']):<{COL_WIDTHS[7]}}{C_RESET}"
                     f"{meta_color}{clean_meta:<{COL_WIDTHS[8]}}{C_RESET}"
