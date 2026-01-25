@@ -354,7 +354,7 @@ def export_interactive_html(df):
 
             <div class="legend-container">
                 <div class="legend-header" onclick="toggleLegend()">
-                    <span>ℹ️ STRATEGY GUIDE & LEGEND (Click to Toggle)</span>
+                    <span>STRATEGY GUIDE & LEGEND (Click to Toggle)</span>
                     <span id="legendArrow">▼</span>
                 </div>
                 <div class="legend-box" id="legendContent" style="display:none;">
