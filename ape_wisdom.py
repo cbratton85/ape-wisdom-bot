@@ -359,21 +359,23 @@ def export_interactive_html(df):
                 </div>
                 <div class="legend-box" id="legendContent" style="display:none;">
                     
-                    <div class="legend-section">
-                        <h5>🔥 Heat Status (Name Color)</h5>
-                        <div class="legend-item"><span class="legend-key" style="color:#ff4444">RED NAME</span> Hot (>3σ). High Volatility.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">YEL NAME</span> Warm (>1.5σ). Active.</div>
+                    
+                        <div class="legend-section">
+                        <h5>Heat Status (Name Color)</h5>
+                        <div class="legend-item"><span class="legend-key" style="color:#ff4444">RED NAME</span> <b>Extreme (>3σ):</b> Massive outlier in volume/mentions.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">YEL NAME</span> <b>Elevated (>1.5σ):</b> Activity is well above normal.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ffffff">WHT NAME</span> <b>Normal:</b> Standard activity levels.</div>
                         <div class="legend-item"><span class="legend-key" style="color:#ff00ff">MAGENTA</span> Exchange Traded Fund (ETF).</div>
                     </div>
 
-                    <div class="legend-section">
-                        <h5>🚀 Significance Signals</h5>
+                    
+                        <h5>Significance Signals</h5>
                         <div class="legend-item"><span class="legend-key" style="color:#00ffff">💎 ACCUM</span> Mentions RISING (>10%) + Price FLAT.</div>
                         <div class="legend-item"><span class="legend-key" style="color:#ffff00">🔥 TREND</span> In Top Trending list for 5+ consecutive days.</div>
                     </div>
                     
                     <div class="legend-section">
-                        <h5>📊 Metrics</h5>
+                        <h5>Metrics</h5>
                         <div class="legend-item"><span class="legend-key">Rank+</span> Spots climbed in last 24h.</div>
                         <div class="legend-item"><span class="legend-key">Surge</span> Volume vs 30-Day Avg.</div>
                         <div class="legend-item"><span class="legend-key">Mnt%</span> Change in Mentions vs 24h ago.</div>
