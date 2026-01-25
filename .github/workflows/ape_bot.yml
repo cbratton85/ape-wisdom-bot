@@ -1,4 +1,4 @@
-name: Hourly Email Scan
+name: Market Momentum Tracker
 
 on:
   schedule:
@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: '3.9'
 
-      # --- NEW STEP: Restore & Save Cache ---
+      # --- RESTORE & SAVE CACHE (Keeps History) ---
       - name: Cache JSON Data
         uses: actions/cache@v3
         with:
@@ -36,7 +36,5 @@ jobs:
 
       - name: Run Script
         env:
-          EMAIL_USER: ${{ secrets.EMAIL_USER }}
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: python ape_wisdom.py --auto
