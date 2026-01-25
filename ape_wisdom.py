@@ -227,11 +227,18 @@ def export_interactive_html(df):
             os.makedirs(PUBLIC_DIR)
 
         def color_span(text, color_hex): return f'<span style="color: {color_hex}; font-weight: bold;">{text}</span>'
+        def format_vol(v):
+            if v >= 1_000_000: return f"{v/1_000_000:.1f}M"
+            if v >= 1_000: return f"{v/1_000:.0f}K"
+            return str(v)
 
         C_GREEN, C_YELLOW, C_RED, C_CYAN, C_MAGENTA, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ff00ff", "#ffffff"
         export_df['Type_Tag'] = 'STOCK'
         tracker = HistoryTracker(HISTORY_FILE)
         export_df['Vel'] = 0; export_df['Sig'] = ""
+
+        # Create Readable Volume Column
+        export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
 
         for index, row in export_df.iterrows():
             m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
@@ -264,14 +271,18 @@ def export_interactive_html(df):
             t = row['Sym']
             export_df.at[index, 'Sym'] = f'<a href="https://finance.yahoo.com/quote/{t}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
             export_df.at[index, 'Price'] = f"${row['Price']:.2f}"
+            export_df.at[index, 'Vol_Display'] = color_span(export_df.at[index, 'Vol_Display'], "#ccc")
 
-        export_df.rename(columns={'Meta': 'Industry'}, inplace=True)
+        # RENAME Meta -> Industry/Sector
+        export_df.rename(columns={'Meta': 'Industry/Sector', 'Vol_Display': 'Avg Vol'}, inplace=True)
 
-        cols = ['Name', 'Sym', 'Vel', 'Sig', 'Rank+', 'Price', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry', 'Type_Tag', 'AvgVol']
+        # Columns (Index 10 is 'Industry/Sector')
+        cols = ['Name', 'Sym', 'Vel', 'Sig', 'Rank+', 'Price', 'Avg Vol', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol']
         final_df = export_df[cols]
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
+        # HTML + JS Logic
         html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Ape Wisdom Analysis</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
@@ -349,7 +360,7 @@ def export_interactive_html(df):
                     <span>ℹ️ STRATEGY GUIDE & LEGEND (Click to Toggle)</span>
                     <span id="legendArrow">▼</span>
                 </div>
-                <div class="legend-box" id="legendContent">
+                <div class="legend-box" id="legendContent" style="display:none;">
                     
                     <div class="legend-section">
                         <h5>🔥 Heat Status (Name Color)</h5>
@@ -362,13 +373,15 @@ def export_interactive_html(df):
                         <h5>🚀 Momentum Signals</h5>
                         <div class="legend-item"><span class="legend-key" style="color:#00ffff">💎 ACCUM</span> <b>Accumulation:</b> Mentions RISING (>10%) + Price FLAT.</div>
                         <div class="legend-item"><span class="legend-key" style="color:#ffff00">🔥 TREND</span> <b>Persistence:</b> In list >5 Days.</div>
-                        <div class="legend-item"><span class="legend-key">Vel</span> <b>Acceleration:</b> Difference in Rank+ vs yesterday. (+ = Speeding Up).</div>
+                        <div class="legend-item"><span class="legend-key">Vel</span> <b>Acceleration:</b> Difference in Rank+ vs yesterday.</div>
                     </div>
                     
                     <div class="legend-section">
                         <h5>📊 Metrics</h5>
                         <div class="legend-item"><span class="legend-key">Rank+</span> <b>Speed:</b> Spots climbed in last 24h.</div>
                         <div class="legend-item"><span class="legend-key">Surge</span> Volume vs 30-Day Avg.</div>
+                        <div class="legend-item"><span class="legend-key">Mnt%</span> Change in Mentions vs 24h ago.</div>
+                        <div class="legend-item"><span class="legend-key">Upvotes</span> Raw upvote count on Reddit.</div>
                         <div class="legend-item"><span class="legend-key">Squeeze</span> (Mentions × Vol) / MarketCap.</div>
                     </div>
 
@@ -387,10 +400,10 @@ def export_interactive_html(df):
             var arrow = document.getElementById("legendArrow");
             if (x.style.display === "none") {{
                 x.style.display = "grid";
-                arrow.innerText = "▼";
+                arrow.innerText = "▲";
             }} else {{
                 x.style.display = "none";
-                arrow.innerText = "▲";
+                arrow.innerText = "▼";
             }}
         }}
 
@@ -399,7 +412,8 @@ def export_interactive_html(df):
                 "order":[[4,"desc"]],
                 "pageLength": 25,
                 "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-                "columnDefs": [ {{ "visible": false, "targets": [11, 12] }} ],
+                // Hide Type_Tag (12) and RawAvgVol (13)
+                "columnDefs": [ {{ "visible": false, "targets": [12, 13] }} ],
                 
                 "drawCallback": function(settings) {{
                     var api = this.api();
@@ -410,25 +424,41 @@ def export_interactive_html(df):
             }});
             
             $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {{
-                var typeTag = data[11] || ""; 
+                // 1. View Type (Col 12)
+                var typeTag = data[12] || ""; 
                 var viewMode = $('input[name="btnradio"]:checked').attr('id');
                 if (viewMode == 'btnradio2' && typeTag == 'ETF') return false;
                 if (viewMode == 'btnradio3' && typeTag == 'STOCK') return false;
 
+                // 2. Price Filter (Col 5)
                 var minPrice = parseFloat($('#minPrice').val()) || 0;
                 var priceStr = data[5] || "0"; 
                 var price = parseFloat(priceStr.replace(/[$,]/g, '')) || 0;
                 if (price < minPrice) return false;
 
+                // 3. Volume Filter (Hidden Col 13)
                 var minVol = parseFloat($('#minVol').val()) || 0;
-                var rawVol = parseFloat(data[12]) || 0; 
+                var rawVol = parseFloat(data[13]) || 0; 
                 if (rawVol < minVol) return false;
 
                 return true;
             }});
 
             $('#minPrice, #minVol').on('keyup change', function() {{ table.draw(); }});
-            window.redraw = function() {{ table.draw(); }};
+            
+            // REDRAW & UPDATE HEADER TEXT
+            window.redraw = function() {{ 
+                var mode = $('input[name="btnradio"]:checked').attr('id');
+                var headerTxt = "Industry/Sector";
+                
+                if (mode == 'btnradio2') headerTxt = "Industry";
+                else if (mode == 'btnradio3') headerTxt = "Sector";
+                
+                // Update Column 11 Header (Index 10 is 'Industry/Sector' in the list)
+                $(table.column(11).header()).text(headerTxt);
+                
+                table.draw(); 
+            }};
             
             var d=new Date($("#time").data("utc"));
             $("#time").text("Last Updated: " + d.toLocaleString());
