@@ -700,7 +700,6 @@ if __name__ == "__main__":
     # =========================================
     # 1. AUTO MODE (For GitHub/Cron/Email)
     # =========================================
-    # This detects if the script is running in "Headless" mode
     if "--auto" in sys.argv:
         print(f"{C_YELLOW}--- STARTING AUTO-MODE SCAN ---{C_RESET}")
         
@@ -716,12 +715,19 @@ if __name__ == "__main__":
         # C. Generate HTML (Silent)
         filename = export_interactive_html(df)
         
-        # D. Send Email (Or Telegram if you prefer)
+        # D. Send Email
         if filename:
-            send_email(filename)
+            try:
+                # Check if send_email exists (in case you missed pasting it)
+                if 'send_email' in globals():
+                    send_email(filename)
+                else:
+                    print(f"{C_RED}[!] Error: send_email function missing. Check your code.{C_RESET}")
+            except Exception as e:
+                print(f"Email Error: {e}")
             
         print(f"{C_GREEN}--- AUTO SCAN COMPLETE ---{C_RESET}")
-        sys.exit() # <--- Important: Stops here so it doesn't open the menu
+        sys.exit() 
 
     # =========================================
     # 2. INTERACTIVE MODE (For You)
@@ -729,10 +735,9 @@ if __name__ == "__main__":
     raw_data = get_all_trending_stocks()
     CACHED_DF = filter_and_process(raw_data)
     
-    # Change 4: Added "0" for Master Score
     sort_map = {
         "T": ("Master_Score", False),
-        "0": ("Master_Score", False),   # <--- Press 0 for Hot Stocks
+        "0": ("Master_Score", False),
         "1": ("Name", True),
         "2": ("Sym", True),
         "3": ("Rank+", False),
@@ -747,7 +752,9 @@ if __name__ == "__main__":
     current_key, current_page, view_mode = "3", 0, "all"
 
     while True:
-        clear_screen()
+        # Clear screen
+        os.system('cls' if os.name == 'nt' else 'clear')
+        
         sort_col, sort_asc = sort_map.get(current_key, ("Rank+", False))
 
         # --- Apply View Filter ---
@@ -763,10 +770,6 @@ if __name__ == "__main__":
         total_pages = max(1, math.ceil(len(df_sorted) / PAGE_SIZE))
         df_page = df_sorted.iloc[current_page*PAGE_SIZE : (current_page+1)*PAGE_SIZE]
         
-        # We can remove print_ape_ui() call if the code below does the printing manually
-        # OR keep it if it just prints the title banner. Assuming it prints title:
-        # print_ape_ui(sort_col, df_sorted, current_page, total_pages, view_mode)
-        
         # --- HEADER & DATA PRINTING ---
         if not df_page.empty:
             numbers_header = ""
@@ -776,16 +779,16 @@ if __name__ == "__main__":
             for i, (label, width) in enumerate(zip(labels, COL_WIDTHS)):
                 numbers_header += f"{i+1:<{width}}"
                 labels_header += f"{label:<{width}}"
-                if label == "Price": # Fix alignment for Price column
+                if label == "Price": 
                     numbers_header += " "
                     labels_header += " "
             
             print(f" {C_BOLD}{C_YELLOW}{numbers_header}{C_RESET}") 
             print(f" {C_BOLD}{labels_header}{C_RESET}\n" + DASH_LINE.replace("-", "="))
 
+            # --- SAFE PRINTING LOOP (Fixes SyntaxError) ---
             for _, row in df_page.iterrows():
-                
-                # 1. Calculate Colors (Logic remains the same)
+                # Color Logic
                 z_r = row['z_Rank+']
                 r_color = C_YELLOW if z_r >= 2.0 else (C_GREEN if z_r >= 1.0 else "")
 
@@ -805,22 +808,19 @@ if __name__ == "__main__":
                 elif row['Master_Score'] > 1.5: name_color = C_YELLOW
                 else:                           name_color = ""
 
-                # 2. PRE-CALCULATE STRINGS (This fixes the SyntaxError!)
+                # Pre-calculate strings to avoid nested quote errors
                 clean_name = str(row['Name']).replace('\n', '').strip()[:NAME_MAX_WIDTH]
                 clean_meta = str(row['Meta']).replace('\n', '').strip()[:INDUSTRY_MAX_WIDTH]
-                
-                # We format these here into variables so we don't confuse the f-string below
                 surge_str = f"{row['Surge']:.0f}%"
                 mnt_str = f"{row['Mnt%']:.0f}%"
-
-                # 3. PRINT
+                
                 print(
                     f" {name_color}{clean_name:<{COL_WIDTHS[0]}}{C_RESET}"
                     f"{row['Sym']:<{COL_WIDTHS[1]}}"
                     f"{r_color}{row['Rank+']:<{COL_WIDTHS[2]}}{C_RESET}"
                     f"${row['Price']:<{COL_WIDTHS[3]}.2f} " 
-                    f"{s_color}{surge_str:<{COL_WIDTHS[4]}}{C_RESET}"  # <--- Uses variable
-                    f"{m_color}{mnt_str:<{COL_WIDTHS[5]}}{C_RESET}"    # <--- Uses variable
+                    f"{s_color}{surge_str:<{COL_WIDTHS[4]}}{C_RESET}"
+                    f"{m_color}{mnt_str:<{COL_WIDTHS[5]}}{C_RESET}"
                     f"{v_color}{row['Upvotes']:<{COL_WIDTHS[6]}}{C_RESET}"
                     f"{sq_color}{int(row['Squeeze']):<{COL_WIDTHS[7]}}{C_RESET}"
                     f"{meta_color}{clean_meta:<{COL_WIDTHS[8]}}{C_RESET}"
@@ -837,7 +837,6 @@ if __name__ == "__main__":
             break
 
         if choice == 'H':
-            # Interactive HTML export
             export_interactive_html(CACHED_DF)
             input("Press Enter to continue...")
             continue
