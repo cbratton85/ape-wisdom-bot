@@ -274,7 +274,8 @@ def export_interactive_html(df):
         C_GREEN, C_YELLOW, C_RED, C_CYAN, C_MAGENTA, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ff00ff", "#ffffff"
         export_df['Type_Tag'] = 'STOCK'
         tracker = HistoryTracker(HISTORY_FILE)
-        export_df['Vel'] = 0; export_df['Sig'] = ""
+        # FIX: Initialize Vel as a String ("") so we can put HTML in it later without error
+        export_df['Vel'] = ""; export_df['Sig'] = ""
 
         export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
 
@@ -455,11 +456,14 @@ def export_interactive_html(df):
         }}
 
         $(document).ready(function(){{ 
-            var table=$('.table').DataTable({{
+            var table=$('.table').DataTable({
                 "order":[[4,"desc"]],
                 "pageLength": 25,
                 "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-                "columnDefs": [ {{ "visible": false, "targets": [12, 13] }} ],
+                "columnDefs": [ 
+                    { "visible": false, "targets": [12, 13] }, // Hide tags & raw vol
+                    { "orderData": [13], "targets": [6] }       // Sort "Avg Vol" (6) using "Raw Vol" (13)
+                ],
                 
                 "drawCallback": function(settings) {{
                     var api = this.api();
