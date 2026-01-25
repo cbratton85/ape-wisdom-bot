@@ -253,7 +253,8 @@ def get_all_trending_stocks():
 
 def export_interactive_html(df):
     try:
-        export_df = df.copy()
+        # Convert to object type immediately so we can overwrite numbers with HTML strings
+        export_df = df.copy().astype(object)
         
         if not os.path.exists(PUBLIC_DIR):
             os.makedirs(PUBLIC_DIR)
