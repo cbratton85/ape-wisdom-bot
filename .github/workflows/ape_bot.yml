@@ -2,8 +2,7 @@ name: Market Momentum Tracker
 
 on:
   schedule:
-    # Runs at minute 0 past every hour (24/7)
-    - cron: '0 * * * *'
+    - cron: '15 * * * *'
   workflow_dispatch:      # Allows manual testing
 
 permissions:
