@@ -310,6 +310,23 @@ def filter_and_process(stocks):
         )
 
     print(f"{C_GREEN}--- ANALYSIS COMPLETE ---{C_RESET}")
+    
+    tracker = HistoryTracker(HISTORY_FILE)
+    
+    velocity_list = []
+    divergence_list = []
+
+    for _, row in df.iterrows():
+        m = tracker.get_metrics(row['Sym'])
+        velocity_list.append(m['velocity'])
+        divergence_list.append(m['divergence'])
+
+    df['Velocity'] = velocity_list
+    df['Divergence'] = divergence_list
+
+    # Save current run to history
+    tracker.save(df)
+    
     return df
 
 def get_all_trending_stocks():
@@ -371,6 +388,9 @@ def export_interactive_html(df):
         C_WHITE_HTML = "#ffffff"
 
         export_df['Type_Tag'] = 'STOCK'
+
+        export_df['Vel'] = 0
+        export_df['Sig'] = ""
 
         for index, row in export_df.iterrows():
             name_color = C_WHITE_HTML
@@ -616,6 +636,64 @@ def send_email(filename):
 
     except Exception as e:
         print(f"{C_RED}[!] Email Failed: {e}{C_RESET}")
+
+class HistoryTracker:
+    def __init__(self, filepath):
+        self.filepath = filepath
+        self.data = self._load()
+
+    def _load(self):
+        if os.path.exists(self.filepath):
+            try:
+                with open(self.filepath, 'r') as f:
+                    return json.load(f)
+            except: return {}
+        return {}
+
+    def save(self, df):
+        # We use UTC to keep PC and GitHub in sync
+        today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+        for _, row in df.iterrows():
+            ticker = row['Sym']
+            if ticker not in self.data:
+                self.data[ticker] = {}
+            
+            self.data[ticker][today] = {
+                "rank_plus": int(row.get('Rank+', 0)),
+                "price": float(row.get('Price', 0)),
+                "mnt_perc": float(row.get('Mnt%', 0))
+            }
+
+        # Keep 14 days of history
+        cutoff = datetime.datetime.utcnow() - datetime.timedelta(days=RETENTION_DAYS)
+        for ticker in list(self.data.keys()):
+            self.data[ticker] = {d: v for d, v in self.data[ticker].items() 
+                                 if datetime.datetime.strptime(d, "%Y-%m-%d") > cutoff}
+            if not self.data[ticker]: del self.data[ticker]
+
+        with open(self.filepath, 'w') as f:
+            json.dump(self.data, f, indent=4)
+
+    def get_metrics(self, ticker, current_price, current_mnt):
+        if ticker not in self.data or len(self.data[ticker]) < 2:
+            return {"vel": 0, "div": False, "streak": 0}
+
+        dates = sorted(self.data[ticker].keys())
+        prev_date = dates[-2]
+        prev_data = self.data[ticker][prev_date]
+
+        # 1. VELOCITY: Is the Rank+ accelerating?
+        velocity = int(self.data[ticker][dates[-1]]['rank_plus'] - prev_data['rank_plus'])
+
+        # 2. DIVERGENCE: Mentions UP > 10%, but Price change < 2% (The "Hidden" Move)
+        mnt_surge = current_mnt > (prev_data['mnt_perc'] + 10)
+        price_stable = abs((current_price - prev_data['price']) / (prev_data['price'] or 1)) < 0.02
+        divergence = mnt_surge and price_stable
+
+        # 3. STREAK: How many days has it been in our logs?
+        streak = len(dates)
+
+        return {"vel": velocity, "div": divergence, "streak": streak}
 
 if __name__ == "__main__":
     
