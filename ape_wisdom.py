@@ -16,24 +16,24 @@ import shutil
 #                  CONFIGURATION
 # ==========================================
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-# The script will save the HTML here for the website
 PUBLIC_DIR = os.path.join(SCRIPT_DIR, "public") 
-
 CACHE_FILE = os.path.join(SCRIPT_DIR, "ape_cache.json")
 MARKET_DATA_CACHE_FILE = os.path.join(SCRIPT_DIR, "market_data.pkl")
 HISTORY_FILE = os.path.join(SCRIPT_DIR, "market_history.json")
 CACHE_EXPIRY_SECONDS = 3600 
 RETENTION_DAYS = 14          
 
-# --- FILTERS ---
-MIN_PRICE = 5        
-MIN_AVG_VOLUME = 250000        
+# --- INTERNAL DATA COLLECTION LIMITS ---
+# We set these LOW so the HTML gets data to work with.
+# The User filters these visually in the Dashboard.
+MIN_PRICE = 0.50             
+MIN_AVG_VOLUME = 5000        
 AVG_VOLUME_DAYS = 10
 PAGE_SIZE = 30
-NAME_MAX_WIDTH = 35
-INDUSTRY_MAX_WIDTH = 41     
-COL_WIDTHS = [35, 8, 8, 10, 8, 8, 8, 8, INDUSTRY_MAX_WIDTH] 
-DASH_LINE = "-" * 135
+
+# --- LAYOUT WIDTHS ---
+NAME_MAX_WIDTH = 45      
+INDUSTRY_MAX_WIDTH = 55  
 REQUEST_DELAY_MIN = 1.5 
 REQUEST_DELAY_MAX = 3.0
 TICKER_FIXES = {'GPS': 'GAP', 'FB': 'META', 'SVRE': 'SaverOne', 'MMTLP': 'MMTLP', 'SAVERONE': 'SVRE', 'DTC': 'SOLO', 'APE': 'AMC'} 
@@ -49,7 +49,6 @@ C_BOLD = '\033[1m'
 
 session = requests.Session()
 session.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
-STATS = {"total": 0, "filtered_price": 0, "filtered_vol": 0, "failed_data": 0}
 
 class HistoryTracker:
     def __init__(self, filepath):
@@ -99,7 +98,7 @@ def save_cache(cache_data):
     except: pass
 
 def fetch_meta_data_robust(ticker):
-    name, meta, quote_type, mcap = ticker, "Unknown", "EQUITY", 0
+    name, meta, quote_type, mcap, currency = ticker, "Unknown", "EQUITY", 0, "USD"
     try:
         dat = yf.Ticker(ticker) 
         info = dat.info
@@ -107,6 +106,8 @@ def fetch_meta_data_robust(ticker):
             quote_type = info.get('quoteType', 'EQUITY')
             name = info.get('shortName') or info.get('longName') or ticker
             mcap = info.get('marketCap', 0)
+            currency = info.get('currency', 'USD') # Check Currency
+            
             if quote_type == 'ETF':
                 meta = info.get('category', 'Unknown')
             else:
@@ -114,7 +115,7 @@ def fetch_meta_data_robust(ticker):
                 i = info.get('industry', 'Unknown')
                 meta = f"{s} - {i}" if s != 'Unknown' else 'Unknown'
     except: pass
-    return {'ticker': ticker, 'name': name, 'meta': meta, 'type': quote_type, 'mcap': mcap}
+    return {'ticker': ticker, 'name': name, 'meta': meta, 'type': quote_type, 'mcap': mcap, 'currency': currency}
 
 def filter_and_process(stocks):
     if not stocks: return pd.DataFrame()
@@ -131,6 +132,7 @@ def filter_and_process(stocks):
             except: pass
         save_cache(local_cache)
 
+    # Market Data
     market_data = None
     use_cache = False
     if os.path.exists(MARKET_DATA_CACHE_FILE):
@@ -157,10 +159,17 @@ def filter_and_process(stocks):
             if hist.empty: continue
             curr_p = hist['Close'].iloc[-1]
             avg_v = hist['Volume'].tail(AVG_VOLUME_DAYS).mean()
+            
+            # --- INTERNAL SAFETY LIMITS ---
             if curr_p < MIN_PRICE: continue
             if avg_v < MIN_AVG_VOLUME: continue
 
             info = local_cache.get(t, {})
+            
+            # --- US LISTING CHECK ---
+            # If currency is NOT USD, skip it.
+            if info.get('currency', 'USD') != 'USD': continue
+
             name = str(info.get('name', t)).replace('"', '').strip()[:NAME_MAX_WIDTH]
             cur_m, old_m = int(stock.get('mentions', 0)), int(stock.get('mentions_24h_ago', 1))
             m_perc = int(((cur_m - (old_m or 1)) / (old_m or 1) * 100))
@@ -170,7 +179,9 @@ def filter_and_process(stocks):
 
             final_list.append({
                 "Name": name, "Sym": t, "Rank+": int(stock['rank_24h_ago']) - int(stock['rank']),
-                "Price": float(curr_p), "Surge": s_perc, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
+                "Price": float(curr_p), 
+                "AvgVol": int(avg_v),  # Added for Filtering
+                "Surge": s_perc, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
                 "Upvotes": int(stock.get('upvotes', 0)), "Meta": info.get('meta', '-'), "Squeeze": squeeze_score
             })
         except: continue
@@ -212,15 +223,22 @@ def export_interactive_html(df):
     try:
         export_df = df.copy()
         
-        # --- CREATE PUBLIC FOLDER FOR WEBSITE ---
         if not os.path.exists(PUBLIC_DIR):
             os.makedirs(PUBLIC_DIR)
 
         def color_span(text, color_hex): return f'<span style="color: {color_hex}; font-weight: bold;">{text}</span>'
+        def format_vol(v):
+            if v >= 1_000_000: return f"{v/1_000_000:.1f}M"
+            if v >= 1_000: return f"{v/1_000:.0f}K"
+            return str(v)
+
         C_GREEN, C_YELLOW, C_RED, C_CYAN, C_MAGENTA, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ff00ff", "#ffffff"
         export_df['Type_Tag'] = 'STOCK'
         tracker = HistoryTracker(HISTORY_FILE)
         export_df['Vel'] = 0; export_df['Sig'] = ""
+
+        # Create Readable Volume Column
+        export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
 
         for index, row in export_df.iterrows():
             m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
@@ -238,7 +256,6 @@ def export_interactive_html(df):
             nm_clr = C_RED if row['Master_Score'] > 3.0 else (C_YELLOW if row['Master_Score'] > 1.5 else C_WHITE)
             export_df.at[index, 'Name'] = color_span(row['Name'], nm_clr)
             
-            # Simple Column Coloring
             for col, z_col in [('Rank+', 'z_Rank+'), ('Surge', 'z_Surge'), ('Mnt%', 'z_Mnt%')]:
                 val = f"{row[col]:.0f}%" if '%' in col or 'Surge' in col else row[col]
                 clr = C_YELLOW if row[z_col] >= 2.0 else (C_GREEN if row[z_col] >= 1.0 else C_WHITE)
@@ -254,46 +271,144 @@ def export_interactive_html(df):
             t = row['Sym']
             export_df.at[index, 'Sym'] = f'<a href="https://finance.yahoo.com/quote/{t}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
             export_df.at[index, 'Price'] = f"${row['Price']:.2f}"
+            export_df.at[index, 'Vol_Display'] = color_span(export_df.at[index, 'Vol_Display'], "#ccc")
 
-        cols = ['Name', 'Sym', 'Vel', 'Sig', 'Rank+', 'Price', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Meta', 'Type_Tag']
+        export_df.rename(columns={'Meta': 'Industry', 'Vol_Display': 'Avg Vol'}, inplace=True)
+
+        cols = ['Name', 'Sym', 'Vel', 'Sig', 'Rank+', 'Price', 'Avg Vol', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry', 'Type_Tag', 'AvgVol']
         final_df = export_df[cols]
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
-        # HTML Template
-        html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Ape Wisdom</title>
+        # HTML + JS Logic for Filtering
+        html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Ape Wisdom Analysis</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-        <style>body{{background-color:#121212;color:#e0e0e0;font-family:monospace;padding:20px}}
-        .table-dark{{--bs-table-bg:#1e1e1e;color:#ccc}} th{{color:#00ff00}} td{{vertical-align:middle}} a{{color:#4da6ff}}
-        .legend-box{{background:#2a2a2a;padding:10px;margin:15px 0;display:flex;gap:15px;border-radius:5px}}</style></head>
-        <body><div class="container-fluid" style="max-width:1400px">
-        <div class="d-flex justify-content-between"><h2>🦍 Ape Wisdom</h2><span id="time" data-utc="{utc_timestamp}"></span></div>
-        <div class="legend-box">
-            <span>🔴=Hot 🟡=Warm 🟢=Good</span>
-            <span>💎 ACCUM = Price Flat/Mentions Up</span>
-            <button class="btn btn-sm btn-outline-light" onclick="filterTable('all')">All</button>
-            <button class="btn btn-sm btn-outline-light" onclick="filterTable('stock')">Stocks</button>
-            <button class="btn btn-sm btn-outline-light" onclick="filterTable('etf')">ETFs</button>
+        <style>
+            body{{background-color:#121212;color:#e0e0e0;font-family:'Consolas','Monaco',monospace;padding:20px}}
+            .table-dark{{--bs-table-bg:#1e1e1e;color:#ccc}} 
+            th{{color:#00ff00;border-bottom:2px solid #444; font-size: 14px;}} 
+            td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
+            a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
+            
+            .legend-box {{
+                background-color: #222; border: 1px solid #444; border-radius: 8px; padding: 15px; margin-bottom: 20px;
+                display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; font-size: 0.85rem;
+            }}
+            .legend-section h5 {{ color: #00ff00; font-size: 1rem; border-bottom: 1px solid #444; padding-bottom: 5px; margin-bottom: 10px; }}
+            .legend-item {{ margin-bottom: 6px; }}
+            .legend-key {{ font-weight: bold; display: inline-block; width: 100px; }}
+            
+            .filter-bar {{ display:flex; gap:15px; align-items:center; background:#2a2a2a; padding:10px; border-radius:5px; margin-bottom:15px; border:1px solid #444; flex-wrap:wrap;}}
+            .filter-group {{ display:flex; align-items:center; gap:5px; }}
+            .filter-group label {{ font-size:0.9rem; color:#aaa; }}
+            .form-control-sm {{ background:#111; border:1px solid #555; color:#fff; width: 100px;}}
+            .header-flex {{ display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; }}
+        </style>
+        </head>
+        <body>
+        <div class="container-fluid" style="max-width:98%;">
+            
+            <div class="header-flex">
+                <h2>🦍 Ape Wisdom Market Scan</h2>
+                <span id="time" data-utc="{utc_timestamp}">Loading...</span>
+            </div>
+
+            <div class="filter-bar">
+                <span style="color:#fff; font-weight:bold; margin-right:10px;">⚡ INTERACTIVE FILTERS:</span>
+                
+                <div class="filter-group">
+                    <label>Min Price ($):</label>
+                    <input type="number" id="minPrice" class="form-control form-control-sm" value="5" step="0.5">
+                </div>
+                
+                <div class="filter-group">
+                    <label>Min Avg Vol:</label>
+                    <input type="number" id="minVol" class="form-control form-control-sm" value="500000" step="10000">
+                </div>
+
+                <div class="filter-group" style="margin-left: auto;">
+                    <div class="btn-group" role="group">
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked onclick="redraw()">
+                        <label class="btn btn-outline-light btn-sm" for="btnradio1">All</label>
+
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="redraw()">
+                        <label class="btn btn-outline-light btn-sm" for="btnradio2">Stocks Only</label>
+
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="redraw()">
+                        <label class="btn btn-outline-light btn-sm" for="btnradio3">ETFs Only</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="legend-box">
+                <div class="legend-section">
+                    <h5>🚀 Momentum Signals</h5>
+                    <div class="legend-item"><span class="legend-key" style="color:#00ffff">💎 ACCUM</span> <b>(Accumulation)</b>: Mentions RISING (>10%), Price FLAT.</div>
+                    <div class="legend-item"><span class="legend-key" style="color:#ffff00">🔥 TREND</span> <b>(Persistence)</b>: In list >5 Days.</div>
+                </div>
+                <div class="legend-section">
+                    <h5>🔥 Heat Status</h5>
+                    <div class="legend-item"><span class="legend-key" style="color:#ff4444">RED NAME</span> Hot (>3σ). High Volatility.</div>
+                    <div class="legend-item"><span class="legend-key" style="color:#ffff00">YEL NAME</span> Warm (>1.5σ). Active.</div>
+                </div>
+                <div class="legend-section">
+                    <h5>📊 Metrics</h5>
+                    <div class="legend-item"><span class="legend-key">Surge</span> Volume vs 10-Day Avg.</div>
+                    <div class="legend-item"><span class="legend-key">Mnt%</span> Mentions vs 24h ago.</div>
+                </div>
+            </div>
+
+            {table_html}
         </div>
-        {table_html}</div>
+        
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
         <script>
-        $(document).ready(function(){{ var table=$('.table').DataTable({{"order":[[4,"desc"]],"pageLength":25}});
-        window.filterTable=function(t){{$.fn.dataTable.ext.search.pop();if(t!='all'){{$.fn.dataTable.ext.search.push(
-        function(s,d,i){{return (d[11]||"")==(t=='etf'?'ETF':'STOCK')}})}};table.draw()}};
-        var d=new Date($("#time").data("utc"));$("#time").text(d.toLocaleString());}});
+        $(document).ready(function(){{ 
+            var table=$('.table').DataTable({{
+                "order":[[4,"desc"]],
+                "pageLength":25,
+                "columnDefs": [ {{ "visible": false, "targets": [12, 13] }} ] // Hide Type_Tag(12) and RawVol(13)
+            }});
+            
+            // Custom Filtering Function
+            $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {{
+                // 1. View Type Filter
+                var typeTag = data[12] || ""; 
+                var viewMode = $('input[name="btnradio"]:checked').attr('id');
+                if (viewMode == 'btnradio2' && typeTag == 'ETF') return false;
+                if (viewMode == 'btnradio3' && typeTag == 'STOCK') return false;
+
+                // 2. Price Filter
+                var minPrice = parseFloat($('#minPrice').val()) || 0;
+                var priceStr = data[5] || "0"; // Price is column 5
+                var price = parseFloat(priceStr.replace(/[$,]/g, '')) || 0;
+                if (price < minPrice) return false;
+
+                // 3. Volume Filter
+                var minVol = parseFloat($('#minVol').val()) || 0;
+                var vol = parseFloat(data[13]) || 0; // Raw Volume is Hidden Column 13
+                if (vol < minVol) return false;
+
+                return true;
+            }});
+
+            // Inputs trigger redraw
+            $('#minPrice, #minVol').on('keyup change', function() {{ table.draw(); }});
+            window.redraw = function() {{ table.draw(); }};
+            
+            var d=new Date($("#time").data("utc"));
+            $("#time").text("Last Updated: " + d.toLocaleString());
+        }});
         </script></body></html>"""
 
-        # 1. Save with timestamp (History)
         timestamp = time.strftime("%Y-%m-%d_%H-%M")
         filename = f"scan_{timestamp}.html"
         filepath = os.path.join(PUBLIC_DIR, filename)
         with open(filepath, "w", encoding="utf-8") as f: f.write(html_content)
 
-        # 2. Save as Index (Current Link)
         index_path = os.path.join(PUBLIC_DIR, "index.html")
         shutil.copy(filepath, index_path)
 
@@ -307,16 +422,14 @@ def export_interactive_html(df):
 def send_discord_link(filename):
     print(f"\n{C_YELLOW}--- Sending Link to Discord... ---{C_RESET}")
     DISCORD_URL = os.environ.get('DISCORD_WEBHOOK')
-    REPO_NAME = os.environ.get('GITHUB_REPOSITORY') # e.g. "username/my-repo"
+    REPO_NAME = os.environ.get('GITHUB_REPOSITORY')
     
     if not DISCORD_URL or not REPO_NAME: 
         print("Missing Discord URL or Repo Name")
         return
 
-    # Construct the Website URL
     try:
         user, repo = REPO_NAME.split('/')
-        # This is the standard GitHub Pages URL format
         website_url = f"https://{user}.github.io/{repo}/{filename}"
         
         msg = (f"🚀 **Market Scan Complete**\n"
