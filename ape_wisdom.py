@@ -117,108 +117,6 @@ def fetch_meta_data_robust(ticker):
     except: pass
     return {'ticker': ticker, 'name': name, 'meta': meta, 'type': quote_type, 'mcap': mcap, 'currency': currency}
 
-def filter_and_process(stocks):
-    if not stocks: return pd.DataFrame()
-    us_tickers = list(set([TICKER_FIXES.get(s['ticker'], s['ticker'].replace('.', '-')) for s in stocks]))
-    local_cache = load_cache()
-    
-    missing = [t for t in us_tickers if t not in local_cache]
-    if missing:
-        print(f"Healing {len(missing)} metadata items...")
-        for i, t in enumerate(missing):
-            try:
-                res = fetch_meta_data_robust(t)
-                if res: local_cache[res['ticker']] = res
-            except: pass
-        save_cache(local_cache)
-
-    # Market Data
-    market_data = None
-    use_cache = False
-    if os.path.exists(MARKET_DATA_CACHE_FILE):
-        if (time.time() - os.path.getmtime(MARKET_DATA_CACHE_FILE)) < CACHE_EXPIRY_SECONDS: use_cache = True
-
-    if use_cache: market_data = pd.read_pickle(MARKET_DATA_CACHE_FILE)
-    else:
-        market_data = yf.download(us_tickers, period="40d", interval="1d", group_by='ticker', progress=False, threads=True)
-        if not market_data.empty: market_data.to_pickle(MARKET_DATA_CACHE_FILE)
-
-    if len(us_tickers) == 1 and not market_data.empty:
-        idx = pd.MultiIndex.from_product([us_tickers, market_data.columns])
-        market_data.columns = idx
-
-    final_list = []
-    for stock in stocks:
-        t = TICKER_FIXES.get(stock['ticker'], stock['ticker'].replace('.', '-'))
-        try:
-            if isinstance(market_data.columns, pd.MultiIndex):
-                if t in market_data.columns.levels[0]: hist = market_data[t].dropna()
-                else: continue
-            else: hist = market_data.dropna()
-
-            if hist.empty: continue
-            curr_p = hist['Close'].iloc[-1]
-            avg_v = hist['Volume'].tail(AVG_VOLUME_DAYS).mean()
-            
-            # --- INTERNAL SAFETY LIMITS ---
-            if curr_p < MIN_PRICE: continue
-            if avg_v < MIN_AVG_VOLUME: continue
-
-            info = local_cache.get(t, {})
-            
-            # --- US LISTING CHECK ---
-            # If currency is NOT USD, skip it.
-            if info.get('currency', 'USD') != 'USD': continue
-
-            name = str(info.get('name', t)).replace('"', '').strip()[:NAME_MAX_WIDTH]
-            cur_m, old_m = int(stock.get('mentions', 0)), int(stock.get('mentions_24h_ago', 1))
-            m_perc = int(((cur_m - (old_m or 1)) / (old_m or 1) * 100))
-            s_perc = int((hist['Volume'].iloc[-1] / avg_v * 100)) if avg_v > 0 else 0
-            mcap = info.get('mcap', 10**9) or 10**9
-            squeeze_score = (cur_m * s_perc) / max(math.log(mcap, 10), 1)
-
-            final_list.append({
-                "Name": name, "Sym": t, "Rank+": int(stock['rank_24h_ago']) - int(stock['rank']),
-                "Price": float(curr_p), 
-                "AvgVol": int(avg_v),  # Added for Filtering
-                "Surge": s_perc, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
-                "Upvotes": int(stock.get('upvotes', 0)), "Meta": info.get('meta', '-'), "Squeeze": squeeze_score
-            })
-        except: continue
-    
-    df = pd.DataFrame(final_list)
-    if not df.empty:
-        cols = ['Rank+', 'Surge', 'Mnt%', 'Squeeze', 'Upvotes']
-        for col in cols:
-            mean, std = df[col].mean(), df[col].std(ddof=0)
-            df[f'z_{col}'] = (df[col] - mean) / (std if std > 0 else 1)
-        df['Master_Score'] = (df['z_Rank+'].clip(0) + df['z_Surge'].clip(0) + df['z_Mnt%'].clip(0) + df['z_Upvotes'].clip(0) + (df['z_Squeeze'].clip(0) * 0.5))
-
-    tracker = HistoryTracker(HISTORY_FILE)
-    vel, div, strk = [], [], []
-    for _, row in df.iterrows():
-        m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
-        vel.append(m['vel']); div.append(m['div']); strk.append(m['streak'])
-    df['Velocity'] = vel; df['Divergence'] = div; df['Streak'] = strk
-    tracker.save(df)
-    return df
-
-def get_all_trending_stocks():
-    all_results, page = [], 1
-    print(f"{C_CYAN}--- API: Fetching list of trending stocks ---{C_RESET}")
-    while True:
-        try:
-            r = requests.get(f"https://apewisdom.io/api/v1.0/filter/all-stocks/page/{page}", timeout=10)
-            if r.status_code == 200:
-                data = r.json()
-                results = data.get('results', [])
-                if not results: break
-                all_results.extend(results)
-                page += 1
-            else: break
-        except: break
-    return all_results
-
 def export_interactive_html(df):
     try:
         export_df = df.copy()
@@ -273,10 +171,8 @@ def export_interactive_html(df):
             export_df.at[index, 'Price'] = f"${row['Price']:.2f}"
             export_df.at[index, 'Vol_Display'] = color_span(export_df.at[index, 'Vol_Display'], "#ccc")
 
-        # RENAME Meta -> Industry/Sector
         export_df.rename(columns={'Meta': 'Industry/Sector', 'Vol_Display': 'Avg Vol'}, inplace=True)
 
-        # Columns (Index 10 is 'Industry/Sector')
         cols = ['Name', 'Sym', 'Vel', 'Sig', 'Rank+', 'Price', 'Avg Vol', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol']
         final_df = export_df[cols]
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
@@ -318,6 +214,9 @@ def export_interactive_html(df):
             .page-link {{ background-color: #222; border-color: #444; color: #00ff00; }}
             .page-item.active .page-link {{ background-color: #00ff00; border-color: #00ff00; color: #000; }}
             .page-item.disabled .page-link {{ background-color: #111; border-color: #333; color: #555; }}
+            
+            .btn-reset {{ border: 1px solid #555; color: #fff; font-size: 0.8rem; background: #333; }}
+            .btn-reset:hover {{ background: #444; color: #fff; }}
         </style>
         </head>
         <body>
@@ -331,14 +230,16 @@ def export_interactive_html(df):
             <div class="filter-bar">
                 <span style="color:#fff; font-weight:bold; margin-right:10px;">⚡ FILTERS:</span>
                 
+                <button class="btn btn-sm btn-reset" onclick="resetFilters()">🔄 RESET</button>
+
                 <div class="filter-group">
                     <label>Min Price ($):</label>
-                    <input type="number" id="minPrice" class="form-control form-control-sm" value="5" step="0.5">
+                    <input type="number" id="minPrice" class="form-control form-control-sm" placeholder="Any" step="0.5">
                 </div>
                 
                 <div class="filter-group">
                     <label>Min Avg Vol:</label>
-                    <input type="number" id="minVol" class="form-control form-control-sm" value="500000" step="10000">
+                    <input type="number" id="minVol" class="form-control form-control-sm" placeholder="Any" step="10000">
                 </div>
 
                 <div class="filter-group">
@@ -372,7 +273,7 @@ def export_interactive_html(df):
                     <div class="legend-section">
                         <h5>🚀 Momentum Signals</h5>
                         <div class="legend-item"><span class="legend-key" style="color:#00ffff">💎 ACCUM</span> <b>Accumulation:</b> Mentions RISING (>10%) + Price FLAT.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">🔥 TREND</span> <b>Persistence:</b> In list >5 Days.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">🔥 TREND</span> <b>Persistence:</b> Has remained in the Top Trending list for 5+ consecutive days.</div>
                         <div class="legend-item"><span class="legend-key">Vel</span> <b>Acceleration:</b> Difference in Rank+ vs yesterday.</div>
                     </div>
                     
@@ -407,12 +308,19 @@ def export_interactive_html(df):
             }}
         }}
 
+        // RESET FILTERS FUNCTION
+        function resetFilters() {{
+            $('#minPrice').val(''); // Clear inputs
+            $('#minVol').val('');
+            $('#btnradio1').prop('checked', true); // Reset to All
+            redraw(); // Redraw table
+        }}
+
         $(document).ready(function(){{ 
             var table=$('.table').DataTable({{
                 "order":[[4,"desc"]],
                 "pageLength": 25,
                 "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-                // Hide Type_Tag (12) and RawAvgVol (13)
                 "columnDefs": [ {{ "visible": false, "targets": [12, 13] }} ],
                 
                 "drawCallback": function(settings) {{
@@ -424,20 +332,20 @@ def export_interactive_html(df):
             }});
             
             $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {{
-                // 1. View Type (Col 12)
+                // 1. View Type
                 var typeTag = data[12] || ""; 
                 var viewMode = $('input[name="btnradio"]:checked').attr('id');
                 if (viewMode == 'btnradio2' && typeTag == 'ETF') return false;
                 if (viewMode == 'btnradio3' && typeTag == 'STOCK') return false;
 
                 // 2. Price Filter (Col 5)
-                var minPrice = parseFloat($('#minPrice').val()) || 0;
+                var minPrice = parseFloat($('#minPrice').val()) || 0; // Default to 0 if empty
                 var priceStr = data[5] || "0"; 
                 var price = parseFloat(priceStr.replace(/[$,]/g, '')) || 0;
                 if (price < minPrice) return false;
 
                 // 3. Volume Filter (Hidden Col 13)
-                var minVol = parseFloat($('#minVol').val()) || 0;
+                var minVol = parseFloat($('#minVol').val()) || 0; // Default to 0 if empty
                 var rawVol = parseFloat(data[13]) || 0; 
                 if (rawVol < minVol) return false;
 
@@ -446,7 +354,6 @@ def export_interactive_html(df):
 
             $('#minPrice, #minVol').on('keyup change', function() {{ table.draw(); }});
             
-            // REDRAW & UPDATE HEADER TEXT
             window.redraw = function() {{ 
                 var mode = $('input[name="btnradio"]:checked').attr('id');
                 var headerTxt = "Industry/Sector";
@@ -454,9 +361,7 @@ def export_interactive_html(df):
                 if (mode == 'btnradio2') headerTxt = "Industry";
                 else if (mode == 'btnradio3') headerTxt = "Sector";
                 
-                // Update Column 11 Header (Index 10 is 'Industry/Sector' in the list)
                 $(table.column(11).header()).text(headerTxt);
-                
                 table.draw(); 
             }};
             
