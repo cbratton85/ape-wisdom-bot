@@ -367,19 +367,19 @@ def export_interactive_html(df):
                     </div>
 
                     <div class="legend-section">
-                        <h5>🚀 Momentum Signals</h5>
-                        <div class="legend-item"><span class="legend-key" style="color:#00ffff">💎 ACCUM</span> <b>Accumulation:</b> Mentions RISING (>10%) + Price FLAT.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">🔥 TREND</span> <b>Persistence:</b><br>Has remained in the Top Trending list for 5+ consecutive days.</div>
+                        <h5>🚀 Significance Signals</h5>
+                        <div class="legend-item"><span class="legend-key" style="color:#00ffff">💎 ACCUM</span> Mentions RISING (>10%) + Price FLAT.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">🔥 TREND</span> In Top Trending list for 5+ consecutive days.</div>
                     </div>
                     
                     <div class="legend-section">
                         <h5>📊 Metrics</h5>
-                        <div class="legend-item"><span class="legend-key">Rank+</span> <b>Speed:</b> Spots climbed in last 24h.</div>
+                        <div class="legend-item"><span class="legend-key">Rank+</span> Spots climbed in last 24h.</div>
                         <div class="legend-item"><span class="legend-key">Surge</span> Volume vs 30-Day Avg.</div>
                         <div class="legend-item"><span class="legend-key">Mnt%</span> Change in Mentions vs 24h ago.</div>
                         <div class="legend-item"><span class="legend-key">Upvotes</span> Raw upvote count on Reddit.</div>
                         <div class="legend-item"><span class="legend-key">Squeeze</span> (Mentions × Vol) / MarketCap.</div>
-                        <div class="legend-item"><span class="legend-key">Vel</span> <b>Acceleration:</b> Difference in Rank+ vs yesterday.</div>
+                        <div class="legend-item"><span class="legend-key">Vel</span> Difference in Rank+ vs yesterday.</div>
                     </div>
 
                 </div>
