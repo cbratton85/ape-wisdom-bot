@@ -283,6 +283,7 @@ def export_interactive_html(df):
             body{{background-color:#121212;color:#e0e0e0;font-family:'Consolas','Monaco',monospace;padding:20px}}
             .table-dark{{--bs-table-bg:#1e1e1e;color:#ccc}} 
             th{{color:#00ff00;border-bottom:2px solid #444; font-size: 14px;}} 
+            th:nth-child(4), td:nth-child(4) {{ width: 1%; white-space: nowrap; }}
             td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
             
@@ -368,8 +369,7 @@ def export_interactive_html(df):
                     <div class="legend-section">
                         <h5>🚀 Momentum Signals</h5>
                         <div class="legend-item"><span class="legend-key" style="color:#00ffff">💎 ACCUM</span> <b>Accumulation:</b> Mentions RISING (>10%) + Price FLAT.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">🔥 TREND</span> <b>Persistence:</b> Has remained in the Top Trending list for 5+ consecutive days.</div>
-                        <div class="legend-item"><span class="legend-key">Vel</span> <b>Acceleration:</b> Difference in Rank+ vs yesterday.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">🔥 TREND</span> <b>Persistence:</b><br>Has remained in the Top Trending list for 5+ consecutive days.</div>
                     </div>
                     
                     <div class="legend-section">
@@ -379,6 +379,7 @@ def export_interactive_html(df):
                         <div class="legend-item"><span class="legend-key">Mnt%</span> Change in Mentions vs 24h ago.</div>
                         <div class="legend-item"><span class="legend-key">Upvotes</span> Raw upvote count on Reddit.</div>
                         <div class="legend-item"><span class="legend-key">Squeeze</span> (Mentions × Vol) / MarketCap.</div>
+                        <div class="legend-item"><span class="legend-key">Vel</span> <b>Acceleration:</b> Difference in Rank+ vs yesterday.</div>
                     </div>
 
                 </div>
