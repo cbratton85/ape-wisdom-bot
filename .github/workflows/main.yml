@@ -1,0 +1,30 @@
+name: Hourly Email Scan
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Runs every hour at minute 0
+  workflow_dispatch:      # Allows you to click a button to test it immediately
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install pandas yfinance requests lxml
+
+      - name: Run Script
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python ape_wisdom.py --auto
