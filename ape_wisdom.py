@@ -136,23 +136,28 @@ def filter_and_process(stocks):
     if not stocks: return pd.DataFrame()
     us_tickers = list(set([TICKER_FIXES.get(s['ticker'], s['ticker'].replace('.', '-')) for s in stocks]))
     
-    # --- BLACKLIST CHECK ---
-    delisted_cache = load_delisted()
+    # Load the existing cache (which we know persists correctly)
+    local_cache = load_cache()
+    
+    # --- INTEGRATED BLACKLIST CHECK ---
     now = datetime.datetime.utcnow()
     valid_tickers = []
     
     for t in us_tickers:
-        if t in delisted_cache:
-            last_checked = datetime.datetime.strptime(delisted_cache[t], "%Y-%m-%d")
-            if (now - last_checked).days < DELISTED_RETRY_DAYS:
-                continue # Skip this ticker (it's in the penalty box)
+        # Check if we previously flagged this ticker as delisted in the main cache
+        if t in local_cache and local_cache[t].get('delisted') == True:
+            last_checked_str = local_cache[t].get('last_checked', '2000-01-01')
+            try:
+                last_checked = datetime.datetime.strptime(last_checked_str, "%Y-%m-%d")
+                # If it's been less than 7 days (or your setting), SKIP IT
+                if (now - last_checked).days < DELISTED_RETRY_DAYS:
+                    continue 
+            except: pass
         valid_tickers.append(t)
     
     us_tickers = valid_tickers
-    # -----------------------
-
-    local_cache = load_cache()
     
+    # Check for missing metadata for the valid ones
     missing = [t for t in us_tickers if t not in local_cache]
     if missing:
         print(f"Healing {len(missing)} metadata items...")
@@ -170,6 +175,7 @@ def filter_and_process(stocks):
 
     if use_cache: market_data = pd.read_pickle(MARKET_DATA_CACHE_FILE)
     else:
+        # Download only the Valid tickers
         market_data = yf.download(us_tickers, period="40d", interval="1d", group_by='ticker', progress=False, threads=True)
         if not market_data.empty: market_data.to_pickle(MARKET_DATA_CACHE_FILE)
 
@@ -181,23 +187,24 @@ def filter_and_process(stocks):
     for stock in stocks:
         t = TICKER_FIXES.get(stock['ticker'], stock['ticker'].replace('.', '-'))
         try:
+            # --- CHECK IF DATA EXISTS ---
             if isinstance(market_data.columns, pd.MultiIndex):
                 if t in market_data.columns.levels[0]: 
                     hist = market_data[t].dropna()
                 else: 
-                    # FIX: If ticker is missing from columns, it failed to download. Blacklist it.
-                    delisted_cache[t] = datetime.datetime.utcnow().strftime("%Y-%m-%d")
-                    save_delisted(delisted_cache)
+                    # FIX: Ticker completely missing from download -> Save to MAIN CACHE
+                    local_cache[t] = {'delisted': True, 'last_checked': datetime.datetime.utcnow().strftime("%Y-%m-%d")}
+                    save_cache(local_cache)
                     continue
             else: hist = market_data.dropna()
 
             if hist.empty: 
-                # Add to Blacklist 
-                # Add to Blacklist
-                delisted_cache[t] = datetime.datetime.utcnow().strftime("%Y-%m-%d")
-                save_delisted(delisted_cache)
+                # FIX: Ticker has no history -> Save to MAIN CACHE
+                local_cache[t] = {'delisted': True, 'last_checked': datetime.datetime.utcnow().strftime("%Y-%m-%d")}
+                save_cache(local_cache)
                 continue
-                
+            # -----------------------------
+
             curr_p = hist['Close'].iloc[-1]
             avg_v = hist['Volume'].tail(AVG_VOLUME_DAYS).mean()
             
@@ -205,7 +212,6 @@ def filter_and_process(stocks):
             if avg_v < MIN_AVG_VOLUME: continue
 
             info = local_cache.get(t, {})
-            # --- US LISTING CHECK ---
             if info.get('currency', 'USD') != 'USD': continue
 
             name = str(info.get('name', t)).replace('"', '').strip()[:NAME_MAX_WIDTH]
@@ -216,6 +222,7 @@ def filter_and_process(stocks):
             squeeze_score = (cur_m * s_perc) / max(math.log(mcap, 10), 1)
 
             final_list.append({
+                "Rank": int(stock['rank']), # <--- NEW CAPTURE
                 "Name": name, "Sym": t, "Rank+": int(stock['rank_24h_ago']) - int(stock['rank']),
                 "Price": float(curr_p), 
                 "AvgVol": int(avg_v),
@@ -240,7 +247,6 @@ def filter_and_process(stocks):
     df['Velocity'] = vel; df['Divergence'] = div; df['Streak'] = strk
     tracker.save(df)
     return df
-
 def get_all_trending_stocks():
     all_results, page = [], 1
     print(f"{C_CYAN}--- API: Fetching list of trending stocks ---{C_RESET}")
@@ -316,7 +322,8 @@ def export_interactive_html(df):
 
         export_df.rename(columns={'Meta': 'Industry/Sector', 'Vol_Display': 'Avg Vol'}, inplace=True)
 
-        cols = ['Name', 'Sym', 'Vel', 'Sig', 'Rank+', 'Price', 'Avg Vol', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol']
+        # ADD 'Rank' to the start of the list
+        cols = ['Rank', 'Name', 'Sym', 'Vel', 'Sig', 'Rank+', 'Price', 'Avg Vol', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol']
         final_df = export_df[cols]
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -329,7 +336,8 @@ def export_interactive_html(df):
             body{{background-color:#121212;color:#e0e0e0;font-family:'Consolas','Monaco',monospace;padding:20px}}
             .table-dark{{--bs-table-bg:#1e1e1e;color:#ccc}} 
             th{{color:#00ff00;border-bottom:2px solid #444; font-size: 14px;}} 
-            th:nth-child(4), td:nth-child(4) {{ width: 1%; white-space: nowrap; }}
+            /* FIX: Shifted from 4 to 5 because of new Rank column */
+            th:nth-child(5), td:nth-child(5) {{ width: 1%; white-space: nowrap; }}
             td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
             
@@ -460,12 +468,12 @@ def export_interactive_html(df):
 
         $(document).ready(function(){{ 
             var table=$('.table').DataTable({{
-                "order":[[4,"desc"]],
+                "order":[[0,"asc"]], // FIX: Default Sort by Rank (Column 0)
                 "pageLength": 25,
                 "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 "columnDefs": [ 
-                    {{ "visible": false, "targets": [12, 13] }}, // Hide tags & raw vol
-                    {{ "orderData": [13], "targets": [6] }}       // FIX: Sort "Avg Vol" (6) using "Raw Vol" (13)
+                    {{ "visible": false, "targets": [13, 14] }}, // FIX: Shifted indices +1
+                    {{ "orderData": [14], "targets": [7] }}       // FIX: Shifted indices +1
                 ],
                 
                 "drawCallback": function(settings) {{
