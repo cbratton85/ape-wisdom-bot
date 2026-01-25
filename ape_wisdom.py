@@ -14,23 +14,22 @@ import random
 import json
 import re
 from bs4 import BeautifulSoup
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # ==========================================
-#                 CONFIGURATION
+#                  CONFIGURATION
 # ==========================================
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 CACHE_FILE = os.path.join(SCRIPT_DIR, "ape_cache.json")
 MARKET_DATA_CACHE_FILE = os.path.join(SCRIPT_DIR, "market_data.pkl")
 CACHE_EXPIRY_SECONDS = 3600  # 1 Hour
 
-# --- UPDATED FILTERS (Change 3) ---
-MIN_PRICE = 5      
-MIN_AVG_VOLUME = 250000      
+# --- FILTERS ---
+MIN_PRICE = 5       
+MIN_AVG_VOLUME = 250000       
 AVG_VOLUME_DAYS = 10
 PAGE_SIZE = 30
 
-# --- LAYOUT SETTINGS (Change 5) ---
+# --- LAYOUT SETTINGS ---
 NAME_MAX_WIDTH = 35
 INDUSTRY_MAX_WIDTH = 41     
 # Widths: [Name, Sym, Rank, Price, Surge, Mnt, Upvt, Squeeze, Industry]
@@ -38,8 +37,6 @@ COL_WIDTHS = [35, 8, 8, 10, 8, 8, 8, 8, INDUSTRY_MAX_WIDTH]
 DASH_LINE = "-" * 135
 
 # --- SAFETY SETTINGS ---
-# Time to wait between requests (in seconds). 
-# 2.0 is safe. 0.1 is fast but risky.
 REQUEST_DELAY_MIN = 1.5 
 REQUEST_DELAY_MAX = 3.0
 
@@ -85,19 +82,13 @@ def save_cache(cache_data):
         pass
 
 def fetch_sector_fallback(ticker):
-    """
-    Tries to fetch Sector/Industry from StockAnalysis.
-    Now checks BOTH 'ETF' and 'Stocks' pages to catch Trusts like PSLV/PHYS.
-    """
     clean_ticker = ticker.replace('-', '.')
-    
     # 1. Try StockAnalysis (ETF Page)
     try:
         url = f"https://stockanalysis.com/etf/{clean_ticker}/"
         r = session.get(url, timeout=4)
         if r.status_code == 200:
             soup = BeautifulSoup(r.text, 'html.parser')
-            # Look for Category
             rows = soup.find_all('div', class_='px-4 py-3')
             for row in rows:
                 label = row.find('span', class_='text-sm')
@@ -108,28 +99,22 @@ def fetch_sector_fallback(ticker):
                     if val_alt: return val_alt.get_text(strip=True)
     except: pass
 
-    # 2. Try StockAnalysis (Stock Page) - CRITICAL FIX FOR PSLV/PHYS
+    # 2. Try StockAnalysis (Stock Page)
     try:
-        # Trusts often live here instead of the ETF section
         url = f"https://stockanalysis.com/stocks/{clean_ticker}/"
         r = session.get(url, timeout=4)
         if r.status_code == 200:
             soup = BeautifulSoup(r.text, 'html.parser')
-            # Stocks page layout is different. Look for "Sector" and "Industry" labels.
-            # Usually found in a table or grid.
             info_table = soup.find('div', class_='grid grid-cols-2 gap-x-4 gap-y-2')
             if info_table:
-                # StockAnalysis usually puts Sector/Industry clearly in the overview
-                # We will grab Industry as it is more descriptive for Trusts
                 txt = info_table.get_text()
                 if "Industry" in txt:
-                    # Parse the specific industry link text
                     ind_link = soup.find('a', href=re.compile(r'/stocks/industry/'))
                     if ind_link:
                         return ind_link.get_text(strip=True)
     except: pass
 
-    # 3. Fallback to Finviz (Last Resort)
+    # 3. Fallback to Finviz
     try:
         url = f"https://finviz.com/quote.ashx?t={ticker}"
         r = session.get(url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=4)
@@ -168,10 +153,7 @@ def fetch_google_fallback(ticker):
     except: return None
 
 def fetch_meta_data_robust(ticker):
-    # Prepare standard outputs
     name, meta, quote_type, mcap = ticker, "Unknown", "EQUITY", 0
-    
-    # SLOW DOWN: Sleep before every single request to prevent bans
     time.sleep(random.uniform(REQUEST_DELAY_MIN, REQUEST_DELAY_MAX))
 
     # 1. Try YFinance API
@@ -203,9 +185,8 @@ def fetch_meta_data_robust(ticker):
         except: pass
         finally: sys.stderr = old_stderr 
 
-    # 2. External Fallback (StockAnalysis/Finviz) if YFinance failed
+    # 2. External Fallback
     if meta in ['Unknown', 'General ETF', None]:
-        # Sleep again before hitting the fallback site
         time.sleep(random.uniform(1.0, 2.0))
         found_meta = fetch_sector_fallback(ticker)
         if found_meta != "Unknown":
@@ -215,30 +196,13 @@ def fetch_meta_data_robust(ticker):
     if len(meta) > INDUSTRY_MAX_WIDTH:
         meta = meta[:INDUSTRY_MAX_WIDTH-3] + "..."
 
-    # 4. Last Resort: Google Fallback for Name/Meta
+    # 4. Last Resort: Google Fallback
     if name == ticker and meta == "Unknown":
-        time.sleep(1.0) # Sleep before Google
+        time.sleep(1.0)
         g_res = fetch_google_fallback(ticker)
         if g_res: return g_res
 
     return {'ticker': ticker, 'name': name, 'meta': meta, 'type': quote_type, 'mcap': mcap}
-
-def print_ape_ui(current_sort, df, page, total_pages, view_mode):
-    hidden_count = STATS["filtered_price"] + STATS["filtered_vol"]
-    view_str = f"VIEW: {C_YELLOW}{view_mode.upper()}{C_RESET}"
-    sort_str = f"SORT: {C_YELLOW}{current_sort}{C_RESET}"
-    
-    # Get current time for the header
-    now = time.strftime("%H:%M:%S")
-
-    # Modified Header with Timestamp
-    print(f"\n {C_CYAN}{C_BOLD}APE WISDOM TRENDING DASHBOARD {C_RESET}| {C_YELLOW}Last Updated: {now}{C_RESET}")
-    
-    print(f" [ FILTERS: Price > ${MIN_PRICE:.2f} | Vol > {MIN_AVG_VOLUME:,} | {view_str} | {sort_str} ]")
-    print(f" [ STATS: Found: {STATS['total']} | {C_RED}Hidden: {hidden_count}{C_RESET} | Showing: {len(df)} | {C_YELLOW}Page {page+1} of {total_pages}{C_RESET} ]")
-    
-    # Correctly prints a full line of equals signs (=) matching the dash width
-    print(DASH_LINE.replace("-", "="))
 
 def filter_and_process(stocks):
     if not stocks: return pd.DataFrame()
@@ -250,7 +214,7 @@ def filter_and_process(stocks):
     us_tickers = list(set([TICKER_FIXES.get(s['ticker'], s['ticker'].replace('.', '-')) for s in stocks]))
     local_cache = load_cache()
     
-    # --- METADATA HEALING (Slow Mode) ---
+    # --- METADATA HEALING ---
     missing = [t for t in us_tickers if t not in local_cache]
     if missing:
         print(f"{C_YELLOW}--- HEALING METADATA: {len(missing)} items (Sequential Mode) ---{C_RESET}")
@@ -327,7 +291,7 @@ def filter_and_process(stocks):
             })
         except: continue
     
-    # --- CALCULATE STATISTICAL SIGNIFICANCE (Z-SCORES) ---
+    # --- CALCULATE Z-SCORES ---
     df = pd.DataFrame(final_list)
     if not df.empty:
         cols_to_score = ['Rank+', 'Surge', 'Mnt%', 'Squeeze', 'Upvotes']
@@ -337,9 +301,6 @@ def filter_and_process(stocks):
             if pd.isna(col_std) or col_std == 0: col_std = 1
             df[f'z_{col}'] = (df[col] - col_mean) / col_std
 
-        # --- MASTER SCORE (GAINERS ONLY) ---
-        # We use .clip(lower=0) so negative numbers count as 0.
-        # This prevents a drop in one area from canceling out a gain in another.
         df['Master_Score'] = (
             df['z_Rank+'].clip(lower=0) + 
             df['z_Surge'].clip(lower=0) + 
@@ -356,7 +317,6 @@ def get_all_trending_stocks():
     print(f"{C_CYAN}--- API: Fetching list of trending stocks ---{C_RESET}")
     while page <= total_pages:
         try:
-            # Live status update on one line
             print(f"\r    Fetching page {page} of {total_pages}...", end="", flush=True)
             r = requests.get(f"https://apewisdom.io/api/v1.0/filter/all-stocks/page/{page}", timeout=10)
             if r.status_code == 200:
@@ -364,7 +324,6 @@ def get_all_trending_stocks():
                 results = data.get('results', [])
                 if not results: break
                 all_results.extend(results)
-                # On the first successful fetch, update total_pages
                 if page == 1:
                     total_pages = data.get('pages', 1)
                 page += 1
@@ -375,24 +334,18 @@ def get_all_trending_stocks():
 
 def export_to_txt(df):
     try:
-        # 1. Desktop Detection
         export_folder = os.path.join(SCRIPT_DIR, "exports")
         if not os.path.exists(export_folder):
             os.makedirs(export_folder)
-            print(f"\n{C_CYAN}Created new folder for exports: {export_folder}{C_RESET}")
 
         filename = os.path.join(export_folder, "Trending_Symbols.txt")
-        
-        # 2. Ask for Limit
         print(f"\n {C_YELLOW}--- EXPORT SYMBOLS ONLY ---{C_RESET}")
         limit_input = input(f" How many symbols to include? (1-{len(df)}) [Default: all]: ")
         limit = int(limit_input) if limit_input.strip() else len(df)
 
-        # 3. Extract just the 'Sym' column and join them with a space
         symbols_list = df['Sym'].head(limit).tolist()
         content = " ".join(symbols_list)
         
-        # 4. Write to File (No headers, just the symbols)
         with open(filename, "w", encoding="utf-8") as f:
             f.write(content)
             
@@ -405,14 +358,11 @@ def export_to_txt(df):
 
 def export_interactive_html(df):
     try:
-        # 1. Work on a copy
         export_df = df.copy()
 
-        # --- HELPER: Color Wrapper ---
         def color_span(text, color_hex):
             return f'<span style="color: {color_hex}; font-weight: bold;">{text}</span>'
 
-        # Colors (Dark Mode)
         C_GREEN_HTML = "#00ff00"
         C_YELLOW_HTML = "#ffff00"
         C_RED_HTML = "#ff4444"
@@ -420,19 +370,14 @@ def export_interactive_html(df):
         C_MAGENTA_HTML = "#ff00ff"
         C_WHITE_HTML = "#ffffff"
 
-        # Initialize the new "Type_Tag" column
         export_df['Type_Tag'] = 'STOCK'
 
-        # 2. APPLY LOGIC ROW BY ROW
         for index, row in export_df.iterrows():
-            
-            # Name Coloring
             name_color = C_WHITE_HTML
             if row['Master_Score'] > 3.0:   name_color = C_RED_HTML
             elif row['Master_Score'] > 1.5: name_color = C_YELLOW_HTML
             export_df.at[index, 'Name'] = color_span(row['Name'], name_color)
 
-            # Rank+ Coloring
             z = row['z_Rank+']
             val = row['Rank+']
             c = C_WHITE_HTML
@@ -440,7 +385,6 @@ def export_interactive_html(df):
             elif z >= 1.0: c = C_GREEN_HTML
             export_df.at[index, 'Rank+'] = color_span(val, c)
 
-            # Surge Coloring
             z = row['z_Surge']
             val = f"{row['Surge']:.0f}%"
             c = C_WHITE_HTML
@@ -448,7 +392,6 @@ def export_interactive_html(df):
             elif z >= 1.0: c = C_GREEN_HTML
             export_df.at[index, 'Surge'] = color_span(val, c)
 
-            # Mentions Coloring
             z = row['z_Mnt%']
             val = f"{row['Mnt%']:.0f}%"
             c = C_WHITE_HTML
@@ -456,45 +399,32 @@ def export_interactive_html(df):
             elif z >= 1.0: c = C_GREEN_HTML
             export_df.at[index, 'Mnt%'] = color_span(val, c)
 
-            # Upvotes Coloring
             z = row['z_Upvotes']
             c = C_GREEN_HTML if z > 1.5 else C_WHITE_HTML
             export_df.at[index, 'Upvotes'] = color_span(row['Upvotes'], c)
 
-            # Squeeze Coloring
             z = row['z_Squeeze']
             c = C_CYAN_HTML if z > 1.5 else C_WHITE_HTML
             export_df.at[index, 'Squeeze'] = color_span(int(row['Squeeze']), c)
 
-            # Meta/Industry Coloring & Type Tagging
             is_fund = row['Type'] == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
             c = C_MAGENTA_HTML if is_fund else C_WHITE_HTML
             export_df.at[index, 'Meta'] = color_span(row['Meta'], c)
             
-            if is_fund:
-                export_df.at[index, 'Type_Tag'] = 'ETF'
-            else:
-                export_df.at[index, 'Type_Tag'] = 'STOCK'
+            if is_fund: export_df.at[index, 'Type_Tag'] = 'ETF'
+            else:       export_df.at[index, 'Type_Tag'] = 'STOCK'
 
-            # Ticker Link
             t = row['Sym']
             link = f'<a href="https://finance.yahoo.com/quote/{t}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
             export_df.at[index, 'Sym'] = link
-            
-            # Price Formatting
             export_df.at[index, 'Price'] = f"${row['Price']:.2f}"
 
-        # 3. Select Columns
         cols_to_keep = ['Name', 'Sym', 'Rank+', 'Price', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Meta', 'Master_Score', 'Type_Tag']
         final_df = export_df[cols_to_keep]
 
-        # 4. Generate HTML Table
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
-
-        # UTC Time
         utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
-        # 5. Create HTML Template
         html_content = f"""
         <!DOCTYPE html>
         <html lang="en">
@@ -511,7 +441,6 @@ def export_interactive_html(df):
                 h2 {{ color: #00ff00; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0; }}
                 #time-display {{ color: #888; font-size: 0.9em; }}
 
-                /* LEGEND BOX */
                 .legend-box {{
                     background-color: #2a2a2a;
                     border: 1px solid #444;
@@ -603,7 +532,6 @@ def export_interactive_html(df):
                     "language": {{ "search": "SEARCH TICKER:", "lengthMenu": "Show _MENU_ entries" }}
                 }});
 
-                // Time Converter
                 const timeSpan = document.getElementById('time-display');
                 if (timeSpan) {{
                     const rawUtc = timeSpan.getAttribute('data-utc');
@@ -617,7 +545,6 @@ def export_interactive_html(df):
                 }}
             }});
 
-            // FILTER LOGIC
             function filterTable(type) {{
                 $.fn.dataTable.ext.search.pop(); 
                 
@@ -641,23 +568,21 @@ def export_interactive_html(df):
         </html>
         """
 
-        # 6. Save with Timestamp
         timestamp = time.strftime("%Y-%m-%d_%H-%M-%S")
         filename = os.path.join(SCRIPT_DIR, f"ape_dashboard_{timestamp}.html")
         with open(filename, "w", encoding="utf-8") as f:
             f.write(html_content)
 
         print(f"\n{C_GREEN}[+] HTML Dashboard generated: {filename}{C_RESET}")
-        time.sleep(2)
+        return filename
 
     except Exception as e:
         print(f"\n{C_RED}[!] Export Failed: {e}{C_RESET}")
-        time.sleep(2)
+        return None
 
 def send_email(filename):
     print(f"\n{C_YELLOW}--- Sending Email... ---{C_RESET}")
     
-    # 1. Get Credentials from Environment Variables
     SMTP_SERVER = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
     SMTP_PORT = int(os.environ.get('EMAIL_PORT', 587))
     SENDER_EMAIL = os.environ.get('EMAIL_USER')
@@ -668,7 +593,6 @@ def send_email(filename):
         print(f"{C_RED}[!] Error: Missing Email Credentials.{C_RESET}")
         return
 
-    # 2. Create the Email
     msg = MIMEMultipart()
     msg['Subject'] = f"🦍 Ape Wisdom Dashboard - {time.strftime('%Y-%m-%d %H:%M')}"
     msg['From'] = SENDER_EMAIL
@@ -677,14 +601,12 @@ def send_email(filename):
     body = "Here is your latest market scan. Download the attachment to view the interactive dashboard."
     msg.attach(MIMEText(body, 'plain'))
 
-    # 3. Attach the HTML File
     try:
         with open(filename, 'rb') as f:
             part = MIMEApplication(f.read(), Name=os.path.basename(filename))
         part['Content-Disposition'] = f'attachment; filename="{os.path.basename(filename)}"'
         msg.attach(part)
 
-        # 4. Connect and Send
         with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
             server.starttls()
             server.login(SENDER_EMAIL, SENDER_PASSWORD)
@@ -698,31 +620,26 @@ def send_email(filename):
 if __name__ == "__main__":
     
     # =========================================
-    # 1. AUTO MODE (For GitHub/Cron/Email)
+    # 1. AUTO MODE (For GitHub/Email)
     # =========================================
     if "--auto" in sys.argv:
         print(f"{C_YELLOW}--- STARTING AUTO-MODE SCAN ---{C_RESET}")
         
-        # A. Fetch
         raw_data = get_all_trending_stocks()
         if not raw_data:
             print("No data found. Exiting.")
             sys.exit()
             
-        # B. Process
         df = filter_and_process(raw_data)
         
-        # C. Generate HTML (Silent)
         filename = export_interactive_html(df)
         
-        # D. Send Email
         if filename:
             try:
-                # Check if send_email exists (in case you missed pasting it)
                 if 'send_email' in globals():
                     send_email(filename)
                 else:
-                    print(f"{C_RED}[!] Error: send_email function missing. Check your code.{C_RESET}")
+                    print(f"{C_RED}[!] Error: send_email function missing.{C_RESET}")
             except Exception as e:
                 print(f"Email Error: {e}")
             
@@ -736,41 +653,28 @@ if __name__ == "__main__":
     CACHED_DF = filter_and_process(raw_data)
     
     sort_map = {
-        "T": ("Master_Score", False),
-        "0": ("Master_Score", False),
-        "1": ("Name", True),
-        "2": ("Sym", True),
-        "3": ("Rank+", False),
-        "4": ("Price", False),
-        "5": ("Surge", False),
-        "6": ("Mnt%", False),
-        "7": ("Upvotes", False),
-        "8": ("Squeeze", False),
-        "9": ("Meta", True)
+        "T": ("Master_Score", False), "0": ("Master_Score", False),
+        "1": ("Name", True), "2": ("Sym", True),
+        "3": ("Rank+", False), "4": ("Price", False),
+        "5": ("Surge", False), "6": ("Mnt%", False),
+        "7": ("Upvotes", False), "8": ("Squeeze", False), "9": ("Meta", True)
     }
     
     current_key, current_page, view_mode = "3", 0, "all"
 
     while True:
-        # Clear screen
         os.system('cls' if os.name == 'nt' else 'clear')
         
         sort_col, sort_asc = sort_map.get(current_key, ("Rank+", False))
 
-        # --- Apply View Filter ---
-        if view_mode == 'stocks':
-            df_view = CACHED_DF[CACHED_DF['Type'] == 'EQUITY']
-        elif view_mode == 'etfs':
-            df_view = CACHED_DF[CACHED_DF['Type'] == 'ETF']
-        else: # 'all'
-            df_view = CACHED_DF
+        if view_mode == 'stocks': df_view = CACHED_DF[CACHED_DF['Type'] == 'EQUITY']
+        elif view_mode == 'etfs': df_view = CACHED_DF[CACHED_DF['Type'] == 'ETF']
+        else:                     df_view = CACHED_DF
         
         df_sorted = df_view.sort_values(by=sort_col, ascending=sort_asc)
-        
         total_pages = max(1, math.ceil(len(df_sorted) / PAGE_SIZE))
         df_page = df_sorted.iloc[current_page*PAGE_SIZE : (current_page+1)*PAGE_SIZE]
         
-        # --- HEADER & DATA PRINTING ---
         if not df_page.empty:
             numbers_header = ""
             labels_header = ""
@@ -786,9 +690,8 @@ if __name__ == "__main__":
             print(f" {C_BOLD}{C_YELLOW}{numbers_header}{C_RESET}") 
             print(f" {C_BOLD}{labels_header}{C_RESET}\n" + DASH_LINE.replace("-", "="))
 
-            # --- SAFE PRINTING LOOP (Fixes SyntaxError) ---
+            # --- FIXED PRINTING LOOP ---
             for _, row in df_page.iterrows():
-                # Color Logic
                 z_r = row['z_Rank+']
                 r_color = C_YELLOW if z_r >= 2.0 else (C_GREEN if z_r >= 1.0 else "")
 
@@ -808,19 +711,21 @@ if __name__ == "__main__":
                 elif row['Master_Score'] > 1.5: name_color = C_YELLOW
                 else:                           name_color = ""
 
-                # Pre-calculate strings to avoid nested quote errors
                 clean_name = str(row['Name']).replace('\n', '').strip()[:NAME_MAX_WIDTH]
                 clean_meta = str(row['Meta']).replace('\n', '').strip()[:INDUSTRY_MAX_WIDTH]
+                
+                # We define these variables to use safely in the print statement below
                 surge_str = f"{row['Surge']:.0f}%"
                 mnt_str = f"{row['Mnt%']:.0f}%"
                 
+                # !!! HERE IS THE FIX: We use 'surge_str' instead of trying to format inside !!!
                 print(
                     f" {name_color}{clean_name:<{COL_WIDTHS[0]}}{C_RESET}"
                     f"{row['Sym']:<{COL_WIDTHS[1]}}"
                     f"{r_color}{row['Rank+']:<{COL_WIDTHS[2]}}{C_RESET}"
                     f"${row['Price']:<{COL_WIDTHS[3]}.2f} " 
-                    f"{s_color}{row['Surge']:.0f}%:<{COL_WIDTHS[4]}}{C_RESET}"
-                    f"{m_color}{row['Mnt%']:.0f}%:<{COL_WIDTHS[5]}}{C_RESET}"
+                    f"{s_color}{surge_str:<{COL_WIDTHS[4]}}{C_RESET}"  # <--- FIXED
+                    f"{m_color}{mnt_str:<{COL_WIDTHS[5]}}{C_RESET}"    # <--- FIXED
                     f"{v_color}{row['Upvotes']:<{COL_WIDTHS[6]}}{C_RESET}"
                     f"{sq_color}{int(row['Squeeze']):<{COL_WIDTHS[7]}}{C_RESET}"
                     f"{meta_color}{clean_meta:<{COL_WIDTHS[8]}}{C_RESET}"
@@ -861,7 +766,6 @@ if __name__ == "__main__":
             print(f"\n{C_YELLOW}--- SCANNING FOR UNKNOWN METADATA... ---{C_RESET}")
             local_cache = load_cache()
             keys_to_reset = [k for k, v in local_cache.items() if v.get('meta') in ['Unknown', 'General ETF', '-', None]]
-            
             if keys_to_reset:
                 print(f" Found {len(keys_to_reset)} incomplete records. Clearing them...")
                 for k in keys_to_reset: del local_cache[k]
