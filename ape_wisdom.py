@@ -3,10 +3,6 @@ import yfinance as yf
 import pandas as pd
 import time
 import datetime
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from email.mime.application import MIMEApplication
 import os
 import sys
 import math
@@ -21,9 +17,9 @@ from bs4 import BeautifulSoup
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 CACHE_FILE = os.path.join(SCRIPT_DIR, "ape_cache.json")
 MARKET_DATA_CACHE_FILE = os.path.join(SCRIPT_DIR, "market_data.pkl")
-HISTORY_FILE = os.path.join(SCRIPT_DIR, "market_history.json") # <--- ADDED
+HISTORY_FILE = os.path.join(SCRIPT_DIR, "market_history.json")
 CACHE_EXPIRY_SECONDS = 3600  # 1 Hour
-RETENTION_DAYS = 14          # <--- ADDED
+RETENTION_DAYS = 14          # Keep 2 weeks of history
 
 # --- FILTERS ---
 MIN_PRICE = 5        
@@ -64,7 +60,7 @@ session.headers.update({
 
 STATS = {"total": 0, "filtered_price": 0, "filtered_vol": 0, "failed_data": 0}
 
-# --- HISTORY TRACKER CLASS (Moved to top for safety) ---
+# --- HISTORY TRACKER CLASS ---
 class HistoryTracker:
     def __init__(self, filepath):
         self.filepath = filepath
@@ -79,7 +75,6 @@ class HistoryTracker:
         return {}
 
     def save(self, df):
-        # We use UTC to keep PC and GitHub in sync
         today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
         for _, row in df.iterrows():
             ticker = row['Sym']
@@ -92,7 +87,6 @@ class HistoryTracker:
                 "mnt_perc": float(row.get('Mnt%', 0))
             }
 
-        # Keep 14 days of history
         cutoff = datetime.datetime.utcnow() - datetime.timedelta(days=RETENTION_DAYS)
         for ticker in list(self.data.keys()):
             self.data[ticker] = {d: v for d, v in self.data[ticker].items() 
@@ -110,15 +104,11 @@ class HistoryTracker:
         prev_date = dates[-2]
         prev_data = self.data[ticker][prev_date]
 
-        # 1. VELOCITY: Is the Rank+ accelerating?
         velocity = int(self.data[ticker][dates[-1]]['rank_plus'] - prev_data['rank_plus'])
 
-        # 2. DIVERGENCE: Mentions UP > 10%, but Price change < 2% (The "Hidden" Move)
         mnt_surge = current_mnt > (prev_data['mnt_perc'] + 10)
         price_stable = abs((current_price - prev_data['price']) / (prev_data['price'] or 1)) < 0.02
         divergence = mnt_surge and price_stable
-
-        # 3. STREAK: How many days has it been in our logs?
         streak = len(dates)
 
         return {"vel": velocity, "div": divergence, "streak": streak}
@@ -144,7 +134,6 @@ def save_cache(cache_data):
 
 def fetch_sector_fallback(ticker):
     clean_ticker = ticker.replace('-', '.')
-    # 1. Try StockAnalysis (ETF Page)
     try:
         url = f"https://stockanalysis.com/etf/{clean_ticker}/"
         r = session.get(url, timeout=4)
@@ -160,7 +149,6 @@ def fetch_sector_fallback(ticker):
                     if val_alt: return val_alt.get_text(strip=True)
     except: pass
 
-    # 2. Try StockAnalysis (Stock Page)
     try:
         url = f"https://stockanalysis.com/stocks/{clean_ticker}/"
         r = session.get(url, timeout=4)
@@ -171,21 +159,17 @@ def fetch_sector_fallback(ticker):
                 txt = info_table.get_text()
                 if "Industry" in txt:
                     ind_link = soup.find('a', href=re.compile(r'/stocks/industry/'))
-                    if ind_link:
-                        return ind_link.get_text(strip=True)
+                    if ind_link: return ind_link.get_text(strip=True)
     except: pass
 
-    # 3. Fallback to Finviz
     try:
         url = f"https://finviz.com/quote.ashx?t={ticker}"
         r = session.get(url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=4)
         if r.status_code == 200:
             soup = BeautifulSoup(r.text, 'html.parser')
             links = soup.find_all('a', class_='tab-link') 
-            if len(links) >= 2:
-                return f"{links[0].text} - {links[1].text}"
+            if len(links) >= 2: return f"{links[0].text} - {links[1].text}"
     except: pass
-    
     return "Unknown"
 
 def fetch_google_fallback(ticker):
@@ -194,12 +178,10 @@ def fetch_google_fallback(ticker):
         r = session.get(url, timeout=5)
         if r.status_code != 200: return None
         soup = BeautifulSoup(r.text, 'html.parser')
-        
         page_title = soup.title.string if soup.title else ""
         name = ticker 
         match = re.search(r"^(.*?)\s\(", page_title)
         if match: name = match.group(1).strip()
-        
         meta = "Unknown"
         target_labels = ["Sector", "Industry", "Sector / Industry"]
         for label in target_labels:
@@ -209,55 +191,39 @@ def fetch_google_fallback(ticker):
                 if value_div:
                     meta = value_div.get_text(strip=True)
                     break 
-
         return {'ticker': ticker, 'name': name, 'meta': meta, 'type': 'EQUITY', 'mcap': 0}
     except: return None
 
 def fetch_meta_data_robust(ticker):
     name, meta, quote_type, mcap = ticker, "Unknown", "EQUITY", 0
     time.sleep(random.uniform(REQUEST_DELAY_MIN, REQUEST_DELAY_MAX))
-
-    # 1. Try YFinance API
     with open(os.devnull, 'w') as f:
         old_stderr = sys.stderr
         sys.stderr = f
         try:
             dat = yf.Ticker(ticker) 
             info = dat.info
-            
             if info:
                 quote_type = info.get('quoteType', 'EQUITY')
                 name = info.get('shortName') or info.get('longName') or ticker
                 mcap = info.get('marketCap', 0)
-
                 if quote_type == 'ETF':
                     category = info.get('category')
-                    if category and 'unknown' not in category.lower():
-                        meta = category
-                    else:
-                        meta = 'Unknown' 
+                    meta = category if category and 'unknown' not in category.lower() else 'Unknown' 
                 else:
                     s = info.get('sector', 'Unknown')
                     i = info.get('industry', 'Unknown')
-                    if s != 'Unknown' and i != 'Unknown':
-                        meta = f"{s} - {i}"
-                    else:
-                        meta = 'Unknown'
+                    meta = f"{s} - {i}" if s != 'Unknown' and i != 'Unknown' else 'Unknown'
         except: pass
         finally: sys.stderr = old_stderr 
 
-    # 2. External Fallback
     if meta in ['Unknown', 'General ETF', None]:
         time.sleep(random.uniform(1.0, 2.0))
         found_meta = fetch_sector_fallback(ticker)
-        if found_meta != "Unknown":
-            meta = found_meta
+        if found_meta != "Unknown": meta = found_meta
 
-    # 3. Apply Truncation
-    if len(meta) > INDUSTRY_MAX_WIDTH:
-        meta = meta[:INDUSTRY_MAX_WIDTH-3] + "..."
+    if len(meta) > INDUSTRY_MAX_WIDTH: meta = meta[:INDUSTRY_MAX_WIDTH-3] + "..."
 
-    # 4. Last Resort: Google Fallback
     if name == ticker and meta == "Unknown":
         time.sleep(1.0)
         g_res = fetch_google_fallback(ticker)
@@ -451,7 +417,6 @@ def export_interactive_html(df):
 
         export_df['Type_Tag'] = 'STOCK'
 
-        # --- Re-Initialize Tracker for HTML Coloring ---
         tracker = HistoryTracker(HISTORY_FILE)
         export_df['Vel'] = 0
         export_df['Sig'] = ""
@@ -462,25 +427,17 @@ def export_interactive_html(df):
             elif row['Master_Score'] > 1.5: name_color = C_YELLOW_HTML
             export_df.at[index, 'Name'] = color_span(row['Name'], name_color)
 
-            # --- NEW METRICS VISUALIZATION ---
             m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
-            
-            # Velocity Coloring
             v_val = m['vel']
             v_color = C_GREEN_HTML if v_val > 0 else (C_RED_HTML if v_val < 0 else C_WHITE_HTML)
             v_arrow = "↑" if v_val > 5 else ("↓" if v_val < -5 else "")
             export_df.at[index, 'Vel'] = color_span(f"{v_val} {v_arrow}", v_color)
 
-            # Signal Coloring
             sig_text = ""
-            if m['div']: 
-                sig_text = "💎 ACCUM"
-            elif m['streak'] > 5:
-                sig_text = "🔥 TREND"
-            
+            if m['div']: sig_text = "💎 ACCUM"
+            elif m['streak'] > 5: sig_text = "🔥 TREND"
             sig_color = C_CYAN_HTML if "ACCUM" in sig_text else C_YELLOW_HTML
             export_df.at[index, 'Sig'] = color_span(sig_text, sig_color)
-            # ---------------------------------
 
             z = row['z_Rank+']
             val = row['Rank+']
@@ -523,7 +480,6 @@ def export_interactive_html(df):
             export_df.at[index, 'Sym'] = link
             export_df.at[index, 'Price'] = f"${row['Price']:.2f}"
 
-        # ADDED Vel and Sig to the columns list
         cols_to_keep = ['Name', 'Sym', 'Vel', 'Sig', 'Rank+', 'Price', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Meta', 'Master_Score', 'Type_Tag']
         final_df = export_df[cols_to_keep]
 
@@ -542,50 +498,30 @@ def export_interactive_html(df):
             <style>
                 body {{ background-color: #121212; color: #e0e0e0; font-family: 'Consolas', 'Monaco', monospace; padding: 20px; }}
                 .container {{ max-width: 95%; background: #1e1e1e; padding: 25px; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.7); }}
-                
                 h2 {{ color: #00ff00; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0; }}
                 #time-display {{ color: #888; font-size: 0.9em; }}
-
-                .legend-box {{
-                    background-color: #2a2a2a;
-                    border: 1px solid #444;
-                    border-radius: 6px;
-                    padding: 10px 15px;
-                    margin-top: 15px;
-                    margin-bottom: 20px;
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 20px;
-                    font-size: 0.85rem;
-                    align-items: center;
-                    justify-content: space-between;
-                }}
+                .legend-box {{ background-color: #2a2a2a; border: 1px solid #444; border-radius: 6px; padding: 10px 15px; margin-top: 15px; margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 20px; font-size: 0.85rem; align-items: center; justify-content: space-between; }}
                 .legend-left {{ display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }}
                 .legend-group {{ display: flex; gap: 10px; align-items: center; border-right: 1px solid #444; padding-right: 20px; }}
                 .legend-group:last-child {{ border-right: none; }}
                 .legend-label {{ color: #888; text-transform: uppercase; font-size: 0.75rem; margin-right: 5px; }}
-
                 .btn-group-xs > .btn, .btn-xs {{ padding: .25rem .4rem; font-size: .875rem; line-height: .5; border-radius: .2rem; }}
                 .btn-check:checked + .btn-outline-light {{ background-color: #00ff00; color: black; border-color: #00ff00; }}
-                
                 table.dataTable {{ border-collapse: collapse !important; }}
                 .table-dark {{ --bs-table-bg: #1e1e1e; color: #ccc; }}
                 .table-dark th {{ color: #00ff00; border-bottom: 2px solid #444; }}
                 .table-dark td {{ border-bottom: 1px solid #333; vertical-align: middle; }}
-                
                 .dataTables_filter input, .dataTables_length select {{ background-color: #333; color: white; border: 1px solid #555; }}
                 .page-link {{ background-color: #333; border-color: #444; color: #00ff00; }}
                 .page-item.active .page-link {{ background-color: #00ff00; border-color: #00ff00; color: black; }}
             </style>
         </head>
         <body>
-
         <div class="container">
             <div class="d-flex justify-content-between align-items-end">
                 <h2>🦍 Ape Wisdom Dashboard</h2>
                 <span id="time-display" data-utc="{utc_timestamp}">Loading time...</span>
             </div>
-
             <div class="legend-box">
                 <div class="legend-left">
                     <div class="legend-group">
@@ -594,7 +530,6 @@ def export_interactive_html(df):
                         <span><span style="color:#ffff00; font-weight:bold;">YEL</span> = Warm</span>
                         <span><span style="color:#ff00ff; font-weight:bold;">MAG</span> = ETF</span>
                     </div>
-
                     <div class="legend-group">
                         <span class="legend-label">METRICS:</span>
                         <span><span style="color:#ffff00;">120%</span> = Extreme (>2&sigma;)</span>
@@ -606,71 +541,49 @@ def export_interactive_html(df):
                         <span><span style="color:#ffff00;">TREND</span> = >5 Days</span>
                     </div>
                 </div>
-
                 <div class="legend-group" style="border:none; padding-right:0;">
                     <span class="legend-label">VIEW:</span>
                     <div class="btn-group" role="group">
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked onclick="filterTable('all')">
                         <label class="btn btn-outline-light btn-sm" for="btnradio1">All</label>
-
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="filterTable('stock')">
                         <label class="btn btn-outline-light btn-sm" for="btnradio2">Stocks Only</label>
-
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="filterTable('etf')">
                         <label class="btn btn-outline-light btn-sm" for="btnradio3">ETFs Only</label>
                     </div>
                 </div>
             </div>
-            
             {table_html}
         </div>
-
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-
         <script>
             var table;
-
             $(document).ready(function() {{
                 table = $('.table').DataTable({{
                     "pageLength": 10,
                     "order": [[ 2, "desc" ]],
-                    "columnDefs": [ 
-                        {{ "visible": false, "targets": [11, 12] }} 
-                    ],
+                    "columnDefs": [ {{ "visible": false, "targets": [11, 12] }} ],
                     "language": {{ "search": "SEARCH TICKER:", "lengthMenu": "Show _MENU_ entries" }}
                 }});
-
                 const timeSpan = document.getElementById('time-display');
                 if (timeSpan) {{
                     const rawUtc = timeSpan.getAttribute('data-utc');
                     const localDate = new Date(rawUtc);
-                    const dateString = localDate.toLocaleString(undefined, {{ 
-                        year: 'numeric', month: 'numeric', day: 'numeric', 
-                        hour: '2-digit', minute: '2-digit', second: '2-digit',
-                        timeZoneName: 'short' 
-                    }});
+                    const dateString = localDate.toLocaleString(undefined, {{ year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short' }});
                     timeSpan.textContent = "Last Updated: " + dateString;
                 }}
             }});
-
             function filterTable(type) {{
                 $.fn.dataTable.ext.search.pop(); 
-                
-                if (type === 'all') {{
-                    table.draw();
-                    return;
-                }}
-
-                $.fn.dataTable.ext.search.push(
-                    function(settings, data, dataIndex) {{
+                if (type === 'all') {{ table.draw(); return; }}
+                $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {{
                         var typeTag = data[12] || ""; 
                         if (type === 'etf') return typeTag === 'ETF';
                         if (type === 'stock') return typeTag === 'STOCK';
                         return true;
-                    }}
-                );
+                    }});
                 table.draw();
             }}
         </script>
@@ -690,47 +603,33 @@ def export_interactive_html(df):
         print(f"\n{C_RED}[!] Export Failed: {e}{C_RESET}")
         return None
 
-def send_email(filename):
-    print(f"\n{C_YELLOW}--- Sending Email... ---{C_RESET}")
+def send_discord_file(filename):
+    print(f"\n{C_YELLOW}--- Sending to Discord... ---{C_RESET}")
     
-    SMTP_SERVER = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
-    SMTP_PORT = int(os.environ.get('EMAIL_PORT', 587))
-    SENDER_EMAIL = os.environ.get('EMAIL_USER')
-    SENDER_PASSWORD = os.environ.get('EMAIL_PASSWORD')
-    RECIPIENT_EMAIL = os.environ.get('EMAIL_TO')
-
-    if not SENDER_EMAIL or not SENDER_PASSWORD:
-        print(f"{C_RED}[!] Error: Missing Email Credentials.{C_RESET}")
+    DISCORD_URL = os.environ.get('DISCORD_WEBHOOK')
+    if not DISCORD_URL:
+        print(f"{C_RED}[!] Error: Missing DISCORD_WEBHOOK secret.{C_RESET}")
         return
 
-    msg = MIMEMultipart()
-    msg['Subject'] = f"🦍 Ape Wisdom Dashboard - {time.strftime('%Y-%m-%d %H:%M')}"
-    msg['From'] = SENDER_EMAIL
-    msg['To'] = RECIPIENT_EMAIL
-
-    body = "Here is your latest market scan. Download the attachment to view the interactive dashboard."
-    msg.attach(MIMEText(body, 'plain'))
-
     try:
+        payload = {"content": f"🚀 **Ape Wisdom Market Scan** - {time.strftime('%Y-%m-%d %H:%M')}\n*Download the file below for the full interactive dashboard.*"}
+        
         with open(filename, 'rb') as f:
-            part = MIMEApplication(f.read(), Name=os.path.basename(filename))
-        part['Content-Disposition'] = f'attachment; filename="{os.path.basename(filename)}"'
-        msg.attach(part)
-
-        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-            server.starttls()
-            server.login(SENDER_EMAIL, SENDER_PASSWORD)
-            server.send_message(msg)
+            file_data = {"file": (os.path.basename(filename), f, "text/html")}
+            r = requests.post(DISCORD_URL, data=payload, files=file_data)
             
-        print(f"{C_GREEN}[+] Email sent successfully to {RECIPIENT_EMAIL}{C_RESET}")
-
+        if r.status_code == 200 or r.status_code == 204:
+            print(f"{C_GREEN}[+] Discord file sent successfully!{C_RESET}")
+        else:
+            print(f"{C_RED}[!] Discord Error: {r.status_code} - {r.text}{C_RESET}")
+            
     except Exception as e:
-        print(f"{C_RED}[!] Email Failed: {e}{C_RESET}")
+        print(f"{C_RED}[!] Discord Failed: {e}{C_RESET}")
 
 if __name__ == "__main__":
     
     # =========================================
-    # 1. AUTO MODE (For GitHub/Email)
+    # 1. AUTO MODE (For GitHub/Discord)
     # =========================================
     if "--auto" in sys.argv:
         print(f"{C_YELLOW}--- STARTING AUTO-MODE SCAN ---{C_RESET}")
@@ -746,12 +645,13 @@ if __name__ == "__main__":
         
         if filename:
             try:
-                if 'send_email' in globals():
-                    send_email(filename)
+                # Send Discord File
+                if 'send_discord_file' in globals():
+                    send_discord_file(filename)
                 else:
-                    print(f"{C_RED}[!] Error: send_email function missing.{C_RESET}")
+                    print(f"{C_RED}[!] Error: send_discord_file function missing.{C_RESET}")
             except Exception as e:
-                print(f"Email Error: {e}")
+                print(f"Notification Error: {e}")
             
         print(f"{C_GREEN}--- AUTO SCAN COMPLETE ---{C_RESET}")
         sys.exit() 
@@ -804,16 +704,12 @@ if __name__ == "__main__":
             for _, row in df_page.iterrows():
                 z_r = row['z_Rank+']
                 r_color = C_YELLOW if z_r >= 2.0 else (C_GREEN if z_r >= 1.0 else "")
-
                 z_s = row['z_Surge']
                 s_color = C_YELLOW if z_s >= 2.0 else (C_GREEN if z_s >= 1.0 else "")
-
                 z_m = row['z_Mnt%']
                 m_color = C_YELLOW if z_m >= 2.0 else (C_GREEN if z_m >= 1.0 else "")
-
                 sq_color = C_CYAN if row['z_Squeeze'] > 1.5 else ""
                 v_color = C_GREEN if row['z_Upvotes'] > 1.5 else ""
-                
                 is_fund = row['Type'] == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
                 meta_color = C_MAGENTA if is_fund else ""
 
@@ -823,8 +719,6 @@ if __name__ == "__main__":
 
                 clean_name = str(row['Name']).replace('\n', '').strip()[:NAME_MAX_WIDTH]
                 clean_meta = str(row['Meta']).replace('\n', '').strip()[:INDUSTRY_MAX_WIDTH]
-                
-                # --- SYNTAX FIX ---
                 surge_str = f"{row['Surge']:.0f}%"
                 mnt_str = f"{row['Mnt%']:.0f}%"
                 
@@ -833,8 +727,8 @@ if __name__ == "__main__":
                     f"{row['Sym']:<{COL_WIDTHS[1]}}"
                     f"{r_color}{row['Rank+']:<{COL_WIDTHS[2]}}{C_RESET}"
                     f"${row['Price']:<{COL_WIDTHS[3]}.2f} " 
-                    f"{s_color}{surge_str:<{COL_WIDTHS[4]}}{C_RESET}"  # Uses variable
-                    f"{m_color}{mnt_str:<{COL_WIDTHS[5]}}{C_RESET}"    # Uses variable
+                    f"{s_color}{surge_str:<{COL_WIDTHS[4]}}{C_RESET}"  
+                    f"{m_color}{mnt_str:<{COL_WIDTHS[5]}}{C_RESET}"    
                     f"{v_color}{row['Upvotes']:<{COL_WIDTHS[6]}}{C_RESET}"
                     f"{sq_color}{int(row['Squeeze']):<{COL_WIDTHS[7]}}{C_RESET}"
                     f"{meta_color}{clean_meta:<{COL_WIDTHS[8]}}{C_RESET}"
