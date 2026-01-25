@@ -2,8 +2,8 @@ name: Market Momentum Tracker
 
 on:
   schedule:
-    # Runs at minute 0, past hour 13 through 21 (1 PM to 9 PM UTC), Mon-Fri
-    - cron: '0 13-21 * * 1-5'
+    # Runs at minute 0 past every hour (24/7)
+    - cron: '0 * * * *'
   workflow_dispatch:      # Allows manual testing
 
 permissions:
@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: '3.9'
 
-      # --- RESTORE CACHE ---
+      # --- RESTORE & SAVE CACHE ---
       - name: Cache JSON Data
         uses: actions/cache@v3
         with:
@@ -37,11 +37,11 @@ jobs:
         run: |
           pip install pandas yfinance requests lxml
 
-      # --- RUN SCRIPT (Generates HTML in 'public' folder) ---
+      # --- RUN SCRIPT (Generates website files) ---
       - name: Run Script
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          GITHUB_REPOSITORY: ${{ github.repository }} # Passes 'username/repo' to python
+          GITHUB_REPOSITORY: ${{ github.repository }} # Needed to build the link
         run: python ape_wisdom.py --auto
 
       # --- DEPLOY TO GITHUB PAGES ---
@@ -49,4 +49,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public  # The script will now save HTML here
+          publish_dir: ./public  # Uploads the folder the script created
