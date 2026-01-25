@@ -259,7 +259,7 @@ def get_all_trending_stocks():
 
 def export_interactive_html(df):
     try:
-        # FIX: Convert to object immediately so we can overwrite numbers with HTML strings
+        # FIX 1: Convert to object immediately so we can overwrite numbers with HTML strings
         export_df = df.copy().astype(object)
         
         if not os.path.exists(PUBLIC_DIR):
@@ -274,9 +274,11 @@ def export_interactive_html(df):
         C_GREEN, C_YELLOW, C_RED, C_CYAN, C_MAGENTA, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ff00ff", "#ffffff"
         export_df['Type_Tag'] = 'STOCK'
         tracker = HistoryTracker(HISTORY_FILE)
-        # FIX: Initialize Vel as a String ("") so we can put HTML in it later without error
+        
+        # FIX 2: Initialize Vel as String to avoid FutureWarning
         export_df['Vel'] = ""; export_df['Sig'] = ""
 
+        # Create Readable Volume Column
         export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
 
         for index, row in export_df.iterrows():
@@ -319,6 +321,7 @@ def export_interactive_html(df):
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
+        # HTML + JS Logic (NOTE: Double braces {{ }} are used for JS/CSS, Single braces { } for Python vars)
         html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Ape Wisdom Analysis</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
@@ -456,13 +459,13 @@ def export_interactive_html(df):
         }}
 
         $(document).ready(function(){{ 
-            var table=$('.table').DataTable({
+            var table=$('.table').DataTable({{
                 "order":[[4,"desc"]],
                 "pageLength": 25,
                 "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 "columnDefs": [ 
-                    { "visible": false, "targets": [12, 13] }, // Hide tags & raw vol
-                    { "orderData": [13], "targets": [6] }       // Sort "Avg Vol" (6) using "Raw Vol" (13)
+                    {{ "visible": false, "targets": [12, 13] }}, // Hide tags & raw vol
+                    {{ "orderData": [13], "targets": [6] }}       // FIX: Sort "Avg Vol" (6) using "Raw Vol" (13)
                 ],
                 
                 "drawCallback": function(settings) {{
