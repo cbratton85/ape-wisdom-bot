@@ -21,11 +21,13 @@ from bs4 import BeautifulSoup
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 CACHE_FILE = os.path.join(SCRIPT_DIR, "ape_cache.json")
 MARKET_DATA_CACHE_FILE = os.path.join(SCRIPT_DIR, "market_data.pkl")
+HISTORY_FILE = os.path.join(SCRIPT_DIR, "market_history.json") # <--- ADDED
 CACHE_EXPIRY_SECONDS = 3600  # 1 Hour
+RETENTION_DAYS = 14          # <--- ADDED
 
 # --- FILTERS ---
-MIN_PRICE = 5       
-MIN_AVG_VOLUME = 250000       
+MIN_PRICE = 5        
+MIN_AVG_VOLUME = 250000        
 AVG_VOLUME_DAYS = 10
 PAGE_SIZE = 30
 
@@ -61,6 +63,65 @@ session.headers.update({
 })
 
 STATS = {"total": 0, "filtered_price": 0, "filtered_vol": 0, "failed_data": 0}
+
+# --- HISTORY TRACKER CLASS (Moved to top for safety) ---
+class HistoryTracker:
+    def __init__(self, filepath):
+        self.filepath = filepath
+        self.data = self._load()
+
+    def _load(self):
+        if os.path.exists(self.filepath):
+            try:
+                with open(self.filepath, 'r') as f:
+                    return json.load(f)
+            except: return {}
+        return {}
+
+    def save(self, df):
+        # We use UTC to keep PC and GitHub in sync
+        today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+        for _, row in df.iterrows():
+            ticker = row['Sym']
+            if ticker not in self.data:
+                self.data[ticker] = {}
+            
+            self.data[ticker][today] = {
+                "rank_plus": int(row.get('Rank+', 0)),
+                "price": float(row.get('Price', 0)),
+                "mnt_perc": float(row.get('Mnt%', 0))
+            }
+
+        # Keep 14 days of history
+        cutoff = datetime.datetime.utcnow() - datetime.timedelta(days=RETENTION_DAYS)
+        for ticker in list(self.data.keys()):
+            self.data[ticker] = {d: v for d, v in self.data[ticker].items() 
+                                 if datetime.datetime.strptime(d, "%Y-%m-%d") > cutoff}
+            if not self.data[ticker]: del self.data[ticker]
+
+        with open(self.filepath, 'w') as f:
+            json.dump(self.data, f, indent=4)
+
+    def get_metrics(self, ticker, current_price, current_mnt):
+        if ticker not in self.data or len(self.data[ticker]) < 2:
+            return {"vel": 0, "div": False, "streak": 0}
+
+        dates = sorted(self.data[ticker].keys())
+        prev_date = dates[-2]
+        prev_data = self.data[ticker][prev_date]
+
+        # 1. VELOCITY: Is the Rank+ accelerating?
+        velocity = int(self.data[ticker][dates[-1]]['rank_plus'] - prev_data['rank_plus'])
+
+        # 2. DIVERGENCE: Mentions UP > 10%, but Price change < 2% (The "Hidden" Move)
+        mnt_surge = current_mnt > (prev_data['mnt_perc'] + 10)
+        price_stable = abs((current_price - prev_data['price']) / (prev_data['price'] or 1)) < 0.02
+        divergence = mnt_surge and price_stable
+
+        # 3. STREAK: How many days has it been in our logs?
+        streak = len(dates)
+
+        return {"vel": velocity, "div": divergence, "streak": streak}
 
 def clear_screen():
     if os.name == 'nt': os.system('cls')
@@ -390,6 +451,8 @@ def export_interactive_html(df):
 
         export_df['Type_Tag'] = 'STOCK'
 
+        # --- Re-Initialize Tracker for HTML Coloring ---
+        tracker = HistoryTracker(HISTORY_FILE)
         export_df['Vel'] = 0
         export_df['Sig'] = ""
 
@@ -398,6 +461,26 @@ def export_interactive_html(df):
             if row['Master_Score'] > 3.0:   name_color = C_RED_HTML
             elif row['Master_Score'] > 1.5: name_color = C_YELLOW_HTML
             export_df.at[index, 'Name'] = color_span(row['Name'], name_color)
+
+            # --- NEW METRICS VISUALIZATION ---
+            m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
+            
+            # Velocity Coloring
+            v_val = m['vel']
+            v_color = C_GREEN_HTML if v_val > 0 else (C_RED_HTML if v_val < 0 else C_WHITE_HTML)
+            v_arrow = "↑" if v_val > 5 else ("↓" if v_val < -5 else "")
+            export_df.at[index, 'Vel'] = color_span(f"{v_val} {v_arrow}", v_color)
+
+            # Signal Coloring
+            sig_text = ""
+            if m['div']: 
+                sig_text = "💎 ACCUM"
+            elif m['streak'] > 5:
+                sig_text = "🔥 TREND"
+            
+            sig_color = C_CYAN_HTML if "ACCUM" in sig_text else C_YELLOW_HTML
+            export_df.at[index, 'Sig'] = color_span(sig_text, sig_color)
+            # ---------------------------------
 
             z = row['z_Rank+']
             val = row['Rank+']
@@ -440,7 +523,8 @@ def export_interactive_html(df):
             export_df.at[index, 'Sym'] = link
             export_df.at[index, 'Price'] = f"${row['Price']:.2f}"
 
-        cols_to_keep = ['Name', 'Sym', 'Rank+', 'Price', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Meta', 'Master_Score', 'Type_Tag']
+        # ADDED Vel and Sig to the columns list
+        cols_to_keep = ['Name', 'Sym', 'Vel', 'Sig', 'Rank+', 'Price', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Meta', 'Master_Score', 'Type_Tag']
         final_df = export_df[cols_to_keep]
 
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
@@ -516,6 +600,11 @@ def export_interactive_html(df):
                         <span><span style="color:#ffff00;">120%</span> = Extreme (>2&sigma;)</span>
                         <span><span style="color:#00ff00;">45%</span> = Strong (>1&sigma;)</span>
                     </div>
+                     <div class="legend-group">
+                        <span class="legend-label">MOMENTUM:</span>
+                        <span><span style="color:#00ffff;">ACCUM</span> = Price Flat + Mentions Up</span>
+                        <span><span style="color:#ffff00;">TREND</span> = >5 Days</span>
+                    </div>
                 </div>
 
                 <div class="legend-group" style="border:none; padding-right:0;">
@@ -548,7 +637,7 @@ def export_interactive_html(df):
                     "pageLength": 10,
                     "order": [[ 2, "desc" ]],
                     "columnDefs": [ 
-                        {{ "visible": false, "targets": [9, 10] }} 
+                        {{ "visible": false, "targets": [11, 12] }} 
                     ],
                     "language": {{ "search": "SEARCH TICKER:", "lengthMenu": "Show _MENU_ entries" }}
                 }});
@@ -576,7 +665,7 @@ def export_interactive_html(df):
 
                 $.fn.dataTable.ext.search.push(
                     function(settings, data, dataIndex) {{
-                        var typeTag = data[10] || ""; 
+                        var typeTag = data[12] || ""; 
                         if (type === 'etf') return typeTag === 'ETF';
                         if (type === 'stock') return typeTag === 'STOCK';
                         return true;
@@ -637,64 +726,6 @@ def send_email(filename):
 
     except Exception as e:
         print(f"{C_RED}[!] Email Failed: {e}{C_RESET}")
-
-class HistoryTracker:
-    def __init__(self, filepath):
-        self.filepath = filepath
-        self.data = self._load()
-
-    def _load(self):
-        if os.path.exists(self.filepath):
-            try:
-                with open(self.filepath, 'r') as f:
-                    return json.load(f)
-            except: return {}
-        return {}
-
-    def save(self, df):
-        # We use UTC to keep PC and GitHub in sync
-        today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
-        for _, row in df.iterrows():
-            ticker = row['Sym']
-            if ticker not in self.data:
-                self.data[ticker] = {}
-            
-            self.data[ticker][today] = {
-                "rank_plus": int(row.get('Rank+', 0)),
-                "price": float(row.get('Price', 0)),
-                "mnt_perc": float(row.get('Mnt%', 0))
-            }
-
-        # Keep 14 days of history
-        cutoff = datetime.datetime.utcnow() - datetime.timedelta(days=RETENTION_DAYS)
-        for ticker in list(self.data.keys()):
-            self.data[ticker] = {d: v for d, v in self.data[ticker].items() 
-                                 if datetime.datetime.strptime(d, "%Y-%m-%d") > cutoff}
-            if not self.data[ticker]: del self.data[ticker]
-
-        with open(self.filepath, 'w') as f:
-            json.dump(self.data, f, indent=4)
-
-    def get_metrics(self, ticker, current_price, current_mnt):
-        if ticker not in self.data or len(self.data[ticker]) < 2:
-            return {"vel": 0, "div": False, "streak": 0}
-
-        dates = sorted(self.data[ticker].keys())
-        prev_date = dates[-2]
-        prev_data = self.data[ticker][prev_date]
-
-        # 1. VELOCITY: Is the Rank+ accelerating?
-        velocity = int(self.data[ticker][dates[-1]]['rank_plus'] - prev_data['rank_plus'])
-
-        # 2. DIVERGENCE: Mentions UP > 10%, but Price change < 2% (The "Hidden" Move)
-        mnt_surge = current_mnt > (prev_data['mnt_perc'] + 10)
-        price_stable = abs((current_price - prev_data['price']) / (prev_data['price'] or 1)) < 0.02
-        divergence = mnt_surge and price_stable
-
-        # 3. STREAK: How many days has it been in our logs?
-        streak = len(dates)
-
-        return {"vel": velocity, "div": divergence, "streak": streak}
 
 if __name__ == "__main__":
     
@@ -793,18 +824,17 @@ if __name__ == "__main__":
                 clean_name = str(row['Name']).replace('\n', '').strip()[:NAME_MAX_WIDTH]
                 clean_meta = str(row['Meta']).replace('\n', '').strip()[:INDUSTRY_MAX_WIDTH]
                 
-                # We define these variables to use safely in the print statement below
+                # --- SYNTAX FIX ---
                 surge_str = f"{row['Surge']:.0f}%"
                 mnt_str = f"{row['Mnt%']:.0f}%"
                 
-                # !!! HERE IS THE FIX: We use 'surge_str' instead of trying to format inside !!!
                 print(
                     f" {name_color}{clean_name:<{COL_WIDTHS[0]}}{C_RESET}"
                     f"{row['Sym']:<{COL_WIDTHS[1]}}"
                     f"{r_color}{row['Rank+']:<{COL_WIDTHS[2]}}{C_RESET}"
                     f"${row['Price']:<{COL_WIDTHS[3]}.2f} " 
-                    f"{s_color}{surge_str:<{COL_WIDTHS[4]}}{C_RESET}"  # <--- FIXED
-                    f"{m_color}{mnt_str:<{COL_WIDTHS[5]}}{C_RESET}"    # <--- FIXED
+                    f"{s_color}{surge_str:<{COL_WIDTHS[4]}}{C_RESET}"  # Uses variable
+                    f"{m_color}{mnt_str:<{COL_WIDTHS[5]}}{C_RESET}"    # Uses variable
                     f"{v_color}{row['Upvotes']:<{COL_WIDTHS[6]}}{C_RESET}"
                     f"{sq_color}{int(row['Squeeze']):<{COL_WIDTHS[7]}}{C_RESET}"
                     f"{meta_color}{clean_meta:<{COL_WIDTHS[8]}}{C_RESET}"
