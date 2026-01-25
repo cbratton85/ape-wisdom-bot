@@ -182,11 +182,17 @@ def filter_and_process(stocks):
         t = TICKER_FIXES.get(stock['ticker'], stock['ticker'].replace('.', '-'))
         try:
             if isinstance(market_data.columns, pd.MultiIndex):
-                if t in market_data.columns.levels[0]: hist = market_data[t].dropna()
-                else: continue
+                if t in market_data.columns.levels[0]: 
+                    hist = market_data[t].dropna()
+                else: 
+                    # FIX: If ticker is missing from columns, it failed to download. Blacklist it.
+                    delisted_cache[t] = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+                    save_delisted(delisted_cache)
+                    continue
             else: hist = market_data.dropna()
 
             if hist.empty: 
+                # Add to Blacklist 
                 # Add to Blacklist
                 delisted_cache[t] = datetime.datetime.utcnow().strftime("%Y-%m-%d")
                 save_delisted(delisted_cache)
@@ -253,7 +259,7 @@ def get_all_trending_stocks():
 
 def export_interactive_html(df):
     try:
-        # Convert to object type immediately so we can overwrite numbers with HTML strings
+        # FIX: Convert to object immediately so we can overwrite numbers with HTML strings
         export_df = df.copy().astype(object)
         
         if not os.path.exists(PUBLIC_DIR):
@@ -390,28 +396,27 @@ def export_interactive_html(df):
 
             <div class="legend-container">
                 <div class="legend-header" onclick="toggleLegend()">
-                    <span>STRATEGY GUIDE & LEGEND (Click to Toggle)</span>
+                    <span>ℹ️ STRATEGY GUIDE & LEGEND (Click to Toggle)</span>
                     <span id="legendArrow">▼</span>
                 </div>
                 <div class="legend-box" id="legendContent" style="display:none;">
                     
-                    
-                        <div class="legend-section">
-                        <h5>Heat Status (Name Color)</h5>
+                    <div class="legend-section">
+                        <h5>🔥 Heat Status (Name Color)</h5>
                         <div class="legend-item"><span class="legend-key" style="color:#ff4444">RED NAME</span> <b>Extreme (>3σ):</b> Massive outlier in volume/mentions.</div>
                         <div class="legend-item"><span class="legend-key" style="color:#ffff00">YEL NAME</span> <b>Elevated (>1.5σ):</b> Activity is well above normal.</div>
                         <div class="legend-item"><span class="legend-key" style="color:#ffffff">WHT NAME</span> <b>Normal:</b> Standard activity levels.</div>
                         <div class="legend-item"><span class="legend-key" style="color:#ff00ff">MAGENTA</span> Exchange Traded Fund (ETF).</div>
                     </div>
 
-                    
-                        <h5>Significance Signals</h5>
+                    <div class="legend-section">
+                        <h5>🚀 Significance Signals</h5>
                         <div class="legend-item"><span class="legend-key" style="color:#00ffff">💎 ACCUM</span> Mentions RISING (>10%) + Price FLAT.</div>
                         <div class="legend-item"><span class="legend-key" style="color:#ffff00">🔥 TREND</span> In Top Trending list for 5+ consecutive days.</div>
                     </div>
                     
                     <div class="legend-section">
-                        <h5>Metrics</h5>
+                        <h5>📊 Metrics</h5>
                         <div class="legend-item"><span class="legend-key">Rank+</span> Spots climbed in last 24h.</div>
                         <div class="legend-item"><span class="legend-key">Surge</span> Volume vs 30-Day Avg.</div>
                         <div class="legend-item"><span class="legend-key">Mnt%</span> Change in Mentions vs 24h ago.</div>
