@@ -20,8 +20,10 @@ PUBLIC_DIR = os.path.join(SCRIPT_DIR, "public")
 CACHE_FILE = os.path.join(SCRIPT_DIR, "ape_cache.json")
 MARKET_DATA_CACHE_FILE = os.path.join(SCRIPT_DIR, "market_data.pkl")
 HISTORY_FILE = os.path.join(SCRIPT_DIR, "market_history.json")
+DELISTED_CACHE_FILE = os.path.join(SCRIPT_DIR, "delisted_cache.json") 
 CACHE_EXPIRY_SECONDS = 3600 
 RETENTION_DAYS = 14          
+DELISTED_RETRY_DAYS = 7       
 
 # --- FILTERS & LAYOUT ---
 MIN_PRICE = 0.50             
@@ -118,9 +120,37 @@ def fetch_meta_data_robust(ticker):
     except: pass
     return {'ticker': ticker, 'name': name, 'meta': meta, 'type': quote_type, 'mcap': mcap, 'currency': currency}
 
+def load_delisted():
+    if os.path.exists(DELISTED_CACHE_FILE):
+        try:
+            with open(DELISTED_CACHE_FILE, 'r') as f: return json.load(f)
+        except: return {}
+    return {}
+
+def save_delisted(data):
+    try:
+        with open(DELISTED_CACHE_FILE, 'w') as f: json.dump(data, f, indent=4)
+    except: pass
+
 def filter_and_process(stocks):
     if not stocks: return pd.DataFrame()
     us_tickers = list(set([TICKER_FIXES.get(s['ticker'], s['ticker'].replace('.', '-')) for s in stocks]))
+    
+    # --- BLACKLIST CHECK ---
+    delisted_cache = load_delisted()
+    now = datetime.datetime.utcnow()
+    valid_tickers = []
+    
+    for t in us_tickers:
+        if t in delisted_cache:
+            last_checked = datetime.datetime.strptime(delisted_cache[t], "%Y-%m-%d")
+            if (now - last_checked).days < DELISTED_RETRY_DAYS:
+                continue # Skip this ticker (it's in the penalty box)
+        valid_tickers.append(t)
+    
+    us_tickers = valid_tickers
+    # -----------------------
+
     local_cache = load_cache()
     
     missing = [t for t in us_tickers if t not in local_cache]
@@ -156,7 +186,12 @@ def filter_and_process(stocks):
                 else: continue
             else: hist = market_data.dropna()
 
-            if hist.empty: continue
+            if hist.empty: 
+                # Add to Blacklist
+                delisted_cache[t] = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+                save_delisted(delisted_cache)
+                continue
+                
             curr_p = hist['Close'].iloc[-1]
             avg_v = hist['Volume'].tail(AVG_VOLUME_DAYS).mean()
             
