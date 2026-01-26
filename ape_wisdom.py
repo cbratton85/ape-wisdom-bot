@@ -33,7 +33,7 @@ PAGE_SIZE = 30
 
 # --- UPDATED WIDTHS ---
 NAME_MAX_WIDTH = 50      
-INDUSTRY_MAX_WIDTH = 60  
+INDUSTRY_MAX_WIDTH = 75  
 COL_WIDTHS = [50, 8, 8, 10, 8, 8, 8, 8, INDUSTRY_MAX_WIDTH] 
 DASH_LINE = "-" * 170    
 
@@ -312,7 +312,13 @@ def export_interactive_html(df):
             export_df.at[index, 'Upvotes'] = color_span(row['Upvotes'], C_GREEN if row['z_Upvotes']>1.5 else C_WHITE)
             
             is_fund = row['Type'] == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
-            export_df.at[index, 'Meta'] = color_span(row['Meta'], C_MAGENTA if is_fund else C_WHITE)
+
+            # Create the ETF badge style
+            etf_badge = '<span style="background:#ff00ff22; color:#ff00ff; border:1px solid #ff00ff; padding:1px 6px; border-radius:4px; font-size:10px; font-weight:bold; margin-right:8px; vertical-align:middle;">ETF</span>' if is_fund else ''
+
+            # Prepend the badge to the Industry text
+            industry_text = color_span(row['Meta'], C_MAGENTA if is_fund else C_WHITE)
+            export_df.at[index, 'Meta'] = f"{etf_badge}{industry_text}"
             export_df.at[index, 'Type_Tag'] = 'ETF' if is_fund else 'STOCK'
             
             t = row['Sym']
@@ -341,7 +347,11 @@ def export_interactive_html(df):
             th{{color:#00ff00;border-bottom:2px solid #444; font-size: 14px;}} 
             /* Child 5 is the "Sig" column (1-based index in CSS, matches Col 4 in JS) */
             th:nth-child(5), td:nth-child(5) {{ width: 1%; white-space: nowrap; }}
-            td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
+            td {
+            vertical-align: middle; 
+            white-space: nowrap; /* This prevents the ETF badge from dropping to a new line */
+            border-bottom: 1px solid #333;
+            } 
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
             
             .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 8px; margin-bottom: 20px; overflow: hidden; transition: all 0.3s ease; }}
