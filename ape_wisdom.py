@@ -378,7 +378,9 @@ def export_interactive_html(df):
         <div class="container-fluid" style="max-width:98%;">
             
             <div class="header-flex">
+                <a href="https://apewisdom.io" target="_blank" style="text-decoration: none;">
                 <img src="{logo_data}" alt="Ape Wisdom" style="height: 60px;">
+                </a>
                 <span id="time" data-utc="{utc_timestamp}" style="font-size: 0.9rem; color: #888;">Loading...</span>
             </div>
 
