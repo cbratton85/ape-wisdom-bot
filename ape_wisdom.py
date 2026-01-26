@@ -406,17 +406,20 @@ def export_interactive_html(df):
             }}
             /* NEW: Name Column (3) - Allow it to grow/fill space */
             th:nth-child(3), td:nth-child(3) {{
-                width: auto;
+                max-width: 220px;        /* Limits the width */
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis; /* Adds '...' if name is too long */
             }}
 
-            /* Constrain Industry/Sector (13) */
+            /* Industry/Sector (13) - Widen it and fix font size */
             th:nth-child(13), td:nth-child(13) {{
-                max-width: 140px;
+                max-width: 200px;        /* Increased from 140px */
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                font-size: 0.75rem;
-                color: #888;
+                font-size: 0.8rem;       /* Increased from 0.75rem */
+                color: #aaa;             /* Slightly brighter gray */
             }}
 
             /* NEW: Ensure Price (Column 7) never wraps */
@@ -593,36 +596,36 @@ def export_interactive_html(df):
         }}
         
         // NEW: Export visible tickers to .txt
-        function exportTickers() {{
+        function exportTickers() {
             var table = $('.table').DataTable();
-            var data = table.rows({{ search: 'applied', order: 'current' }}).data();
+            
+            // UPDATE: Added "page: 'current'" to only get what is visible on screen
+            var data = table.rows({ search: 'applied', order: 'current', page: 'current' }).data();
             var tickers = [];
 
-            data.each(function (value, index) {{
-                // Column 3 is the Symbol (Index 3)
+            data.each(function (value, index) {
                 var html = value[3]; 
-                // Strip HTML tags to get just "AAPL"
                 var div = document.createElement("div");
                 div.innerHTML = html;
                 var text = div.textContent || div.innerText || "";
                 if(text) tickers.push(text.trim());
-            }});
+            });
 
-            if (tickers.length === 0) {{
-                alert("No tickers to export!");
+            if (tickers.length === 0) {
+                alert("No visible tickers to export!");
                 return;
-            }}
+            }
 
             var content = tickers.join(" "); 
-            var blob = new Blob([content], {{ type: "text/plain;charset=utf-8" }});
+            var blob = new Blob([content], { type: "text/plain;charset=utf-8" });
             var url = URL.createObjectURL(blob);
             var a = document.createElement("a");
             a.href = url;
-            a.download = "ape_tickers.txt";
+            a.download = "ape_tickers_page.txt";
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-        }}
+        }
 
         $(document).ready(function(){{ 
             var table=$('.table').DataTable({{
