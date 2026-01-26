@@ -453,9 +453,9 @@ def export_interactive_html(df):
                 padding-right: 15px;
             }}
 
-            /* --- GROUP 4: INDUSTRY (Fixed Width) --- */
+            /* --- GROUP 4: INDUSTRY (Wider) --- */
             th:nth-child(13), td:nth-child(13) {{
-                max-width: 180px;    /* Compact limit */
+                max-width: 260px;    /* Increased from 180px to 260px */
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
