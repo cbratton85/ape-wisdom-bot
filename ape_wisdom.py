@@ -146,33 +146,27 @@ def save_delisted(data):
 
 def filter_and_process(stocks):
     if not stocks: return pd.DataFrame()
+    # Normalize tickers (Fix dots/hyphens and apply manual fixes)
     us_tickers = list(set([TICKER_FIXES.get(s['ticker'], s['ticker'].replace('.', '-')) for s in stocks]))
     
-    # Load the existing cache (which we know persists correctly)
     local_cache = load_cache()
     
-    # --- INTEGRATED BLACKLIST CHECK ---
+    # --- BLACKLIST & HEALING ---
     now = datetime.datetime.utcnow()
     valid_tickers = []
-    
     for t in us_tickers:
-        # Check if we previously flagged this ticker as delisted in the main cache
         if t in local_cache and local_cache[t].get('delisted') == True:
-            last_checked_str = local_cache[t].get('last_checked', '2000-01-01')
             try:
-                last_checked = datetime.datetime.strptime(last_checked_str, "%Y-%m-%d")
-                # If it's been less than 7 days (or your setting), SKIP IT
-                if (now - last_checked).days < DELISTED_RETRY_DAYS:
-                    continue 
+                last_checked = datetime.datetime.strptime(local_cache[t].get('last_checked', '2000-01-01'), "%Y-%m-%d")
+                if (now - last_checked).days < DELISTED_RETRY_DAYS: continue 
             except: pass
         valid_tickers.append(t)
     
     us_tickers = valid_tickers
     
-    # Check for missing metadata for the valid ones
+    # Metadata healing (unchanged)
     missing = [t for t in us_tickers if t not in local_cache]
     if missing:
-        print(f"Healing {len(missing)} metadata items...")
         for i, t in enumerate(missing):
             try:
                 res = fetch_meta_data_robust(t)
@@ -180,6 +174,7 @@ def filter_and_process(stocks):
             except: pass
         save_cache(local_cache)
 
+    # Market Data Loading (unchanged)
     market_data = None
     use_cache = False
     if os.path.exists(MARKET_DATA_CACHE_FILE):
@@ -187,35 +182,29 @@ def filter_and_process(stocks):
 
     if use_cache: market_data = pd.read_pickle(MARKET_DATA_CACHE_FILE)
     else:
-        # Download only the Valid tickers
         market_data = yf.download(us_tickers, period="40d", interval="1d", group_by='ticker', progress=False, threads=True)
         if not market_data.empty: market_data.to_pickle(MARKET_DATA_CACHE_FILE)
 
     if len(us_tickers) == 1 and not market_data.empty:
-        idx = pd.MultiIndex.from_product([us_tickers, market_data.columns])
-        market_data.columns = idx
+        market_data.columns = pd.MultiIndex.from_product([us_tickers, market_data.columns])
 
     final_list = []
     for stock in stocks:
         t = TICKER_FIXES.get(stock['ticker'], stock['ticker'].replace('.', '-'))
         try:
-            # --- CHECK IF DATA EXISTS ---
+            # --- MARKET DATA CHECKS ---
             if isinstance(market_data.columns, pd.MultiIndex):
-                if t in market_data.columns.levels[0]: 
-                    hist = market_data[t].dropna()
+                if t in market_data.columns.levels[0]: hist = market_data[t].dropna()
                 else: 
-                    # FIX: Ticker completely missing from download -> Save to MAIN CACHE
                     local_cache[t] = {'delisted': True, 'last_checked': datetime.datetime.utcnow().strftime("%Y-%m-%d")}
                     save_cache(local_cache)
                     continue
             else: hist = market_data.dropna()
 
             if hist.empty: 
-                # FIX: Ticker has no history -> Save to MAIN CACHE
                 local_cache[t] = {'delisted': True, 'last_checked': datetime.datetime.utcnow().strftime("%Y-%m-%d")}
                 save_cache(local_cache)
                 continue
-            # -----------------------------
 
             curr_p = hist['Close'].iloc[-1]
             avg_v = hist['Volume'].tail(AVG_VOLUME_DAYS).mean()
@@ -227,21 +216,39 @@ def filter_and_process(stocks):
             if info.get('currency', 'USD') != 'USD': continue
 
             name = str(info.get('name', t)).replace('"', '').strip()[:NAME_MAX_WIDTH]
-            cur_m, old_m = int(stock.get('mentions', 0)), int(stock.get('mentions_24h_ago', 1))
-            m_perc = int(((cur_m - (old_m or 1)) / (old_m or 1) * 100))
+            
+            # --- MATH FIXES START HERE ---
+            cur_m = int(stock.get('mentions', 0))
+            old_m = int(stock.get('mentions_24h_ago', 0)) # Default to 0, not 1, to catch "new" stocks
+            m_perc = int(((cur_m - old_m) / (old_m if old_m > 0 else 1) * 100))
+            
             s_perc = int((hist['Volume'].iloc[-1] / avg_v * 100)) if avg_v > 0 else 0
             mcap = info.get('mcap', 10**9) or 10**9
             squeeze_score = (cur_m * s_perc) / max(math.log(mcap, 10), 1)
 
+            # Rank Logic: Safely get ranks
+            rank_now = int(stock.get('rank', 0))
+            rank_old = int(stock.get('rank_24h_ago', 0))
+            
+            # If rank_old is 0, it means it wasn't ranked yesterday (New Entry). 
+            # We set Rank+ to 0 to avoid showing a fake "-50" drop.
+            if rank_old == 0:
+                rank_plus = 0
+            else:
+                rank_plus = rank_old - rank_now
+
             final_list.append({
-                "Rank": int(stock['rank']), # <--- NEW CAPTURE
-                "Name": name, "Sym": t, "Rank+": int(stock['rank_24h_ago']) - int(stock['rank']),
+                "Rank": rank_now, 
+                "Name": name, "Sym": t, 
+                "Rank+": rank_plus,
                 "Price": float(curr_p), 
                 "AvgVol": int(avg_v),
                 "Surge": s_perc, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
                 "Upvotes": int(stock.get('upvotes', 0)), "Meta": info.get('meta', '-'), "Squeeze": squeeze_score
             })
-        except: continue
+        except Exception as e: 
+            # Optional: print(f"Skipped {t}: {e}")
+            continue
     
     df = pd.DataFrame(final_list)
     if not df.empty:
@@ -336,7 +343,8 @@ def export_interactive_html(df):
 
         # Columns: 0=Rank, 1=Vel, 2=Name, 3=Sym, 4=Sig, 5=Rank+, 6=Price, 7=Avg Vol, 
         #          8=Surge, 9=Mnt%, 10=Upvotes, 11=Squeeze, 12=Industry, 13=Type, 14=RawVol
-        cols = ['Rank', 'Vel', 'Name', 'Sym', 'Sig', 'Rank+', 'Price', 'Avg Vol', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol']
+        # SWAPPED: Rank+ is now Index 1, Vel is now Index 5
+        cols = ['Rank', 'Rank+', 'Name', 'Sym', 'Sig', 'Vel', 'Price', 'Avg Vol', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol']
         final_df = export_df[cols]
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
