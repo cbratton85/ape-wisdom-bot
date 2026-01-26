@@ -271,7 +271,7 @@ def export_interactive_html(df):
         if not os.path.exists(PUBLIC_DIR):
             os.makedirs(PUBLIC_DIR)
 
-        def color_span(text, color_hex): 
+        ddef color_span(text, color_hex): 
             return f'<span style="background:{color_hex}15; color:{color_hex}; border:1px solid {color_hex}44; padding:2px 10px; border-radius:12px; font-weight:600; font-size:0.85rem; white-space:nowrap; vertical-align:middle;">{text}</span>'
         def format_vol(v):
             if v >= 1_000_000: return f"{v/1_000_000:.1f}M"
