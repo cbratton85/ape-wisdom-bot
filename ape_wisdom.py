@@ -635,11 +635,20 @@ def export_interactive_html(df):
                         }}
                         return data;
                     }} }},
-                    {{ "targets": [10], "render": function(data, type) {{
-                        var val = parseFloat(data.toString().replace(/,/g, '')) || 0;
+                    {{ "targets": [10], "type": "num", "render": function(data, type, row) {{
+                        // 1. STRIP HTML TAGS (<...>) to get the raw number string
+                        var clean = data.toString().replace(/<[^>]+>/g, '').replace(/,/g, '');
+                        var val = parseFloat(clean) || 0;
+                        
+                        // 2. SORT LOGIC: Return the clean number
                         if (type === 'sort' || type === 'type') return val;
-                        if (val < 0) return '<span style="color:#ff4444">' + data + '</span>'; 
-                        else return '<span style="color:#00ff00">' + data + '</span>';
+                        
+                        // 3. DISPLAY LOGIC: Color Red if negative, Green if positive
+                        if (val < 0) {{
+                            return '<span style="color:#ff4444">' + val + '</span>'; 
+                        }} else {{
+                            return '<span style="color:#00ff00">' + val + '</span>'; 
+                        }}
                     }} }}
                 ],
                 "drawCallback": function() {{
