@@ -265,187 +265,317 @@ def get_all_trending_stocks():
 
 def export_interactive_html(df):
     try:
-        # Convert to object immediately so we can overwrite numbers with HTML strings
+        # Create a copy to manipulate for display
         export_df = df.copy().astype(object)
         
         if not os.path.exists(PUBLIC_DIR):
             os.makedirs(PUBLIC_DIR)
 
-        def color_span(text, color_hex): return f'<span style="color: {color_hex}; font-weight: bold;">{text}</span>'
+        # --- "NANO BANANA" COLOR PALETTE & HELPERS ---
+        # Professional Dark Mode Colors (Bloomberg/Github Dark style)
+        C_BG_DARK = "#0d1117"      # Deep Blue-Grey Background
+        C_PANEL   = "#161b22"      # Card/Panel Background
+        C_BORDER  = "#30363d"      # Subtle Borders
+        C_TEXT_MAIN = "#c9d1d9"    # Off-white text
+        C_TEXT_MUTED = "#8b949e"   # Grey text
+        
+        # Signal Colors (De-saturated for professional look)
+        C_GREEN  = "#3fb950"       # Success/Up
+        C_RED    = "#f85149"       # Danger/Down
+        C_YELLOW = "#d29922"       # Warning/Elevated
+        C_BLUE   = "#58a6ff"       # Info/Links
+        C_PURPLE = "#bc8cff"       # ETFs
+        C_CYAN   = "#39c5cf"       # Accumulation
+
+        def make_badge(text, bg_color, text_color="#fff"):
+            return f'<span style="background-color: {bg_color}20; color: {bg_color}; border: 1px solid {bg_color}40; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">{text}</span>'
+
         def format_vol(v):
             if v >= 1_000_000: return f"{v/1_000_000:.1f}M"
             if v >= 1_000: return f"{v/1_000:.0f}K"
             return str(v)
 
-        C_GREEN, C_YELLOW, C_RED, C_CYAN, C_MAGENTA, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ff00ff", "#ffffff"
-        export_df['Type_Tag'] = 'STOCK'
         tracker = HistoryTracker(HISTORY_FILE)
         
-        # Initialize Vel as String to avoid FutureWarning
-        export_df['Vel'] = ""; export_df['Sig'] = ""
-
-        # Create Readable Volume Column
+        # --- PRE-PROCESS COLUMNS ---
+        export_df['Type_Tag'] = 'STOCK'
+        export_df['Vel'] = ""
+        export_df['Sig'] = ""
         export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
 
         for index, row in export_df.iterrows():
+            # 1. VELOCITY & ARROWS
             m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
             v_val = m['vel']
-            v_color = C_GREEN if v_val > 0 else (C_RED if v_val < 0 else C_WHITE)
-            v_arrow = "↑" if v_val > 5 else ("↓" if v_val < -5 else "")
-            export_df.at[index, 'Vel'] = color_span(f"{v_val} {v_arrow}", v_color)
             
-            sig_text = ""
-            if m['div']: sig_text = "💎 ACCUM"
-            elif m['streak'] > 5: sig_text = "🔥 TREND"
-            sig_color = C_CYAN if "ACCUM" in sig_text else C_YELLOW
-            export_df.at[index, 'Sig'] = color_span(sig_text, sig_color)
+            # Arrow Logic
+            if v_val > 0:   arrow = f'<span style="color:{C_GREEN}">▲ {v_val}</span>'
+            elif v_val < 0: arrow = f'<span style="color:{C_RED}">▼ {abs(v_val)}</span>'
+            else:           arrow = f'<span style="color:{C_TEXT_MUTED}">-</span>'
+            export_df.at[index, 'Vel'] = arrow
             
-            nm_clr = C_RED if row['Master_Score'] > 3.0 else (C_YELLOW if row['Master_Score'] > 1.5 else C_WHITE)
-            export_df.at[index, 'Name'] = color_span(row['Name'], nm_clr)
+            # 2. SIGNALS (BADGES)
+            sigs = []
+            if m['div']: 
+                sigs.append(make_badge("💎 ACCUM", C_CYAN))
+            if m['streak'] > 5: 
+                sigs.append(make_badge("🔥 TREND", C_YELLOW))
+            export_df.at[index, 'Sig'] = " ".join(sigs)
             
-            for col, z_col in [('Rank+', 'z_Rank+'), ('Surge', 'z_Surge'), ('Mnt%', 'z_Mnt%')]:
-                val = f"{row[col]:.0f}%" if '%' in col or 'Surge' in col else row[col]
-                clr = C_YELLOW if row[z_col] >= 2.0 else (C_GREEN if row[z_col] >= 1.0 else C_WHITE)
-                export_df.at[index, col] = color_span(val, clr)
+            # 3. NAME STYLING (Hot Stocks get a left border color in CSS, here we just bold high rankers)
+            name_style = f"color: {C_TEXT_MAIN}; font-weight: 600;"
+            if row['Master_Score'] > 3.0: 
+                name_style = f"color: {C_RED}; font-weight: 700;" # Hot
+            elif row['Master_Score'] > 1.5:
+                name_style = f"color: {C_YELLOW};" # Warm
                 
-            export_df.at[index, 'Squeeze'] = color_span(int(row['Squeeze']), C_CYAN if row['z_Squeeze']>1.5 else C_WHITE)
-            export_df.at[index, 'Upvotes'] = color_span(row['Upvotes'], C_GREEN if row['z_Upvotes']>1.5 else C_WHITE)
+            export_df.at[index, 'Name'] = f'<span style="{name_style}">{row["Name"]}</span>'
             
+            # 4. CONDITIONAL FORMATTING FOR METRICS
+            # Rank+
+            r_plus = row['Rank+']
+            r_clr = C_GREEN if r_plus > 0 else (C_RED if r_plus < 0 else C_TEXT_MUTED)
+            export_df.at[index, 'Rank+'] = f'<span style="color:{r_clr}">{r_plus}</span>'
+            
+            # Surge & Mnt%
+            for col, z_col in [('Surge', 'z_Surge'), ('Mnt%', 'z_Mnt%')]:
+                val = f"{row[col]:.0f}%"
+                # Highlight if Z-Score is high
+                style = ""
+                if row[z_col] >= 2.0: style = f"color: {C_YELLOW}; font-weight:bold;"
+                elif row[z_col] >= 1.0: style = f"color: {C_GREEN};"
+                else: style = f"color: {C_TEXT_MUTED};"
+                export_df.at[index, col] = f'<span style="{style}">{val}</span>'
+
+            # 5. META / ETF
             is_fund = row['Type'] == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
-            export_df.at[index, 'Meta'] = color_span(row['Meta'], C_MAGENTA if is_fund else C_WHITE)
-            export_df.at[index, 'Type_Tag'] = 'ETF' if is_fund else 'STOCK'
-            
+            meta_txt = row['Meta']
+            if is_fund:
+                export_df.at[index, 'Type_Tag'] = 'ETF'
+                export_df.at[index, 'Meta'] = make_badge("ETF", C_PURPLE) + f" <span style='font-size:0.8em'>{meta_txt}</span>"
+            else:
+                export_df.at[index, 'Meta'] = f"<span style='color:{C_TEXT_MUTED}'>{meta_txt}</span>"
+
+            # 6. TICKER LINK
             t = row['Sym']
-            export_df.at[index, 'Sym'] = f'<a href="https://finance.yahoo.com/quote/{t}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
+            export_df.at[index, 'Sym'] = f'<a href="https://finance.yahoo.com/quote/{t}" target="_blank" class="ticker-link">{t}</a>'
             export_df.at[index, 'Price'] = f"${row['Price']:.2f}"
-            export_df.at[index, 'Vol_Display'] = color_span(export_df.at[index, 'Vol_Display'], "#ccc")
 
         export_df.rename(columns={'Meta': 'Industry/Sector', 'Vol_Display': 'Avg Vol'}, inplace=True)
 
-        # Columns: 0=Rank, 1=Name, 2=Sym, 3=Vel, 4=Sig, 5=Rank+, 6=Price, 7=Avg Vol, 
-        #          8=Surge, 9=Mnt%, 10=Upvotes, 11=Squeeze, 12=Industry, 13=Type, 14=RawVol
         cols = ['Rank', 'Name', 'Sym', 'Vel', 'Sig', 'Rank+', 'Price', 'Avg Vol', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol']
         final_df = export_df[cols]
-        table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
+        
+        # Generate Table HTML
+        table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False, border=0)
         utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
         
-        # INSERTED BASE64 IMAGE DATA BELOW
+        # Base64 Logo (Keep your existing logo data string here)
         logo_data = "data:image/png;base64,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"
 
-        html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Ape Wisdom Analysis</title>
+        html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Ape Wisdom | Market Intelligence</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+        
         <style>
-            body{{background-color:#121212;color:#e0e0e0;font-family:'Consolas','Monaco',monospace;padding:20px}}
-            .table-dark{{--bs-table-bg:#1e1e1e;color:#ccc}} 
-            th{{color:#00ff00;border-bottom:2px solid #444; font-size: 14px;}} 
-            /* Child 5 is the "Sig" column (1-based index in CSS, matches Col 4 in JS) */
-            th:nth-child(5), td:nth-child(5) {{ width: 1%; white-space: nowrap; }}
-            td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
-            a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
-            
-            .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 8px; margin-bottom: 20px; overflow: hidden; transition: all 0.3s ease; }}
-            .legend-header {{ background: #2a2a2a; padding: 10px 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; }}
-            .legend-header:hover {{ background: #333; }}
-            .legend-box {{
-                padding: 15px;
-                display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; font-size: 0.85rem;
-                border-top: 1px solid #444;
+            :root {{
+                --bg-dark: {C_BG_DARK};
+                --panel-bg: {C_PANEL};
+                --border-color: {C_BORDER};
+                --text-main: {C_TEXT_MAIN};
+                --text-muted: {C_TEXT_MUTED};
+                --accent-blue: {C_BLUE};
+                --accent-green: {C_GREEN};
+                --accent-red: {C_RED};
             }}
-            .legend-section h5 {{ color: #00ff00; font-size: 1rem; border-bottom: 1px solid #444; padding-bottom: 5px; margin-bottom: 10px; }}
-            .legend-item {{ margin-bottom: 6px; }}
-            .legend-key {{ font-weight: bold; display: inline-block; width: 100px; }}
+            body {{
+                background-color: var(--bg-dark);
+                color: var(--text-main);
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                font-size: 0.9rem;
+                padding-bottom: 50px;
+            }}
             
-            .filter-bar {{ display:flex; gap:15px; align-items:center; background:#2a2a2a; padding:10px; border-radius:5px; margin-bottom:15px; border:1px solid #444; flex-wrap:wrap;}}
-            .filter-group {{ display:flex; align-items:center; gap:5px; }}
-            .filter-group label {{ font-size:0.9rem; color:#aaa; }}
-            .form-control-sm {{ background:#111; border:1px solid #555; color:#fff; width: 100px;}}
+            /* --- TYPOGRAPHY --- */
+            h1, h2, h3, h4, h5 {{ font-weight: 600; letter-spacing: -0.02em; }}
+            .mono {{ font-family: 'JetBrains Mono', 'Fira Code', monospace; }}
             
-            #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; font-family: 'Consolas', monospace; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px;}}
+            /* --- LAYOUT --- */
+            .main-container {{ max-width: 1400px; margin: 0 auto; padding: 20px; }}
             
-            /* Center the header content vertically */
-            .header-flex {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
+            /* --- HEADER --- */
+            .top-bar {{ 
+                display: flex; justify-content: space-between; align-items: center; 
+                padding: 15px 25px; background: var(--panel-bg); 
+                border-bottom: 1px solid var(--border-color);
+                border-radius: 8px 8px 0 0;
+            }}
+            .logo-section {{ display: flex; align-items: center; gap: 15px; }}
+            .logo-section img {{ height: 45px; }}
+            .logo-section h2 {{ margin: 0; font-size: 1.25rem; color: #fff; }}
+            .meta-info {{ text-align: right; color: var(--text-muted); font-size: 0.8rem; }}
+
+            /* --- CONTROLS / FILTER BAR --- */
+            .control-panel {{
+                background: var(--panel-bg);
+                border: 1px solid var(--border-color);
+                border-top: none;
+                padding: 15px 25px;
+                display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
+                margin-bottom: 25px;
+                border-radius: 0 0 8px 8px;
+            }}
+            .filter-group {{ display: flex; flex-direction: column; gap: 4px; }}
+            .filter-group label {{ font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }}
+            .form-control-dark {{
+                background: #0d1117; border: 1px solid #30363d; color: #fff;
+                padding: 6px 10px; font-size: 0.9rem; border-radius: 6px;
+                width: 120px;
+            }}
+            .form-control-dark:focus {{ outline: none; border-color: var(--accent-blue); box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2); }}
+
+            /* --- SEGMENTED CONTROL (Radio) --- */
+            .btn-group-segment {{ background: #0d1117; padding: 3px; border-radius: 6px; border: 1px solid #30363d; display: inline-flex; }}
+            .btn-check:checked + .btn-segment {{ background: var(--accent-blue); color: #fff; border-color: transparent; }}
+            .btn-segment {{
+                color: var(--text-muted); padding: 5px 12px; font-size: 0.85rem; border-radius: 4px; border: none; font-weight: 500; transition: all 0.2s;
+            }}
+            .btn-segment:hover {{ color: #fff; }}
+
+            /* --- DATA TABLE --- */
+            .table-container {{ 
+                background: var(--panel-bg); border: 1px solid var(--border-color); 
+                border-radius: 8px; overflow: hidden; padding: 0;
+            }}
+            .table-dark {{ --bs-table-bg: var(--panel-bg); color: var(--text-main); margin-bottom: 0; }}
             
-            .page-link {{ background-color: #222; border-color: #444; color: #00ff00; }}
-            .page-item.active .page-link {{ background-color: #00ff00; border-color: #00ff00; color: #000; }}
-            .page-item.disabled .page-link {{ background-color: #111; border-color: #333; color: #555; }}
+            /* Header */
+            .table thead th {{
+                background-color: #0d1117;
+                color: var(--text-muted);
+                font-weight: 600;
+                text-transform: uppercase;
+                font-size: 0.75rem;
+                letter-spacing: 0.05em;
+                border-bottom: 1px solid var(--border-color);
+                padding: 12px 10px;
+                vertical-align: middle;
+            }}
             
-            .btn-reset {{ border: 1px solid #555; color: #fff; font-size: 0.8rem; background: #333; }}
-            .btn-reset:hover {{ background: #444; color: #fff; }}
+            /* Cells */
+            .table tbody td {{
+                vertical-align: middle;
+                border-bottom: 1px solid var(--border-color);
+                padding: 10px 12px;
+                font-size: 0.9rem;
+                font-family: 'JetBrains Mono', monospace; /* Monospace for data */
+            }}
+            .table tbody tr:hover {{ background-color: #21262d; }}
+
+            /* Column Specifics */
+            .ticker-link {{ color: var(--accent-blue); font-weight: 700; text-decoration: none; }}
+            .ticker-link:hover {{ text-decoration: underline; }}
+            
+            /* --- FOOTER / UTILS --- */
+            .btn-reset {{ 
+                background: transparent; border: 1px solid var(--accent-red); color: var(--accent-red); 
+                font-size: 0.8rem; padding: 5px 12px; border-radius: 4px; transition: 0.2s;
+            }}
+            .btn-reset:hover {{ background: var(--accent-red); color: #fff; }}
+            
+            .dataTables_info {{ color: var(--text-muted) !important; font-size: 0.85rem; padding: 15px; }}
+            .dataTables_paginate {{ padding: 10px; }}
+            .page-link {{ background: var(--bg-dark); border-color: var(--border-color); color: var(--text-main); }}
+            .page-item.active .page-link {{ background: var(--accent-blue); border-color: var(--accent-blue); color: #fff; }}
+            .page-item.disabled .page-link {{ background: var(--bg-dark); opacity: 0.5; }}
+
+            /* --- LEGEND (COLLAPSIBLE) --- */
+            .legend-toggle {{ cursor: pointer; color: var(--accent-blue); font-size: 0.85rem; font-weight: 500; }}
+            .legend-grid {{ 
+                display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;
+                padding: 20px; background: #0d1117; border-top: 1px solid var(--border-color);
+                font-size: 0.8rem; color: var(--text-muted);
+            }}
+            .legend-key {{ font-weight: 700; color: #fff; margin-right: 5px; }}
         </style>
         </head>
         <body>
-        <div class="container-fluid" style="max-width:98%;">
+        <div class="main-container">
             
-            <div class="header-flex">
-                <img src="{logo_data}" alt="Ape Wisdom" style="height: 60px;">
-                <span id="time" data-utc="{utc_timestamp}" style="font-size: 0.9rem; color: #888;">Loading...</span>
+            <div class="top-bar">
+                <div class="logo-section">
+                    <img src="{logo_data}" alt="Ape Wisdom">
+                    <div>
+                        <h2>Market Intelligence</h2>
+                        <span style="color: var(--accent-blue); font-size: 0.8rem; font-weight: 600;">LIVE SCANNER</span>
+                    </div>
+                </div>
+                <div class="meta-info">
+                    <div id="time" data-utc="{utc_timestamp}">Loading...</div>
+                    <div id="stockCounter">Scanning...</div>
+                </div>
             </div>
 
-            <div class="filter-bar">
-                <span style="color:#fff; font-weight:bold; margin-right:10px;">⚡ FILTERS:</span>
-                
-                <button class="btn btn-sm btn-reset" onclick="resetFilters()">🔄 RESET</button>
-
+            <div class="control-panel">
                 <div class="filter-group">
-                    <label>Min Price ($):</label>
-                    <input type="number" id="minPrice" class="form-control form-control-sm" placeholder="Any" step="0.5">
-                </div>
-                
-                <div class="filter-group">
-                    <label>Min Avg Vol:</label>
-                    <input type="number" id="minVol" class="form-control form-control-sm" placeholder="Any" step="10000">
-                </div>
-
-                <div class="filter-group">
-                    <div class="btn-group" role="group">
+                    <label>View Mode</label>
+                    <div class="btn-group-segment" role="group">
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio1">All</label>
+                        <label class="btn btn-segment" for="btnradio1">All</label>
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio2">Stocks</label>
+                        <label class="btn btn-segment" for="btnradio2">Stocks</label>
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio3">ETFs</label>
+                        <label class="btn btn-segment" for="btnradio3">ETFs</label>
                     </div>
                 </div>
 
-                <span id="stockCounter">Loading...</span>
-            </div>
-
-            <div class="legend-container">
-                <div class="legend-header" onclick="toggleLegend()">
-                    <span>ℹ️ STRATEGY GUIDE & LEGEND (Click to Toggle)</span>
-                    <span id="legendArrow">▼</span>
+                <div class="filter-group">
+                    <label>Min Price</label>
+                    <input type="number" id="minPrice" class="form-control-dark" placeholder="$0.00" step="0.5">
                 </div>
-                <div class="legend-box" id="legendContent" style="display:none;">
-                    
-                    <div class="legend-section">
-                        <h5>🔥 Heat Status (Name Color)</h5>
-                        <div class="legend-item"><span class="legend-key" style="color:#ff4444">RED NAME</span> <b>Extreme (>3σ):</b> Massive outlier in volume/mentions.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">YEL NAME</span> <b>Elevated (>1.5σ):</b> Activity is well above normal.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffffff">WHT NAME</span> <b>Normal:</b> Standard activity levels.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ff00ff">MAGENTA</span> Exchange Traded Fund (ETF).</div>
-                    </div>
+                
+                <div class="filter-group">
+                    <label>Min Avg Vol</label>
+                    <input type="number" id="minVol" class="form-control-dark" placeholder="0" step="10000">
+                </div>
 
-                    <div class="legend-section">
-                        <h5>🚀 Significance Signals</h5>
-                        <div class="legend-item"><span class="legend-key" style="color:#00ffff">💎 ACCUM</span> Mentions RISING (>10%) + Price FLAT.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">🔥 TREND</span> In Top Trending list for 5+ consecutive days.</div>
-                    </div>
-                    
-                    <div class="legend-section">
-                        <h5>📊 Metrics</h5>
-                        <div class="legend-item"><span class="legend-key">Rank+</span> Spots climbed in last 24h.</div>
-                        <div class="legend-item"><span class="legend-key">Surge</span> Volume vs 30-Day Avg.</div>
-                        <div class="legend-item"><span class="legend-key">Mnt%</span> Change in Mentions vs 24h ago.</div>
-                        <div class="legend-item"><span class="legend-key">Upvotes</span> Raw upvote count on Reddit.</div>
-                        <div class="legend-item"><span class="legend-key">Squeeze</span> (Mentions × Vol) / MarketCap.</div>
-                        <div class="legend-item"><span class="legend-key">Vel</span> Difference in Rank+ vs yesterday.</div>
-                    </div>
-
+                <div style="flex-grow: 1;"></div>
+                
+                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
+                     <button class="btn-reset" onclick="resetFilters()">Reset Filters ⟲</button>
+                     <div class="legend-toggle" onclick="toggleLegend()">Show Strategy Guide ▼</div>
                 </div>
             </div>
+            
+            <div id="legendPanel" style="display:none; margin-bottom: 25px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color);">
+                <div class="legend-grid">
+                     <div>
+                        <div style="margin-bottom:8px; color: #fff; font-weight:600;">🔥 Name Signals</div>
+                        <div><span class="legend-key" style="color:{C_RED}">RED NAME</span> >3σ Outlier (Hot)</div>
+                        <div><span class="legend-key" style="color:{C_YELLOW}">YEL NAME</span> >1.5σ Elevated</div>
+                     </div>
+                     <div>
+                        <div style="margin-bottom:8px; color: #fff; font-weight:600;">🚀 Trend Signals</div>
+                        <div><span class="legend-key" style="color:{C_CYAN}">💎 ACCUM</span> Mentions Up + Price Flat</div>
+                        <div><span class="legend-key" style="color:{C_YELLOW}">🔥 TREND</span> 5+ Day Streak</div>
+                     </div>
+                     <div>
+                        <div style="margin-bottom:8px; color: #fff; font-weight:600;">📊 Key Metrics</div>
+                        <div><span class="legend-key">Squeeze:</span> (Mentions × Vol) / MktCap</div>
+                        <div><span class="legend-key">Vel:</span> Rank Change Speed</div>
+                     </div>
+                </div>
+            </div>
 
-            {table_html}
+            <div class="table-container">
+                {table_html}
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px; color: var(--text-muted); font-size: 0.8rem;">
+                Generated by Ape Wisdom Bot | Data is delayed. Not financial advice.
+            </div>
         </div>
         
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
@@ -453,56 +583,45 @@ def export_interactive_html(df):
         <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
         <script>
         function toggleLegend() {{
-            var x = document.getElementById("legendContent");
-            var arrow = document.getElementById("legendArrow");
-            if (x.style.display === "none") {{
-                x.style.display = "grid";
-                arrow.innerText = "▲";
-            }} else {{
-                x.style.display = "none";
-                arrow.innerText = "▼";
-            }}
+            var x = document.getElementById("legendPanel");
+            if (x.style.display === "none") x.style.display = "block";
+            else x.style.display = "none";
         }}
 
         function resetFilters() {{
-            $('#minPrice').val(''); 
-            $('#minVol').val('');
-            $('#btnradio1').prop('checked', true); 
-            redraw(); 
+            $('#minPrice').val(''); $('#minVol').val('');
+            $('#btnradio1').prop('checked', true); redraw(); 
         }}
 
         $(document).ready(function(){{ 
             var table=$('.table').DataTable({{
-                "order":[[0,"asc"]], // Rank (0)
-                "pageLength": 25,
-                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                "order":[[0,"asc"]],
+                "pageLength": 50,
+                "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
+                "dom": 'rtip', /* Hides default search box for cleaner look */
                 "columnDefs": [ 
-                    {{ "visible": false, "targets": [13, 14] }}, // Hidden: Type (13), RawVol (14)
-                    {{ "orderData": [14], "targets": [7] }}       // Sort AvgVol (7) by RawVol (14)
+                    {{ "visible": false, "targets": [13, 14] }},
+                    {{ "orderData": [14], "targets": [7] }}
                 ],
-                
                 "drawCallback": function(settings) {{
                     var api = this.api();
-                    var total = api.rows().count();
-                    var shown = api.rows({{filter:'applied'}}).count();
-                    $("#stockCounter").text("Showing " + shown + " / " + total + " Tickers");
+                    $("#stockCounter").text(api.rows({{filter:'applied'}}).count() + " Tickers Active");
                 }}
             }});
             
             $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {{
-                // FIX INDICES FOR RANK COLUMN SHIFT (+1 to everything)
-                var typeTag = data[13] || ""; // Was 12
+                var typeTag = data[13] || ""; 
                 var viewMode = $('input[name="btnradio"]:checked').attr('id');
                 if (viewMode == 'btnradio2' && typeTag == 'ETF') return false;
                 if (viewMode == 'btnradio3' && typeTag == 'STOCK') return false;
 
                 var minPrice = parseFloat($('#minPrice').val()) || 0;
-                var priceStr = data[6] || "0"; // Was 5
+                var priceStr = data[6] || "0"; 
                 var price = parseFloat(priceStr.replace(/[$,]/g, '')) || 0;
                 if (price < minPrice) return false;
 
                 var minVol = parseFloat($('#minVol').val()) || 0;
-                var rawVol = parseFloat(data[14]) || 0; // Was 13
+                var rawVol = parseFloat(data[14]) || 0; 
                 if (rawVol < minVol) return false;
 
                 return true;
@@ -512,18 +631,13 @@ def export_interactive_html(df):
             
             window.redraw = function() {{ 
                 var mode = $('input[name="btnradio"]:checked').attr('id');
-                var headerTxt = "Industry/Sector";
-                
-                if (mode == 'btnradio2') headerTxt = "Industry";
-                else if (mode == 'btnradio3') headerTxt = "Sector";
-                
-                // Target Col 12 (Industry) instead of 11 (Squeeze)
+                var headerTxt = (mode == 'btnradio3') ? "SECTOR" : "INDUSTRY";
                 $(table.column(12).header()).text(headerTxt);
                 table.draw(); 
             }};
             
             var d=new Date($("#time").data("utc"));
-            $("#time").text("Last Updated: " + d.toLocaleString());
+            $("#time").text(d.toLocaleString());
         }});
         </script></body></html>"""
 
