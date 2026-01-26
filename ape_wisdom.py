@@ -491,7 +491,7 @@ def export_interactive_html(df):
             
             <div class="header-flex">
                 <a href="https://apewisdom.io" target="_blank" style="text-decoration: none;">
-                <img src="{logo_data}" alt="Ape Wisdom" style="height: 60px;">
+                <img src="{logo_data}" alt="Ape Wisdom" style="height: 50px; vertical-align: middle; object-fit: contain;">
                 </a>
                 <span id="time" data-utc="{utc_timestamp}" style="font-size: 0.9rem; color: #888;">Loading...</span>
             </div>
@@ -499,7 +499,7 @@ def export_interactive_html(df):
             <div class="filter-bar">
                 <span style="color:#fff; font-weight:bold; margin-right:5px;">⚡ FILTERS:</span>
                 
-                <button id="btnColors" class="btn btn-sm btn-reset" onclick="toggleColors()" style="margin-right: 5px;">🎨 Z-Score Colors: ON</button>
+                <button id="btnColors" class="btn btn-sm btn-reset" onclick="toggleColors()" style="margin-right: 5px;">🎨 Colors: ON</button>
                 
                 <button class="btn btn-sm btn-reset" onclick="resetFilters()" title="Reset Filters">🔄</button>
 
@@ -578,10 +578,10 @@ def export_interactive_html(df):
             table.classList.toggle('no-colors');
             
             if (table.classList.contains('no-colors')) {{
-                btn.innerHTML = "🎨 Z-Score Colors: OFF";
+                btn.innerHTML = "🎨 Colors: OFF";
                 btn.style.opacity = "0.6";
             }} else {{
-                btn.innerHTML = "🎨 Z-Score Colors: ON";
+                btn.innerHTML = "🎨 Colors: ON";
                 btn.style.opacity = "1.0";
             }}
         }}
