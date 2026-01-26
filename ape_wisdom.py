@@ -591,6 +591,38 @@ def export_interactive_html(df):
             $('#btnradio1').prop('checked', true); 
             redraw(); 
         }}
+        
+        // NEW: Export visible tickers to .txt
+        function exportTickers() {{
+            var table = $('.table').DataTable();
+            var data = table.rows({{ search: 'applied', order: 'current' }}).data();
+            var tickers = [];
+
+            data.each(function (value, index) {{
+                // Column 3 is the Symbol (Index 3)
+                var html = value[3]; 
+                // Strip HTML tags to get just "AAPL"
+                var div = document.createElement("div");
+                div.innerHTML = html;
+                var text = div.textContent || div.innerText || "";
+                if(text) tickers.push(text.trim());
+            }});
+
+            if (tickers.length === 0) {{
+                alert("No tickers to export!");
+                return;
+            }}
+
+            var content = tickers.join(" "); 
+            var blob = new Blob([content], {{ type: "text/plain;charset=utf-8" }});
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement("a");
+            a.href = url;
+            a.download = "ape_tickers.txt";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }}
 
         $(document).ready(function(){{ 
             var table=$('.table').DataTable({{
