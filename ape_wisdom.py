@@ -272,23 +272,21 @@ def export_interactive_html(df):
             os.makedirs(PUBLIC_DIR)
 
         # --- "NANO BANANA" COLOR PALETTE & HELPERS ---
-        # Professional Dark Mode Colors (Bloomberg/Github Dark style)
-        C_BG_DARK = "#0d1117"      # Deep Blue-Grey Background
-        C_PANEL   = "#161b22"      # Card/Panel Background
-        C_BORDER  = "#30363d"      # Subtle Borders
-        C_TEXT_MAIN = "#c9d1d9"    # Off-white text
-        C_TEXT_MUTED = "#8b949e"   # Grey text
+        C_BG_DARK = "#0d1117"      
+        C_PANEL   = "#161b22"      
+        C_BORDER  = "#30363d"      
+        C_TEXT_MAIN = "#c9d1d9"    
+        C_TEXT_MUTED = "#8b949e"   
         
-        # Signal Colors (De-saturated for professional look)
-        C_GREEN  = "#3fb950"       # Success/Up
-        C_RED    = "#f85149"       # Danger/Down
-        C_YELLOW = "#d29922"       # Warning/Elevated
-        C_BLUE   = "#58a6ff"       # Info/Links
-        C_PURPLE = "#bc8cff"       # ETFs
-        C_CYAN   = "#39c5cf"       # Accumulation
+        C_GREEN  = "#3fb950"       
+        C_RED    = "#f85149"       
+        C_YELLOW = "#d29922"       
+        C_BLUE   = "#58a6ff"       
+        C_PURPLE = "#bc8cff"       
+        C_CYAN   = "#39c5cf"       
 
-        def make_badge(text, bg_color, text_color="#fff"):
-            return f'<span style="background-color: {bg_color}20; color: {bg_color}; border: 1px solid {bg_color}40; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">{text}</span>'
+        def make_badge(text, bg_color):
+            return f'<span style="background-color: {bg_color}20; color: {bg_color}; border: 1px solid {bg_color}40; padding: 2px 6px; border-radius: 4px; font-size: 0.70rem; font-weight: 700; letter-spacing: 0.5px;">{text}</span>'
 
         def format_vol(v):
             if v >= 1_000_000: return f"{v/1_000_000:.1f}M"
@@ -302,13 +300,14 @@ def export_interactive_html(df):
         export_df['Vel'] = ""
         export_df['Sig'] = ""
         export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
+        
+        # FIX: Round Squeeze to whole number
+        export_df['Squeeze'] = pd.to_numeric(export_df['Squeeze']).fillna(0).astype(int)
 
         for index, row in export_df.iterrows():
-            # 1. VELOCITY & ARROWS
+            # 1. VELOCITY
             m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
             v_val = m['vel']
-            
-            # Arrow Logic
             if v_val > 0:   arrow = f'<span style="color:{C_GREEN}">▲ {v_val}</span>'
             elif v_val < 0: arrow = f'<span style="color:{C_RED}">▼ {abs(v_val)}</span>'
             else:           arrow = f'<span style="color:{C_TEXT_MUTED}">-</span>'
@@ -316,31 +315,26 @@ def export_interactive_html(df):
             
             # 2. SIGNALS (BADGES)
             sigs = []
-            if m['div']: 
-                sigs.append(make_badge("💎 ACCUM", C_CYAN))
-            if m['streak'] > 5: 
-                sigs.append(make_badge("🔥 TREND", C_YELLOW))
+            if m['div']: sigs.append(make_badge("ACCUM", C_CYAN))
+            if m['streak'] > 5: sigs.append(make_badge("TREND", C_YELLOW))
             export_df.at[index, 'Sig'] = " ".join(sigs)
             
-            # 3. NAME STYLING (Hot Stocks get a left border color in CSS, here we just bold high rankers)
+            # 3. NAME STYLING
             name_style = f"color: {C_TEXT_MAIN}; font-weight: 600;"
             if row['Master_Score'] > 3.0: 
-                name_style = f"color: {C_RED}; font-weight: 700;" # Hot
+                name_style = f"color: {C_RED}; font-weight: 700;" 
             elif row['Master_Score'] > 1.5:
-                name_style = f"color: {C_YELLOW};" # Warm
+                name_style = f"color: {C_YELLOW};"
                 
-            export_df.at[index, 'Name'] = f'<span style="{name_style}">{row["Name"]}</span>'
+            export_df.at[index, 'Name'] = f'<span style="{name_style}" title="{row["Name"]}">{row["Name"]}</span>'
             
-            # 4. CONDITIONAL FORMATTING FOR METRICS
-            # Rank+
+            # 4. METRICS FORMATTING
             r_plus = row['Rank+']
             r_clr = C_GREEN if r_plus > 0 else (C_RED if r_plus < 0 else C_TEXT_MUTED)
             export_df.at[index, 'Rank+'] = f'<span style="color:{r_clr}">{r_plus}</span>'
             
-            # Surge & Mnt%
             for col, z_col in [('Surge', 'z_Surge'), ('Mnt%', 'z_Mnt%')]:
                 val = f"{row[col]:.0f}%"
-                # Highlight if Z-Score is high
                 style = ""
                 if row[z_col] >= 2.0: style = f"color: {C_YELLOW}; font-weight:bold;"
                 elif row[z_col] >= 1.0: style = f"color: {C_GREEN};"
@@ -352,9 +346,9 @@ def export_interactive_html(df):
             meta_txt = row['Meta']
             if is_fund:
                 export_df.at[index, 'Type_Tag'] = 'ETF'
-                export_df.at[index, 'Meta'] = make_badge("ETF", C_PURPLE) + f" <span style='font-size:0.8em'>{meta_txt}</span>"
+                export_df.at[index, 'Meta'] = make_badge("ETF", C_PURPLE) + f" <span style='font-size:0.85em'>{meta_txt}</span>"
             else:
-                export_df.at[index, 'Meta'] = f"<span style='color:{C_TEXT_MUTED}'>{meta_txt}</span>"
+                export_df.at[index, 'Meta'] = f"<span style='color:{C_TEXT_MUTED}; font-size:0.85em' title='{meta_txt}'>{meta_txt}</span>"
 
             # 6. TICKER LINK
             t = row['Sym']
@@ -362,15 +356,13 @@ def export_interactive_html(df):
             export_df.at[index, 'Price'] = f"${row['Price']:.2f}"
 
         export_df.rename(columns={'Meta': 'Industry/Sector', 'Vol_Display': 'Avg Vol'}, inplace=True)
-
         cols = ['Rank', 'Name', 'Sym', 'Vel', 'Sig', 'Rank+', 'Price', 'Avg Vol', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol']
         final_df = export_df[cols]
         
-        # Generate Table HTML
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False, border=0)
         utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
         
-        # Base64 Logo (Keep your existing logo data string here)
+        # LOGO DATA (Keep your string here)
         logo_data = "data:image/png;base64,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"
 
         html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -393,19 +385,16 @@ def export_interactive_html(df):
             body {{
                 background-color: var(--bg-dark);
                 color: var(--text-main);
-                font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                font-family: 'Inter', sans-serif;
                 font-size: 0.9rem;
                 padding-bottom: 50px;
             }}
             
-            /* --- TYPOGRAPHY --- */
             h1, h2, h3, h4, h5 {{ font-weight: 600; letter-spacing: -0.02em; }}
-            .mono {{ font-family: 'JetBrains Mono', 'Fira Code', monospace; }}
+            .mono {{ font-family: 'JetBrains Mono', monospace; }}
             
-            /* --- LAYOUT --- */
             .main-container {{ max-width: 1400px; margin: 0 auto; padding: 20px; }}
             
-            /* --- HEADER --- */
             .top-bar {{ 
                 display: flex; justify-content: space-between; align-items: center; 
                 padding: 15px 25px; background: var(--panel-bg); 
@@ -417,7 +406,6 @@ def export_interactive_html(df):
             .logo-section h2 {{ margin: 0; font-size: 1.25rem; color: #fff; }}
             .meta-info {{ text-align: right; color: var(--text-muted); font-size: 0.8rem; }}
 
-            /* --- CONTROLS / FILTER BAR --- */
             .control-panel {{
                 background: var(--panel-bg);
                 border: 1px solid var(--border-color);
@@ -436,7 +424,6 @@ def export_interactive_html(df):
             }}
             .form-control-dark:focus {{ outline: none; border-color: var(--accent-blue); box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2); }}
 
-            /* --- SEGMENTED CONTROL (Radio) --- */
             .btn-group-segment {{ background: #0d1117; padding: 3px; border-radius: 6px; border: 1px solid #30363d; display: inline-flex; }}
             .btn-check:checked + .btn-segment {{ background: var(--accent-blue); color: #fff; border-color: transparent; }}
             .btn-segment {{
@@ -444,41 +431,28 @@ def export_interactive_html(df):
             }}
             .btn-segment:hover {{ color: #fff; }}
 
-            /* --- DATA TABLE --- */
             .table-container {{ 
                 background: var(--panel-bg); border: 1px solid var(--border-color); 
                 border-radius: 8px; overflow: hidden; padding: 0;
             }}
             .table-dark {{ --bs-table-bg: var(--panel-bg); color: var(--text-main); margin-bottom: 0; }}
             
-            /* Header */
             .table thead th {{
-                background-color: #0d1117;
-                color: var(--text-muted);
-                font-weight: 600;
-                text-transform: uppercase;
-                font-size: 0.75rem;
-                letter-spacing: 0.05em;
-                border-bottom: 1px solid var(--border-color);
-                padding: 12px 10px;
-                vertical-align: middle;
+                background-color: #0d1117; color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;
+                border-bottom: 1px solid var(--border-color); padding: 12px 10px; vertical-align: middle;
             }}
             
-            /* Cells */
+            /* CSS FIX: Force single line and truncate */
             .table tbody td {{
-                vertical-align: middle;
-                border-bottom: 1px solid var(--border-color);
-                padding: 10px 12px;
-                font-size: 0.9rem;
-                font-family: 'JetBrains Mono', monospace; /* Monospace for data */
+                vertical-align: middle; border-bottom: 1px solid var(--border-color);
+                padding: 10px 12px; font-size: 0.9rem; font-family: 'JetBrains Mono', monospace;
+                white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;
             }}
             .table tbody tr:hover {{ background-color: #21262d; }}
 
-            /* Column Specifics */
             .ticker-link {{ color: var(--accent-blue); font-weight: 700; text-decoration: none; }}
             .ticker-link:hover {{ text-decoration: underline; }}
             
-            /* --- FOOTER / UTILS --- */
             .btn-reset {{ 
                 background: transparent; border: 1px solid var(--accent-red); color: var(--accent-red); 
                 font-size: 0.8rem; padding: 5px 12px; border-radius: 4px; transition: 0.2s;
@@ -491,14 +465,14 @@ def export_interactive_html(df):
             .page-item.active .page-link {{ background: var(--accent-blue); border-color: var(--accent-blue); color: #fff; }}
             .page-item.disabled .page-link {{ background: var(--bg-dark); opacity: 0.5; }}
 
-            /* --- LEGEND (COLLAPSIBLE) --- */
             .legend-toggle {{ cursor: pointer; color: var(--accent-blue); font-size: 0.85rem; font-weight: 500; }}
             .legend-grid {{ 
-                display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;
+                display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;
                 padding: 20px; background: #0d1117; border-top: 1px solid var(--border-color);
                 font-size: 0.8rem; color: var(--text-muted);
             }}
             .legend-key {{ font-weight: 700; color: #fff; margin-right: 5px; }}
+            .legend-desc {{ display: block; margin-top: 2px; color: #8b949e; font-size: 0.75rem; }}
         </style>
         </head>
         <body>
@@ -552,19 +526,21 @@ def export_interactive_html(df):
             <div id="legendPanel" style="display:none; margin-bottom: 25px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color);">
                 <div class="legend-grid">
                      <div>
-                        <div style="margin-bottom:8px; color: #fff; font-weight:600;">🔥 Name Signals</div>
-                        <div><span class="legend-key" style="color:{C_RED}">RED NAME</span> >3σ Outlier (Hot)</div>
-                        <div><span class="legend-key" style="color:{C_YELLOW}">YEL NAME</span> >1.5σ Elevated</div>
+                        <div style="margin-bottom:8px; color: #fff; font-weight:600; border-bottom: 1px solid #333; padding-bottom: 4px;">🔥 Heat / Name Signals</div>
+                        <div style="margin-bottom:6px;"><span class="legend-key" style="color:{C_RED}">RED NAME</span> <b>Extreme (>3σ):</b> <span class="legend-desc">Massive outlier. Very high volume/mentions relative to normal.</span></div>
+                        <div style="margin-bottom:6px;"><span class="legend-key" style="color:{C_YELLOW}">YEL NAME</span> <b>Elevated (>1.5σ):</b> <span class="legend-desc">Activity is significantly above average.</span></div>
+                        <div><span class="legend-key" style="color:#fff">WHT NAME</span> <b>Normal:</b> <span class="legend-desc">Standard activity levels.</span></div>
                      </div>
                      <div>
-                        <div style="margin-bottom:8px; color: #fff; font-weight:600;">🚀 Trend Signals</div>
-                        <div><span class="legend-key" style="color:{C_CYAN}">💎 ACCUM</span> Mentions Up + Price Flat</div>
-                        <div><span class="legend-key" style="color:{C_YELLOW}">🔥 TREND</span> 5+ Day Streak</div>
+                        <div style="margin-bottom:8px; color: #fff; font-weight:600; border-bottom: 1px solid #333; padding-bottom: 4px;">🚀 Badge Signals</div>
+                        <div style="margin-bottom:6px;"><span class="legend-key" style="color:{C_CYAN}">ACCUM</span> <b>Accumulation:</b> <span class="legend-desc">Mentions RISING (>10%) while Price is FLAT/STABLE. Often precedes a move.</span></div>
+                        <div><span class="legend-key" style="color:{C_YELLOW}">TREND</span> <b>Consistent:</b> <span class="legend-desc">Has been in the Top Trending list for 5+ consecutive days.</span></div>
                      </div>
                      <div>
-                        <div style="margin-bottom:8px; color: #fff; font-weight:600;">📊 Key Metrics</div>
-                        <div><span class="legend-key">Squeeze:</span> (Mentions × Vol) / MktCap</div>
-                        <div><span class="legend-key">Vel:</span> Rank Change Speed</div>
+                        <div style="margin-bottom:8px; color: #fff; font-weight:600; border-bottom: 1px solid #333; padding-bottom: 4px;">📊 Metrics Defined</div>
+                        <div style="margin-bottom:6px;"><span class="legend-key">Squeeze:</span> <span class="legend-desc">(Mentions × Vol Surge) / Log(MktCap). High score = High viral potential vs size.</span></div>
+                        <div style="margin-bottom:6px;"><span class="legend-key">Surge:</span> <span class="legend-desc">Current Volume vs 30-Day Average (e.g., 100% = Normal, 200% = Double).</span></div>
+                        <div><span class="legend-key">Vel:</span> <span class="legend-desc">Velocity. How many rank spots climbed since yesterday.</span></div>
                      </div>
                 </div>
             </div>
@@ -598,7 +574,7 @@ def export_interactive_html(df):
                 "order":[[0,"asc"]],
                 "pageLength": 50,
                 "lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
-                "dom": 'rtip', /* Hides default search box for cleaner look */
+                "dom": 'rtip', 
                 "columnDefs": [ 
                     {{ "visible": false, "targets": [13, 14] }},
                     {{ "orderData": [14], "targets": [7] }}
