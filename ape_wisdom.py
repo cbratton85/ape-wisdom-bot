@@ -552,7 +552,7 @@ def export_interactive_html(df):
                     </div>
                 </div>
 
-                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">📋 TXT</button>
+                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">📋 Download TXT</button>
 
                 <span id="stockCounter" style="margin-left: auto; font-size: 0.85rem;">Loading...</span>
             </div>
@@ -672,7 +672,17 @@ def export_interactive_html(df):
                 "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 "columnDefs": [ 
                     {{ "visible": false, "targets": [13, 14] }}, 
-                    {{ "orderData": [14], "targets": [7] }}        
+                    {{ "orderData": [14], "targets": [7] }},      /* Sort Vol by hidden Raw Vol */
+
+                    /* NEW: Fix sorting for Rank+(1), Vel(5), Price(6), Surge(8), Mnt(9) */
+                    {{ "targets": [1, 5, 6, 8, 9], "type": "num", "render": function(data, type, row) {{
+                        if (type === 'sort' || type === 'type') {{
+                            // Remove HTML tags, Dollar signs, Plus signs, Commas, %
+                            var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,]/g, '');
+                            return parseFloat(clean) || 0;
+                        }}
+                        return data;
+                    }} }}
                 ],
                 "drawCallback": function(settings) {{
                     var api = this.api();
