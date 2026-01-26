@@ -271,14 +271,12 @@ def export_interactive_html(df):
         if not os.path.exists(PUBLIC_DIR):
             os.makedirs(PUBLIC_DIR)
 
-        def color_span(text, color_hex): 
-    # Logic remains: text and color input. 
-    # Style change: adds a soft background and rounded border.
+def color_span(text, color_hex):
     return f'<span style="background:{color_hex}15; color:{color_hex}; border:1px solid {color_hex}44; padding:2px 10px; border-radius:12px; font-weight:600; font-size:0.85rem; white-space:nowrap;">{text}</span>'
-        def format_vol(v):
-            if v >= 1_000_000: return f"{v/1_000_000:.1f}M"
-            if v >= 1_000: return f"{v/1_000:.0f}K"
-            return str(v)
+def format_vol(v):
+    if v >= 1_000_000: return f"{v/1_000_000:.1f}M"
+    if v >= 1_000: return f"{v/1_000:.0f}K"
+        return str(v)
 
         C_GREEN, C_YELLOW, C_RED, C_CYAN, C_MAGENTA, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ff00ff", "#ffffff"
         export_df['Type_Tag'] = 'STOCK'
