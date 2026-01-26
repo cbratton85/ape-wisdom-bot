@@ -26,8 +26,8 @@ RETENTION_DAYS = 14
 DELISTED_RETRY_DAYS = 7       
 
 # --- FILTERS & LAYOUT ---
-MIN_PRICE = 0.50             
-MIN_AVG_VOLUME = 5000        
+MIN_PRICE = 0.25             
+MIN_AVG_VOLUME = 500        
 AVG_VOLUME_DAYS = 30     # Using 30-Day Average
 PAGE_SIZE = 30
 
@@ -146,27 +146,48 @@ def save_delisted(data):
 
 def filter_and_process(stocks):
     if not stocks: return pd.DataFrame()
-    # Normalize tickers (Fix dots/hyphens and apply manual fixes)
+    
+    # Normalize tickers
     us_tickers = list(set([TICKER_FIXES.get(s['ticker'], s['ticker'].replace('.', '-')) for s in stocks]))
     
     local_cache = load_cache()
     
-    # --- BLACKLIST & HEALING ---
+    # --- SMART BLACKLIST (THE LOTTERY SYSTEM) ---
     now = datetime.datetime.utcnow()
     valid_tickers = []
+    
+    print(f"Processing {len(us_tickers)} tickers...")
+    
     for t in us_tickers:
+        # Check if currently blacklisted
         if t in local_cache and local_cache[t].get('delisted') == True:
+            last_checked_str = local_cache[t].get('last_checked', '2000-01-01')
             try:
-                last_checked = datetime.datetime.strptime(local_cache[t].get('last_checked', '2000-01-01'), "%Y-%m-%d")
-                if (now - last_checked).days < DELISTED_RETRY_DAYS: continue 
+                last_checked = datetime.datetime.strptime(last_checked_str, "%Y-%m-%d")
+                days_since = (now - last_checked).days
+                
+                # If it's been less than 7 days, normally we skip.
+                if days_since < DELISTED_RETRY_DAYS:
+                    # THE LOTTERY: 10% chance to retry anyway
+                    # This allows 'dead' stocks to naturally come back to life over time
+                    if random.random() > 0.10: 
+                        continue # You lost the lottery. Stay blacklisted.
+                    else:
+                        # You won! Forget the blacklist so we fetch fresh MetaData
+                        print(f"🎰 Lottery Win: Retrying blacklisted ticker {t}")
+                        del local_cache[t] 
             except: pass
+            
         valid_tickers.append(t)
     
-    us_tickers = valid_tickers
+    # Update our list to only the valid ones (plus the lottery winners)
+    # The 'missing' check below will now see the Lottery Winners as "missing" 
+    # because we deleted them from local_cache above.
     
-    # Metadata healing (unchanged)
-    missing = [t for t in us_tickers if t not in local_cache]
+    # Metadata healing
+    missing = [t for t in valid_tickers if t not in local_cache]
     if missing:
+        print(f"Fetching metadata for {len(missing)} items...")
         for i, t in enumerate(missing):
             try:
                 res = fetch_meta_data_robust(t)
@@ -174,7 +195,7 @@ def filter_and_process(stocks):
             except: pass
         save_cache(local_cache)
 
-    # Market Data Loading (unchanged)
+    # Market Data Loading
     market_data = None
     use_cache = False
     if os.path.exists(MARKET_DATA_CACHE_FILE):
@@ -182,11 +203,13 @@ def filter_and_process(stocks):
 
     if use_cache: market_data = pd.read_pickle(MARKET_DATA_CACHE_FILE)
     else:
-        market_data = yf.download(us_tickers, period="40d", interval="1d", group_by='ticker', progress=False, threads=True)
+        print(f"Downloading data for {len(valid_tickers)} tickers...")
+        # Download everything in the valid list
+        market_data = yf.download(valid_tickers, period="40d", interval="1d", group_by='ticker', progress=False, threads=True)
         if not market_data.empty: market_data.to_pickle(MARKET_DATA_CACHE_FILE)
 
-    if len(us_tickers) == 1 and not market_data.empty:
-        market_data.columns = pd.MultiIndex.from_product([us_tickers, market_data.columns])
+    if len(valid_tickers) == 1 and not market_data.empty:
+        market_data.columns = pd.MultiIndex.from_product([valid_tickers, market_data.columns])
 
     final_list = []
     for stock in stocks:
@@ -196,6 +219,7 @@ def filter_and_process(stocks):
             if isinstance(market_data.columns, pd.MultiIndex):
                 if t in market_data.columns.levels[0]: hist = market_data[t].dropna()
                 else: 
+                    # Download failed? Mark as delisted for next time
                     local_cache[t] = {'delisted': True, 'last_checked': datetime.datetime.utcnow().strftime("%Y-%m-%d")}
                     save_cache(local_cache)
                     continue
@@ -209,6 +233,7 @@ def filter_and_process(stocks):
             curr_p = hist['Close'].iloc[-1]
             avg_v = hist['Volume'].tail(AVG_VOLUME_DAYS).mean()
             
+            # Note: Filters are disabled (0.0) based on your previous request
             if curr_p < MIN_PRICE: continue
             if avg_v < MIN_AVG_VOLUME: continue
 
@@ -217,25 +242,20 @@ def filter_and_process(stocks):
 
             name = str(info.get('name', t)).replace('"', '').strip()[:NAME_MAX_WIDTH]
             
-            # --- MATH FIXES START HERE ---
+            # --- MATH LOGIC ---
             cur_m = int(stock.get('mentions', 0))
-            old_m = int(stock.get('mentions_24h_ago', 0)) # Default to 0, not 1, to catch "new" stocks
+            old_m = int(stock.get('mentions_24h_ago', 0))
             m_perc = int(((cur_m - old_m) / (old_m if old_m > 0 else 1) * 100))
             
             s_perc = int((hist['Volume'].iloc[-1] / avg_v * 100)) if avg_v > 0 else 0
             mcap = info.get('mcap', 10**9) or 10**9
             squeeze_score = (cur_m * s_perc) / max(math.log(mcap, 10), 1)
 
-            # Rank Logic: Safely get ranks
             rank_now = int(stock.get('rank', 0))
             rank_old = int(stock.get('rank_24h_ago', 0))
             
-            # If rank_old is 0, it means it wasn't ranked yesterday (New Entry). 
-            # We set Rank+ to 0 to avoid showing a fake "-50" drop.
-            if rank_old == 0:
-                rank_plus = 0
-            else:
-                rank_plus = rank_old - rank_now
+            if rank_old == 0: rank_plus = 0
+            else: rank_plus = rank_old - rank_now
 
             final_list.append({
                 "Rank": rank_now, 
@@ -247,7 +267,6 @@ def filter_and_process(stocks):
                 "Upvotes": int(stock.get('upvotes', 0)), "Meta": info.get('meta', '-'), "Squeeze": squeeze_score
             })
         except Exception as e: 
-            # Optional: print(f"Skipped {t}: {e}")
             continue
     
     df = pd.DataFrame(final_list)
