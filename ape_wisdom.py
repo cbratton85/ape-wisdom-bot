@@ -429,17 +429,17 @@ def export_interactive_html(df):
                 margin: 0 auto;
             }}
             .table-dark {{ --bs-table-bg: #18181b; color: #ccc; }}
-            th {
+            th {{
                 color: #00ff00;
                 border-bottom: 2px solid #444;
                 font-size: 14px;
                 
-                /* NEW: FORCE CONSISTENCY */
-                vertical-align: middle !important; /* Centers text vertically */
-                padding-top: 12px !important;      /* Consistent Top Padding */
-                padding-bottom: 12px !important;   /* Consistent Bottom Padding */
-                line-height: 1.4 !important;       /* Consistent Text Height */
-            }
+                /* Fixed Alignment & Padding */
+                vertical-align: middle !important;
+                padding-top: 12px !important;
+                padding-bottom: 12px !important;
+                line-height: 1.4 !important;
+            }}
             
             /* --- TABLE LAYOUT --- */
             table.dataTable {{ width: auto !important; margin: 0 auto; }}
