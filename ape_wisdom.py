@@ -471,19 +471,38 @@ def export_interactive_html(df):
 
                 <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">TXT File</button>
                 <span id="stockCounter">Loading...</span>
-            </div>
-
             <div class="legend-container">
-                <div class="legend-header" onclick="toggleLegend()"><span>ℹ️ STRATEGY GUIDE & LEGEND (Click to Toggle)</span><span id="legendArrow">▼</span></div>
+                <div class="legend-header" onclick="toggleLegend()">
+                    <span>ℹ️ STRATEGY GUIDE & LEGEND (Click to Toggle)</span>
+                    <span id="legendArrow">▼</span>
+                </div>
                 <div class="legend-box" id="legendContent" style="display:none;">
-                    <div class="legend-section"><h5>🔥 Heat Status (Name Color)</h5><div class="legend-item"><span class="legend-key" style="color:#ff4444">RED NAME</span> <b>Extreme (>4.0):</b> Massive outlier.</div><div class="legend-item"><span class="legend-key" style="color:#ffff00">YEL NAME</span> <b>Elevated (>2.0):</b> Activity above normal.</div></div>
-                    <div class="legend-section"><h5>🚀 Significance Signals</h5><div class="legend-item"><span class="legend-key" style="color:#00ffff">ACCUM</span> <b>Accumulation:</b> Mentions Rising (>10%) + Price Flat.</div><div class="legend-item"><span class="legend-key" style="color:#ffff00">TREND</span> <b>Trending:</b> In Top list for 5+ days.</div></div>
-                    <div class="legend-section"><h5>📊 Metrics Explained</h5><div class="legend-item"><span class="legend-key">Rank+</span> Positions climbed in 24h.</div><div class="legend-item"><span class="legend-key">Squeeze</span> (Mentions × Vol) / MarketCap.</div></div>
+                    
+                    <div class="legend-section">
+                        <h5>🔥 Heat Status</h5>
+                        <div class="legend-item"><span class="legend-key" style="color:#ff4444">RED NAME</span> <b>Extreme:</b> Massive outlier.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">YEL NAME</span> <b>Elevated:</b> Activity above normal.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ffffff">WHT NAME</span> <b>Normal:</b> Standard activity.</div>
+                    </div>
+
+                    <div class="legend-section">
+                        <h5>🚀 Significance Signals (Sig)</h5>
+                        <div class="legend-item"><span class="legend-key" style="color:#00ffff">ACCUM</span> Mentions Rising (>10%) + Price Flat.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">TREND</span> In Top list for 5+ consecutive days.</div>
+                    </div>
+                    
+                    <div class="legend-section">
+                        <h5>📊 Metrics Explained</h5>
+                        <div class="legend-item"><span class="legend-key">Rank+</span> Positions climbed in the last 24 hours.</div>
+                        <div class="legend-item"><span class="legend-key">Vel</span> <b>Velocity:</b> Change in climb speed vs 24h ago.</div>
+                        <div class="legend-item"><span class="legend-key">Surge</span> Volume increase vs 30-Day Average.</div>
+                        <div class="legend-item"><span class="legend-key">Mnt%</span> Change in Mentions vs 24h ago.</div>
+                        <div class="legend-item"><span class="legend-key">Upvotes</span> Net Upvotes on Reddit.</div>
+                        <div class="legend-item"><span class="legend-key">Squeeze</span> (Mentions × Vol) / MarketCap.</div>
+                    </div>
+
                 </div>
             </div>
-
-            {table_html}
-        </div>
         
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
