@@ -472,7 +472,12 @@ def export_interactive_html(df):
                 max-width: 230px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 15px;
             }}
             th:nth-child(13), td:nth-child(13) {{
-                max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 15px;
+                max-width: 320px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding-left: 15px;
+                border-right: 1px solid #333; 
             }}
             
             td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
