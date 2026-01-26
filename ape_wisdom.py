@@ -392,53 +392,75 @@ def export_interactive_html(df):
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
-            body{{background-color:#121212;color:#e0e0e0;font-family:'Consolas','Monaco',monospace;padding:20px}}
-            .table-dark{{--bs-table-bg:#1e1e1e;color:#ccc}} 
-            th{{color:#00ff00;border-bottom:2px solid #444; font-size: 14px;}} 
+            body{{
+                background-color:#121212;
+                color:#e0e0e0;
+                font-family:'Consolas','Monaco',monospace;
+                padding:20px;
+                
+                /* NEW: Centers the whole dashboard on the screen */
+                max-width: 1400px; 
+                margin: 0 auto;
+            }}
+
+            .table-dark{{--bs-table-bg:#1e1e1e;color:#ccc}}
             
-            /* GROUP 1: Center & Narrow (Rank, Velocity, Signal) */
-            th:nth-child(1), td:nth-child(1),
-            th:nth-child(2), td:nth-child(2),
-            th:nth-child(5), td:nth-child(5) {{
+            th{{color:#00ff00;border-bottom:2px solid #444; font-size: 14px;}}
+            
+            /* --- TABLE LAYOUT: SHRINK TO FIT --- */
+            /* This forces the table to only be as wide as the text inside it */
+            table.dataTable {{
+                width: auto !important;  
+                margin: 0 auto;          /* Centers the table inside the dashboard */
+            }}
+
+            /* --- GROUP 1: CENTERED & TIGHT (Rank, Rank+, Sym, Sig, Vel) --- */
+            th:nth-child(1), td:nth-child(1), /* Rank */
+            th:nth-child(2), td:nth-child(2), /* Rank+ */
+            th:nth-child(4), td:nth-child(4), /* Sym */
+            th:nth-child(5), td:nth-child(5), /* Sig */
+            th:nth-child(6), td:nth-child(6)  /* Vel */
+            {{
                 width: 1%;
                 white-space: nowrap;
                 text-align: center;
+                padding-left: 8px;   /* Moderate padding */
+                padding-right: 8px;
             }}
 
-            /* GROUP 2: Right-Align & Narrow (Price, AvgVol, Upvotes, Squeeze) */
-            /* This fixes the "Too Wide" issue for numbers */
-            th:nth-child(7), td:nth-child(7),
-            th:nth-child(9), td:nth-child(9),
-            th:nth-child(11), td:nth-child(11),
-            th:nth-child(15), td:nth-child(15) {{
-                width: 1%;             /* Force shrink to minimum width */
-                white-space: nowrap;   /* No wrapping */
-                padding-left: 4px;     /* Tight padding */
-                padding-right: 4px;
-                text-align: right;     /* Align numbers to right */
+            /* --- GROUP 2: RIGHT-ALIGNED NUMBERS (Price through Squeeze) --- */
+            /* Using indices 7 through 12 based on your screenshot */
+            th:nth-child(7), td:nth-child(7),  /* Price */
+            th:nth-child(8), td:nth-child(8),  /* Avg Vol */
+            th:nth-child(9), td:nth-child(9),  /* Surge */
+            th:nth-child(10), td:nth-child(10),/* Mnt% */
+            th:nth-child(11), td:nth-child(11),/* Upvotes */
+            th:nth-child(12), td:nth-child(12) /* Squeeze */
+            {{
+                width: 1%;
+                white-space: nowrap;
+                text-align: right;
+                padding-left: 10px;  /* Clean separation */
+                padding-right: 10px;
+            }}
+
+            /* --- GROUP 3: NAME COLUMN (Fixed Width) --- */
+            th:nth-child(3), td:nth-child(3) {{
+                max-width: 200px;    /* Strict limit so it doesn't stretch */
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding-right: 15px;
+            }}
+
+            /* --- GROUP 4: INDUSTRY (Fixed Width) --- */
+            th:nth-child(13), td:nth-child(13) {{
+                max-width: 180px;    /* Compact limit */
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }}
             
-            /* Optional: Center headers for the number columns */
-            th:nth-child(7), th:nth-child(9), th:nth-child(11), th:nth-child(15) {{
-                text-align: center;
-            }}
-
-            /* GROUP 3: Name Column (3) - Limit Width */
-            th:nth-child(3), td:nth-child(3) {{
-                max-width: 220px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }}
-
-            /* GROUP 4: Industry/Sector (13) - Limit Width */
-            th:nth-child(13), td:nth-child(13) {{
-                max-width: 200px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }}
-
             td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
             
