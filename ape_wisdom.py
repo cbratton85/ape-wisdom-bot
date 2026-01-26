@@ -295,8 +295,8 @@ def export_interactive_html(df):
             export_df.at[index, 'Vel'] = color_span(f"{v_val} {v_arrow}", v_color)
             
             sig_text = ""
-            if m['div']: sig_text = "💎 ACCUM"
-            elif m['streak'] > 5: sig_text = "🔥 TREND"
+            if m['div']: sig_text = "ACCUM"
+            elif m['streak'] > 5: sig_text = "TREND"
             sig_color = C_CYAN if "ACCUM" in sig_text else C_YELLOW
             export_df.at[index, 'Sig'] = color_span(sig_text, sig_color)
             
@@ -435,8 +435,8 @@ def export_interactive_html(df):
 
                     <div class="legend-section">
                         <h5>🚀 Significance Signals</h5>
-                        <div class="legend-item"><span class="legend-key" style="color:#00ffff">💎 ACCUM</span> Mentions RISING (>10%) + Price FLAT.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">🔥 TREND</span> In Top Trending list for 5+ consecutive days.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#00ffff">ACCUM</span> Mentions RISING (>10%) + Price FLAT.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">TREND</span> In Top Trending list for 5+ consecutive days.</div>
                     </div>
                     
                     <div class="legend-section">
