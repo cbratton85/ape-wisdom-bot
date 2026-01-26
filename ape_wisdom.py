@@ -395,15 +395,35 @@ def export_interactive_html(df):
             body{{background-color:#121212;color:#e0e0e0;font-family:'Consolas','Monaco',monospace;padding:20px}}
             .table-dark{{--bs-table-bg:#1e1e1e;color:#ccc}} 
             th{{color:#00ff00;border-bottom:2px solid #444; font-size: 14px;}} 
-            /* Child 5 is the "Sig" column (1-based index in CSS, matches Col 4 in JS) */
+            
             /* Narrow Rank (1), Vel (2), and Sig (5) */
             th:nth-child(1), td:nth-child(1),
             th:nth-child(2), td:nth-child(2),
             th:nth-child(5), td:nth-child(5) {{
-            width: 1%;
-            white-space: nowrap;
-            text-align: center;
+                width: 1%;
+                white-space: nowrap;
+                text-align: center;
             }}
+            /* NEW: Name Column (3) - Allow it to grow/fill space */
+            th:nth-child(3), td:nth-child(3) {{
+                width: auto;
+            }}
+
+            /* Constrain Industry/Sector (13) */
+            th:nth-child(13), td:nth-child(13) {{
+                max-width: 140px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: 0.75rem;
+                color: #888;
+            }}
+
+            /* NEW: Ensure Price (Column 7) never wraps */
+            th:nth-child(7), td:nth-child(7) {{
+                white-space: nowrap;
+            }}
+
             td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
             
