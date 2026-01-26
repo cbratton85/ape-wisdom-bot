@@ -271,7 +271,10 @@ def export_interactive_html(df):
         if not os.path.exists(PUBLIC_DIR):
             os.makedirs(PUBLIC_DIR)
 
-        def color_span(text, color_hex): return f'<span style="color: {color_hex}; font-weight: bold;">{text}</span>'
+        def color_span(text, color_hex): 
+    # Logic remains: text and color input. 
+    # Style change: adds a soft background and rounded border.
+    return f'<span style="background:{color_hex}15; color:{color_hex}; border:1px solid {color_hex}44; padding:2px 10px; border-radius:12px; font-weight:600; font-size:0.85rem; white-space:nowrap;">{text}</span>'
         def format_vol(v):
             if v >= 1_000_000: return f"{v/1_000_000:.1f}M"
             if v >= 1_000: return f"{v/1_000:.0f}K"
@@ -335,44 +338,111 @@ def export_interactive_html(df):
         html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Ape Wisdom Analysis</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-        <style>
-            body{{background-color:#121212;color:#e0e0e0;font-family:'Consolas','Monaco',monospace;padding:20px}}
-            .table-dark{{--bs-table-bg:#1e1e1e;color:#ccc}} 
-            th{{color:#00ff00;border-bottom:2px solid #444; font-size: 14px;}} 
-            /* Child 5 is the "Sig" column (1-based index in CSS, matches Col 4 in JS) */
-            th:nth-child(5), td:nth-child(5) {{ width: 1%; white-space: nowrap; }}
-            td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
-            a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
-            
-            .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 8px; margin-bottom: 20px; overflow: hidden; transition: all 0.3s ease; }}
-            .legend-header {{ background: #2a2a2a; padding: 10px 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; }}
-            .legend-header:hover {{ background: #333; }}
-            .legend-box {{
-                padding: 15px;
-                display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; font-size: 0.85rem;
-                border-top: 1px solid #444;
-            }}
-            .legend-section h5 {{ color: #00ff00; font-size: 1rem; border-bottom: 1px solid #444; padding-bottom: 5px; margin-bottom: 10px; }}
-            .legend-item {{ margin-bottom: 6px; }}
-            .legend-key {{ font-weight: bold; display: inline-block; width: 100px; }}
-            
-            .filter-bar {{ display:flex; gap:15px; align-items:center; background:#2a2a2a; padding:10px; border-radius:5px; margin-bottom:15px; border:1px solid #444; flex-wrap:wrap;}}
-            .filter-group {{ display:flex; align-items:center; gap:5px; }}
-            .filter-group label {{ font-size:0.9rem; color:#aaa; }}
-            .form-control-sm {{ background:#111; border:1px solid #555; color:#fff; width: 100px;}}
-            
-            #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; font-family: 'Consolas', monospace; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px;}}
-            
-            /* Center the header content vertically */
-            .header-flex {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
-            
-            .page-link {{ background-color: #222; border-color: #444; color: #00ff00; }}
-            .page-item.active .page-link {{ background-color: #00ff00; border-color: #00ff00; color: #000; }}
-            .page-item.disabled .page-link {{ background-color: #111; border-color: #333; color: #555; }}
-            
-            .btn-reset {{ border: 1px solid #555; color: #fff; font-size: 0.8rem; background: #333; }}
-            .btn-reset:hover {{ background: #444; color: #fff; }}
-        </style>
+<style>
+    /* 1. Global Modern Font & Background */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    body {
+        background-color: #0f172a; /* Sleek Deep Slate */
+        color: #f1f5f9;
+        font-family: 'Inter', -apple-system, sans-serif;
+        padding: 20px;
+    }
+
+    /* 2. Modern Table Layout */
+    .table { 
+        border-collapse: separate; 
+        border-spacing: 0 8px; /* Spaces out rows like separate cards */
+        margin-top: 10px;
+    }
+
+    .table thead th {
+        background: transparent !important;
+        color: #94a3b8 !important; /* Muted slate for headers */
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border: none !important;
+        padding: 15px !important;
+    }
+
+    .table tbody tr {
+        background-color: #1e293b !important; /* Slightly lighter card color */
+        transition: all 0.2s ease;
+    }
+
+    .table tbody tr:hover {
+        background-color: #334155 !important;
+        transform: translateY(-2px); /* Makes the row 'lift' when hovered */
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    }
+
+    .table td {
+        border: none !important;
+        padding: 14px 15px !important;
+        vertical-align: middle !important;
+        font-size: 0.9rem;
+    }
+
+    /* Column Specifics (Sig Column) */
+    th:nth-child(5), td:nth-child(5) { width: 1%; white-space: nowrap; }
+
+    /* Rounding Row Corners */
+    .table tbody tr td:first-child { border-radius: 10px 0 0 10px; }
+    .table tbody tr td:last-child { border-radius: 0 10px 10px 0; }
+
+    /* 3. Header, Filter Bar & Legend */
+    .header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    
+    .filter-bar { 
+        background: #1e293b; 
+        padding: 20px; 
+        border: 1px solid #334155;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        display: flex; gap: 15px; align-items: center; flex-wrap: wrap;
+    }
+
+    .legend-container {
+        background-color: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        overflow: hidden;
+    }
+
+    .legend-header { background: #334155; padding: 12px 20px; cursor: pointer; display: flex; justify-content: space-between; font-weight: 600; }
+    
+    .legend-section h5 { color: #818cf8; font-size: 1rem; border-bottom: 1px solid #334155; padding-bottom: 5px; margin-bottom: 10px; }
+
+    /* 4. Buttons & Inputs */
+    .form-control-sm {
+        background: #0f172a !important;
+        border: 1px solid #475569 !important;
+        color: #fff !important;
+        border-radius: 6px;
+    }
+
+    .btn-outline-light { border-color: #475569; color: #94a3b8; }
+    .btn-check:checked + .btn-outline-light { background-color: #6366f1; border-color: #6366f1; }
+
+    #stockCounter { 
+        color: #818cf8; 
+        font-weight: 600; 
+        margin-left: auto; 
+        border: 1px solid #334155; 
+        padding: 4px 12px; 
+        border-radius: 8px;
+        background: #0f172a;
+    }
+
+    /* Links & Pagination */
+    a { color: #818cf8 !important; text-decoration: none; font-weight: 600; }
+    a:hover { text-decoration: underline; color: #c084fc !important; }
+
+    .page-link { background-color: #1e293b; border-color: #334155; color: #818cf8; }
+    .page-item.active .page-link { background-color: #6366f1; border-color: #6366f1; color: #fff; }
+</style>
         </head>
         <body>
         <div class="container-fluid" style="max-width:98%;">
