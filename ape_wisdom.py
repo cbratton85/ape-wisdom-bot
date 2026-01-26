@@ -11,6 +11,7 @@ import json
 import re
 from bs4 import BeautifulSoup
 import shutil
+import numpy as np
 
 # ==========================================
 #                  CONFIGURATION
@@ -26,8 +27,8 @@ RETENTION_DAYS = 14
 DELISTED_RETRY_DAYS = 7       
 
 # --- FILTERS & LAYOUT ---
-MIN_PRICE = 0.25             
-MIN_AVG_VOLUME = 500        
+MIN_PRICE = 0.01             
+MIN_AVG_VOLUME = 100        
 AVG_VOLUME_DAYS = 30     # Using 30-Day Average
 PAGE_SIZE = 30
 
@@ -271,11 +272,40 @@ def filter_and_process(stocks):
     
     df = pd.DataFrame(final_list)
     if not df.empty:
-        cols = ['Rank+', 'Surge', 'Mnt%', 'Squeeze', 'Upvotes']
+        # --- NEW CONFIGURATION: THE BIG 4 ---
+        # 1. Rank+  (Momentum/Speed)
+        # 2. Surge  (Volume Strength)
+        # 3. Mnt%   (Viral Growth)
+        # 4. Upvotes(Raw Popularity)
+        
+        # We dropped 'Squeeze' to reduce noise/double-counting.
+        cols = ['Rank+', 'Surge', 'Mnt%', 'Upvotes']
+        
+        # Weights: Give slightly more power to actual Rank movement and Raw Upvotes
+        weights = {'Rank+': 1.1, 'Surge': 1.0, 'Mnt%': 0.8, 'Upvotes': 1.1}
+
         for col in cols:
-            mean, std = df[col].mean(), df[col].std(ddof=0)
-            df[f'z_{col}'] = (df[col] - mean) / (std if std > 0 else 1)
-        df['Master_Score'] = (df['z_Rank+'].clip(0) + df['z_Surge'].clip(0) + df['z_Mnt%'].clip(0) + df['z_Upvotes'].clip(0) + (df['z_Squeeze'].clip(0) * 0.5))
+            # 1. PRE-PROCESS: Clip negatives to 0. 
+            clean_series = df[col].clip(lower=0).astype(float)
+            
+            # 2. LOG TRANSFORM: Compress outliers (The "Tesla Fix")
+            # np.log1p(x) = log(1 + x)
+            log_data = np.log1p(clean_series)
+            
+            # 3. STATS: Calculate Mean/Std on the COMPRESSED data
+            mean = log_data.mean()
+            std = log_data.std(ddof=0)
+            
+            # 4. Z-SCORE CALCULATION
+            if std == 0:
+                df[f'z_{col}'] = 0
+            else:
+                df[f'z_{col}'] = (log_data - mean) / std
+
+        # 5. MASTER SCORE SUMMATION
+        df['Master_Score'] = 0
+        for col in cols:
+            df['Master_Score'] += df[f'z_{col}'].clip(lower=0) * weights[col]
 
     tracker = HistoryTracker(HISTORY_FILE)
     vel, div, strk = [], [], []
@@ -344,7 +374,9 @@ def export_interactive_html(df):
             export_df.at[index, 'Sig'] = color_span(sig_text, sig_color)
             
             # --- 3. NAME (Heat Status) ---
-            nm_clr = C_RED if row['Master_Score'] > 3.0 else (C_YELLOW if row['Master_Score'] > 1.5 else C_WHITE)
+            # Yellow triggers at 2.5 (Moderate Heat)
+            # Red triggers at 5.0 (High Heat)
+            nm_clr = C_RED if row['Master_Score'] > 4.0 else (C_YELLOW if row['Master_Score'] > 2.0 else C_WHITE)
             export_df.at[index, 'Name'] = color_span(row['Name'], nm_clr)
             
             # --- 4. RANK+ (Directional Move) ---
@@ -455,10 +487,11 @@ def export_interactive_html(df):
 
             /* --- GROUP 4: INDUSTRY (Wider) --- */
             th:nth-child(13), td:nth-child(13) {{
-                max-width: 260px;    /* Increased from 180px to 260px */
+                max-width: 320px;    /* Increased to 320px */
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                padding-left: 15px;
             }}
             
             td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
