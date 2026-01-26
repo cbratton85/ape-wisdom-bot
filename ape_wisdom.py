@@ -422,15 +422,16 @@ def export_interactive_html(df):
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
-            body{{
-                background-color:#121212;
-                color:#e0e0e0;
-                font-family:'Consolas','Monaco',monospace;
-                padding:20px;
-                max-width: 1400px; 
+            body {{
+                /* Exact match for the main background */
+                background-color: #101010; 
+                color: #e0e0e0;
+                font-family: 'Consolas', 'Monaco', monospace;
+                padding: 20px;
+                max-width: 1400px;
                 margin: 0 auto;
             }}
-            .table-dark{{--bs-table-bg:#1e1e1e;color:#ccc}}
+            .table-dark {{ --bs-table-bg: #18181b; color: #ccc; }}
             th{{color:#00ff00;border-bottom:2px solid #444; font-size: 14px;}}
             
             /* --- TABLE LAYOUT --- */
@@ -538,21 +539,31 @@ def export_interactive_html(df):
                     <span id="legendArrow">▼</span>
                 </div>
                 <div class="legend-box" id="legendContent" style="display:none;">
+                    
                     <div class="legend-section">
                         <h5>🔥 Heat Status (Name Color)</h5>
-                        <div class="legend-item"><span class="legend-key" style="color:#ff4444">RED NAME</span> <b>Extreme (>4σ):</b> Massive outlier.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">YEL NAME</span> <b>Elevated (>2σ):</b> Activity above normal.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ff4444">RED NAME</span> <b>Extreme (>4.0):</b> Massive outlier across all metrics.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">YEL NAME</span> <b>Elevated (>2.0):</b> Activity is well above normal.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ffffff">WHT NAME</span> <b>Normal:</b> Standard activity levels.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ff00ff">MAGENTA</span> Exchange Traded Fund (ETF).</div>
                     </div>
+
                     <div class="legend-section">
-                        <h5>🚀 Signals</h5>
-                        <div class="legend-item"><span class="legend-key" style="color:#00ffff">ACCUM</span> Mentions RISING + Price FLAT.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">TREND</span> Top Trending 5+ days.</div>
+                        <h5>🚀 Significance Signals</h5>
+                        <div class="legend-item"><span class="legend-key" style="color:#00ffff">ACCUM</span> <b>Accumulation:</b> Mentions Rising (>10%) + Price Flat.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">TREND</span> <b>Trending:</b> In Top 100 list for 5+ consecutive days.</div>
                     </div>
+                    
                     <div class="legend-section">
-                        <h5>📊 Metrics</h5>
-                        <div class="legend-item"><span class="legend-key">Rank+</span> Spots climbed in last 24h.</div>
-                        <div class="legend-item"><span class="legend-key">Vel</span> Accel. of climb vs yesterday.</div>
+                        <h5>📊 Metrics Explained</h5>
+                        <div class="legend-item"><span class="legend-key">Rank+</span> Positions climbed in the last 24 hours.</div>
+                        <div class="legend-item"><span class="legend-key">Vel</span> <b>Velocity:</b> Acceleration of climb vs yesterday.</div>
+                        <div class="legend-item"><span class="legend-key">Surge</span> Volume increase vs 30-Day Average.</div>
+                        <div class="legend-item"><span class="legend-key">Mnt%</span> Change in Mentions vs 24 hours ago.</div>
+                        <div class="legend-item"><span class="legend-key">Upvotes</span> Net Upvotes on Reddit (Green=Pos, Red=Neg).</div>
+                        <div class="legend-item"><span class="legend-key">Squeeze</span> (Mentions × Vol) / MarketCap (Ratio).</div>
                     </div>
+
                 </div>
             </div>
 
