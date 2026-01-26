@@ -322,9 +322,9 @@ def export_interactive_html(df):
 
         export_df.rename(columns={'Meta': 'Industry/Sector', 'Vol_Display': 'Avg Vol'}, inplace=True)
 
-        # Columns: 0=Rank, 1=Name, 2=Sym, 3=Vel, 4=Sig, 5=Rank+, 6=Price, 7=Avg Vol, 
+        # Columns: 0=Rank, 1=Vel, 2=Name, 3=Sym, 4=Sig, 5=Rank+, 6=Price, 7=Avg Vol, 
         #          8=Surge, 9=Mnt%, 10=Upvotes, 11=Squeeze, 12=Industry, 13=Type, 14=RawVol
-        cols = ['Rank', 'Name', 'Sym', 'Vel', 'Sig', 'Rank+', 'Price', 'Avg Vol', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol']
+        cols = ['Rank', 'Vel', 'Name', 'Sym', 'Sig', 'Rank+', 'Price', 'Avg Vol', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol']
         final_df = export_df[cols]
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -340,7 +340,12 @@ def export_interactive_html(df):
             .table-dark{{--bs-table-bg:#1e1e1e;color:#ccc}} 
             th{{color:#00ff00;border-bottom:2px solid #444; font-size: 14px;}} 
             /* Child 5 is the "Sig" column (1-based index in CSS, matches Col 4 in JS) */
-            th:nth-child(5), td:nth-child(5) {{ width: 1%; white-space: nowrap; }}
+            /* Narrow Rank (1) and Sig (5) */
+            th:nth-child(1), td:nth-child(1),
+            th:nth-child(5), td:nth-child(5) {{
+            width: 1%;
+            white-space: nowrap;
+            }}
             td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
             
