@@ -271,7 +271,8 @@ def export_interactive_html(df):
         if not os.path.exists(PUBLIC_DIR):
             os.makedirs(PUBLIC_DIR)
 
-        def color_span(text, color_hex): return f'<span style="color: {color_hex}; font-weight: bold;">{text}</span>'
+        def color_span(text, color_hex): 
+            return f'<span style="background:{color_hex}15; color:{color_hex}; border:1px solid {color_hex}44; padding:2px 10px; border-radius:12px; font-weight:600; font-size:0.85rem; white-space:nowrap; vertical-align:middle;">{text}</span>'
         def format_vol(v):
             if v >= 1_000_000: return f"{v/1_000_000:.1f}M"
             if v >= 1_000: return f"{v/1_000:.0f}K"
@@ -313,14 +314,14 @@ def export_interactive_html(df):
             
             is_fund = row['Type'] == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
 
-            # Create the ETF badge style
-            etf_badge = '<span style="background:#ff00ff22; color:#ff00ff; border:1px solid #ff00ff; padding:1px 6px; border-radius:4px; font-size:10px; font-weight:bold; margin-right:8px; vertical-align:middle;">ETF</span>' if is_fund else ''
+            # Creates the ETF badge only if it is a fund
+            etf_badge = '<span style="background:#ff00ff22; color:#ff00ff; border:1px solid #ff00ff; padding:1px 6px; border-radius:4px; font-size:10px; font-weight:bold; margin-right:8px; vertical-align:middle; display:inline-block;">ETF</span>' if is_fund else ''
 
-            # Prepend the badge to the Industry text
+            # Prepend badge to Industry text and apply magenta color if ETF
             industry_text = color_span(row['Meta'], C_MAGENTA if is_fund else C_WHITE)
             export_df.at[index, 'Meta'] = f"{etf_badge}{industry_text}"
             export_df.at[index, 'Type_Tag'] = 'ETF' if is_fund else 'STOCK'
-            
+
             t = row['Sym']
             export_df.at[index, 'Sym'] = f'<a href="https://finance.yahoo.com/quote/{t}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
             export_df.at[index, 'Price'] = f"${row['Price']:.2f}"
