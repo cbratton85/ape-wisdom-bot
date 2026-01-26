@@ -79,14 +79,28 @@ class HistoryTracker:
             if not self.data[ticker]: del self.data[ticker]
         with open(self.filepath, 'w') as f: json.dump(self.data, f, indent=4)
     def get_metrics(self, ticker, current_price, current_mnt):
-        if ticker not in self.data or len(self.data[ticker]) < 2: return {"vel": 0, "div": False, "streak": 0}
-        dates = sorted(self.data[ticker].keys())
-        prev_data = self.data[ticker][dates[-2]]
-        velocity = int(self.data[ticker][dates[-1]]['rank_plus'] - prev_data['rank_plus'])
-        mnt_surge = current_mnt > (prev_data['mnt_perc'] + 10)
-        price_stable = abs((current_price - prev_data['price']) / (prev_data['price'] or 1)) < 0.02
-        divergence = mnt_surge and price_stable
-        return {"vel": velocity, "div": divergence, "streak": len(dates)}
+    # Ensure we have at least 2 days of history to compare
+    if ticker not in self.data or len(self.data[ticker]) < 2: 
+        return {"vel": 0, "div": False, "streak": 0}
+        
+    dates = sorted(self.data[ticker].keys())
+    # Grab the two most recent records from your JSON file
+    today_rec = self.data[ticker][dates[-1]]
+    yesterday_rec = self.data[ticker][dates[-2]]
+    
+    # VELOCITY = (Today's Rank Change) - (Yesterday's Rank Change)
+    # This identifies if the 'climb' is accelerating or decelerating
+    velocity = int(today_rec['rank_plus'] - yesterday_rec['rank_plus'])
+    
+    # Fix for ICE: If ICE went from 1 to 3, its Rank+ is -2. 
+    # If yesterday its Rank+ was 0, Vel is -2. 
+    # If it shows -3, check if 'rank_plus' in save() uses 1-based vs 0-based indexing.
+    
+    mnt_surge = current_mnt > (yesterday_rec['mnt_perc'] + 10)
+    price_stable = abs((current_price - yesterday_rec['price']) / (yesterday_rec['price'] or 1)) < 0.02
+    divergence = mnt_surge and price_stable
+    
+    return {"vel": velocity, "div": divergence, "streak": len(dates)}
 
 def clear_screen(): os.system('cls' if os.name == 'nt' else 'clear')
 def load_cache():
@@ -340,11 +354,13 @@ def export_interactive_html(df):
             .table-dark{{--bs-table-bg:#1e1e1e;color:#ccc}} 
             th{{color:#00ff00;border-bottom:2px solid #444; font-size: 14px;}} 
             /* Child 5 is the "Sig" column (1-based index in CSS, matches Col 4 in JS) */
-            /* Narrow Rank (1) and Sig (5) */
+            /* Narrow Rank (1), Vel (2), and Sig (5) */
             th:nth-child(1), td:nth-child(1),
+            th:nth-child(2), td:nth-child(2),
             th:nth-child(5), td:nth-child(5) {{
             width: 1%;
             white-space: nowrap;
+            text-align: center;
             }}
             td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
