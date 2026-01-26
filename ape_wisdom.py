@@ -395,7 +395,7 @@ def export_interactive_html(df):
                 clr = C_YELLOW if row[z_col] >= 2.0 else (C_GREEN if row[z_col] >= 1.0 else C_WHITE)
                 export_df.at[index, col] = color_span(val, clr)
                 
-            export_df.at[index, 'Squeeze'] = color_span(int(row['Squeeze']), C_CYAN if row['z_Squeeze']>1.5 else C_WHITE)
+            export_df.at[index, 'Squeeze'] = color_span(int(row['Squeeze']), C_WHITE)
             export_df.at[index, 'Upvotes'] = color_span(row['Upvotes'], C_GREEN if row['z_Upvotes']>1.5 else C_WHITE)
             
             is_fund = row['Type'] == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
