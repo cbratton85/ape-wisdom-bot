@@ -150,62 +150,39 @@ def filter_and_process(stocks):
     
     # Normalize tickers
     us_tickers = list(set([TICKER_FIXES.get(s['ticker'], s['ticker'].replace('.', '-')) for s in stocks]))
-    
     local_cache = load_cache()
-    
-    # --- SMART BLACKLIST (THE LOTTERY SYSTEM) ---
     now = datetime.datetime.utcnow()
     valid_tickers = []
     
     print(f"Processing {len(us_tickers)} tickers...")
     
     for t in us_tickers:
-        # Check if currently blacklisted
         if t in local_cache and local_cache[t].get('delisted') == True:
             last_checked_str = local_cache[t].get('last_checked', '2000-01-01')
             try:
                 last_checked = datetime.datetime.strptime(last_checked_str, "%Y-%m-%d")
-                days_since = (now - last_checked).days
-                
-                # If it's been less than 7 days, normally we skip.
-                if days_since < DELISTED_RETRY_DAYS:
-                    # THE LOTTERY: 10% chance to retry anyway
-                    # This allows 'dead' stocks to naturally come back to life over time
-                    if random.random() > 0.10: 
-                        continue # You lost the lottery. Stay blacklisted.
-                    else:
-                        # You won! Forget the blacklist so we fetch fresh MetaData
-                        print(f"🎰 Lottery Win: Retrying blacklisted ticker {t}")
-                        del local_cache[t] 
+                if (now - last_checked).days < DELISTED_RETRY_DAYS:
+                    if random.random() > 0.10: continue 
+                    else: del local_cache[t] 
             except: pass
-            
         valid_tickers.append(t)
     
-    # Update our list to only the valid ones (plus the lottery winners)
-    # The 'missing' check below will now see the Lottery Winners as "missing" 
-    # because we deleted them from local_cache above.
-    
-    # Metadata healing
     missing = [t for t in valid_tickers if t not in local_cache]
     if missing:
         print(f"Fetching metadata for {len(missing)} items...")
-        for i, t in enumerate(missing):
+        for t in missing:
             try:
                 res = fetch_meta_data_robust(t)
                 if res: local_cache[res['ticker']] = res
             except: pass
         save_cache(local_cache)
 
-    # Market Data Loading
     market_data = None
-    use_cache = False
-    if os.path.exists(MARKET_DATA_CACHE_FILE):
-        if (time.time() - os.path.getmtime(MARKET_DATA_CACHE_FILE)) < CACHE_EXPIRY_SECONDS: use_cache = True
-
+    use_cache = os.path.exists(MARKET_DATA_CACHE_FILE) and (time.time() - os.path.getmtime(MARKET_DATA_CACHE_FILE)) < CACHE_EXPIRY_SECONDS
+    
     if use_cache: market_data = pd.read_pickle(MARKET_DATA_CACHE_FILE)
     else:
         print(f"Downloading data for {len(valid_tickers)} tickers...")
-        # Download everything in the valid list
         market_data = yf.download(valid_tickers, period="40d", interval="1d", group_by='ticker', progress=False, threads=True)
         if not market_data.empty: market_data.to_pickle(MARKET_DATA_CACHE_FILE)
 
@@ -216,96 +193,63 @@ def filter_and_process(stocks):
     for stock in stocks:
         t = TICKER_FIXES.get(stock['ticker'], stock['ticker'].replace('.', '-'))
         try:
-            # --- MARKET DATA CHECKS ---
             if isinstance(market_data.columns, pd.MultiIndex):
-                if t in market_data.columns.levels[0]: hist = market_data[t].dropna()
-                else: 
-                    # Download failed? Mark as delisted for next time
+                if t not in market_data.columns.levels[0]: 
                     local_cache[t] = {'delisted': True, 'last_checked': datetime.datetime.utcnow().strftime("%Y-%m-%d")}
-                    save_cache(local_cache)
                     continue
+                hist = market_data[t].dropna()
             else: hist = market_data.dropna()
 
-            if hist.empty: 
-                local_cache[t] = {'delisted': True, 'last_checked': datetime.datetime.utcnow().strftime("%Y-%m-%d")}
-                save_cache(local_cache)
-                continue
+            if hist.empty: continue
 
             curr_p = hist['Close'].iloc[-1]
             avg_v = hist['Volume'].tail(AVG_VOLUME_DAYS).mean()
             
-            # Note: Filters are disabled (0.0) based on your previous request
-            if curr_p < MIN_PRICE: continue
-            if avg_v < MIN_AVG_VOLUME: continue
+            if curr_p < MIN_PRICE or avg_v < MIN_AVG_VOLUME: continue
 
             info = local_cache.get(t, {})
             if info.get('currency', 'USD') != 'USD': continue
 
             name = str(info.get('name', t)).replace('"', '').strip()[:NAME_MAX_WIDTH]
             
-            # --- MATH LOGIC ---
             cur_m = int(stock.get('mentions', 0))
             old_m = int(stock.get('mentions_24h_ago', 0))
             m_perc = int(((cur_m - old_m) / (old_m if old_m > 0 else 1) * 100))
             
             s_perc = int((hist['Volume'].iloc[-1] / avg_v * 100)) if avg_v > 0 else 0
-            mcap = info.get('mcap', 10**9) or 10**9
-            squeeze_score = (cur_m * s_perc) / max(math.log(mcap, 10), 1)
+            
+            # --- CAPTURE MARKET CAP ---
+            mcap = info.get('mcap', 0) or 0
+            
+            # Use mcap for Squeeze calc (log scale)
+            squeeze_score = (cur_m * s_perc) / max(math.log(mcap if mcap > 0 else 10**9, 10), 1)
 
             rank_now = int(stock.get('rank', 0))
             rank_old = int(stock.get('rank_24h_ago', 0))
-            
-            if rank_old == 0: rank_plus = 0
-            else: rank_plus = rank_old - rank_now
+            rank_plus = (rank_old - rank_now) if rank_old != 0 else 0
 
             final_list.append({
-                "Rank": rank_now, 
-                "Name": name, "Sym": t, 
-                "Rank+": rank_plus,
-                "Price": float(curr_p), 
-                "AvgVol": int(avg_v),
+                "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
+                "Price": float(curr_p), "AvgVol": int(avg_v),
                 "Surge": s_perc, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
-                "Upvotes": int(stock.get('upvotes', 0)), "Meta": info.get('meta', '-'), "Squeeze": squeeze_score
+                "Upvotes": int(stock.get('upvotes', 0)), "Meta": info.get('meta', '-'), 
+                "Squeeze": squeeze_score, 
+                "MCap": mcap # <--- NEW FIELD
             })
-        except Exception as e: 
-            continue
+        except: continue
     
     df = pd.DataFrame(final_list)
     if not df.empty:
-        # --- NEW CONFIGURATION: THE BIG 4 ---
-        # 1. Rank+  (Momentum/Speed)
-        # 2. Surge  (Volume Strength)
-        # 3. Mnt%   (Viral Growth)
-        # 4. Upvotes(Raw Popularity)
-        
-        # We dropped 'Squeeze' to reduce noise/double-counting.
         cols = ['Rank+', 'Surge', 'Mnt%', 'Upvotes']
-        
-        # Weights: Give slightly more power to actual Rank movement and Raw Upvotes
         weights = {'Rank+': 1.1, 'Surge': 1.0, 'Mnt%': 0.8, 'Upvotes': 1.1}
-
         for col in cols:
-            # 1. PRE-PROCESS: Clip negatives to 0. 
             clean_series = df[col].clip(lower=0).astype(float)
-            
-            # 2. LOG TRANSFORM: Compress outliers (The "Tesla Fix")
-            # np.log1p(x) = log(1 + x)
             log_data = np.log1p(clean_series)
-            
-            # 3. STATS: Calculate Mean/Std on the COMPRESSED data
-            mean = log_data.mean()
-            std = log_data.std(ddof=0)
-            
-            # 4. Z-SCORE CALCULATION
-            if std == 0:
-                df[f'z_{col}'] = 0
-            else:
-                df[f'z_{col}'] = (log_data - mean) / std
+            mean = log_data.mean(); std = log_data.std(ddof=0)
+            df[f'z_{col}'] = 0 if std == 0 else (log_data - mean) / std
 
-        # 5. MASTER SCORE SUMMATION
         df['Master_Score'] = 0
-        for col in cols:
-            df['Master_Score'] += df[f'z_{col}'].clip(lower=0) * weights[col]
+        for col in cols: df['Master_Score'] += df[f'z_{col}'].clip(lower=0) * weights[col]
 
     tracker = HistoryTracker(HISTORY_FILE)
     vel, div, strk = [], [], []
@@ -314,6 +258,7 @@ def filter_and_process(stocks):
         vel.append(m['vel']); div.append(m['div']); strk.append(m['streak'])
     df['Velocity'] = vel; df['Divergence'] = div; df['Streak'] = strk
     tracker.save(df)
+    save_cache(local_cache) # Ensure cache is saved
     return df
 def get_all_trending_stocks():
     all_results, page = [], 1
@@ -333,11 +278,8 @@ def get_all_trending_stocks():
 
 def export_interactive_html(df):
     try:
-        # Convert to object immediately so we can overwrite numbers with HTML strings
         export_df = df.copy().astype(object)
-        
-        if not os.path.exists(PUBLIC_DIR):
-            os.makedirs(PUBLIC_DIR)
+        if not os.path.exists(PUBLIC_DIR): os.makedirs(PUBLIC_DIR)
 
         def color_span(text, color_hex): return f'<span style="color: {color_hex}; font-weight: bold;">{text}</span>'
         def format_vol(v):
@@ -348,72 +290,53 @@ def export_interactive_html(df):
         C_GREEN, C_YELLOW, C_RED, C_CYAN, C_MAGENTA, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ff00ff", "#ffffff"
         export_df['Type_Tag'] = 'STOCK'
         tracker = HistoryTracker(HISTORY_FILE)
-        
-        # Initialize Vel as String to avoid FutureWarning
         export_df['Vel'] = ""; export_df['Sig'] = ""
-
-        # Create Readable Volume Column
         export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
 
         for index, row in export_df.iterrows():
-            # --- 1. VELOCITY (Momentum) ---
+            # Metrics
             m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
             v_val = m['vel']
-            
-            if v_val == 0:
-                export_df.at[index, 'Vel'] = "" # Hide if 0
-            else:
+            if v_val != 0:
                 v_color = C_GREEN if v_val > 0 else C_RED
                 export_df.at[index, 'Vel'] = color_span(f"{v_val:+d}", v_color)
             
-            # --- 2. SIGNAL (Accum/Trend) ---
-            sig_text = ""
-            if m['div']: sig_text = "ACCUM" 
-            elif m['streak'] > 5: sig_text = "TREND"
-            sig_color = C_CYAN if "ACCUM" in sig_text else C_YELLOW
+            # Signals
+            sig_text = ""; sig_color = C_WHITE
+            if m['div']: sig_text = "ACCUM"; sig_color = C_CYAN
+            elif m['streak'] > 5: sig_text = "TREND"; sig_color = C_YELLOW
             export_df.at[index, 'Sig'] = color_span(sig_text, sig_color)
             
-            # --- 3. NAME (Heat Status) ---
-            # Red > 4.0, Yellow > 2.0 (Based on 4 metrics)
+            # Heatmap Name
             nm_clr = C_RED if row['Master_Score'] > 4.0 else (C_YELLOW if row['Master_Score'] > 2.0 else C_WHITE)
             export_df.at[index, 'Name'] = color_span(row['Name'], nm_clr)
             
-            # --- 4. RANK+ (Directional Move) ---
+            # Rank+
             r_val = row['Rank+']
-            
-            if r_val == 0:
-                export_df.at[index, 'Rank+'] = "" # Hide if 0
-            else:
+            if r_val != 0:
                 r_color = C_GREEN if r_val > 0 else C_RED
                 r_arrow = "▲" if r_val > 0 else "▼"
                 export_df.at[index, 'Rank+'] = color_span(f"{r_val} {r_arrow}", r_color)
 
-            # --- 5. METRICS (Surge & Mnt%) ---
+            # Columns
             for col, z_col in [('Surge', 'z_Surge'), ('Mnt%', 'z_Mnt%')]:
                 val = f"{row[col]:.0f}%"
                 clr = C_YELLOW if row[z_col] >= 2.0 else (C_GREEN if row[z_col] >= 1.0 else C_WHITE)
                 export_df.at[index, col] = color_span(val, clr)
                 
-            # Squeeze is now raw (White)
             export_df.at[index, 'Squeeze'] = color_span(int(row['Squeeze']), C_WHITE)
-            
             export_df.at[index, 'Upvotes'] = color_span(row['Upvotes'], C_GREEN if row['z_Upvotes']>1.5 else C_WHITE)
             
+            # ETF Badge logic
             is_fund = row['Type'] == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
-
             if is_fund:
-                # Create the "Badge": Magenta box, Black text, Rounded corners
                 badge = '<span style="background-color:#ff00ff; color:black; padding:2px 5px; border-radius:4px; font-size:11px; font-weight:bold; margin-right:6px; vertical-align:middle;">ETF</span>'
-                # Color the text Magenta too so it matches
                 meta_text = color_span(row['Meta'], C_MAGENTA)
             else:
                 badge = ""
                 meta_text = color_span(row['Meta'], C_WHITE)
 
-            # Combine: [BADGE] + [Industry Name]
             export_df.at[index, 'Meta'] = f"{badge}{meta_text}"
-            
-            # Keep the tag for the filter buttons
             export_df.at[index, 'Type_Tag'] = 'ETF' if is_fund else 'STOCK'
             
             t = row['Sym']
@@ -423,7 +346,8 @@ def export_interactive_html(df):
 
         export_df.rename(columns={'Meta': 'Industry/Sector', 'Vol_Display': 'Avg Vol'}, inplace=True)
 
-        cols = ['Rank', 'Rank+', 'Name', 'Sym', 'Sig', 'Vel', 'Price', 'Avg Vol', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol']
+        # Added MCap to the columns list
+        cols = ['Rank', 'Rank+', 'Name', 'Sym', 'Sig', 'Vel', 'Price', 'Avg Vol', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol', 'MCap']
         final_df = export_df[cols]
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -432,64 +356,38 @@ def export_interactive_html(df):
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
-            body {{
-                /* Exact match for the main background */
-                background-color: #101010; 
-                color: #e0e0e0;
-                font-family: 'Consolas', 'Monaco', monospace;
-                padding: 20px;
-                max-width: 1400px;
-                margin: 0 auto;
+            body{{
+                background-color:#101010; color:#e0e0e0; font-family:'Consolas','Monaco',monospace; padding:20px;
+                max-width: 1400px; margin: 0 auto;
             }}
-            .table-dark {{ --bs-table-bg: #18181b; color: #ccc; }}
-            th {{
-                color: #00ff00;
-                border-bottom: 2px solid #444;
-                font-size: 14px;
-                
-                /* Fixed Alignment & Padding */
-                vertical-align: middle !important;
-                padding-top: 12px !important;
-                padding-bottom: 12px !important;
-                line-height: 1.4 !important;
+            .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
+            
+            th{{
+                color:#00ff00; border-bottom:2px solid #444; font-size: 14px;
+                vertical-align: middle !important; padding-top: 12px !important; padding-bottom: 12px !important; line-height: 1.4 !important;
             }}
             
-            /* --- TABLE LAYOUT --- */
             table.dataTable {{ width: auto !important; margin: 0 auto; }}
-
-            /* --- COLUMN WIDTHS --- */
+            
+            /* Columns */
             th:nth-child(1), td:nth-child(1), th:nth-child(2), td:nth-child(2),
             th:nth-child(4), td:nth-child(4), th:nth-child(5), td:nth-child(5),
-            th:nth-child(6), td:nth-child(6) {{
-                width: 1%; white-space: nowrap; text-align: center; padding: 0 8px;
-            }}
+            th:nth-child(6), td:nth-child(6) {{ width: 1%; white-space: nowrap; text-align: center; padding: 0 8px; }}
+
             th:nth-child(7), td:nth-child(7), th:nth-child(8), td:nth-child(8),
             th:nth-child(9), td:nth-child(9), th:nth-child(10), td:nth-child(10),
-            th:nth-child(11), td:nth-child(11), th:nth-child(12), td:nth-child(12) {{
-                width: 1%; white-space: nowrap; text-align: right; padding: 0 10px;
-            }}
-            th:nth-child(3), td:nth-child(3) {{
-                max-width: 230px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 15px;
-            }}
+            th:nth-child(11), td:nth-child(11), th:nth-child(12), td:nth-child(12) {{ width: 1%; white-space: nowrap; text-align: right; padding: 0 10px; }}
+
+            th:nth-child(3), td:nth-child(3) {{ max-width: 230px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 15px; }}
+            
             th:nth-child(13), td:nth-child(13) {{
-                max-width: 320px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                padding-left: 15px;
+                max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 15px;
                 border-right: 1px solid #333; 
             }}
             
             td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
-
-            /* --- COLOR TOGGLE OVERRIDE --- */
-            /* When this class is active, force all spans to be light gray */
-            table.no-colors span {{
-                color: #ddd !important;
-                font-weight: normal !important;
-            }}
-            /* Keep links blue though */
+            table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
             table.no-colors a {{ color: #4da6ff !important; }}
             
             .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }}
@@ -514,19 +412,16 @@ def export_interactive_html(df):
         </head>
         <body>
         <div class="container-fluid" style="width: fit-content; margin: 0 auto;">
-            
             <div class="header-flex">
                 <a href="https://apewisdom.io" target="_blank" style="text-decoration: none;">
-                <img src="https://www.google.com/s2/favicons?domain=apewisdom.io&sz=128" alt="Ape Wisdom" style="height: 50px; vertical-align: middle; margin-right: 15px;">
+                <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" style="height: 50px; vertical-align: middle; margin-right: 15px;">
                 </a>
                 <span id="time" data-utc="{utc_timestamp}" style="font-size: 0.9rem; color: #888;">Loading...</span>
             </div>
 
             <div class="filter-bar">
                 <span style="color:#fff; font-weight:bold; margin-right:5px;">⚡ FILTERS:</span>
-                
                 <button id="btnColors" class="btn btn-sm btn-reset" onclick="toggleColors()" style="margin-right: 5px;">🎨 Colors: ON</button>
-                
                 <button class="btn btn-sm btn-reset" onclick="resetFilters()" title="Reset Filters">🔄</button>
 
                 <div class="filter-group" style="margin-left: 10px; margin-right: 10px;">
@@ -544,7 +439,7 @@ def export_interactive_html(df):
                 </div>
 
                 <div class="filter-group">
-                    <div class="btn-group" role="group">
+                    <div class="btn-group" role="group" style="margin-right: 10px;">
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked onclick="redraw()">
                         <label class="btn btn-outline-light btn-sm" for="btnradio1" style="font-size: 0.75rem; padding: 2px 8px;">All</label>
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio2" onclick="redraw()">
@@ -552,43 +447,38 @@ def export_interactive_html(df):
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio3" onclick="redraw()">
                         <label class="btn btn-outline-light btn-sm" for="btnradio3" style="font-size: 0.75rem; padding: 2px 8px;">ETFs</label>
                     </div>
+
+                    <div class="btn-group" role="group">
+                        <input type="radio" class="btn-check" name="mcapRadio" id="mcapAll" checked onclick="redraw()">
+                        <label class="btn btn-outline-light btn-sm" for="mcapAll" style="font-size: 0.75rem; padding: 2px 6px;">All</label>
+                        
+                        <input type="radio" class="btn-check" name="mcapRadio" id="mcapMega" onclick="redraw()">
+                        <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.75rem; padding: 2px 6px;" title="> $200B">Mega</label>
+                        
+                        <input type="radio" class="btn-check" name="mcapRadio" id="mcapLarge" onclick="redraw()">
+                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.75rem; padding: 2px 6px;" title="$10B - $200B">Lrg</label>
+                        
+                        <input type="radio" class="btn-check" name="mcapRadio" id="mcapMid" onclick="redraw()">
+                        <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.75rem; padding: 2px 6px;" title="$2B - $10B">Mid</label>
+                        
+                        <input type="radio" class="btn-check" name="mcapRadio" id="mcapSmall" onclick="redraw()">
+                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.75rem; padding: 2px 6px;" title="$250M - $2B">Sml</label>
+                        
+                        <input type="radio" class="btn-check" name="mcapRadio" id="mcapMicro" onclick="redraw()">
+                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.75rem; padding: 2px 6px;" title="< $250M">Mic</label>
+                    </div>
                 </div>
 
-                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">📋 Download TXT</button>
+                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">TXT File</button>
                 <span id="stockCounter">Loading...</span>
             </div>
 
             <div class="legend-container">
-                <div class="legend-header" onclick="toggleLegend()">
-                    <span>ℹ️ STRATEGY GUIDE & LEGEND (Click to Toggle)</span>
-                    <span id="legendArrow">▼</span>
-                </div>
+                <div class="legend-header" onclick="toggleLegend()"><span>ℹ️ STRATEGY GUIDE & LEGEND (Click to Toggle)</span><span id="legendArrow">▼</span></div>
                 <div class="legend-box" id="legendContent" style="display:none;">
-                    
-                    <div class="legend-section">
-                        <h5>🔥 Heat Status (Name Color)</h5>
-                        <div class="legend-item"><span class="legend-key" style="color:#ff4444">RED NAME</span> <b>Extreme (>4.0):</b> Massive outlier across all metrics.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">YEL NAME</span> <b>Elevated (>2.0):</b> Activity is well above normal.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffffff">WHT NAME</span> <b>Normal:</b> Standard activity levels.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ff00ff">MAGENTA</span> Exchange Traded Fund (ETF).</div>
-                    </div>
-
-                    <div class="legend-section">
-                        <h5>🚀 Significance Signals</h5>
-                        <div class="legend-item"><span class="legend-key" style="color:#00ffff">ACCUM</span> <b>Accumulation:</b> Mentions Rising (>10%) + Price Flat.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">TREND</span> <b>Trending:</b> In Top 100 list for 5+ consecutive days.</div>
-                    </div>
-                    
-                    <div class="legend-section">
-                        <h5>📊 Metrics Explained</h5>
-                        <div class="legend-item"><span class="legend-key">Rank+</span> Positions climbed in the last 24 hours.</div>
-                        <div class="legend-item"><span class="legend-key">Vel</span> <b>Velocity:</b> Acceleration of climb vs yesterday.</div>
-                        <div class="legend-item"><span class="legend-key">Surge</span> Volume increase vs 30-Day Average.</div>
-                        <div class="legend-item"><span class="legend-key">Mnt%</span> Change in Mentions vs 24 hours ago.</div>
-                        <div class="legend-item"><span class="legend-key">Upvotes</span> Net Upvotes on Reddit (Green=Pos, Red=Neg).</div>
-                        <div class="legend-item"><span class="legend-key">Squeeze</span> (Mentions × Vol) / MarketCap (Ratio).</div>
-                    </div>
-
+                    <div class="legend-section"><h5>🔥 Heat Status (Name Color)</h5><div class="legend-item"><span class="legend-key" style="color:#ff4444">RED NAME</span> <b>Extreme (>4.0):</b> Massive outlier.</div><div class="legend-item"><span class="legend-key" style="color:#ffff00">YEL NAME</span> <b>Elevated (>2.0):</b> Activity above normal.</div></div>
+                    <div class="legend-section"><h5>🚀 Significance Signals</h5><div class="legend-item"><span class="legend-key" style="color:#00ffff">ACCUM</span> <b>Accumulation:</b> Mentions Rising (>10%) + Price Flat.</div><div class="legend-item"><span class="legend-key" style="color:#ffff00">TREND</span> <b>Trending:</b> In Top list for 5+ days.</div></div>
+                    <div class="legend-section"><h5>📊 Metrics Explained</h5><div class="legend-item"><span class="legend-key">Rank+</span> Positions climbed in 24h.</div><div class="legend-item"><span class="legend-key">Squeeze</span> (Mentions × Vol) / MarketCap.</div></div>
                 </div>
             </div>
 
@@ -600,145 +490,87 @@ def export_interactive_html(df):
         <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
         <script>
         function toggleLegend() {{
-            var x = document.getElementById("legendContent");
-            var arrow = document.getElementById("legendArrow");
-            if (x.style.display === "none") {{ x.style.display = "grid"; arrow.innerText = "▲"; }} 
-            else {{ x.style.display = "none"; arrow.innerText = "▼"; }}
+            var x = document.getElementById("legendContent"); var arrow = document.getElementById("legendArrow");
+            if (x.style.display === "none") {{ x.style.display = "grid"; arrow.innerText = "▲"; }} else {{ x.style.display = "none"; arrow.innerText = "▼"; }}
         }}
-
-        // UPDATED: Toggle Colors Function
         function toggleColors() {{
-            var table = document.querySelector('table');
-            var btn = document.getElementById('btnColors');
-            
+            var table = document.querySelector('table'); var btn = document.getElementById('btnColors');
             table.classList.toggle('no-colors');
-            
-            if (table.classList.contains('no-colors')) {{
-                btn.innerHTML = "🎨 Colors: OFF";
-                btn.style.opacity = "0.6";
-            }} else {{
-                btn.innerHTML = "🎨 Colors: ON";
-                btn.style.opacity = "1.0";
-            }}
+            if (table.classList.contains('no-colors')) {{ btn.innerHTML = "🎨 Colors: OFF"; btn.style.opacity = "0.6"; }} else {{ btn.innerHTML = "🎨 Colors: ON"; btn.style.opacity = "1.0"; }}
         }}
-
         function parseVal(str) {{
-            if (!str) return 0;
-            str = str.toString().toLowerCase().replace(/,/g, '');
-            let mult = 1;
-            if (str.endsWith('k')) mult = 1000;
-            else if (str.endsWith('m')) mult = 1000000;
-            else if (str.endsWith('b')) mult = 1000000000;
+            if (!str) return 0; str = str.toString().toLowerCase().replace(/,/g, '');
+            let mult = 1; if (str.endsWith('k')) mult = 1000; else if (str.endsWith('m')) mult = 1000000; else if (str.endsWith('b')) mult = 1000000000;
             return parseFloat(str) * mult || 0;
         }}
-
-        function resetFilters() {{
-            $('#minPrice, #maxPrice, #minVol, #maxVol').val(''); 
-            $('#btnradio1').prop('checked', true); 
-            redraw(); 
-        }}
-
+        function resetFilters() {{ $('#minPrice, #maxPrice, #minVol, #maxVol').val(''); $('#btnradio1').prop('checked', true); $('#mcapAll').prop('checked', true); redraw(); }}
         function exportTickers() {{
-            var table = $('.table').DataTable();
-            var data = table.rows({{ search: 'applied', order: 'current', page: 'current' }}).data();
-            var tickers = [];
-            data.each(function (value) {{
-                var div = document.createElement("div");
-                div.innerHTML = value[3];
-                var text = div.textContent || div.innerText || "";
-                if(text) tickers.push(text.trim());
-            }});
+            var table = $('.table').DataTable(); var data = table.rows({{ search: 'applied', order: 'current', page: 'current' }}).data();
+            var tickers = []; data.each(function (value) {{ var div = document.createElement("div"); div.innerHTML = value[3]; var text = div.textContent || div.innerText || ""; if(text) tickers.push(text.trim()); }});
             if (tickers.length === 0) {{ alert("No visible tickers!"); return; }}
-            var blob = new Blob([tickers.join(" ")], {{ type: "text/plain;charset=utf-8" }});
-            var a = document.createElement("a");
-            a.href = URL.createObjectURL(blob);
-            a.download = "ape_tickers_page.txt";
-            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            var blob = new Blob([tickers.join(" ")], {{ type: "text/plain;charset=utf-8" }}); var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "ape_tickers_page.txt"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }}
-
         $(document).ready(function(){{ 
             var table=$('.table').DataTable({{
-                "order":[[0,"asc"]],
-                "pageLength": 25,
-                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                "order":[[0,"asc"]], "pageLength": 25, "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 "columnDefs": [ 
-                    {{ "visible": false, "targets": [13, 14] }}, 
+                    {{ "visible": false, "targets": [13, 14, 15] }}, // Hide Industry, RawVol, and NEW MCap (Col 15)
                     {{ "orderData": [14], "targets": [7] }},
-                    {{ "targets": [1, 5, 6, 8, 9], "type": "num", "render": function(data, type) {{
-                        if (type === 'sort' || type === 'type') {{
-                            var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,]/g, '');
-                            return parseFloat(clean) || 0;
-                        }}
-                        return data;
-                    }} }},
-                    {{ "targets": [10], "type": "num", "render": function(data, type, row) {{
-                        // 1. STRIP HTML TAGS (<...>) to get the raw number string
-                        var clean = data.toString().replace(/<[^>]+>/g, '').replace(/,/g, '');
-                        var val = parseFloat(clean) || 0;
-                        
-                        // 2. SORT LOGIC: Return the clean number
-                        if (type === 'sort' || type === 'type') return val;
-                        
-                        // 3. DISPLAY LOGIC: Color Red if negative, Green if positive
-                        if (val < 0) {{
-                            return '<span style="color:#ff4444">' + val + '</span>'; 
-                        }} else {{
-                            return '<span style="color:#00ff00">' + val + '</span>'; 
-                        }}
-                    }} }}
+                    {{ "targets": [1, 5, 6, 8, 9], "type": "num", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,]/g, ''); return parseFloat(clean) || 0; }} return data; }} }},
+                    {{ "targets": [10], "type": "num", "render": function(data, type) {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/,/g, ''); var val = parseFloat(clean) || 0; if (type === 'sort' || type === 'type') return val; if (val < 0) return '<span style="color:#ff4444">' + val + '</span>'; else return '<span style="color:#00ff00">' + val + '</span>'; }} }}
                 ],
-                "drawCallback": function() {{
-                    var api = this.api();
-                    $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers");
-                }}
+                "drawCallback": function() {{ var api = this.api(); $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); }}
             }});
             
             $.fn.dataTable.ext.search.push(function(settings, data) {{
+                // STOCK TYPE FILTER
                 var typeTag = data[13] || ""; 
                 var viewMode = $('input[name="btnradio"]:checked').attr('id');
                 if (viewMode == 'btnradio2' && typeTag == 'ETF') return false;
                 if (viewMode == 'btnradio3' && typeTag == 'STOCK') return false;
+                
+                // MARKET CAP FILTER (New)
+                var mcapMode = $('input[name="mcapRadio"]:checked').attr('id');
+                var mcap = parseFloat(data[15]) || 0; // Col 15 is hidden MCap
+                
+                if (mcapMode == 'mcapMega' && mcap < 200000000000) return false;
+                if (mcapMode == 'mcapLarge' && (mcap < 10000000000 || mcap >= 200000000000)) return false;
+                if (mcapMode == 'mcapMid' && (mcap < 2000000000 || mcap >= 10000000000)) return false;
+                if (mcapMode == 'mcapSmall' && (mcap < 250000000 || mcap >= 2000000000)) return false;
+                if (mcapMode == 'mcapMicro' && mcap >= 250000000) return false;
 
+                // PRICE & VOL FILTERS
                 var minP = parseVal($('#minPrice').val()), maxP = parseVal($('#maxPrice').val());
                 var p = parseFloat((data[6] || "0").replace(/[$,]/g, '')) || 0;
                 if (minP > 0 && p < minP) return false;
                 if (maxP > 0 && p > maxP) return false;
-
                 var minV = parseVal($('#minVol').val()), maxV = parseVal($('#maxVol').val());
                 var v = parseFloat(data[14]) || 0; 
                 if (minV > 0 && v < minV) return false;
                 if (maxV > 0 && v > maxV) return false;
-
                 return true;
             }});
-
-            $('#minPrice, #maxPrice, #minVol, #maxVol').on('keyup change', function() {{ table.draw(); }});
             
+            $('#minPrice, #maxPrice, #minVol, #maxVol').on('keyup change', function() {{ table.draw(); }});
             window.redraw = function() {{ 
                 var mode = $('input[name="btnradio"]:checked').attr('id');
                 var headerTxt = "Industry/Sector";
-                if (mode == 'btnradio2') headerTxt = "Industry";
-                else if (mode == 'btnradio3') headerTxt = "Sector";
+                if (mode == 'btnradio2') headerTxt = "Industry"; else if (mode == 'btnradio3') headerTxt = "Sector";
                 $(table.column(12).header()).text(headerTxt);
                 table.draw(); 
             }};
-            
-            var d=new Date($("#time").data("utc"));
-            $("#time").text("Last Updated: " + d.toLocaleString());
+            var d=new Date($("#time").data("utc")); $("#time").text("Last Updated: " + d.toLocaleString());
         }});
         </script></body></html>"""
-
+        
         timestamp = time.strftime("%Y-%m-%d_%H-%M")
         filename = f"scan_{timestamp}.html"
         filepath = os.path.join(PUBLIC_DIR, filename)
         with open(filepath, "w", encoding="utf-8") as f: f.write(html_content)
-
         index_path = os.path.join(PUBLIC_DIR, "index.html")
         shutil.copy(filepath, index_path)
-
         print(f"{C_GREEN}[+] Dashboard generated at: {filepath}{C_RESET}")
         return filename
-
     except Exception as e:
         print(f"\n{C_RED}[!] Export Failed: {e}{C_RESET}")
         return None
