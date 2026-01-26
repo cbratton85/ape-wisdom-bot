@@ -427,120 +427,63 @@ def export_interactive_html(df):
                 color:#e0e0e0;
                 font-family:'Consolas','Monaco',monospace;
                 padding:20px;
-                
-                /* NEW: Centers the whole dashboard on the screen */
                 max-width: 1400px; 
                 margin: 0 auto;
             }}
-
             .table-dark{{--bs-table-bg:#1e1e1e;color:#ccc}}
-            
             th{{color:#00ff00;border-bottom:2px solid #444; font-size: 14px;}}
             
-            /* --- TABLE LAYOUT: SHRINK TO FIT --- */
-            /* This forces the table to only be as wide as the text inside it */
-            table.dataTable {{
-                width: auto !important;  
-                margin: 0 auto;          /* Centers the table inside the dashboard */
-            }}
+            /* --- TABLE LAYOUT --- */
+            table.dataTable {{ width: auto !important; margin: 0 auto; }}
 
-            /* --- GROUP 1: CENTERED & TIGHT (Rank, Rank+, Sym, Sig, Vel) --- */
-            th:nth-child(1), td:nth-child(1), /* Rank */
-            th:nth-child(2), td:nth-child(2), /* Rank+ */
-            th:nth-child(4), td:nth-child(4), /* Sym */
-            th:nth-child(5), td:nth-child(5), /* Sig */
-            th:nth-child(6), td:nth-child(6)  /* Vel */
-            {{
-                width: 1%;
-                white-space: nowrap;
-                text-align: center;
-                padding-left: 8px;   /* Moderate padding */
-                padding-right: 8px;
+            /* --- COLUMN WIDTHS --- */
+            th:nth-child(1), td:nth-child(1), th:nth-child(2), td:nth-child(2),
+            th:nth-child(4), td:nth-child(4), th:nth-child(5), td:nth-child(5),
+            th:nth-child(6), td:nth-child(6) {{
+                width: 1%; white-space: nowrap; text-align: center; padding: 0 8px;
             }}
-
-            /* --- GROUP 2: RIGHT-ALIGNED NUMBERS (Price through Squeeze) --- */
-            /* Using indices 7 through 12 based on your screenshot */
-            th:nth-child(7), td:nth-child(7),  /* Price */
-            th:nth-child(8), td:nth-child(8),  /* Avg Vol */
-            th:nth-child(9), td:nth-child(9),  /* Surge */
-            th:nth-child(10), td:nth-child(10),/* Mnt% */
-            th:nth-child(11), td:nth-child(11),/* Upvotes */
-            th:nth-child(12), td:nth-child(12) /* Squeeze */
-            {{
-                width: 1%;
-                white-space: nowrap;
-                text-align: right;
-                padding-left: 10px;  /* Clean separation */
-                padding-right: 10px;
+            th:nth-child(7), td:nth-child(7), th:nth-child(8), td:nth-child(8),
+            th:nth-child(9), td:nth-child(9), th:nth-child(10), td:nth-child(10),
+            th:nth-child(11), td:nth-child(11), th:nth-child(12), td:nth-child(12) {{
+                width: 1%; white-space: nowrap; text-align: right; padding: 0 10px;
             }}
-
-            /* --- GROUP 3: NAME COLUMN (Fixed Width) --- */
             th:nth-child(3), td:nth-child(3) {{
-                max-width: 230px;    /* Increased to 230px */
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                padding-right: 15px;
+                max-width: 230px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 15px;
             }}
-
-            /* --- GROUP 4: INDUSTRY (Extra Wide) --- */
             th:nth-child(13), td:nth-child(13) {{
-                max-width: 320px;    /* Increased to 320px */
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                padding-left: 15px;
+                max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 15px;
             }}
             
             td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
-            
-            .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 8px; margin-bottom: 20px; overflow: hidden; transition: all 0.3s ease; }}
-            .legend-header {{ background: #2a2a2a; padding: 10px 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; }}
-            .legend-header:hover {{ background: #333; }}
-            .legend-box {{
-                padding: 15px;
-                display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; font-size: 0.85rem;
-                border-top: 1px solid #444;
+
+            /* --- COLOR TOGGLE OVERRIDE --- */
+            /* When this class is active, force all spans to be light gray */
+            table.no-colors span {{
+                color: #ddd !important;
+                font-weight: normal !important;
             }}
-            .legend-section h5 {{ color: #00ff00; font-size: 1rem; border-bottom: 1px solid #444; padding-bottom: 5px; margin-bottom: 10px; }}
+            /* Keep links blue though */
+            table.no-colors a {{ color: #4da6ff !important; }}
+            
+            .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }}
+            .legend-header {{ background: #2a2a2a; padding: 10px 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; }}
+            .legend-box {{ padding: 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; font-size: 0.85rem; border-top: 1px solid #444; }}
+            .legend-section h5 {{ color: #00ff00; font-size: 1rem; border-bottom: 1px solid #444; padding-bottom: 5px; }}
             .legend-item {{ margin-bottom: 6px; }}
             .legend-key {{ font-weight: bold; display: inline-block; width: 100px; }}
             
-            .filter-bar {{ 
-                display: flex; 
-                gap: 8px; 
-                align-items: center; 
-                background: #2a2a2a; 
-                padding: 8px; 
-                border-radius: 5px; 
-                margin-bottom: 15px; 
-                border: 1px solid #444; 
-                flex-wrap: wrap;
-                font-size: 0.85rem; 
-            }}
+            .filter-bar {{ display: flex; gap: 8px; align-items: center; background: #2a2a2a; padding: 8px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #444; flex-wrap: wrap; font-size: 0.85rem; }}
             .filter-group {{ display:flex; align-items:center; gap:4px; }}
-            .filter-group label {{ font-size:0.9rem; color:#aaa; }}
-            .form-control-sm {{ 
-                background:#111; 
-                border:1px solid #555; 
-                color:#fff; 
-                height: 28px; 
-                font-size: 0.8rem;
-                padding: 2px 5px;
-            }}
+            .form-control-sm {{ background:#111; border:1px solid #555; color:#fff; height: 28px; font-size: 0.8rem; padding: 2px 5px; }}
+            .btn-reset {{ border: 1px solid #555; color: #fff; font-size: 0.8rem; background: #333; }}
+            .btn-reset:hover {{ background: #444; color: #fff; }}
             
-            #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; font-family: 'Consolas', monospace; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px;}}
-            
-            /* Center the header content vertically */
+            #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px;}}
             .header-flex {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
-            
             .page-link {{ background-color: #222; border-color: #444; color: #00ff00; }}
             .page-item.active .page-link {{ background-color: #00ff00; border-color: #00ff00; color: #000; }}
             .page-item.disabled .page-link {{ background-color: #111; border-color: #333; color: #555; }}
-            
-            .btn-reset {{ border: 1px solid #555; color: #fff; font-size: 0.8rem; background: #333; }}
-            .btn-reset:hover {{ background: #444; color: #fff; }}
         </style>
         </head>
         <body>
@@ -556,36 +499,37 @@ def export_interactive_html(df):
             <div class="filter-bar">
                 <span style="color:#fff; font-weight:bold; margin-right:5px;">⚡ FILTERS:</span>
                 
-                <button class="btn btn-sm btn-reset" onclick="resetFilters()" title="Reset Filters" style="margin-right: 5px;">🔄</button>
+                <button id="btnColors" class="btn btn-sm btn-reset" onclick="toggleColors()" style="margin-right: 5px;">🎨 Z-Score Colors: ON</button>
+                
+                <button class="btn btn-sm btn-reset" onclick="resetFilters()" title="Reset Filters">🔄</button>
 
-                <div class="filter-group" style="margin-right: 10px;">
+                <div class="filter-group" style="margin-left: 10px; margin-right: 10px;">
                     <label>Price:</label>
-                    <input type="text" id="minPrice" class="form-control form-control-sm" placeholder="Min" style="width: 60px;">
+                    <input type="text" id="minPrice" class="form-control form-control-sm" placeholder="Min" style="width: 50px;">
                     <span style="color:#666">-</span>
-                    <input type="text" id="maxPrice" class="form-control form-control-sm" placeholder="Max" style="width: 60px;">
+                    <input type="text" id="maxPrice" class="form-control form-control-sm" placeholder="Max" style="width: 50px;">
                 </div>
                 
                 <div class="filter-group" style="margin-right: 10px;">
                     <label>Vol:</label>
-                    <input type="text" id="minVol" class="form-control form-control-sm" placeholder="500k" style="width: 60px;">
+                    <input type="text" id="minVol" class="form-control form-control-sm" placeholder="500k" style="width: 50px;">
                     <span style="color:#666">-</span>
-                    <input type="text" id="maxVol" class="form-control form-control-sm" placeholder="10m" style="width: 60px;">
+                    <input type="text" id="maxVol" class="form-control form-control-sm" placeholder="10m" style="width: 50px;">
                 </div>
 
                 <div class="filter-group">
                     <div class="btn-group" role="group">
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked onclick="redraw()">
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked onclick="redraw()">
                         <label class="btn btn-outline-light btn-sm" for="btnradio1" style="font-size: 0.75rem; padding: 2px 8px;">All</label>
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="redraw()">
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" onclick="redraw()">
                         <label class="btn btn-outline-light btn-sm" for="btnradio2" style="font-size: 0.75rem; padding: 2px 8px;">Stocks</label>
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="redraw()">
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" onclick="redraw()">
                         <label class="btn btn-outline-light btn-sm" for="btnradio3" style="font-size: 0.75rem; padding: 2px 8px;">ETFs</label>
                     </div>
                 </div>
 
                 <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">📋 Download TXT</button>
-
-                <span id="stockCounter" style="margin-left: auto; font-size: 0.85rem;">Loading...</span>
+                <span id="stockCounter">Loading...</span>
             </div>
 
             <div class="legend-container">
@@ -594,31 +538,21 @@ def export_interactive_html(df):
                     <span id="legendArrow">▼</span>
                 </div>
                 <div class="legend-box" id="legendContent" style="display:none;">
-                    
                     <div class="legend-section">
                         <h5>🔥 Heat Status (Name Color)</h5>
-                        <div class="legend-item"><span class="legend-key" style="color:#ff4444">RED NAME</span> <b>Extreme (>4σ):</b> Massive outlier in momentum/volume.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">YEL NAME</span> <b>Elevated (>2σ):</b> Activity is well above normal.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffffff">WHT NAME</span> <b>Normal:</b> Standard activity levels.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ff00ff">MAGENTA</span> Exchange Traded Fund (ETF).</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ff4444">RED NAME</span> <b>Extreme (>4σ):</b> Massive outlier.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">YEL NAME</span> <b>Elevated (>2σ):</b> Activity above normal.</div>
                     </div>
-
                     <div class="legend-section">
-                        <h5>🚀 Significance Signals</h5>
-                        <div class="legend-item"><span class="legend-key" style="color:#00ffff">ACCUM</span> Mentions RISING (>10%) + Price FLAT.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">TREND</span> In Top Trending list for 5+ consecutive days.</div>
+                        <h5>🚀 Signals</h5>
+                        <div class="legend-item"><span class="legend-key" style="color:#00ffff">ACCUM</span> Mentions RISING + Price FLAT.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">TREND</span> Top Trending 5+ days.</div>
                     </div>
-                    
                     <div class="legend-section">
                         <h5>📊 Metrics</h5>
                         <div class="legend-item"><span class="legend-key">Rank+</span> Spots climbed in last 24h.</div>
-                        <div class="legend-item"><span class="legend-key">Surge</span> Volume vs 30-Day Avg.</div>
-                        <div class="legend-item"><span class="legend-key">Mnt%</span> Change in Mentions vs 24h ago.</div>
-                        <div class="legend-item"><span class="legend-key">Upvotes</span> Raw upvote count on Reddit.</div>
-                        <div class="legend-item"><span class="legend-key">Squeeze</span> (Mentions × Vol) / MarketCap.</div>
-                        <div class="legend-item"><span class="legend-key">Vel</span> Difference in Rank+ vs yesterday.</div>
+                        <div class="legend-item"><span class="legend-key">Vel</span> Accel. of climb vs yesterday.</div>
                     </div>
-
                 </div>
             </div>
 
@@ -632,68 +566,58 @@ def export_interactive_html(df):
         function toggleLegend() {{
             var x = document.getElementById("legendContent");
             var arrow = document.getElementById("legendArrow");
-            if (x.style.display === "none") {{
-                x.style.display = "grid"; arrow.innerText = "▲";
+            if (x.style.display === "none") {{ x.style.display = "grid"; arrow.innerText = "▲"; }} 
+            else {{ x.style.display = "none"; arrow.innerText = "▼"; }}
+        }}
+
+        // UPDATED: Toggle Colors Function
+        function toggleColors() {{
+            var table = document.querySelector('table');
+            var btn = document.getElementById('btnColors');
+            
+            table.classList.toggle('no-colors');
+            
+            if (table.classList.contains('no-colors')) {{
+                btn.innerHTML = "🎨 Z-Score Colors: OFF";
+                btn.style.opacity = "0.6";
             }} else {{
-                x.style.display = "none"; arrow.innerText = "▼";
+                btn.innerHTML = "🎨 Z-Score Colors: ON";
+                btn.style.opacity = "1.0";
             }}
         }}
 
-        // NEW: Helper to convert "1.5m" -> 1500000
         function parseVal(str) {{
             if (!str) return 0;
-            str = str.toString().toLowerCase().replace(/,/g, ''); // Remove commas
+            str = str.toString().toLowerCase().replace(/,/g, '');
             let mult = 1;
             if (str.endsWith('k')) mult = 1000;
             else if (str.endsWith('m')) mult = 1000000;
-            else if (str.endsWith('b')) mult = 1000000000; // Added Billion just in case
-            
-            // parseFloat automatically ignores the trailing letters
-            let val = parseFloat(str);
-            return isNaN(val) ? 0 : val * mult;
+            else if (str.endsWith('b')) mult = 1000000000;
+            return parseFloat(str) * mult || 0;
         }}
 
         function resetFilters() {{
-            $('#minPrice, #maxPrice').val(''); 
-            $('#minVol, #maxVol').val('');
+            $('#minPrice, #maxPrice, #minVol, #maxVol').val(''); 
             $('#btnradio1').prop('checked', true); 
             redraw(); 
         }}
-        
-        // NEW: Export visible tickers to .txt
+
         function exportTickers() {{
             var table = $('.table').DataTable();
-            
-            // Note the double braces {{ }} for the object
             var data = table.rows({{ search: 'applied', order: 'current', page: 'current' }}).data();
             var tickers = [];
-
-            // Note the double braces {{ }} for the function body
-            data.each(function (value, index) {{
-                var html = value[3]; 
+            data.each(function (value) {{
                 var div = document.createElement("div");
-                div.innerHTML = html;
+                div.innerHTML = value[3];
                 var text = div.textContent || div.innerText || "";
                 if(text) tickers.push(text.trim());
             }});
-
-            // Note the double braces {{ }} for the if-statement
-            if (tickers.length === 0) {{
-                alert("No visible tickers to export!");
-                return;
-            }}
-
-            var content = tickers.join(" "); 
-            
-            // Note the double braces {{ }} for the Blob options
-            var blob = new Blob([content], {{ type: "text/plain;charset=utf-8" }});
-            var url = URL.createObjectURL(blob);
+            if (tickers.length === 0) {{ alert("No visible tickers!"); return; }}
+            var blob = new Blob([tickers.join(" ")], {{ type: "text/plain;charset=utf-8" }});
             var a = document.createElement("a");
-            a.href = url;
+            a.href = URL.createObjectURL(blob);
             a.download = "ape_tickers_page.txt";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }}
 
         $(document).ready(function(){{ 
@@ -703,73 +627,48 @@ def export_interactive_html(df):
                 "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 "columnDefs": [ 
                     {{ "visible": false, "targets": [13, 14] }}, 
-                    {{ "orderData": [14], "targets": [7] }},      /* Sort Vol by hidden Raw Vol */
-
-                    /* NEW: Fix sorting for Rank+(1), Vel(5), Price(6), Surge(8), Mnt(9) */
-                    {{ "targets": [1, 5, 6, 8, 9], "type": "num", "render": function(data, type, row) {{
+                    {{ "orderData": [14], "targets": [7] }},
+                    {{ "targets": [1, 5, 6, 8, 9], "type": "num", "render": function(data, type) {{
                         if (type === 'sort' || type === 'type') {{
-                            // Remove HTML tags, Dollar signs, Plus signs, Commas, %
                             var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,]/g, '');
                             return parseFloat(clean) || 0;
                         }}
                         return data;
                     }} }},
-                    
-                    /* NEW: Color Upvotes (Column 10) - Green for Positive, Red for Negative */
-                    {{ "targets": [10], "render": function(data, type, row) {{
-                        // Clean the number first
+                    {{ "targets": [10], "render": function(data, type) {{
                         var val = parseFloat(data.toString().replace(/,/g, '')) || 0;
-                        
-                        // Sort logic: return raw number
                         if (type === 'sort' || type === 'type') return val;
-                        
-                        // Display logic: Color it
-                        if (val < 0) {{
-                            return '<span style="color:#ff4444">' + data + '</span>'; // Red for Negative
-                        }} else {{
-                            return '<span style="color:#00ff00">' + data + '</span>'; // Green for Positive
-                        }}
+                        if (val < 0) return '<span style="color:#ff4444">' + data + '</span>'; 
+                        else return '<span style="color:#00ff00">' + data + '</span>';
                     }} }}
                 ],
-                "drawCallback": function(settings) {{
+                "drawCallback": function() {{
                     var api = this.api();
-                    var total = api.rows().count();
-                    var shown = api.rows({{filter:'applied'}}).count();
-                    $("#stockCounter").text("Showing " + shown + " / " + total + " Tickers");
+                    $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers");
                 }}
             }});
             
-            $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {{
+            $.fn.dataTable.ext.search.push(function(settings, data) {{
                 var typeTag = data[13] || ""; 
                 var viewMode = $('input[name="btnradio"]:checked').attr('id');
                 if (viewMode == 'btnradio2' && typeTag == 'ETF') return false;
                 if (viewMode == 'btnradio3' && typeTag == 'STOCK') return false;
 
-                // USE THE NEW PARSER HERE
-                var minPrice = parseVal($('#minPrice').val());
-                var maxPrice = parseVal($('#maxPrice').val());
-                
-                var priceStr = data[6] || "0"; 
-                var price = parseFloat(priceStr.replace(/[$,]/g, '')) || 0;
-                
-                if (minPrice > 0 && price < minPrice) return false;
-                if (maxPrice > 0 && price > maxPrice) return false;
+                var minP = parseVal($('#minPrice').val()), maxP = parseVal($('#maxPrice').val());
+                var p = parseFloat((data[6] || "0").replace(/[$,]/g, '')) || 0;
+                if (minP > 0 && p < minP) return false;
+                if (maxP > 0 && p > maxP) return false;
 
-                // VOLUME PARSING
-                var minVol = parseVal($('#minVol').val());
-                var maxVol = parseVal($('#maxVol').val());
-                var rawVol = parseFloat(data[14]) || 0; 
-                
-                if (minVol > 0 && rawVol < minVol) return false;
-                if (maxVol > 0 && rawVol > maxVol) return false;
+                var minV = parseVal($('#minVol').val()), maxV = parseVal($('#maxVol').val());
+                var v = parseFloat(data[14]) || 0; 
+                if (minV > 0 && v < minV) return false;
+                if (maxV > 0 && v > maxV) return false;
 
                 return true;
             }});
 
-            // Listen for input changes
             $('#minPrice, #maxPrice, #minVol, #maxVol').on('keyup change', function() {{ table.draw(); }});
             
-            // ... rest of your redraw logic ...
             window.redraw = function() {{ 
                 var mode = $('input[name="btnradio"]:checked').attr('id');
                 var headerTxt = "Industry/Sector";
