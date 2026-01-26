@@ -468,7 +468,7 @@ def export_interactive_html(df):
             <div class="filter-bar">
                 <span style="color:#fff; font-weight:bold; margin-right:5px;">⚡ FILTERS:</span>
                 
-                <button class="btn btn-sm btn-reset" onclick="resetFilters()" style="margin-right: 5px;">🔄</button>
+                <button class="btn btn-sm btn-reset" onclick="resetFilters()" title="Reset Filters" style="margin-right: 5px;">🔄</button>
 
                 <div class="filter-group" style="margin-right: 10px;">
                     <label>Price:</label>
@@ -494,6 +494,8 @@ def export_interactive_html(df):
                         <label class="btn btn-outline-light btn-sm" for="btnradio3" style="font-size: 0.75rem; padding: 2px 8px;">ETFs</label>
                     </div>
                 </div>
+
+                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">📋 TXT</button>
 
                 <span id="stockCounter" style="margin-left: auto; font-size: 0.85rem;">Loading...</span>
             </div>
