@@ -596,28 +596,32 @@ def export_interactive_html(df):
         }}
         
         // NEW: Export visible tickers to .txt
-        function exportTickers() {
+        function exportTickers() {{
             var table = $('.table').DataTable();
             
-            // UPDATE: Added "page: 'current'" to only get what is visible on screen
-            var data = table.rows({ search: 'applied', order: 'current', page: 'current' }).data();
+            // Note the double braces {{ }} for the object
+            var data = table.rows({{ search: 'applied', order: 'current', page: 'current' }}).data();
             var tickers = [];
 
-            data.each(function (value, index) {
+            // Note the double braces {{ }} for the function body
+            data.each(function (value, index) {{
                 var html = value[3]; 
                 var div = document.createElement("div");
                 div.innerHTML = html;
                 var text = div.textContent || div.innerText || "";
                 if(text) tickers.push(text.trim());
-            });
+            }});
 
-            if (tickers.length === 0) {
+            // Note the double braces {{ }} for the if-statement
+            if (tickers.length === 0) {{
                 alert("No visible tickers to export!");
                 return;
-            }
+            }}
 
             var content = tickers.join(" "); 
-            var blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+            
+            // Note the double braces {{ }} for the Blob options
+            var blob = new Blob([content], {{ type: "text/plain;charset=utf-8" }});
             var url = URL.createObjectURL(blob);
             var a = document.createElement("a");
             a.href = url;
@@ -625,7 +629,7 @@ def export_interactive_html(df):
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-        }
+        }}
 
         $(document).ready(function(){{ 
             var table=$('.table').DataTable({{
