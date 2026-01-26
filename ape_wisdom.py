@@ -307,23 +307,37 @@ def export_interactive_html(df):
         export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
 
         for index, row in export_df.iterrows():
+            # --- 1. VELOCITY (Momentum) ---
             m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
             v_val = m['vel']
+            # Simple Green/Red logic for positive/negative velocity
             v_color = C_GREEN if v_val > 0 else (C_RED if v_val < 0 else C_WHITE)
-            v_arrow = "↑" if v_val > 5 else ("↓" if v_val < -5 else "")
-            export_df.at[index, 'Vel'] = color_span(f"{v_val} {v_arrow}", v_color)
+            # No arrow for Vel, just the signed number
+            export_df.at[index, 'Vel'] = color_span(f"{v_val:+d}", v_color) # +d forces the + sign
             
+            # --- 2. SIGNAL (Accum/Trend) ---
             sig_text = ""
-            if m['div']: sig_text = "ACCUM"
-            elif m['streak'] > 5: sig_text = "TREND"
+            if m['div']: sig_text = "ACCUM" 
+            elif m['streak'] > 5: sig_text = "🔥 TREND"
             sig_color = C_CYAN if "ACCUM" in sig_text else C_YELLOW
             export_df.at[index, 'Sig'] = color_span(sig_text, sig_color)
             
+            # --- 3. NAME (Heat Status) ---
+            # Keep the Z-Score heat for the Name to spot outliers
             nm_clr = C_RED if row['Master_Score'] > 3.0 else (C_YELLOW if row['Master_Score'] > 1.5 else C_WHITE)
             export_df.at[index, 'Name'] = color_span(row['Name'], nm_clr)
             
-            for col, z_col in [('Rank+', 'z_Rank+'), ('Surge', 'z_Surge'), ('Mnt%', 'z_Mnt%')]:
-                val = f"{row[col]:.0f}%" if '%' in col or 'Surge' in col else row[col]
+            # --- 4. RANK+ (Directional Move) ---
+            # Green = Climbed spots, Red = Dropped spots
+            r_val = row['Rank+']
+            r_color = C_GREEN if r_val > 0 else (C_RED if r_val < 0 else C_WHITE)
+            r_arrow = "▲" if r_val > 0 else ("▼" if r_val < 0 else "")
+            export_df.at[index, 'Rank+'] = color_span(f"{r_val} {r_arrow}", r_color)
+
+            # --- 5. METRICS (Surge & Mnt%) ---
+            # Keep these as "Heat" maps (Green/Yellow based on intensity)
+            for col, z_col in [('Surge', 'z_Surge'), ('Mnt%', 'z_Mnt%')]:
+                val = f"{row[col]:.0f}%"
                 clr = C_YELLOW if row[z_col] >= 2.0 else (C_GREEN if row[z_col] >= 1.0 else C_WHITE)
                 export_df.at[index, col] = color_span(val, clr)
                 
