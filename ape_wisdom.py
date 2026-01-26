@@ -57,12 +57,14 @@ class HistoryTracker:
     def __init__(self, filepath):
         self.filepath = filepath
         self.data = self._load()
+
     def _load(self):
         if os.path.exists(self.filepath):
             try:
                 with open(self.filepath, 'r') as f: return json.load(f)
             except: return {}
         return {}
+
     def save(self, df):
         today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
         for _, row in df.iterrows():
@@ -78,29 +80,25 @@ class HistoryTracker:
             self.data[ticker] = {d: v for d, v in self.data[ticker].items() if datetime.datetime.strptime(d, "%Y-%m-%d") > cutoff}
             if not self.data[ticker]: del self.data[ticker]
         with open(self.filepath, 'w') as f: json.dump(self.data, f, indent=4)
+
     def get_metrics(self, ticker, current_price, current_mnt):
-    # Ensure we have at least 2 days of history to compare
-    if ticker not in self.data or len(self.data[ticker]) < 2: 
-        return {"vel": 0, "div": False, "streak": 0}
+        # FIX: Ensure this block is indented 8 spaces (2 levels) from the left margin
+        if ticker not in self.data or len(self.data[ticker]) < 2: 
+            return {"vel": 0, "div": False, "streak": 0}
+
+        dates = sorted(self.data[ticker].keys())
+        today_data = self.data[ticker][dates[-1]]
+        prev_data = self.data[ticker][dates[-2]]
+
+        # VELOCITY calculation
+        velocity = int(today_data['rank_plus'] - prev_data['rank_plus'])
         
-    dates = sorted(self.data[ticker].keys())
-    # Grab the two most recent records from your JSON file
-    today_rec = self.data[ticker][dates[-1]]
-    yesterday_rec = self.data[ticker][dates[-2]]
-    
-    # VELOCITY = (Today's Rank Change) - (Yesterday's Rank Change)
-    # This identifies if the 'climb' is accelerating or decelerating
-    velocity = int(today_rec['rank_plus'] - yesterday_rec['rank_plus'])
-    
-    # Fix for ICE: If ICE went from 1 to 3, its Rank+ is -2. 
-    # If yesterday its Rank+ was 0, Vel is -2. 
-    # If it shows -3, check if 'rank_plus' in save() uses 1-based vs 0-based indexing.
-    
-    mnt_surge = current_mnt > (yesterday_rec['mnt_perc'] + 10)
-    price_stable = abs((current_price - yesterday_rec['price']) / (yesterday_rec['price'] or 1)) < 0.02
-    divergence = mnt_surge and price_stable
-    
-    return {"vel": velocity, "div": divergence, "streak": len(dates)}
+        # DIVERGENCE (ACCUM) calculation
+        mnt_surge = current_mnt > (prev_data['mnt_perc'] + 10)
+        price_stable = abs((current_price - prev_data['price']) / (prev_data['price'] or 1)) < 0.02
+        divergence = mnt_surge and price_stable
+        
+        return {"vel": velocity, "div": divergence, "streak": len(dates)}
 
 def clear_screen(): os.system('cls' if os.name == 'nt' else 'clear')
 def load_cache():
