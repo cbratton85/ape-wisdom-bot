@@ -400,7 +400,20 @@ def export_interactive_html(df):
             export_df.at[index, 'Upvotes'] = color_span(row['Upvotes'], C_GREEN if row['z_Upvotes']>1.5 else C_WHITE)
             
             is_fund = row['Type'] == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
-            export_df.at[index, 'Meta'] = color_span(row['Meta'], C_MAGENTA if is_fund else C_WHITE)
+
+            if is_fund:
+                # Create the "Badge": Magenta box, Black text, Rounded corners
+                badge = '<span style="background-color:#ff00ff; color:black; padding:2px 5px; border-radius:4px; font-size:11px; font-weight:bold; margin-right:6px; vertical-align:middle;">ETF</span>'
+                # Color the text Magenta too so it matches
+                meta_text = color_span(row['Meta'], C_MAGENTA)
+            else:
+                badge = ""
+                meta_text = color_span(row['Meta'], C_WHITE)
+
+            # Combine: [BADGE] + [Industry Name]
+            export_df.at[index, 'Meta'] = f"{badge}{meta_text}"
+            
+            # Keep the tag for the filter buttons
             export_df.at[index, 'Type_Tag'] = 'ETF' if is_fund else 'STOCK'
             
             t = row['Sym']
