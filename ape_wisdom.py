@@ -400,10 +400,28 @@ def export_interactive_html(df):
             .legend-item {{ margin-bottom: 6px; }}
             .legend-key {{ font-weight: bold; display: inline-block; width: 100px; }}
             
-            .filter-bar {{ display:flex; gap:15px; align-items:center; background:#2a2a2a; padding:10px; border-radius:5px; margin-bottom:15px; border:1px solid #444; flex-wrap:wrap;}}
-            .filter-group {{ display:flex; align-items:center; gap:5px; }}
+            .filter-bar {{ 
+                display: flex; 
+                gap: 8px; 
+                align-items: center; 
+                background: #2a2a2a; 
+                padding: 8px; 
+                border-radius: 5px; 
+                margin-bottom: 15px; 
+                border: 1px solid #444; 
+                flex-wrap: wrap;
+                font-size: 0.85rem; 
+            }}
+            .filter-group {{ display:flex; align-items:center; gap:4px; }}
             .filter-group label {{ font-size:0.9rem; color:#aaa; }}
-            .form-control-sm {{ background:#111; border:1px solid #555; color:#fff; width: 100px;}}
+            .form-control-sm {{ 
+                background:#111; 
+                border:1px solid #555; 
+                color:#fff; 
+                height: 28px; 
+                font-size: 0.8rem;
+                padding: 2px 5px;
+            }}
             
             #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; font-family: 'Consolas', monospace; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px;}}
             
@@ -429,32 +447,36 @@ def export_interactive_html(df):
             </div>
 
             <div class="filter-bar">
-                <span style="color:#fff; font-weight:bold; margin-right:10px;">⚡ FILTERS:</span>
+                <span style="color:#fff; font-weight:bold; margin-right:5px;">⚡ FILTERS:</span>
                 
-                <button class="btn btn-sm btn-reset" onclick="resetFilters()">🔄 RESET</button>
+                <button class="btn btn-sm btn-reset" onclick="resetFilters()" style="margin-right: 5px;">🔄</button>
 
-                <div class="filter-group">
-                    <label>Min Price ($):</label>
-                    <input type="number" id="minPrice" class="form-control form-control-sm" placeholder="Any" step="0.5">
+                <div class="filter-group" style="margin-right: 10px;">
+                    <label>Price:</label>
+                    <input type="text" id="minPrice" class="form-control form-control-sm" placeholder="Min" style="width: 60px;">
+                    <span style="color:#666">-</span>
+                    <input type="text" id="maxPrice" class="form-control form-control-sm" placeholder="Max" style="width: 60px;">
                 </div>
                 
-                <div class="filter-group">
-                    <label>Min Avg Vol:</label>
-                    <input type="number" id="minVol" class="form-control form-control-sm" placeholder="Any" step="10000">
+                <div class="filter-group" style="margin-right: 10px;">
+                    <label>Vol:</label>
+                    <input type="text" id="minVol" class="form-control form-control-sm" placeholder="500k" style="width: 60px;">
+                    <span style="color:#666">-</span>
+                    <input type="text" id="maxVol" class="form-control form-control-sm" placeholder="10m" style="width: 60px;">
                 </div>
 
                 <div class="filter-group">
                     <div class="btn-group" role="group">
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio1">All</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio1" style="font-size: 0.75rem; padding: 2px 8px;">All</label>
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio2">Stocks</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio2" style="font-size: 0.75rem; padding: 2px 8px;">Stocks</label>
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio3">ETFs</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio3" style="font-size: 0.75rem; padding: 2px 8px;">ETFs</label>
                     </div>
                 </div>
 
-                <span id="stockCounter">Loading...</span>
+                <span id="stockCounter" style="margin-left: auto; font-size: 0.85rem;">Loading...</span>
             </div>
 
             <div class="legend-container">
@@ -502,31 +524,42 @@ def export_interactive_html(df):
             var x = document.getElementById("legendContent");
             var arrow = document.getElementById("legendArrow");
             if (x.style.display === "none") {{
-                x.style.display = "grid";
-                arrow.innerText = "▲";
+                x.style.display = "grid"; arrow.innerText = "▲";
             }} else {{
-                x.style.display = "none";
-                arrow.innerText = "▼";
+                x.style.display = "none"; arrow.innerText = "▼";
             }}
         }}
 
+        // NEW: Helper to convert "1.5m" -> 1500000
+        function parseVal(str) {{
+            if (!str) return 0;
+            str = str.toString().toLowerCase().replace(/,/g, ''); // Remove commas
+            let mult = 1;
+            if (str.endsWith('k')) mult = 1000;
+            else if (str.endsWith('m')) mult = 1000000;
+            else if (str.endsWith('b')) mult = 1000000000; // Added Billion just in case
+            
+            // parseFloat automatically ignores the trailing letters
+            let val = parseFloat(str);
+            return isNaN(val) ? 0 : val * mult;
+        }}
+
         function resetFilters() {{
-            $('#minPrice').val(''); 
-            $('#minVol').val('');
+            $('#minPrice, #maxPrice').val(''); 
+            $('#minVol, #maxVol').val('');
             $('#btnradio1').prop('checked', true); 
             redraw(); 
         }}
 
         $(document).ready(function(){{ 
             var table=$('.table').DataTable({{
-                "order":[[0,"asc"]], // Rank (0)
+                "order":[[0,"asc"]],
                 "pageLength": 25,
                 "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 "columnDefs": [ 
-                    {{ "visible": false, "targets": [13, 14] }}, // Hidden: Type (13), RawVol (14)
-                    {{ "orderData": [14], "targets": [7] }}       // Sort AvgVol (7) by RawVol (14)
+                    {{ "visible": false, "targets": [13, 14] }}, 
+                    {{ "orderData": [14], "targets": [7] }}        
                 ],
-                
                 "drawCallback": function(settings) {{
                     var api = this.api();
                     var total = api.rows().count();
@@ -536,34 +569,41 @@ def export_interactive_html(df):
             }});
             
             $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {{
-                // FIX INDICES FOR RANK COLUMN SHIFT (+1 to everything)
-                var typeTag = data[13] || ""; // Was 12
+                var typeTag = data[13] || ""; 
                 var viewMode = $('input[name="btnradio"]:checked').attr('id');
                 if (viewMode == 'btnradio2' && typeTag == 'ETF') return false;
                 if (viewMode == 'btnradio3' && typeTag == 'STOCK') return false;
 
-                var minPrice = parseFloat($('#minPrice').val()) || 0;
-                var priceStr = data[6] || "0"; // Was 5
+                // USE THE NEW PARSER HERE
+                var minPrice = parseVal($('#minPrice').val());
+                var maxPrice = parseVal($('#maxPrice').val());
+                
+                var priceStr = data[6] || "0"; 
                 var price = parseFloat(priceStr.replace(/[$,]/g, '')) || 0;
-                if (price < minPrice) return false;
+                
+                if (minPrice > 0 && price < minPrice) return false;
+                if (maxPrice > 0 && price > maxPrice) return false;
 
-                var minVol = parseFloat($('#minVol').val()) || 0;
-                var rawVol = parseFloat(data[14]) || 0; // Was 13
-                if (rawVol < minVol) return false;
+                // VOLUME PARSING
+                var minVol = parseVal($('#minVol').val());
+                var maxVol = parseVal($('#maxVol').val());
+                var rawVol = parseFloat(data[14]) || 0; 
+                
+                if (minVol > 0 && rawVol < minVol) return false;
+                if (maxVol > 0 && rawVol > maxVol) return false;
 
                 return true;
             }});
 
-            $('#minPrice, #minVol').on('keyup change', function() {{ table.draw(); }});
+            // Listen for input changes
+            $('#minPrice, #maxPrice, #minVol, #maxVol').on('keyup change', function() {{ table.draw(); }});
             
+            // ... rest of your redraw logic ...
             window.redraw = function() {{ 
                 var mode = $('input[name="btnradio"]:checked').attr('id');
                 var headerTxt = "Industry/Sector";
-                
                 if (mode == 'btnradio2') headerTxt = "Industry";
                 else if (mode == 'btnradio3') headerTxt = "Sector";
-                
-                // Target Col 12 (Industry) instead of 11 (Squeeze)
                 $(table.column(12).header()).text(headerTxt);
                 table.draw(); 
             }};
