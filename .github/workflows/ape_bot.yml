@@ -1,11 +1,8 @@
 name: Market Momentum Tracker
 
 on:
-  push:
-    branches:
-      - main             # Only run when code is pushed to 'main'
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '7,22,37,52 * * * *'
   workflow_dispatch:      # Allows manual testing
 
 permissions:
