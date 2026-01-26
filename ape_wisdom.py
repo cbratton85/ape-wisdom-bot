@@ -310,32 +310,35 @@ def export_interactive_html(df):
             # --- 1. VELOCITY (Momentum) ---
             m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
             v_val = m['vel']
-            # Simple Green/Red logic for positive/negative velocity
-            v_color = C_GREEN if v_val > 0 else (C_RED if v_val < 0 else C_WHITE)
-            # No arrow for Vel, just the signed number
-            export_df.at[index, 'Vel'] = color_span(f"{v_val:+d}", v_color) # +d forces the + sign
+            
+            if v_val == 0:
+                export_df.at[index, 'Vel'] = "" # Hide if 0
+            else:
+                v_color = C_GREEN if v_val > 0 else C_RED
+                export_df.at[index, 'Vel'] = color_span(f"{v_val:+d}", v_color)
             
             # --- 2. SIGNAL (Accum/Trend) ---
             sig_text = ""
             if m['div']: sig_text = "ACCUM" 
-            elif m['streak'] > 5: sig_text = "🔥 TREND"
+            elif m['streak'] > 5: sig_text = "TREND"
             sig_color = C_CYAN if "ACCUM" in sig_text else C_YELLOW
             export_df.at[index, 'Sig'] = color_span(sig_text, sig_color)
             
             # --- 3. NAME (Heat Status) ---
-            # Keep the Z-Score heat for the Name to spot outliers
             nm_clr = C_RED if row['Master_Score'] > 3.0 else (C_YELLOW if row['Master_Score'] > 1.5 else C_WHITE)
             export_df.at[index, 'Name'] = color_span(row['Name'], nm_clr)
             
             # --- 4. RANK+ (Directional Move) ---
-            # Green = Climbed spots, Red = Dropped spots
             r_val = row['Rank+']
-            r_color = C_GREEN if r_val > 0 else (C_RED if r_val < 0 else C_WHITE)
-            r_arrow = "▲" if r_val > 0 else ("▼" if r_val < 0 else "")
-            export_df.at[index, 'Rank+'] = color_span(f"{r_val} {r_arrow}", r_color)
+            
+            if r_val == 0:
+                export_df.at[index, 'Rank+'] = "" # Hide if 0
+            else:
+                r_color = C_GREEN if r_val > 0 else C_RED
+                r_arrow = "▲" if r_val > 0 else "▼"
+                export_df.at[index, 'Rank+'] = color_span(f"{r_val} {r_arrow}", r_color)
 
             # --- 5. METRICS (Surge & Mnt%) ---
-            # Keep these as "Heat" maps (Green/Yellow based on intensity)
             for col, z_col in [('Surge', 'z_Surge'), ('Mnt%', 'z_Mnt%')]:
                 val = f"{row[col]:.0f}%"
                 clr = C_YELLOW if row[z_col] >= 2.0 else (C_GREEN if row[z_col] >= 1.0 else C_WHITE)
