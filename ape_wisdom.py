@@ -317,6 +317,11 @@ def get_all_trending_stocks():
 def export_interactive_html(df):
     try:
         export_df = df.copy().astype(object)
+
+        for col in ['Squeeze', 'AvgVol', 'MCap', 'z_Squeeze']:
+            if col not in export_df.columns:
+                export_df[col] = 0
+    
         if not os.path.exists(PUBLIC_DIR): os.makedirs(PUBLIC_DIR)
 
         def color_span(text, color_hex): return f'<span style="color: {color_hex}; font-weight: bold;">{text}</span>'
