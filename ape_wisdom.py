@@ -129,6 +129,9 @@ def fetch_meta_data_robust(ticker):
                 s = info.get('sector', 'Unknown')
                 i = info.get('industry', 'Unknown')
                 meta = f"{s} - {i}" if s != 'Unknown' else 'Unknown'
+
+            meta = meta.replace('\r', '').replace('\n', '').strip()
+
     except: pass
     return {'ticker': ticker, 'name': name, 'meta': meta, 'type': quote_type, 'mcap': mcap, 'currency': currency}
 
@@ -215,7 +218,7 @@ def filter_and_process(stocks):
             info = local_cache.get(t, {})
             if info.get('currency', 'USD') != 'USD': continue
 
-            name = str(info.get('name', t)).replace('"', '').strip()[:NAME_MAX_WIDTH]
+            name = str(info.get('name', t)).replace('"', '').replace('\r', '').replace('\n', '').strip()[:NAME_MAX_WIDTH]
             
             cur_m = int(stock.get('mentions', 0))
             old_m = int(stock.get('mentions_24h_ago', 0))
