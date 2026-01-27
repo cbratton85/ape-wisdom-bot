@@ -572,7 +572,7 @@ def export_interactive_html(df):
             let mult = 1; if (str.endsWith('k')) mult = 1000; else if (str.endsWith('m')) mult = 1000000; else if (str.endsWith('b')) mult = 1000000000;
             return parseFloat(str) * mult || 0;
         }}
-        function resetFilters() {{ $('#minPrice, #maxPrice, #minVol, #maxVol').val(''); $('#btnradio1').prop('checked', true); $('#mcapAll').prop('checked', true); redraw(); }}
+        function resetFilters() {{ $('#minPrice, #maxPrice, #minVol, #maxVol').val(''); $('#btnradio1').prop('checked', true); $('input[name="mcapFilter"]').prop('checked', false); $('#mcapAll').prop('checked', true); table.darw(); redraw(); }}
         function exportTickers() {{
             var table = $('.table').DataTable(); var data = table.rows({{ search: 'applied', order: 'current', page: 'current' }}).data();
             var tickers = []; data.each(function (value) {{ var div = document.createElement("div"); div.innerHTML = value[3]; var text = div.textContent || div.innerText || ""; if(text) tickers.push(text.trim()); }});
@@ -580,7 +580,7 @@ def export_interactive_html(df):
             var blob = new Blob([tickers.join(" ")], {{ type: "text/plain;charset=utf-8" }}); var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "ape_tickers_page.txt"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }}
         $(document).ready(function(){{ 
-            var table=$('.table').DataTable({{
+            table=$('.table').DataTable({{
                 "order":[[0,"asc"]], "pageLength": 25, "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 "columnDefs": [ 
                     {{ "visible": false, "targets": [13, 14, 15] }}, // Hide Industry, RawVol, and NEW MCap (Col 15)
