@@ -483,22 +483,22 @@ def export_interactive_html(df):
                     </div>
 
                     <div class="btn-group" role="group">
-                        <input type="radio" class="btn-check" name="mcapRadio" id="mcapAll" checked onclick="redraw()">
+                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapAll" checked onclick="toggleMcap('all')">
                         <label class="btn btn-outline-light btn-sm" for="mcapAll" style="font-size: 0.75rem; padding: 2px 6px;">All</label>
-                        
-                        <input type="radio" class="btn-check" name="mcapRadio" id="mcapMega" onclick="redraw()">
+    
+                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMega" onclick="toggleMcap('mega')">
                         <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.75rem; padding: 2px 6px;" title="> $200B">Mega</label>
-                        
-                        <input type="radio" class="btn-check" name="mcapRadio" id="mcapLarge" onclick="redraw()">
+    
+                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapLarge" onclick="toggleMcap('large')">
                         <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.75rem; padding: 2px 6px;" title="$10B - $200B">Lrg</label>
-                        
-                        <input type="radio" class="btn-check" name="mcapRadio" id="mcapMid" onclick="redraw()">
+    
+                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMid" onclick="toggleMcap('mid')">
                         <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.75rem; padding: 2px 6px;" title="$2B - $10B">Mid</label>
-                        
-                        <input type="radio" class="btn-check" name="mcapRadio" id="mcapSmall" onclick="redraw()">
+    
+                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapSmall" onclick="toggleMcap('small')">
                         <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.75rem; padding: 2px 6px;" title="$250M - $2B">Sml</label>
-                        
-                        <input type="radio" class="btn-check" name="mcapRadio" id="mcapMicro" onclick="redraw()">
+    
+                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMicro" onclick="toggleMcap('micro')">
                         <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.75rem; padding: 2px 6px;" title="< $250M">Mic</label>
                     </div>
                 </div>
@@ -546,6 +546,18 @@ def export_interactive_html(df):
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
         <script>
+        
+        function toggleMcap(type) {{
+            if (type === 'all') {{
+                $('input[name="mcapFilter"]').not('#mcapAll').prop('checked', false);
+            }} else {{
+                $('#mcapAll').prop('checked', false);
+                if ($('input[name="mcapFilter"]:checked').length === 0) {{
+                    $('#mcapAll').prop('checked', true);
+                }}
+            }}
+            table.draw();
+        }}
         function toggleLegend() {{
             var x = document.getElementById("legendContent"); var arrow = document.getElementById("legendArrow");
             if (x.style.display === "none") {{ x.style.display = "grid"; arrow.innerText = "▲"; }} else {{ x.style.display = "none"; arrow.innerText = "▼"; }}
@@ -586,15 +598,19 @@ def export_interactive_html(df):
                 if (viewMode == 'btnradio2' && typeTag == 'ETF') return false;
                 if (viewMode == 'btnradio3' && typeTag == 'STOCK') return false;
                 
-                // MARKET CAP FILTER (New)
-                var mcapMode = $('input[name="mcapRadio"]:checked').attr('id');
-                var mcap = parseFloat(data[15]) || 0; // Col 15 is hidden MCap
-                
-                if (mcapMode == 'mcapMega' && mcap < 200000000000) return false;
-                if (mcapMode == 'mcapLarge' && (mcap < 10000000000 || mcap >= 200000000000)) return false;
-                if (mcapMode == 'mcapMid' && (mcap < 2000000000 || mcap >= 10000000000)) return false;
-                if (mcapMode == 'mcapSmall' && (mcap < 250000000 || mcap >= 2000000000)) return false;
-                if (mcapMode == 'mcapMicro' && mcap >= 250000000) return false;
+                // MARKET CAP FILTER (Multi-Select) - Braces Doubled for Python
+                if (!$('#mcapAll').is(':checked')) {{
+                    var mcap = parseFloat(data[15]) || 0; 
+                    var match = false;
+
+                    if ($('#mcapMega').is(':checked') && mcap >= 200000000000) match = true;
+                    if ($('#mcapLarge').is(':checked') && (mcap >= 10000000000 && mcap < 200000000000)) match = true;
+                    if ($('#mcapMid').is(':checked') && (mcap >= 2000000000 && mcap < 10000000000)) match = true;
+                    if ($('#mcapSmall').is(':checked') && (mcap >= 250000000 && mcap < 2000000000)) match = true;
+                    if ($('#mcapMicro').is(':checked') && mcap < 250000000) match = true;
+
+                    if (!match) return false; 
+                }}
 
                 // PRICE & VOL FILTERS
                 var minP = parseVal($('#minPrice').val()), maxP = parseVal($('#maxPrice').val());
