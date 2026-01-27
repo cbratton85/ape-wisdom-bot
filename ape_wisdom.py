@@ -231,14 +231,14 @@ def filter_and_process(stocks):
             m_perc = int(((cur_m - old_m) / (old_m if old_m > 0 else 1) * 100))
             s_perc = int((hist['Volume'].iloc[-1] / avg_v * 100)) if avg_v > 0 else 0
             
-            # --- Squeeze & MCap Logic ---
+            # ---  & MCap Logic ---
             try:
                 mcap = float(info.get('mcap', 0) or 0)
             except: 
                 mcap = 0
             
             log_mcap = math.log(mcap if mcap > 0 else 10**9, 10)
-            squeeze_score = (cur_m * s_perc) / max(log_mcap, 1)
+            _score = (cur_m * s_perc) / max(log_mcap, 1)
 
             rank_now = int(stock.get('rank', 0))
             rank_old = int(stock.get('rank_24h_ago', 0))
@@ -249,7 +249,7 @@ def filter_and_process(stocks):
                 "Price": float(curr_p), "AvgVol": int(avg_v),
                 "Surge": s_perc, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
                 "Upvotes": int(stock.get('upvotes', 0)), "Meta": info.get('meta', '-'), 
-                "Squeeze": squeeze_score, 
+                "": _score, 
                 "MCap": mcap
             })
         except Exception as e: 
@@ -270,9 +270,9 @@ def filter_and_process(stocks):
         df['Master_Score'] = 0
         for col in cols: df['Master_Score'] += df[f'z_{col}'].clip(lower=0) * weights[col]
 
-        # --- Visual Only Z-Score for Squeeze ---
-        if 'Squeeze' in df.columns:
-            sq_series = df['Squeeze'].clip(lower=0).astype(float)
+        # --- Visual Only Z-Score for  ---
+        if '' in df.columns:
+            sq_series = df[''].clip(lower=0).astype(float)
             log_sq = np.log1p(sq_series)
             mean_sq = log_sq.mean(); std_sq = log_sq.std(ddof=0)
             df['z_Squeeze'] = 0 if std_sq == 0 else (log_sq - mean_sq) / std_sq
@@ -436,8 +436,30 @@ def export_interactive_html(df):
             .form-control-sm {{ background:#111; border:1px solid #555; color:#fff; height: 28px; font-size: 0.8rem; padding: 2px 5px; }}
             .btn-reset {{ border: 1px solid #555; color: #fff; font-size: 0.8rem; background: #333; }}
             .btn-reset:hover {{ background: #444; color: #fff; }}
+
+            /* Fixes the height/size of the checkbox buttons and alignment */
+            .btn-group .btn-sm {{
+                padding: 2px 8px !important;
+                line-height: 1.5 !important;
+                height: 28px !important;
+                display: flex;
+                align-items: center;
+                margin-bottom: 0 !important;
+            }}
+
+            /* Makes the DataTables search input wider and matches your theme */
+            .dataTables_filter input {{
+                width: 300px !important; 
+                height: 28px !important;
+                background: #111 !important;
+                border: 1px solid #555 !important;
+                color: #fff !important;
+                border-radius: 4px;
+                padding: 2px 5px;
+                margin-left: 10px;
+            }}
             
-            #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px;}}
+            #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px; }}
             .header-flex {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
             .page-link {{ background-color: #222; border-color: #444; color: #00ff00; }}
             .page-item.active .page-link {{ background-color: #00ff00; border-color: #00ff00; color: #000; }}
@@ -534,7 +556,7 @@ def export_interactive_html(df):
                         <div class="legend-item"><span class="legend-key">Surge</span> Volume increase vs 30-Day Average.</div>
                         <div class="legend-item"><span class="legend-key">Mnt%</span> Change in Mentions vs 24h ago.</div>
                         <div class="legend-item"><span class="legend-key">Upvotes</span> Net Upvotes on Reddit.</div>
-                        <div class="legend-item"><span class="legend-key">&Sigma; Squeeze</span> (Mentions × Vol) / MarketCap.</div>
+                        <div class="legend-item"><span class="legend-key">Squeeze</span> (Mentions × Vol) / MarketCap.</div>
                     </div>
 
                 </div>
@@ -584,7 +606,7 @@ def export_interactive_html(df):
             var blob = new Blob([tickers.join(" ")], {{ type: "text/plain;charset=utf-8" }}); var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "ape_tickers_page.txt"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }}
         $(document).ready(function(){{ 
-            var table=$('.table').DataTable({{
+            table=$('.table').DataTable({{
                 "order":[[0,"asc"]], "pageLength": 25, "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 "columnDefs": [ 
                     {{ "visible": false, "targets": [13, 14, 15] }}, // Hide Industry, RawVol, and NEW MCap (Col 15)
