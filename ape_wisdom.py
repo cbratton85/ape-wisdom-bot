@@ -484,22 +484,22 @@ def export_interactive_html(df):
 
                     <div class="btn-group" role="group">
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapAll" checked onclick="toggleMcap('all')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapAll" style="font-size: 0.75rem; padding: 2px 6px;">All</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapAll">All</label>
     
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMega" onclick="toggleMcap('mega')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.75rem; padding: 2px 6px;" title="> $200B">Mega</label>
-    
+                        <label class="btn btn-outline-light btn-sm" for="mcapMega">Mega</label>
+
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapLarge" onclick="toggleMcap('large')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.75rem; padding: 2px 6px;" title="$10B - $200B">Lrg</label>
-    
+                        <label class="btn btn-outline-light btn-sm" for="mcapLarge">Lrg</label>
+
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMid" onclick="toggleMcap('mid')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.75rem; padding: 2px 6px;" title="$2B - $10B">Mid</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMid">Mid</label>
     
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapSmall" onclick="toggleMcap('small')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.75rem; padding: 2px 6px;" title="$250M - $2B">Sml</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapSmall">Sml</label>
     
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMicro" onclick="toggleMcap('micro')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.75rem; padding: 2px 6px;" title="< $250M">Mic</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMicro">Mic</label>
                     </div>
                 </div>
 
@@ -549,13 +549,17 @@ def export_interactive_html(df):
         
         function toggleMcap(type) {{
             if (type === 'all') {{
+                // If "All" is clicked, uncheck the others
                 $('input[name="mcapFilter"]').not('#mcapAll').prop('checked', false);
             }} else {{
+                // If a specific cap is clicked, uncheck "All"
                 $('#mcapAll').prop('checked', false);
+                // If everything is unchecked, turn "All" back on
                 if ($('input[name="mcapFilter"]:checked').length === 0) {{
                     $('#mcapAll').prop('checked', true);
                 }}
             }}
+            // THIS is what actually triggers the table to re-filter
             table.draw();
         }}
         function toggleLegend() {{
@@ -574,7 +578,7 @@ def export_interactive_html(df):
         }}
         function resetFilters() {{ $('#minPrice, #maxPrice, #minVol, #maxVol').val(''); $('#btnradio1').prop('checked', true); $('#mcapAll').prop('checked', true); redraw(); }}
         function exportTickers() {{
-            var table = $('.table').DataTable(); var data = table.rows({{ search: 'applied', order: 'current', page: 'current' }}).data();
+            table = $('.table').DataTable(); var data = table.rows({{ search: 'applied', order: 'current', page: 'current' }}).data();
             var tickers = []; data.each(function (value) {{ var div = document.createElement("div"); div.innerHTML = value[3]; var text = div.textContent || div.innerText || ""; if(text) tickers.push(text.trim()); }});
             if (tickers.length === 0) {{ alert("No visible tickers!"); return; }}
             var blob = new Blob([tickers.join(" ")], {{ type: "text/plain;charset=utf-8" }}); var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "ape_tickers_page.txt"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
