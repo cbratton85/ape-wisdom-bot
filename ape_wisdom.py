@@ -315,31 +315,20 @@ def get_all_trending_stocks():
     return all_results
 
 def export_interactive_html(df):
+    # 1. Define terminal colors for the print statements FIRST
+    # These are for the console output in GitHub Actions
+    TERM_RED = '\033[91m'
+    TERM_RESET = '\033[0m'
+
     try:
-        if df.empty:
-            print(f"{C_RED}[!] DataFrame is empty, skipping export.{C_END}")
+        if df is None or df.empty:
+            print(f"{TERM_RED}[!] DataFrame is empty, skipping export.{TERM_RESET}")
             return None
 
         export_df = df.copy().astype(object)
 
-        # 1. Safety Check: Ensure core columns exist
-        for col in ['Squeeze', 'AvgVol', 'MCap', 'z_Squeeze', 'Master_Score', 'z_Upvotes', 'z_Surge', 'z_Mnt%']:
-            if col not in export_df.columns:
-                export_df[col] = 0
-
-        if not os.path.exists(PUBLIC_DIR): os.makedirs(PUBLIC_DIR)
-
-        def color_span(text, color_hex): return f'<span style="color: {color_hex}; font-weight: bold;">{text}</span>'
-        
-        def format_vol(v):
-            try:
-                v = float(v)
-                if v >= 1_000_000: return f"{v/1_000_000:.1f}M"
-                if v >= 1_000: return f"{v/1_000:.0f}K"
-                return str(int(v))
-            except: return "0"
-
-        C_GREEN, C_YELLOW, C_RED, C_CYAN, C_MAGENTA, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ff00ff", "#ffffff"
+        # 2. Define the HTML hex colors (these are different!)
+        C_GREEN, C_YELLOW, C_RED_HTML, C_CYAN, C_MAGENTA, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ff00ff", "#ffffff"
         
         export_df['Type_Tag'] = 'STOCK'
         tracker = HistoryTracker(HISTORY_FILE)
@@ -697,7 +686,8 @@ def export_interactive_html(df):
         print(f"{C_GREEN}[+] Dashboard generated at: {filepath}{C_RESET}")
         return filename
     except Exception as e:
-        print(f"\n{C_RED}[!] Export Failed: {e}{C_RESET}")
+        # Use the terminal color variable we defined at the top
+        print(f"\n{TERM_RED}[!] Export Failed: {e}{TERM_RESET}")
         return None
 
 def send_discord_link(filename):
