@@ -350,7 +350,7 @@ def export_interactive_html(df):
         C_GREEN, C_YELLOW, C_RED, C_CYAN, C_MAGENTA, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ff00ff", "#ffffff"
         export_df['Type_Tag'] = 'STOCK'
         export_df['Sig'] = ""
-        export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol) # <--- Formats raw AvgVol into Vol_Display
+        export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
 
         for index, row in export_df.iterrows():
             # Velocity
@@ -359,11 +359,11 @@ def export_interactive_html(df):
                 v_color = C_GREEN if v_val > 0 else C_RED
                 export_df.at[index, 'Velocity'] = color_span(f"{v_val:+d}", v_color)
             
-            # 1. Acceleration (Purple for high, Cyan for med)
+            # 1. Acceleration
             ac_val = row['Accel']
-            if ac_val >= 5: ac_clr = "#ff00ff" # Magenta
-            elif ac_val > 0: ac_clr = "#00ffff" # Cyan
-            elif ac_val < 0: ac_clr = "#ff4444" # Red
+            if ac_val >= 5: ac_clr = "#ff00ff"
+            elif ac_val > 0: ac_clr = "#00ffff"
+            elif ac_val < 0: ac_clr = "#ff4444"
             else: ac_clr = "#ffffff"
             export_df.at[index, 'Accel'] = color_span(f"{ac_val:+d}", ac_clr)
 
@@ -385,10 +385,9 @@ def export_interactive_html(df):
             upchg_clr = C_GREEN if upchg_val > 0 else (C_RED if upchg_val < 0 else "#666")
             export_df.at[index, 'Upv+'] = color_span(f"{upchg_val:+d}", upchg_clr)
 
-            # Signals
+            # Signals (The +/- 3 Streak)
             trend_val = row['Rolling']
             sig_text = f"{trend_val:+d}"
-            # Color logic: +3 or higher is vibrant green, negatives are red
             if trend_val >= 3: sig_color = "#00ff00"
             elif trend_val > 0: sig_color = "#99ff99"
             elif trend_val <= -2: sig_color = "#ff4444"
@@ -437,27 +436,33 @@ def export_interactive_html(df):
             export_df.at[index, 'Price'] = f"${row['Price']:.2f}"
             export_df.at[index, 'Vol_Display'] = color_span(export_df.at[index, 'Vol_Display'], "#ccc")
 
-        export_df.rename(columns={'Meta': 'Industry/Sector', 'Velocity': 'Vel', 'Vol_Display': 'Avg Vol', 'Sig': 'Streak'}, inplace=True)
+        # --- CRITICAL FIX START ---
+        # 1. Drop the original raw integer 'Streak' column so it doesn't collide
+        if 'Streak' in export_df.columns:
+            export_df.drop(columns=['Streak'], inplace=True)
 
-        # The 'Shopping List' - Corrected Order
+        # 2. Rename columns (Now 'Sig' becomes the ONLY 'Streak' column)
+        export_df.rename(columns={'Meta': 'Industry/Sector', 'Velocity': 'Vel', 'Vol_Display': 'Avg Vol', 'Sig': 'Streak'}, inplace=True)
+        # --- CRITICAL FIX END ---
+
+        # The 'Shopping List'
         cols = [
             'Rank', 'Rank+', 'Name', 'Sym', 'Price', 
             'Accel', 'Eff', 'Conv', 'Upv+', 
-            'Avg Vol', 'Surge', 'Vel', 'Streak', 'Mnt%',  # <--- FIXED: Changed 'Sig' to 'Streak'
+            'Avg Vol', 'Surge', 'Vel', 'Streak', 'Mnt%', 
             'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol', 'MCap'
         ]
         final_df = export_df[cols]
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
         
-        # --- HTML TEMPLATE (Abbreviated to keep it clean - Same as before) ---
+        # HTML TEMPLATE
         html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Ape Wisdom Analysis</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
             body{{
                 background-color:#101010; color:#e0e0e0; font-family:'Consolas','Monaco',monospace; padding:20px;
-                /* max-width REMOVED per previous request */
             }}
             .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
             
@@ -468,13 +473,12 @@ def export_interactive_html(df):
             
             table.dataTable {{ width: auto !important; margin: 0 auto; }}
             
-            /* Column Widths (Adjusted for new columns) */
             th:nth-child(1), td:nth-child(1) {{ width: 1%; white-space: nowrap; text-align: center; }}
             th:nth-child(2), td:nth-child(2) {{ width: 1%; white-space: nowrap; text-align: center; }}
             th:nth-child(3), td:nth-child(3) {{ max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }}
             th:nth-child(4), td:nth-child(4) {{ width: 1%; white-space: nowrap; text-align: center; }}
             
-            /* Price to Upv+ (Cols 5, 6, 7, 8, 9) */
+            /* Price to Upv+ */
             th:nth-child(5), td:nth-child(5), th:nth-child(6), td:nth-child(6),
             th:nth-child(7), td:nth-child(7), th:nth-child(8), td:nth-child(8),
             th:nth-child(9), td:nth-child(9) {{ width: 1%; white-space: nowrap; text-align: right; padding: 0 8px; }}
@@ -484,6 +488,7 @@ def export_interactive_html(df):
             th:nth-child(12), td:nth-child(12), th:nth-child(13), td:nth-child(13),
             th:nth-child(14), td:nth-child(14) {{ width: 1%; white-space: nowrap; text-align: right; }}
 
+            /* Industry Column (17th child in CSS, Index 16 in Data) */
             th:nth-child(17), td:nth-child(17) {{
                 max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 15px;
                 border-right: 1px solid #333; 
