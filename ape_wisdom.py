@@ -92,13 +92,16 @@ class HistoryTracker:
         today_data = self.data[ticker][dates[-1]]
         prev_data = self.data[ticker][dates[-2]]
         
-        # --- ROLLING TREND ---
-        recent_dates = dates[-5:] 
+        # --- ROLLING TREND (STREAK) ---
         rolling_trend = 0
-        for i in range(1, len(recent_dates)):
-            curr_day = self.data[ticker][recent_dates[i]]
-            if curr_day.get('rank_plus', 0) > 0: rolling_trend += 1
-            elif curr_day.get('rank_plus', 0) < 0: rolling_trend -= 1
+        for d in dates:
+            r_plus = self.data[ticker][d].get('rank_plus', 0)
+            if r_plus > 0:
+                rolling_trend = rolling_trend + 1 if rolling_trend >= 0 else 1
+            elif r_plus < 0:
+                rolling_trend = rolling_trend - 1 if rolling_trend <= 0 else -1
+            else:
+                rolling_trend = 0
         
         # --- NEW METRICS ---
         velocity = int(today_data.get('rank_plus', 0) - prev_data.get('rank_plus', 0))
@@ -434,7 +437,7 @@ def export_interactive_html(df):
             export_df.at[index, 'Price'] = f"${row['Price']:.2f}"
             export_df.at[index, 'Vol_Display'] = color_span(export_df.at[index, 'Vol_Display'], "#ccc")
 
-        export_df.rename(columns={'Meta': 'Industry/Sector', 'Velocity': 'Vel', 'Vol_Display': 'Avg Vol'}, inplace=True)
+        export_df.rename(columns={'Meta': 'Industry/Sector', 'Velocity': 'Vel', 'Vol_Display': 'Avg Vol', 'Sig': 'Streak'}, inplace=True)
 
         # The 'Shopping List' - Corrected Order
         # Note: 'AvgVol' (raw) is at the end for sorting, 'Avg Vol' (formatted) is in the middle for display
