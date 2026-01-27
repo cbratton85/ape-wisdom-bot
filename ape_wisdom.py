@@ -440,11 +440,10 @@ def export_interactive_html(df):
         export_df.rename(columns={'Meta': 'Industry/Sector', 'Velocity': 'Vel', 'Vol_Display': 'Avg Vol', 'Sig': 'Streak'}, inplace=True)
 
         # The 'Shopping List' - Corrected Order
-        # Note: 'AvgVol' (raw) is at the end for sorting, 'Avg Vol' (formatted) is in the middle for display
         cols = [
             'Rank', 'Rank+', 'Name', 'Sym', 'Price', 
             'Accel', 'Eff', 'Conv', 'Upv+', 
-            'Avg Vol', 'Surge', 'Vel', 'Sig', 'Mnt%', 
+            'Avg Vol', 'Surge', 'Vel', 'Streak', 'Mnt%',  # <--- FIXED: Changed 'Sig' to 'Streak'
             'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol', 'MCap'
         ]
         final_df = export_df[cols]
