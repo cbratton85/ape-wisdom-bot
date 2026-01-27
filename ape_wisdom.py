@@ -251,7 +251,17 @@ def filter_and_process(stocks):
         df['Master_Score'] = 0
         for col in cols: df['Master_Score'] += df[f'z_{col}'].clip(lower=0) * weights[col]
 
-    tracker = HistoryTracker(HISTORY_FILE)
+        # --- PASTE YOUR NEW CODE HERE ---
+        # This calculates the Z-Score for Squeeze INDEPENDENTLY (Visual only)
+        sq_series = df['Squeeze'].clip(lower=0).astype(float)
+        log_sq = np.log1p(sq_series)
+        mean_sq = log_sq.mean(); std_sq = log_sq.std(ddof=0)
+        
+        # If std is 0 (all numbers same), set z-score to 0 to avoid crash
+        df['z_Squeeze'] = 0 if std_sq == 0 else (log_sq - mean_sq) / std_sq
+
+        tracker = HistoryTracker(HISTORY_FILE)
+    
     vel, div, strk = [], [], []
     for _, row in df.iterrows():
         m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
