@@ -735,8 +735,13 @@ if __name__ == "__main__":
             if fname and 'send_discord_link' in globals():
                 send_discord_link(fname)
         sys.exit()
-    
+
+
     raw = get_all_trending_stocks()
     df = filter_and_process(raw)
-    export_interactive_html(df)
+    fname = export_interactive_html(df)
+    
+    if fname:
+        send_discord_link(fname)
+        
     print("Done.")
