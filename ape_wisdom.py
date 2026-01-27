@@ -231,31 +231,24 @@ def filter_and_process(stocks):
             m_perc = int(((cur_m - old_m) / (old_m if old_m > 0 else 1) * 100))
             s_perc = int((hist['Volume'].iloc[-1] / avg_v * 100)) if avg_v > 0 else 0
             
-            # ---  & MCap Logic ---
+            # --- Squeeze & MCap Logic ---
             try:
                 mcap = float(info.get('mcap', 0) or 0)
             except: 
                 mcap = 0
             
             log_mcap = math.log(mcap if mcap > 0 else 10**9, 10)
-            _score = (cur_m * s_perc) / max(log_mcap, 1)
+            squeeze_score = (cur_m * s_perc) / max(log_mcap, 1)
 
             rank_now = int(stock.get('rank', 0))
             rank_old = int(stock.get('rank_24h_ago', 0))
             rank_plus = (rank_old - rank_now) if rank_old != 0 else 0
 
             final_list.append({
-                "Rank": rank_now, 
-                "Name": name, 
-                "Sym": t, 
-                "Rank+": rank_plus,
-                "Price": float(curr_p), 
-                "AvgVol": int(avg_v),
-                "Surge": s_perc, 
-                "Mnt%": m_perc, 
-                "Type": info.get('type', 'EQUITY'),
-                "Upvotes": int(stock.get('upvotes', 0)), 
-                "Meta": info.get('meta', '-'), 
+                "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
+                "Price": float(curr_p), "AvgVol": int(avg_v),
+                "Surge": s_perc, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
+                "Upvotes": int(stock.get('upvotes', 0)), "Meta": info.get('meta', '-'), 
                 "Squeeze": squeeze_score, 
                 "MCap": mcap
             })
@@ -277,9 +270,9 @@ def filter_and_process(stocks):
         df['Master_Score'] = 0
         for col in cols: df['Master_Score'] += df[f'z_{col}'].clip(lower=0) * weights[col]
 
-        # --- Visual Only Z-Score for  ---
-        if '' in df.columns:
-            sq_series = df[''].clip(lower=0).astype(float)
+        # --- Visual Only Z-Score for Squeeze ---
+        if 'Squeeze' in df.columns:
+            sq_series = df['Squeeze'].clip(lower=0).astype(float)
             log_sq = np.log1p(sq_series)
             mean_sq = log_sq.mean(); std_sq = log_sq.std(ddof=0)
             df['z_Squeeze'] = 0 if std_sq == 0 else (log_sq - mean_sq) / std_sq
@@ -315,65 +308,70 @@ def get_all_trending_stocks():
     return all_results
 
 def export_interactive_html(df):
-    # 1. Define terminal colors for the print statements FIRST
-    # These are for the console output in GitHub Actions
-    TERM_RED = '\033[91m'
-    TERM_RESET = '\033[0m'
-
     try:
-        if df is None or df.empty:
-            print(f"{TERM_RED}[!] DataFrame is empty, skipping export.{TERM_RESET}")
-            return None
-
         export_df = df.copy().astype(object)
+        if not os.path.exists(PUBLIC_DIR): os.makedirs(PUBLIC_DIR)
 
-        # 2. Define the HTML hex colors (these are different!)
-        C_GREEN, C_YELLOW, C_RED_HTML, C_CYAN, C_MAGENTA, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ff00ff", "#ffffff"
-        
+        def color_span(text, color_hex): return f'<span style="color: {color_hex}; font-weight: bold;">{text}</span>'
+        def format_vol(v):
+            if v >= 1_000_000: return f"{v/1_000_000:.1f}M"
+            if v >= 1_000: return f"{v/1_000:.0f}K"
+            return str(v)
+
+        C_GREEN, C_YELLOW, C_RED, C_CYAN, C_MAGENTA, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ff00ff", "#ffffff"
         export_df['Type_Tag'] = 'STOCK'
         tracker = HistoryTracker(HISTORY_FILE)
-        export_df['Vel'] = ""
-        export_df['Sig'] = ""
+        export_df['Vel'] = ""; export_df['Sig'] = ""
         export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
 
         for index, row in export_df.iterrows():
-            # Metrics (Velocity & Signals)
+            # Metrics
             m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
             v_val = m['vel']
             if v_val != 0:
                 v_color = C_GREEN if v_val > 0 else C_RED
                 export_df.at[index, 'Vel'] = color_span(f"{v_val:+d}", v_color)
             
-            sig_text, sig_color = "", C_WHITE
-            if m['div']: sig_text, sig_color = "ACCUM", C_CYAN
-            elif m['streak'] > 5: sig_text, sig_color = "TREND", C_YELLOW
+            # Signals
+            sig_text = ""; sig_color = C_WHITE
+            if m['div']: sig_text = "ACCUM"; sig_color = C_CYAN
+            elif m['streak'] > 5: sig_text = "TREND"; sig_color = C_YELLOW
             export_df.at[index, 'Sig'] = color_span(sig_text, sig_color)
             
-            # Formatting Name, Rank+, Surge, Mnt%
+            # Heatmap Name
             nm_clr = C_RED if row['Master_Score'] > 4.0 else (C_YELLOW if row['Master_Score'] > 2.0 else C_WHITE)
             export_df.at[index, 'Name'] = color_span(row['Name'], nm_clr)
             
+            # Rank+
             r_val = row['Rank+']
             if r_val != 0:
-                r_color, r_arrow = (C_GREEN, "▲") if r_val > 0 else (C_RED, "▼")
-                export_df.at[index, 'Rank+'] = color_span(f"{abs(r_val)} {r_arrow}", r_color)
+                r_color = C_GREEN if r_val > 0 else C_RED
+                r_arrow = "▲" if r_val > 0 else "▼"
+                export_df.at[index, 'Rank+'] = color_span(f"{r_val} {r_arrow}", r_color)
 
+            # Columns
             for col, z_col in [('Surge', 'z_Surge'), ('Mnt%', 'z_Mnt%')]:
                 val = f"{row[col]:.0f}%"
                 clr = C_YELLOW if row[z_col] >= 2.0 else (C_GREEN if row[z_col] >= 1.0 else C_WHITE)
                 export_df.at[index, col] = color_span(val, clr)
             
-            # Squeeze & Upvotes
+            # --- NEW: Squeeze with Cyan Logic ---
             sq_z = row.get('z_Squeeze', 0)
             sq_color = C_CYAN if sq_z > 1.5 else C_WHITE
             export_df.at[index, 'Squeeze'] = color_span(int(row['Squeeze']), sq_color)
-            export_df.at[index, 'Upvotes'] = color_span(int(row['Upvotes']), C_GREEN if row['z_Upvotes']>1.5 else C_WHITE)
             
-            # ETF logic & Meta
-            is_fund = row['Type'] == 'ETF' or any(x in str(row['Name']) for x in ['Trust', 'Fund', 'ETF'])
-            badge = '<span style="background-color:#ff00ff; color:black; padding:2px 5px; border-radius:4px; font-size:11px; font-weight:bold; margin-right:6px; vertical-align:middle;">ETF</span>' if is_fund else ""
-            meta_clr = C_MAGENTA if is_fund else C_WHITE
-            export_df.at[index, 'Meta'] = f"{badge}{color_span(row['Meta'], meta_clr)}"
+            export_df.at[index, 'Upvotes'] = color_span(row['Upvotes'], C_GREEN if row['z_Upvotes']>1.5 else C_WHITE)
+            
+            # ETF Badge logic
+            is_fund = row['Type'] == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
+            if is_fund:
+                badge = '<span style="background-color:#ff00ff; color:black; padding:2px 5px; border-radius:4px; font-size:11px; font-weight:bold; margin-right:6px; vertical-align:middle;">ETF</span>'
+                meta_text = color_span(row['Meta'], C_MAGENTA)
+            else:
+                badge = ""
+                meta_text = color_span(row['Meta'], C_WHITE)
+
+            export_df.at[index, 'Meta'] = f"{badge}{meta_text}"
             export_df.at[index, 'Type_Tag'] = 'ETF' if is_fund else 'STOCK'
             
             t = row['Sym']
@@ -381,22 +379,9 @@ def export_interactive_html(df):
             export_df.at[index, 'Price'] = f"${row['Price']:.2f}"
             export_df.at[index, 'Vol_Display'] = color_span(export_df.at[index, 'Vol_Display'], "#ccc")
 
-        # --- THE CRITICAL FIX: Rename before selecting columns ---
-        rename_map = {
-            'Meta': 'Industry/Sector',
-            'Vol_Display': 'Avg Vol',
-            'Surge': 'Surge', 
-            'Mnt%': 'Mnt%'
-        }
-        export_df.rename(columns=rename_map, inplace=True)
+        export_df.rename(columns={'Meta': 'Industry/Sector', 'Vol_Display': 'Avg Vol'}, inplace=True)
 
-        # Final Column Shopping List
         cols = ['Rank', 'Rank+', 'Name', 'Sym', 'Sig', 'Vel', 'Price', 'Avg Vol', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol', 'MCap']
-        
-        # Ensure every column in 'cols' exists (Insurance)
-        for c in cols:
-            if c not in export_df.columns: export_df[c] = "-"
-            
         final_df = export_df[cols]
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -451,30 +436,8 @@ def export_interactive_html(df):
             .form-control-sm {{ background:#111; border:1px solid #555; color:#fff; height: 28px; font-size: 0.8rem; padding: 2px 5px; }}
             .btn-reset {{ border: 1px solid #555; color: #fff; font-size: 0.8rem; background: #333; }}
             .btn-reset:hover {{ background: #444; color: #fff; }}
-
-            /* Fixes the height/size of the checkbox buttons and alignment */
-            .btn-group .btn-sm {{
-                padding: 2px 8px !important;
-                line-height: 1.5 !important;
-                height: 28px !important;
-                display: flex;
-                align-items: center;
-                margin-bottom: 0 !important;
-            }}
-
-            /* Makes the DataTables search input wider and matches your theme */
-            .dataTables_filter input {{
-                width: 300px !important; 
-                height: 28px !important;
-                background: #111 !important;
-                border: 1px solid #555 !important;
-                color: #fff !important;
-                border-radius: 4px;
-                padding: 2px 5px;
-                margin-left: 10px;
-            }}
             
-            #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px; }}
+            #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px;}}
             .header-flex {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
             .page-link {{ background-color: #222; border-color: #444; color: #00ff00; }}
             .page-item.active .page-link {{ background-color: #00ff00; border-color: #00ff00; color: #000; }}
@@ -521,22 +484,22 @@ def export_interactive_html(df):
 
                     <div class="btn-group" role="group">
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapAll" checked onclick="toggleMcap('all')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapAll">All</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapAll" style="font-size: 0.75rem; padding: 2px 6px;">All</label>
     
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMega" onclick="toggleMcap('mega')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMega">Mega</label>
-
+                        <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.75rem; padding: 2px 6px;" title="> $200B">Mega</label>
+    
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapLarge" onclick="toggleMcap('large')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapLarge">Lrg</label>
-
+                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.75rem; padding: 2px 6px;" title="$10B - $200B">Lrg</label>
+    
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMid" onclick="toggleMcap('mid')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMid">Mid</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.75rem; padding: 2px 6px;" title="$2B - $10B">Mid</label>
     
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapSmall" onclick="toggleMcap('small')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapSmall">Sml</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.75rem; padding: 2px 6px;" title="$250M - $2B">Sml</label>
     
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMicro" onclick="toggleMcap('micro')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMicro">Mic</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.75rem; padding: 2px 6px;" title="< $250M">Mic</label>
                     </div>
                 </div>
 
@@ -571,7 +534,7 @@ def export_interactive_html(df):
                         <div class="legend-item"><span class="legend-key">Surge</span> Volume increase vs 30-Day Average.</div>
                         <div class="legend-item"><span class="legend-key">Mnt%</span> Change in Mentions vs 24h ago.</div>
                         <div class="legend-item"><span class="legend-key">Upvotes</span> Net Upvotes on Reddit.</div>
-                        <div class="legend-item"><span class="legend-key">Squeeze</span> (Mentions × Vol) / MarketCap.</div>
+                        <div class="legend-item"><span class="legend-key">&Sigma; Squeeze</span> (Mentions × Vol) / MarketCap.</div>
                     </div>
 
                 </div>
@@ -586,17 +549,13 @@ def export_interactive_html(df):
         
         function toggleMcap(type) {{
             if (type === 'all') {{
-                // If "All" is clicked, uncheck the others
                 $('input[name="mcapFilter"]').not('#mcapAll').prop('checked', false);
             }} else {{
-                // If a specific cap is clicked, uncheck "All"
                 $('#mcapAll').prop('checked', false);
-                // If everything is unchecked, turn "All" back on
                 if ($('input[name="mcapFilter"]:checked').length === 0) {{
                     $('#mcapAll').prop('checked', true);
                 }}
             }}
-            // THIS is what actually triggers the table to re-filter
             table.draw();
         }}
         function toggleLegend() {{
@@ -615,13 +574,13 @@ def export_interactive_html(df):
         }}
         function resetFilters() {{ $('#minPrice, #maxPrice, #minVol, #maxVol').val(''); $('#btnradio1').prop('checked', true); $('#mcapAll').prop('checked', true); redraw(); }}
         function exportTickers() {{
-            table = $('.table').DataTable(); var data = table.rows({{ search: 'applied', order: 'current', page: 'current' }}).data();
+            var table = $('.table').DataTable(); var data = table.rows({{ search: 'applied', order: 'current', page: 'current' }}).data();
             var tickers = []; data.each(function (value) {{ var div = document.createElement("div"); div.innerHTML = value[3]; var text = div.textContent || div.innerText || ""; if(text) tickers.push(text.trim()); }});
             if (tickers.length === 0) {{ alert("No visible tickers!"); return; }}
             var blob = new Blob([tickers.join(" ")], {{ type: "text/plain;charset=utf-8" }}); var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "ape_tickers_page.txt"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }}
         $(document).ready(function(){{ 
-            table=$('.table').DataTable({{
+            var table=$('.table').DataTable({{
                 "order":[[0,"asc"]], "pageLength": 25, "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 "columnDefs": [ 
                     {{ "visible": false, "targets": [13, 14, 15] }}, // Hide Industry, RawVol, and NEW MCap (Col 15)
@@ -686,8 +645,7 @@ def export_interactive_html(df):
         print(f"{C_GREEN}[+] Dashboard generated at: {filepath}{C_RESET}")
         return filename
     except Exception as e:
-        # Use the terminal color variable we defined at the top
-        print(f"\n{TERM_RED}[!] Export Failed: {e}{TERM_RESET}")
+        print(f"\n{C_RED}[!] Export Failed: {e}{C_RESET}")
         return None
 
 def send_discord_link(filename):
