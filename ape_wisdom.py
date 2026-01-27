@@ -316,74 +316,75 @@ def get_all_trending_stocks():
 
 def export_interactive_html(df):
     try:
+        if df.empty:
+            print(f"{C_RED}[!] DataFrame is empty, skipping export.{C_END}")
+            return None
+
         export_df = df.copy().astype(object)
 
-        for col in ['Squeeze', 'AvgVol', 'MCap', 'z_Squeeze']:
+        # 1. Safety Check: Ensure core columns exist
+        for col in ['Squeeze', 'AvgVol', 'MCap', 'z_Squeeze', 'Master_Score', 'z_Upvotes', 'z_Surge', 'z_Mnt%']:
             if col not in export_df.columns:
                 export_df[col] = 0
-    
+
         if not os.path.exists(PUBLIC_DIR): os.makedirs(PUBLIC_DIR)
 
         def color_span(text, color_hex): return f'<span style="color: {color_hex}; font-weight: bold;">{text}</span>'
+        
         def format_vol(v):
-            if v >= 1_000_000: return f"{v/1_000_000:.1f}M"
-            if v >= 1_000: return f"{v/1_000:.0f}K"
-            return str(v)
+            try:
+                v = float(v)
+                if v >= 1_000_000: return f"{v/1_000_000:.1f}M"
+                if v >= 1_000: return f"{v/1_000:.0f}K"
+                return str(int(v))
+            except: return "0"
 
         C_GREEN, C_YELLOW, C_RED, C_CYAN, C_MAGENTA, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ff00ff", "#ffffff"
+        
         export_df['Type_Tag'] = 'STOCK'
         tracker = HistoryTracker(HISTORY_FILE)
-        export_df['Vel'] = ""; export_df['Sig'] = ""
+        export_df['Vel'] = ""
+        export_df['Sig'] = ""
         export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
 
         for index, row in export_df.iterrows():
-            # Metrics
+            # Metrics (Velocity & Signals)
             m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
             v_val = m['vel']
             if v_val != 0:
                 v_color = C_GREEN if v_val > 0 else C_RED
                 export_df.at[index, 'Vel'] = color_span(f"{v_val:+d}", v_color)
             
-            # Signals
-            sig_text = ""; sig_color = C_WHITE
-            if m['div']: sig_text = "ACCUM"; sig_color = C_CYAN
-            elif m['streak'] > 5: sig_text = "TREND"; sig_color = C_YELLOW
+            sig_text, sig_color = "", C_WHITE
+            if m['div']: sig_text, sig_color = "ACCUM", C_CYAN
+            elif m['streak'] > 5: sig_text, sig_color = "TREND", C_YELLOW
             export_df.at[index, 'Sig'] = color_span(sig_text, sig_color)
             
-            # Heatmap Name
+            # Formatting Name, Rank+, Surge, Mnt%
             nm_clr = C_RED if row['Master_Score'] > 4.0 else (C_YELLOW if row['Master_Score'] > 2.0 else C_WHITE)
             export_df.at[index, 'Name'] = color_span(row['Name'], nm_clr)
             
-            # Rank+
             r_val = row['Rank+']
             if r_val != 0:
-                r_color = C_GREEN if r_val > 0 else C_RED
-                r_arrow = "▲" if r_val > 0 else "▼"
-                export_df.at[index, 'Rank+'] = color_span(f"{r_val} {r_arrow}", r_color)
+                r_color, r_arrow = (C_GREEN, "▲") if r_val > 0 else (C_RED, "▼")
+                export_df.at[index, 'Rank+'] = color_span(f"{abs(r_val)} {r_arrow}", r_color)
 
-            # Columns
             for col, z_col in [('Surge', 'z_Surge'), ('Mnt%', 'z_Mnt%')]:
                 val = f"{row[col]:.0f}%"
                 clr = C_YELLOW if row[z_col] >= 2.0 else (C_GREEN if row[z_col] >= 1.0 else C_WHITE)
                 export_df.at[index, col] = color_span(val, clr)
             
-            # --- NEW: Squeeze with Cyan Logic ---
+            # Squeeze & Upvotes
             sq_z = row.get('z_Squeeze', 0)
             sq_color = C_CYAN if sq_z > 1.5 else C_WHITE
             export_df.at[index, 'Squeeze'] = color_span(int(row['Squeeze']), sq_color)
+            export_df.at[index, 'Upvotes'] = color_span(int(row['Upvotes']), C_GREEN if row['z_Upvotes']>1.5 else C_WHITE)
             
-            export_df.at[index, 'Upvotes'] = color_span(row['Upvotes'], C_GREEN if row['z_Upvotes']>1.5 else C_WHITE)
-            
-            # ETF Badge logic
-            is_fund = row['Type'] == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
-            if is_fund:
-                badge = '<span style="background-color:#ff00ff; color:black; padding:2px 5px; border-radius:4px; font-size:11px; font-weight:bold; margin-right:6px; vertical-align:middle;">ETF</span>'
-                meta_text = color_span(row['Meta'], C_MAGENTA)
-            else:
-                badge = ""
-                meta_text = color_span(row['Meta'], C_WHITE)
-
-            export_df.at[index, 'Meta'] = f"{badge}{meta_text}"
+            # ETF logic & Meta
+            is_fund = row['Type'] == 'ETF' or any(x in str(row['Name']) for x in ['Trust', 'Fund', 'ETF'])
+            badge = '<span style="background-color:#ff00ff; color:black; padding:2px 5px; border-radius:4px; font-size:11px; font-weight:bold; margin-right:6px; vertical-align:middle;">ETF</span>' if is_fund else ""
+            meta_clr = C_MAGENTA if is_fund else C_WHITE
+            export_df.at[index, 'Meta'] = f"{badge}{color_span(row['Meta'], meta_clr)}"
             export_df.at[index, 'Type_Tag'] = 'ETF' if is_fund else 'STOCK'
             
             t = row['Sym']
@@ -391,9 +392,22 @@ def export_interactive_html(df):
             export_df.at[index, 'Price'] = f"${row['Price']:.2f}"
             export_df.at[index, 'Vol_Display'] = color_span(export_df.at[index, 'Vol_Display'], "#ccc")
 
-        export_df.rename(columns={'Meta': 'Industry/Sector', 'Vol_Display': 'Avg Vol'}, inplace=True)
+        # --- THE CRITICAL FIX: Rename before selecting columns ---
+        rename_map = {
+            'Meta': 'Industry/Sector',
+            'Vol_Display': 'Avg Vol',
+            'Surge': 'Surge', 
+            'Mnt%': 'Mnt%'
+        }
+        export_df.rename(columns=rename_map, inplace=True)
 
+        # Final Column Shopping List
         cols = ['Rank', 'Rank+', 'Name', 'Sym', 'Sig', 'Vel', 'Price', 'Avg Vol', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol', 'MCap']
+        
+        # Ensure every column in 'cols' exists (Insurance)
+        for c in cols:
+            if c not in export_df.columns: export_df[c] = "-"
+            
         final_df = export_df[cols]
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
