@@ -161,17 +161,20 @@ def filter_and_process(stocks):
     
     print(f"Processing {len(us_tickers)} tickers...")
     
-    # 2. Clean Cache
-    for t in us_tickers:
-        if t in local_cache and local_cache[t].get('delisted') == True:
-            last_checked_str = local_cache[t].get('last_checked', '2000-01-01')
-            try:
-                last_checked = datetime.datetime.strptime(last_checked_str, "%Y-%m-%d")
-                if (now - last_checked).days < DELISTED_RETRY_DAYS:
-                    if random.random() > 0.10: continue 
-                    else: del local_cache[t] 
-            except: pass
-        valid_tickers.append(t)
+    # 2. Clean Cache (Lottery Check: Only retry ONE delisted ticker per run)
+    # --------------------------
+    blacklist = [t for t in us_tickers if local_cache.get(t, {}).get('delisted')]
+    
+    if blacklist:
+        t = random.choice(blacklist) # Pick the "lottery" candidate
+        last_checked = datetime.datetime.strptime(local_cache[t].get('last_checked', '2000-01-01'), "%Y-%m-%d")
+        
+        if (now - last_checked).days >= DELISTED_RETRY_DAYS:
+            print(f"{C_YELLOW}[!] Lottery Check: Retrying {t}...{C_RESET}")
+            del local_cache[t] # Remove to force a fresh metadata fetch
+
+    # Re-build valid_tickers excluding those still marked as delisted
+    valid_tickers = [t for t in us_tickers if not local_cache.get(t, {}).get('delisted')]
     
     # 3. Fetch Missing Metadata
     missing = [t for t in valid_tickers if t not in local_cache]
