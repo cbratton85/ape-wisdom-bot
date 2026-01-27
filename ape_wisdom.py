@@ -148,7 +148,8 @@ def save_delisted(data):
 def filter_and_process(stocks):
     if not stocks: return pd.DataFrame()
     
-    # Normalize tickers
+    # 1. Setup and Deduplication
+    # --------------------------
     us_tickers = list(set([TICKER_FIXES.get(s['ticker'], s['ticker'].replace('.', '-')) for s in stocks]))
     local_cache = load_cache()
     now = datetime.datetime.utcnow()
@@ -156,6 +157,8 @@ def filter_and_process(stocks):
     
     print(f"Processing {len(us_tickers)} tickers...")
     
+    # 2. Clean Cache (Remove old delisted items)
+    # --------------------------
     for t in us_tickers:
         if t in local_cache and local_cache[t].get('delisted') == True:
             last_checked_str = local_cache[t].get('last_checked', '2000-01-01')
@@ -167,6 +170,8 @@ def filter_and_process(stocks):
             except: pass
         valid_tickers.append(t)
     
+    # 3. Fetch Missing Metadata
+    # --------------------------
     missing = [t for t in valid_tickers if t not in local_cache]
     if missing:
         print(f"Fetching metadata for {len(missing)} items...")
@@ -177,31 +182,41 @@ def filter_and_process(stocks):
             except: pass
         save_cache(local_cache)
 
+    # 4. Download Market Data
+    # --------------------------
     market_data = None
     use_cache = os.path.exists(MARKET_DATA_CACHE_FILE) and (time.time() - os.path.getmtime(MARKET_DATA_CACHE_FILE)) < CACHE_EXPIRY_SECONDS
     
-    if use_cache: market_data = pd.read_pickle(MARKET_DATA_CACHE_FILE)
+    if use_cache: 
+        market_data = pd.read_pickle(MARKET_DATA_CACHE_FILE)
     else:
         print(f"Downloading data for {len(valid_tickers)} tickers...")
+        # Use threads=True for speed
         market_data = yf.download(valid_tickers, period="40d", interval="1d", group_by='ticker', progress=False, threads=True)
         if not market_data.empty: market_data.to_pickle(MARKET_DATA_CACHE_FILE)
 
+    # Fix for single-ticker download structure
     if len(valid_tickers) == 1 and not market_data.empty:
         market_data.columns = pd.MultiIndex.from_product([valid_tickers, market_data.columns])
 
+    # 5. Build the List
+    # --------------------------
     final_list = []
     for stock in stocks:
         t = TICKER_FIXES.get(stock['ticker'], stock['ticker'].replace('.', '-'))
         try:
+            # Check if we have market data
             if isinstance(market_data.columns, pd.MultiIndex):
                 if t not in market_data.columns.levels[0]: 
                     local_cache[t] = {'delisted': True, 'last_checked': datetime.datetime.utcnow().strftime("%Y-%m-%d")}
                     continue
                 hist = market_data[t].dropna()
-            else: hist = market_data.dropna()
+            else: 
+                hist = market_data.dropna()
 
             if hist.empty: continue
 
+            # Basic Filters
             curr_p = hist['Close'].iloc[-1]
             avg_v = hist['Volume'].tail(AVG_VOLUME_DAYS).mean()
             
@@ -212,36 +227,57 @@ def filter_and_process(stocks):
 
             name = str(info.get('name', t)).replace('"', '').strip()[:NAME_MAX_WIDTH]
             
+            # Mentions Calculation
             cur_m = int(stock.get('mentions', 0))
             old_m = int(stock.get('mentions_24h_ago', 0))
             m_perc = int(((cur_m - old_m) / (old_m if old_m > 0 else 1) * 100))
             
+            # Surge Calculation
             s_perc = int((hist['Volume'].iloc[-1] / avg_v * 100)) if avg_v > 0 else 0
             
-            # --- CAPTURE MARKET CAP ---
-            mcap = info.get('mcap', 0) or 0
+            # --- NEW: Squeeze & MCap Logic (Added Safely) ---
+            try:
+                mcap = float(info.get('mcap', 0) or 0)
+            except: 
+                mcap = 0
             
-            # Use mcap for Squeeze calc (log scale)
-            squeeze_score = (cur_m * s_perc) / max(math.log(mcap if mcap > 0 else 10**9, 10), 1)
+            # Avoid log(0) errors by using max(log(mcap), 1)
+            # Default to 1B (10^9) if mcap is missing to normalize the score
+            log_mcap = math.log(mcap if mcap > 0 else 10**9, 10)
+            squeeze_score = (cur_m * s_perc) / max(log_mcap, 1)
+            # ------------------------------------------------
 
             rank_now = int(stock.get('rank', 0))
             rank_old = int(stock.get('rank_24h_ago', 0))
             rank_plus = (rank_old - rank_now) if rank_old != 0 else 0
 
             final_list.append({
-                "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
-                "Price": float(curr_p), "AvgVol": int(avg_v),
-                "Surge": s_perc, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
-                "Upvotes": int(stock.get('upvotes', 0)), "Meta": info.get('meta', '-'), 
-                "Squeeze": squeeze_score, 
-                "MCap": mcap # <--- NEW FIELD
+                "Rank": rank_now, 
+                "Name": name, 
+                "Sym": t, 
+                "Rank+": rank_plus,
+                "Price": float(curr_p), 
+                "AvgVol": int(avg_v),
+                "Surge": s_perc, 
+                "Mnt%": m_perc, 
+                "Type": info.get('type', 'EQUITY'),
+                "Upvotes": int(stock.get('upvotes', 0)), 
+                "Meta": info.get('meta', '-'), 
+                "Squeeze": squeeze_score,  # Must be here for Z-score to work
+                "MCap": mcap               # Must be here for Filter to work
             })
-        except: continue
+        except Exception as e: 
+            # If a single stock fails, skip it but don't crash
+            continue
     
+    # 6. Scoring and DataFrame Creation
+    # --------------------------
     df = pd.DataFrame(final_list)
     if not df.empty:
+        # Standard Ranking (Uses Weights)
         cols = ['Rank+', 'Surge', 'Mnt%', 'Upvotes']
         weights = {'Rank+': 1.1, 'Surge': 1.0, 'Mnt%': 0.8, 'Upvotes': 1.1}
+        
         for col in cols:
             clean_series = df[col].clip(lower=0).astype(float)
             log_data = np.log1p(clean_series)
@@ -251,24 +287,31 @@ def filter_and_process(stocks):
         df['Master_Score'] = 0
         for col in cols: df['Master_Score'] += df[f'z_{col}'].clip(lower=0) * weights[col]
 
-        # --- PASTE YOUR NEW CODE HERE ---
-        # This calculates the Z-Score for Squeeze INDEPENDENTLY (Visual only)
-        sq_series = df['Squeeze'].clip(lower=0).astype(float)
-        log_sq = np.log1p(sq_series)
-        mean_sq = log_sq.mean(); std_sq = log_sq.std(ddof=0)
-        
-        # If std is 0 (all numbers same), set z-score to 0 to avoid crash
-        df['z_Squeeze'] = 0 if std_sq == 0 else (log_sq - mean_sq) / std_sq
+        # --- INDEPENDENT Squeeze Z-Score (Visual Only) ---
+        # This is the block you added, but it needs the 'Squeeze' column to exist first!
+        if 'Squeeze' in df.columns:
+            sq_series = df['Squeeze'].clip(lower=0).astype(float)
+            log_sq = np.log1p(sq_series)
+            mean_sq = log_sq.mean(); std_sq = log_sq.std(ddof=0)
+            df['z_Squeeze'] = 0 if std_sq == 0 else (log_sq - mean_sq) / std_sq
+        else:
+            df['z_Squeeze'] = 0 # Fallback safety
+        # ------------------------------------------------
 
-        tracker = HistoryTracker(HISTORY_FILE)
-    
+    # 7. History Tracking & Saving
+    # --------------------------
+    tracker = HistoryTracker(HISTORY_FILE)
     vel, div, strk = [], [], []
     for _, row in df.iterrows():
         m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
         vel.append(m['vel']); div.append(m['div']); strk.append(m['streak'])
-    df['Velocity'] = vel; df['Divergence'] = div; df['Streak'] = strk
+    
+    df['Velocity'] = vel
+    df['Divergence'] = div
+    df['Streak'] = strk
+    
     tracker.save(df)
-    save_cache(local_cache) # Ensure cache is saved
+    save_cache(local_cache)
     return df
 def get_all_trending_stocks():
     all_results, page = [], 1
