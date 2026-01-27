@@ -706,7 +706,7 @@ def send_discord_link(filename):
     print(f"\n{C_YELLOW}--- Sending Link to Discord... ---{C_RESET}")
     DISCORD_URL = os.environ.get('DISCORD_WEBHOOK')
     REPO_NAME = os.environ.get('GITHUB_REPOSITORY') 
-    
+
     if not DISCORD_URL or not REPO_NAME: 
         print("Missing Discord URL or Repo Name")
         return
