@@ -442,6 +442,17 @@ def export_interactive_html(df):
             .page-link {{ background-color: #222; border-color: #444; color: #00ff00; }}
             .page-item.active .page-link {{ background-color: #00ff00; border-color: #00ff00; color: #000; }}
             .page-item.disabled .page-link {{ background-color: #111; border-color: #333; color: #555; }}
+
+            /* Makes the search box wider and aligns it */
+            .dataTables_filter input {{
+                width: 350px !important;
+                background: #111 !important;
+                border: 1px solid #555 !important;
+                color: #fff !important;
+                height: 28px !important;
+                border-radius: 4px;
+                margin-left: 10px;
+            }}
         </style>
         </head>
         <body>
@@ -534,7 +545,7 @@ def export_interactive_html(df):
                         <div class="legend-item"><span class="legend-key">Surge</span> Volume increase vs 30-Day Average.</div>
                         <div class="legend-item"><span class="legend-key">Mnt%</span> Change in Mentions vs 24h ago.</div>
                         <div class="legend-item"><span class="legend-key">Upvotes</span> Net Upvotes on Reddit.</div>
-                        <div class="legend-item"><span class="legend-key">&Sigma; Squeeze</span> (Mentions × Vol) / MarketCap.</div>
+                        <div class="legend-item"><span class="legend-key">Squeeze</span> (Mentions × Vol) / MarketCap.</div>
                     </div>
 
                 </div>
@@ -572,7 +583,7 @@ def export_interactive_html(df):
             let mult = 1; if (str.endsWith('k')) mult = 1000; else if (str.endsWith('m')) mult = 1000000; else if (str.endsWith('b')) mult = 1000000000;
             return parseFloat(str) * mult || 0;
         }}
-        function resetFilters() {{ $('#minPrice, #maxPrice, #minVol, #maxVol').val(''); $('#btnradio1').prop('checked', true); $('input[name="mcapFilter"]').prop('checked', false); $('#mcapAll').prop('checked', true); table.darw(); redraw(); }}
+        function resetFilters() {{ $('#minPrice, #maxPrice, #minVol, #maxVol').val(''); $('#btnradio1').prop('checked', true); $('input[name="mcapFilter"]').prop('checked', false); $('#mcapAll').prop('checked', true); table.draw();  }}
         function exportTickers() {{
             var table = $('.table').DataTable(); var data = table.rows({{ search: 'applied', order: 'current', page: 'current' }}).data();
             var tickers = []; data.each(function (value) {{ var div = document.createElement("div"); div.innerHTML = value[3]; var text = div.textContent || div.innerText || ""; if(text) tickers.push(text.trim()); }});
