@@ -715,14 +715,20 @@ def export_interactive_html(df):
 
 def send_discord_link(filename):
     print(f"\n{C_YELLOW}--- Sending Link to Discord... ---{C_RESET}")
+    
+    # 1. Check if the environment variable exists
     DISCORD_URL = os.environ.get('DISCORD_WEBHOOK')
     REPO_NAME = os.environ.get('GITHUB_REPOSITORY') 
 
-    if not DISCORD_URL or not REPO_NAME: 
-        print("Missing Discord URL or Repo Name")
+    if not DISCORD_URL:
+        print(f"{C_RED}[!] Error: DISCORD_WEBHOOK is missing. Check GitHub Secrets.{C_RESET}")
+        return
+    if not REPO_NAME:
+        print(f"{C_RED}[!] Error: GITHUB_REPOSITORY is missing.{C_RESET}")
         return
 
     try:
+        # 2. Construct the URL
         user, repo = REPO_NAME.split('/')
         website_url = f"https://{user}.github.io/{repo}/{filename}"
         
@@ -731,28 +737,42 @@ def send_discord_link(filename):
                f"🔗 **[Click Here to Open Dashboard]({website_url})**\n"
                f"*(Note: It may take ~30s for the link to go live)*")
 
-        requests.post(DISCORD_URL, json={"content": msg})
-        print(f"{C_GREEN}[+] Discord Link Sent!{C_RESET}")
+        # 3. Send and CHECK the status code
+        response = requests.post(DISCORD_URL, json={"content": msg})
+        
+        if response.status_code == 204:
+            print(f"{C_GREEN}[+] Discord Link Sent Successfully!{C_RESET}")
+        else:
+            # This logs the specific error from Discord (e.g., Rate Limit, 404)
+            print(f"{C_RED}[!] Discord Failed: {response.status_code} - {response.text}{C_RESET}")
+
     except Exception as e:
-        print(f"Error sending Discord link: {e}")
+        print(f"{C_RED}[!] Exception sending Discord link: {e}{C_RESET}")
 
 if __name__ == "__main__":
+    # Handle the --auto flag or standard run
     if "--auto" in sys.argv:
         print("Starting Auto Scan...")
-        raw = get_all_trending_stocks()
-        if raw:
-            df = filter_and_process(raw)
-            fname = export_interactive_html(df)
-            if fname and 'send_discord_link' in globals():
-                send_discord_link(fname)
-        sys.exit()
-
-
+    
+    # 1. Fetch Data
     raw = get_all_trending_stocks()
+    if not raw:
+        print(f"{C_RED}[!] No data returned from ApeWisdom API. Exiting without Discord post.{C_RESET}")
+        sys.exit(0) # Exit cleanly, but log that we found nothing
+
+    # 2. Process Data
     df = filter_and_process(raw)
+    if df.empty:
+        print(f"{C_RED}[!] Data fetched, but all tickers were filtered out. Exiting.{C_RESET}")
+        sys.exit(0)
+
+    # 3. Generate HTML
     fname = export_interactive_html(df)
     
+    # 4. Send to Discord
     if fname:
         send_discord_link(fname)
-        
+    else:
+        print(f"{C_RED}[!] HTML generation failed. Skipping Discord.{C_RESET}")
+    
     print("Done.")
