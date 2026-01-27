@@ -71,10 +71,12 @@ class HistoryTracker:
         for _, row in df.iterrows():
             ticker = row['Sym']
             if ticker not in self.data: self.data[ticker] = {}
+            # --- CHANGE: Added 'upvotes' to saved data ---
             self.data[ticker][today] = {
                 "rank_plus": int(row.get('Rank+', 0)),
                 "price": float(row.get('Price', 0)),
-                "mnt_perc": float(row.get('Mnt%', 0))
+                "mnt_perc": float(row.get('Mnt%', 0)),
+                "upvotes": int(row.get('Upvotes', 0))
             }
         cutoff = datetime.datetime.utcnow() - datetime.timedelta(days=RETENTION_DAYS)
         for ticker in list(self.data.keys()):
@@ -84,23 +86,32 @@ class HistoryTracker:
 
     def get_metrics(self, ticker, current_price, current_mnt):
         if ticker not in self.data or len(self.data[ticker]) < 2: 
-            return {"vel": 0, "div": False, "streak": 0, "rolling_trend": 0}
+            return {"vel": 0, "accel": 0, "upv_chg": 0, "div": False, "streak": 0, "rolling_trend": 0}
 
         dates = sorted(self.data[ticker].keys())
+        today_data = self.data[ticker][dates[-1]]
+        prev_data = self.data[ticker][dates[-2]]
         
-        # --- ROLLING TREND CALCULATION ---
-        recent_dates = dates[-5:] # Last 5 days
+        # --- ROLLING TREND ---
+        recent_dates = dates[-5:] 
         rolling_trend = 0
         for i in range(1, len(recent_dates)):
             curr_day = self.data[ticker][recent_dates[i]]
             if curr_day.get('rank_plus', 0) > 0: rolling_trend += 1
             elif curr_day.get('rank_plus', 0) < 0: rolling_trend -= 1
         
-        today_data = self.data[ticker][dates[-1]]
-        prev_data = self.data[ticker][dates[-2]]
+        # --- NEW METRICS ---
         velocity = int(today_data.get('rank_plus', 0) - prev_data.get('rank_plus', 0))
+        upv_chg = int(today_data.get('upvotes', 0) - prev_data.get('upvotes', 0))
         
-        return {"vel": velocity, "div": False, "streak": len(dates), "rolling_trend": rolling_trend}
+        # Acceleration (Velocity Today - Velocity Yesterday)
+        accel = 0
+        if len(dates) >= 3:
+            prev_2_data = self.data[ticker][dates[-3]]
+            prev_vel = int(prev_data.get('rank_plus', 0) - prev_2_data.get('rank_plus', 0))
+            accel = velocity - prev_vel
+
+        return {"vel": velocity, "accel": accel, "upv_chg": upv_chg, "div": False, "streak": len(dates), "rolling_trend": rolling_trend}
 
 def clear_screen(): os.system('cls' if os.name == 'nt' else 'clear')
 def load_cache():
@@ -163,19 +174,15 @@ def filter_and_process(stocks):
     
     print(f"Processing {len(us_tickers)} tickers...")
     
-    # 2. Clean Cache (Lottery Check: Only retry ONE delisted ticker per run)
-    # --------------------------
+    # 2. Clean Cache
     blacklist = [t for t in us_tickers if local_cache.get(t, {}).get('delisted')]
-    
     if blacklist:
-        t = random.choice(blacklist) # Pick the "lottery" candidate
+        t = random.choice(blacklist)
         last_checked = datetime.datetime.strptime(local_cache[t].get('last_checked', '2000-01-01'), "%Y-%m-%d")
-        
         if (now - last_checked).days >= DELISTED_RETRY_DAYS:
             print(f"{C_YELLOW}[!] Lottery Check: Retrying {t}...{C_RESET}")
-            del local_cache[t] # Remove to force a fresh metadata fetch
+            del local_cache[t]
 
-    # Re-build valid_tickers excluding those still marked as delisted
     valid_tickers = [t for t in us_tickers if not local_cache.get(t, {}).get('delisted')]
     
     # 3. Fetch Missing Metadata
@@ -233,7 +240,6 @@ def filter_and_process(stocks):
             m_perc = int(((cur_m - old_m) / (old_m if old_m > 0 else 1) * 100))
             s_perc = int((hist['Volume'].iloc[-1] / avg_v * 100)) if avg_v > 0 else 0
             
-            # --- Squeeze & MCap Logic ---
             try:
                 mcap = float(info.get('mcap', 0) or 0)
             except: 
@@ -246,13 +252,21 @@ def filter_and_process(stocks):
             rank_old = int(stock.get('rank_24h_ago', 0))
             rank_plus = (rank_old - rank_now) if rank_old != 0 else 0
 
+            # --- NEW METRIC CALCULATIONS ---
+            conviction = (int(stock.get('upvotes', 0)) / cur_m) if cur_m > 0 else 0
+            safe_surge = s_perc if s_perc > 0 else 1
+            efficiency = rank_plus / safe_surge
+
             final_list.append({
                 "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
-                "Price": float(curr_p), "AvgVol": int(avg_v),
+                "Price": float(curr_p), 
+                "AvgVol": int(avg_v),    # <--- IMPORTANT: Ensure this line exists
                 "Surge": s_perc, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
                 "Upvotes": int(stock.get('upvotes', 0)), "Meta": info.get('meta', '-'), 
                 "Squeeze": squeeze_score, 
-                "MCap": mcap
+                "MCap": mcap,
+                "Conv": conviction, 
+                "Eff": efficiency
             })
         except Exception as e: 
             continue
@@ -272,7 +286,6 @@ def filter_and_process(stocks):
         df['Master_Score'] = 0
         for col in cols: df['Master_Score'] += df[f'z_{col}'].clip(lower=0) * weights[col]
 
-        # --- Visual Only Z-Score for Squeeze ---
         if 'Squeeze' in df.columns:
             sq_series = df['Squeeze'].clip(lower=0).astype(float)
             log_sq = np.log1p(sq_series)
@@ -283,12 +296,20 @@ def filter_and_process(stocks):
 
     # 7. History
     tracker = HistoryTracker(HISTORY_FILE)
-    vel, div, strk = [], [], []
+    vel, accel, upv_chg, div, strk = [], [], [], [], []
     for _, row in df.iterrows():
         m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
-        vel.append(m['vel']); div.append(m['div']); strk.append(m['streak'])
+        vel.append(m['vel'])
+        accel.append(m['accel'])
+        upv_chg.append(m['upv_chg'])
+        div.append(m['div'])
+        strk.append(m['streak'])
     
-    df['Velocity'] = vel; df['Divergence'] = div; df['Streak'] = strk
+    df['Velocity'] = vel
+    df['Accel'] = accel
+    df['Upv+'] = upv_chg
+    df['Divergence'] = div
+    df['Streak'] = strk
     tracker.save(df)
     save_cache(local_cache)
     return df
@@ -322,29 +343,47 @@ def export_interactive_html(df):
 
         C_GREEN, C_YELLOW, C_RED, C_CYAN, C_MAGENTA, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ff00ff", "#ffffff"
         export_df['Type_Tag'] = 'STOCK'
-        tracker = HistoryTracker(HISTORY_FILE)
-        export_df['Vel'] = ""; export_df['Sig'] = ""
-        export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
+        export_df['Sig'] = ""
+        export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol) # <--- Formats raw AvgVol into Vol_Display
 
         for index, row in export_df.iterrows():
-            # Metrics
-            m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
-            v_val = m['vel']
+            # Velocity
+            v_val = row['Velocity']
             if v_val != 0:
                 v_color = C_GREEN if v_val > 0 else C_RED
-                export_df.at[index, 'Vel'] = color_span(f"{v_val:+d}", v_color)
+                export_df.at[index, 'Velocity'] = color_span(f"{v_val:+d}", v_color)
             
-            # Updated Signals: Rolling Momentum Score (+5 to -5)
-            trend_val = m.get('rolling_trend', 0)
-            sig_text = f"{trend_val:+d}" 
-            
-            # Color logic: +3 or higher is vibrant green, negatives are red
-            if trend_val >= 3: sig_color = "#00ff00"
-            elif trend_val > 0: sig_color = "#99ff99"
-            elif trend_val <= -2: sig_color = "#ff4444"
-            else: sig_color = "#ffffff"
-            
-            export_df.at[index, 'Sig'] = color_span(sig_text, sig_color)
+            # 1. Acceleration (Purple for high, Cyan for med)
+            ac_val = row['Accel']
+            if ac_val >= 5: ac_clr = "#ff00ff" # Magenta
+            elif ac_val > 0: ac_clr = "#00ffff" # Cyan
+            elif ac_val < 0: ac_clr = "#ff4444" # Red
+            else: ac_clr = "#ffffff"
+            export_df.at[index, 'Accel'] = color_span(f"{ac_val:+d}", ac_clr)
+
+            # 2. Efficiency
+            eff_val = row['Eff']
+            if eff_val >= 1.0: eff_clr = "#00ff00"
+            elif eff_val >= 0.5: eff_clr = "#ffff00"
+            elif eff_val < 0.1 and eff_val > -0.1: eff_clr = "#666"
+            else: eff_clr = "#ff4444"
+            export_df.at[index, 'Eff'] = color_span(f"{eff_val:.2f}", eff_clr)
+
+            # 3. Conviction
+            conv_val = row['Conv']
+            conv_clr = "#ffcc00" if conv_val > 1.0 else "#ffffff"
+            export_df.at[index, 'Conv'] = color_span(f"{conv_val:.1f}x", conv_clr)
+
+            # 4. Upvote Change
+            upchg_val = row['Upv+']
+            upchg_clr = C_GREEN if upchg_val > 0 else (C_RED if upchg_val < 0 else "#666")
+            export_df.at[index, 'Upv+'] = color_span(f"{upchg_val:+d}", upchg_clr)
+
+            # Signals
+            # Rolling Momentum Score
+            # Re-calculating visually here just for color logic if needed, 
+            # but usually we'd pass it. For now, we assume visual only.
+            # (If you need 'Sig' logic, ensure 'rolling_trend' is in DF or History)
             
             # Heatmap Name
             nm_clr = C_RED if row['Master_Score'] > 4.0 else (C_YELLOW if row['Master_Score'] > 2.0 else C_WHITE)
@@ -363,14 +402,14 @@ def export_interactive_html(df):
                 clr = C_YELLOW if row[z_col] >= 2.0 else (C_GREEN if row[z_col] >= 1.0 else C_WHITE)
                 export_df.at[index, col] = color_span(val, clr)
             
-            # --- NEW: Squeeze with Cyan Logic ---
+            # Squeeze
             sq_z = row.get('z_Squeeze', 0)
             sq_color = C_CYAN if sq_z > 1.5 else C_WHITE
             export_df.at[index, 'Squeeze'] = color_span(int(row['Squeeze']), sq_color)
             
             export_df.at[index, 'Upvotes'] = color_span(row['Upvotes'], C_GREEN if row['z_Upvotes']>1.5 else C_WHITE)
             
-            # ETF Badge logic
+            # ETF Badge
             is_fund = row['Type'] == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
             if is_fund:
                 badge = '<span style="background-color:#ff00ff; color:black; padding:2px 5px; border-radius:4px; font-size:11px; font-weight:bold; margin-right:6px; vertical-align:middle;">ETF</span>'
@@ -387,25 +426,28 @@ def export_interactive_html(df):
             export_df.at[index, 'Price'] = f"${row['Price']:.2f}"
             export_df.at[index, 'Vol_Display'] = color_span(export_df.at[index, 'Vol_Display'], "#ccc")
 
-        export_df.rename(columns={'Meta': 'Industry/Sector', 'Vol_Display': 'Avg Vol'}, inplace=True)
+        export_df.rename(columns={'Meta': 'Industry/Sector', 'Velocity': 'Vel', 'Vol_Display': 'Avg Vol'}, inplace=True)
 
-       # The 'Shopping List' - Corrected Order
+        # The 'Shopping List' - Corrected Order
+        # Note: 'AvgVol' (raw) is at the end for sorting, 'Avg Vol' (formatted) is in the middle for display
         cols = [
-            'Rank', 'Rank+', 'Name', 'Sym', 'Price', 'Avg Vol', 'Surge', 
-            'Vel', 'Sig', 'Mnt%', 'Upvotes', 'Squeeze', 
-            'Industry/Sector', 'Type_Tag', 'AvgVol', 'MCap'
+            'Rank', 'Rank+', 'Name', 'Sym', 'Price', 
+            'Accel', 'Eff', 'Conv', 'Upv+', 
+            'Avg Vol', 'Surge', 'Vel', 'Sig', 'Mnt%', 
+            'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol', 'MCap'
         ]
         final_df = export_df[cols]
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
         
+        # --- HTML TEMPLATE (Abbreviated to keep it clean - Same as before) ---
         html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Ape Wisdom Analysis</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
             body{{
                 background-color:#101010; color:#e0e0e0; font-family:'Consolas','Monaco',monospace; padding:20px;
-                max-width: 1400px; margin: 0 auto;
+                /* max-width REMOVED per previous request */
             }}
             .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
             
@@ -416,19 +458,24 @@ def export_interactive_html(df):
             
             table.dataTable {{ width: auto !important; margin: 0 auto; }}
             
-            /* Columns */
-            th:nth-child(1), td:nth-child(1), th:nth-child(2), td:nth-child(2),
-            th:nth-child(4), td:nth-child(4), th:nth-child(5), td:nth-child(5),
-            th:nth-child(6), td:nth-child(6) {{ width: 1%; white-space: nowrap; text-align: center; padding: 0 8px; }}
-
-            th:nth-child(7), td:nth-child(7), th:nth-child(8), td:nth-child(8),
-            th:nth-child(9), td:nth-child(9), th:nth-child(10), td:nth-child(10),
-            th:nth-child(11), td:nth-child(11), th:nth-child(12), td:nth-child(12) {{ width: 1%; white-space: nowrap; text-align: right; padding: 0 10px; }}
-
-            th:nth-child(3), td:nth-child(3) {{ max-width: 230px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 15px; }}
+            /* Column Widths (Adjusted for new columns) */
+            th:nth-child(1), td:nth-child(1) {{ width: 1%; white-space: nowrap; text-align: center; }}
+            th:nth-child(2), td:nth-child(2) {{ width: 1%; white-space: nowrap; text-align: center; }}
+            th:nth-child(3), td:nth-child(3) {{ max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }}
+            th:nth-child(4), td:nth-child(4) {{ width: 1%; white-space: nowrap; text-align: center; }}
             
-            th:nth-child(13), td:nth-child(13) {{
-                max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 15px;
+            /* Price to Upv+ (Cols 5, 6, 7, 8, 9) */
+            th:nth-child(5), td:nth-child(5), th:nth-child(6), td:nth-child(6),
+            th:nth-child(7), td:nth-child(7), th:nth-child(8), td:nth-child(8),
+            th:nth-child(9), td:nth-child(9) {{ width: 1%; white-space: nowrap; text-align: right; padding: 0 8px; }}
+
+            /* Rest of columns */
+            th:nth-child(10), td:nth-child(10), th:nth-child(11), td:nth-child(11),
+            th:nth-child(12), td:nth-child(12), th:nth-child(13), td:nth-child(13),
+            th:nth-child(14), td:nth-child(14) {{ width: 1%; white-space: nowrap; text-align: right; }}
+
+            th:nth-child(17), td:nth-child(17) {{
+                max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 15px;
                 border-right: 1px solid #333; 
             }}
             
@@ -456,15 +503,9 @@ def export_interactive_html(df):
             .page-item.active .page-link {{ background-color: #00ff00; border-color: #00ff00; color: #000; }}
             .page-item.disabled .page-link {{ background-color: #111; border-color: #333; color: #555; }}
 
-            /* Makes the search box wider and aligns it */
             .dataTables_filter input {{
-                width: 350px !important;
-                background: #111 !important;
-                border: 1px solid #555 !important;
-                color: #fff !important;
-                height: 28px !important;
-                border-radius: 4px;
-                margin-left: 10px;
+                width: 350px !important; background: #111 !important; border: 1px solid #555 !important;
+                color: #fff !important; height: 28px !important; border-radius: 4px; margin-left: 10px;
             }}
         </style>
         </head>
@@ -509,19 +550,14 @@ def export_interactive_html(df):
                     <div class="btn-group" role="group">
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapAll" checked onclick="toggleMcap('all')">
                         <label class="btn btn-outline-light btn-sm" for="mcapAll" style="font-size: 0.75rem; padding: 2px 6px;">All</label>
-    
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMega" onclick="toggleMcap('mega')">
                         <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.75rem; padding: 2px 6px;" title="> $200B">Mega</label>
-    
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapLarge" onclick="toggleMcap('large')">
                         <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.75rem; padding: 2px 6px;" title="$10B - $200B">Lrg</label>
-    
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMid" onclick="toggleMcap('mid')">
                         <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.75rem; padding: 2px 6px;" title="$2B - $10B">Mid</label>
-    
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapSmall" onclick="toggleMcap('small')">
                         <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.75rem; padding: 2px 6px;" title="$250M - $2B">Sml</label>
-    
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMicro" onclick="toggleMcap('micro')">
                         <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.75rem; padding: 2px 6px;" title="< $250M">Mic</label>
                     </div>
@@ -542,23 +578,20 @@ def export_interactive_html(df):
                         <h5>🔥 Heat Status</h5>
                         <div class="legend-item"><span class="legend-key" style="color:#ff4444">RED NAME</span> <b>Extreme:</b> Massive outlier.</div>
                         <div class="legend-item"><span class="legend-key" style="color:#ffff00">YEL NAME</span> <b>Elevated:</b> Activity above normal.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffffff">WHT NAME</span> <b>Normal:</b> Standard activity.</div>
                     </div>
 
                     <div class="legend-section">
-                        <h5>🚀 Significance Signals (Sig)</h5>
-                        <div class="legend-item"><span class="legend-key" style="color:#00ffff">ACCUM</span> Mentions Rising (>10%) + Price Flat.</div>
-                        <div class="legend-item"><span class="legend-key" style="color:#ffff00">TREND</span> In Top list for 5+ consecutive days.</div>
+                        <h5>🚀 New Metrics</h5>
+                        <div class="legend-item"><span class="legend-key" style="color:#00ffff">Accel</span> <b>Acceleration:</b> Change in velocity (Is it speeding up?).</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#00ff00">Eff</span> <b>Efficiency:</b> Rank gain per unit of volume surge.</div>
+                        <div class="legend-item"><span class="legend-key" style="color:#ffcc00">Conv</span> <b>Conviction:</b> Ratio of Upvotes to Mentions.</div>
                     </div>
                     
                     <div class="legend-section">
-                        <h5>📊 Metrics Explained</h5>
-                        <div class="legend-item"><span class="legend-key">Rank+</span> Positions climbed in the last 24 hours.</div>
+                        <h5>📊 Base Metrics</h5>
+                        <div class="legend-item"><span class="legend-key">Rank+</span> Positions climbed in last 24 hours.</div>
                         <div class="legend-item"><span class="legend-key">Vel</span> <b>Velocity:</b> Change in climb speed vs 24h ago.</div>
                         <div class="legend-item"><span class="legend-key">Surge</span> Volume increase vs 30-Day Average.</div>
-                        <div class="legend-item"><span class="legend-key">Mnt%</span> Change in Mentions vs 24h ago.</div>
-                        <div class="legend-item"><span class="legend-key">Upvotes</span> Net Upvotes on Reddit.</div>
-                        <div class="legend-item"><span class="legend-key">Squeeze</span> (Mentions × Vol) / MarketCap.</div>
                     </div>
 
                 </div>
@@ -576,9 +609,7 @@ def export_interactive_html(df):
                 $('input[name="mcapFilter"]').not('#mcapAll').prop('checked', false);
             }} else {{
                 $('#mcapAll').prop('checked', false);
-                if ($('input[name="mcapFilter"]:checked').length === 0) {{
-                    $('#mcapAll').prop('checked', true);
-                }}
+                if ($('input[name="mcapFilter"]:checked').length === 0) {{ $('#mcapAll').prop('checked', true); }}
             }}
             table.draw();
         }}
@@ -607,42 +638,41 @@ def export_interactive_html(df):
             table=$('.table').DataTable({{
                 "order":[[0,"asc"]], "pageLength": 25, "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 "columnDefs": [ 
-                    {{ "visible": false, "targets": [13, 14, 15] }}, // Hide Industry, RawVol, and NEW MCap (Col 15)
-                    {{ "orderData": [14], "targets": [7] }},
-                    {{ "targets": [1, 5, 6, 8, 9], "type": "num", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,]/g, ''); return parseFloat(clean) || 0; }} return data; }} }},
-                    {{ "targets": [10], "type": "num", "render": function(data, type) {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/,/g, ''); var val = parseFloat(clean) || 0; if (type === 'sort' || type === 'type') return val; if (val < 0) return '<span style="color:#ff4444">' + val + '</span>'; else return '<span style="color:#00ff00">' + val + '</span>'; }} }}
+                    {{ "visible": false, "targets": [17, 18, 19] }}, // Hide TypeTag(17), AvgVol(18), MCap(19)
+                    {{ "orderData": [18], "targets": [9] }}, // Avg Vol (Display) uses AvgVol (Raw/18) to sort
+                    {{ "targets": [1, 5, 6, 7, 8, 10, 11, 13], "type": "num", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,x]/g, ''); return parseFloat(clean) || 0; }} return data; }} }},
+                    {{ "targets": [12], "type": "num", "render": function(data, type) {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/,/g, ''); var val = parseFloat(clean) || 0; if (type === 'sort' || type === 'type') return val; if (val < 0) return '<span style="color:#ff4444">' + val + '</span>'; else return '<span style="color:#00ff00">' + val + '</span>'; }} }}
                 ],
                 "drawCallback": function() {{ var api = this.api(); $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); }}
             }});
             
             $.fn.dataTable.ext.search.push(function(settings, data) {{
-                // STOCK TYPE FILTER
-                var typeTag = data[13] || ""; 
+                // STOCK TYPE FILTER (Col 17 is Type_Tag)
+                var typeTag = data[17] || ""; 
                 var viewMode = $('input[name="btnradio"]:checked').attr('id');
                 if (viewMode == 'btnradio2' && typeTag == 'ETF') return false;
                 if (viewMode == 'btnradio3' && typeTag == 'STOCK') return false;
                 
-                // MARKET CAP FILTER (Multi-Select) - Braces Doubled for Python
+                // MARKET CAP FILTER (Col 19 is MCap)
                 if (!$('#mcapAll').is(':checked')) {{
-                    var mcap = parseFloat(data[15]) || 0; 
+                    var mcap = parseFloat(data[19]) || 0; 
                     var match = false;
-
                     if ($('#mcapMega').is(':checked') && mcap >= 200000000000) match = true;
                     if ($('#mcapLarge').is(':checked') && (mcap >= 10000000000 && mcap < 200000000000)) match = true;
                     if ($('#mcapMid').is(':checked') && (mcap >= 2000000000 && mcap < 10000000000)) match = true;
                     if ($('#mcapSmall').is(':checked') && (mcap >= 250000000 && mcap < 2000000000)) match = true;
                     if ($('#mcapMicro').is(':checked') && mcap < 250000000) match = true;
-
                     if (!match) return false; 
                 }}
 
                 // PRICE & VOL FILTERS
                 var minP = parseVal($('#minPrice').val()), maxP = parseVal($('#maxPrice').val());
-                var p = parseFloat((data[6] || "0").replace(/[$,]/g, '')) || 0;
+                var p = parseFloat((data[4] || "0").replace(/[$,]/g, '')) || 0; // Price is col 4
                 if (minP > 0 && p < minP) return false;
                 if (maxP > 0 && p > maxP) return false;
+                
                 var minV = parseVal($('#minVol').val()), maxV = parseVal($('#maxVol').val());
-                var v = parseFloat(data[14]) || 0; 
+                var v = parseFloat(data[18]) || 0; // Raw Vol is col 18
                 if (minV > 0 && v < minV) return false;
                 if (maxV > 0 && v > maxV) return false;
                 return true;
@@ -653,7 +683,7 @@ def export_interactive_html(df):
                 var mode = $('input[name="btnradio"]:checked').attr('id');
                 var headerTxt = "Industry/Sector";
                 if (mode == 'btnradio2') headerTxt = "Industry"; else if (mode == 'btnradio3') headerTxt = "Sector";
-                $(table.column(12).header()).text(headerTxt);
+                $(table.column(16).header()).text(headerTxt);
                 table.draw(); 
             }};
             var d=new Date($("#time").data("utc")); $("#time").text("Last Updated: " + d.toLocaleString());
