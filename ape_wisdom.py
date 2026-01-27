@@ -84,21 +84,23 @@ class HistoryTracker:
 
     def get_metrics(self, ticker, current_price, current_mnt):
         if ticker not in self.data or len(self.data[ticker]) < 2: 
-            return {"vel": 0, "div": False, "streak": 0}
+            return {"vel": 0, "div": False, "streak": 0, "rolling_trend": 0}
 
         dates = sorted(self.data[ticker].keys())
+        
+        # --- ROLLING TREND CALCULATION ---
+        recent_dates = dates[-5:] # Last 5 days
+        rolling_trend = 0
+        for i in range(1, len(recent_dates)):
+            curr_day = self.data[ticker][recent_dates[i]]
+            if curr_day.get('rank_plus', 0) > 0: rolling_trend += 1
+            elif curr_day.get('rank_plus', 0) < 0: rolling_trend -= 1
+        
         today_data = self.data[ticker][dates[-1]]
         prev_data = self.data[ticker][dates[-2]]
-
-        # VELOCITY calculation
-        velocity = int(today_data['rank_plus'] - prev_data['rank_plus'])
+        velocity = int(today_data.get('rank_plus', 0) - prev_data.get('rank_plus', 0))
         
-        # DIVERGENCE (ACCUM) calculation
-        mnt_surge = current_mnt > (prev_data['mnt_perc'] + 10)
-        price_stable = abs((current_price - prev_data['price']) / (prev_data['price'] or 1)) < 0.02
-        divergence = mnt_surge and price_stable
-        
-        return {"vel": velocity, "div": divergence, "streak": len(dates)}
+        return {"vel": velocity, "div": False, "streak": len(dates), "rolling_trend": rolling_trend}
 
 def clear_screen(): os.system('cls' if os.name == 'nt' else 'clear')
 def load_cache():
@@ -332,10 +334,16 @@ def export_interactive_html(df):
                 v_color = C_GREEN if v_val > 0 else C_RED
                 export_df.at[index, 'Vel'] = color_span(f"{v_val:+d}", v_color)
             
-            # Signals
-            sig_text = ""; sig_color = C_WHITE
-            if m['div']: sig_text = "ACCUM"; sig_color = C_CYAN
-            elif m['streak'] > 5: sig_text = "TREND"; sig_color = C_YELLOW
+            # Updated Signals: Rolling Momentum Score (+5 to -5)
+            trend_val = m.get('rolling_trend', 0)
+            sig_text = f"{trend_val:+d}" 
+            
+            # Color logic: +3 or higher is vibrant green, negatives are red
+            if trend_val >= 3: sig_color = "#00ff00"
+            elif trend_val > 0: sig_color = "#99ff99"
+            elif trend_val <= -2: sig_color = "#ff4444"
+            else: sig_color = "#ffffff"
+            
             export_df.at[index, 'Sig'] = color_span(sig_text, sig_color)
             
             # Heatmap Name
@@ -381,7 +389,12 @@ def export_interactive_html(df):
 
         export_df.rename(columns={'Meta': 'Industry/Sector', 'Vol_Display': 'Avg Vol'}, inplace=True)
 
-        cols = ['Rank', 'Rank+', 'Name', 'Sym', 'Sig', 'Vel', 'Price', 'Avg Vol', 'Surge', 'Mnt%', 'Upvotes', 'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol', 'MCap']
+       # The 'Shopping List' - Corrected Order
+        cols = [
+            'Rank', 'Rank+', 'Name', 'Sym', 'Price', 'Avg Vol', 'Surge', 
+            'Vel', 'Sig', 'Mnt%', 'Upvotes', 'Squeeze', 
+            'Industry/Sector', 'Type_Tag', 'AvgVol', 'MCap'
+        ]
         final_df = export_df[cols]
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
