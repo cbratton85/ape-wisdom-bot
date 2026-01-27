@@ -245,11 +245,18 @@ def filter_and_process(stocks):
             rank_plus = (rank_old - rank_now) if rank_old != 0 else 0
 
             final_list.append({
-                "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
-                "Price": float(curr_p), "AvgVol": int(avg_v),
-                "Surge": s_perc, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
-                "Upvotes": int(stock.get('upvotes', 0)), "Meta": info.get('meta', '-'), 
-                "": _score, 
+                "Rank": rank_now, 
+                "Name": name, 
+                "Sym": t, 
+                "Rank+": rank_plus,
+                "Price": float(curr_p), 
+                "AvgVol": int(avg_v),
+                "Surge": s_perc, 
+                "Mnt%": m_perc, 
+                "Type": info.get('type', 'EQUITY'),
+                "Upvotes": int(stock.get('upvotes', 0)), 
+                "Meta": info.get('meta', '-'), 
+                "Squeeze": squeeze_score, 
                 "MCap": mcap
             })
         except Exception as e: 
