@@ -296,7 +296,7 @@ def filter_and_process(stocks):
 
     # 7. History
     tracker = HistoryTracker(HISTORY_FILE)
-    vel, accel, upv_chg, div, strk = [], [], [], [], []
+    vel, accel, upv_chg, div, strk, roll = [], [], [], [], [], []
     for _, row in df.iterrows():
         m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
         vel.append(m['vel'])
@@ -304,12 +304,15 @@ def filter_and_process(stocks):
         upv_chg.append(m['upv_chg'])
         div.append(m['div'])
         strk.append(m['streak'])
+        roll.append(m['rolling_trend'])
     
     df['Velocity'] = vel
     df['Accel'] = accel
     df['Upv+'] = upv_chg
     df['Divergence'] = div
     df['Streak'] = strk
+    df['Rolling'] = roll
+    
     tracker.save(df)
     save_cache(local_cache)
     return df
@@ -380,11 +383,16 @@ def export_interactive_html(df):
             export_df.at[index, 'Upv+'] = color_span(f"{upchg_val:+d}", upchg_clr)
 
             # Signals
-            # Rolling Momentum Score
-            # Re-calculating visually here just for color logic if needed, 
-            # but usually we'd pass it. For now, we assume visual only.
-            # (If you need 'Sig' logic, ensure 'rolling_trend' is in DF or History)
+            trend_val = row['Rolling']
+            sig_text = f"{trend_val:+d}"
+            # Color logic: +3 or higher is vibrant green, negatives are red
+            if trend_val >= 3: sig_color = "#00ff00"
+            elif trend_val > 0: sig_color = "#99ff99"
+            elif trend_val <= -2: sig_color = "#ff4444"
+            else: sig_color = "#ffffff"
             
+            export_df.at[index, 'Sig'] = color_span(sig_text, sig_color)
+
             # Heatmap Name
             nm_clr = C_RED if row['Master_Score'] > 4.0 else (C_YELLOW if row['Master_Score'] > 2.0 else C_WHITE)
             export_df.at[index, 'Name'] = color_span(row['Name'], nm_clr)
