@@ -128,10 +128,13 @@ def fetch_meta_data_robust(ticker):
             else:
                 s = info.get('sector', 'Unknown')
                 i = info.get('industry', 'Unknown')
-                meta = f"{s} - {i}" if s != 'Unknown' else 'Unknown'
-
-            meta = meta.replace('\r', '').replace('\n', '').strip()
-
+                # 1. Strip the junk characters
+                meta = meta.replace('\r', '').replace('\n', '').strip()
+            
+                # 2. Fallback to 'Unknown' if it's empty or just the company name
+                if not meta or meta == name or meta == "Unknown - Unknown":
+                    meta = "Unknown"
+                # ------------------------
     except: pass
     return {'ticker': ticker, 'name': name, 'meta': meta, 'type': quote_type, 'mcap': mcap, 'currency': currency}
 
