@@ -316,6 +316,10 @@ def filter_and_process(stocks):
     
     # 6. Scoring
     df = pd.DataFrame(final_list)
+    
+    if not df.empty and 'Sym' in df.columns:
+        df = df.drop_duplicates(subset=['Sym'], keep='first')
+
     if not df.empty:
         cols = ['Rank+', 'Surge', 'Mnt%', 'Upvotes', 'Accel', 'Upv+']
         weights = {
@@ -823,23 +827,25 @@ def get_ai_analysis(df, history_data):
         except:
             model = genai.GenerativeModel('gemini-pro')
 
-        # --- 1. PREPARE LEADERS (Top 10) ---
-        # Ensure column names match what the AI expects
-        if 'Surge' in df.columns: df.rename(columns={'Surge': 'Srg'}, inplace=True)
-        if 'Master_Score' in df.columns: df.rename(columns={'Master_Score': 'Heat'}, inplace=True)
+        # --- FIX 2: WORK ON A COPY ---
+        # We use .copy() so we don't break the original DF for the HTML generator
+        ai_df = df.copy()
+
+        # Rename columns ONLY in our copy
+        if 'Surge' in ai_df.columns: ai_df.rename(columns={'Surge': 'Srg'}, inplace=True)
+        if 'Master_Score' in ai_df.columns: ai_df.rename(columns={'Master_Score': 'Heat'}, inplace=True)
         
+        # Ensure required columns exist in the COPY
         cols_for_ai = ['Sym', 'Rank', 'Rank+', 'Price', 'Srg', 'Acc', 'Conv', 'Heat']
-        
+        for c in cols_for_ai:
+            if c not in ai_df.columns: ai_df[c] = 0
+
         # Dataset 1: The obvious winners
-        leaders_df = df.head(10)[cols_for_ai]
+        leaders_df = ai_df.head(10)[cols_for_ai]
         leaders_str = leaders_df.to_string(index=False)
 
-        # --- 2. PREPARE STEALTH MOVERS (The "Deep Scan") ---
-        # We look at everything AFTER rank 10
-        rest_of_market = df.iloc[10:].copy()
-        
-        # Filter: Find stocks with High Surge (>100%) OR Fast Accel (>2)
-        # We sort by 'Heat' to ensure we send the most relevant ones
+        # Dataset 2: Stealth Movers
+        rest_of_market = ai_df.iloc[10:].copy()
         stealth_candidates = rest_of_market[ 
             (rest_of_market['Srg'] > 100) | (rest_of_market['Acc'].abs() >= 2) 
         ].sort_values(by='Heat', ascending=False).head(5)
@@ -849,8 +855,8 @@ def get_ai_analysis(df, history_data):
         else:
             stealth_str = "No significant outliers found."
 
-        # --- 3. HISTORY CONTEXT (For Leaders) ---
-        top_20 = df.head(20)['Sym'].tolist()
+        # Dataset 3: History Context
+        top_20 = df.head(20)['Sym'].tolist() # We can safely read from original df here
         comparison_context = []
         for ticker in top_20:
             if ticker in history_data:
@@ -858,7 +864,6 @@ def get_ai_analysis(df, history_data):
                 if len(snapshots) > 1:
                     curr = snapshots[-1][1]
                     prev = snapshots[-6][1] if len(snapshots) > 6 else snapshots[0][1]
-                    
                     comparison_context.append({
                         "Sym": ticker,
                         "Rank_Now": curr.get('rank', 0),
@@ -866,7 +871,7 @@ def get_ai_analysis(df, history_data):
                         "Conv_Change": round(curr.get('conv', 0) - prev.get('conv', 0), 2)
                     })
 
-        # --- 4. THE PROMPT ---
+        # THE PROMPT
         prompt = f"""
         Act as a professional sentiment trader. Analyze this market momentum data.
         
@@ -891,8 +896,6 @@ def get_ai_analysis(df, history_data):
         """
 
         response = model.generate_content(prompt)
-        
-        # Cleanup
         clean_text = response.text.replace("Here's your analysis:", "").replace("Here is the summary:", "").strip()
         return clean_text
 
