@@ -737,8 +737,7 @@ def send_discord_link(filename, ai_summary):
         user, repo = REPO_NAME.split('/')
         website_url = f"https://{user}.github.io/{repo}/{filename}"
         
-        msg = (f"📊 **AI Momentum Insights**\n"
-               f"{ai_summary}\n\n"
+        msg = (f"🦍 **APE Wisdom Scanner**\n"
                f"🔗 **[Click Here to Open Dashboard]({website_url})**\n"
                f"*(Note: It may take ~30s for the link to go live)*")
 
