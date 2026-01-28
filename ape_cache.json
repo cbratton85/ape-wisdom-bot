@@ -9542,5 +9542,29 @@
         "type": "EQUITY",
         "mcap": 710869778432,
         "currency": "USD"
+    },
+    "SER": {
+        "ticker": "SER",
+        "name": "Serina Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 29006254,
+        "currency": "USD"
+    },
+    "XP": {
+        "ticker": "XP",
+        "name": "XP Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 10584186880,
+        "currency": "USD"
+    },
+    "SLE": {
+        "ticker": "SLE",
+        "name": "Super League Enterprise, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 7818399,
+        "currency": "USD"
     }
 }
