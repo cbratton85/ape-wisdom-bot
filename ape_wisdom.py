@@ -318,11 +318,11 @@ def filter_and_process(stocks):
 
         cols = ['Rank+', 'Surge', 'Mnt%', 'Upvotes', 'Accel', 'Upv+']
         weights = {
-            'Rank+': 1.1, 
+            'Rank+': 1.2, 
             'Surge': 1.1, 
             'Mnt%': 0.7, 
             'Upvotes': 1.0,
-            'Accel': 1.2,
+            'Accel': 0.8,
             'Upv+': 1.0 
         }
         
@@ -544,10 +544,27 @@ def export_interactive_html(df):
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
-            body{{
-                background-color:#101010; color:#e0e0e0; font-family:'Consolas','Monaco',monospace; padding:20px;
+            body {{
+                background-color:#101010; 
+                color:#e0e0e0; 
+                font-family:'Consolas','Monaco',monospace; 
+                padding:20px;
             }}
-            .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
+
+            /* 1. Pre-hide columns 19, 20, 21 (Type_Tag, AvgVol, MCap) */
+            th:nth-child(19), td:nth-child(19),
+            th:nth-child(20), td:nth-child(20),
+            th:nth-child(21), td:nth-child(21) {{
+                display: none !important;
+            }}
+
+            /* 2. Start the container invisible to hide the 'snap' */
+            #mainContainer {{
+                opacity: 0;
+                transition: opacity 0.3s ease-in;
+            }}
+
+            .table-dark {{ --bs-table-bg:#18181b; color:#ccc; }}
             
             th{{
                 color:#00ff00; border-bottom:2px solid #444;
@@ -929,7 +946,14 @@ def export_interactive_html(df):
         }}
         $(document).ready(function(){{ 
             table=$('.table').DataTable({{
-                "order":[[0,"asc"]], "pageLength": 25, "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                "order":[[0,"asc"]],
+                "pageLength": 25,
+                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+
+                "initComplete": function(settings, json) {{
+                    $('#mainContainer').css('opacity', '1');
+                }},
+
                 "columnDefs": [ 
                     {{ "visible": false, "targets": [18, 19, 20] }},
 
