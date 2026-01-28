@@ -9382,5 +9382,61 @@
         "type": "EQUITY",
         "mcap": 667356480,
         "currency": "USD"
+    },
+    "ASAN": {
+        "ticker": "ASAN",
+        "name": "Asana, Inc.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 2622326016,
+        "currency": "USD"
+    },
+    "ATPC": {
+        "ticker": "ATPC",
+        "name": "Agape ATP Corporation",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 4112219,
+        "currency": "USD"
+    },
+    "IEV": {
+        "ticker": "IEV",
+        "name": "iShares Europe ETF",
+        "meta": "Europe Stock",
+        "type": "ETF",
+        "mcap": 2885555968,
+        "currency": "USD"
+    },
+    "EG": {
+        "ticker": "EG",
+        "name": "Everest Group, Ltd.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 13723466752,
+        "currency": "USD"
+    },
+    "PH": {
+        "ticker": "PH",
+        "name": "Parker-Hannifin Corporation",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 116789002240,
+        "currency": "USD"
+    },
+    "CET": {
+        "ticker": "CET",
+        "name": "11017",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 1508995584,
+        "currency": "USD"
+    },
+    "INTS": {
+        "ticker": "INTS",
+        "name": "Intensity Therapeutics, Inc.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 23058938,
+        "currency": "USD"
     }
 }
