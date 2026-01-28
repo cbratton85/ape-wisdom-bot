@@ -308,7 +308,8 @@ def filter_and_process(stocks):
             df[f'z_{col}'] = 0 if std == 0 else (log_data - mean) / std
 
         df['Master_Score'] = 0
-        for col in cols: df[f'z_{col}'] = df[f'z_{col}'].astype(float)
+        for col in cols:
+            df['Master_Score'] += df[f'z_{col}'].clip(lower=0) * weights.get(col, 1.0)
 
         if 'Squeeze' in df.columns:
             sq_series = df['Squeeze'].clip(lower=0).astype(float)
@@ -424,7 +425,7 @@ def export_interactive_html(df):
             r_plus = row.get('Rank+', 0)
             trend_arrow = ' ▲' if r_plus > 5 else (' ▼' if r_plus < -5 else "")
 
-            heat_html = f'<span title="{tooltip}" style="color:{h_clr}; cursor:help;">{score:.2f}{trend_arrow}</span>'
+            heat_html = f'<span title="{tooltip}" style="color:{h_clr}; cursor:help;">{score:.1f}{trend_arrow}</span>'
             
             export_df.at[index, 'Name'] = f"<b>{row['Name']}</b>"
             export_df.at[index, 'Heat'] = heat_html
