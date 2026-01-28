@@ -796,12 +796,13 @@ def get_ai_analysis(df, history_data):
         # Standardize Names for AI
         mapping = {
             'Surge': 'Srg', 'Master_Score': 'Heat', 'Accel': 'Acc', 
-            'Velocity': 'Vel', 'Rolling': 'Strk', 'Upvotes': 'Upvs'
+            'Velocity': 'Vel', 'Rolling': 'Strk', 'Upvotes': 'Upvs',
+            'Squeeze': 'Sqz'
         }
         ai_df.rename(columns=mapping, inplace=True)
         
         # --- GOD MODE: ADDED 'Eff' (Efficiency) FOR RULE #5 ---
-        cols_for_ai = ['Sym', 'Rank', 'Price', 'Srg', 'Vel', 'Acc', 'Strk', 'Upv+', 'Eff', 'Heat']
+        cols_for_ai = ['Sym', 'Rank', 'Price', 'Srg', 'Vel', 'Acc', 'Strk', 'Upv+', 'Eff', 'Heat', 'Sqz']
         
         # Safety fill for missing cols
         for c in cols_for_ai:
