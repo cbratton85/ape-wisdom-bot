@@ -96,15 +96,19 @@ class HistoryTracker:
         with open(self.filepath, 'w') as f:
             json.dump(self.data, f, indent=4)
 
-    def get_metrics(self, ticker, current_price, current_mnt):
-        if ticker not in self.data or len(self.data[ticker]) < 2:
-            return {"vel": 0, "accel": 0, "upv_chg": 0, "div": False, "streak": 0, "rolling_trend": 0}
+    def get_metrics(self, ticker, current_price, current_mnt, current_rank_plus, current_upvotes):
+        # 1. Handle case with no history
+        if ticker not in self.data or not self.data[ticker]:
+            # If we have no history, the current run IS the streak
+            streak = 1 if current_rank_plus > 0 else (-1 if current_rank_plus < 0 else 0)
+            return {"vel": 0, "accel": 0, "upv_chg": 0, "div": False, "streak": 1, "rolling_trend": streak}
 
         dates = sorted(self.data[ticker].keys())
-        today_data = self.data[ticker][dates[-1]]
-        prev_data = self.data[ticker][dates[-2]]
+        # "prev_data" is the last SAVED snapshot (Run -1)
+        prev_data = self.data[ticker][dates[-1]]
         
-        # --- ROLLING TREND (STREAK) ---
+        # --- 1. CALCULATE LIVE STREAK ---
+        # First, calculate streak from history
         rolling_trend = 0
         for d in dates:
             r_plus = self.data[ticker][d].get('rank_plus', 0)
@@ -115,17 +119,32 @@ class HistoryTracker:
             else:
                 rolling_trend = 0
         
-        velocity = int(today_data.get('rank_plus', 0) - prev_data.get('rank_plus', 0))
-        upv_chg = int(today_data.get('upvotes', 0) - prev_data.get('upvotes', 0))
+        # Now, apply the CURRENT (Live) Rank+ to that streak
+        # This fixes the "Streak +4 but Rank -12" issue
+        if current_rank_plus > 0:
+            rolling_trend = rolling_trend + 1 if rolling_trend >= 0 else 1
+        elif current_rank_plus < 0:
+            rolling_trend = rolling_trend - 1 if rolling_trend <= 0 else -1
+        else:
+            rolling_trend = 0
+
+        # --- 2. CALCULATE LIVE VELOCITY & ACCEL ---
+        # Velocity = (Live Rank+) - (Last Run Rank+)
+        prev_rank_plus = prev_data.get('rank_plus', 0)
+        velocity = int(current_rank_plus - prev_rank_plus)
         
-        # Acceleration
+        # Upvote Change = (Live Upvotes) - (Last Run Upvotes)
+        prev_upvotes = prev_data.get('upvotes', 0)
+        upv_chg = int(current_upvotes - prev_upvotes)
+        
+        # Acceleration = (Current Velocity) - (Previous Velocity)
         accel = 0
-        if len(dates) >= 3:
-            prev_2_data = self.data[ticker][dates[-3]]
-            prev_vel = int(prev_data.get('rank_plus', 0) - prev_2_data.get('rank_plus', 0))
+        if len(dates) >= 2:
+            prev_2_data = self.data[ticker][dates[-2]]
+            prev_vel = int(prev_rank_plus - prev_2_data.get('rank_plus', 0))
             accel = velocity - prev_vel
 
-        return {"vel": velocity, "accel": accel, "upv_chg": upv_chg, "div": False, "streak": len(dates), "rolling_trend": rolling_trend}
+        return {"vel": velocity, "accel": accel, "upv_chg": upv_chg, "div": False, "streak": len(dates) + 1, "rolling_trend": rolling_trend}
 
 def load_cache():
     if os.path.exists(CACHE_FILE):
@@ -237,7 +256,8 @@ def filter_and_process(stocks):
             safe_surge = s_perc if s_perc > 0 else 1
             efficiency = rank_plus / safe_surge
 
-            m = tracker.get_metrics(t, float(curr_p), m_perc)
+            current_upvotes = int(stock.get('upvotes', 0))
+            m = tracker.get_metrics(t, float(curr_p), m_perc, rank_plus, current_upvotes)
 
             final_list.append({
                 "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
