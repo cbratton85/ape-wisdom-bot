@@ -9478,5 +9478,45 @@
         "type": "EQUITY",
         "mcap": 45948841984,
         "currency": "USD"
+    },
+    "BKR": {
+        "ticker": "BKR",
+        "name": "Baker Hughes Company",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 55918010368,
+        "currency": "USD"
+    },
+    "FRMI": {
+        "ticker": "FRMI",
+        "name": "Fermi Inc.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 6167885312,
+        "currency": "USD"
+    },
+    "SOLS": {
+        "ticker": "SOLS",
+        "name": "Solstice Advanced Materials Inc",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 10393474048,
+        "currency": "USD"
+    },
+    "MIAX": {
+        "ticker": "MIAX",
+        "name": "Miami International Holdings, I",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 3529591808,
+        "currency": "USD"
+    },
+    "JL": {
+        "ticker": "JL",
+        "name": "J-Long Group Limited",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 13542127,
+        "currency": "USD"
     }
 }
