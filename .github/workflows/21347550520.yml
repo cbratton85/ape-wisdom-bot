@@ -2,8 +2,8 @@ name: Market Momentum Tracker
 
 on:
   schedule:
- #   - cron: '*/30 * * * *'  # Runs every 30 minutes
- # workflow_dispatch:        # Allows you to click "Run workflow" manually
+  # - cron: '*/30 * * * *'  # Runs every 30 minutes
+  workflow_dispatch:        # Allows you to click "Run workflow" manually
 
 permissions:
   contents: write           # CRITICAL: Allows the bot to save history.json
