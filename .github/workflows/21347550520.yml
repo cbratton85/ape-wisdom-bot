@@ -1,12 +1,12 @@
 name: Market Momentum Tracker
 
 on:
-# schedule:
-#   - cron: '7,22,37,52 * * * *'
-  workflow_dispatch:    
+  schedule:
+ #   - cron: '*/30 * * * *'  # Runs every 30 minutes
+ # workflow_dispatch:        # Allows you to click "Run workflow" manually
 
 permissions:
-  contents: write
+  contents: write           # CRITICAL: Allows the bot to save history.json
 
 jobs:
   build:
@@ -14,38 +14,42 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0    # Gets full history to avoid push errors
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
-
-      # --- RESTORE & SAVE CACHE ---
-      - name: Cache JSON Data
-        uses: actions/cache@v3
-        with:
-          path: |
-            ape_cache.json
-            market_history.json
-          key: ape-momentum-v1-${{ github.run_id }}
-          restore-keys: |
-            ape-momentum-v1-
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
-          pip install pandas yfinance requests lxml
+          python -m pip install --upgrade pip
+          # Added google-generativeai for the AI Brain
+          pip install pandas yfinance requests lxml numpy google-generativeai
 
-      # --- RUN SCRIPT (Generates website files) ---
-      - name: Run Script
+      - name: Run Market Scan
         env:
+          # This links your script to the keys you saved in GitHub Settings
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          GITHUB_REPOSITORY: ${{ github.repository }} # Needed to build the link
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: python ape_wisdom.py --auto
 
-      # --- DEPLOY TO GITHUB PAGES ---
+      # --- PERMANENT MEMORY: COMMIT HISTORY BACK TO REPO ---
+      - name: Commit and Push History
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add market_history.json ape_cache.json
+          # [skip ci] prevents the bot from triggering another run when it saves data
+          git commit -m "Update history and cache [skip ci]" || echo "No changes to commit"
+          git push
+
+      # --- DEPLOY DASHBOARD TO PAGES ---
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public  # Uploads the folder the script created
+          publish_dir: ./public
