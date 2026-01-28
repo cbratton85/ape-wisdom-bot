@@ -373,30 +373,38 @@ def get_all_trending_stocks():
 
 def export_interactive_html(df, ai_summary=""):
     try:
-        # --- 1. DATA PROCESSING & COLORING ---
+        # --- 1. PREPARE THE DATA ---
         export_df = df.copy().astype(object)
         if not os.path.exists(PUBLIC_DIR): os.makedirs(PUBLIC_DIR)
 
         def color_span(text, color_hex): return f'<span style="color: {color_hex}; font-weight: bold;">{text}</span>'
         def format_vol(v):
-            if v >= 1_000_000: return f"{v/1_000_000:.1f}M"
-            if v >= 1_000: return f"{v/1_000:.0f}K"
-            return str(v)
+            try:
+                v = float(v)
+                if v >= 1_000_000: return f"{v/1_000_000:.1f}M"
+                if v >= 1_000: return f"{v/1_000:.0f}K"
+                return str(int(v))
+            except: return "0"
 
+        # Define Colors
         C_GREEN, C_YELLOW, C_RED, C_CYAN, C_MAGENTA, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ff00ff", "#ffffff"
+        
+        # Ensure base columns exist
+        if 'AvgVol' not in export_df.columns: export_df['AvgVol'] = 0
+        export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
         export_df['Type_Tag'] = 'STOCK'
         export_df['Sig'] = ""
-        export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
 
+        # --- ROW-BY-ROW FORMATTING ---
         for index, row in export_df.iterrows():
             # Velocity
-            v_val = row['Velocity']
+            v_val = row.get('Velocity', 0)
             if v_val != 0:
                 v_color = C_GREEN if v_val > 0 else C_RED
                 export_df.at[index, 'Velocity'] = color_span(f"{v_val:+d}", v_color)
             
             # Accel
-            ac_val = row['Accel']
+            ac_val = row.get('Accel', 0)
             if ac_val >= 5: ac_clr = "#ff00ff"
             elif ac_val > 0: ac_clr = "#00ffff"
             elif ac_val < 0: ac_clr = "#ff4444"
@@ -404,7 +412,7 @@ def export_interactive_html(df, ai_summary=""):
             export_df.at[index, 'Accel'] = color_span(f"{ac_val:+d}", ac_clr)
 
             # Efficiency
-            eff_val = row['Eff']
+            eff_val = row.get('Eff', 0)
             if eff_val >= 1.0: eff_clr = "#00ff00"
             elif eff_val >= 0.5: eff_clr = "#ffff00"
             elif eff_val < 0.1 and eff_val > -0.1: eff_clr = "#666"
@@ -412,17 +420,17 @@ def export_interactive_html(df, ai_summary=""):
             export_df.at[index, 'Eff'] = color_span(f"{eff_val:.1f}", eff_clr)
 
             # Conviction
-            conv_val = row['Conv']
+            conv_val = row.get('Conv', 0)
             conv_clr = "#ffcc00" if conv_val > 1.0 else "#ffffff"
             export_df.at[index, 'Conv'] = color_span(f"{conv_val:.1f}x", conv_clr)
 
             # Upvote Change
-            upchg_val = row['Upv+']
+            upchg_val = row.get('Upv+', 0)
             upchg_clr = C_GREEN if upchg_val > 0 else (C_RED if upchg_val < 0 else "#666")
             export_df.at[index, 'Upv+'] = color_span(f"{upchg_val:+d}", upchg_clr)
 
-            # Signals (Streak)
-            trend_val = row['Rolling']
+            # Streak (Sig)
+            trend_val = row.get('Rolling', 0)
             sig_text = f"{trend_val:+d}"
             if trend_val >= 3: sig_color = "#00ff00"
             elif trend_val > 0: sig_color = "#99ff99"
@@ -430,22 +438,20 @@ def export_interactive_html(df, ai_summary=""):
             else: sig_color = "#ffffff"
             export_df.at[index, 'Sig'] = color_span(sig_text, sig_color)
 
-            # Heat Score
-            score = row['Master_Score']
-            mean_s, std_s = df['Master_Score'].mean(), df['Master_Score'].std()
-            z_heat = (score - mean_s) / std_s if std_s > 0 else 0
-            
-            if z_heat > 2.0: h_clr = "#ff0000"
-            elif z_heat > 1.5: h_clr = "#ff8800"
-            elif z_heat > 1.0: h_clr = "#ffff00"
+            # Heat Score (Create 'Heat' Column Here)
+            score = row.get('Master_Score', 0)
+            if score > 10: h_clr = "#ff0000"
+            elif score > 5: h_clr = "#ff8800"
+            elif score > 2: h_clr = "#ffff00"
             else: h_clr = "#888888"
-            
             heat_html = f'<span style="color:{h_clr}; font-weight:bold;">{score:.1f}</span>'
-            export_df.at[index, 'Name'] = f"<b>{row['Name']}</b>"
-            export_df.at[index, 'Heat'] = heat_html
+            export_df.at[index, 'Heat'] = heat_html  # <--- Created here
             
+            # Name
+            export_df.at[index, 'Name'] = f"<b>{row.get('Name','')}</b>"
+
             # Rank+
-            r_val = row['Rank+']
+            r_val = row.get('Rank+', 0)
             if r_val != 0:
                 r_color = C_GREEN if r_val > 0 else C_RED
                 r_arrow = "▲" if r_val > 0 else "▼"
@@ -453,55 +459,64 @@ def export_interactive_html(df, ai_summary=""):
             else:
                 export_df.at[index, 'Rank+'] = ""
 
-            # Surge/Mnt% Columns
+            # Surge & Mnt% Colors
             z_cols = [('Surge', 'z_Surge'), ('Mnt%', 'z_Mnt%')]
             for col, z_col in z_cols:
-                val = f"{row[col]:.0f}%"
-                clr = C_YELLOW if row[z_col] >= 2.0 else (C_GREEN if row[z_col] >= 1.0 else C_WHITE)
+                if col not in export_df.columns: export_df[col] = 0
+                val = f"{export_df.at[index, col]:.0f}%"
+                z_val = row.get(z_col, 0)
+                clr = C_YELLOW if z_val >= 2.0 else (C_GREEN if z_val >= 1.0 else C_WHITE)
                 export_df.at[index, col] = color_span(val, clr)
             
             # Squeeze
             sq_z = row.get('z_Squeeze', 0)
             sq_color = C_CYAN if sq_z > 1.5 else C_WHITE
-            export_df.at[index, 'Squeeze'] = color_span(int(row['Squeeze']), sq_color)
+            export_df.at[index, 'Squeeze'] = color_span(int(row.get('Squeeze', 0)), sq_color)
             
-            export_df.at[index, 'Upvotes'] = color_span(row['Upvotes'], C_GREEN if row['z_Upvotes']>1.5 else C_WHITE)
+            # Upvotes
+            z_up = row.get('z_Upvotes', 0)
+            export_df.at[index, 'Upvotes'] = color_span(row.get('Upvotes', 0), C_GREEN if z_up > 1.5 else C_WHITE)
             
-            # ETF Badge
-            is_fund = row['Type'] == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
+            # ETF Badge & Meta
+            is_fund = row.get('Type', 'EQUITY') == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
+            meta_val = row.get('Meta', '-')
             if is_fund:
                 badge = '<span style="background-color:#ff00ff; color:black; padding:2px 5px; border-radius:4px; font-size:11px; font-weight:bold; margin-right:6px; vertical-align:middle;">ETF</span>'
-                meta_text = color_span(row['Meta'], C_WHITE)
+                meta_text = color_span(meta_val, C_WHITE)
             else:
                 badge = ""
-                meta_text = color_span(row['Meta'], C_WHITE)
+                meta_text = color_span(meta_val, C_WHITE)
 
             export_df.at[index, 'Meta'] = f"{badge}{meta_text}"
             export_df.at[index, 'Type_Tag'] = 'ETF' if is_fund else 'STOCK'
             
+            # Sym Link & Price
             t = row['Sym']
             export_df.at[index, 'Sym'] = f'<a href="https://finance.yahoo.com/quote/{t}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
-            export_df.at[index, 'Price'] = f"${row['Price']:.2f}"
+            export_df.at[index, 'Price'] = f"${row.get('Price', 0):.2f}"
             export_df.at[index, 'Vol_Display'] = color_span(export_df.at[index, 'Vol_Display'], "#ccc")
 
-        # Cleanup Columns
-        if 'Streak' in export_df.columns: export_df.drop(columns=['Streak'], inplace=True)
-        
-        # 1. RENAME to match the headers we want
+        # --- COLUMN CLEANUP ---
+        # Drop duplicates/temps to avoid conflicts
+        cols_to_drop = ['Streak', 'Master_Score'] # Drop Master_Score because we made 'Heat'
+        for c in cols_to_drop:
+            if c in export_df.columns: export_df.drop(columns=[c], inplace=True)
+
+        # Rename to final headers
         export_df.rename(columns={
             'Meta': 'INDUSTRY/SECTOR', 'Velocity': 'Vel', 'Vol_Display': 'Vol', 'Sig': 'Strk',
-            'Accel': 'Acc', 'Squeeze': 'Sqz', 'Upvotes': 'Upvs', 'Surge': 'Srg', 'Master_Score': 'Heat'
+            'Accel': 'Acc', 'Squeeze': 'Sqz', 'Upvotes': 'Upvs', 'Surge': 'Srg'
             }, inplace=True)
 
-        # 2. FORCE EXACT COLUMN ORDER (Critical for the table to look right)
-        # The JavaScript expects exactly 21 columns. If this list is wrong, the table breaks.
+        # DEFINE EXACT COLUMN ORDER (21 Columns)
+        # The Javascript hides the last 3 (Type_Tag, AvgVol, MCap)
         cols = [
             'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Acc', 'Eff', 'Conv', 'Upvs', 
             'Upv+', 'Vol', 'Srg', 'Vel', 'Strk', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 
             'Type_Tag', 'AvgVol', 'MCap'
         ]
         
-        # 3. SAFETY: Ensure all columns exist (fill with 0 if missing)
+        # Ensure all exist (Safety fill)
         for c in cols:
             if c not in export_df.columns: export_df[c] = 0
 
@@ -509,7 +524,7 @@ def export_interactive_html(df, ai_summary=""):
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
         
-        # --- 2. BUILD AI SUMMARY HTML ---
+        # --- BUILD AI SUMMARY ---
         ai_box_html = ""
         if ai_summary:
             ai_box_html = f"""
@@ -523,28 +538,19 @@ def export_interactive_html(df, ai_summary=""):
             </div>
             """
 
-        # --- 3. HTML TEMPLATE ---
+        # --- ASSEMBLE HTML ---
         html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Ape Wisdom Analysis</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
             body{{ background-color:#101010; color:#e0e0e0; font-family:'Consolas','Monaco',monospace; padding:20px; }}
-
-            /* --- NEW: ADD THIS CLASS --- */
             .master-container {{ max-width: 1600px; margin: 0 auto; width: 100%; }}
-            /* --------------------------- */
-
             .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
             th{{ color:#00ff00; border-bottom:2px solid #444; font-size: 15px; text-transform: uppercase; vertical-align: middle !important; padding: 8px 22px 8px 6px !important; line-height: 1.2 !important; }}
             td{{ vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333; padding: 4px 5px !important; font-size: 15px; }}
-            
-            /* CHANGE: Make table 100% width so it fills the new container */
             table.dataTable {{ width: 100% !important; margin: 0 auto; }}
-
-            .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
-            th{{ color:#00ff00; border-bottom:2px solid #444; font-size: 15px; text-transform: uppercase; vertical-align: middle !important; padding: 8px 22px 8px 6px !important; line-height: 1.2 !important; }}
-            td{{ vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333; padding: 4px 5px !important; font-size: 15px; }}
             
+            /* Column Widths */
             th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; }} 
             th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }}
             th:nth-child(3), td:nth-child(3) {{ width: 1%; text-align: center; font-weight: bold; }}
@@ -552,10 +558,11 @@ def export_interactive_html(df, ai_summary=""):
             th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }}
             th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; }}
             th:nth-child(18), td:nth-child(18) {{ max-width: 210px; overflow: hidden; text-overflow: ellipsis; text-align: left; padding-left: 10px !important; border-right: 1px solid #333; }}
-            td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
+            
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
             table.no-colors a {{ color: #4da6ff !important; }}
+            
             .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }}
             .legend-header {{ background: #2a2a2a; padding: 10px 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; }}
             .legend-box {{ padding: 8px; display: none; background-color: #1a1a1a; }}
@@ -569,6 +576,7 @@ def export_interactive_html(df, ai_summary=""):
             .color-key {{ width: 80px; font-weight: bold; flex-shrink: 0; }}
             .color-desc {{ color: #bbb; }}
             @media (max-width: 900px) {{ .legend-grid {{ grid-template-columns: 1fr; }} }}
+            
             .filter-bar {{ display: flex; gap: 8px; align-items: center; background: #2a2a2a; padding: 8px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #444; flex-wrap: wrap; font-size: 0.85rem; }}
             .filter-group {{ display:flex; align-items:center; gap:4px; }}
             .form-control-sm {{ background:#111; border:1px solid #555; color:#fff; height: 28px; font-size: 0.8rem; padding: 2px 5px; }}
@@ -576,24 +584,18 @@ def export_interactive_html(df, ai_summary=""):
             .btn-reset:hover {{ background: #444; color: #fff; }}
             #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px;}}
             .header-flex {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
-            .page-link {{ background-color: #222; border-color: #444; color: #00ff00; }}
-            .page-item.active .page-link {{ background-color: #00ff00; border-color: #00ff00; color: #000; }}
-            .page-item.disabled .page-link {{ background-color: #111; border-color: #333; color: #555; }}
             .dataTables_filter input {{ width: 350px !important; background: #111 !important; border: 1px solid #555 !important; color: #fff !important; height: 28px !important; border-radius: 4px; margin-left: 10px; }}
         </style>
         </head>
         <body>
-        <div class="container-fluid" style="width: fit-content; margin: 0 auto;">
-            
+        <div class="master-container">
             {ai_box_html}
-
             <div class="header-flex">
                 <a href="https://apewisdom.io" target="_blank" style="text-decoration: none;">
                 <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" style="height: 60px; vertical-align: middle; margin-right: 15px;">
                 </a>
                 <span id="time" data-utc="{utc_timestamp}" style="font-size: 0.9rem; color: #888;">Loading...</span>
             </div>
-
             <div class="filter-bar">
                 <span style="color:#fff; font-weight:bold; margin-right:5px;">⚡ FILTERS:</span>
                 <button id="btnColors" class="btn btn-sm btn-reset" onclick="toggleColors()" style="margin-right: 5px;">🎨 Colors: ON</button>
@@ -637,7 +639,6 @@ def export_interactive_html(df, ai_summary=""):
                 <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">Download TXT File</button>
                 <span id="stockCounter">Loading...</span>
             </div>
-
             <div class="legend-container">
                 <div class="legend-header" onclick="toggleLegend()">
                     <span>ℹ️ DATA DEFINITIONS & COLOR GUIDE (Click to Toggle)</span>
@@ -724,8 +725,7 @@ def export_interactive_html(df, ai_summary=""):
                 "order":[[0,"asc"]], "pageLength": 25, "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 "columnDefs": [ 
                     {{ "visible": false, "targets": [18, 19, 20] }},
-                    {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], "type": "num", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,x]/g, ''); return parseVal(clean); }} return data; }} }},
-                    {{ "targets": [13], "type": "num", "render": function(data, type) {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/,/g, ''); var val = parseFloat(clean) || 0; if (type === 'sort' || type === 'type') return val; if (val < 0) return '<span style="color:#ff4444">' + val + '</span>'; else return '<span style="color:#00ff00">' + val + '</span>'; }} }}
+                    {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], "type": "num", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,x]/g, ''); return parseVal(clean); }} return data; }} }}
                 ],
                 "drawCallback": function() {{ var api = this.api(); $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); }}
             }});
