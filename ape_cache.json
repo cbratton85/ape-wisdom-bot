@@ -9622,5 +9622,13 @@
         "type": "EQUITY",
         "mcap": 950143232,
         "currency": "USD"
+    },
+    "MET": {
+        "ticker": "MET",
+        "name": "MetLife, Inc.",
+        "meta": "Insurance - Life",
+        "type": "EQUITY",
+        "mcap": 50714886144,
+        "currency": "USD"
     }
 }
