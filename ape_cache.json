@@ -9438,5 +9438,21 @@
         "type": "EQUITY",
         "mcap": 23058938,
         "currency": "USD"
+    },
+    "MIAX": {
+        "ticker": "MIAX",
+        "name": "Miami International Holdings, I",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 3515924480,
+        "currency": "USD"
+    },
+    "CMCSA": {
+        "ticker": "CMCSA",
+        "name": "Comcast Corporation",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 113613922304,
+        "currency": "USD"
     }
 }
