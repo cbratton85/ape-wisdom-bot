@@ -9438,5 +9438,29 @@
         "type": "EQUITY",
         "mcap": 23058938,
         "currency": "USD"
+    },
+    "NWPX": {
+        "ticker": "NWPX",
+        "name": "NWPX Infrastructure, Inc.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 641886656,
+        "currency": "USD"
+    },
+    "PAHC": {
+        "ticker": "PAHC",
+        "name": "Phibro Animal Health Corporatio",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 1572704000,
+        "currency": "USD"
+    },
+    "CMCSA": {
+        "ticker": "CMCSA",
+        "name": "Comcast Corporation",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 112934076416,
+        "currency": "USD"
     }
 }
