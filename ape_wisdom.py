@@ -309,6 +309,13 @@ def filter_and_process(stocks):
     # 6. Scoring
     df = pd.DataFrame(final_list)
     if not df.empty:
+
+        sector_stats = df.groupby('Meta')['Rank+'].mean().to_dict()
+        df['Sector_Avg_Rank_Plus'] = df['Meta'].map(sector_stats)
+        
+        # Calculate the Relative Acceleration
+        df['Rel_Acc'] = (df['Accel'] / df['Sector_Avg_Rank_Plus'].abs().clip(lower=1)) * 100
+
         cols = ['Rank+', 'Surge', 'Mnt%', 'Upvotes', 'Accel', 'Upv+']
         weights = {
             'Rank+': 1.1, 
