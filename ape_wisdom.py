@@ -29,7 +29,7 @@ DELISTED_RETRY_DAYS = 7
 # --- FILTERS & LAYOUT ---
 MIN_PRICE = 0.01             
 MIN_AVG_VOLUME = 100        
-AVG_VOLUME_DAYS = 30     # Using 30-Day Average
+AVG_VOLUME_DAYS = 30
 PAGE_SIZE = 30
 
 # --- UPDATED WIDTHS ---
@@ -308,7 +308,7 @@ def filter_and_process(stocks):
             df[f'z_{col}'] = 0 if std == 0 else (log_data - mean) / std
 
         df['Master_Score'] = 0
-        for col in cols: df['Master_Score'] += df[f'z_{col}'].clip(lower=0) * weights[col]
+        for col in cols: df[f'z_{col}'] = df[f'z_{col}'].astype(float)
 
         if 'Squeeze' in df.columns:
             sq_series = df['Squeeze'].clip(lower=0).astype(float)
@@ -397,9 +397,37 @@ def export_interactive_html(df):
             
             export_df.at[index, 'Sig'] = color_span(sig_text, sig_color)
 
-            # Heatmap Name
-            nm_clr = C_RED if row['Master_Score'] > 4.0 else (C_YELLOW if row['Master_Score'] > 2.0 else C_WHITE)
-            export_df.at[index, 'Name'] = color_span(row['Name'], nm_clr)
+            # Heat Score
+            score = row['Master_Score']
+            mean_s, std_s = df['Master_Score'].mean(), df['Master_Score'].std()
+            z_heat = (score - mean_s) / std_s if std_s > 0 else 0
+            
+            if z_heat > 1.8: h_clr = "#ff0000"
+            elif z_heat > 1.0: h_clr = "#ff8800"
+            elif z_heat > 0: h_clr = "#ffff00"
+            else: h_clr = "#666666"
+
+            z_cols = [
+                ('Rank+', row.get('z_Rank+', 0)),
+                ('Surge', row.get('z_Surge', 0)),
+                ('Mnt%', row.get('z_Mnt%', 0)),
+                ('Upvs', row.get('z_Upvotes', 0)),
+                ('Accel', row.get('z_Accel', 0))
+            ]
+            
+            mvp_pair = max(z_cols, key=lambda x: x[1])
+            mvp_metric = mvp_pair[0]
+            mvp_val = mvp_pair[1]
+            
+            tooltip = f"Main Driver: {mvp_metric} (+{mvp_val:.1f}σ)"
+            
+            r_plus = row.get('Rank+', 0)
+            trend_arrow = ' ▲' if r_plus > 5 else (' ▼' if r_plus < -5 else "")
+
+            heat_html = f'<span title="{tooltip}" style="color:{h_clr}; cursor:help;">{score:.2f}{trend_arrow}</span>'
+            
+            export_df.at[index, 'Name'] = f"<b>{row['Name']}</b>"
+            export_df.at[index, 'Heat'] = heat_html
             
             # Rank+
             r_val = row['Rank+']
@@ -458,7 +486,7 @@ def export_interactive_html(df):
 
         # The 'Shopping List'
         cols = [
-            'Rank', 'Rank+', 'Name', 'Sym', 'Price', 
+            'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 
             'Acc', 'Eff', 'Conv', 'Upvs', 'Upv+',
             'Vol', 'Srg', 'Vel', 'Strk', 'Mnt%', 
             'Sqz', 'INDUSTRY/SECTOR', 'Type_Tag', 'AvgVol', 'MCap'
@@ -497,9 +525,9 @@ def export_interactive_html(df):
 
             th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }}
 
-            th:nth-child(3), td:nth-child(3) {{ max-width: 250px; overflow: hidden; text-overflow: ellipsis; }}
+            th:nth-child(3), td:nth-child(3) {{text-align: center; font-weight: bold; background: rgba(255,255,255,0.03); }}
 
-            th:nth-child(4), td:nth-child(4) {{ width: 1%; text-align: center; }}
+            th:nth-child(4), td:nth-child(4) {{ max-width: 250px; overflow: hidden; text-overflow: ellipsis; }}
             
             th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: right; }}
 
@@ -668,6 +696,11 @@ def export_interactive_html(df):
                                 <span class="metric-desc">Positions changed vs 24h ago.</span>
                             </div>
                             <div class="legend-row">
+                                <span class="metric-name">HEAT</span>
+                                <span class="metric-math">Master Score</span>
+                                <span class="metric-desc">Weighted aggregate of all momentum signals.</span>
+                            </div>
+                            <div class="legend-row">
                                 <span class="metric-name">ACC</span>
                                 <span class="metric-math">Vel(Today) - Vel(Yest)</span>
                                 <span class="metric-desc">Acceleration: (Rate of change of speed).</span>
@@ -734,6 +767,10 @@ def export_interactive_html(df):
                             <div class="legend-row">
                                 <span class="color-key">RANK+</span>
                                 <span class="color-desc"><span style="color:#00ff00">Green</span> (Climbing), <span style="color:#ff4444">Red</span> (Falling).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">HEAT</span>
+                                <span class="color-desc"><span style="color:#ff0000">Red</span> (> 1.8σ), <span style="color:#ff8800">Orange</span> (> 1.0σ), <span style="color:#ffff00">Yellow</span> (> 0σ).</span>
                             </div>
                             <div class="legend-row">
                                 <span class="color-key">ACC</span>
@@ -831,7 +868,7 @@ def export_interactive_html(df):
         function resetFilters() {{ $('#minPrice, #maxPrice, #minVol, #maxVol').val(''); $('#btnradio1').prop('checked', true); $('input[name="mcapFilter"]').prop('checked', false); $('#mcapAll').prop('checked', true); table.draw();  }}
         function exportTickers() {{
             var table = $('.table').DataTable(); var data = table.rows({{ search: 'applied', order: 'current', page: 'current' }}).data();
-            var tickers = []; data.each(function (value) {{ var div = document.createElement("div"); div.innerHTML = value[3]; var text = div.textContent || div.innerText || ""; if(text) tickers.push(text.trim()); }});
+            var tickers = []; data.each(function (value) {{ var div = document.createElement("div"); div.innerHTML = value[4]; var text = div.textContent || div.innerText || ""; if(text) tickers.push(text.trim()); }});
             if (tickers.length === 0) {{ alert("No visible tickers!"); return; }}
             var blob = new Blob([tickers.join(" ")], {{ type: "text/plain;charset=utf-8" }}); var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "ape_tickers_page.txt"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }}
@@ -839,27 +876,27 @@ def export_interactive_html(df):
             table=$('.table').DataTable({{
                 "order":[[0,"asc"]], "pageLength": 25, "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 "columnDefs": [ 
-                    {{ "visible": false, "targets": [17, 18, 19] }},
+                    {{ "visible": false, "targets": [18, 19, 20] }},
 
                     {{
-                        "targets": [1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+                        "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
                         "type": "num",
                         "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,x]/g, ''); return parseVal(clean); }} return data; }} }},
-                    {{ "targets": [12], "type": "num", "render": function(data, type) {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/,/g, ''); var val = parseFloat(clean) || 0; if (type === 'sort' || type === 'type') return val; if (val < 0) return '<span style="color:#ff4444">' + val + '</span>'; else return '<span style="color:#00ff00">' + val + '</span>'; }} }}
+                    {{ "targets": [13], "type": "num", "render": function(data, type) {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/,/g, ''); var val = parseFloat(clean) || 0; if (type === 'sort' || type === 'type') return val; if (val < 0) return '<span style="color:#ff4444">' + val + '</span>'; else return '<span style="color:#00ff00">' + val + '</span>'; }} }}
                 ],
                 "drawCallback": function() {{ var api = this.api(); $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); }}
             }});
             
             $.fn.dataTable.ext.search.push(function(settings, data) {{
-                // STOCK TYPE FILTER (Col 17 is Type_Tag)
-                var typeTag = data[17] || ""; 
+                // STOCK TYPE FILTER (Type_Tag)
+                var typeTag = data[18] || ""; 
                 var viewMode = $('input[name="btnradio"]:checked').attr('id');
                 if (viewMode == 'btnradio2' && typeTag == 'ETF') return false;
                 if (viewMode == 'btnradio3' && typeTag == 'STOCK') return false;
                 
-                // MARKET CAP FILTER (Col 19 is MCap)
+                // MARKET CAP FILTER (MCap)
                 if (!$('#mcapAll').is(':checked')) {{
-                    var mcap = parseFloat(data[19]) || 0; 
+                    var mcap = parseFloat(data[20]) || 0; 
                     var match = false;
                     if ($('#mcapMega').is(':checked') && mcap >= 200000000000) match = true;
                     if ($('#mcapLarge').is(':checked') && (mcap >= 10000000000 && mcap < 200000000000)) match = true;
@@ -871,12 +908,12 @@ def export_interactive_html(df):
 
                 // PRICE & VOL FILTERS
                 var minP = parseVal($('#minPrice').val()), maxP = parseVal($('#maxPrice').val());
-                var p = parseFloat((data[4] || "0").replace(/[$,]/g, '')) || 0; // Price is col 4
+                var p = parseFloat((data[5] || "0").replace(/[$,]/g, '')) || 0; // Price is col 4
                 if (minP > 0 && p < minP) return false;
                 if (maxP > 0 && p > maxP) return false;
                 
                 var minV = parseVal($('#minVol').val()), maxV = parseVal($('#maxVol').val());
-                var v = parseFloat(data[18]) || 0; // Raw Vol is col 18
+                var v = parseFloat(data[19]) || 0; // Raw Vol is col 18
                 if (minV > 0 && v < minV) return false;
                 if (maxV > 0 && v > maxV) return false;
                 return true;
@@ -887,7 +924,7 @@ def export_interactive_html(df):
                 var mode = $('input[name="btnradio"]:checked').attr('id');
                 var headerTxt = "INDUSTRY/SECTOR";
                 if (mode == 'btnradio2') headerTxt = "INDUSTRY"; else if (mode == 'btnradio3') headerTxt = "SECTOR";
-                $(table.column(16).header()).text(headerTxt);
+                $(table.column(17).header()).text(headerTxt);
                 table.draw(); 
             }};
             var d=new Date($("#time").data("utc")); $("#time").text("Last Updated: " + d.toLocaleString());
