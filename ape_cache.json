@@ -9526,5 +9526,21 @@
         "type": "EQUITY",
         "mcap": 27192068096,
         "currency": "USD"
+    },
+    "LC": {
+        "ticker": "LC",
+        "name": "LendingClub Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 2257602304,
+        "currency": "USD"
+    },
+    "TCEHY": {
+        "ticker": "TCEHY",
+        "name": "Tencent Holding Ltd.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 710869778432,
+        "currency": "USD"
     }
 }
