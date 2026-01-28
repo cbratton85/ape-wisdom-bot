@@ -504,7 +504,7 @@ def export_interactive_html(df, ai_summary=""):
             th:nth-child(4), td:nth-child(4) {{ max-width: 260px; overflow: hidden; text-overflow: ellipsis; }}
             th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }}
             th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; }}
-            th:nth-child(18), td:nth-child(18) {{ max-width: 260px; overflow: hidden; text-overflow: ellipsis; text-align: left; padding-left: 10px !important; border-right: 1px solid #333; }}
+            th:nth-child(18), td:nth-child(18) {{ width: auto; white-space: normal; text-align: left; padding-left: 10px !important; border-right: 1px solid #333; }}
             
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
@@ -858,27 +858,22 @@ def get_ai_analysis(df, history_data):
         2. **Formatting:** Use Markdown tables, **bold** for tickers, and emojis for section headers.
 
         ### REQUIRED OUTPUT SECTIONS:
-
         **1. 🌍 Executive Summary**
         * Provide a 2-sentence summary of the market's current mood. (e.g., "Significant rotation into Semiconductors, while Gold cools off.")
-
         **2. 🔝 Top Market Leaders (Table)**
         * Create a Markdown table with columns: **Symbol**, **Price**, **Sector**, and **Analyst Note**.
         * Select the top 4 strongest stocks from DATASET 1 based on 'Heat' and 'Rank'.
-
         **3. 🔥 High-Volatility & Squeeze Alerts**
         * Analyze DATASET 2. Identify stocks with high 'Srg' (Surge) or 'Sqz' (Squeeze) scores.
         * Format as bullet points: "**Ticker (Price):** Description of the move."
         * *Example:* "**CVNA ($45.20):** Massive 442% squeeze score indicates forced buy-ins."
-
         **4. 🏗️ Sector Strength Analysis**
         * Look at the 'Industry/Sector' of the top performers. Group them.
         * Identify the top 2 hot sectors. (e.g., "1. Technology", "2. Energy").
-
         **5. 📉 Notable Laggards / Divergences**
         * Look at DATASET 3. Identify any stock dropping in Rank or Price, OR any stock where Price is dropping but Rank is rising (Divergence).
 
-        Produce the report now.
+        Produce the report now.  Keep it short and be consise.
         """
 
         response = model.generate_content(prompt)
