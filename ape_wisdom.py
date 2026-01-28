@@ -292,11 +292,11 @@ def filter_and_process(stocks):
         cols = ['Rank+', 'Surge', 'Mnt%', 'Upvotes', 'Accel', 'Upv+']
         weights = {
             'Rank+': 1.1, 
-            'Surge': 1.0, 
-            'Mnt%': 0.8, 
+            'Surge': 1.1, 
+            'Mnt%': 0.7, 
             'Upvotes': 1.0,
-            'Accel': 1.2,   # High weight: We want to see "speeding up" stocks
-            'Upv+': 1.0     # Normal weight: Rewards growing engagement
+            'Accel': 1.2,
+            'Upv+': 1.0 
         }
         
         for col in cols:
@@ -405,7 +405,7 @@ def export_interactive_html(df):
             
             if z_heat > 2.0: h_clr = "#ff0000"
             elif z_heat > 1.5: h_clr = "#ff8800"
-            elif z_heat > 1: h_clr = "#ffff00"
+            elif z_heat > 1.0: h_clr = "#ffff00"
             else: h_clr = "#888888"
 
             z_cols = [
@@ -575,7 +575,7 @@ def export_interactive_html(df):
             
             /* --- 2-COLUMN GRID LEGEND --- */
             
-            .legend-grid {{ display: grid; grid-template-columns: 3fr 2fr; gap: 20px; width: 100%; }}
+            .legend-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }}
             .legend-col {{ background: #222;
                 border: 1px solid #333;
                 padding: 6px;
