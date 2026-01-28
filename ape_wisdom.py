@@ -674,7 +674,7 @@ def export_interactive_html(df, ai_summary=""):
             var table = $('.table').DataTable(); var data = table.rows({{ search: 'applied', order: 'current', page: 'current' }}).data();
             var tickers = []; data.each(function (value) {{ var div = document.createElement("div"); div.innerHTML = value[4]; var text = div.textContent || div.innerText || ""; if(text) tickers.push(text.trim()); }});
             if (tickers.length === 0) {{ alert("No visible tickers!"); return; }}
-            var blob = new Blob([tickers.join(" ")], {{ type: "text/plain;charset=utf-8" }}); var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "ape_tickers_page.txt"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            var blob = new Blob([tickers.join(", ")], {{ type: "text/plain;charset=utf-8" }}); var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "ape_tickers_page.txt"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }}
         $(document).ready(function(){{ 
             table=$('.table').DataTable({{
