@@ -35,14 +35,17 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: python ape_wisdom.py --auto
 
-      # --- PERMANENT MEMORY: COMMIT HISTORY BACK TO REPO ---
+      # --- PERMANENT MEMORY & WEBSITE SAVE ---
       - name: Commit and Push History
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add market_history.json ape_cache.json
-          # [skip ci] prevents the bot from triggering another run when it saves data
-          git commit -m "Update history and cache [skip ci]" || echo "No changes to commit"
+          
+          # UPDATE THIS LINE: Add 'public/' so the website saves too!
+          git add market_history.json ape_cache.json public/
+          
+          # [skip ci] prevents infinite loops
+          git commit -m "Update history, cache, and dashboard [skip ci]" || echo "No changes to commit"
           git push
 
       # --- DEPLOY DASHBOARD TO PAGES ---
