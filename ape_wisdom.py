@@ -455,12 +455,15 @@ def export_interactive_html(df, ai_summary=""):
         ai_box_html = ""
         if ai_summary:
             ai_box_html = f"""
-            <div class="ai-box-wrapper" style="margin-bottom: 20px;">
-                <div style="background: #18181b; border: 1px solid #00ff00; border-radius: 8px; padding: 20px; box-shadow: 0 4px 15px rgba(0,255,0,0.1);">
-                    <h3 style="color: #00ff00; margin-top: 0; font-size: 1.2rem; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px;">
-                        🤖 Gemini AI Intelligence Report
-                    </h3>
-                    <div style="color: #e0e0e0; font-size: 15px; line-height: 1.6; white-space: pre-wrap; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">{ai_summary}</div>
+            <div class="ai-box-wrapper" style="margin-bottom: 15px;">
+                <div style="background: #18181b; border: 1px solid #00ff00; border-radius: 5px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,255,0,0.1);">
+                    <div onclick="toggleAI()" style="padding: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: #2a2a2a; border-bottom: 1px solid #333; font-weight: bold; color: #fff; font-size: 0.85rem; text-transform: uppercase;">
+                        <span style="color: #00ff00;">⚡ Gemini AI Intelligence Report</span>
+                        <span id="aiArrow" style="color: #00ff00;">▼</span>
+                    </div>
+                    <div id="aiContent" style="display: none; padding: 15px; color: #e0e0e0; font-size: 14px; line-height: 1.6; white-space: pre-wrap; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                        {ai_summary}
+                    </div>
                 </div>
             </div>
             """
@@ -490,7 +493,7 @@ def export_interactive_html(df, ai_summary=""):
             table.no-colors a {{ color: #4da6ff !important; }}
             
             .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }}
-            .legend-header {{ background: #2a2a2a; padding: 10px 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; }}
+            .legend-header {{ background: #2a2a2a; padding: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; font-size: 0.85rem; text-transform: uppercase; border-bottom: 1px solid #333; }}
             .legend-box {{ padding: 8px; display: none; background-color: #1a1a1a; }}
             .legend-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }}
             .legend-col {{ background: #222; border: 1px solid #333; padding: 6px; border-radius: 5px; }}
@@ -511,6 +514,11 @@ def export_interactive_html(df, ai_summary=""):
             #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px;}}
             .header-flex {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
             .dataTables_filter input {{ width: 350px !important; background: #111 !important; border: 1px solid #555 !important; color: #fff !important; height: 28px !important; border-radius: 4px; margin-left: 10px; }}
+            /* --- PAGINATION DARK MODE FIX --- */
+            .page-link {{ background-color: #1a1a1a !important; border-color: #444 !important; color: #ccc !important; }}
+            .page-link:hover {{ background-color: #333 !important; color: #fff !important; }}
+            .page-item.active .page-link {{ background-color: #00ff00 !important; border-color: #00ff00 !important; color: #000 !important; font-weight: bold; }}
+            .page-item.disabled .page-link {{ background-color: #111 !important; border-color: #333 !important; color: #555 !important; }}
         </style>
         </head>
         <body>
@@ -623,6 +631,10 @@ def export_interactive_html(df, ai_summary=""):
         }}
         function toggleLegend() {{
             var x = document.getElementById("legendContent"); var arrow = document.getElementById("legendArrow");
+            if (x.style.display === "block") {{ x.style.display = "none"; arrow.innerText = "▼"; }} else {{ x.style.display = "block"; arrow.innerText = "▲"; }}
+        }}
+        function toggleAI() {{
+            var x = document.getElementById("aiContent"); var arrow = document.getElementById("aiArrow");
             if (x.style.display === "block") {{ x.style.display = "none"; arrow.innerText = "▼"; }} else {{ x.style.display = "block"; arrow.innerText = "▲"; }}
         }}
         function toggleColors() {{
