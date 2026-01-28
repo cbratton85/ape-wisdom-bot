@@ -919,6 +919,15 @@ if __name__ == "__main__":
         print(f"{C_RED}[!] Data fetched, but all tickers were filtered out. Exiting.{C_RESET}")
         sys.exit(0)
 
+    # --- SAFETY FIX: Force missing columns to exist ---
+    # This prevents the "KeyError: Acc" crash
+    required_cols = ['Acc', 'Master_Score', 'Srg', 'Rank', 'Rank+', 'Conv', 'Heat']
+    for col in required_cols:
+        if col not in df.columns:
+            # If the column is missing, fill it with 0 so the script keeps running
+            df[col] = 0
+    # --------------------------------------------------
+
     # 3. Generate the AI Summary
     print("--- Generating AI Analysis ---")
     tracker = HistoryTracker(HISTORY_FILE)
