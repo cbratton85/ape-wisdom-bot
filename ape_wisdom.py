@@ -504,7 +504,7 @@ def export_interactive_html(df, ai_summary=""):
             th:nth-child(4), td:nth-child(4) {{ max-width: 260px; overflow: hidden; text-overflow: ellipsis; }}
             th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }}
             th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; }}
-            th:nth-child(18), td:nth-child(18) {{ max-width: 210px; overflow: hidden; text-overflow: ellipsis; text-align: left; padding-left: 10px !important; border-right: 1px solid #333; }}
+            th:nth-child(18), td:nth-child(18) {{ max-width: 260px; overflow: hidden; text-overflow: ellipsis; text-align: left; padding-left: 10px !important; border-right: 1px solid #333; }}
             
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
