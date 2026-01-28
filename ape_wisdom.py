@@ -403,9 +403,9 @@ def export_interactive_html(df):
             mean_s, std_s = df['Master_Score'].mean(), df['Master_Score'].std()
             z_heat = (score - mean_s) / std_s if std_s > 0 else 0
             
-            if z_heat > 1.5: h_clr = "#ff0000"
-            elif z_heat > 0.8: h_clr = "#ff8800"
-            elif z_heat > 0.2: h_clr = "#ffff00"
+            if z_heat > 2.0: h_clr = "#ff0000"
+            elif z_heat > 1.5: h_clr = "#ff8800"
+            elif z_heat > 1: h_clr = "#ffff00"
             else: h_clr = "#888888"
 
             z_cols = [
@@ -772,7 +772,7 @@ def export_interactive_html(df):
                             </div>
                             <div class="legend-row">
                                 <span class="color-key">HEAT</span>
-                                <span class="color-desc"><span style="color:#ff0000">Red</span> (> 1.8σ), <span style="color:#ff8800">Orange</span> (> 1.0σ), <span style="color:#ffff00">Yellow</span> (> 0σ).</span>
+                                <span class="color-desc"><span style="color:#ff0000">Red</span> (> 2.0σ), <span style="color:#ff8800">Orange</span> (> 1.5σ), <span style="color:#ffff00">Yellow</span> (> 1σ).</span>
                             </div>
                             <div class="legend-row">
                                 <span class="color-key">ACC</span>
