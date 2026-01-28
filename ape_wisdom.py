@@ -777,10 +777,10 @@ def export_interactive_html(df):
                             <div class="legend-row">
                                 <span class="color-key">ACC</span>
                                 <span class="color-desc">
-                                    <span style="color:#ff00ff">Magenta</span> (Explosive ≥5), 
-                                    <span style="color:#00ffff">Cyan</span> (Speeding Up >0), 
+                                    <span style="color:#ff00ff">Magenta</span> (Expl. ≥5), 
+                                    <span style="color:#00ffff">Cyan</span> (Fast >0), 
                                     <span style="color:#ffffff">White</span> (Steady 0), 
-                                    <span style="color:#ff4444">Red</span> (Slowing Down <0).
+                                    <span style="color:#ff4444">Red</span> (Slow <0).
                                 </span>
                             </div>
                             <div class="legend-row">
