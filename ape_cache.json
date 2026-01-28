@@ -9518,5 +9518,13 @@
         "type": "EQUITY",
         "mcap": 13542127,
         "currency": "USD"
+    },
+    "EC": {
+        "ticker": "EC",
+        "name": "Ecopetrol S.A.",
+        "meta": "Oil & Gas Integrated",
+        "type": "EQUITY",
+        "mcap": 27192068096,
+        "currency": "USD"
     }
 }
