@@ -403,10 +403,10 @@ def export_interactive_html(df):
             mean_s, std_s = df['Master_Score'].mean(), df['Master_Score'].std()
             z_heat = (score - mean_s) / std_s if std_s > 0 else 0
             
-            if z_heat > 1.8: h_clr = "#ff0000"
-            elif z_heat > 1.0: h_clr = "#ff8800"
-            elif z_heat > 0: h_clr = "#ffff00"
-            else: h_clr = "#666666"
+            if z_heat > 1.5: h_clr = "#ff0000"
+            elif z_heat > 0.8: h_clr = "#ff8800"
+            elif z_heat > 0.2: h_clr = "#ffff00"
+            else: h_clr = "#888888"
 
             z_cols = [
                 ('Rank+', row.get('z_Rank+', 0)),
@@ -420,12 +420,7 @@ def export_interactive_html(df):
             mvp_metric = mvp_pair[0]
             mvp_val = mvp_pair[1]
             
-            tooltip = f"Main Driver: {mvp_metric} (+{mvp_val:.1f}σ)"
-            
-            r_plus = row.get('Rank+', 0)
-            trend_arrow = ' ▲' if r_plus > 5 else (' ▼' if r_plus < -5 else "")
-
-            heat_html = f'<span title="{tooltip}" style="color:{h_clr}; cursor:help;">{score:.1f}{trend_arrow}</span>'
+            heat_html = f'<span style="color:{h_clr}; font-weight:bold;">{score:.1f}</span>'
             
             export_df.at[index, 'Name'] = f"<b>{row['Name']}</b>"
             export_df.at[index, 'Heat'] = heat_html
@@ -522,40 +517,46 @@ def export_interactive_html(df):
 
             table.dataTable {{ width: auto !important; margin: 0 auto; }}
             
-            th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; }}
+            th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; }} /*RANK*/
 
-            th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }}
+            th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }} /*RANK+*/
 
-            th:nth-child(3), td:nth-child(3) {{text-align: center; font-weight: bold; background: rgba(255,255,255,0.03); }}
+            th:nth-child(3), td:nth-child(3) {{ width: 1%; text-align: center; font-weight: bold; }} /*HEAT*/
 
-            th:nth-child(4), td:nth-child(4) {{ max-width: 250px; overflow: hidden; text-overflow: ellipsis; }}
+            th:nth-child(4), td:nth-child(4) {{ max-width: 260px; overflow: hidden; text-overflow: ellipsis; }} /*NAME*/
             
-            th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: right; }}
+            th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }} /*SYM*/
 
-            th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: center; }}
+            th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; }} /*PRICE*/
 
-            th:nth-child(7), td:nth-child(7) {{ width: 1%; text-align: center; }}
+            th:nth-child(7), td:nth-child(7) {{ width: 1%; text-align: center; }} /*ACC*/
 
-            th:nth-child(8), td:nth-child(8) {{ width: 1%; text-align: center; }}
+            th:nth-child(8), td:nth-child(8) {{ width: 1%; text-align: center; }} /*EFF*/
 
-            th:nth-child(9), td:nth-child(9) {{ width: 1%; text-align: right; }}
+            th:nth-child(9), td:nth-child(9) {{ width: 1%; text-align: center; }} /*CONV*/
 
-            th:nth-child(10), td:nth-child(10) {{ width: 1%; text-align: right; }}
+            th:nth-child(10), td:nth-child(10) {{ width: 1%; text-align: center; }} /*UPVS*/
 
-            th:nth-child(11), td:nth-child(11) {{ width: 1%; text-align: right; }}
+            th:nth-child(11), td:nth-child(11) {{ width: 1%; text-align: center; }} /*UPV+*/
 
-            th:nth-child(12), td:nth-child(12) {{ width: 1%; text-align: right; }}
+            th:nth-child(12), td:nth-child(12) {{ width: 1%; text-align: right; }} /*VOL*/
 
-            th:nth-child(13), td:nth-child(13) {{ width: 1%; text-align: center; }}
+            th:nth-child(13), td:nth-child(13) {{ width: 1%; text-align: center; }} /*SRG*/
 
-            th:nth-child(14), td:nth-child(14) {{ width: 1%; text-align: center; }}
+            th:nth-child(14), td:nth-child(14) {{ width: 1%; text-align: center; }} /*VEL*/
 
-            th:nth-child(15), td:nth-child(15) {{ width: 1%; text-align: right; }}
+            th:nth-child(15), td:nth-child(15) {{ width: 1%; text-align: center; }} /*STRK*/
             
-            th:nth-child(16), td:nth-child(16) {{ width: 1%; text-align: center; }}
+            th:nth-child(16), td:nth-child(16) {{ width: 1%; text-align: center; }} /*MNT%*/
 
-            th:nth-child(17), td:nth-child(17) {{
-                max-width: 250px; overflow: hidden; text-overflow: ellipsis; padding-left: 10px !important;
+            th:nth-child(17), td:nth-child(17) {{ width: 1%; text-align: center; }} /*SQZ*/
+
+            th:nth-child(18), td:nth-child(18) {{ 
+                max-width: 210px; 
+                overflow: hidden; 
+                text-overflow: ellipsis; 
+                text-align: left; 
+                padding-left: 10px !important; 
                 border-right: 1px solid #333; 
             }}
             
@@ -775,7 +776,12 @@ def export_interactive_html(df):
                             </div>
                             <div class="legend-row">
                                 <span class="color-key">ACC</span>
-                                <span class="color-desc"><span style="color:#ff00ff">Magenta</span> (Explosive), White (Fast).</span>
+                                <span class="color-desc">
+                                    <span style="color:#ff00ff">Magenta</span> (Explosive ≥5), 
+                                    <span style="color:#00ffff">Cyan</span> (Speeding Up >0), 
+                                    <span style="color:#ffffff">White</span> (Steady 0), 
+                                    <span style="color:#ff4444">Red</span> (Slowing Down <0).
+                                </span>
                             </div>
                             <div class="legend-row">
                                 <span class="color-key">EFF</span>
