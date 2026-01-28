@@ -496,7 +496,7 @@ def export_interactive_html(df, ai_summary=""):
         ai_box_html = ""
         if ai_summary:
             ai_box_html = f"""
-            <div class="container-fluid mb-4">
+            <div class="ai-box-wrapper" style="margin-bottom: 20px;">
                 <div style="background: #18181b; border: 1px solid #00ff00; border-radius: 8px; padding: 20px; box-shadow: 0 4px 15px rgba(0,255,0,0.1);">
                     <h3 style="color: #00ff00; margin-top: 0; font-size: 1.2rem; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px;">
                         🤖 Gemini AI Intelligence Report
@@ -512,10 +512,22 @@ def export_interactive_html(df, ai_summary=""):
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
             body{{ background-color:#101010; color:#e0e0e0; font-family:'Consolas','Monaco',monospace; padding:20px; }}
+
+            /* --- NEW: ADD THIS CLASS --- */
+            .master-container {{ max-width: 1600px; margin: 0 auto; width: 100%; }}
+            /* --------------------------- */
+
             .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
             th{{ color:#00ff00; border-bottom:2px solid #444; font-size: 15px; text-transform: uppercase; vertical-align: middle !important; padding: 8px 22px 8px 6px !important; line-height: 1.2 !important; }}
             td{{ vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333; padding: 4px 5px !important; font-size: 15px; }}
-            table.dataTable {{ width: auto !important; margin: 0 auto; }}
+            
+            /* CHANGE: Make table 100% width so it fills the new container */
+            table.dataTable {{ width: 100% !important; margin: 0 auto; }}
+
+            .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
+            th{{ color:#00ff00; border-bottom:2px solid #444; font-size: 15px; text-transform: uppercase; vertical-align: middle !important; padding: 8px 22px 8px 6px !important; line-height: 1.2 !important; }}
+            td{{ vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333; padding: 4px 5px !important; font-size: 15px; }}
+            
             th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; }} 
             th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }}
             th:nth-child(3), td:nth-child(3) {{ width: 1%; text-align: center; font-weight: bold; }}
@@ -799,93 +811,90 @@ def get_ai_analysis(df, history_data):
         genai.configure(api_key=api_key)
         
         # --- SMART MODEL SELECTOR ---
-        # Instead of guessing 'gemini-pro' or 'gemini-1.5-flash', we ask the API what works.
         target_model = None
-        available_models = []
-        
         try:
             for m in genai.list_models():
                 if 'generateContent' in m.supported_generation_methods:
-                    name = m.name
-                    available_models.append(name)
-                    # Preference 1: Flash (Fast & Cheap)
-                    if 'flash' in name.lower() and 'gemini' in name.lower():
-                        target_model = name
-                        break
-            
-            # Preference 2: If no Flash, take the first available 'gemini' model
-            if not target_model:
-                for name in available_models:
-                    if 'gemini' in name.lower():
-                        target_model = name
-                        break
-                        
-            if not target_model:
-                return f"AI Error: No compatible Gemini models found. Available: {available_models}"
-
+                    if 'flash' in m.name.lower() and 'gemini' in m.name.lower():
+                        target_model = m.name; break
+            if not target_model: target_model = 'gemini-pro'
             print(f"🤖 Connected to AI Model: {target_model}")
             model = genai.GenerativeModel(target_model)
-
-        except Exception as list_error:
-            # Fallback if list_models fails (e.g., very old library version)
-            print(f"Warning: Could not list models ({list_error}). Trying default 'gemini-pro'.")
+        except:
             model = genai.GenerativeModel('gemini-pro')
 
-        # --- PREPARE DATA ---
-        ai_view = df.head(10).copy()
-        cols_to_show = ['Sym', 'Rank+', 'Conv']
+        # --- 1. PREPARE LEADERS (Top 10) ---
+        # Ensure column names match what the AI expects
+        if 'Surge' in df.columns: df.rename(columns={'Surge': 'Srg'}, inplace=True)
+        if 'Master_Score' in df.columns: df.rename(columns={'Master_Score': 'Heat'}, inplace=True)
         
-        if 'Master_Score' in df.columns:
-            ai_view.rename(columns={'Master_Score': 'Heat'}, inplace=True)
-            cols_to_show.append('Heat')
+        cols_for_ai = ['Sym', 'Rank', 'Rank+', 'Price', 'Srg', 'Acc', 'Conv', 'Heat']
         
-        if 'Surge' in df.columns:
-            ai_view.rename(columns={'Surge': 'Srg'}, inplace=True)
-            cols_to_show.append('Srg')
+        # Dataset 1: The obvious winners
+        leaders_df = df.head(10)[cols_for_ai]
+        leaders_str = leaders_df.to_string(index=False)
 
-        # --- HISTORY CONTEXT ---
-        top_tickers = df.head(20)['Sym'].tolist()
+        # --- 2. PREPARE STEALTH MOVERS (The "Deep Scan") ---
+        # We look at everything AFTER rank 10
+        rest_of_market = df.iloc[10:].copy()
+        
+        # Filter: Find stocks with High Surge (>100%) OR Fast Accel (>2)
+        # We sort by 'Heat' to ensure we send the most relevant ones
+        stealth_candidates = rest_of_market[ 
+            (rest_of_market['Srg'] > 100) | (rest_of_market['Acc'].abs() >= 2) 
+        ].sort_values(by='Heat', ascending=False).head(5)
+        
+        if not stealth_candidates.empty:
+            stealth_str = stealth_candidates[cols_for_ai].to_string(index=False)
+        else:
+            stealth_str = "No significant outliers found."
+
+        # --- 3. HISTORY CONTEXT (For Leaders) ---
+        top_20 = df.head(20)['Sym'].tolist()
         comparison_context = []
-
-        for ticker in top_tickers:
+        for ticker in top_20:
             if ticker in history_data:
                 snapshots = sorted(history_data[ticker].items())
                 if len(snapshots) > 1:
                     curr = snapshots[-1][1]
                     prev = snapshots[-6][1] if len(snapshots) > 6 else snapshots[0][1]
                     
-                    curr_rank = curr.get('rank', curr.get('Rank', 0))
-                    prev_rank = prev.get('rank', prev.get('Rank', 0))
-                    curr_conv = curr.get('conv', curr.get('Conv', 0))
-                    prev_conv = prev.get('conv', prev.get('Conv', 0))
-                    
-                    diff = {
+                    comparison_context.append({
                         "Sym": ticker,
-                        "Rank_Now": curr_rank,
-                        "Rank_3hr_Ago": prev_rank,
-                        "Conv_Change": round(curr_conv - prev_conv, 2)
-                    }
-                    comparison_context.append(diff)
+                        "Rank_Now": curr.get('rank', 0),
+                        "Rank_3hr_Ago": prev.get('rank', 0),
+                        "Conv_Change": round(curr.get('conv', 0) - prev.get('conv', 0), 2)
+                    })
 
+        # --- 4. THE PROMPT ---
         prompt = f"""
-        Act as a professional sentiment trader. Analyze this 30-minute retail momentum data.
+        Act as a professional sentiment trader. Analyze this market momentum data.
         
-        Current Top 10 Data:
-        {ai_view[cols_to_show].to_string(index=False)}
+        DATASET 1: CURRENT LEADERS (Top 10):
+        {leaders_str}
         
-        Historical Deltas (3hr window):
+        DATASET 2: STEALTH OUTLIERS (Scanned from deep market):
+        {stealth_str}
+        
+        DATASET 3: 3-HOUR TRENDS (For Leaders):
         {comparison_context}
         
-        Provide a 3-bullet point summary for Discord (Format with bold headers):
-        1. **The Breakout:** Which ticker has the most efficient climb (Rank up + Volume)?
-        2. **The Divergence:** Is anything climbing in rank while Conviction is falling? (Bearish signal).
-        3. **The Stealth Play:** A ticker outside the top 5 with weirdly high Surge (Srg) or Accel.
+        Provide a 3-bullet point summary for Discord.
+        
+        RULES:
+        1. **Start directly with the first bullet point.**
+        2. **The Breakout:** Which ticker in DATASET 1 has the most efficient climb (Rank+ vs Volume)?
+        3. **The Divergence:** Is any Leader climbing in rank but showing dropping Conviction in Dataset 3?
+        4. **The Stealth Play:** LOOK AT DATASET 2. Identify a ticker outside the Top 10 that is heating up (High Surge or Accel). Explain why.
         
         Keep it snappy, professional, and use emojis.
         """
 
         response = model.generate_content(prompt)
-        return response.text
+        
+        # Cleanup
+        clean_text = response.text.replace("Here's your analysis:", "").replace("Here is the summary:", "").strip()
+        return clean_text
 
     except Exception as e:
         print(f"AI Error: {e}")
@@ -920,7 +929,7 @@ if __name__ == "__main__":
     
     # 5. Send to Discord
     if fname:
-        send_discord_link(fname, ai_summary) 
+        send_discord_link(fname, "")
     else:
         print(f"{C_RED}[!] HTML generation failed. Skipping Discord.{C_RESET}")
     
