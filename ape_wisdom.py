@@ -811,8 +811,21 @@ def export_interactive_html(df):
             if (table.classList.contains('no-colors')) {{ btn.innerHTML = "🎨 Colors: OFF"; btn.style.opacity = "0.6"; }} else {{ btn.innerHTML = "🎨 Colors: ON"; btn.style.opacity = "1.0"; }}
         }}
         function parseVal(str) {{
-            if (!str) return 0; str = str.toString().toLowerCase().replace(/,/g, '');
-            let mult = 1; if (str.endsWith('k')) mult = 1000; else if (str.endsWith('m')) mult = 1000000; else if (str.endsWith('b')) mult = 1000000000;
+            if (!str) return 0;
+            str = str.toString().toLowerCase().replace(/,/g, '').trim();
+
+            let mult = 1;
+            if (str.endsWith('k')) {{
+                mult = 1000;
+                str = str.replace('k', '');
+            }} else if (str.endsWith('m')) {{
+                mult = 1000000;
+                str = str.replace('m', '');
+            }} else if (str.endsWith('b')) {{
+                mult = 1000000000;
+                str = str.replace('b', '');
+        }}
+            // 3. Convert to float and multiply
             return parseFloat(str) * mult || 0;
         }}
         function resetFilters() {{ $('#minPrice, #maxPrice, #minVol, #maxVol').val(''); $('#btnradio1').prop('checked', true); $('input[name="mcapFilter"]').prop('checked', false); $('#mcapAll').prop('checked', true); table.draw();  }}
@@ -826,9 +839,12 @@ def export_interactive_html(df):
             table=$('.table').DataTable({{
                 "order":[[0,"asc"]], "pageLength": 25, "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 "columnDefs": [ 
-                    {{ "visible": false, "targets": [17, 18, 19] }}, // Hide TypeTag(17), AvgVol(18), MCap(19)
-                    {{ "orderData": [18], "targets": [9] }}, // Avg Vol (Display) uses AvgVol (Raw/18) to sort
-                    {{ "targets": [1, 5, 6, 7, 8, 10, 11, 13], "type": "num", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,x]/g, ''); return parseFloat(clean) || 0; }} return data; }} }},
+                    {{ "visible": false, "targets": [17, 18, 19] }},
+
+                    {{
+                        "targets": [1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+                        "type": "num",
+                        "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,x]/g, ''); return parseVal(clean); }} return data; }} }},
                     {{ "targets": [12], "type": "num", "render": function(data, type) {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/,/g, ''); var val = parseFloat(clean) || 0; if (type === 'sort' || type === 'type') return val; if (val < 0) return '<span style="color:#ff4444">' + val + '</span>'; else return '<span style="color:#00ff00">' + val + '</span>'; }} }}
                 ],
                 "drawCallback": function() {{ var api = this.api(); $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); }}
