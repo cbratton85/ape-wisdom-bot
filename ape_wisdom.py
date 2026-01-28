@@ -798,18 +798,41 @@ def get_ai_analysis(df, history_data):
     try:
         genai.configure(api_key=api_key)
         
-        # --- THE FIX: Switch to 'gemini-pro' (Stable Alias) ---
-        # If 'gemini-pro' fails in the future, try 'gemini-2.0-flash'
-        try:
-            model = genai.GenerativeModel('gemini-pro')
-        except:
-            model = genai.GenerativeModel('models/gemini-pro')
-
-        # --- PREPARE DATA FOR AI ---
-        # 1. Create a clean view for the AI using the ORIGINAL column names
-        ai_view = df.head(10).copy()
+        # --- SMART MODEL SELECTOR ---
+        # Instead of guessing 'gemini-pro' or 'gemini-1.5-flash', we ask the API what works.
+        target_model = None
+        available_models = []
         
-        # Check which columns actually exist to prevent KeyErrors
+        try:
+            for m in genai.list_models():
+                if 'generateContent' in m.supported_generation_methods:
+                    name = m.name
+                    available_models.append(name)
+                    # Preference 1: Flash (Fast & Cheap)
+                    if 'flash' in name.lower() and 'gemini' in name.lower():
+                        target_model = name
+                        break
+            
+            # Preference 2: If no Flash, take the first available 'gemini' model
+            if not target_model:
+                for name in available_models:
+                    if 'gemini' in name.lower():
+                        target_model = name
+                        break
+                        
+            if not target_model:
+                return f"AI Error: No compatible Gemini models found. Available: {available_models}"
+
+            print(f"🤖 Connected to AI Model: {target_model}")
+            model = genai.GenerativeModel(target_model)
+
+        except Exception as list_error:
+            # Fallback if list_models fails (e.g., very old library version)
+            print(f"Warning: Could not list models ({list_error}). Trying default 'gemini-pro'.")
+            model = genai.GenerativeModel('gemini-pro')
+
+        # --- PREPARE DATA ---
+        ai_view = df.head(10).copy()
         cols_to_show = ['Sym', 'Rank+', 'Conv']
         
         if 'Master_Score' in df.columns:
@@ -820,7 +843,7 @@ def get_ai_analysis(df, history_data):
             ai_view.rename(columns={'Surge': 'Srg'}, inplace=True)
             cols_to_show.append('Srg')
 
-        # 2. Build the History Context
+        # --- HISTORY CONTEXT ---
         top_tickers = df.head(20)['Sym'].tolist()
         comparison_context = []
 
@@ -828,14 +851,11 @@ def get_ai_analysis(df, history_data):
             if ticker in history_data:
                 snapshots = sorted(history_data[ticker].items())
                 if len(snapshots) > 1:
-                    # Get current vs ~3 hours ago
                     curr = snapshots[-1][1]
                     prev = snapshots[-6][1] if len(snapshots) > 6 else snapshots[0][1]
                     
-                    # Safe .get() to handle old/new format differences
                     curr_rank = curr.get('rank', curr.get('Rank', 0))
                     prev_rank = prev.get('rank', prev.get('Rank', 0))
-                    
                     curr_conv = curr.get('conv', curr.get('Conv', 0))
                     prev_conv = prev.get('conv', prev.get('Conv', 0))
                     
