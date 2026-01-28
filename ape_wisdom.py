@@ -797,11 +797,16 @@ def get_ai_analysis(df, history_data):
 
     try:
         genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        
+        # --- THE FIX: Switch to 'gemini-pro' (Stable Alias) ---
+        # If 'gemini-pro' fails in the future, try 'gemini-2.0-flash'
+        try:
+            model = genai.GenerativeModel('gemini-pro')
+        except:
+            model = genai.GenerativeModel('models/gemini-pro')
 
         # --- PREPARE DATA FOR AI ---
         # 1. Create a clean view for the AI using the ORIGINAL column names
-        # We rename them properly here so the AI understands them
         ai_view = df.head(10).copy()
         
         # Check which columns actually exist to prevent KeyErrors
