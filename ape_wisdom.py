@@ -795,51 +795,63 @@ def get_ai_analysis(df, history_data):
     if not api_key:
         return "AI analysis skipped: No API key."
 
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-1.5-flash')
-
-    # Prepare a tiny subset of history for Gemini to save tokens
-    # We focus on the Top 20 currently trending stocks
-    top_tickers = df.head(20)['Sym'].tolist()
-    comparison_context = []
-
-    for ticker in top_tickers:
-        if ticker in history_data:
-            snapshots = sorted(history_data[ticker].items())
-            if len(snapshots) > 1:
-                # Get current vs a snapshot from ~3 hours ago (approx 6 runs ago)
-                curr = snapshots[-1][1]
-                prev = snapshots[-6][1] if len(snapshots) > 6 else snapshots[0][1]
-                
-                diff = {
-                    "Sym": ticker,
-                    "Rank_Now": curr['rank'],
-                    "Rank_3hr_Ago": prev['rank'],
-                    "Conv_Change": curr['conv'] - prev['conv']
-                }
-                comparison_context.append(diff)
-
-    prompt = f"""
-    Act as a professional sentiment trader. Analyze this 30-minute retail momentum data:
-    
-    Current Top 10 Data:
-    {df.head(10)[['Sym', 'Rank+', 'Heat', 'Conv', 'Srg']].to_string()}
-    
-    Historical Deltas (3hr window):
-    {comparison_context}
-    
-    Provide a 3-bullet point summary for Discord:
-    1. **The Breakout:** Which ticker has the most 'efficient' climb?
-    2. **The Divergence:** Is anything climbing in rank while Conviction (Conv) is falling? (This is a warning)
-    3. **The Stealth Play:** A ticker outside the top 5 with weirdly high Surge (Srg) or Accel.
-    Keep it snappy and use emojis.
-    """
-
     try:
+        genai.configure(api_key=api_key)
+        model = genai.GenerativeModel('gemini-1.5-flash')
+
+        # Prepare a tiny subset of history for Gemini to save tokens
+        # We focus on the Top 20 currently trending stocks
+        top_tickers = df.head(20)['Sym'].tolist()
+        comparison_context = []
+
+        for ticker in top_tickers:
+            if ticker in history_data:
+                # Sort snapshots by timestamp (keys)
+                snapshots = sorted(history_data[ticker].items())
+                
+                if len(snapshots) > 1:
+                    # Get current vs a snapshot from ~3 hours ago (approx 6 runs ago)
+                    curr = snapshots[-1][1]
+                    prev = snapshots[-6][1] if len(snapshots) > 6 else snapshots[0][1]
+                    
+                    # --- FIX: Use .get() to avoid crashing on missing/capitalized keys ---
+                    curr_rank = curr.get('rank', curr.get('Rank', 0))
+                    prev_rank = prev.get('rank', prev.get('Rank', 0))
+                    
+                    curr_conv = curr.get('conv', curr.get('Conv', 0))
+                    prev_conv = prev.get('conv', prev.get('Conv', 0))
+                    
+                    diff = {
+                        "Sym": ticker,
+                        "Rank_Now": curr_rank,
+                        "Rank_3hr_Ago": prev_rank,
+                        "Conv_Change": round(curr_conv - prev_conv, 2)
+                    }
+                    comparison_context.append(diff)
+
+        prompt = f"""
+        Act as a professional sentiment trader. Analyze this 30-minute retail momentum data.
+        
+        Current Top 10 Data:
+        {df.head(10)[['Sym', 'Rank+', 'Heat', 'Conv', 'Srg']].to_string()}
+        
+        Historical Deltas (3hr window - Look for rank jumps vs conviction drops):
+        {comparison_context}
+        
+        Provide a 3-bullet point summary for Discord (Format with bold headers):
+        1. **The Breakout:** Which ticker has the most efficient climb (Rank up + Volume)?
+        2. **The Divergence:** Is anything climbing in rank while Conviction is falling? (Bearish signal).
+        3. **The Stealth Play:** A ticker outside the top 5 with weirdly high Surge (Srg) or Accel.
+        
+        Keep it snappy, professional, and use emojis.
+        """
+
         response = model.generate_content(prompt)
         return response.text
+
     except Exception as e:
-        return f"AI Error: {e}"
+        print(f"AI Error: {e}")
+        return f"AI Analysis Failed: {str(e)}"
 
 if __name__ == "__main__":
     if "--auto" in sys.argv:
@@ -851,23 +863,25 @@ if __name__ == "__main__":
         print(f"{C_RED}[!] No data returned from ApeWisdom API. Exiting.{C_RESET}")
         sys.exit(0)
 
+    # --- SAFETY LIMIT: Only process top 500 to avoid Yahoo 429 Errors ---
+    raw = raw[:500] 
+
     # 2. Process Data
     df = filter_and_process(raw)
     if df.empty:
         print(f"{C_RED}[!] Data fetched, but all tickers were filtered out. Exiting.{C_RESET}")
         sys.exit(0)
 
-    # --- NEW: 3. Generate the AI Summary ---
-    # We use the tracker to pull the history for comparison
+    # 3. Generate the AI Summary
+    print("--- Generating AI Analysis ---")
     tracker = HistoryTracker(HISTORY_FILE)
     ai_summary = get_ai_analysis(df, tracker.data)
 
-    # 4. Generate HTML
-    fname = export_interactive_html(df)
+    # 4. Generate HTML (Pass the summary so it appears on the website!)
+    fname = export_interactive_html(df, ai_summary)
     
-    # --- UPDATED: 5. Send to Discord ---
+    # 5. Send to Discord
     if fname:
-        # We now pass BOTH the filename and the ai_summary
         send_discord_link(fname, ai_summary) 
     else:
         print(f"{C_RED}[!] HTML generation failed. Skipping Discord.{C_RESET}")
