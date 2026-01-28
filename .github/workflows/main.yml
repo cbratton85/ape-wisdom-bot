@@ -41,11 +41,14 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # UPDATE THIS LINE: Add 'public/' so the website saves too!
-          git add market_history.json ape_cache.json public/
+          # 1. (Optional Trick) Copy the newest scan to 'index.html' 
+          # This makes your main website link always show the latest report!
+          cp $(ls scan_*.html | sort | tail -n 1) index.html
           
-          # [skip ci] prevents infinite loops
-          git commit -m "Update history, cache, and dashboard [skip ci]" || echo "No changes to commit"
+          # 2. Add the JSON memories AND the new website files
+          git add market_history.json ape_cache.json *.html
+          
+          git commit -m "Update history and dashboard [skip ci]" || echo "No changes to commit"
           git push
 
       # --- DEPLOY DASHBOARD TO PAGES ---
