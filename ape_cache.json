@@ -9630,5 +9630,13 @@
         "type": "EQUITY",
         "mcap": 50714886144,
         "currency": "USD"
+    },
+    "LYFT": {
+        "ticker": "LYFT",
+        "name": "Lyft, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 6990794240,
+        "currency": "USD"
     }
 }
