@@ -172,6 +172,9 @@ def filter_and_process(stocks):
     # 1. Setup and Deduplication
     us_tickers = list(set([TICKER_FIXES.get(s['ticker'], s['ticker'].replace('.', '-')) for s in stocks]))
     local_cache = load_cache()
+
+    tracker = HistoryTracker(HISTORY_FILE)
+
     now = datetime.datetime.utcnow()
     valid_tickers = []
     
@@ -260,6 +263,8 @@ def filter_and_process(stocks):
             safe_surge = s_perc if s_perc > 0 else 1
             efficiency = rank_plus / safe_surge
 
+            m = tracker.get_metrics(t, float(curr_p), m_perc)
+
             final_list.append({
                 "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
                 "Price": float(curr_p), 
@@ -269,7 +274,14 @@ def filter_and_process(stocks):
                 "Squeeze": squeeze_score, 
                 "MCap": mcap,
                 "Conv": conviction, 
-                "Eff": efficiency
+                "Eff": efficiency,
+
+                "Accel": m['accel'],
+                "Upv+": m['upv_chg'],
+                "Velocity": m['vel'],
+                "Streak": m['streak'],
+                "Rolling": m['rolling_trend'],
+                "Divergence": m['div'] 
             })
         except Exception as e: 
             continue
@@ -277,10 +289,19 @@ def filter_and_process(stocks):
     # 6. Scoring
     df = pd.DataFrame(final_list)
     if not df.empty:
-        cols = ['Rank+', 'Surge', 'Mnt%', 'Upvotes']
-        weights = {'Rank+': 1.1, 'Surge': 1.0, 'Mnt%': 0.8, 'Upvotes': 1.1}
+        cols = ['Rank+', 'Surge', 'Mnt%', 'Upvotes', 'Accel', 'Upv+']
+        weights = {
+            'Rank+': 1.1, 
+            'Surge': 1.0, 
+            'Mnt%': 0.8, 
+            'Upvotes': 1.0,
+            'Accel': 1.2,   # High weight: We want to see "speeding up" stocks
+            'Upv+': 1.0     # Normal weight: Rewards growing engagement
+        }
         
         for col in cols:
+            # Clip at 0 so negative numbers don't break the log function
+            # (Accel can be negative, so we treat negative accel as 0 contribution to heat)
             clean_series = df[col].clip(lower=0).astype(float)
             log_data = np.log1p(clean_series)
             mean = log_data.mean(); std = log_data.std(ddof=0)
@@ -297,25 +318,6 @@ def filter_and_process(stocks):
         else:
             df['z_Squeeze'] = 0
 
-    # 7. History
-    tracker = HistoryTracker(HISTORY_FILE)
-    vel, accel, upv_chg, div, strk, roll = [], [], [], [], [], []
-    for _, row in df.iterrows():
-        m = tracker.get_metrics(row['Sym'], row['Price'], row['Mnt%'])
-        vel.append(m['vel'])
-        accel.append(m['accel'])
-        upv_chg.append(m['upv_chg'])
-        div.append(m['div'])
-        strk.append(m['streak'])
-        roll.append(m['rolling_trend'])
-    
-    df['Velocity'] = vel
-    df['Accel'] = accel
-    df['Upv+'] = upv_chg
-    df['Divergence'] = div
-    df['Streak'] = strk
-    df['Rolling'] = roll
-    
     tracker.save(df)
     save_cache(local_cache)
     return df
@@ -373,7 +375,7 @@ def export_interactive_html(df):
             elif eff_val >= 0.5: eff_clr = "#ffff00"
             elif eff_val < 0.1 and eff_val > -0.1: eff_clr = "#666"
             else: eff_clr = "#ff4444"
-            export_df.at[index, 'Eff'] = color_span(f"{eff_val:.2f}", eff_clr)
+            export_df.at[index, 'Eff'] = color_span(f"{eff_val:.1f}", eff_clr)
 
             # 3. Conviction
             conv_val = row['Conv']
@@ -405,6 +407,8 @@ def export_interactive_html(df):
                 r_color = C_GREEN if r_val > 0 else C_RED
                 r_arrow = "▲" if r_val > 0 else "▼"
                 export_df.at[index, 'Rank+'] = color_span(f"{r_val} {r_arrow}", r_color)
+            else:
+                export_df.at[index, 'Rank+'] = ""
 
             # Columns
             for col, z_col in [('Surge', 'z_Surge'), ('Mnt%', 'z_Mnt%')]:
@@ -423,7 +427,7 @@ def export_interactive_html(df):
             is_fund = row['Type'] == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
             if is_fund:
                 badge = '<span style="background-color:#ff00ff; color:black; padding:2px 5px; border-radius:4px; font-size:11px; font-weight:bold; margin-right:6px; vertical-align:middle;">ETF</span>'
-                meta_text = color_span(row['Meta'], C_MAGENTA)
+                meta_text = color_span(row['Meta'], C_WHITE)
             else:
                 badge = ""
                 meta_text = color_span(row['Meta'], C_WHITE)
@@ -436,21 +440,28 @@ def export_interactive_html(df):
             export_df.at[index, 'Price'] = f"${row['Price']:.2f}"
             export_df.at[index, 'Vol_Display'] = color_span(export_df.at[index, 'Vol_Display'], "#ccc")
 
-        # --- CRITICAL FIX START ---
         # 1. Drop the original raw integer 'Streak' column so it doesn't collide
         if 'Streak' in export_df.columns:
             export_df.drop(columns=['Streak'], inplace=True)
 
         # 2. Rename columns (Now 'Sig' becomes the ONLY 'Streak' column)
-        export_df.rename(columns={'Meta': 'Industry/Sector', 'Velocity': 'Vel', 'Vol_Display': 'Avg Vol', 'Sig': 'Streak'}, inplace=True)
-        # --- CRITICAL FIX END ---
+        export_df.rename(columns={
+            'Meta': 'INDUSTRY/SECTOR',
+            'Velocity': 'Vel', 
+            'Vol_Display': 'Vol',
+            'Sig': 'Strk',
+            'Accel': 'Acc',
+            'Squeeze': 'Sqz',
+            'Upvotes': 'Upvs',
+            'Surge': 'Srg'
+            }, inplace=True)
 
         # The 'Shopping List'
         cols = [
             'Rank', 'Rank+', 'Name', 'Sym', 'Price', 
-            'Accel', 'Eff', 'Conv', 'Upvotes', 'Upv+',
-            'Avg Vol', 'Surge', 'Vel', 'Streak', 'Mnt%', 
-            'Squeeze', 'Industry/Sector', 'Type_Tag', 'AvgVol', 'MCap'
+            'Acc', 'Eff', 'Conv', 'Upvs', 'Upv+',
+            'Vol', 'Srg', 'Vel', 'Strk', 'Mnt%', 
+            'Sqz', 'INDUSTRY/SECTOR', 'Type_Tag', 'AvgVol', 'MCap'
         ]
         final_df = export_df[cols]
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
@@ -467,30 +478,55 @@ def export_interactive_html(df):
             .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
             
             th{{
-                color:#00ff00; border-bottom:2px solid #444; font-size: 14px;
-                vertical-align: middle !important; padding-top: 12px !important; padding-bottom: 12px !important; line-height: 1.4 !important;
+                color:#00ff00; border-bottom:2px solid #444;
+                font-size: 15px;
+                text-transform: uppercase;
+                /* Changed padding to: Top:8px, Right:20px, Bottom:8px, Left:4px */
+                vertical-align: middle !important; padding: 8px 22px 8px 6px !important; line-height: 1.2 !important;
             }}
-            
+
+            td{{
+                vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333; 
+                padding: 4px 5px !important;
+                font-size: 15px;
+            }}
+
             table.dataTable {{ width: auto !important; margin: 0 auto; }}
             
-            th:nth-child(1), td:nth-child(1) {{ width: 1%; white-space: nowrap; text-align: center; }}
-            th:nth-child(2), td:nth-child(2) {{ width: 1%; white-space: nowrap; text-align: center; }}
-            th:nth-child(3), td:nth-child(3) {{ max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }}
-            th:nth-child(4), td:nth-child(4) {{ width: 1%; white-space: nowrap; text-align: center; }}
+            th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; }}
+
+            th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }}
+
+            th:nth-child(3), td:nth-child(3) {{ max-width: 250px; overflow: hidden; text-overflow: ellipsis; }}
+
+            th:nth-child(4), td:nth-child(4) {{ width: 1%; text-align: center; }}
             
-            /* Price to Upvotes/Upv+ (Cols 5 through 10) */
-            th:nth-child(5), td:nth-child(5), th:nth-child(6), td:nth-child(6),
-            th:nth-child(7), td:nth-child(7), th:nth-child(8), td:nth-child(8),
-            th:nth-child(9), td:nth-child(9), th:nth-child(10), td:nth-child(10) {{ width: 1%; white-space: nowrap; text-align: right; padding: 0 8px; }}
+            th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: right; }}
 
-            /* Rest of columns */
-            th:nth-child(10), td:nth-child(10), th:nth-child(11), td:nth-child(11),
-            th:nth-child(12), td:nth-child(12), th:nth-child(13), td:nth-child(13),
-            th:nth-child(14), td:nth-child(14) {{ width: 1%; white-space: nowrap; text-align: right; }}
+            th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: center; }}
 
-            /* Industry Column (17th child in CSS, Index 16 in Data) */
+            th:nth-child(7), td:nth-child(7) {{ width: 1%; text-align: center; }}
+
+            th:nth-child(8), td:nth-child(8) {{ width: 1%; text-align: center; }}
+
+            th:nth-child(9), td:nth-child(9) {{ width: 1%; text-align: right; }}
+
+            th:nth-child(10), td:nth-child(10) {{ width: 1%; text-align: right; }}
+
+            th:nth-child(11), td:nth-child(11) {{ width: 1%; text-align: right; }}
+
+            th:nth-child(12), td:nth-child(12) {{ width: 1%; text-align: right; }}
+
+            th:nth-child(13), td:nth-child(13) {{ width: 1%; text-align: center; }}
+
+            th:nth-child(14), td:nth-child(14) {{ width: 1%; text-align: center; }}
+
+            th:nth-child(15), td:nth-child(15) {{ width: 1%; text-align: right; }}
+            
+            th:nth-child(16), td:nth-child(16) {{ width: 1%; text-align: center; }}
+
             th:nth-child(17), td:nth-child(17) {{
-                max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 15px;
+                max-width: 250px; overflow: hidden; text-overflow: ellipsis; padding-left: 10px !important;
                 border-right: 1px solid #333; 
             }}
             
@@ -501,13 +537,29 @@ def export_interactive_html(df):
             
             .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }}
             .legend-header {{ background: #2a2a2a; padding: 10px 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; }}
-            .legend-box {{ padding: 15px; display: none; background-color: #1a1a1a; }}
+            .legend-box {{
+                padding: 8px;
+                display: none;
+                background-color: #1a1a1a;
+            }}
             
             /* --- 2-COLUMN GRID LEGEND --- */
+            
             .legend-grid {{ display: grid; grid-template-columns: 3fr 2fr; gap: 20px; width: 100%; }}
-            .legend-col {{ background: #222; border: 1px solid #333; padding: 10px; border-radius: 5px; }}
+            .legend-col {{ background: #222;
+                border: 1px solid #333;
+                padding: 6px;
+                border-radius: 5px;
+            }}
             .legend-title {{ color: #00ff00; font-weight: bold; border-bottom: 1px solid #444; margin-bottom: 8px; font-size: 0.95rem; text-transform: uppercase; }}
-            .legend-row {{ display: flex; align-items: flex-start; margin-bottom: 8px; font-size: 0.85rem; border-bottom: 1px dashed #333; padding-bottom: 6px; }}
+            .legend-row {{
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 1px;
+                font-size: 15px;
+                border-bottom: 1px dashed #333;
+                padding-bottom: 1px;
+            }}
             
             .metric-name {{ color: #00ffff; font-weight: bold; width: 60px; flex-shrink: 0; }}
             .metric-math {{ color: #888; font-family: monospace; font-size: 0.75rem; margin-right: 10px; flex-shrink: 0; }}
@@ -540,7 +592,7 @@ def export_interactive_html(df):
         <div class="container-fluid" style="width: fit-content; margin: 0 auto;">
             <div class="header-flex">
                 <a href="https://apewisdom.io" target="_blank" style="text-decoration: none;">
-                <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" style="height: 50px; vertical-align: middle; margin-right: 15px;">
+                <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" style="height: 60px; vertical-align: middle; margin-right: 15px;">
                 </a>
                 <span id="time" data-utc="{utc_timestamp}" style="font-size: 0.9rem; color: #888;">Loading...</span>
             </div>
@@ -558,7 +610,7 @@ def export_interactive_html(df):
                 </div>
                 
                 <div class="filter-group" style="margin-right: 10px;">
-                    <label>Vol:</label>
+                    <label>Avg Vol:</label>
                     <input type="text" id="minVol" class="form-control form-control-sm" placeholder="500k" style="width: 50px;">
                     <span style="color:#666">-</span>
                     <input type="text" id="maxVol" class="form-control form-control-sm" placeholder="10m" style="width: 50px;">
@@ -590,7 +642,7 @@ def export_interactive_html(df):
                     </div>
                 </div>
 
-                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">TXT File</button>
+                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">Download TXT File</button>
                 <span id="stockCounter">Loading...</span>
             </div>
 
@@ -603,62 +655,72 @@ def export_interactive_html(df):
                     <div class="legend-grid">
                         
                         <div class="legend-col">
-                            <div class="legend-title">📉 Metric Definitions & Math</div>
+                            <div class="legend-title">📉 Column Definitions</div>
                             
                             <div class="legend-row">
-                                <span class="metric-name">Rank+</span>
-                                <span class="metric-math">Rank(Yest) - Rank(Today)</span>
-                                <span class="metric-desc">Positions climbed in the last 24h.</span>
+                                <span class="metric-name">RANK</span>
+                                <span class="metric-math">Current Pos</span>
+                                <span class="metric-desc">Current rank in the popularity list.</span>
                             </div>
                             <div class="legend-row">
-                                <span class="metric-name">Upv+</span>
-                                <span class="metric-math">Upvotes(Today) - Upvotes(Yest)</span>
+                                <span class="metric-name">RANK+</span>
+                                <span class="metric-math">Rank(Yest) - Rank(Today)</span>
+                                <span class="metric-desc">Positions changed vs 24h ago.</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">ACC</span>
+                                <span class="metric-math">Vel(Today) - Vel(Yest)</span>
+                                <span class="metric-desc">Acceleration: (Rate of change of speed).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">EFF</span>
+                                <span class="metric-math">Rank+ / Surge</span>
+                                <span class="metric-desc">Efficiency: Rank gain per unit of volume.</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">CONV</span>
+                                <span class="metric-math">Upvotes / Mentions</span>
+                                <span class="metric-desc">Conviction: Sentiment Quality Ratio.</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">UPVS</span>
+                                <span class="metric-math">Raw Count</span>
+                                <span class="metric-desc">Total upvotes in last 24h.</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">UPV+</span>
+                                <span class="metric-math">Upv(Today) - Upv(Yest)</span>
                                 <span class="metric-desc">Net change in upvotes vs 24h ago.</span>
                             </div>
                             <div class="legend-row">
-                                <span class="metric-name">Mnt%</span>
-                                <span class="metric-math">(Mnt - Mnt_24h) / Mnt_24h</span>
-                                <span class="metric-desc">Percent change in mention volume.</span>
+                                <span class="metric-name">VOL</span>
+                                <span class="metric-math">30-Day Mean</span>
+                                <span class="metric-desc">Average daily trading volume.</span>
                             </div>
                             <div class="legend-row">
-                                <span class="metric-name">Upvotes</span>
-                                <span class="metric-math">Raw Count</span>
-                                <span class="metric-desc">Total raw upvotes for the day.</span>
+                                <span class="metric-name">SRG</span>
+                                <span class="metric-math">(Vol / Avg) * 100</span>
+                                <span class="metric-desc">Surge: Current volume as % of 30-day Avg.</span>
                             </div>
                             <div class="legend-row">
-                                <span class="metric-name">Vel</span>
+                                <span class="metric-name">VEL</span>
                                 <span class="metric-math">Rank+(Today) - Rank+(Yest)</span>
-                                <span class="metric-desc">"Velocity". Is the climb speeding up or slowing down?</span>
+                                <span class="metric-desc">Velocity: Change in climb speed?</span>
                             </div>
                             <div class="legend-row">
-                                <span class="metric-name">Accel</span>
-                                <span class="metric-math">Vel(Today) - Vel(Yest)</span>
-                                <span class="metric-desc">"Acceleration". The rate of change of the speed (Explosiveness).</span>
+                                <span class="metric-name">STRK</span>
+                                <span class="metric-math">Consecutive Days</span>
+                                <span class="metric-desc">Streak: Days sustaining current direction.</span>
                             </div>
                             <div class="legend-row">
-                                <span class="metric-name">Eff</span>
-                                <span class="metric-math">Rank+ / Surge</span>
-                                <span class="metric-desc">"Efficiency". How easily rank climbs per unit of volume.</span>
+                                <span class="metric-name">MNT%</span>
+                                <span class="metric-math">% Change</span>
+                                <span class="metric-desc">Percent change in mentions vs 24h ago.</span>
                             </div>
                             <div class="legend-row">
-                                <span class="metric-name">Conv</span>
-                                <span class="metric-math">Upvotes / Mentions</span>
-                                <span class="metric-desc">"Conviction". Quality of sentiment. (United vs Argumentative).</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="metric-name">Surge</span>
-                                <span class="metric-math">(Vol / 30d_Avg) * 100</span>
-                                <span class="metric-desc">Current volume as % of 30-day average.</span>
-                            </div>
-                             <div class="legend-row">
-                                <span class="metric-name">Squeeze</span>
+                                <span class="metric-name">SQZ</span>
                                 <span class="metric-math">Mnt * Surge / log(MCap)</span>
-                                <span class="metric-desc">High Chatter + High Volume in Low Cap stocks.</span>
-                            </div>
-                             <div class="legend-row">
-                                <span class="metric-name">Streak</span>
-                                <span class="metric-math">Consecutive +/- Days</span>
-                                <span class="metric-desc">Days sustaining current direction (Green or Red).</span>
+                                <span class="metric-desc">Short Squeeze Score (Vol+Chatter/Cap).</span>
                             </div>
                         </div>
 
@@ -666,48 +728,56 @@ def export_interactive_html(df):
                             <div class="legend-title">🎨 Color Indicators</div>
 
                             <div class="legend-row">
-                                <span class="color-key">Rank+</span>
-                                <span class="color-desc"><span style="color:#00ff00">Green</span> (Climbing), <span style="color:#ff4444">Red</span> (Falling)</span>
+                                <span class="color-key">RANK</span>
+                                <span class="color-desc">White (Standard).</span>
                             </div>
                             <div class="legend-row">
-                                <span class="color-key">Upv+</span>
-                                <span class="color-desc"><span style="color:#00ff00">Green</span> (Positive), <span style="color:#ff4444">Red</span> (Negative)</span>
+                                <span class="color-key">RANK+</span>
+                                <span class="color-desc"><span style="color:#00ff00">Green</span> (Climbing), <span style="color:#ff4444">Red</span> (Falling).</span>
                             </div>
                             <div class="legend-row">
-                                <span class="color-key">Mnt%</span>
-                                <span class="color-desc"><span style="color:#ffff00">Yellow</span> (Extreme Surge), <span style="color:#00ff00">Green</span> (Elevated)</span>
+                                <span class="color-key">ACC</span>
+                                <span class="color-desc"><span style="color:#ff00ff">Magenta</span> (Explosive), White (Fast).</span>
                             </div>
                             <div class="legend-row">
-                                <span class="color-key">Upvotes</span>
-                                <span class="color-desc"><span style="color:#00ff00">Green</span> (High Activity > 1.5σ), White (Normal)</span>
+                                <span class="color-key">EFF</span>
+                                <span class="color-desc"><span style="color:#00ff00">Green</span> (> 1.0), <span style="color:#ffff00">Yellow</span> (> 0.5), <span style="color:#ff4444">Red</span> (Low).</span>
                             </div>
                             <div class="legend-row">
-                                <span class="color-key">Vel</span>
-                                <span class="color-desc"><span style="color:#00ff00">Green</span> (Gaining Speed), <span style="color:#ff4444">Red</span> (Losing Speed)</span>
+                                <span class="color-key">CONV</span>
+                                <span class="color-desc"><span style="color:#ffcc00">Gold</span> (> 1.0x), White (Diluted).</span>
                             </div>
                             <div class="legend-row">
-                                <span class="color-key">Accel</span>
-                                <span class="color-desc"><span style="color:#ff00ff">Magenta</span> (Explosive >= 5), <span style="color:#00ffff">Cyan</span> (Fast), <span style="color:#ff4444">Red</span> (Decel)</span>
+                                <span class="color-key">UPVS</span>
+                                <span class="color-desc"><span style="color:#00ff00">Green</span> (High Activity > 1.5σ).</span>
                             </div>
                             <div class="legend-row">
-                                <span class="color-key">Eff</span>
-                                <span class="color-desc"><span style="color:#00ff00">Green</span> (High > 1.0), <span style="color:#ffff00">Yellow</span> (Med > 0.5), <span style="color:#ff4444">Red</span> (Inefficient)</span>
+                                <span class="color-key">UPV+</span>
+                                <span class="color-desc"><span style="color:#00ff00">Green</span> (Positive), <span style="color:#ff4444">Red</span> (Negative).</span>
                             </div>
                             <div class="legend-row">
-                                <span class="color-key">Conv</span>
-                                <span class="color-desc"><span style="color:#ffcc00">Gold</span> (High Conviction > 1.0x), White (Normal)</span>
+                                <span class="color-key">VOL</span>
+                                <span class="color-desc"><span style="color:#ccc">Gray</span> (Static Stat).</span>
                             </div>
                             <div class="legend-row">
-                                <span class="color-key">Surge</span>
-                                <span class="color-desc"><span style="color:#ffff00">Yellow</span> (Extreme > 200%), <span style="color:#00ff00">Green</span> (Elevated > 100%)</span>
+                                <span class="color-key">SRG</span>
+                                <span class="color-desc"><span style="color:#ffff00">Yellow</span> (Anomaly > 2σ), <span style="color:#00ff00">Green</span> (High > 1σ).</span>
                             </div>
                             <div class="legend-row">
-                                <span class="color-key">Squeeze</span>
-                                <span class="color-desc"><span style="color:#00ffff">Cyan</span> (High Score > 1.5), White (Normal)</span>
+                                <span class="color-key">VEL</span>
+                                <span class="color-desc"><span style="color:#00ff00">Green</span> (Speeding Up), <span style="color:#ff4444">Red</span> (Slowing).</span>
                             </div>
-                             <div class="legend-row">
-                                <span class="color-key">Streak</span>
-                                <span class="color-desc"><span style="color:#00ff00">Green</span> (>= 3 Days), <span style="color:#ff4444">Red</span> (<= -2 Days)</span>
+                            <div class="legend-row">
+                                <span class="color-key">STRK</span>
+                                <span class="color-desc"><span style="color:#00ff00">Green</span> (3+ Days), <span style="color:#ff4444">Red</span> (Reversing).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">MNT%</span>
+                                <span class="color-desc"><span style="color:#ffff00">Yellow</span> (> 2σ), <span style="color:#00ff00">Green</span> (> 1σ).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">SQZ</span>
+                                <span class="color-desc"><span style="color:#00ffff">Cyan</span> (Score > 1.5σ), White (Normal).</span>
                             </div>
                         </div>
 
@@ -799,8 +869,8 @@ def export_interactive_html(df):
             $('#minPrice, #maxPrice, #minVol, #maxVol').on('keyup change', function() {{ table.draw(); }});
             window.redraw = function() {{ 
                 var mode = $('input[name="btnradio"]:checked').attr('id');
-                var headerTxt = "Industry/Sector";
-                if (mode == 'btnradio2') headerTxt = "Industry"; else if (mode == 'btnradio3') headerTxt = "Sector";
+                var headerTxt = "INDUSTRY/SECTOR";
+                if (mode == 'btnradio2') headerTxt = "INDUSTRY"; else if (mode == 'btnradio3') headerTxt = "SECTOR";
                 $(table.column(16).header()).text(headerTxt);
                 table.draw(); 
             }};
