@@ -8,8 +8,6 @@ import sys
 import math
 import random
 import json
-import re
-from bs4 import BeautifulSoup
 import shutil
 import numpy as np
 import google.generativeai as genai
@@ -18,28 +16,22 @@ import google.generativeai as genai
 #                   CONFIGURATION
 # ==========================================
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-PUBLIC_DIR = os.path.join(SCRIPT_DIR, "public") 
+PUBLIC_DIR = os.path.join(SCRIPT_DIR, "public")
 CACHE_FILE = os.path.join(SCRIPT_DIR, "ape_cache.json")
 MARKET_DATA_CACHE_FILE = os.path.join(SCRIPT_DIR, "market_data.pkl")
 HISTORY_FILE = os.path.join(SCRIPT_DIR, "market_history.json")
-DELISTED_CACHE_FILE = os.path.join(SCRIPT_DIR, "delisted_cache.json") 
-CACHE_EXPIRY_SECONDS = 3600 
-RETENTION_DAYS = 14          
-DELISTED_RETRY_DAYS = 7        
+DELISTED_CACHE_FILE = os.path.join(SCRIPT_DIR, "delisted_cache.json")
+CACHE_EXPIRY_SECONDS = 3600
+RETENTION_DAYS = 14
+DELISTED_RETRY_DAYS = 7
 
 # --- FILTERS & LAYOUT ---
-MIN_PRICE = 0.01             
-MIN_AVG_VOLUME = 100        
+MIN_PRICE = 0.01
+MIN_AVG_VOLUME = 100
 AVG_VOLUME_DAYS = 30
-PAGE_SIZE = 30
+NAME_MAX_WIDTH = 50
 
-# --- UPDATED WIDTHS ---
-NAME_MAX_WIDTH = 50       
-INDUSTRY_MAX_WIDTH = 60  
-COL_WIDTHS = [50, 8, 8, 10, 8, 8, 8, 8, INDUSTRY_MAX_WIDTH] 
-DASH_LINE = "-" * 170    
-
-REQUEST_DELAY_MIN = 1.5 
+REQUEST_DELAY_MIN = 1.5
 REQUEST_DELAY_MAX = 3.0
 TICKER_FIXES = {'GPS': 'GAP', 'FB': 'META', 'APE': 'AMC'}
 
@@ -49,8 +41,6 @@ C_RED = '\033[91m'
 C_YELLOW = '\033[93m'
 C_CYAN = '\033[96m'
 C_RESET = '\033[0m'
-C_MAGENTA = '\033[95m'
-C_BOLD = '\033[1m'
 
 session = requests.Session()
 session.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
@@ -68,25 +58,23 @@ class HistoryTracker:
         return {}
 
     def save(self, df):
-        # Use a precise timestamp so 30-minute runs don't overwrite each other
-        now_ts = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M") 
+        now_ts = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M")
         
         for _, row in df.iterrows():
             ticker = row['Sym']
-            if ticker not in self.data: 
+            if ticker not in self.data:
                 self.data[ticker] = {}
             
-            # Use now_ts here instead of 'today'
             self.data[ticker][now_ts] = {
                 "rank": int(row.get('Rank', 0)),
                 "rank_plus": int(row.get('Rank+', 0)),
                 "price": float(row.get('Price', 0)),
                 "mnt_perc": float(row.get('Mnt%', 0)),
                 "upvotes": int(row.get('Upvotes', 0)),
-                "conv": float(row.get('Conv', 0)) # Added conv for Gemini to analyze
+                "conv": float(row.get('Conv', 0))
             }
             
-        # 2. Clean up old data (The "Flexible" Retention Loop)
+        # Clean up old data
         cutoff = datetime.datetime.utcnow() - datetime.timedelta(days=RETENTION_DAYS)
         new_data_cleaned = {}
         
@@ -94,11 +82,9 @@ class HistoryTracker:
             valid_entries = {}
             for d, v in entries.items():
                 try:
-                    # Try reading new format: "2026-01-28 10:30"
                     dt = datetime.datetime.strptime(d, "%Y-%m-%d %H:%M")
                 except ValueError:
-                    # Fallback to old format: "2026-01-28"
-                    dt = datetime.datetime.strptime(d, "%Y-%m-%d")
+                    dt = datetime.datetime.strptime(d, "%Y-%m-%d") # Fallback
                 
                 if dt > cutoff:
                     valid_entries[d] = v
@@ -107,13 +93,11 @@ class HistoryTracker:
                 new_data_cleaned[ticker] = valid_entries
         
         self.data = new_data_cleaned
-                
-        # 3. Save to file
-        with open(self.filepath, 'w') as f: 
+        with open(self.filepath, 'w') as f:
             json.dump(self.data, f, indent=4)
 
     def get_metrics(self, ticker, current_price, current_mnt):
-        if ticker not in self.data or len(self.data[ticker]) < 2: 
+        if ticker not in self.data or len(self.data[ticker]) < 2:
             return {"vel": 0, "accel": 0, "upv_chg": 0, "div": False, "streak": 0, "rolling_trend": 0}
 
         dates = sorted(self.data[ticker].keys())
@@ -131,11 +115,10 @@ class HistoryTracker:
             else:
                 rolling_trend = 0
         
-        # --- NEW METRICS ---
         velocity = int(today_data.get('rank_plus', 0) - prev_data.get('rank_plus', 0))
         upv_chg = int(today_data.get('upvotes', 0) - prev_data.get('upvotes', 0))
         
-        # Acceleration (Velocity Today - Velocity Yesterday)
+        # Acceleration
         accel = 0
         if len(dates) >= 3:
             prev_2_data = self.data[ticker][dates[-3]]
@@ -144,13 +127,13 @@ class HistoryTracker:
 
         return {"vel": velocity, "accel": accel, "upv_chg": upv_chg, "div": False, "streak": len(dates), "rolling_trend": rolling_trend}
 
-def clear_screen(): os.system('cls' if os.name == 'nt' else 'clear')
 def load_cache():
     if os.path.exists(CACHE_FILE):
         try:
             with open(CACHE_FILE, 'r') as f: return json.load(f)
         except: return {}
     return {}
+
 def save_cache(cache_data):
     try:
         with open(CACHE_FILE, 'w') as f: json.dump(cache_data, f, indent=4)
@@ -159,7 +142,7 @@ def save_cache(cache_data):
 def fetch_meta_data_robust(ticker):
     name, meta, quote_type, mcap, currency = ticker, "Unknown", "EQUITY", 0, "USD"
     try:
-        dat = yf.Ticker(ticker) 
+        dat = yf.Ticker(ticker)
         info = dat.info
         if info:
             quote_type = info.get('quoteType', 'EQUITY')
@@ -170,71 +153,38 @@ def fetch_meta_data_robust(ticker):
             if quote_type == 'ETF':
                 meta = info.get('category', 'Unknown')
             else:
-                s = info.get('sector', 'Unknown')
-                i = info.get('industry', 'Unknown')
-                # 1. Strip the junk characters
+                meta = info.get('industry', 'Unknown') # Simplified
                 meta = meta.replace('\r', '').replace('\n', '').strip()
-            
-                # 2. Fallback to 'Unknown' if it's empty or just the company name
                 if not meta or meta == name or meta == "Unknown - Unknown":
                     meta = "Unknown"
-                # ------------------------
     except: pass
     return {'ticker': ticker, 'name': name, 'meta': meta, 'type': quote_type, 'mcap': mcap, 'currency': currency}
-
-def load_delisted():
-    if os.path.exists(DELISTED_CACHE_FILE):
-        try:
-            with open(DELISTED_CACHE_FILE, 'r') as f: return json.load(f)
-        except: return {}
-    return {}
-
-def save_delisted(data):
-    try:
-        with open(DELISTED_CACHE_FILE, 'w') as f: json.dump(data, f, indent=4)
-    except: pass
 
 def filter_and_process(stocks):
     if not stocks: return pd.DataFrame()
     
-    # 1. Setup and Deduplication
     us_tickers = list(set([TICKER_FIXES.get(s['ticker'], s['ticker'].replace('.', '-')) for s in stocks]))
     local_cache = load_cache()
-
     tracker = HistoryTracker(HISTORY_FILE)
-
+    
+    # Clean Cache of old delisted
     now = datetime.datetime.utcnow()
-    valid_tickers = []
-    
-    print(f"Processing {len(us_tickers)} tickers...")
-    
-    # 2. Clean Cache
-    blacklist = [t for t in us_tickers if local_cache.get(t, {}).get('delisted')]
-    if blacklist:
-        t = random.choice(blacklist)
-        last_checked = datetime.datetime.strptime(local_cache[t].get('last_checked', '2000-01-01'), "%Y-%m-%d")
-        if (now - last_checked).days >= DELISTED_RETRY_DAYS:
-            print(f"{C_YELLOW}[!] Lottery Check: Retrying {t}...{C_RESET}")
-            del local_cache[t]
-
     valid_tickers = [t for t in us_tickers if not local_cache.get(t, {}).get('delisted')]
     
-    # 3. Fetch Missing Metadata
+    # Fetch Missing Metadata
     missing = [t for t in valid_tickers if t not in local_cache]
     if missing:
         print(f"Fetching metadata for {len(missing)} items...")
         for t in missing:
-            try:
-                res = fetch_meta_data_robust(t)
-                if res: local_cache[res['ticker']] = res
-            except: pass
+            res = fetch_meta_data_robust(t)
+            if res: local_cache[res['ticker']] = res
         save_cache(local_cache)
 
-    # 4. Download Market Data
+    # Download Market Data
     market_data = None
     use_cache = os.path.exists(MARKET_DATA_CACHE_FILE) and (time.time() - os.path.getmtime(MARKET_DATA_CACHE_FILE)) < CACHE_EXPIRY_SECONDS
     
-    if use_cache: 
+    if use_cache:
         market_data = pd.read_pickle(MARKET_DATA_CACHE_FILE)
     else:
         print(f"Downloading data for {len(valid_tickers)} tickers...")
@@ -244,17 +194,16 @@ def filter_and_process(stocks):
     if len(valid_tickers) == 1 and not market_data.empty:
         market_data.columns = pd.MultiIndex.from_product([valid_tickers, market_data.columns])
 
-    # 5. Build the List
     final_list = []
     for stock in stocks:
         t = TICKER_FIXES.get(stock['ticker'], stock['ticker'].replace('.', '-'))
         try:
             if isinstance(market_data.columns, pd.MultiIndex):
-                if t not in market_data.columns.levels[0]: 
-                    local_cache[t] = {'delisted': True, 'last_checked': datetime.datetime.utcnow().strftime("%Y-%m-%d")}
+                if t not in market_data.columns.levels[0]:
+                    local_cache[t] = {'delisted': True, 'last_checked': now.strftime("%Y-%m-%d")}
                     continue
                 hist = market_data[t].dropna()
-            else: 
+            else:
                 hist = market_data.dropna()
 
             if hist.empty: continue
@@ -274,10 +223,8 @@ def filter_and_process(stocks):
             m_perc = int(((cur_m - old_m) / (old_m if old_m > 0 else 1) * 100))
             s_perc = int((hist['Volume'].iloc[-1] / avg_v * 100)) if avg_v > 0 else 0
             
-            try:
-                mcap = float(info.get('mcap', 0) or 0)
-            except: 
-                mcap = 0
+            try: mcap = float(info.get('mcap', 0) or 0)
+            except: mcap = 0
             
             log_mcap = math.log(mcap if mcap > 0 else 10**9, 10)
             squeeze_score = (cur_m * s_perc) / max(log_mcap, 1)
@@ -286,7 +233,6 @@ def filter_and_process(stocks):
             rank_old = int(stock.get('rank_24h_ago', 0))
             rank_plus = (rank_old - rank_now) if rank_old != 0 else 0
 
-            # --- NEW METRIC CALCULATIONS ---
             conviction = (int(stock.get('upvotes', 0)) / cur_m) if cur_m > 0 else 0
             safe_surge = s_perc if s_perc > 0 else 1
             efficiency = rank_plus / safe_surge
@@ -295,45 +241,25 @@ def filter_and_process(stocks):
 
             final_list.append({
                 "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
-                "Price": float(curr_p), 
-                "AvgVol": int(avg_v),    # <--- IMPORTANT: Ensure this line exists
+                "Price": float(curr_p), "AvgVol": int(avg_v),
                 "Surge": s_perc, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
-                "Upvotes": int(stock.get('upvotes', 0)), "Meta": info.get('meta', '-'), 
-                "Squeeze": squeeze_score, 
-                "MCap": mcap,
-                "Conv": conviction, 
-                "Eff": efficiency,
-
-                "Accel": m['accel'],
-                "Upv+": m['upv_chg'],
-                "Velocity": m['vel'],
-                "Streak": m['streak'],
-                "Rolling": m['rolling_trend'],
-                "Divergence": m['div'] 
+                "Upvotes": int(stock.get('upvotes', 0)), "Meta": info.get('meta', '-'),
+                "Squeeze": squeeze_score, "MCap": mcap, "Conv": conviction, "Eff": efficiency,
+                "Accel": m['accel'], "Upv+": m['upv_chg'], "Velocity": m['vel'],
+                "Streak": m['streak'], "Rolling": m['rolling_trend']
             })
-        except Exception as e: 
-            continue
+        except Exception as e: continue
     
-    # 6. Scoring
+    # Scoring
     df = pd.DataFrame(final_list)
-    
     if not df.empty and 'Sym' in df.columns:
         df = df.drop_duplicates(subset=['Sym'], keep='first')
 
     if not df.empty:
         cols = ['Rank+', 'Surge', 'Mnt%', 'Upvotes', 'Accel', 'Upv+']
-        weights = {
-            'Rank+': 1.1, 
-            'Surge': 1.1, 
-            'Mnt%': 0.7, 
-            'Upvotes': 1.0,
-            'Accel': 1.2,
-            'Upv+': 1.0 
-        }
+        weights = {'Rank+': 1.1, 'Surge': 1.1, 'Mnt%': 0.7, 'Upvotes': 1.0, 'Accel': 1.2, 'Upv+': 1.0}
         
         for col in cols:
-            # Clip at 0 so negative numbers don't break the log function
-            # (Accel can be negative, so we treat negative accel as 0 contribution to heat)
             clean_series = df[col].clip(lower=0).astype(float)
             log_data = np.log1p(clean_series)
             mean = log_data.mean(); std = log_data.std(ddof=0)
@@ -342,14 +268,11 @@ def filter_and_process(stocks):
         df['Master_Score'] = 0
         for col in cols:
             df['Master_Score'] += df[f'z_{col}'].clip(lower=0) * weights.get(col, 1.0)
-
-        if 'Squeeze' in df.columns:
-            sq_series = df['Squeeze'].clip(lower=0).astype(float)
-            log_sq = np.log1p(sq_series)
-            mean_sq = log_sq.mean(); std_sq = log_sq.std(ddof=0)
-            df['z_Squeeze'] = 0 if std_sq == 0 else (log_sq - mean_sq) / std_sq
-        else:
-            df['z_Squeeze'] = 0
+            
+        sq_series = df['Squeeze'].clip(lower=0).astype(float)
+        log_sq = np.log1p(sq_series)
+        mean_sq = log_sq.mean(); std_sq = log_sq.std(ddof=0)
+        df['z_Squeeze'] = 0 if std_sq == 0 else (log_sq - mean_sq) / std_sq
 
     tracker.save(df)
     save_cache(local_cache)
@@ -374,8 +297,25 @@ def get_all_trending_stocks():
 def export_interactive_html(df, ai_summary=""):
     try:
         # --- 1. PREPARE THE DATA ---
-        export_df = df.copy().astype(object)
+        export_df = df.copy()
         if not os.path.exists(PUBLIC_DIR): os.makedirs(PUBLIC_DIR)
+        
+        # Ensure necessary columns exist before we process them
+        for c in ['Accel', 'Velocity', 'Rolling', 'Squeeze', 'Upvotes', 'Rank+', 'Surge', 'Mnt%', 'Master_Score', 'z_Upvotes', 'z_Surge', 'z_Squeeze']:
+            if c not in export_df.columns: export_df[c] = 0
+
+        # RENAME COLUMNS TO MATCH DISPLAY LOGIC
+        # This fixes the issue where abbreviated columns were missing
+        export_df.rename(columns={
+            'Accel': 'Acc', 
+            'Velocity': 'Vel', 
+            'Rolling': 'Strk', 
+            'Squeeze': 'Sqz',
+            'Upvotes': 'Upvs',
+            'Surge': 'Srg'
+        }, inplace=True)
+
+        export_df = export_df.astype(object)
 
         def color_span(text, color_hex): return f'<span style="color: {color_hex}; font-weight: bold;">{text}</span>'
         def format_vol(v):
@@ -387,29 +327,26 @@ def export_interactive_html(df, ai_summary=""):
             except: return "0"
 
         # Define Colors
-        C_GREEN, C_YELLOW, C_RED, C_CYAN, C_MAGENTA, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ff00ff", "#ffffff"
+        C_GREEN, C_YELLOW, C_RED, C_CYAN, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ffffff"
         
-        # Ensure base columns exist
         if 'AvgVol' not in export_df.columns: export_df['AvgVol'] = 0
         export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
         export_df['Type_Tag'] = 'STOCK'
-        export_df['Sig'] = ""
 
         # --- ROW-BY-ROW FORMATTING ---
         for index, row in export_df.iterrows():
             # Velocity
-            v_val = row.get('Velocity', 0)
-            if v_val != 0:
-                v_color = C_GREEN if v_val > 0 else C_RED
-                export_df.at[index, 'Velocity'] = color_span(f"{v_val:+d}", v_color)
+            v_val = row.get('Vel', 0)
+            v_color = C_GREEN if v_val > 0 else (C_RED if v_val < 0 else "#666")
+            export_df.at[index, 'Vel'] = color_span(f"{v_val:+d}", v_color)
             
-            # Accel
-            ac_val = row.get('Accel', 0)
+            # Accel (Acc)
+            ac_val = row.get('Acc', 0)
             if ac_val >= 5: ac_clr = "#ff00ff"
             elif ac_val > 0: ac_clr = "#00ffff"
             elif ac_val < 0: ac_clr = "#ff4444"
             else: ac_clr = "#ffffff"
-            export_df.at[index, 'Accel'] = color_span(f"{ac_val:+d}", ac_clr)
+            export_df.at[index, 'Acc'] = color_span(f"{ac_val:+d}", ac_clr)
 
             # Efficiency
             eff_val = row.get('Eff', 0)
@@ -429,23 +366,22 @@ def export_interactive_html(df, ai_summary=""):
             upchg_clr = C_GREEN if upchg_val > 0 else (C_RED if upchg_val < 0 else "#666")
             export_df.at[index, 'Upv+'] = color_span(f"{upchg_val:+d}", upchg_clr)
 
-            # Streak (Sig)
-            trend_val = row.get('Rolling', 0)
+            # Streak (Strk)
+            trend_val = row.get('Strk', 0)
             sig_text = f"{trend_val:+d}"
             if trend_val >= 3: sig_color = "#00ff00"
             elif trend_val > 0: sig_color = "#99ff99"
             elif trend_val <= -2: sig_color = "#ff4444"
             else: sig_color = "#ffffff"
-            export_df.at[index, 'Sig'] = color_span(sig_text, sig_color)
+            export_df.at[index, 'Strk'] = color_span(sig_text, sig_color)
 
-            # Heat Score (Create 'Heat' Column Here)
+            # Heat Score (Calculated from Master_Score)
             score = row.get('Master_Score', 0)
             if score > 10: h_clr = "#ff0000"
             elif score > 5: h_clr = "#ff8800"
             elif score > 2: h_clr = "#ffff00"
             else: h_clr = "#888888"
-            heat_html = f'<span style="color:{h_clr}; font-weight:bold;">{score:.1f}</span>'
-            export_df.at[index, 'Heat'] = heat_html  # <--- Created here
+            export_df.at[index, 'Heat'] = f'<span style="color:{h_clr}; font-weight:bold;">{score:.1f}</span>'
             
             # Name
             export_df.at[index, 'Name'] = f"<b>{row.get('Name','')}</b>"
@@ -459,23 +395,22 @@ def export_interactive_html(df, ai_summary=""):
             else:
                 export_df.at[index, 'Rank+'] = ""
 
-            # Surge & Mnt% Colors
-            z_cols = [('Surge', 'z_Surge'), ('Mnt%', 'z_Mnt%')]
+            # Surge & Mnt% Colors (Uses z-scores for coloring)
+            z_cols = [('Srg', 'z_Surge'), ('Mnt%', 'z_Mnt%')]
             for col, z_col in z_cols:
-                if col not in export_df.columns: export_df[col] = 0
                 val = f"{export_df.at[index, col]:.0f}%"
                 z_val = row.get(z_col, 0)
                 clr = C_YELLOW if z_val >= 2.0 else (C_GREEN if z_val >= 1.0 else C_WHITE)
                 export_df.at[index, col] = color_span(val, clr)
             
-            # Squeeze
+            # Squeeze (Sqz)
             sq_z = row.get('z_Squeeze', 0)
             sq_color = C_CYAN if sq_z > 1.5 else C_WHITE
-            export_df.at[index, 'Squeeze'] = color_span(int(row.get('Squeeze', 0)), sq_color)
+            export_df.at[index, 'Sqz'] = color_span(int(row.get('Sqz', 0)), sq_color)
             
-            # Upvotes
+            # Upvotes (Upvs)
             z_up = row.get('z_Upvotes', 0)
-            export_df.at[index, 'Upvotes'] = color_span(row.get('Upvotes', 0), C_GREEN if z_up > 1.5 else C_WHITE)
+            export_df.at[index, 'Upvs'] = color_span(row.get('Upvs', 0), C_GREEN if z_up > 1.5 else C_WHITE)
             
             # ETF Badge & Meta
             is_fund = row.get('Type', 'EQUITY') == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
@@ -496,35 +431,27 @@ def export_interactive_html(df, ai_summary=""):
             export_df.at[index, 'Price'] = f"${row.get('Price', 0):.2f}"
             export_df.at[index, 'Vol_Display'] = color_span(export_df.at[index, 'Vol_Display'], "#ccc")
 
-        # --- COLUMN CLEANUP ---
-        # Drop duplicates/temps to avoid conflicts
-        cols_to_drop = ['Streak', 'Master_Score'] # Drop Master_Score because we made 'Heat'
-        for c in cols_to_drop:
-            if c in export_df.columns: export_df.drop(columns=[c], inplace=True)
-
-        # Rename to final headers
-        export_df.rename(columns={
-            'Meta': 'INDUSTRY/SECTOR', 'Velocity': 'Vel', 'Vol_Display': 'Vol', 'Sig': 'Strk',
-            'Accel': 'Acc', 'Squeeze': 'Sqz', 'Upvotes': 'Upvs', 'Surge': 'Srg'
-            }, inplace=True)
+        # Rename Meta to final header
+        export_df.rename(columns={'Meta': 'INDUSTRY/SECTOR', 'Vol_Display': 'Vol'}, inplace=True)
 
         # DEFINE EXACT COLUMN ORDER (21 Columns)
-        # The Javascript hides the last 3 (Type_Tag, AvgVol, MCap)
+        # Javascript DataTables relies on this exact index order
         cols = [
             'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Acc', 'Eff', 'Conv', 'Upvs', 
             'Upv+', 'Vol', 'Srg', 'Vel', 'Strk', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 
             'Type_Tag', 'AvgVol', 'MCap'
         ]
         
-        # Ensure all exist (Safety fill)
+        # Safety fill
         for c in cols:
             if c not in export_df.columns: export_df[c] = 0
 
         final_df = export_df[cols]
+        
+        # NOTE: table-dark class + table-hover
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
         
-        # --- BUILD AI SUMMARY ---
         ai_box_html = ""
         if ai_summary:
             ai_box_html = f"""
@@ -538,7 +465,6 @@ def export_interactive_html(df, ai_summary=""):
             </div>
             """
 
-        # --- ASSEMBLE HTML ---
         html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Ape Wisdom Analysis</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
@@ -785,8 +711,6 @@ def export_interactive_html(df, ai_summary=""):
 
 def send_discord_link(filename, ai_summary):
     print(f"\n{C_YELLOW}--- Sending Link to Discord... ---{C_RESET}")
-    
-    # 1. Check if the environment variable exists
     DISCORD_URL = os.environ.get('DISCORD_WEBHOOK')
     REPO_NAME = os.environ.get('GITHUB_REPOSITORY') 
 
@@ -798,7 +722,6 @@ def send_discord_link(filename, ai_summary):
         return
 
     try:
-        # 2. Construct the URL
         user, repo = REPO_NAME.split('/')
         website_url = f"https://{user}.github.io/{repo}/{filename}"
         
@@ -807,13 +730,11 @@ def send_discord_link(filename, ai_summary):
                f"🔗 **[Click Here to Open Dashboard]({website_url})**\n"
                f"*(Note: It may take ~30s for the link to go live)*")
 
-        # 3. Send and CHECK the status code
         response = requests.post(DISCORD_URL, json={"content": msg})
         
         if response.status_code == 204:
             print(f"{C_GREEN}[+] Discord Link Sent Successfully!{C_RESET}")
         else:
-            # This logs the specific error from Discord (e.g., Rate Limit, 404)
             print(f"{C_RED}[!] Discord Failed: {response.status_code} - {response.text}{C_RESET}")
 
     except Exception as e:
@@ -826,8 +747,6 @@ def get_ai_analysis(df, history_data):
 
     try:
         genai.configure(api_key=api_key)
-        
-        # --- SMART MODEL SELECTOR ---
         target_model = None
         try:
             for m in genai.list_models():
@@ -840,36 +759,30 @@ def get_ai_analysis(df, history_data):
         except:
             model = genai.GenerativeModel('gemini-pro')
 
-        # --- FIX 2: WORK ON A COPY ---
-        # We use .copy() so we don't break the original DF for the HTML generator
-        ai_df = df.copy()
-
-        # Rename columns ONLY in our copy
+        # Cleanup for AI
+        ai_df = df.reset_index(drop=True).copy()
+        ai_df = ai_df.loc[:, ~ai_df.columns.duplicated()]
+        
+        # Standardize Names for AI
         if 'Surge' in ai_df.columns: ai_df.rename(columns={'Surge': 'Srg'}, inplace=True)
         if 'Master_Score' in ai_df.columns: ai_df.rename(columns={'Master_Score': 'Heat'}, inplace=True)
+        if 'Accel' in ai_df.columns: ai_df.rename(columns={'Accel': 'Acc'}, inplace=True)
         
-        # Ensure required columns exist in the COPY
         cols_for_ai = ['Sym', 'Rank', 'Rank+', 'Price', 'Srg', 'Acc', 'Conv', 'Heat']
         for c in cols_for_ai:
             if c not in ai_df.columns: ai_df[c] = 0
 
-        # Dataset 1: The obvious winners
         leaders_df = ai_df.head(10)[cols_for_ai]
         leaders_str = leaders_df.to_string(index=False)
 
-        # Dataset 2: Stealth Movers
         rest_of_market = ai_df.iloc[10:].copy()
         stealth_candidates = rest_of_market[ 
             (rest_of_market['Srg'] > 100) | (rest_of_market['Acc'].abs() >= 2) 
         ].sort_values(by='Heat', ascending=False).head(5)
         
-        if not stealth_candidates.empty:
-            stealth_str = stealth_candidates[cols_for_ai].to_string(index=False)
-        else:
-            stealth_str = "No significant outliers found."
+        stealth_str = stealth_candidates[cols_for_ai].to_string(index=False) if not stealth_candidates.empty else "None"
 
-        # Dataset 3: History Context
-        top_20 = df.head(20)['Sym'].tolist() # We can safely read from original df here
+        top_20 = df.head(20)['Sym'].tolist()
         comparison_context = []
         for ticker in top_20:
             if ticker in history_data:
@@ -884,7 +797,6 @@ def get_ai_analysis(df, history_data):
                         "Conv_Change": round(curr.get('conv', 0) - prev.get('conv', 0), 2)
                     })
 
-        # THE PROMPT
         prompt = f"""
         Act as a professional sentiment trader. Analyze this market momentum data.
         
@@ -935,21 +847,12 @@ if __name__ == "__main__":
         print(f"{C_RED}[!] Data fetched, but all tickers were filtered out. Exiting.{C_RESET}")
         sys.exit(0)
 
-    # --- SAFETY FIX: Force missing columns to exist ---
-    # This prevents the "KeyError: Acc" crash
-    required_cols = ['Acc', 'Master_Score', 'Srg', 'Rank', 'Rank+', 'Conv', 'Heat']
-    for col in required_cols:
-        if col not in df.columns:
-            # If the column is missing, fill it with 0 so the script keeps running
-            df[col] = 0
-    # --------------------------------------------------
-
     # 3. Generate the AI Summary
     print("--- Generating AI Analysis ---")
     tracker = HistoryTracker(HISTORY_FILE)
     ai_summary = get_ai_analysis(df, tracker.data)
 
-    # 4. Generate HTML (Pass the summary so it appears on the website!)
+    # 4. Generate HTML
     fname = export_interactive_html(df, ai_summary)
     
     # 5. Send to Discord
