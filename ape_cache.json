@@ -9462,5 +9462,13 @@
         "type": "EQUITY",
         "mcap": 112934076416,
         "currency": "USD"
+    },
+    "ESE": {
+        "ticker": "ESE",
+        "name": "ESCO Technologies Inc.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 5814746624,
+        "currency": "USD"
     }
 }
