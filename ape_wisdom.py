@@ -320,27 +320,44 @@ def filter_and_process(stocks):
         }
         
         for col in cols:
-            # Clip at 0 so negative numbers don't break the log function
-            # (Accel can be negative, so we treat negative accel as 0 contribution to heat)
+            # np.log1p smooths out massive outliers so they don't crush the mean
             clean_series = df[col].clip(lower=0).astype(float)
             log_data = np.log1p(clean_series)
-            mean = log_data.mean(); std = log_data.std(ddof=0)
+            
+            mean = log_data.mean()
+            std = log_data.std(ddof=0)
+            
+            # Create the Z-score (standard deviations from the mean)
             df[f'z_{col}'] = 0 if std == 0 else (log_data - mean) / std
 
+        # --- 3. MASTER SCORE CALCULATION ---
         df['Master_Score'] = 0
         for col in cols:
+            # We clip(lower=0) so that being "worse than average" doesn't 
+            # actively subtract from the heat score; it just adds 0.
             df['Master_Score'] += df[f'z_{col}'].clip(lower=0) * weights.get(col, 1.0)
 
+        # Handle Squeeze Score Z-indexing
         if 'Squeeze' in df.columns:
             sq_series = df['Squeeze'].clip(lower=0).astype(float)
             log_sq = np.log1p(sq_series)
-            mean_sq = log_sq.mean(); std_sq = log_sq.std(ddof=0)
+            mean_sq = log_sq.mean()
+            std_sq = log_sq.std(ddof=0)
             df['z_Squeeze'] = 0 if std_sq == 0 else (log_sq - mean_sq) / std_sq
         else:
             df['z_Squeeze'] = 0
 
+    # ==========================================
+    #   FINALIZATION (Outside the 'if' block)
+    # ==========================================
+    # 1. Save the history with the new metrics
     tracker.save(df)
+    
+    # 2. Update the local metadata cache
     save_cache(local_cache)
+    
+    # 3. CRITICAL: Return the DataFrame so the main script can use it
+    # This fixes the 'NoneType' AttributeError
     return df
 
 def get_all_trending_stocks():
@@ -382,17 +399,15 @@ def export_interactive_html(df):
                 v_color = C_GREEN if v_val > 0 else C_RED
                 export_df.at[index, 'Velocity'] = color_span(f"{v_val:+d}", v_color)
             
-            # 1. Acceleration
-            list_size = len(df) if len(df) > 0 else 1
-            
-            raw_accel = float(row.get('Accel', 0))
-            
-            ac_val = (raw_accel / list_size) * 100
+            # 1. Acceleration (Sector-Relative)
+            # We pulled this from the 'Rel_Acc' column we created in Step 6
+            ac_val = float(row.get('Rel_Acc', 0)) # Using the new sector-relative math
 
-            if ac_val >= 10.0: ac_clr = "#ff00ff" # Magenta
-            elif ac_val > 0.1: ac_clr = "#00ffff" # Cyan
-            elif ac_val < -0.1: ac_clr = "#ff4444" # Red
-            else: ac_clr = "#ffffff" # White
+            # Color Logic: Magnitude of outperformance vs Industry peers
+            if ac_val >= 25.0: ac_clr = "#ff00ff"   # Magenta: Explosive breakout
+            elif ac_val > 5.0: ac_clr = "#00ffff"   # Cyan: Strong outperformance
+            elif ac_val < -5.0: ac_clr = "#ff4444"  # Red: Sector laggard
+            else: ac_clr = "#ffffff"                # White: Moving with the crowd
 
             export_df.at[index, 'Accel'] = f'<span style="color:{ac_clr};">{ac_val:+.1f}%</span>'
 
@@ -730,8 +745,8 @@ def export_interactive_html(df):
                             </div>
                             <div class="legend-row">
                                 <span class="metric-name">ACC</span>
-                                <span class="metric-math">Vel(Today) - Vel(Yest)</span>
-                                <span class="metric-desc">Acceleration: (Rate of change of speed).</span>
+                                <span class="metric-math">(Accel / Sector_Avg_Rank+) * 100</span>
+                                <span class="metric-desc">Sector-Relative Acceleration: Speed gain vs industry peers.</span>
                             </div>
                             <div class="legend-row">
                                 <span class="metric-name">EFF</span>
