@@ -9582,5 +9582,45 @@
         "type": "EQUITY",
         "mcap": 3089807,
         "currency": "USD"
+    },
+    "AUST": {
+        "ticker": "AUST",
+        "name": "Austin Gold Corp.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 35191012,
+        "currency": "USD"
+    },
+    "CON": {
+        "ticker": "CON",
+        "name": "Concentra Group Holdings Parent",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 2753112064,
+        "currency": "USD"
+    },
+    "KSS": {
+        "ticker": "KSS",
+        "name": "Kohl's Corporation",
+        "meta": "Department Stores",
+        "type": "EQUITY",
+        "mcap": 1931897856,
+        "currency": "USD"
+    },
+    "MNTN": {
+        "ticker": "MNTN",
+        "name": "MNTN, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 715391488,
+        "currency": "USD"
+    },
+    "LMB": {
+        "ticker": "LMB",
+        "name": "Limbach Holdings, Inc.",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 950143232,
+        "currency": "USD"
     }
 }
