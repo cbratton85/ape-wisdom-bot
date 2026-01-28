@@ -807,77 +807,134 @@ def get_ai_analysis(df, history_data):
         for c in cols_for_ai:
             if c not in ai_df.columns: ai_df[c] = 0
 
-        # DATASET 1: LEADERS
-        leaders_df = ai_df.head(10)[cols_for_ai]
+        # --- 1. DEFINE COLUMNS FOR ELITE ANALYST ---
+        # We explicitly grab the columns the prompt asks for:
+        # Rank, Heat, Ticker, Price, Acc, Eff, Conv, VolSrg, Vel, Sqz, Sector
+        cols_for_ai = [
+            'Rank', 'Heat', 'Sym', 'Price', 'Acc', 
+            'Eff', 'Conv', 'Srg', 'Vel', 'Sqz', 'Sector'
+        ]
+        
+        # Safety: Only use columns that actually exist in your dataframe
+        valid_cols = [c for c in cols_for_ai if c in df.columns]
+
+        # --- DATASET 1: LEADERS (Top 10) ---
+        leaders_df = ai_df.head(10)[valid_cols]
         leaders_str = leaders_df.to_string(index=False)
 
-        # DATASET 2: STEALTH
+        # --- DATASET 2: DEEP SCAN (Stealth/Squeeze) ---
         rest_of_market = ai_df.iloc[10:].copy()
+        
+        # UPDATED FILTER: Now looks for Squeeze (Sqz) OR high Surge (Srg)
         stealth_candidates = rest_of_market[ 
-            (rest_of_market['Srg'] > 100) | (rest_of_market['Vel'] >= 2) 
-        ].sort_values(by='Heat', ascending=False).head(5)
-        stealth_str = stealth_candidates[cols_for_ai].to_string(index=False) if not stealth_candidates.empty else "None"
+            (rest_of_market['Sqz'] > 50) |       # High Squeeze Score
+            (rest_of_market['Srg'] > 100) |      # Volume Surge
+            (rest_of_market['Vel'] >= 2.5)       # High Velocity
+        ].sort_values(by='Heat', ascending=False).head(8) # Increased to 8 to give AI more options
+        
+        stealth_str = stealth_candidates[valid_cols].to_string(index=False) if not stealth_candidates.empty else "None detected."
 
-        # DATASET 3: 3-HOUR FORENSIC HISTORY
+        # --- DATASET 3: 3-HOUR FORENSIC HISTORY (Formatted as Table) ---
         top_20 = df.head(20)['Sym'].tolist()
-        comparison_context = []
+        history_rows = []
+        
         for ticker in top_20:
             if ticker in history_data:
                 snapshots = sorted(history_data[ticker].items())
                 if len(snapshots) > 1:
                     curr = snapshots[-1][1]
+                    # Compare vs 3 hours ago (approx 6 snapshots if 30min intervals)
                     prev = snapshots[-6][1] if len(snapshots) > 6 else snapshots[0][1]
                     
                     p_now = curr.get('price', 0)
                     p_old = prev.get('price', 0)
                     price_delta = round(((p_now - p_old) / p_old * 100), 2) if p_old > 0 else 0
                     
-                    comparison_context.append({
+                    history_rows.append({
                         "Sym": ticker,
-                        "Rank_Chg": prev.get('rank', 0) - curr.get('rank', 0), # Positive = Climbing
-                        "Price_%": f"{price_delta}%",
-                        "Conv_Chg": round(curr.get('conv', 0) - prev.get('conv', 0), 2),
-                        "Upv_Delta": int(curr.get('upvotes', 0) - prev.get('upvotes', 0))
+                        "Trend": "UP" if price_delta > 0 else "DOWN",
+                        "Price_%": f"{price_delta:+}%", # Adds + sign for positive
+                        "Rank_Delta": prev.get('rank', 0) - curr.get('rank', 0), # Positive = Improved Rank
+                        "Conv_Delta": round(curr.get('conv', 0) - prev.get('conv', 0), 2),
+                        "Vol_State": "Heating" if (curr.get('srg',0) > prev.get('srg',0)) else "Cooling"
                     })
 
-        # --- THE 5-RULE PROMPT ---
-        prompt = f"""
-        You are a Senior Technical Analyst for a quant trading desk. Analyze the market data provided below to produce a "Morning Momentum Report."
+        # Convert list to a clean String Table for the AI
+        if history_rows:
+            comparison_context = pd.DataFrame(history_rows).to_string(index=False)
+        else:
+            comparison_context = "No historical data available."
 
-        ### DATASET 1: LEADERBOARD (Top 10)
+        # --- THE UPDATED QUANT ANALYST PROMPT ---
+        prompt = f"""
+        SYSTEM CONFIGURATION:
+        Identity: You are an elite Quantitative Market Microstructure Analyst (Level 3 Clearance). You specialize in identifying algorithmic trading footprints, hidden liquidity flows, and systemic risks that are invisible to retail observation.
+        Domain Constraint: You are analyzing Financial Equity Markets.
+
+        WARNING: Do NOT interpret "Rank" as coal classification or geological metamorphism.
+        WARNING: Do NOT interpret "Heat" as a meteorological hazard or social vulnerability index.
+        DEFINITION: "Rank" = Relative Strength. "Heat" = Momentum/Order Flow Intensity.
+
+        INPUT DATA:
+        You are provided with the following real-time market snapshots:
+
+        ### SNAPSHOT 1: LEADERBOARD (Rank+Heat Table)
         {leaders_str}
 
-        ### DATASET 2: DEEP SCAN (Stealth/Squeeze Candidates)
+        ### SNAPSHOT 2: DEEP SCAN (Stealth/Squeeze Candidates)
         {stealth_str}
 
-        ### DATASET 3: 3-HOUR DELTAS (Trend Changes)
+        ### SNAPSHOT 3: DELTAS (Trend Changes)
         {comparison_context}
 
-        ### REPORT GUIDELINES:
-        1. **Tone:** Professional, punchy, and narrative-driven. No robotic lists.
-        2. **Formatting:** Use Markdown tables, **bold** for tickers, and emojis for section headers.
+        COLUMNS KEY: Rank, Heat, Ticker, Price, Acc (Acceleration), Eff (Efficiency), Conv (Conviction), VolSrg (Volume Surge/RVOL), Vel (Velocity), Sqz (Volatility Squeeze).
 
-        ### REQUIRED OUTPUT SECTIONS:
-        **1. 🌍 Executive Summary**
-        * Provide a 2-sentence summary of the market's current mood. (e.g., "Significant rotation into Semiconductors, while Gold cools off.")
-        **2. 🔝 Top Market Leaders (Table)**
-        * Create a Markdown table with columns: **Symbol**, **Price**, **Sector**, and **Analyst Note**.
-        * Select the top 4 strongest stocks from DATASET 1 based on 'Heat' and 'Rank'.
-        **3. 🔥 High-Volatility & Squeeze Alerts**
-        * Analyze DATASET 2. Identify stocks with high 'Srg' (Surge) or 'Sqz' (Squeeze) scores.
-        * Format as bullet points: "**Ticker (Price):** Description of the move."
-        * *Example:* "**CVNA ($45.20):** Massive 442% squeeze score indicates forced buy-ins."
-        **4. 🏗️ Sector Strength Analysis**
-        * Look at the 'Industry/Sector' of the top performers. Group them.
-        * Identify the top 2 hot sectors. (e.g., "1. Technology", "2. Energy").
-        **5. 📉 Notable Laggards / Divergences**
-        * Look at DATASET 3. Identify any stock dropping in Rank or Price, OR any stock where Price is dropping but Rank is rising (Divergence).
+        ANALYTICAL DIRECTIVE:
+        Your goal is to produce a concise, actionable Intelligence Briefing. You must look beyond the raw numbers to find Second-Order and Third-Order effects.
 
-        Produce the report now.  Keep it short and be consise.
+        EXECUTION PROTOCOL (Step-by-Step):
+        1. SECTORAL KINETICS (The Group Logic):
+           - Do not analyze stocks in isolation. Group all entries by the INDUSTRY/SECTOR column.
+           - Correlation Check: Are all stocks in a sector moving together (High Coherence) or diverging?
+           - Money Flow Vector: Calculate the aggregate VolSrg for each sector. Is money flowing INTO "Tech" and OUT of "Energy"? This indicates Sector Rotation.
+           - The "Invisible" Move: If a Sector is flat in Price but massive in Volume, flag it as "Accumulation" or "Distribution."
+
+        2. THE VELOCITY/ACCELERATION DIVERGENCE (The Physics Check):
+           - Scan the Vel (Velocity) and Acc (Acceleration) columns.
+           - Bull Trap Detection: Find stocks with High Positive Velocity but Negative Acceleration. This means the price is rising, but the force is dying.
+           - Bear Trap Detection: Find stocks dropping fast (Negative Vel) but with Positive Acceleration (decelerating drop).
+
+        3. THE EFFICIENCY PARADOX:
+           - Analyze Eff (Efficiency) vs VolSrg.
+           - The "Algo" Signature: High Eff (>4.0) + High VolSrg indicates Institutional Program Buying. Retail traders are messy; Algos are efficient.
+           - The "Churn": Low Eff (<1.0) + High VolSrg indicates a battleground. Lots of volume, no progress. Avoid these assets.
+
+        4. THE SQUEEZE (Potential Energy):
+           - Identify assets with high Sqz values. These are "coiling springs."
+           - Correlate Sqz with Conv (Conviction). A Squeeze + High Conviction = Imminent Explosive Breakout.
+
+        REPORT FORMAT:
+        Generate a report with the following structure. Use professional, concise narrative prose. Do not use robotic lists; use analysis.
+
+        # 30-Minute Microstructure Intelligence Brief
+
+        ## 1. 🌊 Liquidity Tides & Sector Rotation
+        *Where is the money going? Which sectors are "Heavy" (Distribution) vs. "Light" (Accumulation)?*
+
+        ## 2. 🚨 The Anomaly Radar (Human Blindspots)
+        *Identify specific assets showing Mathematical Divergence (e.g., Price Up / Acc Down).*
+        *Highlight "Fake Moves" (Low Conviction Rallies) and "Hidden Gems" (Efficient Accumulation).*
+
+        ## 3. 🚀 Squeeze & Breakout Watchlist
+        *Which assets are dormant now but mathematically primed to explode in the next 30 minutes?*
+
+        ## 4. 📉 Risk Assessment
+        *Identify "Overheated" assets (Rank/Heat mismatch).*
         """
 
         response = model.generate_content(prompt)
-        clean_text = response.text.replace("Here's your analysis:", "").replace("Here is the summary:", "").strip()
+        # Cleaning the text to ensure it goes straight to the report content
+        clean_text = response.text.replace("Here is the briefing:", "").replace("## Intelligence Brief", "").strip()
         return clean_text
 
     except Exception as e:
