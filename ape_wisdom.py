@@ -180,26 +180,46 @@ def filter_and_process(stocks):
     
     print(f"Processing {len(us_tickers)} tickers...")
     
-    # 2. Clean Cache
-    blacklist = [t for t in us_tickers if local_cache.get(t, {}).get('delisted')]
+    # 2. Clean Cache & Heal Unknown Metadata
+    # This identifies tickers that are either delisted OR have "Unknown" in their meta field
+    blacklist = [
+        t for t in us_tickers 
+        if local_cache.get(t, {}).get('delisted') or local_cache.get(t, {}).get('meta') == "Unknown"
+    ]
+    
     if blacklist:
         t = random.choice(blacklist)
-        last_checked = datetime.datetime.strptime(local_cache[t].get('last_checked', '2000-01-01'), "%Y-%m-%d")
-        if (now - last_checked).days >= DELISTED_RETRY_DAYS:
-            print(f"{C_YELLOW}[!] Lottery Check: Retrying {t}...{C_RESET}")
+        stock_data = local_cache[t]
+        
+        # Determine why it's in the blacklist
+        is_unknown = stock_data.get('meta') == "Unknown"
+        
+        # Check timing for delisted retries
+        last_checked_str = stock_data.get('last_checked', '2000-01-01')
+        last_checked = datetime.datetime.strptime(last_checked_str, "%Y-%m-%d")
+
+        # Healing logic: Unknowns get retried immediately; Delisted wait for the retry window
+        if is_unknown or (now - last_checked).days >= DELISTED_RETRY_DAYS:
+            reason = "Healing Metadata" if is_unknown else "Retry Delisted"
+            print(f"{C_YELLOW}[!] Lottery Check ({reason}): Retrying {t}...{C_RESET}")
             del local_cache[t]
 
+    # Re-calculate valid tickers to exclude current delisted ones
     valid_tickers = [t for t in us_tickers if not local_cache.get(t, {}).get('delisted')]
     
-    # 3. Fetch Missing Metadata
+    # 3. Fetch Missing Metadata (This now handles the "Healed" tickers too)
     missing = [t for t in valid_tickers if t not in local_cache]
     if missing:
         print(f"Fetching metadata for {len(missing)} items...")
         for t in missing:
             try:
                 res = fetch_meta_data_robust(t)
-                if res: local_cache[res['ticker']] = res
-            except: pass
+                if res: 
+                    # Add a timestamp so the retry logic knows when this was last fetched
+                    res['last_checked'] = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+                    local_cache[res['ticker']] = res
+            except: 
+                pass
         save_cache(local_cache)
 
     # 4. Download Market Data
@@ -363,12 +383,18 @@ def export_interactive_html(df):
                 export_df.at[index, 'Velocity'] = color_span(f"{v_val:+d}", v_color)
             
             # 1. Acceleration
-            ac_val = row['Accel']
-            if ac_val >= 5: ac_clr = "#ff00ff"
-            elif ac_val > 0: ac_clr = "#00ffff"
-            elif ac_val < 0: ac_clr = "#ff4444"
-            else: ac_clr = "#ffffff"
-            export_df.at[index, 'Accel'] = color_span(f"{ac_val:+d}", ac_clr)
+            list_size = len(df) if len(df) > 0 else 1
+            
+            raw_accel = float(row.get('Accel', 0))
+            
+            ac_val = (raw_accel / list_size) * 100
+
+            if ac_val >= 10.0: ac_clr = "#ff00ff" # Magenta
+            elif ac_val > 0.1: ac_clr = "#00ffff" # Cyan
+            elif ac_val < -0.1: ac_clr = "#ff4444" # Red
+            else: ac_clr = "#ffffff" # White
+
+            export_df.at[index, 'Accel'] = f'<span style="color:{ac_clr};">{ac_val:+.1f}%</span>'
 
             # 2. Efficiency
             eff_val = row['Eff']
