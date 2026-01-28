@@ -180,46 +180,26 @@ def filter_and_process(stocks):
     
     print(f"Processing {len(us_tickers)} tickers...")
     
-    # 2. Clean Cache & Heal Unknown Metadata
-    # This identifies tickers that are either delisted OR have "Unknown" in their meta field
-    blacklist = [
-        t for t in us_tickers 
-        if local_cache.get(t, {}).get('delisted') or local_cache.get(t, {}).get('meta') == "Unknown"
-    ]
-    
+    # 2. Clean Cache
+    blacklist = [t for t in us_tickers if local_cache.get(t, {}).get('delisted')]
     if blacklist:
         t = random.choice(blacklist)
-        stock_data = local_cache[t]
-        
-        # Determine why it's in the blacklist
-        is_unknown = stock_data.get('meta') == "Unknown"
-        
-        # Check timing for delisted retries
-        last_checked_str = stock_data.get('last_checked', '2000-01-01')
-        last_checked = datetime.datetime.strptime(last_checked_str, "%Y-%m-%d")
-
-        # Healing logic: Unknowns get retried immediately; Delisted wait for the retry window
-        if is_unknown or (now - last_checked).days >= DELISTED_RETRY_DAYS:
-            reason = "Healing Metadata" if is_unknown else "Retry Delisted"
-            print(f"{C_YELLOW}[!] Lottery Check ({reason}): Retrying {t}...{C_RESET}")
+        last_checked = datetime.datetime.strptime(local_cache[t].get('last_checked', '2000-01-01'), "%Y-%m-%d")
+        if (now - last_checked).days >= DELISTED_RETRY_DAYS:
+            print(f"{C_YELLOW}[!] Lottery Check: Retrying {t}...{C_RESET}")
             del local_cache[t]
 
-    # Re-calculate valid tickers to exclude current delisted ones
     valid_tickers = [t for t in us_tickers if not local_cache.get(t, {}).get('delisted')]
     
-    # 3. Fetch Missing Metadata (This now handles the "Healed" tickers too)
+    # 3. Fetch Missing Metadata
     missing = [t for t in valid_tickers if t not in local_cache]
     if missing:
         print(f"Fetching metadata for {len(missing)} items...")
         for t in missing:
             try:
                 res = fetch_meta_data_robust(t)
-                if res: 
-                    # Add a timestamp so the retry logic knows when this was last fetched
-                    res['last_checked'] = datetime.datetime.utcnow().strftime("%Y-%m-%d")
-                    local_cache[res['ticker']] = res
-            except: 
-                pass
+                if res: local_cache[res['ticker']] = res
+            except: pass
         save_cache(local_cache)
 
     # 4. Download Market Data
@@ -309,62 +289,38 @@ def filter_and_process(stocks):
     # 6. Scoring
     df = pd.DataFrame(final_list)
     if not df.empty:
-
-        sector_stats = df.groupby('Meta')['Rank+'].mean().to_dict()
-        df['Sector_Avg_Rank_Plus'] = df['Meta'].map(sector_stats)
-        
-        # Calculate the Relative Acceleration
-        df['Rel_Acc'] = (df['Accel'] / df['Sector_Avg_Rank_Plus'].abs().clip(lower=1)) * 100
-
         cols = ['Rank+', 'Surge', 'Mnt%', 'Upvotes', 'Accel', 'Upv+']
         weights = {
-            'Rank+': 1.2, 
+            'Rank+': 1.1, 
             'Surge': 1.1, 
             'Mnt%': 0.7, 
             'Upvotes': 1.0,
-            'Accel': 0.8,
+            'Accel': 1.2,
             'Upv+': 1.0 
         }
         
         for col in cols:
-            # np.log1p smooths out massive outliers so they don't crush the mean
+            # Clip at 0 so negative numbers don't break the log function
+            # (Accel can be negative, so we treat negative accel as 0 contribution to heat)
             clean_series = df[col].clip(lower=0).astype(float)
             log_data = np.log1p(clean_series)
-            
-            mean = log_data.mean()
-            std = log_data.std(ddof=0)
-            
-            # Create the Z-score (standard deviations from the mean)
+            mean = log_data.mean(); std = log_data.std(ddof=0)
             df[f'z_{col}'] = 0 if std == 0 else (log_data - mean) / std
 
-        # --- 3. MASTER SCORE CALCULATION ---
         df['Master_Score'] = 0
         for col in cols:
-            # We clip(lower=0) so that being "worse than average" doesn't 
-            # actively subtract from the heat score; it just adds 0.
             df['Master_Score'] += df[f'z_{col}'].clip(lower=0) * weights.get(col, 1.0)
 
-        # Handle Squeeze Score Z-indexing
         if 'Squeeze' in df.columns:
             sq_series = df['Squeeze'].clip(lower=0).astype(float)
             log_sq = np.log1p(sq_series)
-            mean_sq = log_sq.mean()
-            std_sq = log_sq.std(ddof=0)
+            mean_sq = log_sq.mean(); std_sq = log_sq.std(ddof=0)
             df['z_Squeeze'] = 0 if std_sq == 0 else (log_sq - mean_sq) / std_sq
         else:
             df['z_Squeeze'] = 0
 
-    # ==========================================
-    #   FINALIZATION (Outside the 'if' block)
-    # ==========================================
-    # 1. Save the history with the new metrics
     tracker.save(df)
-    
-    # 2. Update the local metadata cache
     save_cache(local_cache)
-    
-    # 3. CRITICAL: Return the DataFrame so the main script can use it
-    # This fixes the 'NoneType' AttributeError
     return df
 
 def get_all_trending_stocks():
@@ -406,17 +362,13 @@ def export_interactive_html(df):
                 v_color = C_GREEN if v_val > 0 else C_RED
                 export_df.at[index, 'Velocity'] = color_span(f"{v_val:+d}", v_color)
             
-            # 1. Acceleration (Sector-Relative)
-            # We pulled this from the 'Rel_Acc' column we created in Step 6
-            ac_val = float(row.get('Rel_Acc', 0)) # Using the new sector-relative math
-
-            # Color Logic: Magnitude of outperformance vs Industry peers
-            if ac_val >= 25.0: ac_clr = "#ff00ff"   # Magenta: Explosive breakout
-            elif ac_val > 5.0: ac_clr = "#00ffff"   # Cyan: Strong outperformance
-            elif ac_val < -5.0: ac_clr = "#ff4444"  # Red: Sector laggard
-            else: ac_clr = "#ffffff"                # White: Moving with the crowd
-
-            export_df.at[index, 'Accel'] = f'<span style="color:{ac_clr};">{ac_val:+.1f}%</span>'
+            # 1. Acceleration
+            ac_val = row['Accel']
+            if ac_val >= 5: ac_clr = "#ff00ff"
+            elif ac_val > 0: ac_clr = "#00ffff"
+            elif ac_val < 0: ac_clr = "#ff4444"
+            else: ac_clr = "#ffffff"
+            export_df.at[index, 'Accel'] = color_span(f"{ac_val:+d}", ac_clr)
 
             # 2. Efficiency
             eff_val = row['Eff']
@@ -544,27 +496,10 @@ def export_interactive_html(df):
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
-            body {{
-                background-color:#101010; 
-                color:#e0e0e0; 
-                font-family:'Consolas','Monaco',monospace; 
-                padding:20px;
+            body{{
+                background-color:#101010; color:#e0e0e0; font-family:'Consolas','Monaco',monospace; padding:20px;
             }}
-
-            /* 1. Pre-hide columns 19, 20, 21 (Type_Tag, AvgVol, MCap) */
-            th:nth-child(19), td:nth-child(19),
-            th:nth-child(20), td:nth-child(20),
-            th:nth-child(21), td:nth-child(21) {{
-                display: none !important;
-            }}
-
-            /* 2. Start the container invisible to hide the 'snap' */
-            #mainContainer {{
-                opacity: 0;
-                transition: opacity 0.3s ease-in;
-            }}
-
-            .table-dark {{ --bs-table-bg:#18181b; color:#ccc; }}
+            .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
             
             th{{
                 color:#00ff00; border-bottom:2px solid #444;
@@ -769,8 +704,8 @@ def export_interactive_html(df):
                             </div>
                             <div class="legend-row">
                                 <span class="metric-name">ACC</span>
-                                <span class="metric-math">(Accel / Sector_Avg_Rank+) * 100</span>
-                                <span class="metric-desc">Sector-Relative Acceleration: Speed gain vs industry peers.</span>
+                                <span class="metric-math">Vel(Today) - Vel(Yest)</span>
+                                <span class="metric-desc">Acceleration: (Rate of change of speed).</span>
                             </div>
                             <div class="legend-row">
                                 <span class="metric-name">EFF</span>
@@ -946,14 +881,7 @@ def export_interactive_html(df):
         }}
         $(document).ready(function(){{ 
             table=$('.table').DataTable({{
-                "order":[[0,"asc"]],
-                "pageLength": 25,
-                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-
-                "initComplete": function(settings, json) {{
-                    $('#mainContainer').css('opacity', '1');
-                }},
-
+                "order":[[0,"asc"]], "pageLength": 25, "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 "columnDefs": [ 
                     {{ "visible": false, "targets": [18, 19, 20] }},
 
