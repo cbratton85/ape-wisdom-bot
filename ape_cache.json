@@ -9470,5 +9470,13 @@
         "type": "EQUITY",
         "mcap": 5814746624,
         "currency": "USD"
+    },
+    "TGT": {
+        "ticker": "TGT",
+        "name": "Target Corporation",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 45948841984,
+        "currency": "USD"
     }
 }
