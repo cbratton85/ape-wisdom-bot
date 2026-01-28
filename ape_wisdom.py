@@ -611,7 +611,7 @@ def export_interactive_html(df, ai_summary=""):
                             <div class="legend-row"><span class="metric-name">VOL</span><span class="metric-math">30-Day Mean</span><span class="metric-desc">Average daily trading volume.</span></div>
                             <div class="legend-row"><span class="metric-name">SRG</span><span class="metric-math">(Vol / Avg) * 100</span><span class="metric-desc">Surge: Current volume as % of 30-day Avg.</span></div>
                             <div class="legend-row"><span class="metric-name">VEL</span><span class="metric-math">Rank+(Today) - Rank+(Yest)</span><span class="metric-desc">Velocity: Change in climb speed?</span></div>
-                            <div class="legend-row"><span class="metric-name">STRK</span><span class="metric-math">Consecutive Days</span><span class="metric-desc">Streak: Days sustaining current direction.</span></div>
+                            <div class="legend-row"><span class="metric-name">STRK</span><span class="metric-math">Consecutive Days</span><span class="metric-desc">Streak: Number of script runs sustaining direction.</span></div>
                             <div class="legend-row"><span class="metric-name">MNT%</span><span class="metric-math">% Change</span><span class="metric-desc">Percent change in mentions vs 24h ago.</span></div>
                             <div class="legend-row"><span class="metric-name">SQZ</span><span class="metric-math">Mnt * Surge / log(MCap)</span><span class="metric-desc">Short Squeeze Score (Vol+Chatter/Cap).</span></div>
                         </div>
@@ -628,7 +628,7 @@ def export_interactive_html(df, ai_summary=""):
                             <div class="legend-row"><span class="color-key">VOL</span><span class="color-desc"><span style="color:#ccc">Gray</span> (Static Stat).</span></div>
                             <div class="legend-row"><span class="color-key">SRG</span><span class="color-desc"><span style="color:#ffff00">Yellow</span> (Anomaly > 2σ), <span style="color:#00ff00">Green</span> (High > 1σ).</span></div>
                             <div class="legend-row"><span class="color-key">VEL</span><span class="color-desc"><span style="color:#00ff00">Green</span> (Speeding Up), <span style="color:#ff4444">Red</span> (Slowing).</span></div>
-                            <div class="legend-row"><span class="color-key">STRK</span><span class="color-desc"><span style="color:#00ff00">Green</span> (3+ Days), <span style="color:#ff4444">Red</span> (Reversing).</span></div>
+                            <div class="legend-row"><span class="color-key">STRK</span><span class="color-desc"><span style="color:#00ff00">Green</span> (3+ Runs.), <span style="color:#ff4444">Red</span> (Reversing).</span></div>
                             <div class="legend-row"><span class="color-key">MNT%</span><span class="color-desc"><span style="color:#ffff00">Yellow</span> (> 2σ), <span style="color:#00ff00">Green</span> (> 1σ).</span></div>
                             <div class="legend-row"><span class="color-key">SQZ</span><span class="color-desc"><span style="color:#00ffff">Cyan</span> (Score > 1.5σ), White (Normal).</span></div>
                         </div>
@@ -842,45 +842,43 @@ def get_ai_analysis(df, history_data):
 
         # --- THE 5-RULE PROMPT ---
         prompt = f"""
-        You are an Algo-Trading Analyst. Analyze the Momentum Matrix below. Use the specific metrics provided (Vel, Eff, Srg, Price_%) to justify your calls.
-        
+        You are a Senior Technical Analyst for a quant trading desk. Analyze the market data provided below to produce a "Morning Momentum Report."
+
         ### DATASET 1: LEADERBOARD (Top 10)
         {leaders_str}
-        
-        ### DATASET 2: DEEP SCAN (Stealth Candidates)
+
+        ### DATASET 2: DEEP SCAN (Stealth/Squeeze Candidates)
         {stealth_str}
-        
-        ### DATASET 3: 3-HOUR DELTAS
+
+        ### DATASET 3: 3-HOUR DELTAS (Trend Changes)
         {comparison_context}
-        
-        ### MISSION:
-        Synthesize these datasets into 5 critical market signals.
-        
-        ### DETECTION RULES:
-        1. 🚀 **The "Ignition" Setup (Velocity & Surge):**
-           Scan DATASET 2 (Stealth). Identify a stock with **High Surge (Srg > 150)** AND **Positive Velocity (Vel > 0)**.
-           *Logic:* Volume is flooding in and it is physically moving up the ranks. Strongest "Buy" signal.
-           
-        2. 🔥 **The "Fresh Heat" Check (Upv+ & Accel):**
-           Look at DATASET 1. Find the leader with the highest **Upvote Change (Upv+)** or **Acceleration (Acc)**.
-           *Logic:* Trend is speeding up (Acc) or fresh people are arriving right now (Upv+).
-           
-        3. 🧱 **The "Concrete" Trend (Streak):**
-           Find a stock with a **High Streak (Strk >= 3)**. Check DATASET 3 to ensure its **Price_%** is positive.
-           *Logic:* Sustained, multi-day trend. Not a pump-and-dump.
-           
-        4. ⚠️ **The "Rug Pull" Risk (Divergence):**
-           Scan DATASET 3. Find a stock where **Rank is CLIMBING** (Positive Rank_Chg) but **Price is DROPPING** (Negative Price_%).
-           *Logic:* "Hype vs Reality" mismatch. Retail is chatting while price fades.
-           
-        5. 💎 **The "Silent Climber" (Efficiency):**
-           Scan DATASET 1. Identify a stock with **High Efficiency (Eff > 0.5)** but **Low Surge (Srg < 100)**.
-           *Logic:* It is climbing ranks *without* needing massive hype volume. This indicates "Quiet Accumulation" before the crowd arrives.
-           
-        **Output Format:**
-        * **Signal Name:** Ticker (Metric Proof) - One sentence analysis.
-        
-        Use emojis. Be concise.
+
+        ### REPORT GUIDELINES:
+        1. **Tone:** Professional, punchy, and narrative-driven. No robotic lists.
+        2. **Formatting:** Use Markdown tables, **bold** for tickers, and emojis for section headers.
+
+        ### REQUIRED OUTPUT SECTIONS:
+
+        **1. 🌍 Executive Summary**
+        * Provide a 2-sentence summary of the market's current mood. (e.g., "Significant rotation into Semiconductors, while Gold cools off.")
+
+        **2. 🔝 Top Market Leaders (Table)**
+        * Create a Markdown table with columns: **Symbol**, **Price**, **Sector**, and **Analyst Note**.
+        * Select the top 4 strongest stocks from DATASET 1 based on 'Heat' and 'Rank'.
+
+        **3. 🔥 High-Volatility & Squeeze Alerts**
+        * Analyze DATASET 2. Identify stocks with high 'Srg' (Surge) or 'Sqz' (Squeeze) scores.
+        * Format as bullet points: "**Ticker (Price):** Description of the move."
+        * *Example:* "**CVNA ($45.20):** Massive 442% squeeze score indicates forced buy-ins."
+
+        **4. 🏗️ Sector Strength Analysis**
+        * Look at the 'Industry/Sector' of the top performers. Group them.
+        * Identify the top 2 hot sectors. (e.g., "1. Technology", "2. Energy").
+
+        **5. 📉 Notable Laggards / Divergences**
+        * Look at DATASET 3. Identify any stock dropping in Rank or Price, OR any stock where Price is dropping but Rank is rising (Divergence).
+
+        Produce the report now.
         """
 
         response = model.generate_content(prompt)
