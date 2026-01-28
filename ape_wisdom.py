@@ -486,12 +486,25 @@ def export_interactive_html(df, ai_summary=""):
 
         # Cleanup Columns
         if 'Streak' in export_df.columns: export_df.drop(columns=['Streak'], inplace=True)
+        
+        # 1. RENAME to match the headers we want
         export_df.rename(columns={
             'Meta': 'INDUSTRY/SECTOR', 'Velocity': 'Vel', 'Vol_Display': 'Vol', 'Sig': 'Strk',
-            'Accel': 'Acc', 'Squeeze': 'Sqz', 'Upvotes': 'Upvs', 'Surge': 'Srg'
+            'Accel': 'Acc', 'Squeeze': 'Sqz', 'Upvotes': 'Upvs', 'Surge': 'Srg', 'Master_Score': 'Heat'
             }, inplace=True)
 
-        cols = ['Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Acc', 'Eff', 'Conv', 'Upvs', 'Upv+', 'Vol', 'Srg', 'Vel', 'Strk', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 'Type_Tag', 'AvgVol', 'MCap']
+        # 2. FORCE EXACT COLUMN ORDER (Critical for the table to look right)
+        # The JavaScript expects exactly 21 columns. If this list is wrong, the table breaks.
+        cols = [
+            'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Acc', 'Eff', 'Conv', 'Upvs', 
+            'Upv+', 'Vol', 'Srg', 'Vel', 'Strk', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 
+            'Type_Tag', 'AvgVol', 'MCap'
+        ]
+        
+        # 3. SAFETY: Ensure all columns exist (fill with 0 if missing)
+        for c in cols:
+            if c not in export_df.columns: export_df[c] = 0
+
         final_df = export_df[cols]
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
