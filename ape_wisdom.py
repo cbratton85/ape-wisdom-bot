@@ -458,7 +458,7 @@ def export_interactive_html(df, ai_summary=""):
             <div class="ai-box-wrapper" style="margin-bottom: 15px;">
                 <div style="background: #18181b; border: 1px solid #00ff00; border-radius: 5px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,255,0,0.1);">
                     <div onclick="toggleAI()" style="padding: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: #2a2a2a; border-bottom: 1px solid #333; font-weight: bold; color: #fff; font-size: 0.85rem; text-transform: uppercase;">
-                        <span style="color: #00ff00;">⚡ Gemini AI Intelligence Report</span>
+                        <span style="color: #00ff00;">✨ Gemini AI Intelligence Report</span>
                         <span id="aiArrow" style="color: #00ff00;">▼</span>
                     </div>
                     <div id="aiContent" style="display: none; padding: 15px; color: #e0e0e0; font-size: 14px; line-height: 1.6; white-space: pre-wrap; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
