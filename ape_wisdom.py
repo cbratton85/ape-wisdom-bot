@@ -799,22 +799,35 @@ def get_ai_analysis(df, history_data):
         genai.configure(api_key=api_key)
         model = genai.GenerativeModel('gemini-1.5-flash')
 
-        # Prepare a tiny subset of history for Gemini to save tokens
-        # We focus on the Top 20 currently trending stocks
+        # --- PREPARE DATA FOR AI ---
+        # 1. Create a clean view for the AI using the ORIGINAL column names
+        # We rename them properly here so the AI understands them
+        ai_view = df.head(10).copy()
+        
+        # Check which columns actually exist to prevent KeyErrors
+        cols_to_show = ['Sym', 'Rank+', 'Conv']
+        
+        if 'Master_Score' in df.columns:
+            ai_view.rename(columns={'Master_Score': 'Heat'}, inplace=True)
+            cols_to_show.append('Heat')
+        
+        if 'Surge' in df.columns:
+            ai_view.rename(columns={'Surge': 'Srg'}, inplace=True)
+            cols_to_show.append('Srg')
+
+        # 2. Build the History Context
         top_tickers = df.head(20)['Sym'].tolist()
         comparison_context = []
 
         for ticker in top_tickers:
             if ticker in history_data:
-                # Sort snapshots by timestamp (keys)
                 snapshots = sorted(history_data[ticker].items())
-                
                 if len(snapshots) > 1:
-                    # Get current vs a snapshot from ~3 hours ago (approx 6 runs ago)
+                    # Get current vs ~3 hours ago
                     curr = snapshots[-1][1]
                     prev = snapshots[-6][1] if len(snapshots) > 6 else snapshots[0][1]
                     
-                    # --- FIX: Use .get() to avoid crashing on missing/capitalized keys ---
+                    # Safe .get() to handle old/new format differences
                     curr_rank = curr.get('rank', curr.get('Rank', 0))
                     prev_rank = prev.get('rank', prev.get('Rank', 0))
                     
@@ -833,9 +846,9 @@ def get_ai_analysis(df, history_data):
         Act as a professional sentiment trader. Analyze this 30-minute retail momentum data.
         
         Current Top 10 Data:
-        {df.head(10)[['Sym', 'Rank+', 'Heat', 'Conv', 'Srg']].to_string()}
+        {ai_view[cols_to_show].to_string(index=False)}
         
-        Historical Deltas (3hr window - Look for rank jumps vs conviction drops):
+        Historical Deltas (3hr window):
         {comparison_context}
         
         Provide a 3-bullet point summary for Discord (Format with bold headers):
