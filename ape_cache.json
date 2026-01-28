@@ -9566,5 +9566,21 @@
         "type": "EQUITY",
         "mcap": 7818399,
         "currency": "USD"
+    },
+    "FURY": {
+        "ticker": "FURY",
+        "name": "Fury Gold Mines Limited",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 182918912,
+        "currency": "USD"
+    },
+    "ZONE": {
+        "ticker": "ZONE",
+        "name": "CleanCore Solutions Inc.",
+        "meta": "Pollution & Treatment Controls",
+        "type": "EQUITY",
+        "mcap": 3089807,
+        "currency": "USD"
     }
 }
