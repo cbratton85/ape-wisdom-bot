@@ -776,6 +776,7 @@ def get_ai_analysis(df, history_data):
 
     try:
         genai.configure(api_key=api_key)
+        # --- SMART MODEL SELECTOR ---
         target_model = None
         try:
             for m in genai.list_models():
@@ -788,29 +789,36 @@ def get_ai_analysis(df, history_data):
         except:
             model = genai.GenerativeModel('gemini-pro')
 
-        # Cleanup for AI
+        # --- DATA PREPARATION ---
         ai_df = df.reset_index(drop=True).copy()
         ai_df = ai_df.loc[:, ~ai_df.columns.duplicated()]
         
         # Standardize Names for AI
-        if 'Surge' in ai_df.columns: ai_df.rename(columns={'Surge': 'Srg'}, inplace=True)
-        if 'Master_Score' in ai_df.columns: ai_df.rename(columns={'Master_Score': 'Heat'}, inplace=True)
-        if 'Accel' in ai_df.columns: ai_df.rename(columns={'Accel': 'Acc'}, inplace=True)
+        mapping = {
+            'Surge': 'Srg', 'Master_Score': 'Heat', 'Accel': 'Acc', 
+            'Velocity': 'Vel', 'Rolling': 'Strk', 'Upvotes': 'Upvs'
+        }
+        ai_df.rename(columns=mapping, inplace=True)
         
-        cols_for_ai = ['Sym', 'Rank', 'Rank+', 'Price', 'Srg', 'Acc', 'Conv', 'Heat']
+        # --- GOD MODE: ADDED 'Eff' (Efficiency) FOR RULE #5 ---
+        cols_for_ai = ['Sym', 'Rank', 'Price', 'Srg', 'Vel', 'Acc', 'Strk', 'Upv+', 'Eff', 'Heat']
+        
+        # Safety fill for missing cols
         for c in cols_for_ai:
             if c not in ai_df.columns: ai_df[c] = 0
 
+        # DATASET 1: LEADERS
         leaders_df = ai_df.head(10)[cols_for_ai]
         leaders_str = leaders_df.to_string(index=False)
 
+        # DATASET 2: STEALTH
         rest_of_market = ai_df.iloc[10:].copy()
         stealth_candidates = rest_of_market[ 
-            (rest_of_market['Srg'] > 100) | (rest_of_market['Acc'].abs() >= 2) 
+            (rest_of_market['Srg'] > 100) | (rest_of_market['Vel'] >= 2) 
         ].sort_values(by='Heat', ascending=False).head(5)
-        
         stealth_str = stealth_candidates[cols_for_ai].to_string(index=False) if not stealth_candidates.empty else "None"
 
+        # DATASET 3: 3-HOUR FORENSIC HISTORY
         top_20 = df.head(20)['Sym'].tolist()
         comparison_context = []
         for ticker in top_20:
@@ -819,34 +827,60 @@ def get_ai_analysis(df, history_data):
                 if len(snapshots) > 1:
                     curr = snapshots[-1][1]
                     prev = snapshots[-6][1] if len(snapshots) > 6 else snapshots[0][1]
+                    
+                    p_now = curr.get('price', 0)
+                    p_old = prev.get('price', 0)
+                    price_delta = round(((p_now - p_old) / p_old * 100), 2) if p_old > 0 else 0
+                    
                     comparison_context.append({
                         "Sym": ticker,
-                        "Rank_Now": curr.get('rank', 0),
-                        "Rank_3hr_Ago": prev.get('rank', 0),
-                        "Conv_Change": round(curr.get('conv', 0) - prev.get('conv', 0), 2)
+                        "Rank_Chg": prev.get('rank', 0) - curr.get('rank', 0), # Positive = Climbing
+                        "Price_%": f"{price_delta}%",
+                        "Conv_Chg": round(curr.get('conv', 0) - prev.get('conv', 0), 2),
+                        "Upv_Delta": int(curr.get('upvotes', 0) - prev.get('upvotes', 0))
                     })
 
+        # --- THE 5-RULE PROMPT ---
         prompt = f"""
-        Act as a professional sentiment trader. Analyze this market momentum data.
+        You are an Algo-Trading Analyst. Analyze the Momentum Matrix below. Use the specific metrics provided (Vel, Eff, Srg, Price_%) to justify your calls.
         
-        DATASET 1: CURRENT LEADERS (Top 10):
+        ### DATASET 1: LEADERBOARD (Top 10)
         {leaders_str}
         
-        DATASET 2: STEALTH OUTLIERS (Scanned from deep market):
+        ### DATASET 2: DEEP SCAN (Stealth Candidates)
         {stealth_str}
         
-        DATASET 3: 3-HOUR TRENDS (For Leaders):
+        ### DATASET 3: 3-HOUR DELTAS
         {comparison_context}
         
-        Provide a 3-bullet point summary for Discord.
+        ### MISSION:
+        Synthesize these datasets into 5 critical market signals.
         
-        RULES:
-        1. **Start directly with the first bullet point.**
-        2. **The Breakout:** Which ticker in DATASET 1 has the most efficient climb (Rank+ vs Volume)?
-        3. **The Divergence:** Is any Leader climbing in rank but showing dropping Conviction in Dataset 3?
-        4. **The Stealth Play:** LOOK AT DATASET 2. Identify a ticker outside the Top 10 that is heating up (High Surge or Accel). Explain why.
+        ### DETECTION RULES:
+        1. 🚀 **The "Ignition" Setup (Velocity & Surge):**
+           Scan DATASET 2 (Stealth). Identify a stock with **High Surge (Srg > 150)** AND **Positive Velocity (Vel > 0)**.
+           *Logic:* Volume is flooding in and it is physically moving up the ranks. Strongest "Buy" signal.
+           
+        2. 🔥 **The "Fresh Heat" Check (Upv+ & Accel):**
+           Look at DATASET 1. Find the leader with the highest **Upvote Change (Upv+)** or **Acceleration (Acc)**.
+           *Logic:* Trend is speeding up (Acc) or fresh people are arriving right now (Upv+).
+           
+        3. 🧱 **The "Concrete" Trend (Streak):**
+           Find a stock with a **High Streak (Strk >= 3)**. Check DATASET 3 to ensure its **Price_%** is positive.
+           *Logic:* Sustained, multi-day trend. Not a pump-and-dump.
+           
+        4. ⚠️ **The "Rug Pull" Risk (Divergence):**
+           Scan DATASET 3. Find a stock where **Rank is CLIMBING** (Positive Rank_Chg) but **Price is DROPPING** (Negative Price_%).
+           *Logic:* "Hype vs Reality" mismatch. Retail is chatting while price fades.
+           
+        5. 💎 **The "Silent Climber" (Efficiency):**
+           Scan DATASET 1. Identify a stock with **High Efficiency (Eff > 0.5)** but **Low Surge (Srg < 100)**.
+           *Logic:* It is climbing ranks *without* needing massive hype volume. This indicates "Quiet Accumulation" before the crowd arrives.
+           
+        **Output Format:**
+        * **Signal Name:** Ticker (Metric Proof) - One sentence analysis.
         
-        Keep it snappy, professional, and use emojis.
+        Use emojis. Be concise.
         """
 
         response = model.generate_content(prompt)
