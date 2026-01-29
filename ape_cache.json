@@ -11302,5 +11302,69 @@
         "type": "ETF",
         "mcap": 17360388096,
         "currency": "USD"
+    },
+    "CCL": {
+        "ticker": "CCL",
+        "name": "Carnival Corporation",
+        "meta": "Travel Services",
+        "type": "EQUITY",
+        "mcap": 43086823424,
+        "currency": "USD"
+    },
+    "NICE": {
+        "ticker": "NICE",
+        "name": "NICE Ltd",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 6689404928,
+        "currency": "USD"
+    },
+    "MGX": {
+        "ticker": "MGX",
+        "name": "Metagenomi Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 59323868,
+        "currency": "USD"
+    },
+    "BIL": {
+        "ticker": "BIL",
+        "name": "State Street SPDR Bloomberg 1-3",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "TOUR": {
+        "ticker": "TOUR",
+        "name": "Tuniu Corporation",
+        "meta": "Travel Services",
+        "type": "EQUITY",
+        "mcap": 77924824,
+        "currency": "USD"
+    },
+    "STRL": {
+        "ticker": "STRL",
+        "name": "Sterling Infrastructure, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 11649708032,
+        "currency": "USD"
+    },
+    "RMTI": {
+        "ticker": "RMTI",
+        "name": "Rockwell Medical, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 42951784,
+        "currency": "USD"
+    },
+    "VOYG": {
+        "ticker": "VOYG",
+        "name": "Voyager Technologies, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 1965374592,
+        "currency": "USD"
     }
 }
