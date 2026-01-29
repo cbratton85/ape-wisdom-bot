@@ -290,8 +290,10 @@ def filter_and_process(stocks):
             NAME_MAX_WIDTH = 100
             name = str(info.get('name', t)).strip()[:NAME_MAX_WIDTH]
             
-            cur_m = int(stock.get('mentions', 0))
-            old_m = int(stock.get('mentions_24h_ago', 0))
+            # We use (stock.get('key') or 0) to handle cases where the API returns None/null
+            cur_m = int(stock.get('mentions') or 0)
+            old_m = int(stock.get('mentions_24h_ago') or 0)
+            
             m_perc = int(((cur_m - old_m) / (old_m if old_m > 0 else 1) * 100))
             s_perc = int((hist['Volume'].iloc[-1] / avg_v * 100)) if avg_v > 0 else 0
             
@@ -301,11 +303,29 @@ def filter_and_process(stocks):
             log_mcap = math.log(mcap if mcap > 0 else 10**9, 10)
             squeeze_score = (cur_m * s_perc) / max(log_mcap, 1)
 
-            rank_now = int(stock.get('rank', 0))
-            rank_old = int(stock.get('rank_24h_ago', 0))
+            rank_now = int(stock.get('rank') or 0)
+            rank_old = int(stock.get('rank_24h_ago') or 0)
             rank_plus = (rank_old - rank_now) if rank_old != 0 else 0
 
-            conviction = (int(stock.get('upvotes', 0)) / cur_m) if cur_m > 0 else 0
+            # Safe upvote fetch
+            upvotes_raw = stock.get('upvotes')
+            current_upvotes = int(upvotes_raw) if upvotes_raw is not None else 0
+            
+            conviction = (current_upvotes / cur_m) if cur_m > 0 else 0
+            safe_surge = s_perc if s_perc > 0 else 1
+            efficiency = rank_plus / safe_surge
+
+            m = tracker.get_metrics(t, float(curr_p), m_perc, rank_plus, current_upvotes)
+
+            final_list.append({
+                "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
+                "Price": float(curr_p), "AvgVol": int(avg_v),
+                "Surge": s_perc, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
+                "Upvotes": current_upvotes, "Meta": info.get('meta', '-'),
+                "Squeeze": squeeze_score, "MCap": mcap, "Conv": conviction, "Eff": efficiency,
+                "Accel": m['accel'], "Upv+": m['upv_chg'], "Velocity": m['vel'],
+                "Streak": m['streak'], "Rolling": m['rolling_trend']
+            })
             safe_surge = s_perc if s_perc > 0 else 1
             efficiency = rank_plus / safe_surge
 
