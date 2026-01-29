@@ -9694,5 +9694,13 @@
         "type": "EQUITY",
         "mcap": 4693872128,
         "currency": "USD"
+    },
+    "TJX": {
+        "ticker": "TJX",
+        "name": "TJX Companies, Inc. (The)",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 164481204224,
+        "currency": "USD"
     }
 }
