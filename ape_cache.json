@@ -9734,5 +9734,589 @@
         "type": "ETF",
         "mcap": 17206328,
         "currency": "USD"
+    },
+    "RELL": {
+        "ticker": "RELL",
+        "name": "Richardson Electronics, Ltd.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 169859680,
+        "currency": "USD"
+    },
+    "LIT": {
+        "ticker": "LIT",
+        "name": "Global X Lithium & Battery Tech",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "DUST": {
+        "ticker": "DUST",
+        "name": "Direxion Daily Gold Miners Inde",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 57163664,
+        "currency": "USD"
+    },
+    "PSI": {
+        "ticker": "PSI",
+        "name": "Invesco Semiconductors ETF",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 308288000,
+        "currency": "USD"
+    },
+    "BHAT": {
+        "ticker": "BHAT",
+        "name": "Blue Hat Interactive Entertainm",
+        "meta": "Electronic Gaming & Multimedia",
+        "type": "EQUITY",
+        "mcap": 32557904,
+        "currency": "USD"
+    },
+    "MQ": {
+        "ticker": "MQ",
+        "name": "Marqeta, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1931883264,
+        "currency": "USD"
+    },
+    "LBJ": {
+        "ticker": "LBJ",
+        "name": "Direxion Daily Latin America Bu",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "OII": {
+        "ticker": "OII",
+        "name": "Oceaneering International, Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 2973159424,
+        "currency": "USD"
+    },
+    "VTOL": {
+        "ticker": "VTOL",
+        "name": "Bristow Group, Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 1276818048,
+        "currency": "USD"
+    },
+    "EFA": {
+        "ticker": "EFA",
+        "name": "iShares MSCI EAFE ETF",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 94787788800,
+        "currency": "USD"
+    },
+    "RGR": {
+        "ticker": "RGR",
+        "name": "Sturm, Ruger & Company, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 606399424,
+        "currency": "USD"
+    },
+    "SCZ": {
+        "ticker": "SCZ",
+        "name": "iShares MSCI EAFE Small-Cap ETF",
+        "meta": "Foreign Small/Mid Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "ARKW": {
+        "ticker": "ARKW",
+        "name": "ARK Next Generation Internet ET",
+        "meta": "Mid-Cap Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "GTX": {
+        "ticker": "GTX",
+        "name": "Garrett Motion Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 3656578560,
+        "currency": "USD"
+    },
+    "CRVS": {
+        "ticker": "CRVS",
+        "name": "Corvus Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1720587520,
+        "currency": "USD"
+    },
+    "VPG": {
+        "ticker": "VPG",
+        "name": "Vishay Precision Group, Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 589192960,
+        "currency": "USD"
+    },
+    "VKTX": {
+        "ticker": "VKTX",
+        "name": "Viking Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3437435136,
+        "currency": "USD"
+    },
+    "KLXE": {
+        "ticker": "KLXE",
+        "name": "KLX Energy Services Holdings, I",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 58338292,
+        "currency": "USD"
+    },
+    "YMM": {
+        "ticker": "YMM",
+        "name": "Full Truck Alliance Co. Ltd.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 10479860736,
+        "currency": "USD"
+    },
+    "ADIL": {
+        "ticker": "ADIL",
+        "name": "Adial Pharmaceuticals, Inc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 6111437,
+        "currency": "USD"
+    },
+    "REV": {
+        "ticker": "REV",
+        "name": "REV",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "ESS": {
+        "ticker": "ESS",
+        "name": "Essex Property Trust, Inc.",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 16954928128,
+        "currency": "USD"
+    },
+    "UMAY": {
+        "ticker": "UMAY",
+        "name": "Innovator U.S. Equity Ultra Buf",
+        "meta": "Defined Outcome",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "BAR": {
+        "ticker": "BAR",
+        "name": "GraniteShares Gold Trust Shares",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "ICSH": {
+        "ticker": "ICSH",
+        "name": "iShares Ultra Short Duration Bo",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "NLR": {
+        "ticker": "NLR",
+        "name": "VanEck Uranium and Nuclear ETF",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "TILE": {
+        "ticker": "TILE",
+        "name": "Interface, Inc.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 1835217024,
+        "currency": "USD"
+    },
+    "CALX": {
+        "ticker": "CALX",
+        "name": "Calix, Inc",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 3510001920,
+        "currency": "USD"
+    },
+    "BCS": {
+        "ticker": "BCS",
+        "name": "Barclays PLC",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 91626364928,
+        "currency": "USD"
+    },
+    "OIH": {
+        "ticker": "OIH",
+        "name": "VanEck Oil Services ETF",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "CW": {
+        "ticker": "CW",
+        "name": "Curtiss-Wright Corporation",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 25035599872,
+        "currency": "USD"
+    },
+    "HLLY": {
+        "ticker": "HLLY",
+        "name": "Holley Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 468743712,
+        "currency": "USD"
+    },
+    "HUBS": {
+        "ticker": "HUBS",
+        "name": "HubSpot, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 16709512192,
+        "currency": "USD"
+    },
+    "SWBI": {
+        "ticker": "SWBI",
+        "name": "Smith & Wesson Brands, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 492100832,
+        "currency": "USD"
+    },
+    "HWKN": {
+        "ticker": "HWKN",
+        "name": "Hawkins, Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 3211874304,
+        "currency": "USD"
+    },
+    "INDY": {
+        "ticker": "INDY",
+        "name": "iShares India 50 ETF",
+        "meta": "India Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "EPI": {
+        "ticker": "EPI",
+        "name": "WisdomTree India Earnings Fund",
+        "meta": "India Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "MPWR": {
+        "ticker": "MPWR",
+        "name": "Monolithic Power Systems, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 55657394176,
+        "currency": "USD"
+    },
+    "CPS": {
+        "ticker": "CPS",
+        "name": "Cooper-Standard Holdings Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 553272960,
+        "currency": "USD"
+    },
+    "EPOL": {
+        "ticker": "EPOL",
+        "name": "iShares MSCI Poland ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "ALLY": {
+        "ticker": "ALLY",
+        "name": "Ally Financial Inc.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 13049252864,
+        "currency": "USD"
+    },
+    "DUAL": {
+        "ticker": "DUAL",
+        "name": "North Shore Dual Share Class ET",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "ENS": {
+        "ticker": "ENS",
+        "name": "EnerSys",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 6782263296,
+        "currency": "USD"
+    },
+    "ESAB": {
+        "ticker": "ESAB",
+        "name": "ESAB Corporation",
+        "meta": "Metal Fabrication",
+        "type": "EQUITY",
+        "mcap": 7139609600,
+        "currency": "USD"
+    },
+    "CRS": {
+        "ticker": "CRS",
+        "name": "Carpenter Technology Corporatio",
+        "meta": "Metal Fabrication",
+        "type": "EQUITY",
+        "mcap": 16530789376,
+        "currency": "USD"
+    },
+    "GDDY": {
+        "ticker": "GDDY",
+        "name": "GoDaddy Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 14308706304,
+        "currency": "USD"
+    },
+    "HEI": {
+        "ticker": "HEI",
+        "name": "Heico Corporation",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 46142349312,
+        "currency": "USD"
+    },
+    "TYO": {
+        "ticker": "TYO",
+        "name": "Direxion Daily 10-Yr Treasury B",
+        "meta": "Trading--Inverse Debt",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "DFEN": {
+        "ticker": "DFEN",
+        "name": "Direxion Daily Aerospace & Defe",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "DECK": {
+        "ticker": "DECK",
+        "name": "Deckers Outdoor Corporation",
+        "meta": "Footwear & Accessories",
+        "type": "EQUITY",
+        "mcap": 14481278976,
+        "currency": "USD"
+    },
+    "RYE": {
+        "ticker": "RYE",
+        "name": "Invesco S&P 500 Equal Weight En",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "UPRO": {
+        "ticker": "UPRO",
+        "name": "ProShares UltraPro S&P 500",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "STEM": {
+        "ticker": "STEM",
+        "name": "Stem, Inc.",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 142130128,
+        "currency": "USD"
+    },
+    "COIN": {
+        "ticker": "COIN",
+        "name": "Coinbase Global, Inc. - 3",
+        "meta": "Financial Data & Stock Exchanges",
+        "type": "EQUITY",
+        "mcap": 56474390528,
+        "currency": "USD"
+    },
+    "YCBD": {
+        "ticker": "YCBD",
+        "name": "cbdMD, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 7913653,
+        "currency": "USD"
+    },
+    "PY": {
+        "ticker": "PY",
+        "name": "Principal Value ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "UHT": {
+        "ticker": "UHT",
+        "name": "Universal Health Realty Income ",
+        "meta": "REIT - Healthcare Facilities",
+        "type": "EQUITY",
+        "mcap": 529991808,
+        "currency": "USD"
+    },
+    "VSS": {
+        "ticker": "VSS",
+        "name": "Vanguard FTSE All-Wld ex-US SmC",
+        "meta": "Foreign Small/Mid Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "AAU": {
+        "ticker": "AAU",
+        "name": "AAU",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "TOST": {
+        "ticker": "TOST",
+        "name": "Toast, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 18733680640,
+        "currency": "USD"
+    },
+    "PLBY": {
+        "ticker": "PLBY",
+        "name": "Playboy, Inc.",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 170256656,
+        "currency": "USD"
+    },
+    "EVEX": {
+        "ticker": "EVEX",
+        "name": "Eve Holding, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 1424565760,
+        "currency": "USD"
+    },
+    "CHAD": {
+        "ticker": "CHAD",
+        "name": "Direxion Daily CSI 300 China A ",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 197390192,
+        "currency": "USD"
+    },
+    "EAF": {
+        "ticker": "EAF",
+        "name": "GrafTech International Ltd.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 443331296,
+        "currency": "USD"
+    },
+    "XPON": {
+        "ticker": "XPON",
+        "name": "Expion360 Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 8706517,
+        "currency": "USD"
+    },
+    "NFTY": {
+        "ticker": "NFTY",
+        "name": "First Trust India Nifty 50 Equa",
+        "meta": "India Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "PRA": {
+        "ticker": "PRA",
+        "name": "ProAssurance Corporation",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 1243696128,
+        "currency": "USD"
+    },
+    "MLI": {
+        "ticker": "MLI",
+        "name": "Mueller Industries, Inc.",
+        "meta": "Metal Fabrication",
+        "type": "EQUITY",
+        "mcap": 14932443136,
+        "currency": "USD"
+    },
+    "EWI": {
+        "ticker": "EWI",
+        "name": "iShares MSCI Italy ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 477346528,
+        "currency": "USD"
+    },
+    "PLAT": {
+        "ticker": "PLAT",
+        "name": "WisdomTree Growth Leaders Fund",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "ARKQ": {
+        "ticker": "ARKQ",
+        "name": "ARK Autonomous Technology & Rob",
+        "meta": "Mid-Cap Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "ABNB": {
+        "ticker": "ABNB",
+        "name": "Airbnb, Inc.",
+        "meta": "Travel Services",
+        "type": "EQUITY",
+        "mcap": 80539598848,
+        "currency": "USD"
+    },
+    "FXI": {
+        "ticker": "FXI",
+        "name": "iShares China Large-Cap ETF",
+        "meta": "China Region",
+        "type": "ETF",
+        "mcap": 5242724864,
+        "currency": "USD"
     }
 }
