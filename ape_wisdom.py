@@ -531,7 +531,7 @@ def export_interactive_html(df, ai_summary=""):
         if ai_summary:
             ai_box_html = f"""
             <div class="ai-box-wrapper" style="margin-bottom: 15px;">
-                <div style="background: #18181b; border: 1px solid #00ff00; border-radius: 5px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,255,0,0.1);">
+                <div style="background: #18181b; border: 1px solid #00ff00; border-radius: 5px; box-shadow: 0 4px 15px rgba(0,255,0,0.1);">
                     <div onclick="toggleAI()" style="padding: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: #2a2a2a; border-bottom: 1px solid #333; font-weight: bold; color: #fff; font-size: 0.85rem; text-transform: uppercase;">
                         <span style="color: #00ff00;">✨ Gemini AI Intelligence Report (CLICK TO TOGGLE)</span>
                         <span id="aiArrow" style="color: #00ff00;">▼</span>
@@ -570,8 +570,6 @@ def export_interactive_html(df, ai_summary=""):
                 width: 1%;
                 text-align: left;
                 max-width: 260px;
-                overflow: hidden;
-                text-overflow: ellipsis;
                 white-space: nowrap;
                 }}
             th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }}
@@ -590,17 +588,16 @@ def export_interactive_html(df, ai_summary=""):
             th:nth-child(18), td:nth-child(18) {{
                 width: 1%;
                 text-align: left;
-                overflow: hidden;
-                text-overflow: ellipsis;
                 white-space: nowrap;
-                max-width: 270px;
+                max-width: 350px;
+                border-right: 1px solid #333 !important;
                 }}
             
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
             table.no-colors a {{ color: #4da6ff !important; }}
             
-            .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }}
+            .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 8px; margin-bottom: 20px; }}
             .legend-header {{ background: #2a2a2a; padding: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; font-size: 0.85rem; text-transform: uppercase; border-bottom: 1px solid #333; }}
             .legend-box {{ padding: 8px; display: none; background-color: #1a1a1a; }}
             .legend-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }}
@@ -621,7 +618,21 @@ def export_interactive_html(df, ai_summary=""):
             .btn-reset:hover {{ background: #444; color: #fff; }}
             #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px;}}
             .header-flex {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
-            .dataTables_filter input {{ width: 350px !important; background: #111 !important; border: 1px solid #555 !important; color: #fff !important; height: 35px !important; border-radius: 4px; margin-left: 10px; }}
+
+            .dataTables_filter {{
+                float: none !important;
+                text-align: center !important;
+                width: 100%;
+                margin-left: -450px;
+            }}
+            .dataTables_filter input {{
+                width: 250px !important; 
+                background: #111 !important; 
+                border: 1px solid #555 !important; 
+                color: #fff !important; 
+                height: 30px !important; 
+            }}
+
             /* --- PAGINATION DARK MODE FIX --- */
             .page-link {{ background-color: #1a1a1a !important; border-color: #444 !important; color: #ccc !important; }}
             .page-link:hover {{ background-color: #333 !important; color: #fff !important; }}
