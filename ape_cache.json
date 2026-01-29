@@ -10510,5 +10510,29 @@
         "type": "EQUITY",
         "mcap": 221804016,
         "currency": "USD"
+    },
+    "AMLX": {
+        "ticker": "AMLX",
+        "name": "Amylyx Pharmaceuticals, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 1592932864,
+        "currency": "USD"
+    },
+    "SGMT": {
+        "ticker": "SGMT",
+        "name": "Sagimet Biosciences Inc. - Seri",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 190413968,
+        "currency": "USD"
+    },
+    "RCL": {
+        "ticker": "RCL",
+        "name": "Royal Caribbean Cruises Ltd.",
+        "meta": "Travel Services",
+        "type": "EQUITY",
+        "mcap": 79523102720,
+        "currency": "USD"
     }
 }
