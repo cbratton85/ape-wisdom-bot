@@ -9670,5 +9670,29 @@
         "type": "EQUITY",
         "mcap": 2628305408,
         "currency": "USD"
+    },
+    "RARE": {
+        "ticker": "RARE",
+        "name": "Ultragenyx Pharmaceutical Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2357911808,
+        "currency": "USD"
+    },
+    "USB": {
+        "ticker": "USB",
+        "name": "U.S. Bancorp",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 86675709952,
+        "currency": "USD"
+    },
+    "VIAV": {
+        "ticker": "VIAV",
+        "name": "Viavi Solutions Inc.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 4693872128,
+        "currency": "USD"
     }
 }
