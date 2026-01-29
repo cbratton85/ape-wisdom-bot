@@ -10406,5 +10406,85 @@
         "type": "EQUITY",
         "mcap": 3365149696,
         "currency": "USD"
+    },
+    "CRVO": {
+        "ticker": "CRVO",
+        "name": "CervoMed Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 49964684,
+        "currency": "USD"
+    },
+    "PPTA": {
+        "ticker": "PPTA",
+        "name": "Perpetua Resources Corp.",
+        "meta": "Other Precious Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 4193530880,
+        "currency": "USD"
+    },
+    "DLB": {
+        "ticker": "DLB",
+        "name": "Dolby Laboratories",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 5844005376,
+        "currency": "USD"
+    },
+    "APPS": {
+        "ticker": "APPS",
+        "name": "Digital Turbine, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 613454464,
+        "currency": "USD"
+    },
+    "ITRG": {
+        "ticker": "ITRG",
+        "name": "Integra Resources Corp.",
+        "meta": "Other Precious Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 819017344,
+        "currency": "USD"
+    },
+    "LB": {
+        "ticker": "LB",
+        "name": "LandBridge Company LLC",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 4660738560,
+        "currency": "USD"
+    },
+    "CNH": {
+        "ticker": "CNH",
+        "name": "CNH Industrial N.V.",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 13458824192,
+        "currency": "USD"
+    },
+    "NVA": {
+        "ticker": "NVA",
+        "name": "Nova Minerals Limited",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 428399808,
+        "currency": "USD"
+    },
+    "VNRX": {
+        "ticker": "VNRX",
+        "name": "VolitionRX Limited",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 31928406,
+        "currency": "USD"
+    },
+    "AQST": {
+        "ticker": "AQST",
+        "name": "Aquestive Therapeutics, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 395290080,
+        "currency": "USD"
     }
 }
