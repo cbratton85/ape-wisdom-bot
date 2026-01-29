@@ -9710,5 +9710,13 @@
         "type": "EQUITY",
         "mcap": 15091020800,
         "currency": "USD"
+    },
+    "NDAQ": {
+        "ticker": "NDAQ",
+        "name": "Nasdaq, Inc.",
+        "meta": "Financial Data & Stock Exchanges",
+        "type": "EQUITY",
+        "mcap": 56639328256,
+        "currency": "USD"
     }
 }
