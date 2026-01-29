@@ -10534,5 +10534,53 @@
         "type": "EQUITY",
         "mcap": 79523102720,
         "currency": "USD"
+    },
+    "BCRX": {
+        "ticker": "BCRX",
+        "name": "BioCryst Pharmaceuticals, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 1651940096,
+        "currency": "USD"
+    },
+    "GCTS": {
+        "ticker": "GCTS",
+        "name": "GCT Semiconductor Holding, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 56591376,
+        "currency": "USD"
+    },
+    "ACRV": {
+        "ticker": "ACRV",
+        "name": "Acrivon Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 59639188,
+        "currency": "USD"
+    },
+    "FXR": {
+        "ticker": "FXR",
+        "name": "First Trust Industrials AlphaDE",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "GCT": {
+        "ticker": "GCT",
+        "name": "GigaCloud Technology Inc",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1534138752,
+        "currency": "USD"
+    },
+    "RY": {
+        "ticker": "RY",
+        "name": "Royal Bank Of Canada",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 234034380800,
+        "currency": "USD"
     }
 }
