@@ -10838,5 +10838,165 @@
         "type": "EQUITY",
         "mcap": 50456891392,
         "currency": "USD"
+    },
+    "ECC": {
+        "ticker": "ECC",
+        "name": "Eagle Point Credit Company Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 750326912,
+        "currency": "USD"
+    },
+    "WING": {
+        "ticker": "WING",
+        "name": "Wingstop Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 7630166016,
+        "currency": "USD"
+    },
+    "MRMD": {
+        "ticker": "MRMD",
+        "name": "MariMed Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 33976332,
+        "currency": "USD"
+    },
+    "URI": {
+        "ticker": "URI",
+        "name": "United Rentals, Inc.",
+        "meta": "Rental & Leasing Services",
+        "type": "EQUITY",
+        "mcap": 49538719744,
+        "currency": "USD"
+    },
+    "MNDY": {
+        "ticker": "MNDY",
+        "name": "monday.com Ltd.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 6057039360,
+        "currency": "USD"
+    },
+    "CDNS": {
+        "ticker": "CDNS",
+        "name": "Cadence Design Systems, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 80782376960,
+        "currency": "USD"
+    },
+    "PRCH": {
+        "ticker": "PRCH",
+        "name": "Porch Group, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 843497664,
+        "currency": "USD"
+    },
+    "IOBT": {
+        "ticker": "IOBT",
+        "name": "IO Biotech, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 23109968,
+        "currency": "USD"
+    },
+    "PACK": {
+        "ticker": "PACK",
+        "name": "Ranpak Holdings Corp",
+        "meta": "Packaging & Containers",
+        "type": "EQUITY",
+        "mcap": 431160704,
+        "currency": "USD"
+    },
+    "AAP": {
+        "ticker": "AAP",
+        "name": "Advance Auto Parts Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 2913179648,
+        "currency": "USD"
+    },
+    "ING": {
+        "ticker": "ING",
+        "name": "ING Group, N.V.",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 85400305664,
+        "currency": "USD"
+    },
+    "HON": {
+        "ticker": "HON",
+        "name": "Honeywell International Inc.",
+        "meta": "Conglomerates",
+        "type": "EQUITY",
+        "mcap": 151863279616,
+        "currency": "USD"
+    },
+    "SNPS": {
+        "ticker": "SNPS",
+        "name": "Synopsys, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 91951357952,
+        "currency": "USD"
+    },
+    "SCM": {
+        "ticker": "SCM",
+        "name": "Stellus Capital Investment Corp",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 374288000,
+        "currency": "USD"
+    },
+    "HII": {
+        "ticker": "HII",
+        "name": "Huntington Ingalls Industries, ",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 16787092480,
+        "currency": "USD"
+    },
+    "OUST": {
+        "ticker": "OUST",
+        "name": "Ouster, Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 1395421312,
+        "currency": "USD"
+    },
+    "PKE": {
+        "ticker": "PKE",
+        "name": "Park Aerospace Corp.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 486986528,
+        "currency": "USD"
+    },
+    "IOT": {
+        "ticker": "IOT",
+        "name": "Samsara Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 16528280576,
+        "currency": "USD"
+    },
+    "V": {
+        "ticker": "V",
+        "name": "Visa Inc.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 637184507904,
+        "currency": "USD"
+    },
+    "CATX": {
+        "ticker": "CATX",
+        "name": "Perspective Therapeutics, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 262309040,
+        "currency": "USD"
     }
 }
