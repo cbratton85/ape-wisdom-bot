@@ -1977,7 +1977,7 @@
         "type": "EQUITY",
         "mcap": 19661600768,
         "currency": "USD",
-        "description": ""
+        "description": "Sprott Physical Gold Trust (the Trust) is a closed-end mutual fund trust. The Trust was created to invest and hold substantially all of its assets in physical gold bullion. The investment objective of the Trust is to provide a secure, convenient and exchange-traded investment alternative for investors interested in holding physical gold bullion without the inconvenience that is typical of a direct investment in physical gold bullion. The Trust invests primarily in long-term holdings of unencumbered, fully allocated, physical gold bullion and does not speculate with regard to short-term changes in gold prices. The Trust is authorized to issue an unlimited number of redeemable, transferrable trust units (the Units). Sprott Asset Management LP is the manager of the Trust."
     },
     "INTU": {
         "ticker": "INTU",
@@ -8178,7 +8178,7 @@
         "type": "EQUITY",
         "mcap": 23144757248,
         "currency": "USD",
-        "description": ""
+        "description": "Sprott Physical Silver Trust (the Trust) is a Canada-based closed-end mutual fund trust. The Trust's investment objective is to provide a secure, convenient and exchange-traded investment alternative for investors interested in holding physical silver bullion without the inconvenience that is typical of a direct investment in physical silver bullion. The Trust invests and intends to continue to invest primarily in long-term holdings of unencumbered, fully allocated, physical silver bullion and does not speculate with regard to short-term changes in silver prices. The Trust will only purchase and expects only to own Good Delivery Bars as defined by the London Bullion Market Association (LBMA), with each bar purchased being verified against the LBMA source by representatives from the Trust’s custodian, the Royal Canadian Mint. Sprott Asset Management LP is the manager of the Trust."
     },
     "TECH": {
         "ticker": "TECH",
