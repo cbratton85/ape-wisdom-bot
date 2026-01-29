@@ -10342,5 +10342,45 @@
         "type": "EQUITY",
         "mcap": 828712832,
         "currency": "USD"
+    },
+    "AVDE": {
+        "ticker": "AVDE",
+        "name": "Avantis International Equity ET",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "VEU": {
+        "ticker": "VEU",
+        "name": "Vanguard FTSE All World Ex US E",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 36420435968,
+        "currency": "USD"
+    },
+    "ZIP": {
+        "ticker": "ZIP",
+        "name": "ZipRecruiter, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 203655616,
+        "currency": "USD"
+    },
+    "AVEM": {
+        "ticker": "AVEM",
+        "name": "Avantis Emerging Markets Equity",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "BLDP": {
+        "ticker": "BLDP",
+        "name": "Ballard Power Systems, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 775905728,
+        "currency": "USD"
     }
 }
