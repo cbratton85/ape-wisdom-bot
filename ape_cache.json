@@ -10382,5 +10382,29 @@
         "type": "EQUITY",
         "mcap": 775905728,
         "currency": "USD"
+    },
+    "NUS": {
+        "ticker": "NUS",
+        "name": "Nu Skin Enterprises, Inc.",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 492375776,
+        "currency": "USD"
+    },
+    "WIP": {
+        "ticker": "WIP",
+        "name": "SPDR FTSE International Governm",
+        "meta": "Global Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "HP": {
+        "ticker": "HP",
+        "name": "Helmerich & Payne, Inc.",
+        "meta": "Oil & Gas Drilling",
+        "type": "EQUITY",
+        "mcap": 3365149696,
+        "currency": "USD"
     }
 }
