@@ -58,7 +58,7 @@ class HistoryTracker:
         return {}
 
     def save(self, df):
-        now_ts = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M")
+        now_ts = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d %H:%M")
         
         for _, row in df.iterrows():
             ticker = row['Sym']
@@ -75,7 +75,7 @@ class HistoryTracker:
             }
             
         # Clean up old data
-        cutoff = datetime.datetime.utcnow() - datetime.timedelta(days=RETENTION_DAYS)
+        cutoff = datetime.datetime.now(datetime.UTC).replace(tzinfo=None) - datetime.timedelta(days=RETENTION_DAYS)
         new_data_cleaned = {}
         
         for ticker, entries in self.data.items():
@@ -159,7 +159,7 @@ def save_cache(cache_data):
     except: pass
 
 def fetch_meta_data_robust(ticker):
-    name, meta, quote_type, mcap, currency = ticker, "Unknown", "EQUITY", 0, "USD"
+    name, meta, quote_type, mcap, currency, description = ticker, "Unknown", "EQUITY", 0, "USD", ""
 
     try:
         dat = yf.Ticker(ticker)
@@ -169,6 +169,7 @@ def fetch_meta_data_robust(ticker):
             name = info.get('shortName') or info.get('longName') or ticker
             mcap = info.get('marketCap', 0)
             currency = info.get('currency', 'USD')
+            description = info.get('longBusinessSummary', '')
             
             if quote_type == 'ETF':
                 meta = info.get('category', 'Unknown')
@@ -184,7 +185,8 @@ def fetch_meta_data_robust(ticker):
             'meta': meta,
             'type': quote_type,
             'mcap': mcap,
-            'currency': currency
+            'currency': currency,
+            'description': description
             }
 
 def filter_and_process(stocks):
@@ -195,7 +197,7 @@ def filter_and_process(stocks):
     tracker = HistoryTracker(HISTORY_FILE)
     
     # Clean Cache of old delisted
-    now = datetime.datetime.utcnow()
+    now = datetime.datetime.now(datetime.UTC)
     valid_tickers = [t for t in us_tickers if not local_cache.get(t, {}).get('delisted')]
     
     # Fetch Missing Metadata with Throttling
@@ -288,7 +290,7 @@ def filter_and_process(stocks):
             if info.get('currency') not in ['USD', None, '']: continue
 
             NAME_MAX_WIDTH = 100
-            name = str(info.get('name', t)).strip()[:NAME_MAX_WIDTH]
+            name = str(info.get('name', t)).replace('"', '').strip()[:NAME_MAX_WIDTH]
             
             # We use (stock.get('key') or 0) to handle cases where the API returns None/null
             cur_m = int(stock.get('mentions') or 0)
@@ -322,25 +324,18 @@ def filter_and_process(stocks):
                 "Price": float(curr_p), "AvgVol": int(avg_v),
                 "Surge": s_perc, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
                 "Upvotes": current_upvotes, "Meta": info.get('meta', '-'),
+                "Desc": info.get('description', ''),   # <--- ADD THIS LINE
                 "Squeeze": squeeze_score, "MCap": mcap, "Conv": conviction, "Eff": efficiency,
                 "Accel": m['accel'], "Upv+": m['upv_chg'], "Velocity": m['vel'],
                 "Streak": m['streak'], "Rolling": m['rolling_trend']
             })
+            
             safe_surge = s_perc if s_perc > 0 else 1
             efficiency = rank_plus / safe_surge
 
             current_upvotes = int(stock.get('upvotes', 0))
             m = tracker.get_metrics(t, float(curr_p), m_perc, rank_plus, current_upvotes)
 
-            final_list.append({
-                "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
-                "Price": float(curr_p), "AvgVol": int(avg_v),
-                "Surge": s_perc, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
-                "Upvotes": int(stock.get('upvotes', 0)), "Meta": info.get('meta', '-'),
-                "Squeeze": squeeze_score, "MCap": mcap, "Conv": conviction, "Eff": efficiency,
-                "Accel": m['accel'], "Upv+": m['upv_chg'], "Velocity": m['vel'],
-                "Streak": m['streak'], "Rolling": m['rolling_trend']
-            })
         except Exception as e:
             print(f"Error processing {t}: {e}") # This will tell you exactly what went wrong
             continue
@@ -479,7 +474,9 @@ def export_interactive_html(df, ai_summary=""):
             export_df.at[index, 'Heat'] = f'<span style="color:{h_clr}; font-weight:bold;">{score:.1f}</span>'
             
             # Name
-            export_df.at[index, 'Name'] = f"<b>{row.get('Name','')}</b>"
+            raw_desc = str(row.get('Desc', 'No description available.'))
+            desc_text = raw_desc.replace('"', '&quot;').replace("'", "&apos;")
+            export_df.at[index, 'Name'] = f'<span title="{desc_text}" style="cursor:help; border-bottom:1px dotted #555;"><b>{row.get("Name","")}</b></span>'
 
             # Rank+
             r_val = row.get('Rank+', 0)
@@ -566,7 +563,7 @@ def export_interactive_html(df, ai_summary=""):
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
             body{{ background-color:#101010; color:#e0e0e0; font-family:'Consolas','Monaco',monospace; padding:20px; }}
-            .master-container {{ max-width: 1600px; margin: 0 auto; width: 100%; }}
+            .master-container {{ margin: 0 auto; width: fit-content; }}
             .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
             th{{ color:#00ff00; border-bottom:2px solid #444; font-size: 15px; text-transform: uppercase; vertical-align: middle !important; padding: 8px 22px 8px 6px !important; line-height: 1.2 !important; }}
             td {{
@@ -583,34 +580,38 @@ def export_interactive_html(df, ai_summary=""):
             }}
             
             /* Column Widths */
-            th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; }} 
-            th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: right; }}
-            th:nth-child(3), td:nth-child(3) {{ width: 1%; text-align: center; font-weight: bold; }}
+            th:nth-child(1), td:nth-child(1) {{ width: 1% !important; text-align: center; }} 
+            th:nth-child(2), td:nth-child(2) {{ width: 1% !important; text-align: center; }}
+            th:nth-child(3), td:nth-child(3) {{ width: 1% !important; text-align: center; font-weight: bold; }}
             th:nth-child(4), td:nth-child(4) {{
-                width: 1%;
-                text-align: left;
-                max-width: 260px;
-                white-space: nowrap;
+                width: 1% !important;
+                text-align: left !important;
+                min-width: 260px !important;
+                max-width: 260px !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
                 }}
-            th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }}
-            th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; }}
-            th:nth-child(7), td:nth-child(7) {{ width: 1%; text-align: center; }}
-            th:nth-child(8), td:nth-child(8) {{ width: 1%; text-align: center; }}
-            th:nth-child(9), td:nth-child(9) {{ width: 1%; text-align: right; }}
-            th:nth-child(10), td:nth-child(10) {{ width: 1%; text-align: center; }}
-            th:nth-child(11), td:nth-child(11) {{ width: 1%; text-align: center; }}
-            th:nth-child(12), td:nth-child(12) {{ width: 1%; text-align: right; }}
-            th:nth-child(13), td:nth-child(13) {{ width: 1%; text-align: center; }}
-            th:nth-child(14), td:nth-child(14) {{ width: 1%; text-align: center; }}
-            th:nth-child(15), td:nth-child(15) {{ width: 1%; text-align: center; }}
-            th:nth-child(16), td:nth-child(16) {{ width: 1%; text-align: right; }}
-            th:nth-child(17), td:nth-child(17) {{ width: 1%; text-align: center; }}
+            th:nth-child(5), td:nth-child(5) {{ width: 1% !important; text-align: left; }}
+            th:nth-child(6), td:nth-child(6) {{ width: 1% !important; text-align: right; padding-right: 20px !important;}}
+            th:nth-child(7), td:nth-child(7) {{ width: 1% !important; text-align: center; }}
+            th:nth-child(8), td:nth-child(8) {{ width: 1% !important; text-align: center; }}
+            th:nth-child(9), td:nth-child(9) {{ width: 1% !important; text-align: center; }}
+            th:nth-child(10), td:nth-child(10) {{ width: 1% !important; text-align: center; }}
+            th:nth-child(11), td:nth-child(11) {{ width: 1% !important; text-align: center; }}
+            th:nth-child(12), td:nth-child(12) {{ width: 1% !important; text-align: center; }}
+            th:nth-child(13), td:nth-child(13) {{ width: 1% !important; text-align: center; }}
+            th:nth-child(14), td:nth-child(14) {{ width: 1% !important; text-align: center; }}
+            th:nth-child(15), td:nth-child(15) {{ width: 1% !important; text-align: center; }}
+            th:nth-child(16), td:nth-child(16) {{ width: 1% !important; text-align: center; }}
+            th:nth-child(17), td:nth-child(17) {{ width: 1% !important; text-align: center; }}
             th:nth-child(18), td:nth-child(18) {{
-                width: 1%;
-                text-align: left;
-                white-space: nowrap;
-                max-width: 350px;
+                width: 1% !important;
+                text-align: left !important;
+                white-space: nowrap !important;
+                min-width: 300px !important;
+                max-width: 300px !important;
                 border-right: 1px solid #333 !important;
+                overflow: hidden !important;
                 }}
             
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
@@ -643,7 +644,7 @@ def export_interactive_html(df, ai_summary=""):
                 float: none !important;
                 text-align: center !important;
                 width: 100%;
-                margin-left: -450px;
+                margin-left: -430px;
             }}
             .dataTables_filter input {{
                 width: 250px !important; 
@@ -672,7 +673,7 @@ def export_interactive_html(df, ai_summary=""):
             <div class="filter-bar">
                 <span style="color:#fff; font-weight:bold; margin-right:5px;">⚡ FILTERS:</span>
                 <button id="btnColors" class="btn btn-sm btn-reset" onclick="toggleColors()" style="margin-right: 5px;">🎨 Colors: ON</button>
-                <button class="btn btn-sm btn-reset" onclick="resetFilters()" title="Reset Filters">🔄</button>
+                <button class="btn btn-sm btn-reset" onclick="resetFilters()" title="Reset Filters">🔄 RESET</button>
                 <div class="filter-group" style="margin-left: 10px; margin-right: 10px;">
                     <label>Price:</label>
                     <input type="text" id="minPrice" class="form-control form-control-sm" placeholder="Min" style="width: 50px;">
