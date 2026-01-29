@@ -9718,5 +9718,21 @@
         "type": "EQUITY",
         "mcap": 56639328256,
         "currency": "USD"
+    },
+    "SPMO": {
+        "ticker": "SPMO",
+        "name": "Invesco S&P 500 Momentum ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "DBS": {
+        "ticker": "DBS",
+        "name": "Invesco DB Silver Fund",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 17206328,
+        "currency": "USD"
     }
 }
