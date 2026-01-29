@@ -935,10 +935,7 @@ def get_ai_analysis(df, history_data):
         # --- 1. DEFINE COLUMNS FOR ELITE ANALYST ---
         # We explicitly grab the columns the prompt asks for:
         # Rank, Heat, Ticker, Price, Acc, Eff, Conv, VolSrg, Vel, Sqz, Sector
-        cols_for_ai = [
-            'Rank', 'Heat', 'Sym', 'Price', 'Acc', 
-            'Eff', 'Conv', 'Srg', 'Vel', 'Sqz', 'Sector'
-        ]
+        cols_for_ai = ['Rank', 'Heat', 'Sym', 'Price', 'Acc', 'Eff', 'Conv', 'Srg', 'Vel', 'VolSqz', 'Industry']
         
         # Safety: Only use columns that actually exist in your dataframe
         valid_cols = [c for c in cols_for_ai if c in df.columns]
@@ -957,7 +954,10 @@ def get_ai_analysis(df, history_data):
             (rest_of_market['Vel'] >= 2.5)       # High Velocity
         ].sort_values(by='Heat', ascending=False).head(8) # Increased to 8 to give AI more options
         
-        stealth_str = stealth_candidates[valid_cols].to_string(index=False) if not stealth_candidates.empty else "None detected."
+        if not stealth_candidates.empty:
+            stealth_str = stealth_candidates[valid_cols].to_string(index=False)
+        else:
+            stealth_str = "No stealth anomalies detected."
 
         # --- DATASET 3: 3-HOUR FORENSIC HISTORY (Formatted as Table) ---
         top_20 = df.head(20)['Sym'].tolist()
@@ -965,70 +965,119 @@ def get_ai_analysis(df, history_data):
         
         for ticker in top_20:
             if ticker in history_data:
+                # Sort snapshots by time
                 snapshots = sorted(history_data[ticker].items())
+        
                 if len(snapshots) > 1:
                     curr = snapshots[-1][1]
-                    # Compare vs 3 hours ago (approx 6 snapshots if 30min intervals)
-                    prev = snapshots[-6][1] if len(snapshots) > 6 else snapshots[0][1]
-                    
-                    p_now = curr.get('price', 0)
-                    p_old = prev.get('price', 0)
-                    price_delta = round(((p_now - p_old) / p_old * 100), 2) if p_old > 0 else 0
-                    
-                    history_rows.append({
-                        "Sym": ticker,
-                        "Trend": "UP" if price_delta > 0 else "DOWN",
-                        "Price_%": f"{price_delta:+}%", # Adds + sign for positive
-                        "Rank_Delta": prev.get('rank', 0) - curr.get('rank', 0), # Positive = Improved Rank
-                        "Conv_Delta": round(curr.get('conv', 0) - prev.get('conv', 0), 2),
-                        "Vol_State": "Heating" if (curr.get('srg',0) > prev.get('srg',0)) else "Cooling"
-                    })
+
+            # --- CONFIGURATION: 24-Hour Lookback (1h intervals) ---
+            # 1 snapshot/hour * 24 = 24 snapshots.
+            target_lookback = 24  
+            
+            # Calculate the index for "Yesterday at this time"
+            prev_idx = len(snapshots) - 1 - target_lookback
+            
+            # Safety Check: If data is younger than 24h, grab the oldest available
+            if prev_idx < 0:
+                prev = snapshots[0][1]
+                time_label = "Since Start" 
+            else:
+                prev = snapshots[prev_idx][1]
+                time_label = "24h Delta"
+
+            p_now = curr.get('price', 0)
+            p_old = prev.get('price', 0)
+
+            # 1. Price Delta %
+            if p_old > 0:
+                price_delta = round(((p_now - p_old) / p_old * 100), 2)
+            else:
+                price_delta = 0.0
+
+            # 2. Rank Delta (Positive = Improved Rank, e.g., 50 -> 10 = +40)
+            rank_delta = prev.get('rank', 0) - curr.get('rank', 0)
+
+            # 3. Volume Trend Detection (Ignition vs Exhaustion)
+            srg_now = curr.get('srg', 0) > 100  # Is volume surging NOW?
+            srg_old = prev.get('srg', 0) > 100  # Was volume surging 24h ago?
+
+            if srg_now and not srg_old:
+                vol_status = "IGNITION"      # Low -> High (New Trend)
+            elif srg_now and srg_old:
+                vol_status = "SUSTAINED"     # High -> High (Strong Trend)
+            elif not srg_now and srg_old:
+                vol_status = "EXHAUSTION"    # High -> Low (Trend Dying)
+            else:
+                vol_status = "Quiet"         # Low -> Low (No Interest)
+
+            history_rows.append({
+                "Sym": ticker,
+                "Timeframe": time_label,
+                "Price_Change": f"{price_delta:+}%",     # Adds '+' for positive numbers
+                "Rank_Delta": f"{rank_delta:+}",         # Adds '+' for rank improvement
+                "Vol_Trend": vol_status
+            })
 
         # Convert list to a clean String Table for the AI
-        if history_rows:
-            comparison_context = pd.DataFrame(history_rows).to_string(index=False)
+        history_df = pd.DataFrame(history_rows)
+
+        if not history_df.empty:
+            comparison_context = history_df.to_string(index=False)
         else:
             comparison_context = "No historical data available."
 
         # --- THE UPDATED QUANT ANALYST PROMPT ---
         prompt = f"""
-        SYSTEM CONFIGURATION:
-        Identity: Elite Quantitative Market Microstructure Analyst (Level 3).
-        Brevity Constraint: EXTREME CONCISION. Max one sentence per ticker. No intro/outro filler.
-        Significance Filter: Only report on tickers with significant statistical anomalies. Ignore noise.
-        Domain: Financial Equity Markets (Rank=Relative Strength, Heat=Order Flow Intensity).
-
-        INPUT DATA:
-        SNAPSHOT 1: {leaders_str}
-        SNAPSHOT 2: {stealth_str}
-        SNAPSHOT 3: {comparison_context}
-
-        COLUMNS KEY: Rank, Heat, Ticker, Price, Acc (Acceleration), Eff (Efficiency), Conv (Conviction), VolSrg (Volume Surge/RVOL), Vel (Velocity), Sqz (Volatility Squeeze).
-
-        EXECUTION PROTOCOL:
-        1. Sectoral Kinetics: Identify aggregate flow and coherence.
-        2. Physics Check: Spot Vel/Acc divergence (Traps).
-        3. Efficiency Check: Institutional Program Buying (High Eff) vs. Churn (Low Eff).
-        4. Squeeze Watch: Sqz + Conviction correlation.
-
-        REPORT FORMAT:
-        # 30-Minute Microstructure Intelligence Brief
-
-        ## 1. 🌊 Liquidity Tides
-        (2-sentence max summary of aggregate sector rotation/money flow.)
-
-        ## 2. 🚨 Tactical Anomalies (One Sentence Per Ticker)
-        * [Ticker]: [Insight on price/acc divergence or efficiency paradox].
-            (Repeat for all relevant tickers)
-
-        ## 3. 🚀 Squeeze & Breakout Watchlist (One Sentence Per Ticker)
-        * [Ticker]: [Mathematical reason for imminent breakout].
-            (Repeat for all relevant tickers)
-
-        ## 4. 📉 Risk Assessment (One Sentence Per Ticker)
-        * [Ticker]: [Reason for Overheated/Distribution status].
-            (Repeat for all relevant tickers)
-        """
+            SYSTEM CONFIGURATION:
+            Identity: Senior Swing Trading Strategist (Timeframe: 1-Hour Candles / 24-Hour Lookback).
+            Brevity Constraint: TELEGRAPHIC STYLE. Bullet points. No fluff.
+            Goal: Synthesize "Now" (Leaders) vs. "Yesterday" (History) to find Trend Changes.
+            
+            INPUT DATA:
+            SNAPSHOT 1 (CURRENT LEADERS): 
+            {leaders_str}
+            
+            SNAPSHOT 2 (STEALTH & OUTLIERS): 
+            {stealth_str}
+            
+            SNAPSHOT 3 (24-HOUR CHANGE & CYCLE ANALYSIS): 
+            {comparison_context}
+              
+            COLUMNS KEY: 
+            Rank, Heat, Sym, Price, Acc (Acceleration), Eff (Efficiency), Conv (Conviction), VolSrg (Volume Surge/RVOL), Vel (Velocity), Sqz (Volatility Squeeze).
+            
+            HISTORY KEYS (Snapshot 3):
+            * Rank_Delta: (+20 means stock jumped 20 spots higher vs 24h ago).
+            * Vol_Trend: 
+              - "IGNITION": Vol was low yesterday -> High today (BUY WATCH).
+              - "SUSTAINED": Vol was high yesterday -> High today (MOMENTUM).
+              - "EXHAUSTION": Vol was high yesterday -> Low today (TAKE PROFIT).
+            
+            EXECUTION PROTOCOL:
+            1. Scan Snapshot 3 for "IGNITION": These are new moves starting TODAY.
+            2. Scan Snapshot 3 for "Rank_Delta > +10": These are stocks aggressively taking market share.
+            3. Cross-Reference Snapshot 2 (Stealth): If a stock is in Stealth AND has "Ignition" in History, it is a Top Pick.
+            4. Sector Check: Group tickers by industry. Are all Gold/Semi/Software stocks moving together?
+            
+            REPORT FORMAT:
+            # 🌅 24-HOUR MARKET SHIFT REPORT
+            
+            ## 1. 🚀 TREND IGNITION (New Moves Starting Now)
+            * **[Ticker] ([Sector]):** Rank Change: [Rank_Delta] | Status: IGNITION
+              * *Insight:* [Why is this moving? e.g., "Fresh volume surge + Efficiency breakout."]
+            
+            ## 2. 📉 MOMENTUM EXHAUSTION (Fade/Sell Watch)
+            * **[Ticker]:** Rank Change: [Rank_Delta] | Status: EXHAUSTION
+              * *Insight:* [e.g., "Price flat but volume died vs yesterday. Sellers absorbing."]
+            
+            ## 3. 🦁 MARKET LEADERSHIP (Sustained Strength)
+            * **[Top Sector]:** [List Tickers]
+            * **[Top Stock]:** [Ticker with highest combined Heat + Rank Improvement]
+            
+            ## 4. 🕵️ STEALTH ANOMALIES (From Snapshot 2)
+             * **[Ticker]:** [Specific stat anomaly, e.g. "Squeeze Score > 80 with rising Rank"]
+            """
 
         response = model.generate_content(prompt)
         # Cleaning the text to ensure it goes straight to the report content
