@@ -9702,5 +9702,13 @@
         "type": "EQUITY",
         "mcap": 164481204224,
         "currency": "USD"
+    },
+    "CF": {
+        "ticker": "CF",
+        "name": "CF Industries Holdings, Inc.",
+        "meta": "Agricultural Inputs",
+        "type": "EQUITY",
+        "mcap": 15091020800,
+        "currency": "USD"
     }
 }
