@@ -9654,5 +9654,21 @@
         "type": "EQUITY",
         "mcap": 8931857408,
         "currency": "USD"
+    },
+    "LTBR": {
+        "ticker": "LTBR",
+        "name": "Lightbridge Corporation",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 575562432,
+        "currency": "USD"
+    },
+    "ETOR": {
+        "ticker": "ETOR",
+        "name": "eToro Group Ltd.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 2628305408,
+        "currency": "USD"
     }
 }
