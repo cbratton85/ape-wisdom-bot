@@ -11366,5 +11366,109 @@
         "type": "EQUITY",
         "mcap": 1965374592,
         "currency": "USD"
+    },
+    "DUK": {
+        "ticker": "DUK",
+        "name": "Duke Energy Corporation (Holdin",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 94011465728,
+        "currency": "USD"
+    },
+    "BZH": {
+        "ticker": "BZH",
+        "name": "Beazer Homes USA, Inc.",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 720488384,
+        "currency": "USD"
+    },
+    "CAAP": {
+        "ticker": "CAAP",
+        "name": "Corporacion America Airports SA",
+        "meta": "Airports & Air Services",
+        "type": "EQUITY",
+        "mcap": 4950624256,
+        "currency": "USD"
+    },
+    "FLR": {
+        "ticker": "FLR",
+        "name": "Fluor Corporation",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 7591758336,
+        "currency": "USD"
+    },
+    "FMC": {
+        "ticker": "FMC",
+        "name": "FMC Corporation",
+        "meta": "Agricultural Inputs",
+        "type": "EQUITY",
+        "mcap": 1987478144,
+        "currency": "USD"
+    },
+    "DLTR": {
+        "ticker": "DLTR",
+        "name": "Dollar Tree, Inc.",
+        "meta": "Discount Stores",
+        "type": "EQUITY",
+        "mcap": 23927465984,
+        "currency": "USD"
+    },
+    "TLSA": {
+        "ticker": "TLSA",
+        "name": "Tiziana Life Sciences Ltd",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 203595840,
+        "currency": "USD"
+    },
+    "RGNT": {
+        "ticker": "RGNT",
+        "name": "Regentis Biomaterials Ltd.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 31749588,
+        "currency": "USD"
+    },
+    "SAVE": {
+        "ticker": "SAVE",
+        "name": "SAVE",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "SKYW": {
+        "ticker": "SKYW",
+        "name": "SkyWest, Inc.",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 4099604224,
+        "currency": "USD"
+    },
+    "BEN": {
+        "ticker": "BEN",
+        "name": "Franklin Resources, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 13493591040,
+        "currency": "USD"
+    },
+    "JW": {
+        "ticker": "JW",
+        "name": "JW",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "PDN": {
+        "ticker": "PDN",
+        "name": "Invesco RAFI Developed Markets ",
+        "meta": "Foreign Small/Mid Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
     }
 }
