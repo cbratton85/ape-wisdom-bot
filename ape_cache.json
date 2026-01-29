@@ -9638,5 +9638,13 @@
         "type": "EQUITY",
         "mcap": 6990794240,
         "currency": "USD"
+    },
+    "GUTS": {
+        "ticker": "GUTS",
+        "name": "Fractyl Health, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 280670848,
+        "currency": "USD"
     }
 }
