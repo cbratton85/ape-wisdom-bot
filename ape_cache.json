@@ -9646,5 +9646,13 @@
         "type": "EQUITY",
         "mcap": 280670848,
         "currency": "USD"
+    },
+    "MOS": {
+        "ticker": "MOS",
+        "name": "Mosaic Company (The)",
+        "meta": "Agricultural Inputs",
+        "type": "EQUITY",
+        "mcap": 8931857408,
+        "currency": "USD"
     }
 }
