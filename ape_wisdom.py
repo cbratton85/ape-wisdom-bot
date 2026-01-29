@@ -497,23 +497,42 @@ def export_interactive_html(df, ai_summary=""):
             .master-container {{ max-width: 1600px; margin: 0 auto; width: 100%; }}
             .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
             th{{ color:#00ff00; border-bottom:2px solid #444; font-size: 15px; text-transform: uppercase; vertical-align: middle !important; padding: 8px 22px 8px 6px !important; line-height: 1.2 !important; }}
-            td{{ vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333; padding: 4px 5px !important; font-size: 15px; }}
-            table.dataTable {{ width: 100% !important; margin: 0 auto; }}
+            td {{
+                vertical-align: middle; 
+                border-bottom: 1px solid #333; 
+                padding: 4px 5px !important; 
+                font-size: 15px;
+                white-space: nowrap;
+            }}
+            
+            table.dataTable {{
+                width: 100% !important;
+                table-layout: auto;
+            }}
             
             /* Column Widths */
             th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; }} 
             th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }}
             th:nth-child(3), td:nth-child(3) {{ width: 1%; text-align: center; font-weight: bold; }}
-            th:nth-child(4), td:nth-child(4) {{ max-width: 260px; overflow: hidden; text-overflow: ellipsis; }}
+            th:nth-child(4), td:nth-child(4) {{ max-width: 250px; overflow: hidden; text-overflow: ellipsis; }}
             th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }}
             th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; }}
+            th:nth-child(7), td:nth-child(7) {{ width: 1%; text-align: right; }}
             th:nth-child(18), td:nth-child(18) {{
-                width: 100%;             /* Take up all remaining space */
-                min-width: 250px;        /* Prevent it from getting too squashed */
-                white-space: nowrap; 
-                overflow: hidden; 
-                text-overflow: ellipsis; 
-                text-align: left; 
+                white-space: nowrap !important; 
+    
+                /* 2. HIDE THE EXTRA TEXT */
+                overflow: hidden !important;
+    
+                /* 3. ADD THE DOTS */
+                text-overflow: ellipsis !important;
+    
+                /* 4. SET SIZE */
+                min-width: 220px !important;
+                max-width: 220px; /* Helps the ellipsis know where to trigger */
+    
+                text-align: left;
+    
             }}
             
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
@@ -688,9 +707,10 @@ def export_interactive_html(df, ai_summary=""):
         }}
         $(document).ready(function(){{ 
             table=$('.table').DataTable({{
-                "order":[[0,"asc"]], "pageLength": 25, "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                "autoWidth": false,
+                "order":[[0,"asc"]],
+                "pageLength": 25,
                 "columnDefs": [
-                    {{ "width": "400px", "targets": 17 }},
                     {{ "visible": false, "targets": [18, 19, 20] }},
                     {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], "type": "num", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,x]/g, ''); return parseVal(clean); }} return data; }} }}
                 ],
