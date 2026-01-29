@@ -10,7 +10,7 @@ import random
 import json
 import shutil
 import numpy as np
-import google.generativeai as genai
+from google import genai
 
 # ==========================================
 #                   CONFIGURATION
@@ -900,7 +900,7 @@ def get_ai_analysis(df, history_data):
         return "AI analysis skipped: No API key."
 
     try:
-        genai.configure(api_key=api_key)
+        client = genai.Client(api_key=api_key)
         # --- SMART MODEL SELECTOR ---
         target_model = None
         try:
@@ -910,7 +910,6 @@ def get_ai_analysis(df, history_data):
                         target_model = m.name; break
             if not target_model: target_model = 'gemini-pro'
             print(f"🤖 Connected to AI Model: {target_model}")
-            model = genai.GenerativeModel(target_model)
         except:
             model = genai.GenerativeModel('gemini-pro')
 
@@ -1080,7 +1079,7 @@ def get_ai_analysis(df, history_data):
              * **[Ticker]:** [Specific stat anomaly, e.g. "Squeeze Score > 80 with rising Rank"]
             """
 
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(model='gemini-2.0-flash', contents=prompt)
         # Cleaning the text to ensure it goes straight to the report content
         clean_text = response.text.replace("Here is the briefing:", "").replace("## Intelligence Brief", "").strip()
         return clean_text
