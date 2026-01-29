@@ -10318,5 +10318,29 @@
         "type": "ETF",
         "mcap": 5242724864,
         "currency": "USD"
+    },
+    "VLUE": {
+        "ticker": "VLUE",
+        "name": "iShares MSCI USA Value Factor E",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "VTV": {
+        "ticker": "VTV",
+        "name": "Vanguard Value ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 84124729344,
+        "currency": "USD"
+    },
+    "SES": {
+        "ticker": "SES",
+        "name": "SES AI Corporation",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 828712832,
+        "currency": "USD"
     }
 }
