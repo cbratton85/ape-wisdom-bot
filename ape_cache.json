@@ -10998,5 +10998,69 @@
         "type": "EQUITY",
         "mcap": 262309040,
         "currency": "USD"
+    },
+    "TG": {
+        "ticker": "TG",
+        "name": "Tredegar Corporation",
+        "meta": "Metal Fabrication",
+        "type": "EQUITY",
+        "mcap": 303213600,
+        "currency": "USD"
+    },
+    "BK": {
+        "ticker": "BK",
+        "name": "The Bank of New York Mellon Cor",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 83277430784,
+        "currency": "USD"
+    },
+    "EXPE": {
+        "ticker": "EXPE",
+        "name": "Expedia Group, Inc.",
+        "meta": "Travel Services",
+        "type": "EQUITY",
+        "mcap": 33518880768,
+        "currency": "USD"
+    },
+    "MAX": {
+        "ticker": "MAX",
+        "name": "MediaAlpha, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 665926656,
+        "currency": "USD"
+    },
+    "GNRC": {
+        "ticker": "GNRC",
+        "name": "Generac Holdlings Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 9948708864,
+        "currency": "USD"
+    },
+    "CMBM": {
+        "ticker": "CMBM",
+        "name": "Cambium Networks Corporation",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 45190092,
+        "currency": "USD"
+    },
+    "SPR": {
+        "ticker": "SPR",
+        "name": "Spirit Aerosystems Holdings, In",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 4642166784,
+        "currency": "USD"
+    },
+    "SSO": {
+        "ticker": "SSO",
+        "name": "ProShares Ultra S&P500",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
     }
 }
