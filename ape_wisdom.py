@@ -233,9 +233,10 @@ def filter_and_process(stocks):
             if curr_p < MIN_PRICE or avg_v < MIN_AVG_VOLUME: continue
 
             info = local_cache.get(t, {})
-            if info.get('currency', 'USD') != 'USD': continue
+            if info.get('currency') not in ['USD', None, '']: continue
 
             NAME_MAX_WIDTH = 100
+            name = str(info.get('name', t)).strip()[:NAME_MAX_WIDTH]
             
             cur_m = int(stock.get('mentions', 0))
             old_m = int(stock.get('mentions_24h_ago', 0))
@@ -268,8 +269,10 @@ def filter_and_process(stocks):
                 "Accel": m['accel'], "Upv+": m['upv_chg'], "Velocity": m['vel'],
                 "Streak": m['streak'], "Rolling": m['rolling_trend']
             })
-        except Exception as e: continue
-    
+        except Exception as e:
+            print(f"Error processing {t}: {e}") # This will tell you exactly what went wrong
+            continue
+
     # Scoring
     df = pd.DataFrame(final_list)
     if not df.empty and 'Sym' in df.columns:
@@ -504,7 +507,14 @@ def export_interactive_html(df, ai_summary=""):
             th:nth-child(4), td:nth-child(4) {{ max-width: 260px; overflow: hidden; text-overflow: ellipsis; }}
             th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }}
             th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; }}
-            th:nth-child(18), td:nth-child(18) {{ width: 100%; white-space: nowrap; text-align: left; overflow: hidden; text-overflow: ellipsis; text-align: left; padding-left: 10px !important; border-right: 1px solid #333; }}
+            th:nth-child(18), td:nth-child(18) {{
+                width: 100%;             /* Take up all remaining space */
+                min-width: 250px;        /* Prevent it from getting too squashed */
+                white-space: nowrap; 
+                overflow: hidden; 
+                text-overflow: ellipsis; 
+                text-align: left; 
+            }}
             
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
