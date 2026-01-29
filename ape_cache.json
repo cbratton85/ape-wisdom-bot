@@ -10486,5 +10486,29 @@
         "type": "EQUITY",
         "mcap": 395290080,
         "currency": "USD"
+    },
+    "LI": {
+        "ticker": "LI",
+        "name": "Li Auto Inc.",
+        "meta": "Auto Manufacturers",
+        "type": "EQUITY",
+        "mcap": 17377824768,
+        "currency": "USD"
+    },
+    "MOM": {
+        "ticker": "MOM",
+        "name": "AGFiQ U.S. Market Neutral Momen",
+        "meta": "Market Neutral",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "VENU": {
+        "ticker": "VENU",
+        "name": "Venu Holding Corporation",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 221804016,
+        "currency": "USD"
     }
 }
