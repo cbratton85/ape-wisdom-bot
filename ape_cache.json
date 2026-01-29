@@ -10582,5 +10582,61 @@
         "type": "EQUITY",
         "mcap": 234034380800,
         "currency": "USD"
+    },
+    "COWZ": {
+        "ticker": "COWZ",
+        "name": "Pacer US Cash Cows 100 ETF",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "CNQ": {
+        "ticker": "CNQ",
+        "name": "Canadian Natural Resources Limi",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 77336829952,
+        "currency": "USD"
+    },
+    "NOV": {
+        "ticker": "NOV",
+        "name": "NOV Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 6825683456,
+        "currency": "USD"
+    },
+    "JAAA": {
+        "ticker": "JAAA",
+        "name": "Janus Henderson AAA CLO ETF",
+        "meta": "Securitized Bond - Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "XLB": {
+        "ticker": "XLB",
+        "name": "State Street Materials Select S",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 3592588544,
+        "currency": "USD"
+    },
+    "GWH": {
+        "ticker": "GWH",
+        "name": "ESS Tech, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 32956676,
+        "currency": "USD"
+    },
+    "ZETA": {
+        "ticker": "ZETA",
+        "name": "Zeta Global Holdings Corp.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 4994561024,
+        "currency": "USD"
     }
 }
