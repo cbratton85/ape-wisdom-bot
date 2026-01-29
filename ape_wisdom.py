@@ -26,8 +26,8 @@ RETENTION_DAYS = 14
 DELISTED_RETRY_DAYS = 7
 
 # --- FILTERS & LAYOUT ---
-MIN_PRICE = 0.01
-MIN_AVG_VOLUME = 100
+MIN_PRICE = 1.00
+MIN_AVG_VOLUME = 100000
 AVG_VOLUME_DAYS = 30
 NAME_MAX_WIDTH = 50
 
@@ -160,6 +160,7 @@ def save_cache(cache_data):
 
 def fetch_meta_data_robust(ticker):
     name, meta, quote_type, mcap, currency = ticker, "Unknown", "EQUITY", 0, "USD"
+
     try:
         dat = yf.Ticker(ticker)
         info = dat.info
@@ -172,12 +173,19 @@ def fetch_meta_data_robust(ticker):
             if quote_type == 'ETF':
                 meta = info.get('category', 'Unknown')
             else:
-                meta = info.get('industry', 'Unknown') # Simplified
+                meta = info.get('industry', 'Unknown')
                 meta = meta.replace('\r', '').replace('\n', '').strip()
                 if not meta or meta == name or meta == "Unknown - Unknown":
                     meta = "Unknown"
-    except: pass
-    return {'ticker': ticker, 'name': name, 'meta': meta, 'type': quote_type, 'mcap': mcap, 'currency': currency}
+    except Exception as e:
+        pass
+    return {'ticker': ticker,
+            'name': name,
+            'meta': meta,
+            'type': quote_type,
+            'mcap': mcap,
+            'currency': currency
+            }
 
 def filter_and_process(stocks):
     if not stocks: return pd.DataFrame()
@@ -190,39 +198,83 @@ def filter_and_process(stocks):
     now = datetime.datetime.utcnow()
     valid_tickers = [t for t in us_tickers if not local_cache.get(t, {}).get('delisted')]
     
-    # Fetch Missing Metadata
+    # Fetch Missing Metadata with Throttling
     missing = [t for t in valid_tickers if t not in local_cache]
     if missing:
-        print(f"Fetching metadata for {len(missing)} items...")
-        for t in missing:
+        print(f"{C_YELLOW}Fetching metadata for {len(missing)} NEW items (this may take a few minutes)...{C_RESET}")
+        for i, t in enumerate(missing):
+            # Log progress every 10 items so you know it hasn't frozen
+            if i % 10 == 0 and i > 0:
+                print(f"  > Progress: {i}/{len(missing)} metadata items fetched...")
+            
             res = fetch_meta_data_robust(t)
-            if res: local_cache[res['ticker']] = res
+            if res: 
+                local_cache[res['ticker']] = res
+            
+            # --- CRITICAL: Rate Limit Delay ---
+            # 0.75 seconds is usually enough to stay under the radar
+            time.sleep(0.75) 
+            
         save_cache(local_cache)
 
-    # Download Market Data
-    market_data = None
+    # --- UPDATED: BATCHED MARKET DATA DOWNLOAD ---
+    market_data = pd.DataFrame()
     use_cache = os.path.exists(MARKET_DATA_CACHE_FILE) and (time.time() - os.path.getmtime(MARKET_DATA_CACHE_FILE)) < CACHE_EXPIRY_SECONDS
     
     if use_cache:
+        print(f"{C_CYAN}[#] Loading market data from cache...{C_RESET}")
         market_data = pd.read_pickle(MARKET_DATA_CACHE_FILE)
     else:
-        print(f"Downloading data for {len(valid_tickers)} tickers...")
-        market_data = yf.download(valid_tickers, period="40d", interval="1d", group_by='ticker', progress=False, threads=True)
-        if not market_data.empty: market_data.to_pickle(MARKET_DATA_CACHE_FILE)
+        print(f"{C_YELLOW}[!] Downloading data for {len(valid_tickers)} tickers in batches...{C_RESET}")
+        
+        # Split into batches of 100
+        CHUNK_SIZE = 100
+        for i in range(0, len(valid_tickers), CHUNK_SIZE):
+            batch = valid_tickers[i:i + CHUNK_SIZE]
+            print(f"    > Processing Batch { (i//CHUNK_SIZE) + 1} ({len(batch)} tickers)...")
+            
+            try:
+                # threads=True is fine, but we keep the batch size reasonable
+                batch_data = yf.download(batch, period="40d", interval="1d", group_by='ticker', progress=False, threads=True)
+                
+                if not batch_data.empty:
+                    # Handle yfinance behavior where single tickers don't return MultiIndex
+                    if len(batch) == 1:
+                        batch_data.columns = pd.MultiIndex.from_product([batch, batch_data.columns])
+                    
+                    # Merge this batch into our master market_data DataFrame
+                    if market_data.empty:
+                        market_data = batch_data
+                    else:
+                        market_data = pd.concat([market_data, batch_data], axis=1)
+                
+                # Mandatory "cool down" delay to avoid 429 errors
+                if i + CHUNK_SIZE < len(valid_tickers):
+                    time.sleep(2.5) 
 
-    if len(valid_tickers) == 1 and not market_data.empty:
-        market_data.columns = pd.MultiIndex.from_product([valid_tickers, market_data.columns])
+            except Exception as e:
+                print(f"{C_RED}[!] Error downloading batch {i}: {e}{C_RESET}")
+
+        # Save the fully assembled dataframe
+        if not market_data.empty:
+            market_data.to_pickle(MARKET_DATA_CACHE_FILE)
+
+    # --- END OF BATCHED DOWNLOAD ---
 
     final_list = []
     for stock in stocks:
         t = TICKER_FIXES.get(stock['ticker'], stock['ticker'].replace('.', '-'))
         try:
+            # Ensure we are looking at a MultiIndex (which yf.download(group_by='ticker') usually is)
             if isinstance(market_data.columns, pd.MultiIndex):
                 if t not in market_data.columns.levels[0]:
-                    local_cache[t] = {'delisted': True, 'last_checked': now.strftime("%Y-%m-%d")}
+                    # Only mark as delisted if we actually tried to fetch it and it's missing
+                    if not use_cache:
+                        local_cache[t] = {'delisted': True, 'last_checked': now.strftime("%Y-%m-%d")}
                     continue
                 hist = market_data[t].dropna()
             else:
+                # Fallback for unexpected single-column returns
                 hist = market_data.dropna()
 
             if hist.empty: continue
@@ -512,28 +564,37 @@ def export_interactive_html(df, ai_summary=""):
             
             /* Column Widths */
             th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; }} 
-            th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }}
+            th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: right; }}
             th:nth-child(3), td:nth-child(3) {{ width: 1%; text-align: center; font-weight: bold; }}
-            th:nth-child(4), td:nth-child(4) {{ max-width: 250px; overflow: hidden; text-overflow: ellipsis; }}
+            th:nth-child(4), td:nth-child(4) {{
+                width: 1%;
+                text-align: left;
+                max-width: 260px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                }}
             th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }}
             th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; }}
-            th:nth-child(7), td:nth-child(7) {{ width: 1%; text-align: right; }}
+            th:nth-child(7), td:nth-child(7) {{ width: 1%; text-align: center; }}
+            th:nth-child(8), td:nth-child(8) {{ width: 1%; text-align: center; }}
+            th:nth-child(9), td:nth-child(9) {{ width: 1%; text-align: right; }}
+            th:nth-child(10), td:nth-child(10) {{ width: 1%; text-align: center; }}
+            th:nth-child(11), td:nth-child(11) {{ width: 1%; text-align: center; }}
+            th:nth-child(12), td:nth-child(12) {{ width: 1%; text-align: right; }}
+            th:nth-child(13), td:nth-child(13) {{ width: 1%; text-align: center; }}
+            th:nth-child(14), td:nth-child(14) {{ width: 1%; text-align: center; }}
+            th:nth-child(15), td:nth-child(15) {{ width: 1%; text-align: center; }}
+            th:nth-child(16), td:nth-child(16) {{ width: 1%; text-align: right; }}
+            th:nth-child(17), td:nth-child(17) {{ width: 1%; text-align: center; }}
             th:nth-child(18), td:nth-child(18) {{
-                white-space: nowrap !important; 
-    
-                /* 2. HIDE THE EXTRA TEXT */
-                overflow: hidden !important;
-    
-                /* 3. ADD THE DOTS */
-                text-overflow: ellipsis !important;
-    
-                /* 4. SET SIZE */
-                min-width: 220px !important;
-                max-width: 220px; /* Helps the ellipsis know where to trigger */
-    
+                width: 1%;
                 text-align: left;
-    
-            }}
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                max-width: 270px;
+                }}
             
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
@@ -555,12 +616,12 @@ def export_interactive_html(df, ai_summary=""):
             
             .filter-bar {{ display: flex; gap: 8px; align-items: center; background: #2a2a2a; padding: 8px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #444; flex-wrap: wrap; font-size: 0.85rem; }}
             .filter-group {{ display:flex; align-items:center; gap:4px; }}
-            .form-control-sm {{ background:#111; border:1px solid #555; color:#fff; height: 28px; font-size: 0.8rem; padding: 2px 5px; }}
+            .form-control-sm {{ background:#111; border:1px solid #555; color:#fff; height: 35px; font-size: 0.8rem; padding: 2px 5px; }}
             .btn-reset {{ border: 1px solid #555; color: #fff; font-size: 0.8rem; background: #333; }}
             .btn-reset:hover {{ background: #444; color: #fff; }}
             #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px;}}
             .header-flex {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
-            .dataTables_filter input {{ width: 350px !important; background: #111 !important; border: 1px solid #555 !important; color: #fff !important; height: 28px !important; border-radius: 4px; margin-left: 10px; }}
+            .dataTables_filter input {{ width: 350px !important; background: #111 !important; border: 1px solid #555 !important; color: #fff !important; height: 35px !important; border-radius: 4px; margin-left: 10px; }}
             /* --- PAGINATION DARK MODE FIX --- */
             .page-link {{ background-color: #1a1a1a !important; border-color: #444 !important; color: #ccc !important; }}
             .page-link:hover {{ background-color: #333 !important; color: #fff !important; }}
@@ -709,6 +770,7 @@ def export_interactive_html(df, ai_summary=""):
             table=$('.table').DataTable({{
                 "autoWidth": false,
                 "order":[[0,"asc"]],
+                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 "pageLength": 25,
                 "columnDefs": [
                     {{ "visible": false, "targets": [18, 19, 20] }},
@@ -955,9 +1017,6 @@ if __name__ == "__main__":
     if not raw:
         print(f"{C_RED}[!] No data returned from ApeWisdom API. Exiting.{C_RESET}")
         sys.exit(0)
-
-    # --- SAFETY LIMIT: Only process top 500 to avoid Yahoo 429 Errors ---
-    raw = raw[:500] 
 
     # 2. Process Data
     df = filter_and_process(raw)
