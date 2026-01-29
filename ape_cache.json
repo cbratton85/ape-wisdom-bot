@@ -10742,5 +10742,101 @@
         "type": "EQUITY",
         "mcap": 38378860544,
         "currency": "USD"
+    },
+    "INTU": {
+        "ticker": "INTU",
+        "name": "Intuit Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 137891512320,
+        "currency": "USD"
+    },
+    "LMFA": {
+        "ticker": "LMFA",
+        "name": "LM Funding America, Inc.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 5688944,
+        "currency": "USD"
+    },
+    "WF": {
+        "ticker": "WF",
+        "name": "Woori Financial Group Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 15514786816,
+        "currency": "USD"
+    },
+    "LDOS": {
+        "ticker": "LDOS",
+        "name": "Leidos Holdings, Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 23996733440,
+        "currency": "USD"
+    },
+    "PANW": {
+        "ticker": "PANW",
+        "name": "Palo Alto Networks, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 119716716544,
+        "currency": "USD"
+    },
+    "FOUR": {
+        "ticker": "FOUR",
+        "name": "Shift4 Payments, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 5228977664,
+        "currency": "USD"
+    },
+    "ATYR": {
+        "ticker": "ATYR",
+        "name": "aTyr Pharma, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 76409976,
+        "currency": "USD"
+    },
+    "NEAR": {
+        "ticker": "NEAR",
+        "name": "iShares Short Duration Bond Act",
+        "meta": "Short-Term Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "DBA": {
+        "ticker": "DBA",
+        "name": "Invesco DB Agriculture Fund",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 712632000,
+        "currency": "USD"
+    },
+    "SKY": {
+        "ticker": "SKY",
+        "name": "Champion Homes, Inc.",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 4791041536,
+        "currency": "USD"
+    },
+    "IVE": {
+        "ticker": "IVE",
+        "name": "iShares S&P 500 Value ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 28714541056,
+        "currency": "USD"
+    },
+    "CBRE": {
+        "ticker": "CBRE",
+        "name": "CBRE Group Inc",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 50456891392,
+        "currency": "USD"
     }
 }
