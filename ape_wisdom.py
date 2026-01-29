@@ -235,7 +235,7 @@ def filter_and_process(stocks):
             info = local_cache.get(t, {})
             if info.get('currency', 'USD') != 'USD': continue
 
-            name = str(info.get('name', t)).replace('"', '').replace('\r', '').replace('\n', '').strip()[:NAME_MAX_WIDTH]
+            NAME_MAX_WIDTH = 100
             
             cur_m = int(stock.get('mentions', 0))
             old_m = int(stock.get('mentions_24h_ago', 0))
@@ -679,7 +679,8 @@ def export_interactive_html(df, ai_summary=""):
         $(document).ready(function(){{ 
             table=$('.table').DataTable({{
                 "order":[[0,"asc"]], "pageLength": 25, "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-                "columnDefs": [ 
+                "columnDefs": [
+                    {{ "width": "400px", "targets": 17 }},
                     {{ "visible": false, "targets": [18, 19, 20] }},
                     {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], "type": "num", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,x]/g, ''); return parseVal(clean); }} return data; }} }}
                 ],
