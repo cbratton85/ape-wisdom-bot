@@ -504,7 +504,7 @@ def export_interactive_html(df, ai_summary=""):
             th:nth-child(4), td:nth-child(4) {{ max-width: 260px; overflow: hidden; text-overflow: ellipsis; }}
             th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }}
             th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; }}
-            th:nth-child(18), td:nth-child(18) {{ width: auto; white-space: normal; text-align: left; padding-left: 10px !important; border-right: 1px solid #333; }}
+            th:nth-child(18), td:nth-child(18) {{ width: 100%; white-space: nowrap; text-align: left; overflow: hidden; text-overflow: ellipsis; text-align: left; padding-left: 10px !important; border-right: 1px solid #333; }}
             
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
@@ -869,68 +869,41 @@ def get_ai_analysis(df, history_data):
         # --- THE UPDATED QUANT ANALYST PROMPT ---
         prompt = f"""
         SYSTEM CONFIGURATION:
-        Identity: You are an elite Quantitative Market Microstructure Analyst (Level 3 Clearance). You specialize in identifying algorithmic trading footprints, hidden liquidity flows, and systemic risks that are invisible to retail observation.
-        Domain Constraint: You are analyzing Financial Equity Markets.
-
-        WARNING: Do NOT interpret "Rank" as coal classification or geological metamorphism.
-        WARNING: Do NOT interpret "Heat" as a meteorological hazard or social vulnerability index.
-        DEFINITION: "Rank" = Relative Strength. "Heat" = Momentum/Order Flow Intensity.
+        Identity: Elite Quantitative Market Microstructure Analyst (Level 3).
+        Brevity Constraint: EXTREME CONCISION. Max one sentence per ticker. No intro/outro filler.
+        Significance Filter: Only report on tickers with significant statistical anomalies. Ignore noise.
+        Domain: Financial Equity Markets (Rank=Relative Strength, Heat=Order Flow Intensity).
 
         INPUT DATA:
-        You are provided with the following real-time market snapshots:
-
-        ### SNAPSHOT 1: LEADERBOARD (Rank+Heat Table)
-        {leaders_str}
-
-        ### SNAPSHOT 2: DEEP SCAN (Stealth/Squeeze Candidates)
-        {stealth_str}
-
-        ### SNAPSHOT 3: DELTAS (Trend Changes)
-        {comparison_context}
+        SNAPSHOT 1: {leaders_str}
+        SNAPSHOT 2: {stealth_str}
+        SNAPSHOT 3: {comparison_context}
 
         COLUMNS KEY: Rank, Heat, Ticker, Price, Acc (Acceleration), Eff (Efficiency), Conv (Conviction), VolSrg (Volume Surge/RVOL), Vel (Velocity), Sqz (Volatility Squeeze).
 
-        ANALYTICAL DIRECTIVE:
-        Your goal is to produce a concise, actionable Intelligence Briefing. You must look beyond the raw numbers to find Second-Order and Third-Order effects.
-
-        EXECUTION PROTOCOL (Step-by-Step):
-        1. SECTORAL KINETICS (The Group Logic):
-           - Do not analyze stocks in isolation. Group all entries by the INDUSTRY/SECTOR column.
-           - Correlation Check: Are all stocks in a sector moving together (High Coherence) or diverging?
-           - Money Flow Vector: Calculate the aggregate VolSrg for each sector. Is money flowing INTO "Tech" and OUT of "Energy"? This indicates Sector Rotation.
-           - The "Invisible" Move: If a Sector is flat in Price but massive in Volume, flag it as "Accumulation" or "Distribution."
-
-        2. THE VELOCITY/ACCELERATION DIVERGENCE (The Physics Check):
-           - Scan the Vel (Velocity) and Acc (Acceleration) columns.
-           - Bull Trap Detection: Find stocks with High Positive Velocity but Negative Acceleration. This means the price is rising, but the force is dying.
-           - Bear Trap Detection: Find stocks dropping fast (Negative Vel) but with Positive Acceleration (decelerating drop).
-
-        3. THE EFFICIENCY PARADOX:
-           - Analyze Eff (Efficiency) vs VolSrg.
-           - The "Algo" Signature: High Eff (>4.0) + High VolSrg indicates Institutional Program Buying. Retail traders are messy; Algos are efficient.
-           - The "Churn": Low Eff (<1.0) + High VolSrg indicates a battleground. Lots of volume, no progress. Avoid these assets.
-
-        4. THE SQUEEZE (Potential Energy):
-           - Identify assets with high Sqz values. These are "coiling springs."
-           - Correlate Sqz with Conv (Conviction). A Squeeze + High Conviction = Imminent Explosive Breakout.
+        EXECUTION PROTOCOL:
+        1. Sectoral Kinetics: Identify aggregate flow and coherence.
+        2. Physics Check: Spot Vel/Acc divergence (Traps).
+        3. Efficiency Check: Institutional Program Buying (High Eff) vs. Churn (Low Eff).
+        4. Squeeze Watch: Sqz + Conviction correlation.
 
         REPORT FORMAT:
-        Generate a report with the following structure. Use professional, concise narrative prose. Do not use robotic lists; use analysis.
-
         # 30-Minute Microstructure Intelligence Brief
 
-        ## 1. 🌊 Liquidity Tides & Sector Rotation
-        *Where is the money going? Which sectors are "Heavy" (Distribution) vs. "Light" (Accumulation)?*
+        ## 1. 🌊 Liquidity Tides
+        (2-sentence max summary of aggregate sector rotation/money flow.)
 
-        ## 2. 🚨 The Anomaly Radar (Human Blindspots)
-        *Identify specific assets showing Mathematical Divergence (e.g., Price Up / Acc Down).*
-        *Highlight "Fake Moves" (Low Conviction Rallies) and "Hidden Gems" (Efficient Accumulation).*
+        ## 2. 🚨 Tactical Anomalies (One Sentence Per Ticker)
+        * [Ticker]: [Insight on price/acc divergence or efficiency paradox].
+            (Repeat for all relevant tickers)
 
-        ## 3. 🚀 Squeeze & Breakout Watchlist
-        *Which assets are dormant now but mathematically primed to explode in the next 30 minutes?*
+        ## 3. 🚀 Squeeze & Breakout Watchlist (One Sentence Per Ticker)
+        * [Ticker]: [Mathematical reason for imminent breakout].
+            (Repeat for all relevant tickers)
 
-        ## 4. 📉 Risk Assessment
-        *Identify "Overheated" assets (Rank/Heat mismatch).*
+        ## 4. 📉 Risk Assessment (One Sentence Per Ticker)
+        * [Ticker]: [Reason for Overheated/Distribution status].
+            (Repeat for all relevant tickers)
         """
 
         response = model.generate_content(prompt)
