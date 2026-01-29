@@ -10638,5 +10638,109 @@
         "type": "EQUITY",
         "mcap": 4994561024,
         "currency": "USD"
+    },
+    "CAR": {
+        "ticker": "CAR",
+        "name": "Avis Budget Group, Inc.",
+        "meta": "Rental & Leasing Services",
+        "type": "EQUITY",
+        "mcap": 4050293760,
+        "currency": "USD"
+    },
+    "TTEK": {
+        "ticker": "TTEK",
+        "name": "Tetra Tech, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 9834471424,
+        "currency": "USD"
+    },
+    "CBT": {
+        "ticker": "CBT",
+        "name": "Cabot Corporation",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 3761102848,
+        "currency": "USD"
+    },
+    "FOSL": {
+        "ticker": "FOSL",
+        "name": "Fossil Group, Inc.",
+        "meta": "Footwear & Accessories",
+        "type": "EQUITY",
+        "mcap": 217655488,
+        "currency": "USD"
+    },
+    "GSY": {
+        "ticker": "GSY",
+        "name": "Invesco Ultra Short Duration ET",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "LINC": {
+        "ticker": "LINC",
+        "name": "Lincoln Educational Services Co",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 819056320,
+        "currency": "USD"
+    },
+    "ASHR": {
+        "ticker": "ASHR",
+        "name": "Xtrackers Harvest CSI 300 China",
+        "meta": "China Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "ZG": {
+        "ticker": "ZG",
+        "name": "Zillow Group, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 16223172608,
+        "currency": "USD"
+    },
+    "ALGM": {
+        "ticker": "ALGM",
+        "name": "Allegro MicroSystems, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 6666136064,
+        "currency": "USD"
+    },
+    "FCFS": {
+        "ticker": "FCFS",
+        "name": "FirstCash Holdings, Inc.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 7431065088,
+        "currency": "USD"
+    },
+    "MYPS": {
+        "ticker": "MYPS",
+        "name": "PLAYSTUDIOS, Inc.",
+        "meta": "Electronic Gaming & Multimedia",
+        "type": "EQUITY",
+        "mcap": 76355952,
+        "currency": "USD"
+    },
+    "GUSH": {
+        "ticker": "GUSH",
+        "name": "Direxion Daily S&P Oil & Gas Ex",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "CVE": {
+        "ticker": "CVE",
+        "name": "Cenovus Energy Inc",
+        "meta": "Oil & Gas Integrated",
+        "type": "EQUITY",
+        "mcap": 38378860544,
+        "currency": "USD"
     }
 }
