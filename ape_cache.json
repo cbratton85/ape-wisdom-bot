@@ -11062,5 +11062,141 @@
         "type": "ETF",
         "mcap": 0,
         "currency": "USD"
+    },
+    "EPD": {
+        "ticker": "EPD",
+        "name": "Enterprise Products Partners L.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 73510150144,
+        "currency": "USD"
+    },
+    "TCGL": {
+        "ticker": "TCGL",
+        "name": "TechCreate Group Ltd.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 2335434752,
+        "currency": "USD"
+    },
+    "HOUR": {
+        "ticker": "HOUR",
+        "name": "Hour Loop, Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 62262084,
+        "currency": "USD"
+    },
+    "WLTH": {
+        "ticker": "WLTH",
+        "name": "Wealthfront Corporation",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 1310550912,
+        "currency": "USD"
+    },
+    "CDL": {
+        "ticker": "CDL",
+        "name": "VictoryShares US Large Cap High",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "ETR": {
+        "ticker": "ETR",
+        "name": "Entergy Corporation",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 42804080640,
+        "currency": "USD"
+    },
+    "INVZ": {
+        "ticker": "INVZ",
+        "name": "Innoviz Technologies Ltd.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 204774864,
+        "currency": "USD"
+    },
+    "AWAY": {
+        "ticker": "AWAY",
+        "name": "Amplify Travel Tech ETF",
+        "meta": "Consumer Cyclical",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD"
+    },
+    "MLP": {
+        "ticker": "MLP",
+        "name": "Maui Land & Pineapple Company, ",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 332863296,
+        "currency": "USD"
+    },
+    "APD": {
+        "ticker": "APD",
+        "name": "Air Products and Chemicals, Inc",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 56947875840,
+        "currency": "USD"
+    },
+    "MPB": {
+        "ticker": "MPB",
+        "name": "Mid Penn Bancorp",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 752774080,
+        "currency": "USD"
+    },
+    "MVIS": {
+        "ticker": "MVIS",
+        "name": "Microvision, Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 260717648,
+        "currency": "USD"
+    },
+    "HPK": {
+        "ticker": "HPK",
+        "name": "HighPeak Energy, Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 572640576,
+        "currency": "USD"
+    },
+    "KRRO": {
+        "ticker": "KRRO",
+        "name": "Korro Bio, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 124025776,
+        "currency": "USD"
+    },
+    "BTBT": {
+        "ticker": "BTBT",
+        "name": "Bit Digital, Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 687808960,
+        "currency": "USD"
+    },
+    "HSAI": {
+        "ticker": "HSAI",
+        "name": "Hesai Group",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 3915903744,
+        "currency": "USD"
+    },
+    "OKE": {
+        "ticker": "OKE",
+        "name": "ONEOK, Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 50175807488,
+        "currency": "USD"
     }
 }
