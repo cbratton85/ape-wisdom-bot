@@ -13219,5 +13219,86 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund will normally invest at least 90% of its net assets (including investment borrowings) in the securities that comprise the index. The index seeks to measure the performance of equity securities of the 100 typically largest and most liquid initial public offerings (\"IPOs\") (including spin-offs and equity carve-outs) of U.S. companies. It is non-diversified."
+    },
+    "SNP": {
+        "ticker": "SNP",
+        "name": "SNP",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "VXF": {
+        "ticker": "VXF",
+        "name": "Vanguard Extended Market ETF",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 36642578432,
+        "currency": "USD",
+        "description": "The fund employs an indexing investment approach designed to track the performance of S&P Completion Index, a broadly diversified index of stocks of small and mid-size U.S. companies. It invests by sampling the index, meaning that it holds a broadly diversified collection of securities that, in the aggregate, approximates the full index in terms of key characteristics. These characteristics include industry weightings and market capitalization, as well as certain financial measures, such as price/earnings ratio and dividend yield."
+    },
+    "WHLR": {
+        "ticker": "WHLR",
+        "name": "Wheeler Real Estate Investment ",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 3307524,
+        "currency": "USD",
+        "description": "Headquartered in Virginia Beach, Virginia, Wheeler Real Estate Investment Trust, Inc. (Nasdaq: WHLR) is a fully integrated, self-managed commercial real estate investment company focused on owning, leasing and operating income-producing retail properties with a primary focus on grocery-anchored centers. WHLR's portfolio contains well-located, potentially dominant retail properties in secondary and tertiary markets that generate attractive, risk adjusted returns. WHLR's common stock, Series B convertible preferred stock (\"Series B Preferred Stock\" and, together with the Series D Preferred Stock, the \"Preferred Stock\"), Series D Preferred Stock, and Convertible Notes trade publicly on Nasdaq under the symbols \"WHLR\", \"WHLRP\", \"WHLRD\", and \"WHLRL\", respectively."
+    },
+    "FPI": {
+        "ticker": "FPI",
+        "name": "Farmland Partners Inc.",
+        "meta": "REIT - Specialty",
+        "type": "EQUITY",
+        "mcap": 521444384,
+        "currency": "USD",
+        "description": "Farmland Partners Inc. is an internally managed real estate company that owns and seeks to acquire high-quality North American farmland and makes loans to third-party farmers (both tenant and non-tenant) and landowners secured by farm real estate and/or other agricultural related assets. As of September 30, 2025, the Company owned and/or managed approximately 125,200 acres of farmland in 15 states, including Arkansas, California, Colorado, Illinois, Indiana, Iowa, Louisiana, Mississippi, Missouri, Nebraska, North Carolina, Ohio, South Carolina, Texas and West Virginia. In addition, the Company owns land and buildings for four agriculture equipment dealerships in Ohio leased to Ag Pro under the John Deere brand. The Company elected to be taxed as a real estate investment trust, or REIT, for U.S. federal income tax purposes, commencing with the taxable year ended December 31, 2014."
+    },
+    "WDIV": {
+        "ticker": "WDIV",
+        "name": "SPDR S&P Global Dividend",
+        "meta": "Global Large-Stock Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index and in depositary receipts based on securities comprising the index. The index is designed to measure the performance of high dividend-yield companies included in the S&P Global BMI that have followed a managed-dividends policy of increasing or stable dividends for at least ten consecutive years."
+    },
+    "LAND": {
+        "ticker": "LAND",
+        "name": "Gladstone Land Corporation",
+        "meta": "REIT - Specialty",
+        "type": "EQUITY",
+        "mcap": 415525152,
+        "currency": "USD",
+        "description": "Gladstone Land Corporation is a publicly traded real estate investment trust that acquires and owns farmland and farm-related properties located in major agricultural markets in the U.S. The Company currently owns 150 farms, comprised of approximately 103,000 acres in 15 different states and over 55,000 acre-feet of water assets in California. Gladstone Land's farms are predominantly located in regions where its tenants are able to grow fresh produce annual row crops, such as berries and vegetables, which are generally planted and harvested annually. The Company also owns farms growing permanent crops, such as almonds, blueberries, figs, olives, pistachios, and wine grapes, which are generally planted every 20-plus years and harvested annually. Over 30% of the Company's fresh produce acreage is either organic or in transition to become organic, and nearly 20% of its permanent crop acreage falls into this category. Gladstone Land pays monthly distributions to its stockholders and has paid 150 consecutive monthly cash distributions on its common stock since its initial public offering in January 2013. The current per-share distribution on its common stock is $0.0467 per month, or $0.5604 per year. Gladstone Land Corporation was founded in 1997."
+    },
+    "STI": {
+        "ticker": "STI",
+        "name": "Solidion Technology, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 53017404,
+        "currency": "USD",
+        "description": "Solidion Technology, Inc. focuses on the development and commercialization of battery materials, components, cells, and selected module/pack technologies. It provides advanced anode materials, silicon-rich all-solid-state lithium-ion cells, anode less lithium metal cells, and lithium-sulfur cells. The company is headquartered in Dallas, Texas. Solidion Technology, Inc. is a subsidiary of Global Graphene Group, Inc."
+    },
+    "PLAB": {
+        "ticker": "PLAB",
+        "name": "Photronics, Inc.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 2041864576,
+        "currency": "USD",
+        "description": "Photronics, Inc., together with its subsidiaries, engages in the manufacture and sale of photomask products and services in the United States, Taiwan, China, Korea, Europe, and internationally. It offers photomasks that are used in the manufacture of integrated circuits and flat panel displays (FPDs); and to transfer circuit patterns onto semiconductor wafers, and FDP substrates. The company also provides electrical and optical components. It sells its products to semiconductor and FPD designers, manufacturers, and foundries through its sales personnel and customer service representatives. The company was formerly known as Photronic Labs, Inc. and changed its name to Photronics, Inc. in 1990. Photronics, Inc. was incorporated in 1969 and is based in Brookfield, Connecticut."
+    },
+    "HOPE": {
+        "ticker": "HOPE",
+        "name": "Hope Bancorp, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 1535855744,
+        "currency": "USD",
+        "description": "Hope Bancorp, Inc. operates as the bank holding company for Bank of Hope that provides retail and commercial banking services for businesses and individuals in the United States. It accepts personal and business checking, money market, savings, time deposit, and individual retirement accounts. The company offers loans comprising commercial and industrial loans to businesses for various purposes, such as working capital, purchasing inventory, debt refinancing, business acquisitions, international trade finance, other business-related financing, and loans syndication services; commercial real estate loans; residential mortgage loans; small business administration loans; and consumer loans, such as single-family mortgage, home equity, automobile, credit card, and personal loans. In addition, it provides internet banking and bill-pay, remote deposit capture, lock box, and ACH origination services; treasury management services; foreign currency exchange transactions; interest rate contracts and wealth management services; automated teller machine services; and engages in investment activities. Hope Bancorp, Inc. was founded in 1986 and is headquartered in Los Angeles, California."
     }
 }
