@@ -13300,5 +13300,23 @@
         "mcap": 1535855744,
         "currency": "USD",
         "description": "Hope Bancorp, Inc. operates as the bank holding company for Bank of Hope that provides retail and commercial banking services for businesses and individuals in the United States. It accepts personal and business checking, money market, savings, time deposit, and individual retirement accounts. The company offers loans comprising commercial and industrial loans to businesses for various purposes, such as working capital, purchasing inventory, debt refinancing, business acquisitions, international trade finance, other business-related financing, and loans syndication services; commercial real estate loans; residential mortgage loans; small business administration loans; and consumer loans, such as single-family mortgage, home equity, automobile, credit card, and personal loans. In addition, it provides internet banking and bill-pay, remote deposit capture, lock box, and ACH origination services; treasury management services; foreign currency exchange transactions; interest rate contracts and wealth management services; automated teller machine services; and engages in investment activities. Hope Bancorp, Inc. was founded in 1986 and is headquartered in Los Angeles, California."
+    },
+    "PDBC": {
+        "ticker": "PDBC",
+        "name": "Invesco Optimum Yield Diversifi",
+        "meta": "Commodities Broad Basket",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund is an actively managed exchange-traded fund (\"ETF\") that seeks to achieve its investment objective by investing in a combination of financial instruments that are economically linked to the world's most heavily traded commodities. Commodities are assets that have tangible properties, such as oil, agricultural produce or raw metals."
+    },
+    "TGIF": {
+        "ticker": "TGIF",
+        "name": "SoFi Weekly Income ETF",
+        "meta": "Multisector Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund is an actively-managed exchange-traded fund (\"ETF\") that seeks to achieve its investment objective, under normal circumstances, by investing in U.S.-dollar denominated investment grade and non-investment grade (also known as \"high-yield\" or \"junk\") fixed income securities and instruments and expects to distribute income from its investments to shareholders weekly. It may invest in a variety of fixed income instruments with a fixed or floating (variable) interest rate. The fund is non-diversified."
     }
 }
