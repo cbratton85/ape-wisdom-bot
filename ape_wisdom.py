@@ -352,14 +352,26 @@ def filter_and_process(stocks):
             m = tracker.get_metrics(t, float(curr_p), m_perc, rank_plus, current_upvotes)
 
             final_list.append({
-                "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
-                "Price": float(curr_p), "AvgVol": int(avg_v),
-                "Surge": s_perc, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
-                "Upvotes": current_upvotes, "Meta": info.get('meta', '-'),
-                "Desc": info.get('description', ''),   # <--- ADD THIS LINE
-                "Squeeze": squeeze_score, "MCap": mcap, "Conv": conviction, "Eff": efficiency,
-                "Accel": m['accel'], "Upv+": m['upv_chg'], "Velocity": m['vel'],
-                "Streak": m['streak'], "Rolling": m['rolling_trend']
+                "Rank": rank_now,
+                "Name": name, "Sym": t,
+                "Rank+": rank_plus,
+                "Price": float(curr_p),
+                "AvgVol": int(avg_v),
+                "Surge": s_perc,
+                "MENT": cur_m,
+                "Mnt%": m_perc,
+                "Type": info.get('type', 'EQUITY'),
+                "Upvotes": current_upvotes,
+                "Meta": info.get('meta', '-'),
+                "Desc": info.get('description', ''),
+                "Squeeze": squeeze_score,
+                "MCap": mcap, "Conv": conviction, "Eff": efficiency,
+                "Accel": m['accel'],
+                "Upv+": m['upv_chg'],
+                "Velocity": m['vel'],
+                "Streak": m['streak'],
+                "Rolling": m['rolling_trend']
+                
             })
             
         except Exception as e:
@@ -372,8 +384,8 @@ def filter_and_process(stocks):
         df = df.drop_duplicates(subset=['Sym'], keep='first')
 
     if not df.empty:
-        cols = ['Rank+', 'Surge', 'Mnt%', 'Upvotes', 'Accel', 'Upv+']
-        weights = {'Rank+': 1.1, 'Surge': 1.1, 'Mnt%': 0.7, 'Upvotes': 1.0, 'Accel': 1.2, 'Upv+': 1.0}
+        cols = ['Rank+', 'Surge', 'Mnt%', 'Upvotes', 'Accel', 'Upv+', 'MENT']
+        weights = {'Rank+': 1.1, 'Surge': 1.1, 'Mnt%': 0.7, 'Upvotes': 1.0, 'Accel': 1.2, 'Upv+': 1.0, 'MENT': 0.8}
         
         for col in cols:
             clean_series = df[col].clip(lower=0).astype(float)
@@ -448,6 +460,21 @@ def export_interactive_html(df, ai_summary=""):
         if 'AvgVol' not in export_df.columns: export_df['AvgVol'] = 0
         export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
         export_df['Type_Tag'] = 'STOCK'
+
+        # CHANGE: Color MENT based on Z-Score
+        # Logic: Yellow = Explosive (>2 sigma), Green = High (>1 sigma), White = Normal
+        if 'MENT' not in export_df.columns: export_df['MENT'] = 0
+        
+        for index, row in export_df.iterrows():
+            m_val = row.get('MENT', 0)
+            z_score = row.get('z_MENT', 0)
+            
+            if z_score >= 2.0: m_clr = "#ffff00"      # Yellow (Very Hot)
+            elif z_score >= 1.0: m_clr = "#00ff00"    # Green (Hot)
+            else: m_clr = "#ffffff"                   # White (Normal)
+            
+            # Format with commas AND color
+            export_df.at[index, 'MENT'] = color_span(f"{int(m_val)}", m_clr)
 
         # --- ROW-BY-ROW FORMATTING ---
         for index, row in export_df.iterrows():
@@ -556,13 +583,14 @@ def export_interactive_html(df, ai_summary=""):
         # Javascript DataTables relies on this exact index order
         cols = [
             'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Acc', 'Eff', 'Conv', 'Upvs', 
-            'Upv+', 'Vol', 'Srg', 'Vel', 'Strk', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 
+            'Upv+', 'Vol', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 
             'Type_Tag', 'AvgVol', 'MCap'
         ]
         
         # Safety fill
         for c in cols:
-            if c not in export_df.columns: export_df[c] = 0
+            if c not in export_df.columns:
+                export_df[c] = 0
 
         final_df = export_df[cols]
         
@@ -576,7 +604,7 @@ def export_interactive_html(df, ai_summary=""):
             <div class="ai-box-wrapper" style="margin-bottom: 15px;">
                 <div style="background: #18181b; border: 1px solid #00ff00; border-radius: 5px; box-shadow: 0 4px 15px rgba(0,255,0,0.1);">
                     <div onclick="toggleAI()" style="padding: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: #2a2a2a; border-bottom: 1px solid #333; font-weight: bold; color: #fff; font-size: 0.85rem; text-transform: uppercase;">
-                        <span style="color: #00ff00;">✨ Gemini AI Intelligence Report (CLICK TO TOGGLE)</span>
+                        <span style="color: #00ff00;">✨ Google Gemini AI Report (CLICK TO TOGGLE)</span>
                         <span id="aiArrow" style="color: #00ff00;">▼</span>
                     </div>
                     <div id="aiContent" style="display: none; padding: 15px; color: #e0e0e0; font-size: 14px; line-height: 1.6; white-space: pre-wrap; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">{ai_summary}</div>
@@ -606,7 +634,7 @@ def export_interactive_html(df, ai_summary=""):
             }}
             
             /* Column Widths */
-            th:nth-child(1), td:nth-child(1) {{ width: 1% !important; text-align: center; }} 
+            th:nth-child(1), td:nth-child(1) {{ width: 1% !important; text-align: center; font-weight: bold; }} 
             th:nth-child(2), td:nth-child(2) {{ width: 1% !important; text-align: center; }}
             th:nth-child(3), td:nth-child(3) {{ width: 1% !important; text-align: center; font-weight: bold; }}
             th:nth-child(4), td:nth-child(4) {{
@@ -630,7 +658,8 @@ def export_interactive_html(df, ai_summary=""):
             th:nth-child(15), td:nth-child(15) {{ width: 1% !important; text-align: center; }}
             th:nth-child(16), td:nth-child(16) {{ width: 1% !important; text-align: center; }}
             th:nth-child(17), td:nth-child(17) {{ width: 1% !important; text-align: center; }}
-            th:nth-child(18), td:nth-child(18) {{
+            th:nth-child(18), td:nth-child(18) {{ width: 1% !important; text-align: center; }}
+            th:nth-child(19), td:nth-child(19) {{
                 width: 1% !important;
                 text-align: left !important;
                 white-space: nowrap !important;
@@ -639,7 +668,7 @@ def export_interactive_html(df, ai_summary=""):
                 border-right: 1px solid #333 !important;
                 overflow: hidden !important;
                 }}
-            
+                
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
             table.no-colors a {{ color: #4da6ff !important; }}
@@ -715,25 +744,25 @@ def export_interactive_html(df, ai_summary=""):
                 <div class="filter-group">
                     <div class="btn-group" role="group" style="margin-right: 10px;">
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio1" style="font-size: 0.75rem; padding: 2px 6px;">All</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio1" style="font-size: 0.75rem; padding: 4px 6px;">All</label>
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio2" onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio2" style="font-size: 0.75rem; padding: 2px 6px;">Stocks</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio2" style="font-size: 0.75rem; padding: 4px 6px;">Stocks</label>
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio3" onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio3" style="font-size: 0.75rem; padding: 2px 6px;">ETFs</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio3" style="font-size: 0.75rem; padding: 4px 6px;">ETFs</label>
                     </div>
                     <div class="btn-group" role="group">
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapAll" checked onclick="toggleMcap('all')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapAll" style="font-size: 0.75rem; padding: 2px 6px;">All</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapAll" style="font-size: 0.75rem; padding: 4px 6px;">All</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMega" onclick="toggleMcap('mega')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.75rem; padding: 2px 6px;" title="> $200B">Mega</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.75rem; padding: 4px 6px;" title="> $200B">Mega</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapLarge" onclick="toggleMcap('large')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.75rem; padding: 2px 6px;" title="$10B - $200B">Large</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.75rem; padding: 4px 6px;" title="$10B - $200B">Large</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMid" onclick="toggleMcap('mid')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.75rem; padding: 2px 6px;" title="$2B - $10B">Mid</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.75rem; padding: 4px 6px;" title="$2B - $10B">Mid</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapSmall" onclick="toggleMcap('small')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.75rem; padding: 2px 6px;" title="$250M - $2B">Small</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.75rem; padding: 4px 6px;" title="$250M - $2B">Small</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMicro" onclick="toggleMcap('micro')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.75rem; padding: 2px 6px;" title="< $250M">Micro</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.75rem; padding: 4px 6px;" title="< $250M">Micro</label>
                     </div>
                 </div>
                 <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">Download TXT File</button>
@@ -760,6 +789,7 @@ def export_interactive_html(df, ai_summary=""):
                             <div class="legend-row"><span class="metric-name">SRG</span><span class="metric-math">(Vol / Avg) * 100</span><span class="metric-desc">Surge: Current volume as % of 30-day Avg.</span></div>
                             <div class="legend-row"><span class="metric-name">VEL</span><span class="metric-math">Rank+(Today) - Rank+(Yest)</span><span class="metric-desc">Velocity: Change in climb speed?</span></div>
                             <div class="legend-row"><span class="metric-name">STRK</span><span class="metric-math">Consecutive Days</span><span class="metric-desc">Streak: Number of script runs sustaining direction.</span></div>
+                            <div class="legend-row"><span class="metric-name">MENT</span><span class="metric-math">Raw Count</span><span class="metric-desc">Total mentions in last 24h.</span></div>
                             <div class="legend-row"><span class="metric-name">MNT%</span><span class="metric-math">% Change</span><span class="metric-desc">Percent change in mentions vs 24h ago.</span></div>
                             <div class="legend-row"><span class="metric-name">SQZ</span><span class="metric-math">Mnt * Surge / log(MCap)</span><span class="metric-desc">Short Squeeze Score (Vol+Chatter/Cap).</span></div>
                         </div>
@@ -777,6 +807,7 @@ def export_interactive_html(df, ai_summary=""):
                             <div class="legend-row"><span class="color-key">SRG</span><span class="color-desc"><span style="color:#ffff00">Yellow</span> (Anomaly > 2σ), <span style="color:#00ff00">Green</span> (High > 1σ).</span></div>
                             <div class="legend-row"><span class="color-key">VEL</span><span class="color-desc"><span style="color:#00ff00">Green</span> (Speeding Up), <span style="color:#ff4444">Red</span> (Slowing).</span></div>
                             <div class="legend-row"><span class="color-key">STRK</span><span class="color-desc"><span style="color:#00ff00">Green</span> (3+ Runs.), <span style="color:#ff4444">Red</span> (Reversing).</span></div>
+                            <div class="legend-row"><span class="color-key">MENT</span><span class="color-desc"><span style="color:#ffff00">Yellow</span> (Explosive > 2σ), <span style="color:#00ff00">Green</span> (High > 1σ).</span></div>
                             <div class="legend-row"><span class="color-key">MNT%</span><span class="color-desc"><span style="color:#ffff00">Yellow</span> (> 2σ), <span style="color:#00ff00">Green</span> (> 1σ).</span></div>
                             <div class="legend-row"><span class="color-key">SQZ</span><span class="color-desc"><span style="color:#00ffff">Cyan</span> (Score > 1.5σ), White (Normal).</span></div>
                         </div>
@@ -831,8 +862,8 @@ def export_interactive_html(df, ai_summary=""):
                 "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 "pageLength": 25,
                 "columnDefs": [
-                    {{ "visible": false, "targets": [18, 19, 20] }},
-                    {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], "type": "num", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,x]/g, ''); return parseVal(clean); }} return data; }} }}
+                    {{ "visible": false, "targets": [19, 20, 21] }},
+                    {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], "type": "num", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,x]/g, ''); return parseVal(clean); }} return data; }} }}
                 ],
                 "drawCallback": function() {{ var api = this.api(); $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); }}
             }});
@@ -921,196 +952,93 @@ def send_discord_link(filename, ai_summary):
         print(f"{C_RED}[!] Exception sending Discord link: {e}{C_RESET}")
 
 def get_ai_analysis(df, history_data):
+    print("--- Starting AI Analysis (Holistic) ---")
     api_key = os.environ.get('GEMINI_API_KEY')
     if not api_key:
         return "AI analysis skipped: No API key."
 
     try:
+        # 1. Setup Client
         client = genai.Client(api_key=api_key)
         target_model = 'gemini-2.0-flash'
         try:
- 
             for m in client.models.list():
                 if 'flash' in m.name.lower() and 'gemini' in m.name.lower():
-                    target_model = m.name.split('/')[-1];
-                    break
+                    target_model = m.name.split('/')[-1]; break
         except: pass
         print(f"🤖 Connected to AI Model: {target_model}")
-
     except Exception as e:
         return f"AI Setup Failed: {e}"
 
-    # --- DATA PREPARATION ---
-    ai_df = df.reset_index(drop=True).copy()
-    ai_df = ai_df.loc[:, ~ai_df.columns.duplicated()]
+    # 2. Data Preparation
+    try:
+        ai_df = df.reset_index(drop=True).copy()
+        ai_df = ai_df.loc[:, ~ai_df.columns.duplicated()]
         
-    # Standardize Names for AI
-    mapping = {
-        'Surge': 'Srg', 'Master_Score': 'Heat', 'Accel': 'Acc', 
-        'Velocity': 'Vel', 'Rolling': 'Strk', 'Upvotes': 'Upvs',
-        'Squeeze': 'Sqz'
+        # Standardize Names
+        mapping = {
+            'Surge': 'Srg', 'Master_Score': 'Heat', 'Accel': 'Acc', 
+            'Velocity': 'Vel', 'Rolling': 'Strk', 'Upvotes': 'Upvs',
+            'Squeeze': 'Sqz'
         }
-
-    ai_df.rename(columns=mapping, inplace=True)
+        ai_df.rename(columns=mapping, inplace=True)
         
-    # --- GOD MODE: ADDED 'Eff' (Efficiency) FOR RULE #5 ---
-    cols_for_ai = ['Sym', 'Rank', 'Price', 'Srg', 'Vel', 'Acc', 'Strk', 'Upv+', 'Eff', 'Heat', 'Sqz']
+        # Define columns we want the AI to see
+        cols_needed = ['Sym', 'Rank', 'Price', 'Srg', 'Vel', 'Acc', 'Strk', 'Upvs', 'Eff', 'Heat', 'Sqz', 'Industry', 'Conv']
         
-    # Safety fill for missing cols
-    for c in cols_for_ai:
-        if c not in ai_df.columns: ai_df[c] = 0
+        # Safety fill
+        for c in cols_needed:
+            if c not in ai_df.columns: ai_df[c] = 0
 
-    # --- 1. DEFINE COLUMNS FOR ELITE ANALYST ---
-    # We explicitly grab the columns the prompt asks for:
-    # Rank, Heat, Ticker, Price, Acc, Eff, Conv, VolSrg, Vel, Sqz, Sector
-    cols_for_ai = ['Rank', 'Heat', 'Sym', 'Price', 'Acc', 'Eff', 'Conv', 'Srg', 'Vel', 'VolSqz', 'Industry']
+        # Create the Full Table (Top 60)
+        valid_cols = [c for c in cols_needed if c in ai_df.columns]
+        full_table = ai_df.head(60)[valid_cols].to_string(index=False)
+
+        # 3. Define Prompt
+        prompt = f"""
+        You are a Senior Market Analyst. I am providing you with a raw data table of the Top 60 Trending Assets right now.
         
-    # Safety: Only use columns that actually exist in your dataframe
-    valid_cols = [c for c in cols_for_ai if c in df.columns]
-
-    # --- DATASET 1: LEADERS (Top 10) ---
-    leaders_df = ai_df.head(10)[valid_cols]
-    leaders_str = leaders_df.to_string(index=False)
-
-    # --- DATASET 2: DEEP SCAN (Stealth/Squeeze) ---
-    rest_of_market = ai_df.iloc[10:].copy()
-        
-    # UPDATED FILTER: Now looks for Squeeze (Sqz) OR high Surge (Srg)
-    stealth_candidates = rest_of_market[ 
-        (rest_of_market['Sqz'] > 50) |       # High Squeeze Score
-        (rest_of_market['Srg'] > 100) |      # Volume Surge
-        (rest_of_market['Vel'] >= 2.5)       # High Velocity
-    ].sort_values(by='Heat', ascending=False).head(8) # Increased to 8 to give AI more options
-        
-    if not stealth_candidates.empty:
-        stealth_str = stealth_candidates[valid_cols].to_string(index=False)
-    else:
-         stealth_str = "No stealth anomalies detected."
-
-    # --- DATASET 3: 3-HOUR FORENSIC HISTORY (Formatted as Table) ---
-    top_20 = df.head(20)['Sym'].tolist()
-    history_rows = []
-        
-    for ticker in top_20:
-        if ticker in history_data:
-            # Sort snapshots by time
-            snapshots = sorted(history_data[ticker].items())
-        
-            if len(snapshots) > 1:
-                curr = snapshots[-1][1]
-
-        # --- CONFIGURATION: 24-Hour Lookback (1h intervals) ---
-        # 1 snapshot/hour * 24 = 24 snapshots.
-        target_lookback = 24  
-            
-        # Calculate the index for "Yesterday at this time"
-        prev_idx = len(snapshots) - 1 - target_lookback
-            
-        # Safety Check: If data is younger than 24h, grab the oldest available
-        if prev_idx < 0:
-            prev = snapshots[0][1]
-            time_label = "Since Start" 
-        else:
-             prev = snapshots[prev_idx][1]
-             time_label = "24h Delta"
-
-        p_now = curr.get('price', 0)
-        p_old = prev.get('price', 0)
-
-        # 1. Price Delta %
-        if p_old > 0:
-             price_delta = round(((p_now - p_old) / p_old * 100), 2)
-        else:
-             price_delta = 0.0
-
-        # 2. Rank Delta (Positive = Improved Rank, e.g., 50 -> 10 = +40)
-        rank_delta = prev.get('rank', 0) - curr.get('rank', 0)
-
-        # 3. Volume Trend Detection (Ignition vs Exhaustion)
-        srg_now = curr.get('srg', 0) > 100  # Is volume surging NOW?
-        srg_old = prev.get('srg', 0) > 100  # Was volume surging 24h ago?
-
-        if srg_now and not srg_old:
-            vol_status = "IGNITION"      # Low -> High (New Trend)
-        elif srg_now and srg_old:
-            vol_status = "SUSTAINED"     # High -> High (Strong Trend)
-        elif not srg_now and srg_old:
-            vol_status = "EXHAUSTION"    # High -> Low (Trend Dying)
-        else:
-            vol_status = "Quiet"         # Low -> Low (No Interest)
-
-        history_rows.append({
-            "Sym": ticker,
-            "Timeframe": time_label,
-            "Price_Change": f"{price_delta:+}%",     # Adds '+' for positive numbers
-            "Rank_Delta": f"{rank_delta:+}",         # Adds '+' for rank improvement
-            "Vol_Trend": vol_status
-            })
-
-    # Convert list to a clean String Table for the AI
-    history_df = pd.DataFrame(history_rows)
-
-    if not history_df.empty:
-        comparison_context = history_df.to_string(index=False)
-    else:
-        comparison_context = "No historical data available."
-
-    # --- THE UPDATED QUANT ANALYST PROMPT ---
-    prompt = f"""
-        SYSTEM CONFIGURATION:
-        Identity: Senior Swing Trading Strategist (Timeframe: 1-Hour Candles / 24-Hour Lookback).
-        Brevity Constraint: TELEGRAPHIC STYLE. Bullet points. No fluff.
-        Goal: Synthesize "Now" (Leaders) vs. "Yesterday" (History) to find Trend Changes.
-            
         INPUT DATA:
-        SNAPSHOT 1 (CURRENT LEADERS): 
-        {leaders_str}
-            
-        SNAPSHOT 2 (STEALTH & OUTLIERS): 
-        {stealth_str}
-            
-        SNAPSHOT 3 (24-HOUR CHANGE & CYCLE ANALYSIS): 
-        {comparison_context}
-              
-        COLUMNS KEY: 
-        Rank, Heat, Sym, Price, Acc (Acceleration), Eff (Efficiency), Conv (Conviction), VolSrg (Volume Surge/RVOL), Vel (Velocity), Sqz (Volatility Squeeze).
-            
-        HISTORY KEYS (Snapshot 3):
-        * Rank_Delta: (+20 means stock jumped 20 spots higher vs 24h ago).
-        * Vol_Trend: 
-            - "IGNITION": Vol was low yesterday -> High today (BUY WATCH).
-            - "SUSTAINED": Vol was high yesterday -> High today (MOMENTUM).
-            - "EXHAUSTION": Vol was high yesterday -> Low today (TAKE PROFIT).
-            
-        EXECUTION PROTOCOL:
-        1. Scan Snapshot 3 for "IGNITION": These are new moves starting TODAY.
-        2. Scan Snapshot 3 for "Rank_Delta > +10": These are stocks aggressively taking market share.
-        3. Cross-Reference Snapshot 2 (Stealth): If a stock is in Stealth AND has "Ignition" in History, it is a Top Pick.
-        4. Sector Check: Group tickers by industry. Are all Gold/Semi/Software stocks moving together?
-            
-        REPORT FORMAT:
-        # 🌅 24-HOUR MARKET SHIFT REPORT
-            
-        ## 1. 🚀 TREND IGNITION (New Moves Starting Now)
-        * **[Ticker] ([Sector]):** Rank Change: [Rank_Delta] | Status: IGNITION
-            * *Insight:* [Why is this moving? e.g., "Fresh volume surge + Efficiency breakout."]
-            
-        ## 2. 📉 MOMENTUM EXHAUSTION (Fade/Sell Watch)
-        * **[Ticker]:** Rank Change: [Rank_Delta] | Status: EXHAUSTION
-             * *Insight:* [e.g., "Price flat but volume died vs yesterday. Sellers absorbing."]
-            
-        ## 3. 🦁 MARKET LEADERSHIP (Sustained Strength)
-        * **[Top Sector]:** [List Tickers]
-        * **[Top Stock]:** [Ticker with highest combined Heat + Rank Improvement]
-            
-        ## 4. 🕵️ STEALTH ANOMALIES (From Snapshot 2)
-            * **[Ticker]:** [Specific stat anomaly, e.g. "Squeeze Score > 80 with rising Rank"]
+        {full_table}
+        
+        COLUMN DEFINITIONS:
+        * Rank: Popularity Rank (1 is highest).
+        * Heat: Composite Momentum Score.
+        * Srg (Surge): Volume % vs 30-day Avg (>100 is double volume).
+        * Vel (Velocity): Speed of rank climbing.
+        * Eff (Efficiency): Rank gain per unit of volume.
+        * Sqz (Squeeze): Short Squeeze Risk Score.
+        * Conv (Conviction): Upvotes per Mention (High = Bullish agreement).
+        
+        TASK:
+        Look at the entire table. Ignore the noise. Identify the "Narrative" of the market right now.
+        
+        REPORT FORMAT (Bullet points, Telegraphic style):
+        
+        ## 🌍 MACRO TEXTURE
+        * (One sentence summary: Is the market chasing Tech? Memes? Biotech? Or is it fearful?)
+        
+        ## 💎 UNUSUAL OUTLIERS (What stands out?)
+        * **[Ticker]:** [Value] (e.g. "Srg is 400%", or "Conviction is 50x")
+          * *Analysis:* Why is this outlier important?
+        
+        ## 🏭 SECTOR ROTATION
+        * Which industries are dominating the top 20? (e.g. "7 out of Top 20 are Semis")
+        
+        ## 🦁 BEST OF BREED (The single strongest chart)
+        * **[Ticker]:** Why did you pick this one over the others?
         """
 
-    response = client.models.generate_content(model=target_model, contents=prompt)
-    # Cleaning the text to ensure it goes straight to the report content
-    clean_text = response.text.replace("Here is the briefing:", "").replace("## Intelligence Brief", "").strip()
-    return clean_text
+        # 4. Run AI
+        response = client.models.generate_content(model=target_model, contents=prompt)
+        
+        if response.text:
+            return response.text.replace("Here is the briefing:", "").replace("## Intelligence Brief", "").strip()
+        else:
+            return "AI returned empty response."
+
+    except Exception as e:
+        return f"AI Analysis Failed: {str(e)}"
 
 if __name__ == "__main__":
     if "--auto" in sys.argv:
