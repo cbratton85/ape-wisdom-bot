@@ -12319,5 +12319,68 @@
         "mcap": 67048345600,
         "currency": "USD",
         "description": "Republic Services, Inc., together with its subsidiaries, offers environmental services in the United States and Canada. It is involved in the collection and processing of recyclable, solid waste, and industrial waste materials; transportation and disposal of non-hazardous and hazardous waste streams; and other environmental solutions. Its residential collection services include curbside collection of material for transport to transfer stations, landfills, recycling centers, and organics processing facilities; supply of recycling and waste containers; and renting of compactors. The company also engages in the processing and sale of old corrugated containers, old newsprint, aluminum, glass, and other materials; and provision of landfill services. It serves small-container, large-container, and residential customers. The company was incorporated in 1996 and is based in Phoenix, Arizona."
+    },
+    "AVUS": {
+        "ticker": "AVUS",
+        "name": "Avantis U.S. Equity ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests primarily in a diverse group of U.S. companies across market sectors and industry groups. It may invest in companies of all market capitalizations. Under normal market conditions, the fund will invest at least 80% of its assets in equity securities of U.S. companies. It also may invest in derivative instruments such as futures contracts, currency forwards, and swap agreements."
+    },
+    "PNC": {
+        "ticker": "PNC",
+        "name": "PNC Financial Services Group, I",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 90752294912,
+        "currency": "USD",
+        "description": "The PNC Financial Services Group, Inc. operates as a diversified financial services company in the United States. It operates through three segments: Retail Banking, Corporate & Institutional Banking, and Asset Management Group segments. The Retail Banking segment offers checking, savings, and money market accounts, and time deposit; residential mortgages, home equity loans and lines of credit, auto loans, credit cards, education loans, and personal and small business loans and lines of credit; and brokerage, insurance, and investment and cash management services. This segment serves consumer and small business customers through a network of branches, digital channels, ATMs, and through phone-based customer contact centers. The Corporate & Institutional Banking segment provides secured and unsecured loans, letters of credit, and equipment leases; cash and investment management, receivables and disbursement management, funds transfer, international payment, and access to online/mobile information management and reporting services; asset-backed financing, securities underwriting, loan syndications, mergers and acquisitions and equity capital markets advisory, and customer related services; and commercial loan servicing and technology solutions. It serves mid-sized and large corporations, and government and not-for-profit entities. The Asset Management Group segment offers investment and retirement planning, customized investment management, credit and cash management solutions, and trust management and administration services for high net worth and ultra high net worth individuals, and their families; and multi-generational family planning services. It also provides outsourced chief investment officer, custody, cash and fixed income client solutions, and retirement plan fiduciary investment services for institutional clients. The company was founded in 1865 and is headquartered in Pittsburgh, Pennsylvania."
+    },
+    "MSGE": {
+        "ticker": "MSGE",
+        "name": "Madison Square Garden Entertain",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 2933561344,
+        "currency": "USD",
+        "description": "Madison Square Garden Entertainment Corp., through its subsidiaries, engages in live entertainment business. The company produces, presents, and hosts live entertainment events, such as concerts, sporting events, family shows, family shows, performing arts events, and special events. It holds a portfolio of venues that include Madison Square Garden, The Theater at Madison Square Garden, Radio City Music Hall, the Beacon Theatre, and The Chicago Theatre. The company also owns and produces the original production, the Christmas Spectacular Starring the Radio City Rockettes. In addition, it engages in the entertainment and sports bookings business that showcase a range of concerts, family shows, and special events, as well as various sporting events. The company was formerly known as MSGE Spinco, Inc. Madison Square Garden Entertainment Corp. was incorporated in 2022 and is based in New York, New York."
+    },
+    "ASNS": {
+        "ticker": "ASNS",
+        "name": "Actelis Networks, Inc.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 3862387,
+        "currency": "USD",
+        "description": "Actelis Networks, Inc. engages in the design, development, manufacture, and marketing of cyber hardened, hybrid fiber, networking solutions for Internet of Things and telecommunication governmental agencies and companies in North America, Europe, the Middle East, Africa, and the Asia Pacific. The company offers rapid-deployment networking solutions for wide-area IoT applications, including federal, state, and local governments; intelligent traffic systems; and military, utility, rail, telecom, and campus applications. It also provides ethernet access devices; network aggregator switches; MetaShield; and Advanced MetaLIGHT/ Gigaline element management systems software, which enables remote management, monitoring, maintenance, and configuration of the installed equipment in the network. In addition, the company offers dynamic spectral software; and access broadband equipment. It serves offers its products to end users, system integrators, distributors, contractors, resellers, and consultants. Actelis Networks, Inc. was incorporated in 1998 and is headquartered in Fremont, California."
+    },
+    "OVID": {
+        "ticker": "OVID",
+        "name": "Ovid Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 110379144,
+        "currency": "USD",
+        "description": "Ovid Therapeutics Inc., a biopharmaceutical company, engages in the development of impactful medicines for patients and families with epilepsies and seizure-related neurological disorders in the United States. The company is developing OV329, a GABA-AT inhibitor which is in Phase 1 clinical trials for the treatment of adult and pediatric drug-resistant epilepsies; and OV350, a small molecule direct activator of the KCC2 transporter, which is in Phase 1 clinical trials for treating epilepsies. It develops OV350 IV, OV4071, and OV4041, an oral program that behave similarly in phenotypical screens for the treatment of psychosis in people with NSD and LBD; and OV888 (GV101), a highly selective rock2 inhibitor which is in Phase 1 double-blind multiple-ascending dose trial. The company has license and collaboration agreements with Healx, AstraZeneca AB, H. Lundbeck A/S, Northwestern University, and Graviton, as well as Marinus Pharmaceuticals, Inc. The company was incorporated in 2014 and is headquartered in New York, New York."
+    },
+    "INOD": {
+        "ticker": "INOD",
+        "name": "Innodata Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 2034640384,
+        "currency": "USD",
+        "description": "Innodata Inc. operates as a data engineering company in the United States, the United Kingdom, the Netherlands, Canada, and internationally. The company operates through three segments: Digital Data Solutions (DDS), Synodex, and Agility. The DDS segment engages in the provision of artificial intelligence (AI) data preparation services; collecting or creating training data; annotating training data; and training AI algorithms for its customers, as well as AI model deployment and integration services. This segment also provides a range of data engineering support services, including data transformation, data curation, data hygiene, data consolidation, data extraction, data compliance, and master data management. The Synodex segment offers an industry platform that transforms medical records into useable digital data with its proprietary data models or client data models. The Agility segment provides an industry platform that offers marketing communications and public relations professionals to target and distribute content to journalists and social media influencers; and to monitor and analyze global news channels, such as print, web, radio, and TV, as well as social media channels. It serves banking, insurance, financial services, technology, digital retailing, and information/media sectors through its professional staff, senior management, and direct sales personnel. The company was formerly known as Innodata Isogen, Inc. and changed its name to Innodata Inc. in June 2012. Innodata Inc. was incorporated in 1988 and is headquartered in Ridgefield Park, New Jersey."
+    },
+    "IESC": {
+        "ticker": "IESC",
+        "name": "IES Holdings, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 9457786880,
+        "currency": "USD",
+        "description": "IES Holdings, Inc. designs and installs integrated electrical and technology systems and provides infrastructure products and services in the United States. The Communications segment designs, builds, and maintains communications infrastructure within data centers for co-location and managed hosting customers; corporate, educational, financial, hospitality, and healthcare buildings; e-commerce distribution centers; and high-tech manufacturing facilities. It also designs and installs audio/visual, telephone, fire, and wireless access and intrusion alarm systems; and engages in designing/building, servicing, and maintaining data network systems. The Residential segment offers electrical installations to single-family housing and multi-family apartments; heating, ventilation and air conditioning and plumbing installation services; and cable television installations to residential and light commercial applications, as well as installs residential solar power for new construction and existing residences. The Infrastructure Solutions segment maintains and repairs alternating and direct current electric motors and generators, and power generating and distribution equipment; manufactures custom-engineered metal enclosed bus duct solutions used in power distribution; manufactures custom commercial and industrial generator enclosures; manufactures, re-manufactures, and repairs industrial lifting magnets; and maintains and repairs railroad main and auxiliary generators, main alternators, and traction motors. The Commercial & Industrial segment offers electrical and mechanical design, construction, and maintenance services for office buildings, manufacturing facilities, data centers, wind farms, solar facilities, municipal infrastructures, and health care facilities. The company was formerly known as Integrated Electrical Services, Inc. and changed its name to IES Holdings, Inc. in May 2016. IES Holdings, Inc. was incorporated in 1997 and is headquartered in Sugar Land, Texas."
     }
 }
