@@ -408,18 +408,55 @@ def filter_and_process(stocks):
 
 def get_all_trending_stocks():
     all_results, page = [], 1
+    max_retries = 3
     print(f"{C_CYAN}--- API: Fetching list of trending stocks ---{C_RESET}")
+    
+    # Using a common browser header helps prevent 403 Forbidden errors
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    }
+
     while True:
-        try:
-            r = requests.get(f"https://apewisdom.io/api/v1.0/filter/all-stocks/page/{page}", timeout=10)
-            if r.status_code == 200:
-                data = r.json()
-                results = data.get('results', [])
-                if not results: break
-                all_results.extend(results)
-                page += 1
-            else: break
-        except: break
+        success = False
+        for attempt in range(max_retries):
+            try:
+                # Increased timeout to 20s as Ape Wisdom can be slow under load
+                r = requests.get(
+                    f"https://apewisdom.io/api/v1.0/filter/all-stocks/page/{page}", 
+                    headers=headers,
+                    timeout=20
+                )
+                
+                if r.status_code == 200:
+                    data = r.json()
+                    results = data.get('results', [])
+                    
+                    if not results:
+                        # End of pages reached
+                        return all_results
+                    
+                    all_results.extend(results)
+                    print(f"  > Page {page} fetched ({len(results)} items)")
+                    page += 1
+                    success = True
+                    break # Break retry loop, go to next page
+                
+                elif r.status_code == 429:
+                    print(f"{C_RED}Rate limited (429). Waiting to retry...{C_RESET}")
+                    time.sleep(10 * (attempt + 1))
+                else:
+                    print(f"{C_YELLOW}Warning: Page {page} returned status {r.status_code}{C_RESET}")
+                    time.sleep(2)
+
+            except Exception as e:
+                print(f"{C_RED}Error fetching page {page} (Attempt {attempt+1}/{max_retries}): {e}{C_RESET}")
+                time.sleep(5)
+        
+        # If we exhausted retries for a page without success, return what we have
+        if not success:
+            print(f"{C_RED}Critical: Failed to fetch page {page} after {max_retries} attempts.{C_RESET}")
+            break
+
     return all_results
 
 def export_interactive_html(df, ai_summary=""):
@@ -629,7 +666,9 @@ def export_interactive_html(df, ai_summary=""):
         #----------------------------------
 
         # NOTE: table-dark class + table-hover
-        table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
+        raw_table = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
+        table_html = f'<div class="table-scroll-container">{raw_table}</div>'
+
         utc_timestamp = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
         
         ai_box_html = ""
@@ -655,10 +694,12 @@ def export_interactive_html(df, ai_summary=""):
             /* --- HEADER TOOLTIP STYLES --- */
             .header-tip {{
                 position: relative;
-                display: inline-block;
+                display: inline;
                 cursor: help;
                 border-bottom: 1px dotted #555;
-                white-space: nowrap;
+                white-space: normal;
+                text-align: center;
+                width: 100%;
             }}
             .header-tip .tip-box {{
                 visibility: hidden; /* This hides the text until hover */
@@ -718,14 +759,13 @@ def export_interactive_html(df, ai_summary=""):
         }}
         /* Optional: Add space at the top of the page so the first row tooltips aren't cut by the browser top */
         body {{
-            padding-top: 80px !important;
+            padding-top: 5px !important;
         }}
             /* END TOOLTIP CSS */
 
             .master-container {{
                 margin: 0 auto;
                 width: fit-content;
-                max-width: 1800px;
             }}
             .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
             th{{ color:#00ff00; border-bottom:2px solid #444; font-size: 15px; text-transform: uppercase; vertical-align: middle !important; padding: 8px 22px 8px 6px !important; line-height: 1.2 !important; }}
@@ -822,7 +862,16 @@ def export_interactive_html(df, ai_summary=""):
             .page-link {{ background-color: #1a1a1a !important; border-color: #444 !important; color: #ccc !important; }}
             .page-link:hover {{ background-color: #333 !important; color: #fff !important; }}
             .page-item.active .page-link {{ background-color: #00ff00 !important; border-color: #00ff00 !important; color: #000 !important; font-weight: bold; }}
-            .page-item.disabled .page-link {{ background-color: #111 !important; border-color: #333 !important; color: #555 !important; }}
+            .page-item.disabled .page-link {{ background-color: #111 !important; border-color: #333 !important; color: #555 !important;
+
+
+            .table-scroll-container {{
+                overflow-x: auto;
+                overflow-y: visible; /* Allows tooltips to pop up out of the scroll area */
+                width: 100%;
+                position: relative;
+                border: 1px solid #333; /* Optional: gives the scroll area a border */
+            }}
         </style>
         </head>
         <body>
@@ -1150,23 +1199,32 @@ def get_ai_analysis(df, history_data):
         return f"AI Analysis Failed: {str(e)}"
 
 if __name__ == "__main__":
-    if "--auto" in sys.argv:
-        print("Starting Auto Scan...")
-    
-    # 1. Fetch Data
+    is_auto = "--auto" in sys.argv
+    if is_auto:
+        print(f"{C_CYAN}Starting Auto Scan...{C_RESET}")
+
+    # 1. Fetch Data with the new robust function
     raw = get_all_trending_stocks()
+    
     if not raw:
-        print(f"{C_RED}[!] No data returned from ApeWisdom API. Exiting.{C_RESET}")
-        sys.exit(0)
+        msg = "CRITICAL: No data returned from ApeWisdom API. Script stopping."
+        print(f"{C_RED}[!] {msg}{C_RESET}")
+        if is_auto:
+            # Send alert so you don't have to check GitHub logs
+            send_discord_link("", f"⚠️ **API Alert:** {msg}")
+        sys.exit(1) 
 
     # 2. Process Data
     df = filter_and_process(raw)
     if df.empty:
-        print(f"{C_RED}[!] Data fetched, but all tickers were filtered out. Exiting.{C_RESET}")
-        sys.exit(0)
+        msg = "Data fetched, but all tickers were filtered out based on your criteria."
+        print(f"{C_RED}[!] {msg}{C_RESET}")
+        if is_auto:
+            send_discord_link("", f"ℹ️ **Scan Alert:** {msg}")
+        sys.exit(0) 
 
     # 3. Generate the AI Summary
-    print("--- Generating AI Analysis ---")
+    print(f"{C_CYAN}--- Generating AI Analysis ---{C_RESET}")
     tracker = HistoryTracker(HISTORY_FILE)
     ai_summary = get_ai_analysis(df, tracker.data)
 
@@ -1175,8 +1233,9 @@ if __name__ == "__main__":
     
     # 5. Send to Discord
     if fname:
-        send_discord_link(fname, "")
+        # Pass the filename and a custom success message
+        send_discord_link(fname, "🚀 **New Market Scan Complete**")
     else:
         print(f"{C_RED}[!] HTML generation failed. Skipping Discord.{C_RESET}")
     
-    print("Done.")
+    print(f"{C_GREEN}Done.{C_RESET}")
