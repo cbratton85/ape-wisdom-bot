@@ -191,9 +191,41 @@ def fetch_meta_data_robust(ticker):
 
 def filter_and_process(stocks):
     if not stocks: return pd.DataFrame()
-    
-    us_tickers = list(set([TICKER_FIXES.get(s['ticker'], s['ticker'].replace('.', '-')) for s in stocks]))
+
+    PERMANENT_BLACKLIST = []
+
     local_cache = load_cache()
+    now = datetime.datetime.now(datetime.UTC)
+
+    tickers_to_retry = []
+    for t, data in local_cache.items():
+        if data.get('delisted'):
+            last_checked_str = data.get('last_checked', '2020-01-01')
+            try:
+                last_date = datetime.datetime.strptime(last_checked_str, "%Y-%m-%d").replace(tzinfo=datetime.timezone.utc)
+                if (now - last_date).days >= DELISTED_RETRY_DAYS:
+                    tickers_to_retry.append(t)
+            except:
+                tickers_to_retry.append(t)
+
+    if tickers_to_retry:
+        print(f"{C_GREEN}[+] Re-checking {len(tickers_to_retry)} tickers from penalty box...{C_RESET}")
+        for t in tickers_to_retry:
+            if t in local_cache: del local_cache[t]
+        save_cache(local_cache)
+
+    us_tickers = []
+    for s in stocks:
+        t = TICKER_FIXES.get(s['ticker'], s['ticker'].replace('.', '-'))
+
+        if t in PERMANENT_BLACKLIST: continue
+
+        if local_cache.get(t, {}).get('delisted'): continue
+
+        us_tickers.append(t)
+    
+    us_tickers = list(set(us_tickers))
+
     tracker = HistoryTracker(HISTORY_FILE)
     
     # Clean Cache of old delisted
@@ -330,12 +362,6 @@ def filter_and_process(stocks):
                 "Streak": m['streak'], "Rolling": m['rolling_trend']
             })
             
-            safe_surge = s_perc if s_perc > 0 else 1
-            efficiency = rank_plus / safe_surge
-
-            current_upvotes = int(stock.get('upvotes', 0))
-            m = tracker.get_metrics(t, float(curr_p), m_perc, rank_plus, current_upvotes)
-
         except Exception as e:
             print(f"Error processing {t}: {e}") # This will tell you exactly what went wrong
             continue
@@ -902,16 +928,16 @@ def get_ai_analysis(df, history_data):
     try:
         client = genai.Client(api_key=api_key)
         # --- SMART MODEL SELECTOR ---
-        target_model = None
+        target_model = 'gemini-2.0-flash' # Default fallback
         try:
-            for m in genai.list_models():
-                if 'generateContent' in m.supported_generation_methods:
-                    if 'flash' in m.name.lower() and 'gemini' in m.name.lower():
-                        target_model = m.name; break
-            if not target_model: target_model = 'gemini-pro'
-            print(f"🤖 Connected to AI Model: {target_model}")
-        except:
-            model = genai.GenerativeModel('gemini-pro')
+            # In the new SDK, we list models via client.models.list()
+            for m in client.models.list():
+                if 'flash' in m.name.lower() and 'gemini' in m.name.lower():
+                    target_model = m.name.split('/')[-1]; break
+        except: pass
+        print(f"🤖 Connected to AI Model: {target_model}")
+    except Exception as e:
+        return f"AI Setup Failed: {e}"
 
         # --- DATA PREPARATION ---
         ai_df = df.reset_index(drop=True).copy()
@@ -1079,7 +1105,7 @@ def get_ai_analysis(df, history_data):
              * **[Ticker]:** [Specific stat anomaly, e.g. "Squeeze Score > 80 with rising Rank"]
             """
 
-        response = client.models.generate_content(model='gemini-2.0-flash', contents=prompt)
+        response = client.models.generate_content(model=target_model, contents=prompt)
         # Cleaning the text to ensure it goes straight to the report content
         clean_text = response.text.replace("Here is the briefing:", "").replace("## Intelligence Brief", "").strip()
         return clean_text
