@@ -1,10 +1,10 @@
 name: Market Momentum Tracker
 
 on:
-  workflow_dispatch:        # Manual Trigger Only
+  workflow_dispatch:        # Manual Trigger
 
 permissions:
-  contents: write           # CRITICAL: Allows saving history.json
+  contents: write           # CRITICAL: Allows saving history and deleting old files
 
 jobs:
   build:
@@ -39,32 +39,20 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # 1. Check if a scan file exists inside the 'public' folder
-          if ls public/scan_*.html 1> /dev/null 2>&1; then
-            echo "✅ Scan file found. Updating index.html..."
-            
-            # Copy the newest scan to index.html (So your main link works)
-            # We look inside 'public/' now!
-            cp $(ls public/scan_*.html | sort | tail -n 1) public/index.html
-
-            # Add JSON memory AND the public folder
-            git add market_history.json ape_cache.json public/
-            
-            git commit -m "Update history and dashboard [skip ci]" || echo "No changes to commit"
-            git push
-
-          else
-            echo "⚠️ No HTML file generated (Script may have errored)."
-            
-            # 2. EMERGENCY SAVE: Only save the JSON memory
-            # We do NOT try to add *.html here because it would crash the bot
-            git add market_history.json ape_cache.json
-            
-            git commit -m "Update history (Rescue Save) [skip ci]" || echo "No changes to commit"
-            git push
-          fi
+          # 'git add .' stages ALL changes: 
+          # 1. New scan_*.html files
+          # 2. The deleted old files (cleanup)
+          # 3. The updated index.html and json files
+          git add .
+          
+          # Commit the changes (if any)
+          git commit -m "Update Market Data & Cleanup [skip ci]" || echo "No changes to commit"
+          
+          # Push changes back to the main branch
+          git push
 
       # --- DEPLOY DASHBOARD TO PAGES ---
+      # This ensures the 'gh-pages' branch stays synced with your latest data
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
