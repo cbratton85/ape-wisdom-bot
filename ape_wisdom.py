@@ -690,7 +690,7 @@ def export_interactive_html(df, ai_summary=""):
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
             /* 1. Global Font */
-            body {{ background-color:#101010; color:#e0e0e0; font-family:'Consolas','Monaco',monospace; padding: 5px 20px 20px 20px; }}
+            body {{ background-color:#101010; color:#e0e0e0; font-family:'Consolas','Monaco',monospace; padding: 5px 50px 5px 50px; }}
 
             /* --- HEADER TOOLTIPS --- */
             .header-tip {{
@@ -753,7 +753,7 @@ def export_interactive_html(df, ai_summary=""):
                 line-height: 1.2 !important;
                 border-right: 1px solid #333;
                 white-space: nowrap;
-                width: 1% !important;  /* DEFAULT: Force all columns to shrink */
+                width: 2% !important;  /* DEFAULT: Force all columns to shrink */
             }}
 
             /* Header Specifics */
@@ -776,7 +776,7 @@ def export_interactive_html(df, ai_summary=""):
                 text-align: left !important;
                 width: auto !important;       
                 min-width: 220px !important;  
-                max-width: 350px !important;  
+                max-width: 220px !important;  
             }}
             /* TRUNCATE DATA ONLY (Keep Headers Visible for Tooltips) */
             td:nth-child(4) {{
@@ -791,7 +791,7 @@ def export_interactive_html(df, ai_summary=""):
                 text-align: left !important;
                 width: auto !important;
                 min-width: 200px !important;
-                max-width: 300px !important;
+                max-width: 200px !important;
             }}
             /* TRUNCATE DATA ONLY */
             td:nth-child(19) {{
