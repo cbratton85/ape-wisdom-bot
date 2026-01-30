@@ -12220,5 +12220,50 @@
         "mcap": 19216072704,
         "currency": "USD",
         "description": "BWX Technologies, Inc. manufactures and sells nuclear components in the United States, Canada, and internationally. It operates through two segments, Government Operations and Commercial Operations. The company manufactures precision naval nuclear components, reactors, and nuclear fuel; close-tolerance and high-quality equipment for nuclear applications; critical nuclear components, fuels and assemblies for government and limited other uses; down blend government stockpiles of uranium; and fabricate fuel-bearing precision components. It also supplies proprietary and sole-source valves, manifolds, and fittings to naval and commercial shipping customers; research reactor fuel elements for colleges, universities, and national laboratories; and components for defense applications. In addition, the company manufactures commercial nuclear steam generators, nuclear fuel, fuel handling systems, pressure vessels, reactor components, heat exchangers, tooling delivery systems; and containers for the storage of nuclear fuel and other high-level nuclear waste. Further, it supplies nuclear fuel, fuel handling systems, tooling delivery systems, nuclear-grade materials and precisely machined components; and manufactures medical radioisotopes, radiopharmaceuticals, and medical devices. Additionally, it provides specialized engineering services that include structural component design, 3-D thermal-hydraulic engineering analysis, weld and robotic process development, electrical and controls engineering and metallurgy and materials engineering; in-plant inspection, maintenance and modification services; and non-destructive examination and tooling/repair solutions. It also offers nuclear power plant lifecycle support services. The company was formerly known as The Babcock & Wilcox Company and changed its name to BWX Technologies, Inc. in June 2015. BWX Technologies, Inc. was founded in 1867 and is headquartered in Lynchburg, Virginia."
+    },
+    "CETX": {
+        "ticker": "CETX",
+        "name": "Cemtrex Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 15030921,
+        "currency": "USD",
+        "description": "Cemtrex, Inc. operates as a technology company in the United States and internationally. It operates through Security and Industrial Services segments. The company offers browser-based video monitoring and analytics-based recognition systems, cameras, servers, and access control systems for security and surveillance in industrial and commercial facilities, federal prisons, hospitals, universities, schools, and federal and state government offices; and provides critical security and video surveillance solutions utilizing artificial intelligence based data algorithms. It also provides services for rigging, millwrighting, in plant maintenance, equipment erection, relocation, and disassembly; installs high precision equipment in various industrial markets comprising automotive, printing and graphics, industrial automation, packaging, chemicals and others; and provides maintenance and contracting solutions for the machinery, packaging, printing, chemical, and other manufacturing markets. It serves smart technologies, virtual and augmented realities, industrial solutions, and intelligent security systems sectors. The company was formerly known as Diversified American Holding, Inc. and changed its name to Cemtrex, Inc. in December 2004. Cemtrex, Inc. was incorporated in 1998 and is headquartered in Brooklyn, New York."
+    },
+    "DAN": {
+        "ticker": "DAN",
+        "name": "Dana Incorporated",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 3388283648,
+        "currency": "USD",
+        "description": "Dana Incorporated, together with its subsidiaries, provides power-conveyance and energy-management solutions for vehicles and machinery in North America, Europe, South America, and the Asia Pacific. The company operates through four segments: Light Vehicle Drive Systems, Commercial Vehicle Drive and Motion Systems, Off-Highway Drive and Motion Systems, and Power Technologies. It offers drive systems, including axles, driveshafts, transmission, and wheel and track drives; motion systems, such as winches, slew drives, and hub drives; and electrodynamic technologies comprising motors, inverters, software and control systems, battery-management systems, and fuel cell plates. The company also provides sealing solutions, such as gaskets, seals, cam covers, and oil pan modules; thermal-management technologies, including transmission and engine oil cooling, battery and electronics cooling, charge air cooling, and thermal-acoustical protective shielding; and digital solutions that include active and passive system controls, as well as descriptive and predictive analytics. It serves vehicle manufacturers in the global light vehicle, medium/heavy vehicle, and off-highway markets, as well as the stationary industrial market. The company was formerly known as Dana Holding Corporation and changed its name to Dana Incorporated in August 2016. Dana Incorporated was founded in 1904 and is headquartered in Maumee, Ohio."
+    },
+    "IVES": {
+        "ticker": "IVES",
+        "name": "Dan IVES Wedbush AI Revolution ",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index is comprised exclusively of equity securities (or corresponding American Depositary Receipts (\u201cADRs\u201d)) of companies included in the Dan Ives AI 30 Research Report (the \u201cAI Report\u201d). Under normal circumstances, the fund will invest at least 80% of its net assets (plus borrowings for investment purposes) in the securities of AI Companies. The fund is non-diversified."
+    },
+    "KOS": {
+        "ticker": "KOS",
+        "name": "Kosmos Energy Ltd.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 808372544,
+        "currency": "USD",
+        "description": "Kosmos Energy Ltd., a deep-water exploration and production company, engages in the exploration, development, and production of oil and natural gas properties. The company has oil and gas production projects located in offshore Ghana, Equatorial Guinea, Mauritania, Senegal, and the Gulf of America. Kosmos Energy Ltd. was founded in 2003 and is headquartered in Dallas, Texas."
+    },
+    "NNVC": {
+        "ticker": "NNVC",
+        "name": "NanoViricides, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 21568430,
+        "currency": "USD",
+        "description": "NanoViricides, Inc., a clinical stage nano-biopharmaceutical company, discovers, develops, and commercializes drugs to combat viral infections. The company's product portfolio includes NV-387 drug candidate developed for RSV and influenza indications and has completed phase 1a/1b human clinical trial for the evaluation of safety and tolerability; NV-387 as an active ingredient of drug product formulations for the treatment of COVID infections comprising NV-CoV-2 Oral Syrup and NV-CoV-2 Oral Gummies developed for the treatment of COVID infection, a semi-solid fixed-dose form, which are in phase 1a/1b human clinical trials for enabling body-weight-based dose titration as is required for pediatric treatments. It also offers NV-387 Solution for injection, infusion, and inhalation to treat severe cases that are not hospitalized and carried out by an injection; and injectable solution that delivered directly into the lungs as a fog created using portable battery operated nebulizer devices, which enables action at infection by a respiratory virus, such as coronaviruses, RSV, influenzas, human meta-pneumovirus, certain adenoviruses, and other infections, that can lead to severe pneumonia. In addition, the company develops NV-HHV-1, a skin cream for the treatment of Shingles rash, which has completed non-clinical pharmacology studies; oral drug with NV-HHV-1 as the active ingredient for the treatment of HSV-1 cold sores and HSV-2 genital ulcers; and other drug candidates in HIVCide program for the treatment of Dengue and Ebola virus, as well as provides Nanoviricide platform technology to treat various types of viruses. NanoViricides, Inc. was incorporated in 2005 and is headquartered in Shelton, Connecticut."
     }
 }
