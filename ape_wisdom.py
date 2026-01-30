@@ -478,6 +478,7 @@ def export_interactive_html(df, ai_summary=""):
 
         # --- ROW-BY-ROW FORMATTING ---
         for index, row in export_df.iterrows():
+            
             # Velocity
             v_val = row.get('Vel', 0)
             v_color = C_GREEN if v_val > 0 else (C_RED if v_val < 0 else "#666")
@@ -586,14 +587,47 @@ def export_interactive_html(df, ai_summary=""):
             'Upv+', 'Vol', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 
             'Type_Tag', 'AvgVol', 'MCap'
         ]
-        
         # Safety fill
         for c in cols:
             if c not in export_df.columns:
                 export_df[c] = 0
 
-        final_df = export_df[cols]
-        
+        final_df = export_df[cols].copy()
+
+        # NEW TOOL TIP FUNCTION FOR HEADERS
+        header_tooltips = {
+            "Rank": ("", "Current position in the popularity list based on social momentum."),
+            "Rank+": ("Rank(Yest) - Rank(Today)", "Positions changed vs 24h ago."),
+            "Heat": ("Weighted aggregate", "Master Score of all momentum signals."),
+            "Name": ("", "Company or Fund Name."),
+            "Sym": ("", "Ticker symbol and link to Yahoo Finance."),
+            "Price": ("", "Last traded market price (USD)."),
+            "Acc": ("Vel(Today) - Vel(Yest)", "Acceleration: Rate of change of speed"),
+            "Eff": ("Rank+ / Surge", "Efficiency: Rank gain per unit of volume."),
+            "Conv": ("Upvotes / Mentions", "Conviction: Sentiment Quality Ratio."),
+            "Upvs": ("", "Total upvotes received in the last 24 hours."),
+            "Upv+": ("", "Net change in upvotes compared to the previous 24h period."),
+            "Vol": ("", "Average daily 30-day trading volume."),
+            "Srg": ("(Vol/Avg)*100", "Surge: Current volume as % of 30-day Avg."),
+            "Vel": ("", "Velocity: The speed of the rank change (Rank+ Delta)."),
+            "Strk": ("", "Streak: Number of consecutive runs sustaining direction."),
+            "MENT": ('<span style="color:#ffff00;">Yellow</span>(>2σ),<span style="color:#00ff00;">Green</span>(>1σ).', "Number of times mentioned in 24h."),
+            "Mnt%": ("", "Percent change in chatter vs yesterday."),
+            "Sqz": ("Mnt * Surge / log(MCap)", 'Likelihood of a <span style="color: #ff4444; font-weight:bold;">short squeeze</span>.'),
+            "INDUSTRY/SECTOR": ("", "The primary industry classification or ETF category.")
+        }
+        final_df.columns = [
+            f'''<span class="header-tip">{c}
+                <span class="tip-box">
+                <span class="formula">{header_tooltips[c][0]}</span>
+                <span class="desc">{header_tooltips[c][1]}</span>
+            </span>
+        </span>'''
+        if c in header_tooltips else c 
+        for c in final_df.columns
+        ]
+        #----------------------------------
+
         # NOTE: table-dark class + table-hover
         table_html = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
         utc_timestamp = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -617,7 +651,82 @@ def export_interactive_html(df, ai_summary=""):
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
             body{{ background-color:#101010; color:#e0e0e0; font-family:'Consolas','Monaco',monospace; padding:20px; }}
-            .master-container {{ margin: 0 auto; width: fit-content; }}
+
+            /* --- HEADER TOOLTIP STYLES --- */
+            .header-tip {{
+                position: relative;
+                display: inline-block;
+                cursor: help;
+                border-bottom: 1px dotted #555;
+                white-space: nowrap;
+            }}
+            .header-tip .tip-box {{
+                visibility: hidden; /* This hides the text until hover */
+                position: absolute;
+                bottom: 140%; /* Position above the header */
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #1a1a1a;
+                color: #ffffff;
+                padding: 10px;
+                border-radius: 6px;
+                width: 240px;
+                z-index: 9999; 
+                border: 1px solid #00ff00; /* Green border to match your theme */
+                box-shadow: 0 8px 16px rgba(0,0,0,0.8);
+                font-weight: normal;
+                white-space: normal;
+                text-transform: none; /* Prevents uppercase headers from making desc uppercase */
+                font-family: 'Segoe UI', Tahoma, sans-serif;
+            }}
+            .header-tip .formula {{
+                display: block;
+                color: #888;
+                font-size: 11px;
+                font-family: 'Consolas', monospace;
+                border-bottom: 1px solid #333;
+                margin-bottom: 5px;
+                padding-bottom: 5px;
+            }}
+            .header-tip .formula:empty {{ display: none; }}
+            .header-tip .desc {{
+                display: block;
+                font-size: 13px;
+                line-height: 1.4;
+            }}
+            /* The Trigger */
+            .header-tip:hover .tip-box {{
+                visibility: visible;
+                opacity: 1;
+            }}
+            /* --- OVERRIDES TO PREVENT CLIPPING --- */
+        .dataTables_wrapper, 
+        .table-responsive {{
+            /* Critical: Bootstrap/DataTables often hide overflow, cutting off tooltips */
+            overflow: visible !important;
+        }}
+        table.dataTable th, 
+        table.dataTable td {{
+            /* Ensures the cells allow the absolute-positioned tooltip to float over them */
+            overflow: visible !important;
+            position: relative;
+        }}
+        .header-tip .tip-box {{
+            /* Higher z-index ensures tooltips stay on top of all other table layers */
+            z-index: 99999 !important;
+            pointer-events: none; /* Prevents the tooltip box from blocking mouse clicks */
+        }}
+        /* Optional: Add space at the top of the page so the first row tooltips aren't cut by the browser top */
+        body {{
+            padding-top: 80px !important;
+        }}
+            /* END TOOLTIP CSS */
+
+            .master-container {{
+                margin: 0 auto;
+                width: fit-content;
+                max-width: 1800px;
+            }}
             .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
             th{{ color:#00ff00; border-bottom:2px solid #444; font-size: 15px; text-transform: uppercase; vertical-align: middle !important; padding: 8px 22px 8px 6px !important; line-height: 1.2 !important; }}
             td {{
