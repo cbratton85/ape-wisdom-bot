@@ -780,8 +780,9 @@ def export_interactive_html(df, ai_summary=""):
             }}
             
             table.dataTable {{
-                width: 100% !important;
-                table-layout: auto;
+                width: auto !important;
+                margin: 0 auto;
+                border-collapse: collapse !important;
             }}
             
             /* Column Widths */
@@ -864,15 +865,14 @@ def export_interactive_html(df, ai_summary=""):
             .page-link {{ background-color: #1a1a1a !important; border-color: #444 !important; color: #ccc !important; }}
             .page-link:hover {{ background-color: #333 !important; color: #fff !important; }}
             .page-item.active .page-link {{ background-color: #00ff00 !important; border-color: #00ff00 !important; color: #000 !important; font-weight: bold; }}
-            .page-item.disabled .page-link {{ background-color: #111 !important; border-color: #333 !important; color: #555 !important;
+            .page-item.disabled .page-link {{ background-color: #111 !important; border-color: #333 !important; color: #555 !important; }}
 
 
             .table-scroll-container {{
-                overflow-x: auto;
-                overflow-y: visible; /* Allows tooltips to pop up out of the scroll area */
+                overflow-x: visable;
+                overflow-y: visible;
                 width: 100%;
                 position: relative;
-                border: 1px solid #333; /* Optional: gives the scroll area a border */
             }}
         </style>
         </head>
