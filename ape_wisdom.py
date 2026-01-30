@@ -766,7 +766,9 @@ def export_interactive_html(df, ai_summary=""):
             .master-container {{
                 margin: 0 auto;
                 width: fit-content;
+                max-width: 1600px !important;
             }}
+            
             .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
             th{{ color:#00ff00; border-bottom:2px solid #444; font-size: 15px; text-transform: uppercase; vertical-align: middle !important; padding: 8px 22px 8px 6px !important; line-height: 1.2 !important; }}
             td {{
