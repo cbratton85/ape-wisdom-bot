@@ -694,17 +694,17 @@ def export_interactive_html(df, ai_summary=""):
             /* --- HEADER TOOLTIP STYLES --- */
             .header-tip {{
                 position: relative;
-                display: inline;
+                display: inline-block;
                 cursor: help;
                 border-bottom: 1px dotted #555;
-                white-space: normal;
+                white-space: nowrap;
                 text-align: center;
-                width: 100%;
+                width: auto;
             }}
             .header-tip .tip-box {{
-                visibility: hidden; /* This hides the text until hover */
+                display: none;
                 position: absolute;
-                bottom: 140%; /* Position above the header */
+                bottom: 140%;
                 left: 50%;
                 transform: translateX(-50%);
                 background-color: #1a1a1a;
@@ -713,11 +713,11 @@ def export_interactive_html(df, ai_summary=""):
                 border-radius: 6px;
                 width: 240px;
                 z-index: 9999; 
-                border: 1px solid #00ff00; /* Green border to match your theme */
+                border: 1px solid #00ff00;
                 box-shadow: 0 8px 16px rgba(0,0,0,0.8);
                 font-weight: normal;
                 white-space: normal;
-                text-transform: none; /* Prevents uppercase headers from making desc uppercase */
+                text-transform: none;
                 font-family: 'Segoe UI', Tahoma, sans-serif;
             }}
             .header-tip .formula {{
@@ -737,7 +737,7 @@ def export_interactive_html(df, ai_summary=""):
             }}
             /* The Trigger */
             .header-tip:hover .tip-box {{
-                visibility: visible;
+                display: block;
                 opacity: 1;
             }}
             /* --- OVERRIDES TO PREVENT CLIPPING --- */
