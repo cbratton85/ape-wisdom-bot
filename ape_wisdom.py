@@ -715,11 +715,11 @@ def export_interactive_html(df, ai_summary=""):
                 <div class="filter-group">
                     <div class="btn-group" role="group" style="margin-right: 10px;">
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio1" style="font-size: 0.75rem; padding: 2px 8px;">All</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio1" style="font-size: 0.75rem; padding: 2px 6px;">All</label>
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio2" onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio2" style="font-size: 0.75rem; padding: 2px 8px;">Stocks</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio2" style="font-size: 0.75rem; padding: 2px 6px;">Stocks</label>
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio3" onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio3" style="font-size: 0.75rem; padding: 2px 8px;">ETFs</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio3" style="font-size: 0.75rem; padding: 2px 6px;">ETFs</label>
                     </div>
                     <div class="btn-group" role="group">
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapAll" checked onclick="toggleMcap('all')">
@@ -727,13 +727,13 @@ def export_interactive_html(df, ai_summary=""):
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMega" onclick="toggleMcap('mega')">
                         <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.75rem; padding: 2px 6px;" title="> $200B">Mega</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapLarge" onclick="toggleMcap('large')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.75rem; padding: 2px 6px;" title="$10B - $200B">Lrg</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.75rem; padding: 2px 6px;" title="$10B - $200B">Large</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMid" onclick="toggleMcap('mid')">
                         <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.75rem; padding: 2px 6px;" title="$2B - $10B">Mid</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapSmall" onclick="toggleMcap('small')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.75rem; padding: 2px 6px;" title="$250M - $2B">Sml</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.75rem; padding: 2px 6px;" title="$250M - $2B">Small</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMicro" onclick="toggleMcap('micro')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.75rem; padding: 2px 6px;" title="< $250M">Mic</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.75rem; padding: 2px 6px;" title="< $250M">Micro</label>
                     </div>
                 </div>
                 <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">Download TXT File</button>
@@ -927,192 +927,190 @@ def get_ai_analysis(df, history_data):
 
     try:
         client = genai.Client(api_key=api_key)
-        # --- SMART MODEL SELECTOR ---
-        target_model = 'gemini-2.0-flash' # Default fallback
+        target_model = 'gemini-2.0-flash'
         try:
-            # In the new SDK, we list models via client.models.list()
+ 
             for m in client.models.list():
                 if 'flash' in m.name.lower() and 'gemini' in m.name.lower():
-                    target_model = m.name.split('/')[-1]; break
+                    target_model = m.name.split('/')[-1];
+                    break
         except: pass
         print(f"🤖 Connected to AI Model: {target_model}")
+
     except Exception as e:
         return f"AI Setup Failed: {e}"
 
-        # --- DATA PREPARATION ---
-        ai_df = df.reset_index(drop=True).copy()
-        ai_df = ai_df.loc[:, ~ai_df.columns.duplicated()]
+    # --- DATA PREPARATION ---
+    ai_df = df.reset_index(drop=True).copy()
+    ai_df = ai_df.loc[:, ~ai_df.columns.duplicated()]
         
-        # Standardize Names for AI
-        mapping = {
-            'Surge': 'Srg', 'Master_Score': 'Heat', 'Accel': 'Acc', 
-            'Velocity': 'Vel', 'Rolling': 'Strk', 'Upvotes': 'Upvs',
-            'Squeeze': 'Sqz'
+    # Standardize Names for AI
+    mapping = {
+        'Surge': 'Srg', 'Master_Score': 'Heat', 'Accel': 'Acc', 
+        'Velocity': 'Vel', 'Rolling': 'Strk', 'Upvotes': 'Upvs',
+        'Squeeze': 'Sqz'
         }
-        ai_df.rename(columns=mapping, inplace=True)
-        
-        # --- GOD MODE: ADDED 'Eff' (Efficiency) FOR RULE #5 ---
-        cols_for_ai = ['Sym', 'Rank', 'Price', 'Srg', 'Vel', 'Acc', 'Strk', 'Upv+', 'Eff', 'Heat', 'Sqz']
-        
-        # Safety fill for missing cols
-        for c in cols_for_ai:
-            if c not in ai_df.columns: ai_df[c] = 0
 
-        # --- 1. DEFINE COLUMNS FOR ELITE ANALYST ---
-        # We explicitly grab the columns the prompt asks for:
-        # Rank, Heat, Ticker, Price, Acc, Eff, Conv, VolSrg, Vel, Sqz, Sector
-        cols_for_ai = ['Rank', 'Heat', 'Sym', 'Price', 'Acc', 'Eff', 'Conv', 'Srg', 'Vel', 'VolSqz', 'Industry']
+    ai_df.rename(columns=mapping, inplace=True)
         
-        # Safety: Only use columns that actually exist in your dataframe
-        valid_cols = [c for c in cols_for_ai if c in df.columns]
+    # --- GOD MODE: ADDED 'Eff' (Efficiency) FOR RULE #5 ---
+    cols_for_ai = ['Sym', 'Rank', 'Price', 'Srg', 'Vel', 'Acc', 'Strk', 'Upv+', 'Eff', 'Heat', 'Sqz']
+        
+    # Safety fill for missing cols
+    for c in cols_for_ai:
+        if c not in ai_df.columns: ai_df[c] = 0
 
-        # --- DATASET 1: LEADERS (Top 10) ---
-        leaders_df = ai_df.head(10)[valid_cols]
-        leaders_str = leaders_df.to_string(index=False)
+    # --- 1. DEFINE COLUMNS FOR ELITE ANALYST ---
+    # We explicitly grab the columns the prompt asks for:
+    # Rank, Heat, Ticker, Price, Acc, Eff, Conv, VolSrg, Vel, Sqz, Sector
+    cols_for_ai = ['Rank', 'Heat', 'Sym', 'Price', 'Acc', 'Eff', 'Conv', 'Srg', 'Vel', 'VolSqz', 'Industry']
+        
+    # Safety: Only use columns that actually exist in your dataframe
+    valid_cols = [c for c in cols_for_ai if c in df.columns]
 
-        # --- DATASET 2: DEEP SCAN (Stealth/Squeeze) ---
-        rest_of_market = ai_df.iloc[10:].copy()
+    # --- DATASET 1: LEADERS (Top 10) ---
+    leaders_df = ai_df.head(10)[valid_cols]
+    leaders_str = leaders_df.to_string(index=False)
+
+    # --- DATASET 2: DEEP SCAN (Stealth/Squeeze) ---
+    rest_of_market = ai_df.iloc[10:].copy()
         
-        # UPDATED FILTER: Now looks for Squeeze (Sqz) OR high Surge (Srg)
-        stealth_candidates = rest_of_market[ 
-            (rest_of_market['Sqz'] > 50) |       # High Squeeze Score
-            (rest_of_market['Srg'] > 100) |      # Volume Surge
-            (rest_of_market['Vel'] >= 2.5)       # High Velocity
-        ].sort_values(by='Heat', ascending=False).head(8) # Increased to 8 to give AI more options
+    # UPDATED FILTER: Now looks for Squeeze (Sqz) OR high Surge (Srg)
+    stealth_candidates = rest_of_market[ 
+        (rest_of_market['Sqz'] > 50) |       # High Squeeze Score
+        (rest_of_market['Srg'] > 100) |      # Volume Surge
+        (rest_of_market['Vel'] >= 2.5)       # High Velocity
+    ].sort_values(by='Heat', ascending=False).head(8) # Increased to 8 to give AI more options
         
-        if not stealth_candidates.empty:
-            stealth_str = stealth_candidates[valid_cols].to_string(index=False)
+    if not stealth_candidates.empty:
+        stealth_str = stealth_candidates[valid_cols].to_string(index=False)
+    else:
+         stealth_str = "No stealth anomalies detected."
+
+    # --- DATASET 3: 3-HOUR FORENSIC HISTORY (Formatted as Table) ---
+    top_20 = df.head(20)['Sym'].tolist()
+    history_rows = []
+        
+    for ticker in top_20:
+        if ticker in history_data:
+            # Sort snapshots by time
+            snapshots = sorted(history_data[ticker].items())
+        
+            if len(snapshots) > 1:
+                curr = snapshots[-1][1]
+
+        # --- CONFIGURATION: 24-Hour Lookback (1h intervals) ---
+        # 1 snapshot/hour * 24 = 24 snapshots.
+        target_lookback = 24  
+            
+        # Calculate the index for "Yesterday at this time"
+        prev_idx = len(snapshots) - 1 - target_lookback
+            
+        # Safety Check: If data is younger than 24h, grab the oldest available
+        if prev_idx < 0:
+            prev = snapshots[0][1]
+            time_label = "Since Start" 
         else:
-            stealth_str = "No stealth anomalies detected."
+             prev = snapshots[prev_idx][1]
+             time_label = "24h Delta"
 
-        # --- DATASET 3: 3-HOUR FORENSIC HISTORY (Formatted as Table) ---
-        top_20 = df.head(20)['Sym'].tolist()
-        history_rows = []
-        
-        for ticker in top_20:
-            if ticker in history_data:
-                # Sort snapshots by time
-                snapshots = sorted(history_data[ticker].items())
-        
-                if len(snapshots) > 1:
-                    curr = snapshots[-1][1]
+        p_now = curr.get('price', 0)
+        p_old = prev.get('price', 0)
 
-            # --- CONFIGURATION: 24-Hour Lookback (1h intervals) ---
-            # 1 snapshot/hour * 24 = 24 snapshots.
-            target_lookback = 24  
-            
-            # Calculate the index for "Yesterday at this time"
-            prev_idx = len(snapshots) - 1 - target_lookback
-            
-            # Safety Check: If data is younger than 24h, grab the oldest available
-            if prev_idx < 0:
-                prev = snapshots[0][1]
-                time_label = "Since Start" 
-            else:
-                prev = snapshots[prev_idx][1]
-                time_label = "24h Delta"
+        # 1. Price Delta %
+        if p_old > 0:
+             price_delta = round(((p_now - p_old) / p_old * 100), 2)
+        else:
+             price_delta = 0.0
 
-            p_now = curr.get('price', 0)
-            p_old = prev.get('price', 0)
+        # 2. Rank Delta (Positive = Improved Rank, e.g., 50 -> 10 = +40)
+        rank_delta = prev.get('rank', 0) - curr.get('rank', 0)
 
-            # 1. Price Delta %
-            if p_old > 0:
-                price_delta = round(((p_now - p_old) / p_old * 100), 2)
-            else:
-                price_delta = 0.0
+        # 3. Volume Trend Detection (Ignition vs Exhaustion)
+        srg_now = curr.get('srg', 0) > 100  # Is volume surging NOW?
+        srg_old = prev.get('srg', 0) > 100  # Was volume surging 24h ago?
 
-            # 2. Rank Delta (Positive = Improved Rank, e.g., 50 -> 10 = +40)
-            rank_delta = prev.get('rank', 0) - curr.get('rank', 0)
+        if srg_now and not srg_old:
+            vol_status = "IGNITION"      # Low -> High (New Trend)
+        elif srg_now and srg_old:
+            vol_status = "SUSTAINED"     # High -> High (Strong Trend)
+        elif not srg_now and srg_old:
+            vol_status = "EXHAUSTION"    # High -> Low (Trend Dying)
+        else:
+            vol_status = "Quiet"         # Low -> Low (No Interest)
 
-            # 3. Volume Trend Detection (Ignition vs Exhaustion)
-            srg_now = curr.get('srg', 0) > 100  # Is volume surging NOW?
-            srg_old = prev.get('srg', 0) > 100  # Was volume surging 24h ago?
-
-            if srg_now and not srg_old:
-                vol_status = "IGNITION"      # Low -> High (New Trend)
-            elif srg_now and srg_old:
-                vol_status = "SUSTAINED"     # High -> High (Strong Trend)
-            elif not srg_now and srg_old:
-                vol_status = "EXHAUSTION"    # High -> Low (Trend Dying)
-            else:
-                vol_status = "Quiet"         # Low -> Low (No Interest)
-
-            history_rows.append({
-                "Sym": ticker,
-                "Timeframe": time_label,
-                "Price_Change": f"{price_delta:+}%",     # Adds '+' for positive numbers
-                "Rank_Delta": f"{rank_delta:+}",         # Adds '+' for rank improvement
-                "Vol_Trend": vol_status
+        history_rows.append({
+            "Sym": ticker,
+            "Timeframe": time_label,
+            "Price_Change": f"{price_delta:+}%",     # Adds '+' for positive numbers
+            "Rank_Delta": f"{rank_delta:+}",         # Adds '+' for rank improvement
+            "Vol_Trend": vol_status
             })
 
-        # Convert list to a clean String Table for the AI
-        history_df = pd.DataFrame(history_rows)
+    # Convert list to a clean String Table for the AI
+    history_df = pd.DataFrame(history_rows)
 
-        if not history_df.empty:
-            comparison_context = history_df.to_string(index=False)
-        else:
-            comparison_context = "No historical data available."
+    if not history_df.empty:
+        comparison_context = history_df.to_string(index=False)
+    else:
+        comparison_context = "No historical data available."
 
-        # --- THE UPDATED QUANT ANALYST PROMPT ---
-        prompt = f"""
-            SYSTEM CONFIGURATION:
-            Identity: Senior Swing Trading Strategist (Timeframe: 1-Hour Candles / 24-Hour Lookback).
-            Brevity Constraint: TELEGRAPHIC STYLE. Bullet points. No fluff.
-            Goal: Synthesize "Now" (Leaders) vs. "Yesterday" (History) to find Trend Changes.
+    # --- THE UPDATED QUANT ANALYST PROMPT ---
+    prompt = f"""
+        SYSTEM CONFIGURATION:
+        Identity: Senior Swing Trading Strategist (Timeframe: 1-Hour Candles / 24-Hour Lookback).
+        Brevity Constraint: TELEGRAPHIC STYLE. Bullet points. No fluff.
+        Goal: Synthesize "Now" (Leaders) vs. "Yesterday" (History) to find Trend Changes.
             
-            INPUT DATA:
-            SNAPSHOT 1 (CURRENT LEADERS): 
-            {leaders_str}
+        INPUT DATA:
+        SNAPSHOT 1 (CURRENT LEADERS): 
+        {leaders_str}
             
-            SNAPSHOT 2 (STEALTH & OUTLIERS): 
-            {stealth_str}
+        SNAPSHOT 2 (STEALTH & OUTLIERS): 
+        {stealth_str}
             
-            SNAPSHOT 3 (24-HOUR CHANGE & CYCLE ANALYSIS): 
-            {comparison_context}
+        SNAPSHOT 3 (24-HOUR CHANGE & CYCLE ANALYSIS): 
+        {comparison_context}
               
-            COLUMNS KEY: 
-            Rank, Heat, Sym, Price, Acc (Acceleration), Eff (Efficiency), Conv (Conviction), VolSrg (Volume Surge/RVOL), Vel (Velocity), Sqz (Volatility Squeeze).
+        COLUMNS KEY: 
+        Rank, Heat, Sym, Price, Acc (Acceleration), Eff (Efficiency), Conv (Conviction), VolSrg (Volume Surge/RVOL), Vel (Velocity), Sqz (Volatility Squeeze).
             
-            HISTORY KEYS (Snapshot 3):
-            * Rank_Delta: (+20 means stock jumped 20 spots higher vs 24h ago).
-            * Vol_Trend: 
-              - "IGNITION": Vol was low yesterday -> High today (BUY WATCH).
-              - "SUSTAINED": Vol was high yesterday -> High today (MOMENTUM).
-              - "EXHAUSTION": Vol was high yesterday -> Low today (TAKE PROFIT).
+        HISTORY KEYS (Snapshot 3):
+        * Rank_Delta: (+20 means stock jumped 20 spots higher vs 24h ago).
+        * Vol_Trend: 
+            - "IGNITION": Vol was low yesterday -> High today (BUY WATCH).
+            - "SUSTAINED": Vol was high yesterday -> High today (MOMENTUM).
+            - "EXHAUSTION": Vol was high yesterday -> Low today (TAKE PROFIT).
             
-            EXECUTION PROTOCOL:
-            1. Scan Snapshot 3 for "IGNITION": These are new moves starting TODAY.
-            2. Scan Snapshot 3 for "Rank_Delta > +10": These are stocks aggressively taking market share.
-            3. Cross-Reference Snapshot 2 (Stealth): If a stock is in Stealth AND has "Ignition" in History, it is a Top Pick.
-            4. Sector Check: Group tickers by industry. Are all Gold/Semi/Software stocks moving together?
+        EXECUTION PROTOCOL:
+        1. Scan Snapshot 3 for "IGNITION": These are new moves starting TODAY.
+        2. Scan Snapshot 3 for "Rank_Delta > +10": These are stocks aggressively taking market share.
+        3. Cross-Reference Snapshot 2 (Stealth): If a stock is in Stealth AND has "Ignition" in History, it is a Top Pick.
+        4. Sector Check: Group tickers by industry. Are all Gold/Semi/Software stocks moving together?
             
-            REPORT FORMAT:
-            # 🌅 24-HOUR MARKET SHIFT REPORT
+        REPORT FORMAT:
+        # 🌅 24-HOUR MARKET SHIFT REPORT
             
-            ## 1. 🚀 TREND IGNITION (New Moves Starting Now)
-            * **[Ticker] ([Sector]):** Rank Change: [Rank_Delta] | Status: IGNITION
-              * *Insight:* [Why is this moving? e.g., "Fresh volume surge + Efficiency breakout."]
+        ## 1. 🚀 TREND IGNITION (New Moves Starting Now)
+        * **[Ticker] ([Sector]):** Rank Change: [Rank_Delta] | Status: IGNITION
+            * *Insight:* [Why is this moving? e.g., "Fresh volume surge + Efficiency breakout."]
             
-            ## 2. 📉 MOMENTUM EXHAUSTION (Fade/Sell Watch)
-            * **[Ticker]:** Rank Change: [Rank_Delta] | Status: EXHAUSTION
-              * *Insight:* [e.g., "Price flat but volume died vs yesterday. Sellers absorbing."]
+        ## 2. 📉 MOMENTUM EXHAUSTION (Fade/Sell Watch)
+        * **[Ticker]:** Rank Change: [Rank_Delta] | Status: EXHAUSTION
+             * *Insight:* [e.g., "Price flat but volume died vs yesterday. Sellers absorbing."]
             
-            ## 3. 🦁 MARKET LEADERSHIP (Sustained Strength)
-            * **[Top Sector]:** [List Tickers]
-            * **[Top Stock]:** [Ticker with highest combined Heat + Rank Improvement]
+        ## 3. 🦁 MARKET LEADERSHIP (Sustained Strength)
+        * **[Top Sector]:** [List Tickers]
+        * **[Top Stock]:** [Ticker with highest combined Heat + Rank Improvement]
             
-            ## 4. 🕵️ STEALTH ANOMALIES (From Snapshot 2)
-             * **[Ticker]:** [Specific stat anomaly, e.g. "Squeeze Score > 80 with rising Rank"]
-            """
+        ## 4. 🕵️ STEALTH ANOMALIES (From Snapshot 2)
+            * **[Ticker]:** [Specific stat anomaly, e.g. "Squeeze Score > 80 with rising Rank"]
+        """
 
-        response = client.models.generate_content(model=target_model, contents=prompt)
-        # Cleaning the text to ensure it goes straight to the report content
-        clean_text = response.text.replace("Here is the briefing:", "").replace("## Intelligence Brief", "").strip()
-        return clean_text
-
-    except Exception as e:
-        print(f"AI Error: {e}")
-        return f"AI Analysis Failed: {str(e)}"
+    response = client.models.generate_content(model=target_model, contents=prompt)
+    # Cleaning the text to ensure it goes straight to the report content
+    clean_text = response.text.replace("Here is the briefing:", "").replace("## Intelligence Brief", "").strip()
+    return clean_text
 
 if __name__ == "__main__":
     if "--auto" in sys.argv:
