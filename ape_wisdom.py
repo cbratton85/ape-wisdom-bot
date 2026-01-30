@@ -33,7 +33,7 @@ NAME_MAX_WIDTH = 50
 
 REQUEST_DELAY_MIN = 1.5
 REQUEST_DELAY_MAX = 3.0
-TICKER_FIXES = {'GPS': 'GAP', 'FB': 'META', 'APE': 'AMC'}
+TICKER_FIXES = {'GPS': 'GAP', 'FB': 'META', 'APE': 'AMC', 'FISV':'FI'}
 
 # ANSI COLORS
 C_GREEN = '\033[92m'
@@ -869,13 +869,13 @@ def export_interactive_html(df, ai_summary=""):
             }});
             
             $.fn.dataTable.ext.search.push(function(settings, data) {{
-                var typeTag = data[18] || ""; 
+                var typeTag = data[19] || ""; 
                 var viewMode = $('input[name="btnradio"]:checked').attr('id');
                 if (viewMode == 'btnradio2' && typeTag == 'ETF') return false;
                 if (viewMode == 'btnradio3' && typeTag == 'STOCK') return false;
                 
                 if (!$('#mcapAll').is(':checked')) {{
-                    var mcap = parseFloat(data[20]) || 0; 
+                    var mcap = parseFloat(data[21]) || 0; 
                     var match = false;
                     if ($('#mcapMega').is(':checked') && mcap >= 200000000000) match = true;
                     if ($('#mcapLarge').is(':checked') && (mcap >= 10000000000 && mcap < 200000000000)) match = true;
@@ -891,7 +891,7 @@ def export_interactive_html(df, ai_summary=""):
                 if (maxP > 0 && p > maxP) return false;
                 
                 var minV = parseVal($('#minVol').val()), maxV = parseVal($('#maxVol').val());
-                var v = parseFloat(data[19]) || 0; 
+                var v = parseFloat(data[20]) || 0; 
                 if (minV > 0 && v < minV) return false;
                 if (maxV > 0 && v > maxV) return false;
                 return true;
@@ -902,7 +902,7 @@ def export_interactive_html(df, ai_summary=""):
                 var mode = $('input[name="btnradio"]:checked').attr('id');
                 var headerTxt = "INDUSTRY/SECTOR";
                 if (mode == 'btnradio2') headerTxt = "INDUSTRY"; else if (mode == 'btnradio3') headerTxt = "SECTOR";
-                $(table.column(17).header()).text(headerTxt);
+                $(table.column(18).header()).text(headerTxt);
                 table.draw(); 
             }};
             var d=new Date($("#time").data("utc")); $("#time").text("Last Updated: " + d.toLocaleString());
