@@ -738,7 +738,8 @@ def export_interactive_html(df, ai_summary=""):
             .table-dark {{ --bs-table-bg:#18181b; color:#ccc }}
             
             table.dataTable {{
-                width: auto !important; 
+                width: 100% !important;
+                table-layout: fixed;
                 margin: 0 auto;
                 border-collapse: collapse !important;
                 border: 1px solid #444; 
