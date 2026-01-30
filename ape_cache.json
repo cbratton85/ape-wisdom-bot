@@ -8178,7 +8178,7 @@
         "type": "EQUITY",
         "mcap": 23144757248,
         "currency": "USD",
-        "description": "Sprott Physical Silver Trust (the Trust) is a Canada-based closed-end mutual fund trust. The Trust's investment objective is to provide a secure, convenient and exchange-traded investment alternative for investors interested in holding physical silver bullion without the inconvenience that is typical of a direct investment in physical silver bullion. The Trust invests and intends to continue to invest primarily in long-term holdings of unencumbered, fully allocated, physical silver bullion and does not speculate with regard to short-term changes in silver prices. The Trust will only purchase and expects only to own Good Delivery Bars as defined by the London Bullion Market Association (LBMA), with each bar purchased being verified against the LBMA source by representatives from the Trust’s custodian, the Royal Canadian Mint. Sprott Asset Management LP is the manager of the Trust."
+        "description": "Sprott Physical Silver Trust (the Trust) is a Canada-based closed-end mutual fund trust. The Trust's investment objective is to provide a secure, convenient and exchange-traded investment alternative for investors interested in holding physical silver bullion without the inconvenience that is typical of a direct investment in physical silver bullion. The Trust invests and intends to continue to invest primarily in long-term holdings of unencumbered, fully allocated, physical silver bullion and does not speculate with regard to short-term changes in silver prices. The Trust will only purchase and expects only to own Good Delivery Bars as defined by the London Bullion Market Association (LBMA), with each bar purchased being verified against the LBMA source by representatives from the Trust\u2019s custodian, the Royal Canadian Mint. Sprott Asset Management LP is the manager of the Trust."
     },
     "TECH": {
         "ticker": "TECH",
@@ -11284,5 +11284,212 @@
         "mcap": 10759109632,
         "currency": "USD",
         "description": "Regal Rexnord Corporation provides sustainable solutions for power, transmit, and control motion products in the North America, Asia, Europe, and internationally. It operates through Industrial Powertrain Solutions, Automation and Motion Control, and Power Efficiency Solutions segments. The Industrial Powertrain Solutions segment provides mounted and unmounted bearings, couplings, mechanical power transmission drives and components, gearboxes, gear motors, clutches, brakes, special, and industrial powertrain components and solutions for metals and mining, general industrial, energy, alternative energy, machinery / off-highway, discrete automation, and other markets. Its Power Efficiency Solutions segment offers AC and DC motors, electronic variable speed controls, electronic drives, fans, and blowers for residential, commercial HVAC, water heaters, commercial refrigeration, commercial building ventilation, pool and spa, irrigation, dewatering, agricultural, conveying and other applications. The Automation and Motion Control segment provides conveying automation subsystems, aerospace components, precision motion control solutions, miniature servo motors, controls, drives and linear actuators, and power management products, as well as automatic transfer switches and paralleling switchgear for industrial automation, robotics, food and beverage, aerospace, medical, agricultural and construction, general industrial, data center, and other markets. It sells its products directly to original equipment manufacturers, distributors, and end-users. The company was formerly known as Regal Beloit Corporation. Regal Rexnord Corporation was founded in 1955 and is based in Milwaukee, Wisconsin."
+    },
+    "EPU": {
+        "ticker": "EPU",
+        "name": "iShares MSCI Peru and Global Ex",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of the index and in investments that have economic characteristics that are substantially identical to the component securities of the index. A significant portion of the index is represented by securities of companies in the financials and materials industries or sectors. Companies with economic exposure to and/or carry out the majority of their operations in Peru may include companies organized, listed, or with significant operations in developed countries. The fund is non-diversified."
+    },
+    "DKS": {
+        "ticker": "DKS",
+        "name": "Dick's Sporting Goods Inc",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 18496706560,
+        "currency": "USD",
+        "description": "DICK'S Sporting Goods, Inc., together with its subsidiaries, operates as an omni-channel sporting goods retailer primarily in the United States. The company provides hardlines, including sporting goods equipment, fitness equipment, golf equipment, and fishing gear products; and apparel. It also offers footwear and accessories, such as athletic shoes for running, walking, tennis, fitness and cross training, basketball, and hiking; and specialty footwear comprising casual footwear and a complete line of cleats for team sports. In addition, the company owns and operates Sporting Goods, Golf Galaxy, Public Lands, Moosejaw, and Going Going Gone! specialty concept stores; and DICK'S House of Sport and Golf Galaxy Performance Center, as well as GameChanger, a youth sports mobile app for live streaming, scheduling, communications, and scorekeeping. It offers its products online, as well as through its mobile apps. The company was formerly known as Dick'S Clothing and Sporting Goods, Inc. and changed its name to DICK'S Sporting Goods, Inc. in April 1999. DICK'S Sporting Goods, Inc. was incorporated in 1948 and is based in Coraopolis, Pennsylvania."
+    },
+    "RENT": {
+        "ticker": "RENT",
+        "name": "Rent the Runway, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 237509952,
+        "currency": "USD",
+        "description": "Rent the Runway, Inc. operates shared designer closet in the United States. The company provides evening wear and accessories, ready-to-wear, workwear, denim, casual, maternity, outerwear, blouses, knitwear, loungewear, jewelry, handbags, activewear, and ski wear under subscription, rental, and resale offering. It also engages in the software development and support activities. Rent the Runway, Inc. was incorporated in 2009 and is headquartered in Brooklyn, New York."
+    },
+    "WSBC": {
+        "ticker": "WSBC",
+        "name": "WesBanco, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 3384460032,
+        "currency": "USD",
+        "description": "WesBanco, Inc. operates as the bank holding company for WesBanco Bank, Inc. that provides retail banking, corporate banking, personal and corporate trust, brokerage, mortgage banking, and insurance services to individuals and businesses in the United States. The company operates in two segments, Community Banking, and Trust and Investment Services. It accepts interest and non-interest-bearing demand, money market, and savings deposit accounts, as well as certificates of deposit; and offers land and construction, improved property, commercial and industrial, residential real estate mortgage, and consumer loans, as well as home equity lines of credit and overdrafts. The company also provides mutual funds and annuities; and property, casualty, life, and title insurance services, as well as holds commercial real estate properties and investment securities. In addition, it offers letters of credit and international wire services, as well as operates as an investment adviser to a family of mutual funds. The company operates through branches and ATM machines in West Virginia, Ohio, western Pennsylvania, Kentucky, southern Indiana, and Maryland. WesBanco, Inc. was founded in 1870 and is headquartered in Wheeling, West Virginia."
+    },
+    "EUFN": {
+        "ticker": "EUFN",
+        "name": "iShares MSCI Europe Financials ",
+        "meta": "Europe Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of the underlying index and in investments that have economic characteristics that are substantially identical to the component securities of the underlying index. The index is a free float-adjusted market capitalization-weighted index designed to measure the combined equity market performance of the financials sector of developed market countries in Europe."
+    },
+    "ALMU": {
+        "ticker": "ALMU",
+        "name": "Aeluma, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 306619520,
+        "currency": "USD",
+        "description": "Aeluma, Inc. develops optoelectronic and electronic devices for sensing, communication, and computing applications in the United States. The company produces semiconductor materials and chips using compound semiconductors on diameter substrates that are used to manufacture mass market microelectronics. Its products are used in mobile, automotive, AI, defense and aerospace, communication, AR/VR, high-performance commuting, and quantum computing applications, as well as other electronic and optoelectronic devices, including lasers, transistors, and solar cells. Aeluma, Inc. was founded in 2019 and is headquartered in Goleta, California."
+    },
+    "GAN": {
+        "ticker": "GAN",
+        "name": "GAN",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "AOA": {
+        "ticker": "AOA",
+        "name": "iShares Core 80/20 Aggressive A",
+        "meta": "Global Aggressive Allocation",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund is a fund of funds and seeks its investment objective by investing primarily in underlying funds that themselves seek investment results corresponding to their own respective underlying indexes. It generally will invest at least 80% of its assets in the component securities of the underlying index. The index measures the performance of the S&P Dow Jones Indices LLC proprietary allocation model."
+    },
+    "TAP": {
+        "ticker": "TAP",
+        "name": "Molson Coors Beverage Company",
+        "meta": "Beverages - Brewers",
+        "type": "EQUITY",
+        "mcap": 9407243264,
+        "currency": "USD",
+        "description": "Molson Coors Beverage Company manufactures, markets, and sells beer and other malt beverage products in the Americas, Europe, the Middle East, Africa, and the Asia Pacific. The company offers flavored malt beverages including hard seltzers, craft, spirits, and ready to drink beverages. It provides its products under Arnold Palmer Spiked, Aspall Cider, Blue Moon, Beck's, Blue Run Spirits, Cobra, Corona Extra, Coors Original, Five Trail, Heineken, Leinenkugel's, Madri, Miller Genuine Draft, Molson Ultra, Peroni Nastro Azurro, Pilsner Urquell, Redd's, Sharp's, Simply Spiked, Sol, Staropramen, Stella Artois, Topo Chico Hard Seltzer, ZOA Energy, and Vizzy Hard Seltzer above premium brands; Bergenbier, Borsodi, Burgasko, Caraiman, Carling, Coors Banquet, Coors Light, Jelen, Kamenitza, Miller Lite, Molson Canadian brands, Niksicko, and O\u009eujsko under the premium brands; and Branik, Icehouse, Keystone, Lowenbrau, Miller High Life, Milwaukee's Best, and Steel Reserve under the economy brands. The company was formerly known as Molson Coors Brewing Company and changed its name to Molson Coors Beverage Company in January 2020. Molson Coors Beverage Company was founded in 1774 and is based in Golden, Colorado."
+    },
+    "PWZ": {
+        "ticker": "PWZ",
+        "name": "Invesco California AMT-Free Mun",
+        "meta": "Muni California Long",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its total assets in the components of the index. The index is composed of U.S. dollar-denominated, tax-exempt municipal debt publicly issued by California or any U.S. territory and their political subdivisions, in the U.S. domestic market. It is non-diversified."
+    },
+    "WRBY": {
+        "ticker": "WRBY",
+        "name": "Warby Parker Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 3281347072,
+        "currency": "USD",
+        "description": "Warby Parker Inc. provides eyewear products in the United States and Canada. The company offers eyeglasses, sunglasses, single-vision lenses, progressive lenses, light-responsive lenses, blue-light-filtering lenses, non-prescription lenses, and contact lenses. It also provides accessories, such as cases, lenses kit with anti-fog spray, pouches, travel cases, lenses cloth, anti-fog lens spray, and sun clip-ons through its retail stores, website, and mobile apps. In addition, the company offers eye exams and vision tests. Warby Parker Inc. was incorporated in 2009 and is headquartered in New York, New York."
+    },
+    "SPWH": {
+        "ticker": "SPWH",
+        "name": "Sportsman's Warehouse Holdings,",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 54258344,
+        "currency": "USD",
+        "description": "Sportsman's Warehouse Holdings, Inc., together with its subsidiaries, operates as an outdoor sporting goods retailer in the United States. It offers camping products, such as backpacks, camp essentials, canoes and kayaks, coolers, outdoor cooking equipment, sleeping bags, tents, and tools; and apparel products, including camouflage, jackets, hats, outerwear, sportswear, technical gear, and work wear. The company also provides fishing products comprising bait, electronics, fishing rods, flotation items, fly fishing products, lines, lures, reels, tackles, and small boats; and foot wear products consist of hiking and work boots, socks, sport sandals, technical footwear, trial and casual shoes, and waders. In addition, it offers hunting and shooting products, such as ammunition, archery items, ATV accessories, blinds and tree stands, decoys, firearms, firearms safety and storage products, reloading equipment, and shooting gear products; and optics, electronics, accessories, and other products comprising gift items, GPS devices, knives, lighting, optics, and two-way radios. Further, the company's stores provide archery technician services, fishing-reel line winding, scope mounting and bore sighting, and cleaning services, as well as issues hunting and fishing licenses. Additionally, it offers various private label and special make-up offerings under the Rustic Ridge, Killik, Vital Impact, Yukon Gold, Lost Creek, and Sportsman's Warehouse brands. Sportsman's Warehouse Holdings, Inc. was founded in 1986 and is headquartered in West Jordan, Utah."
+    },
+    "ARGT": {
+        "ticker": "ARGT",
+        "name": "Global X MSCI Argentina ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its total assets in the securities of the underlying index and in American Depositary Receipts (\"ADRs\") and Global Depositary Receipts (\"GDRs\") based on the securities in the underlying index. The underlying index is designed to represent the performance of the broad Argentina equity universe, while including a minimum number of constituents. The fund is non-diversified."
+    },
+    "COLM": {
+        "ticker": "COLM",
+        "name": "Columbia Sportswear Company",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 2964703744,
+        "currency": "USD",
+        "description": "Columbia Sportswear Company, together with its subsidiaries, designs, develops, markets, and distributes outdoor, active, and lifestyle products in the United States, Latin America, the Asia Pacific, Europe, the Middle East, Africa, and Canada. The company provides apparel, accessories, and equipment for hiking, trail running, snow, fishing, hunting, and outdoor activities. It also offers footwear products that include hiking boots; trail running shoes; rugged cold weather boots; sandals and shoes for use in water activities; and footwear for lifestyle wear. The company serves its products through wholesale distribution channel comprising small independently operated specialty outdoor and sporting goods stores, sporting goods chains, department store chains, internet retailers, and international distributors, as well as through direct-to-consumer distribution channel, including a network of branded, outlet, temporary clearance and employee retail stores, brand-specific e-commerce sites, and shop-in-shop retail locations. It sells its products under the Columbia, Mountain Hard Wear, prAna, and SOREL brands. Columbia Sportswear Company was founded in 1938 and is headquartered in Portland, Oregon."
+    },
+    "UCL": {
+        "ticker": "UCL",
+        "name": "uCloudlink Group Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 58706924,
+        "currency": "USD",
+        "description": "uCloudlink Group Inc. operates as a mobile data traffic sharing marketplace in the telecommunications industry. The company provides uCloudlink 1.0, a model that focuses on cross-border travelers that need mobile data connectivity services in various countries; and operates portable Wi-Fi services under the Roamingman name in China and Malaysia, which provides global mobile data connectivity services, as well as offers GlocalMe portable Wi-Fi terminals and cloud SIM architecture for mobile virtual network operators, mobile network operators (MNOs), and portable Wi-Fi terminal rental companies. It offers uCloudlink 2.0, a model that provides mobile data connectivity services to local users through various MNOs; GlocalMe Inside, an implementation solution for smartphones and other smart hardware products, which enables them to access its cloud SIM architecture and SIM card pool; and GlocalMe, a world phone series. In addition, the company provides IoT modules with GlocalMe Inside implementation to meet the demand for mobile data from various terminals, as well as provides integrated network solutions to its customers; SIM cards with prepaid data packages; and value-added services, such as advertisement. Further, it's platform-as-a-service/software-as-a-service offers modules, such as customer relationship management, operations and business support system, and SIM card enterprise resource planning and management. The company was incorporated in 2014 and is headquartered in Tsim Sha Tsui, Hong Kong."
+    },
+    "CHWY": {
+        "ticker": "CHWY",
+        "name": "Chewy, Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 12508056576,
+        "currency": "USD",
+        "description": "Chewy, Inc., together with its subsidiaries, engages in the e-commerce business in the United States. It offers pet food and treats, pet supplies and pet medications, and other pet-health products, as well as pet services. The company serves its customer through its retail websites and mobile applications, including Autoship subscription program. Chewy, Inc. was founded in 2010 and is based in Plantation, Florida."
+    },
+    "TSCO": {
+        "ticker": "TSCO",
+        "name": "Tractor Supply Company",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 26927446016,
+        "currency": "USD",
+        "description": "Tractor Supply Company operates as a rural lifestyle retailer in the United States. The company offers various merchandise, including livestock and equine feed and equipment, poultry, fencing, and sprayers and chemicals; companion animal products, such as food, treats, and equipment for dogs, cats, and other small animals, as well as dog wellness products; seasonal and recreation products comprising tractors and riders, lawn and garden, bird feeding, power equipment, and other recreational products; truck, tool, and hardware products, such as truck accessories, trailers, generators, lubricants, batteries, and hardware and tools; and clothing, gift, and d\u00e9cor products consist of clothing, footwear, toys, snacks, and decorative merchandise. It provides its products under the 4health, Paws & Claws, American Farmworks, Producer's Pride, Bit & Bridle, Red Shed, Blue Mountain, Redstone, C.E. Schmidt, Retriever, Country Lane, Ridgecut, Countyline, Royal Wing, Country Tuff, Strive, Dumor, Traveller, Farm Table, Treeline, Groundwork, TSC Tractor Supply Co, Huskee, Untamed, JobSmart, and Impeckable brand names. The company operates its retail stores under the Tractor Supply Company, Petsense by Tractor Supply, and Orscheln Farm and Home names; and operates websites under the TractorSupply.com and Petsense.com names. It sells its products to recreational farmers, ranchers, and others. Tractor Supply Company was founded in 1938 and is based in Brentwood, Tennessee."
+    },
+    "JOUT": {
+        "ticker": "JOUT",
+        "name": "Johnson Outdoors Inc.",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 469237600,
+        "currency": "USD",
+        "description": "Johnson Outdoors Inc. designs, manufactures, and markets seasonal and outdoor recreation products for fishing worldwide. It operates through Fishing; Camping & Watercraft Recreation; and Diving segments. The Fishing segment offers electric motors for quiet trolling or primary propulsion, marine battery chargers, and shallow water anchors; sonar and GPS equipment for fish finding, navigation and marine cartography; and downriggers for controlled-depth fishing. This segment sells its products under the Minn Kota, Humminbird, and Cannon brands through outdoor specialty retailers, retail store chains, internet dealers, original equipment manufacturers, and distributors. The Camping & Watercraft Recreation segment provides portable outdoor cooking systems, single burner and two burner stoves, and accessories under the Jetboil brand to camping and backpacking specialty stores, sporting goods stores, internet retailers, and direct customer through website and distributors; and kayaks, canoes, personal watercraft equipment and products, and paddles for family recreation, touring, and angling through independent specialty and outdoor retailers under Old Town and Carlisle brands. The Diving segment manufactures and markets underwater diving and snorkeling equipment, such as regulators, buoyancy compensators, dive computers and gauges, wetsuits, masks, fins, snorkels, and accessories through independent specialty dive stores and diving magazines under the SCUBAPRO brand. This segment also provides regular maintenance, product repair, diving education, and travel program services; and sells diving gear to dive training centers, resorts, and public safety units through websites and internet retailers. The company was founded in 1970 and is headquartered in Racine, Wisconsin."
+    },
+    "AX": {
+        "ticker": "AX",
+        "name": "Axos Financial, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 5360787968,
+        "currency": "USD",
+        "description": "Axos Financial, Inc., together with its subsidiaries, operates as a consumer and business banking provider in the United States. The company operates through two segments, Banking Business and Securities Business. It offers deposits products, including consumer and business checking, savings, time deposit, and commercial and deposits. The company also provides residential single family, multifamily, and commercial mortgage loans; commercial real estate secured, commercial and industrial non-real estate, and auto and consumer loans. In addition, it offers a range of investment and wealth management services, such as disclosed clearing, recordkeeping, trade reporting, and reorganization assistance services, as well as margin loans and securities lending services. The company was formerly known as BofI Holding, Inc. and changed its name to Axos Financial, Inc. in September 2018. Axos Financial, Inc. was incorporated in 1999 and is based in Las Vegas, Nevada."
+    },
+    "NERD": {
+        "ticker": "NERD",
+        "name": "Roundhill Video Games ETF",
+        "meta": "Communications",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund is an actively managed exchange-traded fund (\u201cETF\u201d) that seeks to achieve its investment objective by investing in the equity securities of Video Game Companies. It invests, under normal circumstances, at least 80% of its net assets (plus borrowings for investment purposes) in Video Games Companies. The fund is non-diversified."
+    },
+    "ASO": {
+        "ticker": "ASO",
+        "name": "Academy Sports and Outdoors, In",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 3691476736,
+        "currency": "USD",
+        "description": "Academy Sports and Outdoors, Inc., through its subsidiaries, operates as a sporting goods and outdoor recreational retailer in the United States. The company's outdoors division comprises camping products, such as coolers and drinkware, and camping accessories and equipment; fishing products, including marine equipment and fishing rods, reels, and baits and equipment; and hunting products, which includes firearms, ammunition, archery and archery equipment, camouflage apparel, waders, shooting accessories, gun safes, optics, airguns, and hunting equipment. Its sports and recreation division offers fitness equipment, fitness accessories, and nutrition supplies; team and specialty sports equipment, including baseball, football, basketball, soccer, golf, racket sports, volleyball, backpacks, and sports bags; recreation products, which includes patio furniture, outdoor cooking, trampolines, play sets, watersports, and pet equipment, as well as wheeled goods that include bicycles, skateboards, and other ride-on toys; and electronics, watches, and sunglasses, as well as front-end products, such as consumables, batteries, etc. The company's apparel division provides outdoor and seasonal apparel, denim, work apparel, graphic t-shirts, and accessories; boys and girls outdoor, and athletic apparel; sporting and fitness apparel; and professional and collegiate team licensed apparel and accessories. Its footwear division offers casual shoes, slippers, seasonal footwear, and socks; work and western boots, shoes, and hunting footwear; boys and girls footwear; athletic footwear, such as running shoes, athletic lifestyle, and training shoes; and team and specialty sports footwear, and slides. The company sells its products under the Academy Sports + Outdoors, Magellan Outdoors, BCG, O'rageous, Game Winner, Outdoor Gourmet, Freely, and R.O.W. brand names. Academy Sports and Outdoors, Inc. was founded in 1938 and is headquartered in Katy, Texas."
+    },
+    "YETI": {
+        "ticker": "YETI",
+        "name": "YETI Holdings, Inc.",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 3712759296,
+        "currency": "USD",
+        "description": "YETI Holdings, Inc. designs, retails, and distributes outdoor products under the YETI brand name. It offers coolers and equipment, including hard and soft coolers, cargo, bags, outdoor living, and associated accessories; and backpacks, duffel bags, luggage, packing cubes, carryalls, camp chairs, blankets, dog beds, dog bowls, and gear cases under the LoadOut, Panga, Crossroads, Camino, Hondo Base, Trailhead, Lowlands, Boomer, and SideKick Dry brand names. The company also provides drinkware products, such as french press, pitcher, pour over, flask, and shot glasses, as well as Bucket, wine chillers, cocktail shaker, colsters, lowball, stackable pints, mugs, tumblers, straw mugs and cups, bottles, jugs, and related accessories; straw caps and lids, bottle chug caps, magslider lid and color pack, tumbler handles, jug mounts, and ice scoop; food storage containers; and cast-iron skillet cookware products. In addition, it offers apparel and gear products, including hats, shirts, bottle openers, and ice substitutes. The company sells its products through independent retailers comprising outdoor specialty, hardware, sporting goods, and farm and ranch supply stores, as well as through its own website. It operates in the United States, Canada, Australia, New Zealand, Europe, and Japan. YETI Holdings, Inc. was founded in 2006 and is headquartered in Austin, Texas."
+    },
+    "THD": {
+        "ticker": "THD",
+        "name": "iShares MSCI Thailand ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 326144992,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of the underlying index and in investments that have economic characteristics that are substantially identical to the component securities of the underlying index. The index is designed to measure the performance of the large-, mid- and small-capitalization segments of the equity market in Thailand. It is non-diversified."
     }
 }
