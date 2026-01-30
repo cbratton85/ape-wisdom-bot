@@ -11599,5 +11599,95 @@
         "mcap": 12499405,
         "currency": "USD",
         "description": "Guardforce AI Co., Limited engages in the provision of secured logistics services in the Asia Pacific. It operates through Secured Logistics; AI&Robotics Solution Business; and General Security Solutions segments. The company offers cash-in-transit non-dedicated vehicle; cash-in transit dedicated vehicle; ATM management; cash processing; cash center operations; consolidate cash center operations; cheque center services; express cash; coin processing services; and cash deposit machine solutions, including cash deposit management for business. It also provides delivery service for high value items such as diamonds and jewelries; Robotic solutions with AI integration; advertising services; smart retail solution; and security engineering and maintenance. In addition, the company is involved in developing web-based AI solutions to help with personalized trip planning; and selling and leasing robots. It serves its products to local commercial banks, chain retailers, coin manufacturing mints, and government authorities. The company was founded in 1982 and is based in Singapore."
+    },
+    "KODK": {
+        "ticker": "KODK",
+        "name": "Eastman Kodak Company",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 727820032,
+        "currency": "USD",
+        "description": "Eastman Kodak Company focuses on the commercial print and advanced materials and chemicals businesses worldwide. The company operates through three segments: Print, Advanced Materials and Chemicals, and Brand. The Print segment provides digital offset plate offerings and computer-to-plate imaging solutions; digital printing solutions; press systems and components under the PROSPER brand name, as well as print inks and primers under the KODAK OPTIMAX, KODACHROME, and KODAK EKTACOLOR brand names; and PRINERGY, a workflow production software that is used by customers to manage digital and conventional print content from file creation to output. This segment offers its products to commercial industries, including commercial print, direct mail, book publishing, newspapers and magazines, d\u00e9cor, and packaging/labels. The Advanced Materials and Chemicals segment engages in the industrial film and chemicals, motion picture, advanced materials and functional printing, and IP licensing and analytical activities. This segment also comprises the Kodak Research Laboratories, which conducts research, develops new product or new business opportunities, and files patent applications, as well as manages licensing of its intellectual property to third parties. The Brand segment engages in the licensing of Kodak brand to third parties. The company is also involved in the operation of Eastman Business Park, a technology center and industrial complex. It sells its products and services through direct sales, third party resellers, dealers, channel partners, and distributors. The company was founded in 1880 and is headquartered in Rochester, New York."
+    },
+    "FRI": {
+        "ticker": "FRI",
+        "name": "First Trust S&P REIT Index Fund",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will normally invest at least 90% of its net assets (including investment borrowings) in the securities that comprise the index. The index seeks to measure the performance of publicly-traded REITs domiciled in the United States that meet certain eligibility requirements."
+    },
+    "AUID": {
+        "ticker": "AUID",
+        "name": "authID Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 23057378,
+        "currency": "USD",
+        "description": "authID Inc. provides biometric identity platform worldwide. The company offers cloud-based platform, including Biometric Identity Verification \u0096 Proof, which establishes the identity of a user based on a variety of ground truth sources, including government-issued identity documents, such as national IDs, driver's licenses, passports, and electronic machine-readable travel documents; Verified platform, which detects presentation attack and spoofing threats; authID's Proof for identity verification product eliminates the need for costly and less accurate face-to-face, in-person ID checks; Biometric Identity Authentication \u0096 Verified, which provides organization with a secure convenient solution to validate that individual is the verified account owner for various purposes, including passwordless login and performing specific transactions, and functions; PrivacyKey Privacy Preserving Biometrics solution provides biometric authentication without the requirement to store any biometri and derivative of biometric data; Account Access and Recovery, which allows users to recover, via a facial biometric, account access that is lost or blocked due to expired credentials, lockouts, lost or stolen devices, and compromised accounts. The company was formerly known as Ipsidy Inc. and changed its name to authID Inc. authID Inc. was founded in 2009 and is headquartered in Denver, Colorado."
+    },
+    "LRHC": {
+        "ticker": "LRHC",
+        "name": "La Rosa Holdings Corp.",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 1599650,
+        "currency": "USD",
+        "description": "La Rosa Holdings Corp., through its subsidiaries, operates primarily in the residential real estate market in the United States. The company operates through six segments: Real Estate Brokerage Services (Residential), Franchising Services, Coaching Services, Property Management, Real Estate Brokerage Services (Commercial), and Title Settlement and Insurance. It is involved in the residential and commercial real estate brokerage business; delivery of coaching services to its brokers and franchisee's brokers; franchising of real estate brokerage agencies; and property management services to owners of single-family residential properties, as well as providing title services related to real estate transactions. La Rosa Holdings Corp. was founded in 2004 and is based in Celebration, Florida."
+    },
+    "ANL": {
+        "ticker": "ANL",
+        "name": "Adlai Nortye Ltd.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 240958752,
+        "currency": "USD",
+        "description": "Adlai Nortye Ltd., a clinical-stage biotechnology company, engages in the research and development of pharmaceutical products. Its lead product is AN2025, a pan-phosphoinositide 3-kinase inhibitor, which is in Phase III clinical trials for the treatment of recurrent or metastatic head and neck squamous cell carcinomas. The company is also developing AN0025, a small molecule prostaglandin E receptor 4 antagonist to modulate the tumor microenvironment that is in a Phase Ib clinical trial for the treatment of recurrent non-small cell lung cancer and urothelial cancer after anti-PD-1/PD-L1 treatments, recurrent triple-negative breast cancer, microsatellite stable colorectal cancer, and cervical cancer after standard of care treatments; and AN4005, an oral small-molecule PD-L1 inhibitor, which is in Phase I clinical trials to induce and stabilize PD-L1 dimerization and disrupt the interaction between PD-1 and PD-L1. Its preclinical candidates include AN8025, a multifunctional antibody as T cell and antigen-presenting cell modulator; and AN9025, an oral small molecule pan-KRAS inhibitor. The company was founded in 2004 and is based in Grand Cayman, the Cayman Islands."
+    },
+    "EBAY": {
+        "ticker": "EBAY",
+        "name": "eBay Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 43145371648,
+        "currency": "USD",
+        "description": "eBay Inc., together with its subsidiaries, operates marketplace platforms that connect buyers and sellers in the United States, the United Kingdom, China, Germany, and internationally. The company's marketplace platform includes its online marketplace at ebay.com, off-platform businesses, and the eBay suite of mobile apps. Its platforms enable users to list, sell, buy, and pay various products. The company was founded in 1995 and is headquartered in San Jose, California."
+    },
+    "ETSY": {
+        "ticker": "ETSY",
+        "name": "Etsy, Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 5446016000,
+        "currency": "USD",
+        "description": "Etsy, Inc., together with its subsidiaries, operates two-sided online marketplaces that connect buyers and sellers worldwide. The company operates through three segments: Etsy, Reverb, and Depop. It primarily operates Etsy marketplace that connects artisans and entrepreneurs with various consumers. The company also offers Reverb, a musical instrument marketplace; and Depop, a fashion resale marketplace. In addition, it provides marketplace activities, including transaction offsite advertising, payments processing, and listing fees, as well as from optional seller services, which include on-site advertising and shipping labels. Further, the company offers Etsy Search Visibility Page that is designed to give sellers more agency and control over their businesses; Etsy Purchase Protection program that is designed to help buyers; and Etsy Share & Save program for sellers to save on Etsy fees for sales that drive to their Etsy shop from their own channels, as well as educational resources. The company was formerly known as Indieco, Inc changed its name to Etsy, Inc. in June 2006. Etsy, Inc. was founded in 2005 and is headquartered in Brooklyn, New York."
+    },
+    "SPCX": {
+        "ticker": "SPCX",
+        "name": "SPAC and New Issue ETF",
+        "meta": "Event Driven",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will invest at least 80% of its net assets (plus borrowings for investment purposes) in units and shares of Special Purpose Acquisitions Companies (\u201cSPACs\u201d) that have a minimum capitalization of $100 million and companies that completed an initial public offering (\u201cIPO\u201d) within the last two years. The fund may also invest in depositary receipts or appropriate ETFs for cash management purposes or due to a lack of suitable investment opportunities, the fund may hold up to 20% of its net assets in cash or similar short-term, high-quality debt securities."
+    },
+    "CRSP": {
+        "ticker": "CRSP",
+        "name": "CRISPR Therapeutics AG",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 5084267008,
+        "currency": "USD",
+        "description": "CRISPR Therapeutics AG, a gene editing company, focuses on developing gene-based medicines for serious human diseases using its Clustered Regularly Interspaced Short Palindromic Repeats (CRISPR)/CRISPR-associated protein 9 (Cas9) platform. The company's CRISPR/Cas9 is a revolutionary technology for gene editing which is the process of precisely altering specific sequences of genomic DNA. It has a portfolio of therapeutic programs across a range of disease areas, including hemoglobinopathies, CAR T cell therapies, in vivo, and type 1 diabetes, as well as develops investigational CAR T programs, including an autologous, gene-edited CAR T program targeting glypican-3 (GPC3) for the potential treatment of solid tumors. The company's lead product candidate is CASGEVY, an ex vivo CRISPR/Cas9 gene-edited cell therapy for treating patients suffering from transfusion-dependent beta-thalassemia, severe sickle cell disease (SCD), and hemoglobinopathies in which a patient's hematopoietic stem and progenitor cells are edited to produce high levels of fetal hemoglobin in red blood cells. It also develops CAR T cell therapies, including CTX112 targeting cluster of differentiation 19 (CD19) and CTX131 targeting CD70 for oncology and autoimmune indications; CTX310 and CTX320, in vivo gene editing to address the cardiovascular disease by disrupting the validated targets angiopoietin-like protein 3 and lipoprotein; and CTX211, an allogeneic, gene-edited, hypoimmune stem cell-derived product candidate for the treatment of T1D. It has strategic partnerships with Vertex Pharmaceuticals Incorporated, Nkarta, Inc., and Capsida Biotherapeutics. CRISPR Therapeutics AG was incorporated in 2013 and is headquartered in Zug, Switzerland."
+    },
+    "DAVE": {
+        "ticker": "DAVE",
+        "name": "Dave Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2314599680,
+        "currency": "USD",
+        "description": "Dave Inc. provides various financial products and services through its financial services platform in the United States. The company offers Budget, personal financial management tool that helps members with budgeting, and managing income and expenses; ExtraCash, a short-term liquidity alternative, which allows members to advance funds to their account through automated clearing house network and avoid a fee; Side Hustle, a job application portal to find supplemental or temporary work; and Surveys, which allows member to take paid surveys within the Dave mobile application. It also provides Dave Banking, a digital checking and demand deposit account. Dave Inc. was founded in 2015 and is headquartered in Los Angeles, California."
     }
 }
