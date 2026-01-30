@@ -11779,5 +11779,59 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund normallyinvests at least 80% of its total assets in securities that comprise the fund\u2019s benchmark index. The index includes securities of African companies. African companies generally include local listings of companies that are incorporated in Africa and listings of companies incorporated outside of Africa but that have at least 50% of their revenues/related assets in Africa."
+    },
+    "PFSI": {
+        "ticker": "PFSI",
+        "name": "PennyMac Financial Services, In",
+        "meta": "Mortgage Finance",
+        "type": "EQUITY",
+        "mcap": 7779231232,
+        "currency": "USD",
+        "description": "PennyMac Financial Services, Inc., through its subsidiaries, engages in the mortgage banking and investment management activities in the United States. The company operates through two segments, Production and Servicing. The Production segment is involved in the origination, acquisition, and sale of loans. This segment sources residential conventional and government-insured or guaranteed mortgage loans through correspondent production, consumer direct lending, and broker direct lending. The Servicing segment performs loan servicing for newly originated loans that are under holding for sale and loans services for others. The segment performs loan administration, collection, and default management activities, including the collection and remittance of loan payments; responds to customer inquiries; provides accounting for principal and interest; holds custodial funds for the payment of property taxes and insurance premiums; offers counseling for delinquent borrowers; and supervising foreclosures and property dispositions, as well as administers loss mitigation activities comprising modification and forbearance programs. The company was founded in 2008 and is headquartered in Westlake Village, California."
+    },
+    "NCL": {
+        "ticker": "NCL",
+        "name": "Northann Corp.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 4207474,
+        "currency": "USD",
+        "description": "Northann Corp. engages in the operates dotfloor.com, the online store that offers vinyl flooring products internationally. It offers its products under the Benchwick and Dotfloor brand names; and it serves retail customers. The company was founded in 2013 and is based in Elk Grove, California."
+    },
+    "BCE": {
+        "ticker": "BCE",
+        "name": "BCE, Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 23770083328,
+        "currency": "USD",
+        "description": "BCE Inc., a communications company, provides wireless, wireline, internet, streaming services, and television (TV) services to residential, business, and wholesale customers in Canada. It operates in two segments: Bell Communication and Technology Services, and Bell Media. The Bell Communication and Technology Services segment provides wireless products and services including mobile data and voice plans, streaming services, and devices; wireline products and services comprising data, including internet access, internet protocol television, cloud-based services and business solutions, as well as voice, and other communication services and products, satellite TV and connectivity services for residential, small and medium-sized business, and large enterprise customers. This segment also buys and sells local telephone, long distance, and data and other services from or to resellers and other carriers; and operates consumer electronics retail stores. The Bell Media segment provides a portfolio of video, audio, out-of-home advertising, and digital media services. BCE Inc. was founded in 1880 and is headquartered in Verdun, Canada."
+    },
+    "GRND": {
+        "ticker": "GRND",
+        "name": "Grindr Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2223101184,
+        "currency": "USD",
+        "description": "Grindr Inc. operates a social networking and dating application for the lesbian, gay, bisexual, transgender, and queer (LGBTQ) communities worldwide. It operates Grindr platform, a social networking platform serving and addressing the needs of gay, bisexual, and sexually explorative adults worldwide. It also offers Grindr as the Global Gayborhood in Your Pocket brand. In addition, the company provides ad-supported service and a premium subscription version. Grindr Inc. was founded in 2009 and is headquartered in West Hollywood, California."
+    },
+    "ERJ": {
+        "ticker": "ERJ",
+        "name": "ERJ",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "CL": {
+        "ticker": "CL",
+        "name": "Colgate-Palmolive Company",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 68892737536,
+        "currency": "USD",
+        "description": "Colgate-Palmolive Company, together with its subsidiaries, manufactures and sells consumer products in the United States and internationally. It operates through two segments: Oral, Personal and Home Care; and Pet Nutrition. The Oral, Personal and Home Care segment offers toothpaste, toothbrushes, mouthwash, bar and liquid hand soaps, shower gels, shampoos, conditioners, deodorants and antiperspirants, skin health products, dishwashing detergents, fabric conditioners, household cleaners, and other related items. This segment markets and sells its products under the Colgate, Palmolive, Darlie, elmex, hello, meridol, Sorriso, Tom's of Maine, EltaMD, Filorga, Irish Spring, Protex, Sanex, Softsoap, Lady Speed Stick, Speed Stick, PCA SKIN, Ajax, Axion, Fabuloso, Murphy, Suavitel, and Soupline brands to a range of traditional and eCommerce retailers, wholesalers, and distributors, as well as dentists and skin health professionals. It also offers pharmaceutical products for dentists and other oral health professionals. The Pet Nutrition segment offers pet nutrition products for everyday nutritional needs under the Hill's Science Diet brand; and a range of therapeutic pet products to help nutritionally support dogs and cats in different stages of health under the Hill's Prescription Diet brand. This segment markets and sells its products through pet supply retailers, veterinarians, and eCommerce retailers. Colgate-Palmolive Company was founded in 1806 and is headquartered in New York, New York."
     }
 }
