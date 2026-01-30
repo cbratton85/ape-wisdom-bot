@@ -689,14 +689,15 @@ def export_interactive_html(df, ai_summary=""):
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
-            body{{ background-color:#101010; color:#e0e0e0; font-family:'Consolas','Monaco',monospace; padding:20px; }}
+            /* 1. Global Font */
+            body {{ background-color:#101010; color:#e0e0e0; font-family:'Consolas','Monaco',monospace; padding: 5px 20px 20px 20px; }}
 
-            /* --- HEADER TOOLTIP STYLES --- */
+            /* --- HEADER TOOLTIPS --- */
             .header-tip {{
                 position: relative;
                 display: inline-block;
                 cursor: help;
-                border-bottom: 1px dotted #555;
+                border-bottom: 1px dotted #777;
                 white-space: nowrap;
                 text-align: center;
                 width: auto;
@@ -712,115 +713,106 @@ def export_interactive_html(df, ai_summary=""):
                 padding: 10px;
                 border-radius: 6px;
                 width: 240px;
-                z-index: 9999; 
+                z-index: 999999; 
                 border: 1px solid #00ff00;
                 box-shadow: 0 8px 16px rgba(0,0,0,0.8);
-                font-weight: normal;
-                white-space: normal;
-                text-transform: none;
                 font-family: 'Segoe UI', Tahoma, sans-serif;
+                white-space: normal;
+                font-weight: normal;
+                text-transform: none;
             }}
             .header-tip .formula {{
-                display: block;
-                color: #888;
-                font-size: 11px;
-                font-family: 'Consolas', monospace;
-                border-bottom: 1px solid #333;
-                margin-bottom: 5px;
-                padding-bottom: 5px;
+                display: block; color: #888; font-size: 11px; font-family: 'Consolas', monospace;
+                border-bottom: 1px solid #333; margin-bottom: 5px; padding-bottom: 5px;
             }}
             .header-tip .formula:empty {{ display: none; }}
-            .header-tip .desc {{
-                display: block;
-                font-size: 13px;
-                line-height: 1.4;
-            }}
-            /* The Trigger */
-            .header-tip:hover .tip-box {{
-                display: block;
-                opacity: 1;
-            }}
-            /* --- OVERRIDES TO PREVENT CLIPPING --- */
-        .dataTables_wrapper, 
-        .table-responsive {{
-            /* Critical: Bootstrap/DataTables often hide overflow, cutting off tooltips */
-            overflow: visible !important;
-        }}
-        table.dataTable th, 
-        table.dataTable td {{
-            /* Ensures the cells allow the absolute-positioned tooltip to float over them */
-            overflow: visible !important;
-            position: relative;
-        }}
-        .header-tip .tip-box {{
-            /* Higher z-index ensures tooltips stay on top of all other table layers */
-            z-index: 99999 !important;
-            pointer-events: none; /* Prevents the tooltip box from blocking mouse clicks */
-        }}
-        /* Optional: Add space at the top of the page so the first row tooltips aren't cut by the browser top */
-        body {{
-            padding-top: 5px !important;
-        }}
-            /* END TOOLTIP CSS */
+            .header-tip .desc {{ display: block; font-size: 13px; line-height: 1.4; }}
+            .header-tip:hover .tip-box {{ display: block; }}
 
-            .master-container {{
-                margin: 0 auto;
-                width: fit-content;
-                max-width: 1600px !important;
-            }}
-            
-            .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
-            th{{ color:#00ff00; border-bottom:2px solid #444; font-size: 15px; text-transform: uppercase; vertical-align: middle !important; padding: 8px 22px 8px 6px !important; line-height: 1.2 !important; }}
-            td {{
-                vertical-align: middle; 
-                border-bottom: 1px solid #333; 
-                padding: 4px 5px !important; 
-                font-size: 15px;
-                white-space: nowrap;
-            }}
+            /* --- LAYOUT --- */
+            .master-container {{ margin: 0 auto; width: fit-content; max-width: 100% !important; }}
+            .table-scroll-container {{ overflow-x: visible !important; overflow-y: visible; width: 100%; position: relative; }}
+            .dataTables_wrapper, .table-responsive {{ overflow: visible !important; }}
+
+            /* --- TABLE STYLES --- */
+            .table-dark {{ --bs-table-bg:#18181b; color:#ccc }}
             
             table.dataTable {{
-                width: auto !important;
+                width: auto !important; 
                 margin: 0 auto;
                 border-collapse: collapse !important;
+                border: 1px solid #444; 
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
             }}
+
+            /* --- DEFAULT CELL STYLES (Targeting Numeric Columns) --- */
+            th, td {{
+                vertical-align: middle !important;
+                font-size: 13px;
+                line-height: 1.2 !important;
+                border-right: 1px solid #333;
+                white-space: nowrap;
+                width: 1% !important;  /* DEFAULT: Force all columns to shrink */
+            }}
+
+            /* Header Specifics */
+            th {{
+                color: #00ff00;
+                border-bottom: 2px solid #444;
+                text-transform: uppercase;
+                padding: 6px 18px 6px 6px !important; 
+            }}
+            /* Data Specifics */
+            td {{ border-bottom: 1px solid #333; padding: 4px 6px !important; }}
             
-            /* Column Widths */
-            th:nth-child(1), td:nth-child(1) {{ width: 1% !important; text-align: center; font-weight: bold; }} 
-            th:nth-child(2), td:nth-child(2) {{ width: 1% !important; text-align: center; }}
-            th:nth-child(3), td:nth-child(3) {{ width: 1% !important; text-align: center; font-weight: bold; }}
+            /* Remove right border from last column */
+            th:last-child, td:last-child {{ border-right: none; }}
+
+            /* --- WIDE COLUMNS (Name & Industry) --- */
+
+            /* 1. NAME COLUMN (Col 4) - WIDE */
             th:nth-child(4), td:nth-child(4) {{
-                width: 1% !important;
                 text-align: left !important;
-                min-width: 260px !important;
-                max-width: 260px !important;
-                white-space: nowrap !important;
+                width: auto !important;       
+                min-width: 220px !important;  
+                max-width: 350px !important;  
                 overflow: hidden !important;
-                }}
-            th:nth-child(5), td:nth-child(5) {{ width: 1% !important; text-align: left; }}
-            th:nth-child(6), td:nth-child(6) {{ width: 1% !important; text-align: right; padding-right: 20px !important;}}
-            th:nth-child(7), td:nth-child(7) {{ width: 1% !important; text-align: center; }}
-            th:nth-child(8), td:nth-child(8) {{ width: 1% !important; text-align: center; }}
-            th:nth-child(9), td:nth-child(9) {{ width: 1% !important; text-align: center; }}
-            th:nth-child(10), td:nth-child(10) {{ width: 1% !important; text-align: center; }}
-            th:nth-child(11), td:nth-child(11) {{ width: 1% !important; text-align: center; }}
-            th:nth-child(12), td:nth-child(12) {{ width: 1% !important; text-align: center; }}
-            th:nth-child(13), td:nth-child(13) {{ width: 1% !important; text-align: center; }}
-            th:nth-child(14), td:nth-child(14) {{ width: 1% !important; text-align: center; }}
-            th:nth-child(15), td:nth-child(15) {{ width: 1% !important; text-align: center; }}
-            th:nth-child(16), td:nth-child(16) {{ width: 1% !important; text-align: center; }}
-            th:nth-child(17), td:nth-child(17) {{ width: 1% !important; text-align: center; }}
-            th:nth-child(18), td:nth-child(18) {{ width: 1% !important; text-align: center; }}
+                text-overflow: ellipsis !important;
+            }}
+
+            /* 2. INDUSTRY COLUMN (Col 19) - WIDE */
             th:nth-child(19), td:nth-child(19) {{
-                width: 1% !important;
                 text-align: left !important;
-                white-space: nowrap !important;
-                min-width: 300px !important;
+                width: auto !important;
+                min-width: 200px !important;
                 max-width: 300px !important;
-                border-right: 1px solid #333 !important;
                 overflow: hidden !important;
-                }}
-                
+                text-overflow: ellipsis !important;
+            }}
+
+            /* 3. SYMBOL & PRICE (Left/Right Align) */
+            th:nth-child(5), td:nth-child(5) {{ text-align: left !important; font-weight: bold; }}
+            th:nth-child(6), td:nth-child(6) {{ text-align: right !important; }}
+
+            /* 4. CENTER ALIGNMENT (All other columns) */
+            th:nth-child(1), td:nth-child(1), /* Rank */
+            th:nth-child(2), td:nth-child(2), /* Rank+ */
+            th:nth-child(3), td:nth-child(3), /* Heat */
+            th:nth-child(7), td:nth-child(7), /* Acc */
+            th:nth-child(8), td:nth-child(8), /* Eff */
+            th:nth-child(9), td:nth-child(9), /* Conv */
+            th:nth-child(10), td:nth-child(10), /* Upvs */
+            th:nth-child(11), td:nth-child(11), /* Upv+ */
+            th:nth-child(12), td:nth-child(12), /* Vol */
+            th:nth-child(13), td:nth-child(13), /* Srg */
+            th:nth-child(14), td:nth-child(14), /* Vel */
+            th:nth-child(15), td:nth-child(15), /* Strk */
+            th:nth-child(16), td:nth-child(16), /* MENT */
+            th:nth-child(17), td:nth-child(17), /* Mnt% */
+            th:nth-child(18), td:nth-child(18)  /* Sqz */
+            {{ text-align: center; }}
+
+            /* --- MISC UI --- */
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
             table.no-colors a {{ color: #4da6ff !important; }}
@@ -847,33 +839,12 @@ def export_interactive_html(df, ai_summary=""):
             #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px;}}
             .header-flex {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
 
-            .dataTables_filter {{
-                float: none !important;
-                text-align: center !important;
-                width: 100%;
-                margin-left: -430px;
-            }}
-            .dataTables_filter input {{
-                width: 250px !important; 
-                background: #111 !important; 
-                border: 1px solid #555 !important; 
-                color: #fff !important; 
-                height: 30px !important; 
-            }}
-
-            /* --- PAGINATION DARK MODE FIX --- */
+            .dataTables_filter {{ float: none !important; text-align: center !important; width: 100%; margin-left: -430px; }}
+            .dataTables_filter input {{ width: 250px !important; background: #111 !important; border: 1px solid #555 !important; color: #fff !important; height: 30px !important; }}
             .page-link {{ background-color: #1a1a1a !important; border-color: #444 !important; color: #ccc !important; }}
             .page-link:hover {{ background-color: #333 !important; color: #fff !important; }}
             .page-item.active .page-link {{ background-color: #00ff00 !important; border-color: #00ff00 !important; color: #000 !important; font-weight: bold; }}
             .page-item.disabled .page-link {{ background-color: #111 !important; border-color: #333 !important; color: #555 !important; }}
-
-
-            .table-scroll-container {{
-                overflow-x: visable;
-                overflow-y: visible;
-                width: 100%;
-                position: relative;
-            }}
         </style>
         </head>
         <body>
