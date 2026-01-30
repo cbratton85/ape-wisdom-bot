@@ -12931,5 +12931,194 @@
         "mcap": 162814576,
         "currency": "USD",
         "description": "Accendra Health, Inc., together with its subsidiaries, operates as a healthcare solutions company worldwide. The company operates in two segments, Products & Healthcare Services and Patient Direct. The Products & Healthcare Services segment offers a portfolio of products and services to healthcare providers and manufacturers. Its portfolio of medical and surgical supplies includes branded products and its proprietary products. This segment also offers services to healthcare providers, including supplier management, analytics, inventory management, and clinical supply management; and various programs to provide outsourced logistics and marketing solutions to its suppliers. The Patient Direct segment provides products and services for in-home care and delivery across diabetes treatment, home respiratory therapy, and obstructive sleep apnea treatment. This segment also supplies a range of other home medical equipment; and patient care products, including ostomy, wound care, urology, and incontinence and other products and services. The company serves multi-facility networks of healthcare providers, independent hospitals, surgery centers, physicians' practices, and networks of hospitals directly, as well as indirectly through third-party distributors. Accendra Health, Inc. was formerly known as Owens & Minor, Inc. and changed its name Accendra Health, Inc. in December 2025. The company was founded in 1882 and is based in Glen Allen, Virginia."
+    },
+    "CGNX": {
+        "ticker": "CGNX",
+        "name": "Cognex Corporation",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 6544703488,
+        "currency": "USD",
+        "description": "Cognex Corporation provides machine vision products that capture and analyze visual information to automate manufacturing and distribution tasks worldwide. Its machine vision products are used to automate the manufacturing and tracking of discrete items, including mobile phones, automotive components, and e-commerce packages by locating, identifying, inspecting, and measuring them. The company offers VisionPro software, a suite of patented vision tools for advanced programming; In-Sight product line of vision systems and sensors; QuickBuild that allows customers to build vision applications with a graphical, flowchart-based programming interface; and DataMan, an image-based barcode readers and barcode verifiers; vision accessories, such as industrial cameras, lenses, lighting, vision controllers, frame grabbers, and I/O cards. It sells its products to automotive, logistics, consumer electronics, medical-related, semiconductor, consumer products, and food and beverage industries through a network of distributors and integrators. The company was incorporated in 1981 and is headquartered in Natick, Massachusetts."
+    },
+    "PAC": {
+        "ticker": "PAC",
+        "name": "Grupo Aeroportuario Del Pacific",
+        "meta": "Airports & Air Services",
+        "type": "EQUITY",
+        "mcap": 13803778048,
+        "currency": "USD",
+        "description": "Grupo Aeroportuario del Pac\u00edfico, S.A.B. de C.V., together with its subsidiaries, develops, operates, and manages airports in Mexico and Jamaica. The company operates twelve international airports in Guadalajara and Tijuana areas, Mexico; and two international airports in Montego Bay, Jamaica. It also offers aeronautical services, such as passenger, aircraft landing, parking charges, leasing of space to these airlines, airport security and passenger walkway, and airport bus; complementary services, including baggage handling, catering, aircraft maintenance and repair, and fuel; cargo handling; and ground transportation services. In addition, the company provides non-aeronautical services, such as redesigning and modernizing terminal spaces and developing new projects; telephone and internet services; and ground handling services under the brand Primesky, as well as advertising services. Further, it engages in commercial activities comprising leasing space in terminals to airlines and other service providers; retail stores, such as souvenir and gift shops, fashion and footwear stores, pharmacies, jewelry, electronics, cosmetics, and others; and various food and beverage services, as well as leasing space to car rental service companies, including parking spots, lots, and car rental reservation booths; and leasing space to timeshare developers, financial service providers, communications, and to operators of duty-free stores. Additionally, the company operates parking facilities; VIP lounges; convenience stores; and vending machines. The company was incorporated in 1998 and is headquartered in Guadalajara, Mexico."
+    },
+    "PFFD": {
+        "ticker": "PFFD",
+        "name": "Global X U.S. Preferred ETF",
+        "meta": "Preferred Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its total assets in the securities of its underlying index. It also invests at least 80% of its total assets in preferred securities that are domiciled in, principally traded in or whose revenues are primarily from the U.S. The underlying index is designed to track the broad-based performance of the U.S. preferred securities market."
+    },
+    "AMBP": {
+        "ticker": "AMBP",
+        "name": "Ardagh Metal Packaging S.A.",
+        "meta": "Packaging & Containers",
+        "type": "EQUITY",
+        "mcap": 2617924352,
+        "currency": "USD",
+        "description": "Ardagh Metal Packaging S.A., together with its subsidiaries, operates as a metal beverage can company in Europe, the United States, and Brazil. The company offers products for use in various end-use categories, such as beer, carbonated soft drinks, energy drinks, sparkling waters, hard seltzers, juices, pre-mixed cocktails, tea, and wine. It serves beverage producers. The company was founded in 1932 and is based in Luxembourg, Luxembourg. Ardagh Metal Packaging S.A. is a subsidiary of Ardagh Group S.A."
+    },
+    "AES": {
+        "ticker": "AES",
+        "name": "The AES Corporation",
+        "meta": "Utilities - Diversified",
+        "type": "EQUITY",
+        "mcap": 10404086784,
+        "currency": "USD",
+        "description": "The AES Corporation, together with its subsidiaries, operates as a power generation and utility company in the United States and internationally. The company owns and/or operates power plants to generate and sell power to customers, such as utilities, industrial users, and other intermediaries; owns and/or operates utilities to generate or purchase, distribute, transmit, and sell electricity to end-user customers in the residential, commercial, industrial, and governmental sectors; and generates and sells electricity on the wholesale market. It uses various fuels and technologies to generate electricity, such as coal, gas, hydro, wind, solar, and biomass, as well as renewables comprising energy storage and landfill gas. The company owns and/or operates a generation portfolio of approximately 32,109 megawatts and distributes power to 2.7 million customers. The company was formerly known as Applied Energy Services, Inc. and changed its name to The AES Corporation in April 2000. The AES Corporation was incorporated in 1981 and is headquartered in Arlington, Virginia."
+    },
+    "OPTX": {
+        "ticker": "OPTX",
+        "name": "Syntec Optics Holdings, Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 217829328,
+        "currency": "USD",
+        "description": "Syntec Optics Holdings, Inc. manufactures and supplies integrated optics and photonics components, sub-systems, and optical systems for defense, medical, and consumer end-markets worldwide. It offers polymer-based optics; and optical assemblies, electro-optics assemblies, molded polymer and glass optic components, opto-mechanical components, nano machining, and thin films coating. The company also provides optics assembly, electro-optics assembly, design, and coating services. Syntec Optics Holdings, Inc. was founded in 1981 and is based in Rochester, New York."
+    },
+    "D": {
+        "ticker": "D",
+        "name": "Dominion Energy, Inc.",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 51260411904,
+        "currency": "USD",
+        "description": "Dominion Energy, Inc. provides regulated electricity and natural gas services in the United States. It operates through Dominion Energy Virginia, Dominion Energy South Carolina, and Contracted Energy segments. The Dominion Energy Virginia segment engages in the generation, distribution, and transmission of electricity to approximately 2.8 million residential, commercial, industrial, and governmental customers in Virginia and North Carolina. The Dominion Energy South Carolina segment generates, transmits, and distributes electricity to approximately 0.8 million customers in the central, southern, and southwestern portions of South Carolina; and distributes natural gas to approximately 0.5 million residential, commercial, and industrial customers in South Carolina. The Contracted Energy segment is involved in the nonregulated long-term contracted renewable electric generation fleet and renewable natural gas facility. As of December 31, 2024, the company's portfolio of assets included approximately 30.3 GW of electric generating capacity, 10,600 miles of electric transmission lines, and 79,700 miles of electric distribution lines. The company was formerly known as Dominion Resources, Inc. Dominion Energy, Inc. was incorporated in 1983 and is headquartered in Richmond, Virginia."
+    },
+    "PMT": {
+        "ticker": "PMT",
+        "name": "PennyMac Mortgage Investment Tr",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 1026360896,
+        "currency": "USD",
+        "description": "PennyMac Mortgage Investment Trust, through its subsidiary, primarily invests in residential mortgage-related assets in the United States. The company operates through: Credit Sensitive Strategies, Interest Rate Sensitive Strategies, Correspondent Production segments. The Credit Sensitive Strategies segment invests in credit risk transfer (CRT) agreements and subordinate mortgage-backed securities (MBS). The Interest Rate Sensitive Strategies segment engages in investing in mortgage servicing rights, base servicing and excess servicing spreads, and agency and senior non-agency MBS, as well as related interest rate hedging activities. The Correspondent Production segment is involved in purchasing, pooling, and reselling newly originated prime credit quality loans directly or in the form of MBS. The company primarily sells its loans to government-sponsored entities. The company qualifies as a real estate investment trust for federal income tax purposes. It generally would not be subject to federal corporate income taxes if it distributes at least 90% of its taxable income to its shareholders. The company was incorporated in 2009 and is headquartered in Westlake Village, California."
+    },
+    "ONTO": {
+        "ticker": "ONTO",
+        "name": "Onto Innovation Inc.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 9997867008,
+        "currency": "USD",
+        "description": "Onto Innovation Inc. engages in the design, development, manufacture, and support of process control tools that performs optical metrology and inspection worldwide. The company offers lithography systems and process control analytical software. It also provides process and yield management solutions, and device packaging and test facilities through standalone systems for optical metrology, macro-defect inspection, packaging lithography, and transparent and opaque thin film measurements. In addition, the company offers process control software portfolio that includes solutions for standalone tools, groups of tools, and enterprise-or factory-wide suites. Further, it engages in systems and software, spare parts, and other services, as well as offers software licensing services. The company's products are used in semiconductor and advanced packaging device manufacturers; silicon wafers; light emitting diodes; vertical-cavity surface-emitting lasers; micro-electromechanical systems; CMOS image sensors; power devices; analog devices; RF filters; data storage; and various industrial and scientific applications. Onto Innovation Inc. was founded in 1940 and is headquartered in Wilmington, Massachusetts."
+    },
+    "TPB": {
+        "ticker": "TPB",
+        "name": "Turning Point Brands, Inc.",
+        "meta": "Tobacco",
+        "type": "EQUITY",
+        "mcap": 2310612992,
+        "currency": "USD",
+        "description": "Turning Point Brands, Inc., together with its subsidiaries, manufactures, markets, and distributes branded consumer products in the United States and Canada. It operates through two segments, Zig-Zag Products and Stoker's Products. The Zig-Zag Products segment markets and distributes rolling papers, tubes, finished cigars, make-your-own cigar wraps, and related products, as well as lighters and other accessories under the Zig-Zag brand. The Stoker's Products segment manufactures and markets moist snuff tobacco and loose-leaf chewing tobacco products under the Stoker's, FRE, Beech-Nut, Durango, Trophy, and Wind River brands. In addition, it markets and distributes cannabis accessories and tobacco products. The company sells its products to wholesale distributors and retail merchants in the independent and chain convenience stores, tobacco outlets, food stores, mass merchandising, drug store, and non-traditional retail channels. The company was formerly known as North Atlantic Holding Company, Inc. and changed its name to Turning Point Brands, Inc. in November 2015. Turning Point Brands, Inc. was founded in 1988 and is headquartered in Louisville, Kentucky."
+    },
+    "QED": {
+        "ticker": "QED",
+        "name": "IQ Hedge Event-Driven Tracker E",
+        "meta": "Event Driven",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund is a \"fund of funds\" which means it invests, under normal circumstances, at least 80% of its net assets, plus the amount of any borrowings for investment purposes, in the investments included in its underlying index, which includes underlying funds. The underlying index consists of a number of components (\"underlying index components\") selected in accordance with IndexIQ's rules-based methodology of such underlying index."
+    },
+    "TOI": {
+        "ticker": "TOI",
+        "name": "The Oncology Institute, Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 268089152,
+        "currency": "USD",
+        "description": "The Oncology Institute, Inc., an oncology company, provides various medical oncology services in the United States. The company operates through three segments: Dispensary, Patient Services, and Clinical Trials & Other. It offers physician services, in-house infusion and dispensary, clinical trial, radiation, outpatient blood product transfusion, and patient support services, as well as educational seminars, support groups, counseling services, and 24/7 patient assistance services. The company also provides and manages clinical trials, palliative care programs, stem cell transplants services, other care delivery models associated with non-community-based academic, and tertiary care settings; and conducts clinical trials for a range of pharmaceutical, and medical device companies. It serves adult and senior cancer patients. The Oncology Institute, Inc. was founded in 2007 and is headquartered in Cerritos, California."
+    },
+    "MUFG": {
+        "ticker": "MUFG",
+        "name": "Mitsubishi UFJ Financial Group,",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 206732197888,
+        "currency": "USD",
+        "description": "Mitsubishi UFJ Financial Group, Inc. operates as a bank holding company that engages in a range of financial businesses in Japan, the United States, Europe, Asia/Oceania, and internationally. It operates through seven segments: Digital Services, Retail & Commercial Banking, Japanese Corporate & Investment Banking, Global Commercial Banking, Asset Management & Investor Services, Global Corporate & Investment Banking, and Global Markets. The company offers commercial banking, trust banking, and securities products and services to retail and small-and medium-sized enterprise customers. It also provides mergers and acquisitions, debt and equity issuance, financial advice, and real estate-related services; credit cards; and trust banking and securities products and services, as well as engages in the lending, fund settlement, inheritance, asset management, business and asset succession solutions, and foreign exchange businesses. In addition, the company offers corporate banking services, such as project finance, export credit agency finance, and financing through asset-backed commercial paper; investment and transaction banking services for corporations, financial institutions, sovereign and multinational organizations, and institutional investors; and asset management and investor services, including pension fund management and administration, pension structure advisory, payments to beneficiaries, and investment trust services for retail customers. Further, it provides loans, deposits, fund transfers, hedging, and investment services, as well as corporate customers; finances for automotive and consumer goods; sells and trades in fixed-income instruments, currencies, equities, and equities; offers investment products comprising mutual funds, structured bonds, and notes; originates and distributes of financial products; and provides insurance and treasury services. Mitsubishi UFJ Financial Group, Inc. was founded in 1880 and is headquartered in Tokyo, Japan."
+    },
+    "VRNS": {
+        "ticker": "VRNS",
+        "name": "Varonis Systems, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 3573467392,
+        "currency": "USD",
+        "description": "Varonis Systems, Inc. provides software products and services that continuously discover and classify critical data, remediate exposures, and detect advanced threats with AI-powered technology in North America, Europe, APAC, and rest of world. Its software protects structured and unstructured data in SaaS, IaaS, and on-premises. In the cloud, the company secures data and resources in AWS, Microsoft Azure, and Google Cloud and in SaaS applications including Salesforce, Snowflake, ServiceNow, Microsoft 365, Google Drive, Box, and others; and On-premises, it supports Windows, NAS, and Linux storage. In addition, it offers Varonis' Managed Data Detection and Response service that identifies threats to data. It uses AI-powered detection technology to investigate and respond to threats. The company works with organizations that include financial services, healthcare, manufacturing, technology, insurance, energy and utilities, consumer and retail, education, construction, and the public sector. Varonis Systems, Inc. was incorporated in 2004 and is headquartered in Miami, Florida."
+    },
+    "ADM": {
+        "ticker": "ADM",
+        "name": "Archer-Daniels-Midland Company",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 32111669248,
+        "currency": "USD",
+        "description": "Archer-Daniels-Midland Company engages in the procurement, transportation, storage, processing, and merchandising of agricultural commodities, ingredients, flavors, and solutions. It operates in three segments: Ag Services and Oilseeds; Carbohydrate Solutions; and Nutrition. The company originates, merchandises, stores, and transports agricultural raw materials, such as oilseeds and soft seeds. It engages in the agricultural commodity and feed product import, export, and distribution; and various structured trade finance activities. In addition, the company offers soybean meal and oil; vegetable and salad oils and protein meals; ingredients for the food, feed, energy, and industrial customers; margarine, shortening, and other food products; and partially refined oils to produce biodiesel and glycols for use in chemicals, paints, and other industrial products. Further, it provides peanuts, peanut-derived ingredients, and cotton cellulose pulp; sweeteners, corn and wheat starches, syrup, glucose, wheat flour, and dextrose; alcohol, and other food and animal feed ingredients; ethyl alcohol and ethanol; corn gluten feed and meal; distillers' grains; corn germ; and citric acids. Additionally, the company provides proteins, natural flavors, flavor systems, natural colors, emulsifiers, soluble fiber, polyols, hydrocolloids, probiotics, prebiotics, postbiotics, enzymes, and botanical extracts; and other specialty food and feed ingredients; edible beans; formula feeds, and animal health and nutrition products; and contract and private label pet treats and food products. It also offers futures commission merchant; commodity brokerage; cash margins and securities pledged to commodity exchange clearinghouse; and cash pledged as security under certain insurance arrangements. It operates in the United States, Switzerland, the Cayman Islands, Brazil, Mexico, Canada, the United Kingdom, and internationally. The company was founded in 1902 and is headquartered in Chicago, Illinois."
+    },
+    "ELF": {
+        "ticker": "ELF",
+        "name": "e.l.f. Beauty, Inc.",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 5034834432,
+        "currency": "USD",
+        "description": "e.l.f. Beauty, Inc., a beauty company, provides cosmetics and skin care products worldwide. The company offers eye, lip, face, paw, and skin care products. It offers products under the e.l.f. Cosmetics, e.l.f. Skin, Well People, Naturium, and Keys Soulcare brand names. The company sells its products through national and international retailer and direct-to-consumer through its e-commerce channel. e.l.f. Beauty, Inc. was formerly known as J.A. Cosmetics Holdings, Inc. and changed its name to e.l.f. Beauty, Inc. in April 2016. The company was founded in 2004 and is headquartered in Oakland, California."
+    },
+    "CMC": {
+        "ticker": "CMC",
+        "name": "Commercial Metals Company",
+        "meta": "Steel",
+        "type": "EQUITY",
+        "mcap": 8554022912,
+        "currency": "USD",
+        "description": "Commercial Metals Company manufactures, recycles, and fabricates steel and metal products, and related materials and services in the United States, Poland, China, and internationally. It operates through three segments: North America Steel Group; Europe Steel Group; and Emerging Businesses Group. The company processes and sells ferrous and nonferrous scrap metals to steel mills and foundries, aluminum sheet and ingot manufacturers, brass and bronze ingot makers, copper refineries and mills, secondary lead smelters, specialty steel mills, high temperature alloy manufacturers, and other consumers. It also manufactures and sells finished long steel products, including reinforcing bar, merchant bar, light structural, wire rod, and other special sections, as well as semi-finished billets for rerolling and forging applications. In addition, the company provides fabricated rebar used to reinforce concrete primarily in the construction of commercial and non-commercial buildings, hospitals, convention centers, industrial plants, power plants, highways, bridges, arenas, stadiums, and dams; sells and rents construction-related products and equipment to concrete installers and other businesses; and manufactures and sells strength bars for the truck trailer industry, special bar steels for the energy market, and armor plates for military vehicles. Further, it sells wire meshes, welded steel mesh, wire rod, cold rolled rebar, cold rolled wire rod, assembled rebar cages and other fabricated rebar by-products to fabricators, manufacturers, distributors, and construction companies. The company was founded in 1915 and is headquartered in Irving, Texas."
+    },
+    "BELFB": {
+        "ticker": "BELFB",
+        "name": "Bel Fuse Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 2542367744,
+        "currency": "USD",
+        "description": "Bel Fuse Inc. designs, manufactures, markets, and sells products that power, protect, and connect electronic circuits. It operates in three product groups: Power Solutions and Protection, Connectivity Solutions, and Magnetic Solutions. The company's products are used in the networking, telecommunications, computing, general industrial, high-speed data transmission, military, commercial aerospace, transportation, and e-Mobility industries. It provides power solutions and protection products, including front-end power supplies, board-mount power products, industrial and transportation power products, external power products, and circuit protection products. The company offers connectivity solutions, such as expanded beam fiber optic connectors, cable assemblies, and active optical devices; copper-based connectors/cable assemblies; radio frequency connectors, cable assemblies, microwave devices, and low loss cables; and ethernet, I/O, and industrial and power connectivity products. In addition, it provides magnetic solutions comprising integrated connector modules, power transformers, SMD power inductors and SMPS transformers, and ethernet discrete components. The company sells its products through direct strategic account managers, regional sales managers working with independent sales representative organizations, and authorized distributors North America, Europe, and Asia. Bel Fuse Inc. was incorporated in 1949 and is headquartered in West Orange, New Jersey."
+    },
+    "COF": {
+        "ticker": "COF",
+        "name": "Capital One Financial Corporati",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 138450075648,
+        "currency": "USD",
+        "description": "Capital One Financial Corporation operates as the financial services holding company for the Capital One, National Association, which engages in the provision of various financial products and services in the United States, Canada, and the United Kingdom. It operates through three segments: Credit Card, Consumer Banking, and Commercial Banking. The company accepts checking accounts, money market deposits, negotiable order of withdrawals, savings deposits, and time deposits. Its loan products include credit card loans; auto and retail banking loans; and commercial and multifamily real estate, and commercial and industrial loans. The company offers credit and debit card products; online direct banking services; and provides advisory, capital markets, treasury management, and depository services. It serves consumers, small businesses, and commercial clients through digital channels, branches, caf\u00e9s, and other distribution channels located in New York, Louisiana, Texas, Maryland, Virginia, New Jersey, and California. Capital One Financial Corporation was founded in 1988 and is headquartered in McLean, Virginia."
+    },
+    "ATI": {
+        "ticker": "ATI",
+        "name": "ATI Inc.",
+        "meta": "Metal Fabrication",
+        "type": "EQUITY",
+        "mcap": 16630134784,
+        "currency": "USD",
+        "description": "ATI Inc. produces and sells specialty materials and complex components worldwide. The company operates in two segments, High Performance Materials & Components, and Advanced Alloys & Solutions. It produces high performance materials, including titanium and titanium-based alloys, nickel- and cobalt-based alloys and superalloys, advanced powder alloys and other specialty materials, and metallic powder alloys, as well as long product forms, such as ingot, billet, bar, rod, wire, shapes and rectangles, seamless tubes, plus precision forgings, components, and machined parts. The company also offers zirconium and related alloys, including hafnium and niobium, nickel-based alloys, titanium and titanium-based alloys, and specialty alloys in various forms, such as plate, sheet, and precision rolled strip products. In addition, it provides hot-rolling conversion services comprising carbon steel products. The company serves medical and specialty energy, aerospace and defense, construction and mining, transportation, oil and gas, automotive, food equipment and appliances, and mining markets. The company was formerly known as Allegheny Technologies Incorporated. ATI Inc. was founded in 1996 and is headquartered in Dallas, Texas."
+    },
+    "FLO": {
+        "ticker": "FLO",
+        "name": "Flowers Foods, Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 2398984448,
+        "currency": "USD",
+        "description": "Flowers Foods, Inc. produces and markets packaged bakery food products in the United States. The company's principal products include fresh breads, buns, rolls, snack items, bagels, English muffins, and tortillas, as well as frozen breads and rolls under the Nature's Own, Dave's Killer Bread, Wonder, Canyon Bakehouse, Mrs. Freshley's, and Tastykake brand names. It distributes its products through a direct-store-delivery distribution and a warehouse delivery system, as well as operates bakeries. The company's customers include national and regional restaurants, institutions and foodservice distributors, and retail in-store bakeries; wholesale distributors; mass merchandisers, supermarkets, vending outlets, and convenience stores; quick-serve chains, food wholesalers, institutions, dollar stores, and vending companies; and public health care, military commissaries, and prisons, and other governmental institutions. The company was formerly known as Flowers Industries and changed its name to Flowers Foods, Inc. in 2001. Flowers Foods, Inc. was founded in 1919 and is headquartered in Thomasville, Georgia."
     }
 }
