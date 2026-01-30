@@ -1200,6 +1200,50 @@ def get_ai_analysis(df, history_data):
     except Exception as e:
         return f"AI Analysis Failed: {str(e)}"
 
+def cleanup_old_html_files(days_to_keep=14):
+    """
+    Scans the PUBLIC_DIR for scan_*.html files.
+    Deletes any that are older than 'days_to_keep'.
+    """
+    print(f"{C_CYAN}--- Checking for old HTML files to clean up... ---{C_RESET}")
+    
+    if not os.path.exists(PUBLIC_DIR):
+        return
+
+    now = datetime.datetime.now()
+    count = 0
+    
+    for filename in os.listdir(PUBLIC_DIR):
+        # Only target files that match our specific pattern: scan_YYYY-MM-DD_HH-MM.html
+        if filename.startswith("scan_") and filename.endswith(".html"):
+            try:
+                # Extract the date part from the filename
+                # format is: scan_2025-01-30_10-00.html
+                # We split by '_' and take the middle part (date) and last part (time)
+                parts = filename.replace("scan_", "").replace(".html", "").split("_")
+                
+                if len(parts) >= 2:
+                    date_str = parts[0] # "2025-01-30"
+                    file_date = datetime.datetime.strptime(date_str, "%Y-%m-%d")
+                    
+                    # Calculate age
+                    age_days = (now - file_date).days
+                    
+                    if age_days > days_to_keep:
+                        file_path = os.path.join(PUBLIC_DIR, filename)
+                        os.remove(file_path)
+                        print(f"  > Deleted old file: {filename} ({age_days} days old)")
+                        count += 1
+            except Exception as e:
+                # If a file has a weird name, just skip it
+                print(f"  > Skipping check for {filename}: {e}")
+                continue
+
+    if count == 0:
+        print(f"{C_GREEN}  > No old files found to delete.{C_RESET}")
+    else:
+        print(f"{C_GREEN}  > Cleanup complete. Removed {count} files.{C_RESET}")
+
 if __name__ == "__main__":
     is_auto = "--auto" in sys.argv
     if is_auto:
@@ -1239,5 +1283,7 @@ if __name__ == "__main__":
         send_discord_link(fname, "🚀 **New Market Scan Complete**")
     else:
         print(f"{C_RED}[!] HTML generation failed. Skipping Discord.{C_RESET}")
-    
+
+    cleanup_old_html_files(days_to_keep=7)
+
     print(f"{C_GREEN}Done.{C_RESET}")
