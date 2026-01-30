@@ -11689,5 +11689,95 @@
         "mcap": 2314599680,
         "currency": "USD",
         "description": "Dave Inc. provides various financial products and services through its financial services platform in the United States. The company offers Budget, personal financial management tool that helps members with budgeting, and managing income and expenses; ExtraCash, a short-term liquidity alternative, which allows members to advance funds to their account through automated clearing house network and avoid a fee; Side Hustle, a job application portal to find supplemental or temporary work; and Surveys, which allows member to take paid surveys within the Dave mobile application. It also provides Dave Banking, a digital checking and demand deposit account. Dave Inc. was founded in 2015 and is headquartered in Los Angeles, California."
+    },
+    "WTS": {
+        "ticker": "WTS",
+        "name": "Watts Water Technologies, Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 9926162432,
+        "currency": "USD",
+        "description": "Watts Water Technologies, Inc., together with its subsidiaries, supplies systems, products and solutions that manage and conserve the flow of fluids and energy into, though, and out of buildings in the commercial, industrial, and residential markets in the Americas, Europe, the Asia-Pacific, the Middle East, and Africa. The company offers residential and commercial flow control and protection products, including backflow preventers, water pressure regulators, temperature and pressure relief valves, thermostatic mixing valves, leak detection and protection products, commercial washroom solutions, and emergency safety products and equipment for plumbing and hot water applications. It also provides heating, ventilation, and air conditioning and gas products comprising commercial boilers; water heaters and heating solutions; hydronic and electric heating systems for under-floor radiant applications; custom heat and hot water solutions; hydronic pump groups for boiler manufacturers and alternative energy control packages; and flexible stainless-steel connectors for natural and liquid propane gas in commercial food service and residential applications. In addition, the company offers drainage and water re-use products, such as drainage products, engineered rainwater harvesting solutions for commercial, industrial, marine, and residential applications; connected roof drain systems; and water quality products that include point-of-use and point-of-entry water filtration, conditioning, and scale prevention systems for commercial, marine, and residential applications. It sells its products to plumbing, heating, and mechanical wholesale distributors and dealers; original equipment manufacturers; specialty product distributors; and do-it-yourself and retail chains, as well as wholesalers and private label accounts. Watts Water Technologies, Inc. was founded in 1874 and is headquartered in North Andover, Massachusetts."
+    },
+    "ARKK": {
+        "ticker": "ARKK",
+        "name": "ARK Innovation ETF",
+        "meta": "Mid-Cap Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund is an actively-managed exchange-traded fund (\"ETF\") that will invest under normal circumstances primarily (at least 65% of its assets) in domestic and foreign equity securities of companies that are relevant to the fund's investment theme of disruptive innovation. Its investments in foreign equity securities will be in both developed and emerging markets. The fund may invest in foreign securities listed on foreign exchanges as well as American Depositary Receipts (\u201cADRs\u201d) and Global Depositary Receipts (\u201cGDRs\u201d). The fund is non-diversified."
+    },
+    "CPB": {
+        "ticker": "CPB",
+        "name": "The Campbell's Company",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 8052605952,
+        "currency": "USD",
+        "description": "The Campbell's Company, together with its subsidiaries, manufactures and markets food and beverage products in the United States and internationally. It operates through Meals & Beverages, and Snacks segments. The Meals & Beverages segment engages in the retail and foodservice businesses in the United States and Canada. This segment provides Campbell's condensed and ready-to-serve soups; Swanson broth and stocks; Pacific Foods broth, soups, and non-dairy beverages; Prego pasta sauces; Pace Mexican sauces; Campbell's gravies, pasta, beans, and dinner sauces; Swanson canned poultry; V8 juices and beverages; Campbell's tomato juice; Rao's pasta sauces, dry pasta, frozen entr\u00e9es, frozen pizza, and soups; and Michael Angelo's frozen entr\u00e9es and pasta sauces, as well as snacking products in foodservice in Canada. Its Snacks segment retails Pepperidge Farm cookies, crackers, fresh bakery, and frozen products, that includes Goldfish crackers, Snyder's of Hanover pretzels, Lance sandwich crackers, Cape Cod and Kettle Brand potato chips, Late July snacks, Snack Factory pretzel crisps, and other snacking products. This segment is also involved in the snacking, and meals and beverage retail business in Latin America. It sells its products through retail food chains, mass discounters and merchandisers, club stores, convenience and dollar stores, e-commerce and other retail, commercial, and non-commercial establishments, and independent contractor distributors. The company was formerly known as Campbell Soup Company and changed its name to The Campbell's Company in November 2024. The Campbell's Company was founded in 1869 and is headquartered in Camden, New Jersey."
+    },
+    "KW": {
+        "ticker": "KW",
+        "name": "Kennedy-Wilson Holdings Inc.",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 1359737344,
+        "currency": "USD",
+        "description": "Kennedy-Wilson Holdings, Inc., together with its subsidiaries, operates as a real estate investment company in the United States and Europe. It focuses on investing in the rental housing sector and industrial properties; and originating, managing, and servicing real estate loans primarily senior construction loans secured by multifamily and student housing properties that are being developed by institutional sponsors. The company also invests in the office assets and other investments, including hotel and retail properties. In addition, it is involved in the development, redevelopment, and entitlement projects; and provides investment management platform. Kennedy-Wilson Holdings, Inc. was founded in 1977 and is headquartered in Beverly Hills, California."
+    },
+    "UBT": {
+        "ticker": "UBT",
+        "name": "ProShares Ultra 20+ Year Treasu",
+        "meta": "Trading--Leveraged Debt",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of U.S. dollar denominated sovereign debt publicly issued by the U.S. government. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index or in instruments with similar economic characteristics. The fund is non-diversified."
+    },
+    "PCI": {
+        "ticker": "PCI",
+        "name": "PGIM Corporate Bond 5-10 Year E",
+        "meta": "Corporate Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund normally invests at least 80% of its investable assets in bonds of corporations with varying maturities. For the purposes of this policy, bonds include all fixed income securities, other than preferred stock, issued by corporations."
+    },
+    "MAC": {
+        "ticker": "MAC",
+        "name": "Macerich Company (The)",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 5008589824,
+        "currency": "USD",
+        "description": "Macerich is a fully integrated, self-managed, self-administered real estate investment trust (REIT). As a leading owner, operator, and developer of high-quality retail real estate in densely populated and attractive U.S. markets, Macerich's portfolio is concentrated in California, the Pacific Northwest, Phoenix/Scottsdale, and the Metro New York to Washington, D.C. corridor. Developing and managing properties that serve as community cornerstones, Macerich currently owns 39 million square feet of real estate, consisting primarily of interests in 38 retail centers. Macerich is firmly dedicated to advancing environmental goals, social good, and sound corporate governance. A recognized leader in sustainability, Macerich has achieved a #1 Global Real Estate Sustainability Benchmark (GRESB) ranking for the North American retail sector for ten consecutive years (2015-2024)."
+    },
+    "LDI": {
+        "ticker": "LDI",
+        "name": "loanDepot, Inc.",
+        "meta": "Mortgage Finance",
+        "type": "EQUITY",
+        "mcap": 803777792,
+        "currency": "USD",
+        "description": "loanDepot, Inc. engages in originating, financing, selling, and servicing residential mortgage loans in the United States. The company offers conventional agency-conforming and prime jumbo, federal assistance residential mortgage, and home equity lines of credit and closed-end second liens. It also provides settlement services, which include captive title and escrow business; real estate services that cover captive real estate referral business; and insurance services, including services to homeowners, as well as other consumer insurance policies. The company was founded in 2010 and is headquartered in Irvine, California."
+    },
+    "EB": {
+        "ticker": "EB",
+        "name": "Eventbrite, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 442914688,
+        "currency": "USD",
+        "description": "Eventbrite, Inc. operates a two-sided marketplace that provides self-service ticketing and marketing tools for event creators in the United States and internationally. Its platform plans, promotes, and sells tickets to consumers. The company was formerly known as Mollyguard Corporation and changed its name to Eventbrite, Inc. in 2009. Eventbrite, Inc. was incorporated in 2003 and is headquartered in San Francisco, California."
+    },
+    "AFK": {
+        "ticker": "AFK",
+        "name": "VanEck Africa Index ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund normallyinvests at least 80% of its total assets in securities that comprise the fund\u2019s benchmark index. The index includes securities of African companies. African companies generally include local listings of companies that are incorporated in Africa and listings of companies incorporated outside of Africa but that have at least 50% of their revenues/related assets in Africa."
     }
 }
