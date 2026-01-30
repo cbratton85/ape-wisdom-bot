@@ -12265,5 +12265,59 @@
         "mcap": 21568430,
         "currency": "USD",
         "description": "NanoViricides, Inc., a clinical stage nano-biopharmaceutical company, discovers, develops, and commercializes drugs to combat viral infections. The company's product portfolio includes NV-387 drug candidate developed for RSV and influenza indications and has completed phase 1a/1b human clinical trial for the evaluation of safety and tolerability; NV-387 as an active ingredient of drug product formulations for the treatment of COVID infections comprising NV-CoV-2 Oral Syrup and NV-CoV-2 Oral Gummies developed for the treatment of COVID infection, a semi-solid fixed-dose form, which are in phase 1a/1b human clinical trials for enabling body-weight-based dose titration as is required for pediatric treatments. It also offers NV-387 Solution for injection, infusion, and inhalation to treat severe cases that are not hospitalized and carried out by an injection; and injectable solution that delivered directly into the lungs as a fog created using portable battery operated nebulizer devices, which enables action at infection by a respiratory virus, such as coronaviruses, RSV, influenzas, human meta-pneumovirus, certain adenoviruses, and other infections, that can lead to severe pneumonia. In addition, the company develops NV-HHV-1, a skin cream for the treatment of Shingles rash, which has completed non-clinical pharmacology studies; oral drug with NV-HHV-1 as the active ingredient for the treatment of HSV-1 cold sores and HSV-2 genital ulcers; and other drug candidates in HIVCide program for the treatment of Dengue and Ebola virus, as well as provides Nanoviricide platform technology to treat various types of viruses. NanoViricides, Inc. was incorporated in 2005 and is headquartered in Shelton, Connecticut."
+    },
+    "FEMY": {
+        "ticker": "FEMY",
+        "name": "Femasys Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 32648666,
+        "currency": "USD",
+        "description": "Femasys Inc., a biomedical company, develops therapeutic and diagnostic solutions to address unmet women healthcare needs in the United States and internationally. The company offers FemaSeed, an intratubal insemination solution; FemVue, a companion diagnostic for fallopian tube assessment through ultrasound; FemCerv, an endocervical tissue sampler for cervical cancer diagnosis; FemCath, a cornual balloon catheter for selective fallopian tube evaluation; and FemChec, a controlled contrast-generating device for fallopian tube diagnosis. It also develops FemBloc, a non-surgical permanent birth control solution. The company offers its products to reproductive endocrinologists, gynecological physicians, related healthcare professionals, and women's healthcare provider organizations. Femasys Inc. was incorporated in 2004 and is headquartered in Suwanee, Georgia."
+    },
+    "VANI": {
+        "ticker": "VANI",
+        "name": "Vivani Medical, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 122621184,
+        "currency": "USD",
+        "description": "Vivani Medical, Inc., a clinical-stage biopharmaceutical company, engages in the development of miniaturized and subdermal drug implants that treat chronic diseases. The company uses its NanoPortal implant technology to develop and potentially commercialize drug implant candidates in the treatment of chronic disease and medication non-adherence. Its pipeline includes NPM-115, a high-dose exenatide implant candidate is in clinical stage development for the treatment of chronic weight management in patients with obesity or overweight; NPM-119, an exenatide implant candidate is in preclinical stage development for the treatment of patients with type 2 diabetes; NPM-139, a miniature and subdermal GLP-1 implant in development for chronic weight management; and OKV-119, an exenatide implant for metabolic diseases in cats. The company is headquartered in Alameda, California."
+    },
+    "FM": {
+        "ticker": "FM",
+        "name": "iShares Frontier and Select EM ",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 469027520,
+        "currency": "USD",
+        "description": "The fund seeks to achieve its investment objective by investing, under normal circumstances, at least 80% of the value of its net assets, plus the amount of any borrowings for investment purposes, in equity securities of issuers economically tied to frontier markets and issuers economically tied to emerging markets, or in depositary receipts representing such securities."
+    },
+    "DQ": {
+        "ticker": "DQ",
+        "name": "DAQO New Energy Corp.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 1720675328,
+        "currency": "USD",
+        "description": "Daqo New Energy Corp., together with its subsidiaries, manufactures and sells polysilicon to photovoltaic product manufacturers in the People's Republic of China. Its products are used in ingots, wafers, cells, and modules for solar power solutions. The company was formerly known as Mega Stand International Limited and changed its name to Daqo New Energy Corp. in August 2009. The company was founded in 2006 and is based in Shanghai, the People's Republic of China."
+    },
+    "KR": {
+        "ticker": "KR",
+        "name": "Kroger Company (The)",
+        "meta": "Grocery Stores",
+        "type": "EQUITY",
+        "mcap": 40920379392,
+        "currency": "USD",
+        "description": "The Kroger Co. operates as a food and drug retailer in the United States. The company operates combination food and drug stores, multi-department stores, marketplace stores, and price impact warehouses. Its combination food and drug stores offer natural food and organic sections, pharmacies, general merchandise, pet centers, fresh seafood, and organic produce; and its multi-department stores provide apparel, home fashion and furnishings, outdoor living, electronics, automotive products, and toys. The company's marketplace stores offer full-service grocery, pharmacy, health and beauty care, and perishable goods, as well as general merchandise, including apparel, home goods, and toys; and its price impact warehouse stores provide grocery, and health and beauty care items, as well as meat, dairy, baked goods, and fresh produce items. It also manufactures and processes food products for sale in its supermarkets and online; and sells fuel through its fuel centers. The company sells its products through its stores, fuel centers, and online platforms. The Kroger Co. was founded in 1883 and is based in Cincinnati, Ohio."
+    },
+    "RSG": {
+        "ticker": "RSG",
+        "name": "Republic Services, Inc.",
+        "meta": "Waste Management",
+        "type": "EQUITY",
+        "mcap": 67048345600,
+        "currency": "USD",
+        "description": "Republic Services, Inc., together with its subsidiaries, offers environmental services in the United States and Canada. It is involved in the collection and processing of recyclable, solid waste, and industrial waste materials; transportation and disposal of non-hazardous and hazardous waste streams; and other environmental solutions. Its residential collection services include curbside collection of material for transport to transfer stations, landfills, recycling centers, and organics processing facilities; supply of recycling and waste containers; and renting of compactors. The company also engages in the processing and sale of old corrugated containers, old newsprint, aluminum, glass, and other materials; and provision of landfill services. It serves small-container, large-container, and residential customers. The company was incorporated in 1996 and is based in Phoenix, Arizona."
     }
 }
