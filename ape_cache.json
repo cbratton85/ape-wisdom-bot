@@ -12616,5 +12616,122 @@
         "mcap": 324277344,
         "currency": "USD",
         "description": "Aldeyra Therapeutics, Inc., a biotechnology company, discovers and develops therapies designed to treat immune-mediated and metabolic diseases. Its lead product candidate is reproxalap, a reactive aldehyde species (RASP) modulator, which is in Phase III clinical trial for the treatment of dry eye disease and allergic conjunctivitis; and ADX-2191, a dihydrofolate reductase inhibitor for the treatment retinitis pigmentosa. The company also develops ADX-629, an orally administered RASP modulator that is in Phase 2 clinical trials for the treatment of COVID-19, atopic asthma, psoriasis, and alcohol intoxication. In addition, it develops preclinical RASP platform, including ADX 248, ADX 743, ADX 631, ADX 246, and other product candidates in development for inflammatory and metabolic diseases. The company was formerly known as Aldexa Therapeutics, Inc. and changed its name to Aldeyra Therapeutics, Inc. in March 2014. Aldeyra Therapeutics, Inc. was incorporated in 2004 and is based in Lexington, Massachusetts."
+    },
+    "UPST": {
+        "ticker": "UPST",
+        "name": "Upstart Holdings, Inc.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 3866164992,
+        "currency": "USD",
+        "description": "Upstart Holdings, Inc., together with its subsidiaries, operates a cloud-based artificial intelligence (AI) lending platform in the United States. The company operates through three segments: Personal Lending, Auto Lending, and Other. Its platform includes personal loans, automotive retail and refinance loans, home equity lines of credit, and small dollar loans. Upstart Holdings, Inc. was founded in 2012 and is headquartered in San Mateo, California."
+    },
+    "BOIL": {
+        "ticker": "BOIL",
+        "name": "ProShares Ultra Bloomberg Natur",
+        "meta": "Trading--Leveraged Commodities",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund seeks to meet its investment objective by investing normally in Natural Gas futures contracts. It may also invest in swaps if the market for a specific futures contract experiences emergencies (e.g., natural disaster, terrorist attack, or an act of God) or disruptions (e.g., a trading halt or a flash crash) or in situations where the Sponsor deems it impractical or inadvisable to buy or sell futures contracts (such as during periods of market volatility or illiquidity)."
+    },
+    "PSNL": {
+        "ticker": "PSNL",
+        "name": "Personalis, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 828544576,
+        "currency": "USD",
+        "description": "Personalis, Inc. develops, markets, and sells advanced cancer genomic tests and services in the United States and internationally. The company offers NeXT Personal, a tumor-informed liquid biopsy test for detection of minimal residual disease (MRD), therapy response and recurrence monitoring in solid tumor cancers; and ImmunoID NeXT, a tissue-based service that combines whole exome and whole transcriptome sequencing data with advanced analytics to provide a multi-dimensional view of the tumor and the tumor microenvironment from a single sample. It also provides NeXT Personal Dx, a tumor-informed liquid biopsy test for the detection of MRD; and NeXT Dx, a tumor profiling test that is used to help select therapy for a cancer patient and identify potential clinical trials for a patient. In addition, the company performs whole exome sequencing of cancer tissue and matched blood samples for diagnostic companies as an input to their products; and whole genome sequencing on human samples for research projects, such as population sequencing initiatives. Its services are used by pharmaceutical companies for translational research, biomarker discovery, the development of personalized cancer therapies, and for clinical trials, as well as tests are used by physicians to detect residual or recurrent cancer in patients, monitor cancer response to therapy, and uncover insights for therapy selection. The company's customers include pharmaceutical companies, biopharmaceutical companies, diagnostics companies, universities, non-profits, government entities, and patients. The company has strategic collaboration with Tempus AI, Inc. to bring ultra-sensitive cancer recurrence testing to colorectal cancer patients. Personalis, Inc. was incorporated in 2011 and is headquartered in Fremont, California."
+    },
+    "SUUN": {
+        "ticker": "SUUN",
+        "name": "PowerBank Corporation",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 64487260,
+        "currency": "USD",
+        "description": "PowerBank Corporation operates as an independent renewable and clean energy project developer, power producer, and asset operator in Canada and the United States. The company operates through Development & EPC, IPP Production and Other segments. It focuses on solar photovoltaic power generation projects, battery energy storage systems, and EV-charging projects, grid connected solar PV electricity power plants and battery energy storage system. The company provides expertise in the areas of site origination, utility grid interconnection, permitting, financing, engineering, procurement and construction, operation and maintenance, independent power producer facilities, and asset management of solar photovoltaic power plants to the renewable and clean energy industry. In addition, it develops solar projects that sells electricity to commercial, industrial, municipal, residential, and utility off-takers sectors. The company was formerly known as SolarBank Corporation and changed its name to PowerBank Corporation in July 2025. PowerBank Corporation was incorporated in 2013 and is headquartered in Toronto, Canada."
+    },
+    "AIG": {
+        "ticker": "AIG",
+        "name": "American International Group, I",
+        "meta": "Insurance - Diversified",
+        "type": "EQUITY",
+        "mcap": 40970801152,
+        "currency": "USD",
+        "description": "American International Group, Inc. offers insurance products for commercial, institutional, and individual customers in North America and internationally. It operates through three segments: North America Commercial; International Commercial; and Global Personal. The company provides commercial and industrial property insurance, including business interruption and package insurance that cover exposure to made and natural disasters; general liability, environmental, commercial automobile liability, workers' compensation, excess casualty, and crisis management insurance products; and professional liability insurance. It also offers marine, energy-related property insurance, aviation, political risk, trade credit, trade finance, and portfolio solutions; voluntary and sponsor-paid personal accident, and supplemental health products; and personal auto and homeowners, extended warranty, device protection insurance, home warranty and related services, and insurance for high net-worth individuals. Further, the company provides mortgage and other loans receivable includes commercial mortgages, life insurance policy loans, and commercial loans, The company was founded in 1919 and is headquartered in New York, New York."
+    },
+    "LEAD": {
+        "ticker": "LEAD",
+        "name": "Siren DIVCON Leaders Dividend E",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Under normal circumstances, at least 80% of the fund's net assets will be invested in component securities of the benchmark index. The benchmark index is designed to capitalize on the theory that, over time, companies that consistently grow their dividends tend to have investment returns above overall market returns, and companies that do not grow (or cut) their dividends tend to have investment returns below overall market returns."
+    },
+    "MCO": {
+        "ticker": "MCO",
+        "name": "Moody's Corporation",
+        "meta": "Financial Data & Stock Exchanges",
+        "type": "EQUITY",
+        "mcap": 91883634688,
+        "currency": "USD",
+        "description": "Moody's Corporation operates as an integrated risk assessment firm worldwide. It operates in two segments, Moody's Analytics and Moody's Investors Services. The Moody's Analytics segment develops a range of products and services that support the risk management activities of institutional participants in financial markets. It offers credit research, credit models and analytics, economics data and models, and structured finance solutions; data sets on companies and securities; and SaaS solutions supporting banking, insurance, and know your customer workflows. The Moody's Investors Service segment publishes credit ratings and provides assessment services on various debt obligations, programs and facilities, and entities that issue such obligations, such as various corporate, financial institution, and governmental obligations, as well as structured finance securities. The company was formerly known as Dun and Bradstreet Company and changed its name to Moody's Corporation in September 2000. The company was founded in 1900 and is headquartered in New York, New York."
+    },
+    "CDP": {
+        "ticker": "CDP",
+        "name": "COPT Defense Properties",
+        "meta": "REIT - Office",
+        "type": "EQUITY",
+        "mcap": 3506560256,
+        "currency": "USD",
+        "description": "COPT Defense Properties is an S&P MidCap 400 Company, is a self-managed REIT focused on owning, operating and developing properties in locations proximate to, or sometimes containing, key U.S. Government defense installations and missions (referred to as its Defense/IT Portfolio). The Company's tenants include the USG and their defense contractors, who are primarily engaged in priority national security activities, and who generally require mission-critical and high security property enhancements. As of September 30, 2025, the Company's Defense/IT Portfolio of 198 properties, including 24 owned through unconsolidated joint ventures, encompassed 22.6 million square feet and was 97.0% leased."
+    },
+    "PAVE": {
+        "ticker": "PAVE",
+        "name": "Global X U.S. Infrastructure De",
+        "meta": "Infrastructure",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its total assets in the securities of the underlying index. The underlying index is designed to measure the performance of U.S. listed companies that provide exposure to domestic infrastructure development, including companies involved in construction and engineering; production of infrastructure raw materials, composites and products; industrial transportation; and producers/distributors of heavy construction equipment."
+    },
+    "VVV": {
+        "ticker": "VVV",
+        "name": "Valvoline Inc.",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 4134092032,
+        "currency": "USD",
+        "description": "Valvoline Inc. provides automotive preventive maintenance through its retail stores in the United States and Canada. The company offers oil changes; battery, bulb, and wiper replacements; tire rotations; and other maintenance services. It also operates and franchises service centers and retail locations. The company was founded in 1866 and is headquartered in Lexington, Kentucky."
+    },
+    "ITA": {
+        "ticker": "ITA",
+        "name": "iShares U.S. Aerospace & Defens",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index measures the performance of the aerospace and defense sector of the U.S. equity market, as defined by SPDJI. The fund generally will invest at least 80% of its assets in the component securities of its index and in investments that have economic characteristics that are substantially identical to the component securities of its index and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents. The fund is non-diversified."
+    },
+    "TTMI": {
+        "ticker": "TTMI",
+        "name": "TTM Technologies, Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 10476702720,
+        "currency": "USD",
+        "description": "TTM Technologies, Inc. manufactures and sells mission systems, radio frequency (RF) components and RF microwave/microelectronic assemblies, and printed circuit boards (PCB) in the United States, Taiwan, and internationally. It operates in two segments, PCB and RF&S Components. The company offers a range of engineered systems, RF and microwave assemblies, HDI PCBs, flexible PCBs, rigid-flex PCBs, custom assemblies and system integration, IC substrates, passive RF components, advanced ceramic RF components, hi-reliability multi-chip modules, beamforming and switching networks, PCB products, RF components, and backplane/custom assembly solutions, including conventional PCBs. It also provides value-added services, such as design for manufacturability, PCB layout design, simulation and testing services, and quick turnaround production, as well as specialized assembly and RF testing. In addition, the company offers maritime surveillance and weather avoidance radar systems for fixed- and rotary-wing aircraft, unmanned aerial vehicles, and shipboard platforms; AN/APS-153 multi-mode radar; communications suite within the MH-60R/S multi-mission helicopters; and develops multi-mode maritime and overland surveillance AESA radar under MOSAIC brand. Further, it provides identification friend, monopulse secondary surveillance radars, and air traffic control systems; wired and wireless communication systems; custom electronic assemblies; quick turnaround services comprising prototype production and ramp-to-volume production; and thermal management. The company serves original equipment manufacturers and electronic manufacturing services providers, original design manufacturers, distributors, and government agencies; and aerospace and defense, data center computing, automotive, medical, industrial, and instrumentation, and networking markets. TTM Technologies, Inc. was incorporated in 1978 and is headquartered in Santa Ana, California."
+    },
+    "FLYX": {
+        "ticker": "FLYX",
+        "name": "flyExclusive, Inc.",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 291623712,
+        "currency": "USD",
+        "description": "flyExclusive, Inc. owns and operates jet aircraft in North America. It also offers jet charter services; aircraft maintenance, modification, repair, inspection, overhaul operation services; interior and exterior refurbishment services; and aircraft management services, as well as wholesale and retail ad hoc flights, a jet club program, partnership program, fractional program, and other services. The company is headquartered in Kinston, North Carolina."
     }
 }
