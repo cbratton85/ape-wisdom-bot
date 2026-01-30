@@ -712,12 +712,12 @@ def export_interactive_html(df, ai_summary=""):
                 color: #ffffff;
                 padding: 10px;
                 border-radius: 6px;
-                width: 240px;
+                width: auto;
                 z-index: 999999; 
                 border: 1px solid #00ff00;
                 box-shadow: 0 8px 16px rgba(0,0,0,0.8);
                 font-family: 'Segoe UI', Tahoma, sans-serif;
-                white-space: normal;
+                white-space: nowrap;
                 font-weight: normal;
                 text-transform: none;
             }}
