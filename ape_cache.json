@@ -12733,5 +12733,131 @@
         "mcap": 291623712,
         "currency": "USD",
         "description": "flyExclusive, Inc. owns and operates jet aircraft in North America. It also offers jet charter services; aircraft maintenance, modification, repair, inspection, overhaul operation services; interior and exterior refurbishment services; and aircraft management services, as well as wholesale and retail ad hoc flights, a jet club program, partnership program, fractional program, and other services. The company is headquartered in Kinston, North Carolina."
+    },
+    "BURL": {
+        "ticker": "BURL",
+        "name": "Burlington Stores, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 18368708608,
+        "currency": "USD",
+        "description": "Burlington Stores, Inc. operates as a retailer of branded merchandise in the United States and Puerto Rico. The company offers fashion-focused merchandise, including women's ready-to-wear apparel, menswear, youth apparel, footwear, accessories, home furnishings, toys, gifts, and coats, as well as baby and beauty merchandise products. It operates stores under the Burlington Stores, and Cohoes Fashions brands in Washington D.C. and Puerto Rico. Burlington Stores, Inc. was founded in 1924 and is headquartered in Burlington, New Jersey."
+    },
+    "L": {
+        "ticker": "L",
+        "name": "Loews Corporation",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 21669836800,
+        "currency": "USD",
+        "description": "Loews Corporation, through its subsidiaries, provides commercial property and casualty insurance in the United States and internationally. The company offers specialty insurance products, such as management and professional liability, and other coverage products; surety and fidelity bonds; professional liability coverages and risk management services to various professional firms, including architects, real estate agents, and accounting and law firms; standard and excess property, marine and boiler and machinery coverages, workers' compensation, general and product liability, commercial auto, umbrella, and excess and surplus coverages, and specialized loss-sensitive insurance programs and total risk management services relating to claim and information services; directors and officers, errors and omissions, employment practices, fiduciary, fidelity, and cyber coverages, as well as for small and mid-size firms, public and privately held firms, and not-for-profit organizations; and insurance products to serve the health care industry, including professional and general liability, as well as associated casualty coverage to aging services, allied medical facilities, dentists, physicians, nurses, and other medical practitioners. It also provides warranty and alternative risk and run-off long-term care insurance products. The company markets its insurance products and services through independent agents, brokers, and managing general underwriters. In addition, it engages in the transportation and storage of natural gas and natural gas liquids; and provision of ethane supply and transportation services for industrial customers in Louisiana and Texas, as well as operates a chain of 25 hotels. Further, the company develops, manufactures, and markets a range of extrusion blow-molded and injection molded plastic containers, as well as manufactures commodity and differentiated plastic resins. Loews Corporation was incorporated in 1969 and is headquartered in New York, New York."
+    },
+    "UL": {
+        "ticker": "UL",
+        "name": "Unilever PLC",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 147956809728,
+        "currency": "USD",
+        "description": "Unilever PLC operates as a fast-moving consumer goods company in the Asia Pacific, Africa, the Americas, and Europe. It operates through Beauty & Wellbeing, Personal Care, Home Care, and Foods segments. The Beauty & Wellbeing segment engages in the sale of hair care products, such as shampoo, conditioner, and styling; skin care products, including face, hand, and body moisturizers; and Prestige beauty and wellbeing products. The Personal Care segment offers skin cleansing products comprising soaps and showers; deodorants; and oral care products consisting of toothpaste, toothbrush, and mouthwash products. The Home Care segment is involved in the sale of fabric care products, including washing powders and liquids, and rinse conditioners; and fabric enhancers, and home and hygiene cleaning products. The Foods segment provides cooking aids and mini meals, such as soups, bouillons, and seasonings, as well as condiments, mayonnaise and ketchup, and food solutions. The company provides its products under the AXE, Ben & Jerry's, Clear, Cif, Closeup, Comfort, Cornetto, Dermalogica, Domestos, Dove, Dove Men+Care, Hellmann's, Horlicks, Knorr, LUX, Lifebuoy, Liquid I.V., Nutrafol, OMO, Pond's, Paula's Choice, Pepsodent, Rexona, Sunlight, Sunsilk, Surf, TRESemm\u00e9, Vaseline, Wall's, and Yasso brand names. Unilever PLC was founded in 1860 and is headquartered in London, the United Kingdom."
+    },
+    "SONY": {
+        "ticker": "SONY",
+        "name": "Sony Group Corporation",
+        "meta": "Consumer Electronics",
+        "type": "EQUITY",
+        "mcap": 131408379904,
+        "currency": "USD",
+        "description": "Sony Group Corporation designs, develops, produces, and sells electronic equipment, instruments, and devices for the consumer, professional, and industrial markets in Japan, the United States, Europe, China, the Asia-Pacific, and internationally. The company distributes software titles and add-on content through digital networks; network services related to game, video, and music content; hardware and home gaming consoles, packaged and game software, and peripheral devices. It also develops, produces, markets, and distributes recorded music; publishes music; and produces and distributes animation titles, game applications, and various services for music and visual products. In addition, the company produces, acquires, and distributes live-action and animated motion pictures for theatrical release, as well as scripted and animated series, unscripted reality or light entertainment, daytime serials, game shows, television movies, and miniseries and other television programs; operation of television networks and direct-to-consumer streaming services; operates a visual effects and animation unit; and manages a studio facility. Further, the company researches, develops, designs, produces, markets, distributes, sells, and services televisions, and video and sound products; interchangeable lens, as well as compact digital, and consumer and professional video cameras; projectors and medical equipment; mobile phones, accessories, and applications; and metal oxide semiconductor image sensors, integration systems, and other semiconductors. Additionally, it offers internet broadband network services; recording media, and storage media products; and life and non-life insurance, banking, and other services, as well as creates and distributes content for PCs and mobile phones. The company was formerly known as Sony Corporation and changed its name to Sony Group Corporation in April 2021. Sony Group Corporation was incorporated in 1946 and is headquartered in Tokyo, Japan."
+    },
+    "RHI": {
+        "ticker": "RHI",
+        "name": "Robert Half Inc.",
+        "meta": "Staffing & Employment Services",
+        "type": "EQUITY",
+        "mcap": 3474375424,
+        "currency": "USD",
+        "description": "Robert Half Inc. provides talent solutions and business consulting services in the United States and internationally. The company operates through Contract Talent Solutions, Permanent Placement Talent Solutions, and Protiviti segments. The Contract Talent Solutions segment provides contract engagement professionals in the fields of finance and accounting, technology, marketing and creative, legal and administrative, and customer support. This segment markets its services to clients and employment candidates through national and local advertising activities, including radio, digital advertising, job boards, alliance partners, and events. The Permanent Placement Talent Solutions segment engages in the placement of full-time accounting, finance, and tax and accounting operations personnel. The Protiviti segment offers consulting services for compliance, finance, technology, operations, data, digital, legal, HR, governance, risk and internal audit. It offers it services under the Accountemps, Robert Half Finance and Accounting, OfficeTeam, Robert Half Technology, Robert Half Management Resources, Robert Half Legal, and The Creative Group brands. The company was formerly known as Robert Half International Inc. and changed its name to Robert Half Inc. in July 2023. Robert Half Inc. was founded in 1948 and is headquartered in Menlo Park, California."
+    },
+    "OCX": {
+        "ticker": "OCX",
+        "name": "OCX",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "DTD": {
+        "ticker": "DTD",
+        "name": "WisdomTree U.S. Total Dividend ",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally uses a representative sampling strategy to achieve its investment objective, meaning it generally will invest in a sample of the securities in the index whose risk, return, and other characteristics resemble the risk, return, and other characteristics of the index as a whole. The index is a modified capitalization-weighted index that is comprised of companies that conduct their Primary Business Activities in the U.S., are listed on a U.S. stock market, and pay regular cash dividends. The fund is non-diversified."
+    },
+    "W": {
+        "ticker": "W",
+        "name": "Wayfair Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 13481519104,
+        "currency": "USD",
+        "description": "Wayfair Inc. engages in the e-commerce business in the United States and internationally. It offers online selections of furniture, d\u00e9cor, housewares, and home improvement products through its sites comprising Wayfair, Joss & Main, AllModern, Birch Lane, Perigold, and Wayfair Professional. The company offers its products under the Three Posts and Mercury Row brands. Wayfair Inc. was founded in 2002 and is headquartered in Boston, Massachusetts."
+    },
+    "BOLD": {
+        "ticker": "BOLD",
+        "name": "Boundless Bio, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 25855382,
+        "currency": "USD",
+        "description": "Boundless Bio, Inc., a clinical-stage oncology company, develops cancer therapeutics to address the unmet need of patients with oncogene amplified tumors by interrogating extrachromosomal DNA (ecDNA). The company's lead product candidate is BBI-355, an ecDNA-directed therapeutic candidate and oral inhibitor of checkpoint kinase 1 that is in Phase 1/2 clinical trial in patients with oncogene amplified cancers. It also develops BBI-098, a picomolar biochemical inhibition of checkpoint kinase 1 demonstrating central nervous system penetrance in preclinical models. In addition, the company offers ECHO, an ecDNA harboring oncogenes diagnostic test to detect ecDNA in patient tumor specimens; and Spyglass platform, a platform used to identify druggable targets in oncogene amplified cancers. The company was formerly known as Pretzel Therapeutics, Inc. and changed its name to Boundless Bio, Inc. in July 2019. Boundless Bio, Inc. was incorporated in 2018 and is headquartered in San Diego, California."
+    },
+    "JOB": {
+        "ticker": "JOB",
+        "name": "GEE Group Inc.",
+        "meta": "Staffing & Employment Services",
+        "type": "EQUITY",
+        "mcap": 26632384,
+        "currency": "USD",
+        "description": "GEE Group Inc. provides human resources solutions in the United States. It offers placement of information technology, accounting, finance, office, engineering professionals for direct hire and contract staffing services, and data entry assistants. The company also provides scribes that specialize in electronic medical record services for emergency departments, specialty physician practices, and clinics. It offers professional staffing services under the names of Access Data Consulting, Agile Resources, Ashley Ellis, GEE Group (Columbus), General Employment, Hornet Staffing, Omni One, Paladin Consulting, Scribe Solutions, Accounting Now, Staffing Now, SNI Banking, SNI Certes, SNI Energy, SNI Financial, and SNI Technology. The company was formerly known as General Employment Enterprises, Inc. and changed its name to GEE Group Inc. in July 2016. GEE Group Inc. was founded in 1893 and is headquartered in Jacksonville, Florida."
+    },
+    "REX": {
+        "ticker": "REX",
+        "name": "REX American Resources Corporat",
+        "meta": "Chemicals",
+        "type": "EQUITY",
+        "mcap": 1105610496,
+        "currency": "USD",
+        "description": "REX American Resources Corporation, together with its subsidiaries, produces and sells ethanol in the United States. The company provides corn, distillers grains, ethanol, distillers corn oil, gasoline, and natural gas. It also offers dry distillers grains with soluble, which is used as a protein in animal feed. The company was formerly known as REX Stores Corporation and changed its name to REX American Resources Corporation in 2010. REX American Resources Corporation was founded in 1980 and is headquartered in Dayton, Ohio."
+    },
+    "DOL": {
+        "ticker": "DOL",
+        "name": "WisdomTree True Developed Inter",
+        "meta": "Foreign Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund normally invests at least 95% of its total assets (exclusive of collateral held from securities lending) in constituent securities of the index and investments that have economic characteristics that are substantially identical to the economic characteristics of such constituent securities. The index is a fundamentally weighted index that is comprised of the large-capitalization segment of the dividend-paying market in the industrialized world outside the U.S. and Canada. The fund is non-diversified."
+    },
+    "BBY": {
+        "ticker": "BBY",
+        "name": "Best Buy Co., Inc.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 13509512192,
+        "currency": "USD",
+        "description": "Best Buy Co., Inc. offers technology products and solutions in the United States, Canada, and internationally. It provides computing and mobile phone products, such as desktops, notebooks, and peripherals; mobile phones comprising related mobile network carrier commissions; networking products; tablets covering e-readers; smartwatches; and consumer electronics consisting of digital imaging, health and fitness products, portable audio comprising headphones and portable speakers, and smart home products, as well as home theaters that includes home theater accessories, soundbars, and televisions. The company's stores also offer appliances, such as dishwashers, laundry, ovens, refrigerators, blenders, coffee makers, vacuums, and personal care; entertainment products consisting of drones, peripherals, movies, and toys, as well as hardware and software, and virtual reality and other software products; and other products, such as baby, food and beverage, luggage, and outdoor living products. In addition, it provides delivery, installation, memberships, repair, set-up, technical support, health-related, and warranty-related services. The company offers its products through stores and websites under the Best Buy, Best Buy Ads, Best Buy Business, Best Buy Essentials, Best Buy Health, Current Health, Geek Squad, Imagine That, Insignia, Lively, My Best Buy, My Best Buy Memberships, Pacific Kitchen, Home, TechLiquidators, and Yardbird brand names, as well as domain names comprising bestbuy.com, currenthealth.com, lively.com, techliquidators.com, yardbird.com, bestbuy.ca, and techliquidators.ca. The company was formerly known as Sound of Music, Inc. Best Buy Co., Inc. was incorporated in 1966 and is headquartered in Richfield, Minnesota."
+    },
+    "WMS": {
+        "ticker": "WMS",
+        "name": "Advanced Drainage Systems, Inc.",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 11701222400,
+        "currency": "USD",
+        "description": "Advanced Drainage Systems, Inc. designs, manufactures, and markets thermoplastic corrugated pipes and related water management products in the United States, Canada, and internationally. It operates through Pipe, Infiltrator, International, and Allied Products & Other segments. The company offers single, double, and triple wall corrugated polypropylene and polyethylene pipes; plastic leachfield chambers and systems; EZflow synthetic aggregate bundles; wastewater purification through mechanical aeration wastewater for residential and commercial systems; septic tanks and accessories; combined treatment and dispersal systems, including AeroFin, advanced enviro-septic, enviro-septic, and advanced treatment leachfield; and allied products, including storm retention/detention and septic chambers, polyvinyl chloride drainage structures, fittings, and water quality filters and separators. It also purchases and distributes construction fabrics and other geosynthetic products for soil stabilization, reinforcement, filtration, separation, erosion control, and sub-surface drainage, as well as drainage grates and other products. In addition, the company provides PVC hubs, rubber sleeves, and stainless-steel bands. It offers its products for non-residential, residential, agriculture, and infrastructure applications through a network of distribution centers. Advanced Drainage Systems, Inc. incorporated in 1966 and is headquartered in Hilliard, Ohio."
     }
 }
