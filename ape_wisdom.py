@@ -776,18 +776,31 @@ def export_interactive_html(df, ai_summary=""):
                 width: auto !important;       
                 min-width: 220px !important;  
                 max-width: 350px !important;  
+            }}
+            /* TRUNCATE DATA ONLY (Keep Headers Visible for Tooltips) */
+            td:nth-child(4) {{
                 overflow: hidden !important;
                 text-overflow: ellipsis !important;
             }}
-
+            th:nth-child(4) {{
+                overflow: visible !important; /* Critical for Tooltip */
+            }}
             /* 2. INDUSTRY COLUMN (Col 19) - WIDE */
             th:nth-child(19), td:nth-child(19) {{
                 text-align: left !important;
                 width: auto !important;
                 min-width: 200px !important;
                 max-width: 300px !important;
+            }}
+            /* TRUNCATE DATA ONLY */
+            td:nth-child(19) {{
                 overflow: hidden !important;
                 text-overflow: ellipsis !important;
+                border-right: 1px solid #333 !important;
+            }}
+            th:nth-child(19) {{
+                overflow: visible !important; /* Critical for Tooltip */
+                border-right: 1px solid #333 !important;
             }}
 
             /* 3. SYMBOL & PRICE (Left/Right Align) */
