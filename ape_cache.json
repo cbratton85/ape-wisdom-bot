@@ -13318,5 +13318,32 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund is an actively-managed exchange-traded fund (\"ETF\") that seeks to achieve its investment objective, under normal circumstances, by investing in U.S.-dollar denominated investment grade and non-investment grade (also known as \"high-yield\" or \"junk\") fixed income securities and instruments and expects to distribute income from its investments to shareholders weekly. It may invest in a variety of fixed income instruments with a fixed or floating (variable) interest rate. The fund is non-diversified."
+    },
+    "UWMC": {
+        "ticker": "UWMC",
+        "name": "UWM Holdings Corporation",
+        "meta": "Mortgage Finance",
+        "type": "EQUITY",
+        "mcap": 7922275328,
+        "currency": "USD",
+        "description": "UWM Holdings Corporation engages in the origination, sale, and servicing residential mortgage lending in the United States. The company offers mortgage loans through wholesale channel. It originates primarily conforming and government loans. UWM Holdings Corporation was founded in 1986 and is headquartered in Pontiac, Michigan."
+    },
+    "NEXA": {
+        "ticker": "NEXA",
+        "name": "Nexa Resources S.A.",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 1670050816,
+        "currency": "USD",
+        "description": "Nexa Resources S.A., together with its subsidiaries, engages in the zinc mining and smelting business worldwide. The company operates in two segments, Mining and Smelting. It produces metallic zinc, zamac, and zinc oxide, as well as by-products, such as copper, lead, silver, gold, sulfuric acid, silver concentrate, copper cement and cadmium sticks, cadmium and cobalt cement, sulfur dioxide, copper sulfate, and zinc ash. The company owns and operates four polymetallic mines, including two located in the Central Andes of Peru; one located in the state of Minas Gerais in Brazil; and one located in the state of Mato Grosso in Brazil. It also owns and operates one zinc smelter in Peru Cajamarquillaand; and two zinc smelters in Brazil, which recovers and produces metallic zinc, zinc oxide, and various by-products, such as sulfuric acid, silver concentrate, and copper cement and sulfate. The company was formerly known as VM Holding S.A. and changed its name to Nexa Resources S.A. in September 2017. The company was founded in 1956 and is based in Luxembourg, Luxembourg. Nexa Resources S.A. is a subsidiary of Votorantim S.A."
+    },
+    "MKC": {
+        "ticker": "MKC",
+        "name": "McCormick & Company, Incorporat",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 16597536768,
+        "currency": "USD",
+        "description": "McCormick & Company, Incorporated manufactures, markets, and distributes herbs, spices, seasoning mixes, condiments, and other flavorful products to the food industry. It operates in two segments, Consumer and Flavor Solutions. The Consumer segment offers spices, herbs, and seasonings, as well as condiments and sauces, and desserts. This segment markets its products under the McCormick, French's, Frank's RedHot, Lawry's, Cholula Hot Sauce, Club House, Gourmet Garden, and OLD BAY brands in the Americas; Ducros, Schwartz, Kamis, LA Drogheria, and Vahin\u00e9 brands in Europe, the Middle East, and Africa; and McCormick and DaQiao brands in the Asia/Pacific, as well as markets desserts under the Aeroplane brand and packaged chilled herbs under the Gourmet Garden brand name; and markets authentic regional brands, such as Zatarain's, Stubb's, Thai Kitchen, and Simply Asia. It also supplies its products under the private labels. This segment serves retailers comprising grocery, mass merchandise, warehouse clubs, discount and drug stores, and e-commerce retailers directly and indirectly through distributors, wholesale foodservice suppliers, and e-commerce. The Flavor Solutions segment offers seasoning blends, spices and herbs, condiments, coating systems, and compound flavors to multinational food manufacturers and foodservice customers. It serves foodservice customers directly and indirectly through distributors. The company was founded in 1889 and is headquartered in Hunt Valley, Maryland."
     }
 }
