@@ -13525,5 +13525,41 @@
         "mcap": 184731600,
         "currency": "USD",
         "description": "Smart Sand, Inc. provides mine to wellsite proppant supply and logistics solutions to frac sand customers. The company operates through Sand Segment and SmartSystems Segment. It offers excavation, processing, and sale of white sands or proppant for use in hydraulic fracturing operations. The company also provides proppant logistics services wellsite storage solutions through in-basin transloading terminals and SmartSystems wellsite proppant storage capabilities. It sells its products primarily to oil and natural gas exploration and production companies, oilfield service companies, and industrial manufacturers. Smart Sand, Inc. was incorporated in 2011 and is headquartered in Yardley, Pennsylvania."
+    },
+    "ACDC": {
+        "ticker": "ACDC",
+        "name": "ProFrac Holding Corp.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 942338880,
+        "currency": "USD",
+        "description": "ProFrac Holding Corp. operates as a technology-focused energy services holding company in the United States. It operates through three segments: Stimulation Services, Proppant Production, and Manufacturing. The company offers hydraulic fracturing, proppant production, well stimulation, in-basin frac sand, and other completion services and complementary products and services to upstream oil and natural gas companies engaged in the exploration and production of unconventional oil and natural gas resources. It also manufactures and sells high horsepower pumps, valves, piping, swivels, large-bore manifold systems, and fluid ends, as well as other auxiliary equipment. The company was founded in 2016 and is headquartered in Willow Park, Texas."
+    },
+    "INDI": {
+        "ticker": "INDI",
+        "name": "indie Semiconductor, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 830706112,
+        "currency": "USD",
+        "description": "indie Semiconductor, Inc. provides automotive semiconductors and software solutions for advanced driver assistance systems, driver automation, in-cabin, connected car, and electrification applications. It offers ultrasonic sensors for parking assist and systems; radar sensors for audio assistance and reverse information; front cameras for vehicle detection, collision avoidance, and sign reading; and side/inside cameras for blind spot and lane change assist, and driver behavior monitoring. The company also provides LiDAR for distance, speed, and obstacle detection, collision avoidance, and emergency brake system; and long range RADAR for audio assistance, obstacle detection, and ACC stop and go. In addition, it designs, manufactures, and integrates photonic components on various technology platforms, including fiber Bragg gratings, low-noise lasers, athermal and tunable packaging, and low-noise and high-speed electronics. It provides solutions in the United States, Greater China, Europe, South Korea, rest of North America, rest of the Asia Pacific, and South America. The company was founded in 2007 and is headquartered in Aliso Viejo, California."
+    },
+    "NAVI": {
+        "ticker": "NAVI",
+        "name": "Navient Corporation",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 956540800,
+        "currency": "USD",
+        "description": "Navient Corporation provides technology-enabled education finance and business processing solutions for education, health care, and government clients in the United States. It operates through three segments: Federal Education Loans, Consumer Lending, and Business Processing. The company owns Federal Family Education Loan Program (FFELP) loans that are insured or guaranteed by state or not-for-profit agencies; and performs servicing on its portfolios, as well as federal education loans held by other institutions. It owns, originates, and services refinance and in-school private education loans; and offers business processing solutions, such as omnichannel contact center, workflow processing, and revenue cycle optimization services to federal agencies, state governments, tolling and parking authorities, other public sector clients, as well as hospitals, hospital systems, medical centers, large physician groups, other healthcare providers, and public health departments. In addition, the company provides corporate liquidity portfolio services. Navient Corporation was founded in 1973 and is headquartered in Herndon, Virginia."
+    },
+    "PAGS": {
+        "ticker": "PAGS",
+        "name": "PagSeguro Digital Ltd.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 3283555072,
+        "currency": "USD",
+        "description": "PagSeguro Digital Ltd., together with its subsidiaries, engages in the provision of financial and payment solutions for consumers, individual entrepreneurs, micro-merchants, and small and medium-sized companies in Brazil and internationally. It provides digital banking solutions, including deposits, top-ups, debt management services, tax collections, wire transfers, ATM withdrawals, and various online and point-of-sale (POS) payment solutions; cards, such as debit, credit, cash, and prepaid cards; and credit products comprising FGTS withdrawals, payroll loans, working capital loans, and overdraft accounts. The company offers insurance services, including account, card, home, business, health assistance, life, and credit life insurance; investment services, such as investment and portfolio advisory, financial education, brokerage, fund management, treasury, and research services; and operates Shopping PagBank, a marketplace for various brands. In addition, it provides software solutions comprising PagVendas, a POS software app; ClubPag, a marketing tool that allows merchants to advertise across client base, available for POS devices; and PlugPag, a wireless solution that connects the machine to the commercial automation system, via Bluetooth technology. The company was founded in 2006 and is headquartered in S\u00e3o Paulo, Brazil."
     }
 }
