@@ -13777,5 +13777,41 @@
         "mcap": 33612435456,
         "currency": "USD",
         "description": "The advisor attempts to track the index by investing all, or substantially all, of its assets-either directly or indirectly through a wholly owned subsidiary, which is itself a registered investment company-in the stocks that make up the index, holding each stock in approximately the same proportion as its weighting in the index. The fund is non-diversified."
+    },
+    "IDXX": {
+        "ticker": "IDXX",
+        "name": "IDEXX Laboratories, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 53639950336,
+        "currency": "USD",
+        "description": "IDEXX Laboratories, Inc. develops, manufactures, and distributes products for the companion animal veterinary, livestock and poultry, dairy, and water testing industries in the United States and internationally. The company operates through three segments: Companion Animal Group; Water Quality Products; and Livestock, Poultry and Dairy. It offers in-clinic chemistry, blood and urine chemistry, hematology, immunoassay, urinalysis, cytology, and coagulation analyzers; and SNAP rapid assays test kits. The company also provides commercial reference laboratory diagnostic and consulting services to veterinarians; veterinary consultation, telemedicine, and advisory services, including radiology, dental radiography, cardiology, internal medicine, and ultrasound consulting; Colilert, Colilert-18, and Colisure tests, which detect the presence of total coliforms and E. coli in water; Enterolert, Pseudalert, Filta-Max and Filta-Max xpress, Legiolert, Quanti-Tray products, and Tecta system instruments; and veterinary software and services for independent veterinary clinics and corporate groups. In addition, it offers diagnostic tests, services, and related instrumentation to manage the health status of livestock and poultry; human medical diagnostic products and services; and VetConnect PLUS, a cloud-based technology that enables veterinarians to access and analyze patients, as well as operates VetLab Station. The company markets its products through marketing, customer service, sales, and technical service groups, as well as through independent distributors and other resellers. IDEXX Laboratories, Inc. was incorporated in 1983 and is headquartered in Westbrook, Maine."
+    },
+    "PRM": {
+        "ticker": "PRM",
+        "name": "Perimeter Solutions, SA",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 3868205056,
+        "currency": "USD",
+        "description": "Perimeter Solutions, Inc. manufactures and supplies firefighting products and lubricant additives in the United States, Germany, and internationally. It operates in two segments, Fire Safety and Specialty Products. The Fire Safety segment provides fire retardants and firefighting foams, as well as specialized equipment and services for federal, state, provincial, local/municipal, and commercial customers. The Specialty Products segment develops, produces, and markets products for non-fire safety markets, including phosphorus pentasulfide based lubricant additives used in pesticide and mining chemicals applications, and electric battery technologies. The company was founded in 1963 and is headquartered in Clayton, Missouri with fire retardant production facility in Sacramento, California."
+    },
+    "UCO": {
+        "ticker": "UCO",
+        "name": "ProShares Ultra Bloomberg Crude",
+        "meta": "Trading--Leveraged Commodities",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund seeks to meet its investment objective by investing, under normal market conditions, in any one of, or combinations of, Financial Instruments (including swap agreements, futures contracts, forward contracts, and option contracts) based on WTI sweet, light crude oil. It will not invest directly in oil."
+    },
+    "GERN": {
+        "ticker": "GERN",
+        "name": "Geron Corporation",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 874546688,
+        "currency": "USD",
+        "description": "Geron Corporation, a commercial-stage biopharmaceutical company, focuses on the development of therapeutics products for oncology. It offers RYTELO a telomerase inhibitor for the treatment f adult patients with low- to intermediate-1 risk myelodysplastic syndromes with transfusion-dependent anemia. The company was incorporated in 1990 and is headquartered in Foster City, California."
     }
 }
