@@ -13615,5 +13615,59 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund will normally invest at least 90% of its net assets (including investment borrowings) in the securities that comprise the index. The index is designed to select stocks from the NASDAQ China Index (the \"base index\") that may generate positive alpha, or risk-adjusted returns, relative to traditional indices through the use of the AlphaDEX\u00ae selection methodology."
+    },
+    "GOVT": {
+        "ticker": "GOVT",
+        "name": "iShares U.S. Treasury Bond ETF",
+        "meta": "Intermediate Government",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will invest at least 80% of its assets in the component securities of the underlying index and will invest at least 90% of its assets in U.S. Treasury securities that BFA believes will help the fund track the underlying index. The underlying index includes publicly-issued U.S. Treasury securities that have a remaining maturity greater than one year and less than or equal to thirty years and have $300 million or more of outstanding face value."
+    },
+    "CABA": {
+        "ticker": "CABA",
+        "name": "Cabaletta Bio, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 247401552,
+        "currency": "USD",
+        "description": "Cabaletta Bio, Inc., a clinical-stage biotechnology company, focuses on the discovery and development of engineered T cell therapies for patients with autoimmune diseases. Its lead product candidate is resecabtagene autoleucel, a 4-1BB co-stimulatory domain-containing fully human CD19-CAR T, which is in Phase 1/2 clinical trials for the treatment of dermatomyositis, anti-synthetase syndrome, immune-mediated necrotizing myopathy, juvenile myositis, lupus nephritis, non-renal systemic lupus erythematosus, relapsing and progressive multiple sclerosis, mucocutaneous and mucosal pemphigus vulgaris (PV), systemic sclerosis, and generalized myasthenia gravis. The company also develops DSG3-CAART, a CAAR T cell therapy that is in Phase 1 clinical trial for the treatment of mucosal PV; and MuSK-CAART, an investigational cell therapy in Phase 1 trial for treating patients with anti-muscle-specific kinase (MuSK) antibody positive myasthenia gravis. It has collaborations with the University of Pennsylvania and the Children's Hospital of Philadelphia; Nanjing IASO Biotherapeutics Co., Ltd; Oxford Biomedica; Autolus Holdings (UK) Limited; and WuXi Advanced Therapies, Inc. The company was formerly known as Tycho Therapeutics, Inc. and changed its name to Cabaletta Bio, Inc. in August 2018. Cabaletta Bio, Inc. was incorporated in 2017 and is headquartered in Philadelphia, Pennsylvania."
+    },
+    "KXIN": {
+        "ticker": "KXIN",
+        "name": "Kaixin Holdings",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 1090328,
+        "currency": "USD",
+        "description": "Kaixin Holdings, an investment holding company, primarily sells domestic and imported automobiles in the People's Republic of China and Hong Kong. It also sells new and used vehicles through a network of dealerships with a focus on automobile brands, such as Audi, BMW, Mercedes-Benz, Land Rover, Bentley, Rolls-Royce, and Porsche, as well as through online sales channels, including the Kaixin app and web interfaces. The company is headquartered in Beijing, the People's Republic of China."
+    },
+    "GMGI": {
+        "ticker": "GMGI",
+        "name": "Golden Matrix Group, Inc.",
+        "meta": "Electronic Gaming & Multimedia",
+        "type": "EQUITY",
+        "mcap": 102920032,
+        "currency": "USD",
+        "description": "Golden Matrix Group, Inc. operates as an B2B and B2C gaming technology company in Central and South America, Europe, and Africa. It develops and licenses gaming platforms; and provides online sports betting and casino, and gaming services. The company is based in Las Vegas, Nevada."
+    },
+    "SPHY": {
+        "ticker": "SPHY",
+        "name": "State Street SPDR Portfolio Hig",
+        "meta": "High Yield Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests substantially all, but at least 80%, of its total assets in the securities comprising the index and in securities that the Adviser determines have economic characteristics that are substantially identical to the economic characteristics of the securities that comprise the index. The index is designed to measure the performance of U.S. dollar denominated below investment grade corporate debt publicly issued in the U.S. domestic market."
+    },
+    "USFR": {
+        "ticker": "USFR",
+        "name": "WisdomTree Floating Rate Treasu",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its total assets (exclusive of collateral held from securities lending) in the component securities of the index and investments that have economic characteristics that are substantially identical to the economic characteristics of such component securities. The index is designed to measure the performance of floating rate public obligations of the U.S. Treasury. The fund is non-diversified."
     }
 }
