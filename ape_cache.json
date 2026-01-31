@@ -13489,5 +13489,41 @@
         "mcap": 4815599104,
         "currency": "USD",
         "description": "Argan, Inc., through its subsidiaries, provides engineering, procurement, construction, commissioning, maintenance, project development, and technical consulting services to the power generation market in the United States, Republic of Ireland, and the United Kingdom. Its Power Industry Services segment offers engineering, procurement, and construction, as well as designing, building, and commissioning of large-scale energy projects to the owners of alternative energy facilities, such as biomass plants, wind farms, battery storage, and solar fields; and design, construction, project management, start-up, and operation, as well as technical consulting services. This segment serves independent power project owners, public utilities, power plant heavy equipment suppliers, and other commercial firms. The company's Industrial Construction Services segment provides field services that support new plant construction and additions; maintenance turnarounds; shutdowns and emergency mobilizations for industrial plants; and delivery and installation of steel components, such as piping systems and pressure vessels. Its Telecommunications Infrastructure Services segment offers trenchless directional boring and excavation for underground communication and power networks; aerial cabling; high and low voltage electric lines; and private area outdoor lighting systems, as well as installs buried cable. It also provides structured cabling, terminations, and connectivity that offers the physical transport for high-speed data, voice, video, and security networks. This segment serves electricity cooperative, state and local government agencies, counties and municipalities, and technology-oriented government contracting firms, as well as federal government customers in the mid-Atlantic region of the United States. Argan, Inc. was incorporated in 1961 and is headquartered in Arlington, Virginia."
+    },
+    "CZR": {
+        "ticker": "CZR",
+        "name": "Caesars Entertainment, Inc.",
+        "meta": "Resorts & Casinos",
+        "type": "EQUITY",
+        "mcap": 4305424896,
+        "currency": "USD",
+        "description": "Caesars Entertainment, Inc. operates as a gaming and hospitality company. The company owns, leases, brands, or manages domestic properties in 18 states with slot machines, video lottery terminals and e-tables, and hotel rooms, as well as table games, including poker. It also operates and conducts retail and online sports wagering across 32 jurisdictions in North America, and iGaming in five jurisdictions in North America; sports betting from retail and online sportsbooks; and other games, such as keno. In addition, the company operates dining venues, bars, nightclubs, lounges, hotels, and entertainment venues; and provides staffing and management services. The company was founded in 1937 and is based in Reno, Nevada."
+    },
+    "KC": {
+        "ticker": "KC",
+        "name": "Kingsoft Cloud Holdings Limited",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 4021402112,
+        "currency": "USD",
+        "description": "Kingsoft Cloud Holdings Limited provides cloud services to businesses and organizations primarily in China. The company's product portfolio includes cloud products, such as infrastructure as a service (IaaS) infrastructure, platform as a service (PaaS) middleware, and software as a service (SaaS) applications that primarily consist of cloud computing, network, containers, database, big data, security, storage, and delivery solutions. It offers research and development services, as well as enterprise digital solutions and related services. The company also provides public cloud services to customers in various verticals, including video, e-commerce, intelligent mobility, artificial intelligence, and mobile internet; and enterprise cloud services to customers in financial services, public service, and healthcare businesses. Kingsoft Cloud Holdings Limited was incorporated in 2012 and is headquartered in Beijing, China."
+    },
+    "EMR": {
+        "ticker": "EMR",
+        "name": "Emerson Electric Company",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 82635915264,
+        "currency": "USD",
+        "description": "Emerson Electric Co., a technology and software company, provides various solutions in the Americas, Asia, the Middle East, Africa, and Europe. It operates through Final Control, Measurement & Analytical, Discrete Automation, Safety & Productivity, Control Systems & Software, and Test & Measurement segments. The Final Control segment provides control valves, isolation valves, shutoff valves, pressure relief valves, pressure safety valves, actuators, and regulators for process and hybrid industries under Anderson Greenwood, Bettis, Crosby, Fisher, Keystone, KTM, and Vanessa brands. The Measurement & Analytical segment supplies intelligent instrumentation measuring the physical properties of liquids or gases, such as pressure, temperature, level, flow, acoustics, corrosion, pH, conductivity, water quality, toxic gases, and flame under the Flexim, Micro Motion, and Rosemount brands. The Discrete Automation segment includes solenoid valves, pneumatic valves, valve position indicators, pneumatic cylinders and actuators, air preparation equipment, pressure and temperature switches, electric linear motion solutions, programmable automation control systems and software, electrical distribution equipment, and materials joining solutions used primarily in discrete industries under the Afag, Appleton, ASCO, Aventics, Branson, Movicon, PACSystems, SolaHD, TESCOM, and TopWorx brands. The Safety & Productivity segment delivers tools for professionals and homeowners that support infrastructure, promote safety, and enhance productivity under the Greenlee, Klauke, ProTeam, and RIDGID brands. The Control Systems & Software segment provides control systems and software that control plant processes by collecting and analyzing information from measurement devices in the plant under the DeltaV and Ovation brands. The Test & Measurement offers software-connected automated test and measurement systems. The company was incorporated in 1890 and is headquartered in Saint Louis, Missouri."
+    },
+    "SND": {
+        "ticker": "SND",
+        "name": "Smart Sand, Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 184731600,
+        "currency": "USD",
+        "description": "Smart Sand, Inc. provides mine to wellsite proppant supply and logistics solutions to frac sand customers. The company operates through Sand Segment and SmartSystems Segment. It offers excavation, processing, and sale of white sands or proppant for use in hydraulic fracturing operations. The company also provides proppant logistics services wellsite storage solutions through in-basin transloading terminals and SmartSystems wellsite proppant storage capabilities. It sells its products primarily to oil and natural gas exploration and production companies, oilfield service companies, and industrial manufacturers. Smart Sand, Inc. was incorporated in 2011 and is headquartered in Yardley, Pennsylvania."
     }
 }
