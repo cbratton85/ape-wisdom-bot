@@ -13867,5 +13867,41 @@
         "mcap": 16495305728,
         "currency": "USD",
         "description": "Aptiv PLC engages in design, manufacture, and sale of vehicle components for the automotive and commercial vehicle markets in North America, Europe, the Middle East, Africa, the Asia Pacific, South America, and internationally. It operates through two segments, Signal and Power Solutions, and Advanced Safety and User Experience. The Signal and Power Solutions segment designs, manufactures, and assembles vehicle's electrical architecture, including engineered component products, connectors, wiring assemblies and harnesses, cable management products, electrical centers, and high voltage and safety distribution systems. The Advanced Safety and User Experience segment provides critical technologies and services for vehicle safety, security, comfort, and convenience, such as sensing and perception systems, electronic control units, multi-domain controllers, vehicle connectivity systems, cloud-native software platform, application software, autonomous driving technologies, and end-to-end DevOps tools. Aptiv PLC was incorporated in 2011 and is based in Schaffhausen, Switzerland."
+    },
+    "HIVE": {
+        "ticker": "HIVE",
+        "name": "HIVE Digital Technologies Ltd",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 695256704,
+        "currency": "USD",
+        "description": "HIVE Digital Technologies Ltd., a technology company, engages in the building and operating data centers powered by green energy in Bermuda and Paraguay. The Company operates the mining and sale of digital currencies and performance computing hosting. It also provides infrastructure solutions, such as computational capacity to distributed networks in the blockchain industry. The company was formerly known as HIVE Blockchain Technologies Ltd. and changed its name to HIVE Digital Technologies Ltd. in July 2023. HIVE Digital Technologies Ltd. was incorporated in 1987 and is headquartered in San Antonio, Texas."
+    },
+    "ROLL": {
+        "ticker": "ROLL",
+        "name": "ROLL",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "BSM": {
+        "ticker": "BSM",
+        "name": "Black Stone Minerals, L.P.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 3129208064,
+        "currency": "USD",
+        "description": "Black Stone Minerals, L.P., together with its subsidiaries, owns and manages oil and natural gas mineral interests. It owns mineral interests in approximately 16.8 million gross acres, nonparticipating royalty interests in 1.8 million gross acres, and overriding royalty interests in 1.6 million gross acres located in 41 states in the United States. The company was founded in 1876 and is based in Houston, Texas."
+    },
+    "CCS": {
+        "ticker": "CCS",
+        "name": "Century Communities, Inc.",
+        "meta": "Real Estate - Development",
+        "type": "EQUITY",
+        "mcap": 1850622592,
+        "currency": "USD",
+        "description": "Century Communities, Inc., together with its subsidiaries, engages in the design, development, construction, marketing, and sale of single-family attached and detached homes. It is also involved in the entitlement and development of the underlying land; and provision of mortgage, title, and insurance services to its homebuyers. The company offers homes under the Century Communities and Century Complete brands. It sells homes through its sales representatives, retail studios, and internet, as well as through independent real estate brokers in 18 states in the United States. Century Communities, Inc. was founded in 2002 and is headquartered in Greenwood Village, Colorado."
     }
 }
