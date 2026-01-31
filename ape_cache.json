@@ -13462,5 +13462,32 @@
         "mcap": 274060000,
         "currency": "USD",
         "description": "The fund generally will invest at least 80% of its assets in the component securities of the underlying index and in investments that have economic characteristics that are substantially identical to the component securities of the underlying index. The index has been developed by MSCI Inc. (the \"index provider\" or \"MSCI\") to focus on approximately 25 companies in developed and emerging markets that are involved in silver mining or exploration. The fund is non-diversified."
+    },
+    "PTON": {
+        "ticker": "PTON",
+        "name": "Peloton Interactive, Inc.",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 2335538176,
+        "currency": "USD",
+        "description": "Peloton Interactive, Inc. provides fitness and wellness products and services in North America and internationally. The company offers connected fitness products, such as the Peloton Bike, Peloton Bike+, Peloton Tread, Peloton Tread+, and Peloton Row. It also provides all-access, rental, and Peloton App memberships. In addition, the company leases Peloton Bike+ products. The company sells its products through e-commerce and inside sales, retail showrooms, and third-party retailers. Peloton Interactive, Inc. was founded in 2012 and is headquartered in New York, New York."
+    },
+    "IHG": {
+        "ticker": "IHG",
+        "name": "Intercontinental Hotels Group",
+        "meta": "Lodging",
+        "type": "EQUITY",
+        "mcap": 20652435456,
+        "currency": "USD",
+        "description": "InterContinental Hotels Group PLC owns, manages, franchises, and leases hotels in the United Kingdom, the United States, and internationally. It operates hotels under the Six Senses, Regent, InterContinental Hotels & Resorts, Vignette Collection, Kimpton Hotels & Restaurants, Hotel Indigo, voco, HUALUXE, Crowne Plaza, Iberostar Beachfront Resorts, EVEN, Holiday Inn Express, Holiday Inn, Garner, avid hotels, Atwell Suites, Staybridge Suites, IHG, Holiday Inn Club Vacations, and Candlewood Suites brand names. The company also provides IHG Rewards loyalty program. InterContinental Hotels Group PLC was founded in 1777 and is headquartered in Windsor, the United Kingdom."
+    },
+    "AGX": {
+        "ticker": "AGX",
+        "name": "Argan, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 4815599104,
+        "currency": "USD",
+        "description": "Argan, Inc., through its subsidiaries, provides engineering, procurement, construction, commissioning, maintenance, project development, and technical consulting services to the power generation market in the United States, Republic of Ireland, and the United Kingdom. Its Power Industry Services segment offers engineering, procurement, and construction, as well as designing, building, and commissioning of large-scale energy projects to the owners of alternative energy facilities, such as biomass plants, wind farms, battery storage, and solar fields; and design, construction, project management, start-up, and operation, as well as technical consulting services. This segment serves independent power project owners, public utilities, power plant heavy equipment suppliers, and other commercial firms. The company's Industrial Construction Services segment provides field services that support new plant construction and additions; maintenance turnarounds; shutdowns and emergency mobilizations for industrial plants; and delivery and installation of steel components, such as piping systems and pressure vessels. Its Telecommunications Infrastructure Services segment offers trenchless directional boring and excavation for underground communication and power networks; aerial cabling; high and low voltage electric lines; and private area outdoor lighting systems, as well as installs buried cable. It also provides structured cabling, terminations, and connectivity that offers the physical transport for high-speed data, voice, video, and security networks. This segment serves electricity cooperative, state and local government agencies, counties and municipalities, and technology-oriented government contracting firms, as well as federal government customers in the mid-Atlantic region of the United States. Argan, Inc. was incorporated in 1961 and is headquartered in Arlington, Virginia."
     }
 }
