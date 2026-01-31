@@ -13399,5 +13399,68 @@
         "mcap": 107191416,
         "currency": "USD",
         "description": "Incannex Healthcare Inc., a clinical-stage biopharmaceutical company, engages in the research and development of psychedelic medicines and therapies for patients with chronic diseases in Australia. The company develops IHL-42X, an oral fixed dose combination of dronabinol and acetazolamide that is in Phase 2/3 clinical trial for the treatment of obstructive sleep apnea; and PSX-001, an oral synthetic psilocybin treatment in Phase 2b clinical development for patients with generalized anxiety disorder. It is also developing IHL-675A, an oral fixed dose combination drug containing synthetic cannabidiol and hydroxychloroquine sulphate to treat rheumatoid arthritis, as well as lung inflammation, acute respiratory disease, chronic obstructive pulmonary disease, asthma, bronchitis, inflammatory bowel disease, colitis, and Crohn's disease. Incannex Healthcare Inc. is headquartered in Sydney, Australia."
+    },
+    "BKSY": {
+        "ticker": "BKSY",
+        "name": "BlackSky Technology Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 794356608,
+        "currency": "USD",
+        "description": "BlackSky Technology Inc. operates as a space-based intelligence company in North America, the Middle East, the Asia Pacific, and internationally. The company provides geospatial intelligence, imagery, and related data analytic products and services that include the development, integration, and operation of satellites and software platforms, and ground systems for government and commercial organizations. The company's Spectra software platform processes a range of observations from its satellite constellation and various external data sources, including imaging, radar and radio frequency satellites, environmental sensors, asset tracking sensors, internet-of-things (IoT) connected devices, internet-enabled narrative sources, and various geotemporal data feeds. It also offers a range of services related to object, change and anomaly detection, site monitoring, and enhanced analytics, which helps to detect key pattern of life changes in critical locations, including strategic locations and infrastructure comprising ports, airports, and construction sites; retail activity; commodities stockpiles; and other sites that contain critical commodities and supply chain inventory. In addition, the company develops and delivers satellites and payload systems; and provides professional and engineering services. Its products and services are used in national security, supply chain intelligence, crisis management, critical infrastructure monitoring, economic intelligence, and other applications. BlackSky Technology Inc. was founded in 2014 and is headquartered in Herndon, Virginia."
+    },
+    "IEZ": {
+        "ticker": "IEZ",
+        "name": "iShares U.S. Oil Equipment & Se",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index measures the performance of the oil equipment and services sector of the U.S. equity market. The fund generally will invest at least 80% of its assets in the component securities of its underlying index and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents. The fund is non-diversified."
+    },
+    "MCB": {
+        "ticker": "MCB",
+        "name": "Metropolitan Bank Holding Corp.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 953595072,
+        "currency": "USD",
+        "description": "Metropolitan Bank Holding Corp. operates as the bank holding company for Metropolitan Commercial Bank that provides a range of business, commercial, and retail banking products and services. The company offers checking, savings, term deposit, money market, non-interest-bearing demand deposit, and other time deposits. It also provides lending products, including commercial real estate; multi-family; construction; one-to four-family real estate loans; commercial and industrial loans; consumer loans, including purchased student loans; acquisition and renovation loans; loans to refinance or return borrower equity; loans on owner-occupied properties; working capital lines of credit; trade finance; letters of credit; and term loans. In addition, the company offers cash management services, as well as online and mobile banking, ACH, remote deposit capture, and debit cards products, as well as merchant services. It serves small businesses, middle-market enterprises, public entities, and individuals. The company was formerly known as Metbank Holding Corp. and changed its name to Metropolitan Bank Holding Corp. in January 2007. Metropolitan Bank Holding Corp. was incorporated in 1997 and is headquartered in New York, New York."
+    },
+    "PGY": {
+        "ticker": "PGY",
+        "name": "Pagaya Technologies Ltd.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1558877184,
+        "currency": "USD",
+        "description": "Pagaya Technologies Ltd., a product-focused technology company, deploys data science and proprietary artificial intelligence-powered technology for financial services and other service providers, their customers, and asset investors in the United States, Israel, and the Cayman Islands. The company develops and implements proprietary artificial intelligence technology and related software solutions to assist partners to originate loans and other assets. Its partners include financial technology companies, incumbent banks and financial institutions, auto finance providers, and residential real estate service providers. The company was incorporated in 2016 and is headquartered in New York, New York."
+    },
+    "RING": {
+        "ticker": "RING",
+        "name": "iShares MSCI Global Gold Miners",
+        "meta": "Equity Precious Metals",
+        "type": "ETF",
+        "mcap": 928740032,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of the underlying index and in investments that have economic characteristics that are substantially identical to the component securities of the underlying index. The index has been developed by MSCI Inc. (the \"index provider\" or \"MSCI\") to target a minimum of 30 companies in developed and emerging markets that are involved in the business of gold mining. The fund is non-diversified."
+    },
+    "MTPOY": {
+        "ticker": "MTPOY",
+        "name": "Metropolitan Bank & Trust",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 5541875200,
+        "currency": "USD",
+        "description": "Metropolitan Bank & Trust Company, together with its subsidiaries, provides various commercial and investment banking products and services in the Philippines, rest of Asia, the United States of America, and Europe. It operates through Consumer Banking, Corporate banking, Investment Banking, Treasury, Branch Banking, and Others segments. The Consumer Banking segment offers consumer type loans and support for the sourcing and generation of consumer business. Its Corporate Banking segment engages in handling loans and other credit facilities; and provides deposit and current accounts for corporate and institutional customers. The Investment Banking segment offers structured financing; services relating to privatizations, initial public offerings, and mergers and acquisitions; and advisory services to individuals and institutions. The Treasury segment provides money market, trading, and treasury products and services. Its Branch Banking segment handles branch deposits, as well as offers loans and other loan-related products for domestic middle-market clients. The Others segment provides remittances, leasing, account financing, and other support services. It also provides trade finance, credit card, programs and facilities, online and mobile banking, cash management, domestic and foreign fund transfer, remittance, institutional fund management, private banking, collateral, and trust services; debt and equity underwriting, loan syndication, project finance, financial advisory, equity brokering, online trading, research, and debt financing services; and automated teller machine, savings and mortgage banking, foreign exchange, money transmission and changing, insurance/reinsurance brokerage, and general and special management services. Metropolitan Bank & Trust Company was incorporated in 1962 and is headquartered in Makati City, the Philippines."
+    },
+    "SLVP": {
+        "ticker": "SLVP",
+        "name": "iShares MSCI Global Silver Mine",
+        "meta": "Equity Precious Metals",
+        "type": "ETF",
+        "mcap": 274060000,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of the underlying index and in investments that have economic characteristics that are substantially identical to the component securities of the underlying index. The index has been developed by MSCI Inc. (the \"index provider\" or \"MSCI\") to focus on approximately 25 companies in developed and emerging markets that are involved in silver mining or exploration. The fund is non-diversified."
     }
 }
