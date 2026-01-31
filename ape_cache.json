@@ -13345,5 +13345,59 @@
         "mcap": 16597536768,
         "currency": "USD",
         "description": "McCormick & Company, Incorporated manufactures, markets, and distributes herbs, spices, seasoning mixes, condiments, and other flavorful products to the food industry. It operates in two segments, Consumer and Flavor Solutions. The Consumer segment offers spices, herbs, and seasonings, as well as condiments and sauces, and desserts. This segment markets its products under the McCormick, French's, Frank's RedHot, Lawry's, Cholula Hot Sauce, Club House, Gourmet Garden, and OLD BAY brands in the Americas; Ducros, Schwartz, Kamis, LA Drogheria, and Vahin\u00e9 brands in Europe, the Middle East, and Africa; and McCormick and DaQiao brands in the Asia/Pacific, as well as markets desserts under the Aeroplane brand and packaged chilled herbs under the Gourmet Garden brand name; and markets authentic regional brands, such as Zatarain's, Stubb's, Thai Kitchen, and Simply Asia. It also supplies its products under the private labels. This segment serves retailers comprising grocery, mass merchandise, warehouse clubs, discount and drug stores, and e-commerce retailers directly and indirectly through distributors, wholesale foodservice suppliers, and e-commerce. The Flavor Solutions segment offers seasoning blends, spices and herbs, condiments, coating systems, and compound flavors to multinational food manufacturers and foodservice customers. It serves foodservice customers directly and indirectly through distributors. The company was founded in 1889 and is headquartered in Hunt Valley, Maryland."
+    },
+    "FLCA": {
+        "ticker": "FLCA",
+        "name": "Franklin FTSE Canada ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Under normal market conditions, the fund invests at least 80% of its assets in the component securities of the FTSE Canada Capped Index and in depositary receipts representing such securities. The FTSE Canada Capped Index is based on the FTSE Canada Index and is designed to measure the performance of Canadian large- and mid-capitalization stocks. The fund is non-diversified."
+    },
+    "DEF": {
+        "ticker": "DEF",
+        "name": "Invesco Defensive Equity ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its total assets in the securities that comprise the underlying index. The underlying index focuses on companies that have the smallest deviations among their annual gross profit margins over the last five years.. The fund will concentrate its investments in securities of issuers in any one industry or group of industries only to the extent that the underlying index reflects a concentration in that industry or group of industries."
+    },
+    "SIZE": {
+        "ticker": "SIZE",
+        "name": "iShares MSCI USA Size Factor ET",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of the underlying index and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents, including shares of money market funds advised by BFA or its affiliates, as well as in securities not included in the underlying index, but which BFA believes will help the fund track the underlying index. The index is based on a traditional market capitalization-weighted parent index, the MSCI USA Index (the \"parent index\")."
+    },
+    "FLMX": {
+        "ticker": "FLMX",
+        "name": "Franklin FTSE Mexico ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Under normal market conditions, the fund invests at least 80% of its assets in the component securities of the FTSE Mexico Capped Index and in depositary receipts representing such securities. The FTSE Mexico Capped Index is based on the FTSE Mexico Index and is designed to measure the performance of Mexican large- and mid-capitalization stocks. The fund is non-diversified."
+    },
+    "PLRX": {
+        "ticker": "PLRX",
+        "name": "Pliant Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 74353760,
+        "currency": "USD",
+        "description": "Pliant Therapeutics, Inc., a biopharmaceutical company, discovers, develops, and commercializes novel therapies for the treatment of fibrosis and related diseases. The company's lead candidate includes bexotegrast, an oral, small-molecule, dual selective inhibitor of av\u00df6 and av\u00df1 integrins, which has completed phase 2a trial for primary sclerosing cholangitis. It also develops PLN-1474, an oral, small-molecule selective inhibitor of av\u00df1 for the treatment of liver fibrosis associated with nonalcoholic steatohepatitis; PLN-101095, a dual inhibitor of integrins av\u00df8 and av\u00df1 for the treatment of solid tumors; and PLN-101325, a phase 1-ready program for treatment of the muscular dystrophies, including duchenne muscular dystrophy. Pliant Therapeutics, Inc. was incorporated in 2015 and is headquartered in South San Francisco, California."
+    },
+    "IXHL": {
+        "ticker": "IXHL",
+        "name": "Incannex Healthcare Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 107191416,
+        "currency": "USD",
+        "description": "Incannex Healthcare Inc., a clinical-stage biopharmaceutical company, engages in the research and development of psychedelic medicines and therapies for patients with chronic diseases in Australia. The company develops IHL-42X, an oral fixed dose combination of dronabinol and acetazolamide that is in Phase 2/3 clinical trial for the treatment of obstructive sleep apnea; and PSX-001, an oral synthetic psilocybin treatment in Phase 2b clinical development for patients with generalized anxiety disorder. It is also developing IHL-675A, an oral fixed dose combination drug containing synthetic cannabidiol and hydroxychloroquine sulphate to treat rheumatoid arthritis, as well as lung inflammation, acute respiratory disease, chronic obstructive pulmonary disease, asthma, bronchitis, inflammatory bowel disease, colitis, and Crohn's disease. Incannex Healthcare Inc. is headquartered in Sydney, Australia."
     }
 }
