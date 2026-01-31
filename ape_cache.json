@@ -13813,5 +13813,59 @@
         "mcap": 874546688,
         "currency": "USD",
         "description": "Geron Corporation, a commercial-stage biopharmaceutical company, focuses on the development of therapeutics products for oncology. It offers RYTELO a telomerase inhibitor for the treatment f adult patients with low- to intermediate-1 risk myelodysplastic syndromes with transfusion-dependent anemia. The company was incorporated in 1990 and is headquartered in Foster City, California."
+    },
+    "IBND": {
+        "ticker": "IBND",
+        "name": "SPDR Bloomberg International Co",
+        "meta": "Global Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests substantially all, but at least 80%, of its total assets in the securities comprising the index and in securities that the Adviser determines have economic characteristics that are substantially identical to the economic characteristics of the securities that comprise the index. The index is designed to be a broad based measure of the global investment grade, fixed rate, fixed income corporate markets outside the United States."
+    },
+    "AMN": {
+        "ticker": "AMN",
+        "name": "AMN Healthcare Services Inc",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 818213504,
+        "currency": "USD",
+        "description": "AMN Healthcare Services, Inc. provides technology-enabled healthcare workforce solutions and staffing services to acute and sub-acute care hospitals, and other healthcare facilities in the United States. It operates through three segments: Nurse and Allied Solutions, Physician and Leadership Solutions, and Technology and Workforce Solutions. The Nurse and Allied Solutions segment offers travel nurse staffing, labor disruption staffing, local staffing, international nurse permanent placement, allied staffing, crisis nurse staffing for critical staffing and rapid response nursing, and allied health professionals, such as skilled nursing facilities, rehabilitation clinics, schools, and pharmacies. This segment also provides allied health professionals, such as physical therapists, respiratory therapists, occupational therapists, medical and radiology technologists, lab technicians, speech pathologists, rehabilitation assistants, and pharmacists; and solutions for schools, including teletherapy platform, Televate, and qualified school speech-language pathologists, psychologists, nurses, social workers, and other care providers. The Physician and Leadership Solutions segment offers locum tenens staffing, healthcare interim leadership staffing, executive search, and physician permanent placement solutions. The Technology and Workforce Solutions segment offers language services, vendor management systems, workforce optimization, and outsourced solutions. The company offers its services under the brands, including AMN Healthcare, Nursefinders, O'Grady Peyton International, Connetics, Medical Search International, DRW Healthcare Staffing, and B.E. Smith. AMN Healthcare Services, Inc. was founded in 1985 and is based in Dallas, Texas."
+    },
+    "NVAX": {
+        "ticker": "NVAX",
+        "name": "Novavax, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1437303680,
+        "currency": "USD",
+        "description": "Novavax, Inc., a biotechnology company, engages in the discovering, developing, and commercializing vaccines to protect against serious infectious diseases in the United States, Europe, and internationally. The company offers vaccine platform that combines a recombinant protein approach, nanoparticle technology, and its patented Matrix-M adjuvant to enhance the immune response. The company is commercializing a COVID-19 vaccine, NVX-CoV2373 under the brand names of Nuvaxovid, Covovax, and Novavax COVID-19 Vaccine, adjuvanted for adult and adolescent populations as a primary series and for both homologous and heterologous booster indications. It also developing R21/Matrix-M adjuvant malaria vaccine. Novavax, Inc. was incorporated in 1987 and is headquartered in Gaithersburg, Maryland."
+    },
+    "MNMD": {
+        "ticker": "MNMD",
+        "name": "Mind Medicine (MindMed) Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1460232320,
+        "currency": "USD",
+        "description": "Mind Medicine (MindMed) Inc., a clinical stage biopharmaceutical company, develops novel products to treat brain health disorders. The company's lead product candidates include MM120, which is in phase 3 for the treatment of generalized anxiety disorder and attention deficit hyperactivity disorder; and MM402, a R-enantiomer of 3,4-methylenedioxymethamphetamine, which is in phase I clinical trials for the treatment of core symptoms of autism spectrum disorder. Mind Medicine (MindMed) Inc. is headquartered in New York, New York."
+    },
+    "POR": {
+        "ticker": "POR",
+        "name": "Portland General Electric Co",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 5652569600,
+        "currency": "USD",
+        "description": "Portland General Electric Company, an integrated electric utility company, engages in the generation, wholesale purchase, transmission, distribution, and retail sale of electricity in the state of Oregon. It operates six thermal plants, four wind farms, and seven hydroelectric facilities. As of December 31, 2024, the company owned an electric transmission system consisting of 1,269 circuit miles, including 287 circuit miles of 500 kilovolt line, 418 circuit miles of 230 kilovolt line, and 564 miles of 115 kilovolt line; and served 950 thousand retail customers in 51 cities. It also has 29,398 circuit miles of distribution lines. Portland General Electric Company was founded in 1889 and is headquartered in Portland, Oregon."
+    },
+    "APTV": {
+        "ticker": "APTV",
+        "name": "Aptiv PLC",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 16495305728,
+        "currency": "USD",
+        "description": "Aptiv PLC engages in design, manufacture, and sale of vehicle components for the automotive and commercial vehicle markets in North America, Europe, the Middle East, Africa, the Asia Pacific, South America, and internationally. It operates through two segments, Signal and Power Solutions, and Advanced Safety and User Experience. The Signal and Power Solutions segment designs, manufactures, and assembles vehicle's electrical architecture, including engineered component products, connectors, wiring assemblies and harnesses, cable management products, electrical centers, and high voltage and safety distribution systems. The Advanced Safety and User Experience segment provides critical technologies and services for vehicle safety, security, comfort, and convenience, such as sensing and perception systems, electronic control units, multi-domain controllers, vehicle connectivity systems, cloud-native software platform, application software, autonomous driving technologies, and end-to-end DevOps tools. Aptiv PLC was incorporated in 2011 and is based in Schaffhausen, Switzerland."
     }
 }
