@@ -8,6 +8,8 @@ import sys
 import math
 import random
 import json
+import re
+from bs4 import BeautifulSoup
 import shutil
 import numpy as np
 
@@ -628,290 +630,203 @@ def export_interactive_html(df, ai_summary=""):
             if c not in export_df.columns:
                 export_df[c] = 0
 
-        final_df = export_df[cols].copy()
-
-        # NEW TOOL TIP FUNCTION FOR HEADERS
-        header_tooltips = {
-            "Rank": ("", "Current position in the popularity list based on social momentum."),
-            "Rank+": ("Rank(Yest) - Rank(Today)", "Positions changed vs 24h ago."),
-            "Heat": ("Weighted aggregate", "Master Score of all momentum signals."),
-            "Name": ("", "Company or Fund Name."),
-            "Sym": ("", "Ticker symbol and link to Yahoo Finance."),
-            "Price": ("", "Last traded market price (USD)."),
-            "Acc": ("Vel(Today) - Vel(Yest)", "Acceleration: Rate of change of speed"),
-            "Eff": ("Rank+ / Surge", "Efficiency: Rank gain per unit of volume."),
-            "Conv": ("Upvotes / Mentions", "Conviction: Sentiment Quality Ratio."),
-            "Upvs": ("", "Total upvotes received in the last 24 hours."),
-            "Upv+": ("", "Net change in upvotes compared to the previous 24h period."),
-            "Vol": ("", "Average daily 30-day trading volume."),
-            "Srg": ("(Vol/Avg)*100", "Surge: Current volume as % of 30-day Avg."),
-            "Vel": ("", "Velocity: The speed of the rank change (Rank+ Delta)."),
-            "Strk": ("", "Streak: Number of consecutive runs sustaining direction."),
-            "MENT": ('<span style="color:#ffff00;">Yellow</span>(>2σ),<span style="color:#00ff00;">Green</span>(>1σ).', "Number of times mentioned in 24h."),
-            "Mnt%": ("", "Percent change in chatter vs yesterday."),
-            "Sqz": ("Mnt * Surge / log(MCap)", 'Likelihood of a <span style="color: #ff4444; font-weight:bold;">short squeeze</span>.'),
-            "INDUSTRY/SECTOR": ("", "The primary industry classification or ETF category.")
-        }
-        final_df.columns = [
-            f'''<span class="header-tip">{c}
-                <span class="tip-box">
-                <span class="formula">{header_tooltips[c][0]}</span>
-                <span class="desc">{header_tooltips[c][1]}</span>
-            </span>
-        </span>'''
-        if c in header_tooltips else c 
-        for c in final_df.columns
-        ]
-        #----------------------------------
-
         # NOTE: table-dark class + table-hover
-        raw_table = final_df.to_html(classes='table table-dark table-hover', index=False, escape=False)
+        raw_table = export_df[cols].to_html(classes='table table-dark table-hover', index=False, escape=False)
         table_html = f'<div class="table-scroll-container">{raw_table}</div>'
-
         utc_timestamp = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
         
-        ai_box_html = ""
-        if ai_summary:
-            ai_box_html = f"""
-            <div class="ai-box-wrapper" style="margin-bottom: 15px;">
-                <div style="background: #18181b; border: 1px solid #00ff00; border-radius: 5px; box-shadow: 0 4px 15px rgba(0,255,0,0.1);">
-                    <div onclick="toggleAI()" style="padding: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: #2a2a2a; border-bottom: 1px solid #333; font-weight: bold; color: #fff; font-size: 0.85rem; text-transform: uppercase;">
-                        <span style="color: #00ff00;">✨ Google Gemini AI Report (CLICK TO TOGGLE)</span>
-                        <span id="aiArrow" style="color: #00ff00;">▼</span>
-                    </div>
-                    <div id="aiContent" style="display: none; padding: 15px; color: #e0e0e0; font-size: 14px; line-height: 1.6; white-space: pre-wrap; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">{ai_summary}</div>
-                </div>
-            </div>
-            """
-
         html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Ape Wisdom Analysis</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
-            /* 1. Global Font */
-            body {{ background-color:#101010; color:#e0e0e0; font-family:'Consolas','Monaco',monospace; padding: 5px 50px 5px 50px; }}
-
-            /* --- HEADER TOOLTIPS --- */
-            .header-tip {{
-                position: relative;
-                display: inline-block;
-                cursor: help;
-                border-bottom: 1px dotted #777;
-                white-space: nowrap;
-                text-align: center;
-                width: auto;
+            body{{
+                background-color:#101010; color:#e0e0e0; font-family:'Consolas','Monaco',monospace; padding:20px;
             }}
-            .header-tip .tip-box {{
-                display: none;
-                position: absolute;
-                bottom: 140%;
-                left: 50%;
-                transform: translateX(-50%);
-                background-color: #1a1a1a;
-                color: #ffffff;
-                padding: 10px;
-                border-radius: 6px;
-                width: auto;
-                z-index: 999999; 
-                border: 1px solid #00ff00;
-                box-shadow: 0 8px 16px rgba(0,0,0,0.8);
-                font-family: 'Segoe UI', Tahoma, sans-serif;
-                white-space: nowrap;
-                font-weight: normal;
-                text-transform: none;
-            }}
-            .header-tip .formula {{
-                display: block; color: #888; font-size: 11px; font-family: 'Consolas', monospace;
-                border-bottom: 1px solid #333; margin-bottom: 5px; padding-bottom: 5px;
-            }}
-            .header-tip .formula:empty {{ display: none; }}
-            .header-tip .desc {{ display: block; font-size: 13px; line-height: 1.4; }}
-            .header-tip:hover .tip-box {{ display: block; }}
-
-            /* --- LAYOUT --- */
-            .master-container {{ margin: 0 auto; width: fit-content; max-width: 100% !important; }}
-            .table-scroll-container {{ overflow-x: visible !important; overflow-y: visible; width: 100%; position: relative; }}
-            .dataTables_wrapper, .table-responsive {{ overflow: visible !important; }}
-
-            /* --- TABLE STYLES --- */
-            .table-dark {{ --bs-table-bg:#18181b; color:#ccc }}
+            .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
             
-            table.dataTable {{
-                width: 100% !important;
-                table-layout: fixed;
-                margin: 0 auto;
-                border-collapse: collapse !important;
-                border: 1px solid #444; 
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-            }}
-
-            /* --- DEFAULT CELL STYLES (Targeting Numeric Columns) --- */
-            th, td {{
-                vertical-align: middle !important;
-                font-size: 13px;
-                line-height: 1.2 !important;
-                border-right: 1px solid #333;
-                white-space: nowrap;
-                width: 2% !important;  /* DEFAULT: Force all columns to shrink */
-            }}
-
-            /* Header Specifics */
-            th {{
-                color: #00ff00;
-                border-bottom: 2px solid #444;
+            th{{
+                color:#00ff00; border-bottom:2px solid #444;
+                font-size: 15px;
                 text-transform: uppercase;
-                padding: 6px 18px 6px 6px !important; 
+                /* Changed padding to: Top:8px, Right:20px, Bottom:8px, Left:4px */
+                vertical-align: middle !important; padding: 8px 22px 8px 6px !important; line-height: 1.2 !important;
             }}
-            /* Data Specifics */
-            td {{ border-bottom: 1px solid #333; padding: 4px 6px !important; }}
+
+            td{{
+                vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333; 
+                padding: 4px 5px !important;
+                font-size: 15px;
+            }}
+
+            table.dataTable {{ width: auto !important; margin: 0 auto; }}
             
-            /* Remove right border from last column */
-            th:last-child, td:last-child {{ border-right: none; }}
+            th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; }} /*RANK*/
 
-            /* --- WIDE COLUMNS (Name & Industry) --- */
+            th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }} /*RANK+*/
 
-            /* 1. NAME COLUMN (Col 4) - WIDE */
+            th:nth-child(3), td:nth-child(3) {{ width: 1%; text-align: center; font-weight: bold; }} /*HEAT*/
+
             th:nth-child(4), td:nth-child(4) {{
-                text-align: left !important;
-                width: auto !important;       
-                min-width: 220px !important;  
-                max-width: 220px !important;  
-            }}
-            /* TRUNCATE DATA ONLY (Keep Headers Visible for Tooltips) */
-            td:nth-child(4) {{
-                overflow: hidden !important;
-                text-overflow: ellipsis !important;
-            }}
-            th:nth-child(4) {{
-                overflow: visible !important; /* Critical for Tooltip */
-            }}
-            /* 2. INDUSTRY COLUMN (Col 19) - WIDE */
-            th:nth-child(19), td:nth-child(19) {{
-                text-align: left !important;
-                width: auto !important;
-                min-width: 200px !important;
-                max-width: 200px !important;
-            }}
-            /* TRUNCATE DATA ONLY */
-            td:nth-child(19) {{
-                overflow: hidden !important;
-                text-overflow: ellipsis !important;
-                border-right: 1px solid #333 !important;
-            }}
-            th:nth-child(19) {{
-                overflow: visible !important; /* Critical for Tooltip */
-                border-right: 1px solid #333 !important;
-            }}
+                min-width: 260px
+                max-width: 260px;
+                overflow: hidden; text-overflow:
+                ellipsis;
+            }} /*NAME*/
+            
+            th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }} /*SYM*/
 
-            /* 3. SYMBOL & PRICE (Left/Right Align) */
-            th:nth-child(5), td:nth-child(5) {{ text-align: left !important; font-weight: bold; }}
-            th:nth-child(6), td:nth-child(6) {{ text-align: right !important; }}
+            th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; }} /*PRICE*/
 
-            /* 4. CENTER ALIGNMENT (All other columns) */
-            th:nth-child(1), td:nth-child(1), /* Rank */
-            th:nth-child(2), td:nth-child(2), /* Rank+ */
-            th:nth-child(3), td:nth-child(3), /* Heat */
-            th:nth-child(7), td:nth-child(7), /* Acc */
-            th:nth-child(8), td:nth-child(8), /* Eff */
-            th:nth-child(9), td:nth-child(9), /* Conv */
-            th:nth-child(10), td:nth-child(10), /* Upvs */
-            th:nth-child(11), td:nth-child(11), /* Upv+ */
-            th:nth-child(12), td:nth-child(12), /* Vol */
-            th:nth-child(13), td:nth-child(13), /* Srg */
-            th:nth-child(14), td:nth-child(14), /* Vel */
-            th:nth-child(15), td:nth-child(15), /* Strk */
-            th:nth-child(16), td:nth-child(16), /* MENT */
-            th:nth-child(17), td:nth-child(17), /* Mnt% */
-            th:nth-child(18), td:nth-child(18)  /* Sqz */
-            {{ text-align: center; }}
+            th:nth-child(7), td:nth-child(7) {{ width: 1%; text-align: center; }} /*ACC*/
 
-            /* --- MISC UI --- */
+            th:nth-child(8), td:nth-child(8) {{ width: 1%; text-align: center; }} /*EFF*/
+
+            th:nth-child(9), td:nth-child(9) {{ width: 1%; text-align: center; }} /*CONV*/
+
+            th:nth-child(10), td:nth-child(10) {{ width: 1%; text-align: center; }} /*UPVS*/
+
+            th:nth-child(11), td:nth-child(11) {{ width: 1%; text-align: center; }} /*UPV+*/
+
+            th:nth-child(12), td:nth-child(12) {{ width: 1%; text-align: right; }} /*VOL*/
+
+            th:nth-child(13), td:nth-child(13) {{ width: 1%; text-align: center; }} /*SRG*/
+
+            th:nth-child(14), td:nth-child(14) {{ width: 1%; text-align: center; }} /*VEL*/
+
+            th:nth-child(15), td:nth-child(15) {{ width: 1%; text-align: center; }} /*STRK*/
+
+            th:nth-child(16), td:nth-child(16) {{ width: 1%; text-align: center; }} /*MENT*/
+            
+            th:nth-child(17), td:nth-child(17) {{ width: 1%; text-align: center; }} /*MNT%*/
+
+            th:nth-child(18), td:nth-child(18) {{ width: 1%; text-align: center; }} /*SQZ*/
+
+            th:nth-child(19), td:nth-child(19) {{ 
+                min-width: 260px
+                max-width: 260px; 
+                overflow: hidden; 
+                text-overflow: ellipsis; 
+                text-align: left; 
+                padding-left: 10px !important; 
+                border-right: 1px solid #333; 
+            }}
+            
+            td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
             table.no-colors a {{ color: #4da6ff !important; }}
             
-            .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 8px; margin-bottom: 20px; }}
-            .legend-header {{ background: #2a2a2a; padding: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; font-size: 0.85rem; text-transform: uppercase; border-bottom: 1px solid #333; }}
-            .legend-box {{ padding: 8px; display: none; background-color: #1a1a1a; }}
+            .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }}
+            .legend-header {{ background: #2a2a2a; padding: 10px 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; }}
+            .legend-box {{
+                padding: 8px;
+                display: none;
+                background-color: #1a1a1a;
+            }}
+            
+            /* --- 2-COLUMN GRID LEGEND --- */
+            
             .legend-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }}
-            .legend-col {{ background: #222; border: 1px solid #333; padding: 6px; border-radius: 5px; }}
+            .legend-col {{ background: #222;
+                border: 1px solid #333;
+                padding: 6px;
+                border-radius: 5px;
+            }}
             .legend-title {{ color: #00ff00; font-weight: bold; border-bottom: 1px solid #444; margin-bottom: 8px; font-size: 0.95rem; text-transform: uppercase; }}
-            .legend-row {{ display: flex; align-items: flex-start; margin-bottom: 1px; font-size: 15px; border-bottom: 1px dashed #333; padding-bottom: 1px; }}
+            .legend-row {{
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 1px;
+                font-size: 15px;
+                border-bottom: 1px dashed #333;
+                padding-bottom: 1px;
+            }}
+            
             .metric-name {{ color: #00ffff; font-weight: bold; width: 60px; flex-shrink: 0; }}
             .metric-math {{ color: #888; font-family: monospace; font-size: 0.75rem; margin-right: 10px; flex-shrink: 0; }}
             .metric-desc {{ color: #ccc; }}
+            
             .color-key {{ width: 80px; font-weight: bold; flex-shrink: 0; }}
             .color-desc {{ color: #bbb; }}
-            @media (max-width: 900px) {{ .legend-grid {{ grid-template-columns: 1fr; }} }}
             
+            @media (max-width: 900px) {{ .legend-grid {{ grid-template-columns: 1fr; }} }}
+
             .filter-bar {{ display: flex; gap: 8px; align-items: center; background: #2a2a2a; padding: 8px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #444; flex-wrap: wrap; font-size: 0.85rem; }}
             .filter-group {{ display:flex; align-items:center; gap:4px; }}
-            .form-control-sm {{ background:#111; border:1px solid #555; color:#fff; height: 35px; font-size: 0.8rem; padding: 2px 5px; }}
+            .form-control-sm {{ background:#111; border:1px solid #555; color:#fff; height: 28px; font-size: 0.8rem; padding: 2px 5px; }}
             .btn-reset {{ border: 1px solid #555; color: #fff; font-size: 0.8rem; background: #333; }}
             .btn-reset:hover {{ background: #444; color: #fff; }}
+            
             #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px;}}
             .header-flex {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
+            .page-link {{ background-color: #222; border-color: #444; color: #00ff00; }}
+            .page-item.active .page-link {{ background-color: #00ff00; border-color: #00ff00; color: #000; }}
+            .page-item.disabled .page-link {{ background-color: #111; border-color: #333; color: #555; }}
 
-            .dataTables_filter {{ float: none !important; text-align: center !important; width: 100%; margin-left: -430px; }}
-            .dataTables_filter input {{ width: 250px !important; background: #111 !important; border: 1px solid #555 !important; color: #fff !important; height: 30px !important; }}
-            .page-link {{ background-color: #1a1a1a !important; border-color: #444 !important; color: #ccc !important; }}
-            .page-link:hover {{ background-color: #333 !important; color: #fff !important; }}
-            .page-item.active .page-link {{ background-color: #00ff00 !important; border-color: #00ff00 !important; color: #000 !important; font-weight: bold; }}
-            .page-item.disabled .page-link {{ background-color: #111 !important; border-color: #333 !important; color: #555 !important; }}
+            .dataTables_filter input {{
+                width: 350px !important; background: #111 !important; border: 1px solid #555 !important;
+                color: #fff !important; height: 28px !important; border-radius: 4px; margin-left: 10px;
+            }}
         </style>
         </head>
         <body>
-        <div class="master-container">
-            {ai_box_html}
+        <div class="container-fluid" style="width: fit-content; margin: 0 auto;">
             <div class="header-flex">
                 <a href="https://apewisdom.io" target="_blank" style="text-decoration: none;">
                 <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" style="height: 60px; vertical-align: middle; margin-right: 15px;">
                 </a>
                 <span id="time" data-utc="{utc_timestamp}" style="font-size: 0.9rem; color: #888;">Loading...</span>
             </div>
+
             <div class="filter-bar">
                 <span style="color:#fff; font-weight:bold; margin-right:5px;">⚡ FILTERS:</span>
                 <button id="btnColors" class="btn btn-sm btn-reset" onclick="toggleColors()" style="margin-right: 5px;">🎨 Colors: ON</button>
-                <button class="btn btn-sm btn-reset" onclick="resetFilters()" title="Reset Filters">🔄 RESET</button>
+                <button class="btn btn-sm btn-reset" onclick="resetFilters()" title="Reset Filters">🔄</button>
+
                 <div class="filter-group" style="margin-left: 10px; margin-right: 10px;">
                     <label>Price:</label>
                     <input type="text" id="minPrice" class="form-control form-control-sm" placeholder="Min" style="width: 50px;">
                     <span style="color:#666">-</span>
                     <input type="text" id="maxPrice" class="form-control form-control-sm" placeholder="Max" style="width: 50px;">
                 </div>
+                
                 <div class="filter-group" style="margin-right: 10px;">
                     <label>Avg Vol:</label>
                     <input type="text" id="minVol" class="form-control form-control-sm" placeholder="500k" style="width: 50px;">
                     <span style="color:#666">-</span>
                     <input type="text" id="maxVol" class="form-control form-control-sm" placeholder="10m" style="width: 50px;">
                 </div>
+
                 <div class="filter-group">
                     <div class="btn-group" role="group" style="margin-right: 10px;">
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio1" style="font-size: 0.75rem; padding: 4px 6px;">All</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio1" style="font-size: 0.75rem; padding: 2px 8px;">All</label>
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio2" onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio2" style="font-size: 0.75rem; padding: 4px 6px;">Stocks</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio2" style="font-size: 0.75rem; padding: 2px 8px;">Stocks</label>
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio3" onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio3" style="font-size: 0.75rem; padding: 4px 6px;">ETFs</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio3" style="font-size: 0.75rem; padding: 2px 8px;">ETFs</label>
                     </div>
+
                     <div class="btn-group" role="group">
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapAll" checked onclick="toggleMcap('all')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapAll" style="font-size: 0.75rem; padding: 4px 6px;">All</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapAll" style="font-size: 0.75rem; padding: 2px 6px;">All</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMega" onclick="toggleMcap('mega')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.75rem; padding: 4px 6px;" title="> $200B">Mega</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.75rem; padding: 2px 6px;" title="> $200B">Mega</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapLarge" onclick="toggleMcap('large')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.75rem; padding: 4px 6px;" title="$10B - $200B">Large</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.75rem; padding: 2px 6px;" title="$10B - $200B">Lrg</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMid" onclick="toggleMcap('mid')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.75rem; padding: 4px 6px;" title="$2B - $10B">Mid</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.75rem; padding: 2px 6px;" title="$2B - $10B">Mid</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapSmall" onclick="toggleMcap('small')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.75rem; padding: 4px 6px;" title="$250M - $2B">Small</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.75rem; padding: 2px 6px;" title="$250M - $2B">Sml</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMicro" onclick="toggleMcap('micro')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.75rem; padding: 4px 6px;" title="< $250M">Micro</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.75rem; padding: 2px 6px;" title="< $250M">Mic</label>
                     </div>
                 </div>
+
                 <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">Download TXT File</button>
                 <span id="stockCounter">Loading...</span>
             </div>
+
             <div class="legend-container">
                 <div class="legend-header" onclick="toggleLegend()">
                     <span>ℹ️ DATA DEFINITIONS & COLOR GUIDE (Click to Toggle)</span>
@@ -919,42 +834,148 @@ def export_interactive_html(df, ai_summary=""):
                 </div>
                 <div class="legend-box" id="legendContent">
                     <div class="legend-grid">
+                        
                         <div class="legend-col">
                             <div class="legend-title">📉 Column Definitions</div>
-                            <div class="legend-row"><span class="metric-name">RANK</span><span class="metric-math">Current Pos</span><span class="metric-desc">Current rank in the popularity list.</span></div>
-                            <div class="legend-row"><span class="metric-name">RANK+</span><span class="metric-math">Rank(Yest) - Rank(Today)</span><span class="metric-desc">Positions changed vs 24h ago.</span></div>
-                            <div class="legend-row"><span class="metric-name">HEAT</span><span class="metric-math">Master Score</span><span class="metric-desc">Weighted aggregate of all momentum signals.</span></div>
-                            <div class="legend-row"><span class="metric-name">ACC</span><span class="metric-math">Vel(Today) - Vel(Yest)</span><span class="metric-desc">Acceleration: (Rate of change of speed).</span></div>
-                            <div class="legend-row"><span class="metric-name">EFF</span><span class="metric-math">Rank+ / Surge</span><span class="metric-desc">Efficiency: Rank gain per unit of volume.</span></div>
-                            <div class="legend-row"><span class="metric-name">CONV</span><span class="metric-math">Upvotes / Mentions</span><span class="metric-desc">Conviction: Sentiment Quality Ratio.</span></div>
-                            <div class="legend-row"><span class="metric-name">UPVS</span><span class="metric-math">Raw Count</span><span class="metric-desc">Total upvotes in last 24h.</span></div>
-                            <div class="legend-row"><span class="metric-name">UPV+</span><span class="metric-math">Upv(Today) - Upv(Yest)</span><span class="metric-desc">Net change in upvotes vs 24h ago.</span></div>
-                            <div class="legend-row"><span class="metric-name">VOL</span><span class="metric-math">30-Day Mean</span><span class="metric-desc">Average daily trading volume.</span></div>
-                            <div class="legend-row"><span class="metric-name">SRG</span><span class="metric-math">(Vol / Avg) * 100</span><span class="metric-desc">Surge: Current volume as % of 30-day Avg.</span></div>
-                            <div class="legend-row"><span class="metric-name">VEL</span><span class="metric-math">Rank+(Today) - Rank+(Yest)</span><span class="metric-desc">Velocity: Change in climb speed?</span></div>
-                            <div class="legend-row"><span class="metric-name">STRK</span><span class="metric-math">Consecutive Days</span><span class="metric-desc">Streak: Number of script runs sustaining direction.</span></div>
-                            <div class="legend-row"><span class="metric-name">MENT</span><span class="metric-math">Raw Count</span><span class="metric-desc">Total mentions in last 24h.</span></div>
-                            <div class="legend-row"><span class="metric-name">MNT%</span><span class="metric-math">% Change</span><span class="metric-desc">Percent change in mentions vs 24h ago.</span></div>
-                            <div class="legend-row"><span class="metric-name">SQZ</span><span class="metric-math">Mnt * Surge / log(MCap)</span><span class="metric-desc">Short Squeeze Score (Vol+Chatter/Cap).</span></div>
+                            
+                            <div class="legend-row">
+                                <span class="metric-name">RANK</span>
+                                <span class="metric-math">Current Pos</span>
+                                <span class="metric-desc">Current rank in the popularity list.</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">RANK+</span>
+                                <span class="metric-math">Rank(Yest) - Rank(Today)</span>
+                                <span class="metric-desc">Positions changed vs 24h ago.</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">HEAT</span>
+                                <span class="metric-math">Master Score</span>
+                                <span class="metric-desc">Weighted aggregate of all momentum signals.</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">ACC</span>
+                                <span class="metric-math">Vel(Today) - Vel(Yest)</span>
+                                <span class="metric-desc">Acceleration: (Rate of change of speed).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">EFF</span>
+                                <span class="metric-math">Rank+ / Surge</span>
+                                <span class="metric-desc">Efficiency: Rank gain per unit of volume.</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">CONV</span>
+                                <span class="metric-math">Upvotes / Mentions</span>
+                                <span class="metric-desc">Conviction: Sentiment Quality Ratio.</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">UPVS</span>
+                                <span class="metric-math">Raw Count</span>
+                                <span class="metric-desc">Total upvotes in last 24h.</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">UPV+</span>
+                                <span class="metric-math">Upv(Today) - Upv(Yest)</span>
+                                <span class="metric-desc">Net change in upvotes vs 24h ago.</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">VOL</span>
+                                <span class="metric-math">30-Day Mean</span>
+                                <span class="metric-desc">Average daily trading volume.</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">SRG</span>
+                                <span class="metric-math">(Vol / Avg) * 100</span>
+                                <span class="metric-desc">Surge: Current volume as % of 30-day Avg.</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">VEL</span>
+                                <span class="metric-math">Rank+(Today) - Rank+(Yest)</span>
+                                <span class="metric-desc">Velocity: Change in climb speed?</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">STRK</span>
+                                <span class="metric-math">Consecutive Days</span>
+                                <span class="metric-desc">Streak: Days sustaining current direction.</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">MNT%</span>
+                                <span class="metric-math">% Change</span>
+                                <span class="metric-desc">Percent change in mentions vs 24h ago.</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">SQZ</span>
+                                <span class="metric-math">Mnt * Surge / log(MCap)</span>
+                                <span class="metric-desc">Short Squeeze Score (Vol+Chatter/Cap).</span>
+                            </div>
                         </div>
+
                         <div class="legend-col">
                             <div class="legend-title">🎨 Color Indicators</div>
-                            <div class="legend-row"><span class="color-key">RANK</span><span class="color-desc">White (Standard).</span></div>
-                            <div class="legend-row"><span class="color-key">RANK+</span><span class="color-desc"><span style="color:#00ff00">Green</span> (Climbing), <span style="color:#ff4444">Red</span> (Falling).</span></div>
-                            <div class="legend-row"><span class="color-key">HEAT</span><span class="color-desc"><span style="color:#ff0000">Red</span> (> 2.0σ), <span style="color:#ff8800">Orange</span> (> 1.5σ), <span style="color:#ffff00">Yellow</span> (> 1σ).</span></div>
-                            <div class="legend-row"><span class="color-key">ACC</span><span class="color-desc"><span style="color:#ff00ff">Magenta</span> (Expl. ≥5), <span style="color:#00ffff">Cyan</span> (Fast >0), <span style="color:#ffffff">White</span> (Steady 0), <span style="color:#ff4444">Red</span> (Slow <0).</span></div>
-                            <div class="legend-row"><span class="color-key">EFF</span><span class="color-desc"><span style="color:#00ff00">Green</span> (> 1.0), <span style="color:#ffff00">Yellow</span> (> 0.5), <span style="color:#ff4444">Red</span> (Low).</span></div>
-                            <div class="legend-row"><span class="color-key">CONV</span><span class="color-desc"><span style="color:#ffcc00">Gold</span> (> 1.0x), White (Diluted).</span></div>
-                            <div class="legend-row"><span class="color-key">UPVS</span><span class="color-desc"><span style="color:#00ff00">Green</span> (High Activity > 1.5σ).</span></div>
-                            <div class="legend-row"><span class="color-key">UPV+</span><span class="color-desc"><span style="color:#00ff00">Green</span> (Positive), <span style="color:#ff4444">Red</span> (Negative).</span></div>
-                            <div class="legend-row"><span class="color-key">VOL</span><span class="color-desc"><span style="color:#ccc">Gray</span> (Static Stat).</span></div>
-                            <div class="legend-row"><span class="color-key">SRG</span><span class="color-desc"><span style="color:#ffff00">Yellow</span> (Anomaly > 2σ), <span style="color:#00ff00">Green</span> (High > 1σ).</span></div>
-                            <div class="legend-row"><span class="color-key">VEL</span><span class="color-desc"><span style="color:#00ff00">Green</span> (Speeding Up), <span style="color:#ff4444">Red</span> (Slowing).</span></div>
-                            <div class="legend-row"><span class="color-key">STRK</span><span class="color-desc"><span style="color:#00ff00">Green</span> (3+ Runs.), <span style="color:#ff4444">Red</span> (Reversing).</span></div>
-                            <div class="legend-row"><span class="color-key">MENT</span><span class="color-desc"><span style="color:#ffff00">Yellow</span> (Explosive > 2σ), <span style="color:#00ff00">Green</span> (High > 1σ).</span></div>
-                            <div class="legend-row"><span class="color-key">MNT%</span><span class="color-desc"><span style="color:#ffff00">Yellow</span> (> 2σ), <span style="color:#00ff00">Green</span> (> 1σ).</span></div>
-                            <div class="legend-row"><span class="color-key">SQZ</span><span class="color-desc"><span style="color:#00ffff">Cyan</span> (Score > 1.5σ), White (Normal).</span></div>
+
+                            <div class="legend-row">
+                                <span class="color-key">RANK</span>
+                                <span class="color-desc">White (Standard).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">RANK+</span>
+                                <span class="color-desc"><span style="color:#00ff00">Green</span> (Climbing), <span style="color:#ff4444">Red</span> (Falling).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">HEAT</span>
+                                <span class="color-desc"><span style="color:#ff0000">Red</span> (> 2.0σ), <span style="color:#ff8800">Orange</span> (> 1.5σ), <span style="color:#ffff00">Yellow</span> (> 1σ).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">ACC</span>
+                                <span class="color-desc">
+                                    <span style="color:#ff00ff">Magenta</span> (Expl. ≥5), 
+                                    <span style="color:#00ffff">Cyan</span> (Fast >0), 
+                                    <span style="color:#ffffff">White</span> (Steady 0), 
+                                    <span style="color:#ff4444">Red</span> (Slow <0).
+                                </span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">EFF</span>
+                                <span class="color-desc"><span style="color:#00ff00">Green</span> (> 1.0), <span style="color:#ffff00">Yellow</span> (> 0.5), <span style="color:#ff4444">Red</span> (Low).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">CONV</span>
+                                <span class="color-desc"><span style="color:#ffcc00">Gold</span> (> 1.0x), White (Diluted).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">UPVS</span>
+                                <span class="color-desc"><span style="color:#00ff00">Green</span> (High Activity > 1.5σ).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">UPV+</span>
+                                <span class="color-desc"><span style="color:#00ff00">Green</span> (Positive), <span style="color:#ff4444">Red</span> (Negative).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">VOL</span>
+                                <span class="color-desc"><span style="color:#ccc">Gray</span> (Static Stat).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">SRG</span>
+                                <span class="color-desc"><span style="color:#ffff00">Yellow</span> (Anomaly > 2σ), <span style="color:#00ff00">Green</span> (High > 1σ).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">VEL</span>
+                                <span class="color-desc"><span style="color:#00ff00">Green</span> (Speeding Up), <span style="color:#ff4444">Red</span> (Slowing).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">STRK</span>
+                                <span class="color-desc"><span style="color:#00ff00">Green</span> (3+ Days), <span style="color:#ff4444">Red</span> (Reversing).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">MNT%</span>
+                                <span class="color-desc"><span style="color:#ffff00">Yellow</span> (> 2σ), <span style="color:#00ff00">Green</span> (> 1σ).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">SQZ</span>
+                                <span class="color-desc"><span style="color:#00ffff">Cyan</span> (Score > 1.5σ), White (Normal).</span>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -965,17 +986,18 @@ def export_interactive_html(df, ai_summary=""):
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
         <script>
+        
         function toggleMcap(type) {{
-            if (type === 'all') {{ $('input[name="mcapFilter"]').not('#mcapAll').prop('checked', false); }} 
-            else {{ $('#mcapAll').prop('checked', false); if ($('input[name="mcapFilter"]:checked').length === 0) {{ $('#mcapAll').prop('checked', true); }} }}
+            if (type === 'all') {{
+                $('input[name="mcapFilter"]').not('#mcapAll').prop('checked', false);
+            }} else {{
+                $('#mcapAll').prop('checked', false);
+                if ($('input[name="mcapFilter"]:checked').length === 0) {{ $('#mcapAll').prop('checked', true); }}
+            }}
             table.draw();
         }}
         function toggleLegend() {{
             var x = document.getElementById("legendContent"); var arrow = document.getElementById("legendArrow");
-            if (x.style.display === "block") {{ x.style.display = "none"; arrow.innerText = "▼"; }} else {{ x.style.display = "block"; arrow.innerText = "▲"; }}
-        }}
-        function toggleAI() {{
-            var x = document.getElementById("aiContent"); var arrow = document.getElementById("aiArrow");
             if (x.style.display === "block") {{ x.style.display = "none"; arrow.innerText = "▼"; }} else {{ x.style.display = "block"; arrow.innerText = "▲"; }}
         }}
         function toggleColors() {{
@@ -986,10 +1008,19 @@ def export_interactive_html(df, ai_summary=""):
         function parseVal(str) {{
             if (!str) return 0;
             str = str.toString().toLowerCase().replace(/,/g, '').trim();
+
             let mult = 1;
-            if (str.endsWith('k')) {{ mult = 1000; str = str.replace('k', ''); }} 
-            else if (str.endsWith('m')) {{ mult = 1000000; str = str.replace('m', ''); }} 
-            else if (str.endsWith('b')) {{ mult = 1000000000; str = str.replace('b', ''); }}
+            if (str.endsWith('k')) {{
+                mult = 1000;
+                str = str.replace('k', '');
+            }} else if (str.endsWith('m')) {{
+                mult = 1000000;
+                str = str.replace('m', '');
+            }} else if (str.endsWith('b')) {{
+                mult = 1000000000;
+                str = str.replace('b', '');
+        }}
+            // 3. Convert to float and multiply
             return parseFloat(str) * mult || 0;
         }}
         function resetFilters() {{ $('#minPrice, #maxPrice, #minVol, #maxVol').val(''); $('#btnradio1').prop('checked', true); $('input[name="mcapFilter"]').prop('checked', false); $('#mcapAll').prop('checked', true); table.draw();  }}
@@ -1001,23 +1032,60 @@ def export_interactive_html(df, ai_summary=""):
         }}
         $(document).ready(function(){{ 
             table=$('.table').DataTable({{
-                "autoWidth": false,
-                "order":[[0,"asc"]],
-                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-                "pageLength": 25,
-                "columnDefs": [
+                "order":[[0,"asc"]], "pageLength": 25, "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                "columnDefs": [ 
                     {{ "visible": false, "targets": [19, 20, 21] }},
-                    {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], "type": "num", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,x]/g, ''); return parseVal(clean); }} return data; }} }}
-                ],
+
+                    {{
+                        "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+                        "type": "num",
+                        "render": function(data, type) {{
+                            if (type === 'sort' || type === 'type') {{
+                            var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,x]/g, ''); 
+                            return parseVal(clean); 
+                            }} 
+                            return data; 
+                        }} 
+                    }},
+
+                    // 3. TEXT group: ADDED 18 here as a string
+                    {{
+                        "targets": [18],
+                        "type": "string",
+                        "render": function(data, type) {{ 
+                            if (type === 'sort' || type === 'type') {{ 
+                                // Strip the HTML spans and the "ETF" badge so it sorts purely by name
+                                return data.toString().replace(/<[^>]+>/g, '').trim(); 
+                            }} 
+                            return data; 
+                        }} 
+                    }},
+
+                    // 4. Your specific logic for column 13 (VEL)
+                    {{ 
+                        "targets": [13],
+                        "type": "num",
+                        "render": function(data, type) {{
+                        var clean = data.toString().replace(/<[^>]+>/g, '').replace(/,/g, '');
+                        var val = parseFloat(clean) || 0;
+                        if (type === 'sort' || type === 'type') return val;
+                        if (val < 0) return '<span style="color:#ff4444">' + val + '</span>';
+                        else return '<span style="color:#00ff00">' + val + '</span>';
+                    }}
+
+                }}
+            ],
                 "drawCallback": function() {{ var api = this.api(); $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); }}
             }});
             
             $.fn.dataTable.ext.search.push(function(settings, data) {{
+                // STOCK TYPE FILTER (Type_Tag)
                 var typeTag = data[19] || ""; 
                 var viewMode = $('input[name="btnradio"]:checked').attr('id');
                 if (viewMode == 'btnradio2' && typeTag == 'ETF') return false;
                 if (viewMode == 'btnradio3' && typeTag == 'STOCK') return false;
                 
+                // MARKET CAP FILTER (MCap)
                 if (!$('#mcapAll').is(':checked')) {{
                     var mcap = parseFloat(data[21]) || 0; 
                     var match = false;
@@ -1029,13 +1097,14 @@ def export_interactive_html(df, ai_summary=""):
                     if (!match) return false; 
                 }}
 
+                // PRICE & VOL FILTERS
                 var minP = parseVal($('#minPrice').val()), maxP = parseVal($('#maxPrice').val());
-                var p = parseFloat((data[5] || "0").replace(/[$,]/g, '')) || 0; 
+                var p = parseFloat((data[5] || "0").replace(/[$,]/g, '')) || 0; // Price is col 4
                 if (minP > 0 && p < minP) return false;
                 if (maxP > 0 && p > maxP) return false;
                 
                 var minV = parseVal($('#minVol').val()), maxV = parseVal($('#maxVol').val());
-                var v = parseFloat(data[20]) || 0; 
+                var v = parseFloat(data[20]) || 0; // Raw Vol is col 18
                 if (minV > 0 && v < minV) return false;
                 if (maxV > 0 && v > maxV) return false;
                 return true;
@@ -1045,8 +1114,9 @@ def export_interactive_html(df, ai_summary=""):
             window.redraw = function() {{ 
                 var mode = $('input[name="btnradio"]:checked').attr('id');
                 var headerTxt = "INDUSTRY/SECTOR";
-                if (mode == 'btnradio2') headerTxt = "INDUSTRY"; else if (mode == 'btnradio3') headerTxt = "SECTOR";
-                $(table.column(18).header()).text(headerTxt);
+                // if (mode == 'btnradio2') headerTxt = "INDUSTRY"; else if (mode == 'btnradio3') headerTxt = "SECTOR";
+                // $(table.column(18).header()).text(headerTxt);
+
                 table.draw(); 
             }};
             var d=new Date($("#time").data("utc")); $("#time").text("Last Updated: " + d.toLocaleString());
@@ -1094,95 +1164,6 @@ def send_discord_link(filename, ai_summary):
 
     except Exception as e:
         print(f"{C_RED}[!] Exception sending Discord link: {e}{C_RESET}")
-
-def get_ai_analysis(df, history_data):
-    print("--- Starting AI Analysis (Holistic) ---")
-    api_key = os.environ.get('GEMINI_API_KEY')
-    if not api_key:
-        return "AI analysis skipped: No API key."
-
-    try:
-        # 1. Setup Client
-        client = genai.Client(api_key=api_key)
-        target_model = 'gemini-2.0-flash'
-        try:
-            for m in client.models.list():
-                if 'flash' in m.name.lower() and 'gemini' in m.name.lower():
-                    target_model = m.name.split('/')[-1]; break
-        except: pass
-        print(f"🤖 Connected to AI Model: {target_model}")
-    except Exception as e:
-        return f"AI Setup Failed: {e}"
-
-    # 2. Data Preparation
-    try:
-        ai_df = df.reset_index(drop=True).copy()
-        ai_df = ai_df.loc[:, ~ai_df.columns.duplicated()]
-        
-        # Standardize Names
-        mapping = {
-            'Surge': 'Srg', 'Master_Score': 'Heat', 'Accel': 'Acc', 
-            'Velocity': 'Vel', 'Rolling': 'Strk', 'Upvotes': 'Upvs',
-            'Squeeze': 'Sqz'
-        }
-        ai_df.rename(columns=mapping, inplace=True)
-        
-        # Define columns we want the AI to see
-        cols_needed = ['Sym', 'Rank', 'Price', 'Srg', 'Vel', 'Acc', 'Strk', 'Upvs', 'Eff', 'Heat', 'Sqz', 'Industry', 'Conv']
-        
-        # Safety fill
-        for c in cols_needed:
-            if c not in ai_df.columns: ai_df[c] = 0
-
-        # Create the Full Table (Top 60)
-        valid_cols = [c for c in cols_needed if c in ai_df.columns]
-        full_table = ai_df.head(60)[valid_cols].to_string(index=False)
-
-        # 3. Define Prompt
-        prompt = f"""
-        You are a Senior Market Analyst. I am providing you with a raw data table of the Top 60 Trending Assets right now.
-        
-        INPUT DATA:
-        {full_table}
-        
-        COLUMN DEFINITIONS:
-        * Rank: Popularity Rank (1 is highest).
-        * Heat: Composite Momentum Score.
-        * Srg (Surge): Volume % vs 30-day Avg (>100 is double volume).
-        * Vel (Velocity): Speed of rank climbing.
-        * Eff (Efficiency): Rank gain per unit of volume.
-        * Sqz (Squeeze): Short Squeeze Risk Score.
-        * Conv (Conviction): Upvotes per Mention (High = Bullish agreement).
-        
-        TASK:
-        Look at the entire table. Ignore the noise. Identify the "Narrative" of the market right now.
-        
-        REPORT FORMAT (Bullet points, Telegraphic style):
-        
-        ## 🌍 MACRO TEXTURE
-        * (One sentence summary: Is the market chasing Tech? Memes? Biotech? Or is it fearful?)
-        
-        ## 💎 UNUSUAL OUTLIERS (What stands out?)
-        * **[Ticker]:** [Value] (e.g. "Srg is 400%", or "Conviction is 50x")
-          * *Analysis:* Why is this outlier important?
-        
-        ## 🏭 SECTOR ROTATION
-        * Which industries are dominating the top 20? (e.g. "7 out of Top 20 are Semis")
-        
-        ## 🦁 BEST OF BREED (The single strongest chart)
-        * **[Ticker]:** Why did you pick this one over the others?
-        """
-
-        # 4. Run AI
-        response = client.models.generate_content(model=target_model, contents=prompt)
-        
-        if response.text:
-            return response.text.replace("Here is the briefing:", "").replace("## Intelligence Brief", "").strip()
-        else:
-            return "AI returned empty response."
-
-    except Exception as e:
-        return f"AI Analysis Failed: {str(e)}"
 
 def cleanup_old_html_files(days_to_keep=14):
     """
@@ -1233,41 +1214,16 @@ if __name__ == "__main__":
     if is_auto:
         print(f"{C_CYAN}Starting Auto Scan...{C_RESET}")
 
-    # 1. Fetch Data with the new robust function
+    # 2. Fetch & Process Data
     raw = get_all_trending_stocks()
-    
-    if not raw:
-        msg = "CRITICAL: No data returned from ApeWisdom API. Script stopping."
-        print(f"{C_RED}[!] {msg}{C_RESET}")
-        if is_auto:
-            # Send alert so you don't have to check GitHub logs
-            send_discord_link("", f"⚠️ **API Alert:** {msg}")
-        sys.exit(1) 
-
-    # 2. Process Data
+    if not raw: sys.exit(1) 
     df = filter_and_process(raw)
-    if df.empty:
-        msg = "Data fetched, but all tickers were filtered out based on your criteria."
-        print(f"{C_RED}[!] {msg}{C_RESET}")
-        if is_auto:
-            send_discord_link("", f"ℹ️ **Scan Alert:** {msg}")
-        sys.exit(0) 
+    if df.empty: sys.exit(0) 
 
-    # 3. Generate the AI Summary
-    print(f"{C_CYAN}--- Generating AI Analysis ---{C_RESET}")
-    tracker = HistoryTracker(HISTORY_FILE)
-    ai_summary = get_ai_analysis(df, tracker.data)
-
-    # 4. Generate HTML
-    fname = export_interactive_html(df, ai_summary)
-    
-    # 5. Send to Discord
+    # 4. Generate HTML & Discord
+    fname = export_interactive_html(df)
     if fname:
-        # Pass the filename and a custom success message
-        send_discord_link(fname, "🚀 **New Market Scan Complete**")
-    else:
-        print(f"{C_RED}[!] HTML generation failed. Skipping Discord.{C_RESET}")
-
+        send_discord_link(fname, "🚀 **Market Scan Updated**")
+        
     cleanup_old_html_files(days_to_keep=7)
-
     print(f"{C_GREEN}Done.{C_RESET}")
