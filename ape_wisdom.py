@@ -34,7 +34,8 @@ NAME_MAX_WIDTH = 50
 
 REQUEST_DELAY_MIN = 1.5
 REQUEST_DELAY_MAX = 3.0
-TICKER_FIXES = {'GPS': 'GAP', 'FB': 'META', 'APE': 'AMC', 'FISV':'FI'}
+TICKER_FIXES = {'FISV': 'FI'}
+PERMANENT_BLACKLIST = ['JW', 'RE', 'OCX', 'BABY', 'ELY', 'SNP', 'SLAM', 'OG', 'DTC', 'CO', 'CBD', 'GAN', 'AUD', 'TTM', 'FRMI', 'ERJ', 'DS', 'ABB', 'SAVE', 'HEAR', 'FI']
 
 # ANSI COLORS
 C_GREEN = '\033[92m'
@@ -193,13 +194,15 @@ def fetch_meta_data_robust(ticker):
 def filter_and_process(stocks):
     if not stocks: return pd.DataFrame()
 
-    PERMANENT_BLACKLIST = []
-
     local_cache = load_cache()
     now = datetime.datetime.now(datetime.UTC)
 
+    # 1. RETRY CHECK (Only for items NOT in blacklist)
     tickers_to_retry = []
     for t, data in local_cache.items():
+        # SECURITY: Skip retry if it's in the blacklist
+        if t in PERMANENT_BLACKLIST: continue
+
         if data.get('delisted'):
             last_checked_str = data.get('last_checked', '2020-01-01')
             try:
@@ -215,44 +218,55 @@ def filter_and_process(stocks):
             if t in local_cache: del local_cache[t]
         save_cache(local_cache)
 
+    # 2. MAIN FILTER LOOP
     us_tickers = []
     for s in stocks:
-        t = TICKER_FIXES.get(s['ticker'], s['ticker'].replace('.', '-'))
+        # Normalize the ticker name
+        raw_ticker = s['ticker']
+        t = TICKER_FIXES.get(raw_ticker, raw_ticker.replace('.', '-'))
 
-        if t in PERMANENT_BLACKLIST: continue
+        # --- CRITICAL: PERMANENT BLACKLIST CHECK ---
+        # Checks both the normalized ticker (FI) and raw ticker (FISV)
+        if t in PERMANENT_BLACKLIST or raw_ticker in PERMANENT_BLACKLIST:
+            continue
+        # -------------------------------------------
 
         if local_cache.get(t, {}).get('delisted'): continue
-
         us_tickers.append(t)
     
     us_tickers = list(set(us_tickers))
 
     tracker = HistoryTracker(HISTORY_FILE)
     
-    # Clean Cache of old delisted
-    now = datetime.datetime.now(datetime.UTC)
+    # 3. METADATA FETCHING
     valid_tickers = [t for t in us_tickers if not local_cache.get(t, {}).get('delisted')]
     
-    # Fetch Missing Metadata with Throttling
-    missing = [t for t in valid_tickers if t not in local_cache]
+    # Double check blacklist one last time before fetching (Safety net)
+    missing = [t for t in valid_tickers if t not in local_cache and t not in PERMANENT_BLACKLIST]
+    
     if missing:
         print(f"{C_YELLOW}Fetching metadata for {len(missing)} NEW items (this may take a few minutes)...{C_RESET}")
         for i, t in enumerate(missing):
-            # Log progress every 10 items so you know it hasn't frozen
             if i % 10 == 0 and i > 0:
                 print(f"  > Progress: {i}/{len(missing)} metadata items fetched...")
             
             res = fetch_meta_data_robust(t)
             if res: 
-                local_cache[res['ticker']] = res
+                # If yahoo returns a 404/Null, mark it as delisted immediately so we don't retry forever
+                if res.get('meta') == 'Unknown' and res.get('mcap') == 0:
+                     print(f"{C_RED}  > {t} seems invalid/delisted. Adding to penalty box.{C_RESET}")
+                     local_cache[t] = {
+                        'delisted': True, 
+                        'last_checked': now.strftime("%Y-%m-%d"),
+                        'reason': 'Metadata 404'
+                    }
+                else:
+                    local_cache[res['ticker']] = res
             
-            # --- CRITICAL: Rate Limit Delay ---
-            # 0.75 seconds is usually enough to stay under the radar
             time.sleep(0.75) 
             
         save_cache(local_cache)
 
-    # --- UPDATED: BATCHED MARKET DATA DOWNLOAD ---
     market_data = pd.DataFrame()
     use_cache = os.path.exists(MARKET_DATA_CACHE_FILE) and (time.time() - os.path.getmtime(MARKET_DATA_CACHE_FILE)) < CACHE_EXPIRY_SECONDS
     
@@ -262,57 +276,57 @@ def filter_and_process(stocks):
     else:
         print(f"{C_YELLOW}[!] Downloading data for {len(valid_tickers)} tickers in batches...{C_RESET}")
         
-        # Split into batches of 100
         CHUNK_SIZE = 100
         for i in range(0, len(valid_tickers), CHUNK_SIZE):
             batch = valid_tickers[i:i + CHUNK_SIZE]
             print(f"    > Processing Batch { (i//CHUNK_SIZE) + 1} ({len(batch)} tickers)...")
             
             try:
-                # threads=True is fine, but we keep the batch size reasonable
                 batch_data = yf.download(batch, period="40d", interval="1d", group_by='ticker', progress=False, threads=True)
                 
                 if not batch_data.empty:
-                    # Handle yfinance behavior where single tickers don't return MultiIndex
                     if len(batch) == 1:
                         batch_data.columns = pd.MultiIndex.from_product([batch, batch_data.columns])
                     
-                    # Merge this batch into our master market_data DataFrame
                     if market_data.empty:
                         market_data = batch_data
                     else:
                         market_data = pd.concat([market_data, batch_data], axis=1)
                 
-                # Mandatory "cool down" delay to avoid 429 errors
                 if i + CHUNK_SIZE < len(valid_tickers):
                     time.sleep(2.5) 
 
             except Exception as e:
                 print(f"{C_RED}[!] Error downloading batch {i}: {e}{C_RESET}")
 
-        # Save the fully assembled dataframe
         if not market_data.empty:
             market_data.to_pickle(MARKET_DATA_CACHE_FILE)
-
-    # --- END OF BATCHED DOWNLOAD ---
 
     final_list = []
     for stock in stocks:
         t = TICKER_FIXES.get(stock['ticker'], stock['ticker'].replace('.', '-'))
+        
+        # --- BLACKLIST CHECK AGAIN ---
+        if t in PERMANENT_BLACKLIST: continue
+        
         try:
-            # Ensure we are looking at a MultiIndex (which yf.download(group_by='ticker') usually is)
             if isinstance(market_data.columns, pd.MultiIndex):
                 if t not in market_data.columns.levels[0]:
-                    # Only mark as delisted if we actually tried to fetch it and it's missing
                     if not use_cache:
-                        local_cache[t] = {'delisted': True, 'last_checked': now.strftime("%Y-%m-%d")}
+                        if t not in local_cache or not local_cache[t].get('delisted'):
+                            print(f"{C_RED}[-] Adding {t} to penalty box (No market data found){C_RESET}")
+                            local_cache[t] = {
+                                'delisted': True, 
+                                'last_checked': now.strftime("%Y-%m-%d"),
+                                'reason': 'Market Data 404'
+                            }
                     continue
                 hist = market_data[t].dropna()
             else:
-                # Fallback for unexpected single-column returns
                 hist = market_data.dropna()
 
-            if hist.empty: continue
+            if hist.empty:
+                continue
 
             curr_p = hist['Close'].iloc[-1]
             avg_v = hist['Volume'].tail(AVG_VOLUME_DAYS).mean()
@@ -322,10 +336,9 @@ def filter_and_process(stocks):
             info = local_cache.get(t, {})
             if info.get('currency') not in ['USD', None, '']: continue
 
-            NAME_MAX_WIDTH = 100
+            # Dynamic Name Truncation
             name = str(info.get('name', t)).replace('"', '').strip()[:NAME_MAX_WIDTH]
             
-            # We use (stock.get('key') or 0) to handle cases where the API returns None/null
             cur_m = int(stock.get('mentions') or 0)
             old_m = int(stock.get('mentions_24h_ago') or 0)
             
@@ -342,7 +355,6 @@ def filter_and_process(stocks):
             rank_old = int(stock.get('rank_24h_ago') or 0)
             rank_plus = (rank_old - rank_now) if rank_old != 0 else 0
 
-            # Safe upvote fetch
             upvotes_raw = stock.get('upvotes')
             current_upvotes = int(upvotes_raw) if upvotes_raw is not None else 0
             
@@ -350,7 +362,7 @@ def filter_and_process(stocks):
             safe_surge = s_perc if s_perc > 0 else 1
             efficiency = rank_plus / safe_surge
 
-            m = tracker.get_metrics(t, float(curr_p), m_perc, rank_plus, current_upvotes)
+            m = tracker.get_metrics(t, float(curr_p), cur_m, rank_plus, current_upvotes)
 
             final_list.append({
                 "Rank": rank_now,
@@ -376,7 +388,6 @@ def filter_and_process(stocks):
             })
             
         except Exception as e:
-            print(f"Error processing {t}: {e}") # This will tell you exactly what went wrong
             continue
 
     # Scoring
@@ -639,19 +650,25 @@ def export_interactive_html(df, ai_summary=""):
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
-            body{{
-                background-color:#101010; color:#e0e0e0; font-family:'Consolas','Monaco',monospace; padding:20px;
+            /* GLOBAL SETTINGS */
+            body {{
+                background-color: #101010;
+                color: #e0e0e0;
+                font-family: 'Consolas', 'Monaco', monospace;
+                padding: 0;    /* CHANGED: Removes the space around the whole dashboard */
+                margin: 0;     /* ADDED: Ensures it touches the top of the browser */
             }}
             .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
             
+            /* TABLE HEADERS */
             th{{
                 color:#00ff00; border-bottom:2px solid #444;
                 font-size: 15px;
                 text-transform: uppercase;
-                /* Changed padding to: Top:8px, Right:20px, Bottom:8px, Left:4px */
                 vertical-align: middle !important; padding: 8px 22px 8px 6px !important; line-height: 1.2 !important;
             }}
 
+            /* TABLE CELLS */
             td{{
                 vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333; 
                 padding: 4px 5px !important;
@@ -660,49 +677,37 @@ def export_interactive_html(df, ai_summary=""):
 
             table.dataTable {{ width: auto !important; margin: 0 auto; }}
             
-            th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; }} /*RANK*/
-
+            /* COLUMN WIDTHS & ALIGNMENT */
+            th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; font-weight: bold; }} /*RANK*/
             th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }} /*RANK+*/
-
             th:nth-child(3), td:nth-child(3) {{ width: 1%; text-align: center; font-weight: bold; }} /*HEAT*/
 
+            /* NAME COLUMN (Fixed Width + Truncate) */
             th:nth-child(4), td:nth-child(4) {{
-                min-width: 260px
+                min-width: 260px;
                 max-width: 260px;
-                overflow: hidden; text-overflow:
-                ellipsis;
-            }} /*NAME*/
+                overflow: hidden; 
+                text-overflow: ellipsis;
+            }} 
             
             th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }} /*SYM*/
-
             th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; }} /*PRICE*/
-
             th:nth-child(7), td:nth-child(7) {{ width: 1%; text-align: center; }} /*ACC*/
-
             th:nth-child(8), td:nth-child(8) {{ width: 1%; text-align: center; }} /*EFF*/
-
             th:nth-child(9), td:nth-child(9) {{ width: 1%; text-align: center; }} /*CONV*/
-
             th:nth-child(10), td:nth-child(10) {{ width: 1%; text-align: center; }} /*UPVS*/
-
             th:nth-child(11), td:nth-child(11) {{ width: 1%; text-align: center; }} /*UPV+*/
-
             th:nth-child(12), td:nth-child(12) {{ width: 1%; text-align: right; }} /*VOL*/
-
             th:nth-child(13), td:nth-child(13) {{ width: 1%; text-align: center; }} /*SRG*/
-
             th:nth-child(14), td:nth-child(14) {{ width: 1%; text-align: center; }} /*VEL*/
-
             th:nth-child(15), td:nth-child(15) {{ width: 1%; text-align: center; }} /*STRK*/
-
             th:nth-child(16), td:nth-child(16) {{ width: 1%; text-align: center; }} /*MENT*/
-            
             th:nth-child(17), td:nth-child(17) {{ width: 1%; text-align: center; }} /*MNT%*/
-
             th:nth-child(18), td:nth-child(18) {{ width: 1%; text-align: center; }} /*SQZ*/
 
+            /* SECTOR COLUMN (Fixed Width + Truncate) */
             th:nth-child(19), td:nth-child(19) {{ 
-                min-width: 260px
+                min-width: 260px;
                 max-width: 260px; 
                 overflow: hidden; 
                 text-overflow: ellipsis; 
@@ -711,71 +716,310 @@ def export_interactive_html(df, ai_summary=""):
                 border-right: 1px solid #333; 
             }}
             
-            td{{vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333;}} 
+            /* LINKS & COLORS */
             a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
             table.no-colors a {{ color: #4da6ff !important; }}
             
-            .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }}
-            .legend-header {{ background: #2a2a2a; padding: 10px 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; }}
-            .legend-box {{
-                padding: 8px;
-                display: none;
-                background-color: #1a1a1a;
-            }}
-            
-            /* --- 2-COLUMN GRID LEGEND --- */
-            
-            .legend-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }}
-            .legend-col {{ background: #222;
-                border: 1px solid #333;
-                padding: 6px;
-                border-radius: 5px;
-            }}
-            .legend-title {{ color: #00ff00; font-weight: bold; border-bottom: 1px solid #444; margin-bottom: 8px; font-size: 0.95rem; text-transform: uppercase; }}
-            .legend-row {{
-                display: flex;
-                align-items: flex-start;
-                margin-bottom: 1px;
-                font-size: 15px;
-                border-bottom: 1px dashed #333;
-                padding-bottom: 1px;
-            }}
-            
+            /* LEGEND STYLES */
+            .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 6px; margin-bottom: 10px; overflow: hidden; }}
+            .legend-header {{ background: #2a2a2a; padding: 4px 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; }}
+            .legend-box {{ padding: 5px; display: none; background-color: #1a1a1a; }}
+            .legend-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }}
+            .legend-col {{ background: #222; border: 1px solid #333; padding: 6px; border-radius: 5px; }}
+            .legend-title {{ color: #00ff00; font-weight: bold; border-bottom: 1px solid #444; margin-bottom: 5px; font-size: 0.85rem; text-transform: uppercase; padding-bottom: 2px; }}
+            .legend-row {{ display: flex; align-items: flex-start; margin-bottom: 0px; font-size: 13px; border-bottom: 1px dashed #333; padding: 2px 0; line-height: 1.2; }}
             .metric-name {{ color: #00ffff; font-weight: bold; width: 60px; flex-shrink: 0; }}
             .metric-math {{ color: #888; font-family: monospace; font-size: 0.75rem; margin-right: 10px; flex-shrink: 0; }}
             .metric-desc {{ color: #ccc; }}
-            
             .color-key {{ width: 80px; font-weight: bold; flex-shrink: 0; }}
             .color-desc {{ color: #bbb; }}
-            
             @media (max-width: 900px) {{ .legend-grid {{ grid-template-columns: 1fr; }} }}
 
+            /* FILTER BAR */
             .filter-bar {{ display: flex; gap: 8px; align-items: center; background: #2a2a2a; padding: 8px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #444; flex-wrap: wrap; font-size: 0.85rem; }}
             .filter-group {{ display:flex; align-items:center; gap:4px; }}
-            .form-control-sm {{ background:#111; border:1px solid #555; color:#fff; height: 28px; font-size: 0.8rem; padding: 2px 5px; }}
+            /* SEARCH BOX INPUTS (Price/Vol) */
+            .form-control-sm {{ 
+                background: #111; 
+                border: 1px solid #555; 
+                color: #ffffff !important; /* Brighter white for typed text */
+                height: 28px; 
+                font-size: 0.85rem; 
+                padding: 2px 8px;
+                outline: none;
+            }}
+
+            /* Lighten the "Min/Max" hint text */
+            .form-control-sm::placeholder {{
+                color: #aaa !important; /* Lighter grey/silver for better visibility */
+                opacity: 1; 
+            }}
+
+            /* Glow effect when you click inside to type */
+            .form-control-sm:focus {{
+                border-color: #00ffff;
+                background: #1a1a1a;
+                box-shadow: 0 0 5px rgba(0, 255, 255, 0.2);
+            }}
             .btn-reset {{ border: 1px solid #555; color: #fff; font-size: 0.8rem; background: #333; }}
             .btn-reset:hover {{ background: #444; color: #fff; }}
-            
             #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px;}}
-            .header-flex {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
+
+            /* HEADER FLEX LAYOUT */
+            .header-flex {{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 68px; /* Reduced height for less padding feel */
+                width: 100%;
+                padding: 0 15px;
+                background: #111;
+                margin-bottom: 5px;
+                box-sizing: border-box;
+                overflow: hidden;
+            }}
+            /* ANCHORS */
+            .header-left {{
+                flex: 0 0 200px;
+                display: flex;
+                align-items: center;
+                z-index: 10;
+            }}
+            .header-right {{
+                flex: 0 0 200px;
+                display: flex;
+                justify-content: flex-end; 
+                align-items: center;
+                z-index: 10;
+            }}
+            /* CENTER STACK */
+            .header-center {{
+                position: absolute; /* The Magic Fix */
+                left: 50%;
+                transform: translateX(-50%); /* Centers it perfectly regardless of side content */
+                display: grid;
+                grid-template-columns: max-content auto;
+                gap: 0px 12px;
+                padding-top: 0px;
+                min-width: 0;
+                width: auto;
+                max-width: 60%; /* Prevents it from hitting the logo/time on small screens */
+            }}
+            /* VIRTUAL CONTAINER - FLATTENS THE DIV FOR GRID */
+            .summary-row {{
+                display: contents; /* This is the Magic: makes children part of the parent Grid */
+            }}
+            /* REFINED LABELS - Underline fits text exactly */
+            /* REFINED LABELS - Removing the extra line */
+            .row-label {{
+                font-size: 11px;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                text-align: right;
+                padding-top: 0px;
+                cursor: help;
+                
+                /* 1. FORCE BOX TO FIT TEXT */
+                display: inline-block; 
+                width: auto;
+                
+                /* 2. REMOVE THE BOX BORDER (The long line) */
+                border-bottom: none !important; 
+                
+                /* 3. USE TEXT DECORATION (The correct length line) */
+                text-decoration: underline dotted #555;
+                text-underline-offset: 2px;
+                text-decoration-thickness: 1px;
+                
+                position: relative; /* Keep tooltip anchored correctly */
+            }}
+
+            /* Ensure the underline doesn't change color, just the text */
+            .clr-rank {{ color: #00ffff; text-decoration-color: #555; }}
+            .clr-surge {{ color: #ffcc00; text-decoration-color: #555; }}
+            .clr-buzz {{ color: #ff00ff; text-decoration-color: #555; }}
+
+            /* TITLE COLORS */
+            .clr-rank {{ color: #00ffff; }} /* Cyan for Rank */
+            .clr-surge {{ color: #ffcc00; }} /* Gold for Surge */
+            .clr-buzz {{ color: #ff00ff; }} /* Magenta for Buzz */
+
+            .row-content {{
+                font-size: 12px;
+                font-weight: 600;
+                color: #fff;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                min-width: 0;
+                text-align: left;
+            }}
+            .time-block {{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                line-height: 1.1;
+            }}
+            .time-label {{
+                font-size: 11px;
+                font-weight: bold;
+                color: #888;
+                text-transform: uppercase;
+                margin-bottom: 0px;
+            }}
+            #time {{
+                font-family: monospace;
+                font-size: 18px;
+                font-weight: bold;
+                color: #e0e0e0;
+                line-height: 1.1;
+            }}
+
+            /* BREADCRUMB SEPARATORS */
+            .crumb-sep {{ color: #555; margin: 0 5px; }}
+            .crumb-num {{ color: #666; margin-right: 3px; font-size: 11px; }}
+
+            /* TOGGLE SWITCH */
+            .mode-toggle label {{
+                margin-left: 15px;
+                display: flex;
+                align-items: center;
+                background: #222;
+                padding: 3px;
+                border-radius: 4px;
+                cursor: pointer;
+                border: 1px solid #444;
+            }}
+            .mode-label {{
+                font-size: 12px;
+                font-weight: bold;
+                padding: 5px 12px;
+                color: #666;
+            }}
+            .row-label {{
+                position: relative;
+                cursor: help; /* Changes mouse to a question mark icon */
+                border-bottom: 1px dotted #555; /* Subtle hint that it's hoverable */
+            }}
+            /* TOOLTIP TEXT BOX */
+            .row-label::after {{
+                content: attr(data-tooltip); /* Pulls text from the HTML attribute */
+                position: absolute;
+                top: 125%;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #222;
+                color: #fff;
+                padding: 8px 12px;
+                border-radius: 6px;
+                border: 1px solid #444;
+                font-size: 11px;
+                font-weight: normal;
+                text-transform: none; /* Keep explanation text readable */
+                white-space: normal;
+                width: 200px; /* Width of the box */
+                z-index: 99;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.2s;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+                pointer-events: none;
+            }}
+            /* SHOW ON HOVER */
+            .row-label:hover::after {{
+                opacity: 1;
+                visibility: visible;
+            }}
+            #modeSwitch {{ display: none; }}
+            #modeSwitch:checked + label .e-label {{ color: #fff; background: #333; border-radius: 2px; }}
+            #modeSwitch:not(:checked) + label .s-label {{ color: #fff; background: #333; border-radius: 2px; }}
+
+            /* MISC */
+            #time {{ font-family: monospace; font-size: 11px; color: #666; }}
+            
             .page-link {{ background-color: #222; border-color: #444; color: #00ff00; }}
             .page-item.active .page-link {{ background-color: #00ff00; border-color: #00ff00; color: #000; }}
             .page-item.disabled .page-link {{ background-color: #111; border-color: #333; color: #555; }}
+            /* RE-CENTERING THE SEARCH BAR */
+            .dataTables_wrapper .data_tables_header {{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 15px;
+            }}
+
+            /* This targets the container holding the search box */
+            .dataTables_filter {{
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                margin: 0 !important;
+                float: none !important;
+            }}
+
+            .dataTables_filter label {{
+                display: flex;
+                align-items: center;
+                color: #888;
+                font-size: 12px;
+                font-weight: bold;
+                text-transform: uppercase;
+            }}
 
             .dataTables_filter input {{
-                width: 350px !important; background: #111 !important; border: 1px solid #555 !important;
-                color: #fff !important; height: 28px !important; border-radius: 4px; margin-left: 10px;
+                width: 450px !important; /* Adjusted for better balance */
+                background: #181818 !important;
+                color: #fff !important;
+                border: 1px solid #333 !important;
+                border-radius: 20px !important; /* Rounded pill shape looks better centered */
+                padding: 6px 20px !important;
+                margin-left: 12px !important;
+                outline: none !important;
+                transition: border-color 0.2s;
+            }}
+
+            .dataTables_filter input:focus {{
+                border-color: #00ffff !important; /* Glows cyan when searching */
             }}
         </style>
         </head>
         <body>
-        <div class="container-fluid" style="width: fit-content; margin: 0 auto;">
+        <div class="container-fluid" style="width: 100%; max-width: 1600px; margin: 0 auto;">
+            
             <div class="header-flex">
-                <a href="https://apewisdom.io" target="_blank" style="text-decoration: none;">
-                <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" style="height: 60px; vertical-align: middle; margin-right: 15px;">
-                </a>
-                <span id="time" data-utc="{utc_timestamp}" style="font-size: 0.9rem; color: #888;">Loading...</span>
+                <div class="header-left">
+                    <a href="https://apewisdom.io" target="_blank">
+                        <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" style="height: 54px;">
+                    </a>
+                    <div class="mode-toggle">
+                        <input type="checkbox" id="modeSwitch" onclick="updateSummary()">
+                        <label for="modeSwitch">
+                            <span class="mode-label s-label">STOCKS</span>
+                            <span class="mode-label e-label">ETFS</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="header-center">
+                    <div class="summary-row">
+                        <span class="row-label clr-rank" data-tooltip="Top Industries by weighted Rank Change. Shows where sector momentum is shifting.">RANK CLIMBERS:</span>
+                        <span id="rankBreadcrumb" class="row-content">...</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="row-label clr-surge" data-tooltip="Top Industries by weighted Volume Surge. Shows where institutional buying is hitting.">VOL SURGE:</span>
+                        <span id="surgeBreadcrumb" class="row-content">...</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="row-label clr-buzz" data-tooltip="Top Industries by Mention Growth. Shows where social hype is accelerating.">SOCIAL BUZZ:</span>
+                        <span id="mntBreadcrumb" class="row-content">...</span>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <span id="time" data-utc="{utc_timestamp}">Loading...</span>
+                </div>
             </div>
 
             <div class="filter-bar">
@@ -792,34 +1036,34 @@ def export_interactive_html(df, ai_summary=""):
                 
                 <div class="filter-group" style="margin-right: 10px;">
                     <label>Avg Vol:</label>
-                    <input type="text" id="minVol" class="form-control form-control-sm" placeholder="500k" style="width: 50px;">
+                    <input type="text" id="minVol" class="form-control form-control-sm" placeholder="Min" style="width: 50px;">
                     <span style="color:#666">-</span>
-                    <input type="text" id="maxVol" class="form-control form-control-sm" placeholder="10m" style="width: 50px;">
+                    <input type="text" id="maxVol" class="form-control form-control-sm" placeholder="Max" style="width: 50px;">
                 </div>
 
                 <div class="filter-group">
                     <div class="btn-group" role="group" style="margin-right: 10px;">
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio1" style="font-size: 0.75rem; padding: 2px 8px;">All</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio1" style="font-size: 0.8rem; padding: 4px 8px;">All</label>
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio2" onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio2" style="font-size: 0.75rem; padding: 2px 8px;">Stocks</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio2" style="font-size: 0.8rem; padding: 4px 8px;">Stocks</label>
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio3" onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio3" style="font-size: 0.75rem; padding: 2px 8px;">ETFs</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio3" style="font-size: 0.8rem; padding: 4px 8px;">ETFs</label>
                     </div>
 
                     <div class="btn-group" role="group">
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapAll" checked onclick="toggleMcap('all')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapAll" style="font-size: 0.75rem; padding: 2px 6px;">All</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapAll" style="font-size: 0.8rem; padding: 4px 8px;">All</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMega" onclick="toggleMcap('mega')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.75rem; padding: 2px 6px;" title="> $200B">Mega</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.8rem; padding: 4px 8px;" title="> $200B">Mega</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapLarge" onclick="toggleMcap('large')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.75rem; padding: 2px 6px;" title="$10B - $200B">Lrg</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.8rem; padding: 4px 8px;" title="$10B - $200B">Lrg</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMid" onclick="toggleMcap('mid')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.75rem; padding: 2px 6px;" title="$2B - $10B">Mid</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.8rem; padding: 4px 8px;" title="$2B - $10B">Mid</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapSmall" onclick="toggleMcap('small')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.75rem; padding: 2px 6px;" title="$250M - $2B">Sml</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.8rem; padding: 4px 8px;" title="$250M - $2B">Sml</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMicro" onclick="toggleMcap('micro')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.75rem; padding: 2px 6px;" title="< $250M">Mic</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.8rem; padding: 4px 8px;" title="< $250M">Mic</label>
                     </div>
                 </div>
 
@@ -986,142 +1230,196 @@ def export_interactive_html(df, ai_summary=""):
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
         <script>
+    var table;
+
+    // 1. ROBUST PARSER: Double braces {{ }} used for Python f-string safety
+    function parseVal(str) {{
+        if (!str) return 0;
+        var clean = str.toString().replace(/<[^>]+>/g, '').replace(/[$,%▲▼+]/g, '').trim();
         
-        function toggleMcap(type) {{
-            if (type === 'all') {{
-                $('input[name="mcapFilter"]').not('#mcapAll').prop('checked', false);
-            }} else {{
-                $('#mcapAll').prop('checked', false);
-                if ($('input[name="mcapFilter"]:checked').length === 0) {{ $('#mcapAll').prop('checked', true); }}
-            }}
-            table.draw();
-        }}
-        function toggleLegend() {{
-            var x = document.getElementById("legendContent"); var arrow = document.getElementById("legendArrow");
-            if (x.style.display === "block") {{ x.style.display = "none"; arrow.innerText = "▼"; }} else {{ x.style.display = "block"; arrow.innerText = "▲"; }}
-        }}
-        function toggleColors() {{
-            var table = document.querySelector('table'); var btn = document.getElementById('btnColors');
-            table.classList.toggle('no-colors');
-            if (table.classList.contains('no-colors')) {{ btn.innerHTML = "🎨 Colors: OFF"; btn.style.opacity = "0.6"; }} else {{ btn.innerHTML = "🎨 Colors: ON"; btn.style.opacity = "1.0"; }}
-        }}
-        function parseVal(str) {{
-            if (!str) return 0;
-            str = str.toString().toLowerCase().replace(/,/g, '').trim();
+        clean = clean.toLowerCase();
+        let mult = 1;
+        if (clean.endsWith('k')) {{ mult = 1000; clean = clean.replace('k', ''); }}
+        else if (clean.endsWith('m')) {{ mult = 1000000; clean = clean.replace('m', ''); }}
+        else if (clean.endsWith('b')) {{ mult = 1000000000; clean = clean.replace('b', ''); }}
+        
+        return parseFloat(clean) * mult || 0;
+    }}
 
-            let mult = 1;
-            if (str.endsWith('k')) {{
-                mult = 1000;
-                str = str.replace('k', '');
-            }} else if (str.endsWith('m')) {{
-                mult = 1000000;
-                str = str.replace('m', '');
-            }} else if (str.endsWith('b')) {{
-                mult = 1000000000;
-                str = str.replace('b', '');
+    function updateSummary() {{
+        if (!$.fn.DataTable.isDataTable('.table')) return;
+        var api = $('.table').DataTable();
+        
+        // 1. Check the state of the TOP toggle only
+        var topSwitchIsETF = $('#modeSwitch').is(':checked');
+        
+        // 2. Grab ALL data (ignoring table filters)
+        var allData = api.rows().data();
+
+        function getTopSectors(metricIdx) {{
+            var sectorData = {{}};
+            
+            allData.each(function(row) {{
+                // 3. Manually Apply the Stock/ETF Filter based on Top Switch
+                var rawType = row[19].toString().replace(/<[^>]+>/g, ''); 
+                
+                // If Top Switch says ETFs, skip Stocks
+                if (topSwitchIsETF && !rawType.includes('ETF')) return;
+                // If Top Switch says Stocks, skip ETFs
+                if (!topSwitchIsETF && rawType.includes('ETF')) return;
+
+                // 4. Proceed with Sector Calculation
+                // CLEANUP: Strip "ETF" from the sector name if it exists
+                var sector = row[18].toString().replace(/<[^>]+>/g, '').trim();
+                sector = sector.replace(/^ETF/i, ''); // This removes "ETF" from the start of the string
+                
+                var val = parseVal(row[metricIdx]); 
+                var weight = parseVal(row[15]) || 1; 
+
+                if (!sectorData[sector]) sectorData[sector] = {{ sum: 0, totalWeight: 0, count: 0 }};
+                
+                sectorData[sector].sum += (val * weight);
+                sectorData[sector].totalWeight += weight;
+                sectorData[sector].count += 1;
+            }});
+
+            // Sort and Format (Same as before)
+            var sorted = Object.keys(sectorData).map(function(s) {{
+                var d = sectorData[s];
+                var avg = d.totalWeight > 0 ? (d.sum / d.totalWeight) : 0;
+                return {{ name: s, avg: avg, count: d.count }};
+            }});
+
+            sorted = sorted.filter(s => s.count >= 2);
+            sorted.sort((a, b) => b.avg - a.avg);
+
+            if (sorted.length === 0) return '<span style="color:#666; font-weight:normal;">---</span>';
+
+            return sorted.slice(0, 3).map((s, i) => {{
+                return '<span class="crumb-num">' + (i+1) + '.</span>' + s.name;
+            }}).join('<span class="crumb-sep"> > </span>');
         }}
-            // 3. Convert to float and multiply
-            return parseFloat(str) * mult || 0;
+
+        $('#rankBreadcrumb').html(getTopSectors(1));  
+        $('#surgeBreadcrumb').html(getTopSectors(12)); 
+        $('#mntBreadcrumb').html(getTopSectors(16));  
+    }}
+
+    function toggleMcap(type) {{
+        if (type === 'all') {{
+            $('input[name="mcapFilter"]').not('#mcapAll').prop('checked', false);
+        }} else {{
+            $('#mcapAll').prop('checked', false);
+            if ($('input[name="mcapFilter"]:checked').length === 0) {{ $('#mcapAll').prop('checked', true); }}
         }}
-        function resetFilters() {{ $('#minPrice, #maxPrice, #minVol, #maxVol').val(''); $('#btnradio1').prop('checked', true); $('input[name="mcapFilter"]').prop('checked', false); $('#mcapAll').prop('checked', true); table.draw();  }}
-        function exportTickers() {{
-            var table = $('.table').DataTable(); var data = table.rows({{ search: 'applied', order: 'current', page: 'current' }}).data();
-            var tickers = []; data.each(function (value) {{ var div = document.createElement("div"); div.innerHTML = value[4]; var text = div.textContent || div.innerText || ""; if(text) tickers.push(text.trim()); }});
-            if (tickers.length === 0) {{ alert("No visible tickers!"); return; }}
-            var blob = new Blob([tickers.join(", ")], {{ type: "text/plain;charset=utf-8" }}); var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "ape_tickers_page.txt"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
-        }}
-        $(document).ready(function(){{ 
-            table=$('.table').DataTable({{
-                "order":[[0,"asc"]], "pageLength": 25, "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-                "columnDefs": [ 
-                    {{ "visible": false, "targets": [19, 20, 21] }},
+        table.draw();
+    }}
 
-                    {{
-                        "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
-                        "type": "num",
-                        "render": function(data, type) {{
-                            if (type === 'sort' || type === 'type') {{
-                            var clean = data.toString().replace(/<[^>]+>/g, '').replace(/[$,%+,x]/g, ''); 
-                            return parseVal(clean); 
-                            }} 
-                            return data; 
-                        }} 
-                    }},
+    function toggleLegend() {{
+        var x = document.getElementById("legendContent"); var arrow = document.getElementById("legendArrow");
+        if (x.style.display === "block") {{ x.style.display = "none"; arrow.innerText = "▼"; }} else {{ x.style.display = "block"; arrow.innerText = "▲"; }}
+    }}
 
-                    // 3. TEXT group: ADDED 18 here as a string
-                    {{
-                        "targets": [18],
-                        "type": "string",
-                        "render": function(data, type) {{ 
-                            if (type === 'sort' || type === 'type') {{ 
-                                // Strip the HTML spans and the "ETF" badge so it sorts purely by name
-                                return data.toString().replace(/<[^>]+>/g, '').trim(); 
-                            }} 
-                            return data; 
-                        }} 
-                    }},
+    function toggleColors() {{
+        var t = document.querySelector('table'); var btn = document.getElementById('btnColors');
+        t.classList.toggle('no-colors');
+        if (t.classList.contains('no-colors')) {{ btn.innerHTML = "🎨 Colors: OFF"; btn.style.opacity = "0.6"; }} else {{ btn.innerHTML = "🎨 Colors: ON"; btn.style.opacity = "1.0"; }}
+    }}
 
-                    // 4. Your specific logic for column 13 (VEL)
-                    {{ 
-                        "targets": [13],
-                        "type": "num",
-                        "render": function(data, type) {{
-                        var clean = data.toString().replace(/<[^>]+>/g, '').replace(/,/g, '');
-                        var val = parseFloat(clean) || 0;
-                        if (type === 'sort' || type === 'type') return val;
-                        if (val < 0) return '<span style="color:#ff4444">' + val + '</span>';
-                        else return '<span style="color:#00ff00">' + val + '</span>';
-                    }}
+    function resetFilters() {{ 
+        $('#minPrice, #maxPrice, #minVol, #maxVol').val(''); 
+        $('#btnradio1').prop('checked', true); 
+        $('input[name="mcapFilter"]').prop('checked', false); 
+        $('#mcapAll').prop('checked', true); 
+        table.draw(); 
+    }}
 
+    function exportTickers() {{
+        var data = table.rows({{ search: 'applied', order: 'current', page: 'current' }}).data();
+        var tickers = []; 
+        data.each(function (value) {{ 
+            var clean = value[4].replace(/<[^>]+>/g, '').trim(); 
+            if(clean) tickers.push(clean); 
+        }});
+        if (tickers.length === 0) {{ alert("No visible tickers!"); return; }}
+        var blob = new Blob([tickers.join(", ")], {{ type: "text/plain;charset=utf-8" }}); 
+        var a = document.createElement("a"); 
+        a.href = URL.createObjectURL(blob); 
+        a.download = "ape_tickers_page.txt"; 
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    }}
+
+    $(document).ready(function(){{ 
+        table = $('.table').DataTable({{
+            "order":[[0,"asc"]], 
+            "pageLength": 15, 
+            "lengthMenu": [[15, 25, 50, 100, 250, -1], [15, 25, 50, 100, 250, "All"]],
+            "columnDefs": [ 
+                {{ "visible": false, "targets": [19, 20, 21] }}, 
+                {{
+                    "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+                    "type": "num",
+                    "render": function(data, type) {{
+                        if (type === 'sort' || type === 'type') {{ return parseVal(data); }} 
+                        return data; 
+                    }} 
+                }},
+                {{
+                    "targets": [18],
+                    "type": "string",
+                    "render": function(data, type) {{ 
+                        if (type === 'sort' || type === 'type') {{ return data.toString().replace(/<[^>]+>/g, '').trim(); }} 
+                        return data; 
+                    }} 
                 }}
             ],
-                "drawCallback": function() {{ var api = this.api(); $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); }}
-            }});
-            
-            $.fn.dataTable.ext.search.push(function(settings, data) {{
-                // STOCK TYPE FILTER (Type_Tag)
-                var typeTag = data[19] || ""; 
-                var viewMode = $('input[name="btnradio"]:checked').attr('id');
-                if (viewMode == 'btnradio2' && typeTag == 'ETF') return false;
-                if (viewMode == 'btnradio3' && typeTag == 'STOCK') return false;
-                
-                // MARKET CAP FILTER (MCap)
-                if (!$('#mcapAll').is(':checked')) {{
-                    var mcap = parseFloat(data[21]) || 0; 
-                    var match = false;
-                    if ($('#mcapMega').is(':checked') && mcap >= 200000000000) match = true;
-                    if ($('#mcapLarge').is(':checked') && (mcap >= 10000000000 && mcap < 200000000000)) match = true;
-                    if ($('#mcapMid').is(':checked') && (mcap >= 2000000000 && mcap < 10000000000)) match = true;
-                    if ($('#mcapSmall').is(':checked') && (mcap >= 250000000 && mcap < 2000000000)) match = true;
-                    if ($('#mcapMicro').is(':checked') && mcap < 250000000) match = true;
-                    if (!match) return false; 
-                }}
-
-                // PRICE & VOL FILTERS
-                var minP = parseVal($('#minPrice').val()), maxP = parseVal($('#maxPrice').val());
-                var p = parseFloat((data[5] || "0").replace(/[$,]/g, '')) || 0; // Price is col 4
-                if (minP > 0 && p < minP) return false;
-                if (maxP > 0 && p > maxP) return false;
-                
-                var minV = parseVal($('#minVol').val()), maxV = parseVal($('#maxVol').val());
-                var v = parseFloat(data[20]) || 0; // Raw Vol is col 18
-                if (minV > 0 && v < minV) return false;
-                if (maxV > 0 && v > maxV) return false;
-                return true;
-            }});
-            
-            $('#minPrice, #maxPrice, #minVol, #maxVol').on('keyup change', function() {{ table.draw(); }});
-            window.redraw = function() {{ 
-                var mode = $('input[name="btnradio"]:checked').attr('id');
-                var headerTxt = "INDUSTRY/SECTOR";
-                // if (mode == 'btnradio2') headerTxt = "INDUSTRY"; else if (mode == 'btnradio3') headerTxt = "SECTOR";
-                // $(table.column(18).header()).text(headerTxt);
-
-                table.draw(); 
-            }};
-            var d=new Date($("#time").data("utc")); $("#time").text("Last Updated: " + d.toLocaleString());
+            "drawCallback": function() {{ 
+                var api = this.api(); 
+                $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); 
+            }}
         }});
-        </script></body></html>"""
+
+        $.fn.dataTable.ext.search.push(function(settings, data) {{
+            var typeTag = data[19] || ""; 
+            var viewMode = $('input[name="btnradio"]:checked').attr('id');
+            var isETF = typeTag.includes("ETF");
+            if (viewMode == 'btnradio2' && isETF) return false; 
+            if (viewMode == 'btnradio3' && !isETF) return false; 
+            
+            if (!$('#mcapAll').is(':checked')) {{
+                var mcap = parseVal(data[21]); 
+                var match = false;
+                if ($('#mcapMega').is(':checked') && mcap >= 200000000000) match = true;
+                if ($('#mcapLarge').is(':checked') && (mcap >= 10000000000 && mcap < 200000000000)) match = true;
+                if ($('#mcapMid').is(':checked') && (mcap >= 2000000000 && mcap < 10000000000)) match = true;
+                if ($('#mcapSmall').is(':checked') && (mcap >= 250000000 && mcap < 2000000000)) match = true;
+                if ($('#mcapMicro').is(':checked') && mcap < 250000000) match = true;
+                if (!match) return false; 
+            }}
+
+            var minP = parseVal($('#minPrice').val()), maxP = parseVal($('#maxPrice').val());
+            var p = parseVal(data[5]);
+            if (minP > 0 && p < minP) return false;
+            if (maxP > 0 && p > maxP) return false;
+            
+            var minV = parseVal($('#minVol').val()), maxV = parseVal($('#maxVol').val());
+            var v = parseVal(data[20]);
+            if (minV > 0 && v < minV) return false;
+            if (maxV > 0 && v > maxV) return false;
+            return true;
+        }});
+
+        $('#minPrice, #maxPrice, #minVol, #maxVol').on('keyup change', function() {{ table.draw(); }});
+        window.redraw = function() {{ table.draw(); }};
+
+        var d = new Date($("#time").data("utc")); 
+        // 'en-US' keeps Month/Day/Year, {{ hour12: false }} forces 24-hour time
+        $("#time").text(d.toLocaleString('en-US', {{ hour12: false }}).replace(',', ''));
+        
+        table.on('draw', updateSummary);
+        setTimeout(updateSummary, 100);
+    }});
+</script></body></html>"""
         
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
         filename = f"scan_{timestamp}.html"
@@ -1210,20 +1508,70 @@ def cleanup_old_html_files(days_to_keep=14):
         print(f"{C_GREEN}  > Cleanup complete. Removed {count} files.{C_RESET}")
 
 if __name__ == "__main__":
+    # --- CONFIGURATION FOR DATA PERSISTENCE ---
+    LOCK_FILE = os.path.join(SCRIPT_DIR, "last_scan_time.txt")
+    LATEST_DATA_FILE = os.path.join(SCRIPT_DIR, "latest_scan_data.pkl")
+    
     is_auto = "--auto" in sys.argv
     if is_auto:
         print(f"{C_CYAN}Starting Auto Scan...{C_RESET}")
 
-    # 2. Fetch & Process Data
-    raw = get_all_trending_stocks()
-    if not raw: sys.exit(1) 
-    df = filter_and_process(raw)
-    if df.empty: sys.exit(0) 
+    df = pd.DataFrame()
+    skip_fetch = False
 
-    # 4. Generate HTML & Discord
+    # 1. CHECK COOLDOWN STATUS
+    if os.path.exists(LOCK_FILE):
+        last_run_time = os.path.getmtime(LOCK_FILE)
+        # 900 seconds = 15 minutes
+        if time.time() - last_run_time < 900:
+            if os.path.exists(LATEST_DATA_FILE):
+                remaining = int((900 - (time.time() - last_run_time)) / 60)
+                print(f"{C_YELLOW}[!] Data updated recently ({remaining}m ago). Skipping ApeWisdom fetch...{C_RESET}")
+                print(f"{C_CYAN}[#] Loading saved data from disk...{C_RESET}")
+                skip_fetch = True
+            else:
+                print(f"{C_YELLOW}[!] Cooldown active, but no saved data found. Forcing new fetch...{C_RESET}")
+
+    # 2. LOAD OR FETCH DATA
+    if skip_fetch:
+        try:
+            # Load the data we saved last time
+            df = pd.read_pickle(LATEST_DATA_FILE)
+        except Exception as e:
+            print(f"{C_RED}[!] Error loading saved data: {e}. Fetching fresh...{C_RESET}")
+            skip_fetch = False
+
+    if not skip_fetch:
+        # Fetch fresh data from APIs
+        raw = get_all_trending_stocks()
+        if not raw: 
+            # If API fails and we have no backup, exit
+            if df.empty: sys.exit(1)
+        
+        else:
+            new_df = filter_and_process(raw)
+            if not new_df.empty:
+                df = new_df
+                # SAVE SUCCESSFUL DATA FOR NEXT TIME
+                df.to_pickle(LATEST_DATA_FILE)
+                # UPDATE TIMESTAMP
+                with open(LOCK_FILE, "w") as f: 
+                    f.write(str(time.time()))
+
+    if df.empty:
+        print(f"{C_RED}[!] No data available to generate HTML.{C_RESET}")
+        sys.exit(0)
+
+    # 3. GENERATE HTML (Runs every time, using either new or saved data)
     fname = export_interactive_html(df)
+    
     if fname:
-        send_discord_link(fname, "🚀 **Market Scan Updated**")
+        # Optional: Only send Discord notification if it was a FRESH fetch?
+        # Remove the 'if not skip_fetch:' check if you want it to spam Discord every time you run it.
+        if not skip_fetch: 
+            send_discord_link(fname, "🚀 **Market Scan Updated**")
+        else:
+            print(f"{C_CYAN}[i] Skipped Discord notification (Using cached data){C_RESET}")
         
     cleanup_old_html_files(days_to_keep=7)
     print(f"{C_GREEN}Done.{C_RESET}")
