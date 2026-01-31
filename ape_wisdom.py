@@ -10,7 +10,6 @@ import random
 import json
 import shutil
 import numpy as np
-from google import genai
 
 # ==========================================
 #                   CONFIGURATION
