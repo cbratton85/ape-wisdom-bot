@@ -11349,5 +11349,32 @@
         "mcap": 239804640,
         "currency": "USD",
         "description": "Context Therapeutics Inc., a biopharmaceutical company, develops products for the treatment of solid tumors. Its lead program candidate is CTIM-76, an anti-Claudin 6 (CLDN6) x anti-CD3 bispecific antibody that is intended to redirect T-cell-mediated lysis toward malignant cells expressing CLDN6. The company has a collaboration and licensing agreement with Integral Molecular, Inc. for the development of a CLDN6 bispecific monoclonal antibody for cancer therapy. The company was incorporated in 2015 and is headquartered in Philadelphia, Pennsylvania."
+    },
+    "WWR": {
+        "ticker": "WWR",
+        "name": "Westwater Resources, Inc.",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 111464648,
+        "currency": "USD",
+        "description": "Westwater Resources, Inc., an energy technology company, focuses on developing battery-grade natural graphite materials in the United States. It primarily holds interests in the Kellyton Graphite plant located near Kellyton, Alabama; and the Coosa Graphite project covering an area of approximately 41,965 acres situated in east-central Alabama, near the western end of Coosa County. The company was formerly known as Uranium Resources, Inc. and changed its name to Westwater Resources, Inc. in August 2017. Westwater Resources, Inc. was incorporated in 1977 and is headquartered in Centennial, Colorado."
+    },
+    "ENS": {
+        "ticker": "ENS",
+        "name": "EnerSys",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 6751165952,
+        "currency": "USD",
+        "description": "EnerSys engages in the provision of stored energy solutions for industrial applications worldwide. The company operates in four segments: Energy Systems, Motive Power, Specialty, and New Ventures. The Energy Systems segment offers uninterruptible power systems (UPS) applications for computer and computer-controlled systems, as well as telecommunications systems; switchgear and electrical control systems used in industrial facilities and electric utilities, large-scale energy storage, and energy pipelines; integrated power solutions and services to broadband, telecom, data center, and renewable and industrial customers; and thermally managed cabinets and enclosures for electronic equipment and batteries. The Motive Power segment provides power solutions for electric industrial forklifts, automated guided vehicles used in manufacturing, warehousing operations as well as equipment used in floor care, mining, rail and airport ground support applications. The Specialty offers starting, lighting, and ignition applications in transportation, energy solutions for satellites, spacecraft, commercial aircraft, military, aircraft, submarines, ships, other tactical vehicles, defense applications and portable power solutions for soldiers in the field, as well as medical devices and equipment. The New Venture segment provides energy storage and management systems for demand charge reduction, utility back-up power, and dynamic fast charging for electric vehicles. It also offers battery chargers, power equipment, battery accessories, and outdoor cabinet enclosures, as well as related after-market and customer-support services for industrial batteries. It sells its products through a network of distributors, independent representatives, and internal sales forces. The company was formerly known as Yuasa, Inc. and changed its name to EnerSys in January 2001. EnerSys was founded in 1991 and is headquartered in Reading, Pennsylvania."
+    },
+    "MOVE": {
+        "ticker": "MOVE",
+        "name": "Movano Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 15579494,
+        "currency": "USD",
+        "description": "Movano Inc., a technology company, engages in the development of a platform to deliver healthcare solutions at the intersection of medical and consumer devices. It offers Evie Ring, a wearable device for women that combines health and wellness metrics comprising resting heart rate, heart rate variability (HRV), blood oxygen saturation (SpO2), respiration rate, skin temperature variability, period and ovulation tracking, and menstrual symptom tracking, as well as activity profile, including steps, active minutes and calories burned, sleep stages and duration, and mood tracking. The company develops System-on-a-Chip (SoC) for blood pressure or continuous glucose monitoring (CGM) systems. It sells its products through its website, retail or other distribution channels, value-added resellers (VARs), as well as partnering with OEMs. The company was formerly known as Maestro Sensors Inc. and changed its name to Movano Inc. in August 2018. Movano Inc. was incorporated in 2018 and is headquartered in Pleasanton, California."
     }
 }
