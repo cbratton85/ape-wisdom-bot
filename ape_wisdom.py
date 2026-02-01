@@ -1075,7 +1075,14 @@ def export_interactive_html(df, ai_summary=""):
                     </div>
                 </div>
 
-                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">Download TXT File</button>
+                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">TXT File</button>
+                <button class="btn btn-sm btn-reset" 
+                        onclick="copyTableToClipboard(event)" 
+                        title="Copy Table to Excel/Sheets" 
+                        style="margin-left: 10px;">
+                    📋 Copy Table
+                </button>
+                
                 <span id="stockCounter">Loading...</span>
             </div>
 
@@ -1427,6 +1434,43 @@ def export_interactive_html(df, ai_summary=""):
         table.on('draw', updateSummary);
         setTimeout(updateSummary, 100);
     }});
+
+
+    function copyTableToClipboard(event) {{ 
+        // 1. Setup - Get the button and the table
+        const btn = event.currentTarget; 
+        const table = document.querySelector(".table");
+    
+        if (!table) {{
+            console.error("Table not found");
+            return;
+        }}
+
+        // 2. Data Processing - Convert table rows to Tab-Separated Values
+        let rows = Array.from(table.querySelectorAll("tr"));
+        let textToCopy = rows.map(row => {{
+            let cells = Array.from(row.querySelectorAll("th, td"));
+            // Join cells with tabs, rows with newlines
+            return cells.map(cell => cell.innerText.trim()).join("\\t");
+        }}).join("\\n");
+
+        // 3. Execution - Send to Clipboard
+        navigator.clipboard.writeText(textToCopy).then(() => {{
+            const originalText = btn.innerHTML;
+        
+            // Visual Feedback
+            btn.innerHTML = "✅ Copied!";
+            btn.style.color = "#00ff00";
+
+            setTimeout(() => {{
+            btn.innerHTML = originalText;
+            btn.style.color = ""; 
+        }}, 2000);
+    }}).catch(err => {{
+        console.error("Clipboard Error:", err);
+        alert("Clipboard access denied. If you are opening a local file, try using Firefox or a local server.");
+    }});
+}}
 </script></body></html>"""
         
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
@@ -1528,15 +1572,14 @@ if __name__ == "__main__":
     skip_fetch = False
 
     # 1. CHECK COOLDOWN STATUS
-    if os.path.exists(LOCK_FILE):
-        last_run_time = os.path.getmtime(LOCK_FILE)
-        # CHANGED: 10 seconds instead of 900 (15 mins)
-        if time.time() - last_run_time < 900:
-            if os.path.exists(LATEST_DATA_FILE):
-                print(f"{C_YELLOW}[!] Force-skipping repeat fetch...{C_RESET}")
-                skip_fetch = True
-            else:
-                print(f"{C_YELLOW}[!] Cooldown active, but no saved data found. Forcing new fetch...{C_RESET}")
+    #if os.path.exists(LOCK_FILE):
+    #    last_run_time = os.path.getmtime(LOCK_FILE)
+    #   if time.time() - last_run_time < 900:
+    #        if os.path.exists(LATEST_DATA_FILE):
+    #            print(f"{C_YELLOW}[!] Force-skipping repeat fetch...{C_RESET}")
+    #            skip_fetch = True
+    #        else:
+    #           print(f"{C_YELLOW}[!] Cooldown active, but no saved data found. Forcing new fetch...{C_RESET}")
 
     # 2. LOAD OR FETCH DATA
     if skip_fetch:
