@@ -1639,21 +1639,14 @@ if __name__ == "__main__":
     df = pd.DataFrame()
     skip_fetch = False
 
-    # 1. CHECK COOLDOWN STATUS
-    #if os.path.exists(LOCK_FILE):
-    #    last_run_time = os.path.getmtime(LOCK_FILE)
-    #   if time.time() - last_run_time < 900:
-    #        if os.path.exists(LATEST_DATA_FILE):
-    #            print(f"{C_YELLOW}[!] Force-skipping repeat fetch...{C_RESET}")
-    #            skip_fetch = True
-    #        else:
-    #           print(f"{C_YELLOW}[!] Cooldown active, but no saved data found. Forcing new fetch...{C_RESET}")
+    # 1. CHECK COOLDOWN STATUS (Currently disabled/commented out by you)
+    # ... (Keep your commented code here if you want) ...
 
     # 2. LOAD OR FETCH DATA
     if skip_fetch:
         try:
-            # Load the data we saved last time
             df = pd.read_pickle(LATEST_DATA_FILE)
+            print(f"{C_GREEN}[+] Loaded cached data from {LATEST_DATA_FILE}{C_RESET}")
         except Exception as e:
             print(f"{C_RED}[!] Error loading saved data: {e}. Fetching fresh...{C_RESET}")
             skip_fetch = False
@@ -1661,33 +1654,43 @@ if __name__ == "__main__":
     if not skip_fetch:
         # Fetch fresh data from APIs
         raw = get_all_trending_stocks()
+        
         if not raw: 
-            # If API fails and we have no backup, exit
-            if df.empty: sys.exit(1)
+            print(f"{C_RED}[!] API returned no data.{C_RESET}")
+            # Only exit if we don't have a backup dataframe loaded
+            if df.empty: 
+                sys.exit(1)
         
         else:
             new_df = filter_and_process(raw)
-            if not new_df.empty:
+            
+            # --- CRITICAL FIX: Check for None before checking .empty ---
+            if new_df is not None and not new_df.empty:
                 df = new_df
-                # SAVE SUCCESSFUL DATA FOR NEXT TIME
-                df.to_pickle(LATEST_DATA_FILE)
                 
-                # UPDATE TIMESTAMP - This is the line that was cut off:
-                with open(LOCK_FILE, "w") as f: 
-                    f.write(str(time.time()))
+                # SAVE SUCCESSFUL DATA FOR NEXT TIME
+                try:
+                    df.to_pickle(LATEST_DATA_FILE)
+                    # UPDATE TIMESTAMP
+                    with open(LOCK_FILE, "w") as f: 
+                        f.write(str(time.time()))
+                except Exception as e:
+                    print(f"{C_YELLOW}[!] Warning: Could not save cache: {e}{C_RESET}")
+            else:
+                print(f"{C_YELLOW}[!] filter_and_process returned no valid data.{C_RESET}")
 
+    # 3. SAFETY CHECK
     if df.empty:
         print(f"{C_RED}[!] Table is empty. Check filters or API connection.{C_RESET}")
         sys.exit(0)
 
-    # 3. GENERATE HTML (Runs every time, using either new or saved data)
+    # 4. GENERATE HTML
+    # (Note: tracker.save(df) happens INSIDE filter_and_process now, so we don't call it here)
     fname = export_interactive_html(df)
     
     if fname:
-        # ALWAYS send Discord notification, even if data is cached
         status_msg = "🚀 **Market Scan Updated**" if not skip_fetch else "🔄 **Dashboard Refreshed (Cached)**"
         send_discord_link(fname, status_msg)
-        # Note: The 'else' was removed from here because we never skip anymore
         
     cleanup_old_html_files(days_to_keep=7)
     print(f"{C_GREEN}Done.{C_RESET}")
