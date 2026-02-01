@@ -10804,5 +10804,50 @@
         "mcap": 465643200,
         "currency": "USD",
         "description": "Gladstone Capital Corporation is a business development company specializing in lower middle market, growth capital, add on acquisitions, change of control, buy & build strategies, debt refinancing, debt investments in senior term loans, revolving loans, secured first and second lien term loans, senior subordinated loans, unitranche loans, junior subordinated loans, and mezzanine loans and equity investments in the form of common stock, preferred stock, limited liability company interests, or warrants. It operates as a business development company. The fund also makes private equity investments in acquisitions, buyouts and recapitalizations, and refinancing existing debts. It targets small and medium-sized companies in United States. It is industry agnostic and seeks to invest in companies engaged in the business services, light and specialty manufacturing, niche industrial products and services, specialty consumer products and services, energy services, transportation and logistics, healthcare and education services, specialty chemicals, media and communications and aerospace and defense. The fund seeks to invest in debt between $8 million and $40 million in companies that have between $20 million and $150 million in sales and EBITDA between $3 million and $25 million. It prefers to acquire minority stakes. It seeks to exit its investments through strategic acquisitions by other industry participants or financial buyers, initial public offerings of common stock, or other capital market transactions."
+    },
+    "CRON": {
+        "ticker": "CRON",
+        "name": "Cronos Group Inc. Common Share",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 961106240,
+        "currency": "USD",
+        "description": "Cronos Group Inc., a cannabinoid company, engages in the cultivation, production, distribution, and marketing of cannabis products in Canada, Israel, and internationally. It offers dried flowers, pre-rolls, oils, vaporizers, edibles, and cannabis tinctures under the Spinach, Lord Jones, and PEACE NATURALS brand names. The company is based in Stayner, Canada."
+    },
+    "SMC": {
+        "ticker": "SMC",
+        "name": "Summit Midstream Corporation",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 352040704,
+        "currency": "USD",
+        "description": "Summit Midstream Corporation focuses on owning, developing, and operating midstream energy infrastructure assets primarily shale formations in the continental United States. The company operates through Rockies, Permian, Piceance, Mid-Con, and Northeast segments. It owns, develops, and operates natural gas, crude oil, produced water gathering systems, and transmission pipelines. The company serves natural gas and crude oil producers. Summit Midstream Corporation was founded in 2009 and is based in Houston, Texas."
+    },
+    "SPOT": {
+        "ticker": "SPOT",
+        "name": "Spotify Technology S.A.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 103019069440,
+        "currency": "USD",
+        "description": "Spotify Technology S.A., together with its subsidiaries, provides audio streaming subscription services worldwide. It operates through two segments, Premium and Ad-Supported. The Premium segment offers unlimited online and offline streaming access to its catalog of music and podcasts without commercial breaks to its subscribers. This segment sells directly to the end users. The Ad-Supported segment provides on-demand online access to its catalog of music and unlimited online access to the catalog of podcasts to its users on their computers, tablets, and compatible mobile devices. The company also offers sales, distribution and marketing, contract research and development, and customer and other support services. Spotify Technology S.A. was incorporated in 2006 and is based in Luxembourg, Luxembourg."
+    },
+    "LXRX": {
+        "ticker": "LXRX",
+        "name": "Lexicon Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 421620864,
+        "currency": "USD",
+        "description": "Lexicon Pharmaceuticals, Inc., a biopharmaceutical company, focuses on the discovery, development, and commercialization of pharmaceutical products for the treatment of human disease. The company offers Sotagliflozin, an orally-delivered small molecule drug to reduce the risk of cardiovascular death, hospitalization for heart failure, and urgent heart failure visits in adults with heart failure or type 2 diabetes mellitus, chronic kidney disease or CKD, and other cardiovascular risk factors. Its orally-delivered small molecule drug candidates under development include sotagliflozin for the treatment of hypertrophic cardiomyopathy or HCM and type 1 diabetes that is in Phase 3 clinical trial; LX9211, which has completed Phase II clinical trials for the treatment of neuropathic pain; and LX9851 for the treatment of obesity and associated cardiometabolic disorders, as well as for weight management. Lexicon Pharmaceuticals, Inc. has strategic collaboration and license agreements with Viatris Inc. and Bristol-Myers Squibb Company. The company was incorporated in 1995 and is headquartered in The Woodlands, Texas."
+    },
+    "HUMA": {
+        "ticker": "HUMA",
+        "name": "Humacyte, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 192552608,
+        "currency": "USD",
+        "description": "Humacyte, Inc., together with its subsidiaries, engages in the development and manufacture of off-the-shelf, implantable, and bioengineered human tissues for the treatment of diseases and conditions across a range of anatomic locations in multiple therapeutic areas. The company using its proprietary and scientific technology platform to engineer and manufacture human acellular vessels (HAVs) to be implanted into patient without inducing a foreign body response or leading to immune rejection. It is developing a portfolio of HAVs, which would target the vascular repair, reconstruction, and replacement market, including vascular trauma; arteriovenous access for hemodialysis; peripheral arterial disease; pediatric heart surgery; and coronary artery bypass grafting, as well as for the delivery of cellular therapy, including pancreatic islet cell transplantation to treat Type 1 diabetes. The company was founded in 2004 and is headquartered in Durham, North Carolina."
     }
 }
