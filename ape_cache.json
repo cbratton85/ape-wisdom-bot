@@ -10741,5 +10741,68 @@
         "mcap": 0,
         "currency": "USD",
         "description": "Under normal market conditions, the fund seeks to achieve its investment objective by investing at least 80% of its net assets (including investment borrowings) in bonds, notes and bills issued or guaranteed by entities incorporated or domiciled in emerging market countries (collectively, \"Bonds\") that are denominated in the local currency of the issuer. It is non-diversified."
+    },
+    "HSCS": {
+        "ticker": "HSCS",
+        "name": "HeartSciences Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 10265609,
+        "currency": "USD",
+        "description": "HeartSciences Inc., a medical technology company, focuses on applying AI-based technology to an ECG to expand and improve clinical usefulness. It develops artificial intelligence-enhanced electrocardiography (AI-ECG) solutions, an algorithm to detect impaired cardiac relaxation or cardiac dysfunction caused by heart disease and/or age-related cardiac dysfunction; MyoVista wavECG device, a resting 12-lead ECG that provides diagnostic information related to cardiac dysfunction, as well as conventional ECG information in the same test; and MyoVista Insights, a cloud-based platform to host AI-ECG algorithms on an ECG hardware agnostic basis. The company was formerly known as Heart Test Laboratories, Inc. and changed its name to HeartSciences Inc. in October 2024. HeartSciences Inc. was incorporated in 2007 and is headquartered in Southlake, Texas."
+    },
+    "TARS": {
+        "ticker": "TARS",
+        "name": "Tarsus Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2739665152,
+        "currency": "USD",
+        "description": "Tarsus Pharmaceuticals, Inc., a commercial stage biopharmaceutical company, focuses on the development and commercialization of therapeutic candidates for eye care in the United States. The company's lead product candidate is XDEMVY, a novel therapeutic for the treatment of blepharitis caused by the infestation of Demodex mites, as well as to treat meibomian gland disease. It is also developing TP-04 for the treatment of Ocular Rosacea; TP-05 for potential Lyme disease prophylaxis; and community malaria reduction. In addition, the company develops lotilaner active pharmaceutical ingredient (API) to address diseases in human medicine, including eye care and infectious disease prevention. Tarsus Pharmaceuticals, Inc. was incorporated in 2016 and is headquartered in Irvine, California."
+    },
+    "CGNT": {
+        "ticker": "CGNT",
+        "name": "Cognyte Software Ltd.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 659533888,
+        "currency": "USD",
+        "description": "Cognyte Software Ltd., a software-led technology company, focuses on solutions for data processing and analytics worldwide. The company offers network intelligence analytics, threat intelligence analytics, decision intelligence analytics, and operational intelligence analytics solutions. It also offers software products, including subscription or perpetual licenses and appliances that include software that is essential to the product's functionality; software services, such as support and cloud-based SaaS subscriptions; and professional services and others comprising installation and integration services, customer specific development work, resale of third-party hardware, and consulting and training services. In addition, the company provides customer support, professional, and integration services. It serves governments agencies, including national, regional, and local government agencies. Cognyte Software Ltd. was incorporated in 2020 and is headquartered in Herzliya, Israel."
+    },
+    "DRTS": {
+        "ticker": "DRTS",
+        "name": "Alpha Tau Medical Ltd.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 591733184,
+        "currency": "USD",
+        "description": "Alpha Tau Medical Ltd., a clinical-stage oncology therapeutics company, focuses on the research, development, and commercialization of diffusing alpha-emitters radiation therapy (Alpha DaRT) for the treatment of solid cancer. Its Alpha-DaRT technology is in clinical trials for various forms comprising skin, oral, pancreatic, prostate, lung, liver, and breast cancers; and preclinical or pending clinical studies for brain and other cancers. The company is headquartered in Jerusalem, Israel."
+    },
+    "ATEX": {
+        "ticker": "ATEX",
+        "name": "Anterix Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 492200640,
+        "currency": "USD",
+        "description": "Anterix Inc. focuses on the commercialization of spectrum assets to enable the targeted utility and critical infrastructure customers to deploy private broadband networks and solutions. The company offers CatalyX, an active ecosystem platform; complementary spectrum; anterix security collective; and rural broadband services. It also holds licensed spectrum in the 900 MHz band throughout the contiguous United States, as well as Hawaii, Alaska, and Puerto Rico. The company was formerly known as pdvWireless, Inc. and changed its name to Anterix Inc. in August 2019. Anterix Inc. was incorporated in 1997 and is headquartered in Woodland Park, New Jersey."
+    },
+    "VLN": {
+        "ticker": "VLN",
+        "name": "Valens Semiconductor Ltd.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 174021392,
+        "currency": "USD",
+        "description": "Valens Semiconductor Ltd., together with its subsidiaries, provides semiconductor products for the audio-video and automotive industries. The company offers HDBaseT technology, which enables the simultaneous delivery of ultra-high-definition digital video and audio, Ethernet, USB, control signals, and power through a single long-reach cable. It also provides audio-video solutions for the enterprise, education, industrial, digital signage, and medical markets. In addition, it offers automotive chipsets that support advanced driver-assistance systems, automotive data solutions, infotainment, telematics, and backbone connectivity. The company's product series include VS100, VS2000, VS3000, VS6000, VS7000, VS6320, VA6000, and VA7000. Valens Semiconductor Ltd. was founded in 2006 and is headquartered in Hod HaSharon, Israel."
+    },
+    "GLAD": {
+        "ticker": "GLAD",
+        "name": "Gladstone Capital Corporation",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 465643200,
+        "currency": "USD",
+        "description": "Gladstone Capital Corporation is a business development company specializing in lower middle market, growth capital, add on acquisitions, change of control, buy & build strategies, debt refinancing, debt investments in senior term loans, revolving loans, secured first and second lien term loans, senior subordinated loans, unitranche loans, junior subordinated loans, and mezzanine loans and equity investments in the form of common stock, preferred stock, limited liability company interests, or warrants. It operates as a business development company. The fund also makes private equity investments in acquisitions, buyouts and recapitalizations, and refinancing existing debts. It targets small and medium-sized companies in United States. It is industry agnostic and seeks to invest in companies engaged in the business services, light and specialty manufacturing, niche industrial products and services, specialty consumer products and services, energy services, transportation and logistics, healthcare and education services, specialty chemicals, media and communications and aerospace and defense. The fund seeks to invest in debt between $8 million and $40 million in companies that have between $20 million and $150 million in sales and EBITDA between $3 million and $25 million. It prefers to acquire minority stakes. It seeks to exit its investments through strategic acquisitions by other industry participants or financial buyers, initial public offerings of common stock, or other capital market transactions."
     }
 }
