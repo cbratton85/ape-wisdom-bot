@@ -25,6 +25,7 @@ DELISTED_CACHE_FILE = os.path.join(SCRIPT_DIR, "delisted_cache.json")
 CACHE_EXPIRY_SECONDS = 3600
 RETENTION_DAYS = 14
 DELISTED_RETRY_DAYS = 7
+TOOLTIP_HISTORY_DAYS = 7
 
 # --- FILTERS & LAYOUT ---
 MIN_PRICE = 1.00
@@ -39,7 +40,9 @@ PERMANENT_BLACKLIST = ['JW', 'RE', 'OCX', 'BABY', 'ELY',
                        'CBD', 'GAN', 'AUD', 'TTM', 'FRMI',
                        'ERJ', 'DS', 'ABB', 'SAVE', 'HEAR',
                        'FI', 'TGIF', 'CHAD', 'QED', 'WFH',
-                       'CN', 'SQ', 'FM', 'MOM', '']
+                       'CN', 'SQ', 'FM', 'MOM', 'BOSS', 'SLT',
+                       '', '', '', '', '', '', '', '', '', '', '', ''
+                       ]
 
 # ANSI COLORS
 C_GREEN = '\033[92m'
@@ -72,7 +75,7 @@ class HistoryTracker:
         exclude_list = [
             'sym', 'name', 'meta', 'history', 'desc', 'type', 'avgvol', 'mcap', 'rolling',
             'z_rank_plus', 'z_surge', 'z_mnt_perc', 'z_upvotes', 'z_accel', 'z_upv_plus', 
-            'z_ment', 'z_squeeze', 'master_score', 'type_tag', 'industry/sector',
+            'z_ment', 'z_squeeze', 'type_tag', 'industry/sector',
             'velocity', 'accel', 'streak', 'upv_chg'] 
 
         no_round_list = ['rank', 'rank_plus', 'ment', 'upvotes', 'upv_plus', 'streak']
@@ -141,35 +144,65 @@ class HistoryTracker:
             json.dump(self.data, f, indent=4)
 
     def get_metrics(self, ticker, current_price, current_mnt, current_rank_plus, current_upvotes):
-        # 1. Safety Check
         if ticker not in self.data or not self.data[ticker]:
-            return {"vel": 0, "accel": 0, "upv_chg": 0, "streak": 1, "rolling_trend": 0, "history_str": "New"}
+            return {"vel": 0, "accel": 0, "upv_chg": 0, "streak": 1, "rolling_trend": 0, "hist": {}}
 
         dates = sorted(self.data[ticker].keys())
+        recent_dates = dates[-TOOLTIP_HISTORY_DAYS:]
         
-        # Need at least 2 entries (Yesterday + Today) to calculate change
-        if len(dates) < 2:
-            return {"vel": 0, "accel": 0, "upv_chg": 0, "streak": 1, "rolling_trend": 0, "history_str": "New"}
+        # 1. Initialize ALL lists (Added Heat, Eff, Conv, Surge, etc.)
+        history_map = {
+            'rank': [], 'rank_plus': [], 'price': [], 'ment': [], 'upvotes': [], 
+            'accel': [], 'velocity': [], 'streak': [], 'upv_plus': [],
+            'eff': [], 'conv': [], 'surge': [], 'mnt_perc': [], 'squeeze': [], 'master_score': []
+        }
 
-        # 2. Get Data Points
-        # dates[-1] = Today (Just saved)
-        # dates[-2] = Previous (Yesterday)
+        # Helper to format values specifically for history strings
+        def get_val(entry, key, signed=False, is_perc=False, decimals=2):
+            val = entry.get(key, 0)
+            
+            if isinstance(val, (float, np.floating)): 
+                # Now 'decimals' exists and can be used here
+                val = round(float(val), decimals)
+                
+            if is_perc: 
+                return f"{val}%"
+            
+            return f"{'+' if signed and val > 0 else ''}{val}"
+
+        for d in recent_dates:
+            entry = self.data[ticker][d]
+            history_map['rank'].append(get_val(entry, 'rank'))
+            history_map['rank_plus'].append(get_val(entry, 'rank_plus', signed=True))
+            history_map['price'].append(get_val(entry, 'price'))
+            history_map['ment'].append(get_val(entry, 'ment'))
+            history_map['upvotes'].append(get_val(entry, 'upvotes'))
+            history_map['accel'].append(get_val(entry, 'accel', signed=True))
+            history_map['velocity'].append(get_val(entry, 'velocity', signed=True))
+            
+            # --- NEW METRICS ADDED HERE ---
+            history_map['streak'].append(get_val(entry, 'streak', signed=True))
+            history_map['upv_plus'].append(get_val(entry, 'upv_plus', signed=True)) # UPV+
+            history_map['eff'].append(get_val(entry, 'eff'))
+            history_map['conv'].append(get_val(entry, 'conv'))
+            history_map['surge'].append(get_val(entry, 'surge', is_perc=True)) # SRG
+            history_map['mnt_perc'].append(get_val(entry, 'mnt_perc', is_perc=True)) # MNT%
+            history_map['squeeze'].append(get_val(entry, 'squeeze')) # SQZ
+            history_map['master_score'].append(get_val(entry, 'master_score', decimals=1)) # HEAT
+    
+        final_histories = {k: " → ".join(v) for k, v in history_map.items()}
+
+        # [Calculation Logic remains the same]
         current_entry = self.data[ticker][dates[-1]]
-        prev_entry = self.data[ticker][dates[-2]]
+        prev_entry = self.data[ticker][dates[-2]] if len(dates) > 1 else current_entry
 
-        # 3. Calculate Velocity (Rank Change)
         curr_rank = current_entry.get('rank_plus', 0)
         prev_rank = prev_entry.get('rank_plus', 0)
         velocity = int(curr_rank - prev_rank)
 
-        # 4. Calculate Upvotes Change (Upv+)
-        # We try 'upvotes' (new standard) AND 'Upvotes' (old data fallback)
         prev_upv = prev_entry.get('upvotes', prev_entry.get('Upvotes', 0))
-        
-        # Calculate change: Today's API Value - Yesterday's Saved Value
         upv_chg = int(current_upvotes - prev_upv)
 
-        # 5. Calculate Acceleration
         accel = 0
         if len(dates) >= 3:
             prev_2_entry = self.data[ticker][dates[-3]]
@@ -177,15 +210,6 @@ class HistoryTracker:
             prev_vel = int(prev_rank - prev_2_rank)
             accel = velocity - prev_vel
 
-        # 6. History String
-        recent_ranks = []
-        for d in dates[-7:]: 
-            val = self.data[ticker][d].get('rank_plus', 0)
-            recent_ranks.append(f"{'+' if val > 0 else ''}{val}")
-        history_str = " → ".join(recent_ranks)
-
-        # 7. Streak
-        rolling_trend = 0
         rolling_trend = 0
         for d in dates:
             val = self.data[ticker][d].get('rank_plus', 0)
@@ -195,17 +219,11 @@ class HistoryTracker:
         current_entry['velocity'] = velocity
         current_entry['accel'] = accel
         current_entry['upv_plus'] = upv_chg
-        
         current_entry['streak'] = rolling_trend
 
         return {
-            "vel": velocity, 
-            "accel": accel, 
-            "upv_chg": upv_chg, 
-            "streak": rolling_trend, 
-            "history_len": len(dates), 
-            "rolling_trend": rolling_trend, 
-            "history_str": history_str
+            "vel": velocity, "accel": accel, "upv_chg": upv_chg, "streak": rolling_trend, 
+            "hist": final_histories 
         }
 
     def flush(self):
@@ -433,12 +451,36 @@ def filter_and_process(stocks):
         # --- THEN UPDATE WITH REAL NUMBERS ---
         for index, row in df.iterrows():
             m = tracker.get_metrics(row['Sym'], row['Price'], row['MENT'], row['Rank+'], row['Upvotes'])
+            
+            # 1. Update Metrics
             df.at[index, 'Accel'] = m.get('accel', 0)
             df.at[index, 'Upv+'] = m.get('upv_chg', 0)
             df.at[index, 'Velocity'] = m.get('vel', 0)
-            df.at[index, 'Streak'] = m.get('streak', 0)
-            df.at[index, 'History'] = m.get('history_str', 'New')
-            df.at[index, 'Rolling'] = m.get('rolling_trend', 0)
+            df.at[index, 'Streak'] = m.get('streak', 1)
+            # 'Rolling' is often used for the trend number
+            df.at[index, 'Rolling'] = m.get('streak', 0) 
+
+            # 2. UNPACK HISTORIES (The Missing Link)
+            # This passes the history from Python to the HTML Table
+            histories = m.get('hist', {})
+            
+            df.at[index, 'h_rank'] = histories.get('rank', '')
+            df.at[index, 'h_rank_plus'] = histories.get('rank_plus', '')
+            df.at[index, 'h_price'] = histories.get('price', '')
+            df.at[index, 'h_ment'] = histories.get('ment', '')
+            df.at[index, 'h_upvotes'] = histories.get('upvotes', '')
+            
+            # --- CRITICAL MISSING ONES ---
+            df.at[index, 'h_velocity'] = histories.get('velocity', '')  # <--- Fixes VEL Tooltip
+            df.at[index, 'h_accel'] = histories.get('accel', '')        # <--- Fixes ACC Tooltip
+            df.at[index, 'h_streak'] = histories.get('streak', '')
+            df.at[index, 'h_upv_plus'] = histories.get('upv_plus', '')
+            df.at[index, 'h_eff'] = histories.get('eff', '')
+            df.at[index, 'h_conv'] = histories.get('conv', '')
+            df.at[index, 'h_surge'] = histories.get('surge', '')
+            df.at[index, 'h_mnt_perc'] = histories.get('mnt_perc', '')
+            df.at[index, 'h_squeeze'] = histories.get('squeeze', '')
+            df.at[index, 'h_heat'] = histories.get('master_score', '')
 
         # Force write the "Good" data (Velocity/Accel) back to the JSON file
         tracker.flush()
@@ -502,16 +544,18 @@ def get_all_trending_stocks():
 
 def export_interactive_html(df, ai_summary=""):
     try:
-        # --- 1. PREPARE THE DATA ---
         export_df = df.copy()
         if not os.path.exists(PUBLIC_DIR): os.makedirs(PUBLIC_DIR)
-        
-        # Ensure necessary columns exist before we process them
+
+        def with_hist(val_str, history_str):
+            if not history_str or history_str == "New" or history_str == "": 
+                return val_str
+            
+            return f'<span title="{history_str}" data-bs-toggle="tooltip" data-bs-html="true" style="cursor:help; text-decoration: none;">{val_str}</span>'
+
         for c in ['Accel', 'Velocity', 'Rolling', 'Squeeze', 'Upvotes', 'Rank+', 'Surge', 'Mnt%', 'Master_Score', 'z_Upvotes', 'z_Surge', 'z_Squeeze']:
             if c not in export_df.columns: export_df[c] = 0
 
-        # RENAME COLUMNS TO MATCH DISPLAY LOGIC
-        # This fixes the issue where abbreviated columns were missing
         export_df.rename(columns={
             'Accel': 'Acc', 
             'Velocity': 'Vel', 
@@ -532,138 +576,172 @@ def export_interactive_html(df, ai_summary=""):
                 return str(int(v))
             except: return "0"
 
-        # Define Colors
         C_GREEN, C_YELLOW, C_RED, C_CYAN, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ffffff"
         
         if 'AvgVol' not in export_df.columns: export_df['AvgVol'] = 0
         export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
         export_df['Type_Tag'] = 'STOCK'
 
-        # CHANGE: Color MENT based on Z-Score
-        # Logic: Yellow = Explosive (>2 sigma), Green = High (>1 sigma), White = Normal
         if 'MENT' not in export_df.columns: export_df['MENT'] = 0
         
         for index, row in export_df.iterrows():
             m_val = row.get('MENT', 0)
             z_score = row.get('z_MENT', 0)
             
-            if z_score >= 2.0: m_clr = "#ffff00"      # Yellow (Very Hot)
-            elif z_score >= 1.0: m_clr = "#00ff00"    # Green (Hot)
-            else: m_clr = "#ffffff"                   # White (Normal)
+            if z_score >= 2.0: m_clr = "#ffff00"
+            elif z_score >= 1.0: m_clr = "#00ff00"
+            else: m_clr = "#ffffff"  
             
-            # Format with commas AND color
             export_df.at[index, 'MENT'] = color_span(f"{int(m_val)}", m_clr)
 
-        # --- ROW-BY-ROW FORMATTING ---
+        # [Inside export_interactive_html]
+        # REPLACE THE ENTIRE 'for index, row' LOOP WITH THIS:
+
         for index, row in export_df.iterrows():
             
-            # Velocity
+            # --- 1. VELOCITY (Vel) ---
             v_val = row.get('Vel', 0)
+            v_hist = row.get('h_velocity', '') 
             v_color = C_GREEN if v_val > 0 else (C_RED if v_val < 0 else "#666")
-            export_df.at[index, 'Vel'] = color_span(f"{v_val:+d}", v_color)
+            v_str = color_span(f"{v_val:+d}", v_color)
+            export_df.at[index, 'Vel'] = with_hist(v_str, v_hist)
             
-            # Accel (Acc)
+            # --- 2. ACCELERATION (Acc) ---
             ac_val = row.get('Acc', 0)
+            ac_hist = row.get('h_accel', '')
             if ac_val >= 5: ac_clr = "#ff00ff"
             elif ac_val > 0: ac_clr = "#00ffff"
             elif ac_val < 0: ac_clr = "#ff4444"
             else: ac_clr = "#ffffff"
-            export_df.at[index, 'Acc'] = color_span(f"{ac_val:+d}", ac_clr)
+            export_df.at[index, 'Acc'] = with_hist(color_span(f"{ac_val:+d}", ac_clr), ac_hist)
 
-            # Efficiency
-            eff_val = row.get('Eff', 0)
+            # --- 3. EFFICIENCY (Eff) ---
+            eff_val = float(row.get('Eff', 0)) # Force float for formatting
+            eff_hist = row.get('h_eff', '') 
             if eff_val >= 1.0: eff_clr = "#00ff00"
             elif eff_val >= 0.5: eff_clr = "#ffff00"
             elif eff_val < 0.1 and eff_val > -0.1: eff_clr = "#666"
             else: eff_clr = "#ff4444"
-            export_df.at[index, 'Eff'] = color_span(f"{eff_val:.1f}", eff_clr)
+            export_df.at[index, 'Eff'] = with_hist(color_span(f"{eff_val:.1f}", eff_clr), eff_hist)
 
-            # Conviction
-            conv_val = row.get('Conv', 0)
+            # --- 4. CONVICTION (Conv) ---
+            conv_val = float(row.get('Conv', 0)) # Force float
+            conv_hist = row.get('h_conv', '') 
             conv_clr = "#ffcc00" if conv_val > 1.0 else "#ffffff"
-            export_df.at[index, 'Conv'] = color_span(f"{conv_val:.1f}x", conv_clr)
+            # Fixed Rounding: .1f ensures 14.77 becomes 14.8
+            export_df.at[index, 'Conv'] = with_hist(color_span(f"{conv_val:.1f}x", conv_clr), conv_hist)
 
-            # Upvote Change
+            # --- 5. UPVOTE CHANGE (Upv+) ---
             upchg_val = row.get('Upv+', 0)
+            upchg_hist = row.get('h_upv_plus', '') 
             upchg_clr = C_GREEN if upchg_val > 0 else (C_RED if upchg_val < 0 else "#666")
-            export_df.at[index, 'Upv+'] = color_span(f"{upchg_val:+d}", upchg_clr)
+            export_df.at[index, 'Upv+'] = with_hist(color_span(f"{upchg_val:+d}", upchg_clr), upchg_hist)
 
-            # Streak (Strk)
+            # --- 6. STREAK (Strk) ---
             trend_val = row.get('Strk', 0)
+            trend_hist = row.get('h_streak', '') 
             sig_text = f"{trend_val:+d}"
             if trend_val >= 3: sig_color = "#00ff00"
             elif trend_val > 0: sig_color = "#99ff99"
             elif trend_val <= -2: sig_color = "#ff4444"
             else: sig_color = "#ffffff"
-            export_df.at[index, 'Strk'] = color_span(sig_text, sig_color)
+            export_df.at[index, 'Strk'] = with_hist(color_span(sig_text, sig_color), trend_hist)
 
-            # Heat Score (Calculated from Master_Score)
-            score = row.get('Master_Score', 0)
+            # --- 7. HEAT SCORE ---
+            score = float(row.get('Master_Score', 0))
+            heat_hist = row.get('h_heat', '') 
             if score > 10: h_clr = "#ff0000"
             elif score > 5: h_clr = "#ff8800"
             elif score > 2: h_clr = "#ffff00"
             else: h_clr = "#888888"
-            export_df.at[index, 'Heat'] = f'<span style="color:{h_clr}; font-weight:bold;">{score:.1f}</span>'
+            heat_span = f'<span style="color:{h_clr}; font-weight:bold;">{score:.1f}</span>'
+            export_df.at[index, 'Heat'] = with_hist(heat_span, heat_hist)
             
-            # Name
+            # --- 8. NAME & DESC (The Fix) ---
+            # Use 'Desc' for the tooltip, NOT history
             raw_desc = str(row.get('Desc', 'No description available.'))
             desc_text = raw_desc.replace('"', '&quot;').replace("'", "&apos;")
-            export_df.at[index, 'Name'] = f'<span title="{desc_text}" style="cursor:help; border-bottom:none;"><b>{row.get("Name","")}</b></span>'
+            # Logic: We define the span manually to use desc_text as the title
+            export_df.at[index, 'Name'] = f'<span title="{desc_text}" data-bs-toggle="tooltip" data-bs-html="true" style="cursor:help; border-bottom:none;"><b>{row.get("Name","")}</b></span>'
 
-            # Rank+
+            # --- 9. RANK+ ---
             r_val = row.get('Rank+', 0)
-            r_hist = row.get('History', 'No history')
+            r_hist = row.get('h_rank_plus', '')
             
             if r_val != 0:
                 r_color = C_GREEN if r_val > 0 else C_RED
                 r_arrow = "▲" if r_val > 0 else "▼"
-                # Standard colored display for changes
-                export_df.at[index, 'Rank+'] = f'<span title="History: {r_hist}" style="cursor:help;">{color_span(f"{r_val} {r_arrow}", r_color)}</span>'
+                r_str = color_span(f"{r_val} {r_arrow}", r_color)
+                export_df.at[index, 'Rank+'] = with_hist(r_str, r_hist)
             else:
-                # FIX: Render a visible gray "0" so the tooltip still works
-                export_df.at[index, 'Rank+'] = f'<span title="History: {r_hist}" style="cursor:help; color: #888;">0</span>'
+                export_df.at[index, 'Rank+'] = with_hist('<span style="color:#888">0</span>', r_hist)
 
-            # Surge & Mnt% Colors (Uses z-scores for coloring)
-            z_cols = [('Srg', 'z_Surge'), ('Mnt%', 'z_Mnt%')]
-            for col, z_col in z_cols:
-                val = f"{export_df.at[index, col]:.0f}%"
-                z_val = row.get(z_col, 0)
-                clr = C_YELLOW if z_val >= 2.0 else (C_GREEN if z_val >= 1.0 else C_WHITE)
-                export_df.at[index, col] = color_span(val, clr)
-            
-            # Squeeze (Sqz)
+            # --- 10. RANK ---
+            rank_val = str(row.get('Rank', 0))
+            rank_hist = row.get('h_rank', '')
+            export_df.at[index, 'Rank'] = with_hist(rank_val, rank_hist)
+
+            # --- 11. SURGE & MNT% ---
+            # Surge
+            srg_val = f"{export_df.at[index, 'Srg']:.0f}%"
+            srg_hist = row.get('h_surge', '')
+            srg_z = row.get('z_Surge', 0)
+            srg_clr = C_YELLOW if srg_z >= 2.0 else (C_GREEN if srg_z >= 1.0 else C_WHITE)
+            export_df.at[index, 'Srg'] = with_hist(color_span(srg_val, srg_clr), srg_hist)
+
+            # Mnt%
+            mnt_val = f"{export_df.at[index, 'Mnt%']:.0f}%"
+            mnt_hist = row.get('h_mnt_perc', '')
+            mnt_z = row.get('z_Mnt%', 0)
+            mnt_clr = C_YELLOW if mnt_z >= 2.0 else (C_GREEN if mnt_z >= 1.0 else C_WHITE)
+            export_df.at[index, 'Mnt%'] = with_hist(color_span(mnt_val, mnt_clr), mnt_hist)
+
+            # --- 12. SQUEEZE (Sqz) ---
+            sq_val = int(row.get('Sqz', 0))
+            sq_hist = row.get('h_squeeze', '') 
             sq_z = row.get('z_Squeeze', 0)
             sq_color = C_CYAN if sq_z > 1.5 else C_WHITE
-            export_df.at[index, 'Sqz'] = color_span(int(row.get('Sqz', 0)), sq_color)
+            export_df.at[index, 'Sqz'] = with_hist(color_span(sq_val, sq_color), sq_hist)
             
-            # Upvotes (Upvs)
+            # --- 13. UPVOTES (Upvs) ---
+            upvs_val = row.get('Upvs', 0)
+            upvs_hist = row.get('h_upvotes', '')
             z_up = row.get('z_Upvotes', 0)
-            export_df.at[index, 'Upvs'] = color_span(row.get('Upvs', 0), C_GREEN if z_up > 1.5 else C_WHITE)
+            upvs_clr = C_GREEN if z_up > 1.5 else C_WHITE
+            upvs_str = color_span(upvs_val, upvs_clr)
+            export_df.at[index, 'Upvs'] = with_hist(upvs_str, upvs_hist)
             
-            # ETF Badge & Meta
+            # --- 14. MENTIONS (MENT) ---
+            ment_val = str(row.get('MENT', 0))
+            ment_hist = row.get('h_ment', '')
+            export_df.at[index, 'MENT'] = with_hist(ment_val, ment_hist)
+
+            # --- 15. ETF BADGE & META ---
             is_fund = row.get('Type', 'EQUITY') == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
             meta_val = row.get('Meta', '-')
             if is_fund:
                 badge = '<span style="background-color:#ff00ff; color:black; padding:2px 5px; border-radius:4px; font-size:11px; font-weight:bold; margin-right:6px; vertical-align:middle;">ETF</span>'
-                meta_text = color_span(meta_val, C_WHITE)
             else:
                 badge = ""
-                meta_text = color_span(meta_val, C_WHITE)
-
-            export_df.at[index, 'Meta'] = f"{badge}{meta_text}"
+            
+            export_df.at[index, 'Meta'] = f"{badge}{color_span(meta_val, C_WHITE)}"
             export_df.at[index, 'Type_Tag'] = 'ETF' if is_fund else 'STOCK'
             
-            # Sym Link & Price
+            # --- 16. SYMBOL & PRICE ---
             t = row['Sym']
             export_df.at[index, 'Sym'] = f'<a href="https://finance.yahoo.com/quote/{t}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
-            export_df.at[index, 'Price'] = f"${row.get('Price', 0):.2f}"
+            
+            # Price
+            p_val = f"${row.get('Price', 0):.2f}"
+            p_hist = row.get('h_price', '')
+            export_df.at[index, 'Price'] = with_hist(p_val, p_hist)
+
             export_df.at[index, 'Vol_Display'] = color_span(export_df.at[index, 'Vol_Display'], "#ccc")
 
         # Rename Meta to final header
         export_df.rename(columns={'Meta': 'INDUSTRY/SECTOR', 'Vol_Display': 'Vol'}, inplace=True)
 
         # DEFINE EXACT COLUMN ORDER (21 Columns)
-        # Javascript DataTables relies on this exact index order
         cols = [
             'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Acc', 'Eff', 'Conv', 'Upvs', 
             'Upv+', 'Vol', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 
