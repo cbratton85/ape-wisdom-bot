@@ -1522,12 +1522,10 @@ if __name__ == "__main__":
     # 1. CHECK COOLDOWN STATUS
     if os.path.exists(LOCK_FILE):
         last_run_time = os.path.getmtime(LOCK_FILE)
-        # 900 seconds = 15 minutes
-        if time.time() - last_run_time < 900:
+        # CHANGED: 10 seconds instead of 900 (15 mins)
+        if time.time() - last_run_time < 10:
             if os.path.exists(LATEST_DATA_FILE):
-                remaining = int((900 - (time.time() - last_run_time)) / 60)
-                print(f"{C_YELLOW}[!] Data updated recently ({remaining}m ago). Skipping ApeWisdom fetch...{C_RESET}")
-                print(f"{C_CYAN}[#] Loading saved data from disk...{C_RESET}")
+                print(f"{C_YELLOW}[!] Force-skipping repeat fetch...{C_RESET}")
                 skip_fetch = True
             else:
                 print(f"{C_YELLOW}[!] Cooldown active, but no saved data found. Forcing new fetch...{C_RESET}")
@@ -1554,7 +1552,8 @@ if __name__ == "__main__":
                 df = new_df
                 # SAVE SUCCESSFUL DATA FOR NEXT TIME
                 df.to_pickle(LATEST_DATA_FILE)
-                # UPDATE TIMESTAMP
+                
+                # UPDATE TIMESTAMP - This is the line that was cut off:
                 with open(LOCK_FILE, "w") as f: 
                     f.write(str(time.time()))
 
