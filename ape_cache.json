@@ -10479,11 +10479,11 @@
     "FISV": {
         "ticker": "FISV",
         "name": "Fiserv, Inc.",
-        "meta": "Unknown",
+        "meta": "Information Technology Services",
         "type": "EQUITY",
         "mcap": 34643189760,
         "currency": "USD",
-        "description": ""
+        "description": "Fiserv, Inc. is a global provider of payments and financial services technology solutions. Its segments include Merchant Solutions (Merchant) and Financial Solutions (Financial). The businesses in its Merchant segment provide commerce-enabling products and services to companies of all sizes around the world. These products and services include merchant acquiring and digital commerce services; mobile payment services; security and fraud protection solutions; stored-value solutions; software-as-a-service; POS devices; and pay-by-bank solutions. The business lines in its Merchant segment consist of small business, enterprise, and processing. The businesses in its Financial segment provide products and services to financial institutions, corporate and public sector clients across the world, enabling the processing of customer loan and deposit accounts, digital payments and card transactions. The business lines in its Financial segment consist of digital payments, issuing, and banking."
     },
     "DGX": {
         "ticker": "DGX",
@@ -10907,11 +10907,11 @@
     "BBBY": {
         "ticker": "BBBY",
         "name": "Bed Bath & Beyond, Inc.",
-        "meta": "Unknown",
+        "meta": "Specialty Retail",
         "type": "EQUITY",
         "mcap": 406981184,
         "currency": "USD",
-        "description": ""
+        "description": "Bed Bath & Beyond, Inc. is an e-commerce focused retailer that owns or has ownership interests in various retail brands. The Company owns Bed Bath & Beyond, Overstock, buybuy BABY, Kirkland’s Home, and other related brands and websites, and a blockchain asset portfolio inclusive of tZERO, GrainChain, and other assets. Through its Bed Bath & Beyond brand, it provides an array of home-related products. Through its Overstock brand, the Company provides an array of goods at discounted prices, and a treasure hunt-like experience for its target customers. Its product assortment includes home categories such as indoor and outdoor furniture, rugs, decor, and lighting, as well as lifestyle categories such as jewelry and watches, apparel and accessories, and designer shoes and handbags. In addition, the Company also offers a range of add-on services across its platforms, including warranties, shipping insurance, and installation services."
     },
     "DPRO": {
         "ticker": "DPRO",
