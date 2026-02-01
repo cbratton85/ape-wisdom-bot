@@ -148,55 +148,12 @@ class HistoryTracker:
             return {"vel": 0, "accel": 0, "upv_chg": 0, "streak": 1, "rolling_trend": 0, "hist": {}}
 
         dates = sorted(self.data[ticker].keys())
-        recent_dates = dates[-TOOLTIP_HISTORY_DAYS:]
         
-        # 1. Initialize ALL lists (Added Heat, Eff, Conv, Surge, etc.)
-        history_map = {
-            'rank': [], 'rank_plus': [], 'price': [], 'ment': [], 'upvotes': [], 
-            'accel': [], 'velocity': [], 'streak': [], 'upv_plus': [],
-            'eff': [], 'conv': [], 'surge': [], 'mnt_perc': [], 'squeeze': [], 'master_score': []
-        }
-
-        # Helper to format values specifically for history strings
-        def get_val(entry, key, signed=False, is_perc=False, decimals=2):
-            val = entry.get(key, 0)
-            
-            if isinstance(val, (float, np.floating)): 
-                # Now 'decimals' exists and can be used here
-                val = round(float(val), decimals)
-                
-            if is_perc: 
-                return f"{val}%"
-            
-            return f"{'+' if signed and val > 0 else ''}{val}"
-
-        for d in recent_dates:
-            entry = self.data[ticker][d]
-            history_map['rank'].append(get_val(entry, 'rank'))
-            history_map['rank_plus'].append(get_val(entry, 'rank_plus', signed=True))
-            history_map['price'].append(get_val(entry, 'price'))
-            history_map['ment'].append(get_val(entry, 'ment'))
-            history_map['upvotes'].append(get_val(entry, 'upvotes'))
-            history_map['accel'].append(get_val(entry, 'accel', signed=True))
-            history_map['velocity'].append(get_val(entry, 'velocity', signed=True))
-            
-            # --- NEW METRICS ADDED HERE ---
-            history_map['streak'].append(get_val(entry, 'streak', signed=True))
-            history_map['upv_plus'].append(get_val(entry, 'upv_plus', signed=True)) # UPV+
-            history_map['eff'].append(get_val(entry, 'eff'))
-            history_map['conv'].append(get_val(entry, 'conv'))
-            history_map['surge'].append(get_val(entry, 'surge', is_perc=True)) # SRG
-            history_map['mnt_perc'].append(get_val(entry, 'mnt_perc', is_perc=True)) # MNT%
-            history_map['squeeze'].append(get_val(entry, 'squeeze')) # SQZ
-            history_map['master_score'].append(get_val(entry, 'master_score', decimals=1)) # HEAT
-    
-        final_histories = {k: " → ".join(v) for k, v in history_map.items()}
-
-        # [Calculation Logic remains the same]
+        # --- MOVE CALCULATION LOGIC TO THE TOP ---
         current_entry = self.data[ticker][dates[-1]]
         prev_entry = self.data[ticker][dates[-2]] if len(dates) > 1 else current_entry
 
-        curr_rank = current_entry.get('rank_plus', 0)
+        curr_rank = current_rank_plus # Using the live passed-in value
         prev_rank = prev_entry.get('rank_plus', 0)
         velocity = int(curr_rank - prev_rank)
 
@@ -216,13 +173,57 @@ class HistoryTracker:
             if val > 0: rolling_trend = rolling_trend + 1 if rolling_trend >= 0 else 1
             elif val < 0: rolling_trend = rolling_trend - 1 if rolling_trend <= 0 else -1
 
+        # --- UPDATE THE ENTRY IN MEMORY NOW ---
+        # This makes sure the history loop below sees the +15, not the 0
         current_entry['velocity'] = velocity
         current_entry['accel'] = accel
         current_entry['upv_plus'] = upv_chg
         current_entry['streak'] = rolling_trend
+        # Make sure price and upvotes are synced too
+        current_entry['price'] = current_price
+        current_entry['upvotes'] = current_upvotes
+
+        # --- NOW BUILD THE HISTORY MAP ---
+        recent_dates = dates[-TOOLTIP_HISTORY_DAYS:]
+        history_map = {
+            'rank': [], 'rank_plus': [], 'price': [], 'ment': [], 'upvotes': [], 
+            'accel': [], 'velocity': [], 'streak': [], 'upv_plus': [],
+            'eff': [], 'conv': [], 'surge': [], 'mnt_perc': [], 'squeeze': [], 'master_score': []
+        }
+
+        def get_val(entry, key, signed=False, is_perc=False, decimals=2):
+            val = entry.get(key, 0)
+            if isinstance(val, (float, np.floating)): 
+                val = round(float(val), decimals)
+            if is_perc: 
+                return f"{val}%"
+            return f"{'+' if signed and val > 0 else ''}{val}"
+
+        for d in recent_dates:
+            entry = self.data[ticker][d]
+            history_map['rank'].append(get_val(entry, 'rank'))
+            history_map['rank_plus'].append(get_val(entry, 'rank_plus', signed=True))
+            history_map['price'].append(get_val(entry, 'price'))
+            history_map['ment'].append(get_val(entry, 'ment'))
+            history_map['upvotes'].append(get_val(entry, 'upvotes'))
+            history_map['accel'].append(get_val(entry, 'accel', signed=True))
+            history_map['velocity'].append(get_val(entry, 'velocity', signed=True)) # <--- Will now show +15
+            history_map['streak'].append(get_val(entry, 'streak', signed=True))
+            history_map['upv_plus'].append(get_val(entry, 'upv_plus', signed=True))
+            history_map['eff'].append(get_val(entry, 'eff'))
+            history_map['conv'].append(get_val(entry, 'conv'))
+            history_map['surge'].append(get_val(entry, 'surge', is_perc=True))
+            history_map['mnt_perc'].append(get_val(entry, 'mnt_perc', is_perc=True))
+            history_map['squeeze'].append(get_val(entry, 'squeeze'))
+            history_map['master_score'].append(get_val(entry, 'master_score', decimals=1))
+    
+        final_histories = {k: " → ".join(v) for k, v in history_map.items()}
 
         return {
-            "vel": velocity, "accel": accel, "upv_chg": upv_chg, "streak": rolling_trend, 
+            "vel": velocity, 
+            "accel": accel, 
+            "upv_chg": upv_chg, 
+            "streak": rolling_trend, 
             "hist": final_histories 
         }
 
@@ -736,15 +737,17 @@ def export_interactive_html(df, ai_summary=""):
             p_hist = row.get('h_price', '')
             export_df.at[index, 'Price'] = with_hist(p_val, p_hist)
 
-            export_df.at[index, 'Vol_Display'] = color_span(export_df.at[index, 'Vol_Display'], "#ccc")
+            vol_raw = export_df.at[index, 'Vol_Display']
+            # Change to 'right' and use 'padding-right' to push it away from the right wall
+            export_df.at[index, 'Vol_Display'] = f'<div style="text-align: right; padding-right: 25px; color: #ccc;">{vol_raw}</div>'
 
         # Rename Meta to final header
-        export_df.rename(columns={'Meta': 'INDUSTRY/SECTOR', 'Vol_Display': 'Vol'}, inplace=True)
+        export_df.rename(columns={'Meta': 'INDUSTRY/SECTOR', 'Vol_Display': 'VOL(30)'}, inplace=True)
 
         # DEFINE EXACT COLUMN ORDER (21 Columns)
         cols = [
             'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Acc', 'Eff', 'Conv', 'Upvs', 
-            'Upv+', 'Vol', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 
+            'Upv+', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 
             'Type_Tag', 'AvgVol', 'MCap'
         ]
         # Safety fill
@@ -808,7 +811,7 @@ def export_interactive_html(df, ai_summary=""):
             th:nth-child(9), td:nth-child(9) {{ width: 1%; text-align: center; }} /*CONV*/
             th:nth-child(10), td:nth-child(10) {{ width: 1%; text-align: center; }} /*UPVS*/
             th:nth-child(11), td:nth-child(11) {{ width: 1%; text-align: center; }} /*UPV+*/
-            th:nth-child(12), td:nth-child(12) {{ width: 1%; text-align: right; }} /*VOL*/
+            th:nth-child(12), td:nth-child(12) {{ width: 1%; text-align: right;  }} /*VOL(30)*/
             th:nth-child(13), td:nth-child(13) {{ width: 1%; text-align: center; }} /*SRG*/
             th:nth-child(14), td:nth-child(14) {{ width: 1%; text-align: center; }} /*VEL*/
             th:nth-child(15), td:nth-child(15) {{ width: 1%; text-align: center; }} /*STRK*/
