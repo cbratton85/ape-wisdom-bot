@@ -11394,5 +11394,50 @@
         "mcap": 299492512,
         "currency": "USD",
         "description": "Senseonics Holdings, Inc., a commercial-stage medical technology company, focuses on development and manufacturing of continuous glucose monitoring (CGM) systems for people with diabetes in the United States and internationally. The company's products include Eversense, Eversense XL, Eversense E3, and Eversense 365, which are implantable CGM systems to measure glucose levels in people with diabetes through an under-the-skin sensor, a removable and rechargeable smart transmitter, and an app for real-time diabetes monitoring and management. It serves healthcare providers and patients through a network of distributors and strategic fulfillment partners. The company was founded in 1996 and is headquartered in Germantown, Maryland."
+    },
+    "EPI": {
+        "ticker": "EPI",
+        "name": "WisdomTree India Earnings Fund",
+        "meta": "India Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Under normal circumstances, at least 95% of the fund's total assets (exclusive of collateral held from securities lending) will be invested in constituent securities of the index and investments that have economic characteristics that are substantially identical to the economic characteristics of such constituent securities. The index is comprised of companies incorporated and traded in India that are profitable and that are eligible to be purchased by foreign investors as of the annual index screening date. It is non-diversified."
+    },
+    "CLH": {
+        "ticker": "CLH",
+        "name": "Clean Harbors, Inc.",
+        "meta": "Waste Management",
+        "type": "EQUITY",
+        "mcap": 13939651584,
+        "currency": "USD",
+        "description": "Clean Harbors, Inc. provides environmental and industrial services in the United States and Canada. It operates through two segments: Environmental Services and Safety-Kleen Sustainability Solutions. The Environmental Services segment collects, transports, treats, and disposes hazardous and non-hazardous waste, such as resource recovery, physical treatment, incineration, landfill disposal, wastewater treatment, lab chemicals disposal, and explosives management services; and offers CleanPack services, including collection, identification, categorization, specialized packaging, transportation, and disposal of laboratory chemicals and household hazardous waste. This segment also provides industrial maintenance and specialty industrial services; and utilizes specialty equipment and resources that performs field services. The Safety-Kleen Sustainability Solutions segment provides containerized waste, parts-washer, and vacuum services for automobile repair shops, car and truck dealers, metal fabricators, machine manufacturers, fleet maintenance shops, and other automotive, industrial, and retail customers; collects and transports for hazardous and non-hazardous containerized waste for recycling or disposal; machine cleaning and maintenance, and disposal and replenishment of clean solvent or aqueous fluids; and vacuum services to remove solids, residual oily water, and sludge and other fluids from customers' oil/water separators, sumps, and collection tanks, as well as removes and collects waste fluids found at large and small industrial locations, including metal fabricators, auto maintenance providers, and general manufacturers. This segment also manufactures, formulates, and packages lubricants and other products. Clean Harbors, Inc. was incorporated in 1980 and is headquartered in Norwell, Massachusetts."
+    },
+    "XCEM": {
+        "ticker": "XCEM",
+        "name": "Columbia EM Core ex-China ETF",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will invest at least 80% of its net assets in the companies included in the index and the advisor generally expects to be substantially invested at such times, with at least 95% of its net assets invested in these securities. The index (and therefore the fund) was concentrated in the financials and information technology sectors. It is non-diversified."
+    },
+    "SLT": {
+        "ticker": "SLT",
+        "name": "Pacer Salt High truBeta US Mark",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Under normal circumstances, at least 80% of the fund's total assets (exclusive of any collateral held from securities lending) will be invested in the component securities of the index. The index uses an objective, rules-based methodology to measure the performance of an equal-weighted portfolio of approximately 100 large- and mid-capitalization U.S.-listed stocks with the highest forecasted systematic risk relative to the market (known as \"beta\"). The fund is non-diversified."
+    },
+    "FRDM": {
+        "ticker": "FRDM",
+        "name": "Freedom 100 Emerging Markets ET",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Under normal circumstances, at least 80% of the fund's total assets (exclusive of collateral held from securities lending) will be invested in the component securities of the index or in depositary receipts representing such component securities. The index is designed to track the performance of a portfolio of approximately 100 equity securities in emerging market countries."
     }
 }
