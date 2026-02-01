@@ -35,7 +35,12 @@ NAME_MAX_WIDTH = 50
 REQUEST_DELAY_MIN = 1.5
 REQUEST_DELAY_MAX = 3.0
 TICKER_FIXES = {'FISV': 'FI'}
-PERMANENT_BLACKLIST = ['JW', 'RE', 'OCX', 'BABY', 'ELY', 'SNP', 'SLAM', 'OG', 'DTC', 'CO', 'CBD', 'GAN', 'AUD', 'TTM', 'FRMI', 'ERJ', 'DS', 'ABB', 'SAVE', 'HEAR', 'FI']
+PERMANENT_BLACKLIST = ['JW', 'RE', 'OCX', 'BABY', 'ELY',
+                       'SNP', 'SLAM', 'OG', 'DTC', 'CO',
+                       'CBD', 'GAN', 'AUD', 'TTM', 'FRMI',
+                       'ERJ', 'DS', 'ABB', 'SAVE', 'HEAR',
+                       'FI', 'TGIF', 'CHAD', 'QED', 'WFH',
+                       'CN', 'SQ', 'FM', 'MOM', '']
 
 # ANSI COLORS
 C_GREEN = '\033[92m'
@@ -1523,7 +1528,7 @@ if __name__ == "__main__":
     if os.path.exists(LOCK_FILE):
         last_run_time = os.path.getmtime(LOCK_FILE)
         # CHANGED: 10 seconds instead of 900 (15 mins)
-        if time.time() - last_run_time < 10:
+        if time.time() - last_run_time < 900:
             if os.path.exists(LATEST_DATA_FILE):
                 print(f"{C_YELLOW}[!] Force-skipping repeat fetch...{C_RESET}")
                 skip_fetch = True
