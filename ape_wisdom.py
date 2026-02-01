@@ -64,16 +64,16 @@ class HistoryTracker:
         return {}
 
     def save(self, df):
-        # 1. Setup Time and Cutoff for retention
         now_ts = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d %H:%M")
         cutoff = datetime.datetime.now(datetime.UTC).replace(tzinfo=None) - datetime.timedelta(days=RETENTION_DAYS)
         
-        # 2. Configuration
+        # --- UPDATE THIS LIST ---
+        # Added: velocity, accel, streak, upv_chg (to prevent overwriting with bad API data)
         exclude_list = [
             'sym', 'name', 'meta', 'history', 'desc', 'type', 'avgvol', 'mcap', 'rolling',
             'z_rank_plus', 'z_surge', 'z_mnt_perc', 'z_upvotes', 'z_accel', 'z_upv_plus', 
-            'z_ment', 'z_squeeze', 'master_score', 'type_tag', 'industry/sector'
-        ] 
+            'z_ment', 'z_squeeze', 'master_score', 'type_tag', 'industry/sector',
+            'velocity', 'accel', 'streak', 'upv_chg'] 
 
         no_round_list = ['rank', 'rank_plus', 'ment', 'upvotes', 'upv_plus', 'streak']
 
@@ -100,13 +100,22 @@ class HistoryTracker:
                 # Assignment and Rounding logic
                 if col_clean in no_round_list:
                     entry[col_clean] = val
+
                 elif isinstance(val, (np.integer, int)):
                     entry[col_clean] = int(val)
+
                 elif isinstance(val, (np.floating, float)):
                     decimals = precision_map.get(col_clean, 2)
-                    entry[col_clean] = round(float(val), decimals)
+                    
+                    # FIX: If precision is 0, convert to Integer to remove ".0"
+                    if decimals == 0:
+                        entry[col_clean] = int(round(float(val)))
+                    else:
+                        entry[col_clean] = round(float(val), decimals)
+
                 else:
                     entry[col_clean] = str(val)
+                
 
             # Save this ticker's current snapshot
             self.data[ticker][now_ts] = entry
@@ -132,79 +141,77 @@ class HistoryTracker:
             json.dump(self.data, f, indent=4)
 
     def get_metrics(self, ticker, current_price, current_mnt, current_rank_plus, current_upvotes):
-        # 1. Handle case with NO history
+        # 1. Safety Check
         if ticker not in self.data or not self.data[ticker]:
-            streak = 1 if current_rank_plus > 0 else (-1 if current_rank_plus < 0 else 0)
-            return {
-                "vel": 0, "accel": 0, "upv_chg": 0, "div": False, 
-                "streak": 1, "rolling_trend": streak, 
-                "history_str": "New"
-            }
+            return {"vel": 0, "accel": 0, "upv_chg": 0, "streak": 1, "rolling_trend": 0, "history_str": "New"}
 
         dates = sorted(self.data[ticker].keys())
-
-        # If this is the first time we've ever seen this stock, 
-        # we can't calculate a delta, so return "New" defaults.
+        
+        # Need at least 2 entries (Yesterday + Today) to calculate change
         if len(dates) < 2:
-            return {
-                "vel": 0, "accel": 0, "upv_chg": 0, "streak": 1, 
-                "rolling_trend": 0, "history_str": "New"
-            }
+            return {"vel": 0, "accel": 0, "upv_chg": 0, "streak": 1, "rolling_trend": 0, "history_str": "New"}
 
-        # If we have at least 2 entries, it's safe to proceed
+        # 2. Get Data Points
+        # dates[-1] = Today (Just saved)
+        # dates[-2] = Previous (Yesterday)
         current_entry = self.data[ticker][dates[-1]]
         prev_entry = self.data[ticker][dates[-2]]
 
-        prev_rank_plus = prev_entry.get('rank_plus', 0) 
-        upv_chg = int(current_upvotes - prev_entry.get('upvotes', 0))
+        # 3. Calculate Velocity (Rank Change)
+        curr_rank = current_entry.get('rank_plus', 0)
+        prev_rank = prev_entry.get('rank_plus', 0)
+        velocity = int(curr_rank - prev_rank)
 
-        velocity = int(current_rank_plus - prev_entry.get('rank_plus', 0))
-        upv_chg = int(current_upvotes - prev_entry.get('upvotes', 0))
+        # 4. Calculate Upvotes Change (Upv+)
+        # We try 'upvotes' (new standard) AND 'Upvotes' (old data fallback)
+        prev_upv = prev_entry.get('upvotes', prev_entry.get('Upvotes', 0))
         
-        # 2. Build History String (Tooltip)
-        recent_ranks = []
-        for d in dates[-6:]: #DAYS OF RANK+ HISTORY#
-            val = self.data[ticker][d].get('rank_plus', 0)
-            recent_ranks.append(f"{'+' if val > 0 else ''}{val}")
-        recent_ranks.append(f"{'+' if current_rank_plus > 0 else ''}{current_rank_plus}")
-        history_str = " → ".join(recent_ranks)
+        # Calculate change: Today's API Value - Yesterday's Saved Value
+        upv_chg = int(current_upvotes - prev_upv)
 
-        # 3. Calculate Streak
-        rolling_trend = 0
-        for d in dates:
-            r_plus = self.data[ticker][d].get('rank_plus', 0)
-            if r_plus > 0: rolling_trend = rolling_trend + 1 if rolling_trend >= 0 else 1
-            elif r_plus < 0: rolling_trend = rolling_trend - 1 if rolling_trend <= 0 else -1
-        
-        if current_rank_plus > 0: rolling_trend = rolling_trend + 1 if rolling_trend >= 0 else 1
-        elif current_rank_plus < 0: rolling_trend = rolling_trend - 1 if rolling_trend <= 0 else -1
-
-        # 4. Velocity & Accel
-        prev_rank_plus = prev_data.get('rank_plus', 0)
-        velocity = int(current_rank_plus - prev_rank_plus)
-        upv_chg = int(current_upvotes - prev_data.get('upvotes', 0))
-        
+        # 5. Calculate Acceleration
         accel = 0
-        # We need at least 3 historical points to calculate acceleration 
-        # (Point A to B = Velocity 1, Point B to C = Velocity 2, Vel 1 - Vel 2 = Accel)
         if len(dates) >= 3:
-            # dates[-1] = Today
-            # dates[-2] = Yesterday (Previous Reading)
-            # dates[-3] = Day Before Yesterday (Previous Previous Reading)
-            
-            prev_2_val = self.data[ticker][dates[-3]].get('rank_plus', 0)
-            
-            # prev_rank_plus is already dates[-2] from our previous fix
-            prev_vel = int(prev_rank_plus - prev_2_val)
-            
-            # Acceleration is the change in velocity
+            prev_2_entry = self.data[ticker][dates[-3]]
+            prev_2_rank = prev_2_entry.get('rank_plus', 0)
+            prev_vel = int(prev_rank - prev_2_rank)
             accel = velocity - prev_vel
 
+        # 6. History String
+        recent_ranks = []
+        for d in dates[-7:]: 
+            val = self.data[ticker][d].get('rank_plus', 0)
+            recent_ranks.append(f"{'+' if val > 0 else ''}{val}")
+        history_str = " → ".join(recent_ranks)
+
+        # 7. Streak
+        rolling_trend = 0
+        rolling_trend = 0
+        for d in dates:
+            val = self.data[ticker][d].get('rank_plus', 0)
+            if val > 0: rolling_trend = rolling_trend + 1 if rolling_trend >= 0 else 1
+            elif val < 0: rolling_trend = rolling_trend - 1 if rolling_trend <= 0 else -1
+
+        current_entry['velocity'] = velocity
+        current_entry['accel'] = accel
+        current_entry['upv_plus'] = upv_chg
+        
+        current_entry['streak'] = rolling_trend
+
         return {
-            "vel": velocity, "accel": accel, "upv_chg": upv_chg, 
-            "div": False, "streak": len(dates) + 1, 
-            "rolling_trend": rolling_trend, "history_str": history_str
+            "vel": velocity, 
+            "accel": accel, 
+            "upv_chg": upv_chg, 
+            "streak": rolling_trend, 
+            "history_len": len(dates), 
+            "rolling_trend": rolling_trend, 
+            "history_str": history_str
         }
+
+    def flush(self):
+        """Force saves the current data state to disk."""
+        with open(self.filepath, 'w') as f:
+            json.dump(self.data, f, indent=4)
 
 def load_cache():
     if os.path.exists(CACHE_FILE):
@@ -258,9 +265,7 @@ def filter_and_process(stocks):
     # 1. RETRY CHECK (Only for items NOT in blacklist)
     tickers_to_retry = []
     for t, data in local_cache.items():
-        # SECURITY: Skip retry if it's in the blacklist
         if t in PERMANENT_BLACKLIST: continue
-
         if data.get('delisted'):
             last_checked_str = data.get('last_checked', '2020-01-01')
             try:
@@ -279,52 +284,34 @@ def filter_and_process(stocks):
     # 2. MAIN FILTER LOOP
     us_tickers = []
     for s in stocks:
-        # Normalize the ticker name
         raw_ticker = s['ticker']
         t = TICKER_FIXES.get(raw_ticker, raw_ticker.replace('.', '-'))
-
-        # --- CRITICAL: PERMANENT BLACKLIST CHECK ---
-        # Checks both the normalized ticker (FI) and raw ticker (FISV)
-        if t in PERMANENT_BLACKLIST or raw_ticker in PERMANENT_BLACKLIST:
-            continue
-        # -------------------------------------------
-
+        if t in PERMANENT_BLACKLIST or raw_ticker in PERMANENT_BLACKLIST: continue
         if local_cache.get(t, {}).get('delisted'): continue
         us_tickers.append(t)
     
     us_tickers = list(set(us_tickers))
-
     tracker = HistoryTracker(HISTORY_FILE)
     
     # 3. METADATA FETCHING
     valid_tickers = [t for t in us_tickers if not local_cache.get(t, {}).get('delisted')]
-    
-    # Double check blacklist one last time before fetching (Safety net)
     missing = [t for t in valid_tickers if t not in local_cache and t not in PERMANENT_BLACKLIST]
     
     if missing:
-        print(f"{C_YELLOW}Fetching metadata for {len(missing)} NEW items (this may take a few minutes)...{C_RESET}")
+        print(f"{C_YELLOW}Fetching metadata for {len(missing)} NEW items...{C_RESET}")
         for i, t in enumerate(missing):
-            if i % 10 == 0 and i > 0:
-                print(f"  > Progress: {i}/{len(missing)} metadata items fetched...")
-            
+            if i % 10 == 0 and i > 0: print(f"  > Progress: {i}/{len(missing)} metadata items fetched...")
             res = fetch_meta_data_robust(t)
             if res: 
-                # If yahoo returns a 404/Null, mark it as delisted immediately so we don't retry forever
                 if res.get('meta') == 'Unknown' and res.get('mcap') == 0:
-                     print(f"{C_RED}  > {t} seems invalid/delisted. Adding to penalty box.{C_RESET}")
-                     local_cache[t] = {
-                        'delisted': True, 
-                        'last_checked': now.strftime("%Y-%m-%d"),
-                        'reason': 'Metadata 404'
-                    }
+                     print(f"{C_RED}  > {t} seems invalid. Adding to penalty box.{C_RESET}")
+                     local_cache[t] = {'delisted': True, 'last_checked': now.strftime("%Y-%m-%d"), 'reason': 'Metadata 404'}
                 else:
                     local_cache[res['ticker']] = res
-            
             time.sleep(0.75) 
-            
         save_cache(local_cache)
 
+    # 4. MARKET DATA FETCHING
     market_data = pd.DataFrame()
     use_cache = os.path.exists(MARKET_DATA_CACHE_FILE) and (time.time() - os.path.getmtime(MARKET_DATA_CACHE_FILE)) < CACHE_EXPIRY_SECONDS
     
@@ -332,60 +319,40 @@ def filter_and_process(stocks):
         print(f"{C_CYAN}[#] Loading market data from cache...{C_RESET}")
         market_data = pd.read_pickle(MARKET_DATA_CACHE_FILE)
     else:
-        print(f"{C_YELLOW}[!] Downloading data for {len(valid_tickers)} tickers in batches...{C_RESET}")
-        
+        print(f"{C_YELLOW}[!] Downloading data for {len(valid_tickers)} tickers...{C_RESET}")
         CHUNK_SIZE = 100
         for i in range(0, len(valid_tickers), CHUNK_SIZE):
             batch = valid_tickers[i:i + CHUNK_SIZE]
             print(f"    > Processing Batch { (i//CHUNK_SIZE) + 1} ({len(batch)} tickers)...")
-            
             try:
                 batch_data = yf.download(batch, period="40d", interval="1d", group_by='ticker', progress=False, threads=True)
-                
                 if not batch_data.empty:
-                    if len(batch) == 1:
-                        batch_data.columns = pd.MultiIndex.from_product([batch, batch_data.columns])
-                    
-                    if market_data.empty:
-                        market_data = batch_data
-                    else:
-                        market_data = pd.concat([market_data, batch_data], axis=1)
-                
-                if i + CHUNK_SIZE < len(valid_tickers):
-                    time.sleep(2.5) 
-
+                    if len(batch) == 1: batch_data.columns = pd.MultiIndex.from_product([batch, batch_data.columns])
+                    if market_data.empty: market_data = batch_data
+                    else: market_data = pd.concat([market_data, batch_data], axis=1)
+                if i + CHUNK_SIZE < len(valid_tickers): time.sleep(2.5) 
             except Exception as e:
                 print(f"{C_RED}[!] Error downloading batch {i}: {e}{C_RESET}")
 
-        if not market_data.empty:
-            market_data.to_pickle(MARKET_DATA_CACHE_FILE)
+        if not market_data.empty: market_data.to_pickle(MARKET_DATA_CACHE_FILE)
 
+    # 5. BUILD THE DATAFRAME
     final_list = []
     for stock in stocks:
         t = TICKER_FIXES.get(stock['ticker'], stock['ticker'].replace('.', '-'))
+        if t in PERMANENT_BLACKLIST: continue
         
-        # --- BLACKLIST CHECK AGAIN ---
-        if t in PERMANENT_BLACKLIST: 
-            continue
-        
-        # --- 2. MARKET DATA CHECK ---
-        # --- 2. MARKET DATA CHECK ---
         try:
-            # Check if ticker exists in market_data
             if isinstance(market_data.columns, pd.MultiIndex):
-                if t not in market_data.columns.levels[0]:
-                    continue
+                if t not in market_data.columns.levels[0]: continue
                 hist = market_data[t].dropna()
             else:
-                if t not in market_data.columns:
-                    continue
+                if t not in market_data.columns: continue
                 hist = market_data[t].dropna()
 
-            if hist.empty:
-                continue
+            if hist.empty: continue
 
             curr_p = hist['Close'].iloc[-1]
-            # Ensure we have enough data for volume average
             actual_vol_days = min(len(hist), AVG_VOLUME_DAYS)
             avg_v = hist['Volume'].tail(actual_vol_days).mean()
             
@@ -394,9 +361,7 @@ def filter_and_process(stocks):
             info = local_cache.get(t, {})
             if info.get('currency') not in ['USD', None, '']: continue
 
-            # Dynamic Name Truncation
             name = str(info.get('name', t)).replace('"', '').strip()[:NAME_MAX_WIDTH]
-            
             cur_m = int(stock.get('mentions') or 0)
             old_m = int(stock.get('mentions_24h_ago') or 0)
             
@@ -420,38 +385,24 @@ def filter_and_process(stocks):
             safe_surge = s_perc if s_perc > 0 else 1
             efficiency = rank_plus / safe_surge
 
-            m = tracker.get_metrics(t, float(curr_p), cur_m, rank_plus, current_upvotes)
-
+            # --- CHANGE: Don't call get_metrics here. It's too early. ---
+            # Just put placeholders. The refill loop at the bottom handles it.
             final_list.append({
-                "Rank": rank_now,
-                "Name": name, 
-                "Sym": t,
-                "Rank+": rank_plus,
-                "History": m.get('history_str', 'New'), # Use .get() to prevent crashes
-                "Price": float(curr_p),
-                "AvgVol": int(avg_v),
-                "Surge": s_perc,
-                "MENT": cur_m,
-                "Mnt%": m_perc,
-                "Type": info.get('type', 'EQUITY'),
-                "Upvotes": current_upvotes,
-                "Meta": info.get('meta', '-'),
-                "Desc": info.get('description', ''),
-                "Squeeze": squeeze_score,
-                "MCap": mcap, 
-                "Conv": conviction, 
-                "Eff": efficiency,
-                "Accel": m['accel'],
-                "Upv+": m['upv_chg'],
-                "Velocity": m['vel'],
-                "Streak": m['streak'],
-                "Rolling": m['rolling_trend']
+                "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
+                "Price": float(curr_p), "AvgVol": int(avg_v), "Surge": s_perc,
+                "MENT": cur_m, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
+                "Upvotes": current_upvotes, "Meta": info.get('meta', '-'),
+                "Desc": info.get('description', ''), "Squeeze": squeeze_score,
+                "MCap": mcap, "Conv": conviction, "Eff": efficiency,
+                # PLACEHOLDERS
+                "Accel": 0, "Upv+": 0, "Velocity": 0, "Streak": 0, 
+                "Rolling": 0, "History": "New"
             })
             
         except Exception as e:
             continue
 
-    # Scoring
+    # 6. SCORING & SAVING
     df = pd.DataFrame(final_list)
     if not df.empty and 'Sym' in df.columns:
         df = df.drop_duplicates(subset=['Sym'], keep='first')
@@ -474,22 +425,27 @@ def filter_and_process(stocks):
         log_sq = np.log1p(sq_series)
         mean_sq = log_sq.mean(); std_sq = log_sq.std(ddof=0)
         df['z_Squeeze'] = 0 if std_sq == 0 else (log_sq - mean_sq) / std_sq
-
         df['Heat'] = df['Master_Score']
 
-        # 2. SAVE immediately
+        # --- THE CRITICAL STEP: SAVE FIRST ---
         tracker.save(df) 
 
-        # 3. REFILL the 0s by checking the tracker now that it has data
+        # --- THEN UPDATE WITH REAL NUMBERS ---
         for index, row in df.iterrows():
             m = tracker.get_metrics(row['Sym'], row['Price'], row['MENT'], row['Rank+'], row['Upvotes'])
             df.at[index, 'Accel'] = m.get('accel', 0)
             df.at[index, 'Upv+'] = m.get('upv_chg', 0)
             df.at[index, 'Velocity'] = m.get('vel', 0)
-            df.at[index, 'Streak'] = m.get('streak', 1)
+            df.at[index, 'Streak'] = m.get('streak', 0)
             df.at[index, 'History'] = m.get('history_str', 'New')
+            df.at[index, 'Rolling'] = m.get('rolling_trend', 0)
+
+        # Force write the "Good" data (Velocity/Accel) back to the JSON file
+        tracker.flush()
 
         return df
+    
+    return pd.DataFrame()
 
 def get_all_trending_stocks():
     all_results, page = [], 1
