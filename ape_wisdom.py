@@ -75,7 +75,7 @@ class HistoryTracker:
         exclude_list = [
             'sym', 'name', 'meta', 'history', 'desc', 'type', 'avgvol', 'mcap', 'rolling',
             'z_rank_plus', 'z_surge', 'z_mnt_perc', 'z_upvotes', 'z_accel', 'z_upv_plus', 
-            'z_ment', 'z_squeeze', 'type_tag', 'industry/sector',
+            'z_ment', 'z_squeeze', 'type_tag', 'industry/sector', 'heat',
             'velocity', 'accel', 'streak', 'upv_chg'] 
 
         no_round_list = ['rank', 'rank_plus', 'ment', 'upvotes', 'upv_plus', 'streak']
