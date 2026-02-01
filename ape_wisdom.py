@@ -1566,12 +1566,10 @@ if __name__ == "__main__":
     fname = export_interactive_html(df)
     
     if fname:
-        # Optional: Only send Discord notification if it was a FRESH fetch?
-        # Remove the 'if not skip_fetch:' check if you want it to spam Discord every time you run it.
-        if not skip_fetch: 
-            send_discord_link(fname, "🚀 **Market Scan Updated**")
-        else:
-            print(f"{C_CYAN}[i] Skipped Discord notification (Using cached data){C_RESET}")
+        # ALWAYS send Discord notification, even if data is cached
+        status_msg = "🚀 **Market Scan Updated**" if not skip_fetch else "🔄 **Dashboard Refreshed (Cached)**"
+        send_discord_link(fname, status_msg)
+        # Note: The 'else' was removed from here because we never skip anymore
         
     cleanup_old_html_files(days_to_keep=7)
     print(f"{C_GREEN}Done.{C_RESET}")
