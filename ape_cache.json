@@ -11493,5 +11493,104 @@
         "mcap": 70884856,
         "currency": "USD",
         "description": "Solitario Resources Corp., an exploration stage company, engages in the acquisition and exploration of precious metal, zinc, and other base metal properties in North and South America. It also explores for gold deposits. The company holds 100% interest in the Golden Crest gold project covering an area of approximately 33,000 acres of mining claims located in western South Dakota, Lawrence County; and 85% interest in the Chambara project, which consists of 12 concessions covering an area of approximately 9,661 hectares located in Peru. It also holds 100% interest in the Cat Creek project located in south-central Colorado. The company was formerly known as Solitario Zinc Corp. and changed its name to Solitario Resources Corp. in July 2023. Solitario Resources Corp. was incorporated in 1984 and is based in Wheat Ridge, Colorado."
+    },
+    "TEM": {
+        "ticker": "TEM",
+        "name": "Tempus AI, Inc.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 10642412544,
+        "currency": "USD",
+        "description": "Tempus AI, Inc. operates as a healthcare technology company. It engages in providing next generation sequencing diagnostics, polymerase chain reaction profiling, molecular genotyping, and other anatomic and molecular pathology testing to healthcare providers, pharmaceutical companies, biotechnology companies, researchers, and other third parties. The company offers Insights, a license library of linked clinical, molecular, and imaging de-identified data, as well as a suite of analytical services to analytic and cloud-and-compute tools to pharmaceutical and biotechnology companies; and Trials that provides clinical trial matching services to pharmaceutical companies. In addition, it operates Next; Algos, a suite of algorithmic tests in oncology; Hub, a desktop and mobile platform for ordering, managing, and receiving tests and patient results; and Lens, a platform for researchers and scientists to find, access, and analyze Tempus data. The company has a strategic collaboration agreement with AstraZeneca and Pathos AI, Inc. to develop therapeutic programs in oncology, as well as strategic collaboration with Personalis, Inc. and Whitehawk Therapeutics, Inc. The company was formerly known as Tempus Labs, Inc. and changed its name to Tempus AI, Inc. in January 2023. Tempus AI, Inc. was incorporated in 2015 and is headquartered in Chicago, Illinois."
+    },
+    "NBIX": {
+        "ticker": "NBIX",
+        "name": "Neurocrine Biosciences, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 13565957120,
+        "currency": "USD",
+        "description": "Neurocrine Biosciences, Inc. discovers, develops, and markets pharmaceuticals for neurological, neuroendocrine, and neuropsychiatric disorders in the United States and internationally. The company's products include INGREZZA for tardive dyskinesia and chorea associated with Huntington's disease; ALKINDI for adrenal insufficiency; Efmody capsules for classic congenital adrenal hyperplasia; Orilissa tablets for endometriosis; Oriahnn capsules to treat uterine fibroids; and CRENESSITY to treat congenital adrenal hyperplasia. Its product candidates in clinical development include valbenazine to treat dyskinetic cerebral palsy and schizophrenia; NBI-1076986 to treat movement disorders; Osavampator for inadequate response to treatment in major depressive disorder; NBI-1117568 for the treatment of schizophrenia; NBI-1070770 to treat major depressive disorder; and NBI-1117570, NBI-1117567, NBI-1117569, and NBI-1065890 for neuropsychiatric and neurological conditions. The company also has license and collaboration agreements with Nxera Pharma UK Limited; Takeda Pharmaceutical Company Limited; Xenon Pharmaceuticals Inc.; Voyager Therapeutics, Inc.; Mitsubishi Tanabe Pharma Corporation; and AbbVie Inc. The company was incorporated in 1992 and is headquartered in San Diego, California."
+    },
+    "IMAX": {
+        "ticker": "IMAX",
+        "name": "Imax Corporation",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 1878120832,
+        "currency": "USD",
+        "description": "IMAX Corporation, together with its subsidiaries, operates as a technology platform for entertainment and events in the United States, Greater China, rest of Asia, Western Europe, Canada, Latin America, and internationally. It operates through Content Solutions; and Technology Products and Services segments. The company offers IMAX film remastering, a proprietary technology that digitally remasters films and other content into IMAX formats for distribution to the IMAX network; IMAX Enhanced, which provides end-to-end technology across streaming content and entertainment devices at home; AI-driven video quality solutions for media and entertainment companies; and streaming technology software products. It also provides preventative and emergency maintenance services, and quality monitoring to the IMAX network; film post-production services; and IMAX film and digital cameras for content creators. In addition, the company engages in the distribution of large-format documentary films to institutional theaters, as well as live performances and interactive events with artists and creators; after-market sales of IMAX System parts and 3D glasses; sale or lease of IMAX theater systems; provision of management services to theaters, as well as production advice and technical assistance to documentary and Hollywood filmmakers; and rental of company's proprietary 2D and 3D large-format film cameras. The company markets its theater systems through a direct sales force and marketing staff to science and natural history museums, zoos, aquariums, and other educational and cultural centers, as well as theme parks, private home theaters, tourist destination sites, fairs, and expositions. It offers its services under the IMAX, IMAX 3D, Experience It In IMAX, The IMAX Experience, DMR, Filmed For IMAX, IMAX Live, IMAX Enhanced, and IMAX StreamSmart. IMAX Corporation was founded in 1967 and is headquartered in Mississauga, Canada."
+    },
+    "EQ": {
+        "ticker": "EQ",
+        "name": "Equillium, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 86468464,
+        "currency": "USD",
+        "description": "Equillium, Inc., a clinical-stage biotechnology company, develops therapeutics to treat severe autoimmune and inflammatory, or immuno-inflammatory disorders with unmet medical need in the United States. Its lead product candidate is Itolizumab (EQ001), a first-in-class anti-CD6 immune-modifying monoclonal antibody, which is in phase 3 clinical trial to treat acute graft-versus-host disease, as well as completed Phase 1b clinical trial to treat systemic lupus erythematosus and lupus nephritis and in phase 2 clinical trial for the treatment of ulcerative colitis. The company also develops EQ101, first-in-class, selective, tri-specific inhibitor of IL-2, IL-9 and IL-15, which completed Phase 1/2 to treat cutaneous T cell lymphoma. It serves its products to gastroenterology, dermatology, hematology, transplant science, rheumatology, pulmonology, and oncology areas. The company has a collaboration and license agreement with Biocon SA to develop, make, have made, use, sell, have sold, offer for sale, import and otherwise exploit itolizumab (EQ001) and any pharmaceutical composition or preparation containing or comprising itolizumab (EQ001) that uses Biocon technology or Biocon know-how, or collectively, a Biocon Product. The company was formerly known as Attenuate Biopharmaceuticals, Inc. and changed its name to Equillium, Inc. in May 2017. Equillium, Inc. was incorporated in 2017 and is headquartered in La Jolla, California."
+    },
+    "PK": {
+        "ticker": "PK",
+        "name": "Park Hotels & Resorts Inc.",
+        "meta": "REIT - Hotel & Motel",
+        "type": "EQUITY",
+        "mcap": 2185054720,
+        "currency": "USD",
+        "description": "Park is one of the largest publicly-traded lodging real estate investment trusts (\u0093REIT\u0094) with a diverse portfolio of iconic and market-leading hotels and resorts with significant underlying real estate value. Park's portfolio currently consists of 38 premium-branded hotels and resorts with over 24,000 rooms primarily located in prime city center and resort locations."
+    },
+    "HTB": {
+        "ticker": "HTB",
+        "name": "HomeTrust Bancshares, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 752186624,
+        "currency": "USD",
+        "description": "HomeTrust Bancshares, Inc. operates as the bank holding company for HomeTrust Bank that provides a range of retail and commercial banking products and services in North Carolina, South Carolina, East Tennessee, Southwest Virginia, and Georgia. The company's deposit products include savings, money market, noninterest-bearing, and interest-bearing checking accounts, as well as certificates of deposit for individuals, businesses, and nonprofit organizations. Its loan portfolio comprises one-to-four-family real estate lending, multifamily, home equity lines of credit, construction and land development, indirect auto finance, and consumer lending; and commercial loans that include commercial real estate, construction and land development, and commercial and industrial loans. The company also provides small business administration loans, equipment finance leases, and municipal leases, as well as cash management and online/mobile banking services. In addition, it invests in debt securities issued by the United States government agencies and government-sponsored enterprises, municipal bonds, corporate bonds, commercial paper and certificates of deposit insured by the federal deposit insurance corporation. HomeTrust Bancshares, Inc. was founded in 1926 and is headquartered in Asheville, North Carolina."
+    },
+    "CRL": {
+        "ticker": "CRL",
+        "name": "Charles River Laboratories Inte",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 10358872064,
+        "currency": "USD",
+        "description": "Charles River Laboratories International, Inc. provides drug discovery, non-clinical development, and safety testing services in the United States, Europe, Canada, the Asia Pacific, and internationally. It operates through three segments: Research Models and Services (RMS), Discovery and Safety Assessment (DSA), and Manufacturing Solutions (Manufacturing). The RMS segment produces and sells rodents, and purpose-bred rats and mice for use by researchers. This segment also provides a range of services to assist its clients in supporting the use of research models in research and screening pre-clinical drug candidates, including research models, genetically engineered models and services, insourcing solutions, and research animal diagnostic services. The DSA segment offers early and in vivo discovery services for the identification and validation of novel targets, chemical compounds, and antibodies through delivery of preclinical drug and therapeutic candidates ready for safety assessment; and safety assessment services, such as toxicology, pathology, safety pharmacology, bioanalysis, drug metabolism, and pharmacokinetics services. The Manufacturing segment provides in vitro methods for conventional and rapid quality control testing of sterile and non-sterile pharmaceuticals and consumer products. This segment offers specialized testing of biologics that are outsourced by pharmaceutical and biotechnology companies. It utilizes Logica, a platform offering from Valo Health, to identify advanceable small molecule leads. It provides contract vivarium operation services to biopharmaceutical clients. The company has strategic collaborations with Parker Institute for Cancer Immunotherapy and Children's Hospital Los Angeles across its contract development and manufacturing organization. Additionally, It has a strategic alliance with Francis Crick Institute (Crick), Inc. for the development of Antibody-Drug Conjugate (ADC) drug discovery and development. The company was founded in 1947 and is headquartered in Wilmington, Massachusetts."
+    },
+    "BEAM": {
+        "ticker": "BEAM",
+        "name": "Beam Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2802737920,
+        "currency": "USD",
+        "description": "Beam Therapeutics Inc., a biotechnology company, engages in the development of precision genetic medicines for patients suffering from serious diseases in the United States. It develops BEAM-101 for the treatment of sickle cell disease; BEAM-302, a liver-targeting LNP formulation to treat severe alpha-1 antitrypsin deficiency; and BEAM-301, a liver-targeting LNP formulation for the treatment of glycogen storage disease 1a. It also intends to develop BEAM-103, an anti-CD117 monoclonal antibody, and BEAM-104, a cell therapy for development in sickle cell disease and beta-thalassemia; and BEAM-201 and other potential ex vivo CAR-T therapies. The company has research collaboration agreement with Pfizer Inc., focus on in vivo base editing programs for targets rare genetic diseases of the liver, muscle, and central nervous system; Apellis Pharmaceuticals to conduct preclinical research on target specific genes within the complement system in various organs, including the eye, liver, and brain; Verve Therapeutics, Inc., for cardiovascular disease treatments; Sana Biotechnology, Inc., to research, develop, and commercialize rights to CRISPR Cas12b for cell therapy programs; and Orbital Therapeutics design RNA for the prevention, treatment or diagnosis of human disease. Beam Therapeutics Inc. was incorporated in 2017 and is based in Cambridge, Massachusetts."
+    },
+    "IBD": {
+        "ticker": "IBD",
+        "name": "Inspire Corporate Bond ETF",
+        "meta": "Corporate Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally invests at least 80% of its total assets in the component securities of the index. The index Provider selects domestic corporate bonds issued by companies that are considered large capitalization companies, are rated investment grade quality from a bond ratings agency widely recognized in the financial services industry and which have an Inspire Impact Score of zero or higher."
+    },
+    "CNK": {
+        "ticker": "CNK",
+        "name": "Cinemark Holdings Inc Cinemark ",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 2781829376,
+        "currency": "USD",
+        "description": "Cinemark Holdings, Inc., together with its subsidiaries, engages in the motion picture exhibition business. It operates theatres in the United States and Latin America. The company was founded in 1984 and is headquartered in Plano, Texas."
+    },
+    "ROKU": {
+        "ticker": "ROKU",
+        "name": "Roku, Inc.",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 14065968128,
+        "currency": "USD",
+        "description": "Roku, Inc., together with its subsidiaries, operates a TV streaming platform in the United States and internationally. The company operates in two segments, Platform and Devices. Its streaming platform allows users to find and access TV shows, movies, news, sports, and others. The company also sells streaming players, Roku-branded TVs, smart home products and services, audio products, and related accessories, as well as offers digital advertising services. Roku, Inc. was incorporated in 2002 and is headquartered in San Jose, California."
     }
 }
