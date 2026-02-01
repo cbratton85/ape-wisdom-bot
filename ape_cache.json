@@ -11592,5 +11592,77 @@
         "mcap": 14065968128,
         "currency": "USD",
         "description": "Roku, Inc., together with its subsidiaries, operates a TV streaming platform in the United States and internationally. The company operates in two segments, Platform and Devices. Its streaming platform allows users to find and access TV shows, movies, news, sports, and others. The company also sells streaming players, Roku-branded TVs, smart home products and services, audio products, and related accessories, as well as offers digital advertising services. Roku, Inc. was incorporated in 2002 and is headquartered in San Jose, California."
+    },
+    "MSS": {
+        "ticker": "MSS",
+        "name": "Maison Solutions Inc.",
+        "meta": "Grocery Stores",
+        "type": "EQUITY",
+        "mcap": 6456268,
+        "currency": "USD",
+        "description": "Maison Solutions Inc., together with its subsidiaries, operates as a specialty grocery retailer in the United States. The company offers perishable products, such as meat, seafood, vegetables, and fruit; non-perishable products, including grocery products comprising cooking utensils, canned foods, Chinese and Asian seasonings and spices, and snacks, as well as liquor, cigarette, lottery, newspaper, reusable bag, non-food, and health products; and general merchandise, beauty care, pharmacy, and other items and services in its stores. It serves its products online. The company was formerly known as Maison International, Inc. and changed its name to Maison Solutions Inc. in September 2021. Maison Solutions Inc. was incorporated in 2019 and is headquartered in Monterey Park, California."
+    },
+    "DSP": {
+        "ticker": "DSP",
+        "name": "Viant Technology Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 749097024,
+        "currency": "USD",
+        "description": "Viant Technology Inc. operates as an advertising technology company. It provides ViantAI, an artificial intelligence product suite; Holistic, Omnichannel DSP, an integrated platform that manages omnichannel campaigns and access metrics; Household ID, which combines digital and personal identifiers into a normalized household profile; IRIS_ID, a content identifier that allows partners to share video-level data to power planning, targeting, and measurement solutions in ad-supported streaming media; and Viant Data Platform, which offers the ability to integrate first-party data with data from top third-party data providers in order to obtain key insights, reporting, and attribution opportunities. The company also offers Direct Access, a supply path optimization program that creates a direct path to premium inventory; Advanced Reporting and Measurement that offers conversion lift, multi-touch attribution, foot-traffic data reports, digital-out-of-home lift, sales reporting, and ROAS analytics; and Flexible Customer Engagement Model, which offers customers transparency and control over their advertising campaigns and underlying data infrastructure. The company sells its platform through a direct sales team focused on business development in various markets. It serves purchasers of programmatic advertising inventory and large, independent, and mid-market advertising agencies, as well as marketers. The company was founded in 1999 and is headquartered in Irvine, California. Viant Inc. operates as a subsidiary of American Lifecare Holdings Inc."
+    },
+    "ESS": {
+        "ticker": "ESS",
+        "name": "Essex Property Trust, Inc.",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 17396275200,
+        "currency": "USD",
+        "description": "Essex Property Trust, Inc., an S&P 500 company, is a fully integrated real estate investment trust that acquires, develops, redevelops, and manages multifamily residential properties in selected West Coast markets. Essex currently has ownership interests in 257 apartment communities comprising over 62,000 apartment homes with an additional property in active development."
+    },
+    "VLO": {
+        "ticker": "VLO",
+        "name": "Valero Energy Corporation",
+        "meta": "Oil & Gas Refining & Marketing",
+        "type": "EQUITY",
+        "mcap": 56361541632,
+        "currency": "USD",
+        "description": "Valero Energy Corporation manufactures, markets, and sells petroleum-based and low-carbon liquid transportation fuels and petrochemical products in the United States, Canada, the United Kingdom, Ireland, Latin America, Mexico, Peru, and internationally. It operates through three segments: Refining, Renewable Diesel, and Ethanol. The company produces California Reformulated Gasoline Blendstock for Oxygenate Blending (CARBOB) and Conventional Blendstock for Oxygenate Blending (CBOB) gasolines, CARB diesel, diesel, jet fuel, heating oil, and asphalt; feedstocks; aromatics; sulfur and residual fuel oil; intermediate oils; and sulfur, sweet, and sour crude oils. It sells its refined products through wholesale rack and bulk markets; and through outlets under the Valero, Beacon, Diamond Shamrock, Shamrock, Ultramar, and Texaco brands. The company owns and operates renewable diesel and ethanol plants, as well as produces and sells renewable diesel, renewable naphtha, and neat sustainable aviation fuel under the Diamond Green Diesel brand name. In addition, it offers ethanol and various co-products, including dry distiller grains, syrup, and inedible distillers corn oil to animal feed customers. The company was formerly known as Valero Refining and Marketing Company and changed its name to Valero Energy Corporation in August 1997. Valero Energy Corporation was founded in 1980 and is headquartered in San Antonio, Texas."
+    },
+    "ERX": {
+        "ticker": "ERX",
+        "name": "Direxion Energy Bull 2X Shares",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index is provided by S&P Dow Jones Indices and includes domestic companies from the energy sector which includes the following industries: oil, gas and consumable fuels; and energy equipment and services. The fund invests at least 80% of its net assets in financial instruments, such as swap agreements, securities of the index, and ETFs that track the index, that, in combination, provide 2X daily leveraged exposure to the index, consistent with the fund's investment objective. It is non-diversified."
+    },
+    "CSA": {
+        "ticker": "CSA",
+        "name": "VictoryShares US Small Cap Vola",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund seeks to achieve its investment objective by investing, under normal market conditions, at least 80% of its assets directly or indirectly in the securities included in the Nasdaq Victory U.S. Small Cap 500 Volatility Weighted Index, an unmanaged, volatility weighted index maintained exclusively by the index provider. The index combines fundamental criteria with individual security risk control achieved through volatility weighting of individual securities."
+    },
+    "FRO": {
+        "ticker": "FRO",
+        "name": "Frontline Plc",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 6362562560,
+        "currency": "USD",
+        "description": "Frontline plc, a shipping company, engages in the ownership and operation of oil and product tankers worldwide. The company owns and operates oil and product tankers, such as very large crude carriers (VLCCs), Suezmax tankers, and LR2/Aframax tankers. As of December 31, 2024, it operated a fleet of 81 vessels, including 41 VLCCs, 22 Suezmax tankers, and 18 LR2/Aframax tankers. The company is also involved in the charter, purchase, and sale of vessels. Frontline plc was founded in 1985 and is based in Limassol, Cyprus."
+    },
+    "HRL": {
+        "ticker": "HRL",
+        "name": "Hormel Foods Corporation",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 13538140160,
+        "currency": "USD",
+        "description": "Hormel Foods Corporation develops, processes, and distributes various meat, nuts, and other food products to foodservice, convenience store, and commercial customers in the United States and internationally. It operates through three segments: Retail, Foodservice, and International segments. The company provides various perishable products, including resh meats, frozen items, refrigerated meal solutions, bacon, sausages, hams, guacamole, and other items that require refrigeration; and shelf-stable products, such as canned luncheon meats, nut butters, snack nuts, chili, shelf-stable microwaveable meals, hash, stews, tortillas, salsas, tortilla chips, and other items that do not require refrigeration. It sells its products under the HORMEL, ALWAYS TENDER, APPLEGATE, AUSTIN BLUES, BACON 1, BLACK LABEL, BREAD READY, BURKE, CAF\u00c9 H, CERATTI, CHI-CHI'S, COLUMBUS, COMPLEATS, CORN NUTS, CURE 81, DAN'S PRIZE, DI LUSSO, DINTY MOORE, DON MIGUEL, DO\u00d1A MARIA, EMBASA, FAST \u0091N EASY, FIRE BRAISED, FONTANINI, HERDEZ, HORMEL GATHERINGS, HOUSE OF TSANG, JENNIE-O, JUSTIN'S, LA VICTORIA, LAYOUT, LLOYD'S, MARY KITCHEN, MR. PEANUT, NATURAL CHOICE, NUT-RITION, OLD SMOKEHOUSE, OVEN READY, PILLOW PACK, PLANTERS, ROSA GRANDE, SADLER'S SMOKEHOUSE, SKIPPY, SPAM, SQUARE TABLE, SPECIAL RECIPE, VALLEY FRESH, and WHOLLY brands through sales personnel, independent brokers, and distributors. The company was formerly known as Geo. A. Hormel & Company and changed its name to Hormel Foods Corporation in January 1995. Hormel Foods Corporation was founded in 1891 and is headquartered in Austin, Minnesota."
     }
 }
