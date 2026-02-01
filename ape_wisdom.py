@@ -31,10 +31,9 @@ MIN_PRICE = 1.00
 MIN_AVG_VOLUME = 100000
 AVG_VOLUME_DAYS = 30
 NAME_MAX_WIDTH = 50
-
+TICKER_FIXES = {}
 REQUEST_DELAY_MIN = 1.5
 REQUEST_DELAY_MAX = 3.0
-TICKER_FIXES = {'FISV': 'FI'}
 PERMANENT_BLACKLIST = ['JW', 'RE', 'OCX', 'BABY', 'ELY',
                        'SNP', 'SLAM', 'OG', 'DTC', 'CO',
                        'CBD', 'GAN', 'AUD', 'TTM', 'FRMI',
@@ -118,7 +117,7 @@ class HistoryTracker:
         
         # 2. Build History String (Tooltip)
         recent_ranks = []
-        for d in dates[-3:]:
+        for d in dates[-6:]: #DAYS OF RANK+ HISTORY#
             val = self.data[ticker][d].get('rank_plus', 0)
             recent_ranks.append(f"{'+' if val > 0 else ''}{val}")
         recent_ranks.append(f"{'+' if current_rank_plus > 0 else ''}{current_rank_plus}")
@@ -585,7 +584,7 @@ def export_interactive_html(df, ai_summary=""):
             # Name
             raw_desc = str(row.get('Desc', 'No description available.'))
             desc_text = raw_desc.replace('"', '&quot;').replace("'", "&apos;")
-            export_df.at[index, 'Name'] = f'<span title="{desc_text}" style="cursor:help; border-bottom:1px dotted #555;"><b>{row.get("Name","")}</b></span>'
+            export_df.at[index, 'Name'] = f'<span title="{desc_text}" style="cursor:help; border-bottom:none;"><b>{row.get("Name","")}</b></span>'
 
             # Rank+
             r_val = row.get('Rank+', 0)
