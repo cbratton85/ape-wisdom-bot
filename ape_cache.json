@@ -11439,5 +11439,59 @@
         "mcap": 0,
         "currency": "USD",
         "description": "Under normal circumstances, at least 80% of the fund's total assets (exclusive of collateral held from securities lending) will be invested in the component securities of the index or in depositary receipts representing such component securities. The index is designed to track the performance of a portfolio of approximately 100 equity securities in emerging market countries."
+    },
+    "IYW": {
+        "ticker": "IYW",
+        "name": "iShares U.S. Technology ETF",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 4096340480,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index. The underlying index measures the performance of the technology sector of the U.S. equity market, as defined by FTSE Russell. The fund is non-diversified."
+    },
+    "SBLK": {
+        "ticker": "SBLK",
+        "name": "Star Bulk Carriers Corp.",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 2623471616,
+        "currency": "USD",
+        "description": "Star Bulk Carriers Corp., a shipping company, engages in the ocean transportation of dry bulk cargoes through the ownership and operation of dry bulk carrier vessels worldwide. Its vessels transport a range of bulk commodities, including iron ores, minerals and grains, bauxite, fertilizers, and steel products. As of December 31, 2024, the company owned a fleet of 151 dry bulk vessels with a combined carrying capacity of 14.6 million deadweight tonnage (dwt) consisting of Newcastlemax, Capesize, Post Panamax, Kamsarmax, Panamax, Ultramax, and Supramax vessels with carrying capacities between 53,489 deadweight tonnage and 209,537 deadweight tonnage. Star Bulk Carriers Corp. was incorporated in 2006 and is based in Marousi, Greece."
+    },
+    "DIVO": {
+        "ticker": "DIVO",
+        "name": "Amplify CWP Enhanced Dividend I",
+        "meta": "Derivative Income",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Under normal circumstances, the fund invests at least 80% of its net assets in dividend-paying U.S. exchange-traded equity securities (\"Equity Securities\") and will opportunistically utilize an \"option strategy\" consisting of writing (selling) U.S. exchange-traded covered call options on such Equity Securities. The fund is non-diversified."
+    },
+    "GPCR": {
+        "ticker": "GPCR",
+        "name": "Structure Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 6248034816,
+        "currency": "USD",
+        "description": "Structure Therapeutics Inc., a clinical stage global biopharmaceutical company, develops and delivers novel oral small molecule therapeutics to treat various chronic diseases with unmet medical needs in the United States. Its lead product candidate is GSBR-1290, an oral and biased small molecule agonist of glucagon-like-peptide-1 receptor, which is in two phase 2 clinical trials for the treatment of obesity, overweight, and related conditions. The company also develops ACCG-2671, which is in preclinical trial to treat obesity; ANPA-0073, an oral small molecule agonist targeting the apelin, which is phase 2 ready for selective weight loss or muscle-sparing weight loss; and LTSE-2578, an antagonist that targets lysophosphatidic acid 1 receptor, a G-protein coupled receptors implicated in responses to tissue injury and pro-fibrotic processes, for the treatment of idiopathic pulmonary fibrosis. In addition, it develops programs, including glucose-dependent insulinotropic polypeptide receptor (GIPR) program, which identified multiple GIPR agonist, dual GLP-1R/GIPR agonist, and GIPR antagonist hits for small molecule GIPR modulation that has the potential to provide a treatment in obesity; and GCG program, which identified multiple GCG receptor (GCGR) agonist and dual GLP-1R/GCGR agonist hits for small molecule GCGR modulation. The company was formerly known as ShouTi Inc. Structure Therapeutics Inc. was incorporated in 2016 and is headquartered in South San Francisco, California."
+    },
+    "VRIG": {
+        "ticker": "VRIG",
+        "name": "Invesco Variable Rate Investmen",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its net assets (plus any borrowings for investment purposes) in a portfolio of investment-grade, variable rate or floating rate debt securities. At least 80% of its net assets (plus any borrowings for investment purposes) will be invested in Variable Rate Instruments that are, at the time of purchase, investment grade (or in affiliated ETFs that invest primarily in any or all of the foregoing securities)."
+    },
+    "XPL": {
+        "ticker": "XPL",
+        "name": "Solitario Resources Corp.",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 70884856,
+        "currency": "USD",
+        "description": "Solitario Resources Corp., an exploration stage company, engages in the acquisition and exploration of precious metal, zinc, and other base metal properties in North and South America. It also explores for gold deposits. The company holds 100% interest in the Golden Crest gold project covering an area of approximately 33,000 acres of mining claims located in western South Dakota, Lawrence County; and 85% interest in the Chambara project, which consists of 12 concessions covering an area of approximately 9,661 hectares located in Peru. It also holds 100% interest in the Cat Creek project located in south-central Colorado. The company was formerly known as Solitario Zinc Corp. and changed its name to Solitario Resources Corp. in July 2023. Solitario Resources Corp. was incorporated in 1984 and is based in Wheat Ridge, Colorado."
     }
 }
