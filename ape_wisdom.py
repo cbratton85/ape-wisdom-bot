@@ -64,40 +64,69 @@ class HistoryTracker:
         return {}
 
     def save(self, df):
+        # 1. Setup Time and Cutoff for retention
         now_ts = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d %H:%M")
+        cutoff = datetime.datetime.now(datetime.UTC).replace(tzinfo=None) - datetime.timedelta(days=RETENTION_DAYS)
         
+        # 2. Configuration
+        exclude_list = [
+            'sym', 'name', 'meta', 'history', 'desc', 'type', 'avgvol', 'mcap', 'rolling',
+            'z_rank_plus', 'z_surge', 'z_mnt_perc', 'z_upvotes', 'z_accel', 'z_upv_plus', 
+            'z_ment', 'z_squeeze', 'master_score', 'type_tag', 'industry/sector'
+        ] 
+
+        no_round_list = ['rank', 'rank_plus', 'ment', 'upvotes', 'upv_plus', 'streak']
+
+        precision_map = {
+            'price': 2, 'surge': 0, 'mnt_perc': 0, 'squeeze': 0, 
+            'conv': 1, 'eff': 1, 'accel': 0, 'velocity': 0, 'heat': 1
+        }
+
+        # 3. Main Loop: Process each row in the DataFrame
         for _, row in df.iterrows():
             ticker = row['Sym']
             if ticker not in self.data:
                 self.data[ticker] = {}
-            
-            self.data[ticker][now_ts] = {
-                "rank": int(row.get('Rank', 0)),
-                "rank_plus": int(row.get('Rank+', 0)),
-                "price": float(row.get('Price', 0)),
-                "mnt_perc": float(row.get('Mnt%', 0)),
-                "upvotes": int(row.get('Upvotes', 0)),
-                "conv": float(row.get('Conv', 0))
-            }
-            
-        # Clean up old data
-        cutoff = datetime.datetime.now(datetime.UTC).replace(tzinfo=None) - datetime.timedelta(days=RETENTION_DAYS)
+
+            entry = {}
+            for col, val in row.items():
+                # Create standardized column name
+                col_clean = col.lower().replace('%', '_perc').replace('+', '_plus')
+                
+                # Filter exclusions
+                if col_clean in exclude_list:
+                    continue
+
+                # Assignment and Rounding logic
+                if col_clean in no_round_list:
+                    entry[col_clean] = val
+                elif isinstance(val, (np.integer, int)):
+                    entry[col_clean] = int(val)
+                elif isinstance(val, (np.floating, float)):
+                    decimals = precision_map.get(col_clean, 2)
+                    entry[col_clean] = round(float(val), decimals)
+                else:
+                    entry[col_clean] = str(val)
+
+            # Save this ticker's current snapshot
+            self.data[ticker][now_ts] = entry
+
+        # 4. Cleanup old data
         new_data_cleaned = {}
-        
         for ticker, entries in self.data.items():
             valid_entries = {}
             for d, v in entries.items():
                 try:
                     dt = datetime.datetime.strptime(d, "%Y-%m-%d %H:%M")
+                    if dt > cutoff:
+                        valid_entries[d] = v
                 except ValueError:
-                    dt = datetime.datetime.strptime(d, "%Y-%m-%d") # Fallback
-                
-                if dt > cutoff:
-                    valid_entries[d] = v
+                    continue 
             
             if valid_entries:
                 new_data_cleaned[ticker] = valid_entries
         
+        # 5. Final Save to File
         self.data = new_data_cleaned
         with open(self.filepath, 'w') as f:
             json.dump(self.data, f, indent=4)
@@ -113,7 +142,24 @@ class HistoryTracker:
             }
 
         dates = sorted(self.data[ticker].keys())
-        prev_data = self.data[ticker][dates[-1]]
+
+        # If this is the first time we've ever seen this stock, 
+        # we can't calculate a delta, so return "New" defaults.
+        if len(dates) < 2:
+            return {
+                "vel": 0, "accel": 0, "upv_chg": 0, "streak": 1, 
+                "rolling_trend": 0, "history_str": "New"
+            }
+
+        # If we have at least 2 entries, it's safe to proceed
+        current_entry = self.data[ticker][dates[-1]]
+        prev_entry = self.data[ticker][dates[-2]]
+
+        prev_rank_plus = prev_entry.get('rank_plus', 0) 
+        upv_chg = int(current_upvotes - prev_entry.get('upvotes', 0))
+
+        velocity = int(current_rank_plus - prev_entry.get('rank_plus', 0))
+        upv_chg = int(current_upvotes - prev_entry.get('upvotes', 0))
         
         # 2. Build History String (Tooltip)
         recent_ranks = []
@@ -139,9 +185,19 @@ class HistoryTracker:
         upv_chg = int(current_upvotes - prev_data.get('upvotes', 0))
         
         accel = 0
-        if len(dates) >= 2:
-            prev_2_val = self.data[ticker][dates[-2]].get('rank_plus', 0)
+        # We need at least 3 historical points to calculate acceleration 
+        # (Point A to B = Velocity 1, Point B to C = Velocity 2, Vel 1 - Vel 2 = Accel)
+        if len(dates) >= 3:
+            # dates[-1] = Today
+            # dates[-2] = Yesterday (Previous Reading)
+            # dates[-3] = Day Before Yesterday (Previous Previous Reading)
+            
+            prev_2_val = self.data[ticker][dates[-3]].get('rank_plus', 0)
+            
+            # prev_rank_plus is already dates[-2] from our previous fix
             prev_vel = int(prev_rank_plus - prev_2_val)
+            
+            # Acceleration is the change in velocity
             accel = velocity - prev_vel
 
         return {
@@ -413,15 +469,27 @@ def filter_and_process(stocks):
         df['Master_Score'] = 0
         for col in cols:
             df['Master_Score'] += df[f'z_{col}'].clip(lower=0) * weights.get(col, 1.0)
-            
+        
         sq_series = df['Squeeze'].clip(lower=0).astype(float)
         log_sq = np.log1p(sq_series)
         mean_sq = log_sq.mean(); std_sq = log_sq.std(ddof=0)
         df['z_Squeeze'] = 0 if std_sq == 0 else (log_sq - mean_sq) / std_sq
 
-    tracker.save(df)
-    save_cache(local_cache)
-    return df
+        df['Heat'] = df['Master_Score']
+
+        # 2. SAVE immediately
+        tracker.save(df) 
+
+        # 3. REFILL the 0s by checking the tracker now that it has data
+        for index, row in df.iterrows():
+            m = tracker.get_metrics(row['Sym'], row['Price'], row['MENT'], row['Rank+'], row['Upvotes'])
+            df.at[index, 'Accel'] = m.get('accel', 0)
+            df.at[index, 'Upv+'] = m.get('upv_chg', 0)
+            df.at[index, 'Velocity'] = m.get('vel', 0)
+            df.at[index, 'Streak'] = m.get('streak', 1)
+            df.at[index, 'History'] = m.get('history_str', 'New')
+
+        return df
 
 def get_all_trending_stocks():
     all_results, page = [], 1
