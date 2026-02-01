@@ -10669,5 +10669,77 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund will normally invest in a portfolio of fixed income instruments of varying maturities and of any credit quality. It will normally invest at least 80% of its net assets (plus any borrowings for investment purposes) in fixed income instruments, which may be represented by certain derivative instruments, and also include exchange-traded funds (\"ETFs\") and closed-end funds (\"CEFs\") that invest substantially all of their assets in fixed income instruments (which may include ETFs and CEFs affiliated with the fund)."
+    },
+    "WINA": {
+        "ticker": "WINA",
+        "name": "Winmark Corporation",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 1605418624,
+        "currency": "USD",
+        "description": "Winmark Corporation, a resale company, operates as a franchisor for small business in the United States and Canada. It franchises retail stores concepts that buys, sells, and trades in merchandise. The company also operates middle-market equipment leasing business under the Winmark Capital name. In addition, it buys and sells used clothing and accessories geared toward the teenage and young adult market under Plato's Closet brand; and operates stores that buys and sells used and new children's clothing, toys, furniture, equipment, and accessories primarily to parents of children ages infant to 12 years under the Once Upon A Child brand. Further, the company buys, sells, and trades in used and new sporting goods, equipment, and accessories for various athletic activities that include team sports, such as baseball/softball, hockey, football, lacrosse, and soccer, as well as fitness, ski/snowboard, golf, and others under the Play It Again Sports brand; and buys and sells used women's apparel, shoes, and accessories under the Style Encore brand. Additionally, it buys, sells, trades in, and used and new musical instruments, speakers, amplifiers, music-related electronics, and related accessories under the Music Go Round brand; and operates an e-commerce platform that allows franchisees of Music Go Round, Play It Again Sports, and Style Encore brands to market and sell in-store product inventory online. The company was formerly known as Grow Biz International, Inc. and changed its name to Winmark Corporation in November 2001. Winmark Corporation was incorporated in 1988 and is headquartered in Minneapolis, Minnesota."
+    },
+    "COCO": {
+        "ticker": "COCO",
+        "name": "The Vita Coco Company, Inc.",
+        "meta": "Beverages - Non-Alcoholic",
+        "type": "EQUITY",
+        "mcap": 3038189312,
+        "currency": "USD",
+        "description": "The Vita Coco Company, Inc. develops, markets, and distributes coconut water products under the Vita Coco brand name in the United States, Canada, Europe, the Middle East, Africa, and the Asia Pacific. It offers coconut oil, coconut juice, and coconut milk; packaged water under the Ever & Ever brand name; and PWR LIFT, a protein-infused fitness drink. The company also supplies private label products to retailers. It distributes its products through club, food, drug, mass, convenience, e-commerce, and foodservice channels. The company was formerly known as All Market Inc. and changed its name to The Vita Coco Company, Inc. in September 2021. The Vita Coco Company, Inc. was incorporated in 2004 and is headquartered in New York, New York."
+    },
+    "AAL": {
+        "ticker": "AAL",
+        "name": "American Airlines Group, Inc.",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 8782004224,
+        "currency": "USD",
+        "description": "American Airlines Group Inc., through its subsidiaries, operates as a network air carrier in the United States, Latin America, Atlantic, and Pacific. The company provides scheduled air transportation services for passengers and cargo through its hubs in Charlotte, Chicago, Dallas/Fort Worth, Los Angeles, Miami, New York, Philadelphia, Phoenix, and Washington, D.C., as well as through partner gateways in London, Doha, Madrid, Seattle/Tacoma, Sydney, and Tokyo. It also operates a mainline fleet of 977 aircraft. The company was formerly known as AMR Corporation and changed its name to American Airlines Group Inc. in December 2013. American Airlines Group Inc. was founded in 1926 and is headquartered in Fort Worth, Texas."
+    },
+    "FTA": {
+        "ticker": "FTA",
+        "name": "First Trust Large Cap Value Alp",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will normally invest at least 90% of its net assets (including investment borrowings) in the securities that comprise the index. The index is designed to select value stocks from the NASDAQ US 500 Large Cap Index TM (the \"base index\") that may generate positive alpha, or risk-adjusted returns, relative to traditional indices through the use of the AlphaDEX\u00ae selection methodology."
+    },
+    "MRNA": {
+        "ticker": "MRNA",
+        "name": "Moderna, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 17219631104,
+        "currency": "USD",
+        "description": "Moderna, Inc., a biotechnology company, provides messenger RNA medicines in the United States, Europe, and internationally. The company's respiratory vaccines include spikevax, mRESVIA, COVID, RSV, seasonal influenza, combination, and pandemic influenza vaccine; latent vaccines comprise cytomegalovirus, epstein-barr virus, herpes simplex virus, varicella zoster virus, and human immunodeficiency virus vaccines; enteric viruses include norovirus; public health vaccines consist of Zika, Nipah, and Mpox vaccines; and bacterial diseases vaccines, such as lyme vaccines. It also provides oncology therapeutics, such as individualized neoantigen and checkpoint adaptive immune modulation therapy; and rare disease products, including propionic and methylmalonic acidemia, glycogen storage disease type 1a, ornithine transcarbamylase deficiency, phenylketonuria, crigler-najjar syndrome type 1, and cystic fibrosis. It has strategic alliances and collaborations with AstraZeneca; Merck & Co., Inc; Vertex Pharmaceuticals Incorporated; Vertex Pharmaceuticals (Europe) Limited; Generation Bio Co.; immatics N.V.; Life Edit Therapeutics; Carisma Therapeutics, Inc.; CytomX Therapeutics; Defense Advanced Research Projects Agency; Biomedical Advanced Research and Development Authority; Institute for Life Changing Medicines; The Bill & Melinda Gates Foundation; and OpenAI. The company was formerly known as Moderna Therapeutics, Inc. and changed its name to Moderna, Inc. in August 2018. Moderna, Inc. was founded in 2010 and is headquartered in Cambridge, Massachusetts."
+    },
+    "CLOV": {
+        "ticker": "CLOV",
+        "name": "Clover Health Investments, Corp",
+        "meta": "Healthcare Plans",
+        "type": "EQUITY",
+        "mcap": 1157358848,
+        "currency": "USD",
+        "description": "Clover Health Investments, Corp. provides medicare advantage plans in the United States. The company offers preferred provider organization and health maintenance organization plans to medicare-eligible individuals. It operates Clover Assistant, a software platform to execute strategy by enabling physicians to detect, identify, and manage chronic diseases earlier than they otherwise could. The company is based in Wilmington, Delaware."
+    },
+    "BBWI": {
+        "ticker": "BBWI",
+        "name": "Bath & Body Works, Inc.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 4494888960,
+        "currency": "USD",
+        "description": "Bath & Body Works, Inc. operates as a specialty retailer of home fragrance, personal and body care, soaps, and sanitizer products. The company offers body and home fragrances, including 3-wick candles, home fragrance diffusers, fine fragrance mists, liquid hand soaps, body lotions, and body creams. It sells its products under the Bath & Body Works, White Barn, and other brand names through retail stores and e-commerce sites in the United States and Canada, as well as through international stores operated by partners under franchise, license, and wholesale arrangements. The company was formerly known as L Brands, Inc. and changed its name to Bath & Body Works, Inc. in August 2021. Bath & Body Works, Inc. was founded in 1963 and is headquartered in Columbus, Ohio."
+    },
+    "FEMB": {
+        "ticker": "FEMB",
+        "name": "First Trust Emerging Markets Lo",
+        "meta": "Emerging-Markets Local-Currency Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Under normal market conditions, the fund seeks to achieve its investment objective by investing at least 80% of its net assets (including investment borrowings) in bonds, notes and bills issued or guaranteed by entities incorporated or domiciled in emerging market countries (collectively, \"Bonds\") that are denominated in the local currency of the issuer. It is non-diversified."
     }
 }
