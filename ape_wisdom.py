@@ -617,10 +617,11 @@ def export_interactive_html(df, ai_summary=""):
             if r_val != 0:
                 r_color = C_GREEN if r_val > 0 else C_RED
                 r_arrow = "▲" if r_val > 0 else "▼"
-
+                # Standard colored display for changes
                 export_df.at[index, 'Rank+'] = f'<span title="History: {r_hist}" style="cursor:help;">{color_span(f"{r_val} {r_arrow}", r_color)}</span>'
             else:
-                export_df.at[index, 'Rank+'] = ""
+                # FIX: Render a visible gray "0" so the tooltip still works
+                export_df.at[index, 'Rank+'] = f'<span title="History: {r_hist}" style="cursor:help; color: #888;">0</span>'
 
             # Surge & Mnt% Colors (Uses z-scores for coloring)
             z_cols = [('Srg', 'z_Surge'), ('Mnt%', 'z_Mnt%')]
