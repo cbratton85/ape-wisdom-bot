@@ -11376,5 +11376,23 @@
         "mcap": 15579494,
         "currency": "USD",
         "description": "Movano Inc., a technology company, engages in the development of a platform to deliver healthcare solutions at the intersection of medical and consumer devices. It offers Evie Ring, a wearable device for women that combines health and wellness metrics comprising resting heart rate, heart rate variability (HRV), blood oxygen saturation (SpO2), respiration rate, skin temperature variability, period and ovulation tracking, and menstrual symptom tracking, as well as activity profile, including steps, active minutes and calories burned, sleep stages and duration, and mood tracking. The company develops System-on-a-Chip (SoC) for blood pressure or continuous glucose monitoring (CGM) systems. It sells its products through its website, retail or other distribution channels, value-added resellers (VARs), as well as partnering with OEMs. The company was formerly known as Maestro Sensors Inc. and changed its name to Movano Inc. in August 2018. Movano Inc. was incorporated in 2018 and is headquartered in Pleasanton, California."
+    },
+    "FTEC": {
+        "ticker": "FTEC",
+        "name": "Fidelity MSCI Information Techn",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of assets in securities included in the fund's underlying index. The fund's underlying index is the MSCI USA IMI Information Technology 25/50 Index, which represents the performance of the information technology sector in the U.S. equity market. It may or may not hold all of the securities in the MSCI USA IMI Information Technology 25/50 Index. The fund is non-diversified."
+    },
+    "SENS": {
+        "ticker": "SENS",
+        "name": "Senseonics Holdings, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 299492512,
+        "currency": "USD",
+        "description": "Senseonics Holdings, Inc., a commercial-stage medical technology company, focuses on development and manufacturing of continuous glucose monitoring (CGM) systems for people with diabetes in the United States and internationally. The company's products include Eversense, Eversense XL, Eversense E3, and Eversense 365, which are implantable CGM systems to measure glucose levels in people with diabetes through an under-the-skin sensor, a removable and rechargeable smart transmitter, and an app for real-time diabetes monitoring and management. It serves healthcare providers and patients through a network of distributors and strategic fulfillment partners. The company was founded in 1996 and is headquartered in Germantown, Maryland."
     }
 }
