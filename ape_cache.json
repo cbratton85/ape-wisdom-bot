@@ -10849,5 +10849,50 @@
         "mcap": 192552608,
         "currency": "USD",
         "description": "Humacyte, Inc., together with its subsidiaries, engages in the development and manufacture of off-the-shelf, implantable, and bioengineered human tissues for the treatment of diseases and conditions across a range of anatomic locations in multiple therapeutic areas. The company using its proprietary and scientific technology platform to engineer and manufacture human acellular vessels (HAVs) to be implanted into patient without inducing a foreign body response or leading to immune rejection. It is developing a portfolio of HAVs, which would target the vascular repair, reconstruction, and replacement market, including vascular trauma; arteriovenous access for hemodialysis; peripheral arterial disease; pediatric heart surgery; and coronary artery bypass grafting, as well as for the delivery of cellular therapy, including pancreatic islet cell transplantation to treat Type 1 diabetes. The company was founded in 2004 and is headquartered in Durham, North Carolina."
+    },
+    "CIB": {
+        "ticker": "CIB",
+        "name": "Grupo Cibest S.A.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 21285380096,
+        "currency": "USD",
+        "description": "Grupo Cibest S.A., together with its subsidiaries, provides various banking products and services in Colombia and internationally. It offers checking and savings accounts, money market accounts, time deposits, fixed term deposits, and investment products; trade financing, loans funded by domestic development banks, working capital loans, mortgage, credit cards, personal and vehicle loans, payroll loans, and overdrafts; factoring; and financial and operating leasing services. The company also provides hedging instruments, including futures, forwards, options, and swaps; and brokerage, investment advisory, and private banking services comprising selling and distributing equities, futures, foreign currencies, fixed income securities, mutual funds, and structured products. In addition, it offers cash management services; foreign currency and trade finance solutions; letters of credit and bills collection; bancassurance and insurance products; telephone and mobile phone banking services; and ATM network, online and computer banking services. Further, the company provides project and acquisition finance, loan syndication, corporate loans, debt and equity capital markets, principal investments, mergers and acquisition, hedging strategy advisories, restructurings, and structured financing; mutual and pension funds, private equity funds, payment and corporate trust, and custody; internet-based trading platform; inter-bank lending and repurchase agreements; managing escrow accounts, and investment and real estate funds; credit cards; roadside and medical assistance services; and transportation, maintenance and remodeling, and outsourcing services, as well as provides technology services. The company was formerly known as Bancolombia S.A. and changed its name to Grupo Cibest S.A. in May 2025. The company was founded in 1875 and is headquartered in Medell\u00edn, Colombia."
+    },
+    "VALE": {
+        "ticker": "VALE",
+        "name": "VALE S.A.",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 68599291904,
+        "currency": "USD",
+        "description": "Vale S.A., together with its subsidiaries, produces iron ore and nickel in Asia, the Americas, Europe, and internationally. It operates through Iron Solutions and Energy Transition Materials segments. The company extracts and produces iron ore, iron ore pellets, briquettes, and other ferrous products; provides logistic related services; and operates mining complexes, railways, maritime terminals, and ports. It also produces nickel, copper, and cobalt, as well as by-products, such as gold, silver, platinum group metals, and other precious metals. In addition, the company engages in greenfield mineral exploration; invests in energy businesses through renewable sources; and operates pelletizing plants and distribution centers to support the delivery of iron ore. The company was formerly known as Companhia Vale do Rio Doce and changed its name to Vale S.A. in May 2009. Vale S.A. was founded in 1942 and is headquartered in Rio De Janeiro, Brazil."
+    },
+    "FNF": {
+        "ticker": "FNF",
+        "name": "Fidelity National Financial, In",
+        "meta": "Insurance - Specialty",
+        "type": "EQUITY",
+        "mcap": 14758004736,
+        "currency": "USD",
+        "description": "Fidelity National Financial, Inc., together with its subsidiaries, provides various insurance products in the United States. The company operates through Title, F&G, and Corporate and Other segments. It offers title insurance, escrow, and other title related services, including trust activities, trustee sales guarantees, recordings and reconveyances, and home warranty products. The company also provides technology and transaction services to the real estate and mortgage industries; and mortgage transaction services, including title-related services and facilitation of production and management of mortgage loans. In addition, it offers annuity and life insurance products, such as deferred and immediate annuities, as well as indexed universal life insurance products; and funding agreements and pension risk transfer (PRT) solutions. Further, the company engages in the real estate brokerage business. Fidelity National Financial, Inc. was incorporated in 2005 and is headquartered in Jacksonville, Florida."
+    },
+    "DGNX": {
+        "ticker": "DGNX",
+        "name": "Diginex Limited",
+        "meta": "Consulting Services",
+        "type": "EQUITY",
+        "mcap": 223305920,
+        "currency": "USD",
+        "description": "Diginex Limited, an investment holding company, engages in the provision of environmental, social, and governance (ESG) reporting solution services, advisory, and developing customization solutions in Hong Kong, the United Kingdom, and the United States. Its suite of products include diginexESG, a cloud based ESG platform that offers end to end reporting from topic discovery, data collection, and collaborative report publishing services; diginexLUMEN that allows companies to execute supply chain risk assessments, and monitoring; diginexAPPRISE, a multilingual application that collects standardized and actionable data related to working conditions directly from workers in supply chains; diginexCLIMATE, a carbon footprint calculator based on the GHG protocols; diginexADVISORY that provides clients strategy and advisory support for credible reporting; and diginexPARTNERS that develops white label versions of diginexESG and diginexLUMEN. The company has a strategic alliance with Sustainability RegTech solutions to deliver technology-driven solutions for sustainable finance, empowering organizations to navigate the evolving landscape of environmental, social, and governance (ESG) requirements. The company has a strategic alliance with EVIDENT Group to enable Diginex's advanced sustainability data capabilities to be embedded directly within EVIDENT's platform for asset managers and investment partner community, addressing the escalating need for verifiable ESG metrics in the rapidly expanding sector of tokenized real-world assets. Diginex Limited was founded in 2020 and is headquartered in London, United Kingdom."
+    },
+    "GTE": {
+        "ticker": "GTE",
+        "name": "Gran Tierra Energy Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 191655920,
+        "currency": "USD",
+        "description": "Gran Tierra Energy Inc., together with its subsidiaries, engages in the exploration and production of oil and gas properties in Colombia, Canada, and Ecuador. The company was founded in 2003 and is headquartered in Calgary, Canada."
     }
 }
