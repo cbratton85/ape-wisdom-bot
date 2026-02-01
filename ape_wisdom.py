@@ -104,54 +104,52 @@ class HistoryTracker:
             json.dump(self.data, f, indent=4)
 
     def get_metrics(self, ticker, current_price, current_mnt, current_rank_plus, current_upvotes):
-        # 1. Handle case with no history
+        # 1. Handle case with NO history
         if ticker not in self.data or not self.data[ticker]:
-            # If we have no history, the current run IS the streak
             streak = 1 if current_rank_plus > 0 else (-1 if current_rank_plus < 0 else 0)
-            return {"vel": 0, "accel": 0, "upv_chg": 0, "div": False, "streak": 1, "rolling_trend": streak}
+            return {
+                "vel": 0, "accel": 0, "upv_chg": 0, "div": False, 
+                "streak": 1, "rolling_trend": streak, 
+                "history_str": "New"
+            }
 
         dates = sorted(self.data[ticker].keys())
-        # "prev_data" is the last SAVED snapshot (Run -1)
         prev_data = self.data[ticker][dates[-1]]
         
-        # --- 1. CALCULATE LIVE STREAK ---
-        # First, calculate streak from history
+        # 2. Build History String (Tooltip)
+        recent_ranks = []
+        for d in dates[-3:]:
+            val = self.data[ticker][d].get('rank_plus', 0)
+            recent_ranks.append(f"{'+' if val > 0 else ''}{val}")
+        recent_ranks.append(f"{'+' if current_rank_plus > 0 else ''}{current_rank_plus}")
+        history_str = " → ".join(recent_ranks)
+
+        # 3. Calculate Streak
         rolling_trend = 0
         for d in dates:
             r_plus = self.data[ticker][d].get('rank_plus', 0)
-            if r_plus > 0:
-                rolling_trend = rolling_trend + 1 if rolling_trend >= 0 else 1
-            elif r_plus < 0:
-                rolling_trend = rolling_trend - 1 if rolling_trend <= 0 else -1
-            else:
-                rolling_trend = 0
+            if r_plus > 0: rolling_trend = rolling_trend + 1 if rolling_trend >= 0 else 1
+            elif r_plus < 0: rolling_trend = rolling_trend - 1 if rolling_trend <= 0 else -1
         
-        # Now, apply the CURRENT (Live) Rank+ to that streak
-        # This fixes the "Streak +4 but Rank -12" issue
-        if current_rank_plus > 0:
-            rolling_trend = rolling_trend + 1 if rolling_trend >= 0 else 1
-        elif current_rank_plus < 0:
-            rolling_trend = rolling_trend - 1 if rolling_trend <= 0 else -1
-        else:
-            rolling_trend = 0
+        if current_rank_plus > 0: rolling_trend = rolling_trend + 1 if rolling_trend >= 0 else 1
+        elif current_rank_plus < 0: rolling_trend = rolling_trend - 1 if rolling_trend <= 0 else -1
 
-        # --- 2. CALCULATE LIVE VELOCITY & ACCEL ---
-        # Velocity = (Live Rank+) - (Last Run Rank+)
+        # 4. Velocity & Accel
         prev_rank_plus = prev_data.get('rank_plus', 0)
         velocity = int(current_rank_plus - prev_rank_plus)
+        upv_chg = int(current_upvotes - prev_data.get('upvotes', 0))
         
-        # Upvote Change = (Live Upvotes) - (Last Run Upvotes)
-        prev_upvotes = prev_data.get('upvotes', 0)
-        upv_chg = int(current_upvotes - prev_upvotes)
-        
-        # Acceleration = (Current Velocity) - (Previous Velocity)
         accel = 0
         if len(dates) >= 2:
-            prev_2_data = self.data[ticker][dates[-2]]
-            prev_vel = int(prev_rank_plus - prev_2_data.get('rank_plus', 0))
+            prev_2_val = self.data[ticker][dates[-2]].get('rank_plus', 0)
+            prev_vel = int(prev_rank_plus - prev_2_val)
             accel = velocity - prev_vel
 
-        return {"vel": velocity, "accel": accel, "upv_chg": upv_chg, "div": False, "streak": len(dates) + 1, "rolling_trend": rolling_trend}
+        return {
+            "vel": velocity, "accel": accel, "upv_chg": upv_chg, 
+            "div": False, "streak": len(dates) + 1, 
+            "rolling_trend": rolling_trend, "history_str": history_str
+        }
 
 def load_cache():
     if os.path.exists(CACHE_FILE):
@@ -312,29 +310,29 @@ def filter_and_process(stocks):
         t = TICKER_FIXES.get(stock['ticker'], stock['ticker'].replace('.', '-'))
         
         # --- BLACKLIST CHECK AGAIN ---
-        if t in PERMANENT_BLACKLIST: continue
+        if t in PERMANENT_BLACKLIST: 
+            continue
         
+        # --- 2. MARKET DATA CHECK ---
+        # --- 2. MARKET DATA CHECK ---
         try:
+            # Check if ticker exists in market_data
             if isinstance(market_data.columns, pd.MultiIndex):
                 if t not in market_data.columns.levels[0]:
-                    if not use_cache:
-                        if t not in local_cache or not local_cache[t].get('delisted'):
-                            print(f"{C_RED}[-] Adding {t} to penalty box (No market data found){C_RESET}")
-                            local_cache[t] = {
-                                'delisted': True, 
-                                'last_checked': now.strftime("%Y-%m-%d"),
-                                'reason': 'Market Data 404'
-                            }
                     continue
                 hist = market_data[t].dropna()
             else:
-                hist = market_data.dropna()
+                if t not in market_data.columns:
+                    continue
+                hist = market_data[t].dropna()
 
             if hist.empty:
                 continue
 
             curr_p = hist['Close'].iloc[-1]
-            avg_v = hist['Volume'].tail(AVG_VOLUME_DAYS).mean()
+            # Ensure we have enough data for volume average
+            actual_vol_days = min(len(hist), AVG_VOLUME_DAYS)
+            avg_v = hist['Volume'].tail(actual_vol_days).mean()
             
             if curr_p < MIN_PRICE or avg_v < MIN_AVG_VOLUME: continue
 
@@ -371,8 +369,10 @@ def filter_and_process(stocks):
 
             final_list.append({
                 "Rank": rank_now,
-                "Name": name, "Sym": t,
+                "Name": name, 
+                "Sym": t,
                 "Rank+": rank_plus,
+                "History": m.get('history_str', 'New'), # Use .get() to prevent crashes
                 "Price": float(curr_p),
                 "AvgVol": int(avg_v),
                 "Surge": s_perc,
@@ -383,13 +383,14 @@ def filter_and_process(stocks):
                 "Meta": info.get('meta', '-'),
                 "Desc": info.get('description', ''),
                 "Squeeze": squeeze_score,
-                "MCap": mcap, "Conv": conviction, "Eff": efficiency,
+                "MCap": mcap, 
+                "Conv": conviction, 
+                "Eff": efficiency,
                 "Accel": m['accel'],
                 "Upv+": m['upv_chg'],
                 "Velocity": m['vel'],
                 "Streak": m['streak'],
                 "Rolling": m['rolling_trend']
-                
             })
             
         except Exception as e:
@@ -588,10 +589,13 @@ def export_interactive_html(df, ai_summary=""):
 
             # Rank+
             r_val = row.get('Rank+', 0)
+            r_hist = row.get('History', 'No history')
+            
             if r_val != 0:
                 r_color = C_GREEN if r_val > 0 else C_RED
                 r_arrow = "▲" if r_val > 0 else "▼"
-                export_df.at[index, 'Rank+'] = color_span(f"{r_val} {r_arrow}", r_color)
+
+                export_df.at[index, 'Rank+'] = f'<span title="History: {r_hist}" style="cursor:help;">{color_span(f"{r_val} {r_arrow}", r_color)}</span>'
             else:
                 export_df.at[index, 'Rank+'] = ""
 
@@ -1563,7 +1567,7 @@ if __name__ == "__main__":
                     f.write(str(time.time()))
 
     if df.empty:
-        print(f"{C_RED}[!] No data available to generate HTML.{C_RESET}")
+        print(f"{C_RED}[!] Table is empty. Check filters or API connection.{C_RESET}")
         sys.exit(0)
 
     # 3. GENERATE HTML (Runs every time, using either new or saved data)
