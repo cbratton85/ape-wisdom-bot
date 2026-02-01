@@ -41,7 +41,7 @@ PERMANENT_BLACKLIST = ['JW', 'RE', 'OCX', 'BABY', 'ELY',
                        'ERJ', 'DS', 'ABB', 'SAVE', 'HEAR',
                        'FI', 'TGIF', 'CHAD', 'QED', 'WFH',
                        'CN', 'SQ', 'FM', 'MOM', 'BOSS', 'SLT',
-                       '', '', '', '', '', '', '', '', '', '', '', ''
+                       'CSA', '', '', '', '', '', '', '', '', '', '', ''
                        ]
 
 # ANSI COLORS
@@ -798,8 +798,8 @@ def export_interactive_html(df, ai_summary=""):
 
             /* NAME COLUMN (Fixed Width + Truncate) */
             th:nth-child(4), td:nth-child(4) {{
-                min-width: 260px;
-                max-width: 260px;
+                min-width: 228px;
+                max-width: 228px;
                 overflow: hidden; 
                 text-overflow: ellipsis;
             }} 
