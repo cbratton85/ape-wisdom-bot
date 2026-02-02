@@ -12101,5 +12101,23 @@
         "mcap": 2460897280,
         "currency": "USD",
         "description": "eToro Group Ltd. engages in the trading business. Its multi-asset platform supports trading and investing in equities, crypto assets, commodities, currencies, and options, which can be traded either as assets or as derivatives related to various underlying asset types. The company also operates eToro Club, a membership program providing a range of services and tools to enhance a user's investment experience; eToro Academy, an education hub to improve users' understanding of financial markets; and eToro Money, a money management solution that enables users to make deposits and withdrawals, as well as to trade local stocks in local currencies. In addition, it provides various investment tools and services, including charting and analysis tools and extended-hours trading. The company was incorporated in 2006 and is based in Bnei Brak, Israel."
+    },
+    "EH": {
+        "ticker": "EH",
+        "name": "EHang Holdings Limited",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 919246656,
+        "currency": "USD",
+        "description": "EHang Holdings Limited operates as an urban air mobility (UAM) technology platform company in the People's Republic of China, East Asia, West Asia, North America, South America, West Africa, and Europe. It designs, develops, manufactures, sells, and operates UAVs, as well as supporting systems and infrastructure for various industries and applications, including passenger transportation, logistics, smart city management, and aerial media solutions. The company's product portfolio includes EH216 series, the VT series, the Falcon B, and the GD series. It also offers airborne operating systems, including autopilot and flight control, communication, battery management system, and safety management systems; and command-and-control system. In addition, the company has built a digital UAM operational platform architecture and visualized flight operation module for managing the EH216-S flight schedule, ground crew, vertiports and landing pads, and other factors for the entire front-line UAM operational process. Further, it offers vertiports for eVTOL aircraft operations and mobility efficiency; and charging piles for eVTOL aircraft. Additionally, the company provides air mobility solutions; smart city management, which centralizes and coordinates a range of UAV applications; and aerial media solutions for drone light shows. EHang Holdings Limited was incorporated in 2014 and is headquartered in Guangzhou, the People's Republic of China."
+    },
+    "PDD": {
+        "ticker": "PDD",
+        "name": "PDD Holdings Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 143455272960,
+        "currency": "USD",
+        "description": "PDD Holdings Inc., a multinational commerce group that owns and operates a portfolio of businesses. It operates Pinduoduo platform which provides various product categories, including agricultural produce, apparel, shoes, bags, mother and childcare products, food and beverages, consumer electronics, electronic appliances, furniture and household goods, cosmetics and other personal care items, sports and fitness, and auto accessories; and Temu, an online platform, which enables merchants to streamline their manufacturing and commercial operations. The company was formerly known as Pinduoduo Inc. and changed its name to PDD Holdings Inc. in February 2023. PDD Holdings Inc. was incorporated in 2015 and is based in Dublin, Ireland."
     }
 }
