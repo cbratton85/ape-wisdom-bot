@@ -11957,5 +11957,95 @@
         "mcap": 2129251328,
         "currency": "USD",
         "description": "Bausch Health Companies Inc. operates as a diversified specialty pharmaceutical and medical device company, develops, manufactures, and markets a range of products primarily in gastroenterology, hepatology, neurology, dermatology, generic pharmaceuticals, over-the-counter (OTC) products, aesthetic medical devices, and eye health in the United States and internationally. The company operates through five segments: Salix, International, Solta Medical, Diversified, and Bausch + Lomb. The Salix segment provides gastroenterology products. The International segment sells aesthetic medical devices, branded pharmaceuticals, generic pharmaceuticals, and OTC products. The Solta Medical segment engages in the sale of aesthetic medical devices. The Diversified segment offers pharmaceutical products in the areas of neurology and certain other therapeutic classes; dermatology products; generic pharmaceutical products; and dentistry products. The Bausch + Lomb segment offers products in the areas of vision care, surgical, and ophthalmic pharmaceuticals products. The company was formerly known as Valeant Pharmaceuticals International, Inc. and changed its name to Bausch Health Companies Inc. in July 2018. Bausch Health Companies Inc. is headquartered in Laval, Canada."
+    },
+    "PI": {
+        "ticker": "PI",
+        "name": "Impinj, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 4158071296,
+        "currency": "USD",
+        "description": "Impinj, Inc. operates a cloud connectivity platform in the Americas, the Asia Pacific, Europe, the Middle East, and Africa. Its platform wirelessly connects items and delivers data about the connected items to business and consumer applications. The company's platform comprises endpoint ICs, a miniature radios-on-a-chip that attaches to a host item and includes a number to identify the item. Its platform also consists of systems products that consists of reader ICs, readers, and gateways to wirelessly provide power to and communicate bidirectionally with endpoint ICs on host items, as well as to read, write, authenticate, and engage the endpoint ICs on those items; and software and algorithms that enable its partners to solve enterprise business problems, such as retail self-checkout and loss prevention. The company primarily serves retail, supply chain and logistics, automotive, aviation, banking, datacenters, food, healthcare, industrial and manufacturing, linen and uniform tracking, sports, and travel industries through original equipment and device manufacturers, tag service bureaus, systems integrators, value-added resellers, independent software vendors, and other solution partners. Impinj, Inc. was incorporated in 2000 and is headquartered in Seattle, Washington."
+    },
+    "BFRI": {
+        "ticker": "BFRI",
+        "name": "Biofrontera Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 10836435,
+        "currency": "USD",
+        "description": "Biofrontera Inc., a biopharmaceutical company, engages in the commercialization of pharmaceutical products for the treatment of dermatological conditions in the United States. The company's products are used for the treatment of actinic keratoses, which are pre-cancerous skin lesions, as well as impetigo, a common skin infection. It offers Ameluz, a prescription drug for use in combination with the RhodoLED lamp series, for photodynamic therapy for the lesion-directed and field-directed treatment of actinic keratosis of mild-to-moderate severity on the face and scalp. The company also provides Xepi, a topical non-fluorinated quinolone that inhibits bacterial growth for the treatment of impetigo. The company was incorporated in 2015 and is headquartered in Woburn, Massachusetts."
+    },
+    "VXX": {
+        "ticker": "VXX",
+        "name": "iPath Series B S&P 500 VIX Shor",
+        "meta": "Trading--Miscellaneous",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The ETN offers exposure to futures contracts of specified maturities on the VIX index and not direct exposure to the VIX index or its spot level. The index is designed to provide investors with exposure to one or more maturities of futures contracts on the CBOE Volatility Index\u00ae."
+    },
+    "EMXC": {
+        "ticker": "EMXC",
+        "name": "iShares MSCI Emerging Markets e",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of the index and in investments that have economic characteristics that are substantially identical to the component securities of its index. The index is a free float-adjusted market capitalization-weighted index that captures large- and mid-capitalization stocks across 23 of the 24 Emerging Markets countries, excluding China. The fund is non-diversified."
+    },
+    "LH": {
+        "ticker": "LH",
+        "name": "Labcorp Holdings Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 22563311616,
+        "currency": "USD",
+        "description": "Labcorp Holdings Inc. provides laboratory services. It operates through two segments, Diagnostics Laboratories and Biopharma Laboratory Services. The company offers various tests, such as blood chemistry analyses, urinalyses, blood cell counts, thyroid, PAP, hemoglobin A1C, prostate-specific antigens, sexually transmitted diseases, hepatitis C, vitamin D, microbiology cultures and procedures, and alcohol and other substance-abuse tests. It also provides specialty testing services comprising gene-based and esoteric testing; advanced tests target specific diseases; services related to anatomic pathology/oncology, cardiovascular disease, coagulation, diagnostic genetics, endocrinology, infectious disease, women's health, pharmacogenetics, parentage and donor testing, occupational testing services, medical drug monitoring services, chronic disease programs, and kidney stone prevention tests; and health and wellness services to employers and managed care organizations (MCOs). In addition, the company offers online and mobile applications that enable patients to check offerings, schedule PSC visits, check-in upon PSC arrival, complete documentation, access tests and test results, and manage their accounts; online applications for providers, MCOs, and accountable care organizations; specimen collection services; and drug development, medical device, and companion diagnostic development solutions, as well as support for crop protection and chemical testing. It serves pharmaceutical, biotechnology, medical device, and diagnostics companies; and MCOs, employer plans, other health insurance providers, governments, physician, large provider organizations, other healthcare providers, hospitals and health systems, patients and consumers, crop protection and chemical companies, academic institutions, independent clinical laboratories, and retailers. The company was founded in 1995 and is headquartered in Burlington, North Carolina."
+    },
+    "COM": {
+        "ticker": "COM",
+        "name": "Direxion Auspice Broad Commodit",
+        "meta": "Commodities Broad Basket",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index is a rules-based index that attempts to capture upward trends in the commodity markets while minimizing risk during downtrends by tracking a portfolio of commodity futures contracts. The index uses a quantitative methodology to track a diversified portfolio of 12 different commodity futures contracts, or \u201ccomponents.\u201d The fund generally will not invest directly in the 12 commodity futures contracts that comprise the index. The fund is non-diversified."
+    },
+    "AZTR": {
+        "ticker": "AZTR",
+        "name": "Azitra Inc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2625026,
+        "currency": "USD",
+        "description": "Azitra, Inc., an early-stage clinical biopharmaceutical company, develops therapies for precision dermatology using engineered proteins and live biotherapeutic products to treat skin diseases. It develops ATR-12, a genetically modified strain of S. epidermidis, which is in Phase Ib clinical trial for treating Netherton syndrome, a skin disease. The company also develops ATR-04, a genetically modified strain of S. epidermidis that is in Phase 1/2 clinical trial for treating the papulopustular rash experienced by cancer patients undergoing epidermal growth factor receptor inhibitor; and ATR-01, an engineered recombinant human filaggrin protein for treating ichthyosis vulgaris, a skin disease. It has a collaboration with Bayer. The company was incorporated in 2014 and is based in Branford, Connecticut."
+    },
+    "CORN": {
+        "ticker": "CORN",
+        "name": "Teucrium Corn Fund ETV",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The Benchmark is a weighted average of the closing settlement prices for three futures contracts for corn that are traded on the Chicago Board of Trade. Under normal market conditions, it is expected that 100% of the fund\u2019s assets will be invested in benchmark component futures contracts and in cash and cash equivalents. The fund seeks to achieve its investment objective by investing in benchmark component futures contracts."
+    },
+    "VPG": {
+        "ticker": "VPG",
+        "name": "Vishay Precision Group, Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 665016576,
+        "currency": "USD",
+        "description": "Vishay Precision Group, Inc. engages in the precision measurement and sensing technologies business in the United States, Europe, Israel, Asia, and Canada. It operates through three segments: Sensors, Weighing Solutions, and Measurement Systems. Its product portfolio includes precision resistors, strain gages, load cells and force measurement transducers, on-board weighing systems, and control process weighing products; rolling force measuring load cell systems and pressure transmitters; web tension measurement load cells and systems; optical strip width gages; and laser velocimeters for speed and length measurements and closed-loop crop optimization control systems for optimal strip cuts. The company also offers data acquisition systems and sensors for product safety testing; thermal-mechanical simulation systems for metallurgical research; and conditioning, data acquisition, and control systems, as well as electronic displays, signal processors, microelectromechanical system sensors, cabling, system software, and communications software/hardware. Its products are used in waste management, bulk hauling, logging, scales manufacturing, engineering systems, pharmaceutical, oil, chemical, steel, paper, and food industries, as well as test and measurement, steel, medical, construction, agricultural, and consumer markets. The company offers its products under the Alpha Electronics, Powertron, Vishay Foil Resistors, Micro-Measurements, APR, Celtron, Revere, Sensortronics, Tedea-Huntleigh, Stress-tek, Vulcan, BLH Nobel, KELK, and DTS brands. Vishay Precision Group, Inc. was incorporated in 2009 and is headquartered in Malvern, Pennsylvania."
+    },
+    "MYNZ": {
+        "ticker": "MYNZ",
+        "name": "Mainz Biomed N.V.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 10781569,
+        "currency": "USD",
+        "description": "Mainz Biomed N.V. develops and sells in-vitro diagnostic (IVD) tests for the early detection of cancer in the United States and Europe. It offers ColoAlert, a colorectal cancer diagnostic molecular genetic stool test. The company also develops PancAlert, a stool-based screening test for the detection of pancreatic cancer. In addition, it operates a clinical diagnostic laboratory; and distributes its IVD kits to third-party laboratories. The company has a collaboration agreement with Thermo Fisher Scientific Inc. for the development and commercialization of colorectal cancer screening product. Mainz Biomed N.V. was founded in 2008 and is based in Mainz, Germany."
     }
 }
