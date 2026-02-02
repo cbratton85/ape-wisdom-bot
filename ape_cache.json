@@ -12254,5 +12254,131 @@
         "mcap": 35844075520,
         "currency": "USD",
         "description": "Arch Capital Group Ltd., together with its subsidiaries, provides insurance, reinsurance, and mortgage insurance products in the United States, Canada, Bermuda, the United Kingdom, Europe, and Australia. The Insurance segment offers commercial automobile; commercial multiperil; financial and professional line liability; admitted, excess, and surplus casualty lines; property and short-tail specialty; workers compensation; casualty; marine and aviation; excess and surplus casualty; construction and national accounts; alternative market risks and employer's liability; travel, accident, and health; contract and commercial surety coverage; and other insurance products, as well as Lloyd's syndicates; programs; and warranty and lenders solutions. Its Reinsurance segment provides reinsurance products for casualty; marine and aviation; property catastrophe; property excluding property catastrophe; and other specialty products. The Mortgage segment offers U.S. primary mortgage insurance business written predominantly on loans sold to the Federal National Mortgage Association and Federal Home Loan Mortgage Corporation; reinsurance and underwriting services related to the U.S. credit-risk transfer business and other U.S. mortgage reinsurance transactions; and international mortgage insurance and reinsurance business covering loans. It markets its products through a group of licensed independent retail and wholesale brokers. The company was formerly known as Risk Capital Holdings, Inc. Arch Capital Group Ltd. was founded in 1995 and is headquartered in Pembroke, Bermuda."
+    },
+    "TSE": {
+        "ticker": "TSE",
+        "name": "Trinseo PLC",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 15563627,
+        "currency": "USD",
+        "description": "Trinseo PLC provides specialty material solutions in the United States, Europe, the Asia-Pacific, and internationally. It operates through four segments: Engineered Materials, Latex Binders, Polymer Solutions, and Americas Styrenics. The Engineered Materials segment offers rigid thermoplastic compounds and blends, soft thermoplastic, continuous cast, cell cast, activated methyl methacrylates, polymethyl methacrylates (PMMA) resins, and extruded PMMA sheets and resins for consumer electronics, medical, footwear, automotive, and building and construction applications under the EMERGE, CALIBRE, PLEXIGLAS, ALTUGLAS, ACRYSPA, AVONITE, STUDIO, MEGOL, APILON, APIGO, and APINAT trade names. The Latex Binders segment provides various latex binder products, including styrene-butadiene latex, styrene-acrylate latex, vinylidene chloride latex, all-acrylic latex, and butadiene-methacrylate latex. The Polymer Solutions Segment offers a range of polymers, such as copolymers, polycarbonate, styrene-acrylonitrile, and acrylonitrile-butadiene-styrene under the MAGNUM brand. The Americas Styrenics segment provides styrene monomer, polystyrene, general purpose polystyrenes, high heat and impact resins, and STYRON A-TECH polystyrene products for appliances, food packaging, food service disposables, consumer electronics, and building and construction materials applications. It operates as a land development and subdivision company. The company was incorporated in 2015 and is based in Wayne, Pennsylvania."
+    },
+    "EIS": {
+        "ticker": "EIS",
+        "name": "iShares MSCI Israel ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 306892512,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of the underlying index and in investments that have economic characteristics that are substantially identical to the component securities of the underlying index. The index is a free float-adjusted market capitalization-weighted index rhat is designed to measure the performance of the large-, mid- and small-capitalization segments of the equity market in Israel. The fund is non-diversified."
+    },
+    "OPRA": {
+        "ticker": "OPRA",
+        "name": "Opera Limited",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 1306441088,
+        "currency": "USD",
+        "description": "Opera Limited, together with its subsidiaries, provides mobile and PC web browsers and related products and services in Norway and internationally. The company offers mobile browser products, such as Opera Mini, Opera browser for Android and iOS, and Opera GX for PCs and Mobile; PC browsers, including Opera for Computers and Opera GX; Apex Football; Opera VPN Pro; and Opera News, an AI-powered personalized news discovery and aggregation service. It provides browser-based cashback rewards programs; owns GameMaker Studio, a 2D gaming development platform; and GXC, a gaming portal. In addition, the company operates Opera Ads, an online advertising platform; and offers Web3 and e-commerce services. Opera Limited was founded in 1995 and is headquartered in Oslo, Norway. Opera Limited is a subsidiary of Kunlun Tech Co., Ltd."
+    },
+    "GWRS": {
+        "ticker": "GWRS",
+        "name": "Global Water Resources, Inc.",
+        "meta": "Utilities - Regulated Water",
+        "type": "EQUITY",
+        "mcap": 249983536,
+        "currency": "USD",
+        "description": "Global Water Resources, Inc., a water resource management company, owns, operates, and manages regulated water, wastewater, and recycled water systems in metropolitan Phoenix and Tucson, Arizona. It serves approximately 111,000 people in approximately 36,000 homes. Global Water Resources, Inc. was founded in 2003 and is based in Phoenix, Arizona."
+    },
+    "MBX": {
+        "ticker": "MBX",
+        "name": "MBX Biosciences, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1703144448,
+        "currency": "USD",
+        "description": "MBX Biosciences, Inc., a clinical-stage biopharmaceutical company, focuses on the discovery and development of precision peptide therapies for the treatment of endocrine and metabolic disorders. Its lead product candidate is MBX 2109, a parathyroid hormone peptide prodrug, which is in Phase 2 clinical trial for the treatment of chronic hypoparathyroidism. The company is also developing MBX 1416, a long-acting glucagon-like peptide-1 (GLP-1) receptor antagonist that is in Phase 1 clinical trial a potential therapy for post-bariatric hypoglycemia, a chronic complication of bariatric surgery. In addition, it is developing MBX 4291, a lead obesity product candidate, which is in investigational new drug-enabling studies for the treatment of obesity and co-morbidities. The company was founded in 2018 and is based in Carmel, Indiana."
+    },
+    "HWKN": {
+        "ticker": "HWKN",
+        "name": "Hawkins, Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 2654983680,
+        "currency": "USD",
+        "description": "Hawkins, Inc. operates as a water treatment and specialty ingredients company in the United States. The company operates through three segments: Water Treatment, Industrial, and Health and Nutrition. The Water Treatment segment provides chemicals, products, equipment, services, and solutions for potable water, municipal and industrial wastewater, industrial process water, non-residential swimming pool water, and agriculture water. The Industrial segment offers industrial chemicals, products, and services to agriculture, chemical processing, electronics, energy, food, pharmaceutical, and plating industries. This segment manufactures sodium hypochlorite and agricultural products, as well as various food-grade and pharmaceutical products, such as liquid phosphates, lactates, other blended products, and agricultural products; and receives, stores, and distributes various chemicals comprising liquid caustic soda, sulfuric acid, hydrochloric acid, urea, phosphoric acid, aqua ammonia, and potassium hydroxide. It also repackages water treatment chemicals and bulk industrial chemicals; and performs custom blending of chemicals. The Health and Nutrition segment offers ingredient distribution, processing, and formulation solutions to manufacturers of nutraceutical, functional food and beverage, personal care, dietary supplement and other nutritional food, and health and wellness products. This segment offers minerals, vitamins and amino acids, excipients, joint products, botanicals and herbs, sweeteners, and enzymes. Hawkins, Inc. was founded in 1938 and is headquartered in Roseville, Minnesota."
+    },
+    "HUBB": {
+        "ticker": "HUBB",
+        "name": "Hubbell Inc",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 26119583744,
+        "currency": "USD",
+        "description": "Hubbell Incorporated, together with its subsidiaries, designs, manufactures, and sells electrical and utility solutions in the United States and internationally. It operates through two segments, Electrical Solutions and Utility Solutions. The Electrical Solution segment offers standard and special application wiring device products, rough-in electrical products, connector and grounding products, lighting fixtures, and other electrical equipment for use in industrial, commercial, and institutional facilities by electrical contractors, maintenance personnel, electricians, utilities, and telecommunications companies, as well as components and assemblies. It also designs and manufactures various industrial controls, and communication systems for use in the non-residential and industrial markets, as well as in the oil and gas, and mining industries. This segment sells its products through electrical and industrial distributors, home centers, retail and hardware outlets, lighting showrooms, and residential product-oriented internet sites; and special application products primarily through wholesale distributors to contractors, industrial customers, and original equipment manufacturers. The Utility Solution segment designs, manufactures, and sells electrical distribution, transmission, substation, and telecommunications products, such as arresters, insulators, connectors, anchors, bushings, and enclosures cutoffs and switches; and utility infrastructure products, including smart meters, communications systems, and protection and control devices. This segment sells its products to distributors. Its brand portfolio includes Hubbell, Kellems, Bryant, Burndy, CMC, Bell, TayMac, Wiegmann, Killark, Hawke, Aclara, Fargo, Quazite, Hot Box, etc. The company was founded in 1888 and is headquartered in Shelton, Connecticut."
+    },
+    "SWKS": {
+        "ticker": "SWKS",
+        "name": "Skyworks Solutions, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 8349615104,
+        "currency": "USD",
+        "description": "Skyworks Solutions, Inc., together with its subsidiaries, develops, manufactures, and markets analog and mixed-signal semiconductor products and solutions in the United States, Taiwan, China, South Korea, Europe, the Middle East, Africa, and the Asia Pacific. The company offers amplifiers, antenna tuners, attenuators, automotive tuners and digital radios, wireless ASoC, DC/DC converters, demodulators, detectors, digital power isolators, diodes, directional couplers, diversity receive modules, filters, front-end modules, hybrids, light emitting diode drivers, low noise amplifiers, mixers, modulators, and optocouplers/optoisolators. It also provides phase locked loops, phase shifters, power dividers/combiners, power over ethernet, power isolators, ProSLIC family of subscriber line interface circuits, receivers, system in package, switches, synthesizers, timing devices, voltage-controlled oscillators/synthesizers, and voltage regulators. The company sells its products through direct sales force, electronic component distributors, and independent sales representatives. Its products are used in aerospace, automotive, broadband, cellular infrastructure, connected home, defense, entertainment and gaming, industrial, medical, smartphone, tablet, and wearables applications. The company was founded in 1962 and is headquartered in Irvine, California."
+    },
+    "AXGN": {
+        "ticker": "AXGN",
+        "name": "AxoGen, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 1751908992,
+        "currency": "USD",
+        "description": "Axogen, Inc., together with its subsidiaries, develops and commercializes technologies for peripheral nerve regeneration and repair worldwide. The company's products include Avance Nerve Graft, a biologically active off-the-shelf processed human nerve allograft for bridging severed peripheral nerves without the comorbidities associated with a second surgical site; AxoGuard Nerve Connector, a porcine submucosa extracellular matrix (ECM) coaptation aid for tensionless repair of severed peripheral nerves; AxoGuard Nerve Protector, a porcine submucosa ECM product that is used to wrap and protect damaged peripheral nerves, as well as reinforces the nerve reconstruction while preventing soft tissue attachments; and Axoguard HA+ Nerve Protector, a processed porcine submucosa ECM base layer with a hyaluronate-alginate gel coating designed to provide short- and long-term protection for peripheral nerve injuries. Its products also comprise Axoguard Nerve Cap, a porcine submucosa ECM product that is used to protect a peripheral nerve end, as well as separates the nerve from the surrounding environment to reduce the development of symptomatic or painful neuroma. The company provides its products to hospitals, surgery centers, and military hospitals, plastic reconstructive surgeons, orthopedic and plastic hand surgeons, and various oral and maxillofacial surgeons. Axogen, Inc. is headquartered in Alachua, Florida."
+    },
+    "CGC": {
+        "ticker": "CGC",
+        "name": "Canopy Growth Corporation",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 444172800,
+        "currency": "USD",
+        "description": "Canopy Growth Corporation, together with its subsidiaries, engages in the production, distribution, and sale of cannabis, hemp, and cannabis-related products in Canada, Germany, and Australia. It operates through four segments: Canada Cannabis, International Markets Cannabis, and Storz & Bickel, and This Works. The company offers dried flower and pre-rolled joints; extracts and concentrates, such as softgel capsules; cannabis edibles, including gummies; cannabis vapes; and oils, beverages, concentrates. It sells its products under the Tweed, 7ACRES, Deep Space, HiWay, Maitri, Twd., Spectrum Therapeutics, Canopy Medical, Storz & Bickel, Wana, and Claybourne brands, as well as DOJA, LivRelief, Ace Valley, and Vert brands. The company was formerly known as Tweed Marijuana Inc. and changed its name to Canopy Growth Corporation in September 2015. Canopy Growth Corporation is headquartered in Smiths Falls, Canada."
+    },
+    "SITM": {
+        "ticker": "SITM",
+        "name": "SiTime Corporation",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 9749760000,
+        "currency": "USD",
+        "description": "SiTime Corporation designs, develops, and sells silicon timing systems solutions in Taiwan, Hong Kong, the United States, Singapore, and internationally. The company provides resonators and clock integrated circuits, and various types of oscillators. It serves communications, datacenter, enterprise, automotive, industrial, internet of things, mobile, consumer, and aerospace and defense markets. SiTime Corporation was incorporated in 2003 and is based in Santa Clara, California."
+    },
+    "PFM": {
+        "ticker": "PFM",
+        "name": "Invesco Dividend Achievers ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 550825600,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 90% of its total assets in securities that comprise the underlying index. Strictly in accordance with its guidelines and mandated procedures, Nasdaq, Inc. (\"Nasdaq\" or the \"index provider\") includes common stock in the underlying index pursuant to a proprietary selection methodology that identifies a universe of \"Dividend AchieversTM.\""
+    },
+    "CRSR": {
+        "ticker": "CRSR",
+        "name": "Corsair Gaming, Inc.",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 548862336,
+        "currency": "USD",
+        "description": "Corsair Gaming, Inc., together with its subsidiaries, designs and sells gaming and streaming peripherals, components, and systems in Europe, the Middle East, North Africa, North America, Latin America, and the Asia Pacific. The company operates in two segments, Gamer and Creator Peripherals, and Gaming Components and Systems. It offers gamer and creator peripherals, including gaming keyboards, mice, headsets, and controllers; and streaming products, such as capture cards, stream decks, microphones and audio interfaces, facecam streaming cameras, studio accessories, sim racing products, gaming furniture, and others. The company also provides gaming components and systems comprising power supply units, cooling solutions, computer cases, SSD, and dynamic random access memory modules, as well as pre- and custom-built gaming personal computers and laptops, and gaming monitors. In addition, it offers personal computer gaming software, which includes software platforms, including iCUE for gamers and Elgato streaming suite for content creators, as well as digital services. The company sells its products through e-retail, retail, and direct-to-consumer channels, as well as distributors. The company was formerly known as Corsair Components (Cayman) Ltd and changed its name to Corsair Gaming, Inc. in 2018. Corsair Gaming, Inc. was incorporated in 1994 and is headquartered in Milpitas, California."
+    },
+    "AZN": {
+        "ticker": "AZN",
+        "name": "Astrazeneca PLC",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 590782005248,
+        "currency": "USD",
+        "description": "AstraZeneca PLC, a biopharmaceutical company, focuses on the discovery, development, manufacture, and commercialization of prescription medicines. The company offers Imjudo, Datroway, Iressa, Tagrisso, Imfinzi, Lynparza, Calquence, Enhertu, Orpathys, Truqap, Zoladex, Faslodex, Farxiga, Brilinta, Crestor, Seloken, Lokelma, Roxadustat, Andexxa, Wainua, Symbicort, Fasenra, Pulmicort, Breztri/Trixeo, Saphnelo, Tezspire, Airsupra, Ultomiris, Soliris, Strensiq, Koselugo, Kanuma, Atacand, Plendil, Modip, Splendil, Munobal, Flodil, Komboglyze, Qtern, Byetta, XIGDUO, Accolate, Accoleit, Vanticon, Beyfortus, Synagis, FluMist, tixagevimab and cilgavimab, and sipavibart. It also provides Bricanyl Respules, Eklira Genuair/Tudorza/Bretaris, Bricanyl Turbuhaler, Rhinocort, Bevespi Aerosphere, Daliresp/Daxas, Oxis Turbuhaler, Breztri Aerosphere, Duaklir Genuair, Kavigale, Evusheld, Fluenz/FluMist, and Voydeya. The company offers its products for ocology, cardiovascular, renal and metabolism, respiratory & immunology, vaccines and immune, and therapies rare diseases. It serves primary and specialty care physicians through distributors and local representative offices in the United Kingdom, the United States, Europe, and Asia. It has a strategic agreement with Tempus to develop the largest multimodal foundation model in oncology. The company has a collaboration agreement with IonQ, Inc. for the development of quantum-accelerated computational chemistry workflow for healthcare, life sciences, and chemistry; a strategic research collaboration with CSPC Pharmaceutical Group Limited to advance the discovery and development of novel oral candidates, with the potential to treat diseases across multiple indications and multiple next-generation therapies for obesity and type 2 diabetes; and collaboration Revna Biosciences for lung cancer treatment. AstraZeneca PLC was formerly known as Zeneca Group PLC and changed its name to AstraZeneca PLC in April 1999. AstraZeneca PLC was incorporated in 1992 and is headquartered in Cambridge, the United Kingdom."
     }
 }
