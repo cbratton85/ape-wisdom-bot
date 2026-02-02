@@ -10911,7 +10911,7 @@
         "type": "EQUITY",
         "mcap": 406981184,
         "currency": "USD",
-        "description": "Bed Bath & Beyond, Inc. is an e-commerce focused retailer that owns or has ownership interests in various retail brands. The Company owns Bed Bath & Beyond, Overstock, buybuy BABY, Kirkland’s Home, and other related brands and websites, and a blockchain asset portfolio inclusive of tZERO, GrainChain, and other assets. Through its Bed Bath & Beyond brand, it provides an array of home-related products. Through its Overstock brand, the Company provides an array of goods at discounted prices, and a treasure hunt-like experience for its target customers. Its product assortment includes home categories such as indoor and outdoor furniture, rugs, decor, and lighting, as well as lifestyle categories such as jewelry and watches, apparel and accessories, and designer shoes and handbags. In addition, the Company also offers a range of add-on services across its platforms, including warranties, shipping insurance, and installation services."
+        "description": "Bed Bath & Beyond, Inc. is an e-commerce focused retailer that owns or has ownership interests in various retail brands. The Company owns Bed Bath & Beyond, Overstock, buybuy BABY, Kirkland\u2019s Home, and other related brands and websites, and a blockchain asset portfolio inclusive of tZERO, GrainChain, and other assets. Through its Bed Bath & Beyond brand, it provides an array of home-related products. Through its Overstock brand, the Company provides an array of goods at discounted prices, and a treasure hunt-like experience for its target customers. Its product assortment includes home categories such as indoor and outdoor furniture, rugs, decor, and lighting, as well as lifestyle categories such as jewelry and watches, apparel and accessories, and designer shoes and handbags. In addition, the Company also offers a range of add-on services across its platforms, including warranties, shipping insurance, and installation services."
     },
     "DPRO": {
         "ticker": "DPRO",
@@ -11664,5 +11664,14 @@
         "mcap": 13538140160,
         "currency": "USD",
         "description": "Hormel Foods Corporation develops, processes, and distributes various meat, nuts, and other food products to foodservice, convenience store, and commercial customers in the United States and internationally. It operates through three segments: Retail, Foodservice, and International segments. The company provides various perishable products, including resh meats, frozen items, refrigerated meal solutions, bacon, sausages, hams, guacamole, and other items that require refrigeration; and shelf-stable products, such as canned luncheon meats, nut butters, snack nuts, chili, shelf-stable microwaveable meals, hash, stews, tortillas, salsas, tortilla chips, and other items that do not require refrigeration. It sells its products under the HORMEL, ALWAYS TENDER, APPLEGATE, AUSTIN BLUES, BACON 1, BLACK LABEL, BREAD READY, BURKE, CAF\u00c9 H, CERATTI, CHI-CHI'S, COLUMBUS, COMPLEATS, CORN NUTS, CURE 81, DAN'S PRIZE, DI LUSSO, DINTY MOORE, DON MIGUEL, DO\u00d1A MARIA, EMBASA, FAST \u0091N EASY, FIRE BRAISED, FONTANINI, HERDEZ, HORMEL GATHERINGS, HOUSE OF TSANG, JENNIE-O, JUSTIN'S, LA VICTORIA, LAYOUT, LLOYD'S, MARY KITCHEN, MR. PEANUT, NATURAL CHOICE, NUT-RITION, OLD SMOKEHOUSE, OVEN READY, PILLOW PACK, PLANTERS, ROSA GRANDE, SADLER'S SMOKEHOUSE, SKIPPY, SPAM, SQUARE TABLE, SPECIAL RECIPE, VALLEY FRESH, and WHOLLY brands through sales personnel, independent brokers, and distributors. The company was formerly known as Geo. A. Hormel & Company and changed its name to Hormel Foods Corporation in January 1995. Hormel Foods Corporation was founded in 1891 and is headquartered in Austin, Minnesota."
+    },
+    "DOG": {
+        "ticker": "DOG",
+        "name": "ProShares Short Dow30",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is a price-weighted index and includes 30 large-cap, \"blue-chip\" U.S. stocks, excluding utility and transportation companies. The fund is non-diversified."
     }
 }
