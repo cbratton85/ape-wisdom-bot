@@ -11844,5 +11844,68 @@
         "mcap": 106617724928,
         "currency": "USD",
         "description": "Enbridge Inc., together with its subsidiaries, operates as an energy infrastructure company. The company operates through four segments: Liquids Pipelines, Gas Transmission, Gas Distribution and Storage, and Renewable Power Generation. The Liquids Pipelines segment operates pipelines and related terminals to transport various grades of crude oil and other liquid hydrocarbons in Canada and the United States. This segment also provides physical commodity marketing and logistical services, and crude oil marketing services. The Gas Transmission and Midstream segment invests in natural gas pipelines and gathering and processing facilities in Canada and the United States. The Gas Distribution and Storage segment is involved in natural gas utility operations serving residential, commercial, and industrial customers in Ontario, as well as natural gas distribution activities in Quebec. The Renewable Power Generation segment operates wind, solar, geothermal, waste heat recovery, and transmission assets in North America. The company was formerly known as IPL Energy Inc. and changed its name to Enbridge Inc. in October 1998. Enbridge Inc. was founded in 1949 and is headquartered in Calgary, Canada."
+    },
+    "CALM": {
+        "ticker": "CALM",
+        "name": "Cal-Maine Foods, Inc.",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 3980542464,
+        "currency": "USD",
+        "description": "Cal-Maine Foods, Inc., together with its subsidiaries, engages in the production, grading, packaging, marketing, and distribution of shell eggs, egg products, and prepared foods. The company offers specialty shell eggs, including cage-free, organic, brown, free-range, and pasture-raised and nutritionally enhanced eggs, as well as conventional eggs under the Egg-Land's Best, Land O' Lakes, Farmhouse Eggs, Sunups, Sunny Meadow, and 4-Grain brand names. It also provides ready-to-eat products, such as hard-cooked eggs, egg wraps, protein pancakes, crepes and wrap-ups; and sells feed, miscellaneous byproducts, and resale products. The company sells its products to various customers, including national and regional grocery store chains, club stores, independent supermarkets, foodservice distributors, and egg product consumers primarily in the southwestern, southeastern, mid-western, northeastern, and mid-Atlantic regions of the United States, as well as Puerto Rico. Cal-Maine Foods, Inc. was founded in 1957 and is headquartered in Ridgeland, Mississippi."
+    },
+    "TMF": {
+        "ticker": "TMF",
+        "name": "Direxion Daily 20-Yr Treasury B",
+        "meta": "Trading--Leveraged Debt",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund, under normal circumstances, invests at least 80% of its net assets in financial instruments, such as swap agreements, securities of the index, and ETFs that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index is a market value weighted index that includes publicly issued U.S. Treasury securities that have a remaining maturity of greater than 20 years. The fund is non-diversified."
+    },
+    "LEE": {
+        "ticker": "LEE",
+        "name": "Lee Enterprises, Incorporated",
+        "meta": "Publishing",
+        "type": "EQUITY",
+        "mcap": 32999818,
+        "currency": "USD",
+        "description": "Lee Enterprises, Incorporated, a digital-first subscription and marketing services company, provides local news and information, and advertising services in the United States. The company offers digital subscription platforms; daily and weekly newspapers; and niche products for national and international news are accessible across digital and print formats through websites and mobile applications. It also provides subscription services through digital and print subscriptions; and omni-channel marketing solutions, including digital, print, programmatic, video, and social media campaigns. In addition, the company offers commercial printing, distribution, and other digital services through SaaS content management solution. Lee Enterprises, Incorporated was founded in 1890 and is based in Davenport, Iowa."
+    },
+    "RC": {
+        "ticker": "RC",
+        "name": "Ready Capital Corporation",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 351301440,
+        "currency": "USD",
+        "description": "Ready Capital Corporation operates as a real estate finance company in the United States. It operates through two segments: LMM Commercial Real Estate and Small Business Lending. The LMM Commercial Real Estate segment originates LLM loans across the full life-cycle of an LLM property, including construction, bridge, stabilized, and agency loan origination channels. The Small Business Lending segment acquires, originates, and services owner-occupied loans guaranteed by the SBA under its SBA Section 7(a) Program; and acquires, originates, and services USDA loans, as well as originates and services small business loans. It originates, acquires, finances, and services lower-to-middle-market (LLM) commercial real estate loans, small business administration (SBA) loans, residential mortgage loans, construction loans, USDA loans, and mortgage-backed securities collateralized primarily by LLM loans, or other real estate-related investments. The company has elected to be taxed as a real estate investment trust (REIT) and would not be subject to federal corporate income taxes if it distributes at least 90% of its taxable income to its stockholders. The company was formerly known as Sutherland Asset Management Corporation and changed its name to Ready Capital Corporation in September 2018. Ready Capital Corporation was founded in 2007 and is headquartered in New York, New York."
+    },
+    "VONG": {
+        "ticker": "VONG",
+        "name": "Vanguard Russell 1000 Growth ET",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index is designed to measure the performance of large-capitalization growth stocks in the United States. The Advisor attempts to replicate the target index by investing all, or substantially all, of its assets in the stocks that make up the index, holding each stock in approximately the same proportion as its weighting in the index. The fund may become non-diversified, as defined under the Investment Company Act of 1940, solely as a result of a change in relative market capitalization or index weighting of one or more constituents of the index."
+    },
+    "IWF": {
+        "ticker": "IWF",
+        "name": "iShares Russell 1000 Growth Fun",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 131957047296,
+        "currency": "USD",
+        "description": "The fund generally invests at least 80% of its assets in the component securities of its underlying index and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents, including shares of money market funds advised by BFA or its affiliates, as well as in securities not included in the underlying index, but which BFA believes will help the fund track the underlying index. It is non-diversified."
+    },
+    "JBL": {
+        "ticker": "JBL",
+        "name": "Jabil Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 25337337856,
+        "currency": "USD",
+        "description": "Jabil Inc. provides engineering, manufacturing, and supply chain solutions worldwide. It operates in three segments: Regulated Industries, Intelligent Infrastructure, and Connected Living and Digital Commerce. The company offers electronic hardware, and embedded software design services for analog, digital, radio frequency, power, sensor, and optical component applications; creates, develops, and connects concepts and specifications that optimize the function, value, and appearance of products for both consumers and manufacturing partners; design of plastic and metal components, enclosures, sub-assemblies, and systems, with advanced modeling and analysis of electronic, electro-mechanical, and optical assemblies; detail design, environmental applications, thermal and tooling management; develop solutions for virtual and/or augmented reality, light detection and ranging, 3D sensing, projection, and imaging; delivering PCBA design with CAD tools; and electrical and mechanical assemblies. The company also offers cloud data center server platforms; medical and consumer health devices; automotive assemblies; a digital commerce ecosystem; and smart controls and security for digital building and utilities. In addition, the company offers systems assembly, test, direct-order fulfillment, and configure-to-order services. It serves 5G, wireless and cloud, digital print and retail, industrial and semi-cap, networking and storage, automotive and transportation, connected devices, healthcare and packaging, and mobility industries. The company was formerly known as Jabil Circuit, Inc. Jabil Inc. was founded in 1966 and is based in Saint Petersburg, Florida."
     }
 }
