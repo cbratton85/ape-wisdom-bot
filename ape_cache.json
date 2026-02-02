@@ -11718,5 +11718,23 @@
         "mcap": 167727104,
         "currency": "USD",
         "description": "Tenaya Therapeutics, Inc., a clinical-stage biotechnology company, discovers, develops, and delivers therapies for heart disease in the United States. The company's lead product candidate includes TN-201, a gene therapy for myosin binding protein C3-associated hypertrophic cardiomyopathy that is in phase 2 clinical trial; TN-401, a gene therapy for plakophilin 2-associated arrhythmogenic right ventricular cardiomyopathy, which is in phase 1 clinical trial; and TN-301, a small molecule histone deacetylase-6 for heart failure with preserved ejection fraction that is in phase 1 clinical trial. It also develops an adeno-associated virus-based gene therapy designed to deliver the dworf gene for patient with dilated cardiomyopathy; and reprogramming program for heart failure due to prior myocardial infarction. The company develops its products through gene editing, cellular regeneration, gene silencing, and gene addition. Tenaya Therapeutics, Inc. was incorporated in 2016 and is headquartered in South San Francisco, California."
+    },
+    "IAUX": {
+        "ticker": "IAUX",
+        "name": "i-80 Gold Corp.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 1313788416,
+        "currency": "USD",
+        "description": "i-80 Gold Corp., a mining company, explores for, develops, and produces gold, silver, and polymetallic deposits in the United States. The company's principal assets are the McCoy-Cove gold properties located in Lander County, Nevada; the Granite Creek gold project located in Humboldt County, Nevada; the Lone Tree project located within the Battle Mountain-Eureka Trend, Nevada; the Ruby Hill mine in Eureka County; and the FAD property located in Eureka County, Nevada. i-80 Gold Corp. was incorporated in 2020 and is headquartered in Reno, Nevada."
+    },
+    "FILL": {
+        "ticker": "FILL",
+        "name": "iShares MSCI Global Energy Prod",
+        "meta": "Infrastructure",
+        "type": "ETF",
+        "mcap": 60849840,
+        "currency": "USD",
+        "description": "The fund seeks to track the investment results of the underlying index, which measures the performance of equity securities of U.S.-domiciled companies involved in U.S. power infrastructure, as determined by S&P Dow Jones Indices LLC (the \u201cindex provider\u201d or \u201cSPDJI\u201d). The underlying index is a product of SPDJI, which is independent of the fund and BFA. The fund is non-diversified."
     }
 }
