@@ -11673,5 +11673,50 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is a price-weighted index and includes 30 large-cap, \"blue-chip\" U.S. stocks, excluding utility and transportation companies. The fund is non-diversified."
+    },
+    "CTXR": {
+        "ticker": "CTXR",
+        "name": "Citius Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 16560795,
+        "currency": "USD",
+        "description": "Citius Pharmaceuticals, Inc., a biopharmaceutical company, focuses on the development and commercialization of critical care products. Its LYMPHIR, an FDA-approved product, is a targeted immunotherapy for the treatment of cutaneous T-cell lymphoma. The company's late-stage pipeline includes Mino-Lok, an antibiotic lock solution to treat patients with catheter-related bloodstream infections; Halo-Lido, a corticosteroid-lidocaine topical formulation to provide anti-inflammatory and anesthetic relief to persons suffering from hemorrhoids; and NoveCite, a mesenchymal stem cell therapy for the treatment of ARDS. Citius Pharmaceuticals, Inc. was founded in 2007 and is headquartered in Cranford, New Jersey."
+    },
+    "GBTC": {
+        "ticker": "GBTC",
+        "name": "Grayscale Bitcoin Trust (BTC)",
+        "meta": "Digital Assets",
+        "type": "ETF",
+        "mcap": 45260226560,
+        "currency": "USD",
+        "description": "The trust\u2019s Bitcoins are carried, for financial statement purposes, at fair value as required by U.S. generally accepted accounting principles (\u201cGAAP\u201d). The trust determines the fair value of Bitcoins based on the price provided by the Digital Asset Market that the trust considers its principal market as of 4:00 p.m., New York time, on the valuation date."
+    },
+    "VNM": {
+        "ticker": "VNM",
+        "name": "VanEck Vietnam ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund normally invests at least 80% of its total assets in securities that comprise the fund's benchmark index. The index includes securities of Vietnamese companies. A company is generally considered to be a Vietnamese company if it is incorporated in Vietnam. It is non-diversified."
+    },
+    "EWJ": {
+        "ticker": "EWJ",
+        "name": "iShares MSCI Japan Index Fund",
+        "meta": "Japan Stock",
+        "type": "ETF",
+        "mcap": 19531302912,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The underlying index is designed to measure the performance of the large- and mid-capitalization segments of the Japanese equity market."
+    },
+    "TNYA": {
+        "ticker": "TNYA",
+        "name": "Tenaya Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 167727104,
+        "currency": "USD",
+        "description": "Tenaya Therapeutics, Inc., a clinical-stage biotechnology company, discovers, develops, and delivers therapies for heart disease in the United States. The company's lead product candidate includes TN-201, a gene therapy for myosin binding protein C3-associated hypertrophic cardiomyopathy that is in phase 2 clinical trial; TN-401, a gene therapy for plakophilin 2-associated arrhythmogenic right ventricular cardiomyopathy, which is in phase 1 clinical trial; and TN-301, a small molecule histone deacetylase-6 for heart failure with preserved ejection fraction that is in phase 1 clinical trial. It also develops an adeno-associated virus-based gene therapy designed to deliver the dworf gene for patient with dilated cardiomyopathy; and reprogramming program for heart failure due to prior myocardial infarction. The company develops its products through gene editing, cellular regeneration, gene silencing, and gene addition. Tenaya Therapeutics, Inc. was incorporated in 2016 and is headquartered in South San Francisco, California."
     }
 }
