@@ -11736,5 +11736,77 @@
         "mcap": 60849840,
         "currency": "USD",
         "description": "The fund seeks to track the investment results of the underlying index, which measures the performance of equity securities of U.S.-domiciled companies involved in U.S. power infrastructure, as determined by S&P Dow Jones Indices LLC (the \u201cindex provider\u201d or \u201cSPDJI\u201d). The underlying index is a product of SPDJI, which is independent of the fund and BFA. The fund is non-diversified."
+    },
+    "CROX": {
+        "ticker": "CROX",
+        "name": "Crocs, Inc.",
+        "meta": "Footwear & Accessories",
+        "type": "EQUITY",
+        "mcap": 4583488512,
+        "currency": "USD",
+        "description": "Crocs, Inc., together with its subsidiaries, designs, develops, manufactures, markets, distributes, and sells casual lifestyle footwear and accessories for men, women, and children under the Crocs and HEYDUDE Brands in the United States and internationally. The company offers various footwear products, including clogs, sandals, platforms, wedges, boots, slides, flip flops, flips, sneakers, and slippers, as well as lace and beads, straps, strap covers, bags, socks, and charms. It sells its products through wholesalers, retail stores, e-commerce sites, third-party marketplaces, and kiosks/store-in-store locations. Crocs, Inc. was founded in 1999 and is headquartered in Broomfield, Colorado."
+    },
+    "AIM": {
+        "ticker": "AIM",
+        "name": "AIM ImmunoTech Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3681673,
+        "currency": "USD",
+        "description": "AIM ImmunoTech Inc., an immuno-pharma company, focuses on the research and development of therapeutics to treat multiple types of cancers, viral diseases, and immune-deficiency disorders in the United States. Its flagship products are Ampligen (rintatolimod), a drug of large macromolecular double-stranded ribonucleic acid molecules to treat chronic fatigue syndrome; and Alferon N Injection (Interferon alfa), a purified, natural-source, glycosylated, multi-species alpha interferon product for the treatment of genital warts. The company is also developing Ampligen for potential treatment of pancreatic, renal cell carcinoma, malignant melanoma, non-small cell lung, ovarian, breast, colorectal, and prostate cancers, as well as for myalgic encephalomyelitis, Hepatitis B, HIV, COVID-19, and post-COVID conditions. The company was formerly known as Hemispherx Biopharma, Inc. and changed its name to AIM ImmunoTech Inc. in August 2019. AIM ImmunoTech Inc. was incorporated in 1966 and is headquartered in Ocala, Florida."
+    },
+    "TEF": {
+        "ticker": "TEF",
+        "name": "Telefonica SA",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 21491091456,
+        "currency": "USD",
+        "description": "Telef\u00f3nica, S.A., together with its subsidiaries, provides telecommunications services in Europe and Latin America. The company offers mobile and related services and products, including mobile voice, value added, mobile data and internet, wholesale, corporate, roaming, fixed wireless, and trunking and paging services; traditional fixed telecommunication services, such as PSTN lines; ISDN accesses; public telephone services; local, domestic, and international long-distance and fixed-to-mobile communications; corporate communications; supplementary value-added services; video telephony; intelligent network; telephony information services; and leases and sells handset equipment. It also provides internet provider service; portal and network, retail and wholesale broadband access, narrowband switched access and other technologies, internet through fibre to the home, very high bit-rate digital subscriber line, and voice over internet protocol services; leased line, virtual private network, fibre optics, web and managed hosting, content delivery and application, security, and outsourcing and consultancy services, including network management or CGP; and desktop, system integration, and professional services. In addition, the company offers wholesale services for telecommunication operators, such as domestic interconnection and international wholesale services; leased lines for other operators; and local loop leasing services, as well as bit stream services, wholesale line rental accesses, and leased ducts for other operators' fiber deployment. Further, it provides video/TV services; smart connectivity and services; financial and other payment, cloud, security, advertising, and big data services; digital products; Aura, an artificial-intelligence ecosystem; Movistar Home device; open gateway; living apps; smart Wi-Fi; NT; Solar 360; and Phoenix, a digital sales platform. Telef\u00f3nica, S.A. was incorporated in 1924 and is headquartered in Madrid, Spain."
+    },
+    "SRPT": {
+        "ticker": "SRPT",
+        "name": "Sarepta Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2131371392,
+        "currency": "USD",
+        "description": "Sarepta Therapeutics, Inc., a commercial-stage biopharmaceutical company, focuses on the discovery and development of RNA-targeted therapeutics, gene therapies, and other genetic therapeutic modalities for the treatment of rare diseases. It offers EXONDYS 51 injection to treat Duchenne muscular dystrophy (Duchenne) in patients with confirmed mutation of the dystrophin gene that is amenable to exon 51 skipping; VYONDYS 53 for the treatment of Duchenne in patients with confirmed mutation of the dystrophin gene that is amenable to exon 53 skipping; AMONDYS 45 for the treatment of Duchenne in patients with confirmed mutation of the dystrophin gene that is amenable to exon 45 skipping; and ELEVIDYS, an adeno-associated virus based gene therapy for the treatment of ambulatory pediatric patients with Duchenne with a confirmed mutation in the Duchenne gene. The company is also developing SRP-9003, a limb-girdle muscular dystrophies gene therapy program. It has collaboration and license agreements with F. Hoffman-La Roche Ltd; Arrowhead Pharmaceuticals, Inc.; University of Western Australia; Catalent Maryland, Inc.; Nationwide Children's Hospital; Dyno Therapeutics; Hansa Biopharma; Duke University; and Genethon. The company was incorporated in 1980 and is headquartered in Cambridge, Massachusetts."
+    },
+    "CELH": {
+        "ticker": "CELH",
+        "name": "Celsius Holdings, Inc.",
+        "meta": "Beverages - Non-Alcoholic",
+        "type": "EQUITY",
+        "mcap": 13528571904,
+        "currency": "USD",
+        "description": "Celsius Holdings, Inc. develops, processes, manufactures, markets, sells, and distributes functional energy drinks in the United States, North America, Europe, the Asia Pacific, and internationally. The company offers CELSIUS, a lifestyle and energy drink; CELSIUS Originals and Vibe, which are functional energy drinks in various flavors that is offered in carbonated and non-carbonated forms; CELSIUS ESSENTIALS, a functional energy drink formulated with aminos; CELSIUS On-the-Go Powder, a functional energy drink in powder form; and CELSIUS Hydration, a line of zero-sugar hydration powders infused electrolytes in various fruit-forward flavors, as well as CELSIUS ready-to-drink products. It distributes its products through direct-to-store delivery, independent distributors, supermarkets, convenience stores, drug stores, nutritional stores, food service providers, and mass merchants, as well as natural food stores, fitness centers, mass market retailers, vitamin specialty stores, club stores, gyms, and e-commerce platforms. The company was formerly known as Vector Ventures, Inc. and changed its name to Celsius Holdings, Inc. in January 2007. Celsius Holdings, Inc. was founded in 2004 and is headquartered in Boca Raton, Florida."
+    },
+    "BLSH": {
+        "ticker": "BLSH",
+        "name": "Bullish",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 4550649344,
+        "currency": "USD",
+        "description": "Bullish provides market infrastructure and information services in United States. It operates Bullish Exchange, a digital assets spot and derivatives exchange that integrates a central limit order book matching engine with automated market making to provide deep and predictable liquidity. The company also offers CoinDesk Indices, a collection of tradable proprietary and single-asset benchmarks and indices that track the performance of digital assets for global institutions in the digital assets and traditional finance industries; CoinDesk Data, a comprehensive suite of digital assets market data and analytics, providing real-time insights into prices, trends, and market dynamics; and CoinDesk Insights, operates Coindesk.com, a leading digital media platform that covers news and insights about digital assets, the underlying markets, policy, and blockchain technology. Bullish was founded in 2020 and is based in George Town, Cayman Islands."
+    },
+    "CTVA": {
+        "ticker": "CTVA",
+        "name": "Corteva, Inc.",
+        "meta": "Agricultural Inputs",
+        "type": "EQUITY",
+        "mcap": 49438482432,
+        "currency": "USD",
+        "description": "Corteva, Inc. operates in the agriculture business. It operates through two segments, Seed and Crop Protection. The Seed segment develops and supplies advanced germplasm and traits that produce optimum yield for farms. It offers trait technologies that enhance resistance to weather, disease, insects, and herbicides used to control weeds, as well as food and nutritional characteristics. This segment also provides digital solutions that assist farmer decision-making with a view to optimize product selection, and maximize yield and profitability. The Crop Protection segment offers products that protect against weeds, insects and other pests, and diseases, as well as enhances crop health above and below ground through nitrogen management and seed-applied technologies. This segment provides herbicides, insecticides, nitrogen stabilizers, and pasture and range management herbicides. It serves agricultural input industry. The company operates in the United States, Canada, Latin America, the Asia Pacific, Europe, the Middle East, and Africa. Corteva, Inc. was incorporated in 2018 and is headquartered in Indianapolis, Indiana."
+    },
+    "NNE": {
+        "ticker": "NNE",
+        "name": "Nano Nuclear Energy Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 1487439744,
+        "currency": "USD",
+        "description": "NANO Nuclear Energy Inc. operates as a nuclear energy company. The company is developing KRONOS MMR Energy System, a high-temperature gas-cooled reactor; LOKI MMR, a compact microreactor designed for remote and specialized applications; ZEUS, a solid core battery reactor; and ODIN, a low-pressure salt coolant reactor. It is also developing a high-assay low-enriched uranium fuel processing facility to provide a fuel pipeline for the nuclear reactor industry, and fuel transportation and nuclear consultation businesses. The company was incorporated in 2022 and is based in New York, New York."
     }
 }
