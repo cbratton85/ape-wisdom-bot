@@ -12074,5 +12074,32 @@
         "mcap": 828589888,
         "currency": "USD",
         "description": "Camping World Holdings, Inc., together its subsidiaries, retails recreational vehicles (RVs), and related products and services in the United States. It operates through two segments, Good Sam Services and Plans; and RV and Outdoor Retail. The company provides a portfolio of services, protection plans, products, and resources in the RV industry. It also offers extended vehicle service contracts; vehicle roadside assistance plans; property and casualty insurance; travel protection, travel planning, and directories; and publications, as well as operates the Coast to Coast Resorts and Good Sam Campgrounds. In addition, the company provides new and used RVs; vehicle financing; RV repair and maintenance services; protection plans and services; various RV parts, equipment, supplies, and accessories, which include towing and hitching products, satellite and GPS systems, electrical and lighting products, appliances and furniture, and other products; and collision repair services comprising fiberglass front and rear cap replacement, windshield replacement, interior remodel solutions, and paint and body work. Further, it offers co-branded credit cards; operates Good Sam Club, a membership organization that offers savings on a range of products and services; and facilitates an RV rental platform that connects travelers with RV owners. The company serves customers through dealerships and service centers, and online and e-commerce platforms. Camping World Holdings, Inc. was founded in 1966 and is headquartered in Lincolnshire, Illinois."
+    },
+    "AUR": {
+        "ticker": "AUR",
+        "name": "Aurora Innovation, Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 8128558080,
+        "currency": "USD",
+        "description": "Aurora Innovation, Inc. operates as a self-driving technology company in the United States. It focuses on developing Aurora Driver, a platform that brings a suite of self-driving hardware, software, and data services together to adapt and interoperate various vehicle types and applications. The company was founded in 2017 and is headquartered in Pittsburgh, Pennsylvania."
+    },
+    "MARK": {
+        "ticker": "MARK",
+        "name": "Remark Holdings, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 68092,
+        "currency": "USD",
+        "description": "Remark Holdings, Inc. provides AI-powered analytics, computer vision, and smart agent solutions. The company operates a data and AI software platform that offers AI-based computer vision products, computing devices, and software-as-a-service solutions; and Smart Safety Platform, a software solution that uses computer vision to detect persons, objects, and behavior in video feeds, as well as provides Remark AI Thermal kits and rPads products and services. It serves retail, construction, public safety, workplace safety, and public sectors. The company was formerly known as Remark Media, Inc. and changed its name to Remark Holdings, Inc. in April 2017. Remark Holdings, Inc. is headquartered in Las Vegas, Nevada."
+    },
+    "ETOR": {
+        "ticker": "ETOR",
+        "name": "eToro Group Ltd.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 2460897280,
+        "currency": "USD",
+        "description": "eToro Group Ltd. engages in the trading business. Its multi-asset platform supports trading and investing in equities, crypto assets, commodities, currencies, and options, which can be traded either as assets or as derivatives related to various underlying asset types. The company also operates eToro Club, a membership program providing a range of services and tools to enhance a user's investment experience; eToro Academy, an education hub to improve users' understanding of financial markets; and eToro Money, a money management solution that enables users to make deposits and withdrawals, as well as to trade local stocks in local currencies. In addition, it provides various investment tools and services, including charting and analysis tools and extended-hours trading. The company was incorporated in 2006 and is based in Bnei Brak, Israel."
     }
 }
