@@ -12200,5 +12200,59 @@
         "mcap": 741095616,
         "currency": "USD",
         "description": "SES AI Corporation develops and produces AI enhanced lithium metal and lithium ion rechargeable battery technologies for electric vehicles, urban air mobility, drones, robotics, battery energy storage systems, and other applications. It manufactures and sells li metal battery cells and battery materials, such as electrolytes for automotive original equipment manufacturers. SES AI Corporation operates in the United States and the Asia Pacific region. The company was founded in 2012 and is headquartered in Woburn, Massachusetts."
+    },
+    "MED": {
+        "ticker": "MED",
+        "name": "MEDIFAST INC",
+        "meta": "Personal Services",
+        "type": "EQUITY",
+        "mcap": 125740160,
+        "currency": "USD",
+        "description": "Medifast, Inc., through its subsidiaries, operates as a health and wellness company that provides habit-based and coach-guided lifestyle solutions to address obesity and support a healthy life in the United States. The company offers weight loss and weight management plans; and GLP-1 support plans that provide access to GLP-1 medications where clinically appropriate under the OPTAVIA brand name. It also provides bars, puffs, cereal, crunchers, drinks, hearty choices, oatmeal, pancakes, pudding, soft serve, shakes, smoothies, soft bakes, and soups, as well as provides coaching support along with community, nutrition, and healthy habits, and helps people in their weight loss journey. It markets its products through point-of-sale transactions, as well as through ecommerce platform. Medifast, Inc. was founded in 1980 and is headquartered in Baltimore, Maryland."
+    },
+    "CAKE": {
+        "ticker": "CAKE",
+        "name": "The Cheesecake Factory Incorpor",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 2888824064,
+        "currency": "USD",
+        "description": "The Cheesecake Factory Incorporated operates and licenses restaurants in the United States and Canada. The company operates bakeries that produce cheesecakes and other baked products for its restaurants, international licensees, third-party bakery customers, external foodservice operators, retailers, and distributors. It operates restaurants under the brands comprising The Cheesecake Factory, North Italia, Flower Child, and Fox Restaurant Concepts. The Cheesecake Factory Incorporated was founded in 1972 and is headquartered in Calabasas, California."
+    },
+    "RGP": {
+        "ticker": "RGP",
+        "name": "Resources Connection, Inc.",
+        "meta": "Consulting Services",
+        "type": "EQUITY",
+        "mcap": 151764768,
+        "currency": "USD",
+        "description": "Resources Connection, Inc. engages in the provision of consulting services to business customers under the Resources Global Professionals (RGP) name in North America, the Asia Pacific, and Europe. The company operates through On-Demand Talent, Consulting, Europe & Asia Pacific, Outsourced Services, and Sitrick segments. Its On-Demand Talent segment includes experts for filling resource gaps. Its Consulting segments offers accounting and finance, technology and digital, risk and compliance, and supply chain transformation services. The company's Outsourced Services segments provides finance, accounting, and human resources services provided to startups, spinouts, and scale-up enterprises. Its Sitrick segment offers a crisis communications and public relations firm that provides corporate, financial, transactional, and crisis communication and management services. The company also provides human resources, information technology, payroll, and legal and real estate support services. In addition, it offers services in the areas of transactions, including integration and divestitures, bankruptcy/restructuring, going public readiness and support, financial process optimization, and system implementation; and regulations, such as accounting regulations, internal audit and compliance, data privacy and security, healthcare compliance, and regulatory compliance. Further, the company provides transformations services comprising cloud migration, and data design and analytics. The company was formerly known as RC Transaction Corp. and changed its name to Resources Connection, Inc. in August 2000. Resources Connection, Inc. was founded in 1996 and is headquartered in Dallas, Texas."
+    },
+    "RTH": {
+        "ticker": "RTH",
+        "name": "VanEck Retail ETF",
+        "meta": "Consumer Cyclical",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund normally invests at least 80% of its total assets in securities that comprise the fund's benchmark index. To be initially eligible for the index, companies must generate at least 50% of their revenues from retail. Retail includes companies engaged primarily in retail distribution; wholesalers; online, direct mail and TV retailers; multi-line retailers; specialty retailers; and food and other staples retailers. The fund is non-diversified."
+    },
+    "SOBR": {
+        "ticker": "SOBR",
+        "name": "SOBR Safe, Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 2433247,
+        "currency": "USD",
+        "description": "SOBR Safe, Inc. a hardware and software company, provides non-invasive technologies to monitor and identify the presence of alcohol in North America. The company offers SOBRcheck and SOBRsure that enables non-invasive alcohol monitoring and detection, biometric identity verification, and qualified, real-time cloud-based alerts and reporting; and SOBRsafe, a touch-based alcohol monitoring and detection products. SOBR Safe, Inc. was founded in 2004 and is headquartered in Greenwood Village, Colorado."
+    },
+    "ACGL": {
+        "ticker": "ACGL",
+        "name": "Arch Capital Group Ltd.",
+        "meta": "Insurance - Diversified",
+        "type": "EQUITY",
+        "mcap": 35844075520,
+        "currency": "USD",
+        "description": "Arch Capital Group Ltd., together with its subsidiaries, provides insurance, reinsurance, and mortgage insurance products in the United States, Canada, Bermuda, the United Kingdom, Europe, and Australia. The Insurance segment offers commercial automobile; commercial multiperil; financial and professional line liability; admitted, excess, and surplus casualty lines; property and short-tail specialty; workers compensation; casualty; marine and aviation; excess and surplus casualty; construction and national accounts; alternative market risks and employer's liability; travel, accident, and health; contract and commercial surety coverage; and other insurance products, as well as Lloyd's syndicates; programs; and warranty and lenders solutions. Its Reinsurance segment provides reinsurance products for casualty; marine and aviation; property catastrophe; property excluding property catastrophe; and other specialty products. The Mortgage segment offers U.S. primary mortgage insurance business written predominantly on loans sold to the Federal National Mortgage Association and Federal Home Loan Mortgage Corporation; reinsurance and underwriting services related to the U.S. credit-risk transfer business and other U.S. mortgage reinsurance transactions; and international mortgage insurance and reinsurance business covering loans. It markets its products through a group of licensed independent retail and wholesale brokers. The company was formerly known as Risk Capital Holdings, Inc. Arch Capital Group Ltd. was founded in 1995 and is headquartered in Pembroke, Bermuda."
     }
 }
