@@ -12614,5 +12614,77 @@
         "mcap": 58334273536,
         "currency": "USD",
         "description": "NXP Semiconductors N.V. provides semiconductor products in China, the United States, Germany, Japan, Singapore, South Korea, Mexico, the Netherlands, Taiwan, and internationally. The company's product portfolio includes microcontrollers; application processors; communication processors; wireless connectivity solutions, such as near field communications, ultra-wideband, Bluetooth low-energy, Zigbee, Thread, and Wi-Fi and Wi-Fi/Bluetooth integrated SoCs; analog and interface devices; radio frequency power amplifiers; and security controllers, as well as semiconductor-based environmental and inertial sensors, including pressure, inertial, magnetic, and gyroscopic sensors. Its products are used in various applications, including automotive, industrial and Internet of Things, mobile, and communication infrastructure. The company markets its products to various original equipment manufacturers, contract manufacturers, and distributors. NXP Semiconductors N.V. was incorporated in 2006 and is headquartered in Eindhoven, the Netherlands."
+    },
+    "GOSS": {
+        "ticker": "GOSS",
+        "name": "Gossamer Bio, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 579797888,
+        "currency": "USD",
+        "description": "Gossamer Bio, Inc., a clinical-stage biopharmaceutical company, focuses on developing and commercializing seralutinib for the treatment of pulmonary arterial hypertension (PAH) in the United States. The company is developing GB002, an inhaled, small molecule, platelet-derived growth factor receptor, or PDGFR, colony-stimulatin factor 1 receptor and c-KIT inhibitor, which is in Phase 3 clinical trial for the treatment of PAH. It has license agreements with Pulmokine, Inc. to develop and commercialize GB002 and related backup compounds. The company was formerly known as FSG, Bio, Inc. and changed its name to Gossamer Bio, Inc. in 2017. The company was incorporated in 2015 and is headquartered in San Diego, California."
+    },
+    "JCI": {
+        "ticker": "JCI",
+        "name": "Johnson Controls International ",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 74592509952,
+        "currency": "USD",
+        "description": "Johnson Controls International plc, together with its subsidiaries, engages in engineering, manufacturing, commissioning, and retrofitting building products and systems in the United States, Europe, the Asia Pacific, and internationally. It operates through four segments: Building Solutions North America, Building Solutions EMEA/LA, Building Solutions Asia Pacific, and Global Products. The company designs, sells, installs, and services heating, ventilating, air conditioning, controls, building management, refrigeration, integrated electronic security, integrated fire detection and suppression systems, and fire protection and security products. It also provides energy efficiency solutions and technical services, including inspection, scheduled maintenance, and repair and replacement of mechanical and control systems, as well as data-driven smart building solutions. In addition, the company offers access control software and software services. It sells its products and services to commercial, institutional, industrial, data center, and governmental customers. Johnson Controls International plc was incorporated in 1885 and is based in Cork, Ireland."
+    },
+    "ENPH": {
+        "ticker": "ENPH",
+        "name": "Enphase Energy, Inc.",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 4709641216,
+        "currency": "USD",
+        "description": "Enphase Energy, Inc., together with its subsidiaries, designs, develops, manufactures, and sells home energy solutions for the solar photovoltaic industry in the United States and internationally. The company offers semiconductor-based microinverter that converts energy at the individual solar module level and combines with its proprietary networking and software technologies to provide energy monitoring and control. It also provides microinverter units and related accessories; IQ Battery and related accessories; IQ Gateway and IQ Energy Router; cloud-based Enlighten monitoring service; and electric vehicle charging solutions, as well as design, proposal, permitting, and lead generation services. The company sells its solutions to solar distributors; and directly to large installers, original equipment manufacturers, strategic partners, and homeowners, as well as through its legacy product upgrade program or online store. Enphase Energy, Inc. was incorporated in 2006 and is headquartered in Fremont, California."
+    },
+    "GH": {
+        "ticker": "GH",
+        "name": "Guardant Health, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 14955039744,
+        "currency": "USD",
+        "description": "Guardant Health, Inc., a precision oncology company, provides blood and tissue tests, and data sets in the United States and internationally. The company provides precision oncology testing services comprising Guardant360, a panel of genetic tests; Guardant360 LDT that measures 730+ genes and supports all guideline-recommended biomarkers; Guardant360 CDx Test, a liquid biopsy test; Guardant360 Response Test, a blood-only liquid biopsy; Guardant360 TissueNext Test, a tissue-based test with AI-powered PD-L1 detection; GuardantINFINITY Test that provides insights into the complexities of tumor molecular profiles and immune response to advance cancer research and therapy development; GuardantConnect, an integrated software-based solution designed for clinical and biopharmaceutical customers to connect patients tested with assays with actionable alterations with potentially relevant clinical studies; GuardantOMNI blood test for advanced stage cancer; and GuardantINFORM, an in-silico research platform for tumor evolution and treatment resistance across various biomarker-driven cancers. It also offers Shield Test; Guardant Reveal Test for adjuvant treatment and surveillance settings in early-stage cancer patients; and Smart Liquid Biopsy Platform. In addition, the company provides development services, including companion diagnostic development and regulatory approval, clinical study setup, monitoring and maintenance, testing development and support, technologies licensing, and kit fulfillment and delivery of Shield screening tests. The company was incorporated in 2011 and is headquartered in Palo Alto, California."
+    },
+    "GIGB": {
+        "ticker": "GIGB",
+        "name": "Goldman Sachs Access Investment",
+        "meta": "Corporate Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund seeks to achieve its investment objective by investing at least 80% of its assets (exclusive of collateral held from securities lending) in securities included in its underlying index. The index is a rules-based index that is designed to measure the performance of investment grade and high yield bonds issued by emerging market governments or quasi-government entities denominated in U.S. dollars (\u201cUSD\u201d) that meet certain liquidity criteria."
+    },
+    "DULL": {
+        "ticker": "DULL",
+        "name": "MicroSectors Gold -3X Inverse L",
+        "meta": "Trading--Inverse Commodities",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The notes are designed to reflect a 3x leveraged inverse exposure to the inverse performance of the ETF on a daily basis. The notes are riskier than securities that have intermediate- or long-term investment objectives, and may not be suitable for investors who plan to hold them for a period other than one day or who have a \u201cbuy and hold\u201d strategy."
+    },
+    "URTY": {
+        "ticker": "URTY",
+        "name": "ProShares UltraPro Russell2000",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of the small-cap segment of the U.S. markets. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index or in instruments with similar economic characteristics. The fund is non-diversified."
+    },
+    "EXP": {
+        "ticker": "EXP",
+        "name": "Eagle Materials Inc",
+        "meta": "Building Materials",
+        "type": "EQUITY",
+        "mcap": 6680187904,
+        "currency": "USD",
+        "description": "Eagle Materials Inc., through its subsidiaries, manufactures and sells heavy construction products and light building materials in the United States. The company operates in four segments: Cement, Concrete and Aggregates, Gypsum Wallboard, and Recycled Paperboard. It engages in the mining of limestone for the manufacture, production, distribution, and sale of portland cement, including Portland limestone cement; grinding and sale of slag; and mining of gypsum for the manufacture and sale of gypsum wallboards used to finish the interior walls and ceilings in residential, commercial, and industrial structures, as well as well as containerboard and lightweight packaging grades. The company is also involved in the manufacture and sale of recycled paperboard to the gypsum wallboard industry and other paperboard converters; sale of readymix concrete; and mining and sale of aggregates, such as crushed stone, sand, and gravel. Its products are used in commercial and residential construction; public construction projects to build, expand, and repair roads and highways; and repair and remodel activities. The company was formerly known as Centex Construction Products, Inc. and changed its name to Eagle Materials, Inc. in January 2004. Eagle Materials Inc. was founded in 1963 and is headquartered in Dallas, Texas."
     }
 }
