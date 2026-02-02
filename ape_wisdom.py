@@ -22,7 +22,7 @@ CACHE_FILE = os.path.join(SCRIPT_DIR, "ape_cache.json")
 MARKET_DATA_CACHE_FILE = os.path.join(SCRIPT_DIR, "market_data.pkl")
 HISTORY_FILE = os.path.join(SCRIPT_DIR, "market_history.json")
 DELISTED_CACHE_FILE = os.path.join(SCRIPT_DIR, "delisted_cache.json")
-CACHE_EXPIRY_SECONDS = 3600
+CACHE_EXPIRY_SECONDS = 1800
 RETENTION_DAYS = 14
 DELISTED_RETRY_DAYS = 7
 TOOLTIP_HISTORY_DAYS = 12
@@ -372,8 +372,9 @@ def filter_and_process(stocks):
             if hist.empty: continue
 
             curr_p = hist['Close'].iloc[-1]
-            actual_vol_days = min(len(hist), AVG_VOLUME_DAYS)
-            avg_v = hist['Volume'].tail(actual_vol_days).mean()
+            clean_hist = hist['Volume'].iloc[:-1] 
+            actual_vol_days = min(len(clean_hist), AVG_VOLUME_DAYS)
+            avg_v = clean_hist.tail(actual_vol_days).mean()
             
             if curr_p < MIN_PRICE or avg_v < MIN_AVG_VOLUME: continue
 
@@ -401,8 +402,8 @@ def filter_and_process(stocks):
             current_upvotes = int(upvotes_raw) if upvotes_raw is not None else 0
             
             conviction = (current_upvotes / cur_m) if cur_m > 0 else 0
-            safe_surge = s_perc if s_perc > 0 else 1
-            efficiency = rank_plus / safe_surge
+            safe_surge = s_perc if s_perc > 10 else 10 
+            efficiency = rank_plus / (safe_surge / 100.0) # Normalize surge to a float (1.5x instead of 150%)
 
             # --- CHANGE: Don't call get_metrics here. It's too early. ---
             # Just put placeholders. The refill loop at the bottom handles it.
@@ -505,7 +506,7 @@ def get_all_trending_stocks():
         for attempt in range(max_retries):
             try:
                 # Increased timeout to 20s as Ape Wisdom can be slow under load
-                r = requests.get(
+                r = session.get(
                     f"https://apewisdom.io/api/v1.0/filter/all-stocks/page/{page}", 
                     headers=headers,
                     timeout=20
@@ -730,7 +731,13 @@ def export_interactive_html(df, ai_summary=""):
             
             # --- 16. SYMBOL & PRICE ---
             t = row['Sym']
-            export_df.at[index, 'Sym'] = f'<a href="https://finance.yahoo.com/quote/{t}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
+            
+            # TradingView prefers dots for classes (e.g., BRK.B) whereas Yahoo uses dashes (BRK-B)
+            # We create a specific ticker string just for the URL to ensure it loads correctly.
+            tv_ticker = t.replace('-', '.')
+            
+            # Link directly to the SuperChart with the symbol pre-loaded
+            export_df.at[index, 'Sym'] = f'<a href="https://www.tradingview.com/chart/?symbol={tv_ticker}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
             
             # Price
             p_val = f"${row.get('Price', 0):.2f}"
@@ -1041,11 +1048,36 @@ def export_interactive_html(df, ai_summary=""):
                 box-shadow: 0 4px 15px rgba(0,0,0,0.5);
                 pointer-events: none;
             }}
+
+            /* 1. Target the main container */
+            .tooltip {{
+                opacity: 1 !important;
+            }}
+
+            /* 2. Style the inner box to be 100% solid black */
+            .tooltip-inner {{
+                background-color: #000000 !important;
+                color: #ffffff !important;
+                border: 1px solid #444 !important;
+               max-width: none !important;
+                white-space: nowrap !important;
+                opacity: 1 !important;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 1) !important;
+                padding: 10px 15px !important;
+            }}
+
+            /* 3. Ensure the arrows are solid black */
+            .bs-tooltip-top .tooltip-arrow::before {{ border-top-color: #000000 !important; }}
+            .bs-tooltip-bottom .tooltip-arrow::before {{ border-bottom-color: #000000 !important; }}
+            .bs-tooltip-start .tooltip-arrow::before {{ border-left-color: #000000 !important; }}
+            .bs-tooltip-end .tooltip-arrow::before {{ border-right-color: #000000 !important; }}
+
             /* SHOW ON HOVER */
             .row-label:hover::after {{
                 opacity: 1;
                 visibility: visible;
             }}
+            
             #modeSwitch {{ display: none; }}
             #modeSwitch:checked + label .e-label {{ color: #fff; background: #333; border-radius: 2px; }}
             #modeSwitch:not(:checked) + label .s-label {{ color: #fff; background: #333; border-radius: 2px; }}
@@ -1220,7 +1252,7 @@ def export_interactive_html(df, ai_summary=""):
                             </div>
                             <div class="legend-row">
                                 <span class="metric-name">ACC</span>
-                                <span class="metric-math">Vel(Today) - Vel(Yest)</span>
+                                <span class="metric-math">Vel(Now) - Vel(1h ago)</span>
                                 <span class="metric-desc">Acceleration: (Rate of change of speed).</span>
                             </div>
                             <div class="legend-row">
@@ -1240,8 +1272,8 @@ def export_interactive_html(df, ai_summary=""):
                             </div>
                             <div class="legend-row">
                                 <span class="metric-name">UPV+</span>
-                                <span class="metric-math">Upv(Today) - Upv(Yest)</span>
-                                <span class="metric-desc">Net change in upvotes vs 24h ago.</span>
+                                <span class="metric-math">Upv(Now) - Upv(1hr ago)</span>
+                                <span class="metric-desc">New upvotes gained since <b>Last Scan (1h)</b>.</span>
                             </div>
                             <div class="legend-row">
                                 <span class="metric-name">VOL</span>
@@ -1255,13 +1287,13 @@ def export_interactive_html(df, ai_summary=""):
                             </div>
                             <div class="legend-row">
                                 <span class="metric-name">VEL</span>
-                                <span class="metric-math">Rank+(Today) - Rank+(Yest)</span>
-                                <span class="metric-desc">Velocity: Change in climb speed?</span>
+                                <span class="metric-math">Rank+(Now) - Rank+(1hr ago)</span>
+                                <span class="metric-desc">Hourly change in Rank+. (Speeding up vs 1h ago?)</span>
                             </div>
                             <div class="legend-row">
                                 <span class="metric-name">STRK</span>
-                                <span class="metric-math">Consecutive Days</span>
-                                <span class="metric-desc">Streak: Days sustaining current direction.</span>
+                                <span class="metric-math">Hourly Streak</span>
+                                <span class="metric-desc">Streak: Consecutive <b>HOURS</b> sustaining direction.</span>
                             </div>
                             <div class="legend-row">
                                 <span class="metric-name">MNT%</span>
@@ -1329,7 +1361,7 @@ def export_interactive_html(df, ai_summary=""):
                             </div>
                             <div class="legend-row">
                                 <span class="color-key">STRK</span>
-                                <span class="color-desc"><span style="color:#00ff00">Green</span> (3+ Days), <span style="color:#ff4444">Red</span> (Reversing).</span>
+                                <span class="color-desc"><span style="color:#00ff00">Green</span> (3+ Hours), <span style="color:#ff4444">Red</span> (Reversing).</span>
                             </div>
                             <div class="legend-row">
                                 <span class="color-key">MNT%</span>
@@ -1348,6 +1380,7 @@ def export_interactive_html(df, ai_summary=""):
         </div>
         
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
         <script>
@@ -1368,72 +1401,112 @@ def export_interactive_html(df, ai_summary=""):
     }}
 
     function updateSummary() {{
+        // Safety check: if table doesn't exist, stop.
         if (!$.fn.DataTable.isDataTable('.table')) return;
         var api = $('.table').DataTable();
         
-        // 1. Check the state of the TOP toggle only
+        // 1. Check the state of the Toggle Switch
         var topSwitchIsETF = $('#modeSwitch').is(':checked');
         
-        // 2. Grab ALL data (ignoring table filters)
+        // 2. Grab ALL data (ignoring search filters)
         var allData = api.rows().data();
 
+        // Helper function to build the Top Movers list
         function getTopSectors(metricIdx) {{
             var sectorData = {{}};
             
+            // A. Aggregate Data
             allData.each(function(row) {{
-                // 3. Manually Apply the Stock/ETF Filter based on Top Switch
+                // Parse Stock vs ETF filter
                 var rawType = row[19].toString().replace(/<[^>]+>/g, ''); 
-                
-                // If Top Switch says ETFs, skip Stocks
                 if (topSwitchIsETF && !rawType.includes('ETF')) return;
-                // If Top Switch says Stocks, skip ETFs
                 if (!topSwitchIsETF && rawType.includes('ETF')) return;
 
-                // 4. Proceed with Sector Calculation
-                // CLEANUP: Strip "ETF" from the sector name if it exists
+                // Clean Sector Name
                 var sector = row[18].toString().replace(/<[^>]+>/g, '').trim();
-                sector = sector.replace(/^ETF/i, ''); // This removes "ETF" from the start of the string
-                
+                sector = sector.replace(/^ETF/i, ''); 
+
+                // Get Values
                 var val = parseVal(row[metricIdx]); 
                 var weight = parseVal(row[15]) || 1; 
+                
+                var sym = row[4].replace(/<[^>]+>/g, '').trim();
+                var name = row[3].replace(/<[^>]+>/g, '').trim();
 
-                if (!sectorData[sector]) sectorData[sector] = {{ sum: 0, totalWeight: 0, count: 0 }};
+                if (!sectorData[sector]) sectorData[sector] = {{ sum: 0, totalWeight: 0, count: 0, stocks: [] }};
                 
                 sectorData[sector].sum += (val * weight);
                 sectorData[sector].totalWeight += weight;
                 sectorData[sector].count += 1;
+                
+                sectorData[sector].stocks.push({{ s: sym, n: name, v: val }});
             }});
 
-            // Sort and Format (Same as before)
+            // B. Sort Sectors
             var sorted = Object.keys(sectorData).map(function(s) {{
                 var d = sectorData[s];
                 var avg = d.totalWeight > 0 ? (d.sum / d.totalWeight) : 0;
-                return {{ name: s, avg: avg, count: d.count }};
+                return {{ name: s, avg: avg, count: d.count, stocks: d.stocks }};
             }});
 
-            sorted = sorted.filter(s => s.count >= 2);
-            sorted.sort((a, b) => b.avg - a.avg);
+            sorted = sorted.filter(function(s) {{ return s.count >= 2; }});
+            sorted.sort(function(a, b) {{ return b.avg - a.avg; }});
 
             if (sorted.length === 0) return '<span style="color:#666; font-weight:normal;">---</span>';
 
-            return sorted.slice(0, 3).map((s, i) => {{
-                return '<span class="crumb-num">' + (i+1) + '.</span>' + s.name;
+            // C. Build HTML Output
+            var topThree = sorted.slice(0, 3);
+            
+            return topThree.map(function(s, i) {{
+                // Sort stocks in this sector (Highest value first)
+                s.stocks.sort(function(a, b) {{ return b.v - a.v; }});
+                
+                var topStocks = s.stocks.slice(0, 5);
+                
+                // Build Tooltip Rows using SAFE concatenation (No backticks)
+                var tipRows = topStocks.map(function(st) {{
+                    var numStr = st.v > 0 ? '+' + Math.round(st.v) : Math.round(st.v);
+                    var color = st.v >= 0 ? '#00ff00' : '#ff4444';
+                    
+                    return "<div style='display:flex; justify-content:flex-start; align-items:center; font-size:11px; margin-bottom:1px;'>" +
+                                "<span style='min-width:45px; text-align:left; color:" + color + "; font-weight:bold;'>" + numStr + "</span>" +
+                                "<span style='color:#fff; white-space:nowrap;'><b>" + st.s + "</b>: " + st.n + "</span>" +
+                            "</div>";
+                }}).join('');
+
+                    var tooltipHTML = "<div style='text-align:left; padding:2px;'>" +
+                                      tipRows + 
+                                      "</div>";
+
+                // We use data-bs-title for the content
+                // We add the 'sector-tooltip' class to find it later
+                return '<span class="crumb-num">' + (i+1) + '.</span>' + 
+                       '<span class="sector-tooltip" data-bs-title="' + tooltipHTML + '" style="cursor:help; border-bottom:1px dotted #555;">' + 
+                       s.name + '</span>';
             }}).join('<span class="crumb-sep"> > </span>');
         }}
 
+        // 3. CLEANUP: Dispose of old tooltips to prevent freezing/memory leaks
+        $('.sector-tooltip').each(function() {{
+            var oldTip = bootstrap.Tooltip.getInstance(this);
+            if (oldTip) oldTip.dispose();
+        }});
+
+        // 4. UPDATE DOM with new text
         $('#rankBreadcrumb').html(getTopSectors(1));  
         $('#surgeBreadcrumb').html(getTopSectors(12)); 
         $('#mntBreadcrumb').html(getTopSectors(16));  
-    }}
 
-    function toggleMcap(type) {{
-        if (type === 'all') {{
-            $('input[name="mcapFilter"]').not('#mcapAll').prop('checked', false);
-        }} else {{
-            $('#mcapAll').prop('checked', false);
-            if ($('input[name="mcapFilter"]:checked').length === 0) {{ $('#mcapAll').prop('checked', true); }}
-        }}
-        table.draw();
+        // 5. RE-INITIALIZE Tooltips manually
+        // We use sanitize: false to allow our custom HTML styling
+        $('.sector-tooltip').each(function() {{
+            new bootstrap.Tooltip(this, {{
+                html: true,
+                sanitize: false,
+                animation: false, // Disables the "fade in" which uses transparency
+                container: 'body'
+            }});
+        }});
     }}
 
     function toggleLegend() {{
@@ -1470,6 +1543,21 @@ def export_interactive_html(df, ai_summary=""):
         document.body.appendChild(a); a.click(); document.body.removeChild(a);
     }}
 
+    function toggleMcap(type) {{
+        if (type === 'all') {{
+            // If "All" is clicked, uncheck all other specific filters
+            $('input[name="mcapFilter"]').not('#mcapAll').prop('checked', false);
+        }} else {{
+            // If a specific filter is clicked, uncheck "All"
+            $('#mcapAll').prop('checked', false);
+            // If nothing is checked anymore, default back to "All"
+            if ($('input[name="mcapFilter"]:checked').length === 0) {{ 
+                $('#mcapAll').prop('checked', true); 
+            }}
+        }}
+        table.draw(); // Refresh the table results
+    }}
+
     $(document).ready(function(){{ 
         table = $('.table').DataTable({{
             "order":[[0,"asc"]], 
@@ -1501,32 +1589,38 @@ def export_interactive_html(df, ai_summary=""):
         }});
 
         $.fn.dataTable.ext.search.push(function(settings, data) {{
+            // 1. Stock/ETF Toggle Logic
             var typeTag = data[19] || ""; 
             var viewMode = $('input[name="btnradio"]:checked').attr('id');
             var isETF = typeTag.includes("ETF");
             if (viewMode == 'btnradio2' && isETF) return false; 
             if (viewMode == 'btnradio3' && !isETF) return false; 
             
+            // 2. Market Cap Filter Logic
             if (!$('#mcapAll').is(':checked')) {{
-                var mcap = parseVal(data[21]); 
+                var mcap = parseVal(data[21]); // Column 21 is MCap (Hidden)
                 var match = false;
+                
                 if ($('#mcapMega').is(':checked') && mcap >= 200000000000) match = true;
                 if ($('#mcapLarge').is(':checked') && (mcap >= 10000000000 && mcap < 200000000000)) match = true;
                 if ($('#mcapMid').is(':checked') && (mcap >= 2000000000 && mcap < 10000000000)) match = true;
                 if ($('#mcapSmall').is(':checked') && (mcap >= 250000000 && mcap < 2000000000)) match = true;
                 if ($('#mcapMicro').is(':checked') && mcap < 250000000) match = true;
+                
                 if (!match) return false; 
             }}
 
+            // 3. Price & Volume Filters
             var minP = parseVal($('#minPrice').val()), maxP = parseVal($('#maxPrice').val());
             var p = parseVal(data[5]);
             if (minP > 0 && p < minP) return false;
             if (maxP > 0 && p > maxP) return false;
             
             var minV = parseVal($('#minVol').val()), maxV = parseVal($('#maxVol').val());
-            var v = parseVal(data[20]);
+            var v = parseVal(data[20]); // Column 20 is AvgVol (Hidden)
             if (minV > 0 && v < minV) return false;
             if (maxV > 0 && v > maxV) return false;
+            
             return true;
         }});
 
