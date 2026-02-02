@@ -11808,5 +11808,41 @@
         "mcap": 1487439744,
         "currency": "USD",
         "description": "NANO Nuclear Energy Inc. operates as a nuclear energy company. The company is developing KRONOS MMR Energy System, a high-temperature gas-cooled reactor; LOKI MMR, a compact microreactor designed for remote and specialized applications; ZEUS, a solid core battery reactor; and ODIN, a low-pressure salt coolant reactor. It is also developing a high-assay low-enriched uranium fuel processing facility to provide a fuel pipeline for the nuclear reactor industry, and fuel transportation and nuclear consultation businesses. The company was incorporated in 2022 and is based in New York, New York."
+    },
+    "WT": {
+        "ticker": "WT",
+        "name": "WisdomTree, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 2279584256,
+        "currency": "USD",
+        "description": "WisdomTree, Inc., through its subsidiaries, operates as an exchange-traded funds (ETFs) sponsor and asset manager. It offers ETFs in equities, currency, fixed income, and alternatives asset classes. The company also licenses its indexes to third parties for proprietary products, as well as offers a platform to promote the use of WisdomTree ETFs in 401(k) plans. It develops index using its fundamentally weighted index methodology. In addition, the company provides investment advisory services. The company was founded in 1985 and is based in New York, New York."
+    },
+    "DHI": {
+        "ticker": "DHI",
+        "name": "D.R. Horton, Inc.",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 43327254528,
+        "currency": "USD",
+        "description": "D.R. Horton, Inc. operates as a homebuilding company in East, North, Southeast, South Central, Southwest, and Northwest regions in the United States. It engages in the acquisition and development of land; and construction and sale of residential homes in 126 markets across 36 states under the names of D.R. Horton. The company also constructs and sells single-family detached homes; and attached homes, such as townhomes and duplexes. In addition, it provides mortgage financing and title agency services; and engages in the residential lot development business. Further, the company develops, constructs, owns, leases, and sells multi-family and single-family rental properties; conducts insurance-related operations; and owns water rights and other water-related assets, as well as non-residential real estate, including ranch land and improvements. It primarily serves homebuyers. D.R. Horton, Inc. was founded in 1978 and is headquartered in Arlington, Texas."
+    },
+    "ADV": {
+        "ticker": "ADV",
+        "name": "Advantage Solutions Inc.",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 352373664,
+        "currency": "USD",
+        "description": "Advantage Solutions Inc. provides business solutions to consumer packaged goods companies and retailers in North America, Asia Pacific, and Europe. It operates in three segments: Branded Services, Experiential Services, and Retailer Services. The company offers brokerage services to branded consumer goods manufacturers and retailers; and analytical services, such as retailer point-of-sale, primary market, and shopper research, as well as services, including selling to retailers, retail merchandising, and omni-channel marketing. It also provides supply chain and logistics services; retailers end-to-end solutions that includes private brand strategy, merchandising, retail media, and aisle/shelf optimization; in-store merchandising or reset services; and advisory and agency services. The company was formerly known as Karman Holding Corp. and changed its name to Advantage Solutions Inc. in March 2016. The company was founded in 1987 and is headquartered in Clayton, Missouri."
+    },
+    "ENB": {
+        "ticker": "ENB",
+        "name": "Enbridge Inc",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 106617724928,
+        "currency": "USD",
+        "description": "Enbridge Inc., together with its subsidiaries, operates as an energy infrastructure company. The company operates through four segments: Liquids Pipelines, Gas Transmission, Gas Distribution and Storage, and Renewable Power Generation. The Liquids Pipelines segment operates pipelines and related terminals to transport various grades of crude oil and other liquid hydrocarbons in Canada and the United States. This segment also provides physical commodity marketing and logistical services, and crude oil marketing services. The Gas Transmission and Midstream segment invests in natural gas pipelines and gathering and processing facilities in Canada and the United States. The Gas Distribution and Storage segment is involved in natural gas utility operations serving residential, commercial, and industrial customers in Ontario, as well as natural gas distribution activities in Quebec. The Renewable Power Generation segment operates wind, solar, geothermal, waste heat recovery, and transmission assets in North America. The company was formerly known as IPL Energy Inc. and changed its name to Enbridge Inc. in October 1998. Enbridge Inc. was founded in 1949 and is headquartered in Calgary, Canada."
     }
 }
