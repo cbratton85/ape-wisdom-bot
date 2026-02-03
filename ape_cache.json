@@ -13569,5 +13569,59 @@
         "mcap": 13317216,
         "currency": "USD",
         "description": "Cyngn Inc., an autonomous vehicle (AV) technology company, develops autonomous driving software in the United States. The company develops Enterprise Autonomy Suite, which consists of DriveMod, a modular industrial vehicle autonomous driving software; and Cyngn Insight, a customer-facing tool suite for monitoring and managing AV fleets and generating/aggregating/analyzing data. It also develops Cyngn Evolve, an internal tool suite and infrastructure that facilitates artificial intelligence and machine learning training to continuously enhance algorithms and models, as well as provides a simulation framework to ensure that data collected in the field can be applied to validating new releases. Cyngn Inc. was incorporated in 2013 and is headquartered in Mountain View, California."
+    },
+    "TNXP": {
+        "ticker": "TNXP",
+        "name": "Tonix Pharmaceuticals Holding C",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 220082672,
+        "currency": "USD",
+        "description": "Tonix Pharmaceuticals Holding Corp., a biopharmaceutical company, focuses on developing and commercializing therapeutics to treat and prevent human disease. It markets Zembrace SymTouch and Tosymra for the treatment of acute migraine with or without aura in adults. Its portfolio focuses on central nervous system disorders, as well as immunology, infectious disease, and rare disease product candidates. The company's products pipeline include TNX-102 SL (cyclobenzaprine HCl sublingual tablet), for the management of fibromyalgia; and is being developed to prevent and treat acute stress reaction, posttraumatic stress disorder, Alzheimer's disease, alcohol use disorder, and multi-site pain associated with Long COVID. It also develops TNX-1300, a double-mutant cocaine esterase, which is in Phase 2 clinical trials for the treatment of cocaine intoxication; and TNX-1900, an intranasal potentiated oxytocin for the treatment of binge eating disorder, adolescent obesity, and bone health in pediatric autism, as well as for social anxiety disorder. In addition, the company develops TNX-1500, an Fc-modified humanized monoclonal antibody indicated to prevent organ transplant rejection, as well as to treat autoimmune conditions; TNX-1700, a recombinant Trefoil Factor Family 2 fusion protein for the treatment of gastric and colorectal cancers; TNX-801 that is in the pre-IND development stage for protection against smallpox and mpox; and TNX-1800, a live virus vaccine for SARS-CoV-2. Its rare disease portfolio consists of TNX-2900, an intranasal potentiated oxytocin to treat for Prader-Willi syndrome. The company has collaboration agreement with Bilthoven Biologicals to advance TNX-801 and Makana Therapeutics, Inc. to study TNX-1500 for human-compatible organs and cells for the treatment of organ failure. Tonix Pharmaceuticals Holding Corp. is headquartered in Chatham, New Jersey."
+    },
+    "LNTH": {
+        "ticker": "LNTH",
+        "name": "Lantheus Holdings, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 4521611264,
+        "currency": "USD",
+        "description": "Lantheus Holdings, Inc. develops, manufactures, and commercializes diagnostic and therapeutic products that assist clinicians in diagnosis and treatment of heart, cancer, and other diseases worldwide. The company offers DEFINITY, an injectable ultrasound enhancing agent used in echocardiography exams; TechneLite, a technetium generator for nuclear medicine procedures; Xenon-133, a radiopharmaceutical gas to assess pulmonary function; Neurolite, an injectable imaging agent to identify the area within the brain where blood flow has been blocked or reduced due to stroke; Cardiolite, an injectable Tc-99m-labeled imaging agent to assess blood flow to the muscle of the heart; and PYLARIFY, an F 18-labelled PSMA-targeted PET imaging agent used for imaging of PSMA positive-lesions in men with prostate cancer. It also provides Automated Bone Scan Index that calculates the disease burden of prostate cancer by detecting and classifying bone scan tracer uptakes as metastatic or benign lesions using an artificial neural network; RELISTOR for opioid-induced constipation; and aPROMISE, an artificial intelligence medical device software; PYLARIFY AI, an medical device software to perform quantitative assessment of PSMA PET/CT images in prostate cancer; and flurpiridaz used to assess blood flow to the heart. In addition, it develops 1095, a PSMA-targeted iodine-131-labeled small molecule; PNT2002, a radiopharmaceutical therapy to treat mCRPC; PNT2003, an SSTR therapy to patients with SSTR-positive neuroendocrine tumors; MK-6240, a F 18-labeled PET imaging agent for Tau tangles in Alzheimer's disease; LNTH-2401, a novel radiodiagnostic targeting the gastrin-releasing peptide receptor; LNTH-2402; LNTH-2403; LNTH-2404; and LNTH-1363S, an fibroblast activation protein, alpha, copper-64 labeled PET imaging agent. It has collaboration agreements with GE Healthcare; POINT; Regeneron; and Ratio Therapeutics LLC. The company was founded in 1956 and is based in Bedford, Massachusetts."
+    },
+    "PSI": {
+        "ticker": "PSI",
+        "name": "Invesco Semiconductors ETF",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 305024000,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 90% of its total assets in securities that comprise the underlying index. The underlying index is composed of common stocks of 30 U.S. semiconductor companies. These companies are engaged principally in the manufacture of semiconductors. The fund is non-diversified."
+    },
+    "GXAI": {
+        "ticker": "GXAI",
+        "name": "Gaxos.ai Inc.",
+        "meta": "Electronic Gaming & Multimedia",
+        "type": "EQUITY",
+        "mcap": 10044070,
+        "currency": "USD",
+        "description": "Gaxos.ai Inc. engages in developing artificial intelligence applications. The company offers Gaxos Labs, a transformative generative AI service that provides AI-powered creativity, monetization, seamless integration, API, dynamic content generation, and customized solutions to game developers and publishers; and Gaxos, a gaming platform develop, design, acquire, and manage conventional games and combine these games with unconventional game mechanisms. The company was formerly known as The NFT Gaming Company, Inc. and changed its name to Gaxos.ai Inc. in January 2024. Gaxos.ai Inc. was incorporated in 2021 and is based in Roseland, New Jersey."
+    },
+    "WTM": {
+        "ticker": "WTM",
+        "name": "White Mountains Insurance Group",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 5230847488,
+        "currency": "USD",
+        "description": "White Mountains Insurance Group, Ltd., through its subsidiaries, engages in the provision of insurance and other financial services in the United States. It operates through four segments: Ark/WM Outrigger, HG Global, Kudu, and Bamboo. The Ark/WM Outrigger segment offers insurance and reinsurance products, including property, specialty, marine and energy, casualty, and accident and health. The HG Global segment provides reinsurance to BAM, focusing on single risk limits for small-to-medium sized, and public investment grade municipal bonds that are issued to finance public purpose projects, including schools, utilities, and transportation facilities. The Kudu segment offers capital solutions for boutique asset and wealth managers for various purposes comprising generational ownership transfers, management buyouts, acquisition and growth finance, and legacy partner liquidity, as well as strategic assistance to investees. The Bamboo segment is involved in the operation of a capital-light, tech- and data-enabled insurance distribution platform, which provides homeowners' insurance and related products to the residential property market. White Mountains Insurance Group, Ltd. was incorporated in 1980 and is headquartered in Hamilton, Bermuda."
+    },
+    "KEYS": {
+        "ticker": "KEYS",
+        "name": "Keysight Technologies Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 38359887872,
+        "currency": "USD",
+        "description": "Keysight Technologies, Inc. provides electronic design and test solutions worldwide. The company operates through Communications Solutions Group and Electronic Industrial Solutions Group segments. It offers electronic design and test software, instrumentation, systems, and related services used in the design, simulation, validation, manufacturing, installation, and optimization of communication systems in wireless, data center ecosystem, enterprise, and aerospace, defense, and government end markets. The company also develops and deploys communications products and services; and operates communications networks. In addition, it provides electronic design, test and simulation software, instrumentation, systems, computer-aided engineering solutions, and related services used in the design, simulation, validation, manufacturing, installation, and optimization of electronic equipment in the automotive and energy, semiconductor solutions, and general electronics industries. Further, the company offers product support; technical and application support for hardware, software, and solutions; and professional services, such as installation, training, engineering, optimization of equipment and solution adoption, utilization, and integration services. Additionally, it provides oscilloscopes; generators, sources and power supplies; software products; analyzers; wireless products; network test and security; modular instruments; meters; network visibility; and other products, as well as KeysightCare support plans, calibration, repair, technology refresh, test as a service, network/security, consulting, financial alternatives, education, software testing, support, managed, device vulnerability analysis, support portal, and used equipment services. Keysight Technologies, Inc. was founded in 1939 and is headquartered in Santa Rosa, California."
     }
 }
