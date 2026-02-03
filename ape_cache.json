@@ -13434,5 +13434,32 @@
         "mcap": 1233196160,
         "currency": "USD",
         "description": "Ramaco Resources, Inc. engages in the development, operation, and sale of metallurgical coal. Its development portfolio includes the Elk Creek project that covers an area of approximately 20,200 acres located in southern West Virginia; the Berwind property covering an area of approximately 62,500 acres situated on the border of West Virginia and Virginia; the Knox Creek property, which covers an area of approximately 64,050 acres is located in Virginia; the Maben property covering an area of approximately 28,000 acres situated in southwestern Pennsylvania southern West Virginia; and the Brook Mine property that covers an area of approximately 16,000 acres located in northeastern Wyoming. The company serves blast furnace steel mills and coke plants in North America, as well as metallurgical coal consumers internationally. Ramaco Resources, Inc. was founded in 2015 and is based in Lexington, Kentucky."
+    },
+    "SII": {
+        "ticker": "SII",
+        "name": "Sprott Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 3109822720,
+        "currency": "USD",
+        "description": "Sprott Inc. is a publicly owned asset management holding company. Through its subsidiaries, the firm provides asset management, portfolio management, wealth management, fund management, and administrative and consulting services to its clients. It offers mutual funds, hedge funds, and offshore funds, along with managed accounts. Further, the firm also provides broker-dealer activities. Sprott Inc. was formed on February 13, 2008 and is based in Toronto, Canada."
+    },
+    "REGN": {
+        "ticker": "REGN",
+        "name": "Regeneron Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 80022642688,
+        "currency": "USD",
+        "description": "Regeneron Pharmaceuticals, Inc. discovers, invents, develops, manufactures, and commercializes medicines for treating various diseases worldwide. The company's products include EYLEA injection to treat wet age-related macular degeneration and diabetic macular edema; myopic choroidal neovascularization; diabetic retinopathy; neovascular glaucoma; and retinopathy of prematurity. It also provides Dupixent injection to treat atopic dermatitis and asthma in adults and pediatrics; Libtayo injection to treat metastatic or locally advanced cutaneous squamous cell carcinoma; Praluent injection for heterozygous familial hypercholesterolemia (HoFH) or clinical atherosclerotic cardiovascular disease in adults; REGEN-COV for covid-19; and Kevzara solution for treating rheumatoid arthritis in adults. In addition, the company offers Inmazeb injection for infection caused by Zaire ebolavirus; ARCALYST injection for cryopyrin-associated periodic syndromes, including familial cold auto-inflammatory syndrome and muckle-wells syndrome; and ZALTRAP injection for intravenous infusion to treat metastatic colorectal cancer; Evkeeza for treatment of HoFH; Ordspono for Follicular lymphoma and Diffuse large B-cell lymphoma; and Veopoz for CD55-deficient protein-losing enteropathy. Further, it develops product candidates for treating patients with eye, allergic and inflammatory, cardiovascular and metabolic, infectious, and rare diseases; and cancer, pain, and hematologic conditions. It has collaboration with Mammoth Biosciences, Inc. to research, develop and commercialize in vivo CRISPR-based gene editing therapies for multiple tissues and cell types; with Sonoma Biotherapeutics, Inc. to discover, develop, and commercialize engineered regulatory T cell therapies; and Tessera Therapeutics, Inc. to develop and commercialize TSRA-196, an investigational gene editing therapy for Alpha-1 antitrypsin deficiency. The company was incorporated in 1988 and is headquartered in Tarrytown, New York."
+    },
+    "QSI": {
+        "ticker": "QSI",
+        "name": "Quantum-Si Incorporated",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 237038640,
+        "currency": "USD",
+        "description": "Quantum-Si incorporated, a life sciences company, engages in the development of single-molecule detection platform to enable Next Generation Protein Sequencing (NGPS). The company offers Platinum NGPS instrument that provides single molecule amino acid level resolution with a streamlined workflow, including automated data analysis that accessible to researchers in all laboratory types; Platinum Pro NGPS instrument, a single molecule amino acid resolution, which provides an enhanced user interface, cloud or on instrument data analysis and an available pro mode; Library preparation kits to prepare protein sample for sequencing; Barcoding Kits to optimize the workflow and performance of technology; and Sequencing Kits contains the reagents and consumables used to perform NGPS on the Platinum or Platinum Pro instrument. It also provides Platinum Analysis Software, a cloud-based solution that automates data analysis workflows and provides a user-friendly interface and visualization of the sequencing results. Its products are used in antibody characterization, biomarker identification, protein identification, protein variants, protein barcoding, and post translational modification analysis applications. Quantum-Si incorporated was founded in 2013 is headquartered in Branford, Connecticut."
     }
 }
