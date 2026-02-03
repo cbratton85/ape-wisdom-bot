@@ -22,9 +22,9 @@ CACHE_FILE = os.path.join(SCRIPT_DIR, "ape_cache.json")
 MARKET_DATA_CACHE_FILE = os.path.join(SCRIPT_DIR, "market_data.pkl")
 HISTORY_FILE = os.path.join(SCRIPT_DIR, "market_history.json")
 DELISTED_CACHE_FILE = os.path.join(SCRIPT_DIR, "delisted_cache.json")
-CACHE_EXPIRY_SECONDS = 1800
+CACHE_EXPIRY_SECONDS = 1800 # 30 minutes
 RETENTION_DAYS = 14
-DELISTED_RETRY_DAYS = 7
+DELISTED_RETRY_DAYS = 1
 TOOLTIP_HISTORY_DAYS = 12
 
 # --- FILTERS & LAYOUT ---
@@ -32,19 +32,11 @@ MIN_PRICE = 1.00
 MIN_AVG_VOLUME = 100000
 AVG_VOLUME_DAYS = 30
 NAME_MAX_WIDTH = 50
-TICKER_FIXES = {}
+LOTTERY_SIZE = 1
 REQUEST_DELAY_MIN = 1.5
 REQUEST_DELAY_MAX = 3.0
-PERMANENT_BLACKLIST = ['JW', 'RE', 'OCX', 'BABY', 'ELY',
-                       'SNP', 'SLAM', 'OG', 'DTC', 'CO',
-                       'CBD', 'GAN', 'AUD', 'TTM', 'FRMI',
-                       'ERJ', 'DS', 'ABB', 'SAVE', 'HEAR',
-                       'FI', 'TGIF', 'CHAD', 'QED', 'WFH',
-                       'CN', 'SQ', 'FM', 'MOM', 'BOSS',
-                       'SLT', 'CSA', '', '', '',
-                       '', '', '', '', '',
-                       '', '', '', '', ''
-                       ]
+TICKER_FIXES = {}
+PERMANENT_BLACKLIST = ['']
 
 # ANSI COLORS
 C_GREEN = '\033[92m'
@@ -72,8 +64,8 @@ class HistoryTracker:
         now_ts = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d %H:%M")
         cutoff = datetime.datetime.now(datetime.UTC).replace(tzinfo=None) - datetime.timedelta(days=RETENTION_DAYS)
         
-        # --- UPDATE THIS LIST ---
-        # Added: velocity, accel, streak, upv_chg (to prevent overwriting with bad API data)
+        # --- EXCLUDE LIST ---
+        # Keeps calculated fields safe from being overwritten by raw API data
         exclude_list = [
             'sym', 'name', 'meta', 'history', 'desc', 'type', 'avgvol', 'mcap', 'rolling',
             'z_rank_plus', 'z_surge', 'z_mnt_perc', 'z_upvotes', 'z_accel', 'z_upv_plus', 
@@ -95,33 +87,22 @@ class HistoryTracker:
 
             entry = {}
             for col, val in row.items():
-                # Create standardized column name
                 col_clean = col.lower().replace('%', '_perc').replace('+', '_plus')
                 
-                # Filter exclusions
                 if col_clean in exclude_list:
                     continue
 
-                # Assignment and Rounding logic
                 if col_clean in no_round_list:
                     entry[col_clean] = val
-
-                elif isinstance(val, (np.integer, int)):
-                    entry[col_clean] = int(val)
-
-                elif isinstance(val, (np.floating, float)):
+                elif isinstance(val, (int, float, np.integer, np.floating)):
                     decimals = precision_map.get(col_clean, 2)
-                    
-                    # FIX: If precision is 0, convert to Integer to remove ".0"
                     if decimals == 0:
                         entry[col_clean] = int(round(float(val)))
                     else:
                         entry[col_clean] = round(float(val), decimals)
-
                 else:
                     entry[col_clean] = str(val)
                 
-
             # Save this ticker's current snapshot
             self.data[ticker][now_ts] = entry
 
@@ -140,22 +121,28 @@ class HistoryTracker:
             if valid_entries:
                 new_data_cleaned[ticker] = valid_entries
         
-        # 5. Final Save to File
+        # 5. Update Memory (Wait for flush() to write to disk)
         self.data = new_data_cleaned
-        with open(self.filepath, 'w') as f:
-            json.dump(self.data, f, indent=4)
 
     def get_metrics(self, ticker, current_price, current_mnt, current_rank_plus, current_upvotes):
         if ticker not in self.data or not self.data[ticker]:
-            return {"vel": 0, "accel": 0, "upv_chg": 0, "streak": 1, "rolling_trend": 0, "hist": {}}
+            return {"vel": 0, "accel": 0, "upv_chg": 0, "streak": 0, "rolling_trend": 0, "hist": {}}
 
         dates = sorted(self.data[ticker].keys())
         
-        # --- MOVE CALCULATION LOGIC TO THE TOP ---
+        # --- CALCULATION LOGIC ---
         current_entry = self.data[ticker][dates[-1]]
         prev_entry = self.data[ticker][dates[-2]] if len(dates) > 1 else current_entry
 
-        curr_rank = current_rank_plus # Using the live passed-in value
+        # === FORCE UPDATE PRICE ===
+        # This guarantees the history file gets the fresh price regardless of save() logic
+        try:
+            current_entry['price'] = round(float(current_price), 2)
+            current_entry['upvotes'] = int(current_upvotes)
+        except:
+            pass # Keep existing if conversion fails
+
+        curr_rank = current_rank_plus 
         prev_rank = prev_entry.get('rank_plus', 0)
         velocity = int(curr_rank - prev_rank)
 
@@ -176,16 +163,12 @@ class HistoryTracker:
             elif val < 0: rolling_trend = rolling_trend - 1 if rolling_trend <= 0 else -1
 
         # --- UPDATE THE ENTRY IN MEMORY NOW ---
-        # This makes sure the history loop below sees the +15, not the 0
         current_entry['velocity'] = velocity
         current_entry['accel'] = accel
         current_entry['upv_plus'] = upv_chg
         current_entry['streak'] = rolling_trend
-        # Make sure price and upvotes are synced too
-        current_entry['price'] = current_price
-        current_entry['upvotes'] = current_upvotes
-
-        # --- NOW BUILD THE HISTORY MAP ---
+        
+        # --- BUILD THE HISTORY MAP ---
         recent_dates = dates[-TOOLTIP_HISTORY_DAYS:]
         history_map = {
             'rank': [], 'rank_plus': [], 'price': [], 'ment': [], 'upvotes': [], 
@@ -209,7 +192,7 @@ class HistoryTracker:
             history_map['ment'].append(get_val(entry, 'ment'))
             history_map['upvotes'].append(get_val(entry, 'upvotes'))
             history_map['accel'].append(get_val(entry, 'accel', signed=True))
-            history_map['velocity'].append(get_val(entry, 'velocity', signed=True)) # <--- Will now show +15
+            history_map['velocity'].append(get_val(entry, 'velocity', signed=True)) 
             history_map['streak'].append(get_val(entry, 'streak', signed=True))
             history_map['upv_plus'].append(get_val(entry, 'upv_plus', signed=True))
             history_map['eff'].append(get_val(entry, 'eff'))
@@ -234,16 +217,18 @@ class HistoryTracker:
         with open(self.filepath, 'w') as f:
             json.dump(self.data, f, indent=4)
 
-def load_cache():
-    if os.path.exists(CACHE_FILE):
+def load_cache(filepath):
+    """Generic loader for any JSON cache file"""
+    if os.path.exists(filepath):
         try:
-            with open(CACHE_FILE, 'r') as f: return json.load(f)
+            with open(filepath, 'r') as f: return json.load(f)
         except: return {}
     return {}
 
-def save_cache(cache_data):
+def save_cache(filepath, cache_data):
+    """Generic saver for any JSON cache file"""
     try:
-        with open(CACHE_FILE, 'w') as f: json.dump(cache_data, f, indent=4)
+        with open(filepath, 'w') as f: json.dump(cache_data, f, indent=4)
     except: pass
 
 def fetch_meta_data_robust(ticker):
@@ -280,66 +265,95 @@ def fetch_meta_data_robust(ticker):
 def filter_and_process(stocks):
     if not stocks: return pd.DataFrame()
 
-    local_cache = load_cache()
+    # --- LOAD CACHES SEPARATELY ---
+    local_cache = load_cache(CACHE_FILE)           
+    delisted_cache = load_cache(DELISTED_CACHE_FILE) 
+    
     now = datetime.datetime.now(datetime.UTC)
+    updated_delisted = False # Track if we need to save the delisted file
 
-    # 1. RETRY CHECK (Only for items NOT in blacklist)
+    # 1. THE LOTTERY (Random Retry)
+    # Instead of checking dates, we pick a few random prisoners to set free and re-test.
     tickers_to_retry = []
-    for t, data in local_cache.items():
-        if t in PERMANENT_BLACKLIST: continue
-        if data.get('delisted'):
-            last_checked_str = data.get('last_checked', '2020-01-01')
-            try:
-                last_date = datetime.datetime.strptime(last_checked_str, "%Y-%m-%d").replace(tzinfo=datetime.timezone.utc)
-                if (now - last_date).days >= DELISTED_RETRY_DAYS:
-                    tickers_to_retry.append(t)
-            except:
-                tickers_to_retry.append(t)
+    banned_tickers = list(delisted_cache.keys())
+    
+    if banned_tickers:
+        # Don't try to pick more than we have
+        draw_count = min(len(banned_tickers), LOTTERY_SIZE)
+        
+        # Pick random winners
+        tickers_to_retry = random.sample(banned_tickers, draw_count)
+        
+        if tickers_to_retry:
+            print(f"{C_GREEN}[+] 🎰 LOTTERY TIME: Re-checking {len(tickers_to_retry)} banned tickers: {tickers_to_retry}{C_RESET}")
+            
+            # Remove them from the cache so the script treats them as "new" and checks them
+            for t in tickers_to_retry:
+                if t in delisted_cache:
+                    del delisted_cache[t]
+            
+            # We must save immediately so the loop below sees them as 'valid'
+            # If they fail again later, they will be re-added to this file/dict
+            updated_delisted = True
 
-    if tickers_to_retry:
-        print(f"{C_GREEN}[+] Re-checking {len(tickers_to_retry)} tickers from penalty box...{C_RESET}")
-        for t in tickers_to_retry:
-            if t in local_cache: del local_cache[t]
-        save_cache(local_cache)
-
-    # 2. MAIN FILTER LOOP
+    # 2. MAIN FILTER LOOP 
     us_tickers = []
+    
     for s in stocks:
         raw_ticker = s['ticker']
         t = TICKER_FIXES.get(raw_ticker, raw_ticker.replace('.', '-'))
-        if t in PERMANENT_BLACKLIST or raw_ticker in PERMANENT_BLACKLIST: continue
-        if local_cache.get(t, {}).get('delisted'): continue
+        
+        if t in PERMANENT_BLACKLIST: continue
+        
+        # If it's in the delisted cache (and didn't win the lottery), SKIP IT.
+        if t in delisted_cache: continue
+        
         us_tickers.append(t)
     
     us_tickers = list(set(us_tickers))
     tracker = HistoryTracker(HISTORY_FILE)
     
     # 3. METADATA FETCHING
-    valid_tickers = [t for t in us_tickers if not local_cache.get(t, {}).get('delisted')]
-    missing = [t for t in valid_tickers if t not in local_cache and t not in PERMANENT_BLACKLIST]
+    missing = [t for t in us_tickers if t not in local_cache and t not in delisted_cache]
     
     if missing:
         print(f"{C_YELLOW}Fetching metadata for {len(missing)} NEW items...{C_RESET}")
         for i, t in enumerate(missing):
             if i % 10 == 0 and i > 0: print(f"  > Progress: {i}/{len(missing)} metadata items fetched...")
+            
             res = fetch_meta_data_robust(t)
+            
             if res: 
-                if res.get('meta') == 'Unknown' and res.get('mcap') == 0:
-                     print(f"{C_RED}  > {t} seems invalid. Adding to penalty box.{C_RESET}")
-                     local_cache[t] = {'delisted': True, 'last_checked': now.strftime("%Y-%m-%d"), 'reason': 'Metadata 404'}
-                else:
-                    local_cache[res['ticker']] = res
+                local_cache[res['ticker']] = res
+            else:
+                # 404 Error - Metadata Missing
+                print(f"{C_RED}  > {t} metadata 404/Not Found. Adding to DELISTED cache.{C_RESET}")
+                delisted_cache[t] = {
+                    'delisted': True, 
+                    'last_checked': now.strftime("%Y-%m-%d"), 
+                    'reason': 'Metadata 404'
+                }
+                updated_delisted = True
+
             time.sleep(0.75) 
-        save_cache(local_cache)
+
+        save_cache(CACHE_FILE, local_cache)
 
     # 4. MARKET DATA FETCHING
+    valid_tickers = [t for t in us_tickers if t not in delisted_cache]
+    
     market_data = pd.DataFrame()
     use_cache = os.path.exists(MARKET_DATA_CACHE_FILE) and (time.time() - os.path.getmtime(MARKET_DATA_CACHE_FILE)) < CACHE_EXPIRY_SECONDS
     
     if use_cache:
         print(f"{C_CYAN}[#] Loading market data from cache...{C_RESET}")
-        market_data = pd.read_pickle(MARKET_DATA_CACHE_FILE)
-    else:
+        try:
+            market_data = pd.read_pickle(MARKET_DATA_CACHE_FILE)
+        except:
+            print(f"{C_RED}[!] Cache corrupt, re-downloading.{C_RESET}")
+            use_cache = False
+
+    if not use_cache:
         print(f"{C_YELLOW}[!] Downloading data for {len(valid_tickers)} tickers...{C_RESET}")
         CHUNK_SIZE = 100
         for i in range(0, len(valid_tickers), CHUNK_SIZE):
@@ -359,22 +373,35 @@ def filter_and_process(stocks):
 
     # 5. BUILD THE DATAFRAME
     final_list = []
+
     for stock in stocks:
         t = TICKER_FIXES.get(stock['ticker'], stock['ticker'].replace('.', '-'))
-        if t in PERMANENT_BLACKLIST: continue
+        if t in PERMANENT_BLACKLIST or t in delisted_cache: continue
         
         try:
+            hist = pd.DataFrame()
             if isinstance(market_data.columns, pd.MultiIndex):
-                if t not in market_data.columns.levels[0]: continue
-                hist = market_data[t].dropna()
+                if t in market_data.columns.levels[0]:
+                    hist = market_data[t].dropna()
             else:
-                if t not in market_data.columns: continue
-                hist = market_data[t].dropna()
+                if t in market_data.columns:
+                    hist = market_data[t].dropna()
 
-            if hist.empty: continue
+            # --- DEAD TICKER CHECK (LOTTERY FAILURE CATCHER) ---
+            # If a lottery winner has NO price data, this line catches it 
+            # and immediately throws it back into the delisted_cache.
+            if hist.empty: 
+                print(f"{C_RED}  > {t} has NO price data. Adding to DELISTED cache.{C_RESET}")
+                delisted_cache[t] = {
+                    'delisted': True, 
+                    'last_checked': now.strftime("%Y-%m-%d"), 
+                    'reason': 'No Price Data'
+                }
+                updated_delisted = True
+                continue
 
             curr_p = hist['Close'].iloc[-1]
-            clean_hist = hist['Volume'].iloc[:-1] 
+            clean_hist = hist['Volume'] 
             actual_vol_days = min(len(clean_hist), AVG_VOLUME_DAYS)
             avg_v = clean_hist.tail(actual_vol_days).mean()
             
@@ -405,10 +432,8 @@ def filter_and_process(stocks):
             
             conviction = (current_upvotes / cur_m) if cur_m > 0 else 0
             safe_surge = s_perc if s_perc > 10 else 10 
-            efficiency = rank_plus / (safe_surge / 100.0) # Normalize surge to a float (1.5x instead of 150%)
+            efficiency = rank_plus / (safe_surge / 100.0) 
 
-            # --- CHANGE: Don't call get_metrics here. It's too early. ---
-            # Just put placeholders. The refill loop at the bottom handles it.
             final_list.append({
                 "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
                 "Price": float(curr_p), "AvgVol": int(avg_v), "Surge": s_perc,
@@ -416,7 +441,6 @@ def filter_and_process(stocks):
                 "Upvotes": current_upvotes, "Meta": info.get('meta', '-'),
                 "Desc": info.get('description', ''), "Squeeze": squeeze_score,
                 "MCap": mcap, "Conv": conviction, "Eff": efficiency,
-                # PLACEHOLDERS
                 "Accel": 0, "Upv+": 0, "Velocity": 0, "Streak": 0, 
                 "Rolling": 0, "History": "New"
             })
@@ -424,7 +448,12 @@ def filter_and_process(stocks):
         except Exception as e:
             continue
 
-    # 6. SCORING & SAVING
+    # --- SAVE UPDATED DELISTED CACHE IF ANYTHING CHANGED ---
+    if updated_delisted:
+        print(f"{C_GREEN}[+] Saving updated delisted cache...{C_RESET}")
+        save_cache(DELISTED_CACHE_FILE, delisted_cache)
+
+    # 6. SCORING & SAVING (Identical to before)
     df = pd.DataFrame(final_list)
     if not df.empty and 'Sym' in df.columns:
         df = df.drop_duplicates(subset=['Sym'], keep='first')
@@ -449,34 +478,25 @@ def filter_and_process(stocks):
         df['z_Squeeze'] = 0 if std_sq == 0 else (log_sq - mean_sq) / std_sq
         df['Heat'] = df['Master_Score']
 
-        # --- THE CRITICAL STEP: SAVE FIRST ---
         tracker.save(df) 
 
-        # --- THEN UPDATE WITH REAL NUMBERS ---
         for index, row in df.iterrows():
             m = tracker.get_metrics(row['Sym'], row['Price'], row['MENT'], row['Rank+'], row['Upvotes'])
             
-            # 1. Update Metrics
             df.at[index, 'Accel'] = m.get('accel', 0)
             df.at[index, 'Upv+'] = m.get('upv_chg', 0)
             df.at[index, 'Velocity'] = m.get('vel', 0)
             df.at[index, 'Streak'] = m.get('streak', 1)
-            # 'Rolling' is often used for the trend number
             df.at[index, 'Rolling'] = m.get('streak', 0) 
 
-            # 2. UNPACK HISTORIES (The Missing Link)
-            # This passes the history from Python to the HTML Table
             histories = m.get('hist', {})
-            
             df.at[index, 'h_rank'] = histories.get('rank', '')
             df.at[index, 'h_rank_plus'] = histories.get('rank_plus', '')
             df.at[index, 'h_price'] = histories.get('price', '')
             df.at[index, 'h_ment'] = histories.get('ment', '')
             df.at[index, 'h_upvotes'] = histories.get('upvotes', '')
-            
-            # --- CRITICAL MISSING ONES ---
-            df.at[index, 'h_velocity'] = histories.get('velocity', '')  # <--- Fixes VEL Tooltip
-            df.at[index, 'h_accel'] = histories.get('accel', '')        # <--- Fixes ACC Tooltip
+            df.at[index, 'h_velocity'] = histories.get('velocity', '') 
+            df.at[index, 'h_accel'] = histories.get('accel', '')
             df.at[index, 'h_streak'] = histories.get('streak', '')
             df.at[index, 'h_upv_plus'] = histories.get('upv_plus', '')
             df.at[index, 'h_eff'] = histories.get('eff', '')
@@ -486,9 +506,7 @@ def filter_and_process(stocks):
             df.at[index, 'h_squeeze'] = histories.get('squeeze', '')
             df.at[index, 'h_heat'] = histories.get('master_score', '')
 
-        # Force write the "Good" data (Velocity/Accel) back to the JSON file
         tracker.flush()
-
         return df
     
     return pd.DataFrame()
@@ -872,6 +890,11 @@ def export_interactive_html(df, ai_summary=""):
             .filter-bar::-webkit-scrollbar {{ display: none; }} 
             .filter-group {{ display:flex; align-items:center; gap:4px; }}
             .form-control-sm {{ background: #111; border: 1px solid #555; color: #fff !important; height: 28px; font-size: 0.85rem; padding: 2px 8px; outline: none; }}
+
+            .form-control-sm {{ background: #111; border: 1px solid #555; color: #fff !important; height: 28px; font-size: 0.85rem; padding: 2px 8px; outline: none; }}
+            .form-control-sm::placeholder {{ color: #ccc !important; opacity: 1; }}
+            .form-control-sm:focus {{ border-color: #00ffff; background: #1a1a1a; }}
+            
             .form-control-sm:focus {{ border-color: #00ffff; background: #1a1a1a; }}
             .btn-reset {{ border: 1px solid #555; color: #fff; font-size: 0.8rem; background: #333; }}
             .btn-reset:hover {{ background: #444; color: #fff; }}
@@ -956,11 +979,11 @@ def export_interactive_html(df, ai_summary=""):
 
             td:nth-child(4) .d-tooltip::after {{
                 white-space: normal !important;
-                width: 600px !important;
+                width: 1000px !important;
                 text-align: left;
                 text-justify: none !important;
                 word-spacing: normal;
-                line-height: 1.4;
+                line-height: 1.2;
             }}
 
             tr:hover {{
