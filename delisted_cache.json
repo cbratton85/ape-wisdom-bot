@@ -119,11 +119,6 @@
         "last_checked": "2026-02-03",
         "reason": "No Price Data"
     },
-    "SLT": {
-        "delisted": true,
-        "last_checked": "2026-02-03",
-        "reason": "No Price Data"
-    },
     "PIK": {
         "delisted": true,
         "last_checked": "2026-02-03",
@@ -140,6 +135,26 @@
         "reason": "No Price Data"
     },
     "DTC": {
+        "delisted": true,
+        "last_checked": "2026-02-03",
+        "reason": "No Price Data"
+    },
+    "SLT": {
+        "delisted": true,
+        "last_checked": "2026-02-03",
+        "reason": "No Price Data"
+    },
+    "PLT": {
+        "delisted": true,
+        "last_checked": "2026-02-03",
+        "reason": "No Price Data"
+    },
+    "AKRO": {
+        "delisted": true,
+        "last_checked": "2026-02-03",
+        "reason": "No Price Data"
+    },
+    "ZK": {
         "delisted": true,
         "last_checked": "2026-02-03",
         "reason": "No Price Data"

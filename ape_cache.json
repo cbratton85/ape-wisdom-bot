@@ -14586,5 +14586,95 @@
         "mcap": 0,
         "currency": "USD",
         "description": ""
+    },
+    "SLAB": {
+        "ticker": "SLAB",
+        "name": "Silicon Laboratories, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 4488368640,
+        "currency": "USD",
+        "description": "Silicon Laboratories Inc., a fabless semiconductor company, provides analog-intensive mixed-signal solutions in the United States, China, Taiwan, and internationally. The company's products include wireless microcontrollers and sensor products. Its products are used in various electronic products in a range of applications for the industrial Internet of Things (IoT), including connected home and security, industrial automation and control, smart metering and agriculture, smart street lighting, renewable energy, electric vehicle supply equipment, industrial wearables and equipment, commercial building automation, consumer electronics, asset tracking, and medical instrumentation; and commercial IoT applications, including smart buildings and lighting, access controls, asset tracking, electronic shelf labels, theft protection, power tools, and enterprise access points. The company's smart home applications comprise smart home cameras, locks, gateways, residential lighting, window shades/blinds, heating, ventilation, air conditioning, switches, smoke/CO detectors, and sensors, as well as home security panels; and connected health applications include diabetes management, consumer health and fitness, elderly care, patient monitoring, and activity tracking. It sells its products through its direct sales force, as well as a network of independent sales representatives and distributors. The company was founded in 1996 and is headquartered in Austin, Texas."
+    },
+    "SYM": {
+        "ticker": "SYM",
+        "name": "Symbotic Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 33267507200,
+        "currency": "USD",
+        "description": "Symbotic Inc., an automation technology company, develops technologies to enhance operating efficiencies in modern warehouses. The company automates the processing of pallets, cases, and individual items in warehouses. Its systems enhance operations at the front end of the supply chain. The company is headquartered in Wilmington, Massachusetts."
+    },
+    "VECO": {
+        "ticker": "VECO",
+        "name": "Veeco Instruments Inc.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 1811927424,
+        "currency": "USD",
+        "description": "Veeco Instruments Inc., together with its subsidiaries, develops, manufactures, sells, and supports semiconductor and thin film process equipment primarily to make electronic devices. The company offers laser annealing, ion beam deposition and etch, metal organic chemical vapor deposition, single wafer wet processing and surface preparation, molecular beam epitaxy, advanced packaging lithography, atomic layer deposition, and other deposition systems. Its process equipment systems are used in the production of a range of microelectronic components, including logic, dynamic random-access memory, photonics devices, power electronics, radio frequency filters and amplifiers, magnetic heads for hard disk drives, and other semiconductor devices. In addition, the company markets and sells its products to integrated device manufacturers and foundries; outsourced semiconductor assembly and test companies; and hard disk drive and photonics manufacturers, as well as research centers and universities. It operates in the United States, Europe, the Middle East, and Africa, China, Rest of the Asia-Pacific, and internationally. Veeco Instruments Inc. was founded in 1945 and is headquartered in Plainview, New York."
+    },
+    "DOCU": {
+        "ticker": "DOCU",
+        "name": "DocuSign, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 9226564608,
+        "currency": "USD",
+        "description": "DocuSign, Inc. provides electronic signature solution in the United States and internationally. The company offers AI-powered intelligent agreement management (IAM) platform to optimize the agreement management process and provides e-signature solution that enables sending and signing of agreements on various devices; Contract Lifecycle Management (CLM), which automates workflows across the entire agreement process; Document Generation streamlines the process of generating new, custom agreements; and Gen for Salesforce for automated agreement generation within Salesforce. It also provides Identify, a signer-identification option for checking government-issued IDs; Standards-Based Signatures, which support signatures that involve digital certificates; Monitor that uses advanced analytics; Notary which enables notaries public to conduct remote online notarization transactions; and Web Forms. In addition, the company offers Real Estate for eSignature that provides a way for brokers and agents to manage the entire real estate transaction digitally. eSignature and CLM are FedRAMP, an authorized version of DocuSign eSignature for U.S. federal government agencies; and life sciences modules that support compliance with the electronic signature practices. The company sells its products through direct and partner-assisted sales, and digital self-service purchasing. DocuSign, Inc. was incorporated in 2003 and is headquartered in San Francisco, California."
+    },
+    "LUMN": {
+        "ticker": "LUMN",
+        "name": "Lumen Technologies, Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 8681152512,
+        "currency": "USD",
+        "description": "Lumen Technologies, Inc., a networking company, provides integrated products and services to business and mass customers in the United States and internationally. The company operates in two segments, Business and Mass Markets. It offers dark fiber and conduit, edge cloud, internet protocol (IP), voice over IP, managed security, software-defined wide area networks, unified communications and collaboration, and optical services; ethernet and VPN data networks services; and legacy services to manage cash flow, including time division multiplexing voice and private line; other legacy services, such as Synchronous Optical Network (SONET) based ethernet, legacy data hosting services, and conferencing services; and managed and professional service solutions, as well as sells communications equipment. The company also provides high speed and lower speed broadband service to residential and small business customers; local and long-distance voice services, professional services, and other ancillary services; and federal broadband and state support programs. It serves its products and services under the Lumen, Quantum Fiber, CenturyLink, and Black Lotus Labs brands. The company was formerly known as CenturyLink, Inc. and changed its name to Lumen Technologies, Inc. in September 2020. Lumen Technologies, Inc. was incorporated in 1968 and is headquartered in Monroe, Louisiana."
+    },
+    "XPO": {
+        "ticker": "XPO",
+        "name": "XPO, Inc.",
+        "meta": "Trucking",
+        "type": "EQUITY",
+        "mcap": 19974803456,
+        "currency": "USD",
+        "description": "XPO, Inc., together with its subsidiaries, provides freight transportation services in the United States, North America, France, the United Kingdom, and rest of Europe. The company operates in two segments, North American Less-Than-Truckload (LTL) and European Transportation. The North American LTL segment provides shippers with geographic density and day-definite domestic and cross-border services to the U.S., Mexico, Canada, and the Caribbean. The European Transportation segment offers dedicated truckload, LTL, truck brokerage, managed transportation, last mile, freight forwarding, and warehousing and multimodal solutions, such as road-rail and road-short sea combinations to an extensive base of customers within the consumer, trade, and industrial markets. The company was formerly known as XPO Logistics, Inc. and changed its name to XPO, Inc. in December 2022. The company is based in Greenwich, Connecticut."
+    },
+    "REM": {
+        "ticker": "REM",
+        "name": "iShares Mortgage Real Estate ET",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and may invest up to 20% of its assets in S-2 certain futures, options and swap contracts, cash and cash equivalents. The fund is non-diversified."
+    },
+    "OIH": {
+        "ticker": "OIH",
+        "name": "VanEck Oil Services ETF",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund normally invests at least 80% of its total assets in securities that comprise the fund's benchmark index. The index includes common stocks and depositary receipts of U.S. exchange-listed companies in the oil services segment. Such companies may include small- and medium-capitalization companies and foreign companies that are listed on a U.S. exchange. The fund is non-diversified."
+    },
+    "LTL": {
+        "ticker": "LTL",
+        "name": "ProShares Ultra Communication S",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index is designed to measure the performance of communication services companies included in the S&P 500 Index. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index or in instruments with similar economic characteristics. The fund is non-diversified."
+    },
+    "NTR": {
+        "ticker": "NTR",
+        "name": "Nutrien Ltd.",
+        "meta": "Agricultural Inputs",
+        "type": "EQUITY",
+        "mcap": 34292461568,
+        "currency": "USD",
+        "description": "Nutrien Ltd. provides crop inputs and services. The company operates through four segments: Nutrien Ag Solutions, Potash, Nitrogen, and Phosphate. The Nutrien Ag Solutions segment distributes crop nutrients, crop protection products, seeds, and merchandise products; product application, soil and leaf testing, crop scouting, precision agriculture, water, and brokerage agency services; and financing solutions. The Potash segment provides granular and standard potash products. The Nitrogen segment offers ammonia, urea, environmentally smart nitrogen, nitrogen solutions, nitrates, and sulfates. The Phosphate segment provides solid fertilizer, liquid fertilizer, and industrial and feed products. The company was incorporated in 2017 and is headquartered in Saskatoon, Canada."
     }
 }
