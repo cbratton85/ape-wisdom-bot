@@ -1052,7 +1052,7 @@ def export_interactive_html(df, ai_summary=""):
 
             /* DATATABLES SEARCH */
             .dataTables_wrapper .data_tables_header {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
-            .dataTables_filter {{ position: absolute; left: 48%; transform: translateX(-50%); width: 100%; margin: 0 !important; float: none !important; }}
+            .dataTables_filter {{ position: absolute; left: 48%; transform: translateX(-50%); width: auto; margin: 0 !important; float: none !important; z-index: 10; }}
             .dataTables_filter input {{ width: 400px !important; max-width: 600px !important; background: #181818 !important; color: #fff !important; border: 1px solid #333 !important; border-radius: 20px !important; padding: 6px 20px !important; outline: none !important; text-align: center !important; }}
             .dataTables_filter input::placeholder {{ color: white !important; opacity: 1; }}
             .dataTables_filter input:focus::placeholder {{ color: transparent !important; }}
