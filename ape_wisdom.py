@@ -953,8 +953,15 @@ def export_interactive_html(df, ai_summary=""):
             #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px; }}
 
             /* HEADER */
+
+            .mode-toggle {{
+                position: relative;
+                z-index: 1 !important;
+                z-index: 1 !important;
+            }}
+
             .header-flex {{ display: flex; justify-content: space-between; align-items: center; height: 68px; width: 100%; padding: 0 15px; background: #111; margin-bottom: 5px; box-sizing: border-box; overflow: hidden; }}
-            .header-left {{ flex: 0 0 200px; display: flex; align-items: center; z-index: 10; }}
+            .header-left {{ flex: 0 0 200px; display: flex; align-items: center; z-index: 1; }}
             .header-right {{ flex: 0 0 400px; display: flex; justify-content: flex-end; align-items: center; z-index: 10; }}
 
             .header-center {{
@@ -964,8 +971,18 @@ def export_interactive_html(df, ai_summary=""):
             }}
 
             .summary-row {{ display: contents; }}
-            .row-label {{ font-size: 11px; font-weight: bold; text-transform: uppercase; text-align: right; cursor: help; border-bottom: none !important; text-decoration: underline dotted #555; position: relative; }}
 
+            .row-label {{
+                font-size: 11px;
+                font-weight: bold;
+                text-transform: uppercase;
+                text-align: right;
+                cursor: help;
+                border-bottom: none !important;
+                text-decoration: underline dotted #555;
+                position: relative;
+                z-index: 10 !important;
+            }}
 
             .row-content {{ font-size: 12px; font-weight: 600; color: #fff; }}
 
@@ -1006,7 +1023,7 @@ def export_interactive_html(df, ai_summary=""):
             .row-label::after {{
                 content: attr(data-tooltip); 
                 position: absolute; 
-                top: 140%; 
+                top: 160%; 
                 left: 50%; 
                 transform: translateX(-50%);
                 background-color: #000; 
@@ -1018,7 +1035,7 @@ def export_interactive_html(df, ai_summary=""):
                 font-weight: normal; 
                 text-transform: none; 
                 white-space: nowrap; 
-                z-index: 999999 !important; 
+                z-index: 9999 !important; 
                 opacity: 0; 
                 visibility: hidden; 
                 transition: opacity 0.1s; 
@@ -1028,12 +1045,19 @@ def export_interactive_html(df, ai_summary=""):
             }}
 
             .row-label:hover::after {{ opacity: 1; visibility: visible; }}
+            
+            .clr-rank:hover::after {{ color: #00ffff !important; border-color: #00ffff !important; }}
+            .clr-surge:hover::after {{ color: #ffcc00 !important; border-color: #ffcc00 !important; }}
+            .clr-buzz:hover::after {{ color: #ff00ff !important; border-color: #ff00ff !important; }}
 
             /* DATATABLES SEARCH */
             .dataTables_wrapper .data_tables_header {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
-            .dataTables_filter {{ position: absolute; left: 50%; transform: translateX(-50%); margin: 0 !important; float: none !important; }}
-            .dataTables_filter input {{ width: 100% !important; max-width: 450px !important; background: #181818 !important; color: #fff !important; border: 1px solid #333 !important; border-radius: 20px !important; padding: 6px 20px !important; outline: none !important; }}
+            .dataTables_filter {{ position: absolute; left: 48%; transform: translateX(-50%); width: 100%; margin: 0 !important; float: none !important; }}
+            .dataTables_filter input {{ width: 400px !important; max-width: 600px !important; background: #181818 !important; color: #fff !important; border: 1px solid #333 !important; border-radius: 20px !important; padding: 6px 20px !important; outline: none !important; text-align: center !important; }}
+            .dataTables_filter input::placeholder {{ color: white !important; opacity: 1; }}
+            .dataTables_filter input:focus::placeholder {{ color: transparent !important; }}
             .dataTables_filter input:focus {{ border-color: #00ffff !important; }}
+            .dataTables_filter label {{ color: transparent !important; font-size: 0 !important; display: flex !important; justify-content: center; width: 100%; }}
             
             /* PAGINATION */
             .page-link {{ background-color: #222; border-color: #444; color: #00ff00; }}
@@ -1062,6 +1086,14 @@ def export_interactive_html(df, ai_summary=""):
             th:nth-child(-n+5)::after, td:nth-child(-n+5) .d-tooltip::after {{
                 left: 0 !important;
                 right: auto !important;
+                transform: none !important;
+            }}
+
+            th:nth-last-child(-n+7)::after, td:nth-last-child(-n+7) .d-tooltip::after {{
+                right: 0 !important;
+                left: auto !important;
+                transform: none !important;
+                text-align: right !important;
             }}
 
             #time {{
@@ -1407,7 +1439,15 @@ def export_interactive_html(df, ai_summary=""):
         $('#mntBreadcrumb').html(getTopSectors(16));  
 
         $('.sector-tooltip').each(function() {{
-            new bootstrap.Tooltip(this, {{ html: true, sanitize: false, animation: false, container: 'body' }});
+            new bootstrap.Tooltip(this, {{
+                html: true,
+                sanitize: false,
+                animation: false,
+                container: 'body',
+                container: 'body',
+                placement: 'bottom',    // <--- THIS FORCES IT BELOW
+                boundary: 'viewport'
+                }});
         }});
     }}
 
@@ -1469,6 +1509,8 @@ def export_interactive_html(df, ai_summary=""):
             ],
             "drawCallback": function() {{ var api = this.api(); $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); }}
         }});
+
+        $('.dataTables_filter input').attr('placeholder', 'SEARCH');
 
         $.fn.dataTable.ext.search.push(function(settings, data) {{
             var typeTag = data[19] || ""; var viewMode = $('input[name="btnradio"]:checked').attr('id');
