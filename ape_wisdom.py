@@ -40,8 +40,10 @@ PERMANENT_BLACKLIST = ['JW', 'RE', 'OCX', 'BABY', 'ELY',
                        'CBD', 'GAN', 'AUD', 'TTM', 'FRMI',
                        'ERJ', 'DS', 'ABB', 'SAVE', 'HEAR',
                        'FI', 'TGIF', 'CHAD', 'QED', 'WFH',
-                       'CN', 'SQ', 'FM', 'MOM', 'BOSS', 'SLT',
-                       'CSA', '', '', '', '', '', '', '', '', '', '', ''
+                       'CN', 'SQ', 'FM', 'MOM', 'BOSS',
+                       'SLT', 'CSA', '', '', '',
+                       '', '', '', '', '',
+                       '', '', '', '', ''
                        ]
 
 # ANSI COLORS
@@ -549,11 +551,14 @@ def export_interactive_html(df, ai_summary=""):
         export_df = df.copy()
         if not os.path.exists(PUBLIC_DIR): os.makedirs(PUBLIC_DIR)
 
+        # --- TOOLTIP CONFIGURATION ---
+        # 1. Use class="d-tooltip" for custom CSS styling (Instant, Black Box)
+        # 2. tabindex="0" ensures it works on Mobile taps
         def with_hist(val_str, history_str):
             if not history_str or history_str == "New" or history_str == "": 
                 return val_str
-            
-            return f'<span title="{history_str}" data-bs-toggle="tooltip" data-bs-html="true" style="cursor:help; text-decoration: none;">{val_str}</span>'
+            safe_hist = history_str.replace('"', '&quot;')
+            return f'<span class="d-tooltip" data-tooltip="{safe_hist}" tabindex="0">{val_str}</span>'
 
         for c in ['Accel', 'Velocity', 'Rolling', 'Squeeze', 'Upvotes', 'Rank+', 'Surge', 'Mnt%', 'Master_Score', 'z_Upvotes', 'z_Surge', 'z_Squeeze']:
             if c not in export_df.columns: export_df[c] = 0
@@ -596,11 +601,6 @@ def export_interactive_html(df, ai_summary=""):
             
             export_df.at[index, 'MENT'] = color_span(f"{int(m_val)}", m_clr)
 
-        # [Inside export_interactive_html]
-        # REPLACE THE ENTIRE 'for index, row' LOOP WITH THIS:
-
-        for index, row in export_df.iterrows():
-            
             # --- 1. VELOCITY (Vel) ---
             v_val = row.get('Vel', 0)
             v_hist = row.get('h_velocity', '') 
@@ -618,7 +618,7 @@ def export_interactive_html(df, ai_summary=""):
             export_df.at[index, 'Acc'] = with_hist(color_span(f"{ac_val:+d}", ac_clr), ac_hist)
 
             # --- 3. EFFICIENCY (Eff) ---
-            eff_val = float(row.get('Eff', 0)) # Force float for formatting
+            eff_val = float(row.get('Eff', 0)) 
             eff_hist = row.get('h_eff', '') 
             if eff_val >= 1.0: eff_clr = "#00ff00"
             elif eff_val >= 0.5: eff_clr = "#ffff00"
@@ -627,10 +627,9 @@ def export_interactive_html(df, ai_summary=""):
             export_df.at[index, 'Eff'] = with_hist(color_span(f"{eff_val:.1f}", eff_clr), eff_hist)
 
             # --- 4. CONVICTION (Conv) ---
-            conv_val = float(row.get('Conv', 0)) # Force float
+            conv_val = float(row.get('Conv', 0)) 
             conv_hist = row.get('h_conv', '') 
             conv_clr = "#ffcc00" if conv_val > 1.0 else "#ffffff"
-            # Fixed Rounding: .1f ensures 14.77 becomes 14.8
             export_df.at[index, 'Conv'] = with_hist(color_span(f"{conv_val:.1f}x", conv_clr), conv_hist)
 
             # --- 5. UPVOTE CHANGE (Upv+) ---
@@ -659,12 +658,11 @@ def export_interactive_html(df, ai_summary=""):
             heat_span = f'<span style="color:{h_clr}; font-weight:bold;">{score:.1f}</span>'
             export_df.at[index, 'Heat'] = with_hist(heat_span, heat_hist)
             
-            # --- 8. NAME & DESC (The Fix) ---
-            # Use 'Desc' for the tooltip, NOT history
+            # --- 8. NAME (Fixed Description Tooltip) ---
             raw_desc = str(row.get('Desc', 'No description available.'))
             desc_text = raw_desc.replace('"', '&quot;').replace("'", "&apos;")
-            # Logic: We define the span manually to use desc_text as the title
-            export_df.at[index, 'Name'] = f'<span title="{desc_text}" data-bs-toggle="tooltip" data-bs-html="true" style="cursor:help; border-bottom:none;"><b>{row.get("Name","")}</b></span>'
+            # Using d-tooltip class here guarantees it uses our new CSS (Single Row, High Z-Index)
+            export_df.at[index, 'Name'] = f'<span class="d-tooltip" data-tooltip="{desc_text}" tabindex="0" style="border-bottom:none;"><b>{row.get("Name","")}</b></span>'
 
             # --- 9. RANK+ ---
             r_val = row.get('Rank+', 0)
@@ -684,28 +682,26 @@ def export_interactive_html(df, ai_summary=""):
             export_df.at[index, 'Rank'] = with_hist(rank_val, rank_hist)
 
             # --- 11. SURGE & MNT% ---
-            # Surge
             srg_val = f"{export_df.at[index, 'Srg']:.0f}%"
             srg_hist = row.get('h_surge', '')
             srg_z = row.get('z_Surge', 0)
             srg_clr = C_YELLOW if srg_z >= 2.0 else (C_GREEN if srg_z >= 1.0 else C_WHITE)
             export_df.at[index, 'Srg'] = with_hist(color_span(srg_val, srg_clr), srg_hist)
 
-            # Mnt%
             mnt_val = f"{export_df.at[index, 'Mnt%']:.0f}%"
             mnt_hist = row.get('h_mnt_perc', '')
             mnt_z = row.get('z_Mnt%', 0)
             mnt_clr = C_YELLOW if mnt_z >= 2.0 else (C_GREEN if mnt_z >= 1.0 else C_WHITE)
             export_df.at[index, 'Mnt%'] = with_hist(color_span(mnt_val, mnt_clr), mnt_hist)
 
-            # --- 12. SQUEEZE (Sqz) ---
+            # --- 12. SQUEEZE ---
             sq_val = int(row.get('Sqz', 0))
             sq_hist = row.get('h_squeeze', '') 
             sq_z = row.get('z_Squeeze', 0)
             sq_color = C_CYAN if sq_z > 1.5 else C_WHITE
             export_df.at[index, 'Sqz'] = with_hist(color_span(sq_val, sq_color), sq_hist)
             
-            # --- 13. UPVOTES (Upvs) ---
+            # --- 13. UPVOTES ---
             upvs_val = row.get('Upvs', 0)
             upvs_hist = row.get('h_upvotes', '')
             z_up = row.get('z_Upvotes', 0)
@@ -713,7 +709,7 @@ def export_interactive_html(df, ai_summary=""):
             upvs_str = color_span(upvs_val, upvs_clr)
             export_df.at[index, 'Upvs'] = with_hist(upvs_str, upvs_hist)
             
-            # --- 14. MENTIONS (MENT) ---
+            # --- 14. MENTIONS ---
             ment_val = str(row.get('MENT', 0))
             ment_hist = row.get('h_ment', '')
             export_df.at[index, 'MENT'] = with_hist(ment_val, ment_hist)
@@ -731,118 +727,192 @@ def export_interactive_html(df, ai_summary=""):
             
             # --- 16. SYMBOL & PRICE ---
             t = row['Sym']
-            
-            # TradingView prefers dots for classes (e.g., BRK.B) whereas Yahoo uses dashes (BRK-B)
-            # We create a specific ticker string just for the URL to ensure it loads correctly.
             tv_ticker = t.replace('-', '.')
-            
-            # Link directly to the SuperChart with the symbol pre-loaded
             export_df.at[index, 'Sym'] = f'<a href="https://www.tradingview.com/chart/?symbol={tv_ticker}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
             
-            # Price
             p_val = f"${row.get('Price', 0):.2f}"
             p_hist = row.get('h_price', '')
             export_df.at[index, 'Price'] = with_hist(p_val, p_hist)
 
             vol_raw = export_df.at[index, 'Vol_Display']
-            # Change to 'right' and use 'padding-right' to push it away from the right wall
             export_df.at[index, 'Vol_Display'] = f'<div style="text-align: right; padding-right: 25px; color: #ccc;">{vol_raw}</div>'
 
-        # Rename Meta to final header
         export_df.rename(columns={'Meta': 'INDUSTRY/SECTOR', 'Vol_Display': 'VOL(30)'}, inplace=True)
 
-        # DEFINE EXACT COLUMN ORDER (21 Columns)
         cols = [
             'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Acc', 'Eff', 'Conv', 'Upvs', 
             'Upv+', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 
             'Type_Tag', 'AvgVol', 'MCap'
         ]
-        # Safety fill
         for c in cols:
             if c not in export_df.columns:
                 export_df[c] = 0
 
-        # NOTE: table-dark class + table-hover
+        # --- 1. GENERATE RAW HTML TABLE ---
         raw_table = export_df[cols].to_html(classes='table table-dark table-hover', index=False, escape=False)
+
+        # --- 2. INJECT FAST TOOLTIPS (Find & Replace Headers) ---
+        header_map = {
+            '<th>Rank</th>': '<th data-tooltip="Current Rank Position">RANK</th>',
+            '<th>Rank+</th>': '<th data-tooltip="Rank Change vs 24h ago">RANK+</th>',
+            '<th>Heat</th>': '<th data-tooltip="Master Momentum Score (Weighted)">HEAT</th>',
+            '<th>Name</th>': '<th data-tooltip="Company Name">NAME</th>',
+            '<th>Sym</th>': '<th data-tooltip="Ticker Symbol">SYM</th>',
+            '<th>Price</th>': '<th data-tooltip="Current Stock Price">PRICE</th>',
+            '<th>Acc</th>': '<th data-tooltip="Acceleration: Speed Change vs 1h ago">ACC</th>',
+            '<th>Eff</th>': '<th data-tooltip="Efficiency: Rank gain per unit of volume">EFF</th>',
+            '<th>Conv</th>': '<th data-tooltip="Conviction: Upvotes per Mention ratio">CONV</th>',
+            '<th>Upvs</th>': '<th data-tooltip="Total Upvotes (24h)">UPVS</th>',
+            '<th>Upv+</th>': '<th data-tooltip="New Upvotes gained in last hour">UPV+</th>',
+            '<th>VOL(30)</th>': '<th data-tooltip="30-Day Average Volume">VOL(30)</th>',
+            '<th>Srg</th>': '<th data-tooltip="Surge: Current Vol vs 30d Avg">SRG</th>',
+            '<th>Vel</th>': '<th data-tooltip="Velocity: Rank change speed (1h)">VEL</th>',
+            '<th>Strk</th>': '<th data-tooltip="Streak: Hours maintaining direction">STRK</th>',
+            '<th>MENT</th>': '<th data-tooltip="Total Mentions (24h)">MENT</th>',
+            '<th>Mnt%</th>': '<th data-tooltip="Mention % Change vs 24h ago">MNT%</th>',
+            '<th>Sqz</th>': '<th data-tooltip="Short Squeeze Score">SQZ</th>',
+            '<th>INDUSTRY/SECTOR</th>': '<th data-tooltip="Sector / Industry Group">INDUSTRY/SECTOR</th>'
+        }
+        for old_tag, new_tag in header_map.items():
+            raw_table = raw_table.replace(old_tag, new_tag)
+
         table_html = f'<div class="table-scroll-container">{raw_table}</div>'
         utc_timestamp = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
         
+        # --- 3. FINAL HTML TEMPLATE ---
         html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Ape Wisdom Analysis</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
-            /* GLOBAL SETTINGS */
-            body {{
-                background-color: #101010;
-                color: #e0e0e0;
-                font-family: 'Consolas', 'Monaco', monospace;
-                padding: 0;    /* CHANGED: Removes the space around the whole dashboard */
-                margin: 0;     /* ADDED: Ensures it touches the top of the browser */
-            }}
-            .table-dark{{--bs-table-bg:#18181b;color:#ccc}}
+            * {{ box-sizing: border-box; }}
+            body {{ background-color: #101010; color: #e0e0e0; font-family: 'Consolas', 'Monaco', monospace; padding: 0; margin: 0; overflow-x: hidden; }}
+            .table-dark {{ --bs-table-bg:#18181b; color:#ccc; }}
             
-            /* TABLE HEADERS */
-            th{{
-                color:#00ff00; border-bottom:2px solid #444;
-                font-size: 15px;
-                text-transform: uppercase;
-                vertical-align: middle !important; padding: 8px 22px 8px 6px !important; line-height: 1.2 !important;
+            /* GLOBAL TOOLTIP SETTINGS (Fixed High Z-Index & Single Row) */
+            th, .d-tooltip {{
+                position: relative;
+                cursor: help;
             }}
 
-            /* TABLE CELLS */
-            td{{
-                vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333; 
-                padding: 4px 5px !important;
-                font-size: 15px;
+            /* The Black Tooltip Box */
+            th[data-tooltip]:not(.sorting):not(.sorting_asc):not(.sorting_desc)::after, .d-tooltip::after {{
+                content: attr(data-tooltip); 
+                position: absolute;
+                top: 100%;    /* Ensures it pops up below the text */
+                right: 0;     /* Aligns the right edge of the box to the right edge of the cell */
+                left: auto;
+                background-color: #000; color: #fff; 
+                padding: 8px 12px; border-radius: 6px; border: 1px solid #444;
+                font-size: 13px; font-weight: normal; 
+                text-transform: none; 
+                white-space: nowrap; 
+                width: auto; max-width: none;
+                z-index: 999999; 
+                opacity: 0; visibility: hidden; 
+                transition: opacity 0.1s; 
+                pointer-events: none; margin-top: 5px;
+                box-shadow: 0 4px 15px rgba(0,0,0,1);
             }}
 
+            /* Show on Hover/Focus */
+            th:hover::after, .d-tooltip:hover::after,
+            th:focus::after, .d-tooltip:focus::after {{ 
+                opacity: 1; visibility: visible; 
+            }}
+            
+            /* BOOTSTRAP TOOLTIP OVERRIDES (For the Industry Breadcrumbs at Top) */
+            .tooltip-inner {{
+                max-width: none !important;
+                white-space: nowrap !important;
+                background-color: #000 !important;
+                color: #fff !important;
+                border: 1px solid #444;
+            }}
+            
+            td {{ vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333; padding: 4px 5px !important; font-size: 15px; }}
             table.dataTable {{ width: auto !important; margin: 0 auto; }}
             
-            /* COLUMN WIDTHS & ALIGNMENT */
-            th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; font-weight: bold; }} /*RANK*/
-            th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }} /*RANK+*/
-            th:nth-child(3), td:nth-child(3) {{ width: 1%; text-align: center; font-weight: bold; }} /*HEAT*/
-
-            /* NAME COLUMN (Fixed Width + Truncate) */
+            /* COLUMN WIDTHS */
+            th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; font-weight: bold; }}
+            th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }}
+            th:nth-child(3), td:nth-child(3) {{ width: 1%; text-align: center; font-weight: bold; }}
             th:nth-child(4), td:nth-child(4) {{
-                min-width: 228px;
-                max-width: 228px;
-                overflow: hidden; 
-                text-overflow: ellipsis;
-            }} 
-            
-            th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }} /*SYM*/
-            th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; }} /*PRICE*/
-            th:nth-child(7), td:nth-child(7) {{ width: 1%; text-align: center; }} /*ACC*/
-            th:nth-child(8), td:nth-child(8) {{ width: 1%; text-align: center; }} /*EFF*/
-            th:nth-child(9), td:nth-child(9) {{ width: 1%; text-align: center; }} /*CONV*/
-            th:nth-child(10), td:nth-child(10) {{ width: 1%; text-align: center; }} /*UPVS*/
-            th:nth-child(11), td:nth-child(11) {{ width: 1%; text-align: center; }} /*UPV+*/
-            th:nth-child(12), td:nth-child(12) {{ width: 1%; text-align: right;  }} /*VOL(30)*/
-            th:nth-child(13), td:nth-child(13) {{ width: 1%; text-align: center; }} /*SRG*/
-            th:nth-child(14), td:nth-child(14) {{ width: 1%; text-align: center; }} /*VEL*/
-            th:nth-child(15), td:nth-child(15) {{ width: 1%; text-align: center; }} /*STRK*/
-            th:nth-child(16), td:nth-child(16) {{ width: 1%; text-align: center; }} /*MENT*/
-            th:nth-child(17), td:nth-child(17) {{ width: 1%; text-align: center; }} /*MNT%*/
-            th:nth-child(18), td:nth-child(18) {{ width: 1%; text-align: center; }} /*SQZ*/
-
-            /* SECTOR COLUMN (Fixed Width + Truncate) */
-            th:nth-child(19), td:nth-child(19) {{ 
-                min-width: 260px;
-                max-width: 260px; 
-                overflow: hidden; 
-                text-overflow: ellipsis; 
+                white-space: normal !important;
+                width: 350px; /* Set a specific width so it knows where to wrap */
+                line-height: 1.4;
+                text-align: left;
+            }}
+            th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }}
+            th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; }}
+            th:nth-child(12), td:nth-child(12) {{ width: 1%; text-align: right; }}
+            th:nth-child(7), td:nth-child(7), th:nth-child(8), td:nth-child(8), th:nth-child(9), td:nth-child(9),
+            th:nth-child(10), td:nth-child(10), th:nth-child(11), td:nth-child(11), th:nth-child(13), td:nth-child(13),
+            th:nth-child(14), td:nth-child(14), th:nth-child(15), td:nth-child(15), th:nth-child(16), td:nth-child(16),
+            th:nth-child(17), td:nth-child(17), th:nth-child(18), td:nth-child(18) {{ width: 1%; text-align: center; }}
+            th:nth-child(19), td:nth-child(19) {{
+                min-width: 260px; 
+                white-space: nowrap !important;
+                overflow: hidden;    
+                text-overflow: ellipsis;    
                 text-align: left; 
                 padding-left: 10px !important; 
                 border-right: 1px solid #333; 
             }}
             
-            /* LINKS & COLORS */
-            a{{color:#4da6ff; text-decoration:none;}} a:hover{{text-decoration:underline;}}
+            a {{ color:#4da6ff; text-decoration:none; }} a:hover {{ text-decoration:underline; }}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
             table.no-colors a {{ color: #4da6ff !important; }}
             
-            /* LEGEND STYLES */
+            /* FILTER BAR */
+            .filter-bar {{ 
+                display: flex; gap: 8px; align-items: center; background: #2a2a2a; padding: 8px; 
+                border-radius: 5px; margin-bottom: 15px; border: 1px solid #444; font-size: 0.85rem;
+                flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; -ms-overflow-style: none; scrollbar-width: none;
+            }}
+            .filter-bar::-webkit-scrollbar {{ display: none; }} 
+            .filter-group {{ display:flex; align-items:center; gap:4px; }}
+            .form-control-sm {{ background: #111; border: 1px solid #555; color: #fff !important; height: 28px; font-size: 0.85rem; padding: 2px 8px; outline: none; }}
+            .form-control-sm:focus {{ border-color: #00ffff; background: #1a1a1a; }}
+            .btn-reset {{ border: 1px solid #555; color: #fff; font-size: 0.8rem; background: #333; }}
+            .btn-reset:hover {{ background: #444; color: #fff; }}
+            #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px; }}
+
+            /* HEADER */
+            .header-flex {{ display: flex; justify-content: space-between; align-items: center; height: 68px; width: 100%; padding: 0 15px; background: #111; margin-bottom: 5px; box-sizing: border-box; overflow: hidden; }}
+            .header-left {{ flex: 0 0 200px; display: flex; align-items: center; z-index: 10; }}
+            .header-right {{ flex: 0 0 400px; display: flex; justify-content: flex-end; align-items: center; z-index: 10; }}
+
+            .header-center {{
+                position: absolute; left: 50%; transform: translateX(-50%); display: grid; 
+                grid-template-columns: max-content max-content; /* Forces labels and content to stay tight */
+                gap: 0px 8px; max-width: 90%; /* Increased max-width to give it more horizontal room */
+            }}
+
+            .summary-row {{ display: contents; }}
+            .row-label {{ font-size: 11px; font-weight: bold; text-transform: uppercase; text-align: right; cursor: help; border-bottom: none !important; text-decoration: underline dotted #555; position: relative; }}
+
+
+            .row-content {{ font-size: 12px; font-weight: 600; color: #fff; }}
+
+            .crumb-sep {{
+                color: #555; 
+                margin: 0 8px; 
+                font-weight: bold; 
+            }}
+
+            .crumb-num {{
+                color: #666; 
+                margin-right: 4px; 
+                font-size: 11px; 
+            }}
+
+            .clr-rank {{ color: #00ffff; }} .clr-surge {{ color: #ffcc00; }} .clr-buzz {{ color: #ff00ff; }}
+
+            .sector-tooltip {{
+                white-space: nowrap;
+            }}
+            
+            /* LEGEND - RESTORED FULL VERSION */
             .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 6px; margin-bottom: 10px; overflow: hidden; }}
             .legend-header {{ background: #2a2a2a; padding: 4px 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; }}
             .legend-box {{ padding: 5px; display: none; background-color: #1a1a1a; }}
@@ -857,282 +927,78 @@ def export_interactive_html(df, ai_summary=""):
             .color-desc {{ color: #bbb; }}
             @media (max-width: 900px) {{ .legend-grid {{ grid-template-columns: 1fr; }} }}
 
-            /* FILTER BAR */
-            .filter-bar {{ display: flex; gap: 8px; align-items: center; background: #2a2a2a; padding: 8px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #444; flex-wrap: wrap; font-size: 0.85rem; }}
-            .filter-group {{ display:flex; align-items:center; gap:4px; }}
-            /* SEARCH BOX INPUTS (Price/Vol) */
-            .form-control-sm {{ 
-                background: #111; 
-                border: 1px solid #555; 
-                color: #ffffff !important; /* Brighter white for typed text */
-                height: 28px; 
-                font-size: 0.85rem; 
-                padding: 2px 8px;
-                outline: none;
-            }}
-
-            /* Lighten the "Min/Max" hint text */
-            .form-control-sm::placeholder {{
-                color: #aaa !important; /* Lighter grey/silver for better visibility */
-                opacity: 1; 
-            }}
-
-            /* Glow effect when you click inside to type */
-            .form-control-sm:focus {{
-                border-color: #00ffff;
-                background: #1a1a1a;
-                box-shadow: 0 0 5px rgba(0, 255, 255, 0.2);
-            }}
-            .btn-reset {{ border: 1px solid #555; color: #fff; font-size: 0.8rem; background: #333; }}
-            .btn-reset:hover {{ background: #444; color: #fff; }}
-            #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px;}}
-
-            /* HEADER FLEX LAYOUT */
-            .header-flex {{
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                height: 68px; /* Reduced height for less padding feel */
-                width: 100%;
-                padding: 0 15px;
-                background: #111;
-                margin-bottom: 5px;
-                box-sizing: border-box;
-                overflow: hidden;
-            }}
-            /* ANCHORS */
-            .header-left {{
-                flex: 0 0 200px;
-                display: flex;
-                align-items: center;
-                z-index: 10;
-            }}
-            .header-right {{
-                flex: 0 0 200px;
-                display: flex;
-                justify-content: flex-end; 
-                align-items: center;
-                z-index: 10;
-            }}
-            /* CENTER STACK */
-            .header-center {{
-                position: absolute; /* The Magic Fix */
-                left: 50%;
-                transform: translateX(-50%); /* Centers it perfectly regardless of side content */
-                display: grid;
-                grid-template-columns: max-content auto;
-                gap: 0px 12px;
-                padding-top: 0px;
-                min-width: 0;
-                width: auto;
-                max-width: 60%; /* Prevents it from hitting the logo/time on small screens */
-            }}
-            /* VIRTUAL CONTAINER - FLATTENS THE DIV FOR GRID */
-            .summary-row {{
-                display: contents; /* This is the Magic: makes children part of the parent Grid */
-            }}
-            /* REFINED LABELS - Underline fits text exactly */
-            /* REFINED LABELS - Removing the extra line */
-            .row-label {{
-                font-size: 11px;
-                font-weight: bold;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-                text-align: right;
-                padding-top: 0px;
-                cursor: help;
-                
-                /* 1. FORCE BOX TO FIT TEXT */
-                display: inline-block; 
-                width: auto;
-                
-                /* 2. REMOVE THE BOX BORDER (The long line) */
-                border-bottom: none !important; 
-                
-                /* 3. USE TEXT DECORATION (The correct length line) */
-                text-decoration: underline dotted #555;
-                text-underline-offset: 2px;
-                text-decoration-thickness: 1px;
-                
-                position: relative; /* Keep tooltip anchored correctly */
-            }}
-
-            /* Ensure the underline doesn't change color, just the text */
-            .clr-rank {{ color: #00ffff; text-decoration-color: #555; }}
-            .clr-surge {{ color: #ffcc00; text-decoration-color: #555; }}
-            .clr-buzz {{ color: #ff00ff; text-decoration-color: #555; }}
-
-            /* TITLE COLORS */
-            .clr-rank {{ color: #00ffff; }} /* Cyan for Rank */
-            .clr-surge {{ color: #ffcc00; }} /* Gold for Surge */
-            .clr-buzz {{ color: #ff00ff; }} /* Magenta for Buzz */
-
-            .row-content {{
-                font-size: 12px;
-                font-weight: 600;
-                color: #fff;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                min-width: 0;
-                text-align: left;
-            }}
-            .time-block {{
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-                line-height: 1.1;
-            }}
-            .time-label {{
-                font-size: 11px;
-                font-weight: bold;
-                color: #888;
-                text-transform: uppercase;
-                margin-bottom: 0px;
-            }}
-            #time {{
-                font-family: monospace;
-                font-size: 18px;
-                font-weight: bold;
-                color: #e0e0e0;
-                line-height: 1.1;
-            }}
-
-            /* BREADCRUMB SEPARATORS */
-            .crumb-sep {{ color: #555; margin: 0 5px; }}
-            .crumb-num {{ color: #666; margin-right: 3px; font-size: 11px; }}
-
-            /* TOGGLE SWITCH */
-            .mode-toggle label {{
-                margin-left: 15px;
-                display: flex;
-                align-items: center;
-                background: #222;
-                padding: 3px;
-                border-radius: 4px;
-                cursor: pointer;
-                border: 1px solid #444;
-            }}
-            .mode-label {{
-                font-size: 12px;
-                font-weight: bold;
-                padding: 5px 12px;
-                color: #666;
-            }}
-            .row-label {{
-                position: relative;
-                cursor: help; /* Changes mouse to a question mark icon */
-                border-bottom: 1px dotted #555; /* Subtle hint that it's hoverable */
-            }}
-            /* TOOLTIP TEXT BOX */
+            /* TOP LABELS TOOLTIPS (Header Summary) */
             .row-label::after {{
-                content: attr(data-tooltip); /* Pulls text from the HTML attribute */
-                position: absolute;
-                top: 125%;
-                left: 50%;
-                transform: translateX(-50%);
-                background-color: #222;
-                color: #fff;
-                padding: 8px 12px;
-                border-radius: 6px;
-                border: 1px solid #444;
-                font-size: 11px;
-                font-weight: normal;
-                text-transform: none; /* Keep explanation text readable */
-                white-space: normal;
-                width: 200px; /* Width of the box */
-                z-index: 99;
-                opacity: 0;
-                visibility: hidden;
-                transition: opacity 0.2s;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-                pointer-events: none;
+                content: attr(data-tooltip); position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+                background-color: #000; color: #fff; padding: 8px 12px; border-radius: 6px; border: 1px solid #444;
+                font-size: 11px; font-weight: normal; text-transform: none; 
+                white-space: nowrap; width: auto; max-width: none;
+                z-index: 999999 !important; opacity: 0; visibility: hidden; position: fixed; top: auto; transition: opacity 0.1s; pointer-events: none; margin-top: 5px;
             }}
 
-            /* 1. Target the main container */
-            .tooltip {{
-                opacity: 1 !important;
-            }}
+            .row-label:hover::after {{ opacity: 1; visibility: visible; }}
 
-            /* 2. Style the inner box to be 100% solid black */
-            .tooltip-inner {{
-                background-color: #000000 !important;
-                color: #ffffff !important;
-                border: 1px solid #444 !important;
-               max-width: none !important;
-                white-space: nowrap !important;
-                opacity: 1 !important;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 1) !important;
-                padding: 10px 15px !important;
-            }}
-
-            /* 3. Ensure the arrows are solid black */
-            .bs-tooltip-top .tooltip-arrow::before {{ border-top-color: #000000 !important; }}
-            .bs-tooltip-bottom .tooltip-arrow::before {{ border-bottom-color: #000000 !important; }}
-            .bs-tooltip-start .tooltip-arrow::before {{ border-left-color: #000000 !important; }}
-            .bs-tooltip-end .tooltip-arrow::before {{ border-right-color: #000000 !important; }}
-
-            /* SHOW ON HOVER */
-            .row-label:hover::after {{
-                opacity: 1;
-                visibility: visible;
-            }}
+            /* DATATABLES SEARCH */
+            .dataTables_wrapper .data_tables_header {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
+            .dataTables_filter {{ position: absolute; left: 50%; transform: translateX(-50%); margin: 0 !important; float: none !important; }}
+            .dataTables_filter input {{ width: 100% !important; max-width: 450px !important; background: #181818 !important; color: #fff !important; border: 1px solid #333 !important; border-radius: 20px !important; padding: 6px 20px !important; outline: none !important; }}
+            .dataTables_filter input:focus {{ border-color: #00ffff !important; }}
             
-            #modeSwitch {{ display: none; }}
-            #modeSwitch:checked + label .e-label {{ color: #fff; background: #333; border-radius: 2px; }}
-            #modeSwitch:not(:checked) + label .s-label {{ color: #fff; background: #333; border-radius: 2px; }}
-
-            /* MISC */
-            #time {{ font-family: monospace; font-size: 11px; color: #666; }}
-            
+            /* PAGINATION */
             .page-link {{ background-color: #222; border-color: #444; color: #00ff00; }}
             .page-item.active .page-link {{ background-color: #00ff00; border-color: #00ff00; color: #000; }}
             .page-item.disabled .page-link {{ background-color: #111; border-color: #333; color: #555; }}
-            /* RE-CENTERING THE SEARCH BAR */
-            .dataTables_wrapper .data_tables_header {{
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 15px;
+            
+            .mode-toggle label {{ margin-left: 15px; display: flex; align-items: center; background: #222; padding: 3px; border-radius: 4px; cursor: pointer; border: 1px solid #444; }}
+            #modeSwitch {{ display: none; }}
+            #modeSwitch:checked + label .e-label {{ color: #fff; background: #333; }}
+            #modeSwitch:not(:checked) + label .s-label {{ color: #fff; background: #333; }}
+
+            td:nth-child(4) .d-tooltip::after {{
+                white-space: normal !important;
+                width: 600px !important;
+                text-align: left;
+                text-justify: none !important;
+                word-spacing: normal;
+                line-height: 1.4;
             }}
 
-            /* This targets the container holding the search box */
-            .dataTables_filter {{
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                margin: 0 !important;
-                float: none !important;
+            tr:hover {{
+                position: relative;
+                z-index: 100;
             }}
 
-            .dataTables_filter label {{
-                display: flex;
-                align-items: center;
-                color: #888;
-                font-size: 12px;
-                font-weight: bold;
-                text-transform: uppercase;
+            th:nth-child(-n+5)::after, td:nth-child(-n+5) .d-tooltip::after {{
+                left: 0 !important;
+                right: auto !important;
             }}
 
-            .dataTables_filter input {{
-                width: 450px !important; /* Adjusted for better balance */
-                background: #181818 !important;
-                color: #fff !important;
-                border: 1px solid #333 !important;
-                border-radius: 20px !important; /* Rounded pill shape looks better centered */
-                padding: 6px 20px !important;
-                margin-left: 12px !important;
-                outline: none !important;
-                transition: border-color 0.2s;
+            #time {{
+                font-family: monospace; 
+                font-size: 14px !important; 
+                font-weight: bold; 
+                color: #00ff00; /* Changed to Green to match your theme */
             }}
 
-            .dataTables_filter input:focus {{
-                border-color: #00ffff !important; /* Glows cyan when searching */
+            table.dataTable thead > tr > th.sorting:before,
+            table.dataTable thead .sorting:after, 
+            table.dataTable thead .sorting_asc:after, 
+            table.dataTable thead .sorting_desc:after {{
+                display: inline-block !important;
+                visibility: visible !important;
+                opacity: 0.6 !important;
+                position: relative !important;
+                margin-left: 10px !important;
+                top: 0 !important;
             }}
+
+            th.sorting::after, th.sorting_asc::after, th.sorting_desc::after {{ content: none !important; }}
+            th.sorting::before, th.sorting_asc::before, th.sorting_desc::before {{ content: none !important; }}
+
         </style>
         </head>
         <body>
-        <div class="container-fluid" style="width: 100%; max-width: 1600px; margin: 0 auto;">
+        <div class="container-fluid" style="width: 98%; max-width: 2500px; margin: 0 auto;">
             
             <div class="header-flex">
                 <div class="header-left">
@@ -1142,29 +1008,29 @@ def export_interactive_html(df, ai_summary=""):
                     <div class="mode-toggle">
                         <input type="checkbox" id="modeSwitch" onclick="updateSummary()">
                         <label for="modeSwitch">
-                            <span class="mode-label s-label">STOCKS</span>
-                            <span class="mode-label e-label">ETFS</span>
+                            <span class="mode-label s-label" style="font-size:12px; font-weight:bold; padding:5px 12px; color:#666;">STOCKS</span>
+                            <span class="mode-label e-label" style="font-size:12px; font-weight:bold; padding:5px 12px; color:#666;">ETFS</span>
                         </label>
                     </div>
                 </div>
 
                 <div class="header-center">
                     <div class="summary-row">
-                        <span class="row-label clr-rank" data-tooltip="Top Industries by weighted Rank Change. Shows where sector momentum is shifting.">RANK CLIMBERS:</span>
+                        <span class="row-label clr-rank" data-tooltip="Total Rank Change by Industry. Shows the sum of all position gains in the sector.">RANK CLIMBERS:</span>
                         <span id="rankBreadcrumb" class="row-content">...</span>
                     </div>
                     <div class="summary-row">
-                        <span class="row-label clr-surge" data-tooltip="Top Industries by weighted Volume Surge. Shows where institutional buying is hitting.">VOL SURGE:</span>
+                        <span class="row-label clr-surge" data-tooltip="Total Volume Surge by Industry. Shows the combined volume pressure of all stocks in the sector.">VOL SURGE:</span>
                         <span id="surgeBreadcrumb" class="row-content">...</span>
                     </div>
                     <div class="summary-row">
-                        <span class="row-label clr-buzz" data-tooltip="Top Industries by Mention Growth. Shows where social hype is accelerating.">SOCIAL BUZZ:</span>
+                        <span class="row-label clr-buzz" data-tooltip="Total Mention Growth by Industry. Sum of all new chatter in the sector.">SOCIAL BUZZ:</span>
                         <span id="mntBreadcrumb" class="row-content">...</span>
                     </div>
                 </div>
 
                 <div class="header-right">
-                    <span id="time" data-utc="{utc_timestamp}">Loading...</span>
+                    <span id="time" data-utc="{utc_timestamp}" style="font-family:monospace; font-size:11px; color:#666;">Loading...</span>
                 </div>
             </div>
 
@@ -1201,25 +1067,20 @@ def export_interactive_html(df, ai_summary=""):
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapAll" checked onclick="toggleMcap('all')">
                         <label class="btn btn-outline-light btn-sm" for="mcapAll" style="font-size: 0.8rem; padding: 4px 8px;">All</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMega" onclick="toggleMcap('mega')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.8rem; padding: 4px 8px;" title="> $200B">Mega</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.8rem; padding: 4px 8px;">Mega</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapLarge" onclick="toggleMcap('large')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.8rem; padding: 4px 8px;" title="$10B - $200B">Lrg</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.8rem; padding: 4px 8px;">Lrg</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMid" onclick="toggleMcap('mid')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.8rem; padding: 4px 8px;" title="$2B - $10B">Mid</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.8rem; padding: 4px 8px;">Mid</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapSmall" onclick="toggleMcap('small')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.8rem; padding: 4px 8px;" title="$250M - $2B">Sml</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.8rem; padding: 4px 8px;">Sml</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMicro" onclick="toggleMcap('micro')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.8rem; padding: 4px 8px;" title="< $250M">Mic</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.8rem; padding: 4px 8px;">Mic</label>
                     </div>
                 </div>
 
                 <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">TXT File</button>
-                <button class="btn btn-sm btn-reset" 
-                        onclick="copyTableToClipboard(event)" 
-                        title="Copy Table to Excel/Sheets" 
-                        style="margin-left: 10px;">
-                    📋 Copy Table
-                </button>
+                <button class="btn btn-sm btn-reset" onclick="copyTableToClipboard(event)" title="Copy Table" style="margin-left: 10px;">📋 Copy</button>
                 
                 <span id="stockCounter">Loading...</span>
             </div>
@@ -1376,6 +1237,7 @@ def export_interactive_html(df, ai_summary=""):
                     </div>
                 </div>
             </div>
+            
             {table_html}
         </div>
         
@@ -1385,127 +1247,76 @@ def export_interactive_html(df, ai_summary=""):
         <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
         <script>
     var table;
-
-    // 1. ROBUST PARSER: Double braces {{ }} used for Python f-string safety
     function parseVal(str) {{
         if (!str) return 0;
-        var clean = str.toString().replace(/<[^>]+>/g, '').replace(/[$,%▲▼+]/g, '').trim();
-        
-        clean = clean.toLowerCase();
+        var clean = str.toString().replace(/<[^>]+>/g, '').replace(/[$,%▲▼+]/g, '').trim().toLowerCase();
         let mult = 1;
         if (clean.endsWith('k')) {{ mult = 1000; clean = clean.replace('k', ''); }}
         else if (clean.endsWith('m')) {{ mult = 1000000; clean = clean.replace('m', ''); }}
         else if (clean.endsWith('b')) {{ mult = 1000000000; clean = clean.replace('b', ''); }}
-        
         return parseFloat(clean) * mult || 0;
     }}
 
     function updateSummary() {{
-        // Safety check: if table doesn't exist, stop.
         if (!$.fn.DataTable.isDataTable('.table')) return;
         var api = $('.table').DataTable();
-        
-        // 1. Check the state of the Toggle Switch
         var topSwitchIsETF = $('#modeSwitch').is(':checked');
-        
-        // 2. Grab ALL data (ignoring search filters)
         var allData = api.rows().data();
 
-        // Helper function to build the Top Movers list
         function getTopSectors(metricIdx) {{
             var sectorData = {{}};
-            
-            // A. Aggregate Data
             allData.each(function(row) {{
-                // Parse Stock vs ETF filter
                 var rawType = row[19].toString().replace(/<[^>]+>/g, ''); 
                 if (topSwitchIsETF && !rawType.includes('ETF')) return;
                 if (!topSwitchIsETF && rawType.includes('ETF')) return;
 
-                // Clean Sector Name
-                var sector = row[18].toString().replace(/<[^>]+>/g, '').trim();
-                sector = sector.replace(/^ETF/i, ''); 
-
-                // Get Values
+                var sector = row[18].toString().replace(/<[^>]+>/g, '').trim().replace(/^ETF/i, ''); 
                 var val = parseVal(row[metricIdx]); 
-                var weight = parseVal(row[15]) || 1; 
-                
                 var sym = row[4].replace(/<[^>]+>/g, '').trim();
                 var name = row[3].replace(/<[^>]+>/g, '').trim();
 
-                if (!sectorData[sector]) sectorData[sector] = {{ sum: 0, totalWeight: 0, count: 0, stocks: [] }};
-                
-                sectorData[sector].sum += (val * weight);
-                sectorData[sector].totalWeight += weight;
+                if (!sectorData[sector]) {{ sectorData[sector] = {{ totalSum: 0, count: 0, stocks: [] }}; }}
+                sectorData[sector].totalSum += val;
                 sectorData[sector].count += 1;
-                
                 sectorData[sector].stocks.push({{ s: sym, n: name, v: val }});
             }});
 
-            // B. Sort Sectors
             var sorted = Object.keys(sectorData).map(function(s) {{
-                var d = sectorData[s];
-                var avg = d.totalWeight > 0 ? (d.sum / d.totalWeight) : 0;
-                return {{ name: s, avg: avg, count: d.count, stocks: d.stocks }};
+                return {{ name: s, total: sectorData[s].totalSum, count: sectorData[s].count, stocks: sectorData[s].stocks }};
             }});
 
             sorted = sorted.filter(function(s) {{ return s.count >= 2; }});
-            sorted.sort(function(a, b) {{ return b.avg - a.avg; }});
+            sorted.sort(function(a, b) {{ return b.total - a.total; }});
+            if (sorted.length === 0) return '<span style="color:#666;">---</span>';
 
-            if (sorted.length === 0) return '<span style="color:#666; font-weight:normal;">---</span>';
-
-            // C. Build HTML Output
-            var topThree = sorted.slice(0, 3);
-            
+            var topThree = sorted.slice(0, 5);
             return topThree.map(function(s, i) {{
-                // Sort stocks in this sector (Highest value first)
                 s.stocks.sort(function(a, b) {{ return b.v - a.v; }});
+                // SHOW ALL STOCKS
+                var topStocks = s.stocks; 
                 
-                var topStocks = s.stocks.slice(0, 5);
-                
-                // Build Tooltip Rows using SAFE concatenation (No backticks)
                 var tipRows = topStocks.map(function(st) {{
                     var numStr = st.v > 0 ? '+' + Math.round(st.v) : Math.round(st.v);
                     var color = st.v >= 0 ? '#00ff00' : '#ff4444';
-                    
                     return "<div style='display:flex; justify-content:flex-start; align-items:center; font-size:11px; margin-bottom:1px;'>" +
                                 "<span style='min-width:45px; text-align:left; color:" + color + "; font-weight:bold;'>" + numStr + "</span>" +
                                 "<span style='color:#fff; white-space:nowrap;'><b>" + st.s + "</b>: " + st.n + "</span>" +
                             "</div>";
                 }}).join('');
 
-                    var tooltipHTML = "<div style='text-align:left; padding:2px;'>" +
-                                      tipRows + 
-                                      "</div>";
-
-                // We use data-bs-title for the content
-                // We add the 'sector-tooltip' class to find it later
+                var tooltipHTML = "<div style='text-align:left; padding:2px;'>" + tipRows + "</div>";
                 return '<span class="crumb-num">' + (i+1) + '.</span>' + 
-                       '<span class="sector-tooltip" data-bs-title="' + tooltipHTML + '" style="cursor:help; border-bottom:1px dotted #555;">' + 
-                       s.name + '</span>';
+                       '<span class="sector-tooltip" data-bs-title="' + tooltipHTML + '" style="cursor:help; border-bottom:1px dotted #555;">' + s.name + '</span>';
             }}).join('<span class="crumb-sep"> > </span>');
         }}
 
-        // 3. CLEANUP: Dispose of old tooltips to prevent freezing/memory leaks
-        $('.sector-tooltip').each(function() {{
-            var oldTip = bootstrap.Tooltip.getInstance(this);
-            if (oldTip) oldTip.dispose();
-        }});
-
-        // 4. UPDATE DOM with new text
+        $('.sector-tooltip').each(function() {{ var old = bootstrap.Tooltip.getInstance(this); if (old) old.dispose(); }});
         $('#rankBreadcrumb').html(getTopSectors(1));  
         $('#surgeBreadcrumb').html(getTopSectors(12)); 
         $('#mntBreadcrumb').html(getTopSectors(16));  
 
-        // 5. RE-INITIALIZE Tooltips manually
-        // We use sanitize: false to allow our custom HTML styling
         $('.sector-tooltip').each(function() {{
-            new bootstrap.Tooltip(this, {{
-                html: true,
-                sanitize: false,
-                animation: false, // Disables the "fade in" which uses transparency
-                container: 'body'
-            }});
+            new bootstrap.Tooltip(this, {{ html: true, sanitize: false, animation: false, container: 'body' }});
         }});
     }}
 
@@ -1531,95 +1342,64 @@ def export_interactive_html(df, ai_summary=""):
     function exportTickers() {{
         var data = table.rows({{ search: 'applied', order: 'current', page: 'current' }}).data();
         var tickers = []; 
-        data.each(function (value) {{ 
-            var clean = value[4].replace(/<[^>]+>/g, '').trim(); 
-            if(clean) tickers.push(clean); 
-        }});
+        data.each(function (value) {{ var clean = value[4].replace(/<[^>]+>/g, '').trim(); if(clean) tickers.push(clean); }});
         if (tickers.length === 0) {{ alert("No visible tickers!"); return; }}
         var blob = new Blob([tickers.join(", ")], {{ type: "text/plain;charset=utf-8" }}); 
-        var a = document.createElement("a"); 
-        a.href = URL.createObjectURL(blob); 
-        a.download = "ape_tickers_page.txt"; 
-        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "ape_tickers.txt"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
     }}
 
     function toggleMcap(type) {{
-        if (type === 'all') {{
-            // If "All" is clicked, uncheck all other specific filters
-            $('input[name="mcapFilter"]').not('#mcapAll').prop('checked', false);
-        }} else {{
-            // If a specific filter is clicked, uncheck "All"
-            $('#mcapAll').prop('checked', false);
-            // If nothing is checked anymore, default back to "All"
-            if ($('input[name="mcapFilter"]:checked').length === 0) {{ 
-                $('#mcapAll').prop('checked', true); 
-            }}
-        }}
-        table.draw(); // Refresh the table results
+        if (type === 'all') {{ $('input[name="mcapFilter"]').not('#mcapAll').prop('checked', false); }} 
+        else {{ $('#mcapAll').prop('checked', false); if ($('input[name="mcapFilter"]:checked').length === 0) {{ $('#mcapAll').prop('checked', true); }} }}
+        table.draw(); 
+    }}
+
+    function copyTableToClipboard(event) {{ 
+        const btn = event.currentTarget; const table = document.querySelector(".table");
+        if (!table) return;
+        let rows = Array.from(table.querySelectorAll("tr"));
+        let textToCopy = rows.map(row => {{
+            let cells = Array.from(row.querySelectorAll("th, td"));
+            return cells.map(cell => cell.innerText.trim()).join("\\t");
+        }}).join("\\n");
+        navigator.clipboard.writeText(textToCopy).then(() => {{
+            const originalText = btn.innerHTML; btn.innerHTML = "✅ Copied!"; btn.style.color = "#00ff00";
+            setTimeout(() => {{ btn.innerHTML = originalText; btn.style.color = ""; }}, 2000);
+        }});
     }}
 
     $(document).ready(function(){{ 
         table = $('.table').DataTable({{
-            "order":[[0,"asc"]], 
-            "pageLength": 15, 
-            "lengthMenu": [[15, 25, 50, 100, 250, -1], [15, 25, 50, 100, 250, "All"]],
+            "order":[[0,"asc"]], "pageLength": 15, "lengthMenu": [[15, 25, 50, 100, 250, -1], [15, 25, 50, 100, 250, "All"]],
             "columnDefs": [ 
                 {{ "visible": false, "targets": [19, 20, 21] }}, 
-                {{
-                    "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
-                    "type": "num",
-                    "render": function(data, type) {{
-                        if (type === 'sort' || type === 'type') {{ return parseVal(data); }} 
-                        return data; 
-                    }} 
-                }},
-                {{
-                    "targets": [18],
-                    "type": "string",
-                    "render": function(data, type) {{ 
-                        if (type === 'sort' || type === 'type') {{ return data.toString().replace(/<[^>]+>/g, '').trim(); }} 
-                        return data; 
-                    }} 
-                }}
+                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], "type": "num", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ return parseVal(data); }} return data; }} }},
+                {{ "targets": [18], "type": "string", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ return data.toString().replace(/<[^>]+>/g, '').trim(); }} return data; }} }}
             ],
-            "drawCallback": function() {{ 
-                var api = this.api(); 
-                $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); 
-            }}
+            "drawCallback": function() {{ var api = this.api(); $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); }}
         }});
 
         $.fn.dataTable.ext.search.push(function(settings, data) {{
-            // 1. Stock/ETF Toggle Logic
-            var typeTag = data[19] || ""; 
-            var viewMode = $('input[name="btnradio"]:checked').attr('id');
+            var typeTag = data[19] || ""; var viewMode = $('input[name="btnradio"]:checked').attr('id');
             var isETF = typeTag.includes("ETF");
             if (viewMode == 'btnradio2' && isETF) return false; 
             if (viewMode == 'btnradio3' && !isETF) return false; 
             
-            // 2. Market Cap Filter Logic
             if (!$('#mcapAll').is(':checked')) {{
-                var mcap = parseVal(data[21]); // Column 21 is MCap (Hidden)
-                var match = false;
-                
+                var mcap = parseVal(data[21]); var match = false;
                 if ($('#mcapMega').is(':checked') && mcap >= 200000000000) match = true;
                 if ($('#mcapLarge').is(':checked') && (mcap >= 10000000000 && mcap < 200000000000)) match = true;
                 if ($('#mcapMid').is(':checked') && (mcap >= 2000000000 && mcap < 10000000000)) match = true;
                 if ($('#mcapSmall').is(':checked') && (mcap >= 250000000 && mcap < 2000000000)) match = true;
                 if ($('#mcapMicro').is(':checked') && mcap < 250000000) match = true;
-                
                 if (!match) return false; 
             }}
 
-            // 3. Price & Volume Filters
-            var minP = parseVal($('#minPrice').val()), maxP = parseVal($('#maxPrice').val());
-            var p = parseVal(data[5]);
-            if (minP > 0 && p < minP) return false;
-            if (maxP > 0 && p > maxP) return false;
+            var minP = parseVal($('#minPrice').val()), maxP = parseVal($('#maxPrice').val()); var p = parseVal(data[5]);
+            if (minP > 0 && p < minP) return false; if (maxP > 0 && p > maxP) return false;
             
-            var minV = parseVal($('#minVol').val()), maxV = parseVal($('#maxVol').val());
-            var v = parseVal(data[20]); // Column 20 is AvgVol (Hidden)
-            if (minV > 0 && v < minV) return false;
-            if (maxV > 0 && v > maxV) return false;
+            var minV = parseVal($('#minVol').val()), maxV = parseVal($('#maxVol').val()); var v = parseVal(data[20]);
+            if (minV > 0 && v < minV) return false; if (maxV > 0 && v > maxV) return false;
             
             return true;
         }});
@@ -1628,49 +1408,11 @@ def export_interactive_html(df, ai_summary=""):
         window.redraw = function() {{ table.draw(); }};
 
         var d = new Date($("#time").data("utc")); 
-        // 'en-US' keeps Month/Day/Year, {{ hour12: false }} forces 24-hour time
         $("#time").text(d.toLocaleString('en-US', {{ hour12: false }}).replace(',', ''));
         
         table.on('draw', updateSummary);
         setTimeout(updateSummary, 100);
     }});
-
-
-    function copyTableToClipboard(event) {{ 
-        // 1. Setup - Get the button and the table
-        const btn = event.currentTarget; 
-        const table = document.querySelector(".table");
-    
-        if (!table) {{
-            console.error("Table not found");
-            return;
-        }}
-
-        // 2. Data Processing - Convert table rows to Tab-Separated Values
-        let rows = Array.from(table.querySelectorAll("tr"));
-        let textToCopy = rows.map(row => {{
-            let cells = Array.from(row.querySelectorAll("th, td"));
-            // Join cells with tabs, rows with newlines
-            return cells.map(cell => cell.innerText.trim()).join("\\t");
-        }}).join("\\n");
-
-        // 3. Execution - Send to Clipboard
-        navigator.clipboard.writeText(textToCopy).then(() => {{
-            const originalText = btn.innerHTML;
-        
-            // Visual Feedback
-            btn.innerHTML = "✅ Copied!";
-            btn.style.color = "#00ff00";
-
-            setTimeout(() => {{
-            btn.innerHTML = originalText;
-            btn.style.color = ""; 
-        }}, 2000);
-    }}).catch(err => {{
-        console.error("Clipboard Error:", err);
-        alert("Clipboard access denied. If you are opening a local file, try using Firefox or a local server.");
-    }});
-}}
 </script></body></html>"""
         
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
