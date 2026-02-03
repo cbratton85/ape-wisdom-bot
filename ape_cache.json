@@ -13497,5 +13497,23 @@
         "mcap": 1891462016,
         "currency": "USD",
         "description": "Oddity Tech Ltd. operates as a consumer tech company that builds digital-first brands for the beauty and wellness industries in the United States and internationally. It serves consumers through its AI-driven online platform, which uses data science, machine learning, and computer vision capabilities to identify consumer needs, and develop solutions in the form of beauty, wellness, and technology products. The company provides a portfolio of products, including face and complexion, eye, brow and lip products, makeup tools, skincare, haircare, and supplements under the IL MAKIAGE and SpoiledChild brands. In addition, it operates ODDITY LABS, a biotechnology center, which deploys AI-based molecule discovery technology to identify and launch novel ingredients that delivers performance and outcomes for consumers in beauty and wellness. Oddity Tech Ltd. was incorporated in 2013 and is headquartered in Tel Aviv, Israel."
+    },
+    "BBT": {
+        "ticker": "BBT",
+        "name": "Beacon Financial Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 2433357056,
+        "currency": "USD",
+        "description": "Beacon Financial Corporation operates as the bank holding company for Beacon Bank & Trust that provides various banking solutions in New England and New York, the United States. The company accepts various deposit products. It also provides commercial, asset-based lending, retail, consumer, and residential products and services. In addition, the company offers equipment financing, SBA lending, and private wealth services, as well as cash management, and online and mobile banking services. Further, it is involved in the securities investment activities. The company is headquartered in Boston, Massachusetts."
+    },
+    "FMS": {
+        "ticker": "FMS",
+        "name": "Fresenius Medical Care AG",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 13194331136,
+        "currency": "USD",
+        "description": "Fresenius Medical Care AG provides dialysis and related services for individuals with renal diseases in Germany, the United States, and internationally. The company offers dialysis treatment and related laboratory and diagnostic services through a network of outpatient dialysis clinics; materials, training, and patient support services comprising clinical monitoring, follow-up assistance, and arranging for delivery of the supplies to the patient's residence; and dialysis services under contract to hospitals in the United States for the hospitalized end-stage renal disease (ESRD) patients and for patients suffering from acute kidney failure. The company operates through Care Delivery and Care Enablement segments. It also develops, manufactures, and distributes various health care products, including hemodialysis machines, peritoneal dialysis cyclers, peritoneal dialysis solutions, hemodialysis concentrates, solutions and granulates, bloodlines, renal pharmaceuticals, systems for water treatment, and acute cardiopulmonary and apheresis products. In addition, the company develops, acquires, and in-licenses renal pharmaceuticals; offers renal medications and supplies to patients at homes or to dialysis clinics; and provides vascular specialty, ambulatory surgery center, physician nephrology practice management, ambulant treatment, pharmacy and other services. The company sells its products to dialysis clinics, hospitals, and specialized treatment clinics, as well as through local sales forces, independent distributors, dealers, and sales agents. Fresenius Medical Care AG was incorporated in 1996 and is headquartered in Bad Homburg, Germany."
     }
 }
