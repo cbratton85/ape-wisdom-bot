@@ -13461,5 +13461,41 @@
         "mcap": 237038640,
         "currency": "USD",
         "description": "Quantum-Si incorporated, a life sciences company, engages in the development of single-molecule detection platform to enable Next Generation Protein Sequencing (NGPS). The company offers Platinum NGPS instrument that provides single molecule amino acid level resolution with a streamlined workflow, including automated data analysis that accessible to researchers in all laboratory types; Platinum Pro NGPS instrument, a single molecule amino acid resolution, which provides an enhanced user interface, cloud or on instrument data analysis and an available pro mode; Library preparation kits to prepare protein sample for sequencing; Barcoding Kits to optimize the workflow and performance of technology; and Sequencing Kits contains the reagents and consumables used to perform NGPS on the Platinum or Platinum Pro instrument. It also provides Platinum Analysis Software, a cloud-based solution that automates data analysis workflows and provides a user-friendly interface and visualization of the sequencing results. Its products are used in antibody characterization, biomarker identification, protein identification, protein variants, protein barcoding, and post translational modification analysis applications. Quantum-Si incorporated was founded in 2013 is headquartered in Branford, Connecticut."
+    },
+    "DV": {
+        "ticker": "DV",
+        "name": "DoubleVerify Holdings, Inc.",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 1734460928,
+        "currency": "USD",
+        "description": "DoubleVerify Holdings, Inc. provides media effectiveness platforms in the United States and internationally. The company provides data analytics that enable advertisers to increase the effectiveness and quality and return on their digital advertising investments. It offers DV Authentic Ad, a metric of digital media quality, which evaluates the existence of fraud, brand safety and suitability, viewability and geography for each digital ad; DV Authentic Attention that provides actionable and comprehensive data to drive campaign performance; Scibids AI, an AI-powered digital campaign optimization solutions. and Custom Contextual solution, which allows advertisers to match their ads to relevant content to maximize user engagement and drive campaign performance. In addition, the company provides DV Publisher suite, a solution for digital publishers to manage revenue and increase inventory yield by improving video delivery, identifying lost or unfilled sales, and aggregate data across all inventory sources; and DV Pinnacle, a service and analytics platform user interface that allows its customers to adjust and deploy controls for their media plan and track campaign performance metrics across channels, formats, and devices. Further, it offers software platform that is integrated across digital advertising ecosystem, including programmatic platforms, social media channels, and digital publishers. The company serves brands, publishers, and other supply-side customers covering various industry verticals, including consumer packaged goods, financial services, telecommunications, technology, automotive, and healthcare. The company was founded in 2008 and is headquartered in New York, New York."
+    },
+    "MAMO": {
+        "ticker": "MAMO",
+        "name": "Massimo Group",
+        "meta": "Recreational Vehicles",
+        "type": "EQUITY",
+        "mcap": 131585408,
+        "currency": "USD",
+        "description": "Massimo Group, through its subsidiaries, manufactures and sells utility terrain vehicles, all-terrain vehicles, and pontoon and tritoon boats in the United States. The company offers motorcycles, scooters, golf carts, and go karts and balance bikes, as well as snow equipment. It also provides accessories, including EV chargers, electric coolers, power stations, and portable solar panels. The company sells its products through a network of dealerships, distributors, and chain stores, as well as the e-commerce marketplace. Massimo Group was founded in 2009 and is based in Garland, Texas."
+    },
+    "XME": {
+        "ticker": "XME",
+        "name": "State Street SPDR S&P Metals & ",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 2075873792,
+        "currency": "USD",
+        "description": "In seeking to track the performance of the S&P Metals & Mining Select Industry Index (the \"index\"), the fund employs a sampling strategy. It generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index. The index represents the metals and mining segment of the S&P Total Market Index (\"S&P TMI\"). The fund is non-diversified."
+    },
+    "ODD": {
+        "ticker": "ODD",
+        "name": "ODDITY Tech Ltd.",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 1891462016,
+        "currency": "USD",
+        "description": "Oddity Tech Ltd. operates as a consumer tech company that builds digital-first brands for the beauty and wellness industries in the United States and internationally. It serves consumers through its AI-driven online platform, which uses data science, machine learning, and computer vision capabilities to identify consumer needs, and develop solutions in the form of beauty, wellness, and technology products. The company provides a portfolio of products, including face and complexion, eye, brow and lip products, makeup tools, skincare, haircare, and supplements under the IL MAKIAGE and SpoiledChild brands. In addition, it operates ODDITY LABS, a biotechnology center, which deploys AI-based molecule discovery technology to identify and launch novel ingredients that delivers performance and outcomes for consumers in beauty and wellness. Oddity Tech Ltd. was incorporated in 2013 and is headquartered in Tel Aviv, Israel."
     }
 }
