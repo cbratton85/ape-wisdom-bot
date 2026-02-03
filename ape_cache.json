@@ -14190,5 +14190,50 @@
         "mcap": 75518640,
         "currency": "USD",
         "description": "Chegg, Inc. provides individualized learning support to students that helps build essential academic, life, and job skills to achieve success in the United States and internationally. Its subscription services include Chegg Study, which offers personalized step-by-step learning support from AI, computational engines, and subject matter experts; Chegg Writing that provides students with a suite of tools, such as plagiarism detection scans, grammar and writing fluency checking, expert personalized writing feedback, and premium citation generation; Chegg Math, a step-by-step math problem solver and calculator that helps students to solve problems; Chegg Study Pack, a bundle of various subscription product offerings, including Chegg Study, Chegg Writing, and Chegg Math services; and Busuu, a language learning platform that offers comprehensive support through self-paced lessons, live classes with expert tutors, and a community of members to practice alongside. The company also provides a skills-based learning platform to learn technical skills comprising AI, coding, data analytics, and cybersecurity, as well as competencies consisting of emotional intelligence, mindset, emerging leadership, and decision making. In addition, it rents and sells print textbooks and eTextbooks; and offers advertising services. The company serves students and companies through direct marketing channels and social media. Chegg, Inc. was incorporated in 2005 and is headquartered in Santa Clara, California."
+    },
+    "THY": {
+        "ticker": "THY",
+        "name": "Toews Agility Shares Dynamic Ta",
+        "meta": "High Yield Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund\u2019s adviser seeks to achieve the fund\u2019s investment objectives by tactically investing in a portfolio of income-producing securities, including high-yield bonds, investment grade bonds, municipal bonds, U.S. Treasuries and/or cash/cash equivalents. It may hedge long positions using futures and/or ETFs."
+    },
+    "COP": {
+        "ticker": "COP",
+        "name": "ConocoPhillips",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 129752621056,
+        "currency": "USD",
+        "description": "ConocoPhillips explores for, produces, transports, and markets crude oil, bitumen, natural gas, liquefied natural gas (LNG), and natural gas liquids. The company operates in six segments: Alaska; Lower 48; Canada; Europe, Middle East and North Africa; Asia Pacific; and Other International. The company's portfolio includes unconventional plays in North America; conventional assets in North America, Europe, Asia, and Australia; global LNG developments; oil sands assets in Canada; and an inventory of global exploration prospects. It serves in the United States, Canada, China, Equatorial Guinea, Libya, Malaysia, Norway, Singapore, the United Kingdom, and internationally ConocoPhillips was founded in 1917 and is headquartered in Houston, Texas."
+    },
+    "TTAN": {
+        "ticker": "TTAN",
+        "name": "ServiceTitan, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 6214390784,
+        "currency": "USD",
+        "description": "ServiceTitan, Inc. provides an end-to-end cloud-based software platform in the United States and Canada. Its platform connects and manages a range of business workflows, such as advertising, job scheduling and management, dispatching, generating estimates and invoices, payment processing and others. The company offers ServiceTitan, a platform for contractors; FieldRoutes, a pest control software; Aspire, a business management software that offers real-time reports, precise data, accurate job costing for the landscape and clean industries; and Convex, a sales and marketing platform for trades. In addition, the company offers FinTech products that include payment processing and third-party financing solutions. It serves HVAC, plumbing, electrician, garage door, chimney sweep, irrigation, water treatment, septic, painting, pool service, landscape, lawn care, pest control, roofing, air duct cleaning, commercial food equipment, audio visual, alarm, appliance repair, residential remodeling, commercial cleaning, locksmith, refrigeration, and handyman industries. The company was formerly known as Linxlogic, Inc. and changed its name to ServiceTitan, Inc. in June 2014. The company was incorporated in 2007 and is based in Glendale, California."
+    },
+    "UFI": {
+        "ticker": "UFI",
+        "name": "Unifi, Inc. New",
+        "meta": "Textile Manufacturing",
+        "type": "EQUITY",
+        "mcap": 74727904,
+        "currency": "USD",
+        "description": "Unifi, Inc., together with its subsidiaries, engages in the manufacture and sale of recycled and synthetic products in North America, Central America, South America, Asia, and Europe. It offers polyester products, including partially oriented yarn, textured, solution and package dyed, twisted, beamed, and draw wound yarns in virgin or recycled varieties; and nylon products comprise virgin or recycled textured, solution dyed, and spandex covered yarns. The company also provides recycled solutions made from pre-consumer and post-consumer waste, such as plastic bottle flakes, polyester polymer beads, and staple fiber. It offers recycled and synthetic products primarily to yarn manufacturers, knitters, and weavers that produces yarn and fabric for the apparel, hosiery, automotive, home furnishings, industrial, medical, and other end-use markets. The company sells its products through sales force and independent sales agents under the REPREVE brand. Unifi, Inc. was incorporated in 1969 and is headquartered in Greensboro, North Carolina."
+    },
+    "VICE": {
+        "ticker": "VICE",
+        "name": "AdvisorShares Vice ETF",
+        "meta": "Miscellaneous Sector",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund is an actively managed ETF that seeks to achieve its investment objective by investing, under normal circumstances, at least 80% of its net assets in securities of (i) companies that derive at least 50% of their net revenue from tobacco and alcoholic beverages, (ii) companies that derive at least 50% of their net revenue from the food and beverage industry, and (iii) companies that derive at least 50% of their net revenue from gaming activities. It invests primarily in U.S. exchange listed equity securities, including common and preferred stock and ADRs."
     }
 }
