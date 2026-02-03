@@ -14235,5 +14235,113 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund is an actively managed ETF that seeks to achieve its investment objective by investing, under normal circumstances, at least 80% of its net assets in securities of (i) companies that derive at least 50% of their net revenue from tobacco and alcoholic beverages, (ii) companies that derive at least 50% of their net revenue from the food and beverage industry, and (iii) companies that derive at least 50% of their net revenue from gaming activities. It invests primarily in U.S. exchange listed equity securities, including common and preferred stock and ADRs."
+    },
+    "TNA": {
+        "ticker": "TNA",
+        "name": "Direxion Small Cap Bull 3X Shar",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its net assets in financial instruments, such as swap agreements, securities of the index, and exchange-traded funds (\"ETFs\") that track the index, that, in combination, provide 3X daily leveraged exposure to the Index, consistent with the fund's investment objective. The index measures the performance of approximately 2,000 small-capitalization companies in the Russell 3000\u00ae Index, based on a combination of their market capitalization and current index membership. The fund is non-diversified."
+    },
+    "PCG": {
+        "ticker": "PCG",
+        "name": "Pacific Gas & Electric Co.",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 33759905792,
+        "currency": "USD",
+        "description": "PG&E Corporation, through its subsidiary, Pacific Gas and Electric Company, engages in the sale and delivery of electricity and natural gas to customers in northern and central California, the United States. It generates electricity using nuclear, hydroelectric, fossil fuel-fired, fuel cell, and photovoltaic sources. The company owns and operates interconnected transmission lines; electric transmission substations, distribution lines, switching and distribution substations; and natural gas transmission, storage, and distribution system consisting of distribution pipelines, backbone and local transmission pipelines, and various storage facilities. It serves residential, commercial, industrial, and agricultural customers, as well as natural gas-fired electric generation facilities. PG&E Corporation was incorporated in 1905 and is based in Oakland, California."
+    },
+    "ADUR": {
+        "ticker": "ADUR",
+        "name": "Aduro Clean Technologies Inc.",
+        "meta": "Pollution & Treatment Controls",
+        "type": "EQUITY",
+        "mcap": 410840640,
+        "currency": "USD",
+        "description": "Aduro Clean Technologies Inc. engages in developing water-based chemical recycling technologies. The company's platform converts end-of-life plastics and tire rubber to specialty chemicals and fuels; upgrades heavy crude oils; and transforms renewable oils into renewable fuels and specialty chemicals. Its water based chemical recycling platform features applications in hydrochemolytic plastics upcycling, hydrochemolytic renewables upgrading, and hydrochemolytic bitumen upgrading sectors. The company was formerly known as Dimension Five Technologies Inc. and changed its name to Aduro Clean Technologies Inc. in 2021. Aduro Clean Technologies Inc. is headquartered in London, Canada."
+    },
+    "AMGN": {
+        "ticker": "AMGN",
+        "name": "Amgen Inc.",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 184039211008,
+        "currency": "USD",
+        "description": "Amgen Inc. discovers, develops, manufactures, and delivers human therapeutics worldwide. The company's principal products include Enbrel for the treatment of rheumatoid arthritis, plaque psoriasis, and psoriatic arthritis; Otezla for the treatment of adult patients with plaque psoriasis, psoriatic arthritis, and oral ulcers associated with Beh\u00e7et's disease; Prolia to treat postmenopausal women with osteoporosis; XGEVA for skeletal-related events prevention; Repatha, which reduces the risks of myocardial infarction, stroke, and coronary revascularization; Nplate for the treatment of patients with immune thrombocytopenia; KYPROLIS to treat patients with relapsed or refractory multiple myeloma; Aranesp to treat a lower-than-normal number of red blood cells and anemia; EVENITY for the treatment of osteoporosis in postmenopausal for men and women; Vectibix to treat patients with wild-type RAS metastatic colorectal cancer; BLINCYTO for the treatment of patients with acute lymphoblastic leukemia; TEPEZZA to treat thyroid eye disease; and KRYSTEXXA for the treatment of chronic refractory gout. It also markets other products, including Neulasta, MVASI, AMJEVITA/AMGEVITA, TEZSPIRE, Parsabiv, Aimovig, LUMAKRAS/LUMYKRAS, EPOGEN, KANJINTI, TAVNEOS, RAVICTI, UPLIZNA and PROCYSBI. The company serves healthcare providers, including physicians or their clinics, dialysis centers, hospitals, and pharmacies. It distributes its products through pharmaceutical wholesale distributors, as well as direct-to-consumer channels. The company has collaboration agreements with AstraZeneca plc for the development and commercialization of TEZSPIRE; Novartis Pharma AG to develop and commercialize Aimovig; UCB for the development and commercialization of EVENITY; Kyowa Kirin Co., Ltd. for rocatinlimab development and commercialization; and BeiGene, Ltd. for oncology products expansion and development. Amgen Inc. was incorporated in 1980 and is headquartered in Thousand Oaks, California."
+    },
+    "ULCC": {
+        "ticker": "ULCC",
+        "name": "Frontier Group Holdings, Inc.",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 1211899008,
+        "currency": "USD",
+        "description": "Frontier Group Holdings, Inc., provides low-fare passenger airline services to leisure travelers in the United States and Latin America. The company sells its products through direct distribution channels, such as website, mobile app, and contact centers. As of December 31, 2024, it had a fleet of 159 Airbus single-aisle aircrafts. Frontier Group Holdings, Inc. was founded in 1994 and is headquartered in Denver, Colorado."
+    },
+    "MOMO": {
+        "ticker": "MOMO",
+        "name": "Hello Group Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 1040334784,
+        "currency": "USD",
+        "description": "Hello Group Inc. provides mobile-based social and entertainment services in the People's Republic of China and internationally. The company operates in three segments: Momo, Tantan, and QOOL. It offers Momo, a mobile application that connects people and facilitates social interactions based on location, interests, and various online recreational activities, including live talent shows, short videos, as well as other video- and audio-based interactive experiences, such as online parties, mobile karaoke, and user participated reality shows; Tantan, a social and dating application; and other applications under the Hertz, Soulchill, and Duidui names. The company also provides live video services for various content and activities comprising talent shows, such as singing, dancing, and talk shows, as well as casual chatting, and other forms of interactions between broadcasters and viewers; value-added services; advertising and marketing solutions; and mobile games. The company was formerly known as Momo Inc. and changed its name to Hello Group Inc. in August 2021. Hello Group Inc. was founded in 2011 and is headquartered in Beijing, the People's Republic of China."
+    },
+    "MNST": {
+        "ticker": "MNST",
+        "name": "Monster Beverage Corporation",
+        "meta": "Beverages - Non-Alcoholic",
+        "type": "EQUITY",
+        "mcap": 79793315840,
+        "currency": "USD",
+        "description": "Monster Beverage Corporation, through its subsidiaries, engages in development, marketing, sale, and distribution of energy drink beverages and concentrates in the United States and internationally. The company operates through four segments: Monster Energy Drinks, Strategic Brands, Alcohol Brands, and Other. It offers carbonated non-carbonated energy drinks, ready-to-drink iced teas, lemonades, juice cocktails, single-serve juices and fruit beverages, ready-to-drink dairy and coffee drinks, energy drinks, sports drinks and single-serve still waters, and sodas that are considered natural, sparkling juices, and flavored sparkling beverages. In addition, the company provides its products under the Monster Energy, Monster Energy Ultra, Rehab Monster, Monster Energy Nitro, Java Monster, Punch Monster, Juice Monster, Monster Tour Water, Reign Total Body Fuel, Reign Inferno Thermogenic Fuel, Reign Storm, Bang Energy, NOS, Full Throttle, Burn, Mother, Nalu, Ultra Energy, Play and Power Play, Relentless, BPM, BU, Samurai, Live+, Predator, and Fury brands. Further, it offers craft beers, flavored malt beverages,and hard seltzers under the Jai Alai IPA, Florida Man IPA, Dale's Pale Ale, Wild Basin Hard Seltzers, Dallas Blonde, Deep Ellum IPA, Perrin Brewing Company Black Ale, Hop Rising Double IPA, Wasatch Apricot Hefeweizen, The Beast, and Nasty Beast Hard Tea brands. The company engages in the concentrates and/or beverage bases to authorized bottling, and canning operations. It sells its products to full-service beverage bottlers/distributors, retail grocery and specialty chains, wholesalers, club stores, mass merchandisers, convenience chains, food service customers, value stores, e-commerce retailers, and the military. The company was formerly known as Hansen Natural Corporation and changed its name to Monster Beverage Corporation in January 2012. Monster Beverage Corporation was founded in 1985 and is headquartered in Corona, California."
+    },
+    "HG": {
+        "ticker": "HG",
+        "name": "Hamilton Insurance Group, Ltd.",
+        "meta": "Insurance - Reinsurance",
+        "type": "EQUITY",
+        "mcap": 2761184768,
+        "currency": "USD",
+        "description": "Hamilton Insurance Group, Ltd., through its subsidiaries, operates as specialty insurance and reinsurance company in Bermuda and internationally. The company operates Hamilton Global Specialty, Hamilton Select, and Hamilton Re underwriting platforms. The company offers casualty reinsurance products, such as commercial auto, general liability, healthcare, multiline, personal motor, professional liability, umbrella and excess casualty, and worker's compensation and employer's liability reinsurance; property reinsurance and insurance; and specialty reinsurance solutions, including accident and health, aviation and space, crisis management, mortgage, financial risks, marine and energy, and multiline specialty. In addition, it offers accident and health, cyber, energy, environmental, financial lines, fine art and specie, kidnap and ransom, mergers and acquisitions, marine and energy liability, political risk and violence, professional liability, property binders, property direct and facultative, professional lines, space, upstream energy, excess casualty, war and terrorism, allied medical, management liability, medical professionals, general liability, products liability and contractors, and small business casualty insurance plans, as well as surety and treaty reinsurance products. The company was incorporated in 2013 and is headquartered in Pembroke, Bermuda."
+    },
+    "NEE": {
+        "ticker": "NEE",
+        "name": "NextEra Energy, Inc.",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 184310956032,
+        "currency": "USD",
+        "description": "NextEra Energy, Inc., through its subsidiaries, generates, transmits, distributes, and sells electric power to retail and wholesale customers in North America. The company generates electricity through wind, solar, nuclear, natural gas, and other clean energy. It also develops, constructs, and operates long-term contracted assets that consists of clean energy solutions, such as renewable generation facilities, battery storage facilities, and electric transmission facilities; sells energy commodities; and owns, develops, constructs, manages and operates electric generation facilities in wholesale energy markets. The company had approximately 35,052 megawatts of net generating capacity; approximately 91,000 circuit miles of transmission and distribution lines; and 921 substations. It serves approximately 12 million people through approximately 6 million customer accounts in the east and lower west coasts of Florida. The company was formerly known as FPL Group, Inc. and changed its name to NextEra Energy, Inc. in 2010. NextEra Energy, Inc. was founded in 1925 and is headquartered in Juno Beach, Florida."
+    },
+    "LVMUY": {
+        "ticker": "LVMUY",
+        "name": "LVMH-Moet Hennessy Louis Vuitto",
+        "meta": "Luxury Goods",
+        "type": "EQUITY",
+        "mcap": 310555574272,
+        "currency": "USD",
+        "description": "LVMH Mo\u00ebt Hennessy - Louis Vuitton, Soci\u00e9t\u00e9 Europ\u00e9enne, together with its subsidiaries, operates as a luxury goods company worldwide. The company offers wine and spirit products under the Ao Yun, Ardbeg, Armand de Brignac, Belvedere, Bodega Numanthia, Chandon, Cheval des Andes, Ch\u00e2teau Cheval Blanc, Ch\u00e2teau Galoupet, Ch\u00e2teau d'Yquem, Ch\u00e2teau d'Esclans, Cloudy Bay, Colgin Cellars, Dom P\u00e9rignon, Domaine des Lambrays, Eminente, Glenmorangie, Hennessy, Joseph Phelps, Krug, Mercier, Minuty, Mo\u00ebt & Chandon, Newton Vineyard, Ruinart, SirDavis, Terrazas de los Andes, Veuve Clicquot, Volcan de mi Tierra, and Woodinville brands; fashion and leather products under Barton Perreira,Berluti, Celine, Christian Dior, Fendi, Givenchy, Kenzo, Loewe, Loro Piana, Louis Vuitton, Marc Jacobs, Moynat, Patou, Pucci, Rimowa, and Vuarnet brands; and perfumes and cosmetics products under the Acqua di Parma, Benefit Cosmetics, Cha Ling, Fenty Beauty by Rihanna, Fresh, Givenchy Parfums, Guerlain, KVD Beauty, Kenzo Parfums, Loewe Perfumes, Maison Francis Kurkdjian, Make Up For Ever, OLEHENRIKSEN, Officine Universelle Buly, and Parfums Christian Dior brands. It also provides watches and jewelry under the Bvlgari, Chaumet, DANIEL ROTH, Fred, G\u00e9rald Genta, Hublot, L'Ep\u00e9e 1839, Repossi, TAG Heuer, Tiffany & Co., and Zenith brands; and selective retailing under the 24S, DFS, La Grande \u00c9picerie de Paris, Le Bon March\u00e9 Rive Gauche, Samaritaine, and Sephora brands. In addition, the company offers french business and cultural news publications under the Les Echos group brand; high end yachts under the Feadship brand; hotels and hospitality activities under the Cheval Blanc and Belmond brands; and other activities under the Connaissance des Arts, Cova, Investir, Jardin d'Acclimatation, Le Parisien, Paris Match, and Radio Classique brands. LVMH Mo\u00ebt Hennessy - Louis Vuitton, Soci\u00e9t\u00e9 Europ\u00e9enne was founded in 1365 and is headquartered in Paris, France."
+    },
+    "AEO": {
+        "ticker": "AEO",
+        "name": "American Eagle Outfitters, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 4055574528,
+        "currency": "USD",
+        "description": "American Eagle Outfitters, Inc. operates as a multi-brand specialty retailer in the United States and internationally. The company provides jeans, apparel and accessories, and personal care products for women and men under the American Eagle brand; and intimates, apparel, activewear, and swim collections under the Aerie and OFFLINE by Aerie brands. It also offers menswear products under the Todd Snyder New York brand; and fashion clothing and accessories under the Unsubscribed brand. The company sells its products through its own and licensed retail stores, concession-based shops-within-shops, wholesale markets, and online marketplaces; and digital channels, such as www.ae.com, www.aerie.com, www.toddsnyder.com, and www.unsubscribed.com. American Eagle Outfitters, Inc. was founded in 1977 and is headquartered in Pittsburgh, Pennsylvania."
+    },
+    "GEMI": {
+        "ticker": "GEMI",
+        "name": "Gemini Space Station, Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 865931392,
+        "currency": "USD",
+        "description": "Gemini Space Station, Inc. develops a crypto platform to buy, sell, and store crypto assets. The company's platform offers crypto assets, including bitcoin and ether; and services, such as derivatives exchange, staking services, an over-the-counter trading desk, institutional-grade custody, stablecoin, a U.S. credit card, and a Web3 studio for NFTs (non-fungible tokens). It serves individual retail users; and institutional investors, including asset managers, hedge funds, proprietary trading firms, and corporations. The company was founded in 2014 and is based in New York, New York."
     }
 }
