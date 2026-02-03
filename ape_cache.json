@@ -13380,5 +13380,23 @@
         "mcap": 27144505344,
         "currency": "USD",
         "description": "FirstEnergy Corp., together with its subsidiaries, engages in the generation, distribution, and transmission of electricity in the United States. It operates through Distribution, Integrated, and Stand-Alone Transmission segments. The company owns and operates coal-fired, nuclear, hydroelectric, wind, and solar power generating facilities. It operates 252,244 distribution line miles and 24,143 transmission line miles, including overhead pole line and underground conduit carrying primary, secondary, and street lighting circuits. The company serves customers in Ohio, Pennsylvania, New Jersey, West Virginia, Maryland, and New York. FirstEnergy Corp. was incorporated in 1996 and is headquartered in Akron, Ohio."
+    },
+    "FAN": {
+        "ticker": "FAN",
+        "name": "First Trust Global Wind Energy ",
+        "meta": "Miscellaneous Sector",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will normally invest at least 90% of its net assets (including investment borrowings) in the common stocks and depositary receipts that comprise the index. The index provides a benchmark for investors interested in tracking public companies throughout the world that are active in the wind energy industry. In order to be eligible for inclusion in the index, a security must be issued by a company that is actively engaged in some aspect of the wind energy industry. The fund is non-diversified."
+    },
+    "LSPD": {
+        "ticker": "LSPD",
+        "name": "Lightspeed Commerce Inc. Subord",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 1445505792,
+        "currency": "USD",
+        "description": "Lightspeed Commerce Inc. engages in sale of cloud-based software subscriptions and payments solutions for single and multi-location retailers, restaurants, golf course operators, and other businesses. It offers a cloud-based commerce platform that connects suppliers, merchants, and consumers to enable omnichannel experiences and engage with consumers, manage operations, accept payments, and grow business. The company's cloud platform is designed around interrelated elements, such as omni-channel consumer experience, a comprehensive back-office operations management suite to improve customers' efficiency and insight, and the facilitation of payments. Its platform functionalities include full omni-channel capabilities, point of sale (POS), product and menu management, kitchen display system (KDS), employee and inventory management comprising ordering, analytics and reporting, multi-location connectivity, order anywhere and curbside pickup functionality, loyalty, and customer management solutions. The company also offers tailored financial solutions, such as Lightspeed Payments and Lightspeed Capital; Lightspeed Restaurant, a unified hospitality commerce offering; Lightspeed Retail, a retail commerce offering; Lightspeed eCommerce; Lightspeed NuORDER integration to order from various brands; and Tee Sheet Lightspeed Golf for golf course operators to manage tee-time schedules, golf retail POS, and food and beverage POS. In addition, it sells hardware, including tablets, customer facing displays, KDS screens, receipt printers, networking hardware, cash drawers, payment terminals, servers, stands, bar-code scanners, and an assortment of accessories, as well as provides installation and implementation services. The company was formerly known as Lightspeed POS Inc. and changed its name to Lightspeed Commerce Inc. in August 2021. Lightspeed Commerce Inc. was incorporated in 2005 and is headquartered in Montreal, Canada."
     }
 }
