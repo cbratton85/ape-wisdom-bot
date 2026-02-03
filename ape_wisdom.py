@@ -270,44 +270,28 @@ def filter_and_process(stocks):
     delisted_cache = load_cache(DELISTED_CACHE_FILE) 
     
     now = datetime.datetime.now(datetime.UTC)
-    updated_delisted = False # Track if we need to save the delisted file
+    updated_delisted = False 
 
     # 1. THE LOTTERY (Random Retry)
-    # Instead of checking dates, we pick a few random prisoners to set free and re-test.
     tickers_to_retry = []
     banned_tickers = list(delisted_cache.keys())
     
     if banned_tickers:
-        # Don't try to pick more than we have
         draw_count = min(len(banned_tickers), LOTTERY_SIZE)
-        
-        # Pick random winners
         tickers_to_retry = random.sample(banned_tickers, draw_count)
-        
         if tickers_to_retry:
-            print(f"{C_GREEN}[+] 🎰 LOTTERY TIME: Re-checking {len(tickers_to_retry)} banned tickers: {tickers_to_retry}{C_RESET}")
-            
-            # Remove them from the cache so the script treats them as "new" and checks them
+            print(f"{C_GREEN}[+] 🎰 LOTTERY TIME: Re-checking {len(tickers_to_retry)} banned tickers...{C_RESET}")
             for t in tickers_to_retry:
-                if t in delisted_cache:
-                    del delisted_cache[t]
-            
-            # We must save immediately so the loop below sees them as 'valid'
-            # If they fail again later, they will be re-added to this file/dict
+                if t in delisted_cache: del delisted_cache[t]
             updated_delisted = True
 
     # 2. MAIN FILTER LOOP 
     us_tickers = []
-    
     for s in stocks:
         raw_ticker = s['ticker']
         t = TICKER_FIXES.get(raw_ticker, raw_ticker.replace('.', '-'))
-        
         if t in PERMANENT_BLACKLIST: continue
-        
-        # If it's in the delisted cache (and didn't win the lottery), SKIP IT.
         if t in delisted_cache: continue
-        
         us_tickers.append(t)
     
     us_tickers = list(set(us_tickers))
@@ -315,18 +299,15 @@ def filter_and_process(stocks):
     
     # 3. METADATA FETCHING
     missing = [t for t in us_tickers if t not in local_cache and t not in delisted_cache]
-    
     if missing:
         print(f"{C_YELLOW}Fetching metadata for {len(missing)} NEW items...{C_RESET}")
         for i, t in enumerate(missing):
             if i % 10 == 0 and i > 0: print(f"  > Progress: {i}/{len(missing)} metadata items fetched...")
-            
             res = fetch_meta_data_robust(t)
             
             if res: 
                 local_cache[res['ticker']] = res
             else:
-                # 404 Error - Metadata Missing
                 print(f"{C_RED}  > {t} metadata 404/Not Found. Adding to DELISTED cache.{C_RESET}")
                 delisted_cache[t] = {
                     'delisted': True, 
@@ -334,24 +315,18 @@ def filter_and_process(stocks):
                     'reason': 'Metadata 404'
                 }
                 updated_delisted = True
-
             time.sleep(0.75) 
-
         save_cache(CACHE_FILE, local_cache)
 
-    # 4. MARKET DATA FETCHING
+    # 4. MARKET DATA FETCHING (Batch Mode)
     valid_tickers = [t for t in us_tickers if t not in delisted_cache]
-    
     market_data = pd.DataFrame()
     use_cache = os.path.exists(MARKET_DATA_CACHE_FILE) and (time.time() - os.path.getmtime(MARKET_DATA_CACHE_FILE)) < CACHE_EXPIRY_SECONDS
     
     if use_cache:
         print(f"{C_CYAN}[#] Loading market data from cache...{C_RESET}")
-        try:
-            market_data = pd.read_pickle(MARKET_DATA_CACHE_FILE)
-        except:
-            print(f"{C_RED}[!] Cache corrupt, re-downloading.{C_RESET}")
-            use_cache = False
+        try: market_data = pd.read_pickle(MARKET_DATA_CACHE_FILE)
+        except: use_cache = False
 
     if not use_cache:
         print(f"{C_YELLOW}[!] Downloading data for {len(valid_tickers)} tickers...{C_RESET}")
@@ -359,35 +334,25 @@ def filter_and_process(stocks):
         for i in range(0, len(valid_tickers), CHUNK_SIZE):
             batch = valid_tickers[i:i + CHUNK_SIZE]
             print(f"    > Processing Batch { (i//CHUNK_SIZE) + 1} ({len(batch)} tickers)...")
-            
             try:
-                # --- FIX: Handle Single Ticker Batches Differently ---
-                # yfinance bugs out with group_by='ticker' on single items
                 if len(batch) == 1:
-                    ticker = batch[0]
-                    # Download WITHOUT group_by to avoid MultiIndex error
-                    batch_data = yf.download(ticker, period="40d", interval="1d", progress=False, threads=False)
-                    
+                    # Single ticker handling
+                    batch_data = yf.download(batch[0], period="40d", interval="1d", progress=False)
                     if not batch_data.empty:
-                        # Manually force the MultiIndex structure: (Ticker, Level)
-                        # This matches the structure of the larger batches
-                        batch_data.columns = pd.MultiIndex.from_product([[ticker], batch_data.columns])
+                        # Normalize format to match multi-index batch
+                        batch_data.columns = pd.MultiIndex.from_product([[batch[0]], batch_data.columns])
                 else:
-                    # Standard batch download
+                    # Multi ticker handling
                     batch_data = yf.download(batch, period="40d", interval="1d", group_by='ticker', progress=False, threads=True)
 
-                # --- MERGE BATCH ---
                 if not batch_data.empty:
-                    if market_data.empty: 
-                        market_data = batch_data
-                    else: 
-                        market_data = pd.concat([market_data, batch_data], axis=1)
+                    if market_data.empty: market_data = batch_data
+                    else: market_data = pd.concat([market_data, batch_data], axis=1)
                 
-                if i + CHUNK_SIZE < len(valid_tickers): time.sleep(1.5) 
-            
+                # Increased sleep to prevent rate-limit "misses"
+                if i + CHUNK_SIZE < len(valid_tickers): time.sleep(2.0) 
             except Exception as e:
-                print(f"{C_RED}[!] Error downloading batch {i}: {e}{C_RESET}")
-                # Don't crash the whole script, just lose this batch
+                print(f"{C_RED}[!] Batch Error: {e}{C_RESET}")
                 continue
 
         if not market_data.empty: market_data.to_pickle(MARKET_DATA_CACHE_FILE)
@@ -401,6 +366,7 @@ def filter_and_process(stocks):
         
         try:
             hist = pd.DataFrame()
+            # Attempt to extract from batch data
             if isinstance(market_data.columns, pd.MultiIndex):
                 if t in market_data.columns.levels[0]:
                     hist = market_data[t].dropna()
@@ -408,26 +374,46 @@ def filter_and_process(stocks):
                 if t in market_data.columns:
                     hist = market_data[t].dropna()
 
-            # --- DEAD TICKER CHECK (LOTTERY FAILURE CATCHER) ---
-            # If a lottery winner has NO price data, this line catches it 
-            # and immediately throws it back into the delisted_cache.
-            if hist.empty: 
-                print(f"{C_RED}  > {t} has NO price data. Adding to DELISTED cache.{C_RESET}")
-                delisted_cache[t] = {
-                    'delisted': True, 
-                    'last_checked': now.strftime("%Y-%m-%d"), 
-                    'reason': 'No Price Data'
-                }
-                updated_delisted = True
-                continue
+            # --- DOUBLE VERIFICATION LOGIC ---
+            if hist.empty:
+                # The batch download failed for this ticker. 
+                # Is it dead? Or did Yahoo just timeout?
+                # We try ONE MORE TIME individually.
+                try:
+                    # print(f"  > Verifying {t} individually...") 
+                    retry_data = yf.download(t, period="5d", interval="1d", progress=False)
+                    
+                    if retry_data.empty:
+                        # Confirmed Dead: Both Batch and Individual checks failed.
+                        print(f"{C_RED}  > {t} confirmed NO DATA. Adding to DELISTED cache.{C_RESET}")
+                        delisted_cache[t] = {
+                            'delisted': True, 
+                            'last_checked': now.strftime("%Y-%m-%d"), 
+                            'reason': 'No Price Data'
+                        }
+                        updated_delisted = True
+                        continue
+                    else:
+                        # It's Alive! The batch just missed it. Use this data.
+                        hist = retry_data
+                        # Fix column format if yfinance returned MultiIndex for single ticker
+                        if isinstance(hist.columns, pd.MultiIndex):
+                            hist.columns = hist.columns.droplevel(1)
+                except:
+                     continue
 
+            # Check price/vol requirements
             curr_p = hist['Close'].iloc[-1]
+            if isinstance(curr_p, pd.Series): curr_p = curr_p.iloc[0] # Handle edge case
+
             clean_hist = hist['Volume'] 
             actual_vol_days = min(len(clean_hist), AVG_VOLUME_DAYS)
             avg_v = clean_hist.tail(actual_vol_days).mean()
+            if isinstance(avg_v, pd.Series): avg_v = avg_v.iloc[0]
             
             if curr_p < MIN_PRICE or avg_v < MIN_AVG_VOLUME: continue
 
+            # ... (Rest of your metadata/math logic) ...
             info = local_cache.get(t, {})
             if info.get('currency') not in ['USD', None, '']: continue
 
@@ -469,12 +455,11 @@ def filter_and_process(stocks):
         except Exception as e:
             continue
 
-    # --- SAVE UPDATED DELISTED CACHE IF ANYTHING CHANGED ---
     if updated_delisted:
         print(f"{C_GREEN}[+] Saving updated delisted cache...{C_RESET}")
         save_cache(DELISTED_CACHE_FILE, delisted_cache)
 
-    # 6. SCORING & SAVING (Identical to before)
+    # 6. SCORING & SAVING
     df = pd.DataFrame(final_list)
     if not df.empty and 'Sym' in df.columns:
         df = df.drop_duplicates(subset=['Sym'], keep='first')
@@ -837,9 +822,8 @@ def export_interactive_html(df, ai_summary=""):
             th[data-tooltip]:not(.sorting):not(.sorting_asc):not(.sorting_desc)::after, .d-tooltip::after {{
                 content: attr(data-tooltip); 
                 position: absolute;
-                top: 100%;    /* Ensures it pops up below the text */
-                right: 0;     /* Aligns the right edge of the box to the right edge of the cell */
-                left: auto;
+                top: 130%;    /* Ensures it pops up below the text */
+                left: 50%;
                 background-color: #000; color: #fff; 
                 padding: 8px 12px; border-radius: 6px; border: 1px solid #444;
                 font-size: 13px; font-weight: normal; 
@@ -867,7 +851,54 @@ def export_interactive_html(df, ai_summary=""):
                 color: #fff !important;
                 border: 1px solid #444;
             }}
-            
+
+            .tooltip {{
+                position: relative;
+                display: inline-block;
+                cursor: help;
+            }}
+
+            .tooltip .tooltiptext {{
+                visibility: hidden;
+                width: 300px;
+                background-color: #111 !important;
+                color: #00ffff !important;
+                border: 1px solid #444 !important;
+                padding: 10px !important;
+                position: absolute !important;
+                z-index: 9999 !important;
+                
+                /* POSITION: Directly below the text */
+                top: 110% !important; 
+                left: 0 !important;            
+                
+                opacity: 0;
+                transition: opacity 0.2s;
+                font-family: monospace !important;
+                white-space: pre-wrap !important;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            }}
+
+            /* Tooltip "Arrow" pointing UP at the text */
+            .tooltip .tooltiptext::after {{
+                content: "";
+                position: absolute;
+                bottom: 100%;           /* At the top of the box */
+                left: 20px;
+                border-width: 6px;
+                border-style: solid;
+                border-color: transparent transparent #444 transparent;
+            }}
+
+            .tooltip:hover .tooltiptext {{
+                visibility: visible !important;
+                opacity: 1 !important;
+            }}
+
+            .table-responsive, .container-fluid {{
+                overflow: visible !important;
+            }}
+
             td {{ vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333; padding: 4px 5px !important; font-size: 15px; }}
             table.dataTable {{ width: auto !important; margin: 0 auto; }}
             
@@ -882,8 +913,8 @@ def export_interactive_html(df, ai_summary=""):
                 text-align: left;
             }}
             th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }}
-            th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; }}
-            th:nth-child(12), td:nth-child(12) {{ width: 1%; text-align: right; }}
+            th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; font-weight: normal !important; }}
+            th:nth-child(12), td:nth-child(12) {{ width: 1%; text-align: right; font-weight: normal !important; }}
             th:nth-child(7), td:nth-child(7), th:nth-child(8), td:nth-child(8), th:nth-child(9), td:nth-child(9),
             th:nth-child(10), td:nth-child(10), th:nth-child(11), td:nth-child(11), th:nth-child(13), td:nth-child(13),
             th:nth-child(14), td:nth-child(14), th:nth-child(15), td:nth-child(15), th:nth-child(16), td:nth-child(16),
@@ -973,11 +1004,27 @@ def export_interactive_html(df, ai_summary=""):
 
             /* TOP LABELS TOOLTIPS (Header Summary) */
             .row-label::after {{
-                content: attr(data-tooltip); position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-                background-color: #000; color: #fff; padding: 8px 12px; border-radius: 6px; border: 1px solid #444;
-                font-size: 11px; font-weight: normal; text-transform: none; 
-                white-space: nowrap; width: auto; max-width: none;
-                z-index: 999999 !important; opacity: 0; visibility: hidden; position: fixed; top: auto; transition: opacity 0.1s; pointer-events: none; margin-top: 5px;
+                content: attr(data-tooltip); 
+                position: absolute; 
+                top: 140%; 
+                left: 50%; 
+                transform: translateX(-50%);
+                background-color: #000; 
+                color: #00ffff; 
+                padding: 8px 12px; 
+                border-radius: 6px; 
+                border: 1px solid #444;
+                font-size: 11px; 
+                font-weight: normal; 
+                text-transform: none; 
+                white-space: nowrap; 
+                z-index: 999999 !important; 
+                opacity: 0; 
+                visibility: hidden; 
+                transition: opacity 0.1s; 
+                pointer-events: none; 
+                margin-top: 5px;
+                box-shadow: 0 4px 15px rgba(0,0,0,1);
             }}
 
             .row-label:hover::after {{ opacity: 1; visibility: visible; }}
