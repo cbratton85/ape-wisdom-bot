@@ -13416,5 +13416,23 @@
         "mcap": 11348051968,
         "currency": "USD",
         "description": "Comerica Incorporated, together with its subsidiaries, provides financial services in the United States, Canada, and Mexico. The company operates through Commercial Bank, Retail Bank, and Wealth Management segments. The Commercial Bank segment offers various products and services, including commercial loans and lines of credit, deposits, cash management, payment solutions, card services, capital market products, international trade finance, letters of credit, foreign exchange management services, and loan syndication services for small and middle market businesses, multinational corporations, and governmental entities. The Retail Bank segment provides personal financial services, such as consumer lending, consumer deposit gathering, and mortgage loan origination; and various consumer products that include deposit accounts, installment loans, credit cards, home equity lines of credit, and residential mortgage loans. The Wealth Management segment offers products and services comprising financial planning, trust and fiduciary services, investment management and advisory, brokerage, private banking, and business transition planning services for affluents, high-net worth and ultra-high-net-worth individuals and families, business owners and executives, and institutional clients. The company was formerly known as DETROITBANK Corporation and changed its name to Comerica Incorporated in July 1982. Comerica Incorporated was founded in 1849 and is headquartered in Dallas, Texas."
+    },
+    "MPWR": {
+        "ticker": "MPWR",
+        "name": "Monolithic Power Systems, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 56205447168,
+        "currency": "USD",
+        "description": "Monolithic Power Systems, Inc. designs, develops, markets, and sells semiconductor-based power electronics solutions for the storage and computing, automotive, enterprise data, consumer, communications, and industrial markets in the United States, China, Taiwan, South Korea, Europe, Southeast Asia, Japan, and internationally. The company provides direct current (DC) to DC integrated circuits (ICs) that are used to convert and control voltages of various electronic systems, such as cloud-based and on-premises CPU servers, server artificial intelligence applications, storage applications, notebooks, infotainment, workstation applications, power sources, home appliances, and network infrastructure and satellite communications applications. It also offers alternating current to DC, driver metal-oxide-semiconductor field-effect transistor, power management ICs, current limit switch, and lighting control products. The company sells its products through third-party distributors, value-added resellers, end customers and other resellers, original design manufacturers, and original equipment manufacturers. Monolithic Power Systems, Inc. was incorporated in 1997 and is headquartered in Kirkland, Washington."
+    },
+    "METC": {
+        "ticker": "METC",
+        "name": "Ramaco Resources, Inc.",
+        "meta": "Coking Coal",
+        "type": "EQUITY",
+        "mcap": 1233196160,
+        "currency": "USD",
+        "description": "Ramaco Resources, Inc. engages in the development, operation, and sale of metallurgical coal. Its development portfolio includes the Elk Creek project that covers an area of approximately 20,200 acres located in southern West Virginia; the Berwind property covering an area of approximately 62,500 acres situated on the border of West Virginia and Virginia; the Knox Creek property, which covers an area of approximately 64,050 acres is located in Virginia; the Maben property covering an area of approximately 28,000 acres situated in southwestern Pennsylvania southern West Virginia; and the Brook Mine property that covers an area of approximately 16,000 acres located in northeastern Wyoming. The company serves blast furnace steel mills and coke plants in North America, as well as metallurgical coal consumers internationally. Ramaco Resources, Inc. was founded in 2015 and is based in Lexington, Kentucky."
     }
 }
