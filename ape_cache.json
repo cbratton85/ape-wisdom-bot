@@ -14343,5 +14343,248 @@
         "mcap": 865931392,
         "currency": "USD",
         "description": "Gemini Space Station, Inc. develops a crypto platform to buy, sell, and store crypto assets. The company's platform offers crypto assets, including bitcoin and ether; and services, such as derivatives exchange, staking services, an over-the-counter trading desk, institutional-grade custody, stablecoin, a U.S. credit card, and a Web3 studio for NFTs (non-fungible tokens). It serves individual retail users; and institutional investors, including asset managers, hedge funds, proprietary trading firms, and corporations. The company was founded in 2014 and is based in New York, New York."
+    },
+    "FI": {
+        "ticker": "FI",
+        "name": "FI",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "MERC": {
+        "ticker": "MERC",
+        "name": "Mercer International Inc.",
+        "meta": "Paper & Paper Products",
+        "type": "EQUITY",
+        "mcap": 122577992,
+        "currency": "USD",
+        "description": "Mercer International Inc., together with its subsidiaries, manufactures and sells northern bleached softwood kraft (NBSK) and northern bleached hardwood kraft (NBHK) pulp in the United States, Germany, China, and internationally. It operates through two segments, Pulp and Solid Wood. The company manufactures, sells, and distributes pulp, electricity, and chemicals through pulp mills. It also manufactures, distributes, and sells lumber, cross-laminated timber, finger joint lumber, glue-laminated timber, wood pallets, electricity, biofuels, and wood residuals. In addition, the company generates and sells green energy produced from biomass cogeneration power plants. Further, it produces and sells NBSK pulp manufactured from softwood; green energy using carbon neutral biofuels, such as black liquor and wood waste; tall oil from black liquor for use as a chemical additive and green energy source; wood pellets and briquettes; lignin; and wood procurement and logistics services. The company sells its pulp products to pulp markets, integrated paper and paperboard manufacturers; and lumber products to distributors, construction firms, secondary manufacturers, retail yards, and home centers. Mercer International Inc. was incorporated in 1968 and is headquartered in Vancouver, Canada."
+    },
+    "AUD": {
+        "ticker": "AUD",
+        "name": "AUD",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "ACWX": {
+        "ticker": "ACWX",
+        "name": "iShares MSCI ACWI ex U.S. ETF",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of the underlying index and in investments that have economic characteristics that are substantially identical to the component securities of the underlying index. The index is a free float-adjusted market capitalization-weighted index designed to measure the combined equity market performance of developed and emerging markets countries, excluding the United States."
+    },
+    "HEAR": {
+        "ticker": "HEAR",
+        "name": "HEAR",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "RES": {
+        "ticker": "RES",
+        "name": "RPC, Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 1205671296,
+        "currency": "USD",
+        "description": "RPC, Inc., together with its subsidiaries, engages provision of a range of oilfield services and equipment for the oil and gas companies involved in the exploration, production, and development of oil and gas properties. The company operates through Technical Services and Support Services segments. The Technical Services segment offers pressure pumping, cementing, downhole tools, coiled tubing, snubbing, nitrogen, well control, wireline, and fishing services that are used in the completion, production, and maintenance of wells, as well as well control training. The Support Services segment provides a range of rental tools drill pipe and related tools, as well as pipe handling, pipe inspection and storage services. It rents its tools for use with onshore and offshore oil and gas well drilling, completion, and workover activities. It operates in Africa, Canada, Argentina, China, Mexico, Latin America, and the Middle East. The company was incorporated in 1984 and is headquartered in Atlanta, Georgia."
+    },
+    "LVHI": {
+        "ticker": "LVHI",
+        "name": "Franklin International Low Vola",
+        "meta": "Foreign Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will invest at least 80% of its net assets, plus borrowings for investment purposes, if any, in securities that compose its underlying index. The underlying index seeks to provide more stable income through investments in stocks of profitable companies in developed markets outside of the United States with relatively high dividend yields or anticipated dividend yields and lower price and earnings volatility, while mitigating exposure to exchange-rate fluctuations between the USD and other international currencies."
+    },
+    "CHRW": {
+        "ticker": "CHRW",
+        "name": "C.H. Robinson Worldwide, Inc.",
+        "meta": "Integrated Freight & Logistics",
+        "type": "EQUITY",
+        "mcap": 23593177088,
+        "currency": "USD",
+        "description": "C.H. Robinson Worldwide, Inc., together with its subsidiaries, provides freight transportation and related logistics and supply chain services in the United States and internationally. It operates in two segments, North American Surface Transportation and Global Forwarding. The company offers transportation and logistics services, such as truckload; less than truckload transportation brokerage services, which include the shipment of single or multiple pallets of freight; intermodal transportation that comprises the shipment service of freight in containers or trailers by a combination of truck and rail; and non-vessel operating common carrier and freight forwarding services, as well as organizes air shipments and provides door-to-door services. It also provides customs brokerage services; and other logistics services, such as fee-based managed, warehousing, and other services. In addition, the company is involved in the buying, selling, and/or marketing of fresh fruits, vegetables, and other value-added perishable items under the Robinson Fresh trade name. Further, the company offers transportation management and other surface transportation services. It provides its fresh produce to grocery retailers, restaurants, produce wholesalers, and foodservice distributors through a network of independent produce growers and suppliers. The company was founded in 1905 and is headquartered in Eden Prairie, Minnesota."
+    },
+    "CLX": {
+        "ticker": "CLX",
+        "name": "Clorox Company (The)",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 14041771008,
+        "currency": "USD",
+        "description": "The Clorox Company manufactures and markets consumer and professional products worldwide. The company operates through four segments: Health and Wellness, Household, Lifestyle, and International. The Health and Wellness segment offers home care cleaning and disinfecting products, bleach, clog removers, and laundry additives under the Clorox, Clorox2, Pine-Sol, Scentiva, Tilex, Liquid-Plumr, Poett, and Formula 409 brands; professional cleaning and disinfecting products under the CloroxPro and Clorox Healthcare brands; professional food service products under the Hidden Valley brand in the United States. The Household segment provides cat litter products under the Fresh Step and Scoop Away brands; bags and wraps under the Glad brand; and grilling products under the Kingsford brand in the United States. The Lifestyle segment offers dressings, dips, seasonings, and sauces primarily under the Hidden Valley brand; water-filtration products under the Brita brand; and natural personal care products under the Burt's Bees brand in the United States. The International segment provides laundry additives, home care products, bags and wraps, cat litter products, water-filtration systems, professional cleaning and disinfecting products, natural personal care products, food, grilling products, and digestive health products internationally primarily under the Clorox, Glad, Poett, Brita, Burt's Bees, Pine-Sol, Ever Clean, Clorinda, Chux and Fresh Step Brands. It also offers vitamins, minerals, and supplement products under the Natural Vitality, RenewLife, NeoCell, and Rainbow Light brands. The company sells its products through mass retailers; grocery outlets; warehouse clubs; dollar stores; home hardware centers; drug, pet, and military stores; third-party and owned e-commerce channels; and distributors, as well as a direct sales force. The company was founded in 1913 and is headquartered in Oakland, California."
+    },
+    "RE": {
+        "ticker": "RE",
+        "name": "RE",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "GCOW": {
+        "ticker": "GCOW",
+        "name": "Pacer Global Cash Cows Dividend",
+        "meta": "Global Large-Stock Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Under normal circumstances, the fund will invest at least 80% of its total assets (exclusive of collateral held from securities lending) in the components of the index and investments that have economic characteristics that are substantially identical to the economic characteristics of such component securities (e.g., depositary receipts). The index uses an objective, rules-based methodology to provide exposure to global companies with high dividend yields backed by a high free cash flow yield."
+    },
+    "SSL": {
+        "ticker": "SSL",
+        "name": "Sasol Ltd.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 4583896064,
+        "currency": "USD",
+        "description": "Sasol Limited operates as a chemical and energy company. It offers bitumen, industrial heating fuels, naphtha, lubricants and lubricant base oils, liquefied petroleum gas, automotive and industrial lubricants, greases, cleansers and degreasers, automotive fuels, and burner fuels or domestic, as well as illuminating paraffin transport fuels, such as petrol, diesel, and jet fuels. The company also provides methane rich and natural gas. In addition, it offers ammonium nitrate, limestone ammonium nitrate, and nitric acid for agriculture; industrial foaming agents, wax/hydrophobic coatings and industrial pegs, dispersible hydrates, boehmites, and aluminum oxides for building and construction; short-chain alcohols for flavors and fragrances; liquids, flakes, powders, and polyethylene glycols for health and wellness; caustic soda, hydrochloric acid CP Grade, and calcium chloride for industrial and institutional cleaning; alumina-based catalyst, cobalt FT catalysts, and mixed metal oxides for inorganic materials and catalysts; chemical feedstocks, process solvents, and chemicals for manufacturing and industrial; viscosity modifiers, chemical carriers, and adsorbents for mining, oil, and gas; hydrocarbons, surfactants, polyether, and polyglycols for paper and water; surfactants, dyes, finishing agents, tanning agents, and emulsifiers for textile and leather; and other chemicals for automotive and transportation, consumer goods, home care, packaging, printing, coatings, personal care, and polymers sectors. Further, it is involved in engineering services, research and development, and technology transfer; management of cash resources, investments, and procurement of loans; develop and implement international gas to liquid and CTL ventures; marketing of fuels and lubricants; trading and transportation of oil products, petrochemicals and chemical products, and derivatives; and coal mining activities. Sasol Limited was founded in 1950 and is based in Johannesburg, South Africa."
+    },
+    "SCYX": {
+        "ticker": "SCYX",
+        "name": "SCYNEXIS, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 31767548,
+        "currency": "USD",
+        "description": "SCYNEXIS, Inc., a biotechnology company, develops medicines to overcome and prevent difficult-to-treat and drug-resistant infections in the United States. It offers BREXAFEMME for the treatment of patients with vulvovaginal candidiasis (VVC) and recurrent VVC. The company's lead product candidate is Ibrexafungerp, a drug for the treatment of invasive candidiasis and/or candidemia, refractory invasive fungal infections, invasive aspergillosis, VVC, and recurrent VVC. It also develops SCY-247 to treat systemic fungal diseases. The company has licensing and collaboration agreements with GlaxoSmithKline Intellectual Property (No. 3) Limited, Merck Sharp & Dohme Corp., Hansoh (Shanghai) Health Technology Co., Ltd., Jiangsu Hansoh Pharmaceutical Group Company Limited, CJSC (R-Pharm), and Cypralis Limited for the development, manufacture, and commercialization of ibrexafungerp. SCYNEXIS, Inc. was formerly known as SCYNEXIS Chemistry & Automation, Inc. and changed its name to SCYNEXIS, Inc. in June 2002. The company was incorporated in 1999 and is headquartered in Jersey City, New Jersey."
+    },
+    "ABB": {
+        "ticker": "ABB",
+        "name": "ABB",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "BABY": {
+        "ticker": "BABY",
+        "name": "BABY",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "DOX": {
+        "ticker": "DOX",
+        "name": "Amdocs Limited",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 8141607424,
+        "currency": "USD",
+        "description": "Amdocs Limited, through its subsidiaries, provides software and services to communications, entertainment, media, and other service providers worldwide. It designs, develops, operates, implements, supports, and markets open and modular cloud offering. The company also provides CES25, a telco-native, GenAI-led customer experience suite, spanning business, and operations and network domains that is embedded with AI and related tools. In addition, it offers GenAI agents, and which include Customer Engagement Platform, a telecom-specific customer relationship management (CRM) solution; Amdocs Monetization Suite which enables customers to monetize their broad set of services and offerings; Amdocs Intelligent Networking Suite, a set of solutions that provide end-to-end service orchestration; Amdocs Charging; Amdocs eSIM Cloud that enables service providers to offer digital SIM (eSIM); Amdocs MarketONE, a based Software-as-a-Service (SaaS)-based platform that includes pre-integrated digital services, ranging from media, gaming, eLearning, sports and retail to security, and business services; and Amdocs connectX, a cloud-native telco-in-a-box software-as-a-service platform for digital telecom brands, as well as Amdocs CatalogONE that spans the entire CES25 suite and combines embedded business intelligence with telecom-specific GenAI agents. Further, the company provides consulting, experience design, data, cloud, network services, delivery, quality engineering, operations, systems integration, and content services to various platforms and technologies; maintenance, enhancement design and development, and operational support services; network deployment and optimization services; and managed services, including AI and related tools, predictive analytics, and robotic process automation, as well as quality engineering, mobile network, cloud, and professional services. Amdocs Limited was founded in 1982 and is headquartered in Saint Louis, Missouri."
+    },
+    "TTM": {
+        "ticker": "TTM",
+        "name": "TTM",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "SQ": {
+        "ticker": "SQ",
+        "name": "SQ",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "MTCH": {
+        "ticker": "MTCH",
+        "name": "Match Group, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 6953979904,
+        "currency": "USD",
+        "description": "Match Group, Inc. engages in the provision of digital technologies. It operates through four segments: Tinder, Hinge, Evergreen and Emerging, and Match Group Asia. The company's portfolio of brands includes Tinder, Hinge, Match, Meetic, OkCupid, Pairs, Plenty Of Fish, Azar, BLK, and other brands, built to increase users' likelihood of connecting with others. Its services are available in over 40 languages to users worldwide. The company was incorporated in 1986 and is based in Dallas, Texas."
+    },
+    "DTC": {
+        "ticker": "DTC",
+        "name": "DTC",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "SAVE": {
+        "ticker": "SAVE",
+        "name": "SAVE",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "DS": {
+        "ticker": "DS",
+        "name": "DS",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "SNP": {
+        "ticker": "SNP",
+        "name": "SNP",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "CBD": {
+        "ticker": "CBD",
+        "name": "CBD",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "OG": {
+        "ticker": "OG",
+        "name": "OG",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "CO": {
+        "ticker": "CO",
+        "name": "CO",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "PTR": {
+        "ticker": "PTR",
+        "name": "PTR",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
     }
 }
