@@ -13150,5 +13150,23 @@
         "mcap": 409212704,
         "currency": "USD",
         "description": "OPAL Fuels Inc., together with its subsidiaries, engages in the production and distribution of renewable natural gas (RNG) for use as a vehicle fuel for heavy and medium-duty trucking fleets throughout the United States. The company also designs, develops, constructs, operates, and services fueling stations for trucking fleets that use natural gas to displace diesel as transportation fuel. In addition, it is involved in the design, development, and construction of hydrogen fueling stations. Further, the company engages in the generation and sale of renewable power to utilities; and environmental attributes associated with RNG and renewable power, as well as sale of RNG as pipeline quality natural gas. OPAL Fuels Inc. was founded in 1998 and is headquartered in White Plains, New York."
+    },
+    "MRAM": {
+        "ticker": "MRAM",
+        "name": "Everspin Technologies, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 302620256,
+        "currency": "USD",
+        "description": "Everspin Technologies, Inc. manufactures and sells magnetoresistive random access memory (MRAM) technologies in the United States, Japan, Hong Kong, Germany, Singapore, China, Canada, and internationally. It offers Toggle MRAM, spin-transfer torque MRAM, and tunnel magneto resistance sensor products, as well as foundry services for MRAM products. The company provides its products for applications, including industrial, medical, automotive/transportation, aerospace, and data center markets. It serves original equipment manufacturers, contract manufacturers, and original design manufacturers through a direct sales channel, and a network of representatives and distributors. Everspin Technologies, Inc. was incorporated in 2008 and is headquartered in Chandler, Arizona."
+    },
+    "IGC": {
+        "ticker": "IGC",
+        "name": "IGC Pharma, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 26049922,
+        "currency": "USD",
+        "description": "IGC Pharma, Inc., a clinical stage pharmaceutical company, develops treatments for Alzheimer's disease in the United States and Colombia. The company's lead product is IGC-AD1 that is in Phase II clinical trial for the treatment of agitation in dementia due to Alzheimer's. Its pre-clinical stage product candidate includes TGR-63, IGC-M3, and LMP to treat Alzheimer's disease; IGC-1C for the treatment of metabolic disorders and Alzheimer's disease; and IGC-1A to treat metabolic disorders. The company was formerly known as India Globalization Capital, Inc. and changed its name to IGC Pharma, Inc. in March 2023. IGC Pharma, Inc. was incorporated in 2005 and is headquartered in Potomac, Maryland."
     }
 }
