@@ -13272,5 +13272,77 @@
         "mcap": 1995470592,
         "currency": "USD",
         "description": "NextNav Inc. provides positioning, navigation, and timing (PNT) solutions in the United States. The company offers Pinnacle, an accurate altitude service for public safety applications, including enhanced 911 for Verizon and national cellular network providers. It also provides TerraPoiNT, a 3D PNT system, provides positioning, navigation, and timing services provided by GPS through a land-based GPS satellite constellation. The company serves Wi-Fi, telecom, public safety, location apps, and critical infrastructure industries. NextNav Inc. was founded in 2007 and is headquartered in Reston, Virginia."
+    },
+    "SSP": {
+        "ticker": "SSP",
+        "name": "E.W. Scripps Company (The)",
+        "meta": "Broadcasting",
+        "type": "EQUITY",
+        "mcap": 311695456,
+        "currency": "USD",
+        "description": "The E.W. Scripps Company, together with its subsidiaries, operates as a media enterprise through a portfolio of local television stations, national news, and entertainment networks in the United States. It operates through Local Media and Scripps Networks segments. The Local Media segment operates broadcast television stations, which produce over-the-air news, information, sports, entertainment content, and related digital operations; runs network, syndicated, and original programming, as well as local sporting events; and provides core and political advertising services. The Scripps Networks segment offers national television networks through free over-the-air broadcast, cable/satellite, connected TV, and digital distribution. This segment also provides Scripp News, a national news network, which provides politics, entertainment, science, and technology news; Court TV that showcases live trials; entertainment brands, such as ION, Bounce, Grit, ION Mystery, ION Plus, and Laff. The company provides digital presence through online, mobile, connected television, and social platforms; Scripps National Spelling Bee, which shows educational programs; and Nuvyyo, which offers consumers DVR product solutions to watch and record free over-the-air HDTV on connected devices. It serves audiences and businesses through cable and satellite service providers. The E.W. Scripps Company was founded in 1878 and is headquartered in Cincinnati, Ohio."
+    },
+    "TFC": {
+        "ticker": "TFC",
+        "name": "Truist Financial Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 67365113856,
+        "currency": "USD",
+        "description": "Truist Financial Corporation, a financial services company, provides banking and trust services in the Southeastern and Mid-Atlantic United States. The company operates through two segments, Consumer and Small Business Banking; and Wholesale Banking. Its deposit products include noninterest-bearing checking, interest-bearing checking, savings, and money market deposit accounts, as well as certificates of deposit and individual retirement accounts. The company also provides funding; asset management; automobile lending; credit card lending; consumer finance; home equity and mortgage lending; other direct retail lending; home mortgage lending; Investment brokerage services; mobile/online banking; payment solutions; point-of-sale lending; retail and small business deposit products; and small business lending. In addition, it offers asset-based lending, commercial deposit and treasury services; commercial lending; floor plan lending; derivatives; institutional trust services; insurance premium finance; international banking; investment banking and capital markets services; leasing; merchant services; mortgage warehouse lending; real estate lending; supply chain financing; and wealth management/private banking. The company was formerly known as BB&T Corporation and changed its name to Truist Financial Corporation in December 2019. Truist Financial Corporation was founded in 1872 and is headquartered in Charlotte, North Carolina."
+    },
+    "BETA": {
+        "ticker": "BETA",
+        "name": "Beta Technologies, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 4734005248,
+        "currency": "USD",
+        "description": "BETA Technologies, Inc. designs, develops, and manufactures electric aircraft platform and propulsion systems for the aviation industry in the United States. The company's products include electric aircraft, advanced electric propulsion systems, charging systems, and components. It offers aircraft, such as ALIA-CTOL (CX300), a piloted electric aircraft for cargo services; ALIA VTOL (A250), a vertical takeoff and landing aircraft for cargo, logistics, medical operations, and passenger services; ALIA Defense VTOL (MV250), a military aircraft for cargo and logistics, and larger aircraft; motors including H500A Motor and V600 Motor for aerospace and marine applications; batteries for electric aircraft; and charging equipment including charge cube, thermal management system cube, and mini cubes. It also offers ground support equipment and flight control systems. The company engages in selling aircraft to military and commercial customers, replacement batteries to operators, propulsion systems to other eVTOL manufacturers, and chargers to state governments, operators, Fixed Base Operators, and other electric aviation companies. It operates across four markets within the aerospace industry including cargo and logistics, medical, defense, and passenger. In addition, the company offers training through flight simulators and virtual reality training solutions. The company was founded in 2017 and is based in South Burlington, Vermont."
+    },
+    "ATO": {
+        "ticker": "ATO",
+        "name": "Atmos Energy Corporation",
+        "meta": "Utilities - Regulated Gas",
+        "type": "EQUITY",
+        "mcap": 26934278144,
+        "currency": "USD",
+        "description": "Atmos Energy Corporation, together with its subsidiaries, engages in the regulated natural gas distribution, and pipeline and storage businesses in the United States. It operates through two segments, Distribution, and Pipeline and Storage. The Distribution segment is involved in the regulated natural gas distribution and related sales operations in eight states. This segment distributes natural gas to approximately 3.4 million residential, commercial, public authority, and industrial customers; and owned 76,000 miles of underground distribution and transmission mains. The Pipeline and Storage segment engages in the pipeline and storage operations. This segment transports natural gas for third parties and manages five underground storage facilities in Texas; provides ancillary services customary to the pipeline industry, including parking arrangements, lending, and inventory sales; and owned 5,700 miles of gas transmission lines. Atmos Energy Corporation was founded in 1906 and is based in Dallas, Texas."
+    },
+    "EVH": {
+        "ticker": "EVH",
+        "name": "Evolent Health, Inc",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 378065888,
+        "currency": "USD",
+        "description": "Evolent Health, Inc., through its subsidiary, provides specialty care management services in oncology, cardiology, and musculoskeletal markets in the United States. The company offers integrated platform for health plan administration and value-based business infrastructure. It also provides administrative services, such as health plan services, pharmacy benefits management, risk management, analytics and reporting, and leadership and management; and Identifi, a proprietary technology system that aggregates and analyzes data, manages care workflows, and engages patients. In addition, the company provides holistic total cost of care management; and Machinify Auth, a software platform that leverages advances in artificial intelligence. Evolent Health, Inc. was founded in 2011 and is headquartered in Arlington, Virginia."
+    },
+    "LYB": {
+        "ticker": "LYB",
+        "name": "LyondellBasell Industries NV",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 16174115840,
+        "currency": "USD",
+        "description": "LyondellBasell Industries N.V. operates as a chemical company in the United States, Germany, Mexico, Italy, Poland, France, Japan, China, the Netherlands, and internationally. The company operates in six segments: Olefins and Polyolefins\u0097Americas; Olefins and Polyolefins\u0097Europe, Asia, International; Intermediates and Derivatives; Advanced Polymer Solutions; Refining; and Technology. It produces and markets olefins and co-products, such as ethylene, aromatics, propylene and butadiene; polyolefins; polyethylene; and polypropylene homopolymers and copolymers; and propylene oxide and derivatives; oxyfuels and related products; and intermediate chemicals, such as styrene monomer, acetyls, and ethylene oxide. The company also produces and markets compounding and solutions, including polypropylene compounds, engineered plastics, masterbatches, engineered composites, colors and powders, and advanced polymers, such as catalloy and polybutene-1; and refines heavy, high-sulfur crude oil and other crude oils, as well as refined products, including gasoline and distillates. In addition, it develops and licenses chemical and polyolefin process technologies; manufactures and sells polyolefin catalysts; and serves food packaging, home furnishings, automotive components, and paints and coatings applications. LyondellBasell Industries N.V. was incorporated in 2009 and is headquartered in Houston, Texas."
+    },
+    "DAL": {
+        "ticker": "DAL",
+        "name": "Delta Air Lines, Inc.",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 45106667520,
+        "currency": "USD",
+        "description": "Delta Air Lines, Inc. provides scheduled air transportation for passengers and cargo in the United States and internationally. The company operates through two segments, Airline and Refinery. Its domestic network centered on core hubs in Atlanta, Detroit, Minneapolis-St. Paul, and Salt Lake City, as well as coastal hub positions in Boston, Los Angeles, New York-LaGuardia, New York-JFK, and Seattle; and international network centered on hubs and market presence in Amsterdam, Bogota, Lima, Mexico City, London-Heathrow, Paris-Charles de Gaulle, Santiago (Chile), Sao Paulo, Seoul-Incheon, and Tokyo. The company sells its tickets through various distribution channels, including delta.com and the Fly Delta app; and acts as a reservations specialists. It also provides aircraft maintenance and engineering support, repair, and overhaul services; and vacation packages to third-party consumers. The company operates through a fleet of approximately 1,292 aircraft. Delta Air Lines, Inc. was founded in 1924 and is headquartered in Atlanta, Georgia."
+    },
+    "FITB": {
+        "ticker": "FITB",
+        "name": "Fifth Third Bancorp",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 56470790144,
+        "currency": "USD",
+        "description": "Fifth Third Bancorp operates as the bank holding company for Fifth Third Bank, National Association that engages in the provision of a range of financial products and services in the United States. It operates through three segments: Commercial Banking, Consumer and Small Business Banking, and Wealth and Asset Management. The Commercial Banking segment offers credit intermediation, cash management, and financial services; lending and depository products; and cash management, foreign exchange and international trade finance, derivatives and capital markets services, asset-based lending, real estate finance, public finance, commercial leasing, and syndicated finance for business, government, and professional customers. Its Consumer and Small Banking segment provides a range of deposit and loan products to individuals and small businesses; home equity loans and lines of credit; credit cards; and cash management services. This segment also engages in the residential mortgage that include origination, retention and servicing of residential mortgage loans, sales and securitizations of loans, and hedging activities; indirect lending, including extending loans to consumers through automobile dealers, motorcycle dealers, powersport dealers, recreational vehicle dealers, and marine dealers; and home improvement and solar energy installation loans through contractors and installers. The Wealth & Asset Management segment provides various wealth management services for individuals, companies, and not-for-profit organizations. It also offers retail brokerage services to individual clients; and broker dealer services to the institutional marketplace. This segment also provides wealth planning, investment management, banking, insurance, and trust and estate services; and advisory services for institutional clients comprising middle market businesses, non-profits, states, and municipalities. Fifth Third Bancorp was founded in 1858 and is headquartered in Cincinnati, Ohio."
     }
 }
