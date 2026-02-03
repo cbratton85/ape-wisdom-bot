@@ -14676,5 +14676,68 @@
         "mcap": 34292461568,
         "currency": "USD",
         "description": "Nutrien Ltd. provides crop inputs and services. The company operates through four segments: Nutrien Ag Solutions, Potash, Nitrogen, and Phosphate. The Nutrien Ag Solutions segment distributes crop nutrients, crop protection products, seeds, and merchandise products; product application, soil and leaf testing, crop scouting, precision agriculture, water, and brokerage agency services; and financing solutions. The Potash segment provides granular and standard potash products. The Nitrogen segment offers ammonia, urea, environmentally smart nitrogen, nitrogen solutions, nitrates, and sulfates. The Phosphate segment provides solid fertilizer, liquid fertilizer, and industrial and feed products. The company was incorporated in 2017 and is headquartered in Saskatoon, Canada."
+    },
+    "FLNC": {
+        "ticker": "FLNC",
+        "name": "Fluence Energy, Inc.",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 5923098112,
+        "currency": "USD",
+        "description": "Fluence Energy, Inc., through its subsidiaries, provides energy storage and optimization software for renewables and storage applications in the Americas, the Asia Pacific, Europe, the Middle East, and Africa. It sells energy storage products with integrated hardware, software, and digital intelligence. The company's energy storage products include Gridstack Pro, a large-scale front-of-the-meter application; Gridstack, a front-of-the-meter application; Ultrastack for critical system requirements of distribution and transmission networks; Smartstack, a split architecture design, incorporating embedded intelligence and higher energy density compared to traditional AC systems. The company also provides operational and maintenance services; and digital applications. It serves independent power producers, developers, conglomerates, utilities/load-serving entities, and commercial and industrial customers. Fluence Energy, Inc. was founded in 2018 and is headquartered in Arlington, Virginia."
+    },
+    "IXN": {
+        "ticker": "IXN",
+        "name": "iShares Global Tech ETF",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 1577164928,
+        "currency": "USD",
+        "description": "The index is designed to measure the performance of global equities in the information technology sector. The fund generally will invest at least 80% of its assets in the component securities of its index and in investments that have economic characteristics that are substantially identical to the component securities of its index and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents. It is non-diversified."
+    },
+    "TSSI": {
+        "ticker": "TSSI",
+        "name": "TSS, Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 276046976,
+        "currency": "USD",
+        "description": "TSS, Inc. engages in the planning, design, deployment, maintenance, refresh, and take-back of end-user and enterprise systems in the United States. It operates three segments: Procurement, Facilities Management, and Systems Integration. The company offers IT equipment deployment services, including client products, enterprise products, clusters, and modular containers; and second-touch configuration services for OEM and end-user customers, such as adding software, hardware, or other features to end-user devices, bundling such devices with peripherals, pre-loading customer-determined application software, tagging, asset capture, and other fulfillment services. It also provides consulting, deployment, and maintenance and management services. In addition, the company involved in procuring third-party hardware and software, as well as provides professional services. It serves IT OEM equipment, technology, and service companies; private sector businesses; and government or commercial end users. The company was formerly known as Fortress International Group, Inc. and changed its name to TSS, Inc. in June 2013. TSS, Inc. was incorporated in 2004 and is based in Georgetown, Texas."
+    },
+    "TRNS": {
+        "ticker": "TRNS",
+        "name": "Transcat, Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 590768320,
+        "currency": "USD",
+        "description": "Transcat, Inc. provides calibration and laboratory instrument services in the United States, Canada, and internationally. It operates through two segments, Service and Distribution. The Service segment offers calibration, repair, inspection, analytical qualification, preventative maintenance, consulting, and other related services. This segment also provides CalTrak, a proprietary document and asset management system that is used to manage the workflow of its calibration service centers and customers' assets; and Compliance, Control, and Cost, an online customer portal that provides its customers with web-based asset management capability, as well as a safe and secure off-site archive of calibration and other service records. The Distribution segment sells and rents test, measurement, and control instruments for customers' test and measurement instrumentation needs, as well as value-added services, such as calibration/certification of equipment purchase, equipment rental, used equipment for sale, and equipment kitting. This segment markets and sells its products through website, digital and print advertising, proactive outbound sales, and an inbound call center. The company provides services and products to highly regulated industries, principally life science, which includes companies in the pharmaceutical, biotechnology, medical device, and other FDA-regulated industries; and additional industries, including aerospace and defense, industrial manufacturing, energy and utilities, chemical manufacturing, and other industries that require accuracy in processes and confirmation of the capabilities of their equipment. Transcat, Inc. was incorporated in 1964 and is headquartered in Rochester, New York."
+    },
+    "OLD": {
+        "ticker": "OLD",
+        "name": "The Long-Term Care ETF",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The investment seeks investment results that correspond generally to the performance, before fees and expenses, of an index which is designed to track the performance of companies globally that are positioned to profit from providing long-term care to the aging population, including companies owning or operating senior living facilities, nursing services, specialty hospitals, and senior housing, biotech companies for age-related illnesses, and companies that sell products and services to such facilities.\n The fund invests at least 80% of its net assets in the stocks that comprise the Solactive Long-Term Care Index. It is non-diversified."
+    },
+    "QURE": {
+        "ticker": "QURE",
+        "name": "uniQure N.V.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1731708160,
+        "currency": "USD",
+        "description": "uniQure N.V. develops treatments for patients suffering from rare and other devastating diseases in the United States. The company offers HEMGENIX that allows people living with hemophilia B to produce factor IX, which can lower the risk of bleeding. Its lead product candidate is AMT-130, a gene therapy candidate, which is in Phase I/II clinical study for the treatment of Huntington's disease. The company also develops AMT-260, which is in Phase I/IIa clinical trial for the treatment of mesial temporal lobe epilepsy; AMT-162, which is in Phase I/IIa clinical trial to treat superoxide dismutase enzyme-amyotrophic lateral sclerosis; and AMT-191, an investigational gene therapy candidate which is in phase I/IIa clinical trial for the treatment of fabry disease. It has a licensing agreement with Apic Bio to develop, manufacture, and commercialize intrathecally administered investigational gene therapy for ALS caused by mutations in SOD-1; and development and commercial supply agreement with CLS Bhering. uniQure N.V. was founded in 1998 and is headquartered in Amsterdam, the Netherlands."
+    },
+    "FLIN": {
+        "ticker": "FLIN",
+        "name": "Franklin FTSE India ETF",
+        "meta": "India Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Under normal market conditions, the fund invests at least 80% of its assets in the component securities of the FTSE India Capped Index and in depositary receipts representing such securities. The FTSE India Capped Index is based on the FTSE India Index and is designed to measure the performance of Indian large- and mid-capitalization stocks. The fund is non-diversified."
     }
 }
