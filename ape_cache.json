@@ -13344,5 +13344,41 @@
         "mcap": 56470790144,
         "currency": "USD",
         "description": "Fifth Third Bancorp operates as the bank holding company for Fifth Third Bank, National Association that engages in the provision of a range of financial products and services in the United States. It operates through three segments: Commercial Banking, Consumer and Small Business Banking, and Wealth and Asset Management. The Commercial Banking segment offers credit intermediation, cash management, and financial services; lending and depository products; and cash management, foreign exchange and international trade finance, derivatives and capital markets services, asset-based lending, real estate finance, public finance, commercial leasing, and syndicated finance for business, government, and professional customers. Its Consumer and Small Banking segment provides a range of deposit and loan products to individuals and small businesses; home equity loans and lines of credit; credit cards; and cash management services. This segment also engages in the residential mortgage that include origination, retention and servicing of residential mortgage loans, sales and securitizations of loans, and hedging activities; indirect lending, including extending loans to consumers through automobile dealers, motorcycle dealers, powersport dealers, recreational vehicle dealers, and marine dealers; and home improvement and solar energy installation loans through contractors and installers. The Wealth & Asset Management segment provides various wealth management services for individuals, companies, and not-for-profit organizations. It also offers retail brokerage services to individual clients; and broker dealer services to the institutional marketplace. This segment also provides wealth planning, investment management, banking, insurance, and trust and estate services; and advisory services for institutional clients comprising middle market businesses, non-profits, states, and municipalities. Fifth Third Bancorp was founded in 1858 and is headquartered in Cincinnati, Ohio."
+    },
+    "STC": {
+        "ticker": "STC",
+        "name": "Stewart Information Services Co",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 2064194944,
+        "currency": "USD",
+        "description": "Stewart Information Services Corporation, through its subsidiaries, provides title insurance and real estate transaction related services in the United States and internationally. The company is involved in searching, examining, closing, and insuring the condition of the title to real property. It also offers home and personal insurance services; services for tax-deferred exchanges; and digital customer engagement platform services. In addition, the company provides appraisal management, online notarization and closing, credit and real estate information, and search and valuation management services. It serves homebuyers and sellers, residential and commercial real estate professionals, mortgage lenders and servicers, title agencies and real estate attorneys, and home builders through direct operations, network of independent agencies, and other businesses. Stewart Information Services Corporation was founded in 1893 and is headquartered in Houston, Texas."
+    },
+    "LIT": {
+        "ticker": "LIT",
+        "name": "Global X Lithium & Battery Tech",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its total assets in the securities of the underlying index and in American Depositary Receipts (\"ADRs\") and Global Depositary Receipts (\"GDRs\") based on the securities in the underlying index. The underlying index is designed to measure broad-based equity market performance of global companies involved in the lithium industry. The fund is non-diversified."
+    },
+    "RVMD": {
+        "ticker": "RVMD",
+        "name": "Revolution Medicines, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 18782953472,
+        "currency": "USD",
+        "description": "Revolution Medicines, Inc., a clinical-stage precision oncology company, develops novel targeted therapies for RAS-addicted cancers. The company's research and development pipeline consist of RAS(ON) inhibitors that binds RAS variants to be used as monotherapy in combination with other RAS(ON) inhibitors and/or in combination with RAS companion inhibitors or other therapeutic agents, and RAS companion inhibitors to suppress cooperating targets and pathways that sustain RAS-addicted cancers. Its RAS(ON) inhibitors include daraxonrasib (RMC-6236), elironrasib G12C (RMC-6291), and zoldonrasib G12D (RMC-9805), which are in phase 1 clinical trial; and development candidates comprise RMC-5127 (G12V), RMC-0708 (Q61H), and RMC-8839 (G13C). The company's RAS companion inhibitors include RMC-4630 that is in phase 2 clinical trial; RMC-5552, a selective inhibitor of mTORC1 signaling in tumors, which is in phase 1 clinical trial; and RMC-5845 that targets SOS1. Revolution Medicines, Inc. was incorporated in 2014 and is headquartered in Redwood City, California."
+    },
+    "FE": {
+        "ticker": "FE",
+        "name": "FirstEnergy Corp.",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 27144505344,
+        "currency": "USD",
+        "description": "FirstEnergy Corp., together with its subsidiaries, engages in the generation, distribution, and transmission of electricity in the United States. It operates through Distribution, Integrated, and Stand-Alone Transmission segments. The company owns and operates coal-fired, nuclear, hydroelectric, wind, and solar power generating facilities. It operates 252,244 distribution line miles and 24,143 transmission line miles, including overhead pole line and underground conduit carrying primary, secondary, and street lighting circuits. The company serves customers in Ohio, Pennsylvania, New Jersey, West Virginia, Maryland, and New York. FirstEnergy Corp. was incorporated in 1996 and is headquartered in Akron, Ohio."
     }
 }
