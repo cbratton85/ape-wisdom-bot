@@ -359,15 +359,36 @@ def filter_and_process(stocks):
         for i in range(0, len(valid_tickers), CHUNK_SIZE):
             batch = valid_tickers[i:i + CHUNK_SIZE]
             print(f"    > Processing Batch { (i//CHUNK_SIZE) + 1} ({len(batch)} tickers)...")
+            
             try:
-                batch_data = yf.download(batch, period="40d", interval="1d", group_by='ticker', progress=False, threads=True)
+                # --- FIX: Handle Single Ticker Batches Differently ---
+                # yfinance bugs out with group_by='ticker' on single items
+                if len(batch) == 1:
+                    ticker = batch[0]
+                    # Download WITHOUT group_by to avoid MultiIndex error
+                    batch_data = yf.download(ticker, period="40d", interval="1d", progress=False, threads=False)
+                    
+                    if not batch_data.empty:
+                        # Manually force the MultiIndex structure: (Ticker, Level)
+                        # This matches the structure of the larger batches
+                        batch_data.columns = pd.MultiIndex.from_product([[ticker], batch_data.columns])
+                else:
+                    # Standard batch download
+                    batch_data = yf.download(batch, period="40d", interval="1d", group_by='ticker', progress=False, threads=True)
+
+                # --- MERGE BATCH ---
                 if not batch_data.empty:
-                    if len(batch) == 1: batch_data.columns = pd.MultiIndex.from_product([batch, batch_data.columns])
-                    if market_data.empty: market_data = batch_data
-                    else: market_data = pd.concat([market_data, batch_data], axis=1)
-                if i + CHUNK_SIZE < len(valid_tickers): time.sleep(2.5) 
+                    if market_data.empty: 
+                        market_data = batch_data
+                    else: 
+                        market_data = pd.concat([market_data, batch_data], axis=1)
+                
+                if i + CHUNK_SIZE < len(valid_tickers): time.sleep(1.5) 
+            
             except Exception as e:
                 print(f"{C_RED}[!] Error downloading batch {i}: {e}{C_RESET}")
+                # Don't crash the whole script, just lose this batch
+                continue
 
         if not market_data.empty: market_data.to_pickle(MARKET_DATA_CACHE_FILE)
 
