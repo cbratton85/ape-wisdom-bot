@@ -13515,5 +13515,59 @@
         "mcap": 13194331136,
         "currency": "USD",
         "description": "Fresenius Medical Care AG provides dialysis and related services for individuals with renal diseases in Germany, the United States, and internationally. The company offers dialysis treatment and related laboratory and diagnostic services through a network of outpatient dialysis clinics; materials, training, and patient support services comprising clinical monitoring, follow-up assistance, and arranging for delivery of the supplies to the patient's residence; and dialysis services under contract to hospitals in the United States for the hospitalized end-stage renal disease (ESRD) patients and for patients suffering from acute kidney failure. The company operates through Care Delivery and Care Enablement segments. It also develops, manufactures, and distributes various health care products, including hemodialysis machines, peritoneal dialysis cyclers, peritoneal dialysis solutions, hemodialysis concentrates, solutions and granulates, bloodlines, renal pharmaceuticals, systems for water treatment, and acute cardiopulmonary and apheresis products. In addition, the company develops, acquires, and in-licenses renal pharmaceuticals; offers renal medications and supplies to patients at homes or to dialysis clinics; and provides vascular specialty, ambulatory surgery center, physician nephrology practice management, ambulant treatment, pharmacy and other services. The company sells its products to dialysis clinics, hospitals, and specialized treatment clinics, as well as through local sales forces, independent distributors, dealers, and sales agents. Fresenius Medical Care AG was incorporated in 1996 and is headquartered in Bad Homburg, Germany."
+    },
+    "CRVL": {
+        "ticker": "CRVL",
+        "name": "CorVel Corp.",
+        "meta": "Insurance Brokers",
+        "type": "EQUITY",
+        "mcap": 3579064064,
+        "currency": "USD",
+        "description": "CorVel Corporation provides workers' compensation, general and auto liability, and hospital bill auditing and payment integrity solutions. It applies technology, including artificial intelligence, machine learning, and natural language processing to enhance the managing of episodes of care and the related health care costs. The company also offers network solutions services, including automated medical fee auditing, preferred provider management and reimbursement, retrospective utilization review, facility claim review, professional review, pharmacy, directed care, clearinghouse, independent medical examination, and inpatient medical bill review services, as well as Medicare solutions. In addition, it provides a range of patient management services, such as claims management, case management, 24/7 nurse triage, utilization management, vocational rehabilitation, and life care planning, as well as processing of claims for self-insured payors with respect to property and casualty insurance. The company offers solutions to employers, third party administrators, insurance companies, and government agencies to assist them in managing the medical costs and monitoring the quality of care associated with healthcare claims. CorVel Corporation was incorporated in 1987 and is based in Fort Worth, Texas."
+    },
+    "ARMN": {
+        "ticker": "ARMN",
+        "name": "Aris Mining Corporation",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 3693976576,
+        "currency": "USD",
+        "description": "Aris Mining Corporation, together with its subsidiaries, engages in the acquisition, exploration, development, and operation of gold properties in Canada, Colombia, and Guyana. It also explores for silver and copper deposits. The company was formerly known as GCM Mining Corp. and changed its name to Aris Mining Corporation in September 2022. Aris Mining Corporation is based in Vancouver, Canada."
+    },
+    "AZZ": {
+        "ticker": "AZZ",
+        "name": "AZZ Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 3838590208,
+        "currency": "USD",
+        "description": "AZZ Inc. provides hot-dip galvanizing and coil coating solutions in North America. The company offers metal coating solutions for corrosion protection, including hot-dip galvanizing, spin galvanizing, powder coating, anodizing, and plating to the steel fabrication and other industries. It also provides aesthetic and corrosion protective coatings and related value-added services for steel and aluminum coil primarily serving the construction; appliance; heating, ventilation, and air conditioning; container; transportation; and other end markets. The company was incorporated in 1956 and is headquartered in Fort Worth, Texas."
+    },
+    "KLAR": {
+        "ticker": "KLAR",
+        "name": "Klarna Group plc",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 8646685696,
+        "currency": "USD",
+        "description": "Klarna Group plc operates as a digital bank and flexible payments provider in the United Kingdom, the United States, Germany, Sweden, and internationally. The company provides payment and marketing solutions to consumers and merchants. It also offers Klarna App, card, bank accounts, open banking, and marketing services. The company was formerly known as Klarna UK II plc and changed its name to Klarna Group plc in December 2023. Klarna Group plc was founded in 2005 and is based in London, the United Kingdom."
+    },
+    "FXN": {
+        "ticker": "FXN",
+        "name": "First Trust Energy AlphaDEX Fun",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will normally invest at least 90% of its net assets (including investment borrowings) in the securities that comprise the index. The index is a modified equal-dollar weighted index to objectively identify and select stocks from the Russell 1000\u00ae Index in the energy sector that may generate positive alpha relative to traditional passive-style indices through the use of the AlphaDEX\u00ae selection methodology."
+    },
+    "CYN": {
+        "ticker": "CYN",
+        "name": "Cyngn Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 13317216,
+        "currency": "USD",
+        "description": "Cyngn Inc., an autonomous vehicle (AV) technology company, develops autonomous driving software in the United States. The company develops Enterprise Autonomy Suite, which consists of DriveMod, a modular industrial vehicle autonomous driving software; and Cyngn Insight, a customer-facing tool suite for monitoring and managing AV fleets and generating/aggregating/analyzing data. It also develops Cyngn Evolve, an internal tool suite and infrastructure that facilitates artificial intelligence and machine learning training to continuously enhance algorithms and models, as well as provides a simulation framework to ensure that data collected in the field can be applied to validating new releases. Cyngn Inc. was incorporated in 2013 and is headquartered in Mountain View, California."
     }
 }
