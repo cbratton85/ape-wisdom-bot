@@ -13240,5 +13240,37 @@
         "mcap": 506882848,
         "currency": "USD",
         "description": "American Battery Technology Company operates as a battery materials company in the United States. It explores for resources of battery metals, such as lithium, nickel, cobalt, and manganese; and develops and commercializes technologies for the extraction and refining of battery metals. It also commercializes an integrated process for the recycling of lithium-ion batteries. The company was formerly known as American Battery Metals Corporation and changed its name to American Battery Technology Company in August 2021. American Battery Technology Company was incorporated in 2011 and is headquartered in Reno, Nevada."
+    },
+    "AKRO": {
+        "ticker": "AKRO",
+        "name": "Akero Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 4499031040,
+        "currency": "USD",
+        "description": "Akero Therapeutics, Inc. engages in developing transformational treatments for patients with serious metabolic diseases in the United States. The company's lead product candidate is efruxifermin (EFX), an analog of fibroblast growth factor 21 that protects against cellular stress and regulates the metabolism of lipids, carbohydrates, and proteins throughout the body for the treatment of metabolic dysfunction-associated steatohepatitis (MASH) patients. It has a license agreement with Amgen Inc. to develop, manufacture, use, distribute, and sell EFX as a treatment for MASH and other metabolic diseases. The company was formerly known as Pippin Therapeutics, Inc. and changed its name to Akero Therapeutics, Inc. in May 2018. Akero Therapeutics, Inc. was incorporated in 2017 and is headquartered in South San Francisco, California. As of December 9, 2025, Akero Therapeutics, Inc. operates as a subsidiary of Novo Nordisk A/S."
+    },
+    "MDGL": {
+        "ticker": "MDGL",
+        "name": "Madrigal Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 11122463744,
+        "currency": "USD",
+        "description": "Madrigal Pharmaceuticals, Inc., a biopharmaceutical company, focuses on delivering novel therapeutics for metabolic dysfunction-associated steatohepatitis (MASH) in the United States. It offers Rezdiffra, a liver-directed thyroid hormone receptor beta agonist for treating MASH. The company is headquartered in West Conshohocken, Pennsylvania."
+    },
+    "PIK": {
+        "delisted": true,
+        "last_checked": "2026-02-03",
+        "reason": "Metadata 404"
+    },
+    "NN": {
+        "ticker": "NN",
+        "name": "NextNav Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1995470592,
+        "currency": "USD",
+        "description": "NextNav Inc. provides positioning, navigation, and timing (PNT) solutions in the United States. The company offers Pinnacle, an accurate altitude service for public safety applications, including enhanced 911 for Verizon and national cellular network providers. It also provides TerraPoiNT, a 3D PNT system, provides positioning, navigation, and timing services provided by GPS through a land-based GPS satellite constellation. The company serves Wi-Fi, telecom, public safety, location apps, and critical infrastructure industries. NextNav Inc. was founded in 2007 and is headquartered in Reston, Virginia."
     }
 }
