@@ -89,11 +89,6 @@
         "last_checked": "2026-02-03",
         "reason": "No Price Data"
     },
-    "ZK": {
-        "delisted": true,
-        "last_checked": "2026-02-03",
-        "reason": "No Price Data"
-    },
     "MBT": {
         "delisted": true,
         "last_checked": "2026-02-03",
@@ -150,6 +145,26 @@
         "reason": "No Price Data"
     },
     "SLT": {
+        "delisted": true,
+        "last_checked": "2026-02-04",
+        "reason": "No Price Data"
+    },
+    "QQC": {
+        "delisted": true,
+        "last_checked": "2026-02-04",
+        "reason": "No Price Data"
+    },
+    "QED": {
+        "delisted": true,
+        "last_checked": "2026-02-04",
+        "reason": "No Price Data"
+    },
+    "INFA": {
+        "delisted": true,
+        "last_checked": "2026-02-04",
+        "reason": "No Price Data"
+    },
+    "SLAM": {
         "delisted": true,
         "last_checked": "2026-02-04",
         "reason": "No Price Data"
