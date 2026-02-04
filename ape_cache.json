@@ -15972,5 +15972,59 @@
         "mcap": 32699252736,
         "currency": "USD",
         "description": "Dollar General Corporation, a discount retailer, provides various merchandise products in the southern, southwestern, midwestern, and eastern United States. The company offers consumable products, including paper towels, bath tissues, paper dinnerware, trash and storage bags, disinfectants, and laundry products; packaged food, such as cereals, pasta, canned soups, canned meats, fruits and vegetables, condiments, spices, sugar, and flour; and perishables, including milk, eggs, bread, refrigerated and frozen food, beer, wine, and produce; candy, cookies, crackers, salty snacks, and carbonated beverages; over-the-counter medicines and personal care products including soap, body wash, shampoo, cosmetics, dental hygiene and foot care products; pet supplies and pet food; and tobacco products. It also provides seasonal products comprising holiday items, toys, batteries, small electronics, greeting cards, stationery, prepaid phones and accessories, gardening supplies, hardware, automotive, and home office supplies; home products include kitchen supplies, cookware, small appliances, light bulbs, storage containers, frames, candles, craft supplies and kitchen, and bed and bath soft goods; and apparel products for infants, toddlers, girls, boys, women and men, as well as socks, underwear, disposable diapers, shoes and accessories. The company was formerly known as J.L. Turner & Son, Inc. and changed its name to Dollar General Corporation in 1968. Dollar General Corporation was founded in 1939 and is based in Goodlettsville, Tennessee."
+    },
+    "RXRX": {
+        "ticker": "RXRX",
+        "name": "Recursion Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2074625792,
+        "currency": "USD",
+        "description": "Recursion Pharmaceuticals, Inc. operates as a clinical-stage biotechnology company, engages in the decoding biology and chemistry by integrating technological innovations across biology, chemistry, automation, data science, and engineering to industrialize drug discovery in the United States. The company develops REC-994, which is in Phase 2 clinical trial to treat cerebral cavernous malformation; REC-2282, which is in Phase 2/3 clinical trial for the treatment of neurofibromatosis type 2; REC-4881, which is in Phase 1b/2 clinical trial to treat familial adenomatous polyposis; REC-3964, which is in Phase 1 clinical trial to treat Clostridioides difficile infection; and REC-4881, which is in Phase 2 clinical trial to treat AXIN1 or APC mutant cancers. Its preclinical stage product includes RBM39 to treat HR-proficient ovarian cancer. The company has collaboration and agreement with Bayer AG; the University of Utah Research Foundation; Ohio State Innovation Foundation; Roche & Genentech; and Takeda Pharmaceutical Company Limited. Recursion Pharmaceuticals, Inc. was incorporated in 2013 and is headquartered in Salt Lake City, Utah."
+    },
+    "BOX": {
+        "ticker": "BOX",
+        "name": "Box, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 3554198528,
+        "currency": "USD",
+        "description": "Box, Inc. provides a cloud content management platform that enables organizations of various sizes to manage and share their content from anywhere on any device in the United States and Japan. The company's Software-as-a-Service platform enables users to work with their content as they need from secure external collaboration, workspaces to e-signature processes, and content workflows improving employee productivity and accelerating business processes. It also offers web, mobile, and desktop applications of its solutions on a platform, as well as the ability to develop custom applications. The company was formerly known as Box.net, Inc. and changed its name to Box, Inc. in November 2011. Box, Inc. was incorporated in 2005 and is headquartered in Redwood City, California."
+    },
+    "VIG": {
+        "ticker": "VIG",
+        "name": "Vanguard Div Appreciation ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The adviser employs an indexing investment approach designed to track the performance of the index, which consists of common stocks of companies that have a record of increasing dividends over time. The adviser attempts to replicate the target index by investing all, or substantially all, of its assets in the stocks that make up the index, holding each stock in approximately the same proportion as its weighting in the index."
+    },
+    "LFVN": {
+        "ticker": "LFVN",
+        "name": "Lifevantage Corporation",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 69602504,
+        "currency": "USD",
+        "description": "LifeVantage Corporation engages in the identification, research, development, formulation, and sale of advanced nutrigenomic activators, dietary supplements, nootropics, weight management, pre and pro-biotics and skin and hair care products. It offers Protandim, a dietary supplement; LifeVantage Omega+, a dietary supplement that combines DHA and EPA Omega-3 and Omega-7 fatty acids, and vitamin D3; LifeVantage ProBio, a dietary supplement to support gut health; LifeVantage IC Bright, a supplement to support eye and brain health, reduce eye fatigue and strain, supports cognitive functions, and support normal sleep patterns; LifeVantage Daily Wellness, a dietary supplement to strengthen immune health; LifeVantage Rise AM and Reset PM System that provides the body with the right nutrients; LifeVantage D3+, a dietary supplement that provides vitamin D3 and K2, magnesium, calcium, and other trace minerals to support a balanced immune system, strong bones, and cardiovascular health; PhysIQ Fat Burn to support weight management; PhysIQ Prebiotic is a dietary supplement designed to support the good bacteria in the gut and a healthy microbiome; MindBody GLP-1 System, a dietary supplement that combines two products, MB Core and MB Enhance, which are designed to support weight management and wellness by activating GLP-1 naturally and balancing signals along the gut-brain axis; Petandim for Dogs, a supplement to combat oxidative stress in dogs; and Axio, a nootropic energy drink mix. It also provides anti-aging skin care products, such as liquid collagen, facial cleansers, eye cream, moisturizing cream, sunscreen, perfecting lotions, and hand creams, as well as shampoos, nourishing conditioners, and scalp serums under the TrueScience brand name. It sells its products through its website and network of independent consultants. LifeVantage Corporation is based in Lehi, Utah."
+    },
+    "BOUT": {
+        "ticker": "BOUT",
+        "name": "Innovator IBD Breakout Opportun",
+        "meta": "Mid-Cap Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund normally invests at least 80% of its net assets (including borrowings for investment purposes) in the equity securities that comprise the index. The index seeks to provide opportunistic investment exposure to those stocks with the potential to \"break out,\" or experience a period of sustained price growth beyond the stock\u2019s recent \u201cresistance level,\u201d with consideration for various market conditions. The fund is non-diversified."
+    },
+    "CSL": {
+        "ticker": "CSL",
+        "name": "Carlisle Companies Incorporated",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 16942329856,
+        "currency": "USD",
+        "description": "Carlisle Companies Incorporated operates as a manufacturer and supplier of building envelope products and solutions in the United States, Europe, North America, and internationally. It operates through two segments, Carlisle Construction Materials (CCM) and Carlisle Weatherproofing Technologies (CWT). The CCM segment offers single-ply roofing solutions, including ethylene propylene diene monomer, thermoplastic polyolefin, polyvinyl chloride membrane, polyiso insulation, and engineered metal roofing and wall panel systems for commercial and residential buildings. Its CWT segment provides waterproofing and moisture protection products; protective roofing underlayment; fully integrated liquid and sheet applied air/vapor barriers; sealants/primers and flashing systems; roof coatings and mastics; spray polyurethane foam and coating systems for a range of thermal protection applications and other premium polyurethane products; block-molded expanded polystyrene insulation; engineered products for HVAC applications; and products for a variety of industrial and surfacing applications. The company sells its products under the Carlisle SynTec, Versico, WeatherBond, Hunter Panels, Resitrix, and Hertalan brands. Carlisle Companies Incorporated was founded in 1917 and is headquartered in Scottsdale, Arizona."
     }
 }
