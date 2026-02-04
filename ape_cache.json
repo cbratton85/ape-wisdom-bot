@@ -14991,5 +14991,41 @@
         "mcap": 34347200,
         "currency": "USD",
         "description": "Farmer Bros. Co. engages in roasting, wholesaling, equipment servicing, and distributing coffee, tea, and other allied products in the United States. The company offers roast and ground coffee; frozen liquid coffee; ambient liquid; flavoured and unflavoured iced and hot teas; culinary products, including spices, pancake and biscuit mixes, gravy and sauce mixes, soup bases, dressings, and syrups and sauces, as well as coffee filters, cups, sugar, and creamers; and other beverages comprising cappuccino, cocoa, granitas, and other blender-based beverages and concentrated and ready-to-drink cold brew and iced coffee under the Farmer Brothers, Artisan Collection by Farmer Brothers, Metropolitan, Farmer Brothers, Sum>One, Metropolitan, China Mist, Cain's, and Boyds brand names. It also involved in the installation, repair, and refurbishment services for an array of coffee, tea, and juice equipment. The company serves small independent restaurants, foodservice operators, and large institutional buyers and national account customers, such as restaurant, department and convenience store chains, hotels, casinos, healthcare facilities, and gourmet coffee houses, as well as retails with private brand and consumer-branded coffee and tea products, foodservice distributors, and consumers through e-commerce channel. It distributes its products through third-party logistics service providers and retail, as well as through foodservice distributors. Farmer Bros. Co. was founded in 1912 and is headquartered in Fort Worth, Texas."
+    },
+    "SPYG": {
+        "ticker": "SPYG",
+        "name": "State Street SPDR Portfolio S&P",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 14629852160,
+        "currency": "USD",
+        "description": "The fund generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index. The index measures the performance of the large-capitalization growth segment of the U.S. equity market. It is non-diversified."
+    },
+    "VV": {
+        "ticker": "VV",
+        "name": "Vanguard Large-Cap ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 34123728896,
+        "currency": "USD",
+        "description": "The fund employs an indexing investment approach designed to track the performance of the CRSP US Large Cap Index, a broadly diversified index of large U.S. companies representing approximately the top 85% of the U.S. market capitalization. The advisor attempts to replicate the target index by investing all, or substantially all, of its assets in the stocks that make up the index, holding each stock in approximately the same proportion as its weighting in the index. The fund is non-diversified."
+    },
+    "LASE": {
+        "ticker": "LASE",
+        "name": "Laser Photonics Corporation",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 28013502,
+        "currency": "USD",
+        "description": "Laser Photonics Corporation operates as a vertically integrated manufacturing company for photonics-based industrial products and solutions, comprising laser cleaning technologies. It offers laser cleaning systems, such as finishing lasers, conditioning lasers, roughening lasers, custom-built industrial laser systems, and continuous and pulsed wave laser cleaning machines; laser cutting systems, including fiber and CO2 laser cutting; and laser welding system comprising handheld laser welder, robot-operated laser welder, enclosed robotic workcell, and custom-built industrial laser systems. The company also provides laser marking systems, which include handheld systems for marking on-the-go and industrial laser systems; and laser engraving solutions. Its products are used in aviation, automotive, nuclear, maritime, defense, space, semiconductors, energy, and battery manufacturing industries. Laser Photonics Corporation was incorporated in 2019 and is based in Orlando, Florida."
+    },
+    "ULY": {
+        "ticker": "ULY",
+        "name": "Urgent.ly Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 5280177,
+        "currency": "USD",
+        "description": "Urgent.ly Inc. operates mobility assistance software platform that matches vehicle owners and operators with service professionals for roadside assistance, proactive maintenance, and repair services in the Americas, Europe, the Middle East, Africa, and the Asia Pacific. The company's services include car lockout, tire changes, towing, stuck in ditch and winch services, motorcycle towing, electric vehicle towing, jump start, and gas delivery. Its software platform combines location-based services, real-time data, AI and machine-to-machine communication to provide roadside assistance solutions. It serves automotive, insurance, telematics, and other transportation-focused verticals. Urgent.ly Inc. was incorporated in 2013 and is headquartered in Vienna, Virginia."
     }
 }
