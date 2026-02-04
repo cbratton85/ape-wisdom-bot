@@ -692,8 +692,11 @@ def export_interactive_html(df, ai_summary=""):
             # --- 8. NAME (Fixed Description Tooltip) ---
             raw_desc = str(row.get('Desc', 'No description available.'))
             desc_text = raw_desc.replace('"', '&quot;').replace("'", "&apos;")
-            # Using d-tooltip class here guarantees it uses our new CSS (Single Row, High Z-Index)
-            export_df.at[index, 'Name'] = f'<span class="d-tooltip" data-tooltip="{desc_text}" tabindex="0" style="border-bottom:none;"><b>{row.get("Name","")}</b></span>'
+            name_txt = row.get("Name", "")
+
+            html_name = f'<div class="d-tooltip" data-tooltip="{desc_text}" tabindex="0" style="position:relative; width: 100%; cursor:help;"><div style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; width:290px; display:block;"><b>{name_txt}</b></div></div>'
+
+            export_df.at[index, 'Name'] = html_name
 
             # --- 9. RANK+ ---
             r_val = row.get('Rank+', 0)
@@ -836,19 +839,33 @@ def export_interactive_html(df, ai_summary=""):
             th[data-tooltip]:not(.sorting):not(.sorting_asc):not(.sorting_desc)::after, .d-tooltip::after {{
                 content: attr(data-tooltip); 
                 position: absolute;
-                top: 130%;    /* Ensures it pops up below the text */
+                top: 130%; 
                 left: 50%;
-                background-color: #000; color: #fff; 
-                padding: 8px 12px; border-radius: 6px; border: 1px solid #444;
-                font-size: 13px; font-weight: normal; 
+                
+                /* TYPOGRAPHY IMPROVEMENTS */
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 13px;       
+                line-height: 1.5;      
+                font-weight: 400;      
+                text-align: left;      
+                color: #e0e0e0;        
+
+                /* BOX STYLING */
+                background-color: #1a1a1a; 
+                padding: 12px 16px;        
+                border-radius: 8px; 
+                border: 1px solid #444;
+                
                 text-transform: none; 
-                white-space: nowrap; 
-                width: auto; max-width: none;
+                white-space: normal;      /* Allows text to wrap */
+                width: max-content; 
+                max-width: 800px;         /* Limits width for readability */
+                
                 z-index: 999999; 
                 opacity: 0; visibility: hidden; 
-                transition: opacity 0.1s; 
+                transition: opacity 0.15s ease-in-out; 
                 pointer-events: none; margin-top: 5px;
-                box-shadow: 0 4px 15px rgba(0,0,0,1);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.8);
             }}
 
             /* Show on Hover/Focus */
@@ -924,12 +941,9 @@ def export_interactive_html(df, ai_summary=""):
             /* NAME COLUMN */
             th:nth-child(4), td:nth-child(4) {{
                 white-space: normal !important;
-                width: 350px; 
+                width: 300px; 
                 line-height: 1.4;
                 text-align: left;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                
             }}
             
             /* SYMBOL */
