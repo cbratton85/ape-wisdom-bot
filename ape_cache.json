@@ -15630,5 +15630,104 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index and in depositary receipts based on securities comprising the index. The index is a free float-adjusted market capitalization-weighted index that is designed to measure the combined equity market performance of developed and emerging markets."
+    },
+    "BAX": {
+        "ticker": "BAX",
+        "name": "Baxter International Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 10718063616,
+        "currency": "USD",
+        "description": "Baxter International Inc., through its subsidiaries, provides a portfolio of healthcare products in the United States. The company operates through three segments: Medical Products and Therapies, Healthcare Systems and Technologies, and Pharmaceuticals. It offers sterile intravenous (IV) solutions; infusion systems and devices; parenteral nutrition therapies; administrative sets; generic injectable pharmaceuticals; surgical hemostat and sealant products; advanced surgical equipment; smart bed systems; patient monitoring and diagnostic technologies; and respiratory health devices, as well as advanced equipment for the surgical space comprising operating room integration technologies, precision positioning devices, and other accessories. The company also provides specialty injectable pharmaceuticals, inhaled anesthetics, and drug compounding services. Its products are used in hospitals, nursing homes, rehabilitation centers, ambulatory surgery centers, doctors' offices, kidney dialysis centers, and patients at home under physician supervision. The company sells its products through direct sales force, independent distributors, drug wholesalers, and specialty pharmacy or other alternate site providers. It has an agreement with Celerity Pharmaceuticals, LLC to develop acute care generic injectable premix and oncolytic products. The company operates in Eastern Europe, the Middle East, Africa, Latin America, Asia, Western Europe, Canada, Japan, Australia, and New Zealand. Baxter International Inc. was incorporated in 1931 and is headquartered in Deerfield, Illinois."
+    },
+    "BL": {
+        "ticker": "BL",
+        "name": "BlackLine, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2722136064,
+        "currency": "USD",
+        "description": "BlackLine, Inc. provides cloud-based solutions to automate and streamline accounting and finance operations in the United States and internationally. It offers financial close and consolidation solutions, such as account reconciliations that provides a centralized workspace for users to collaborate on account reconciliations; transaction matching, which analyzes and reconciles individual transactions; task management to create and manage processes and task lists; and financial reporting analytics that enables analysis and validation of financial data. The company also provides journal entry, which allows users to generate, review, and post manual journal entries; variance analysis that offers anomalous fluctuations in balance sheet and income statement account balances; compliance, an integrated solution that facilitates compliance-related initiatives, consolidates project management, and provides visibility over control self-assessments and testing; and smart close for SAP solution. In addition, it offers credit and risk, collection, dispute and deduction, and team and task management, as well as AR intelligence, electronic invoicing and payment, and cash application solutions. Further, the company provides intercompany create functionality that stores permissions and business logic exceptions by entity, service, and transaction type; intercompany balance and resolve, which records an organization's intercompany transactions; and netting and settlement that enables open intercompany transactions, which integrate with treasury systems. Additionally, it offers implementation, optimization, live and web-based training, and support services. The company sells its solutions primarily through direct sales force to multinational corporations, large domestic enterprises, and mid-market companies across various industries. BlackLine, Inc. was incorporated in 2001 and is headquartered in Woodland Hills, California."
+    },
+    "SUB": {
+        "ticker": "SUB",
+        "name": "iShares Short-Term National Mun",
+        "meta": "Muni National Short",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will invest at least 80% of its assets in the component securities of the underlying index, and the fund will invest at least 90% of its assets in fixed income securities of the types included in the underlying index that the advisor believes will help the fund track the underlying index. The underlying index includes municipal bonds, the interest of which is exempt from Federal income taxes and not subject to alternative minimum tax."
+    },
+    "SGML": {
+        "ticker": "SGML",
+        "name": "Sigma Lithium Corporation",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 1380047488,
+        "currency": "USD",
+        "description": "Sigma Lithium Corporation engages in the exploration and development of lithium deposits in Brazil. It holds a 100% interest in the Grota do Cirilo, Genipapo, Santa Clara, and S\u00e3o Jos\u00e9 properties comprising 29 mineral rights covering an area of approximately 185 square kilometers located in the Ara\u00e7ua\u00ed and Itinga regions of the state of Minas Gerais, Brazil. It serves lithium-ion battery supply chain for electric vehicle industries. The company was formerly known as Sigma Lithium Resources Corporation and changed its name to Sigma Lithium Corporation in July 2021. Sigma Lithium Corporation is headquartered in S\u00e3o Paulo, Brazil."
+    },
+    "MXCT": {
+        "ticker": "MXCT",
+        "name": "MaxCyte, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 90384888,
+        "currency": "USD",
+        "description": "MaxCyte, Inc., a life sciences company, discovers, develops, and commercializes cell therapeutics in the United States and internationally. The company's products include ExPERT ATx, a static electroporation instrument for small to medium scale transfection; ExPERT STx, a flow electroporation for protein production and drug development, as well as expression of therapeutic targets for cell-based assays; ExPERT GTx, a flow electroporation for large scale transfection in therapeutic applications; and ExPERT VLx for very large volume cell-engineering. It also provides disposable processing assemblies (PAs) to process and electroporate cells; and accessories supporting PAs, such as electroporation buffer solution and software protocols. The company licenses and sells its instruments and technology; and sells its consumables to developers of cell therapies, as well as to pharmaceutical and biotechnology companies for use in drug discovery and development, and bio-manufacturing. MaxCyte, Inc. was incorporated in 1998 and is headquartered in Rockville, Maryland."
+    },
+    "ONCY": {
+        "ticker": "ONCY",
+        "name": "Oncolytics Biotech Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 102979304,
+        "currency": "USD",
+        "description": "Oncolytics Biotech Inc., a clinical-stage biopharmaceutical company, engages in the research, development, and commercialization of oncology treatments. The company develops pelareorep, an intravenously delivered immunotherapeutic agent for the treatment of hormone receptor-positive / human epidermal growth factor 2-negative advanced and metastatic breast cancer, metastatic pancreatic ductal adenocarcinoma, and anal cancer. It has an agreement with Roche Holding AG to supply its immune checkpoint inhibitors, atezolizumab, for use in its ongoing sponsored studies. Oncolytics Biotech Inc. was incorporated in 1998 and is headquartered in Calgary, Canada."
+    },
+    "LEG": {
+        "ticker": "LEG",
+        "name": "Leggett & Platt, Incorporated",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 1740356352,
+        "currency": "USD",
+        "description": "Leggett & Platt, Incorporated designs, manufactures, and sells engineered components and products in the United States, Europe, China, Canada, Mexico, and internationally. The company offers steel rod, drawn wire, innersprings, specialty foam chemicals and additives, for use in bedding and furniture, semi-finished mattresses, private label finished mattresses, pillows and toppers, static foundations, adjustable beds, machines to produce innersprings, industrial sewing and quilting machines, and mattress-packaging and glue-drying equipment to industrial users of steel rod and wire, manufacturers of finished bedding, bedding brands and mattress retailers, e-commerce retailers, big box retailers, department stores, and home improvement centers. It also provides mechanical and pneumatic lumbar support and massage systems for automotive seating, seat suspension systems, motors and actuators, and cables; titanium, nickel, and stainless-steel tubing, formed tubes, tube assemblies, and flexible joint components for fluid conveyance systems; and engineered hydraulic cylinders to automobile original equipment manufacturers (OEMs) and suppliers, aerospace OEMs and suppliers, and mobile equipment OEMs. In addition, the company offers steel mechanisms and motion hardware; springs and seat suspensions; components and private label finished goods for soft seating; bases, columns, back rests, casters, and frames for office chairs and control devices; and carpet cushion and hard surface flooring underlayment, structural fabrics, and geo components for manufacturers of upholstered and office furniture, flooring retailers and distributors, contractors, landscapers, road construction companies, retailers, government agencies, mattress and furniture producers, and manufacturers of draperies, specialty packaging, filtration, and automotive upholstery. Leggett & Platt, Incorporated was founded in 1883 and is based in Carthage, Missouri."
+    },
+    "MGNI": {
+        "ticker": "MGNI",
+        "name": "Magnite, Inc.",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 1710846080,
+        "currency": "USD",
+        "description": "Magnite, Inc., together with its subsidiaries, operates an independent omni-channel sell-side advertising platform in the United States and internationally. The company's platform offers applications and services for sellers of digital advertising inventory, or publishers that own and operate CTV channels, applications, websites, and other digital media properties to manage and monetize their inventory; and for buyers, including advertisers, agencies, agency trading desks, and demand side platforms to buy digital advertising inventory, as well as an independent marketplace that brings buyers and sellers together. It markets its solutions through sales teams that operate from various locations. The company was formerly known as The Rubicon Project, Inc. and changed name to Magnite, Inc. in July 2020. Magnite, Inc. was incorporated in 2007 and is headquartered in New York, New York."
+    },
+    "PYXS": {
+        "ticker": "PYXS",
+        "name": "Pyxis Oncology, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 86858584,
+        "currency": "USD",
+        "description": "Pyxis Oncology, Inc., a clinical stage company, engages in the development of therapeutics to treat solid tumors. Its lead antibody-drug conjugates (ADC) product candidate is PYX-201, an investigational novel ADC consisting of human immunoglobulin G1 (IgG1), which is in Phase 1 clinical trial to treat patients with relapsed or refractory solid tumors; and lead immuno-oncology (IO) product candidate is PYX-106, an investigational fully human IgG1 Siglec-15-targeting antibody that is in Phase 1 clinical trial to treat patients with advanced solid tumors. The company is also developing PYX-107, a CD40 agonist with demonstrated anti-cancer activity in patients with several cancer indications, which is in Phase 2 clinical trial for the treatment of tumors, such as soft tissue sarcomas, esophageal and gastroesophageal junction, cancers, and pancreatic ductal adenocarcinoma. It has in-license agreement with Pfizer Inc. to develop and commercialize ADC product candidates, including micvotabart pelidotin and PYX-203, and other ADC product candidates directed to the licensed targets; and Biosion USA, Inc. for development, manufacture, and commercialization of PYX-106, an IO product candidate. Pyxis Oncology, Inc. was incorporated in 2018 and is headquartered in Boston, Massachusetts."
+    },
+    "STZ": {
+        "ticker": "STZ",
+        "name": "Constellation Brands, Inc.",
+        "meta": "Beverages - Brewers",
+        "type": "EQUITY",
+        "mcap": 29099790336,
+        "currency": "USD",
+        "description": "Constellation Brands, Inc., together with its subsidiaries, produces, imports, markets, and sells beer, wine, and spirits in the United States, Canada, Mexico, New Zealand, and Italy. The company offers beer under the Corona Extra, Corona Familiar, Corona Hard Seltzer, Corona Light, Corona Non-Alcoholic, Corona Premier, Corona Refresca, Modelo Especial, Modelo Chelada, Modelo Negra, Modelo Oro, Victoria, Vicky Chamoy, and Pacifico brands. It also offers wine under the Cook's California Champagne, Kim Crawford, Meiomi, Mount Veeder, Ruffino, SIMI, My Favorite Neighbor, Robert Mondavi Winery, Schrader, and The Prisoner Wine Company brands; and spirits under the Casa Noble, Copper & Kings, High West, Mi CAMPO, Nelson's Green Brier, and SVEDKA brands. The company provides its products to wholesale distributors, retailers, on-premise locations, and state alcohol beverage control agencies. Constellation Brands, Inc. was founded in 1945 and is based in Rochester, New York."
+    },
+    "MBOT": {
+        "ticker": "MBOT",
+        "name": "Microbot Medical Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 116519216,
+        "currency": "USD",
+        "description": "Microbot Medical Inc. is a medical device company that focuses on transforming endovascular procedures through advanced robotic technology. The company offers LIBERTY, an endovascular robotic surgical system which allows physicians to conduct a catheter-based procedure from outside the catheterization laboratory, and avoid radiation exposure, physical strain, and the risk of cross contamination for use in cardiovascular, peripheral, endovascular, and neurovascular operations. It also provides NovaCross, an intellectual property and technology in the field of intraluminal revascularization devices with anchoring mechanism and integrated microcatheter. The company has a collaboration agreement with Corewell Health for the development of LIBERTY endovascular robotic system; and Emory University, in connection with autonomous robotics in endovascular procedures. Microbot Medical Inc. was founded in 2010 and is based in Hingham, Massachusetts"
     }
 }
