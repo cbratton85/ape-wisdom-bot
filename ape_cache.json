@@ -16134,5 +16134,50 @@
         "mcap": 3735452928,
         "currency": "USD",
         "description": "TransAlta Corporation engages in the development, production, and sale of electric energy. It operates through Hydro, Wind and Solar, Gas, Energy Transition, and Energy Marketing segments. The Hydro segment holds interest of approximately 922 megawatts (MW) of owned hydroelectric generating capacity located in Alberta, British Columbia, and Ontario. The Wind and Solar segment has a net ownership interest of approximately 2,057 MW of owned wind and solar electrical-generating capacity, as well as battery storage facilities located in Alberta, Ontario, New Brunswick, and Qu\u00e9bec in Canada; the states of Massachusetts, Minnesota, New Hampshire, North Carolina, Pennsylvania, Washington, and Wyoming in the United States; and the state of Western Australia. The Gas segment has a net ownership interest of approximately 2,775 MW of owned gas electrical-generating capacity, and facilities located in Alberta, Ontario, Michigan, and the state of Western Australia. The Energy Transition segment has a net ownership interest of approximately 671 MW of owned coal electrical-generating capacity, as well as operates the Skookumchuck hydro facility in Centralia; and engages in the highvale mine and the mine reclamation activities. The Energy Marketing segment is involved in the trading of power, natural gas, and environmental products. It serves customers in various industry segments, including commercial real estate, municipal, manufacturing, industrial, hospitality, finance, and oil and gas. TransAlta Corporation was founded in 1909 and is headquartered in Calgary, Canada."
+    },
+    "VDC": {
+        "ticker": "VDC",
+        "name": "Vanguard Consumer Staples ETF",
+        "meta": "Consumer Defensive",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund employs an indexing investment approach designed to track the performance of the index, an index made up of stocks of large, mid-size, and small U.S. companies within the consumer staples sector, as classified under the GICS. The Advisor attempts to replicate the target index by seeking to invest all, or substantially all, of its assets in the stocks that make up the index, in order to hold each stock in approximately the same proportion as its weighting in the index. The fund is non-diversified."
+    },
+    "EARN": {
+        "ticker": "EARN",
+        "name": "Ellington Credit Company",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 197997088,
+        "currency": "USD",
+        "description": "Ellington Credit Company, a closed-end management investment company, focuses on generating current yields and risk-adjusted total returns by investing primarily in collateralized loan obligations. It invests in mezzanine debt and equity tranches. The company was formerly known as Ellington Residential Mortgage REIT and changed its name to Ellington Credit Company in April 2024. Ellington Credit Company was incorporated in 2012 and is headquartered in Old Greenwich, Connecticut."
+    },
+    "NPWR": {
+        "ticker": "NPWR",
+        "name": "NET Power Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 182945088,
+        "currency": "USD",
+        "description": "NET Power Inc. operates as an energy technology company in the United States. Its technology includes NET Power Cycle, a power generation system that produces electricity from natural gas while capturing atmospheric emissions. The company was founded in 2010 and is headquartered in Durham, North Carolina."
+    },
+    "PRE": {
+        "ticker": "PRE",
+        "name": "Prenetics Global Limited",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 318562336,
+        "currency": "USD",
+        "description": "Prenetics Global Limited, a health sciences company, focuses on advancing consumer health in Hong Kong, the United States, and internationally. It sells health and wellness products under the IM8 brand name; and provides fulfillment and distribution services for sports nutrition products under the Europa brand. The company is also involved in the operation of CircleDNA, a consumer genetic testing brand that uses next-generation sequencing (NGS) technology to provide comprehensive insights into health, wellness, and genetic predispositions. Prenetics Global Limited was founded in 2014 and is headquartered in Quarry Bay, Hong Kong."
+    },
+    "CBRL": {
+        "ticker": "CBRL",
+        "name": "Cracker Barrel Old Country Stor",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 742409216,
+        "currency": "USD",
+        "description": "Cracker Barrel Old Country Store, Inc. develops and operates the Cracker Barrel Old Country Store concept in the United States. Its Cracker Barrel stores consist of restaurants with a gift shop. The company's restaurants serve breakfast, lunch, and dinner, as well as dine-in, pick-up, and delivery services. Its gift shops offer various decorative and functional items, such as rocking chairs, seasonal gifts, apparel, toys, food, cookware, and various other gift items, as well as various candies, preserves, and other food items. Cracker Barrel Old Country Store, Inc. was incorporated in 1969 and is headquartered in Lebanon, Tennessee."
     }
 }
