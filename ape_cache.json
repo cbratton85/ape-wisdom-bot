@@ -14937,5 +14937,59 @@
         "mcap": 1074179200,
         "currency": "USD",
         "description": "Clear Channel Outdoor Holdings, Inc. operates as an out-of-home advertising company in the United States and Singapore. The company operates in two segments, America and Airports. It provides advertising services through billboards, including bulletins and posters, as well as spectaculars, which are customized display structures with videos, three-dimensional elements and moving parts; street furniture displays, such as advertising surfaces on bus shelters, kiosks, news racks, and other public structures; transit displays in rail stations and on buses, trains, and trams; and wallscapes, as well as advertising solutions to commercial and private airports. The company offers solutions, such as RADARView, an audience and campaign planning tool, which uses historical mobile location data; RADARConnect, a campaign amplification solution that delivers supportive advertisements across mobile and other devices; RADARProof, a campaign measurement and attribution solutions, which analyzes anonymized and/or aggregated data; and RADARSync, a data integration platform designed to enable customized application of the RADAR tools and privacy-compliant sharing of RADAR insights with analytics platforms. The company was formerly known as Eller Media Company and changed its name to Clear Channel Outdoor Holdings, Inc. in August 2005. Clear Channel Outdoor Holdings, Inc. was incorporated in 1995 and is headquartered in San Antonio, Texas."
+    },
+    "KRE": {
+        "ticker": "KRE",
+        "name": "State Street SPDR S&P Regional ",
+        "meta": "Financial",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "In seeking to track the performance of the S&P Regional Banks Select Industry Index (the \"index\"), the fund employs a sampling strategy. It generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index. The index represents the regional banks segment of the S&P Total Market Index (\"S&P TMI\")."
+    },
+    "BAND": {
+        "ticker": "BAND",
+        "name": "Bandwidth Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 407768288,
+        "currency": "USD",
+        "description": "Bandwidth Inc. operates as a cloud-based software-powered communications platform-as-a-service provider in the United States and internationally. The company's platform enables enterprises to create, scale, and operate voice or messaging communications services across various mobile applications or connected devices. Its platform also provides voice services through SIP or programmable voice application programming interfaces (API); software APIs for messaging; communications solutions with integrated local emergency services; number management solutions; insights on customer's voice and messaging performance to make data-driven decisions; and bring your own carrier integrations services, which includes unified communications as a service, contact center as a service, conversational AI, and speech-to-text/text-to-speech platforms. In addition, the company offers Call Assure, which provides hands-free alternative routing; application to person messaging solutions that supports SMS and MMS on local numbers, toll free numbers, and short codes; Bandwidth Maestro, an enterprise cloud communications platform; and AIBridge, which enables enterprises to deploy voice-based AI tools in their contact centers. It serves technology companies, enterprise customers, and software-as-a-service platforms. The company was formerly known as Bandwidth.com, Inc. and changed its name to Bandwidth Inc. in September 2017. Bandwidth Inc. was founded in 1999 and is headquartered in Raleigh, North Carolina."
+    },
+    "TWLO": {
+        "ticker": "TWLO",
+        "name": "Twilio Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 16800978944,
+        "currency": "USD",
+        "description": "Twilio Inc., together with its subsidiaries, offers customer engagement platform solutions in the United States and internationally. It operates through two segments, Twilio Communications and Twilio Segment. The company provides various application programming interfaces and software solutions for communications between customers and end users, including messaging, voice, email, flex, marketing campaigns, and user authentication and identity. It also offers software products to build direct and personalized relationships with their end users, such as segment, a platform that provides tools to harness the power of contextual data by unifying real-time information collected comprising connections, protocols, unify, engages, and AI capabilities components. Twilio Inc. was incorporated in 2008 and is headquartered in San Francisco, California"
+    },
+    "ENR": {
+        "ticker": "ENR",
+        "name": "Energizer Holdings, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 1574381312,
+        "currency": "USD",
+        "description": "Energizer Holdings, Inc., together with its subsidiaries, manufactures, markets, and distributes household batteries, specialty batteries, and lighting products worldwide. It offers household batteries, including primary, rechargeable, specialty, and hearing aid under the Energizer, Eveready, Rayovac, and Varta brands; and protectants, wipes, tire and wheel care products, glass cleaners, leather care products, air fresheners, and washes under the Armor All, Nu Finish, Refresh Your Car!, LEXOL, Eagle One, NEVR-DULL, California Scents, Driven, Bahama & Co, Carnu, Grand Prix, Kit, Tempo, and Centralsul brands. The company also provides fuel and oil additives, functional fluids, and other performance chemical products under the STP brand; automotive air conditioning recharge products, other refrigerant and recharge kits, sealants, and accessories under the A/C PRO brand name. In addition, it distributes and markets lighting products comprising handheld, headlights, lanterns, and area lights; flashlights under the Hard Case, Dolphin, and WeatherReady brands; and licenses brands to developing consumer solutions in solar, automotive batteries, portable power for critical devices, generators, power tools, household light bulbs, and other lighting products. The company sells its products through direct sales force, distributors, and wholesalers, as well as retail locations, mass merchandisers and warehouse clubs, food, drug and convenience stores, electronics specialty stores and department stores, hardware and automotive centers, e-commerce, and military stores. Energizer Holdings, Inc. was incorporated in 2015 and is headquartered in Saint Louis, Missouri."
+    },
+    "EET": {
+        "ticker": "EET",
+        "name": "ProShares Ultra MSCI Emerging M",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of large and mid-capitalization companies across 24 emerging market countries. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index or in instruments with similar economic characteristics. The fund is non-diversified."
+    },
+    "FARM": {
+        "ticker": "FARM",
+        "name": "Farmer Brothers Company",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 34347200,
+        "currency": "USD",
+        "description": "Farmer Bros. Co. engages in roasting, wholesaling, equipment servicing, and distributing coffee, tea, and other allied products in the United States. The company offers roast and ground coffee; frozen liquid coffee; ambient liquid; flavoured and unflavoured iced and hot teas; culinary products, including spices, pancake and biscuit mixes, gravy and sauce mixes, soup bases, dressings, and syrups and sauces, as well as coffee filters, cups, sugar, and creamers; and other beverages comprising cappuccino, cocoa, granitas, and other blender-based beverages and concentrated and ready-to-drink cold brew and iced coffee under the Farmer Brothers, Artisan Collection by Farmer Brothers, Metropolitan, Farmer Brothers, Sum>One, Metropolitan, China Mist, Cain's, and Boyds brand names. It also involved in the installation, repair, and refurbishment services for an array of coffee, tea, and juice equipment. The company serves small independent restaurants, foodservice operators, and large institutional buyers and national account customers, such as restaurant, department and convenience store chains, hotels, casinos, healthcare facilities, and gourmet coffee houses, as well as retails with private brand and consumer-branded coffee and tea products, foodservice distributors, and consumers through e-commerce channel. It distributes its products through third-party logistics service providers and retail, as well as through foodservice distributors. Farmer Bros. Co. was founded in 1912 and is headquartered in Fort Worth, Texas."
     }
 }
