@@ -15207,5 +15207,68 @@
         "mcap": 1412318208,
         "currency": "USD",
         "description": "The fund will normally invest at least 80% of its total assets in securities of the index or in depositary receipts representing securities of the index. The index is designed to measure the performance of robotics-related and/or automation-related companies. The fund may invest up to 20% of its assets in investments that are not included in the index, but which the Adviser and Sub-Adviser believe will help it track the index. It is non-diversified."
+    },
+    "SCZ": {
+        "ticker": "SCZ",
+        "name": "iShares MSCI EAFE Small-Cap ETF",
+        "meta": "Foreign Small/Mid Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of the underlying index and in investments that have economic characteristics that are substantially identical to the component securities of the underlying index. The index represents the small-capitalization segment of the MSCI EAFE IMI Index."
+    },
+    "VERI": {
+        "ticker": "VERI",
+        "name": "Veritone, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 342436480,
+        "currency": "USD",
+        "description": "Veritone, Inc., together with its subsidiaries, engages in the provision of artificial intelligence (AI) computing solutions and services in the United States, the United Kingdom, France, Australia, Israel, and India. It develops and operates aiWARE platform, an AI operating system, that uses machine learning algorithms or AI models designed to mimic human cognitive functions, such as perception, prediction, and problem solving and optimization, as well as enables users to transform unstructured data into structured data, analyze and optimize data to drive business processes and insights. The company offers cloud-native digital content management solutions; software products and services to commercial enterprise and public sector customers; and managed services. It serves media and entertainment, government, legal and compliance, energy, and other vertical markets. The company was formerly known as Veritone Delaware, Inc. and changed its name to Veritone, Inc. in July 2014. Veritone, Inc. was incorporated in 2014 and is headquartered in Denver, Colorado."
+    },
+    "UAVS": {
+        "ticker": "UAVS",
+        "name": "AgEagle Aerial Systems, Inc.",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 47470712,
+        "currency": "USD",
+        "description": "AgEagle Aerial Systems, Inc., doing business as EagleNXT, through its subsidiaries, designs and delivers autonomous uncrewed aerial systems worldwide. It operates through three segments: Drones, Sensors, and Software-as-a-Service (SaaS). The company offers senseFly, an uncrewed aerial vehicle; MicaSense, a multi spectral camera; and Ground Control, a cloud-based plug-and-play operating system that enabled pilots and large enterprises to operate drone fleets, fly autonomously, collaborate globally, visualize data, and integrate with existing business systems and processes. It also offers uncrewed aerial vehicles under the eBee TAC, eBee X, and eBee VISION brands; and sensor solutions, such as Altum-PT, RedEdge-P, and RedEdge-Pdual. It serves agriculture, military/defense, public safety, surveying/mapping, and utilities/engineering industries. The company was founded in 2010 and is headquartered in Allen, Texas."
+    },
+    "PII": {
+        "ticker": "PII",
+        "name": "Polaris Inc.",
+        "meta": "Recreational Vehicles",
+        "type": "EQUITY",
+        "mcap": 3779887616,
+        "currency": "USD",
+        "description": "Polaris Inc. designs, engineers, manufactures, and markets powersports vehicles in the United States, Canada, and internationally. It operates through three segments: Off-Road, On-Road, and Marine. The company offers off-road vehicles (ORVs), including all-terrain vehicles and side-by-side vehicles; military and commercial ORVs; snowmobiles; motorcycles; and moto-roadsters, quadricycles, and boats. It also provides ORV accessories comprising winches, bumper/brushguards, plows, racks, wheels and tires, pull-behinds, cab systems, lighting and audio systems, cargo box accessories, and tracks; snowmobile accessories, which include covers, traction products, reverse kits, electric starters, tracks, bags, windshields, replacement parts, and lubricants; and motorcycle accessories, such as saddle bags, handlebars, backrests, exhausts, windshields, seats, oil, and various chrome accessories. In addition, the company offers light duty hauling and passenger vehicles; gear and apparel, such as helmets, goggles, jackets, gloves, boots, bibs, hats, and pants; and pontoon and deck boats. It provides its products through dealers and distributors, and online; and retail and e-commerce marketplaces. The company was formerly known as Polaris Industries Inc. Polaris Inc. was founded in 1945 and is headquartered in Medina, Minnesota."
+    },
+    "SKT": {
+        "ticker": "SKT",
+        "name": "Tanger Inc.",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 3621951232,
+        "currency": "USD",
+        "description": "Tanger Inc. is a leading owner and operator of outlet and open-air retail shopping destinations, with over 45 years of expertise in the retail and outlet shopping industries. Tanger's portfolio of 38 outlet centers and three open-air lifestyle centers comprises more than 16 million square feet well positioned across tourist destinations and vibrant markets in 22 U.S. states and Canada. A publicly traded REIT since 1993, Tanger continues to innovate the retail experience for its shoppers with over 3,000 stores operated by more than 800 different brand name companies."
+    },
+    "UGRO": {
+        "ticker": "UGRO",
+        "name": "urban-gro, Inc.",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 2379917,
+        "currency": "USD",
+        "description": "urban-gro, Inc. engages in the designing, engineering, building, and integrating complex environmental equipment systems for indoor controlled environment agriculture (CEA) cultivation and retail facilities in the United States, Canada, and Europe. The company provides architectural design, engineering, and construction services comprising pre-construction, cultivation space programming, architectural and interior design, engineering, integrated cultivation design, owner's representative/construction management, and general contracting services. It also offers additional services, including facility and equipment commissioning services; grocare crop and asset protection services that consists of training services, equipment maintenance services, asset protection program, and interactive online operating support system for grocare and client document delivery and project management; and property condition assessment services. In addition, the company provides integrated equipment systems solutions, such as design, source, and integration of complex environmental equipment systems comprising heating, ventilation, and air conditioning (HVAC) solutions, environmental controls, fertigation, and irrigation distribution, as well as environmental control, fertigation, irrigation distribution, water treatment, and wastewater reclamation systems. Further, it offers value-added reselling of cultivation equipment systems and strategic vendor relationships with manufacturers. It primarily markets and sells its solutions to clients in the CEA that includes operators and facilitators in the cannabis and produce markets; and commercial sectors comprising food and beverage consumer packaged goods companies, healthcare, higher education, and hospitality. urban-gro, Inc. was incorporated in 2014 and is based in Lafayette, Colorado."
+    },
+    "FUTU": {
+        "ticker": "FUTU",
+        "name": "Futu Holdings Limited",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 22245771264,
+        "currency": "USD",
+        "description": "Futu Holdings Limited provides digitalized securities brokerage and wealth management product distribution service in Hong Kong and internationally. The company offers online financial services, including securities and derivative trades brokerage, margin financing and fund distribution services through its Futubull and Moomoo digital platforms. It also provides financial information and online community services; online wealth management services under the Money Plus brand name through its Futubull and moomoo platforms, which provides its client access to mutual funds, private funds, bonds, structured products, and other wealth management products; market data and information services; and NiuNiu Community, an open forum for users and clients to share insights, ask questions, and exchange ideas. Futu Holdings Limited was founded in 2007 and is headquartered in Admiralty, Hong Kong."
     }
 }
