@@ -16026,5 +16026,77 @@
         "mcap": 16942329856,
         "currency": "USD",
         "description": "Carlisle Companies Incorporated operates as a manufacturer and supplier of building envelope products and solutions in the United States, Europe, North America, and internationally. It operates through two segments, Carlisle Construction Materials (CCM) and Carlisle Weatherproofing Technologies (CWT). The CCM segment offers single-ply roofing solutions, including ethylene propylene diene monomer, thermoplastic polyolefin, polyvinyl chloride membrane, polyiso insulation, and engineered metal roofing and wall panel systems for commercial and residential buildings. Its CWT segment provides waterproofing and moisture protection products; protective roofing underlayment; fully integrated liquid and sheet applied air/vapor barriers; sealants/primers and flashing systems; roof coatings and mastics; spray polyurethane foam and coating systems for a range of thermal protection applications and other premium polyurethane products; block-molded expanded polystyrene insulation; engineered products for HVAC applications; and products for a variety of industrial and surfacing applications. The company sells its products under the Carlisle SynTec, Versico, WeatherBond, Hunter Panels, Resitrix, and Hertalan brands. Carlisle Companies Incorporated was founded in 1917 and is headquartered in Scottsdale, Arizona."
+    },
+    "TTI": {
+        "ticker": "TTI",
+        "name": "Tetra Technologies, Inc.",
+        "meta": "Conglomerates",
+        "type": "EQUITY",
+        "mcap": 1545443328,
+        "currency": "USD",
+        "description": "TETRA Technologies, Inc., together with its subsidiaries, operates as an energy services and solutions company. It operates through two segments, Completion Fluids & Products; and Water & Flowback Services. The Completion Fluids & Products segment manufactures and markets clear brine fluids, additives, and associated products and services to the oil and gas industry for use in well drilling, completion, and workover operations in the United States, as well as in Latin America, Europe, Asia, the Middle East, and Africa. This segment also markets liquid and dry calcium chloride products; and TETRA PureFlow ultra-pure zinc bromide to battery technology companies. Its Water & Flowback Services segment provides water management services for onshore oil and gas operators. This segment also offers frac flowback, production well testing, and other associated services in oil and gas producing regions in the United States, as well as in various basins in Latin America, Africa, Europe, and the Middle East. TETRA Technologies, Inc. was incorporated in 1981 and is headquartered in The Woodlands, Texas."
+    },
+    "PLD": {
+        "ticker": "PLD",
+        "name": "Prologis, Inc.",
+        "meta": "REIT - Industrial",
+        "type": "EQUITY",
+        "mcap": 125146251264,
+        "currency": "USD",
+        "description": "Prologis, Inc., is the global leader in logistics real estate with a focus on high-barrier, high-growth markets. At September 30, 2025, the company owned or had investments in, on a wholly owned basis or through co-investment ventures, properties and development projects expected to total approximately 1.3 billion square feet (120 million square meters) in 20 countries. Prologis leases modern logistics facilities to a diverse base of approximately 6,500 customers principally across two major categories: business-to-business and retail/online fulfillment."
+    },
+    "UNP": {
+        "ticker": "UNP",
+        "name": "Union Pacific Corporation",
+        "meta": "Railroads",
+        "type": "EQUITY",
+        "mcap": 148213104640,
+        "currency": "USD",
+        "description": "Union Pacific Corporation, through its subsidiary, Union Pacific Railroad Company, operates in the railroad business in the United States. It offers transportation services for grain and grain products, fertilizers, food and refrigerated products, and coal and renewables to grain processors, animal feeders, and ethanol and renewable biofuel producers; and construction products, industrial chemicals, plastics, forest products, specialized products, metals and ores, petroleum, liquid petroleum gases, soda ash, and sand, as well as finished automobiles, automotive parts, and merchandise in intermodal containers. The company was founded in 1862 and is headquartered in Omaha, Nebraska."
+    },
+    "TERM": {
+        "ticker": "TERM",
+        "name": "EquityCompass Tactical Risk Man",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The investment seeks to provide long term capital appreciation with capital preservation as a secondary objective.\n The fund will seek to achieve its investment objectives by investing in equity securities of companies domiciled in the U.S. or listed on a U.S. securities exchange. The fund&#39;s strategy seeks to provide exposure to U.S. listed equity securities and to avoid large, prolonged market losses and reduce volatility. It may also invest in inverse ETFs which seek to provide investment results that match a negative return of the performance of an underlying index like the S&P 500\u00c2\u00ae Index."
+    },
+    "HCI": {
+        "ticker": "HCI",
+        "name": "HCI Group, Inc.",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 2027857024,
+        "currency": "USD",
+        "description": "HCI Group, Inc., together with its subsidiaries, engages in the property and casualty insurance, insurance management, reinsurance, real estate, and information technology businesses in the United States. It operates through Insurance Operations, TypTap Group, Reciprocal Exchange Operations, and Real Estate Operations segments. The company provides residential insurance products, such as homeowners, fire, and wind-only insurance to homeowners, condominium owners, and tenants for properties, as well as offers reinsurance programs. It also owns and operates waterfront properties and retail shopping centers, and an office building, as well as commercial properties for investment purposes. In addition, the company designs and develops web-based applications and products, including SAMS, an online policy administration platform; Harmony, a policy administration platform; ClaimColony, an end-to-end claims management platform; and AtlasViewer, a mapping and data visualization platform. The company was formerly known as Homeowners Choice, Inc. and changed its name to HCI Group, Inc. in May 2013. HCI Group, Inc. was incorporated in 2006 and is headquartered in Tampa, Florida."
+    },
+    "NH": {
+        "ticker": "NH",
+        "name": "NH",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "NX": {
+        "ticker": "NX",
+        "name": "Quanex Building Products Corpor",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 922213440,
+        "currency": "USD",
+        "description": "Quanex Building Products Corporation, together with its subsidiaries, manufactures and distributes components for original equipment manufacturers (OEM) in the building products industry in the United States, Europe, Canada, Asia, and internationally. It offers energy-efficient flexible insulating glass spacers, extruded vinyl profiles, window and door screens, precision-formed metal and wood products, window and door seals, and window and door hardware. The company also solar panel sealants, trim moldings, vinyl decking, water retention barriers, conservatory roof components, and commercial access solutions. It sells its products through sales representatives, direct sales force, distributors, and independent sales agents. Quanex Building Products Corporation was founded in 1927 and is based in Houston, Texas."
+    },
+    "TLH": {
+        "ticker": "TLH",
+        "name": "iShares 10-20 Year Treasury Bon",
+        "meta": "Long Government",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will invest at least 80% of its assets in the component securities of the underlying index, and the fund will invest at least 90% of its assets in U.S. Treasury securities that the advisor believes will help the fund track the underlying index. It seeks to track the investment results of the underlying index which measures the performance of public obligations of the U.S. Treasury that have a remaining maturity of greater than or equal to ten years and less than twenty years."
     }
 }
