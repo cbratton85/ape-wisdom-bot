@@ -965,12 +965,26 @@ def export_interactive_html(df, ai_summary=""):
             .header-right {{ flex: 0 0 400px; display: flex; justify-content: flex-end; align-items: center; z-index: 10; }}
 
             .header-center {{
-                position: absolute; left: 50%; transform: translateX(-50%); display: grid; 
-                grid-template-columns: max-content max-content; /* Forces labels and content to stay tight */
-                gap: 0px 8px; max-width: 90%; /* Increased max-width to give it more horizontal room */
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                display: grid; 
+                grid-template-columns: max-content max-content;
+                gap: 0px
+                max-width: 90%;
+                z-index: 1000;
             }}
 
-            .summary-row {{ display: contents; }}
+            .summary-row {{
+                display: contents;
+                line-height: 1.1;
+                margin-bottom: 0px;  
+            }}
+
+            .summary-row:nth-child(1) {{ z-index: 10; }}
+            .summary-row:nth-child(2) {{ z-index: 20; }}
+            .summary-row:nth-child(3) {{ z-index: 30; }}
+            .summary-row:nth-child(4) {{ z-index: 40; }}
 
             .row-label {{
                 font-size: 11px;
@@ -981,10 +995,11 @@ def export_interactive_html(df, ai_summary=""):
                 border-bottom: none !important;
                 text-decoration: underline dotted #555;
                 position: relative;
-                z-index: 10 !important;
+                z-index: 50;
+                
             }}
 
-            .row-content {{ font-size: 12px; font-weight: 600; color: #fff; }}
+            .row-content {{ font-size: 11px; font-weight: 600; color: #fff; }}
 
             .crumb-sep {{
                 color: #555; 
@@ -1035,7 +1050,7 @@ def export_interactive_html(df, ai_summary=""):
                 font-weight: normal; 
                 text-transform: none; 
                 white-space: nowrap; 
-                z-index: 9999 !important; 
+                z-index: 999999 !important; 
                 opacity: 0; 
                 visibility: hidden; 
                 transition: opacity 0.1s; 
@@ -1047,6 +1062,7 @@ def export_interactive_html(df, ai_summary=""):
             .row-label:hover::after {{ opacity: 1; visibility: visible; }}
             
             .clr-rank:hover::after {{ color: #00ffff !important; border-color: #00ffff !important; }}
+            .clr-upv:hover::after {{ color: #00ff00 !important; border-color: #00ff00 !important; }}
             .clr-surge:hover::after {{ color: #ffcc00 !important; border-color: #ffcc00 !important; }}
             .clr-buzz:hover::after {{ color: #ff00ff !important; border-color: #ff00ff !important; }}
 
@@ -1124,38 +1140,45 @@ def export_interactive_html(df, ai_summary=""):
         <div class="container-fluid" style="width: 98%; max-width: 2500px; margin: 0 auto;">
             
             <div class="header-flex">
-                <div class="header-left">
-                    <a href="https://apewisdom.io" target="_blank">
-                        <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" style="height: 54px;">
-                    </a>
-                    <div class="mode-toggle">
-                        <input type="checkbox" id="modeSwitch" onclick="updateSummary()">
-                        <label for="modeSwitch">
-                            <span class="mode-label s-label" style="font-size:12px; font-weight:bold; padding:5px 12px; color:#666;">STOCKS</span>
-                            <span class="mode-label e-label" style="font-size:12px; font-weight:bold; padding:5px 12px; color:#666;">ETFS</span>
-                        </label>
-                    </div>
-                </div>
+    <div class="header-left">
+        <a href="https://apewisdom.io" target="_blank">
+            <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" style="height: 54px;">
+        </a>
+        <div class="mode-toggle">
+            <input type="checkbox" id="modeSwitch" onclick="updateSummary()">
+            <label for="modeSwitch">
+                <span class="mode-label s-label" style="font-size:12px; font-weight:bold; padding:5px 12px; color:#666;">STOCKS</span>
+                <span class="mode-label e-label" style="font-size:12px; font-weight:bold; padding:5px 12px; color:#666;">ETFS</span>
+            </label>
+        </div>
+    </div>
 
-                <div class="header-center">
-                    <div class="summary-row">
-                        <span class="row-label clr-rank" data-tooltip="Total Rank Change by Industry. Shows the sum of all position gains in the sector.">RANK CLIMBERS:</span>
-                        <span id="rankBreadcrumb" class="row-content">...</span>
-                    </div>
-                    <div class="summary-row">
-                        <span class="row-label clr-surge" data-tooltip="Total Volume Surge by Industry. Shows the combined volume pressure of all stocks in the sector.">VOL SURGE:</span>
-                        <span id="surgeBreadcrumb" class="row-content">...</span>
-                    </div>
-                    <div class="summary-row">
-                        <span class="row-label clr-buzz" data-tooltip="Total Mention Growth by Industry. Sum of all new chatter in the sector.">SOCIAL BUZZ:</span>
-                        <span id="mntBreadcrumb" class="row-content">...</span>
-                    </div>
-                </div>
+    <div class="header-center">
+        <div class="summary-row">
+            <span class="row-label clr-rank" data-tooltip="Total Rank Change by Industry.">RANK CLIMBERS:</span>
+            <span id="rankBreadcrumb" class="row-content">...</span>
+        </div>
+        
+        <div class="summary-row">
+            <span class="row-label clr-upv" style="color: #00ff00;" data-tooltip="Total New Upvotes by Industry.">UPVOTE GAIN:</span>
+            <span id="upvBreadcrumb" class="row-content">...</span>
+        </div>
 
-                <div class="header-right">
-                    <span id="time" data-utc="{utc_timestamp}" style="font-family:monospace; font-size:11px; color:#666;">Loading...</span>
-                </div>
-            </div>
+        <div class="summary-row">
+            <span class="row-label clr-surge" data-tooltip="Total Volume Surge by Industry.">VOL SURGE:</span>
+            <span id="surgeBreadcrumb" class="row-content">...</span>
+        </div>
+
+        <div class="summary-row">
+            <span class="row-label clr-buzz" data-tooltip="Total Social Buzz (Mentions) by Industry.">SOCIAL BUZZ:</span>
+            <span id="mntBreadcrumb" class="row-content">...</span>
+        </div>
+    </div>
+
+    <div class="header-right">
+        <span id="time" data-utc="{utc_timestamp}" style="font-family:monospace; font-size:11px; color:#666;">Loading...</span>
+    </div>
+</div>
 
             <div class="filter-bar">
                 <span style="color:#fff; font-weight:bold; margin-right:5px;">⚡ FILTERS:</span>
@@ -1371,21 +1394,31 @@ def export_interactive_html(df, ai_summary=""):
         <script>
     var table;
     function parseVal(str) {{
-        if (!str) return 0;
-        var clean = str.toString().replace(/<[^>]+>/g, '').replace(/[$,%▲▼+]/g, '').trim().toLowerCase();
+        if (!str || str === null) return 0;
+        
+        // 1. Convert to string and STRIP ALL HTML TAGS first
+        // This removes the <span class="d-tooltip" ...> but leaves the value behind
+        var clean = str.toString().replace(/<[^>]+>/g, '').trim();
+
+        // 2. Remove symbols that aren't numbers ($, %, Arrows, Plus, 'x' for conviction)
+        clean = clean.replace(/[$,%▲▼+x]/g, '').toLowerCase();
+
+        // 3. Handle K/M/B Multipliers
         let mult = 1;
-        if (clean.endsWith('k')) {{ mult = 1000; clean = clean.replace('k', ''); }}
-        else if (clean.endsWith('m')) {{ mult = 1000000; clean = clean.replace('m', ''); }}
-        else if (clean.endsWith('b')) {{ mult = 1000000000; clean = clean.replace('b', ''); }}
-        return parseFloat(clean) * mult || 0;
+        if (clean.endsWith('k')) {{ mult = 1000; clean = clean.slice(0, -1); }}
+        else if (clean.endsWith('m')) {{ mult = 1000000; clean = clean.slice(0, -1); }}
+        else if (clean.endsWith('b')) {{ mult = 1000000000; clean = clean.slice(0, -1); }}
+
+        // 4. Convert to number and multiply
+        var result = parseFloat(clean) * mult;
+        return isNaN(result) ? 0 : result;
     }}
 
     function updateSummary() {{
         if (!$.fn.DataTable.isDataTable('.table')) return;
         var api = $('.table').DataTable();
         var topSwitchIsETF = $('#modeSwitch').is(':checked');
-        var allData = api.rows().data();
-
+        var allData = api.rows({{ search: 'none', order: 'index' }}).data();
         function getTopSectors(metricIdx) {{
             var sectorData = {{}};
             allData.each(function(row) {{
@@ -1408,8 +1441,20 @@ def export_interactive_html(df, ai_summary=""):
                 return {{ name: s, total: sectorData[s].totalSum, count: sectorData[s].count, stocks: sectorData[s].stocks }};
             }});
 
-            sorted = sorted.filter(function(s) {{ return s.count >= 2; }});
-            sorted.sort(function(a, b) {{ return b.total - a.total; }});
+            // Filter: Ensure the sector has at least 2 stocks (or 1 if you prefer)
+            sorted = sorted.filter(function(s) {{ 
+                return s.count >= 2; 
+            }});
+
+            // Sort with Tie-Breaker: Sort by total first, then alphabetically by name
+            sorted.sort(function(a, b) {{ 
+                if (b.total !== a.total) {{
+                    return b.total - a.total; // Primary Sort: Highest Total Gain
+                }}
+                // Secondary Sort: Alphabetical (prevents flip-flopping on ties)
+                return a.name.localeCompare(b.name); 
+            }});
+
             if (sorted.length === 0) return '<span style="color:#666;">---</span>';
 
             var topThree = sorted.slice(0, 5);
@@ -1434,7 +1479,8 @@ def export_interactive_html(df, ai_summary=""):
         }}
 
         $('.sector-tooltip').each(function() {{ var old = bootstrap.Tooltip.getInstance(this); if (old) old.dispose(); }});
-        $('#rankBreadcrumb').html(getTopSectors(1));  
+        $('#rankBreadcrumb').html(getTopSectors(1));
+        $('#upvBreadcrumb').html(getTopSectors(10));
         $('#surgeBreadcrumb').html(getTopSectors(12)); 
         $('#mntBreadcrumb').html(getTopSectors(16));  
 
