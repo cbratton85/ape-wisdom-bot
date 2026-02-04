@@ -16098,5 +16098,41 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund will invest at least 80% of its assets in the component securities of the underlying index, and the fund will invest at least 90% of its assets in U.S. Treasury securities that the advisor believes will help the fund track the underlying index. It seeks to track the investment results of the underlying index which measures the performance of public obligations of the U.S. Treasury that have a remaining maturity of greater than or equal to ten years and less than twenty years."
+    },
+    "YYAI": {
+        "ticker": "YYAI",
+        "name": "AiRWA Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 42478724,
+        "currency": "USD",
+        "description": "AiRWA Inc. through its subsidiaries, operates artificial intelligence software that provides online matchmaking and dating experiences in Hong Kong, the United States, and the United Kingdom. The company was formerly known as Connexa Sports Technologies Inc. and changed its name to AiRWA Inc. in October 2025. AiRWA Inc. was founded in 2021 and is headquartered in Smyrna, Delaware."
+    },
+    "MMM": {
+        "ticker": "MMM",
+        "name": "3M Company",
+        "meta": "Conglomerates",
+        "type": "EQUITY",
+        "mcap": 87009345536,
+        "currency": "USD",
+        "description": "3M Company provides diversified technology services in the America, the Asia Pacific, Europe, the Middle East, Africa, and internationally. It operates through three segments: Safety and Industrial, Transportation and Electronics, and Consumer. The Safety and Industrial segment provides industrial abrasives and finishing for metalworking applications; autobody repair solutions; industrial specialty products, such as personal hygiene products, masking, and packaging materials; electrical products and materials for construction and maintenance, power distribution, and electrical original equipment manufacturers; structural adhesives and tapes; respiratory, hearing, eye, and fall protection solutions; and natural and color-coated mineral granules for shingles. The Transportation and Electronics segment provides ceramic solutions; attachment and bonding, films, sound, and temperature management for transportation vehicles; format graphic films for advertising and fleet signage; reflective signage for highway and vehicle safety; light management films and electronics assembly solutions; chip packaging and interconnection solutions; semiconductor production materials; and data center solutions. The Consumer segment offers cleaning products for the home; consumer air quality products; picture hanging accessories; retail abrasives, paint accessories, and safety products; stationery and office products; automotive appearance products; and consumer bandages, tapes, braces, and supports. It serves automotive; commercial solutions; consumer markets; design and construction; electronics; energy; government; manufacturing; safety; transportation industries. The company offers its products through e-commerce and traditional wholesalers, retailers, jobbers, distributors, channel partner, and dealers, as well as directly to users. 3M Company was founded in 1902 and is headquartered in Saint Paul, Minnesota."
+    },
+    "NTRA": {
+        "ticker": "NTRA",
+        "name": "Natera, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 28672133120,
+        "currency": "USD",
+        "description": "Natera, Inc., a diagnostics company, provides molecular testing services worldwide. Its products include Panorama, a non-invasive prenatal test that screens for chromosomal abnormalities of a fetus, as well as in twin pregnancies; Horizon carrier screening test for individuals and couples determine if they are carriers of genetic variations that cause certain genetic conditions; Vistara single-gene NIPT screens for 25 single-gene disorders; Spectrum, preimplantation genetic tests for couples undergoing IVF; Anora that analyzes miscarriage tissue from women; Empower, a hereditary cancer screening test; and non-invasive prenatal paternity product, which allows a couple to establish paternity without waiting for the child to be born. The company also provides Signatera molecular residual disease test for assessment and surveillance of disease recurrence in patients previously diagnosed with cancer; Altera, a tissue based genomic profiling test, that provides insight into genomic alterations and biomarkers; Prospera to assess active rejection in patients who have undergone kidney, heart, and lung transplantation; and Renasight, a kidney gene panel test. In addition, it offers Constellation, a cloud-based software product. It serves independent laboratories, national and regional reference laboratories, medical centers and physician practices, research laboratories, and pharmaceutical companies through its direct sales force, and a network of laboratory and distribution partners. It has a partnership agreement with BGI Genomics Co., Ltd. to develop, manufacture, and commercialize NGS-based genetic testing assays; and Foundation Medicine, Inc. to develop and commercialize personalized circulating tumor DNA monitoring assays. The company was formerly known as Gene Security Network, LLC and changed its name to Natera, Inc. in January 2012. Natera, Inc. was founded in 2003 and is headquartered in Austin, Texas."
+    },
+    "TAC": {
+        "ticker": "TAC",
+        "name": "TransAlta Corporation",
+        "meta": "Utilities - Independent Power Producers",
+        "type": "EQUITY",
+        "mcap": 3735452928,
+        "currency": "USD",
+        "description": "TransAlta Corporation engages in the development, production, and sale of electric energy. It operates through Hydro, Wind and Solar, Gas, Energy Transition, and Energy Marketing segments. The Hydro segment holds interest of approximately 922 megawatts (MW) of owned hydroelectric generating capacity located in Alberta, British Columbia, and Ontario. The Wind and Solar segment has a net ownership interest of approximately 2,057 MW of owned wind and solar electrical-generating capacity, as well as battery storage facilities located in Alberta, Ontario, New Brunswick, and Qu\u00e9bec in Canada; the states of Massachusetts, Minnesota, New Hampshire, North Carolina, Pennsylvania, Washington, and Wyoming in the United States; and the state of Western Australia. The Gas segment has a net ownership interest of approximately 2,775 MW of owned gas electrical-generating capacity, and facilities located in Alberta, Ontario, Michigan, and the state of Western Australia. The Energy Transition segment has a net ownership interest of approximately 671 MW of owned coal electrical-generating capacity, as well as operates the Skookumchuck hydro facility in Centralia; and engages in the highvale mine and the mine reclamation activities. The Energy Marketing segment is involved in the trading of power, natural gas, and environmental products. It serves customers in various industry segments, including commercial real estate, municipal, manufacturing, industrial, hospitality, finance, and oil and gas. TransAlta Corporation was founded in 1909 and is headquartered in Calgary, Canada."
     }
 }
