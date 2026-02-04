@@ -14901,5 +14901,41 @@
         "mcap": 89819709440,
         "currency": "USD",
         "description": "Marsh & McLennan Companies, Inc., a professional services company, provides advisory services and insurance solutions to clients in the areas of risk, strategy, and people worldwide. It operates through Risk and Insurance Services, and Consulting segments. The Risk and Insurance Services segment offers risk management services, such as risk advice, risk transfer, and risk control and mitigation solutions, as well as insurance and reinsurance broking, strategic advisory services, and analytics solutions, and insurance program management services. It serves businesses, public entities, insurance companies, associations, professional services organizations, and private clients. The Consulting segment provides health, wealth and career advice, solutions and products; and specialized management, strategic, economic, and brand consulting services. Marsh & McLennan Companies, Inc. was founded in 1871 and is headquartered in New York, New York."
+    },
+    "FBIO": {
+        "ticker": "FBIO",
+        "name": "Fortress Biotech, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 95907224,
+        "currency": "USD",
+        "description": "Fortress Biotech, Inc., a biopharmaceutical company, engages in the development and commercialization of biopharmaceutical products. The company markets dermatology products, including Emrosi, a minocycline hydrochloride extended-release capsule for the treatment of rosacea; Qbrexza a medicated cloth towelette for primary axillary hyperhidrosis; Accutane, an oral isotretinoin drug for severe recalcitrant nodular acne; Amzeeq, a topical formulation of minocycline for inflammatory lesions of non-nodular moderate to severe acne vulgaris; Zilxi for inflammatory lesions of rosacea; Exelderm, an antifungal cream and solution for topical use; Targadox, an oral doxycycline drug for therapy for severe acne; and Luxamend, a water-based emulsion to provide a moist healing environment for superficial wounds, minor cuts or scrapes, dermal ulcers, donor sites, sunburns, and radiation dermatitis. It also develops intravenous Tramadol for the treatment of post-operative acute pain; CUTX-101, an injection for Menkes disease; UNLOXCYT for metastatic cutaneous squamous cell carcinoma; Olafertinib for EGFR mutation-positive NSCLC; CAEL-101, a monoclonal antibody for amyloid light chain amyloidosis; and Triplex, a cytomegalovirus vaccine. In addition, the company's early-stage product candidates include Dotinurad for gout; MB-101 for glioblastoma; MB-108 for recurrent GBM; MB-109 for refractory glioblastoma and anaplastic astrocytoma; MB-106 for B-cell non-hodgkin lymphoma; AJ201, an androgen receptor degradation enhancer; and BAER-101, a positive allosteric modulator. Further, its preclinical product candidates comprise AAV-ATP7A and AVTS-001 gene therapies; CK-103 BET inhibitor; CEVA-D and CEVA-102; CK-302, an anti-GITR; CK-303, an anti-CAIX; and oligonucleotide platform. The company was formerly known as Coronado Biosciences, Inc. and changed its name to Fortress Biotech, Inc. in April 2015. Fortress Biotech, Inc. was incorporated in 2006 and is based in Bay Harbor Islands, Florida."
+    },
+    "PCB": {
+        "ticker": "PCB",
+        "name": "PCB Bancorp",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 331562528,
+        "currency": "USD",
+        "description": "PCB Bancorp operates as the bank holding company for PCB Bank that provides various banking products and services to small and middle market businesses and individuals. The company offers demand, savings, money market, time deposits, and certificates of deposit; and remote deposit capture, courier deposit and positive pay services, zero balance accounts, and sweep accounts. It also provides real estate loans, including commercial and residential, small business administration (SBA) property, multifamily, and construction loans; commercial and industrial loans, such as commercial term and lines of credit, and SBA commercial term, trade finance, and mortgage warehouse; consumer loans comprising residential mortgage; and automobile loans, unsecured lines of credit, and term loans. In addition, the company offers access to account balances, online transfers, online bill payment, and electronic delivery of customer statements; and mobile banking solutions, including remote check deposit and mobile bill pay. Further, it provides automated teller machines; and banking by telephone, mail, personal appointment, debit cards, direct deposit, and cashier's checks, as well as treasury management, wire transfer, and automated clearing house services. The company operates through full-service branches in Los Angeles and Orange Counties, California; Bayside, New York; Englewood Cliffs and Palisades Park, New Jersey; and Carrollton and Dallas, Texas. It also operates loan production offices in Los Angeles and Orange Counties, California; Bellevue, Washington; and Atlanta, Georgia. The company was formerly known as Pacific City Financial Corporation and changed its name to PCB Bancorp in July 2019. PCB Bancorp was founded in 2003 and is headquartered in Los Angeles, California."
+    },
+    "ICLN": {
+        "ticker": "ICLN",
+        "name": "iShares Global Clean Energy ETF",
+        "meta": "Miscellaneous Sector",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index is designed to track the performance of approximately 100 clean energy-related companies. The fund generally invests at least 80% of its assets in the component securities of the index and in investments that have economic characteristics that are substantially identical to the component securities of the index and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents, as well as in securities not included in the index. It is non-diversified."
+    },
+    "CCO": {
+        "ticker": "CCO",
+        "name": "Clear Channel Outdoor Holdings,",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 1074179200,
+        "currency": "USD",
+        "description": "Clear Channel Outdoor Holdings, Inc. operates as an out-of-home advertising company in the United States and Singapore. The company operates in two segments, America and Airports. It provides advertising services through billboards, including bulletins and posters, as well as spectaculars, which are customized display structures with videos, three-dimensional elements and moving parts; street furniture displays, such as advertising surfaces on bus shelters, kiosks, news racks, and other public structures; transit displays in rail stations and on buses, trains, and trams; and wallscapes, as well as advertising solutions to commercial and private airports. The company offers solutions, such as RADARView, an audience and campaign planning tool, which uses historical mobile location data; RADARConnect, a campaign amplification solution that delivers supportive advertisements across mobile and other devices; RADARProof, a campaign measurement and attribution solutions, which analyzes anonymized and/or aggregated data; and RADARSync, a data integration platform designed to enable customized application of the RADAR tools and privacy-compliant sharing of RADAR insights with analytics platforms. The company was formerly known as Eller Media Company and changed its name to Clear Channel Outdoor Holdings, Inc. in August 2005. Clear Channel Outdoor Holdings, Inc. was incorporated in 1995 and is headquartered in San Antonio, Texas."
     }
 }
