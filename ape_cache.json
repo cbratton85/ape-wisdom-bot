@@ -15288,5 +15288,104 @@
         "mcap": 43115401216,
         "currency": "USD",
         "description": "Ares Management Corporation operates as an alternative asset manager in the United States, Europe, and Asia. Its Direct Lending Group segment provides financing solutions to small-to-medium sized companies. The company's Private Equity Group segment focuses on majority or shared-control investments primarily in under-capitalized companies. Its Real Estate Group segment invests in new developments and the repositioning of assets, with a focus on control or majority-control investments; and originates and invests in a range of self-originated financing opportunities for middle-market owners and operators of commercial real estate. The firm prefers to invest between $1 million and $400 million in companies having EBITDA between $10 million and $250 million and debt investment value between $10 million and $100 million. The firm was previously known as Ares Management, L.P. Ares Management Corporation was founded in 1997 and is headquartered in Los Angeles, California with additional offices in the United States, Europe and Asia. Ares Management GP LLC is the general partner of the company."
+    },
+    "TYO": {
+        "ticker": "TYO",
+        "name": "Direxion Daily 10-Yr Treasury B",
+        "meta": "Trading--Inverse Debt",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of the fund\u2019s net assets in financial instruments, that, in combination, provide 3X daily inverse (opposite) or short exposure to the index or to ETFs that track the index, consistent with the fund\u2019s investment objective. The index is a market value weighted index that includes publicly issued U.S. Treasury securities that have a remaining maturity of greater than or equal to seven years and less than ten years. It is non-diversified."
+    },
+    "IXUS": {
+        "ticker": "IXUS",
+        "name": "iShares Core MSCI Total Interna",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index is a free float-adjusted market capitalization weighted index designed to measure the combined equity market performance of developed and emerging markets countries, excluding the United States."
+    },
+    "WSR": {
+        "ticker": "WSR",
+        "name": "Whitestone REIT",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 743432384,
+        "currency": "USD",
+        "description": "Whitestone REIT (NYSE: WSR) is a community-centered real estate investment trust (REIT) that acquires, owns, operates, and develops open-air, retail centers located in some of the fastest growing markets in the country: Phoenix, Austin, Dallas-Fort Worth, Houston and San Antonio. Our centers are convenience focused: merchandised with a mix of service-oriented tenants providing food (restaurants and grocers), self-care (health and fitness), services (financial and logistics), education and entertainment to the surrounding communities. The Company believes its strong community connections and deep tenant relationships are key to the success of its current centers and its acquisition strategy."
+    },
+    "PRN": {
+        "ticker": "PRN",
+        "name": "Invesco Dorsey Wright Industria",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 90% of its total assets in securities that comprise the underlying index. The underlying index is composed of at least 30 securities of companies in the industrials sector that have powerful relative strength or \"momentum\" characteristics."
+    },
+    "LYFT": {
+        "ticker": "LYFT",
+        "name": "Lyft, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 6811959808,
+        "currency": "USD",
+        "description": "Lyft, Inc. operates a peer-to-peer marketplace for on-demand ridesharing in the United States and Canada. The company operates multimodal transportation networks that offer access to various transportation options through the Lyft platform and mobile-based applications. Its platform provides a ridesharing marketplace that connects drivers with riders; Express Drive, a car rental program for drivers; and a network of shared bikes and scooters in various cities to address the needs of riders for short trips. The company was formerly known as Zimride, Inc. and changed its name to Lyft, Inc. in April 2013. Lyft, Inc. was incorporated in 2007 and is headquartered in San Francisco, California."
+    },
+    "J": {
+        "ticker": "J",
+        "name": "Jacobs Solutions Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 15782950912,
+        "currency": "USD",
+        "description": "Jacobs Solutions Inc. engages in the infrastructure and advanced facilities, and consulting businesses in the United States, Europe, Canada, India, Asia, Australia, New Zealand, the Middle East, and Africa. The company provides consulting, planning, architecture, design, engineering, and infrastructure delivery services including project, program, and construction management and long-term operation of facilities. It also offers consulting services for consumer and manufacturing, defense and security, energy and utilities, financial services, government, health and life sciences, and transport sectors. The company was founded in 1947 and is headquartered in Dallas, Texas."
+    },
+    "BMI": {
+        "ticker": "BMI",
+        "name": "Badger Meter, Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 4344730112,
+        "currency": "USD",
+        "description": "Badger Meter, Inc. manufactures and markets flow measurement, quality, control, and communication solutions worldwide. It offers Utility water smart metering solutions and software technologies and services to municipal water utilities market. The company also provides flow instrumentation products, including meters, valves, and other sensing instruments to measure and control fluids going through a pipe or pipeline, including water, air, steam, and other liquids and gases to original equipment manufacturers as the primary flow measurement device within a product or system, as well as through manufacturers' representatives. In addition, the company offers ORION Cellular endpoints to power network as a service; ORION mobile read endpoints support for deploying AMR solution; radio products; hardware, instruments, and sensors, and related software, to enhance connected data to a water utility's operation; water quality monitoring solutions, including optical sensing and electrochemical instruments; and high frequency pressure and leak detection sensors to aid in burst pipe and leak events; as well as BEACON, a secure cloud-hosted software suite that establishes alerts for specific conditions and allows consumer engagement tools that permit end water customers to view and manage their water usage activity. Its flow instrumentation products are used in water/wastewater, heating, ventilating and air conditioning, and corporate sustainability markets. The company serves water utilities, commercial, and industrial industries; and provides training, project management, technical support, and other collaborative services for customers. It sells its products and software directly, as well as through resellers and representatives. The company was incorporated in 1905 and is based in Milwaukee, Wisconsin."
+    },
+    "ATS": {
+        "ticker": "ATS",
+        "name": "ATS Corporation",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 2752366336,
+        "currency": "USD",
+        "description": "ATS Corporation, together with its subsidiaries, provides automation solutions worldwide. The company is involved in planning, designing, building, commissioning, and servicing automated manufacturing and assembly systems, including automation products and test solutions. It also offers pre-automation services comprising discovery and analysis, concept development, simulation, and total cost of ownership modelling; post-automation services, including training, process optimization, preventative maintenance, emergency and on-call support, spare parts, retooling, retrofits, and equipment relocation; and contract manufacturing services, as well as after sales and services. In addition, the company provides engineering design, prototyping, process verification, specification writing, software and manufacturing process controls development, standard automation products/platforms, equipment design and build, third-party equipment qualification, procurement and integration, automation system installation, product line commissioning, validation, and documentation services. Further, it offers value engineering, supply chain management, and integration and manufacturing capabilities, as well as other automation products and solutions; and software and digital solutions comprising connected factory floor management systems to capture, analyze, and use real time machine performance data to troubleshoot, deliver process and product solutions, prevent equipment downtime, drive operational efficiency, and unlock performance for sustainable production improvements. The company serves life sciences, transportation and mobility, consumer products, food and beverage, electronics, nuclear, packaging, warehousing and distribution, and energy markets. The company was formerly known as ATS Automation Tooling Systems Inc. and changed its name to ATS Corporation in November 2022. ATS Corporation was founded in 1978 and is headquartered in Cambridge, Canada."
+    },
+    "LENZ": {
+        "ticker": "LENZ",
+        "name": "LENZ Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 485933184,
+        "currency": "USD",
+        "description": "LENZ Therapeutics, Inc. operates as a biopharmaceutical company that focuses on the development and commercialization of therapies to improve vision in the United States. Its product candidates include LNZ100 and LNZ101 which are in Phase III clinical trials for the treatment of presbyopia. LENZ Therapeutics, Inc. was formerly known as Presbyopia Therapies, Inc. and changed its name to LENZ Therapeutics, Inc. in June 2021. The company was founded in 2013 and is headquartered in Solana Beach, California."
+    },
+    "DPST": {
+        "ticker": "DPST",
+        "name": "Direxion Daily Regional Banks B",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its net assets in financial instruments, such as swap agreements, securities of the index, and ETFs that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index is a modified equal-weighted index that is designed to measure performance of the stocks comprising the S&P Total Market Index that are classified in the GICS regional banks sub-industry. The fund is non-diversified."
+    },
+    "MBLY": {
+        "ticker": "MBLY",
+        "name": "Mobileye Global Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 7108315136,
+        "currency": "USD",
+        "description": "Mobileye Global Inc. develops and deploys advanced driver assistance systems (ADAS) and autonomous driving technologies and solutions worldwide. The company operates through Mobileye and Other segments. It offers a portfolio of end-to-end ADAS and autonomous driving solutions comprising Base ADAS, a front camera that delivers a combination of intelligent safety features to avoid unsafe driving situations; Cloud-Enhanced ADAS, which leverages crowdsourced data to offer accurate localization, as well as a safer, smoother, and natural driving experience; and Surround ADAS that offer eyes-on/hands-off functionality for highway ODDs with features, such as automatic lane change, front and rear collision avoidance, traffic jam assist, and a Highway Pilot function, as well as includes DXP support that enables customers to customize the driving experience. It also provides SuperVision, a eyes-on/hands-off driver assist system for autonomous vehicles; Mobileye Chauffeur, an eyes-off/hands-off solution for consumer vehicles; and Mobileye Drive, a fleet-focused end-to-end self-driving system that enables automakers, public transportation companies, and transportation network operators to offer a no-driver solution for robotaxis, ride-pooling, public transport, and goods delivery. In addition, the company offers EyeQ SoC that provide drivers with basic safety features covered by front-facing sensing, such as collision warning, lane departure warnings, pedestrian and cyclist collision warning, headway monitoring and warning, speed limit indicator, blind spot detection, and others; True Redundancy, which is an AI system architecture; and Road Experience Management solutions. It provides its products and services to original equipment manufacturers through automotive suppliers, as well as fleet owners and operators. The company was founded in 1999 and is headquartered in Jerusalem, Israel. Mobileye Global Inc. is a subsidiary of Intel Corporation."
     }
 }
