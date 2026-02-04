@@ -15918,5 +15918,59 @@
         "mcap": 6573491200,
         "currency": "USD",
         "description": "Doximity, Inc. operates as a digital platform for medical professionals in the United States. Its platform provides its members with digital tools built for medicine, that enables its members to collaborate with colleagues, stay up to date with the latest medical news and research, manage their careers and on-call schedules, streamline documentation and administrative paperwork, and conduct virtual patient visits. The company primarily serves physicians, nurse practitioners, physician assistants, medical students, pharmaceutical manufacturers, and healthcare systems. The company was formerly known as 3MD Communications, Inc. and changed its name to Doximity, Inc. in June 2010. Doximity, Inc. was incorporated in 2010 and is headquartered in San Francisco, California."
+    },
+    "ARKG": {
+        "ticker": "ARKG",
+        "name": "ARK Genomic Revolution ETF",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund is an actively-managed exchange-traded fund (\"ETF\") that will invest under normal circumstances primarily (at least 80% of its assets) in domestic and foreign equity securities of companies across multiple sectors, including healthcare, information technology, materials, energy and consumer discretionary, that are relevant to the fund's investment theme of the genomics revolution (\"Genomics Revolution Companies\"). It is non-diversified."
+    },
+    "ARKQ": {
+        "ticker": "ARKQ",
+        "name": "ARK Autonomous Technology & Rob",
+        "meta": "Mid-Cap Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund is an actively-managed exchange-traded fund that will invest under normal circumstances primarily (at least 80% of its assets) in domestic and foreign equity securities of autonomous technology and robotics companies that are relevant to the fund's investment theme of disruptive innovation. Substantially all of the fund's assets will be invested in equity securities, including common stocks, partnership interests, business trust shares and other equity investments or ownership interests in business enterprises. The fund is non-diversified."
+    },
+    "XLC": {
+        "ticker": "XLC",
+        "name": "State Street Communication Serv",
+        "meta": "Communications",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Normally, the fund generally invests substantially all, but at least 95%, of its total assets in the securities comprising the index. The index includes companies that have been identified as Communication Services companies by the GICS\u00ae, including securities of companies from the following industries: diversified telecommunication services; wireless telecommunication services; media; entertainment; and interactive media & services. The fund is non-diversified."
+    },
+    "PHO": {
+        "ticker": "PHO",
+        "name": "Invesco Water Resources ETF",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 90% of its total assets in securities that comprise the underlying index. The underlying index seeks to track the performance of companies that create products designed to conserve and purify water for homes, businesses and industries. The underlying index is designed to track the performance of U.S. exchange-listed companies that create products that conserve and purify water for homes, businesses, and industries. The fund is non-diversified."
+    },
+    "JDST": {
+        "ticker": "JDST",
+        "name": "Direxion Daily Junior Gold Mine",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index tracks the performance of domestic and foreign, including developing and emerging, small- and mid-capitalization companies that are involved in the gold and silver mining industry. The fund invests at least 80% of the fund\u2019s net assets in swap agreements, futures contracts, or short positions, that, in combination, provide 2X daily inverse (opposite) or short exposure to the index or to ETFs that track the index, consistent with the fund\u2019s investment objective. It is non-diversified."
+    },
+    "DG": {
+        "ticker": "DG",
+        "name": "Dollar General Corporation",
+        "meta": "Discount Stores",
+        "type": "EQUITY",
+        "mcap": 32699252736,
+        "currency": "USD",
+        "description": "Dollar General Corporation, a discount retailer, provides various merchandise products in the southern, southwestern, midwestern, and eastern United States. The company offers consumable products, including paper towels, bath tissues, paper dinnerware, trash and storage bags, disinfectants, and laundry products; packaged food, such as cereals, pasta, canned soups, canned meats, fruits and vegetables, condiments, spices, sugar, and flour; and perishables, including milk, eggs, bread, refrigerated and frozen food, beer, wine, and produce; candy, cookies, crackers, salty snacks, and carbonated beverages; over-the-counter medicines and personal care products including soap, body wash, shampoo, cosmetics, dental hygiene and foot care products; pet supplies and pet food; and tobacco products. It also provides seasonal products comprising holiday items, toys, batteries, small electronics, greeting cards, stationery, prepaid phones and accessories, gardening supplies, hardware, automotive, and home office supplies; home products include kitchen supplies, cookware, small appliances, light bulbs, storage containers, frames, candles, craft supplies and kitchen, and bed and bath soft goods; and apparel products for infants, toddlers, girls, boys, women and men, as well as socks, underwear, disposable diapers, shoes and accessories. The company was formerly known as J.L. Turner & Son, Inc. and changed its name to Dollar General Corporation in 1968. Dollar General Corporation was founded in 1939 and is based in Goodlettsville, Tennessee."
     }
 }
