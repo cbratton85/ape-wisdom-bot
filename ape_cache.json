@@ -15450,5 +15450,86 @@
         "mcap": 51288268800,
         "currency": "USD",
         "description": "Autodesk, Inc. provides 3D design, engineering, and entertainment technology solutions worldwide. It offers AutoCAD Civil 3D, a surveying, design, analysis, and documentation solution; Autodesk Build, a toolset for managing, sharing, and accessing project documents for streamlined workflows between the office, trailer, and jobsite; Revit, a software built for building information modeling to help professionals design, build, and maintain energy-efficient buildings; Autodesk BIM Collaborate Pro, cloud-based design collaboration and design management software; BuildingConnected, a SaaS preconstruction solution; and Tandem, a cloud-based platform that transforms the built asset lifecycle. The company also provides AutoCAD software, a customizable and extensible CAD application for professional design, drafting, detailing, and visualization; AutoCAD LT, a drafting and detailing software; Fusion, a 3D CAD, computer-aided manufacturing, and computer-aided engineering tool; Inventor, a software solution that offers a set of tools for 3D mechanical design, simulation, analysis, tooling, visualization, and documentation; product design and manufacturing collection tools; and Vault, a data management software for managing data in one central location, accelerate design processes, and streamline internal/external collaboration. It offers Flow Production Tracking, a cloud-based production management software; Maya software that offers 3D modeling, animation, effects, rendering, and compositing solutions for film and video artists, game developers, and design visualization professionals; Media and Entertainment Collection that offers end-to-end creative tools for entertainment creation; and 3ds Max software, which provides 3D modeling, animation, and rendering solutions. The company sells its products and services through a network of resellers and distributors. Autodesk, Inc. was incorporated in 1982 and is headquartered in San Francisco, California."
+    },
+    "NTSK": {
+        "ticker": "NTSK",
+        "name": "Netskope, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 4907870208,
+        "currency": "USD",
+        "description": "Netskope, Inc., a cybersecurity company, provides security, networking, and analytics solutions to largest enterprises to mid-sized companies worldwide. It develops Netskope One platform, a cloud-native platform for securing and accelerating the digital interactions of enterprises. Its platform offers security products comprising cloud inline security, cloud access security broker, data loss prevention, threat protection, secure web gateway, private access, remote browser isolation, Software-as-a-Service (SaaS) security posture management, data security posture management, and enterprise browser solutions for safeguarding human users, non-human entities, and data from cyber threats through the use of zero trust principles. The company's platform also provides networking products, such as Firewall-as-a-Service, internet of things/operational technology intelligence, software-defined wide-area network, dedicated egress IP, and Cloud Packet Stream solutions that enhance performance, resilience, connectivity, and security; and analytics solutions, including advanced analytics, user and entity behavior analytics, and digital experience management that enables enterprises with insights into user activity, data movement, and security events across the web, cloud, SaaS, AI applications, private applications, and other environments. Netskope, Inc. was formerly known as Skope, Inc. and changed its name to Netskope, Inc. in November 2012. Netskope, Inc. was incorporated in 2012 and is based in Santa Clara, California."
+    },
+    "SPHD": {
+        "ticker": "SPHD",
+        "name": "Invesco S&P 500 High Dividend L",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 90% of its total assets in the securities that comprise the underlying index. Strictly in accordance with its guidelines and mandated procedures, S&P Dow Jones Indices LLC (the \u201cindex Provider\u201d) compiles, maintains and calculates the underlying index, which is designed to measure the performance of 50 least volatile high yielding constituents of the S&P 500 \u00ae Index in the past year."
+    },
+    "TOL": {
+        "ticker": "TOL",
+        "name": "Toll Brothers, Inc.",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 14135495680,
+        "currency": "USD",
+        "description": "Toll Brothers, Inc., together with its subsidiaries, designs, builds, markets, sells, and arranges finance for a range of detached and attached homes in luxury residential communities in the United States. It designs, builds, markets, and sells condominiums through Toll Brothers City Living. The company also develops a range of single-story living and first-floor primary bedroom suite home designs, as well as communities with recreational amenities, such as golf courses, marinas, pool complexes, country clubs, and fitness and recreation centers; and develops, operates, rents apartments and student housing communities. In addition, it provides various interior fit-out options, such as flooring, wall tile, plumbing, cabinets, fixtures, appliances, lighting, and home-automation and security technologies. Further, the company owns and operates architectural, engineering, mortgage, title, land development, insurance, smart home technology, landscaping, lumber distribution, house component assembly, and component manufacturing operations. It serves luxury first-time, move-up, empty-nester, active-adult, and second-home buyers. The company was founded in 1967 and is headquartered in Fort Washington, Pennsylvania."
+    },
+    "UFPT": {
+        "ticker": "UFPT",
+        "name": "UFP Technologies, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 1927339648,
+        "currency": "USD",
+        "description": "UFP Technologies, Inc. designs and manufactures solutions for medical devices, sterile packaging, and other engineered custom products in the United States. The company offers protective drapes for robotic surgery, patient handling and comfort, advanced wound care, infection prevention, disposables for surgical and endoscopic procedures, packaging for medical devices, orthopedic implants, components for cardiac implants, dispenser coils for catheters, and biopharma drug manufacturing; and molded components for applications in acoustic insulation, interior trim, load floors, sunshades, SUV cargo cover handles, driveshaft damping, engine and manifold covers, quarter panels, and wheel liners. It also provides molded composites for commercial aviation and military gear for use in backpack components, knee and elbow pads, eyewear, and helmets; and custom protective case systems for applications in military ballistics panels, virtual training systems, drones, communications equipment, and rugged portable computers. The company serves the medical, aerospace and defense, industrial, and automotive markets. It markets and sells its products through a direct sales force. The company was founded in 1963 and is headquartered in Newburyport, Massachusetts."
+    },
+    "ARAY": {
+        "ticker": "ARAY",
+        "name": "Accuray Incorporated",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 82965712,
+        "currency": "USD",
+        "description": "Accuray Incorporated engages in the design, development, manufacture, and sale of radiosurgery and radiation therapy systems for the treatment of tumors in the United States, Canada, Latin America, Asia, Australia, New Zealand, Europe, the Middle East, India, Africa, Japan, and China. The company offers the CyberKnife platform, a robotic stereotactic radiosurgery and stereotactic body radiation therapy system used for the treatment of primary and metastatic tumors outside the brain, including tumors on or near the spine and in the breast, kidney, liver, lung, pancreas, and prostate. It also provides the TomoTherapy platform, including the Radixact System, which allows for integrated radiation treatment planning, delivery, and data management, enabling clinicians to deliver ultra-precise treatments to approximately 50 patients per day; iDMS data management system, a fully integrated treatment planning and data management systems; and Accuray precision treatment planning system, a treatment planning and data management systems. In addition, the company offers post-contract customer support, installation, training, and other professional services. It primarily markets its products directly to customers, including hospitals and stand-alone treatment facilities through its sales organization, as well as to customers through sales agents and group purchasing organizations in the United States; and to customers directly and through distributors and sales agents internationally. Accuray Incorporated was incorporated in 1990 and is headquartered in Madison, Wisconsin."
+    },
+    "ANAB": {
+        "ticker": "ANAB",
+        "name": "AnaptysBio, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1391097216,
+        "currency": "USD",
+        "description": "AnaptysBio, Inc., a clinical-stage biotechnology company, focuses in delivering immunology therapeutics. Its products include Rosnilimab, an IgG1 antibody that targets PD-1+ T cells, resulting in their agonism or depletion, broadly impacting pathogenic drivers of autoimmune and inflammatory diseases; and ANB032, a non-depleting antibody that binds to the BTLA checkpoint receptor and inhibits activated T cell proliferation; ANB033, a novel anti-CD122 antagonist antibody that targets the shared common beta subunit of the receptors for IL-15 and IL-2; ANB101, a BDCA2 modulator antibody that specifically targets plasmacytoid dendritic cells (pDCs); and Imsidolimab, an antibody that inhibits the interleukin-36 receptor, which is in the Phase 3 development for the treatment of generalized pustular psoriasis. The company focuses on developing various antibody programs that are advanced to preclinical and clinical milestones under its collaborations. It has a collaboration and license agreement with GlaxoSmithKline, Inc. The company was formerly known as Anaptys Biosciences, Inc. and changed its name to AnaptysBio, Inc. in July 2006. AnaptysBio, Inc. was incorporated in 2005 and is based in San Diego, California."
+    },
+    "EE": {
+        "ticker": "EE",
+        "name": "Excelerate Energy, Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 4196339456,
+        "currency": "USD",
+        "description": "Excelerate Energy, Inc. provides liquefied natural gas (LNG) solutions worldwide. It offers regasification services, including floating storage and regasification units, infrastructure development, and LNG and natural gas supply. The company was founded in 2003 and is headquartered in The Woodlands, Texas. Excelerate Energy, Inc. is a subsidiary of Excelerate Energy Holdings, LLC."
+    },
+    "SCI": {
+        "ticker": "SCI",
+        "name": "Service Corporation Internation",
+        "meta": "Personal Services",
+        "type": "EQUITY",
+        "mcap": 11548140544,
+        "currency": "USD",
+        "description": "Service Corporation International provides deathcare products and services in the United States and Canada. Its funeral service and cemetery operations comprise funeral service locations, cemeteries, funeral service/cemetery combination locations, crematoria, and other businesses. The company also provides professional services related to funerals and cremations, including the use of funeral home facilities and motor vehicles; arranging and directing services; and removal, preparation, embalming, cremation, memorialization, and travel protection, as well as catering services. In addition, it offers funeral merchandise, including burial caskets and related accessories, urns and other cremation receptacles, outer burial containers, flowers, online and video tributes, stationery products, casket and cremation memorialization products, and other ancillary merchandise. Further, the company's cemeteries provide cemetery property interment rights, such as developed lots, lawn crypts, mausoleum spaces, niches, and other cremation memorialization and interment options. It offers its products and services under the Dignity Memorial, Dignity Planning, National Cremation Society, Advantage Funeral and Cremation Services, Funeraria del Angel, Making Everlasting Memories, Neptune Society, and Trident Society brand names. The company was incorporated in 1962 and is headquartered in Houston, Texas."
+    },
+    "CTSO": {
+        "ticker": "CTSO",
+        "name": "Cytosorbents Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 44591056,
+        "currency": "USD",
+        "description": "Cytosorbents Corporation engages in the research, development, and commercialization of medical devices with its blood purification technology platform incorporating a proprietary adsorbent and porous polymer technology in the United States, Germany, and internationally. The company's flagship product is CytoSorb, an extracorporeal blood purification cartridge for the treatment of massive inflammation, organ failure, cardiothoracic surgery to remove antithrombotic drugs and inflammatory mediators that can lead to postoperative complications, such as severe bleeding, shock, failure to wean from mechanical ventilation, sepsis, and multiple organ failure; DrugSorb-ATR, an antithrombotic removal system; VetResQ, a broad-spectrum blood purification adsorber for the treatment of septic shock, toxic shock syndrome, toxin-mediated diseases, pancreatitis, trauma, liver failure, heat stroke, and lung injury in animals; PuriFi, an advanced hemoperfusion pump for blood purification therapies; and ECOS-300CY, an ex vivo organ perfusion system to preserve or improve the health and quality of harvested solid organs to be transplanted. In addition, it develops HemoDefend-BGA, a blood purification technology platform to reduce anti-A and anti-B antibodies in plasma and whole blood. The company was formerly known as MedaSorb Technologies Corporation and changed its name to Cytosorbents Corporation in May 2010. Cytosorbents Corporation was founded in 1997 and is headquartered in Princeton, New Jersey."
     }
 }
