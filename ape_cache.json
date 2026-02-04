@@ -14739,5 +14739,86 @@
         "mcap": 0,
         "currency": "USD",
         "description": "Under normal market conditions, the fund invests at least 80% of its assets in the component securities of the FTSE India Capped Index and in depositary receipts representing such securities. The FTSE India Capped Index is based on the FTSE India Index and is designed to measure the performance of Indian large- and mid-capitalization stocks. The fund is non-diversified."
+    },
+    "CRUS": {
+        "ticker": "CRUS",
+        "name": "Cirrus Logic, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 6394962944,
+        "currency": "USD",
+        "description": "Cirrus Logic, Inc., a fabless semiconductor company, develops mixed-signal processing solutions and audio products in China, the United States, and internationally. The company offers audio products, including amplifiers; codecs components that integrate analog-to-digital converters (ADCs) and digital-to-analog converters (DACs) into a single integrated circuit (IC); smart codecs, a codec with integrated digital signal processing; standalone digital signal processors; and SoundClear technology for use in smartphones, tablets, laptops, AR/VR headsets, home theatre systems, automotive entertainment systems, and professional audio systems. It also provides mixed-signal products comprising camera controllers, haptic and sensing solutions, and battery and power ICs for smartphones, as well as products for automotive, industrial, and imaging applications. The company markets and sells its products through direct sales force, external sales representatives, and distributors. Cirrus Logic, Inc. was incorporated in 1984 and is headquartered in Austin, Texas."
+    },
+    "BEEM": {
+        "ticker": "BEEM",
+        "name": "Beam Global",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 30446954,
+        "currency": "USD",
+        "description": "Beam Global, a clean-technology innovation company, engages in the design, development, engineering, manufacture, and sale of renewably energized infrastructure products and battery solutions in the United States and Romania. Its product portfolio includes EV ARC (electric vehicle autonomous renewable charger), an infrastructure product that uses integrated solar power and battery storage to provide a mounting asset and a source of power for factory-installed electric vehicle charging stations; Solar Tree DCFC, an off-grid, renewably energized, and single-column mounted smart generation and energy storage system to provide a 150kW DC fast charge to one or more electric vehicles, such as electric buses, heavy-duty vehicles, agricultural equipment, public transportation, and electric vehicles used in the construction industry; and EV ARC DCFC, a DC fast charging system for charging EVs. The company is also involved in the development of EV-Standard, a lamp standard, EV charging, and emergency power product that uses an existing streetlight's foundation and a combination of solar, wind, grid connection, and onboard energy storage to provide curbside charging; and UAV ARC, an off-grid and renewably energized product and network used to charge aerial drone (UAV) fleets. It offers solutions for electric vehicle (EV) charging infrastructure, energy storage, energy security, disaster preparedness, street lighting, telecommunications, energy infrastructure, and outdoor media and branding industries. The company was formerly known as Envision Solar International, Inc. and changed its name to Beam Global in September 2020. Beam Global was incorporated in 2006 and is headquartered in San Diego, California."
+    },
+    "YINN": {
+        "ticker": "YINN",
+        "name": "Direxion Daily FTSE China Bull ",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund, under normal circumstances, invests at least 80% of its net assets (plus borrowing for investment purposes) in financial instruments, such as swap agreements, securities of the index, and exchange-traded funds (\"ETFs\") that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index consists of the 50 largest and most liquid public Chinese companies currently trading on the Hong Kong Stock Exchange. The fund is non-diversified."
+    },
+    "LINE": {
+        "ticker": "LINE",
+        "name": "Lineage, Inc.",
+        "meta": "REIT - Industrial",
+        "type": "EQUITY",
+        "mcap": 8769131520,
+        "currency": "USD",
+        "description": "Lineage, Inc. is the world's largest global temperature-controlled warehouse REIT with a network of over 485 strategically located facilities totaling approximately 88 million square feet and approximately 3.1 billion cubic feet of capacity across countries in North America, Europe, and Asia-Pacific. Coupling end-to-end supply chain solutions and technology, the firm partner with some of food and beverage producers, retailers, and distributors to help increase distribution efficiency, advance sustainability, minimize supply chain waste. Lineage, Inc. was formed in 2015 and is based in Novi, Michigan. Lineage, Inc. operates as a subsidiary of BG Lineage Holdings, LLC."
+    },
+    "WGRX": {
+        "ticker": "WGRX",
+        "name": "Wellgistics Health, Inc.",
+        "meta": "Pharmaceutical Retailers",
+        "type": "EQUITY",
+        "mcap": 37008380,
+        "currency": "USD",
+        "description": "Wellgistics Health, Inc. engages in the wholesale and distribution of pharmaceutical products to pharmaceutical manufacturers and independent retail pharmacies in the United States. The company distributes generic and branded pharmaceuticals, as well as over-the-counter healthcare and consumer products. It also offers third-party logistics services that include warehousing, inventory management, pick and pack, and shipping to small and mid-size pharmaceutical manufacturers. It also operates DelivMeds platform that serves as a pharmaceutical hub to facilitate the transfer of prescriptions and provide backend clinical concierge services to a network of independent pharmacies; and operates a retail community specialty. The company was formerly known as Danam Health, Inc. and changed its name to Wellgistics Health, Inc. in October 2024. Wellgistics Health, Inc. was incorporated in 2022 and is based in Tampa, Florida."
+    },
+    "NXDR": {
+        "ticker": "NXDR",
+        "name": "Nextdoor Holdings, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 745006272,
+        "currency": "USD",
+        "description": "Nextdoor Holdings, Inc. operates a neighborhood network that connects neighbors, businesses, and public agencies in the United States and internationally. The company provides local news, events, relevant discussions, and exchange goods and services, as well as discovers and supports local businesses. It also offers a suite of advertising solutions designed to deliver value for businesses of various sizes. The company is headquartered in San Francisco, California."
+    },
+    "LODE": {
+        "ticker": "LODE",
+        "name": "Comstock Inc.",
+        "meta": "Other Precious Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 209833312,
+        "currency": "USD",
+        "description": "Comstock Inc. engages in the systemic decarbonization business in Nevada and internationally. The company operates through five segments: Fuels, Metals, Mining, Strategic Investments, and Corporate Services. It develops and commercializes technology that extract and convert wasted and unused lignocellulosic biomass into intermediates for refining into advanced renewable fuels. The company also owns 100% in the Lucerne Project located in the Storey County, Nevada; and the Spring Valley Project situated in the Lyon County, Nevada. In addition, it offers engineering and construction services; and invests in non-mining real estate, water rights, and securities investments. The company was incorporated in 2008 and is based in Virginia City, Nevada."
+    },
+    "BSX": {
+        "ticker": "BSX",
+        "name": "Boston Scientific Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 135874273280,
+        "currency": "USD",
+        "description": "Boston Scientific Corporation develops, manufactures, and markets medical devices for use in various interventional medical specialties worldwide. It operates in two segments, MedSurg and Cardiovascular. The company offers devices to diagnose and treat a range of gastrointestinal conditions, such as resolution clips, biliary stent systems, stents and electrocautery enhanced delivery systems, direct visualization systems, digital catheters, and single-use duodenoscopes, as well as endoluminal surgery and infection prevention portfolios; devices to treat urological conditions, including ureteral stents, catheters, baskets, guidewires, urinary and bowel dysfunction, sheaths, balloons, single-use digital flexible ureteroscopes, holmium laser systems, penile implants, artificial urinary sphincter, laser system, and hydrogel systems; and devices to treat neurological movement disorders and manage chronic pain, such as spinal cord stimulator systems, proprietary programming software, radiofrequency ablation, indirect decompression systems, and intraosseous nerve ablation and deep brain stimulation systems. It also provides technologies for diagnosing and treating coronary artery disease and aortic valve conditions; WATCHMAN FLX, a left atrial appendage closure (LAAC) device; and implantable devices that monitor the heart and deliver electricity to treat cardiac abnormalities, such as cardioverter and cardiac resynchronization therapy defibrillators, MRI S-ICD systems, cardiac resynchronization therapy pacemakers, quadripolar LV leads, ICD leads, pacing leads, remote patient management systems, insertable cardiac monitor systems, and remote cardiac monitoring systems. In addition, the company offers diagnosis and treatment of rate and rhythm disorders of the heart; peripheral arterial and venous diseases; and products to diagnose, treat, and ease forms of cancer. The company was incorporated in 1979 and is headquartered in Marlborough, Massachusetts."
+    },
+    "MMS": {
+        "ticker": "MMS",
+        "name": "Maximus, Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 5039197184,
+        "currency": "USD",
+        "description": "Maximus, Inc. operates as a provider of government services worldwide. The company operates through three segments: U.S. Federal Services, U.S. Services, and Outside the U.S. The U.S. Federal Services segment offers business process services, eligibility and enrollment, outreach, and other services for federal health and human services programs; clinical services; and technology solutions, such as application development and modernization services, enterprise business solutions, advanced analytics and emerging technologies, cybersecurity services, data management, and infrastructure and engineering solutions. The U.S. Services segment offers program eligibility support and enrollment; centralized multilingual customer contact centers, multichannel, and digital self-service options for enrollment; application assistance and independent health plan choice counseling; beneficiary outreach, education, eligibility, enrollment, and redeterminations; subsidized telephone services; and person-centered independent assessment services. This segment also provides employment services, such as eligibility support, case management, job-readiness preparation, job search and employer outreach, job retention and career advancement, and educational and training services; technology solutions; and system implementation project management services. The Outside the U.S. segment offers BPS and technology solutions for international governments, including health and disability assessments, program administration for employment services, wellbeing solutions and other job seeker-related services, digitally-enabled customer services, and technologies for modernization. Maximus, Inc. was founded in 1975 and is headquartered in McLean, Virginia."
     }
 }
