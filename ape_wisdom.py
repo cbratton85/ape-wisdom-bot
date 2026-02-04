@@ -70,7 +70,7 @@ class HistoryTracker:
             'sym', 'name', 'meta', 'history', 'desc', 'type', 'avgvol', 'mcap', 'rolling',
             'z_rank_plus', 'z_surge', 'z_mnt_perc', 'z_upvotes', 'z_accel', 'z_upv_plus', 
             'z_ment', 'z_squeeze', 'type_tag', 'industry/sector', 'heat',
-            'velocity', 'accel', 'streak', 'upv_chg'] 
+            'velocity', 'accel', 'streak', 'upv_chg', 'day%', 'price'] 
 
         no_round_list = ['rank', 'rank_plus', 'ment', 'upvotes', 'upv_plus', 'streak']
 
@@ -137,7 +137,6 @@ class HistoryTracker:
         # === FORCE UPDATE PRICE ===
         # This guarantees the history file gets the fresh price regardless of save() logic
         try:
-            current_entry['price'] = round(float(current_price), 2)
             current_entry['upvotes'] = int(current_upvotes)
         except:
             pass # Keep existing if conversion fails
@@ -441,9 +440,17 @@ def filter_and_process(stocks):
             safe_surge = s_perc if s_perc > 10 else 10 
             efficiency = rank_plus / (safe_surge / 100.0) 
 
+            if len(hist) >= 2:
+                prev_day_close = float(hist['Close'].iloc[-2])
+                day_chg_pct = ((curr_p - prev_day_close) / prev_day_close) * 100
+            else:
+                day_chg_pct = 0.0
+
             final_list.append({
                 "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
-                "Price": float(curr_p), "AvgVol": int(avg_v), "Surge": s_perc,
+                "Price": float(curr_p), 
+                "Day%": float(day_chg_pct),
+                "AvgVol": int(avg_v), "Surge": s_perc,
                 "MENT": cur_m, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
                 "Upvotes": current_upvotes, "Meta": info.get('meta', '-'),
                 "Desc": info.get('description', ''), "Squeeze": squeeze_score,
@@ -738,7 +745,13 @@ def export_interactive_html(df, ai_summary=""):
             ment_hist = row.get('h_ment', '')
             export_df.at[index, 'MENT'] = with_hist(ment_val, ment_hist)
 
-            # --- 15. ETF BADGE & META ---
+
+            # --- 15. Percent Change ---
+            d_val = row.get('Day%', 0)
+            d_clr = "#00ff00" if d_val > 0 else ("#ff4444" if d_val < 0 else "#888")
+            export_df.at[index, 'Day%'] = color_span(f"{d_val:+.1f}%", d_clr)
+
+            # --- 16. ETF BADGE & META ---
             is_fund = row.get('Type', 'EQUITY') == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
             meta_val = row.get('Meta', '-')
             if is_fund:
@@ -749,14 +762,14 @@ def export_interactive_html(df, ai_summary=""):
             export_df.at[index, 'Meta'] = f"{badge}{color_span(meta_val, C_WHITE)}"
             export_df.at[index, 'Type_Tag'] = 'ETF' if is_fund else 'STOCK'
             
-            # --- 16. SYMBOL & PRICE ---
+            # --- 17. SYMBOL & PRICE ---
             t = row['Sym']
             tv_ticker = t.replace('-', '.')
             export_df.at[index, 'Sym'] = f'<a href="https://www.tradingview.com/chart/?symbol={tv_ticker}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
             
             p_val = f"${row.get('Price', 0):.2f}"
-            p_hist = row.get('h_price', '')
-            export_df.at[index, 'Price'] = with_hist(p_val, p_hist)
+
+            export_df.at[index, 'Price'] = p_val
 
             vol_raw = export_df.at[index, 'Vol_Display']
             export_df.at[index, 'Vol_Display'] = f'<div style="text-align: right; padding-right: 25px; color: #ccc;">{vol_raw}</div>'
@@ -764,7 +777,7 @@ def export_interactive_html(df, ai_summary=""):
         export_df.rename(columns={'Meta': 'INDUSTRY/SECTOR', 'Vol_Display': 'VOL(30)'}, inplace=True)
 
         cols = [
-            'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Acc', 'Eff', 'Conv', 'Upvs', 
+            'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Day%', 'Acc', 'Eff', 'Conv', 'Upvs', 
             'Upv+', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 
             'Type_Tag', 'AvgVol', 'MCap'
         ]
@@ -783,6 +796,7 @@ def export_interactive_html(df, ai_summary=""):
             '<th>Name</th>': '<th data-tooltip="Company Name">NAME</th>',
             '<th>Sym</th>': '<th data-tooltip="Ticker Symbol">SYM</th>',
             '<th>Price</th>': '<th data-tooltip="Current Stock Price">PRICE</th>',
+            '<th>Day%</th>': '<th data-tooltip="Price Change Since Yesterday Close">DAY%</th>', # <--- ADDED
             '<th>Acc</th>': '<th data-tooltip="Acceleration: Speed Change vs 1h ago">ACC</th>',
             '<th>Eff</th>': '<th data-tooltip="Efficiency: Rank gain per unit of volume">EFF</th>',
             '<th>Conv</th>': '<th data-tooltip="Conviction: Upvotes per Mention ratio">CONV</th>',
@@ -906,28 +920,34 @@ def export_interactive_html(df, ai_summary=""):
             th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; font-weight: bold; }}
             th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }}
             th:nth-child(3), td:nth-child(3) {{ width: 1%; text-align: center; font-weight: bold; }}
+            
+            /* NAME COLUMN */
             th:nth-child(4), td:nth-child(4) {{
                 white-space: normal !important;
-                width: 350px; /* Set a specific width so it knows where to wrap */
+                width: 350px; 
                 line-height: 1.4;
                 text-align: left;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                
             }}
+            
+            /* SYMBOL */
             th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }}
             th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; font-weight: normal !important; }}
-            th:nth-child(12), td:nth-child(12) {{ width: 1%; text-align: right; font-weight: normal !important; }}
-            th:nth-child(7), td:nth-child(7), th:nth-child(8), td:nth-child(8), th:nth-child(9), td:nth-child(9),
-            th:nth-child(10), td:nth-child(10), th:nth-child(11), td:nth-child(11), th:nth-child(13), td:nth-child(13),
-            th:nth-child(14), td:nth-child(14), th:nth-child(15), td:nth-child(15), th:nth-child(16), td:nth-child(16),
-            th:nth-child(17), td:nth-child(17), th:nth-child(18), td:nth-child(18) {{ width: 1%; text-align: center; }}
-            th:nth-child(19), td:nth-child(19) {{
-                min-width: 260px; 
-                white-space: nowrap !important;
-                overflow: hidden;    
-                text-overflow: ellipsis;    
-                text-align: left; 
-                padding-left: 10px !important; 
-                border-right: 1px solid #333; 
-            }}
+            th:nth-child(7), td:nth-child(7) {{ width: 1%; text-align: right; font-weight: normal !important; }}
+            th:nth-child(8), td:nth-child(8),
+            th:nth-child(9), td:nth-child(9),
+            th:nth-child(10), td:nth-child(10),
+            th:nth-child(11), td:nth-child(11), 
+            th:nth-child(12), td:nth-child(12), 
+            th:nth-child(13), td:nth-child(13) {{ width: 1%; text-align: right; font-weight: normal !important; }}
+            th:nth-child(14), td:nth-child(14),
+            th:nth-child(15), td:nth-child(15), 
+            th:nth-child(16), td:nth-child(16),
+            th:nth-child(17), td:nth-child(17),
+            th:nth-child(18), td:nth-child(18),
+            th:nth-child(19), td:nth-child(19) {{ width: 1%; text-align: center; }}
             
             a {{ color:#4da6ff; text-decoration:none; }} a:hover {{ text-decoration:underline; }}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
@@ -960,7 +980,7 @@ def export_interactive_html(df, ai_summary=""):
                 z-index: 1 !important;
             }}
 
-            .header-flex {{ display: flex; justify-content: space-between; align-items: center; height: 68px; width: 100%; padding: 0 15px; background: #111; margin-bottom: 5px; box-sizing: border-box; overflow: hidden; }}
+            .header-flex {{ display: flex; justify-content: space-between; align-items: center; height: 68px; width: 100%; padding: 0 15px; background: #111; margin-bottom: 0px; box-sizing: border-box; overflow: hidden; }}
             .header-left {{ flex: 0 0 200px; display: flex; align-items: center; z-index: 1; }}
             .header-right {{ flex: 0 0 400px; display: flex; justify-content: flex-end; align-items: center; z-index: 10; }}
 
@@ -1422,11 +1442,11 @@ def export_interactive_html(df, ai_summary=""):
         function getTopSectors(metricIdx) {{
             var sectorData = {{}};
             allData.each(function(row) {{
-                var rawType = row[19].toString().replace(/<[^>]+>/g, ''); 
+                var rawType = row[20].toString().replace(/<[^>]+>/g, ''); 
                 if (topSwitchIsETF && !rawType.includes('ETF')) return;
                 if (!topSwitchIsETF && rawType.includes('ETF')) return;
 
-                var sector = row[18].toString().replace(/<[^>]+>/g, '').trim().replace(/^ETF/i, ''); 
+                var sector = row[19].toString().replace(/<[^>]+>/g, '').trim().replace(/^ETF/i, ''); 
                 var val = parseVal(row[metricIdx]); 
                 var sym = row[4].replace(/<[^>]+>/g, '').trim();
                 var name = row[3].replace(/<[^>]+>/g, '').trim();
@@ -1480,9 +1500,9 @@ def export_interactive_html(df, ai_summary=""):
 
         $('.sector-tooltip').each(function() {{ var old = bootstrap.Tooltip.getInstance(this); if (old) old.dispose(); }});
         $('#rankBreadcrumb').html(getTopSectors(1));
-        $('#upvBreadcrumb').html(getTopSectors(10));
-        $('#surgeBreadcrumb').html(getTopSectors(12)); 
-        $('#mntBreadcrumb').html(getTopSectors(16));  
+        $('#upvBreadcrumb').html(getTopSectors(11));
+        $('#surgeBreadcrumb').html(getTopSectors(13)); 
+        $('#mntBreadcrumb').html(getTopSectors(17));  
 
         $('.sector-tooltip').each(function() {{
             new bootstrap.Tooltip(this, {{
@@ -1549,9 +1569,9 @@ def export_interactive_html(df, ai_summary=""):
         table = $('.table').DataTable({{
             "order":[[0,"asc"]], "pageLength": 15, "lengthMenu": [[15, 25, 50, 100, 250, -1], [15, 25, 50, 100, 250, "All"]],
             "columnDefs": [ 
-                {{ "visible": false, "targets": [19, 20, 21] }}, 
-                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], "type": "num", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ return parseVal(data); }} return data; }} }},
-                {{ "targets": [18], "type": "string", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ return data.toString().replace(/<[^>]+>/g, '').trim(); }} return data; }} }}
+                {{ "visible": false, "targets": [20, 21, 22] }}, 
+                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], "type": "num", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ return parseVal(data); }} return data; }} }},
+                {{ "targets": [19], "type": "string", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ return data.toString().replace(/<[^>]+>/g, '').trim(); }} return data; }} }}
             ],
             "drawCallback": function() {{ var api = this.api(); $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); }}
         }});
@@ -1559,13 +1579,13 @@ def export_interactive_html(df, ai_summary=""):
         $('.dataTables_filter input').attr('placeholder', 'SEARCH');
 
         $.fn.dataTable.ext.search.push(function(settings, data) {{
-            var typeTag = data[19] || ""; var viewMode = $('input[name="btnradio"]:checked').attr('id');
+            var typeTag = data[20] || ""; var viewMode = $('input[name="btnradio"]:checked').attr('id');
             var isETF = typeTag.includes("ETF");
             if (viewMode == 'btnradio2' && isETF) return false; 
             if (viewMode == 'btnradio3' && !isETF) return false; 
             
             if (!$('#mcapAll').is(':checked')) {{
-                var mcap = parseVal(data[21]); var match = false;
+                var mcap = parseVal(data[22]); var match = false;
                 if ($('#mcapMega').is(':checked') && mcap >= 200000000000) match = true;
                 if ($('#mcapLarge').is(':checked') && (mcap >= 10000000000 && mcap < 200000000000)) match = true;
                 if ($('#mcapMid').is(':checked') && (mcap >= 2000000000 && mcap < 10000000000)) match = true;
@@ -1577,7 +1597,7 @@ def export_interactive_html(df, ai_summary=""):
             var minP = parseVal($('#minPrice').val()), maxP = parseVal($('#maxPrice').val()); var p = parseVal(data[5]);
             if (minP > 0 && p < minP) return false; if (maxP > 0 && p > maxP) return false;
             
-            var minV = parseVal($('#minVol').val()), maxV = parseVal($('#maxVol').val()); var v = parseVal(data[20]);
+            var minV = parseVal($('#minVol').val()), maxV = parseVal($('#maxVol').val()); var v = parseVal(data[21]);
             if (minV > 0 && v < minV) return false; if (maxV > 0 && v > maxV) return false;
             
             return true;
