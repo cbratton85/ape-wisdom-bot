@@ -15117,5 +15117,41 @@
         "mcap": 161636064,
         "currency": "USD",
         "description": "Playboy, Inc. operates as a pleasure and leisure company in the United States, Australia, China, the United Kingdom, and internationally. The company operates through three segments: Licensing, Direct-to-Consumer, and Digital Subscriptions and Content. It offers sexual wellness products, such as lingerie, bedroom accessories, intimacy products, and other adult products; apparel and accessories products; visual media and entertainment; and beauty and grooming products, such as skincare, haircare, bath and body, grooming, cosmetics, and fragrance, as well as sells spirits under the Rare Hare brand and ready-to-drink cocktails under the Play Hard brand. The company also owns and operates digital commerce retail platforms, such as playboy.com under license agreements; Honey Birdette retail stores; and collaborates with nightlife, hospitality, digital casino, and online gaming industries. In addition, it licenses Playboy name, Rabbit Head Design, and other trademarks and related properties; and programming content to cable television operators and direct-to-home satellite television operators. Further, the company business covers the subscription sale of playboyplus.com and playboy.tv, which are online content platforms. It offers its products under its flagship brand Playboy. The company was formerly known as PLBY Group, Inc. and changed its name to Playboy, Inc. in June 2025. Playboy, Inc. is headquartered in Los Angeles, California."
+    },
+    "EVTL": {
+        "ticker": "EVTL",
+        "name": "Vertical Aerospace Ltd.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 467004544,
+        "currency": "USD",
+        "description": "Vertical Aerospace Ltd., an aerospace and technology company, engages in designing, manufacturing, and selling zero operating emission electric vertical takeoff and landing (eVTOL) aircraft for use in the advanced air mobility market in the United Kingdom. It involves in developing its flagship VX4, an eVTOL aircraft. Vertical Aerospace Ltd. was founded in 2016 and is headquartered in Bristol, the United Kingdom."
+    },
+    "SNDX": {
+        "ticker": "SNDX",
+        "name": "Syndax Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1846940288,
+        "currency": "USD",
+        "description": "Syndax Pharmaceuticals, Inc., a commercial-stage biopharmaceutical company, develops therapies for the treatment of cancer. Its lead product candidate includes Revuforj (revumenib), a menin inhibitor for the treatment of relapsed or refractory (R/R) acute leukemia; and Niktimvo (axatilimab-csfr), a colony stimulating factor-1 receptor blocking antibody to treat chronic graft-versus-host disease. The company is also developing revumenib for the treatment of R/R acute myeloid leukemia (AML) with a nucleophosmin 1 mutation (mNPM1) and in combination with standard-of-care agents in mNPM1 AML or KMT2Ar acute leukemia, as well as for metastatic colorectal cancer; axatilimab to treat idiopathic pulmonary fibrosis; and Entinostat, a Class 1 HDAC inhibitor. It has an agreement with Eddingpharm International Company Limited for licensing, development, and commercialization of Entinostat. Syndax Pharmaceuticals, Inc. was incorporated in 2005 and is headquartered in New York, New York."
+    },
+    "SAA": {
+        "ticker": "SAA",
+        "name": "ProShares Ultra SmallCap600",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of small-cap companies listed and domiciled in the U.S. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index or in instruments with similar economic characteristics. The fund is non-diversified."
+    },
+    "REV": {
+        "ticker": "REV",
+        "name": "REV",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
     }
 }
