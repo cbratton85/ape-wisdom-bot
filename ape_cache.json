@@ -15387,5 +15387,68 @@
         "mcap": 7108315136,
         "currency": "USD",
         "description": "Mobileye Global Inc. develops and deploys advanced driver assistance systems (ADAS) and autonomous driving technologies and solutions worldwide. The company operates through Mobileye and Other segments. It offers a portfolio of end-to-end ADAS and autonomous driving solutions comprising Base ADAS, a front camera that delivers a combination of intelligent safety features to avoid unsafe driving situations; Cloud-Enhanced ADAS, which leverages crowdsourced data to offer accurate localization, as well as a safer, smoother, and natural driving experience; and Surround ADAS that offer eyes-on/hands-off functionality for highway ODDs with features, such as automatic lane change, front and rear collision avoidance, traffic jam assist, and a Highway Pilot function, as well as includes DXP support that enables customers to customize the driving experience. It also provides SuperVision, a eyes-on/hands-off driver assist system for autonomous vehicles; Mobileye Chauffeur, an eyes-off/hands-off solution for consumer vehicles; and Mobileye Drive, a fleet-focused end-to-end self-driving system that enables automakers, public transportation companies, and transportation network operators to offer a no-driver solution for robotaxis, ride-pooling, public transport, and goods delivery. In addition, the company offers EyeQ SoC that provide drivers with basic safety features covered by front-facing sensing, such as collision warning, lane departure warnings, pedestrian and cyclist collision warning, headway monitoring and warning, speed limit indicator, blind spot detection, and others; True Redundancy, which is an AI system architecture; and Road Experience Management solutions. It provides its products and services to original equipment manufacturers through automotive suppliers, as well as fleet owners and operators. The company was founded in 1999 and is headquartered in Jerusalem, Israel. Mobileye Global Inc. is a subsidiary of Intel Corporation."
+    },
+    "CSGP": {
+        "ticker": "CSGP",
+        "name": "CoStar Group, Inc.",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 21924352000,
+        "currency": "USD",
+        "description": "CoStar Group, Inc. provides information, analytics, and online marketplace services in the United States, Canada, Europe, the Asia Pacific, and Latin America. It offers CoStar Property that provides inventory of office, industrial, retail, multifamily, hospitality, and student housing properties and land; CoStar Leasing, a data on lease transactions and tools to manage user-entered lease data; CoStar Sales, a database of commercial real estate sales transactions; CoStar Owners provides detailed portfolio information; CoStar Markets to view and report on market and submarket trends; and CoStar Tenant that provides tenant information. The company also provides CoStar Benchmarking allows hotels to measure performance against competitors; CoStar Lender, a tool for lenders to manage loan portfolios and risk; and real estate and lease management technology solutions, such as lease administration, lease accounting, and abstraction services. In addition, it offers Apartamentos.com, an apartment marketing sites; LoopNet.com, a commercial property marketing sites; Homes.com, a homes for sale listings site; Ten-X, an online auction platform for commercial real estate; Land.com, a marketplace for rural land sales; and BizBuySell.com, a marketplace for operating businesses and franchises for sale. It serves sales, leasing, and mortgage brokers; property, real estate investment trust, insurance companies, and asset managers; and government agencies, property owners, mortgage-backed security issuers, appraisers, design and construction professionals, pension fund managers, real estate developers, reporters tenant vendors, bankers, building services vendors, mortgage bankers, communications providers, retailers, institutional advisors, hospitality owners, investors, and real estate agents. The company was founded in 1987 and is headquartered in Arlington, Virginia."
+    },
+    "BIO": {
+        "ticker": "BIO",
+        "name": "Bio-Rad Laboratories, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 8064936960,
+        "currency": "USD",
+        "description": "Bio-Rad Laboratories, Inc. manufactures and distributes life science research and clinical diagnostic products in the United States, Europe, Asia, Canada, and Latin America. It operates through two segments, Life Science and Clinical Diagnostics. The company develops, manufactures, and markets instruments, systems, reagents, and consumables to separate, purify, characterize, and quantitate biological materials, such as cells, proteins, and nucleic acids used in biopharmaceutical manufacturing, quality control process, food safety, and science education applications. It also designs, manufactures, markets, and supports test systems, informatics systems, test kits, and specialized quality controls for hospitals, diagnostic reference, and transfusion and physician office laboratories. The company offers its products through its direct sales force, as well as through distributors, agents, brokers, and resellers. Bio-Rad Laboratories, Inc. was founded in 1952 and is headquartered in Hercules, California."
+    },
+    "RCEL": {
+        "ticker": "RCEL",
+        "name": "Avita Medical, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 131120384,
+        "currency": "USD",
+        "description": "AVITA Medical, Inc., together with its subsidiaries, operates as a therapeutic acute wound care company in the United States, Japan, the European Union, Australia, and the United Kingdom. The company's lead product is the RECELL System, a cell harvesting device used for the treatment of thermal burn wounds and full-thickness skin defects, as well as for repigmentation of stable depigmented vitiligo lesions. It also provides RECALL autologous cell harvesting device, which can treat areas of up to 1,920 cm2; RECELL autologous cell harvesting device with ease-of-use, an enhanced ease-of-use device that can treat areas of up to 1,920 cm\u00b2; and RECELL GO mini autologous cell harvesting device, a line extension of the RECELL GO system to treat smaller wounds up to 480 cm2, as well as RECELL GO autologous cell harvesting device consisting of RECELL GO processing device, which controls and manages the pressure applied to disaggregate the donor skin cells and controls the incubation time of the RECELL Enzyme to optimize cell yield and promote cell viability; and RECELL GO preparation kit, which can treat areas up to 1,920 cm2. In addition, the company markets, sells, and distributes PermeaDerm, a biosynthetic wound matrix; and Cohealyx, a collagen-based dermal matrix. It serves hospitals, treatment centers, and distributors. The company was formerly known as AVITA Therapeutics, Inc. and changed its name to AVITA Medical, Inc. in December 2020. AVITA Medical, Inc. is headquartered in Valencia, California."
+    },
+    "HACK": {
+        "ticker": "HACK",
+        "name": "Amplify Cybersecurity ETF",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Under normal circumstances, the fund will invest at least 80% of its net assets in the securities of companies that comprise the index. In pursuing this investment strategy, the fund invests 80% of its net assets in companies actively involved in providing cyber security technology and services, in accordance with the ISE Cyber Security\u00ae Industry classification. The index will consist of a selection of constituents in the Nasdaq ISE Cyber Security Index. The fund is non-diversified."
+    },
+    "TNGX": {
+        "ticker": "TNGX",
+        "name": "Tango Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1690197504,
+        "currency": "USD",
+        "description": "Tango Therapeutics, Inc., a precision oncology company, focuses on the discovery and development of drugs in defined patient populations with unmet medical need. The company develops methylthioadenosine -cooperative protein arginine methyltransferase 5 (PRMT5) inhibitors, including TNG462, which is in Phase 1/2 clinical trial for treating pancreatic and lung cancer; and TNG456, a brain-penetrant PRMT5 inhibitor for the treatment of glioblastoma. It is developing TNG260, a co-repressor of repressor element-1 silencing transcription inhibitor to reverse the immune evasion effect of serine-threonine kinase 11 loss-of-function mutations for treating lung cancer. The company was founded in 2017 and is headquartered in Boston, Massachusetts."
+    },
+    "CIBR": {
+        "ticker": "CIBR",
+        "name": "First Trust NASDAQ Cybersecurit",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will normally invest at least 90% of its net assets (including investment borrowings) in the common stocks and depositary receipts that comprise the index. The index includes securities of companies classified as \"cyber security\" companies by CTA. The fund is non-diversified."
+    },
+    "ADSK": {
+        "ticker": "ADSK",
+        "name": "Autodesk, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 51288268800,
+        "currency": "USD",
+        "description": "Autodesk, Inc. provides 3D design, engineering, and entertainment technology solutions worldwide. It offers AutoCAD Civil 3D, a surveying, design, analysis, and documentation solution; Autodesk Build, a toolset for managing, sharing, and accessing project documents for streamlined workflows between the office, trailer, and jobsite; Revit, a software built for building information modeling to help professionals design, build, and maintain energy-efficient buildings; Autodesk BIM Collaborate Pro, cloud-based design collaboration and design management software; BuildingConnected, a SaaS preconstruction solution; and Tandem, a cloud-based platform that transforms the built asset lifecycle. The company also provides AutoCAD software, a customizable and extensible CAD application for professional design, drafting, detailing, and visualization; AutoCAD LT, a drafting and detailing software; Fusion, a 3D CAD, computer-aided manufacturing, and computer-aided engineering tool; Inventor, a software solution that offers a set of tools for 3D mechanical design, simulation, analysis, tooling, visualization, and documentation; product design and manufacturing collection tools; and Vault, a data management software for managing data in one central location, accelerate design processes, and streamline internal/external collaboration. It offers Flow Production Tracking, a cloud-based production management software; Maya software that offers 3D modeling, animation, effects, rendering, and compositing solutions for film and video artists, game developers, and design visualization professionals; Media and Entertainment Collection that offers end-to-end creative tools for entertainment creation; and 3ds Max software, which provides 3D modeling, animation, and rendering solutions. The company sells its products and services through a network of resellers and distributors. Autodesk, Inc. was incorporated in 1982 and is headquartered in San Francisco, California."
     }
 }
