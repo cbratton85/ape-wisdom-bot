@@ -84,11 +84,6 @@
         "last_checked": "2026-02-04",
         "reason": "No Price Data"
     },
-    "QED": {
-        "delisted": true,
-        "last_checked": "2026-02-04",
-        "reason": "No Price Data"
-    },
     "INFA": {
         "delisted": true,
         "last_checked": "2026-02-04",
@@ -195,6 +190,11 @@
         "reason": "No Price Data"
     },
     "LBJ": {
+        "delisted": true,
+        "last_checked": "2026-02-05",
+        "reason": "No Price Data"
+    },
+    "QED": {
         "delisted": true,
         "last_checked": "2026-02-05",
         "reason": "No Price Data"
