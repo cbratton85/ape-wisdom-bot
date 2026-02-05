@@ -159,11 +159,6 @@
         "last_checked": "2026-02-05",
         "reason": "No Price Data"
     },
-    "ELY": {
-        "delisted": true,
-        "last_checked": "2026-02-05",
-        "reason": "No Price Data"
-    },
     "TGIF": {
         "delisted": true,
         "last_checked": "2026-02-05",
@@ -195,6 +190,16 @@
         "reason": "No Price Data"
     },
     "BODY": {
+        "delisted": true,
+        "last_checked": "2026-02-05",
+        "reason": "No Price Data"
+    },
+    "ELY": {
+        "delisted": true,
+        "last_checked": "2026-02-05",
+        "reason": "No Price Data"
+    },
+    "LBJ": {
         "delisted": true,
         "last_checked": "2026-02-05",
         "reason": "No Price Data"

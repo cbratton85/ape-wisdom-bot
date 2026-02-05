@@ -17358,5 +17358,77 @@
         "mcap": 10673155072,
         "currency": "USD",
         "description": "American Financial Group, Inc., an insurance holding company, provides specialty property and casualty insurance products in the United States. The company offers property and transportation insurance products, such as physical damage and liability coverage for buses and trucks other specialty transportation niches, inland and ocean marine, agricultural-related products, and other commercial property coverages; specialty casualty insurance, including primarily excess and surplus, executive and professional liability, general liability, umbrella and excess liability, and specialty coverage in targeted markets, as well as customized programs for small to mid-sized businesses and workers' compensation insurance; and specialty financial insurance products comprising risk management insurance programs for lending and leasing institutions, fidelity and surety products, and trade credit insurance. It sells its property and casualty insurance products through independent insurance agents and brokers. The company was founded in 1872 and is headquartered in Cincinnati, Ohio."
+    },
+    "REMX": {
+        "ticker": "REMX",
+        "name": "VanEck Rare Earth and Strategic",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund normally invests at least 80% of its total assets in securities that comprise the fund's benchmark index. The index includes companies primarily engaged in a variety of activities that are related to the producing, refining and recycling of rare earth and strategic metals and minerals. It is non-diversified."
+    },
+    "DY": {
+        "ticker": "DY",
+        "name": "Dycom Industries, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 11338358784,
+        "currency": "USD",
+        "description": "Dycom Industries, Inc. provides specialty contracting services to the telecommunications infrastructure and utility industries in the United States. The company offers engineering services to telecommunications providers, including the planning and design of aerial, underground, and buried fiber optic, copper, and coaxial cable systems; placement of cables, related structures, and drop lines for telephone companies and cable multiple system operators; program and project management, and inspection personnel; and wireless networks in connection with the deployment of macro cell and new small cell sites. It also provides construction, maintenance, and installation services, such as placement and splicing of copper, fiber, and coaxial cables; tower construction, lines and antenna installation, foundation and equipment pad construction, and small cell site placement for wireless carriers, as well as equipment installation and material fabrication, and site testing services; underground facility locating services, including locating telephone, cable television, power, water, sewer, and gas lines for utility companies; installation and maintenance of customer premise equipment, including digital video recorders, set top boxes, and modems for cable system operators; and construction and maintenance services for electric and gas utilities, and other customers. Dycom Industries, Inc. was incorporated in 1969 and is based in Palm Beach Gardens, Florida."
+    },
+    "SRE": {
+        "ticker": "SRE",
+        "name": "DBA Sempra",
+        "meta": "Utilities - Diversified",
+        "type": "EQUITY",
+        "mcap": 56704970752,
+        "currency": "USD",
+        "description": "Sempra operates as an energy infrastructure company in the United States and internationally. It operates through three segments: Sempra California, Sempra Texas Utilities, and Sempra Infrastructure. The Sempra California segment provides natural gas and electric services to Southern California and part of central California. As of December 31, 2024, it offered electric services to approximately 3.6 million population and natural gas services to approximately 3.3 million population that covers 4,100 square miles. This segment owns and operates a natural gas distribution, transmission, and storage system that supplies natural gas. As of December 31, 2024, it served a population of 21.1 million covering an area of 24,000 square miles. The Sempra Texas Utilities segment engages in the regulated electricity transmission and distribution business. As of December 31, 2024, its transmission system included 18,324 circuit miles of transmission lines; 1,288 transmission and distribution substations; interconnection to 192 third-party generation facilities totaling 58,597 MW; and distribution system included approximately 4 million points of delivery and consisted of 125,975 miles of overhead and underground lines. The Sempra Infrastructure segment develops, builds, operates, and invests in energy infrastructure to help enable the access to cleaner energy in markets in the United States, Mexico, and internationally. The company was formerly known as Sempra Energy and changed its name to Sempra in May 2023. Sempra was incorporated in 1996 and is based in San Diego, California."
+    },
+    "APM": {
+        "ticker": "APM",
+        "name": "Aptorum Group Limited",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 6372491,
+        "currency": "USD",
+        "description": "Aptorum Group Limited, through its subsidiaries, a clinical stage biopharmaceutical company, engages in the discovery, development, and commercialization of therapeutic products to treat oncology and infectious diseases. Its pipeline products include SACT-1, a repurposed drug candidate, which is in phase 1 clinical trial to treat neuroblastoma and other cancer types; ALS-4, a repurposed small molecule, which is in phase 1 clinical trial for the treatment of bacterial infections, such as staphylococcus aureus, mycobacterium tuberculosis, and pseudomonas aeruginosa; and RPIDD, a liquid biopsy rapid pathogen diagnostic which is in preclinical trial to treat pathogen molecular diagnostics. The company also develops SACT-COV19, a repurposed small molecule which is in preclinical trial for the treatment of coronavirus disease; SACT-2 and SACT-3; ALS-1, a small molecule which is in preclinical trial to treat bacterial infections caused by staphylococcus aureus, including methicillin-resistant staphylococcus aureus (MRSA); and ALS-2/3, a small molecule which is in preclinical trial for the treatment of gram+ve bacterial infections. In addition, it is developing NLS-1, which is in preclinical trial for the treatment of endometriosis; DLS-1+2, which is in preclinical trial to treat NSCLC with mutation; DLS-3, which is in preclinical trial to treat autoimmune disease; CLS-1, a macromolecule, which is in preclinical trial to treat obesity; and CLS-1 and CLS-3. Further, the company offers NativusWell DOI (NLS-2), a dietary supplement for women undergoing menopause; and provides management services. The company was formerly known as APTUS Holdings Limited and changed its name to Aptorum Group Limited in October 2017. Aptorum Group Limited was incorporated in 2010 and is headquartered in London, the United Kingdom."
+    },
+    "GUNR": {
+        "ticker": "GUNR",
+        "name": "FlexShares Global Upstream Natu",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index is designed to the performance of a selection of equity securities that are traded in or are issued by companies classified as developed or emerging markets, as determined by the index provider pursuant to its index methodology. The fund will invest at least 80% of its total assets (exclusive of collateral held from securities lending) in the securities of the index and in ADRs and GDRs based on the securities in the index."
+    },
+    "AHH": {
+        "ticker": "AHH",
+        "name": "Armada Hoffler Properties, Inc.",
+        "meta": "REIT - Diversified",
+        "type": "EQUITY",
+        "mcap": 733425792,
+        "currency": "USD",
+        "description": "Armada Hoffler (NYSE: AHH) is a vertically integrated, self-managed real estate investment trust with over four decades of experience developing, building, acquiring, and managing high-quality retail, office, and multifamily properties located primarily in the Mid-Atlantic and Southeastern United States. The Company also provides general construction and development services to third-party clients, in addition to developing and building properties to be placed in their stabilized portfolio. Founded in 1979 by Daniel A. Hoffler, Armada Hoffler has elected to be taxed as a REIT for U.S. federal income tax purposes."
+    },
+    "LBJ": {
+        "ticker": "LBJ",
+        "name": "Direxion Daily Latin America Bu",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund, under normal circumstances, invests at least 80% of its net assets in financial instruments, such as swap agreements, ETFs that track the index, securities of the index and other financial instruments that provide daily leveraged exposure to the index or to ETFs that track the index. The index is a float-adjusted market capitalization weighted equity index of issuers drawn from five major Latin American markets: Brazil, Chile, Columbia, Mexico, and Per\u00c3\u00ba. The fund is non-diversified."
+    },
+    "FTNT": {
+        "ticker": "FTNT",
+        "name": "Fortinet, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 60626972672,
+        "currency": "USD",
+        "description": "Fortinet, Inc. provides cybersecurity and convergence of networking and security solutions worldwide. The company offers secure networking solutions that focus on the convergence of networking and security; network firewall solutions, which consist of FortiGate data centers, hyperscale, and distributed firewalls, as well as encrypted applications; wireless local area network solutions; and secure connectivity solutions, including FortiSwitch secure ethernet switches, FortiAP wireless LAN access points, and FortiExtender 5G connectivity gateways. It also provides the Fortinet Unified Secure Access Service Edge solutions that include firewall, software-defined wide-area network, secure web gateway, cloud access services broker, data loss prevention, and zero trust network access; and web application firewalls, cloud network security with virtualized firewalls, cloud-native firewalls, cloud-native application protection, and code security. In addition, the company offers artificial intelligence-driven security operation solutions, which provide a suite of cybersecurity solutions that identify, protect, detect, respond, and recover from threats, as well as FortiEDR, FortiXDR, FortiNDR, FortiSandbox, FortiDeceptor, FortiDLP, and FortiRecon, which help organizations ensure attackers face multiple layers of detection and mitigation across endpoints, networks, and applications. Further, it offers FortiGuard application security, content security, device security, NOC/SOC security, and web security services; FortiCare technical support services; and training and certification programs, as well as operates FortiGuard Lab, a cybersecurity threat intelligence and research organization. The company serves large enterprises, communication service providers, government organizations, and small- to medium-sized enterprises. Fortinet, Inc. was incorporated in 2000 and is headquartered in Sunnyvale, California."
     }
 }
