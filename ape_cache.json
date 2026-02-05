@@ -16593,5 +16593,86 @@
         "mcap": 9972482,
         "currency": "USD",
         "description": "CytoMed Therapeutics Limited, a pre-clinical biopharmaceutical company, focuses on developing novel cell-based immunotherapies for the treatment of human cancers and degenerative diseases in Malaysia and Singapore. Its lead product candidate is CTM-N2D, an expanded gamma delta T cells grafted with natural killer group 2D ligands-targeting chimeric antigen receptor, which is in Phase I clinical trials comprising to improve anti-cancer cytotoxicity. The company is also developing iPSC-gdNKT, a pluripotent stem cell-derived gamma delta natural killer T cells platform for cancer treatment; CTM-GDT, a product candidate that consists of expanded allogeneic gamma delta T cells and exploits the potential of the cells to recognize and treat a broad range of cancers; and CTM-MSC, an injectable allogeneic umbilical cord derived mesenchymal stem cells for cartilage injury. It has research collaboration agreement with Sengkang General Hospital to provide CTM-MSC and its conditioned media for in vivo studies and Phase I clinical trial in Singapore. The company also has Business & Research Collaboration Agreement with SunAct Cancer Institute Private Limited to conduct clinical trials for the GMP grade CTM-GDT. CytoMed Therapeutics Limited was incorporated in 2018 and is headquartered in Singapore."
+    },
+    "SPUS": {
+        "ticker": "SPUS",
+        "name": "SP Funds S&P 500 Sharia Industr",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index is composed of the constituents of the S&P 500\u00ae Shariah Index other than those from the following sub-industries: Aerospace & Defense, Financial Exchanges & Data, and Data Processing & Outsourced Services. The manager attempts to invest all, or substantially all, of its assets in the component securities of the index. Under normal circumstances, at least 80% of the fund's total assets will be invested in sharia companies that are component securities of the index. It is non-diversified."
+    },
+    "ESGU": {
+        "ticker": "ESGU",
+        "name": "iShares ESG Aware MSCI USA ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 90% of its assets in the component securities of the underlying index and may invest up to 10% of its assets in certain futures, options and swap contracts, cash and cash equivalents. The underlying index is an optimized equity index designed to reflect the equity performance of U.S. companies that have favorable environmental, social and governance (\"ESG\") characteristics (as determined by the index provider), while exhibiting risk and return characteristics similar to those of the MSCI USA Index (the \"parent index\")."
+    },
+    "ELY": {
+        "ticker": "ELY",
+        "name": "ELY",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "VCEB": {
+        "ticker": "VCEB",
+        "name": "Vanguard World Funds ETF",
+        "meta": "Corporate Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index excludes bonds with maturities of less than 1 year and with less than $750 million outstanding, and is screened for certain environmental, social, and governance (ESG) criteria by the index provider, which is independent of Vanguard. All of the fund\u2019s investments will be selected through the sampling process, and under normal circumstances, at least 80% of the fund\u2019s assets will be invested in bonds included in the index."
+    },
+    "DAO": {
+        "ticker": "DAO",
+        "name": "Youdao, Inc.",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 1180148480,
+        "currency": "USD",
+        "description": "Youdao, Inc., an internet technology company, provides online services in the fields of content, community, communication, and commerce in China. It operates through three segments: Learning Services, Smart Devices, and Online Marketing Services. The learning services mainly include tutoring services and fee-based premium services. The company provides various learning content, applications, and solutions, which cover topics and target people from various age groups for their learning needs through its websites and mobile applications. It also offers online knowledge tools, which include Youdao and other dictionaries and translation tools, as well as AI-based learning tools; STEAM courses through Youdao Premium Courses; adult courses through NetEase Cloud Classroom, such as foreign language, preparing for an exam, and picking up a new skill; and other courses consisting of China University MOOC courses. In addition, the company provides smart devices comprising Youdao Dictionary Pen, and Youdao Listening Pod, and Youdao Smart Learning Pad; education digitalization solutions, such as technologies and solutions licensed to schools or enterprise customers, including Youdao Smart Learning Terminal, Youdao Sports, and Youdao Smart Cloud; and online marketing services consisting of performance-based and brand advertising services. Further, it offers technical support to the variable interest entities (VIEs). The company was founded in 2006 and is headquartered in Hangzhou, China. Youdao, Inc. is a subsidiary of NetEase, Inc."
+    },
+    "VSGX": {
+        "ticker": "VSGX",
+        "name": "Vanguard ESG International Stoc",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests by sampling the index, meaning that it holds a broadly diversified collection of securities that, in the aggregate, approximates the full index in terms of key characteristics. The index, which is market capitalization-weighted, is composed of large-, mid-, and small-cap stocks of companies in developed and emerging markets, excluding the United States, that are screened for certain environmental, social, and corporate governance (ESG) criteria by the index sponsor, which is independent of Vanguard."
+    },
+    "ESGV": {
+        "ticker": "ESGV",
+        "name": "Vanguard ESG U.S. Stock ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The adviser attempts to replicate the target index by investing all, or substantially all, of its assets in the stocks that make up the index, holding each stock in approximately the same proportion as its weighting in the index. The index, which is market capitalization-weighted, is composed of large-, mid-, and small-cap stocks of companies located in the United States that are screened for certain environmental, social, and corporate governance (ESG) criteria by the index provider, which is independent of Vanguard. It is non-diversified."
+    },
+    "DBMF": {
+        "ticker": "DBMF",
+        "name": "iMGP DBi Managed Futures Strate",
+        "meta": "Systematic Trend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund seeks to achieve its objective by: (i) investing its assets pursuant to a managed futures strategy; (ii) allocating up to 20% of its total assets in its wholly-owned subsidiary, which is organized under the laws of the Cayman Islands, is advised by the Sub-Advisor, and will comply with the fund's investment objective and investment policies; and (iii) investing directly in select debt instruments for cash management and other purposes. It is non-diversified."
+    },
+    "PED": {
+        "ticker": "PED",
+        "name": "Pedevco Corp.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 57109584,
+        "currency": "USD",
+        "description": "PEDEVCO Corp., an oil and gas company, focuses on the acquisition, development, and production of oil and natural gas assets in the United States. The company holds interests in the Permian Basin asset covering an area of approximately 14,550 net acres located in New Mexico. Its properties also include D-J Basin asset covering an area of approximately 14,809 net acres in Weld and Morgan Counties, Colorado; and 3,860 net acres in Laramie County, Wyoming. The company is headquartered in Houston, Texas."
     }
 }
