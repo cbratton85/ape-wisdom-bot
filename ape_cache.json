@@ -16908,5 +16908,68 @@
         "mcap": 11692051456,
         "currency": "USD",
         "description": "Align Technology, Inc. provides Invisalign clear aligners, Vivera retainers, and iTero intraoral scanners and services in the United States, Switzerland, and internationally. The company's Clear Aligner segment offers Invisalign comprehensive package to treat adults and teens malocclusion and features, and orthodontic needs of teenage or younger patients; and Invisalign First Phase I and Invisalign First Comprehensive Phase 2 package for younger patients between the ages of six and ten years with a mixture of primary/baby and permanent teeth. This segment also provides Invisalign express, Invisalign lite, and Invisalign moderate; Invisalign Go, Invisalign Go express, and Invisalign Go Plus; retention products, Invisalign training, adjusting tools used by dental professionals during treatment, ancillary Invisalign accessory products, and other oral health products; Invisalign Professional Whitening system; Invisalign Palatal Expander, a 3D printed orthodontic device; and 3D printing solutions. Its Imaging Systems and CAD/CAM Services segment offers iTero intraoral scanning system, a single hardware platform for restorative or orthodontic procedures; exocad, a computer-aided design and computer-aided manufacturing software; orthodontist software for digital records storage, orthodontic diagnosis, and fabrication of printed models and retainers; and restorative software for general practitioner dentists, prosthodontists, periodontists, and oral surgeons. This segment also offers Invisalign outcome simulator, a chair-side and cloud-based application for the iTero scanner; Invisalign progress assessment tool; Align Oral Health Suite, a digital interface for dental consultations; iTero TimeLapse technology for doctors or practitioners to compare a patient's historic 3D scans to the present-day scan; and subscription software, disposables, rents scanners, and pay per scan services. The company was incorporated in 1997 and is headquartered in Tempe, Arizona."
+    },
+    "FRMI": {
+        "ticker": "FRMI",
+        "name": "Fermi Inc.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 4770915840,
+        "currency": "USD",
+        "description": ""
+    },
+    "CYBR": {
+        "ticker": "CYBR",
+        "name": "CyberArk Software Ltd.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 20065597440,
+        "currency": "USD",
+        "description": "CyberArk Software Ltd. develops, markets, and sells software-based identity security solutions and services in the United States, Israel, the United Kingdom, Europe, the Middle East, Africa, and internationally. Its solutions include Privileged Access Manager and Privilege Cloud, which offers risk-based credential security and session management; Remote Access, a SaaS solution that provides secure access to third-party vendors; Secure Infrastructure Access, a SaaS solution that offers just-in-time access to infrastructure; Endpoint Privilege Manager, a SaaS solution that secures privileges on the endpoint; and Secure Desktop, a solution that protects access to endpoints. The company also provides workforce identity security, which offers adaptive multi-factor authentication, single sign-on, secure web sessions, workforce password management, application gateway, identity lifecycle management, customer identity, and secure browser services. In addition, it offers identity management solutions, including lifecycle management, identity flows and compliance, and directory services; Secure Cloud Access, which provides access to cloud consoles, native services, and workloads; machine identity security, which offers secrets manager credential providers, Conjur Enterprise and Cloud, and secrets hub, as well as Venafi TLS protect, zero touch PKI, SSH protect, firefly, and codesign protect. Further, the company offers CORA AI; secure digital vault technology; session recording and controls; secure remote access; application authentication and credential management; endpoint security; distributed workload identity issuance; and SaaS extensibility and cloud service provider integration. It serves the financial services, manufacturing, insurance, healthcare, energy and utilities, transportation, retail, technology, and telecommunications industries; and government agencies. CyberArk Software Ltd. was incorporated in 1996 and is headquartered in Petah Tikva, Israel."
+    },
+    "EQR": {
+        "ticker": "EQR",
+        "name": "Equity Residential",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 24597618688,
+        "currency": "USD",
+        "description": "Equity Residential is committed to creating communities where people thrive. The Company, a member of the S&P 500, owns and manages 318 properties consisting of 86,320 apartment units in dynamic metro areas across the U.S. with a primary concentration in major coastal markets, diversified by a targeted presence in the high-growth metro areas of Atlanta, Austin, Dallas/Ft. Worth and Denver."
+    },
+    "AIV": {
+        "ticker": "AIV",
+        "name": "Apartment Investment and Manage",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 856529088,
+        "currency": "USD",
+        "description": "Aimco is a diversified real estate company primarily focused on value add and opportunistic investments, targeting the U.S. multifamily sector. Aimco's mission is to make real estate investments where outcomes are enhanced through our human capital so that substantial value is created for investors, teammates, and the communities in which we operate. Aimco is traded on the New York Stock Exchange as AIV."
+    },
+    "MOO": {
+        "ticker": "MOO",
+        "name": "VanEck Agribusiness ETF",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 923216000,
+        "currency": "USD",
+        "description": "The fund normally invests at least 80% of its total assets in securities that comprise the fund's benchmark index. The index includes equity securities of companies that generate at least 50% of their revenues from agri-chemicals, animal health and fertilizers, seeds and traits, from farm/irrigation equipment and farm machinery, aquaculture and fishing, livestock, cultivation and plantations and trading of agricultural products. It is non-diversified."
+    },
+    "SARO": {
+        "ticker": "SARO",
+        "name": "StandardAero, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 9870065664,
+        "currency": "USD",
+        "description": "StandardAero, Inc. provides aerospace engine aftermarket services for fixed and rotary wing aircraft in the United States, Canada, the United Kingdom, Rest of Europe, Asia, and internationally. It operates in two segments, Engine Services and Component Repair Services. The Engine Services segment provides a suite of aftermarket services, including maintenance, repair and overhaul, on-wing and field service support, asset management, and engineering and related solutions to customers in the commercial aerospace, military and helicopter, and business aviation end markets. The Component Repair Services segment offers engine component and accessory repairs to the commercial aerospace, military and helicopter, land and marine, and oil and gas end markets. The company was formerly known as Dynasty Parent Co., Inc. and changed its name to StandardAero, Inc. in September 2024. StandardAero, Inc. was founded in 1911 and is headquartered in Scottsdale, Arizona."
+    },
+    "MIAX": {
+        "ticker": "MIAX",
+        "name": "Miami International Holdings, I",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 3631456256,
+        "currency": "USD",
+        "description": "Miami International Holdings, Inc., through its subsidiaries, operates various markets across options, futures, and cash equities. Its markets include options through MIAX Options, MIAX Pearl, MIAX Emerald, and MIAX Sapphire; U.S. equities through MIAX Pearl Equities; U.S. futures and options on futures through MIAX Futures; and international listings through BSX and TISE. The company also trades hard red spring wheat futures and options on MIAX Futures; offers clearing services for U.S. futures and options through MIAX Futures Clearing; and owns Dorman Trading, a full-service futures commission merchant provides execution and clearing services for introducing brokers, retail customers, institutional clients, and professional traders. Miami International Holdings, Inc. was incorporated in 2007 and is headquartered in Princeton, New Jersey"
     }
 }
