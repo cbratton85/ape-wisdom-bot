@@ -17430,5 +17430,32 @@
         "mcap": 60626972672,
         "currency": "USD",
         "description": "Fortinet, Inc. provides cybersecurity and convergence of networking and security solutions worldwide. The company offers secure networking solutions that focus on the convergence of networking and security; network firewall solutions, which consist of FortiGate data centers, hyperscale, and distributed firewalls, as well as encrypted applications; wireless local area network solutions; and secure connectivity solutions, including FortiSwitch secure ethernet switches, FortiAP wireless LAN access points, and FortiExtender 5G connectivity gateways. It also provides the Fortinet Unified Secure Access Service Edge solutions that include firewall, software-defined wide-area network, secure web gateway, cloud access services broker, data loss prevention, and zero trust network access; and web application firewalls, cloud network security with virtualized firewalls, cloud-native firewalls, cloud-native application protection, and code security. In addition, the company offers artificial intelligence-driven security operation solutions, which provide a suite of cybersecurity solutions that identify, protect, detect, respond, and recover from threats, as well as FortiEDR, FortiXDR, FortiNDR, FortiSandbox, FortiDeceptor, FortiDLP, and FortiRecon, which help organizations ensure attackers face multiple layers of detection and mitigation across endpoints, networks, and applications. Further, it offers FortiGuard application security, content security, device security, NOC/SOC security, and web security services; FortiCare technical support services; and training and certification programs, as well as operates FortiGuard Lab, a cybersecurity threat intelligence and research organization. The company serves large enterprises, communication service providers, government organizations, and small- to medium-sized enterprises. Fortinet, Inc. was incorporated in 2000 and is headquartered in Sunnyvale, California."
+    },
+    "BGC": {
+        "ticker": "BGC",
+        "name": "BGC Group, Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 4213709824,
+        "currency": "USD",
+        "description": "BGC Group, Inc. operates as a financial brokerage and technology company in the United States, Europe, the Middle East, Africa, and the Asia Pacific. The company offers various brokerage products, such as fixed income, such as government bonds, corporate bonds, and other debt instruments, as well as related interest rate derivatives and credit derivatives; and brokerage services for foreign exchange, energy, commodities, shipping, equities, and futures and options. It also provides price discovery, trade execution, connectivity solutions, information, consulting, brokerage services, clearing, and other post-trade services, information, and other back-office services to an assortment of financial and non-financial institutions. In addition, the company offers electronic and hybrid brokerage, other financial technology solutions, market data and related information services. Further, the company's integrated platform is designed to provide flexibility to customers regarding price discovery, trade execution and processing of transactions, as well as accessing liquidity through its platforms, for transactions executed either OTC or through an exchange. It primarily serves banks, broker-dealers, trading firms, hedge funds, governments, corporations, investment firms, commodity trading firms, and end users. BGC Group, Inc. was founded in 1945 and is headquartered in New York, New York."
+    },
+    "TOWN": {
+        "ticker": "TOWN",
+        "name": "Towne Bank",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 3421387520,
+        "currency": "USD",
+        "description": "TowneBank provides retail and commercial banking services for individuals, commercial enterprises, and professionals in Virginia and North Carolina. The company operates through three segments: Banking, Realty, and Insurance. It accepts various deposits, including demand deposits, savings accounts, money rate savings, certificates of deposit, and individual retirement accounts. The company also offers secured and unsecured personal loans for financing automobiles, home improvements, education, and personal investments; commercial loans for working capital, business expansion, and equipment and machinery purchases; and mortgage loans, as well as real estate acquisition, development, and construction loans. In addition, it provides other services, such as safe deposit boxes, treasury management services, direct deposit of payroll and social security checks, and automatic drafts for various accounts, as well as online, mobile, and on-call banking services. Further, the company offers documentation services to accomplish tax deferral to investors; investment and asset management services; commercial mortgage brokerage services; and other financial services, such as financial, retirement, and estate planning services, as well as assistance on various investment options comprising alternative investments, annuities, margin accounts, convertible bonds, and pension and profit-sharing plans. Additionally, it provides residential property management services, real estate brokerage services, vacation rentals, and title and settlement services; and originates residential mortgage loans. The company also offers life, property, casualty, and vehicle insurance services; and employee benefit programs, such as health, dental, vision, and disability insurance. TowneBank was incorporated in 1998 and is based in Portsmouth, Virginia."
+    },
+    "BFS": {
+        "ticker": "BFS",
+        "name": "Saul Centers, Inc.",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 1199683840,
+        "currency": "USD",
+        "description": "Saul Centers, Inc. is a self-managed, self-administered equity REIT headquartered in Bethesda, Maryland, which currently operates and manages a real estate portfolio of 62 properties which includes (a) 59 community and neighborhood shopping centers and mixed-use properties with approximately 10.5 million square feet of leasable area and (b) three land and development properties. Over 85% of the Saul Centers' property operating income is generated by properties in the metropolitan Washington, DC/Baltimore area."
     }
 }
