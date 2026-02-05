@@ -17529,5 +17529,131 @@
         "mcap": 1019459520,
         "currency": "USD",
         "description": "Bitfarms Ltd. operates integrated bitcoin data centers in Canada, the United States, Paraguay, and Argentina. It primarily owns and operates data centers housing computers to validate transactions on the bitcoin blockchain, as well as sells computational power used for hashing calculations for cryptocurrency mining in multiple jurisdictions. The company also provides electrician services to commercial and residential customers in Quebec, Canada. It also undertakes hosting of third-party mining hardware. The company was formerly known as Bitfarms Technologies Ltd and changed its name to Bitfarms Ltd. in October 2018. The company was founded in 2017 and is based in Toronto, Canada."
+    },
+    "RBBN": {
+        "ticker": "RBBN",
+        "name": "Ribbon Communications Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 481662656,
+        "currency": "USD",
+        "description": "Ribbon Communications Inc. provides communications technology in the United States, Europe, the Middle East, Africa, the Asia Pacific, and internationally. It operates through two segments, Cloud and Edge, and IP Optical Networks. The Cloud and Edge segment provides software and hardware products, solutions, and services for voice over internet protocol communications, voice over long-term evolution, and voice over 5G communications, and unified communications and collaboration. It also offers session border controllers; and network transformation products, such as signaling products, call controllers, media gateways, and application servers. This segment serves private, public, or hybrid cloud infrastructures, as well as data centers, enterprise premises, and service provider networks. The IP Optical Networks segment provides hardware and software products and solutions for IP networking, switching, routing, and optical transport for technologies comprising 5G, distributed cloud computing, and corresponding applications. It also offers multiple solutions, including 5G-native solutions for mobile-backhaul, metro and edge aggregation, core networking, data center interconnect, multi-service access, and transport solutions for wholesale carriers. This segment serves utilities, government, defense, finance, transportation, and education and research industries, as well as service providers and enterprises. The company was formerly known as Sonus Networks, Inc. and changed its name to Ribbon Communications Inc. in November 2017. Ribbon Communications Inc. was founded in 1997 and is headquartered in Plano, Texas."
+    },
+    "URNM": {
+        "ticker": "URNM",
+        "name": "Sprott Uranium Miners ETF",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will normally invest at least 80% of its total assets in securities of the index. The index is designed to track the performance of companies that devote at least 50% of their assets to (i) mining, exploration, development, and production of uranium; and/or (ii) holding physical uranium, owning uranium royalties, or engaging in other, non-mining activities that support the uranium mining industry. It is non-diversified."
+    },
+    "GRMN": {
+        "ticker": "GRMN",
+        "name": "Garmin Ltd.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 38246625280,
+        "currency": "USD",
+        "description": "Garmin Ltd. designs, develops, manufactures, markets, and distributes a range of wireless devices worldwide. The company offers running and multi-sport watches; cycling products; smartwatch devices; scales and monitors; Garmin Connect and Garmin Connect Mobile, which are web and mobile platforms where users can track and analyze their fitness, activities and workouts, and wellness data; and Connect IQ, enables third parties to create applications that run on Garmin devices. It also provides adventure watches; outdoor handhelds and satellite communicators; golf devices; consumer automotive; dog devices; InReach and Gramin response communication device; and Dive devices. In addition, the company designs, manufactures, and markets various aircraft avionics solutions, including integrated flight decks, electronic flight displays and instrumentation, navigation and communication products, automatic flight control systems and safety-enhancing technologies, audio control systems, engine indication systems, traffic awareness and avoidance solutions, ADS-B and transponders, weather information and avoidance solutions, datalink and connectivity solutions, and portable GPS navigators and wearables, as well as service products to the aviation market. Further, it offers chartplotters and multi-function displays, cartography products, fishfinders, sonar products, autopilot systems, radars, compliant instrument displays and sensors, VHF communication radios, handhelds and wearable devices, sailing products, audio products, digital switching products, trolling motors, and lighting products; and domain controllers and infotainment units, as well as software, map database, cameras, wearables, and automotive solutions. The company sells its products through independent retailers, dealers, distributors, installation and repair shops, and original equipment manufacturers, as well as online webshop. Garmin Ltd. was founded in 1989 and is based in Schaffhausen, Switzerland."
+    },
+    "SOS": {
+        "ticker": "SOS",
+        "name": "SOS Limited",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 11141262,
+        "currency": "USD",
+        "description": "SOS Limited provides data mining and analysis services to corporate and individual members in the People's Republic of China. It offers marketing data, technology, and solutions for insurance companies; emergency rescue services; and insurance product and health care information portals. The company also provides SOS cloud emergency rescue service software as a service platform that offers basic cloud products, such as medical rescue, automobile rescue, financial rescue, and rescue mutual aid card services. In addition, the company offers telecommunication, insurance, and bank call services; rescue cards; cooperative cloud systems, including information rescue center, intelligent big data, and intelligent software and hardware; information cloud systems, such as news today and e-commerce today; information security services, and marketing-related data; emergency medical consultation and health advices; hosting service; and technology and solutions for emergency rescue services, such as insurance, finance, medical care, health, automobile, safety and mutual aid, as well as builds a rescue service system. Further, it engages in blockchain and cryptocurrency operations, including cryptocurrency mining. It serves insurance companies, financial institutions, medical institutions, healthcare providers, and other service providers in the emergency rescue services industry. SOS Limited is headquartered in Qingdao, the People's Republic of China."
+    },
+    "HYS": {
+        "ticker": "HYS",
+        "name": "PIMCO 0-5 Year High Yield Corpo",
+        "meta": "High Yield Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests under normal circumstances at least 80% of its total assets (exclusive of collateral held from securities lending) in the component securities of the ICE BofA 0-5 Year U.S. High Yield Constrained Index. The underlying index is an unmanaged index comprised of U.S. dollar denominated below investment grade corporate debt securities publicly issued in the U.S. domestic market with remaining maturities of less than 5 years."
+    },
+    "BITO": {
+        "ticker": "BITO",
+        "name": "ProShares Bitcoin ETF",
+        "meta": "Digital Assets",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund adviser seeks to achieve its investment objective primarily through managed exposure to bitcoin futures contracts. The fund does not invest directly in bitcoin. The fund adviser will generally hold its bitcoin futures contracts during periods in which the value of bitcoin and bitcoin futures are flat or declining as well as during periods in which the value of bitcoin or bitcoin futures is rising. It is non-diversified."
+    },
+    "PGR": {
+        "ticker": "PGR",
+        "name": "Progressive Corporation (The)",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 121671671808,
+        "currency": "USD",
+        "description": "The Progressive Corporation operates as an insurance company in the United States. The company writes insurance for personal autos and special lines products, including motorcycles, RVs, and watercraft; and personal residential property insurance for homeowners and renters. It also writes auto-related liability and physical damage insurance for comprising dump trucks, log trucks, garbage trucks, tractors, trailers, straight trucks, tow trucks and wreckers, vans, pick-up trucks, and autos; business-related general liability and commercial property insurance for small businesses; and workers' compensation insurance for the transportation industry. In addition, the company offers other specialty property-casualty insurance and provide related services; personal property reinsurance products; and involved in investment activities. It sells its products through independent insurance agencies, as well as online and over the phone. The Progressive Corporation was founded in 1937 and is headquartered in Mayfield Village, Ohio."
+    },
+    "VTWO": {
+        "ticker": "VTWO",
+        "name": "Vanguard Russell 2000 ETF",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund advisor employs an indexing investment approach designed to track the performance of the Russell 2000\u00ae Index. The index is designed to measure the performance of small-capitalization stocks in the United States. The advisor attempts to replicate the target index by investing all, or substantially all, of its assets in the stocks that make up the index, holding each stock in approximately the same proportion as its weighting in the index."
+    },
+    "FORTY": {
+        "ticker": "FORTY",
+        "name": "Formula Systems (1985) Ltd.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 2029738496,
+        "currency": "USD",
+        "description": "Formula Systems (1985) Ltd., through its subsidiaries, provides proprietary and non-proprietary software solutions and information technologies (IT) professional services in Israel, the United States, Europe, Africa, Japan, and internationally. The company also offers software product marketing and support, computer infrastructure and integration solutions, and learning and integration. In addition, it provides IT software solutions and services, and consulting and management services; computer and communication infrastructure solutions; and software solutions, web world content management, database and data warehouse mining, application integration, database and systems, data management, and software development tools. Further, the company offers Sapiens software solutions, such as Sapiens CoreSuite and Sapiens IDITSuite for property and Casualty insurance; Sapiens Platform, Sapiens CoreSuite, Sapiens UnderwritingPro, Sapiens ApplicationPro, Sapiens IllustrationPro, and Sapiens ConsolidationMaster for life, pension, and annuities; Sapiens Digital Suite; Data and Analytics platform; and Sapiens ReinsuranceMaster, Sapiens ReinsurancePro, and Sapiens Reinsurance GO for reinsurance. Additionally, it provides Sapiens workers' compensation platform; Sapiens Medical Professional Liability solution; Sapiens FinancialPro, Sapiens Financial GO, Sapiens StatementPro, Sapiens CheckPro and Sapiens Reporting Tools for financial and compliance; Sapiens Decision platform; and technology-based solutions. The company also application development and business process integration platforms; vertical software solutions; cloud-based services; strategic consulting and outsourcing, and professional services, as well as cloud computing solutions; and sells and markets computers and peripheral equipment. The company was incorporated in 1985 and is headquartered in Or Yehuda, Israel."
+    },
+    "VGSH": {
+        "ticker": "VGSH",
+        "name": "Vanguard Short-Term Treasury ET",
+        "meta": "Short Government",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund employs an indexing investment approach designed to track the performance of the Bloomberg US Treasury 1-3 Year Index. This index includes fixed income securities issued by the U.S. Treasury (not including inflation-protected securities, floating rate securities and certain other security types), all with maturities between 1 and 3 years. At least 80% of the fund's assets will be invested in bonds included in the index."
+    },
+    "TRV": {
+        "ticker": "TRV",
+        "name": "The Travelers Companies, Inc.",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 66988175360,
+        "currency": "USD",
+        "description": "The Travelers Companies, Inc., through its subsidiaries, provides a range of commercial and personal property, and casualty insurance products and services to businesses, government units, associations, and individuals in the United States and internationally. The company operates through three segments: Business Insurance, Bond & Specialty Insurance, and Personal Insurance. The Business Insurance segment offers workers' compensation, commercial automobile and property, general liability, commercial multi-peril, employers' liability, public and product liability, professional indemnity, marine, aviation, onshore and offshore energy, construction, terrorism, personal accident, and kidnap and ransom insurance products. This segment operates through select accounts, which serve small businesses; commercial accounts that serve mid-sized businesses; national accounts, which serve large companies; and national property and other that serve large and mid-sized customers, commercial trucking industry, and agricultural businesses, as well as markets and distributes its products through brokers, wholesale agents, and program managers. The Bond & Specialty Insurance segment provides surety, fidelity, management and professional liability, and other property and casualty coverages and related risk management services through independent agencies and brokers. The Personal Insurance segment offers property and casualty insurance covering personal risks, primarily automobile and homeowners' insurance to individuals through independent agencies and brokers. The Travelers Companies, Inc. was founded in 1853 and is based in New York, New York."
+    },
+    "BMY": {
+        "ticker": "BMY",
+        "name": "Bristol-Myers Squibb Company",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 121168027648,
+        "currency": "USD",
+        "description": "Bristol-Myers Squibb Company discovers, develops, licenses, manufactures, markets, distributes, and sells biopharmaceutical products worldwide. It offers products for oncology, hematology, immunology, cardiovascular, neuroscience, and other areas. The company's products include Eliquis for reduction in risk of stroke/systemic embolism in non-valvular atrial fibrillation and for the treatment of DVT/PE; Opdivo for various anti-cancer indications; Pomalyst/Imnovid for multiple myeloma; Orencia for active rheumatoid arthritis and psoriatic arthritis; and Sprycel to treat patients with Philadelphia chromosome-positive chronic myeloid leukemia. It also provides Yervoy for the treatment of patients with unresectable or metastatic melanoma; Empliciti for the treatment of relapsed/refractory multiple myeloma; Abecma for the treatment of patients with relapsed or refractory multiple myeloma; Reblozyl to treat anemia; Opdualag for the treatment of unresectable or metastatic melanoma; and Zeposia to treat relapsing forms of multiple sclerosis. In addition, the company offers Breyanzi for the treatment of patients with relapsed or refractory large B-cell lymphoma; Cobenfy to treat schizophrenia in adults; Krazati for the treatment of adult patients with KRASG12C-mutated locally advanced or metastatic non-small cell lung cancer (NSCLC); Camzyos to treat symptomatic obstructive HCM to improve functional capacity and symptom; Sotyktu for the treatment of moderate-to-severe plaque psoriasis; Augtyro for the treatment of locally advanced or metastatic ROS1-positive NSCLC; Revlimid, an oral immunomodulatory drug to treat multiple myeloma; and Abraxane for the treatment of breast cancer, NSCLC and pancreatic cancer. It sells products to wholesalers, distributors, pharmacies, retailers, hospitals, clinics, and government agencies. The company was formerly known as Bristol-Myers Company. Bristol-Myers Squibb Company was founded in 1887 and is headquartered in Princeton, New Jersey."
+    },
+    "BG": {
+        "ticker": "BG",
+        "name": "Bunge Limited",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 22031556608,
+        "currency": "USD",
+        "description": "Bunge Global SA operates as an agribusiness and food company worldwide. It operates through four segments: Agribusiness, Refined and Specialty Oils, Milling, and Sugar and Bioenergy. The Agribusiness segment purchases, stores, transports, processes, and sells agricultural commodities and commodity products, including oilseeds primarily soybeans, rapeseed, canola, and sunflower seeds, as well as grains comprising wheat and corn; and processes oilseeds into vegetable oils and protein meals. This segment offers its products for animal feed manufacturers, livestock producers, wheat and corn millers, and other oilseed processors, as well as third-party edible oil processing and biofuel companies for biofuel production applications. The Refined and Specialty Oils segment sells packaged and bulk oils and fats that comprise cooking oils, shortenings, margarines, mayonnaise, renewable diesel feedstocks, and other products for baked goods companies, snack food producers, confectioners, restaurant chains, foodservice operators, infant nutrition companies, and other food manufacturers, as well as grocery chains, wholesalers, distributors, and other retailers. This segment also refines and fractionates palm oil, palm kernel oil, coconut oil, and shea butter, and olive oil; and produces specialty ingredients derived from vegetable oils, such as lecithin. The Milling segment provides wheat flours and bakery mixes; corn milling products that comprise dry-milled corn meals and flours, wet-milled masa and flours, and flaking and brewer's grits, as well as soy-fortified corn meal, corn-soy blends, and other products; whole grain and fiber ingredients; die-cut pellets; and non-GMO products. The Sugar and Bioenergy segment produces sugar and ethanol; and generates electricity from burning sugarcane bagasse. Bunge Global SA was founded in 1818 and is headquartered in Chesterfield, Missouri."
+    },
+    "ROOF": {
+        "ticker": "ROOF",
+        "name": "NYLI CBRE NextGen Real Estate E",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index is a rules-based, modified capitalization weighted, float adjusted index. The index is designed to provide exposure to real estate sectors and companies that are expected to benefit from large trends affecting property sectors of the global economy over a secular, multi-year time horizon. The fund generally will invest in all of the securities that comprise its index in proportion to their weightings in the index. The fund invests at least 80% of the value of its assets in securities of real estate issuers."
     }
 }
