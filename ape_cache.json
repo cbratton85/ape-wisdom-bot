@@ -16404,5 +16404,68 @@
         "mcap": 0,
         "currency": "USD",
         "description": ""
+    },
+    "IDNA": {
+        "ticker": "IDNA",
+        "name": "iShares Genomics Immunology and",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of the index and in investments that have economic characteristics that are substantially identical to the component securities of the index and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents. The index is composed of developed and emerging market companies that could benefit from the long-term growth and innovation in genomics, immunology and bioengineering. -null-. The fund is non-diversified."
+    },
+    "AIRI": {
+        "ticker": "AIRI",
+        "name": "Air Industries Group",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 16176925,
+        "currency": "USD",
+        "description": "Air Industries Group, together with its subsidiaries, engages in the design, manufacture, and sale of precision components and assemblies for defense and aerospace industry in the United States. It offers actuators, arresting gears, aerostructures, aircraft structures, chaff pod assemblies, machining and milling solutions, cylinders, drag beams and braces, flight controls, flight safety critical components, integrated assemblies, landing gears, large diameter turn-mills, submarine valves, thrust struts, engine mounts, and turbine engine components and weldments for aircraft jet engines, ground turbines, and other complex machines. Air Industries Group was founded in 1941 and is based in Bay Shore, New York."
+    },
+    "TTC": {
+        "ticker": "TTC",
+        "name": "Toro Company (The)",
+        "meta": "Tools & Accessories",
+        "type": "EQUITY",
+        "mcap": 9377310720,
+        "currency": "USD",
+        "description": "The Toro Company provides professional turf maintenance equipment and services. It operates through Professional and Residential segments. It offers riding and walking mowers, greens rollers, all-wheel drive articulating tractors, turf sprayer, utility vehicles, aeration, bunker maintenance, and other turf equipment; sprinkler heads, controllers, turf sensors, valves, and operating software; and riding rotary and reel mowers and attachments, infield grooming equipment, multipurpose vehicles, debris management products, all-wheel drive articulating tractors, sidewalk snow and ice solution vehicles, and related attachments and accessories. The company also provides zero-turn radius riding mowers, walk behind and stand-on mowers, turf application and renovation, tree care, horizontal directional drills, and drilling guidance and support equipment; walk and ride trenchers, vacuum excavators, utility locators and inspection systems, pipe rehabilitation, and replacement solutions; drive chucks and sub savers, drill pipe, starter rods and quick connects, bits and blades, rock tools, reamers, and swivels; and snow removal and ice management solutions. In addition, it offers rotors, sprinkler bodies and nozzles, valves, drip tubing and subsurface irrigation, and electric control devices; wired and wireless rain, freeze, climate, and soil sensors; drip tape, polyethylene tubing, drip line, emitters, filters, fitting, and software related solutions; stand-on skid steers, walk-behind trenchers, stump grinders, material handlers, and other concrete construction equipment; walk power and zero-turn riding mowers, and snow throwers; and grass and hedge trimmers, blower-vacuums, chainsaws, edgers, cultivators, string mowers, and related parts and accessories. The company sells its products through distributors, dealers, mass retailers, hardware retailers, equipment rental and home centers, and online. The company was founded in 1914 and is headquartered in Bloomington, Minnesota."
+    },
+    "LAZR": {
+        "ticker": "LAZR",
+        "name": "Luminar Technologies, Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 14668649,
+        "currency": "USD",
+        "description": "Luminar Technologies, Inc., an automotive technology company, provides sensor technologies and software for passenger cars and commercial trucks in North America, the Asia Pacific, Europe, and the Middle East. It operates in two segments, Autonomy Solutions and Advanced Technologies and Services. The Autonomy Solutions segment designs, manufactures, and sells laser imaging, detection, and ranging sensors or lidars, as well as related perception and autonomy software solutions primarily for original equipment manufacturers in the automobile, commercial vehicle, robo-taxi, and adjacent industries. The Advanced Technologies and Services segment develops application-specific integrated circuits, pixel-based sensors, and advanced lasers. This segment also designs, tests, and provides consulting services for non-standard integrated circuits for use in automobile and aeronautics sector, as well as government spending in military and defense activities. The company was founded in 2012 and is headquartered in Orlando, Florida. On December 15, 2025, Luminar Technologies, Inc., along with its affiliates, filed a voluntary petition for reorganization under Chapter 11 in the U.S. Bankruptcy Court for the Southern District of Texas."
+    },
+    "MPC": {
+        "ticker": "MPC",
+        "name": "Marathon Petroleum Corporation",
+        "meta": "Oil & Gas Refining & Marketing",
+        "type": "EQUITY",
+        "mcap": 58894041088,
+        "currency": "USD",
+        "description": "Marathon Petroleum Corporation, together with its subsidiaries, operates as an integrated downstream energy company in the United States. The company operates through three segments: Refining & Marketing; Midstream; and Renewable Diesel. The Refining & Marketing segment refines crude oil and other feedstocks at its refineries in the Gulf Coast, Mid-Continent, and West Coast regions of the United States; and purchases refined products and ethanol for resale and distributes refined products through transportation, storage, distribution, and marketing services. Its refined products include transportation fuels, such as reformulated gasolines and blend-grade gasolines; heavy fuel oil; and asphalt. This segment also manufactures propane and petrochemicals. It sells refined products to wholesale marketing customers in the United States and internationally, buyers on the spot market, and independent entrepreneurs who operate primarily Marathon branded outlets, as well as through long-term fuel supply contracts to direct dealer locations primarily under the ARCO brand. The Midstream segment gathers, transports, stores, distributes, and markets crude oil and refined products, including renewable diesel and other hydrocarbon-based products through refining logistics assets, pipelines, terminals, towboats, and barges; gathers, processes, and transports natural gas; and transports, fractionates, stores, and markets natural gas liquids. The Renewable Diesel segment processes renewable feedstocks into renewable diesel, markets, and distributes renewable diesel through its Midstream segment and third parties. It sells renewable diesel to wholesale marketing customers, buyers on the spot market, and through long-term supply contracts to direct dealers under the ARCO brand. Marathon Petroleum Corporation was founded in 1887 and is headquartered in Findlay, Ohio."
+    },
+    "NVS": {
+        "ticker": "NVS",
+        "name": "Novartis AG",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 293402509312,
+        "currency": "USD",
+        "description": "Novartis AG researches, develops, manufactures, distributes, markets, and sells pharmaceutical medicines in Switzerland and internationally. The company offers Entresto, an angiotensin receptorneprilysin inhibitor to treat symptomatic chronic heart failure with reduced ejection fraction (HFrEF); Cosentyx to treat plaque psoriasis, pso riatic arthritis, ankylosing spondylitis, and nonradiographic axial spondy loarthritis; Kisqali, a selective oral cyclin dependent inhibitor of kinases 4 and 6 (CDK4/6); Promacta/Revolade to treat immune thrombocytopenia (ITP), thrombocytopenia, and patients with severe aplastic anemia (SAA); Tafinlar+Mekinist, an oral combination therapy to treat patients with certain types of cancers; and Jakavi for the treatment of myelofibrosis, polycythemia vera, and acute or chronic graftversushost disease (GvHD). It also provides Tasigna to treat philadelphia chromosomepositive chronic myeloid leukemia in the chronic and/or accelerated phase; Xolair for the treatment of allergic asthma and nasal polyps or severe chronic rhinosi nusitis with nasal polyps; Ilaris to treat fever syndromes, Still's disease, and acute gouty arthritis; Pluvicto to treat prostatespecific membrane anti genpositive metastatic castrationresistant prostate cancer; Sandostatin SC and Sandostatin LAR to treat acromegaly carcinoid tumors and other types of functional gastro intestinal and pancreatic neuroendocrine tumors; Zolgensma for the treatment of genetic root cause of spinal muscular atrophy; Lucentis; Leqvio to reduce LDL cholesterol; Lutathera; Scemblix; and Fabhalta. The company focuses on therapeutic areas, such as cardiovascular, renal and metabolic, immunology, neuroscience, oncology, and hematology. It has a license and collaboration agreement with Alnylam Pharmaceuticals, Inc. to develop, manufacture, and commercialize Leqvio (inclisiran), a therapy to reduce LDL cholesterol. Novartis AG was incorporated in 1996 and is headquartered in Basel, Switzerland."
+    },
+    "VPL": {
+        "ticker": "VPL",
+        "name": "Vanguard FTSE Pacific ETF",
+        "meta": "Diversified Pacific/Asia",
+        "type": "ETF",
+        "mcap": 1842687232,
+        "currency": "USD",
+        "description": "The fund employs an indexing investment approach by investing all, or substantially all, of its assets in the common stocks included in the FTSE Developed Asia Pacific All Cap Index. The FTSE Developed Asia Pacific All Cap Index is a market-capitalization weighted index."
     }
 }
