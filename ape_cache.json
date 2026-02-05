@@ -17169,5 +17169,122 @@
         "mcap": 74004512,
         "currency": "USD",
         "description": "PodcastOne, Inc. operates as a podcast platform and publisher. The company provides its content to audiences through podcasting distribution platforms, including its website, Apple Podcasts, Spotify, Amazon Music, and others. It also produces vodcasts, branded podcasts, merchandise, and live events. In addition, the company builds, owns, and operates LaunchPadOne, a self-publishing podcast hosting, distribution, and monetization platform for independent podcasters. The company was formerly known as Courtside Group, Inc. and changed its name to PodcastOne, Inc. in September 2023. PodcastOne, Inc. was incorporated in 2014 and is headquartered in Beverly Hills, California. PodcastOne, Inc. is a subsidiary of LiveOne, Inc."
+    },
+    "GFI": {
+        "ticker": "GFI",
+        "name": "Gold Fields Limited",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 45295874048,
+        "currency": "USD",
+        "description": "Gold Fields Limited operates as a gold producer with reserves and resources in Australia, South Africa, Ghana, Peru, Chile, and Canada. It also explores for copper and silver deposits. Gold Fields Limited was founded in 1887 and is based in Sandton, South Africa."
+    },
+    "SON": {
+        "ticker": "SON",
+        "name": "Sonoco Products Company",
+        "meta": "Packaging & Containers",
+        "type": "EQUITY",
+        "mcap": 5016475136,
+        "currency": "USD",
+        "description": "Sonoco Products Company, together with its subsidiaries, designs, develops, manufactures, and sells various engineered and sustainable packaging products in the United States, Europe, Canada, the Asia Pacific, and internationally. The company operates in two segments, Consumer Packaging and Industrial Paper Packaging. The Consumer Packaging segment provides round and shaped rigid paper products and steel and plastic containers; and metal and peelable membrane ends, closures, and components. The Industrial Paper Packaging segment offers paperboard tubes, cones, and cores; paper-based protective packaging products; and uncoated recycled paperboards. The company also offers various packaging materials, including plastic, paper, foam, and various other specialty materials. The company sells its products in various markets, which include paper, textile, film, food, packaging, construction, and wire and cable. Sonoco Products Company was founded in 1899 and is headquartered in Hartsville, South Carolina."
+    },
+    "NVT": {
+        "ticker": "NVT",
+        "name": "nVent Electric plc",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 18495838208,
+        "currency": "USD",
+        "description": "nVent Electric plc designs, manufactures, markets, installs, and services electrical connection and protection solutions in North America, Europe, the Middle East, Africa, the Asia Pacific, and internationally. It operates in two segments, Enclosures, and Electrical & Fastening Solutions. The Enclosures segment provides solutions to protect electronics, systems, and data in mission critical applications, including data centers. The Electrical & Fastening Solutions segment offers solutions that connect power and data infrastructure. It also provides cable management, control buildings, liquid and air-cooling solutions, electrical connections, enclosures, equipment protection, power connections, and power management solutions, as well as tools and test instruments. The company markets its products through electrical distributors, retail, contractors, and original equipment manufacturers under the nVent CADDY, ERICO, HOFFMAN, ILSCO, SCHROFF, and TRACHTE brand names. Its products are used for various applications, such as industrial, commercial and residential, infrastructure, and energy. The company was founded in 1903 and is based in London, the United Kingdom."
+    },
+    "KEY": {
+        "ticker": "KEY",
+        "name": "KeyCorp",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 24941824000,
+        "currency": "USD",
+        "description": "KeyCorp operates as the holding company for KeyBank National Association that provides various retail and commercial banking products and services in the United States. It operates in two segments, Consumer Bank and Commercial Bank. The company offers various deposits and investment products; commercial leasing, investment management, consumer finance; personal finance and financial wellness, lending, student loan refinancing, mortgage and home equity, credit card, treasury, and business advisory; and wealth management and investment services for institutional, non-profit, and high-net-worth clients. It also provides lending, cash management, equipment financing, and commercial mortgage loans; and capital market products and services, such as syndicated finance, debt and equity underwriting, fixed income and equity sales and trading, derivatives, foreign exchange, mergers and acquisition, other advisory, and public finance to large corporate and institutional clients. In addition, the company offers personal and institutional trust custody services, personal financial and planning services, access to mutual funds, treasury services, and international banking services. Further, it provides community development financing, securities underwriting, brokerage, and investment banking services, as well as merchant services. The company was founded in 1849 and is headquartered in Cleveland, Ohio."
+    },
+    "SYNA": {
+        "ticker": "SYNA",
+        "name": "Synaptics Incorporated",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 3427632896,
+        "currency": "USD",
+        "description": "Synaptics Incorporated develops, markets, and sells semiconductor products worldwide. The company provides touch, display, biometrics, voice, audio, processor, wireless, and multimedia products for mobile, personal computers, smart home, industrial, and automotive applications, as well as modular development kits, open software frameworks, and optimized AI/ML toolchains. It also offers Wi-Fi, Bluetooth, Bluetooth Low Energy, Zigbee, Thread, Matter, global positioning system, global navigation satellite system, ultra-wideband and ultra-low energy solutions, human interface products, organic light-emitting diodes, multimedia SoCs, fax/modem/printer processors, video interface ICs, DisplayLink graphics, and display driver ICs (DDIC); Astra and Veros, an AI solution; and DisplayLink and DisplayPort to simplify connectivity to external displays. In addition, it provides Natural ID, a fingerprint ID product for notebook, personal computer peripherals, automobiles, and other applications, as well as integrated touch and display, local dimming, and driver sensing technologies. The company sells its products through direct sales, outside sales representatives, OEM distributors, and value-added resellers. Synaptics Incorporated was incorporated in 1986 and is headquartered in San Jose, California."
+    },
+    "SPMD": {
+        "ticker": "SPMD",
+        "name": "State Street SPDR Portfolio S&P",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Under normal market conditions, the fund generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index. The index is designed to measure the performance of the mid-capitalization segment of the U.S. equity market."
+    },
+    "OTEX": {
+        "ticker": "OTEX",
+        "name": "Open Text Corporation",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 5992278016,
+        "currency": "USD",
+        "description": "Open Text Corporation designs, develops, markets, and sells information management software and solutions in North, Central, and South America, Europe, the Middle East, Africa, Australia, Japan, Singapore, India, and China. The company offers cloud services and subscriptions, including software as a service offerings, application programming interfaces and data services, and private, public, and off-cloud products, such as hosted services and managed service arrangements; foundational platform of technology services; and packaged business applications, as well as managed services and outsourced B2B integration solutions, including program implementation, operational management, and customer support. It also provides fees earned from the licensing of software products to customers; and consulting and learning services, such as implementation, training, and integration of licensed product offerings into the customer's systems. In addition, the company offers various business clouds, including content, cybersecurity, DevOps, business network, observability and service management, and analytics; and artificial intelligence, software developers API, and other related services. It has strategic partnerships with SAP SE, Google Cloud, Amazon Web Services, Microsoft Corporation, Oracle Corporation, and Salesforce.com Corporation, as well as global systems integrators, including Accenture plc, Capgemini Technology Services SAS, Deloitte Consulting LLP, Hewlett Packard Enterprises, and Tata Consultancy Services. The company serves G10K organizations, enterprise companies, public sector agencies, mid-market companies, small and medium-sized businesses, and direct consumers. Open Text Corporation was incorporated in 1991 and is headquartered in Waterloo, Canada."
+    },
+    "COUR": {
+        "ticker": "COUR",
+        "name": "Coursera, Inc.",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 998216960,
+        "currency": "USD",
+        "description": "Coursera, Inc. provides online educational services in the United States, Europe, Africa, the Asia Pacific, the Middle East, and internationally. It operates through three segments: Consumer, Enterprise, and Degrees. The company offers guided projects, courses, and specializations, as well as online degrees; and certificates for entry-level professional, non-entry level professional, university, and MasterTrack. It offers its products to individuals, enterprise, business, campus, and government. The company was formerly known as Dkandu, Inc. and changed its name to Coursera, Inc. in April 2012. Coursera, Inc. was incorporated in 2011 and is headquartered in Mountain View, California."
+    },
+    "XIFR": {
+        "ticker": "XIFR",
+        "name": "XPLR Infrastructure, LP",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 913822720,
+        "currency": "USD",
+        "description": "XPLR Infrastructure, LP acquires, owns, and manages contracted clean energy projects in the United States. It operates a portfolio of contracted clean energy assets, including wind, solar, and battery storage projects, as well as invests in contracted natural gas pipeline assets. The company was formerly known as NextEra Energy Partners, LP and changed its name to XPLR Infrastructure, LP in January 2025. XPLR Infrastructure, LP was incorporated in 2014 and is based in Juno Beach, Florida."
+    },
+    "MLR": {
+        "ticker": "MLR",
+        "name": "Miller Industries, Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 501865792,
+        "currency": "USD",
+        "description": "Miller Industries, Inc., together with its subsidiaries, manufactures and sells towing and recovery equipment. The company offers wreckers that are used to recover and tow disabled vehicles and other equipment; and car carriers, which are specialized flat-bed vehicles with hydraulic tilt mechanisms, which are used to transport new or disabled vehicles and other equipment. It also provides transport trailers for moving multiple vehicles for auto auctions, car dealerships, leasing companies, and other similar operations. The company markets its products under the Century, Vulcan, Challenger, Holmes, Champion, Chevron, Eagle, Titan, Jige, and Boniface brands. It sells its products through independent distributors in North America, and Canada, Mexico; and through prime contractors to governmental entities. Miller Industries, Inc. was incorporated in 1990 and is headquartered in Ooltewah, Tennessee."
+    },
+    "ROIV": {
+        "ticker": "ROIV",
+        "name": "Roivant Sciences Ltd.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 14907862016,
+        "currency": "USD",
+        "description": "Roivant Sciences Ltd., a clinical-stage biopharmaceutical company, focuses on the discovery, development, and commercialization of medicines and technologies. Its clinical product candidates include IMVT-1402, a fully human monoclonal antibody that targets the neonatal fragment crystallizable receptor for the treatment of graves' disease, difficult-to-treat rheumatoid arthritis, sj\u00f6gren's disease, myasthenia gravis, chronic inflammatory demyelinating polyneuropathy, and cutaneous lupus erythematosus indications; batoclimab, a fully human monoclonal antibody for the treatment of thyroid eye disease; and brepocitinib, a potent small molecule inhibitor of TYK2 and JAK1 in development for the treatment of dermatomyositis, non-infectious uveitis, cutaneous sarcoidosis, and other immune-mediated diseases. The company's lead program consists of mosliciguat, an inhaled sGC activator for the treatment of pulmonary hypertension associated with interstitial lung disease and other cardiopulmonary diseases. In addition, the company offers delivery platforms comprising lipid nanoparticle (LNP) platform and ligand conjugate platform. Roivant Sciences Ltd. was founded in 2014 and is based in London, United Kingdom."
+    },
+    "JAGX": {
+        "ticker": "JAGX",
+        "name": "Jaguar Health, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2463744,
+        "currency": "USD",
+        "description": "Jaguar Health, Inc., a commercial-stage pharmaceuticals company, focuses on developing plant-based prescription medicines for people and animals with gastrointestinal distress. The company operates through two segments, Animal Health and Human Health. It focuses on developing and commercializing prescription and non-prescription products for companion and production animals; and human products. The company offers Mytesi, an anti-secretory antidiarrheal drug for the symptomatic relief of non-infectious diarrhea in adults with HIV/AIDS on antiretroviral therapy; and Canalevia-CA1, a prescription drug product for chemotherapy-induced diarrhea in dogs. It is also developing Crofelemer, an anti-secretory antidiarrheal drug, which is in Phase III clinical trial for prophylaxis of diarrhea in adult cancer patients; Phase II clinical trials for rare/orphan disease indications, including short bowel syndrome with intestinal failure and microvillus inclusion disease; diarrhea-predominant irritable bowel syndrome; and for idiopathic/functional diarrhea. In addition, the company is developing Mytesi which is in Phase III clinical trial for cancer therapy-related diarrhea, as well as Phase II clinical trial for irritable bowel syndrome; and NP-300, a second-generation antidiarrheal drug that is in Phase I clinical trial for symptomatic relief and treatment of moderate-to-severe diarrhea. The company is headquartered in San Francisco, California."
+    },
+    "SSNC": {
+        "ticker": "SSNC",
+        "name": "SS&C Technologies Holdings, Inc",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 18130939904,
+        "currency": "USD",
+        "description": "SS&C Technologies Holdings, Inc., together with its subsidiaries, provides software products and software-enabled services to financial services and healthcare industries. The company owns and operates technology stack across securities accounting; front-office functions, such as trading and modeling; middle-office functions comprising portfolio management and reporting; back-office functions, such as accounting, performance measurement, reconciliation, reporting, processing and clearing, and compliance and tax reporting; and healthcare solutions consisting of claims adjudication, benefit management, care management, and business intelligence solutions. It also offers software-enabled services, such as SS&C GlobeOp, Global Investor and Distribution Solutions, SS&C Retirement Solutions, CRM Solutions, Managed Services, Data Solutions, ALPS Advisors, and Virtual Data Rooms, as well as pharmacy, healthcare administration, and health outcomes optimization solutions. In addition, the company provides software products, such as portfolio/investment accounting and analytics software, portfolio management software, trading software, automation solutions, and banking and lending solutions, as well as research, analytics, risk, and training solutions. The company also provides professional services that includes consulting and implementation services consisting of initial system installation, conversion of historical data, and ongoing training and support, as well as product support services. It operates in the United States, the United Kingdom, Europe, the Middle East, Africa, the Asia Pacific, Japan, Canada, and the Americas. SS&C Technologies Holdings, Inc. was founded in 1986 and is headquartered in Windsor, Connecticut."
     }
 }
