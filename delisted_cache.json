@@ -134,11 +134,6 @@
         "last_checked": "2026-02-05",
         "reason": "No Price Data"
     },
-    "WFH": {
-        "delisted": true,
-        "last_checked": "2026-02-05",
-        "reason": "No Price Data"
-    },
     "OG": {
         "delisted": true,
         "last_checked": "2026-02-05",
@@ -185,6 +180,11 @@
         "reason": "No Price Data"
     },
     "GPS": {
+        "delisted": true,
+        "last_checked": "2026-02-05",
+        "reason": "No Price Data"
+    },
+    "WFH": {
         "delisted": true,
         "last_checked": "2026-02-05",
         "reason": "No Price Data"
