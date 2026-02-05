@@ -261,6 +261,46 @@ def fetch_meta_data_robust(ticker):
             'description': description
             }
 
+def calculate_rsi(series, period=14):
+    """
+    Calculates RSI using Wilder's Smoothing (EMA-based) to match TradingView.
+    """
+    try:
+        if series is None or len(series) < period + 1:
+            return 0
+        
+        # Ensure data is numeric and drop empty rows
+        series = pd.to_numeric(series, errors='coerce').dropna()
+        
+        if len(series) < period + 1:
+            return 0
+
+        delta = series.diff()
+        
+        # Ups and Downs
+        gain = (delta.where(delta > 0, 0))
+        loss = (-delta.where(delta < 0, 0))
+
+        # Wilder's Smoothing uses alpha = 1/period. 
+        # In Pandas EWM, 'com' (center of mass) = period - 1
+        avg_gain = gain.ewm(com=period - 1, min_periods=period).mean()
+        avg_loss = loss.ewm(com=period - 1, min_periods=period).mean()
+        
+        # Avoid division by zero
+        rs = avg_gain / avg_loss.replace(0, np.nan)
+        rsi = 100 - (100 / (1 + rs))
+        
+        final_val = rsi.iloc[-1]
+        
+        # Return 50.0 if the price was completely flat (NaN result)
+        if np.isnan(final_val):
+            return 50.0
+            
+        return round(float(final_val), 1)
+
+    except Exception:
+        return 0
+
 def filter_and_process(stocks):
     if not stocks: return pd.DataFrame()
 
@@ -365,43 +405,53 @@ def filter_and_process(stocks):
         
         try:
             hist = pd.DataFrame()
-            # Attempt to extract from batch data
+            
+            # 1. EXTRACT FROM BATCH DATA
             if isinstance(market_data.columns, pd.MultiIndex):
-                if t in market_data.columns.levels[0]:
-                    hist = market_data[t].dropna()
+                if t in market_data.columns.get_level_values(0):
+                    # Only drop rows where the specific columns we need are missing
+                    hist = market_data[t][['Close', 'Volume']].dropna(subset=['Close'])
             else:
                 if t in market_data.columns:
-                    hist = market_data[t].dropna()
+                    hist = market_data[[t]].dropna() # Fallback for single-column DF
 
-            # --- DOUBLE VERIFICATION LOGIC ---
-            if hist.empty:
+            # 2. DOUBLE VERIFICATION / RETRY
+            if hist.empty or len(hist) < 2:
                 try:
-                    retry_data = yf.download(t, period="5d", interval="1d", progress=False)
-                    if retry_data.empty:
-                        print(f"{C_RED}  > {t} confirmed NO DATA. Adding to DELISTED cache.{C_RESET}")
-                        delisted_cache[t] = {
-                            'delisted': True, 
-                            'last_checked': now.strftime("%Y-%m-%d"), 
-                            'reason': 'No Price Data'
-                        }
-                        updated_delisted = True
-                        continue
-                    else:
+                    # If batch failed, we need 20 days for a healthy 14-period RSI
+                    retry_data = yf.download(t, period="25d", interval="1d", progress=False)
+                    if not retry_data.empty:
                         hist = retry_data
                         if isinstance(hist.columns, pd.MultiIndex):
                             hist.columns = hist.columns.droplevel(1)
                 except:
-                    continue
+                    pass
 
-            # --- INITIAL DATA GATHERING ---
+            # 3. SAFETY CHECK & RSI CALCULATION
+            if hist.empty:
+                print(f"{C_RED}  > {t} confirmed NO DATA. Adding to DELISTED cache.{C_RESET}")
+                delisted_cache[t] = {
+                    'delisted': True, 
+                    'last_checked': now.strftime("%Y-%m-%d"), 
+                    'reason': 'No Price Data'
+                }
+                updated_delisted = True
+                continue
+
+            # INITIAL DATA GATHERING
             info = local_cache.get(t, {})
             if info.get('currency') not in ['USD', None, '']: continue
 
-            # Volume & Price Requirements
-            # Use a baseline price from hist first to prevent "Empty Table" crashes
+            # Extract current price safely
             curr_p = float(hist['Close'].iloc[-1])
             if isinstance(curr_p, pd.Series): curr_p = curr_p.iloc[0]
 
+            # 4. CALCULATE RSI (Requires ~15-20 days for accuracy)
+            if not hist.empty and len(hist) >= 15:
+                rsi_val = calculate_rsi(hist['Close'])
+            else:
+                # If a stock is brand new or yfinance data is missing, we default to 0
+                rsi_val = 0
             clean_hist = hist['Volume'] 
             actual_vol_days = min(len(clean_hist), AVG_VOLUME_DAYS)
             avg_v = clean_hist.tail(actual_vol_days).mean()
@@ -445,13 +495,14 @@ def filter_and_process(stocks):
                     last_date = last_ts.date() if hasattr(last_ts, 'date') else pd.to_datetime(last_ts).date()
                     today_date = datetime.datetime.now().date()
 
+                    # Only calculate if the data includes today's candle
                     if last_date == today_date:
                         prev_day_close = float(hist['Close'].iloc[-2])
                         if prev_day_close > 0:
                             day_chg_pct = ((curr_p - prev_day_close) / prev_day_close) * 100
                         price_found = True
 
-                # 2. Fallback to Live Fetch if batch is stale/missing today's candle
+                # 2. Fallback to Live Fetch if batch is stale
                 if not price_found:
                     time.sleep(0.05) 
                     live_dat = yf.Ticker(t)
@@ -465,42 +516,40 @@ def filter_and_process(stocks):
                         day_chg_pct = ((curr_p - prev_p) / prev_p) * 100
 
             except Exception:
-                # If both fail, keep baseline curr_p and 0.0% change
                 pass
 
-            # Final list assembly
+            # --- FINAL LIST ASSEMBLY ---
+            # Added 'RSI' here so it can be mapped to Index 20 in the HTML
             final_list.append({
-                "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
+                "Rank": rank_now, 
+                "Name": name, 
+                "Sym": t, 
+                "Rank+": rank_plus,
                 "Price": float(curr_p), 
                 "Day%": float(day_chg_pct),
-                "AvgVol": int(avg_v), "Surge": s_perc,
-                "MENT": cur_m, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
-                "Upvotes": current_upvotes, "Meta": info.get('meta', '-'),
-                "Desc": info.get('description', ''), "Squeeze": squeeze_score,
-                "MCap": mcap, "Conv": conviction, "Eff": efficiency,
-                "Accel": 0, "Upv+": 0, "Velocity": 0, "Streak": 0, 
-                "Rolling": 0, "History": "New"
+                "AvgVol": int(avg_v), 
+                "Surge": s_perc,
+                "MENT": cur_m, 
+                "Mnt%": m_perc, 
+                "Type": info.get('type', 'EQUITY'),
+                "Upvotes": current_upvotes, 
+                "Meta": info.get('meta', '-'),
+                "Desc": info.get('description', ''), 
+                "Squeeze": squeeze_score,
+                "MCap": mcap, 
+                "Conv": conviction, 
+                "Eff": efficiency,
+                "Accel": 0, 
+                "Upv+": 0, 
+                "Velocity": 0, 
+                "Streak": 0, 
+                "Rolling": 0, 
+                "History": "New",
+                "RSI": rsi_val  # <--- CRITICAL: Passes the calculated RSI to the table
             })
             
         except Exception as e:
-            # General catch-all to prevent one bad ticker from stopping the script
             print(f"{C_RED}[!] Error processing {t}: {e}{C_RESET}")
-            continue
-
-            final_list.append({
-                "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
-                "Price": float(curr_p), 
-                "Day%": float(day_chg_pct),
-                "AvgVol": int(avg_v), "Surge": s_perc,
-                "MENT": cur_m, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
-                "Upvotes": current_upvotes, "Meta": info.get('meta', '-'),
-                "Desc": info.get('description', ''), "Squeeze": squeeze_score,
-                "MCap": mcap, "Conv": conviction, "Eff": efficiency,
-                "Accel": 0, "Upv+": 0, "Velocity": 0, "Streak": 0, 
-                "Rolling": 0, "History": "New"
-            })
-            
-        except Exception as e:
             continue
 
     if updated_delisted:
@@ -789,6 +838,18 @@ def export_interactive_html(df, ai_summary=""):
             ment_hist = row.get('h_ment', '')
             export_df.at[index, 'MENT'] = with_hist(ment_val, ment_hist)
 
+            # --- INSERT RSI COLOR LOGIC HERE ---
+            rsi_raw = float(row.get('RSI', 0))
+            if rsi_raw >= 70: 
+                rsi_clr = "#ff4444" # Red (Overbought)
+            elif rsi_raw <= 30 and rsi_raw > 0: 
+                rsi_clr = "#00ff00" # Green (Oversold)
+            else: 
+                rsi_clr = "#ffffff"
+            
+            rsi_str = color_span(f"{rsi_raw:.1f}", rsi_clr)
+            # Use with_hist if you want RSI history in the tooltip, or just color_span
+            export_df.at[index, 'RSI'] = rsi_str
 
             # --- 15. Percent Change ---
             d_val = row.get('Day%', 0)
@@ -822,7 +883,7 @@ def export_interactive_html(df, ai_summary=""):
 
         cols = [
             'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Day%', 'Acc', 'Eff', 'Conv', 'Upvs', 
-            'Upv+', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 
+            'Upv+', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 'RSI', 
             'Type_Tag', 'AvgVol', 'MCap'
         ]
         for c in cols:
@@ -975,34 +1036,36 @@ def export_interactive_html(df, ai_summary=""):
             table.dataTable {{ width: auto !important; margin: 0 auto; }}
             
             /* COLUMN WIDTHS */
-            th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; font-weight: bold; }}
-            th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }}
-            th:nth-child(3), td:nth-child(3) {{ width: 1%; text-align: center; font-weight: bold; }}
+            th:nth-child(1), td:nth-child(1) {{ width: 0.1%; text-align: center; font-weight: bold; }}
+            th:nth-child(2), td:nth-child(2) {{ width: 0.1%; text-align: center; }}
+            th:nth-child(3), td:nth-child(3) {{ width: 0.1%; text-align: center; font-weight: bold; }}
             
             /* NAME COLUMN */
             th:nth-child(4), td:nth-child(4) {{
                 white-space: normal !important;
-                width: 300px; 
+                width: 240px; 
                 line-height: 1.4;
                 text-align: left;
             }}
             
             /* SYMBOL */
-            th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }}
-            th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; font-weight: normal !important; }}
-            th:nth-child(7), td:nth-child(7) {{ width: 1%; text-align: right; font-weight: normal !important; }}
-            th:nth-child(8), td:nth-child(8),
-            th:nth-child(9), td:nth-child(9),
-            th:nth-child(10), td:nth-child(10),
-            th:nth-child(11), td:nth-child(11), 
-            th:nth-child(12), td:nth-child(12), 
-            th:nth-child(13), td:nth-child(13) {{ width: 1%; text-align: right; font-weight: normal !important; }}
-            th:nth-child(14), td:nth-child(14),
-            th:nth-child(15), td:nth-child(15), 
-            th:nth-child(16), td:nth-child(16),
-            th:nth-child(17), td:nth-child(17),
-            th:nth-child(18), td:nth-child(18),
-            th:nth-child(19), td:nth-child(19) {{ width: 1%; text-align: center; }}
+            th:nth-child(5), td:nth-child(5) {{ width: 0.1%; text-align: left; }}
+            th:nth-child(6), td:nth-child(6) {{ width: 0.1%; text-align: right; font-weight: normal !important; }}
+            th:nth-child(7), td:nth-child(7) {{ width: 0.1%; text-align: right; font-weight: normal !important; }}
+            th:nth-child(8), td:nth-child(8) {{ width: 0.1%; }}
+            th:nth-child(9), td:nth-child(9) {{ width: 0.1%; }}
+            th:nth-child(10), td:nth-child(10) {{ width: 0.1%; }}
+            th:nth-child(11), td:nth-child(11) {{ width: 0.1%; }}
+            th:nth-child(12), td:nth-child(12) {{ width: 0.1%; }}
+            th:nth-child(13), td:nth-child(13) {{ width: 0.1%; text-align: right; font-weight: normal !important; }}
+            th:nth-child(14), td:nth-child(14) {{ width: 0.1%; }}
+            th:nth-child(15), td:nth-child(15) {{ width: 0.1%; }}
+            th:nth-child(16), td:nth-child(16) {{ width: 0.1%; }}
+            th:nth-child(17), td:nth-child(17) {{ width: 0.1%; }}
+            th:nth-child(18), td:nth-child(18) {{ width: 0.1%; }}
+            th:nth-child(19), td:nth-child(19) {{ width: 0.1%; text-align: center; }}
+            th:nth-child(20), td:nth-child(20) {{ max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; }}
+            th:nth-child(21), td:nth-child(21) {{ width: 0.1%; text-align: center; font-weight: bold; }}
             
             a {{ color:#4da6ff; text-decoration:none; }} a:hover {{ text-decoration:underline; }}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
@@ -1497,7 +1560,7 @@ def export_interactive_html(df, ai_summary=""):
         function getTopSectors(metricIdx) {{
             var sectorData = {{}};
             allData.each(function(row) {{
-                var rawType = row[20].toString().replace(/<[^>]+>/g, ''); 
+                var rawType = row[21].toString().replace(/<[^>]+>/g, ''); 
                 if (topSwitchIsETF && !rawType.includes('ETF')) return;
                 if (!topSwitchIsETF && rawType.includes('ETF')) return;
 
@@ -1622,25 +1685,53 @@ def export_interactive_html(df, ai_summary=""):
 
     $(document).ready(function(){{ 
         table = $('.table').DataTable({{
-            "order":[[0,"asc"]], "pageLength": 15, "lengthMenu": [[15, 25, 50, 100, 250, -1], [15, 25, 50, 100, 250, "All"]],
+            "order":[[0,"asc"]], 
+            "pageLength": 15, 
+            "lengthMenu": [[15, 25, 50, 100, 250, -1], [15, 25, 50, 100, 250, "All"]],
             "columnDefs": [ 
-                {{ "visible": false, "targets": [20, 21, 22] }}, 
-                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], "type": "num", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ return parseVal(data); }} return data; }} }},
-                {{ "targets": [19], "type": "string", "render": function(data, type) {{ if (type === 'sort' || type === 'type') {{ return data.toString().replace(/<[^>]+>/g, '').trim(); }} return data; }} }}
+                // Metadata: Type_Tag (21), AvgVol (22), MCap (23) hidden
+                {{ "visible": false, "targets": [21, 22, 23] }}, 
+                
+                // Numeric sorting: Indices for all metric columns including RSI (20)
+                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20], 
+                   "type": "num", 
+                   "render": function(data, type) {{ 
+                       if (type === 'sort' || type === 'type') {{ return parseVal(data); }} 
+                       return data; 
+                   }} 
+                }},
+
+                // Industry/Sector (19) as string
+                {{ "targets": [19], "type": "string", "render": function(data, type) {{ 
+                    if (type === 'sort' || type === 'type') {{ return data.toString().replace(/<[^>]+>/g, '').trim(); }} 
+                    return data; 
+                }} }}
             ],
-            "drawCallback": function() {{ var api = this.api(); $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); }}
+            "drawCallback": function() {{ 
+                var api = this.api(); 
+                $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); 
+            }}
         }});
 
         $('.dataTables_filter input').attr('placeholder', 'SEARCH');
 
+        // --- CUSTOM FILTERING LOGIC ---
         $.fn.dataTable.ext.search.push(function(settings, data) {{
-            var typeTag = data[20] || ""; var viewMode = $('input[name="btnradio"]:checked').attr('id');
+            // UPDATED INDICES:
+            var typeTag = data[21] || "";         // Index 21 = Type (STOCK/ETF)
+            var avgVol  = parseVal(data[22]);      // Index 22 = AvgVol
+            var mcap    = parseVal(data[23]);      // Index 23 = MCap
+            
+            var viewMode = $('input[name="btnradio"]:checked').attr('id');
             var isETF = typeTag.includes("ETF");
+
+            // 1. Stock/ETF Toggle
             if (viewMode == 'btnradio2' && isETF) return false; 
             if (viewMode == 'btnradio3' && !isETF) return false; 
             
+            // 2. Market Cap Buttons
             if (!$('#mcapAll').is(':checked')) {{
-                var mcap = parseVal(data[22]); var match = false;
+                var match = false;
                 if ($('#mcapMega').is(':checked') && mcap >= 200000000000) match = true;
                 if ($('#mcapLarge').is(':checked') && (mcap >= 10000000000 && mcap < 200000000000)) match = true;
                 if ($('#mcapMid').is(':checked') && (mcap >= 2000000000 && mcap < 10000000000)) match = true;
@@ -1649,11 +1740,16 @@ def export_interactive_html(df, ai_summary=""):
                 if (!match) return false; 
             }}
 
-            var minP = parseVal($('#minPrice').val()), maxP = parseVal($('#maxPrice').val()); var p = parseVal(data[5]);
-            if (minP > 0 && p < minP) return false; if (maxP > 0 && p > maxP) return false;
+            // 3. Price Filter (Index 5 = Price)
+            var minP = parseVal($('#minPrice').val()), maxP = parseVal($('#maxPrice').val()); 
+            var p = parseVal(data[5]);
+            if (minP > 0 && p < minP) return false; 
+            if (maxP > 0 && p > maxP) return false;
             
-            var minV = parseVal($('#minVol').val()), maxV = parseVal($('#maxVol').val()); var v = parseVal(data[21]);
-            if (minV > 0 && v < minV) return false; if (maxV > 0 && v > maxV) return false;
+            // 4. Volume Filter (CORRECTED Index 22)
+            var minV = parseVal($('#minVol').val()), maxV = parseVal($('#maxVol').val()); 
+            if (minV > 0 && avgVol < minV) return false; 
+            if (maxV > 0 && avgVol > maxV) return false;
             
             return true;
         }});
