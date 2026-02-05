@@ -375,15 +375,9 @@ def filter_and_process(stocks):
 
             # --- DOUBLE VERIFICATION LOGIC ---
             if hist.empty:
-                # The batch download failed for this ticker. 
-                # Is it dead? Or did Yahoo just timeout?
-                # We try ONE MORE TIME individually.
                 try:
-                    # print(f"  > Verifying {t} individually...") 
                     retry_data = yf.download(t, period="5d", interval="1d", progress=False)
-                    
                     if retry_data.empty:
-                        # Confirmed Dead: Both Batch and Individual checks failed.
                         print(f"{C_RED}  > {t} confirmed NO DATA. Adding to DELISTED cache.{C_RESET}")
                         delisted_cache[t] = {
                             'delisted': True, 
@@ -393,17 +387,20 @@ def filter_and_process(stocks):
                         updated_delisted = True
                         continue
                     else:
-                        # It's Alive! The batch just missed it. Use this data.
                         hist = retry_data
-                        # Fix column format if yfinance returned MultiIndex for single ticker
                         if isinstance(hist.columns, pd.MultiIndex):
                             hist.columns = hist.columns.droplevel(1)
                 except:
-                     continue
+                    continue
 
-            # Check price/vol requirements
-            curr_p = hist['Close'].iloc[-1]
-            if isinstance(curr_p, pd.Series): curr_p = curr_p.iloc[0] # Handle edge case
+            # --- INITIAL DATA GATHERING ---
+            info = local_cache.get(t, {})
+            if info.get('currency') not in ['USD', None, '']: continue
+
+            # Volume & Price Requirements
+            # Use a baseline price from hist first to prevent "Empty Table" crashes
+            curr_p = float(hist['Close'].iloc[-1])
+            if isinstance(curr_p, pd.Series): curr_p = curr_p.iloc[0]
 
             clean_hist = hist['Volume'] 
             actual_vol_days = min(len(clean_hist), AVG_VOLUME_DAYS)
@@ -412,10 +409,7 @@ def filter_and_process(stocks):
             
             if curr_p < MIN_PRICE or avg_v < MIN_AVG_VOLUME: continue
 
-            # ... (Rest of your metadata/math logic) ...
-            info = local_cache.get(t, {})
-            if info.get('currency') not in ['USD', None, '']: continue
-
+            # Social & Momentum Math
             name = str(info.get('name', t)).replace('"', '').strip()[:NAME_MAX_WIDTH]
             cur_m = int(stock.get('mentions') or 0)
             old_m = int(stock.get('mentions_24h_ago') or 0)
@@ -440,11 +434,58 @@ def filter_and_process(stocks):
             safe_surge = s_perc if s_perc > 10 else 10 
             efficiency = rank_plus / (safe_surge / 100.0) 
 
-            if len(hist) >= 2:
-                prev_day_close = float(hist['Close'].iloc[-2])
-                day_chg_pct = ((curr_p - prev_day_close) / prev_day_close) * 100
-            else:
-                day_chg_pct = 0.0
+            # --- HYBRID PRICE & DAY% CALCULATION ---
+            day_chg_pct = 0.0
+            price_found = False
+
+            try:
+                # 1. Try Batch Data First (Fastest)
+                if not hist.empty and len(hist) >= 2:
+                    last_ts = hist.index[-1]
+                    last_date = last_ts.date() if hasattr(last_ts, 'date') else pd.to_datetime(last_ts).date()
+                    today_date = datetime.datetime.now().date()
+
+                    if last_date == today_date:
+                        prev_day_close = float(hist['Close'].iloc[-2])
+                        if prev_day_close > 0:
+                            day_chg_pct = ((curr_p - prev_day_close) / prev_day_close) * 100
+                        price_found = True
+
+                # 2. Fallback to Live Fetch if batch is stale/missing today's candle
+                if not price_found:
+                    time.sleep(0.05) 
+                    live_dat = yf.Ticker(t)
+                    fast = live_dat.fast_info
+                    
+                    now_p = fast.get('last_price')
+                    prev_p = fast.get('previous_close')
+                    
+                    if now_p is not None and prev_p is not None and prev_p > 0:
+                        curr_p = float(now_p)
+                        day_chg_pct = ((curr_p - prev_p) / prev_p) * 100
+
+            except Exception:
+                # If both fail, keep baseline curr_p and 0.0% change
+                pass
+
+            # Final list assembly
+            final_list.append({
+                "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
+                "Price": float(curr_p), 
+                "Day%": float(day_chg_pct),
+                "AvgVol": int(avg_v), "Surge": s_perc,
+                "MENT": cur_m, "Mnt%": m_perc, "Type": info.get('type', 'EQUITY'),
+                "Upvotes": current_upvotes, "Meta": info.get('meta', '-'),
+                "Desc": info.get('description', ''), "Squeeze": squeeze_score,
+                "MCap": mcap, "Conv": conviction, "Eff": efficiency,
+                "Accel": 0, "Upv+": 0, "Velocity": 0, "Streak": 0, 
+                "Rolling": 0, "History": "New"
+            })
+            
+        except Exception as e:
+            # General catch-all to prevent one bad ticker from stopping the script
+            print(f"{C_RED}[!] Error processing {t}: {e}{C_RESET}")
+            continue
 
             final_list.append({
                 "Rank": rank_now, "Name": name, "Sym": t, "Rank+": rank_plus,
