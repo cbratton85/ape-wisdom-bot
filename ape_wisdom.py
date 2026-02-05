@@ -484,38 +484,36 @@ def filter_and_process(stocks):
             safe_surge = s_perc if s_perc > 10 else 10 
             efficiency = rank_plus / (safe_surge / 100.0) 
 
-            # --- HYBRID PRICE & DAY% CALCULATION ---
+            # --- IMPROVED PRICE & DAY% CALCULATION ---
             day_chg_pct = 0.0
-            price_found = False
-
+            
             try:
-                # 1. Try Batch Data First (Fastest)
                 if not hist.empty and len(hist) >= 2:
-                    last_ts = hist.index[-1]
-                    last_date = last_ts.date() if hasattr(last_ts, 'date') else pd.to_datetime(last_ts).date()
-                    today_date = datetime.datetime.now().date()
-
-                    # Only calculate if the data includes today's candle
-                    if last_date == today_date:
-                        prev_day_close = float(hist['Close'].iloc[-2])
-                        if prev_day_close > 0:
-                            day_chg_pct = ((curr_p - prev_day_close) / prev_day_close) * 100
-                        price_found = True
-
-                # 2. Fallback to Live Fetch if batch is stale
-                if not price_found:
-                    time.sleep(0.05) 
+                    # Use the two most recent data points available
+                    curr_p = float(hist['Close'].iloc[-1])
+                    prev_day_close = float(hist['Close'].iloc[-2])
+                    
+                    if prev_day_close > 0:
+                        day_chg_pct = ((curr_p - prev_day_close) / prev_day_close) * 100
+                
+                # Optional: If you specifically want LIVE data during market hours
+                # and the batch data is older than 15 minutes:
+                last_ts = hist.index[-1]
+                now_ts = datetime.datetime.now(last_ts.tzinfo if last_ts.tzinfo else None)
+                
+                if (now_ts - last_ts).total_seconds() > 3600: # If data is > 1 hour old
                     live_dat = yf.Ticker(t)
-                    fast = live_dat.fast_info
+                    # Use info.get instead of fast_info as it's more reliable for prev close
+                    inf = live_dat.info 
+                    live_p = inf.get('currentPrice') or inf.get('regularMarketPrice')
+                    prev_p = inf.get('previousClose') or inf.get('regularMarketPreviousClose')
                     
-                    now_p = fast.get('last_price')
-                    prev_p = fast.get('previous_close')
-                    
-                    if now_p is not None and prev_p is not None and prev_p > 0:
-                        curr_p = float(now_p)
-                        day_chg_pct = ((curr_p - prev_p) / prev_p) * 100
+                    if live_p and prev_p:
+                        curr_p = float(live_p)
+                        day_chg_pct = ((live_p - prev_p) / prev_p) * 100
 
-            except Exception:
+            except Exception as e:
+                # Debugging: print(f"Price calc error for {t}: {e}")
                 pass
 
             # --- FINAL LIST ASSEMBLY ---
