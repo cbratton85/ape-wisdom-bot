@@ -16467,5 +16467,23 @@
         "mcap": 1842687232,
         "currency": "USD",
         "description": "The fund employs an indexing investment approach by investing all, or substantially all, of its assets in the common stocks included in the FTSE Developed Asia Pacific All Cap Index. The FTSE Developed Asia Pacific All Cap Index is a market-capitalization weighted index."
+    },
+    "MID": {
+        "ticker": "MID",
+        "name": "American Century Mid Cap Growth",
+        "meta": "Mid-Cap Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will invest principally in exchange-traded common stocks. Under normal market conditions, the portfolio managers will invest at least 80% of the fund's assets in securities of medium capitalization companies that the portfolio managers believe will create impact by aligning with at least one of the SDGs. The fund may purchase securities of small and large capitalization companies as well. It may engage in active and frequent trading of portfolio securities to achieve its principal investment strategies. The fund is non-diversified."
+    },
+    "DFAI": {
+        "ticker": "DFAI",
+        "name": "Dimensional International Core ",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will invest in companies of all sizes, with increased exposure to smaller capitalization, lower relative price, and higher profitability companies as compared to their representation in the International Universe. As a non-fundamental policy, under normal circumstances, it will invest at least 80% of its net assets in equity securities. The Advisor may also increase or reduce the fund's exposure to an eligible company, or exclude a company, based on shorter-term considerations, such as a company's price momentum, short-run reversals, and investment characteristics."
     }
 }
