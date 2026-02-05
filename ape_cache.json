@@ -16737,5 +16737,23 @@
         "mcap": 3854562304,
         "currency": "USD",
         "description": "GRAIL, Inc., a commercial-stage healthcare company, provides multi-cancer early detection testing and services in the United States and internationally. It offers Galleri, a cancer screening test for asymptomatic individuals over 50 years of age; and DAC, a diagnostic aid for cancer tests to accelerate diagnostic resolution for patients for whom there is a clinical suspicion of cancer. The company also provides development services, including support for ongoing clinical studies, pilot testing, research, and therapy development. In addition, it develops minimal residual disease post-diagnostic tests. The company was incorporated in 2015 and is headquartered in Menlo Park, California."
+    },
+    "H": {
+        "ticker": "H",
+        "name": "Hyatt Hotels Corporation",
+        "meta": "Lodging",
+        "type": "EQUITY",
+        "mcap": 15387406336,
+        "currency": "USD",
+        "description": "Hyatt Hotels Corporation operates as a hospitality company in the United States and internationally. It operates through Owned and Leased Hotels, Americas Management and Franchising, ASPAC Management and Franchising, EAME Management and Franchising, and Apple Leisure Group segments. The company manages, franchises, licenses, owns, and leases portfolio of properties, consisting of full-service hotels and resorts, select service hotels, and other properties, including timeshare, fractional, residential, vacation, and condominium units. It operates its properties under the Park Hyatt, Alila, Miraval, Impression by Secrets, The Unbound Collection by Hyatt, Andaz, Thompson Hotels, The Standard, Dream Hotels, The StandardX, Breathless Resorts & Spas, JdV by Hyatt, Bunkhouse Hotels, Me and All Hotels, Zo\u00ebtry Wellness & Spa Resorts, Hyatt Ziva, Hyatt Zilara, Secrets Resorts & Spas, Dreams Resorts & Spas, Hyatt Vivid Hotels & Resorts, Sunscape Resorts & Spas, Alua Hotels & Resorts, Grand Hyatt, Hyatt Regency, Destination by Hyatt, Hyatt Centric, Hyatt Vacation Club, Hyatt, Caption by Hyatt, Hyatt Place, Hyatt House, Hyatt Studios, and UrCove brand name. The company offers short-term vacation rental platform, Homes & Hideaways by World of Hyatt, that features direct booking for short-term private home rentals in the United States, as well as distribution and destination management services. It primarily serves corporations; national, state, and regional associations; specialty market accounts, including social, government, military, educational, religious, and fraternal organizations; travel agency and luxury organizations; and a group of individual consumers. It also operates World of Hyatt loyalty program, which rewards points that can be redeemed for hotel nights and other rewards. Hyatt Hotels Corporation was founded in 1957 and is headquartered in Chicago, Illinois."
+    },
+    "UFO": {
+        "ticker": "UFO",
+        "name": "Procure Space ETF",
+        "meta": "Miscellaneous Sector",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests, under normal circumstances, at least 80% of its net assets in companies of the underlying index that receive at least 50% of their revenues or profits from space-related businesses. The underlying index is designed to serve as an equity benchmark for a globally traded portfolio of companies that are engaged in space-related business, such as those utilizing satellite technology. The fund is non-diversified."
     }
 }
