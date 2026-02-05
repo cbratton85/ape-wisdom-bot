@@ -16701,5 +16701,41 @@
         "mcap": 930040384,
         "currency": "USD",
         "description": "Kura Sushi USA, Inc. operates technology-enabled Japanese restaurants in the United States. The company's restaurants provide Japanese cuisine through an engaging revolving sushi service model, which is known as the Kura Experience. The company was formerly known as Kula Sushi USA, Inc. and changed its name to Kura Sushi USA, Inc. in October 2017. The company was founded in 2008 and is headquartered in Irvine, California. Kura Sushi USA, Inc. is a subsidiary of Kura Sushi, Inc."
+    },
+    "KELYA": {
+        "ticker": "KELYA",
+        "name": "Kelly Services, Inc.",
+        "meta": "Staffing & Employment Services",
+        "type": "EQUITY",
+        "mcap": 381307904,
+        "currency": "USD",
+        "description": "Kelly Services, Inc., together with its subsidiaries, provides workforce solutions to various industries. The company operates through four segments: Professional & Industrial; Science, Engineering & Technology; Education; and Outsourcing & Consulting. The Professional & Industrial segment delivers staffing, outcome-based, and permanent placement services providing administrative, accounting, and finance; light industrial; contact center staffing; and other workforce solutions. The Science, Engineering & Technology segment offers staffing, outcome-based, and permanent placement services in the areas of science and clinical research, engineering, technology, and telecommunications specialties. The Education segment provides staffing, permanent placement, and executive search services to pre-K-12 school districts and education organizations. The Outsourcing & Consulting segment offers managed service provider, recruitment process outsourcing, payroll process outsourcing, and executive coaching programs to customers on a global basis that includes its RocketPower brand, as well as permanent placement services. The company serves customers in the United States, Canada, Mexico, Puerto Rico, France, Switzerland, Portugal, Russia, Italy, rest of Europe, and the Asia-Pacific region. Kelly Services, Inc. was founded in 1946 and is headquartered in Troy, Michigan."
+    },
+    "FWRG": {
+        "ticker": "FWRG",
+        "name": "First Watch Restaurant Group, I",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 1052193472,
+        "currency": "USD",
+        "description": "First Watch Restaurant Group, Inc., through its subsidiaries, operates and franchises restaurants under the First Watch trade name in the United States. The company was formerly known as AI Fresh Super Holdco, Inc. and changed its name to First Watch Restaurant Group, Inc. in December 2019. The company was founded in 1983 and is based in Bradenton, Florida."
+    },
+    "CM": {
+        "ticker": "CM",
+        "name": "Canadian Imperial Bank of Comme",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 88529747968,
+        "currency": "USD",
+        "description": "Canadian Imperial Bank of Commerce, a diversified financial institution, provides various financial products and services to personal, business, public sector, and institutional clients in Canada, the United States, and internationally. The company operates through Canadian Personal and Business Banking; Canadian Commercial Banking and Wealth Management; U.S. Commercial Banking and Wealth Management; Capital Markets and Direct Financial Services; and Corporate and Other segments. It offers checking, savings, agriculture, and business accounts; mortgages; business, car, education, home, and other loans; lines of credit and agriculture loans; and cash management, small business financing, and overdraft protection services. The company also provides investment and insurance services; healthcare banking; credit cards; private banking, wealth planning, investment management, and estate planning and trust; and ATMs, as well as mobile, online, and global money and wire transfer services. Canadian Imperial Bank of Commerce was founded in 1867 and is headquartered in Toronto, Canada."
+    },
+    "GRAL": {
+        "ticker": "GRAL",
+        "name": "GRAIL, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 3854562304,
+        "currency": "USD",
+        "description": "GRAIL, Inc., a commercial-stage healthcare company, provides multi-cancer early detection testing and services in the United States and internationally. It offers Galleri, a cancer screening test for asymptomatic individuals over 50 years of age; and DAC, a diagnostic aid for cancer tests to accelerate diagnostic resolution for patients for whom there is a clinical suspicion of cancer. The company also provides development services, including support for ongoing clinical studies, pilot testing, research, and therapy development. In addition, it develops minimal residual disease post-diagnostic tests. The company was incorporated in 2015 and is headquartered in Menlo Park, California."
     }
 }
