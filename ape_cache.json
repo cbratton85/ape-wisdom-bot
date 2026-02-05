@@ -16539,5 +16539,59 @@
         "mcap": 3910225152,
         "currency": "USD",
         "description": "Kenon Holdings Ltd., through its subsidiaries, operates as an owner, developer, and operator of power generation facilities in Israel and the United States. It engages in the generation and supply of electricity, and energy; development, construction, operation of power plants, and energy generation facilities using natural gas and renewable energy; and management of solar and wind energy, and conventional natural gas-fired power plants. The company was incorporated in 2014 and is based in Singapore. Kenon Holdings Ltd. is a subsidiary of Ansonia Holdings Singapore B.V."
+    },
+    "PIII": {
+        "ticker": "PIII",
+        "name": "P3 Health Partners Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 392070080,
+        "currency": "USD",
+        "description": "P3 Health Partners Inc., a patient-centered and physician-led population health management company, provides superior care services in the United States. The company operates clinics and wellness centers. P3 Health Partners Inc. was founded in 2020 and is based in Henderson, Nevada."
+    },
+    "TMCI": {
+        "ticker": "TMCI",
+        "name": "Treace Medical Concepts, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 135082304,
+        "currency": "USD",
+        "description": "Treace Medical Concepts, Inc., a medical technology company, designs, manufactures, and markets medical devices in the United States. The company offers Lapiplasty 3D bunion correction system that combines instruments, implants, and surgical methods designed to correct three planes of the bunion deformity and secure the unstable joint, addressing the root cause of the bunion. It also provides Lapiplasty mini-incision system designed to allow the Lapiplasty procedure to be performed through a 3.5cm incision. In addition, the company offers Adductoplasty system designed for reproducible correction of metatarsus adductus deformities and osteoarthritis of the midfoot. It serves physicians, surgeons, ambulatory surgery centers and hospitals related to the surgical management of bunion and related midfoot deformities. Treace Medical Concepts, Inc. was founded in 2013 and is headquartered in Ponte Vedra, Florida."
+    },
+    "BRCC": {
+        "ticker": "BRCC",
+        "name": "BRC Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 94010544,
+        "currency": "USD",
+        "description": "BRC Inc., through its subsidiaries, purchases, roasts, and sells coffee and coffee accessories in the United States. The company offers apparels, coffee brewing equipment, ready to drink energy beverages, and outdoor and lifestyle gear products, as well as produces media content. It sells its products through Wholesale, Direct to consumer, and Outpost channels; and e commerce websites. BRC Inc. was founded in 2014 and is based in Salt Lake City, Utah."
+    },
+    "MGRX": {
+        "ticker": "MGRX",
+        "name": "Mangoceuticals, Inc.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 5797182,
+        "currency": "USD",
+        "description": "Mangoceuticals, Inc. engages in the development, marketing, and sale of various men's wellness products and services through a telemedicine platform in the United States. The company offers erectile dysfunction products under the Mango brand; hair loss products under the Grow brand; hormone balance and therapy products under the Mojo brand; and weight loss products under the Slim brand. It also provides oral testosterone undecanoate to treat low testosterone in men and as a form of testosterone replacement therapy under the Prime brand; and access for customers to a licensed pharmacy for online fulfillment and distribution of certain medications that may be prescribed as part of telehealth consultations. The company markets and sells its products online through its website www.MangoRX.com. The company was incorporated in 2021 and is headquartered in Dallas, Texas. Mangoceuticals, Inc. is a subsidiary of Cohen Enterprises, Inc."
+    },
+    "SEV": {
+        "ticker": "SEV",
+        "name": "Aptera Motors Corp.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 50024692,
+        "currency": "USD",
+        "description": ""
+    },
+    "GDTC": {
+        "ticker": "GDTC",
+        "name": "CytoMed Therapeutics Limited",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 9972482,
+        "currency": "USD",
+        "description": "CytoMed Therapeutics Limited, a pre-clinical biopharmaceutical company, focuses on developing novel cell-based immunotherapies for the treatment of human cancers and degenerative diseases in Malaysia and Singapore. Its lead product candidate is CTM-N2D, an expanded gamma delta T cells grafted with natural killer group 2D ligands-targeting chimeric antigen receptor, which is in Phase I clinical trials comprising to improve anti-cancer cytotoxicity. The company is also developing iPSC-gdNKT, a pluripotent stem cell-derived gamma delta natural killer T cells platform for cancer treatment; CTM-GDT, a product candidate that consists of expanded allogeneic gamma delta T cells and exploits the potential of the cells to recognize and treat a broad range of cancers; and CTM-MSC, an injectable allogeneic umbilical cord derived mesenchymal stem cells for cartilage injury. It has research collaboration agreement with Sengkang General Hospital to provide CTM-MSC and its conditioned media for in vivo studies and Phase I clinical trial in Singapore. The company also has Business & Research Collaboration Agreement with SunAct Cancer Institute Private Limited to conduct clinical trials for the GMP grade CTM-GDT. CytoMed Therapeutics Limited was incorporated in 2018 and is headquartered in Singapore."
     }
 }
