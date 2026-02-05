@@ -16368,5 +16368,41 @@
         "mcap": 90467848,
         "currency": "USD",
         "description": "Phaos Technology Holdings (Cayman) Limited, through its subsidiary, Phaos Technology Pte. Ltd., engages in the manufacturing and commercialization of advanced microscopy-related solutions, technologies, and products in Singapore. The company offers Optonano that enables users to view live and still images for construction of high-quality image of larger sample areas; PT-Industrial for use in material study, failure analysis, simple measuring, quality control, inspection, and manufacturing; and PT-Metrology, which provides dimensional measurements with a single key operation. It also provides PT-Biology to create specialized images needed in the biomedical sector; PT-Stereo, a stereo microscope designed to provide clear magnified stereoscopic images that amplify solid or thick samples; and PT-Zoom that offers three-dimensional magnified view of samples to enhance visualization. In addition, the company offers software. The company serves manufacturing companies; biomedical service providers; and research and development institutions. The company was founded in 2017 and is based in Singapore."
+    },
+    "SHEL": {
+        "ticker": "SHEL",
+        "name": "Shell PLC",
+        "meta": "Oil & Gas Integrated",
+        "type": "EQUITY",
+        "mcap": 223154176000,
+        "currency": "USD",
+        "description": "Shell plc operates as an energy and petrochemical company Europe, Asia, Oceania, Africa, the United States, and other Americas. It operates through Integrated Gas; Upstream; Marketing; Chemicals and Products; and Renewables and Energy Solutions segments. The company explores for and extracts natural gas to produce liquefied natural gas or convert into gas-to-liquids products; explores for and extracts crude oil and natural gas liquids; and operates upstream and midstream infrastructure to deliver gas to market. It is also involved in marketing supplies fuels and lubricants for transport, manufacturing, mining, power generation, agriculture, and construction industries; operates electric vehicle charging and convenience retail; turn crude oil and other feedstocks into products for households, industry, and transport; trades crude oil, oil products, and petrochemicals; and oil sand activities. In addition, the company generates, markets, and trades power from wind, solar and pipeline gas; hydrogen production and marketing; commercial carbon capture and storage hubs; carbon credits and nature-based solutions; and provides heavy-duty LNG-fuelled trucks. Further, it offers base chemicals, including ethylene, propylene, and aromatics, as well as intermediate chemicals, such as styrene monomer, propylene oxide, solvents, linear alpha olefins, detergent alcohols, ethylene oxide, ethylene glycol, and polyethylene; and sustainable aviation fuel. The company was formerly known as Royal Dutch Shell plc and changed its name to Shell plc in January 2022. Shell plc was founded in 1897 and is headquartered in London, the United Kingdom."
+    },
+    "VIS": {
+        "ticker": "VIS",
+        "name": "Vanguard Industrials ETF",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 8003792384,
+        "currency": "USD",
+        "description": "The fund employs an indexing investment approach designed to track the performance of the index, an index made up of stocks of large, mid-size, and small U.S. companies within the industrials sector, as classified under the GICS. The Advisor attempts to replicate the target index by seeking to invest all, or substantially all, of its assets in the stocks that make up the index, in order to hold each stock in approximately the same proportion as its weighting in the index."
+    },
+    "CHRD": {
+        "ticker": "CHRD",
+        "name": "Chord Energy Corporation",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 5791657472,
+        "currency": "USD",
+        "description": "Chord Energy Corporation operates as an independent exploration and production company in the United States. The company acquires, explores, develops, and produces crude oil, natural gas, and natural gas liquids in the Williston Basin. It sells its products to refiners, marketers, and other purchasers that have access to pipeline and rail facilities. The company was formerly known as Oasis Petroleum Inc. and changed its name to Chord Energy Corporation in July 2022. Chord Energy Corporation was founded in 2007 and is headquartered in Houston, Texas."
+    },
+    "APE": {
+        "ticker": "APE",
+        "name": "APE",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
     }
 }
