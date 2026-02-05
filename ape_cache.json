@@ -16755,5 +16755,50 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund invests, under normal circumstances, at least 80% of its net assets in companies of the underlying index that receive at least 50% of their revenues or profits from space-related businesses. The underlying index is designed to serve as an equity benchmark for a globally traded portfolio of companies that are engaged in space-related business, such as those utilizing satellite technology. The fund is non-diversified."
+    },
+    "BIS": {
+        "ticker": "BIS",
+        "name": "ProShares UltraShort Nasdaq Bio",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of a set of Nasdaq-listed biotechnology and pharmaceutical companies. Under normal circumstances, the fund will obtain inverse leveraged exposure to at least 80% of its total assets in components of the index or in instruments with similar economic characteristics. The fund is non-diversified."
+    },
+    "AGM": {
+        "ticker": "AGM",
+        "name": "Federal Agricultural Mortgage C",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 1889134336,
+        "currency": "USD",
+        "description": "Federal Agricultural Mortgage Corporation provides a secondary market for various loans made to borrowers in the United States. It operates through seven segments: Farm & Ranch, Corporate AgFinance, Power & Utilities, Broadband Infrastructure, Renewable Energy, Funding, and Investments. The company is involved in a line of agricultural finance business, including purchasing and retaining eligible loans and securities; guaranteeing the payment of principal and interest on securities that represent interests in, or obligations secured by pools of eligible loans; servicing eligible loans; and issuing long-term standby purchase commitments for designated eligible loans. It also engages in the purchasing and guaranteeing of securities issued by lenders and other financial institutions that are secured by pools of eligible loans, loans for electric or telecommunications facilities by lenders organized as cooperatives to borrowers; and loans to rural electric generation and transmission cooperatives and distribution cooperatives, as well as AgVantage securities secured by those types of loans. Federal Agricultural Mortgage Corporation was incorporated in 1987 and is headquartered in Washington, the District of Columbia."
+    },
+    "BORR": {
+        "ticker": "BORR",
+        "name": "Borr Drilling Limited",
+        "meta": "Oil & Gas Drilling",
+        "type": "EQUITY",
+        "mcap": 1604944768,
+        "currency": "USD",
+        "description": "Borr Drilling Limited operates as an offshore shallow-water drilling contractor to the oil and gas industry in the United States, the Middle East, South East Asia, Europe, Latin America, and West Africa. The company owns, contracts, and operates jack-up drilling rigs for operations in shallow-water areas, such as the provision of related equipment and work crews to conduct oil and gas drilling and workover operations for exploration and production. It serves oil and gas exploration and production companies, such as integrated oil companies, state-owned national oil companies, and independent oil and gas companies. The company was formerly known as Magni Drilling Limited and changed its name to Borr Drilling Limited in December 2016. Borr Drilling Limited was incorporated in 2016 and is based in Hamilton, Bermuda."
+    },
+    "TSEM": {
+        "ticker": "TSEM",
+        "name": "Tower Semiconductor Ltd.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 13637661696,
+        "currency": "USD",
+        "description": "Tower Semiconductor Ltd., an independent semiconductor foundry, provides technology, development, and process platforms for integrated circuits in the United States, Japan, rest of Asia, and Europe. The company provides customizable process technologies, including SiGe, SiPho, mixed signal CMOS, RF CMOS, CMOS image sensor, non-imaging sensors, and integrated power management. It also offers a design enablement platform for a design cycle, as well as transfer optimization and development process services to integrated device manufacturers and fabless companies. The company serves various markets, such as consumer applications, personal computers, communications, handsets and smartphones, automotive, industrial, aerospace, and medical devices. Tower Semiconductor Ltd. was incorporated in 1993 and is headquartered in Migdal Haemek, Israel."
+    },
+    "COTY": {
+        "ticker": "COTY",
+        "name": "Coty Inc.",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 2999938560,
+        "currency": "USD",
+        "description": "Coty Inc., together with its subsidiaries, manufactures, markets, distributes, and sells branded beauty products worldwide. It operates through two segments: the Prestige and Consumer Beauty. The company provides fragrance, color cosmetics, and skin and body care products. It offers prestige products through prestige retailers, including perfumeries, department stores, e-retailers, direct-to-consumer websites, and duty-free shops under the Burberry, Calvin Klein, Chloe, Davidoff, Escada, Etro, Gucci, Hugo Boss, Infiniment Coty Paris, Jil Sander, Joop!, Kylie Cosmetics by Kylie Jenner, Lancaster, Marc Jacobs, Orveda, philosophy, and Tiffany & Co. brands. The company provides beauty products through hypermarkets, supermarkets, drug stores, pharmacies, mid-tier department stores, traditional food and drug retailers, and e-commerce retailers under the Adidas, Beckham, Bozzano, Bourjois, Bruno Banani, CoverGirl, Jovan, LeGer by Lena Gercke, Max Factor, Mexx, Monange, Nautica, Paixao, Rimmel, Risque, Vera Wang, and Sally Hansen brands. It also sells its products through third-party distributors. The company was founded in 1904 and is headquartered in New York, New York. Coty Inc. is a subsidiary of JAB Beauty B.V."
     }
 }
