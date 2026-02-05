@@ -16179,5 +16179,23 @@
         "mcap": 742409216,
         "currency": "USD",
         "description": "Cracker Barrel Old Country Store, Inc. develops and operates the Cracker Barrel Old Country Store concept in the United States. Its Cracker Barrel stores consist of restaurants with a gift shop. The company's restaurants serve breakfast, lunch, and dinner, as well as dine-in, pick-up, and delivery services. Its gift shops offer various decorative and functional items, such as rocking chairs, seasonal gifts, apparel, toys, food, cookware, and various other gift items, as well as various candies, preserves, and other food items. Cracker Barrel Old Country Store, Inc. was incorporated in 1969 and is headquartered in Lebanon, Tennessee."
+    },
+    "CAMP": {
+        "ticker": "CAMP",
+        "name": "CAMP4 THERAPEUTICS CORPORATION",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 183659216,
+        "currency": "USD",
+        "description": "Camp4 Therapeutics Corporation, a clinical-stage biopharmaceutical company, discovers and develops regulatory RNA-based therapeutics to treat a range of genetic diseases. Its lead product candidate is CMP-CPS-001, which is in a Phase 1 clinical trial for the treatment of urea cycle disorders. The company also develops CMP-SYNGAP for the treatment of SYNGAP1-related disorders. Camp4 Therapeutics Corporation was formerly known as Marauder Therapeutics, Inc. and changed its name to Camp4 Therapeutics Corporation in March 2018. The company was incorporated in 2015 and is headquartered in Cambridge, Massachusetts."
+    },
+    "SVM": {
+        "ticker": "SVM",
+        "name": "Silvercorp Metals Inc.",
+        "meta": "Silver",
+        "type": "EQUITY",
+        "mcap": 2339705856,
+        "currency": "USD",
+        "description": "Silvercorp Metals Inc., together with its subsidiaries, acquires, explores, develops, and mines mineral properties in China. It explores for copper, silver, gold, lead, and zinc metals. The company was formerly known as SKN Resources Ltd. and changed its name to Silvercorp Metals Inc. in May 2005. Silvercorp Metals Inc. is based in Vancouver, Canada."
     }
 }

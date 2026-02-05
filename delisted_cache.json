@@ -49,11 +49,6 @@
         "last_checked": "2026-02-03",
         "reason": "No Price Data"
     },
-    "HEAR": {
-        "delisted": true,
-        "last_checked": "2026-02-03",
-        "reason": "No Price Data"
-    },
     "PIK": {
         "delisted": true,
         "last_checked": "2026-02-03",
@@ -182,6 +177,11 @@
     "SNP": {
         "delisted": true,
         "last_checked": "2026-02-04",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
+        "delisted": true,
+        "last_checked": "2026-02-05",
         "reason": "No Price Data"
     }
 }
