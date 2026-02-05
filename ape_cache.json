@@ -17088,5 +17088,86 @@
         "mcap": 608482688,
         "currency": "USD",
         "description": "LendingTree, Inc., through its subsidiary, operates online consumer platform in the United States. It operates through three segments: Home, Consumer, and Insurance. The Home segment offers purchase mortgage, refinance mortgage, and home equity loans and lines of credit. The Consumer segment provides credit cards; personal, small business, and auto loans; deposit accounts; and other credit products, such as debt settlement services. The Insurance segment includes information, tools, and access to insurance quote products, including automobile, home, life, and health and Medicare through which consumers are matched with insurance lead aggregators to obtain insurance offers and policies. This segment also offers QuoteWizard, a marketplace for insurance comparison; and ValuePenguin, a personal finance website that offers consumers objective analysis on various financial topics. The company was formerly known as Tree.com, Inc. and changed its name to LendingTree, Inc. in January 2015. LendingTree, Inc. was incorporated in 1996 and is based in Charlotte, North Carolina."
+    },
+    "ELV": {
+        "ticker": "ELV",
+        "name": "Elevance Health, Inc.",
+        "meta": "Healthcare Plans",
+        "type": "EQUITY",
+        "mcap": 75491024896,
+        "currency": "USD",
+        "description": "Elevance Health, Inc., together with its subsidiaries, operates as a health benefits company in the United States. It operates in four segments: Health Benefits, CarelonRx, Carelon Services, and Corporate & Other. The company offers a variety of health plans and services to individual, employer group risk-based and fee-based, BlueCard, Medicare, Medicaid, and FEP members; health products; a broad array of fee-based administrative managed care services; and specialty and other insurance products and services, such as stop loss, dental, vision, and supplemental health insurance benefits. It also operates in the pharmacy services business; and markets and offers pharmacy services, including home delivery and specialty pharmacies, claims adjudication, formulary management, pharmacy networks, rebate administration, a prescription drug database, and member services, as well as infusion services and injectable therapies through ambulatory infusion centers. In addition, the company provides healthcare related services and capabilities, including specialty care enablement and utilization management support for specialized clinical domains; behavioral health and comprehensive care management services; palliative care services and management; virtual care; and payment integrity, subrogation, clinical data exchange through its HealthOS platform, research and data, reporting and clinical analytics, information technology, and business process support services, as well as manages home health, post-acute institutional management, and durable medical equipment costs; and supports plans in managing home and community-based services. It provides its services under the Anthem Blue Cross and Blue Shield, Wellpoint, and Carelon brands. The company was formerly known as Anthem, Inc. and changed its name to Elevance Health, Inc. in June 2022. Elevance Health, Inc. was incorporated in 2001 and is headquartered in Indianapolis, Indiana."
+    },
+    "TFPM": {
+        "ticker": "TFPM",
+        "name": "Triple Flag Precious Metals Cor",
+        "meta": "Other Precious Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 6875794944,
+        "currency": "USD",
+        "description": "Triple Flag Precious Metals Corp., a precious metals streaming and royalty company, engages in acquiring and managing precious metals, streams, royalties, and other mineral interests in Australia, Canada, Colombia, Cote d'Ivoire, Honduras, Mexico, Mongolia, Peru, South Africa, and the United States. It has a portfolio of streams and royalties providing exposure to copper, gold, silver, nickel, lead, and zinc. The company was founded in 2016 and is based in Toronto, Canada."
+    },
+    "HWM": {
+        "ticker": "HWM",
+        "name": "Howmet Aerospace Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 84863098880,
+        "currency": "USD",
+        "description": "Howmet Aerospace Inc. provides advanced engineered solutions for the aerospace and transportation industries in the United States, Japan, France, Germany, the United Kingdom, Mexico, Italy, Canada, Poland, China, and internationally. It operates through four segments: Engine Products, Fastening Systems, Engineered Structures, and Forged Wheels. The Engine Products segment offers airfoils and seamless rolled rings primarily for aircraft engines and industrial gas turbines; and rotating and structural parts. The Fastening Systems segment produces aerospace fastening systems, as well as commercial transportation, industrial, and other fasteners; and latches, bearings, fluid fittings, and installation tools. The Engineered Structures segment provides titanium ingots and mill products, aluminum and nickel forgings, and machined components and assemblies for aerospace and defense applications; and titanium forgings, extrusions, and forming and machining services for airframe, wing, aero-engine, and landing gear components. The Forged Wheels segment offers forged aluminum wheels and related products for heavy-duty trucks and commercial transportation markets. The company was formerly known as Arconic Inc. Howmet Aerospace Inc. was founded in 1888 and is based in Pittsburgh, Pennsylvania."
+    },
+    "SVXY": {
+        "ticker": "SVXY",
+        "name": "ProShares Short VIX Short Term ",
+        "meta": "Trading--Miscellaneous",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index seeks to offer exposure to market volatility through publicly traded futures markets and is designed to measure the implied volatility of the S&P 500 over 30 days in the future."
+    },
+    "FSM": {
+        "ticker": "FSM",
+        "name": "Fortuna Mining Corp.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 3024216576,
+        "currency": "USD",
+        "description": "Fortuna Mining Corp. engages in the precious and base metal mining and related activities in Argentina, Burkina Faso, C\u00f4te d'Ivoire, Mexico, Peru, and Senegal. The company operates through Mansfield, Sanu, Sango, Cuzcatlan, and Bateas segments. It operates the Lindero gold mine, the Yaramoko gold mine, the S\u00e9gu\u00e9la gold mine, and the San Jose silver-gold mine, as well as the Caylloma silver, lead, and zinc mine. The company was formerly known as Fortuna Silver Mines Inc. and changed its name to Fortuna Mining Corp. in June 2024. Fortuna Mining Corp. was incorporated in 1990 and is based in Vancouver, Canada."
+    },
+    "DDG": {
+        "ticker": "DDG",
+        "name": "ProShares Short Oil & Gas",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the fund's investment objective. The index is designed to measure the stock performance of U.S. companies in the oil and gas sector. The fund is non-diversified."
+    },
+    "MAR": {
+        "ticker": "MAR",
+        "name": "Marriott International",
+        "meta": "Lodging",
+        "type": "EQUITY",
+        "mcap": 87911620608,
+        "currency": "USD",
+        "description": "Marriott International, Inc. engages in operation, franchising, and licensing of hotel, residential, timeshare, and other lodging properties worldwide. It operates its properties under the JW Marriott, The Ritz-Carlton, The Luxury Collection, W Hotels, St. Regis, EDITION, Bvlgari, Marriott Hotels, Sheraton, Westin, Autograph Collection, Renaissance Hotels, Le M\u00e9ridien, Delta Hotels by Marriott, MGM Collection with Marriott Bonvoy, Tribute Portfolio, Gaylord Hotels, Design Hotels, Marriott Executive Apartments, Apartments by Marriott Bonvoy, Sonder by Marriott Bonvoy, Courtyard by Marriott, Fairfield by Marriott, Residence Inn by Marriott, SpringHill Suites by Marriott, Four Points by Sheraton, TownePlace Suites by Marriott, Aloft Hotels, AC Hotels by Marriott, Moxy Hotels, Element Hotels, Protea Hotels by Marriott, City Express by Marriott, and Four Points Flex by Sheraton brand names, as well as operates residences, timeshares, and yachts. The company was founded in 1927 and is headquartered in Bethesda, Maryland."
+    },
+    "CVLT": {
+        "ticker": "CVLT",
+        "name": "Commvault Systems, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 3701500928,
+        "currency": "USD",
+        "description": "Commvault Systems, Inc. provides a cyber resilience platform for protecting and recovering data and cloud-native applications in the Americas and internationally. The company offers Operational Recovery, which provides backup, verifiable recovery, and cost-optimized cloud workload mobility to ensure data availability and granular recovery; autonomous recovery for automated disaster and cyber recovery use cases to deliver backup, replication, and disaster recovery for all workloads on-premises, in the cloud, across various clouds, and in hybrid environments; and Cyber Recovery for threat scanning to hunt for threats within backup data, cyber deception, and threat detection to provide early warning of attacks. It also provides Commvault Cloud's Cleanroom Recovery for organizations to be ready to recover by providing a clean, isolated, and on-demand recovery location in the cloud, as well as the ability to test their incident response plans and recover; and Commvault HyperScale X, an intuitive, easy-to-deploy and scale-out, and integrated data protection solution to support enterprises' transformations, such as legacy scale-up infrastructures, hybrid cloud, container, and virtualized environments. In addition, the company offers Commvault Cloud Air Gap Protect, an integrated air-gapped cloud storage target that enables IT organizations to adopt cloud storage to ease digital transformation, reduce risks, and scale; and Commvault's Compliance, which provides built-in reporting, auditing, and logging to help ensure data is not modified or deleted for legal and compliance purposes. Further, it provides Commvault Cloud Rewind to restore an organization's cloud application and data environment; and Commvault's Clumio Backtrack to revert objects and datasets stored in Amazon Simple Storage Service (Amazon S3), as well as professional and customer support services. The company was incorporated in 1996 and is headquartered in Tinton Falls, New Jersey."
+    },
+    "PODC": {
+        "ticker": "PODC",
+        "name": "PodcastOne, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 74004512,
+        "currency": "USD",
+        "description": "PodcastOne, Inc. operates as a podcast platform and publisher. The company provides its content to audiences through podcasting distribution platforms, including its website, Apple Podcasts, Spotify, Amazon Music, and others. It also produces vodcasts, branded podcasts, merchandise, and live events. In addition, the company builds, owns, and operates LaunchPadOne, a self-publishing podcast hosting, distribution, and monetization platform for independent podcasters. The company was formerly known as Courtside Group, Inc. and changed its name to PodcastOne, Inc. in September 2023. PodcastOne, Inc. was incorporated in 2014 and is headquartered in Beverly Hills, California. PodcastOne, Inc. is a subsidiary of LiveOne, Inc."
     }
 }
