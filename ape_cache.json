@@ -16674,5 +16674,14 @@
         "mcap": 57109584,
         "currency": "USD",
         "description": "PEDEVCO Corp., an oil and gas company, focuses on the acquisition, development, and production of oil and natural gas assets in the United States. The company holds interests in the Permian Basin asset covering an area of approximately 14,550 net acres located in New Mexico. Its properties also include D-J Basin asset covering an area of approximately 14,809 net acres in Weld and Morgan Counties, Colorado; and 3,860 net acres in Laramie County, Wyoming. The company is headquartered in Houston, Texas."
+    },
+    "ALVO": {
+        "ticker": "ALVO",
+        "name": "Alvotech",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 1586049920,
+        "currency": "USD",
+        "description": "Alvotech, through its subsidiaries, develops and manufactures biosimilar medicines for patients worldwide. It offers biosimilar products in the therapeutic areas of autoimmune, eye, and bone disorders, as well as cancer. The company's lead program is AVT02, a high concentration formulation biosimilar to Humira to treat various inflammatory conditions, including rheumatoid arthritis, psoriatic arthritis, Crohn's disease, ulcerative colitis, plaque psoriasis, and other indications; AVT04, a biosimilar to Stelara to treat various inflammatory conditions comprising psoriatic arthritis, Crohn's disease, ulcerative colitis, plaque psoriasis, and other indications; AVT06, a biosimilar to Eylea to treat various conditions, such as age-related macular degeneration, macular edema, and diabetic retinopathy; and AVT03, a biosimilar to Xgeva and Prolia to treat prevent bone fracture, spinal cord compression, and the need for radiation or bone surgery in patients with certain types of cancer, as well as prevent bone loss and increase bone mass. In addition, it offers AVT05, a biosimilar to Simponi and Simponi Aria to treat various inflammatory conditions, including rheumatoid arthritis, psoriatic arthritis, ulcerative colitis, and other indications; AVT16, a biosimilar to an Entyvio product for the treatment of adult patients with moderate to severe ulcerative colitis and moderate to severely active Crohn's disease; AVT23, a biosimilar to Xolair to treat allergic asthma, chronic spontaneous urticaria (CSU), and nasal polyp; and AVT33, a biosimilar to Keytruda product which is in early phase development. Alvotech was founded in 2013 and is based in Luxembourg, Luxembourg."
     }
 }
