@@ -16683,5 +16683,23 @@
         "mcap": 1586049920,
         "currency": "USD",
         "description": "Alvotech, through its subsidiaries, develops and manufactures biosimilar medicines for patients worldwide. It offers biosimilar products in the therapeutic areas of autoimmune, eye, and bone disorders, as well as cancer. The company's lead program is AVT02, a high concentration formulation biosimilar to Humira to treat various inflammatory conditions, including rheumatoid arthritis, psoriatic arthritis, Crohn's disease, ulcerative colitis, plaque psoriasis, and other indications; AVT04, a biosimilar to Stelara to treat various inflammatory conditions comprising psoriatic arthritis, Crohn's disease, ulcerative colitis, plaque psoriasis, and other indications; AVT06, a biosimilar to Eylea to treat various conditions, such as age-related macular degeneration, macular edema, and diabetic retinopathy; and AVT03, a biosimilar to Xgeva and Prolia to treat prevent bone fracture, spinal cord compression, and the need for radiation or bone surgery in patients with certain types of cancer, as well as prevent bone loss and increase bone mass. In addition, it offers AVT05, a biosimilar to Simponi and Simponi Aria to treat various inflammatory conditions, including rheumatoid arthritis, psoriatic arthritis, ulcerative colitis, and other indications; AVT16, a biosimilar to an Entyvio product for the treatment of adult patients with moderate to severe ulcerative colitis and moderate to severely active Crohn's disease; AVT23, a biosimilar to Xolair to treat allergic asthma, chronic spontaneous urticaria (CSU), and nasal polyp; and AVT33, a biosimilar to Keytruda product which is in early phase development. Alvotech was founded in 2013 and is based in Luxembourg, Luxembourg."
+    },
+    "KOD": {
+        "ticker": "KOD",
+        "name": "Kodiak Sciences Inc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1366263808,
+        "currency": "USD",
+        "description": "Kodiak Sciences Inc., a clinical stage biopharmaceutical company, engages in the research, development, and commercialization of therapeutics to treat retinal diseases. Its lead product candidate is tarcocimab tedromer (KSI-301), an anti-vascular endothelial growth factor (VEGF) antibody biopolymer that has complete Phase 3 clinical study to treat high prevalence retinal vascular diseases; and in Phase 3 clinical study for the treatment of diabetic retinopathy, wet age-related macular degeneration (AMD), retinal vein occlusion, and diabetic macular edema, as well as in Phase 2/3 clinical study to treat wet AMD. The company's preclinical stage product candidate includes KSI-501, an anti- interleukin-6 (IL-6) and VEGF-trap bispecific antibody biopolymer conjugate for high prevalence retinal vascular diseases; and KSI-101 (KSI-501P), an unconjugated bispecific protein targeting IL-6 and VEGF developed for patients who have retinal fluid and inflammation. The company was formerly known as Oligasis, LLC and changed its name to Kodiak Sciences Inc. in September 2015. Kodiak Sciences Inc. was incorporated in 2009 and is based in Palo Alto, California."
+    },
+    "KRUS": {
+        "ticker": "KRUS",
+        "name": "Kura Sushi USA, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 930040384,
+        "currency": "USD",
+        "description": "Kura Sushi USA, Inc. operates technology-enabled Japanese restaurants in the United States. The company's restaurants provide Japanese cuisine through an engaging revolving sushi service model, which is known as the Kura Experience. The company was formerly known as Kula Sushi USA, Inc. and changed its name to Kura Sushi USA, Inc. in October 2017. The company was founded in 2008 and is headquartered in Irvine, California. Kura Sushi USA, Inc. is a subsidiary of Kura Sushi, Inc."
     }
 }
