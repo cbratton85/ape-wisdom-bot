@@ -16485,5 +16485,59 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund will invest in companies of all sizes, with increased exposure to smaller capitalization, lower relative price, and higher profitability companies as compared to their representation in the International Universe. As a non-fundamental policy, under normal circumstances, it will invest at least 80% of its net assets in equity securities. The Advisor may also increase or reduce the fund's exposure to an eligible company, or exclude a company, based on shorter-term considerations, such as a company's price momentum, short-run reversals, and investment characteristics."
+    },
+    "CFG": {
+        "ticker": "CFG",
+        "name": "Citizens Financial Group, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 28603779072,
+        "currency": "USD",
+        "description": "Citizens Financial Group, Inc. operates as the bank holding company that provides retail and commercial banking products and services to individuals, small businesses, middle-market companies, large corporations, and institutions in the United States. The company operates through two segments, Consumer Banking and Commercial Banking. The Consumer Banking segment offers deposit products, mortgage and home equity lending products, credit cards, business loans, wealth management, and investment services; and education and point-of-sale finance loans, as well as digital deposit products. This segment serves its customers through telephone service centers, as well as through its online and mobile platforms. The Commercial Banking segment provides various financial products and solutions, including lending and leasing, deposit and treasury management services, foreign exchange, and interest rate and commodity risk management solutions, as well as syndicated loans, corporate finance, mergers and acquisitions, and debt and equity capital markets services. This segment serves multi-family, office, industrial, retail, healthcare, and hospitality sectors. The company was formerly known as RBS Citizens Financial Group, Inc. and changed its name to Citizens Financial Group, Inc. in April 2014. Citizens Financial Group, Inc. was founded in 1828 and is headquartered in Providence, Rhode Island."
+    },
+    "KBE": {
+        "ticker": "KBE",
+        "name": "State Street SPDR S&P Bank ETF",
+        "meta": "Financial",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index. The index represents the banks segment of the S&P Total Market Index (\u201cS&P TMI\u201d). The S&P TMI is designed to track the broad U.S. equity market. It may invest in equity securities that are not included in the index, cash and cash equivalents or money market instruments, such as repurchase agreements and money market funds."
+    },
+    "AIR": {
+        "ticker": "AIR",
+        "name": "AAR Corp.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 4239402752,
+        "currency": "USD",
+        "description": "AAR Corp. provides products and services to commercial aviation, government, and defense markets in North America, Europe, Africa, Asia, and internationally. It operates through four segments: Parts Supply, Repair & Engineering, Integrated Solutions, and Expeditionary Services. The company leases and sells aircraft components and replacement parts; and designs, manufactures, and repairs transportation pallets. The company also provides airframe maintenance services, such as airframe inspection, painting services, line maintenance, airframe modifications, structural repairs, avionics service and installation, exterior, and interior refurbishment services; component repair services, including maintenance, repair, and overhaul services, engine and airframe accessories, and interior refurbishment; and engineering services, such as integration, certification and procurement. In addition, it develops aircraft components and parts; designs proprietary designated engineering representative repairs; and provides integrated software solutions comprising Trax, a cloud-based electronic enterprise resource platform, as well as a suite of paperless mobility apps for automating workflows. Further, the company engages in the fleet management and operation of customer-owned aircraft; provision of supply chain logistics services, such as material planning, sourcing, logistics, information and program management, and parts and component repair and overhaul services, as well as engineering, design, and system integration services for specialized command and control systems; and flight hour component inventory and repair services. Additionally, it offers containers and shelters for military and humanitarian tactical deployment activities; and shelters, such as stationary and vehicle-mounted applications. AAR Corp. was founded in 1951 and is headquartered in Wood Dale, Illinois."
+    },
+    "GBCI": {
+        "ticker": "GBCI",
+        "name": "Glacier Bancorp, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 6911580672,
+        "currency": "USD",
+        "description": "Glacier Bancorp, Inc. operates as the bank holding company for Glacier Bank that provides commercial banking services to individuals, small to medium-sized businesses, community organizations, and public entities in the United States. It offers retail banking; business banking; and mortgage origination and loan servicing services. The company also accepts deposit products, including non-interest bearing deposit and interest bearing deposit accounts, such as negotiable order of withdrawal, demand deposit accounts, savings, money market deposits, fixed rate certificates of deposit, negotiated-rate jumbo certificates, and individual retirement accounts. In addition, it offers construction and permanent loans on residential real estate, consumer land or lot loans, and unimproved land and land development loans, construction loans, commercial real estate loans, agricultural and consumer lending, home equity loans, and states and political subdivisions lending, as well as residential builder guidance lines comprising pre-sold and spec-home construction, and lot acquisition loans. Glacier Bancorp, Inc. was founded in 1955 and is headquartered in Kalispell, Montana."
+    },
+    "WBS": {
+        "ticker": "WBS",
+        "name": "Webster Financial Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 11654837248,
+        "currency": "USD",
+        "description": "Webster Financial Corporation operates as the bank holding company for Webster Bank, National Association that provides various financial products and services to businesses, individuals, and families in the United States. It operates through three segments: Commercial Banking, Healthcare Financial Services, and Consumer Banking. It offers checking, savings, and money market accounts; individual retirement account retirement savings; certificates of deposit; mortgages; home equity loans and lines of credit; business and commercial lines of credit; overdrafts; and term, commercial, student, SBA, and personal loans. The company also provides commercial real estate financing, equipment and lender finance, asset-based and community lending, and public finance solutions; financial planning, life and long-term insurance, personal retirement, and portfolio management solutions; employee retirement plans; credit cards; payroll services; automated clearing house payables and wires; bill pay, remote deposit capture, merchant, and lockbox services; treasury management and investment services; private banking services; capital markets and finance solutions; employee benefits solutions, including administrators of HSAs, emergency savings accounts, and flexible spending accounts administration services; wealth management services; and online and mobile banking services. Webster Financial Corporation was founded in 1870 and is headquartered in Stamford, Connecticut."
+    },
+    "KEN": {
+        "ticker": "KEN",
+        "name": "Kenon Holdings Ltd.",
+        "meta": "Utilities - Independent Power Producers",
+        "type": "EQUITY",
+        "mcap": 3910225152,
+        "currency": "USD",
+        "description": "Kenon Holdings Ltd., through its subsidiaries, operates as an owner, developer, and operator of power generation facilities in Israel and the United States. It engages in the generation and supply of electricity, and energy; development, construction, operation of power plants, and energy generation facilities using natural gas and renewable energy; and management of solar and wind energy, and conventional natural gas-fired power plants. The company was incorporated in 2014 and is based in Singapore. Kenon Holdings Ltd. is a subsidiary of Ansonia Holdings Singapore B.V."
     }
 }
