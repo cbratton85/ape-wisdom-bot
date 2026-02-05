@@ -16197,5 +16197,122 @@
         "mcap": 2339705856,
         "currency": "USD",
         "description": "Silvercorp Metals Inc., together with its subsidiaries, acquires, explores, develops, and mines mineral properties in China. It explores for copper, silver, gold, lead, and zinc metals. The company was formerly known as SKN Resources Ltd. and changed its name to Silvercorp Metals Inc. in May 2005. Silvercorp Metals Inc. is based in Vancouver, Canada."
+    },
+    "NANC": {
+        "ticker": "NANC",
+        "name": "Unusual Whales Subversive Democ",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund is an actively managed exchange-traded fund (\u201cETF\u201d) that seeks to achieve its investment objective by investing primarily in equity securities of publicly-traded companies that sitting Democratic members of the U.S. Congress and/or their family members also have reported to have invested in through public disclosure filings made by such Congresspersons pursuant to the Stop Trading on Congressional Knowledge Act of 2012, as amended (\u201cSTOCK Act\u201d)."
+    },
+    "PAHC": {
+        "ticker": "PAHC",
+        "name": "Phibro Animal Health Corporatio",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 1661877888,
+        "currency": "USD",
+        "description": "Phibro Animal Health Corporation operates as an animal health and mineral nutrition company in the United States, Latin America and Canada, Europe, the Middle East, Africa, and the Asia Pacific. It operates through three segments: Animal Health, Mineral Nutrition, and Performance Products. The company develops, manufactures, and markets various products for food and companion animals including poultry, swine, beef and dairy cattle, aquaculture, and dogs. It also offers animal health products, such as antibacterials, anticoccidials, nutritional specialty, and vaccines and vaccine adjuvants for animal's health and performance, food safety, and animal welfare; and engages in developing, manufacturing, and marketing of microbial and bioproducts for various applications serving animal health and nutrition, environmental, industrial, and agricultural customers. In addition, the company develops, manufactures, and markets conventionally licensed and autogenous vaccine products, as well as adjuvants for animal vaccine manufacturers. Further, it provides formulations and concentrations of trace minerals, such as zinc, copper, manganese, iron, and other compounds to fortify the daily feed requirements of their livestock's diets and maintain optimal balance of trace elements in animals. Additionally, the company offers specialty ingredients for use in personal care, industrial chemical, and chemical catalyst industries. It sells its animal health and mineral nutrition products through local sales offices to integrated poultry, swine, and cattle producers, as well as through commercial animal feed manufacturers, wholesalers, and distributors. The company was formerly known as Philipp Brothers Chemicals, Inc. and changed its name to Phibro Animal Health Corporation in July 2003. Phibro Animal Health Corporation was incorporated in 1946 and is headquartered in Teaneck, New Jersey."
+    },
+    "STRS": {
+        "ticker": "STRS",
+        "name": "Stratus Properties Inc.",
+        "meta": "Real Estate - Diversified",
+        "type": "EQUITY",
+        "mcap": 241150832,
+        "currency": "USD",
+        "description": "Stratus Properties Inc., a real estate company, engages in the entitlement, development, management, leasing, and sale of multi and single family residential and commercial real estate properties in the Austin, Texas area and other select markets in Texas. The company operates through Real Estate Operations and Leasing Operations segments. Its leasing operations cover lease of space at retail and mixed-use and multi-family properties. The company was formerly known as Fm Properties Inc and changed its name to Stratus Properties Inc. in May 1998. The company was incorporated in 1992 and is based in Austin, Texas."
+    },
+    "BMBL": {
+        "ticker": "BMBL",
+        "name": "Bumble Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 519762208,
+        "currency": "USD",
+        "description": "Bumble Inc. provides online dating and social networking applications in North America, Europe, internationally. It owns and operates websites and applications that offers subscription and in-app purchases of products. The company operates apps, including Bumble, a dating app built with women at the center, where women make the first move; Badoo, the web and mobile free-to-use dating app; Bumble BFF and Bumble Bizz Modes that have a format similar to the date mode requiring users to set up profiles and matching users through yes and no votes, similar to the dating platform; and Bumble for Friends, a friendship app where people in all stages of life can meet people nearby and create meaningful platonic connections, as well as Geneva app where users can create and join chat, forum, audio, video, and broadcast rooms. The company was founded in 2020 in and is headquartered in Austin, Texas."
+    },
+    "SLB": {
+        "ticker": "SLB",
+        "name": "SLB Limited",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 76785270784,
+        "currency": "USD",
+        "description": "SLB N.V. engages in the provision of technology for the energy industry worldwide. The company operates through four divisions: Digital & Integration, Reservoir Performance, Well Construction, and Production Systems. The company provides field development and hydrocarbon production, carbon management, and integration of adjacent energy systems; reservoir interpretation and data processing services for exploration data; and well construction and production improvement services and products. It also offers subsurface geology and fluids evaluation information; stimulation services to restore or enhance well productivity through hydraulic fracturing, matrix stimulation, and water treatment; and intervention services to oil and gas operators. In addition, the company offers mud logging, directional drilling, measurement-while-drilling, and logging-while-drilling services, as well as engineering support services; supplies drilling fluid systems; designs, manufactures, and markets roller cone and fixed cutter drill bits; bottom-hole-assembly and borehole enlargement technologies; well planning, well drilling, engineering, supervision, logistics, procurement, and contracting of third parties, as well as drilling rig management solutions; and drilling equipment and services, as well as land drilling rigs and related services. Further, it provides artificial lift; supplies packers, safety valves, sand control technology, and various intelligent systems; midstream production systems; valves, chokes, actuators, and surface trees; and OneSubsea, an integrated solutions, products, systems, and services, including wellheads, subsea trees, manifolds and flowline connectors, control systems, connectors, and services. SLB N.V. was formerly known as Schlumberger Limited and change its name to SLB N.V. in October 2025. The company was founded in 1926 and is based in Houston, Texas."
+    },
+    "KRUZ": {
+        "ticker": "KRUZ",
+        "name": "Unusual Whales Subversive Repub",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund is an actively-managed diversified exchange-traded fund (\u201cETF\u201d) that seeks to achieve its investment objective by investing primarily in equity securities of publicly-traded companies that sitting Republican members of the U.S. Congress and/or their family members also have reported to have invested in through public disclosure filings made by such Congresspersons pursuant to the Stop Trading on Congressional Knowledge Act of 2012, as amended (\u201cSTOCK Act\u201d)."
+    },
+    "HDV": {
+        "ticker": "HDV",
+        "name": "iShares Core High Dividend ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The underlying index is comprised of qualified income paying securities that are screened for superior company quality and financial health as determined by Morningstar, Inc.'s proprietary index methodology. The fund is non-diversified."
+    },
+    "TMUS": {
+        "ticker": "TMUS",
+        "name": "T-Mobile US, Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 227098296320,
+        "currency": "USD",
+        "description": "T-Mobile US, Inc., together with its subsidiaries, provides wireless communications services in the United States, Puerto Rico, and the United States Virgin Islands. The company offers voice, messaging, and data services to postpaid, prepaid, and wholesale and other services customers. It also provides wireless devices, including smartphones, wearables, tablets, home broadband routers, and other mobile communication devices, as well as accessories; financing through equipment installment plans; reinsurance for device insurance policies and extended warranty contracts; and high-speed internet services. The company offers services, devices, and accessories under the T-Mobile, Metro by T-Mobile, and Mint Mobile brands through its owned and operated retail stores, customer care channels, national retailers, and its websites, as well as through T-Mobile, Metro by T-Mobile, and Mint Mobile apps. It also sells devices to dealers and other third-party distributors for resale through independent third-party retail outlets and various third-party websites. The company was founded in 1994 and is headquartered in Bellevue, Washington. T-Mobile US, Inc. is a subsidiary of Deutsche Telekom AG."
+    },
+    "XLRE": {
+        "ticker": "XLRE",
+        "name": "State Street Real Estate Select",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Under normal market conditions, the fund generally invests substantially all, but at least 95%, of its total assets in the securities comprising the index. The index includes companies that have been identified as Real Estate companies by the Global Industry Classification Standard (GICS\u00ae). The fund is non-diversified."
+    },
+    "LEN": {
+        "ticker": "LEN",
+        "name": "Lennar Corporation",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 28470161408,
+        "currency": "USD",
+        "description": "Lennar Corporation, together with its subsidiaries, operates as a homebuilder primarily under the Lennar brand in the United States. It operates through Homebuilding East, Homebuilding Central, Homebuilding South Central, Homebuilding West, Financial Services, Multifamily, and Lennar Other segments. The company's homebuilding operations include the construction and sale of single-family attached and detached homes, as well as the purchase, development, and sale of residential land; and development, construction, and management of multifamily rental properties. It also offers residential mortgage financing, title insurance, and closing services for home buyers and others, as well as originating and selling securitization commercial mortgage loans. In addition, the company is involved in fund investment activities. It primarily serves first-time, move-up, active adult, and luxury homebuyers. The company was founded in 1954 and is based in Miami, Florida."
+    },
+    "NOG": {
+        "ticker": "NOG",
+        "name": "Northern Oil and Gas, Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 2470331392,
+        "currency": "USD",
+        "description": "Northern Oil and Gas, Inc., an independent energy company, engages in the acquisition, exploration, exploitation, development, and production of crude oil and natural gas properties in the United States. The company was founded in 2006 and is headquartered in Minnetonka, Minnesota."
+    },
+    "OTLY": {
+        "ticker": "OTLY",
+        "name": "Oatly Group AB",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 325404992,
+        "currency": "USD",
+        "description": "Oatly Group AB, an oatmilk company, provides a range of plant-based dairy products made from oats in Europe, the Middle East, Africa, the Asia Pacific, Latin America, the United States, Canada, Mainland China, Hong Kong, and Taiwan. Its oatmilk portfolio includes original, low-fat, full-fat, chocolate flavored, unsweetened, and Super Basic, which are offered in ambient and chilled packaging. The company offers Barista edition oatmilk; Oatgurts, which are oat-based yogurts; frozen desserts; cooking products, including regular and organic cooking cream, cr\u00e8me fraiche, whipping cream, vanilla custard, and spreads in a variety of flavors; and ready-to-go drinks. It sells its products through retail and e-commerce channels. The company was formerly known as Havre Global AB and changed its name to Oatly Group AB in March 2021. Oatly Group AB was founded in 1994 and is headquartered in Malm\u00f6, Sweden."
+    },
+    "BIRD": {
+        "ticker": "BIRD",
+        "name": "Allbirds, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 29156476,
+        "currency": "USD",
+        "description": "Allbirds, Inc. manufactures and sells footwear and apparel products for men and women in the United States and internationally. The company offers a range of lifestyle products; shoes; and apparel, including classic tees and sweats, socks, and underwear. It sells its products through its retail stores, and third-party retailers and distributors, as well as digital channels comprising websites and marketplace platforms. The company was formerly known as Bozz, Inc. and changed its name to Allbirds, Inc. in December 2015. Allbirds, Inc. was incorporated in 2015 and is headquartered in San Francisco, California."
     }
 }
