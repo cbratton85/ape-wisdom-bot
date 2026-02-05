@@ -17286,5 +17286,77 @@
         "mcap": 18130939904,
         "currency": "USD",
         "description": "SS&C Technologies Holdings, Inc., together with its subsidiaries, provides software products and software-enabled services to financial services and healthcare industries. The company owns and operates technology stack across securities accounting; front-office functions, such as trading and modeling; middle-office functions comprising portfolio management and reporting; back-office functions, such as accounting, performance measurement, reconciliation, reporting, processing and clearing, and compliance and tax reporting; and healthcare solutions consisting of claims adjudication, benefit management, care management, and business intelligence solutions. It also offers software-enabled services, such as SS&C GlobeOp, Global Investor and Distribution Solutions, SS&C Retirement Solutions, CRM Solutions, Managed Services, Data Solutions, ALPS Advisors, and Virtual Data Rooms, as well as pharmacy, healthcare administration, and health outcomes optimization solutions. In addition, the company provides software products, such as portfolio/investment accounting and analytics software, portfolio management software, trading software, automation solutions, and banking and lending solutions, as well as research, analytics, risk, and training solutions. The company also provides professional services that includes consulting and implementation services consisting of initial system installation, conversion of historical data, and ongoing training and support, as well as product support services. It operates in the United States, the United Kingdom, Europe, the Middle East, Africa, the Asia Pacific, Japan, Canada, and the Americas. SS&C Technologies Holdings, Inc. was founded in 1986 and is headquartered in Windsor, Connecticut."
+    },
+    "EMXF": {
+        "ticker": "EMXF",
+        "name": "iShares ESG Advanced MSCI EM ET",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index is a free float-adjusted market capitalization-weighted index designed to reflect the equity performance of large- and mid-capitalization emerging market companies with favorable ESG ratings while applying extensive screens, including removing fossil fuel exposure. The fund generally will invest at least 90% of its assets in the component securities of the index and in investments that have economic characteristics that are substantially identical to the component securities of the index."
+    },
+    "DMXF": {
+        "ticker": "DMXF",
+        "name": "iShares ESG Advanced MSCI EAFE ",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The underlying index is a free float-adjusted market capitalization-weighted index that is designed to reflect the equity performance of large- and mid-capitalization developed market companies, excluding the U.S. and Canada. The fund generally will invest at least 90% of its assets in the component securities of the underlying index."
+    },
+    "USXF": {
+        "ticker": "USXF",
+        "name": "iShares ESG Advanced MSCI USA E",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The underlying index is a free float-adjusted market capitalization-weighted index designed to reflect the equity performance of large- and mid-capitalization U.S. companies with favorable environmental, social and governance (\u201cESG\u201d) ratings while applying extensive screens, including removing fossil fuel exposure. The fund generally will invest at least 90% of its assets in the component securities of the underlying index. It is non-diversified."
+    },
+    "BODY": {
+        "ticker": "BODY",
+        "name": "BODY",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "LADR": {
+        "ticker": "LADR",
+        "name": "Ladder Capital Corp",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 1330692480,
+        "currency": "USD",
+        "description": "Ladder Capital Corp operates as an internally-managed real estate investment trust in the United States. It operates through three segments: Loans, Securities, and Real Estate. The Loans segment originates conduit first mortgage loans that are secured by cash-flowing commercial real estate; and originates and invests in balance sheet first mortgage loans secured by commercial real estate properties that are undergoing transition, including lease-up, sell-out, and renovation or repositioning. It also invests in note purchase financings, subordinated debt, mezzanine debt, and other structured finance products related to commercial real estate. The Securities segment invests in commercial mortgage-backed securities, U.S. treasury and agency, corporate bonds, and equity securities. The Real Estate segment owns and leases in commercial properties. The company qualifies as a real estate investment trust for federal income tax purposes. It generally would not be subject to federal corporate income taxes if it distributes at least 90% of its taxable income to its stockholders. The company was founded in 2008 and is headquartered in New York, New York."
+    },
+    "EVGO": {
+        "ticker": "EVGO",
+        "name": "EVgo Inc.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 898939968,
+        "currency": "USD",
+        "description": "EVgo, Inc. owns and operates a direct current fast charging network for electric vehicles in the United States. The company offers electricity directly to drivers; original equipment manufacturer charging and related services; and fleet and rideshare public charging services; and commercial charging. It also provides ancillary services, such as customization of digital applications, charging data integration, loyalty programs, access to chargers behind parking lot or garage pay gates, microtargeted advertising, and charging reservations; and hardware, design, and construction services for charging sites, as well as ongoing operations, maintenance, and networking and software integration solutions through eXtend. In addition, it offers PlugShare such as data, research, and advertising services and equipment procurement and operational services. EVgo, Inc. was incorporated in 2010 and is headquartered in Los Angeles, California.EVgo, Inc. operates as a subsidiary of EVgo Holdings LLC."
+    },
+    "EGO": {
+        "ticker": "EGO",
+        "name": "Eldorado Gold Corporation",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 7562546176,
+        "currency": "USD",
+        "description": "Eldorado Gold Corporation, together with its subsidiaries, engages in the mining, exploration, development, and sale of mineral products primarily in Turkey, Canada, and Greece. The company primarily produces gold, as well as silver, lead, and zinc. It holds a 100% interest in the Kisladag and Efem\u00e7ukuru mines located in Turkey; Lamaque complex located in Quebec, Canada; Olympias located in northern Greece; and Stratoni, Skouries, Perama Hill, and Sapes gold mines located in Greece. The company was formerly known as Eldorado Corporation Ltd. and changed its name to Eldorado Gold Corporation in April 1996. Eldorado Gold Corporation was incorporated in 1996 and is headquartered in Vancouver, Canada."
+    },
+    "AFG": {
+        "ticker": "AFG",
+        "name": "American Financial Group, Inc.",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 10673155072,
+        "currency": "USD",
+        "description": "American Financial Group, Inc., an insurance holding company, provides specialty property and casualty insurance products in the United States. The company offers property and transportation insurance products, such as physical damage and liability coverage for buses and trucks other specialty transportation niches, inland and ocean marine, agricultural-related products, and other commercial property coverages; specialty casualty insurance, including primarily excess and surplus, executive and professional liability, general liability, umbrella and excess liability, and specialty coverage in targeted markets, as well as customized programs for small to mid-sized businesses and workers' compensation insurance; and specialty financial insurance products comprising risk management insurance programs for lending and leasing institutions, fidelity and surety products, and trade credit insurance. It sells its property and casualty insurance products through independent insurance agents and brokers. The company was founded in 1872 and is headquartered in Cincinnati, Ohio."
     }
 }
