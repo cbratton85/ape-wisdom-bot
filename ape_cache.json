@@ -18195,5 +18195,23 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index. In addition, in seeking to track the index, it may invest in equity securities that are not included in the index, cash and cash equivalents or money market instruments, such as repurchase agreements and money market funds. The index measures the performance of the small-capitalization segment of the U.S. equity market."
+    },
+    "LAB": {
+        "ticker": "LAB",
+        "name": "Standard BioTools Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 476861120,
+        "currency": "USD",
+        "description": "Standard BioTools Inc., together with its subsidiaries, develops, manufactures, and sells a range of instrumentation, consumables, and services to scientists and biomedical researchers to develop therapeutics in the Americas, Europe, the Middle East, Africa, and the Asia pacific. The company operates in two segments, Proteomics and Genomics. Its proteomics and genomics include instruments, consumables, software, and services based upon technologies used in the identification of proteins, as well as genes and their functions. The company provides SomaScan platform that enables researchers to measure proteins simultaneously and provides deep insights into biological processes and disease mechanisms; CyTOF technology platform that uses metal-tagged antibodies and time-of-flight mass spectrometry to eliminate signal interference and expand multiplexing capabilities; Hyperion, a spatial biology platform, which unlocks deeper insights into tissue organization by preserving spatial context while enabling high-dimensional molecular and proteomic analysis; and Biomark X9 system that redefines high-throughput genomics for quantitative polymerase chain reaction applications. The company sells its instruments and consumables for research use only to academic research institutions, translational research and medicine centers, cancer centers, and clinical research laboratories, as well as biopharmaceutical, biotechnology, and plant and animal research companies. It has license agreements with California Institute of Technology, Harvard University, and Caliper Life Sciences, Inc. The company was formerly known as Fluidigm Corporation and changed its name to Standard BioTools Inc. in April 2022. Standard BioTools Inc. was incorporated in 1999 and is headquartered in South San Francisco, California."
+    },
+    "ABR": {
+        "ticker": "ABR",
+        "name": "Arbor Realty Trust",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 1625153408,
+        "currency": "USD",
+        "description": "Arbor Realty Trust, Inc. invests in a diversified portfolio of structured finance assets in the multifamily, single-family rental, and commercial real estate markets in the United States. The company operates through Structured Business and Agency Business segments. It primarily invests in bridge and mezzanine loans, including junior participating interests in first mortgages, and preferred and direct equity, as well as real estate-related joint ventures, real estate-related notes, and various mortgage-related securities. In addition, the company offers bridge financing products to borrowers who seek short-term capital to be used in an acquisition of property; financing by making preferred equity investments in entities that directly or indirectly own real property; mezzanine financing in the form of loans that are subordinate to a conventional first mortgage loan and senior to the borrower's equity in a transaction; junior participation financing in the form of a junior participating interest in the senior debt; and financing products to borrowers who are looking to acquire conventional, workforce, and affordable single-family housing. Further, it underwrites, originates, sells, and services multifamily mortgage loans through conduit/commercial mortgage-backed securities programs. The company qualifies as a real estate investment trust for federal income tax purposes. It generally would not be subject to federal corporate income taxes if it distributes at least 90% of its taxable income to its stockholders. The company was incorporated in 2003 and is headquartered in Uniondale, New York."
     }
 }
