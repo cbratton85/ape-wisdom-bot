@@ -18474,5 +18474,32 @@
         "mcap": 9824733,
         "currency": "USD",
         "description": "zSpace, Inc. provides augmented and virtual reality educational technology solutions for K-12 schools, and career and technical education markets in the United States and internationally. The company provides hardware products to produce devices that deliver a 3D experience that includes Inspire, a second-generation laptop product that delivers autostereoscopic 3D graphics which does not require any eyewear or headset; Inspire 2, a third-generation laptop product that delivers autostereoscopic 3D graphics not requiring any eyewear or headset and allows users to interact with and manipulate 3D images; Imagine, a fourth-generation laptop product which delivers autostereoscopic 3D graphics not requiring any eyewear or headset and uses the zSpace hand-held stylus; Tracked stylus which allows users to interact with the projection of the 3D information, as well as precise interaction with the virtual objects in open space; and Original Edition (OE) products, an all-in-one products and OE laptop that uses a proprietary passive circular polarized display to create 3D stereo using lightweight eyewear. It also develops and delivers platform management software that enables the distribution, licensing, and management of web enabled applications; and end user applications, as well as offers StudioA3, an application that allows teachers to build lessons for various subject using pre-made models. In addition, the company provides implementation and professional development services; and training services. Its platform offers a range of educational tools designed for K-12 science, technology, engineering, and math lessons, as well as training skilled trades in areas, such as health sciences, automotive engineering/repair, and software programming and advanced manufacturing. The company was formerly known as Infinite Z, Inc. and changed its name to zSpace, Inc. in February 2013. The company was incorporated in 2006 and is headquartered in San Jose, California."
+    },
+    "KMLM": {
+        "ticker": "KMLM",
+        "name": "KraneShares Mount Lucas Managed",
+        "meta": "Systematic Trend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund seeks to achieve its goal by investing in commodity, currency, and global fixed income futures contracts traded on U.S. and foreign exchanges that are the same as or similar to those included in the index. It may also invest directly and indirectly in certain debt instruments. The index measures the performance of a portfolio of commodity, currency, and global fixed income futures contracts traded on U.S. and foreign exchanges using a trend following methodology. It is non-diversified."
+    },
+    "HKD": {
+        "ticker": "HKD",
+        "name": "AMTD Digital Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 462022112,
+        "currency": "USD",
+        "description": "AMTD Digital Inc., through its subsidiaries, provides digital solutions; media and entertainment services; and hotel operations, hospitality, and very important person (VIP) services in Europe, the United States, Hong Kong, Singapore, and Asia. The company offers cross-market and intelligent digital solutions services for retail and corporate clients; and general and life insurance solutions to clients in various industries. It also provides fashion, arts, and luxury media advertising and marketing services; print and digital advertising campaigns and marketing services; and sells printed and digital publications, as well as operates in the movie production sector. In addition, the company offers customer-centric VIP services, such as hotels and serviced apartments, food and beverage, and club membership services. Further, it holds whole building properties. Digital Inc. was incorporated in 2019 and is headquartered in Paris, France."
+    },
+    "VRP": {
+        "ticker": "VRP",
+        "name": "Invesco Variable Rate Preferred",
+        "meta": "Preferred Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will invest at least 90% of its total assets in the components of the index, as well as ADRs that represent securities in the index. The index provider compiles and calculates the index, a market capitalization-weighted index designed to track the performance of floating and variable rate investment grade and below investment grade U.S. dollar denominated preferred stock, as well as certain types of hybrid securities. It is non-diversified."
     }
 }
