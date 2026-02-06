@@ -17826,5 +17826,59 @@
         "mcap": 34621837312,
         "currency": "USD",
         "description": "Kenvue Inc. operates as a consumer health company in the United States, Europe, the Middle East, Africa, Asia-Pacific, and Latin America. It operates through three segments: Self Care, Skin Health and Beauty, and Essential Health. The Self Care segment offers cough, cold and allergy, pain care, digestive health, smoking cessation, eye care, and other products under the Tylenol, Motrin, Benadryl, Nicorette, Zarbee's, ORSLTM, Rhinocort, Calpol, and Zyrtec brands. The Skin Health and Beauty segment provides face and body care, hair, sun, and other care products under the Neutrogena, Aveeno, Dr.Ci:Labo, Le Petit Marseillais, Lubriderm, Rogaine, and OGX brand names. The Essential Health segment offers oral and baby, women's health, wound, and other care products under the Listerine, Johnson's, Band-Aid, and Stayfree, o.b., tampons, Carefree, and Desitin Diaper Rash brands. Kenvue Inc. was incorporated in 2022 and is headquartered in Summit, New Jersey."
+    },
+    "FDD": {
+        "ticker": "FDD",
+        "name": "First Trust STOXX European Sele",
+        "meta": "Europe Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will normally invest at least 90% of its net assets (including investment borrowings) in the common stocks and depositary receipts that comprise the index. The index consists of 30 high dividend-yielding securities selected from the STOXX \u00ae Europe 600 Index. In addition, a security must be issued by a company with a non-negative five-year dividend-per-share growth rate and a dividend-to-earnings ratio of 60% or less."
+    },
+    "SMLR": {
+        "ticker": "SMLR",
+        "name": "Semler Scientific, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 311112768,
+        "currency": "USD",
+        "description": "Semler Scientific, Inc. provides technology solutions to enhance the clinical effectiveness and efficiency of healthcare providers in the United States. The company's products include QuantaFlo, a four-minute in-office blood flow test that enables healthcare providers to use blood flow measurements as part of their examinations of a patient's vascular condition. The company's products serve cardiologists, internists, nephrologists, endocrinologists, podiatrists, family practitioners, healthcare insurance plans, integrated delivery networks, independent physician groups, and companies contracting with the healthcare industry, such as risk assessment groups and retailers. It offers its products through sales representatives and distributors. The company was incorporated in 2007 and is headquartered in Santa Clara, California."
+    },
+    "PSL": {
+        "ticker": "PSL",
+        "name": "Invesco Dorsey Wright Consumer ",
+        "meta": "Consumer Defensive",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 90% of its total assets in securities that comprise the underlying index. The underlying index is composed of at least 30 securities of companies in the consumer staples sector that have powerful relative strength or \"momentum\" characteristics."
+    },
+    "ECPG": {
+        "ticker": "ECPG",
+        "name": "Encore Capital Group Inc",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 1301085568,
+        "currency": "USD",
+        "description": "Encore Capital Group, Inc., a specialty finance company, provides debt recovery solutions and other related services for consumers across financial assets worldwide. The company purchases portfolios of defaulted consumer receivables at discounts to face value, as well as manages them by working with individuals as they repay their obligations and works toward financial recovery. It is also involved in the provision of early stage collection, business process outsourcing, and contingent collection services. In addition, the company engages in debt servicing and other portfolio management services to credit originator for non-performing loans. Further, it offers credit management services. Encore Capital Group, Inc. was incorporated in 1999 and is headquartered in San Diego, California."
+    },
+    "CACC": {
+        "ticker": "CACC",
+        "name": "Credit Acceptance Corporation",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 5461386752,
+        "currency": "USD",
+        "description": "Credit Acceptance Corporation engages in the provision of financing programs, and related products and services in the United States. The company advances money to automobile dealers in exchange for the right to service the underlying consumer loans; and buys the consumer loans from the dealers and keeps the amount collected from the consumers. It is also involved in the business of reinsuring coverage under vehicle service contracts sold to consumers by dealers on vehicles financed by the company. The company serves independent and franchised automobile dealers. The company was incorporated in 1972 and is headquartered in Southfield, Michigan."
+    },
+    "CMBT": {
+        "ticker": "CMBT",
+        "name": "CMB.TECH NV",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 3576171008,
+        "currency": "USD",
+        "description": "Cmb.Tech NV engages in marine transportation business in Belgium. It operates through three divisions: Marine, H2 Infra, and H2 Industry. The Marine division owns and operates fleet of crude oil tankers, bulk carriers, container ships, chemicals, offshore wind support vessels, tugboats, and ferries. The H2 Infra division develops and secures green molecule supplies; and produces and distributes green hydrogen and ammonia. The H2 Industry division provides scalable dual-fuel industrial applications. The company was formerly known as Euronav NV and changed its name to Cmb.Tech NV in October 2024. Cmb.Tech NV was incorporated in 2003 and is headquartered in Antwerp, Belgium. Cmb.Tech NV is a subsidiary of CMB NV."
     }
 }
