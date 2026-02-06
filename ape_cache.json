@@ -18375,5 +18375,59 @@
         "mcap": 71831112,
         "currency": "USD",
         "description": "AMCON Distributing Company, together with its subsidiaries, engages in the wholesale distribution of consumer products in the Central, Rocky Mountain, and Mid-South regions of the United States. The company operates through two segments: Wholesale Distribution and Retail Health Food. The Wholesale Distribution segment distributes consumer products, including cigarettes and tobacco products, candy and other confectionery, beverages, groceries, paper products, health and beauty care products, frozen and refrigerated products, and institutional foodservice products. It serves retail outlets, such as convenience stores, discount and general merchandise stores, grocery stores, drug stores, liquor stores, tobacco shops, and gas stations; and institutional customers, including restaurants and bars, schools, sports complexes, and other wholesalers. This segment also markets its own private label lines of water, candy products, batteries, and other products. The Retail Health Food segment offers the retail of natural, organic, and specialty foods consisting of produce, baked goods, frozen foods, nutritional supplements, personal care items, and general merchandise. In addition, the company operates retail health food stores under the Chamberlin's Natural Foods, Akin's Natural Foods, and Earth Origins Market brands. AMCON Distributing Company was incorporated in 1986 and is based in Omaha, Nebraska."
+    },
+    "VOOG": {
+        "ticker": "VOOG",
+        "name": "Vanguard S&P 500 Growth ETF",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 7314081280,
+        "currency": "USD",
+        "description": "The advisor employs an indexing investment approach designed to track the performance of the S&P 500\u00ae Growth Index, which represents the growth companies, as determined by the index sponsor, of the S&P 500 Index. The index measures the performance of large-capitalization growth companies in the United States."
+    },
+    "ATAI": {
+        "ticker": "ATAI",
+        "name": "AtaiBeckley Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1327549312,
+        "currency": "USD",
+        "description": "AtaiBeckley Inc., a clinical-stage biopharmaceutical company, engages in the research, development, and commercialization of mental health treatments in the United States, Germany, and Canada. The company develops BPL-003, an intranasal formulation of the benzoate salt form of mebufotenin that is in Phase 2a and 2b clinical studies for treatment resistant depression (TRD) and alcohol use disorder; RL-007, an orally bioavailable compound, which is a pro-cognitive neuromodulator in Phase 2b trial for cognitive impairment associated with schizophrenia; and ELE-101, a serotonergic psychedelic in Phase 2a trial for the treatment of major depressive disorder. It is also developing VLS-01, an oral transmucosal film formulation of N,N-Dimethyltryptamine in Phase 2 clinical study to treat TRD; EMP-01, an oral formulation of R-3,4-methylenedioxy-methamphetamine that is in Phase 2 clinical study for social anxiety disorder; and EGX-A & EGX-B, which are non-hallucinogenic 5-HT2A receptor agonists in preclinical studies for TRD. In addition, the company offers COMP360 for psilocybin therapy; and GRX-917 for the treatment of anxiety, depression, and various neurological disorders. The company was formerly known as Atai Beckley N.V. and changed its name to AtaiBeckley Inc. in December 2025. AtaiBeckley Inc. was founded in 2018 and is based in New York, New York."
+    },
+    "KNF": {
+        "ticker": "KNF",
+        "name": "Knife Riv Holding Co.",
+        "meta": "Building Materials",
+        "type": "EQUITY",
+        "mcap": 4547299328,
+        "currency": "USD",
+        "description": "Knife River Corporation, together with its subsidiaries, provides aggregates-led construction materials and contracting services in the United States. It operates through Pacific, Northwest, Mountain, Central, and Energy Services segments. The company mines, processes, and sells construction aggregates, including crushed stone and sand, and gravel; and produces and sells asphalt and ready-mix concrete. It also provides contracting service, such as heavy-civil construction, asphalt and concrete paving, and site development and grading. In addition, the company sells cement, merchandise, and other building materials and related services; and produces and supplies liquid asphalt for use in asphalt road construction. The company sells its construction materials to public and private-sector customers comprising federal, state, and municipal governments; industrial, commercial, and residential developers, as well as other private parties; and provides its contracting services to public-sector customers for the development and servicing of highways, local roads, bridges, and other public-infrastructure projects. Knife River Corporation was founded in 1917 and is headquartered in Bismarck, North Dakota."
+    },
+    "WKEY": {
+        "ticker": "WKEY",
+        "name": "WISeKey International Holding L",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 76942120,
+        "currency": "USD",
+        "description": "WISeKey International Holding AG, a cybersecurity company, provides integrated security solutions in North America, Europe, the Middle East, Africa, the Asia Pacific, and Latin America. The company designs, manufactures, distributes, and sells high-end, Common Criteria EAL5+ & FIPS 140-3-certified secure microprocessors, as well as offers digital certificates; software as a service solutions, including cloud-based certificate life-cycle-management, signing, and authentication solutions; software licenses; cloud-based certificates for authentication purposes; post-contract customer support for cybersecurity applications; software for certificates life-cycle management, and signing and authentication solutions through its INeS certificate management platform; services to implement and integrate multi-element cybersecurity solutions; and hosting and monitoring of infrastructure services. It also develops, markets, hosts, and supports a range of solutions that enable secure digital identification of people, content, and objects by generating digital identities through its products and services in cybersecurity services, internet of things, digital brand management, and mobile security that enable clients to monetize its existing user bases, as well as expand its eco-system. In addition, the company engages in financing, sales, and distribution activities; and provision of semiconductor secure chips. WISeKey International Holding AG was incorporated in 2015 and is headquartered in Zug, Switzerland."
+    },
+    "VRE": {
+        "ticker": "VRE",
+        "name": "Veris Residential, Inc.",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 1824333440,
+        "currency": "USD",
+        "description": "Veris Residential, Inc. is a forward-thinking real estate investment trust (REIT) that primarily owns, operates, acquires and develops premier Class A multifamily properties in the Northeast. Our technology-enabled, vertically integrated operating platform delivers a contemporary living experience aligned with residents' preferences while positively impacting the communities we serve. We are guided by an experienced management team and Board of Directors, underpinned by leading corporate governance principles; a best-in-class approach to operations; and an inclusive culture based on meritocratic empowerment."
+    },
+    "DXCM": {
+        "ticker": "DXCM",
+        "name": "DexCom, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 27676356608,
+        "currency": "USD",
+        "description": "DexCom, Inc., a medical device company, focuses on the design, development, and commercialization of continuous glucose monitoring (CGM) systems in the United States and internationally. The company provides its systems for the management of diabetes and metabolic health by patients, caregivers, and clinicians. Its products include Dexcom G6 and Dexcom G7, integrated CGM systems for diabetes management; Dexcom Share, a remote monitoring system; Dexcom Real-Time API, which enables authorized third-party software developers to integrate real-time CGM data into their digital health apps and devices; Dexcom ONE, that is designed to replace finger stick blood glucose testing for diabetes treatment decisions; and Stelo, a new over-the-counter glucose biosensor designed for adults with prediabetes and Type 2 diabetes. The company has a collaboration and license agreement with Verily Life Sciences LLC and Verily Ireland Limited to develop blood-based or interstitial glucose monitoring products. It markets its products directly to endocrinologists, physicians, and diabetes educators. The company was incorporated in 1999 and is headquartered in San Diego, California."
     }
 }
