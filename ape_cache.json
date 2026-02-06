@@ -18069,5 +18069,50 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund invests at least 80% of its total assets in the securities of the Cboe S&P 500 BuyWrite Index (the \u201cunderlying index\u201d) or in investments that have economic characteristics that are similar to the economic characteristics of the component securities of the underlying index, either individually or in the aggregate."
+    },
+    "DLO": {
+        "ticker": "DLO",
+        "name": "DLocal Limited",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 3778407168,
+        "currency": "USD",
+        "description": "DLocal Limited, together with its subsidiaries, operates a payment processing platform worldwide. The company offers a robust pay-in solution that allows businesses to get paid for their products and services through various payment methods, including international and local cards, online bank transfers, direct debit, cash, and hundreds of alternative payment methods (APMs). It also provides a pay-out solution used by merchants to scale their pay-out operations. In addition, the company offers dLocal for Platforms, an end-to-end payment solution that provides a range of services to help platforms manage global payments. It serves its products to the commerce, streaming, ride-hailing, financial services, remittances, advertising, SaaS, travel, e-learning, on-demand delivery, gaming, and crypto industries. The company was founded in 2016 and is headquartered in Montevideo, Uruguay."
+    },
+    "ISPC": {
+        "ticker": "ISPC",
+        "name": "iSpecimen Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 3371987,
+        "currency": "USD",
+        "description": "iSpecimen Inc. operates marketplace that provides biospecimens to life science researchers worldwide. The company develops and operates iSpecimen Marketplace, a proprietary online marketplace platform that connects medical researchers who need access to subjects, samples, and data with hospitals, laboratories, and other organizations who have access to them. Its marketplace offers human biospecimens, including Biofluids, such as whole blood, plasma, serum, urine, saliva, sputum, nasopharyngeal material, and cerebral spinal fluid; Solid tissue comprising fresh, fixed, and cryopreserved tissue, as well as formalin-fixed paraffin embedded blocks, slides, and curls; and Hematopoietic stem and immune cells, including bone marrow, cord blood, whole blood, or sub-components of these tissues, such as peripheral blood mononuclear cells and other isolated cell types. The company serves biopharmaceutical companies, in vitro diagnostic companies, and government/academic institutions. iSpecimen Inc. was incorporated in 2009 and is headquartered in Woburn, Massachusetts."
+    },
+    "JL": {
+        "ticker": "JL",
+        "name": "J-Long Group Limited",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 13730213,
+        "currency": "USD",
+        "description": "J-Long Group Limited distributes reflective and non-reflective garment trims in Asia, Hong Kong, the People's Republic of China, and internationally. The company offers reflective, heat transfers, workwear trims, patches, packaging, fabrics, woven labels and tapes, sewing badges, piping, zipper pulls, and drawcords. It sells its products through online. J-Long Group Limited was founded in 1985 and is headquartered in Tsuen Wan, Hong Kong."
+    },
+    "BUL": {
+        "ticker": "BUL",
+        "name": "Pacer US Cash Cows Growth ETF",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index uses an objective, rules-based methodology to provide exposure to mid- and large-capitalization U.S. companies with high free cash flow yields. Under normal circumstances, at least 80% of the fund's total assets (exclusive of collateral held from securities lending) will be invested in the component securities of the index. It is non-diversified."
+    },
+    "CRTO": {
+        "ticker": "CRTO",
+        "name": "Criteo S.A.",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 966258688,
+        "currency": "USD",
+        "description": "Criteo S.A., a technology company, provides marketing and monetization services and infrastructure on the open internet in North and South America, Europe, the Middle East, Africa, and the Asia-Pacific. It operates in two segments, Retail Media and Performance Media. The company's Criteo Shopper Graph, which derives clients' proprietary commerce data, such as transaction activity on their digital properties. It also offers Criteo AI Engine solutions, including lookalike finder, recommendation, and predictive bidding models; recommendation algorithms, dynamic creative optimization+, sponsored product placement algorithms, and other product placement algorithms. The company's technology comprises data synchronization, storage, and analysis of distributed computing infrastructure in various geographies, as well as fast data collection and retrieval using multi-layered caching infrastructure; and experimentation platform, an offline/online testing platform. In addition, it provides Retail Media, which assists retailers in generating high-margin advertising revenues from brands and agencies looking to address multiple marketing goals with strong return on ad spend, and to drive sales for themselves, by monetizing their audiences through personalized ads, either on their own digital store or on media owner properties on the open Internet; and Performance Media, which encompasses commerce activation, monetization, and services. Further, the company offers real-time advertising technology and trading infrastructure delivering advanced media buying, selling, and packaged capabilities for media owners, agencies, performance advertisers, and third-party AdTech platforms. It serves retail, travel, and classifieds industries. The company has a strategic alliance with Mirakl SAS to serve the segment of retail media, third-party sellers, and mid-to-long-tail advertisers. Criteo S.A. was incorporated in 2005 and is headquartered in Paris, France."
     }
 }
