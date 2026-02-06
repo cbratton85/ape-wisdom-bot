@@ -18303,5 +18303,77 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund will normally invest at least 90% of its net assets (including investment borrowings) in the common stocks and depositary receipts that comprise the index. The index is designed to track the performance of companies involved in the cloud computing industry."
+    },
+    "EOG": {
+        "ticker": "EOG",
+        "name": "EOG Resources, Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 62210490368,
+        "currency": "USD",
+        "description": "EOG Resources, Inc., together with its subsidiaries, explores for, develops, produces, and markets crude oil, natural gas liquids, and natural gas in producing basins in the United States, the Republic of Trinidad and Tobago, and internationally. The company was formerly known as Enron Oil & Gas Company. EOG Resources, Inc. was incorporated in 1985 and is headquartered in Houston, Texas."
+    },
+    "AMTM": {
+        "ticker": "AMTM",
+        "name": "Amentum Holdings, Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 8961292288,
+        "currency": "USD",
+        "description": "Amentum Holdings, Inc. engages in the provision of engineering and technology solutions in the United States and internationally. It operates through two segments, Digital Solutions and Global Engineering Solutions. The company offers digital and data-driven solutions, including intelligence analytics, space system development, cybersecurity, and IT to the federal government and commercial clients. It also provides large-scale environmental remediation, nuclear power solutions, platform engineering, sustainment, and supply chain management for the U.S. government and allied nations. The company was incorporated in 2023 and is headquartered in Chantilly, Virginia."
+    },
+    "VRSN": {
+        "ticker": "VRSN",
+        "name": "VeriSign, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 19905372160,
+        "currency": "USD",
+        "description": "VeriSign, Inc., together with its subsidiaries, provides internet infrastructure and domain name registry services that enables internet navigation for various recognized domain names worldwide. The company enables the security, stability, and resiliency of internet infrastructure and services, including providing root zone maintainer services, operating two of thirteen internet root servers; and offering registration services and authoritative resolution for the .com and .net domains, which supports global e-commerce. It operates directory for .name and .cc; and back-end systems for .edu, domain names. The company was incorporated in 1995 and is headquartered in Reston, Virginia."
+    },
+    "TRMB": {
+        "ticker": "TRMB",
+        "name": "Trimble Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 15448952832,
+        "currency": "USD",
+        "description": "Trimble Inc. provides technology solutions that enable professionals and field mobile workers to enhance or transform their work processes in North America, Europe, the Asia Pacific, and internationally. The company offers architecture design, engineering, construction, and owner software products. It also offers field-based data collection systems and field software, and real-time communications systems, as well as back-office software for data processing, modeling, monitoring, reporting, and analysis; software for planning, data processing and editing, quality control, 3D modeling, intelligent data analysis and AI-based feature extraction, deformation monitoring, project reporting, and data export; field and office software for project design and visualization; office-based products, such as software for 3D design and data sharing; systems to guide and control construction equipment; and software to facilitate the management of the construction process. In addition, it offers positioning services, such as VRSNow; CenterPoint RTX; FieldPoint RTX; Rangepoint RTX; ViewPoint RTX; Trimble xFill; and OmniSTAR (HP, XP, G2, and VBS) services. Further, it offers transportation management system that automates business processes for shippers, carriers, and intermediaries, as well as truck routing, mileage, mapping, and voice navigation solutions; and transporeon solutions that offers freight sourcing and procurement, such as dock and yard management, and freight auditing. It serves architecture, engineering, construction, design, asset management, operations, and maintenance; private, commercial, and government; and shippers, carriers, and intermediaries customers. It sells its technology solutions directly to its customers in central Illinois, eastern Iowa, and northeast Missouri. The company was formerly known as Trimble Navigation Limited and changed its name to Trimble Inc. in October 2016. Trimble Inc. was founded in 1978 and is headquartered in Westminster, Colorado."
+    },
+    "RBND": {
+        "ticker": "RBND",
+        "name": "SPDR Bloomberg SASB Corporate B",
+        "meta": "Corporate Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Normally, the fund generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index or in securities that the Adviser determines have economic characteristics that are substantially identical to the economic characteristics of the securities that comprise the index. It is non-diversified."
+    },
+    "OILU": {
+        "ticker": "OILU",
+        "name": "MicroSectors Oil & Gas Exp. & P",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "DEM": {
+        "ticker": "DEM",
+        "name": "WisdomTree Emerging Markets Hig",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Under normal circumstances, at least 95% of the fund's total assets will be invested in constituent securities of the index and investments that have economic characteristics that are substantially identical to the economic characteristics of such constituent securities. The index is a fundamentally weighted index that is comprised of the highest dividend-yielding common stocks selected from the WisdomTree Emerging Markets Dividend Index. The fund is non-diversified."
+    },
+    "DIT": {
+        "ticker": "DIT",
+        "name": "AMCON Distributing Company",
+        "meta": "Food Distribution",
+        "type": "EQUITY",
+        "mcap": 71831112,
+        "currency": "USD",
+        "description": "AMCON Distributing Company, together with its subsidiaries, engages in the wholesale distribution of consumer products in the Central, Rocky Mountain, and Mid-South regions of the United States. The company operates through two segments: Wholesale Distribution and Retail Health Food. The Wholesale Distribution segment distributes consumer products, including cigarettes and tobacco products, candy and other confectionery, beverages, groceries, paper products, health and beauty care products, frozen and refrigerated products, and institutional foodservice products. It serves retail outlets, such as convenience stores, discount and general merchandise stores, grocery stores, drug stores, liquor stores, tobacco shops, and gas stations; and institutional customers, including restaurants and bars, schools, sports complexes, and other wholesalers. This segment also markets its own private label lines of water, candy products, batteries, and other products. The Retail Health Food segment offers the retail of natural, organic, and specialty foods consisting of produce, baked goods, frozen foods, nutritional supplements, personal care items, and general merchandise. In addition, the company operates retail health food stores under the Chamberlin's Natural Foods, Akin's Natural Foods, and Earth Origins Market brands. AMCON Distributing Company was incorporated in 1986 and is based in Omaha, Nebraska."
     }
 }
