@@ -17943,5 +17943,50 @@
         "mcap": 67476979712,
         "currency": "USD",
         "description": "Kinder Morgan, Inc. operates as an energy infrastructure company primarily in North America. The company operates through Natural Gas Pipelines, Products Pipelines, Terminals, and CO2 segments. The Natural Gas Pipelines segment owns and operates interstate and intrastate natural gas pipeline, and storage systems; natural gas gathering systems and natural gas processing and treating facilities; natural gas liquids fractionation facilities and transportation systems; and liquefied natural gas gasification, liquefaction, and storage facilities. The Products Pipelines segment owns and operates refined petroleum products, and crude oil and condensate pipelines; and associated product terminals and petroleum pipeline transmix facilities. The Terminals segment owns and/or operates liquids and bulk terminals that stores and handles various commodities, including gasoline, diesel fuel, renewable fuel and feedstocks, chemicals, ethanol, metals, and petroleum coke; and owns tankers. The CO2 segment produces, transports, and markets CO2 to recovery and production crude oil from mature oil fields; owns interests in/or operates oil fields and gasoline processing plants; and operates a crude oil pipeline system in West Texas, as well as owns and operates RNG and LNG facilities. The company was formerly known as Kinder Morgan Holdco LLC and changed its name to Kinder Morgan, Inc. in February 2011. Kinder Morgan, Inc. was founded in 1997 and is headquartered in Houston, Texas."
+    },
+    "SQM": {
+        "ticker": "SQM",
+        "name": "Sociedad Quimica y Minera S.A.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 20228870144,
+        "currency": "USD",
+        "description": "Sociedad Qu\u00edmica y Minera de Chile S.A. produces and sells specialty plant nutrients, and iodine and its derivatives worldwide. The company offers sodium potassium nitrate, specialty blends, and other specialty fertilizers under Ultrasol, Qrop, Speedfol, Allganic, Ultrasoline, Prop, and Prohydric brands. It also provides iodine and its derivatives for use in medical, agricultural, industrial, and human and animal nutrition products comprising x-ray contrast media, biocides, antiseptics and disinfectants, pharmaceutical intermediates, polarizing films for LCD and LED screens, chemicals, organic compounds, and pigments, as well as added to edible salt to prevent iodine deficiency disorders. In addition, the company produces lithium carbonate and lithium hydroxide which are used in the production of cathode material for, secondary batteries; lithium chloride; and basic lithium chemicals and lithium derivatives used in lubricating greases for heat-resistant glass, chips for the ceramic and glazing industry, and air conditioning chemicals, as well as other pharmaceutical syntheses and metal alloys. Further, it produces potassium sulfate; and potassium chloride which are used to nourish various crops. Additionally, the company produces and markets industrial chemicals, such as sodium nitrate mainly used in the production of glass and explosives, metal processing and recycling, and production of insulating materials and adhesives; potassium nitrate used as a raw material to produce frits and special glass, as well as in the enamel, metal treatment, and pyrotechnic sectors; solar salts used as a thermal storage medium in solar power generation plants; and potassium chloride as an additive in oil drilling and food processing sectors. Furthermore, it is involved in the sale of third-party fertilizers; and the exploration of copper, gold, and silver deposits. The company was founded in 1926 and is headquartered in Santiago, Chile."
+    },
+    "ABG": {
+        "ticker": "ABG",
+        "name": "Asbury Automotive Group Inc",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 4336154112,
+        "currency": "USD",
+        "description": "Asbury Automotive Group, Inc., together with its subsidiaries, operates as an automotive retailer in the United States. It operates through Dealerships and Total Care Auto, Powered by Landcar (TCA) segments. The company offers a range of automotive products and services, including new and used vehicles; and vehicle repair and maintenance services, replacement parts, collision repair, and recondition of used vehicle services. It also provides finance and insurance products, including arranging vehicle financing through third parties; and aftermarket products, such as extended vehicle service contracts, guaranteed asset protection debt cancellation, prepaid maintenance contracts, key replacement contracts, paintless debt repair contracts, appearance protection contracts, tire and wheel, and lease wear and tear contracts. The company sells its products and services to individual retail customers, other dealers, and licensed wholesalers through its network of dealerships and at auctions. Asbury Automotive Group, Inc. was founded in 1996 and is headquartered in Duluth, Georgia."
+    },
+    "RVSN": {
+        "ticker": "RVSN",
+        "name": "Rail Vision Ltd.",
+        "meta": "Railroads",
+        "type": "EQUITY",
+        "mcap": 9185431,
+        "currency": "USD",
+        "description": "Rail Vision Ltd. designs, develops, assembles, and sells railway detection systems for railway operational safety, efficiency, and predictive maintenance in Israel, Latin America, and the United States. The company's railway detection systems include various cameras, such as optics, visible light spectrum cameras (video), and thermal cameras that transmit data to a ruggedized on-board computer, which is designed to be suitable for the rough environment of a train's locomotive. It also offers main line systems for the safety of train operations, prevention of collisions, and reduction of downtime; railway detection systems; and shunting yard systems for shunting operations. In addition, the company provides rail vision data services, as well as maintenance and predictive maintenance systems; and geographic information systems for mapping and updates. Further, it offers supervision, guidance, and training services; and DASH, a cloud-based SaaS platform designed for fleet and infrastructure, analysis, and reports. Rail Vision Ltd. was incorporated in 2016 and is headquartered in Ra'anana, Israel."
+    },
+    "AZTA": {
+        "ticker": "AZTA",
+        "name": "Azenta, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 1281600256,
+        "currency": "USD",
+        "description": "Azenta, Inc. provides biological and chemical compound sample exploration and management solutions for the life sciences industry in the United States, China, the United Kingdom, rest of Europe, the Asia Pacific, and internationally. It operates through Sample Management Solutions and Multiomics segments. The Sample Management Solutions segment provides sample management products and services, including automated stores, cryogenic systems, automated sample tubes, consumables and instruments, and controlled rate thawing devices, as well as sample repository services. This segment also offers consultation services to clients throughout their experimental design and implementation processes. The Multiomics segment provides genomic and other sample analysis services comprising gene sequencing, gene synthesis, and related services. The company was formerly known as Brooks Automation, Inc. and changed its name to Azenta, Inc. in December 2021. Azenta, Inc. was founded in 1978 and is headquartered in Burlington, Massachusetts."
+    },
+    "INNV": {
+        "ticker": "INNV",
+        "name": "InnovAge Holding Corp.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 1013675008,
+        "currency": "USD",
+        "description": "InnovAge Holding Corp. manages and provides a range of medical and ancillary services for seniors in need of care and support to live independently in its homes and communities. It manages its business through Program of All-Inclusive Care for the Elderly (PACE) approach. The company also offers in-home care services consisting of skilled, unskilled, and personal care; in-center services, such as primary care, physical therapy, occupational therapy, speech therapy, dental services, mental health and psychiatric services, meals, and activities; transportation to and from the PACE center and third-party medical appointments; and care management. It serves participants in the United States; and operates PACE centers in Colorado, California, New Mexico, Pennsylvania, Florida, and Virginia. The company was formerly known as TCO Group Holdings, Inc. and changed its name to InnovAge Holding Corp. in January 2021. InnovAge Holding Corp. was founded in 1989 and is headquartered in Denver, Colorado."
     }
 }
