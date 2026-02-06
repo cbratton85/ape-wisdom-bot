@@ -17655,5 +17655,50 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The index is a rules-based, modified capitalization weighted, float adjusted index. The index is designed to provide exposure to real estate sectors and companies that are expected to benefit from large trends affecting property sectors of the global economy over a secular, multi-year time horizon. The fund generally will invest in all of the securities that comprise its index in proportion to their weightings in the index. The fund invests at least 80% of the value of its assets in securities of real estate issuers."
+    },
+    "CMF": {
+        "ticker": "CMF",
+        "name": "iShares California Muni Bond ET",
+        "meta": "Muni California Long",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index includes municipal bonds issued in the State of California, the interest of which is exempt from Federal income taxes and not subject to AMT. The fund will invest at least 80% of its assets in the component securities of the underlying index, and the fund will invest at least 90% of its assets in fixed income securities of the types included in the underlying index that the advisor believes will help the fund track the underlying index. It is non-diversified."
+    },
+    "MQ": {
+        "ticker": "MQ",
+        "name": "Marqeta, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1797413504,
+        "currency": "USD",
+        "description": "Marqeta, Inc. operates a cloud-based open API platform for card issuing and transaction processing services. The company's platform also provides access to a suite of bank account and money movement features, including demand deposit accounts, direct deposit with early pay, ACH, cash loads, and fee-free ATMs, bill pay, and instant funding capabilities; RiskControl product; Marqeta Dashboard, a self-service portal to access and manage all aspects of card program; and credit capabilities, as well as Portfolio Migration which simplifies upgrading existing card programs into its platform. It offers its solutions in various verticals, including financial services, on-demand services, expense management, and e-commerce enablement, as well as buy now, pay later providers. Marqeta, Inc. was incorporated in 2010 and is headquartered in Oakland, California."
+    },
+    "QYLD": {
+        "ticker": "QYLD",
+        "name": "Global X NASDAQ 100 Covered Cal",
+        "meta": "Derivative Income",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will invest at least 80% of its total assets in the securities of the underlying index. The CBOE NASDAQ-100\u00ae BuyWrite Index is a benchmark index that measures the performance of a theoretical portfolio that holds a portfolio of the stocks included in the NASDAQ-100\u00ae Index, and \"writes\" (or sells) a succession of one-month at-the-money NASDAQ-100\u00ae Index covered call options. It is non-diversified."
+    },
+    "SAVEQ": {
+        "ticker": "SAVEQ",
+        "name": "SAVEQ",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "ADC": {
+        "ticker": "ADC",
+        "name": "Agree Realty Corporation",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 8776419328,
+        "currency": "USD",
+        "description": "Agree Realty Corporation is a publicly traded real estate investment trust that is RETHINKING RETAIL through the acquisition and development of properties net leased to industry-leading, omni-channel retail tenants. As of December 31, 2025, the Company owned and operated a portfolio of 2,674 properties, located in all 50 states and containing approximately 55.5 million square feet of gross leasable area. The Company's common stock is listed on the New York Stock Exchange."
     }
 }
