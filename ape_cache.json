@@ -18186,5 +18186,14 @@
         "mcap": 473286,
         "currency": "USD",
         "description": "PRF Technologies Ltd., a clinical stage specialty pharmaceutical company, focuses on the reformulation of established therapeutics and provides an extended period of post-surgical pain relief in Israel. It develops PRF-110, a viscous clear oil-based solution that is instilled directly into the surgical wound to provide localized and extended post-operative analgesia, as well as in Phase 3 clinical trial for pain treatment of patients undergoing bunionectomy and pain treatment of hernia repair operations. The company was formerly known as PainReform Ltd. and change its name to PRF Technologies Ltd. in January 2026. The company was incorporated in 2007 and is based in Tel Aviv-Yafo, Israel."
+    },
+    "SLY": {
+        "ticker": "SLY",
+        "name": "SPDR S&P 600 Small Cap ETF (bas",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index. In addition, in seeking to track the index, it may invest in equity securities that are not included in the index, cash and cash equivalents or money market instruments, such as repurchase agreements and money market funds. The index measures the performance of the small-capitalization segment of the U.S. equity market."
     }
 }
