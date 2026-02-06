@@ -18051,5 +18051,23 @@
         "mcap": 1412577408,
         "currency": "USD",
         "description": "Relay Therapeutics, Inc. operates as a clinical-stage precision medicines company. It transforms the drug discovery process with a focus on enhancing small molecule therapeutic discovery in targeted oncology and genetic disease indications. The company's lead product candidates include RLY-2608, a pan-mutant and isoform-selective phosphoinostide 3 kinase alpha, or PI3Ka, inhibitor that is in clinical development for the treatment of breast cancer, solid tumor, and vascular malformations; and aGal chaperone for Fabry diseases. It also develops RLY-8161, an oncogene driver that belongs to the RAS family of signaling proteins; and RLY-1013, a degrader of estrogen receptor alpha. In addition, the company develops lirafugratinib (RLY-4008), a receptor tyrosine kinase for the treatment of cancer. It has collaboration and license agreements with D. E. Shaw Research, LLC to research certain biological targets through the use of D. E. Shaw Research computational modeling capabilities focused on analysis of protein motion to develop and commercialize compounds and products directed to such targets; Elevar Therapeutics, Inc. for the development and commercialization of RLY-4008; and Pfizer Inc. for the development of RLY-2608 in combination with fulvestrant and atirmociclib. The company was formerly known as Allostery, Inc. and changed its name to Relay Therapeutics, Inc. in December 2015. Relay Therapeutics, Inc. was incorporated in 2015 and is headquartered in Cambridge, Massachusetts."
+    },
+    "FNDB": {
+        "ticker": "FNDB",
+        "name": "Schwab Fundamental U.S. Broad M",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will invest at least 90% of its net assets in stocks included in the index. The index measures the performance of the constituent companies by fundamental overall company scores (scores), which are created using as the universe the U.S. companies in the RAFI Global Equity Investable Universe. It may invest up to 10% of its net assets in securities not included in the index."
+    },
+    "XYLD": {
+        "ticker": "XYLD",
+        "name": "Global X S&P 500 Covered Call E",
+        "meta": "Derivative Income",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its total assets in the securities of the Cboe S&P 500 BuyWrite Index (the \u201cunderlying index\u201d) or in investments that have economic characteristics that are similar to the economic characteristics of the component securities of the underlying index, either individually or in the aggregate."
     }
 }
