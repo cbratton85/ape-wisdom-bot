@@ -17700,5 +17700,86 @@
         "mcap": 8776419328,
         "currency": "USD",
         "description": "Agree Realty Corporation is a publicly traded real estate investment trust that is RETHINKING RETAIL through the acquisition and development of properties net leased to industry-leading, omni-channel retail tenants. As of December 31, 2025, the Company owned and operated a portfolio of 2,674 properties, located in all 50 states and containing approximately 55.5 million square feet of gross leasable area. The Company's common stock is listed on the New York Stock Exchange."
+    },
+    "ROKT": {
+        "ticker": "ROKT",
+        "name": "State Street SPDR S&P Kensho Fi",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Under normal market conditions, the fund generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index. The index is designed to capture companies whose products and services are driving innovation behind the exploration of deep space and deep sea. The fund may invest in equity securities that are not included in the index, cash and cash equivalents or money market instruments. It is non-diversified."
+    },
+    "IJH": {
+        "ticker": "IJH",
+        "name": "iShares Core S&P Mid-Cap ETF",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 17897021440,
+        "currency": "USD",
+        "description": "The index measures the performance of the mid-capitalization sector of the U.S. equity market, as determined by SPDJI. The fund generally will invest at least 80% of its assets in the component securities of its index and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents."
+    },
+    "PSQ": {
+        "ticker": "PSQ",
+        "name": "ProShares Short QQQ",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of 100 of the largest Nasdaq-listed non-financial companies. Under normal circumstances, the fund will obtain inverse exposure to at least 80% of its total assets in components of the index or in instruments with similar economic characteristics. The fund is non-diversified."
+    },
+    "SCHB": {
+        "ticker": "SCHB",
+        "name": "Schwab U.S. Broad Market ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "To pursue its goal, the fund generally invests in stocks that are included in the index. The index includes the largest 2,500 publicly traded U.S. companies for which pricing information is readily available. The fund will invest at least 90% of its net assets in these stocks. It may invest up to 10% of its net assets in securities not included in the index."
+    },
+    "BKR": {
+        "ticker": "BKR",
+        "name": "Baker Hughes Company",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 56601350144,
+        "currency": "USD",
+        "description": "Baker Hughes Company provides a portfolio of technologies and services to energy and industrial value chain worldwide. The company operates through Oilfield Services & Equipment (OFSE) and Industrial & Energy Technology (IET) segments. The OFSE segment designs and manufactures products and provides related services, including exploration, appraisal, development, production, rejuvenation, and decommissioning for onshore and offshore oilfield operations. This segment also provides drilling services, drill bits, and drilling and completions fluids; completions, intervention, measurements, pressure pumping, and wireline services; artificial lift systems, and oilfield and industrial chemicals; subsea projects and services, flexible pipe systems, and surface pressure control systems; and integrated well services and solutions. It serves oil and natural gas companies; the United States and international independent oil and natural gas companies; national or state-owned oil companies; engineering, procurement, and construction contractors; geothermal companies; and other oilfield service companies. The IET segment provides gas technology equipment, including drivers, driven equipment, and turnkey solutions for the mechanical and electric-drive, compression, and power-generation applications; and energy sectors, such as oil and gas, LNG operations, petrochemical, and carbon solutions. This segment also provides rack-based vibrating monitoring equipment and sensors; integrated asset performance management products; inspection services; pumps, valves, and gears; precision sensors and instrumentation, and condition monitoring solutions. It serves upstream, midstream, downstream, onshore, offshore, and small-to-large scale customers. The company was formerly known as Baker Hughes, a GE company and changed its name to Baker Hughes Company in October 2019. Baker Hughes Company was incorporated in 2016 and is based in Houston, Texas."
+    },
+    "TUR": {
+        "ticker": "TUR",
+        "name": "iShares MSCI Turkey ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 636329024,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of the underlying index and in investments that have economic characteristics that are substantially identical to the component securities of the underlying index. The underlying index is designed to measure the performance of the large-, mid- and small-capitalization segments of equity market in Turkey. The fund is non-diversified."
+    },
+    "INTA": {
+        "ticker": "INTA",
+        "name": "Intapp, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 1947392512,
+        "currency": "USD",
+        "description": "Intapp, Inc., through its subsidiary, Integration Appliance, Inc., provides AI-powered solutions in the United States, the United Kingdom, and internationally. It provides DealCloud that manages client relationships, prospective clients, investments, and current engagements, as well as provides customer relationship management, deal management, experience management, and relationship intelligence solutions. The company also offers compliance products that help firms thoroughly evaluate new business, onboard clients quickly, and monitor relationships for risk throughout their business lifecycle; and time solutions provides AI-enabled software solutions that include time capture, enhance billing, and facilitate compliance with client requirements. In addition, it provides collaboration products that offer intelligent client-centric teamwork with Microsoft 365, Teams, and SharePoint; a unified system for managing emails, documents, chats, and tasks; and Assist, an AI-driven transformation that integrates advanced machine learning and natural language processing into Intapp products, such as Intapp DealCloud and Intapp Terms, as well as streamlines critical workflows, enhances decision-making, and delivers measurable results. Further, the company operates technology platforms, such as cloud-based architecture, low-code configurability and personalized UX, applied AI, and industry-specific data architecture. It serves private capital, investment banking, legal, accounting, and consulting firms, and real assets. The company was formerly known as LegalApp Holdings, Inc. and changed its name to Intapp, Inc. in February 2021. Intapp, Inc. was founded in 2000 and is headquartered in Palo Alto, California."
+    },
+    "HLI": {
+        "ticker": "HLI",
+        "name": "Houlihan Lokey, Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 11767340032,
+        "currency": "USD",
+        "description": "Houlihan Lokey, Inc., an investment banking company, provides merger and acquisition (M&A), capital market, financial restructurings and liability management, and financial and valuation advisory services worldwide. The company operates in three segments: Corporate Finance (CF), Financial Restructuring (FR), and Financial and Valuation Advisory (FVA). The CF segment offers general financial advisory services; and advises public and private institutions, including financial sponsors on buy-side and sell-side M&A transactions, debt and equity financings in both the private and public markets, and other corporate finance transactions. The FR segment advises debtors, creditors, and other parties-in-interest related to recapitalization/deleveraging transactions. This segment also provides a range of advisory services, such as structuring, negotiation, and confirmation of plans of reorganization; structuring and analysis of exchange offers; liability management transactions; corporate viability assessment; dispute resolution and expert testimony; and procuring debtor-in-possession financing. The FVA segment provides valuation services to companies; debt and equity interests comprising illiquid investments; and other assets and liabilities. This segment also offers fairness opinions in connection with M&A and other transactions; solvency opinions in connection with corporate spin-offs and dividend recapitalizations; and other types of financial opinions, as well as provides dispute resolution services. It serves corporations, financial sponsors, and government agencies. Houlihan Lokey, Inc. was incorporated in 1972 and is headquartered in Los Angeles, California."
+    },
+    "FNDX": {
+        "ticker": "FNDX",
+        "name": "Schwab Fundamental U.S. Large C",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund normally will invest at least 90% of its net assets (including, for this purpose, any borrowings for investment purposes) in stocks included in the index. The index measures the performance of the large company size segment by fundamental overall company scores, which are created using as the universe the U.S. companies in the RAFI Global Equity Investable Universe."
     }
 }
