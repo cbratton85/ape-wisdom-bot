@@ -17880,5 +17880,68 @@
         "mcap": 3576171008,
         "currency": "USD",
         "description": "Cmb.Tech NV engages in marine transportation business in Belgium. It operates through three divisions: Marine, H2 Infra, and H2 Industry. The Marine division owns and operates fleet of crude oil tankers, bulk carriers, container ships, chemicals, offshore wind support vessels, tugboats, and ferries. The H2 Infra division develops and secures green molecule supplies; and produces and distributes green hydrogen and ammonia. The H2 Industry division provides scalable dual-fuel industrial applications. The company was formerly known as Euronav NV and changed its name to Cmb.Tech NV in October 2024. Cmb.Tech NV was incorporated in 2003 and is headquartered in Antwerp, Belgium. Cmb.Tech NV is a subsidiary of CMB NV."
+    },
+    "ALX": {
+        "ticker": "ALX",
+        "name": "Alexander's, Inc.",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 1305985152,
+        "currency": "USD",
+        "description": "Alexander's, Inc. is a real estate investment trust (REIT) engaged in leasing, managing, developing and redeveloping properties. Alexander's activities are conducted through its manager, Vornado Realty Trust. Alexander's has five properties in the greater New York City metropolitan area consisting of: 731 Lexington Avenue office and retail (including Bloomberg, L.P.'s world headquarters), the Rego Center complex in Rego Park, Queens, including the Rego Park I & II retail properties and The Alexander apartment tower, and a retail property located in Flushing, NY."
+    },
+    "CEL": {
+        "ticker": "CEL",
+        "name": "CEL",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "ALXO": {
+        "ticker": "ALXO",
+        "name": "ALX Oncology Holdings Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 270266048,
+        "currency": "USD",
+        "description": "ALX Oncology Holdings Inc., a clinical-stage immuno-oncology company, focuses on developing therapies for cancer patients in the United States. The company's lead product candidate is Evorpacept, a CD47 blocking therapeutic biologic in development as a combination therapy with other anti-cancer agents, including ASPEN-06, under Phase 2 clinical study for treating Gastric/GEJ cancer; ASPEN-07, under Phase 1 clinical study for treating urothelial cancer; and ASPEN-03 and ASPEN-04, both under Phase 2 clinical study for treating head and neck squamous cell carcinoma. It has collaboration agreement for Evorpacept combination programs comprising Jazz Pharmaceuticals plc for zanidatamab, under Phase 1 trial for the treatment of breast cancer and other solid tumors; Quantum Leap Healthcare collaborative with an ADC, fam-trastuzumab deruxtecan-nxki, under Phase 1 trial for the treatment of patients with breast cancer; MD Anderson Cancer Center with rituximab and lenalidomide for the treatment of patients with indolent and aggressive NHL; Sanofi with isatuximab and dexamethasone, under Phase 1/2 trial for the treatment of patients with relapsed or refractory multiple myeloma; Academic Gastrointestinal Cancer Symposium; and University of Pittsburgh with liposomal doxorubicin and pembrolizumab, under Phase 2 trial recurrent platinum-resistant ovarian cancer. In addition, the company has collaboration agreement with Tallac Therapeutics, Inc. for the development of ALTA-002, a potent immune activator targeted to myeloid cells in the tumor to promote innate and adaptive anti-cancer immune responses. It has license agreements with Board of Trustees of the Leland Stanford Junior University, Selexis SA, and Crystal Bioscience, Inc. The company was incorporated in 2015 and is headquartered in South San Francisco, California."
+    },
+    "WOOD": {
+        "ticker": "WOOD",
+        "name": "iShares Global Timber & Forestr",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will invest at least 80% of its assets in the component securities of the index and in investments that have economic characteristics that are substantially identical to the component securities and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents. The fund is non-diversified."
+    },
+    "BIP": {
+        "ticker": "BIP",
+        "name": "Brookfield Infrastructure Partn",
+        "meta": "Utilities - Diversified",
+        "type": "EQUITY",
+        "mcap": 17168624640,
+        "currency": "USD",
+        "description": "Brookfield Infrastructure Partners L.P. engages in the utilities, transport, midstream, and data businesses. The Utilities segment operates approximately 2,900 kilometers (km) of electricity transmission lines; 3,900 km of natural gas pipelines; 8.4 million electricity and natural gas connections; 0.7 million long-term contracted sub-metering services; and 2.8 million meters under management. This segment also offers cooling, water heaters, solar, and energy storage solutions; gas distribution; heating, ventilation, air conditioner, and water products, including heating and purification, as well as other home services. The Transport segment consists of infrastructure assets that offers transportation, storage, and handling services for merchandise goods, commodities, and passengers through a network of approximately 21,000 km of track; 5,500 km of track; 9,800 km of rail; 3,300 km of motorways. The Midstream segment provides natural gas transmission, gathering and processing, and storage services through approximately 15,000 km of natural gas transmission pipelines; 570 billion cubic feet of natural gas storage; 16 natural gas and natural gas liquids processing plants; and 10,600 km of gas gathering pipelines, as well as 525,000 tonnes of polypropylene production capacity. The Data segment offers telecommunication, fiber, and data storage services through approximately 3,06,000 operational telecom towers; 28,000 km of fiber optic cables; 3,60,000 fiber-to-the-premise connections; two semiconductor manufacturing foundries; and 70 distributed antenna systems, as well as 140 data centers and 1 gigawatt of critical load capacity and an additional approximate 640 megawatts of contracted capacity. It operates in the United States, Canada, India, the United Kingdom, Brazil, Colombia, France, Australia, Germany, and internationally. The company was incorporated in 2007 and is based in Hamilton, Bermuda."
+    },
+    "TECL": {
+        "ticker": "TECL",
+        "name": "Direxion Technology Bull 3X Sha",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its net assets (plus borrowing for investment purposes) in financial instruments, such as swap agreements, securities of the index, and exchange-traded funds (\"ETFs\") that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index includes domestic companies from the technology sector. It is non-diversified."
+    },
+    "KMI": {
+        "ticker": "KMI",
+        "name": "Kinder Morgan, Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 67476979712,
+        "currency": "USD",
+        "description": "Kinder Morgan, Inc. operates as an energy infrastructure company primarily in North America. The company operates through Natural Gas Pipelines, Products Pipelines, Terminals, and CO2 segments. The Natural Gas Pipelines segment owns and operates interstate and intrastate natural gas pipeline, and storage systems; natural gas gathering systems and natural gas processing and treating facilities; natural gas liquids fractionation facilities and transportation systems; and liquefied natural gas gasification, liquefaction, and storage facilities. The Products Pipelines segment owns and operates refined petroleum products, and crude oil and condensate pipelines; and associated product terminals and petroleum pipeline transmix facilities. The Terminals segment owns and/or operates liquids and bulk terminals that stores and handles various commodities, including gasoline, diesel fuel, renewable fuel and feedstocks, chemicals, ethanol, metals, and petroleum coke; and owns tankers. The CO2 segment produces, transports, and markets CO2 to recovery and production crude oil from mature oil fields; owns interests in/or operates oil fields and gasoline processing plants; and operates a crude oil pipeline system in West Texas, as well as owns and operates RNG and LNG facilities. The company was formerly known as Kinder Morgan Holdco LLC and changed its name to Kinder Morgan, Inc. in February 2011. Kinder Morgan, Inc. was founded in 1997 and is headquartered in Houston, Texas."
     }
 }
