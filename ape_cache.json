@@ -18177,5 +18177,14 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund generally will invest at least 90% of its total assets in the securities that comprise the underlying index. The underlying index is composed of at least 30 securities of companies in the technology sector that have powerful relative strength or \"momentum\" characteristics."
+    },
+    "PRFX": {
+        "ticker": "PRFX",
+        "name": "PRF Technologies Ltd.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 473286,
+        "currency": "USD",
+        "description": "PRF Technologies Ltd., a clinical stage specialty pharmaceutical company, focuses on the reformulation of established therapeutics and provides an extended period of post-surgical pain relief in Israel. It develops PRF-110, a viscous clear oil-based solution that is instilled directly into the surgical wound to provide localized and extended post-operative analgesia, as well as in Phase 3 clinical trial for pain treatment of patients undergoing bunionectomy and pain treatment of hernia repair operations. The company was formerly known as PainReform Ltd. and change its name to PRF Technologies Ltd. in January 2026. The company was incorporated in 2007 and is based in Tel Aviv-Yafo, Israel."
     }
 }
