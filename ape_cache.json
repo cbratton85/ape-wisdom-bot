@@ -17781,5 +17781,50 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund normally will invest at least 90% of its net assets (including, for this purpose, any borrowings for investment purposes) in stocks included in the index. The index measures the performance of the large company size segment by fundamental overall company scores, which are created using as the universe the U.S. companies in the RAFI Global Equity Investable Universe."
+    },
+    "CRMD": {
+        "ticker": "CRMD",
+        "name": "CorMedix Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 579099520,
+        "currency": "USD",
+        "description": "CorMedix Inc., a biopharmaceutical company, focuses on developing and commercializing therapeutic products for life-threatening diseases and conditions in the United States. Its lead product candidate is DefenCath, an antimicrobial catheter lock solution to reduce the incidence of catheter-related bloodstream infections in adult patients with kidney failure. The company was formerly known as Picton Holding Company, Inc. and changed its name to CorMedix, Inc. in January 2007. CorMedix Inc. was incorporated in 2006 and is based in Berkeley Heights, New Jersey."
+    },
+    "JACK": {
+        "ticker": "JACK",
+        "name": "Jack In The Box Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 420460480,
+        "currency": "USD",
+        "description": "Jack in the Box Inc., together with its subsidiaries, develops, operates, and franchises quick-service restaurants (QSR) in the United States. It operates through Jack in the Box and Del Taco segments. The company engages in the operation of a hamburger chain under the Jack in the Box brand; and a Mexican-American QSR chain under the Del Taco brand. The company was formerly known as Foodmaker, Inc and changed its name to Jack in the Box Inc. in November 1999. Jack in the Box Inc. was founded in 1951 and is headquartered in San Diego, California."
+    },
+    "ZN": {
+        "ticker": "ZN",
+        "name": "ZN",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "DENN": {
+        "ticker": "DENN",
+        "name": "Denny's Corporation",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 321868736,
+        "currency": "USD",
+        "description": "Denny's Corporation, through its subsidiaries, owns and operates franchised full-service restaurant chains under the Denny's and Keke's Breakfast Cafe brand names in the United States and internationally. The company was formerly known as Advantica Restaurant Group, Inc. and changed its name to Denny's Corporation in July 2002. Denny's Corporation was founded in 1953 and is headquartered in Spartanburg, South Carolina."
+    },
+    "KVUE": {
+        "ticker": "KVUE",
+        "name": "Kenvue Inc.",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 34621837312,
+        "currency": "USD",
+        "description": "Kenvue Inc. operates as a consumer health company in the United States, Europe, the Middle East, Africa, Asia-Pacific, and Latin America. It operates through three segments: Self Care, Skin Health and Beauty, and Essential Health. The Self Care segment offers cough, cold and allergy, pain care, digestive health, smoking cessation, eye care, and other products under the Tylenol, Motrin, Benadryl, Nicorette, Zarbee's, ORSLTM, Rhinocort, Calpol, and Zyrtec brands. The Skin Health and Beauty segment provides face and body care, hair, sun, and other care products under the Neutrogena, Aveeno, Dr.Ci:Labo, Le Petit Marseillais, Lubriderm, Rogaine, and OGX brand names. The Essential Health segment offers oral and baby, women's health, wound, and other care products under the Listerine, Johnson's, Band-Aid, and Stayfree, o.b., tampons, Carefree, and Desitin Diaper Rash brands. Kenvue Inc. was incorporated in 2022 and is headquartered in Summit, New Jersey."
     }
 }
