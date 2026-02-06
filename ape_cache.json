@@ -18573,5 +18573,23 @@
         "mcap": 1872042752,
         "currency": "USD",
         "description": "Blue Bird Corporation, together with its subsidiaries, designs, engineers, manufactures, and sells school buses in the United States, Canada, and internationally. The company operates through two segments, Bus and Parts. It offers Type C, Type D, and specialty buses; and alternative power options through its propane powered, gasoline powered, compressed natural gas powered, and electric powered school buses, as well as diesel engines. The company also sells replacement bus parts; and provides extended warranties related to its products. Blue Bird Corporation sells its products through drop ship and a network of dealers, as well as directly to fleet operators, the United States government, and state governments; independent service centers; and maintains a parts distribution center. Blue Bird Corporation was founded in 1927 and is headquartered in Macon, Georgia."
+    },
+    "COHU": {
+        "ticker": "COHU",
+        "name": "Cohu, Inc.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 1440467200,
+        "currency": "USD",
+        "description": "Cohu, Inc., through its subsidiaries, provides semiconductor test equipment and services in the United States, China, Malaysia, the Philippines, Singapore, and internationally. It supplies test and inspection metrology automation systems, micro-electromechanical system test modules, test contactors, thermal subsystems, and data analytics software for semiconductor manufacturers and test subcontractors. The company also provides semiconductor automated test equipment for wafer level and device package testing; various test handlers, including pick-and-place, turret, gravity, strip, film frame, laser marker, and thermal sub-systems; interface products comprising test contactors, and probe heads and pins; spares and kits; various parts and labor warranties on test and handling systems, and instruments; and training on the maintenance and operation of its systems, as well as application, data management software, and consulting services on its products. In addition, it offers data analytics product that includes DI-Core, a software suite used to optimize Cohu equipment performance, which provides real-time online performance monitoring and process control. Further, the company provides artificial intelligence process control and analytics-based monitoring software. It markets its products through direct sales force and independent sales representatives. The company was formerly known as Cohu Electronics, Inc. and changed its name to Cohu, Inc. in 1972. Cohu, Inc. was incorporated in 1947 and is headquartered in Poway, California."
+    },
+    "LAW": {
+        "ticker": "LAW",
+        "name": "CS Disco, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 252466032,
+        "currency": "USD",
+        "description": "CS Disco, Inc. provides cloud-native and artificial intelligence-powered legal products for legal hold, legal request, ediscovery, legal document review, and case management in the United States and internationally. The company offers DISCO Hold which automates the manual work to comply with preservation requirements, preserve data, notify custodians, track holds with audit trail, and collect data; DISCO Request that automates response compliance for legal requests, such as service of process requests, subpoenas, and law enforcement requests;and DISCO Ediscovery which automates ediscovery process and saving legal departments from manual tasks associated with collecting, processing, enriching, searching, reviewing, analyzing, producing, and using enterprise data that is at issue in legal matters. It also provides DISCO Review, an AI-powered document review that delivers legal document reviews; and DISCO Case Builder that allows legal professionals to collaborate across teams by offering a single place to search, organize, and review witness testimony and other important legal data. The company's products are used for various legal matters comprising litigation, investigation, compliance, and diligence. It serves enterprises, law firms, legal services providers, and governments. CS Disco, Inc. was founded in 2012 and is headquartered in Austin, Texas."
     }
 }
