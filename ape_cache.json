@@ -18114,5 +18114,68 @@
         "mcap": 966258688,
         "currency": "USD",
         "description": "Criteo S.A., a technology company, provides marketing and monetization services and infrastructure on the open internet in North and South America, Europe, the Middle East, Africa, and the Asia-Pacific. It operates in two segments, Retail Media and Performance Media. The company's Criteo Shopper Graph, which derives clients' proprietary commerce data, such as transaction activity on their digital properties. It also offers Criteo AI Engine solutions, including lookalike finder, recommendation, and predictive bidding models; recommendation algorithms, dynamic creative optimization+, sponsored product placement algorithms, and other product placement algorithms. The company's technology comprises data synchronization, storage, and analysis of distributed computing infrastructure in various geographies, as well as fast data collection and retrieval using multi-layered caching infrastructure; and experimentation platform, an offline/online testing platform. In addition, it provides Retail Media, which assists retailers in generating high-margin advertising revenues from brands and agencies looking to address multiple marketing goals with strong return on ad spend, and to drive sales for themselves, by monetizing their audiences through personalized ads, either on their own digital store or on media owner properties on the open Internet; and Performance Media, which encompasses commerce activation, monetization, and services. Further, the company offers real-time advertising technology and trading infrastructure delivering advanced media buying, selling, and packaged capabilities for media owners, agencies, performance advertisers, and third-party AdTech platforms. It serves retail, travel, and classifieds industries. The company has a strategic alliance with Mirakl SAS to serve the segment of retail media, third-party sellers, and mid-to-long-tail advertisers. Criteo S.A. was incorporated in 2005 and is headquartered in Paris, France."
+    },
+    "RAMP": {
+        "ticker": "RAMP",
+        "name": "LiveRamp Holdings, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1470873472,
+        "currency": "USD",
+        "description": "LiveRamp Holdings, Inc., a technology company, operates a data collaboration platform in the United States, Europe, the Asia-Pacific, and internationally. It operates LiveRamp Data Collaboration platform that enables an organization to unify customer and prospect data to build a single view of the customer in a way that protects consumer privacy. The company's platform supports various people-based marketing solutions, including data collaboration, activation, measurement and analytics, identity, and data marketplace. It sells its solutions to enterprise marketers, agencies, marketing technology providers, publishers, and data providers in various industry verticals, such as financial, insurance and investment services, retail, automotive, telecommunications, technology, consumer packaged goods, media, healthcare, travel and hospitality, entertainment, and non-profit. The company was formerly known as Acxiom Holdings, Inc. and changed its name to LiveRamp Holdings, Inc. in October 2018. The company was incorporated in 2018 and is headquartered in San Francisco, California."
+    },
+    "PAGP": {
+        "ticker": "PAGP",
+        "name": "Plains GP Holdings, L.P.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 4937279488,
+        "currency": "USD",
+        "description": "Plains GP Holdings, L.P., through its subsidiary, Plains All American Pipeline, L.P., owns and operates midstream infrastructure systems in the United States and Canada. The company operates in two segments, Crude Oil and Natural Gas Liquids (NGLs). It engages in the gathering and transporting crude oil using pipelines, trucks, and barges or railcars, as well as providing terminalling, storage, and other related services. The company is also involved in the natural gas processing and NGL fractionation, storage, transportation, and terminalling activities. PAA GP Holdings LLC operates as a general partner of the company. Plains GP Holdings, L.P. was incorporated in 2013 and is headquartered in Houston, Texas."
+    },
+    "SANA": {
+        "ticker": "SANA",
+        "name": "Sana Biotechnology, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 945599680,
+        "currency": "USD",
+        "description": "Sana Biotechnology, Inc., a biotechnology company, focuses on utilizing engineered cells as medicines in the United States. It develops ex vivo and in vivo cell engineering platforms for various therapeutic areas with unmet treatment needs, including type 1 diabetes, B cell mediated autoimmune diseases, and oncology. The company's product pipeline consist of UP421, a HIP-modified allogeneic primary islet cell product, which is in phase 1 clinical trial to treat type 1 diabetes; SC451, a HIP-modified, stem cell derived pancreatic islet cell therapy, which is in preclinical trial for the treatment of type 1 diabetes; SC291, a HIP-modified allogeneic CD19-dirtected allogeneic CAR T cell product candidate which is in phase 1 clinical trial to treat systemic lupus erythematosus and ANCA-associated vasculitis, as well as in preclinical trial to treat other indications and b-cell mediated autoimmune disease; and SG299, a CD8-targeted fusosome, which is in preclinical trial to treat patients with hematologic malignancies and B cell mediated autoimmune diseases. It also develops SC262, a hypoimmune-modified CD22-directed allogeneic CAR T program, which is in phase 1 to treat non-Hodgkin's lymphoma; and SG299, a CD8-targeted fusosome, which is in preclinical trial to treat patients with hematologic malignancies and B cell mediated autoimmune diseases. The company has an option and license agreement with Beam Therapeutics Inc. for use of Beam's proprietary CRISPR Cas12b nuclease editing technology to research, develop, and commercialize engineered cell therapy products; and a license agreement with Harvard College to access certain intellectual property for the development of hypoimmune-modified cells. The company was formerly known as FD Therapeutics, Inc. and changed its name to Sana Biotechnology, Inc. in September 2018. Sana Biotechnology, Inc. was incorporated in 2018 and is headquartered in Seattle, Washington."
+    },
+    "AER": {
+        "ticker": "AER",
+        "name": "AerCap Holdings N.V.",
+        "meta": "Rental & Leasing Services",
+        "type": "EQUITY",
+        "mcap": 25676605440,
+        "currency": "USD",
+        "description": "AerCap Holdings N.V. engages in the lease, financing, sale, and management of commercial flight equipment in the United States, China, and internationally. The company engages in aircraft asset management services, such as remarketing aircraft and engines for lease or sale; collecting rental and supplemental maintenance rent payments, monitoring aircraft maintenance, monitoring and enforcing contract compliance, and accepting delivery and redelivery of aircraft and engines; conducting ongoing lessee financial performance reviews. Its aircraft asset management services also include periodically inspecting the leased aircraft and engines; coordinating technical modifications to aircraft to meet new lessee requirements; conducting restructuring negotiations in connection with lease defaults; repossessing aircraft and engines; arranging and monitoring insurance coverage; registering and de-registering aircraft; arranging for aircraft and engine valuations; and providing market research services. In addition, the company provides cash management services, including treasury services, such as the financing, refinancing, hedging, and ongoing cash management of vehicles; and administrative services comprising accounting, and corporate secretarial services consisting of the preparation of budgets and financial statements. Further, it offers airframe and engine parts and supply chain solutions to airlines; maintenance, repair, and overhaul service providers; and aircraft parts distributors. The company has a portfolio of owned, managed, or on order aircraft, consisting of 3,525 aircraft, engines, and helicopters. AerCap Holdings N.V. was founded in 1995 and is headquartered in Dublin, Ireland."
+    },
+    "PAA": {
+        "ticker": "PAA",
+        "name": "Plains All American Pipeline, L",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 14088790016,
+        "currency": "USD",
+        "description": "Plains All American Pipeline, L.P., through its subsidiaries, engages in the pipeline transportation, terminaling, storage, and gathering of crude oil and natural gas liquids (NGL) in the United States and Canada. The company operates through two segments, Crude Oil and NGL. The Crude Oil segment offers gathering and transporting crude oil through pipelines, trucks, and on barges or railcars. This segment provides terminaling, storage, and other related services, as well as merchant activities. The NGL segment is involved in natural gas processing and NGL fractionation, storage, transportation, and terminaling. This segment also includes ethane, propane, normal butane, iso-butane, and natural gasoline derived from natural gas production and processing activities, as well as crude oil refining processes. Its NGL components are used for various applications, such as heating, engine, and industrial fuels. The company was founded in 1981 and is headquartered in Houston, Texas. Plains All American Pipeline, L.P. operates as a subsidiary of Plains GP Holdings, L.P."
+    },
+    "MKTX": {
+        "ticker": "MKTX",
+        "name": "MarketAxess Holdings, Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 6083942912,
+        "currency": "USD",
+        "description": "MarketAxess Holdings Inc., together with its subsidiaries, operates an electronic trading platform for institutional investor and broker-dealer firms in the United States, the United Kingdom, and internationally. The company offers trading technology to access liquidity on its platforms in U.S. high-grade bonds, U.S. high-yield bonds, emerging market debt, eurobonds, municipal bonds, U.S. government bonds, and other fixed-income securities; and executes bond trades between and among institutional investor and broker-dealer clients in an all-to-all anonymous trading environment for corporate bonds through its Open Trading protocols. It also provides automated and algorithmic trading solutions, such as X-Pro, a trading platform to combine trading protocols with its proprietary data and pre-trade analytics; and integrated and actionable data offerings, including CP+ and Axess All, a real-time pricing engine, including Auto-X and portfolio trading. In addition, the company offers various pre-and post-trade services, such as processing, trade matching, trade publication, regulatory transaction reporting, and market and reference data across a range of fixed-income and other products. MarketAxess Holdings Inc. was incorporated in 2000 and is headquartered in New York, New York."
+    },
+    "PTF": {
+        "ticker": "PTF",
+        "name": "Invesco Dorsey Wright Technolog",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 90% of its total assets in the securities that comprise the underlying index. The underlying index is composed of at least 30 securities of companies in the technology sector that have powerful relative strength or \"momentum\" characteristics."
     }
 }
