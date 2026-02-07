@@ -18978,5 +18978,32 @@
         "mcap": 19666059264,
         "currency": "USD",
         "description": "The index tracks the performance of inflation-protected public obligations of the U.S. Treasury, commonly known as \u201cTIPS,\u201d that have a remaining maturity of more than one year. The fund will invest at least 80% of its assets in the component securities of the index, and it will invest at least 90% of its assets in U.S. Treasury securities that BFA believes will help the fund track the index."
+    },
+    "PAX": {
+        "ticker": "PAX",
+        "name": "Patria Investments Limited",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 2258074624,
+        "currency": "USD",
+        "description": "Patria Investments Limited operates as a private market investment firm. It specializes in investments in private equity, secondary direct and indirect and venture capital with focus in middle market, buyout and growth capital investments. It seeks to be sector agnostic with focus on agribusiness, power & energy, healthcare, logistics & transportations, food & beverage, agricultural products, packaged foods and meats, education services, outsourced business services, and digital & tech services. It prefers to invest globally with focus on Latin America, Europe, United States, North America and Brazil. It seeks to invest between $38.48 million and $72.14 million per transaction. The firm seeks a majority or minority stake in its portfolio companies. The company offers asset management services to investors focusing on private equity funds, infrastructure development funds, co-investments funds, constructivist equity funds, and real estate and credit funds. The firm seeks to co-invest with other investors. Patria Investments Limited was founded in 1994 and is headquartered in Grand Cayman, Cayman Islands with additional offices across South America, North America, Europe and Asia. Patria Investments Limited operates as a subsidiary of Patria Holdings Limited."
+    },
+    "BLNK": {
+        "ticker": "BLNK",
+        "name": "Blink Charging Co.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 99173544,
+        "currency": "USD",
+        "description": "Blink Charging Co., through its subsidiaries, owns, operates, manufactures, and provides electric vehicle (EV) charging equipment and networked EV charging services in the United States and internationally. It offers residential and commercial EV charging equipment that enable EV drivers to recharge at various location types. The company also provides Blink Network, a cloud-based system that operates, maintains, and manages various Blink charging stations and associated charging data, back-end operations, and payment processing, as well as offers fleets, property owners, managers, parking companies, and state and municipal entities with cloud-based services that enable the remote monitoring and management of EV charging stations; and EV drivers with station information, including station location, availability, and applicable fees. Further, it offers EV charging hardware, software services, and extended warranty service plans. It has strategic partnerships across transit/destination locations, including airports, auto dealers, healthcare/medicals, hotels, mixed-use and municipal locations, multifamily residential and condos, parks and recreation areas, parking lots, restaurants, retailers, schools and universities, stadiums, supermarkets, transportation hubs, and workplace locations. Blink Charging Co. was founded in 2009 and is headquartered in Bowie, Maryland."
+    },
+    "TECK": {
+        "ticker": "TECK",
+        "name": "Teck Resources Ltd",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 26927800320,
+        "currency": "USD",
+        "description": "Teck Resources Limited engages in research, exploration, development, processing, smelting, refining, and reclamation of mineral properties in Asia, the Americas, and Europe. The company operates through Copper and Zinc segments. It offers copper, zinc, and lead concentrates, as well as refined zinc, lead, and silver. The company also produces lead, precious metals, molybdenum, fertilizers, and other metals; and sells refined metals or concentrates. In addition, it explores for gold. The company was formerly known as Teck Cominco Limited and changed its name to Teck Resources Limited in April 2009. Teck Resources Limited was founded in 1913 and is based in Vancouver, Canada."
     }
 }
