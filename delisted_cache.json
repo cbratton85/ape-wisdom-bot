@@ -199,11 +199,6 @@
         "last_checked": "2026-02-07",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-02-07",
-        "reason": "No Price Data"
-    },
     "MGRX": {
         "delisted": true,
         "last_checked": "2026-02-07",
@@ -225,6 +220,11 @@
         "reason": "No Price Data"
     },
     "GPS": {
+        "delisted": true,
+        "last_checked": "2026-02-07",
+        "reason": "No Price Data"
+    },
+    "BABY": {
         "delisted": true,
         "last_checked": "2026-02-07",
         "reason": "No Price Data"
