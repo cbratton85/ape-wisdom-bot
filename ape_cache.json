@@ -18744,5 +18744,32 @@
         "mcap": 1353155072,
         "currency": "USD",
         "description": "Telesat Corporation, a satellite operator, provides mission-critical communications solutions to support the requirements of satellite users in Canada, the United States, Asia, Australia, Latin America, the Caribbean, Europe, the Middle East, and Africa. It operates through Geostationary (GEO) and Low Earth Orbit (LEO) segments. The company offers broadcast services comprising direct-to-home television, video distribution and contribution, and occasional use services; enterprise services consisting of telecommunication carrier and integrator, government, consumer broadband, resource, maritime and aeronautical, and retail and satellite operator services; and consulting services related to space and earth segments, government studies, satellite control services, and research and development. It also provides value-added services, such as satellite capacity, digital encoding of video channels, and uplinking and downlinking services; satellite capacity and end-to-end services for data and voice transmission to telecommunications carriers and integrators; space segment services and terrestrial facilities for enterprise connectivity; internet and cellular backhaul and services, including rural telephony to telecommunications carriers and network services integrators. In addition, the company offers direct-to-consumer broadband services; and communications services to offshore, oil and gas, and mining industries. Further, the company operates satellite and terrestrial networks that support enterprise and retail activities. It offers its services through a direct sales force. Telesat Corporation was founded in 1969 and is headquartered in Ottawa, Canada."
+    },
+    "VIXY": {
+        "ticker": "VIXY",
+        "name": "VIX Short-Term Futures ETF",
+        "meta": "Trading--Miscellaneous",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index seeks to offer exposure to market volatility through publicly traded futures markets and is designed to measure the implied volatility of the S&P 500 over 30 days in the future."
+    },
+    "IEF": {
+        "ticker": "IEF",
+        "name": "iShares 7-10 Year Treasury Bond",
+        "meta": "Long Government",
+        "type": "ETF",
+        "mcap": 14026219520,
+        "currency": "USD",
+        "description": "The underlying index measures the performance of public obligations of the U.S. Treasury that have a remaining maturity of greater than or equal to seven years and less than ten years. The fund will invest at least 80% of its assets in the component securities of the underlying index, and the fund will invest at least 90% of its assets in U.S. Treasury securities that the advisor believes will help the fund track the underlying index."
+    },
+    "WPC": {
+        "ticker": "WPC",
+        "name": "W. P. Carey Inc. REIT",
+        "meta": "REIT - Diversified",
+        "type": "EQUITY",
+        "mcap": 15605316608,
+        "currency": "USD",
+        "description": "W. P. Carey ranks among the largest net lease REITs with a well-diversified portfolio of high-quality, operationally critical commercial real estate, which includes 1,600 net lease properties covering approximately 178 million square feet and a portfolio of 66 self-storage operating properties as of June 30, 2025. With offices in New York, London, Amsterdam and Dallas, the company remains focused on investing primarily in single-tenant, industrial, warehouse and retail properties located in the U.S. and Europe, under long-term net leases with built-in rent escalations."
     }
 }

@@ -104,11 +104,6 @@
         "last_checked": "2026-02-06",
         "reason": "No Price Data"
     },
-    "SAVEQ": {
-        "delisted": true,
-        "last_checked": "2026-02-06",
-        "reason": "No Price Data"
-    },
     "OG": {
         "delisted": true,
         "last_checked": "2026-02-06",
@@ -220,6 +215,11 @@
         "reason": "No Price Data"
     },
     "BASE": {
+        "delisted": true,
+        "last_checked": "2026-02-07",
+        "reason": "No Price Data"
+    },
+    "SAVEQ": {
         "delisted": true,
         "last_checked": "2026-02-07",
         "reason": "No Price Data"
