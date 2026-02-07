@@ -74,11 +74,6 @@
         "last_checked": "2026-02-04",
         "reason": "No Price Data"
     },
-    "NH": {
-        "delisted": true,
-        "last_checked": "2026-02-04",
-        "reason": "No Price Data"
-    },
     "SNP": {
         "delisted": true,
         "last_checked": "2026-02-04",
@@ -222,6 +217,11 @@
     "APE": {
         "delisted": true,
         "last_checked": "2026-02-06",
+        "reason": "No Price Data"
+    },
+    "NH": {
+        "delisted": true,
+        "last_checked": "2026-02-07",
         "reason": "No Price Data"
     }
 }
