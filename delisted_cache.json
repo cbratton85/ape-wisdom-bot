@@ -84,11 +84,6 @@
         "last_checked": "2026-02-05",
         "reason": "No Price Data"
     },
-    "WFH": {
-        "delisted": true,
-        "last_checked": "2026-02-05",
-        "reason": "No Price Data"
-    },
     "DDG": {
         "delisted": true,
         "last_checked": "2026-02-05",
@@ -220,6 +215,11 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-02-07",
+        "reason": "No Price Data"
+    },
+    "WFH": {
         "delisted": true,
         "last_checked": "2026-02-07",
         "reason": "No Price Data"
