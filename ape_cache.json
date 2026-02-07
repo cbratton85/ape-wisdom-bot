@@ -18942,5 +18942,23 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund employs an indexing investment approach designed to track the performance of the Bloomberg U.S. 1-5 Year Corporate Bond Index. This index includes U.S. dollar-denominated, investment-grade, fixed-rate, taxable securities issued by U.S. and non-U.S. industrial, utility, and financial companies, with maturities between 1 and 5 years. Under normal circumstances, at least 80% of the fund's assets will be invested in bonds included in the index."
+    },
+    "FAB": {
+        "ticker": "FAB",
+        "name": "First Trust Multi Cap Value Alp",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will normally invest at least 90% of its net assets (including investment borrowings) in the securities that comprise the index. The index is designed to select value stocks from the NASDAQ US 500 Large Cap Index TM, NASDAQ US 600 Mid Cap Index TM and NASDAQ US 700 Small Cap Index TM that may generate positive alpha, or risk-adjusted returns, relative to traditional indices through the use of the AlphaDEX\u00ae selection methodology."
+    },
+    "PILL": {
+        "ticker": "PILL",
+        "name": "Direxion Daily Pharmaceutical &",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its net assets in financial instruments, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index is a modified equal-weighted index that is designed to measure performance of the stocks, defined as pharmaceutical and medical stocks, comprising the S&P Total Market Index that are classified in the GICS pharmaceuticals sub-industry. The fund is non-diversified."
     }
 }

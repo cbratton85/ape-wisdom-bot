@@ -99,11 +99,6 @@
         "last_checked": "2026-02-06",
         "reason": "No Price Data"
     },
-    "ZN": {
-        "delisted": true,
-        "last_checked": "2026-02-06",
-        "reason": "No Price Data"
-    },
     "ELY": {
         "delisted": true,
         "last_checked": "2026-02-06",
@@ -220,6 +215,11 @@
         "reason": "No Price Data"
     },
     "CEL": {
+        "delisted": true,
+        "last_checked": "2026-02-07",
+        "reason": "No Price Data"
+    },
+    "ZN": {
         "delisted": true,
         "last_checked": "2026-02-07",
         "reason": "No Price Data"
