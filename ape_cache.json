@@ -18834,5 +18834,23 @@
         "mcap": 2425336832,
         "currency": "USD",
         "description": "Tecnoglass Inc. manufactures, supplies, and installs architectural glass, windows, and associated aluminum and vinyl products for commercial and residential construction markets in Colombia, the United States, Panama, and internationally. The company provides low emissivity, laminated/thermo-laminated, thermo-acoustic, tempered, silk-screened, curved, and digital print glass products. It offers aluminum products, including bars, plates, profiles, rods, and tubes that are used in the manufacture of architectural glass settings, such as windows, doors, spatial separators, and related products under the Alutions brand name. In addition, the company offers curtain wall/floating facades, stick facade systems, windows and doors, interior dividers and commercial display windows, and hurricane-proof windows; StormArmour, that are attachment for sliding doors, and other products, such as awnings, structures, and automatic doors; and other components of architectural systems. It markets and sells its products primarily under the Tecnoglass, ESWindows, Alutions, Energia Solar, Tecnoglass, Alutions, Eswindows, Tecnobend, Tecnoair, Tecnosmart, ECOMAX by ESWINDOWS, ESWINDOWS Interiors, ESW Windows and Walls, Solartec by Tecnoglass, Prestige by ESWINDOWS, Eli by ESWINDOWS, Alessia by ESWINDOWS, Elite Line by ESWindows, ULTRAVIEW by Tecnoglass, and MULTIMAX by ESWIDOWS brand names through internal and independent sales representatives, as wells as directly to distributors. It serves developers, general contractors or installers for hotels, office buildings, shopping centers, airports, universities, hospitals, and multifamily and residential buildings. The company was founded in 1983 and is based in Barranquilla, Colombia."
+    },
+    "LMND": {
+        "ticker": "LMND",
+        "name": "Lemonade, Inc.",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 5549526016,
+        "currency": "USD",
+        "description": "Lemonade, Inc. provides various insurance products in the United States, Europe, and the United Kingdom. The company offers renters and homeowners, building, car, pet, and life insurance products, as well as landlord insurance products. It also provides insurance for stolen or damaged property, and personal liability that protects its customers if they are responsible for an accident or damage to another person or their property. In addition, it operates as an agent for other insurance companies. The company was formerly known as Lemonade Group, Inc. Lemonade, Inc. was incorporated in 2015 and is headquartered in New York, New York."
+    },
+    "MDY": {
+        "ticker": "MDY",
+        "name": "State Street SPDR S&P MIDCAP 40",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 36314624000,
+        "currency": "USD",
+        "description": "The Trust seeks to achieve its investment objective by holding a portfolio of the common stocks that are included in the index (the \u201cPortfolio\u201d), with the weight of each stock in the Portfolio substantially corresponding to the weight of such stock in the index."
     }
 }
