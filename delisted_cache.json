@@ -179,11 +179,6 @@
         "last_checked": "2026-02-06",
         "reason": "No Price Data"
     },
-    "FM": {
-        "delisted": true,
-        "last_checked": "2026-02-06",
-        "reason": "No Price Data"
-    },
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-02-06",
@@ -220,6 +215,16 @@
         "reason": "No Price Data"
     },
     "WFH": {
+        "delisted": true,
+        "last_checked": "2026-02-07",
+        "reason": "No Price Data"
+    },
+    "FM": {
+        "delisted": true,
+        "last_checked": "2026-02-07",
+        "reason": "No Price Data"
+    },
+    "CSA": {
         "delisted": true,
         "last_checked": "2026-02-07",
         "reason": "No Price Data"
