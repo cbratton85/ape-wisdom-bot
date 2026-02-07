@@ -89,11 +89,6 @@
         "last_checked": "2026-02-05",
         "reason": "No Price Data"
     },
-    "BASE": {
-        "delisted": true,
-        "last_checked": "2026-02-05",
-        "reason": "No Price Data"
-    },
     "LBJ": {
         "delisted": true,
         "last_checked": "2026-02-05",
@@ -220,6 +215,11 @@
         "reason": "No Price Data"
     },
     "CSA": {
+        "delisted": true,
+        "last_checked": "2026-02-07",
+        "reason": "No Price Data"
+    },
+    "BASE": {
         "delisted": true,
         "last_checked": "2026-02-07",
         "reason": "No Price Data"
