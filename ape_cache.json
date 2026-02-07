@@ -18771,5 +18771,32 @@
         "mcap": 15605316608,
         "currency": "USD",
         "description": "W. P. Carey ranks among the largest net lease REITs with a well-diversified portfolio of high-quality, operationally critical commercial real estate, which includes 1,600 net lease properties covering approximately 178 million square feet and a portfolio of 66 self-storage operating properties as of June 30, 2025. With offices in New York, London, Amsterdam and Dallas, the company remains focused on investing primarily in single-tenant, industrial, warehouse and retail properties located in the U.S. and Europe, under long-term net leases with built-in rent escalations."
+    },
+    "PRAX": {
+        "ticker": "PRAX",
+        "name": "Praxis Precision Medicines, Inc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 8864518144,
+        "currency": "USD",
+        "description": "Praxis Precision Medicines, Inc., a clinical-stage biopharmaceutical company, engages in the development of therapies for central nervous system (CNS) disorders characterized by neuronal excitation-inhibition imbalance. The company's platforms include cerebrum, a small molecule platform for CNS small molecule therapies to develop orally available precision therapies; and solidus to discover and develop antisense oligonucleotide. It also develops Ulixacaltamide, a small molecule inhibitor of T-type calcium channels that is in Phase 3 clinical trial for the treatment of essential tremor; Vormatrigine, a small molecule targeting the hyperexcitable state of sodium-channels in the brain to treat focal onset epilepsy; Relutrigine for the treatment of developmental and epileptic encephalopathies; PRAX-020 to treat KCNT1; and PRAX-050. In addition, the company develops Elsunersen, a clinical-stage ASO designed to regulate NaV1.2 expression for the treatment of SCN2A-DEE; PRAX-080 that targets PCDH19-related developmental epilepsy; PRAX-090 for targeting SYNGAP1 loss-of-function; and PRAX-100 that targets SCN2A LoF mutations. It has a license agreement with RogCon Inc.; and research collaboration and license agreement with Ionis Pharmaceuticals, Inc. Praxis Precision Medicines, Inc. was incorporated in 2015 and is based in Boston, Massachusetts."
+    },
+    "NWS": {
+        "ticker": "NWS",
+        "name": "News Corporation",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 14235413504,
+        "currency": "USD",
+        "description": "News Corporation, a media and information services company, creates and distributes authoritative and engaging content, and other products and services for consumers and businesses. It operates through five segments: Digital Real Estate Services, Dow Jones, Book Publishing, News Media, and Other. The company distributes content and data products through various media channels, such as newspapers, newswires, websites, mobile apps, newsletters, magazines, proprietary databases, live journalism, video, and podcasts under the MarketWatch, The Wall Street Journal, Barron's, Investor's Business Daily, Factiva, Dow Jones Risk & Compliance, Dow Jones Newswires, and Dow Jones Energy brands. It also owns and operates Monday to Friday, Saturday and Sunday, weekly, and bi-weekly newspapers comprising The Australian, The Weekend Australian, The Daily Telegraph, The Sunday Telegraph, Herald Sun, Sunday Herald Sun, The Courier Mail, The Sunday Mail, The Advertiser, Sunday Mail, The Sun, The Sun on Sunday, The Times, The Sunday Times, and New York Post, as well as digital mastheads and other websites. In addition, the company publishes general fiction, nonfiction, children's, and religious books; and operates Storyful, a social media content agency, as well as sports radio network and news channels. Further, it offers property and property-related advertising and services on its websites and mobile applications; digital real estate services; and financial services. The company has operations in the United States, Canada, Europe, Australasia, and internationally. News Corporation was incorporated in 2012 and is headquartered in New York, New York."
+    },
+    "ERAS": {
+        "ticker": "ERAS",
+        "name": "Erasca, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3804822016,
+        "currency": "USD",
+        "description": "Erasca, Inc., a clinical-stage precision oncology company, focuses on discovering, developing, and commercializing therapies for patients with RAS/MAPK pathway-driven cancers. The company's lead product is naporafenib which is in SEACRAFT-2 pivotal Phase 3 trial for patients with NRAS-mutated (NRASm) melanoma; and in SEACRAFT-1 Phase 1b trial for patients with NRAS Q61X melanoma. It also develops ERAS-0015, a pan-RAS molecular glue for the treatment of patients with RAS-altered solid tumors; ERAS-4001, a pan-KRAS inhibitor for the treatment of patients with KRAS-altered solid tumors; and ERAS-12, an investigational EGFR D2/D3 biparatopic antibody (bpAb) for the treatment of EGRF and RAS/MAPK solid tumors. In addition, the company's products under development include ERAS-801, a central nervous system (CNS)-penetrant EGFR inhibitor for patients with EGFR-altered recurrent glioblastoma (GBM) which is in phase 1 clinical trials; and ERAS-007, an oral inhibitor of ERK1/2 and ERAS-601, an oral SHP2 inhibitor for patients with advanced or metastatic solid tumors. It has a license agreement with Novartis to develop, manufacture, use, and commercialize naporafenib; Katmai Pharmaceuticals, Inc. to develop, manufacture, use, and commercialize ERAS-801 and certain other related compounds; and NiKang Therapeutics, Inc. to develop and commercialize ERAS-601 and certain other related compounds. Erasca, Inc. was incorporated in 2018 and is headquartered in San Diego, California."
     }
 }
