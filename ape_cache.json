@@ -18960,5 +18960,23 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund invests at least 80% of its net assets in financial instruments, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index is a modified equal-weighted index that is designed to measure performance of the stocks, defined as pharmaceutical and medical stocks, comprising the S&P Total Market Index that are classified in the GICS pharmaceuticals sub-industry. The fund is non-diversified."
+    },
+    "WEX": {
+        "ticker": "WEX",
+        "name": "WEX Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 5450160640,
+        "currency": "USD",
+        "description": "WEX Inc. operates a commerce platform in the United States and internationally. The Mobility segment offers fleet vehicle payment solutions, transaction processing, and information management services; and provides account activation and account retention services; authorization and billing inquiries, and account maintenance services; account management; credit and collections services; merchant services; analytics solutions; and ancillary services and offerings. This segment markets its products directly and indirectly to businesses and government agencies with fleets of commercial vehicles; and indirectly through co-branded and private label relationships. The Corporate Payments segment provides payment solutions, including embedded payments; and accounts payable automation and spend management solutions. This segment also markets its products directly and indirectly to customers in travel, fintech, insurance, consumer bill pay, and media verticals. The Benefits Solutions segment offers software-as-a-service (SaaS) platform for consumer directed healthcare benefits and full-service benefit enrollment solutions. In addition, its SaaS platform includes embedded payment solutions and plan administration services for consumer-directed health benefits; COBRA accounts; and benefit enrollment and administration services. Further, it offers custodial and depository services for health savings accounts; and markets its products through third-party administrators, financial institutions, payroll providers, and health plans. The company was formerly known as Wright Express Corporation and changed its name to WEX Inc. in October 2012. The company was founded in 1983 and is headquartered in Portland, Maine."
+    },
+    "TIP": {
+        "ticker": "TIP",
+        "name": "iShares TIPS Bond ETF",
+        "meta": "Inflation-Protected Bond",
+        "type": "ETF",
+        "mcap": 19666059264,
+        "currency": "USD",
+        "description": "The index tracks the performance of inflation-protected public obligations of the U.S. Treasury, commonly known as \u201cTIPS,\u201d that have a remaining maturity of more than one year. The fund will invest at least 80% of its assets in the component securities of the index, and it will invest at least 90% of its assets in U.S. Treasury securities that BFA believes will help the fund track the index."
     }
 }
