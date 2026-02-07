@@ -79,11 +79,6 @@
         "last_checked": "2026-02-05",
         "reason": "No Price Data"
     },
-    "DDG": {
-        "delisted": true,
-        "last_checked": "2026-02-05",
-        "reason": "No Price Data"
-    },
     "SLAM": {
         "delisted": true,
         "last_checked": "2026-02-05",
@@ -220,6 +215,11 @@
         "reason": "No Price Data"
     },
     "FI": {
+        "delisted": true,
+        "last_checked": "2026-02-07",
+        "reason": "No Price Data"
+    },
+    "DDG": {
         "delisted": true,
         "last_checked": "2026-02-07",
         "reason": "No Price Data"
