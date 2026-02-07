@@ -18636,5 +18636,23 @@
         "mcap": 2491061504,
         "currency": "USD",
         "description": "ZIM Integrated Shipping Services Ltd., together with its subsidiaries, provides container shipping and related services in Israel and internationally. The company offers door-to-door and port-to-port transportation services for various types of customers, including end-users, consolidators, and freight forwarders. It also provides ZIMonitor, a reefer cargo tracking service. As of December 31, 2024, it operated a fleet of 145 vessels, such as 130 container vessels and 15 vehicle transport vessels, as well as a network of 56 weekly lines. The company was incorporated in 1945 and is headquartered in Haifa, Israel."
+    },
+    "XRAY": {
+        "ticker": "XRAY",
+        "name": "DENTSPLY SIRONA Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 2745835008,
+        "currency": "USD",
+        "description": "DENTSPLY SIRONA Inc. develops, manufactures, and markets dental equipment supported by cloud-enabled solutions, dental products, and healthcare consumable products in urology and enterology worldwide. It operates through four segments: Connected Technology Solutions, Essential Dental Solutions, Orthodontic and Implant Solutions, and Wellspect Healthcare. The Connected Technology Solutions segment offers imaging equipment, motorized dental handpieces, treatment centers, and other instruments; and intraoral scanners, 3-D printers, and mills, as well as CEREC, a full-chairside economical restoration of esthetic ceramic dentistry offering. The Essential Dental Solutions segment provides motorized endodontic handpieces, files, sealers, irrigation needles, and other tools for root canal procedures; restorative products; curing light and dental diagnostic systems; ultrasonic scalers and polishers; and dental anesthetics, prophylaxis paste, dental sealants, and impression materials. The Orthodontic and Implant Solutions segment offers SureSmile, a clear aligner solution that includes whitening kits and retainers; VPro, a high frequency vibration technology device; SureSmile Simulator; DS Core platform, which creates 3D visualization of patient outcomes; dental implant products; digital dentures; crown and bridge porcelain products; bone regenerative and restorative solutions; treatment planning software; educational programs; custom abutments; tapered immediate load screws; regenerative bone growth factor; artificial teeth; and precious metal dental alloys. The Wellspect Healthcare segment offers intermittent urinary catheters under the LoFric brand and irrigation systems under the Navina brand. The company was formerly known as DENTSPLY International Inc. and changed its name to DENTSPLY SIRONA Inc. in February 2016. DENTSPLY SIRONA Inc. was founded in 1877 and is headquartered in Charlotte, North Carolina."
+    },
+    "GAL": {
+        "ticker": "GAL",
+        "name": "State Street Global Allocation ",
+        "meta": "Global Moderate Allocation",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The Adviser primarily invests the assets of the fund among exchange traded products (\"ETPs\") that provide balanced exposure to domestic and international debt and equity securities. The fund typically allocates approximately 60% of its assets to equity securities, though this percentage can vary based on the Adviser's tactical decisions."
     }
 }
