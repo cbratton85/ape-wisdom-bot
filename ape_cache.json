@@ -19005,5 +19005,14 @@
         "mcap": 26927800320,
         "currency": "USD",
         "description": "Teck Resources Limited engages in research, exploration, development, processing, smelting, refining, and reclamation of mineral properties in Asia, the Americas, and Europe. The company operates through Copper and Zinc segments. It offers copper, zinc, and lead concentrates, as well as refined zinc, lead, and silver. The company also produces lead, precious metals, molybdenum, fertilizers, and other metals; and sells refined metals or concentrates. In addition, it explores for gold. The company was formerly known as Teck Cominco Limited and changed its name to Teck Resources Limited in April 2009. Teck Resources Limited was founded in 1913 and is based in Vancouver, Canada."
+    },
+    "GHG": {
+        "ticker": "GHG",
+        "name": "GreenTree Hospitality Group Ltd",
+        "meta": "Lodging",
+        "type": "EQUITY",
+        "mcap": 150792128,
+        "currency": "USD",
+        "description": "GreenTree Hospitality Group Ltd., through its subsidiaries, develops leased-and-operated, and franchised-and-managed hotels and restaurants in the People's Republic of China. It engages in the food manufacturing business; and provision of information technology services. The company's wholesale business includes sale of prepared meals and frozen foods to supermarkets, distributors, and restaurant franchisees. It operates under the GreenTree, Da Niang, and Lu Gang or Bellagio brand names. The company was founded in 2004 and is headquartered in Shanghai, the People's Republic of China. GreenTree Hospitality Group Ltd. is a subsidiary of GreenTree Inns Hotel Management Group, Inc."
     }
 }
