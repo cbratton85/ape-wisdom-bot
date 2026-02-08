@@ -3336,7 +3336,7 @@
         "type": "EQUITY",
         "mcap": 376810528,
         "currency": "USD",
-        "description": "Bed Bath & Beyond, Inc. is an e-commerce focused retailer that owns or has ownership interests in various retail brands. The Company owns Bed Bath & Beyond, Overstock, buybuy BABY, Kirkland’s Home, and other related brands and websites, and a blockchain asset portfolio inclusive of tZERO, GrainChain, and other assets. Through its Bed Bath & Beyond brand, it provides an array of home-related products. Through its Overstock brand, the Company provides an array of goods at discounted prices, and a treasure hunt-like experience for its target customers. Its product assortment includes home categories such as indoor and outdoor furniture, rugs, decor, and lighting, as well as lifestyle categories such as jewelry and watches, apparel and accessories, and designer shoes and handbags. In addition, the Company also offers a range of add-on services across its platforms, including warranties, shipping insurance, and installation services."
+        "description": "Bed Bath & Beyond, Inc. is an e-commerce focused retailer that owns or has ownership interests in various retail brands. The Company owns Bed Bath & Beyond, Overstock, buybuy BABY, Kirkland\u2019s Home, and other related brands and websites, and a blockchain asset portfolio inclusive of tZERO, GrainChain, and other assets. Through its Bed Bath & Beyond brand, it provides an array of home-related products. Through its Overstock brand, the Company provides an array of goods at discounted prices, and a treasure hunt-like experience for its target customers. Its product assortment includes home categories such as indoor and outdoor furniture, rugs, decor, and lighting, as well as lifestyle categories such as jewelry and watches, apparel and accessories, and designer shoes and handbags. In addition, the Company also offers a range of add-on services across its platforms, including warranties, shipping insurance, and installation services."
     },
     "HSBC": {
         "ticker": "HSBC",
@@ -4200,7 +4200,7 @@
         "type": "EQUITY",
         "mcap": 15893285888,
         "currency": "USD",
-        "description": "Sprott Physical Silver Trust (the Trust) is a Canada-based closed-end mutual fund trust. The Trust's investment objective is to provide a secure, convenient and exchange-traded investment alternative for investors interested in holding physical silver bullion without the inconvenience that is typical of a direct investment in physical silver bullion. The Trust invests and intends to continue to invest primarily in long-term holdings of unencumbered, fully allocated, physical silver bullion and does not speculate with regard to short-term changes in silver prices. The Trust will only purchase and expects only to own Good Delivery Bars as defined by the London Bullion Market Association (LBMA), with each bar purchased being verified against the LBMA source by representatives from the Trust’s custodian, the Royal Canadian Mint. Sprott Asset Management LP is the manager of the Trust."
+        "description": "Sprott Physical Silver Trust (the Trust) is a Canada-based closed-end mutual fund trust. The Trust's investment objective is to provide a secure, convenient and exchange-traded investment alternative for investors interested in holding physical silver bullion without the inconvenience that is typical of a direct investment in physical silver bullion. The Trust invests and intends to continue to invest primarily in long-term holdings of unencumbered, fully allocated, physical silver bullion and does not speculate with regard to short-term changes in silver prices. The Trust will only purchase and expects only to own Good Delivery Bars as defined by the London Bullion Market Association (LBMA), with each bar purchased being verified against the LBMA source by representatives from the Trust\u2019s custodian, the Royal Canadian Mint. Sprott Asset Management LP is the manager of the Trust."
     },
     "VWO": {
         "ticker": "VWO",
@@ -8503,5 +8503,293 @@
         "mcap": 1516262656,
         "currency": "USD",
         "description": "Innodata Inc. operates as a data engineering company in the United States, the United Kingdom, the Netherlands, Canada, and internationally. The company operates through three segments: Digital Data Solutions (DDS), Synodex, and Agility. The DDS segment engages in the provision of artificial intelligence (AI) data preparation services; collecting or creating training data; annotating training data; and training AI algorithms for its customers, as well as AI model deployment and integration services. This segment also provides a range of data engineering support services, including data transformation, data curation, data hygiene, data consolidation, data extraction, data compliance, and master data management. The Synodex segment offers an industry platform that transforms medical records into useable digital data with its proprietary data models or client data models. The Agility segment provides an industry platform that offers marketing communications and public relations professionals to target and distribute content to journalists and social media influencers; and to monitor and analyze global news channels, such as print, web, radio, and TV, as well as social media channels. It serves banking, insurance, financial services, technology, digital retailing, and information/media sectors through its professional staff, senior management, and direct sales personnel. The company was formerly known as Innodata Isogen, Inc. and changed its name to Innodata Inc. in June 2012. Innodata Inc. was incorporated in 1988 and is headquartered in Ridgefield Park, New Jersey."
+    },
+    "EUDG": {
+        "ticker": "EUDG",
+        "name": "WisdomTree Europe Quality Divid",
+        "meta": "Europe Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "At least 80% of the fund's total assets will be invested in constituent securities of the index and investments that have economic characteristics that are substantially identical to the economic characteristics of such constituent securities. The index consists of dividend-paying common stocks of companies with growth characteristics that are incorporated and listed on a stock exchange in one of the following countries: Germany, Switzerland, United Kingdom, etc. The fund is non-diversified."
+    },
+    "PLUG": {
+        "ticker": "PLUG",
+        "name": "Plug Power, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 2887643136,
+        "currency": "USD",
+        "description": "Plug Power Inc. develops hydrogen fuel cells product solutions in North America, Europe, Asia, and internationally. The company offers GenDrive, a hydrogen fueled proton exchange membrane fuel cell system that provides power to material handling electric vehicles; GenSure, a stationary fuel cell solution that offers modular PEM fuel cell power to support the backup and grid-support power requirements of the telecommunications, transportation, and utility sectors; and Progen, a fuel cell stack and engine technology used in mobility and stationary fuel cell systems. It also provides GenFuel, a liquid hydrogen fueling delivery, generation, storage, and dispensing system; GenCare, an ongoing Internet of Things-based maintenance and on-site service program for GenDrive fuel cell systems; GenSure fuel cell systems; GenFuel hydrogen storage and dispensing products; ProGen fuel cell engines; and GenKey, an integrated turn-key solution for transitioning to fuel cell power. In addition, the company offers electrolyzers, a hydrogen generator for clean hydrogen production; liquefaction systems that provides liquid hydrogen to customers; cryogenic equipment for the distribution of liquified hydrogen, oxygen, argon, nitrogen, and other cryogenic gases, including trailers and mobile storage equipment; and liquid hydrogen, an alternative to fuel to fossil-based energy. The company sells its products through a direct product sales force, original equipment manufacturers, and dealer networks. Plug Power Inc. was incorporated in 1997 and is headquartered in Slingerlands, New York."
+    },
+    "UUUU": {
+        "ticker": "UUUU",
+        "name": "Energy Fuels Inc",
+        "meta": "Uranium",
+        "type": "EQUITY",
+        "mcap": 5110359040,
+        "currency": "USD",
+        "description": "Energy Fuels Inc., together with its subsidiaries, engages in the exploration, recovery, recycling, exploration, operation, development, permitting, evaluation, and sale of uranium mineral properties in the United States. It produces and sells vanadium pentoxide, rare earth elements, carbonate, and heavy mineral sands, such as ilmenite, rutile, zircon, and monazite. The company was formerly known as Volcanic Metals Exploration Inc. and changed its name to Energy Fuels Inc. in May 2006. Energy Fuels Inc. was incorporated in 1987 and is headquartered in Lakewood, Colorado."
+    },
+    "IMAX": {
+        "ticker": "IMAX",
+        "name": "Imax Corporation",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 2005624320,
+        "currency": "USD",
+        "description": "IMAX Corporation, together with its subsidiaries, operates as a technology platform for entertainment and events in the United States, Greater China, rest of Asia, Western Europe, Canada, Latin America, and internationally. It operates through Content Solutions; and Technology Products and Services segments. The company offers IMAX film remastering, a proprietary technology that digitally remasters films and other content into IMAX formats for distribution to the IMAX network; IMAX Enhanced, which provides end-to-end technology across streaming content and entertainment devices at home; AI-driven video quality solutions for media and entertainment companies; and streaming technology software products. It also provides preventative and emergency maintenance services, and quality monitoring to the IMAX network; film post-production services; and IMAX film and digital cameras for content creators. In addition, the company engages in the distribution of large-format documentary films to institutional theaters, as well as live performances and interactive events with artists and creators; after-market sales of IMAX System parts and 3D glasses; sale or lease of IMAX theater systems; provision of management services to theaters, as well as production advice and technical assistance to documentary and Hollywood filmmakers; and rental of company's proprietary 2D and 3D large-format film cameras. The company markets its theater systems through a direct sales force and marketing staff to science and natural history museums, zoos, aquariums, and other educational and cultural centers, as well as theme parks, private home theaters, tourist destination sites, fairs, and expositions. It offers its services under the IMAX, IMAX 3D, Experience It In IMAX, The IMAX Experience, DMR, Filmed For IMAX, IMAX Live, IMAX Enhanced, and IMAX StreamSmart. IMAX Corporation was founded in 1967 and is headquartered in Mississauga, Canada."
+    },
+    "XBI": {
+        "ticker": "XBI",
+        "name": "State Street SPDR S&P Biotech E",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "In seeking to track the performance of the S&P Biotechnology Select Industry Index (the \"index\"), the fund employs a sampling strategy. It generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index. The index represents the biotechnology segment of the S&P Total Market Index (\"S&P TMI\")."
+    },
+    "IEFA": {
+        "ticker": "IEFA",
+        "name": "iShares Core MSCI EAFE ETF",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index is designed to measure large-, mid- and small-capitalization equity market performance and includes stocks from Europe, Australasia and the Far East."
+    },
+    "NE": {
+        "ticker": "NE",
+        "name": "Noble Corporation plc A",
+        "meta": "Oil & Gas Drilling",
+        "type": "EQUITY",
+        "mcap": 6226791424,
+        "currency": "USD",
+        "description": "Noble Corporation plc operates as an offshore drilling contractor for the oil and gas industry worldwide. The company provides contract drilling services through its fleet of mobile offshore drilling units. It operates drilling rigs, such as floaters and jackups. Noble Corporation plc was founded in 1921 and is headquartered in Houston, Texas."
+    },
+    "ASO": {
+        "ticker": "ASO",
+        "name": "Academy Sports and Outdoors, In",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 3942865408,
+        "currency": "USD",
+        "description": "Academy Sports and Outdoors, Inc., through its subsidiaries, operates as a sporting goods and outdoor recreational retailer in the United States. The company's outdoors division comprises camping products, such as coolers and drinkware, and camping accessories and equipment; fishing products, including marine equipment and fishing rods, reels, and baits and equipment; and hunting products, which includes firearms, ammunition, archery and archery equipment, camouflage apparel, waders, shooting accessories, gun safes, optics, airguns, and hunting equipment. Its sports and recreation division offers fitness equipment, fitness accessories, and nutrition supplies; team and specialty sports equipment, including baseball, football, basketball, soccer, golf, racket sports, volleyball, backpacks, and sports bags; recreation products, which includes patio furniture, outdoor cooking, trampolines, play sets, watersports, and pet equipment, as well as wheeled goods that include bicycles, skateboards, and other ride-on toys; and electronics, watches, and sunglasses, as well as front-end products, such as consumables, batteries, etc. The company's apparel division provides outdoor and seasonal apparel, denim, work apparel, graphic t-shirts, and accessories; boys and girls outdoor, and athletic apparel; sporting and fitness apparel; and professional and collegiate team licensed apparel and accessories. Its footwear division offers casual shoes, slippers, seasonal footwear, and socks; work and western boots, shoes, and hunting footwear; boys and girls footwear; athletic footwear, such as running shoes, athletic lifestyle, and training shoes; and team and specialty sports footwear, and slides. The company sells its products under the Academy Sports + Outdoors, Magellan Outdoors, BCG, O'rageous, Game Winner, Outdoor Gourmet, Freely, and R.O.W. brand names. Academy Sports and Outdoors, Inc. was founded in 1938 and is headquartered in Katy, Texas."
+    },
+    "AMP": {
+        "ticker": "AMP",
+        "name": "Ameriprise Financial, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 50446872576,
+        "currency": "USD",
+        "description": "Ameriprise Financial, Inc., together with its subsidiaries, operates as a diversified financial services company in the United States and internationally. The company offers financial planning and advice services to individual and institutional clients. It operates through Advice & Wealth Management, Asset Management, and Retirement & Protection Solutions segments. The Advice & Wealth Management segment provides financial planning and advice; brokerage products and services for retail and institutional clients; discretionary and non-discretionary investment advisory accounts; mutual funds; insurance and annuities products; cash management and banking products; and face-amount certificates. The Asset Management segment offers investment management, advice, and products to retail, high net worth, and institutional clients through third-party financial institutions, advisor networks, direct retail, and its institutional sales force under the Columbia Threadneedle Investments brand name. Its products include U.S. mutual funds and their non-U.S. equivalents, exchange-traded funds, variable product funds underlying insurance, and annuity separate accounts; and institutional asset management products, such as traditional asset classes, separately managed accounts, individually managed accounts, collateralized loan obligations, hedge funds, collective funds, and property and infrastructure funds. The Retirement & Protection Solutions segment provides variable annuity products, as well as life and disability income insurance products to retail clients. The company was formerly known as American Express Financial Corporation and changed its name to Ameriprise Financial, Inc. in September 2005. Ameriprise Financial, Inc. was founded in 1894 and is based in Minneapolis, Minnesota."
+    },
+    "ENTG": {
+        "ticker": "ENTG",
+        "name": "Entegris, Inc.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 18551291904,
+        "currency": "USD",
+        "description": "Entegris, Inc. provides advanced materials and process solutions for the semiconductor and other high-technology industries in North America, Taiwan, South Korea, Japan, China, Europe, and Southeast Asia. The company operates in two segments, Materials Solutions (MS) and Advanced Purity Solutions (APS). The MS segment provides materials-based solutions, such as chemical vapor and atomic layer deposition materials, chemical mechanical planarization slurries and pads, ion implantation specialty gases, formulated etch and clean materials, and other specialty materials. The APS segment offers filtration, purification, and contamination-control solutions for the semiconductor manufacturing processes, semiconductor ecosystem, and other high-technology industries. The company's customers include logic and memory semiconductor device manufacturers, semiconductor equipment makers, gas and chemical manufacturing companies, and wafer grower companies; and flat panel display equipment makers, panel manufacturers, and manufacturers of hard disk drive components and devices, as well as their related ecosystems. It serves manufacturers and suppliers in the solar and life science industries, electrical discharge machining customers, glass and glass container manufacturers, aerospace manufacturers, and manufacturers of biomedical implantation devices. Entegris, Inc. was founded in 1966 and is headquartered in Billerica, Massachusetts."
+    },
+    "LUCK": {
+        "ticker": "LUCK",
+        "name": "LUCKY STRIKE ENTERTAINMENT CORP",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 925790592,
+        "currency": "USD",
+        "description": "Lucky Strike Entertainment Corporation operates location-based entertainment venues in North America. The company operates traditional bowling under the AMF and Bowl America brands; and entertainment concept with lounge seating, food and beverage offerings, and customer service for individuals and group events under the Lucky Strike and Bowlero brands. It also operates Octane Raceway, Raging Waves water park, Shipwreck Island water park, Big Kahuna's water park, and Boomers Parks. The company was formerly known as Bowlero Corp. and changed its name to Lucky Strike Entertainment Corporation in December 2024. Lucky Strike Entertainment Corporation was founded in 1997 and is headquartered in Mechanicsville, Virginia."
+    },
+    "GD": {
+        "ticker": "GD",
+        "name": "General Dynamics Corporation",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 97359241216,
+        "currency": "USD",
+        "description": "General Dynamics Corporation operates as an aerospace and defense company worldwide. It operates through four segments: Aerospace, Marine Systems, Combat Systems, and Technologies. The Aerospace segment produces and sells business jets; and offers aircraft maintenance and repair, management, aircraft-on-ground support, customer support and custom completion services, modifications, upgrades, and lifecycle sustainment support services. The Marine Systems segment designs and builds nuclear-powered submarines, surface combatants, and auxiliary ships for the United States Navy and Jones Act ships for commercial customers, as well as provides maintenance, modernization, and lifecycle support services for navy ships; offers and program management, planning, engineering, and design support services for submarine construction programs. The Combat Systems segment manufactures land combat solutions, such as wheeled and tracked combat vehicles, Stryker wheeled combat vehicles, piranha vehicles, weapons systems, energetics and munitions, mobile bridge systems with payloads, tactical vehicles, main battle tanks, and armored vehicles; and offers modernization programs, support and sustainment services, and development programs. The Technologies segment provides information technology solutions and mission support services; mobile communication, computers, and command-and-control mission systems; intelligence, surveillance, and reconnaissance solutions to military, intelligence, and federal civilian customers; cloud services, cybersecurity, network modernization, artificial intelligence; machine learning; application development, high-performance computing, and 5G and advanced communications services; and unmanned undersea vehicle manufacturing and assembly services. The company was founded in 1899 and is headquartered in Reston, Virginia."
+    },
+    "EMLC": {
+        "ticker": "EMLC",
+        "name": "VanEck J. P. Morgan EM Local Cu",
+        "meta": "Emerging-Markets Local-Currency Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund normally invests at least 80% of its total assets in securities that comprise the fund's benchmark index. The index is comprised of bonds issued by emerging market governments and denominated in the local currency of the issuer. It may concentrate its investments in a particular industry or group of industries to the extent that the index concentrates in an industry or group of industries. The fund is non-diversified."
+    },
+    "ESG": {
+        "ticker": "ESG",
+        "name": "FlexShares STOXX US ESG Select ",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index is designed to reflect the performance of a selection of companies that, in aggregate, score better with respect to a set of ESG KPIs relative to the U.S. companies in the STOXX\u00ae Global 1800 Index, a float-adjusted market-capitalization weighted index of companies incorporated in the U.S. and in developed international markets. The fund will invest at least 80% of its total assets (exclusive of collateral held from securities lending) in the securities of the index."
+    },
+    "POST": {
+        "ticker": "POST",
+        "name": "Post Holdings, Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 5977461760,
+        "currency": "USD",
+        "description": "Post Holdings, Inc. operates as a consumer packaged goods holding company in the United States and internationally. It operates through Post Consumer Brands, Weetabix, Foodservice, and Refrigerated Retail segments. The Post Consumer Brands segment manufactures, markets, and sells branded and private label ready-to-eat (RTE) cereals under Honey Bunches of Oats, Pebbles, and Malt-O-Meal brands; hot cereal; peanut butter under the Peter Pan brand; and branded and private label pet food under Rachael Ray Nutrish, Nature's Recipe, 9Lives, Kibbles 'n Bits and Gravy Train brands. The Weetabix segment manufactures, markets, and distributes branded and private label RTE cereal under Weetabix and Alpen brands; hot cereals and other cereal-based food products; private label cereals; and protein-based shakes under the UFIT brand, and nutritional snacks. The Foodservice segment produces and distributes egg products primarily under Papetti's and Abbotsford Farms brands, as well as potato products in the foodservice and food ingredient channels. The segment also manufactures certain meat products. The Refrigerated Retail segment produces and distributes side dish, potato, sausage products under Bob Evans, Bob Evans Farms, and Simply Potatoes brands; eggs and egg products under Bob Evans Egg Whites and Egg Beaters brands; and cheese and other dairy products under Crystal Farms brand. It serves grocery stores, mass merchandise customers, supercenters, club stores, natural/specialty stores, dollar stores, discounters, wholesalers, convenience stores, pet supply retailers, drug store customers, foodservice distributors, and national restaurant chains, as well as sells its products in the military, ecommerce, and foodservice channels. The company was founded in 1895 and is headquartered in Saint Louis, Missouri."
+    },
+    "OG": {
+        "ticker": "OG",
+        "name": "OG",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "CNK": {
+        "ticker": "CNK",
+        "name": "Cinemark Holdings Inc Cinemark ",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 3027354112,
+        "currency": "USD",
+        "description": "Cinemark Holdings, Inc., together with its subsidiaries, engages in the motion picture exhibition business. It operates theatres in the United States and Latin America. The company was founded in 1984 and is headquartered in Plano, Texas."
+    },
+    "WOLF": {
+        "ticker": "WOLF",
+        "name": "Wolfspeed, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 709873984,
+        "currency": "USD",
+        "description": "Wolfspeed, Inc., a semiconductor company, focuses on silicon carbide and gallium nitride (GaN) technologies in Europe, Hong Kong, China, rest of Asia Pacific, the United States, and internationally. The company offers silicon carbide and GaN materials, including silicon carbide bare wafers, epitaxial wafers, and GaN epitaxial layers on silicon carbide wafers to manufacture products for RF, power, and other applications. It also provides power devices, such as silicon carbide Schottky diodes, metal oxide semiconductor field effect transistors (MOSFETs), and power modules for customers and distributors to use in applications, including electric vehicles comprising charging infrastructure, server power supplies, solar inverters, uninterruptible power supplies, industrial power supplies, and other applications. The company was formerly known as Cree, Inc. and changed its name to Wolfspeed, Inc. in October 2021. Wolfspeed, Inc. was founded in 1987 and is headquartered in Durham, North Carolina."
+    },
+    "FC": {
+        "ticker": "FC",
+        "name": "Franklin Covey Company",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 233684160,
+        "currency": "USD",
+        "description": "Franklin Covey Co. provides training and consulting services in the areas of leadership, customer loyalty, execution, productivity, sales performance, and educational improvement for organizations and individuals worldwide. The company operates through four segments: North America, International Direct Offices, International Licensees, and Education Division. It offers a suite of individual-effectiveness and leadership-development training and products, such as The 7 Habits of Highly Effective People, The Speed of Trust, The Leader In Me, The Four Disciplines of Execution, Trust & Inspire, and Multipliers. The company also operates internet-based platforms, including All Access Pass and Leader in Me that offer training days and training course materials. The company was formerly known as Franklin Quest Co. and changed its name to Franklin Covey Co. in May 1997. Franklin Covey Co. was incorporated in 1983 and is based in Draper, Utah."
+    },
+    "ACH": {
+        "ticker": "ACH",
+        "name": "Accendra Health, Inc.",
+        "meta": "Medical Distribution",
+        "type": "EQUITY",
+        "mcap": 184858368,
+        "currency": "USD",
+        "description": "Accendra Health, Inc., together with its subsidiaries, operates as a healthcare solutions company worldwide. It provides products and services for in-home care and delivery across diabetes treatment, home respiratory therapy, and obstructive sleep apnea treatment. The company also supplies a range of other home medical equipment; and patient care products, including ostomy, wound care, urology, and incontinence and other products and services. The company serves to patients and home health agencies, the U.S. federal government, and private insurers. Accendra Health, Inc. was formerly known as Owens & Minor, Inc. and changed its name to Accendra Health, Inc. in December 2025. The company was founded in 1882 and is based in Glen Allen, Virginia."
+    },
+    "IHI": {
+        "ticker": "IHI",
+        "name": "iShares U.S. Medical Devices ET",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund seeks to track the investment results of the Dow Jones U.S. Select Medical Equipment Index, which measures the performance of the medical equipment sector of the U.S. equity market, as defined by S&P Dow Jones Indices LLC. The index includes medical equipment companies, including manufacturers and distributors of medical devices such as magnetic resonance imaging scanners, prosthetics, pacemakers, X-ray machines, and other non-disposable medical devices. The fund is non-diversified."
+    },
+    "BBEU": {
+        "ticker": "BBEU",
+        "name": "JPMorgan BetaBuilders Europe ET",
+        "meta": "Europe Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will invest at least 80% of its assets in securities included in the underlying index. The underlying index is a free float adjusted market capitalization-weighted index which consists of equity securities from developed European countries or regions, including: Austria, Belgium, Denmark, Finland, France, Germany, Ireland, Italy, the Netherlands, Norway, Portugal, Spain, Sweden, Switzerland and the United Kingdom."
+    },
+    "KMI": {
+        "ticker": "KMI",
+        "name": "Kinder Morgan, Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 67855187968,
+        "currency": "USD",
+        "description": "Kinder Morgan, Inc. operates as an energy infrastructure company primarily in North America. The company operates through Natural Gas Pipelines, Products Pipelines, Terminals, and CO2 segments. The Natural Gas Pipelines segment owns and operates interstate and intrastate natural gas pipeline, and storage systems; natural gas gathering systems and natural gas processing and treating facilities; natural gas liquids fractionation facilities and transportation systems; and liquefied natural gas gasification, liquefaction, and storage facilities. The Products Pipelines segment owns and operates refined petroleum products, and crude oil and condensate pipelines; and associated product terminals and petroleum pipeline transmix facilities. The Terminals segment owns and/or operates liquids and bulk terminals that stores and handles various commodities, including gasoline, diesel fuel, renewable fuel and feedstocks, chemicals, ethanol, metals, and petroleum coke; and owns tankers. The CO2 segment produces, transports, and markets CO2 to recovery and production crude oil from mature oil fields; owns interests in/or operates oil fields and gasoline processing plants; and operates a crude oil pipeline system in West Texas, as well as owns and operates RNG and LNG facilities. The company was formerly known as Kinder Morgan Holdco LLC and changed its name to Kinder Morgan, Inc. in February 2011. Kinder Morgan, Inc. was founded in 1997 and is headquartered in Houston, Texas."
+    },
+    "PNW": {
+        "ticker": "PNW",
+        "name": "Pinnacle West Capital Corporati",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 11193445376,
+        "currency": "USD",
+        "description": "Pinnacle West Capital Corporation, through its subsidiary, provides retail and wholesale electric services primarily in the state of Arizona. The company engages in the generation, transmission, and distribution of electricity using nuclear, gas, oil, coal, and solar generating facilities. Its transmission facilities include overhead lines and underground lines; and distribution facilities consist of overhead lines and underground primary cables. The company also owns and maintains transmission and distribution substations; and owns energy storage facilities. Pinnacle West Capital Corporation was incorporated in 1985 and is headquartered in Phoenix, Arizona."
+    },
+    "NEXT": {
+        "ticker": "NEXT",
+        "name": "NextDecade Corporation",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 1387559296,
+        "currency": "USD",
+        "description": "NextDecade Corporation, an energy company, engages in the construction and development activities related to the liquefaction of natural gas in the United States. The company focuses on the development activities on the Rio Grande liquefied natural gas (LNG) terminal facility located in the Port of Brownsville in southern Texas; and a carbon capture and storage project (CCS project) at the terminal, as well as on other CCS projects with third-party industrial facilities. It is also involved in sale of LNG; and capture and storage of CO2 emissions. The company was founded in 2010 is based in Houston, Texas."
+    },
+    "IQLT": {
+        "ticker": "IQLT",
+        "name": "iShares MSCI Intl Quality Facto",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index measures the performance of international developed large- and mid-capitalization stocks exhibiting relatively higher quality characteristics as identified through three fundamental variables: return on equity, earnings variability and debt-to-equity."
+    },
+    "CMBS": {
+        "ticker": "CMBS",
+        "name": "iShares CMBS Bond ETF",
+        "meta": "Securitized Bond - Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index measures the performance of investment-grade commercial mortgage-backed securities (\"CMBS\"), which are classes of securities (known as \"certificates\") that represent interests in \"pools\" of commercial mortgages. The fund will invest at least 80% of its assets in the component securities of the underlying index, and it will invest at least 90% of its assets in fixed income securities of the types included in the underlying index that BFA believes will help the fund track the underlying index."
+    },
+    "FRI": {
+        "ticker": "FRI",
+        "name": "First Trust S&P REIT Index Fund",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will normally invest at least 90% of its net assets (including investment borrowings) in the securities that comprise the index. The index seeks to measure the performance of publicly-traded REITs domiciled in the United States that meet certain eligibility requirements."
+    },
+    "MNDY": {
+        "ticker": "MNDY",
+        "name": "monday.com Ltd.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 5052043264,
+        "currency": "USD",
+        "description": "monday.com Ltd., together with its subsidiaries, develops software applications in the United States, Europe, the Middle East, Africa, the United Kingdom, and internationally. The company provides Work Operating System (Work OS), a cloud-based visual work OS that consists of modular building blocks used and assembled to create software applications and work management tools. Its products include monday work management that manages workflows, projects, and portfolios for team collaboration and productivity; monday CRM, which tracks and manages various sales cycle; monday dev that builds agile product and software development workflows; monday service, which creates seamless connection between service desks and their data; WorkCanvas, a digital whiteboard; and WorkForms, which allows users to create personalized forms or surveys and gain organizational insights. It serves organizations, educational or government institution, and distinct business unit of an organization. The company was formerly known as DaPulse Labs Ltd. and changed its name to monday.com Ltd. in December 2017. monday.com Ltd. was incorporated in 2012 and is headquartered in Tel Aviv, Israel."
+    },
+    "NICE": {
+        "ticker": "NICE",
+        "name": "NICE Ltd",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 6906426880,
+        "currency": "USD",
+        "description": "NICE Ltd., together with its subsidiaries, provides AI-powered cloud platforms for customer engagement, and financial crime and compliance worldwide. It offers CXone Mpower, an AI platform that enables enterprises to design, build, and operate customer service automation; and NICE Evidencentral, a digital evidence management and investigation platform for criminal justice system. The company also provides X-Sight, an open and flexible AI-cloud platform for the high-end market; and Xceed, an AI cloud platform for anti-money laundering and fraud prevention for small and mid-sized organizations. In addition, it offers data intelligence solutions enable organizations to turn raw data into comprehensive actionable intelligence to prevent and detect financial crimes. The company was formerly known as NICE-Systems Ltd. and changed its name to NICE Ltd. in June 2016. NICE Ltd. was incorporated in 1986 and is headquartered in Ra'anana, Israel."
+    },
+    "RICK": {
+        "ticker": "RICK",
+        "name": "RCI Hospitality Holdings, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 211907200,
+        "currency": "USD",
+        "description": "RCI Hospitality Holdings, Inc., through its subsidiaries, engages in the hospitality and related businesses in the United States. The company operates through Nightclubs, Bombshells, and Other segments. It owns and/or operates upscale adult nightclubs under the Rick's Cabaret, Jaguars Club, Tootsie's Cabaret, XTC Cabaret, Club Onyx, Hoops Cabaret and Sports Bar, Scarlett's Cabaret, Diamond Cabaret, Cheetah Gentlemen's Club, PT's Showclub, Playmates Club, Country Rock Cabaret, Temptations Adult Cabaret, Foxy's Cabaret, Vivid Cabaret, Downtown Cabaret, Cabaret East, The Seville, Silver City Cabaret, Heartbreakers Gentlemen's Club, Kappa Men's Club, Baby Dolls, and Chicas Locas brands; and a dance club under the Studio 80 brand. The company also owns and operates restaurants and sports bars under the Bombshells Restaurant & Bar brand. In addition, it owns national industry convention and tradeshow; national industry trade publications; and national industry award shows, as well as industry and social media websites, which serves adult nightclubs industry and the adult retail products industry. Further, it holds license to sell Robust Energy Drink in the United States. The company was formerly known as Rick's Cabaret International, Inc. and changed its name to RCI Hospitality Holdings, Inc. in August 2014. RCI Hospitality Holdings, Inc. was founded in 1983 and is based in Houston, Texas."
+    },
+    "BLSH": {
+        "ticker": "BLSH",
+        "name": "Bullish",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 4136268800,
+        "currency": "USD",
+        "description": "Bullish provides market infrastructure and information services in United States. It operates Bullish Exchange, a digital assets spot and derivatives exchange that integrates a central limit order book matching engine with automated market making to provide deep and predictable liquidity. The company also offers CoinDesk Indices, a collection of tradable proprietary and single-asset benchmarks and indices that track the performance of digital assets for global institutions in the digital assets and traditional finance industries; CoinDesk Data, a comprehensive suite of digital assets market data and analytics, providing real-time insights into prices, trends, and market dynamics; and CoinDesk Insights, operates Coindesk.com, a leading digital media platform that covers news and insights about digital assets, the underlying markets, policy, and blockchain technology. Bullish was founded in 2020 and is based in George Town, Cayman Islands."
     }
 }
