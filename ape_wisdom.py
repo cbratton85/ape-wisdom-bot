@@ -340,8 +340,10 @@ def filter_and_process(stocks):
     missing = [t for t in us_tickers if t not in local_cache and t not in delisted_cache]
     if missing:
         print(f"{C_YELLOW}Fetching metadata for {len(missing)} NEW items...{C_RESET}")
+        
         for i, t in enumerate(missing):
-            if i % 10 == 0 and i > 0: print(f"  > Progress: {i}/{len(missing)} metadata items fetched...")
+            print(f"  > [{i+1}/{len(missing)}] Fetching: {t}") 
+            
             res = fetch_meta_data_robust(t)
             
             if res: 
@@ -1401,6 +1403,19 @@ def export_interactive_html(df):
                 gap: 5px;
             }}
 
+            .dataTables_filter input::placeholder {{
+                color: #cccccc !important;
+                opacity: 1 !important;
+            }}
+
+            .dataTables_filter input::-webkit-input-placeholder {{
+                color: #cccccc !important;
+                opacity: 1 !important;
+            }}
+            .dataTables_filter input::-moz-placeholder {{
+                color: #cccccc !important;
+                opacity: 1 !important;
+            }}
         </style>
         </head>
         <body>
@@ -1850,6 +1865,11 @@ def export_interactive_html(df):
             "pageLength": 25,
             "lengthMenu": [[25, 50, 75, 100, 150, 200, 250, 500, -1], [25, 50, 75, 100, 150, 200, 250, 500, "All"]],
 
+            "language": {{
+                "search": "",
+                "searchPlaceholder": "🔍 Search Ticker..."
+            }},
+
             "initComplete": function(settings, json) {{
                 $('#page-loader').remove();
                 $('body').addClass('loaded');
@@ -1880,8 +1900,6 @@ def export_interactive_html(df):
                 $("#stockCounter").text("" + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); 
             }}
         }});
-
-        $('.dataTables_filter input').attr('placeholder', '');
 
         // --- CUSTOM FILTERING LOGIC ---
         $.fn.dataTable.ext.search.push(function(settings, data) {{
