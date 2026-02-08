@@ -493,35 +493,30 @@ def filter_and_process(stocks):
             
             try:
                 if not hist.empty and len(hist) >= 2:
-                    # Use the two most recent data points available
                     curr_p = float(hist['Close'].iloc[-1])
                     prev_day_close = float(hist['Close'].iloc[-2])
-                    
                     if prev_day_close > 0:
                         day_chg_pct = ((curr_p - prev_day_close) / prev_day_close) * 100
                 
-                # Optional: If you specifically want LIVE data during market hours
-                # and the batch data is older than 15 minutes:
-                last_ts = hist.index[-1]
-                now_ts = datetime.datetime.now(last_ts.tzinfo if last_ts.tzinfo else None)
-                
-                if (now_ts - last_ts).total_seconds() > 3600: # If data is > 1 hour old
+                    # 2. FORCE LIVE DATA FETCH (Always runs)
                     live_dat = yf.Ticker(t)
-                    # Use info.get instead of fast_info as it's more reliable for prev close
-                    inf = live_dat.info 
+                    inf = live_dat.info
+
+                    # Update Price
                     live_p = inf.get('currentPrice') or inf.get('regularMarketPrice')
                     prev_p = inf.get('previousClose') or inf.get('regularMarketPreviousClose')
-                    
+
                     if live_p and prev_p:
                         curr_p = float(live_p)
                         day_chg_pct = ((live_p - prev_p) / prev_p) * 100
 
+                    live_v = inf.get('regularMarketVolume') or inf.get('volume')
+                    if live_v:
+                        curr_v = int(live_v)
+
             except Exception as e:
-                # Debugging: print(f"Price calc error for {t}: {e}")
                 pass
 
-            # --- FINAL LIST ASSEMBLY ---
-            # Added 'RSI' here so it can be mapped to Index 20 in the HTML
             final_list.append({
                 "Rank": rank_now, 
                 "Name": name, 
@@ -548,7 +543,7 @@ def filter_and_process(stocks):
                 "Streak": 0, 
                 "Rolling": 0, 
                 "History": "New",
-                "RSI": rsi_val  # <--- CRITICAL: Passes the calculated RSI to the table
+                "RSI": rsi_val
             })
             
         except Exception as e:
