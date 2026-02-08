@@ -19284,5 +19284,14 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index measures the performance of international developed large- and mid-capitalization stocks exhibiting relatively higher quality characteristics as identified through three fundamental variables: return on equity, earnings variability and debt-to-equity."
+    },
+    "RICK": {
+        "ticker": "RICK",
+        "name": "RCI Hospitality Holdings, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 211907200,
+        "currency": "USD",
+        "description": "RCI Hospitality Holdings, Inc., through its subsidiaries, engages in the hospitality and related businesses in the United States. The company operates through Nightclubs, Bombshells, and Other segments. It owns and/or operates upscale adult nightclubs under the Rick's Cabaret, Jaguars Club, Tootsie's Cabaret, XTC Cabaret, Club Onyx, Hoops Cabaret and Sports Bar, Scarlett's Cabaret, Diamond Cabaret, Cheetah Gentlemen's Club, PT's Showclub, Playmates Club, Country Rock Cabaret, Temptations Adult Cabaret, Foxy's Cabaret, Vivid Cabaret, Downtown Cabaret, Cabaret East, The Seville, Silver City Cabaret, Heartbreakers Gentlemen's Club, Kappa Men's Club, Baby Dolls, and Chicas Locas brands; and a dance club under the Studio 80 brand. The company also owns and operates restaurants and sports bars under the Bombshells Restaurant & Bar brand. In addition, it owns national industry convention and tradeshow; national industry trade publications; and national industry award shows, as well as industry and social media websites, which serves adult nightclubs industry and the adult retail products industry. Further, it holds license to sell Robust Energy Drink in the United States. The company was formerly known as Rick's Cabaret International, Inc. and changed its name to RCI Hospitality Holdings, Inc. in August 2014. RCI Hospitality Holdings, Inc. was founded in 1983 and is based in Houston, Texas."
     }
 }
