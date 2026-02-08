@@ -109,11 +109,6 @@
         "last_checked": "2026-02-06",
         "reason": "No Price Data"
     },
-    "HEAR": {
-        "delisted": true,
-        "last_checked": "2026-02-06",
-        "reason": "No Price Data"
-    },
     "TGIF": {
         "delisted": true,
         "last_checked": "2026-02-06",
@@ -210,6 +205,11 @@
         "reason": "No Price Data"
     },
     "LBJ": {
+        "delisted": true,
+        "last_checked": "2026-02-08",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
         "delisted": true,
         "last_checked": "2026-02-08",
         "reason": "No Price Data"

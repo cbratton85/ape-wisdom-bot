@@ -19023,5 +19023,59 @@
         "mcap": 70336831488,
         "currency": "USD",
         "description": "Motorola Solutions, Inc. provides public safety and enterprise security solutions in the United States, the United Kingdom, Canada, and internationally. It operates in two segments, Products and Systems Integration, and Software and Services. The Products and Systems Integration segment offers a portfolio of infrastructure, devices, accessories, and video security devices and infrastructure, as well as the implementation and integration of systems, devices, software, and applications for government, public safety, and commercial customers who operate private communications systems and video security solutions, as well as manage a mobile workforce. This segment also provides land mobile radio communications, and video security and access control devices, including two-way portable and vehicle-mounted radios, video cameras, and accessories; communications network core and central processing software, base stations, consoles, and repeaters; and video analytics, network video management hardware and software, and access control solutions. The Software and Services segment offers public safety and enterprise command center, unified communications applications, mobile video equipment, and video software solutions; repair, technical support, and maintenance services; and monitoring, software updates, and cybersecurity services to government, public safety, and commercial communications networks. It serves hospitality; manufacturing; military and defence; police; air transportation; fire and rescue; stadium; emergency medical services; mining; oil and gas; transportation and logistics; utilities; education; retail; and healthcare industries. The company was formerly known as Motorola, Inc. and changed its name to Motorola Solutions, Inc. in January 2011. Motorola Solutions, Inc. was incorporated in 1928 and is headquartered in Chicago, Illinois."
+    },
+    "ABOS": {
+        "ticker": "ABOS",
+        "name": "Acumen Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 145376224,
+        "currency": "USD",
+        "description": "Acumen Pharmaceuticals, Inc., a clinical-stage biopharmaceutical company, develops targeted therapies for the treatment of Alzheimer's disease. The company focuses on advancing a targeted immunotherapy drug candidate Sabirnetug (ACU193), a recombinant humanized immunoglobulin gamma 2, which has completed the INTERCEPT-AD phase 1 clinical trial and in ALTITUDE-AD phase 2 clinical trial to target soluble amyloid-beta oligomers. It has a collaboration and license agreement with Halozyme, Inc. for the development of a subcutaneous formulation of Sabirnetug. Acumen Pharmaceuticals, Inc. was incorporated in 1996 and is headquartered in Newton, Massachusetts."
+    },
+    "AIQ": {
+        "ticker": "AIQ",
+        "name": "Global X Artificial Intelligenc",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its total assets in the securities of the underlying index. The underlying index is designed to track the performance of companies involved in the development and utilization of artificial intelligence (\"AI\") and big data. The fund is non-diversified."
+    },
+    "BOTZ": {
+        "ticker": "BOTZ",
+        "name": "Global X Robotics & Artificial ",
+        "meta": "Miscellaneous Sector",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its total assets in the securities of the underlying index. The underlying index is designed to provide exposure to exchange-listed companies in developed markets that are involved in the development of robotics and/or artificial intelligence as defined by Indxx, the provider of the underlying index. The fund is non-diversified."
+    },
+    "MTB": {
+        "ticker": "MTB",
+        "name": "M&T Bank Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 37193654272,
+        "currency": "USD",
+        "description": "M&T Bank Corporation operates as a bank holding company for Manufacturers and Traders Trust Company and Wilmington Trust, National Association that provides retail and commercial banking products and services in the United States. The company operates through three segments: Commercial Bank, Retail Bank, and Institutional Services and Wealth Management. It offers a range of credit products and banking services, such as commercial lending and leasing, letters of credits, deposit products, cash management services, commercial real estate loans, and credit facilities secured by various commercial real estate properties to middle-market and large commercial customers. The company also provides customers deposit products, including demand, savings and time accounts, and other services; automobile and recreational finance loans, home equity loans and lines of credit, credit cards, and other loan products, as well as residential mortgage and real estate loans; business loans, cash management, payroll, and direct deposit services to consumers and small businesses through branch network, telephone banking, internet banking, and automated teller machines. In addition, it offers trustee, agency, investment management, security brokerage, and administrative services; personal trust, planning and advisory, fiduciary, asset management, family office, and other services; and investment products, including mutual funds and annuities, and other services for corporations and institutions, investment bankers, corporate tax, finance and legal executives, and other institutional clients. M&T Bank Corporation was founded in 1856 and is headquartered in Buffalo, New York."
+    },
+    "MOV": {
+        "ticker": "MOV",
+        "name": "Movado Group Inc.",
+        "meta": "Luxury Goods",
+        "type": "EQUITY",
+        "mcap": 542379904,
+        "currency": "USD",
+        "description": "Movado Group, Inc. designs, sources, markets, and distributes watches worldwide. The company operates in two segments, Watch and Accessory Brands, and Company Stores. The company offers its watches under the Movado, Concord, Ebel, Olivia Burton, and MVMT brands, as well as licensed brands comprising Coach, Tommy Hilfiger, HUGO BOSS, Lacoste, and Calvin Klein. It also designs, sources, markets, and distributes jewelry and other accessories; and provides after-sales and shipping services. The company's customers include jewelry store chains, department stores, independent regional jewelers, network of independent distributors, online marketplaces, licensors' retail stores, and third-party e-commerce retailers. It sells directly to consumers through its e-commerce platforms. The company was formerly known as North American Watch Corporation and changed its name to Movado Group, Inc. in 1996. Movado Group, Inc. was founded in 1961 and is headquartered in Paramus, New Jersey."
+    },
+    "VIA": {
+        "ticker": "VIA",
+        "name": "Via Transportation, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 1744248704,
+        "currency": "USD",
+        "description": "Via Transportation, Inc. provides a digital public transportation system platform in the United States, Germany, and internationally. It develops and operates TransitTech, a public mobility platform that enables partners to create end-to-end transit networks, planning and scheduling for the integration of multiple transportation modes into a single unified network. It offers solutions in the areas of microtransit/on-demand public transit, paratransit, student transportation, non-emergency medical transport (NEMT), corporate/university shuttles, and health transportation. It serves cities, transit authorities, transit operators, paratransit operators, school districts and departments of education, universities, corporations, healthcare providers and payers, riders, and drivers. The company was incorporated in 2012 and is based in New York, New York."
     }
 }
