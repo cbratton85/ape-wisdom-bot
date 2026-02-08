@@ -19095,5 +19095,14 @@
         "mcap": 646928768,
         "currency": "USD",
         "description": "Hyster-Yale, Inc., through its subsidiaries, designs, engineers, manufactures, sells, and services a line of lift trucks, attachments, and aftermarket parts worldwide. The company manufactures components, such as frames, masts, and transmissions; and assembles lift trucks. It markets its products primarily under the Hyster and Yale brand names to independent Hyster and Yale retail dealerships. The company also offers aftermarket parts under the UNISOURCE and PREMIER brand names; attachments, and forks, and lift tables under the Bolzoni, Auramo, and Meyer brand names. It is involved in designing, manufacturing, and sale of hydrogen fuel-cell stacks and engines, as well as designs and produces products in the port equipment and rough terrain forklift markets. The company was formerly known as Hyster-Yale Materials Handling, Inc. and changed its name to Hyster-Yale, Inc. in June 2024. Hyster-Yale, Inc. was incorporated in 1991 and is headquartered in Cleveland, Ohio."
+    },
+    "PLSE": {
+        "ticker": "PLSE",
+        "name": "Pulse Biosciences, Inc",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 1406177152,
+        "currency": "USD",
+        "description": "Pulse Biosciences, Inc. operates as a novel bioelectric medicine company. It offers CellFX System, a novel Nanosecond Pulsed-Field Ablation delivery platform to treat benign lesions of the skin; CellFX nsPFA Percutaneous Electrode system for soft tissue ablation in surgical setting; CellFX nsPFA Cardiac Clamp designed for use in surgical treatment of atrial fibrillation (AF); CellFX nsPFA 360\u00b0 Cardiac Catheter designed to provide a circumferential, or circular, ablation in a single treatment cycle; and The CellFX Consol, a tunable, software-enabled, and console-based platform designed to accommodate the clinical workflow preferred by physicians. The company was formerly known as Electroblate, Inc. and changed its name to Pulse Biosciences, Inc. in December 2015. Pulse Biosciences, Inc. was incorporated in 2014 and is headquartered in Miami, Florida."
     }
 }
