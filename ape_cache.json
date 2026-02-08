@@ -19104,5 +19104,23 @@
         "mcap": 1406177152,
         "currency": "USD",
         "description": "Pulse Biosciences, Inc. operates as a novel bioelectric medicine company. It offers CellFX System, a novel Nanosecond Pulsed-Field Ablation delivery platform to treat benign lesions of the skin; CellFX nsPFA Percutaneous Electrode system for soft tissue ablation in surgical setting; CellFX nsPFA Cardiac Clamp designed for use in surgical treatment of atrial fibrillation (AF); CellFX nsPFA 360\u00b0 Cardiac Catheter designed to provide a circumferential, or circular, ablation in a single treatment cycle; and The CellFX Consol, a tunable, software-enabled, and console-based platform designed to accommodate the clinical workflow preferred by physicians. The company was formerly known as Electroblate, Inc. and changed its name to Pulse Biosciences, Inc. in December 2015. Pulse Biosciences, Inc. was incorporated in 2014 and is headquartered in Miami, Florida."
+    },
+    "BKIE": {
+        "ticker": "BKIE",
+        "name": "BNY Mellon International Equity",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests all of its assets in equity securities comprising the Solactive GBS Developed Markets ex United States Large & Mid Cap USD Index NTR, depositary receipts based on securities comprising the index, ETFs providing exposure to such securities, and derivatives with economic characteristics similar to such securities or the index. The index is a free float market capitalization weighted index designed to measure the performance of developed market large- and mid-capitalization companies. It is non-diversified."
+    },
+    "JPN": {
+        "ticker": "JPN",
+        "name": "Xtrackers Japan JPX-Nikkei 400 ",
+        "meta": "Japan Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index is designed to track the performance of equity securities of issuers who are primarily listed on the following sections of Tokyo Stock Exchange (\"TSE\"): the 1st section, the 2nd section, Mothers or JASDAQ. The fund will invest at least 80% of its total assets in component securities of the underlying index."
     }
 }
