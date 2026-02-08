@@ -19239,5 +19239,32 @@
         "mcap": 18551291904,
         "currency": "USD",
         "description": "Entegris, Inc. provides advanced materials and process solutions for the semiconductor and other high-technology industries in North America, Taiwan, South Korea, Japan, China, Europe, and Southeast Asia. The company operates in two segments, Materials Solutions (MS) and Advanced Purity Solutions (APS). The MS segment provides materials-based solutions, such as chemical vapor and atomic layer deposition materials, chemical mechanical planarization slurries and pads, ion implantation specialty gases, formulated etch and clean materials, and other specialty materials. The APS segment offers filtration, purification, and contamination-control solutions for the semiconductor manufacturing processes, semiconductor ecosystem, and other high-technology industries. The company's customers include logic and memory semiconductor device manufacturers, semiconductor equipment makers, gas and chemical manufacturing companies, and wafer grower companies; and flat panel display equipment makers, panel manufacturers, and manufacturers of hard disk drive components and devices, as well as their related ecosystems. It serves manufacturers and suppliers in the solar and life science industries, electrical discharge machining customers, glass and glass container manufacturers, aerospace manufacturers, and manufacturers of biomedical implantation devices. Entegris, Inc. was founded in 1966 and is headquartered in Billerica, Massachusetts."
+    },
+    "IHI": {
+        "ticker": "IHI",
+        "name": "iShares U.S. Medical Devices ET",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund seeks to track the investment results of the Dow Jones U.S. Select Medical Equipment Index, which measures the performance of the medical equipment sector of the U.S. equity market, as defined by S&P Dow Jones Indices LLC. The index includes medical equipment companies, including manufacturers and distributors of medical devices such as magnetic resonance imaging scanners, prosthetics, pacemakers, X-ray machines, and other non-disposable medical devices. The fund is non-diversified."
+    },
+    "CMBS": {
+        "ticker": "CMBS",
+        "name": "iShares CMBS Bond ETF",
+        "meta": "Securitized Bond - Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index measures the performance of investment-grade commercial mortgage-backed securities (\"CMBS\"), which are classes of securities (known as \"certificates\") that represent interests in \"pools\" of commercial mortgages. The fund will invest at least 80% of its assets in the component securities of the underlying index, and it will invest at least 90% of its assets in fixed income securities of the types included in the underlying index that BFA believes will help the fund track the underlying index."
+    },
+    "EUDG": {
+        "ticker": "EUDG",
+        "name": "WisdomTree Europe Quality Divid",
+        "meta": "Europe Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "At least 80% of the fund's total assets will be invested in constituent securities of the index and investments that have economic characteristics that are substantially identical to the economic characteristics of such constituent securities. The index consists of dividend-paying common stocks of companies with growth characteristics that are incorporated and listed on a stock exchange in one of the following countries: Germany, Switzerland, United Kingdom, etc. The fund is non-diversified."
     }
 }
