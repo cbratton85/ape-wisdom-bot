@@ -942,6 +942,31 @@ def export_interactive_html(df):
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
+
+        body {{
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s linear;
+        }}
+
+        body.loaded {{
+            visibility: visible;
+            opacity: 1;
+        }}
+
+        #page-loader {{
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: #00ff00;
+            visibility: visible !important;
+            opacity: 1 !important;
+           z-index: 9999;
+        }}
+
             table {{
                 table-layout: fixed; 
                 width: 100%;
@@ -1380,6 +1405,7 @@ def export_interactive_html(df):
         </style>
         </head>
         <body>
+        <div id="page-loader">Loading Market Data...</div>
         <div class="container-fluid" style="width: auto; display: inline-block; min-width: 100%; margin: 0 auto;">
             
             <div class="header-flex">
@@ -1824,6 +1850,13 @@ def export_interactive_html(df):
             "order":[[0,"asc"]], 
             "pageLength": 25,
             "lengthMenu": [[25, 50, 75, 100, 150, 200, 250, 500, -1], [25, 50, 75, 100, 150, 200, 250, 500, "All"]],
+
+            "initComplete": function(settings, json) {{
+                $('#page-loader').remove();
+                $('body').addClass('loaded');
+                this.api().columns.adjust();
+            }},
+
             "columnDefs": [ 
                 // Metadata: Type_Tag (21), AvgVol (22), MCap (23) hidden
                 {{ "visible": false, "targets": [22, 23, 24] }}, 
