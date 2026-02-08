@@ -942,14 +942,13 @@ def export_interactive_html(df):
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
-
-        body {{
+        .container-fluid {{
             visibility: hidden;
             opacity: 0;
-            transition: visibility 0s, opacity 0.3s linear;
+            transition: visibility 0s, opacity 0.5s ease-in-out;
         }}
 
-        body.loaded {{
+        body.loaded .container-fluid {{
             visibility: visible;
             opacity: 1;
         }}
