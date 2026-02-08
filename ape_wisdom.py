@@ -23,7 +23,7 @@ MARKET_DATA_CACHE_FILE = os.path.join(SCRIPT_DIR, "market_data.pkl")
 HISTORY_FILE = os.path.join(SCRIPT_DIR, "market_history.json")
 DELISTED_CACHE_FILE = os.path.join(SCRIPT_DIR, "delisted_cache.json")
 CACHE_EXPIRY_SECONDS = 1800 # 30 minutes
-RETENTION_DAYS = 14
+RETENTION_DAYS = 3
 DELISTED_RETRY_DAYS = 1
 TOOLTIP_HISTORY_DAYS = 12
 
@@ -70,7 +70,7 @@ class HistoryTracker:
             'sym', 'name', 'meta', 'history', 'desc', 'type', 'avgvol', 'mcap', 'rolling',
             'z_rank_plus', 'z_surge', 'z_mnt_perc', 'z_upvotes', 'z_accel', 'z_upv_plus', 
             'z_ment', 'z_squeeze', 'type_tag', 'industry/sector', 'heat',
-            'velocity', 'accel', 'streak', 'upv_chg', 'day%', 'price'] 
+            'velocity', 'accel', 'streak', 'upv_chg', 'day_perc', 'price', 'rsi', 'curvol'] 
 
         no_round_list = ['rank', 'rank_plus', 'ment', 'upvotes', 'upv_plus', 'streak']
 
@@ -369,7 +369,7 @@ def filter_and_process(stocks):
 
     if not use_cache:
         print(f"{C_YELLOW}[!] Downloading data for {len(valid_tickers)} tickers...{C_RESET}")
-        CHUNK_SIZE = 100
+        CHUNK_SIZE = 40
         for i in range(0, len(valid_tickers), CHUNK_SIZE):
             batch = valid_tickers[i:i + CHUNK_SIZE]
             print(f"    > Processing Batch { (i//CHUNK_SIZE) + 1} ({len(batch)} tickers)...")
@@ -389,7 +389,7 @@ def filter_and_process(stocks):
                     else: market_data = pd.concat([market_data, batch_data], axis=1)
                 
                 # Increased sleep to prevent rate-limit "misses"
-                if i + CHUNK_SIZE < len(valid_tickers): time.sleep(2.0) 
+                if i + CHUNK_SIZE < len(valid_tickers): time.sleep(5.0) 
             except Exception as e:
                 print(f"{C_RED}[!] Batch Error: {e}{C_RESET}")
                 continue
@@ -455,7 +455,9 @@ def filter_and_process(stocks):
             clean_hist = hist['Volume'] 
             actual_vol_days = min(len(clean_hist), AVG_VOLUME_DAYS)
             avg_v = clean_hist.tail(actual_vol_days).mean()
+            curr_v = int(hist['Volume'].iloc[-1])
             if isinstance(avg_v, pd.Series): avg_v = avg_v.iloc[0]
+            if isinstance(curr_v, pd.Series): curr_v = curr_v.iloc[0]
             
             if curr_p < MIN_PRICE or avg_v < MIN_AVG_VOLUME: continue
 
@@ -525,6 +527,7 @@ def filter_and_process(stocks):
                 "Rank+": rank_plus,
                 "Price": float(curr_p), 
                 "Day%": float(day_chg_pct),
+                "CurVol": int(curr_v),
                 "AvgVol": int(avg_v), 
                 "Surge": s_perc,
                 "MENT": cur_m, 
@@ -665,7 +668,7 @@ def get_all_trending_stocks():
 
     return all_results
 
-def export_interactive_html(df, ai_summary=""):
+def export_interactive_html(df):
     try:
         export_df = df.copy()
         if not os.path.exists(PUBLIC_DIR): os.makedirs(PUBLIC_DIR)
@@ -705,12 +708,20 @@ def export_interactive_html(df, ai_summary=""):
         C_GREEN, C_YELLOW, C_RED, C_CYAN, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ffffff"
         
         if 'AvgVol' not in export_df.columns: export_df['AvgVol'] = 0
+        if 'CurVol' not in export_df.columns: export_df['CurVol'] = 0
+        
         export_df['Vol_Display'] = export_df['AvgVol'].apply(format_vol)
+        export_df['CurVol_Disp'] = export_df['CurVol'].apply(format_vol)
         export_df['Type_Tag'] = 'STOCK'
 
         if 'MENT' not in export_df.columns: export_df['MENT'] = 0
         
         for index, row in export_df.iterrows():
+            v_raw = row.get('CurVol_Disp', '0')
+            export_df.at[index, 'CurVol_Disp'] = f'<div style="text-align: right; padding-right: 10px; color: #fff; font-weight:bold;">{v_raw}</div>'
+            
+            avg_v_raw = row.get('Vol_Display', '0')
+            export_df.at[index, 'Vol_Display'] = f'<div style="text-align: right; padding-right: 10px; color: #ccc;">{avg_v_raw}</div>'
             m_val = row.get('MENT', 0)
             z_score = row.get('z_MENT', 0)
             
@@ -782,7 +793,11 @@ def export_interactive_html(df, ai_summary=""):
             desc_text = raw_desc.replace('"', '&quot;').replace("'", "&apos;")
             name_txt = row.get("Name", "")
 
-            html_name = f'<div class="d-tooltip" data-tooltip="{desc_text}" tabindex="0" style="position:relative; width: 100%; cursor:help;"><div style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; width:290px; display:block;"><b>{name_txt}</b></div></div>'
+            html_name = (
+                f'<div class="d-tooltip" data-tooltip="{desc_text}" tabindex="0">'
+                f'<span class="text-content"><b>{name_txt}</b></span>'
+                f'</div>'
+            )
 
             export_df.at[index, 'Name'] = html_name
 
@@ -875,13 +890,13 @@ def export_interactive_html(df, ai_summary=""):
             export_df.at[index, 'Price'] = p_val
 
             vol_raw = export_df.at[index, 'Vol_Display']
-            export_df.at[index, 'Vol_Display'] = f'<div style="text-align: right; padding-right: 25px; color: #ccc;">{vol_raw}</div>'
+            export_df.at[index, 'Vol_Display'] = f'<div style="text-align: right; color: #ccc;">{vol_raw}</div>'
 
-        export_df.rename(columns={'Meta': 'INDUSTRY/SECTOR', 'Vol_Display': 'VOL(30)'}, inplace=True)
+        export_df.rename(columns={'Meta': 'INDUSTRY/SECTOR', 'Vol_Display': 'VOL(30)', 'CurVol_Disp': 'VOL'}, inplace=True)
 
         cols = [
             'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Day%', 'Acc', 'Eff', 'Conv', 'Upvs', 
-            'Upv+', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 'RSI', 
+            'Upv+', 'VOL', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 'RSI', 
             'Type_Tag', 'AvgVol', 'MCap'
         ]
         for c in cols:
@@ -894,25 +909,27 @@ def export_interactive_html(df, ai_summary=""):
         # --- 2. INJECT FAST TOOLTIPS (Find & Replace Headers) ---
         header_map = {
             '<th>Rank</th>': '<th data-tooltip="Current Rank Position">RANK</th>',
-            '<th>Rank+</th>': '<th data-tooltip="Rank Change vs 24h ago">RANK+</th>',
-            '<th>Heat</th>': '<th data-tooltip="Master Momentum Score (Weighted)">HEAT</th>',
-            '<th>Name</th>': '<th data-tooltip="Company Name">NAME</th>',
-            '<th>Sym</th>': '<th data-tooltip="Ticker Symbol">SYM</th>',
-            '<th>Price</th>': '<th data-tooltip="Current Stock Price">PRICE</th>',
-            '<th>Day%</th>': '<th data-tooltip="Price Change Since Yesterday Close">DAY%</th>', # <--- ADDED
+            '<th>Rank+</th>': '<th data-tooltip="Rank Change vs 24h ago">&nbsp;RANK+</th>',
+            '<th>Heat</th>': '<th data-tooltip="Master Momentum Score (Weighted)">&nbsp;HEAT</th>',
+            '<th>Name</th>': '<th data-tooltip="Company Name">&nbsp;NAME</th>',
+            '<th>Sym</th>': '<th data-tooltip="Ticker Symbol">&nbsp;SYM</th>',
+            '<th>Price</th>': '<th data-tooltip="Current Stock Price">&nbsp;&nbsp;PRICE</th>',
+            '<th>Day%</th>': '<th data-tooltip="Price Change Since Yesterday Close">&nbsp;&nbsp;DAY%</th>',
             '<th>Acc</th>': '<th data-tooltip="Acceleration: Speed Change vs 1h ago">ACC</th>',
-            '<th>Eff</th>': '<th data-tooltip="Efficiency: Rank gain per unit of volume">EFF</th>',
-            '<th>Conv</th>': '<th data-tooltip="Conviction: Upvotes per Mention ratio">CONV</th>',
+            '<th>Eff</th>': '<th data-tooltip="Efficiency: Rank gain per unit of volume">&nbsp;&nbsp;EFF</th>',
+            '<th>Conv</th>': '<th data-tooltip="Conviction: Upvotes per Mention ratio">&nbsp;CONV</th>',
             '<th>Upvs</th>': '<th data-tooltip="Total Upvotes (24h)">UPVS</th>',
-            '<th>Upv+</th>': '<th data-tooltip="New Upvotes gained in last hour">UPV+</th>',
-            '<th>VOL(30)</th>': '<th data-tooltip="30-Day Average Volume">VOL(30)</th>',
-            '<th>Srg</th>': '<th data-tooltip="Surge: Current Vol vs 30d Avg">SRG</th>',
+            '<th>Upv+</th>': '<th data-tooltip="New Upvotes gained in last hour">&nbsp;UPV+</th>',
+            '<th>VOL</th>': '<th data-tooltip="Current Session Trading Volume">&nbsp;&nbsp;VOL</th>',
+            '<th>VOL(30)</th>': '<th data-tooltip="30-Day Average Volume">&nbsp;VOL(30)</th>',
+            '<th>Srg</th>': '<th data-tooltip="Surge: Current Vol vs 30d Avg">&nbsp;SRG</th>',
             '<th>Vel</th>': '<th data-tooltip="Velocity: Rank change speed (1h)">VEL</th>',
             '<th>Strk</th>': '<th data-tooltip="Streak: Hours maintaining direction">STRK</th>',
             '<th>MENT</th>': '<th data-tooltip="Total Mentions (24h)">MENT</th>',
-            '<th>Mnt%</th>': '<th data-tooltip="Mention % Change vs 24h ago">MNT%</th>',
-            '<th>Sqz</th>': '<th data-tooltip="Short Squeeze Score">SQZ</th>',
-            '<th>INDUSTRY/SECTOR</th>': '<th data-tooltip="Sector / Industry Group">INDUSTRY/SECTOR</th>'
+            '<th>Mnt%</th>': '<th data-tooltip="Mention % Change vs 24h ago">&nbsp;MNT%</th>',
+            '<th>Sqz</th>': '<th data-tooltip="Short Squeeze Score">&nbsp;SQZ</th>',
+            '<th>INDUSTRY/SECTOR</th>': '<th data-tooltip="Sector / Industry Group">&nbsp;INDUSTRY/SECTOR</th>',
+            '<th>RSI</th>': '<th data-tooltip="Relative Strength Index (14-Day)">&nbsp;RSI</th>'
         }
         for old_tag, new_tag in header_map.items():
             raw_table = raw_table.replace(old_tag, new_tag)
@@ -925,42 +942,39 @@ def export_interactive_html(df, ai_summary=""):
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
+            table {{
+                table-layout: fixed; 
+                width: 100%;
+            }}
+
             * {{ box-sizing: border-box; }}
             body {{ background-color: #101010; color: #e0e0e0; font-family: 'Consolas', 'Monaco', monospace; padding: 0; margin: 0; overflow-x: hidden; }}
             .table-dark {{ --bs-table-bg:#18181b; color:#ccc; }}
             
-            /* GLOBAL TOOLTIP SETTINGS (Fixed High Z-Index & Single Row) */
             th, .d-tooltip {{
                 position: relative;
                 cursor: help;
             }}
 
-            /* The Black Tooltip Box */
             th[data-tooltip]:not(.sorting):not(.sorting_asc):not(.sorting_desc)::after, .d-tooltip::after {{
                 content: attr(data-tooltip); 
                 position: absolute;
                 top: 130%; 
                 left: 50%;
-                
-                /* TYPOGRAPHY IMPROVEMENTS */
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 font-size: 13px;       
                 line-height: 1.5;      
                 font-weight: 400;      
                 text-align: left;      
                 color: #e0e0e0;        
-
-                /* BOX STYLING */
                 background-color: #1a1a1a; 
                 padding: 12px 16px;        
                 border-radius: 8px; 
                 border: 1px solid #444;
-                
                 text-transform: none; 
-                white-space: normal;      /* Allows text to wrap */
+                white-space: normal; 
                 width: max-content; 
-                max-width: 800px;         /* Limits width for readability */
-                
+                max-width: 800px;
                 z-index: 999999; 
                 opacity: 0; visibility: hidden; 
                 transition: opacity 0.15s ease-in-out; 
@@ -968,13 +982,11 @@ def export_interactive_html(df, ai_summary=""):
                 box-shadow: 0 8px 24px rgba(0,0,0,0.8);
             }}
 
-            /* Show on Hover/Focus */
             th:hover::after, .d-tooltip:hover::after,
             th:focus::after, .d-tooltip:focus::after {{ 
                 opacity: 1; visibility: visible; 
             }}
             
-            /* BOOTSTRAP TOOLTIP OVERRIDES (For the Industry Breadcrumbs at Top) */
             .tooltip-inner {{
                 max-width: none !important;
                 white-space: nowrap !important;
@@ -998,11 +1010,8 @@ def export_interactive_html(df, ai_summary=""):
                 padding: 10px !important;
                 position: absolute !important;
                 z-index: 9999 !important;
-                
-                /* POSITION: Directly below the text */
                 top: 110% !important; 
                 left: 0 !important;            
-                
                 opacity: 0;
                 transition: opacity 0.2s;
                 font-family: monospace !important;
@@ -1010,11 +1019,10 @@ def export_interactive_html(df, ai_summary=""):
                 box-shadow: 0 5px 15px rgba(0,0,0,0.5);
             }}
 
-            /* Tooltip "Arrow" pointing UP at the text */
             .tooltip .tooltiptext::after {{
                 content: "";
                 position: absolute;
-                bottom: 100%;           /* At the top of the box */
+                bottom: 100%;
                 left: 20px;
                 border-width: 6px;
                 border-style: solid;
@@ -1030,51 +1038,129 @@ def export_interactive_html(df, ai_summary=""):
                 overflow: visible !important;
             }}
 
-            td {{ vertical-align:middle; white-space: nowrap; border-bottom:1px solid #333; padding: 4px 5px !important; font-size: 15px; }}
-            table.dataTable {{ width: auto !important; margin: 0 auto; }}
-            
-            /* COLUMN WIDTHS */
-            th:nth-child(1), td:nth-child(1) {{ width: 0.1%; text-align: center; font-weight: bold; }}
-            th:nth-child(2), td:nth-child(2) {{ width: 0.1%; text-align: center; }}
-            th:nth-child(3), td:nth-child(3) {{ width: 0.1%; text-align: center; font-weight: bold; }}
-            
-            /* NAME COLUMN */
-            th:nth-child(4), td:nth-child(4) {{
-                white-space: normal !important;
-                width: 240px; 
+            th {{
+                vertical-align: middle;
+                font-size: 15px;
+                font-weight: bold;
+                padding: 5px 3px !important;
+                background-color: #1a1a1a;
+                border-bottom: 2px solid #444;
+            }}
+
+            td {{
+                vertical-align:middle;
+                white-space: nowrap;
+                border-bottom:1px solid #333;
+                padding: 1px 8px !important;
                 line-height: 1.4;
-                text-align: left;
+                font-size: 15px;
             }}
             
-            /* SYMBOL */
-            th:nth-child(5), td:nth-child(5) {{ width: 0.1%; text-align: left; }}
-            th:nth-child(6), td:nth-child(6) {{ width: 0.1%; text-align: right; font-weight: normal !important; }}
-            th:nth-child(7), td:nth-child(7) {{ width: 0.1%; text-align: right; font-weight: normal !important; }}
-            th:nth-child(8), td:nth-child(8) {{ width: 0.1%; }}
-            th:nth-child(9), td:nth-child(9) {{ width: 0.1%; }}
-            th:nth-child(10), td:nth-child(10) {{ width: 0.1%; }}
-            th:nth-child(11), td:nth-child(11) {{ width: 0.1%; }}
-            th:nth-child(12), td:nth-child(12) {{ width: 0.1%; }}
-            th:nth-child(13), td:nth-child(13) {{ width: 0.1%; text-align: right; font-weight: normal !important; }}
-            th:nth-child(14), td:nth-child(14) {{ width: 0.1%; }}
-            th:nth-child(15), td:nth-child(15) {{ width: 0.1%; }}
-            th:nth-child(16), td:nth-child(16) {{ width: 0.1%; }}
-            th:nth-child(17), td:nth-child(17) {{ width: 0.1%; }}
-            th:nth-child(18), td:nth-child(18) {{ width: 0.1%; }}
-            th:nth-child(19), td:nth-child(19) {{ width: 0.1%; text-align: center; }}
-            th:nth-child(20), td:nth-child(20) {{ max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; }}
-            th:nth-child(21), td:nth-child(21) {{ width: 0.1%; text-align: center; font-weight: bold; }}
+            table.dataTable {{ 
+                width: auto !important; 
+                margin: 0 auto; 
+                border-right: 1px solid #444 !important;
+                border-left: 1px solid #444 !important;
+                border-collapse: separate !important;
+                border-spacing: 0;
+            }}
+            
+            th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; font-weight: bold; }}
+            th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }}
+            th:nth-child(3), td:nth-child(3) {{ width: 1%; text-align: center; font-weight: bold; }}
+            
+            th:nth-child(4), td:nth-child(4) {{
+                width: 60px;
+                min-width: 60px;
+                max-width: 60px;
+                text-align: left;
+                padding: 0 5px;
+                vertical-align: middle;
+            }}
+
+            td:nth-child(4) .d-tooltip {{
+                position: relative;
+                width: 100%;
+            }}
+
+            td:nth-child(4) .d-tooltip .text-content {{
+                display: block;
+                width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }}
+
+            td:nth-child(4) .d-tooltip::after {{
+                content: attr(data-tooltip);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                margin-top: 5px;
+                background-color: #000;
+                color: #e0e0e0;
+                width: 600px;
+                max-width: 600px;
+                padding: 12px 14px;
+                border-radius: 6px;
+                border: 1px solid #444;
+                font-size: 14px;
+                font-weight: normal;
+                white-space: normal;
+                line-height: 1.4;
+                z-index: 999999;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.2s ease-in-out;
+                pointer-events: none;
+            }}
+
+            td:nth-child(4) .d-tooltip:hover::after {{
+                opacity: 1;
+                visibility: visible;
+            }}
+
+            th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }}
+            th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; font-weight: normal !important; }}
+            th:nth-child(7), td:nth-child(7) {{ width: 1%; text-align: right; font-weight: normal !important; }}
+            th:nth-child(8), td:nth-child(8) {{ width: 1%; text-align: center; }}
+            th:nth-child(9), td:nth-child(9) {{ width: 1%; text-align: center; }}
+            th:nth-child(10), td:nth-child(10) {{ width: 1%; text-align: center; }}
+            th:nth-child(11), td:nth-child(11) {{ width: 1%; text-align: center; }}
+            th:nth-child(12), td:nth-child(12) {{ width: 1%; text-align: center; }}
+            th:nth-child(13), td:nth-child(13) {{ width: 1%; text-align: right; font-weight: bold !important; color: #fff; }}
+            th:nth-child(14), td:nth-child(14) {{ width: 1%; text-align: right; font-weight: normal !important; letter-spacing: -0.5px; }}
+            th:nth-child(15), td:nth-child(15) {{ width: 1%; text-align: center; }}
+            th:nth-child(16), td:nth-child(16) {{ width: 1%; text-align: center; }}
+            th:nth-child(17), td:nth-child(17) {{ width: 1%; text-align: center; }}
+            th:nth-child(18), td:nth-child(18) {{ width: 1%; text-align: center; }}
+            th:nth-child(19), td:nth-child(19) {{ width: 1%; text-align: center; }}
+            th:nth-child(20), td:nth-child(20) {{ width: 1%; text-align: center; }}
+
+            th:nth-child(21), td:nth-child(21) {{
+                width: 60px;
+                min-width: 60px;
+                max-width: 60px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                text-align: left;
+            }}
+
+            th:nth-child(22), td:nth-child(22) {{ width: 1%; text-align: center; font-weight: bold; border-right: 1px solid #444 !important; }}
             
             a {{ color:#4da6ff; text-decoration:none; }} a:hover {{ text-decoration:underline; }}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
             table.no-colors a {{ color: #4da6ff !important; }}
             
-            /* FILTER BAR */
-            .filter-bar {{ 
-                display: flex; gap: 8px; align-items: center; background: #2a2a2a; padding: 8px; 
-                border-radius: 5px; margin-bottom: 15px; border: 1px solid #444; font-size: 0.85rem;
+            .filter-bar {{
+                display: flex; gap: 8px; align-items: center; background: #2a2a2a; padding: 2px 4px; /* Reduced from 8px */
+                border-radius: 5px; margin-bottom: 5px; /* Optional: Pulls the table up closer */
+                border: 1px solid #444; font-size: 0.85rem;
                 flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; -ms-overflow-style: none; scrollbar-width: none;
             }}
+            
             .filter-bar::-webkit-scrollbar {{ display: none; }} 
             .filter-group {{ display:flex; align-items:center; gap:4px; }}
             .form-control-sm {{ background: #111; border: 1px solid #555; color: #fff !important; height: 28px; font-size: 0.85rem; padding: 2px 8px; outline: none; }}
@@ -1087,8 +1173,6 @@ def export_interactive_html(df, ai_summary=""):
             .btn-reset {{ border: 1px solid #555; color: #fff; font-size: 0.8rem; background: #333; }}
             .btn-reset:hover {{ background: #444; color: #fff; }}
             #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px; }}
-
-            /* HEADER */
 
             .mode-toggle {{
                 position: relative;
@@ -1129,10 +1213,9 @@ def export_interactive_html(df, ai_summary=""):
                 text-align: right;
                 cursor: help;
                 border-bottom: none !important;
-                text-decoration: underline dotted #555;
                 position: relative;
                 z-index: 50;
-                
+                margin-right: 12px;
             }}
 
             .row-content {{ font-size: 11px; font-weight: 600; color: #fff; }}
@@ -1155,7 +1238,6 @@ def export_interactive_html(df, ai_summary=""):
                 white-space: nowrap;
             }}
             
-            /* LEGEND - RESTORED FULL VERSION */
             .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 6px; margin-bottom: 10px; overflow: hidden; }}
             .legend-header {{ background: #2a2a2a; padding: 4px 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; }}
             .legend-box {{ padding: 5px; display: none; background-color: #1a1a1a; }}
@@ -1170,7 +1252,6 @@ def export_interactive_html(df, ai_summary=""):
             .color-desc {{ color: #bbb; }}
             @media (max-width: 900px) {{ .legend-grid {{ grid-template-columns: 1fr; }} }}
 
-            /* TOP LABELS TOOLTIPS (Header Summary) */
             .row-label::after {{
                 content: attr(data-tooltip); 
                 position: absolute; 
@@ -1202,10 +1283,25 @@ def export_interactive_html(df, ai_summary=""):
             .clr-surge:hover::after {{ color: #ffcc00 !important; border-color: #ffcc00 !important; }}
             .clr-buzz:hover::after {{ color: #ff00ff !important; border-color: #ff00ff !important; }}
 
-            /* DATATABLES SEARCH */
             .dataTables_wrapper .data_tables_header {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
             .dataTables_filter {{ position: absolute; left: 48%; transform: translateX(-50%); width: auto; margin: 0 !important; float: none !important; z-index: 10; }}
-            .dataTables_filter input {{ width: 400px !important; max-width: 600px !important; background: #181818 !important; color: #fff !important; border: 1px solid #333 !important; border-radius: 20px !important; padding: 6px 20px !important; outline: none !important; text-align: center !important; }}
+
+            .dataTables_filter input {{
+                width: 400px !important;
+                max-width: 400px !important;
+                background: #181818 !important;
+                color: #fff !important;
+                border: 1px solid #333 !important;
+                border-radius: 20px !important;
+                padding: 1px 1px !important;
+                outline: none !important;
+                text-align: center !important;
+                font-size: 16px !important;
+                font-weight: bold !important;
+                height: 16px !important;
+                line-height: 16px !important;
+            }}
+            
             .dataTables_filter input::placeholder {{ color: white !important; opacity: 1; }}
             .dataTables_filter input:focus::placeholder {{ color: transparent !important; }}
             .dataTables_filter input:focus {{ border-color: #00ffff !important; }}
@@ -1220,15 +1316,6 @@ def export_interactive_html(df, ai_summary=""):
             #modeSwitch {{ display: none; }}
             #modeSwitch:checked + label .e-label {{ color: #fff; background: #333; }}
             #modeSwitch:not(:checked) + label .s-label {{ color: #fff; background: #333; }}
-
-            td:nth-child(4) .d-tooltip::after {{
-                white-space: normal !important;
-                width: 1000px !important;
-                text-align: left;
-                text-justify: none !important;
-                word-spacing: normal;
-                line-height: 1.2;
-            }}
 
             tr:hover {{
                 position: relative;
@@ -1263,17 +1350,37 @@ def export_interactive_html(df, ai_summary=""):
                 visibility: visible !important;
                 opacity: 0.6 !important;
                 position: relative !important;
-                margin-left: 10px !important;
                 top: 0 !important;
             }}
 
             th.sorting::after, th.sorting_asc::after, th.sorting_desc::after {{ content: none !important; }}
             th.sorting::before, th.sorting_asc::before, th.sorting_desc::before {{ content: none !important; }}
 
+            .dataTables_filter input, .dataTables_length select {{
+                background-color: #111 !important;
+                color: #fff !important;
+                border: 1px solid #444 !important;
+                border-radius: 4px;
+                padding: 4px 10px !important; 
+                height: 32px !important; 
+                font-size: 16px !important;
+                outline: none !important;
+                box-shadow: none !important; 
+            }}
+
+            .dataTables_filter label, .dataTables_length label {{
+                color: #ccc !important;
+                font-size: 16px !important;
+                line-height: 24px !important;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }}
+
         </style>
         </head>
         <body>
-        <div class="container-fluid" style="width: 98%; max-width: 2500px; margin: 0 auto;">
+        <div class="container-fluid" style="width: auto; display: inline-block; min-width: 100%; margin: 0 auto;">
             
             <div class="header-flex">
     <div class="header-left">
@@ -1329,7 +1436,7 @@ def export_interactive_html(df, ai_summary=""):
                 </div>
                 
                 <div class="filter-group" style="margin-right: 10px;">
-                    <label>Avg Vol:</label>
+                    <label>Vol(30):</label>
                     <input type="text" id="minVol" class="form-control form-control-sm" placeholder="Min" style="width: 50px;">
                     <span style="color:#666">-</span>
                     <input type="text" id="maxVol" class="form-control form-control-sm" placeholder="Max" style="width: 50px;">
@@ -1338,30 +1445,30 @@ def export_interactive_html(df, ai_summary=""):
                 <div class="filter-group">
                     <div class="btn-group" role="group" style="margin-right: 10px;">
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio1" style="font-size: 0.8rem; padding: 4px 8px;">All</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio1" style="font-size: 0.8rem; padding: 4px 4px;">ALL</label>
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio2" onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio2" style="font-size: 0.8rem; padding: 4px 8px;">Stocks</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio2" style="font-size: 0.8rem; padding: 4px 4px;">STOCKS</label>
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio3" onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio3" style="font-size: 0.8rem; padding: 4px 8px;">ETFs</label>
+                        <label class="btn btn-outline-light btn-sm" for="btnradio3" style="font-size: 0.8rem; padding: 4px 4px;">ETFs</label>
                     </div>
 
                     <div class="btn-group" role="group">
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapAll" checked onclick="toggleMcap('all')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapAll" style="font-size: 0.8rem; padding: 4px 8px;">All</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapAll" style="font-size: 0.8rem; padding: 4px 4px;">ALL</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMega" onclick="toggleMcap('mega')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.8rem; padding: 4px 8px;">Mega</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.8rem; padding: 4px 4px;">MEG</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapLarge" onclick="toggleMcap('large')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.8rem; padding: 4px 8px;">Lrg</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.8rem; padding: 4px 4px;">LRG</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMid" onclick="toggleMcap('mid')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.8rem; padding: 4px 8px;">Mid</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.8rem; padding: 4px 4px;">MID</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapSmall" onclick="toggleMcap('small')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.8rem; padding: 4px 8px;">Sml</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.8rem; padding: 4px 4px;">SML</label>
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMicro" onclick="toggleMcap('micro')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.8rem; padding: 4px 8px;">Mic</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.8rem; padding: 4px 4px;">MIC</label>
                     </div>
                 </div>
 
-                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">TXT File</button>
+                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">.TXT</button>
                 <button class="btn btn-sm btn-reset" onclick="copyTableToClipboard(event)" title="Copy Table" style="margin-left: 10px;">📋 Copy</button>
                 
                 <span id="stockCounter">Loading...</span>
@@ -1420,8 +1527,13 @@ def export_interactive_html(df, ai_summary=""):
                             </div>
                             <div class="legend-row">
                                 <span class="metric-name">VOL</span>
+                                <span class="metric-math">Current</span>
+                                <span class="metric-desc">Total shares traded in the current session.</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">VOL(30)</span>
                                 <span class="metric-math">30-Day Mean</span>
-                                <span class="metric-desc">Average daily trading volume.</span>
+                                <span class="metric-desc">Average daily trading volume (Baseline).</span>
                             </div>
                             <div class="legend-row">
                                 <span class="metric-name">SRG</span>
@@ -1447,6 +1559,11 @@ def export_interactive_html(df, ai_summary=""):
                                 <span class="metric-name">SQZ</span>
                                 <span class="metric-math">Mnt * Surge / log(MCap)</span>
                                 <span class="metric-desc">Short Squeeze Score (Vol+Chatter/Cap).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="metric-name">RSI</span>
+                                <span class="metric-math">Wilder's 14d</span>
+                                <span class="metric-desc">Relative Strength Index (Momentum Oscillator).</span>
                             </div>
                         </div>
 
@@ -1492,7 +1609,11 @@ def export_interactive_html(df, ai_summary=""):
                             </div>
                             <div class="legend-row">
                                 <span class="color-key">VOL</span>
-                                <span class="color-desc"><span style="color:#ccc">Gray</span> (Static Stat).</span>
+                                <span class="color-desc"><span style="color:#ffffff">Bold White</span> (Current Session Activity).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">VOL(30)</span>
+                                <span class="color-desc"><span style="color:#ccc">Gray</span> (Baseline average volume).</span>
                             </div>
                             <div class="legend-row">
                                 <span class="color-key">SRG</span>
@@ -1513,6 +1634,10 @@ def export_interactive_html(df, ai_summary=""):
                             <div class="legend-row">
                                 <span class="color-key">SQZ</span>
                                 <span class="color-desc"><span style="color:#00ffff">Cyan</span> (Score > 1.5σ), White (Normal).</span>
+                            </div>
+                            <div class="legend-row">
+                                <span class="color-key">RSI</span>
+                                <span class="color-desc"><span style="color:#ff4444">Red</span> (Overbought ≥70), <span style="color:#00ff00">Green</span> (Oversold ≤30).</span>
                             </div>
                         </div>
 
@@ -1558,11 +1683,12 @@ def export_interactive_html(df, ai_summary=""):
         function getTopSectors(metricIdx) {{
             var sectorData = {{}};
             allData.each(function(row) {{
-                var rawType = row[21].toString().replace(/<[^>]+>/g, ''); 
+                var rawType = row[22].toString().replace(/<[^>]+>/g, ''); 
                 if (topSwitchIsETF && !rawType.includes('ETF')) return;
                 if (!topSwitchIsETF && rawType.includes('ETF')) return;
 
-                var sector = row[19].toString().replace(/<[^>]+>/g, '').trim().replace(/^ETF/i, ''); 
+                var sector = row[20].toString().replace(/<[^>]+>/g, '').trim().replace(/^ETF/i, '');
+                if (!topSwitchIsETF && sector === 'Exchange Traded Fund') return;
                 var val = parseVal(row[metricIdx]); 
                 var sym = row[4].replace(/<[^>]+>/g, '').trim();
                 var name = row[3].replace(/<[^>]+>/g, '').trim();
@@ -1596,12 +1722,12 @@ def export_interactive_html(df, ai_summary=""):
             var topThree = sorted.slice(0, 5);
             return topThree.map(function(s, i) {{
                 s.stocks.sort(function(a, b) {{ return b.v - a.v; }});
-                // SHOW ALL STOCKS
                 var topStocks = s.stocks; 
                 
                 var tipRows = topStocks.map(function(st) {{
-                    var numStr = st.v > 0 ? '+' + Math.round(st.v) : Math.round(st.v);
-                    var color = st.v >= 0 ? '#00ff00' : '#ff4444';
+                    var val = Math.round(st.v);
+                    var numStr = val > 0 ? '+' + val : val;
+                    var color = val > 0 ? '#00ff00' : (val < 0 ? '#ff4444' : '#cccccc'); // Grey for 0
                     return "<div style='display:flex; justify-content:flex-start; align-items:center; font-size:11px; margin-bottom:1px;'>" +
                                 "<span style='min-width:45px; text-align:left; color:" + color + "; font-weight:bold;'>" + numStr + "</span>" +
                                 "<span style='color:#fff; white-space:nowrap;'><b>" + st.s + "</b>: " + st.n + "</span>" +
@@ -1610,15 +1736,15 @@ def export_interactive_html(df, ai_summary=""):
 
                 var tooltipHTML = "<div style='text-align:left; padding:2px;'>" + tipRows + "</div>";
                 return '<span class="crumb-num">' + (i+1) + '.</span>' + 
-                       '<span class="sector-tooltip" data-bs-title="' + tooltipHTML + '" style="cursor:help; border-bottom:1px dotted #555;">' + s.name + '</span>';
+                       '<span class="sector-tooltip" data-bs-title="' + tooltipHTML + '" style="cursor:help;">' + s.name + '</span>';
             }}).join('<span class="crumb-sep"> > </span>');
         }}
 
         $('.sector-tooltip').each(function() {{ var old = bootstrap.Tooltip.getInstance(this); if (old) old.dispose(); }});
         $('#rankBreadcrumb').html(getTopSectors(1));
         $('#upvBreadcrumb').html(getTopSectors(11));
-        $('#surgeBreadcrumb').html(getTopSectors(13)); 
-        $('#mntBreadcrumb').html(getTopSectors(17));  
+        $('#surgeBreadcrumb').html(getTopSectors(14)); 
+        $('#mntBreadcrumb').html(getTopSectors(18));  
 
         $('.sector-tooltip').each(function() {{
             new bootstrap.Tooltip(this, {{
@@ -1627,7 +1753,7 @@ def export_interactive_html(df, ai_summary=""):
                 animation: false,
                 container: 'body',
                 container: 'body',
-                placement: 'bottom',    // <--- THIS FORCES IT BELOW
+                placement: 'bottom',
                 boundary: 'viewport'
                 }});
         }});
@@ -1662,8 +1788,20 @@ def export_interactive_html(df, ai_summary=""):
     }}
 
     function toggleMcap(type) {{
-        if (type === 'all') {{ $('input[name="mcapFilter"]').not('#mcapAll').prop('checked', false); }} 
-        else {{ $('#mcapAll').prop('checked', false); if ($('input[name="mcapFilter"]:checked').length === 0) {{ $('#mcapAll').prop('checked', true); }} }}
+        if (type === 'all') {{ 
+            // Force 'All' to stay checked and uncheck others
+            $('#mcapAll').prop('checked', true);
+            $('input[name="mcapFilter"]').not('#mcapAll').prop('checked', false); 
+        }} 
+        else {{ 
+            // Uncheck 'All' when a specific cap is selected
+            $('#mcapAll').prop('checked', false); 
+            
+            // If everything is unchecked, default back to 'All'
+            if ($('input[name="mcapFilter"]:checked').length === 0) {{ 
+                $('#mcapAll').prop('checked', true); 
+            }}
+        }}
         table.draw(); 
     }}
 
@@ -1684,14 +1822,14 @@ def export_interactive_html(df, ai_summary=""):
     $(document).ready(function(){{ 
         table = $('.table').DataTable({{
             "order":[[0,"asc"]], 
-            "pageLength": 15, 
-            "lengthMenu": [[15, 25, 50, 100, 250, -1], [15, 25, 50, 100, 250, "All"]],
+            "pageLength": 25,
+            "lengthMenu": [[25, 50, 75, 100, 150, 200, 250, 500, -1], [25, 50, 75, 100, 150, 200, 250, 500, "All"]],
             "columnDefs": [ 
                 // Metadata: Type_Tag (21), AvgVol (22), MCap (23) hidden
-                {{ "visible": false, "targets": [21, 22, 23] }}, 
+                {{ "visible": false, "targets": [22, 23, 24] }}, 
                 
                 // Numeric sorting: Indices for all metric columns including RSI (20)
-                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20], 
+                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21], 
                    "type": "num", 
                    "render": function(data, type) {{ 
                        if (type === 'sort' || type === 'type') {{ return parseVal(data); }} 
@@ -1707,18 +1845,18 @@ def export_interactive_html(df, ai_summary=""):
             ],
             "drawCallback": function() {{ 
                 var api = this.api(); 
-                $("#stockCounter").text("Showing " + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); 
+                $("#stockCounter").text("" + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); 
             }}
         }});
 
-        $('.dataTables_filter input').attr('placeholder', 'SEARCH');
+        $('.dataTables_filter input').attr('placeholder', '');
 
         // --- CUSTOM FILTERING LOGIC ---
         $.fn.dataTable.ext.search.push(function(settings, data) {{
             // UPDATED INDICES:
-            var typeTag = data[21] || "";         // Index 21 = Type (STOCK/ETF)
-            var avgVol  = parseVal(data[22]);      // Index 22 = AvgVol
-            var mcap    = parseVal(data[23]);      // Index 23 = MCap
+            var typeTag = data[22] || "";
+            var avgVol  = parseVal(data[23]);
+            var mcap    = parseVal(data[24]);
             
             var viewMode = $('input[name="btnradio"]:checked').attr('id');
             var isETF = typeTag.includes("ETF");
@@ -1775,7 +1913,7 @@ def export_interactive_html(df, ai_summary=""):
         print(f"{C_RED}[!] Error generating HTML: {e}{C_RESET}")
         return None
 
-def send_discord_link(filename, ai_summary):
+def send_discord_link(filename):
     print(f"\n{C_YELLOW}--- Sending Link to Discord... ---{C_RESET}")
     DISCORD_URL = os.environ.get('DISCORD_WEBHOOK')
     REPO_NAME = os.environ.get('GITHUB_REPOSITORY') 
@@ -1851,7 +1989,6 @@ def cleanup_old_html_files(days_to_keep=14):
 
 if __name__ == "__main__":
     # --- CONFIGURATION FOR DATA PERSISTENCE ---
-    LOCK_FILE = os.path.join(SCRIPT_DIR, "last_scan_time.txt")
     LATEST_DATA_FILE = os.path.join(SCRIPT_DIR, "latest_scan_data.pkl")
     
     is_auto = "--auto" in sys.argv
@@ -1893,9 +2030,6 @@ if __name__ == "__main__":
                 # SAVE SUCCESSFUL DATA FOR NEXT TIME
                 try:
                     df.to_pickle(LATEST_DATA_FILE)
-                    # UPDATE TIMESTAMP
-                    with open(LOCK_FILE, "w") as f: 
-                        f.write(str(time.time()))
                 except Exception as e:
                     print(f"{C_YELLOW}[!] Warning: Could not save cache: {e}{C_RESET}")
             else:
@@ -1907,12 +2041,10 @@ if __name__ == "__main__":
         sys.exit(0)
 
     # 4. GENERATE HTML
-    # (Note: tracker.save(df) happens INSIDE filter_and_process now, so we don't call it here)
     fname = export_interactive_html(df)
     
     if fname:
-        status_msg = "🚀 **Market Scan Updated**" if not skip_fetch else "🔄 **Dashboard Refreshed (Cached)**"
-        send_discord_link(fname, status_msg)
+        send_discord_link(fname)
         
-    cleanup_old_html_files(days_to_keep=7)
+    cleanup_old_html_files(days_to_keep=0.2)
     print(f"{C_GREEN}Done.{C_RESET}")
