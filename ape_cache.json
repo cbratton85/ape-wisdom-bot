@@ -19158,5 +19158,77 @@
         "mcap": 1805951232,
         "currency": "USD",
         "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index is a free float-adjusted market capitalization-weighted index that is designed to measure the performance of the large- and mid- capitalization segments of the equity market in Switzerland. The fund is non-diversified."
+    },
+    "IEUR": {
+        "ticker": "IEUR",
+        "name": "iShares Core MSCI Europe ETF",
+        "meta": "Europe Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index is a free float-adjusted market capitalization-weighted index which consists of securities from the following 15 developed market countries or regions: Austria, Belgium, Denmark, Finland, France, Germany, Ireland, Italy, the Netherlands, Norway, Portugal, Spain, Sweden, Switzerland and the United Kingdom."
+    },
+    "MCHI": {
+        "ticker": "MCHI",
+        "name": "iShares MSCI China ETF",
+        "meta": "China Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of the underlying index and in investments that have economic characteristics that are substantially identical to the component securities of the underlying index. The index is a free float-adjusted market capitalization-weighted index that is designed to measure the performance of equity securities in the top 85% in market capitalization of the Chinese equity securities markets, as represented by the H-shares and B-shares markets. The fund is non-diversified."
+    },
+    "IDV": {
+        "ticker": "IDV",
+        "name": "iShares International Select Di",
+        "meta": "Foreign Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of the underlying index and in investments that have economic characteristics that are substantially identical to the component securities of the underlying index. The underlying index measures the performance of 100 high dividend-paying companies in the EPAC (Europe, the Pacific, Asia and Canada) region."
+    },
+    "EDEN": {
+        "ticker": "EDEN",
+        "name": "iShares MSCI Denmark ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index is designed to measure the performance of the large-, mid- and small-capitalization segments of the equity market in Denmark. The underlying index uses a capping methodology that limits the weight of any single \u201cgroup entity\u201d to a maximum of 25% of the underlying index weight. The fund is non-diversified."
+    },
+    "SCHC": {
+        "ticker": "SCHC",
+        "name": "Schwab International Small-Cap ",
+        "meta": "Foreign Small/Mid Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index is comprised of small capitalization companies in developed countries outside the United States. The fund will invest at least 90% of its net assets in stocks, including depositary receipts representing securities of the index; such depositary receipts may be in the form of American Depositary Receipts, Global Depositary Receipts and European Depositary Receipts."
+    },
+    "SMA": {
+        "ticker": "SMA",
+        "name": "SmartStop Self Storage REIT, In",
+        "meta": "REIT - Industrial",
+        "type": "EQUITY",
+        "mcap": 1777423872,
+        "currency": "USD",
+        "description": "SmartStop Self Storage REIT, Inc. is a self-managed REIT with a fully integrated operations team of more than 1,000 self-storage professionals focused on growing the SmartStop Self Storage brand. SmartStop, through its indirect subsidiary SmartStop REIT Advisors, LLC, also sponsors other self-storage programs, and through its indirect subsidiary Argus Professional Storage Management, LLC, offers third-party management services in the U.S. and Canada. As of January 30, 2026, SmartStop has an owned or managed portfolio of more than 460 operating properties in 35 states, Washington D.C., and Canada, comprising approximately 270,000 units and more than 35 million rentable square feet. SmartStop and its affiliates own or manage 49 operating self-storage properties in Canada, which total approximately 42,200 units and 4.3 million rentable square feet."
+    },
+    "EWD": {
+        "ticker": "EWD",
+        "name": "iShares MSCI Sweden ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 404914496,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index is designed to measure the performance of the large- and mid-capitalization segments of the equity market in Sweden. The fund is non-diversified."
+    },
+    "MRP": {
+        "ticker": "MRP",
+        "name": "Millrose Properties, Inc.",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 5260651008,
+        "currency": "USD",
+        "description": "Millrose purchases and develops residential land and sells finished homesites to homebuilders by way of option contracts with predetermined costs and takedown schedules. Millrose serves as a solution for homebuilders seeking to expand access to finished homesites while implementing an asset-light strategy. As fully developed homesites are sold by Millrose, capital is recycled into future land acquisitions for homebuilders, providing customers with durable access to community growth."
     }
 }
