@@ -19266,5 +19266,23 @@
         "mcap": 0,
         "currency": "USD",
         "description": "At least 80% of the fund's total assets will be invested in constituent securities of the index and investments that have economic characteristics that are substantially identical to the economic characteristics of such constituent securities. The index consists of dividend-paying common stocks of companies with growth characteristics that are incorporated and listed on a stock exchange in one of the following countries: Germany, Switzerland, United Kingdom, etc. The fund is non-diversified."
+    },
+    "EMLC": {
+        "ticker": "EMLC",
+        "name": "VanEck J. P. Morgan EM Local Cu",
+        "meta": "Emerging-Markets Local-Currency Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund normally invests at least 80% of its total assets in securities that comprise the fund's benchmark index. The index is comprised of bonds issued by emerging market governments and denominated in the local currency of the issuer. It may concentrate its investments in a particular industry or group of industries to the extent that the index concentrates in an industry or group of industries. The fund is non-diversified."
+    },
+    "IQLT": {
+        "ticker": "IQLT",
+        "name": "iShares MSCI Intl Quality Facto",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index measures the performance of international developed large- and mid-capitalization stocks exhibiting relatively higher quality characteristics as identified through three fundamental variables: return on equity, earnings variability and debt-to-equity."
     }
 }
