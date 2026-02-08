@@ -8791,5 +8791,50 @@
         "mcap": 4136268800,
         "currency": "USD",
         "description": "Bullish provides market infrastructure and information services in United States. It operates Bullish Exchange, a digital assets spot and derivatives exchange that integrates a central limit order book matching engine with automated market making to provide deep and predictable liquidity. The company also offers CoinDesk Indices, a collection of tradable proprietary and single-asset benchmarks and indices that track the performance of digital assets for global institutions in the digital assets and traditional finance industries; CoinDesk Data, a comprehensive suite of digital assets market data and analytics, providing real-time insights into prices, trends, and market dynamics; and CoinDesk Insights, operates Coindesk.com, a leading digital media platform that covers news and insights about digital assets, the underlying markets, policy, and blockchain technology. Bullish was founded in 2020 and is based in George Town, Cayman Islands."
+    },
+    "IVLU": {
+        "ticker": "IVLU",
+        "name": "iShares MSCI Intl Value Factor ",
+        "meta": "Foreign Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of the underlying index and in investments that have economic characteristics that are substantially identical to the component securities of the underlying index and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents as well as in securities not included in the underlying index. The index is based on a traditional market capitalization-weighted parent index, the MSCI World ex USA Index."
+    },
+    "AVEM": {
+        "ticker": "AVEM",
+        "name": "Avantis Emerging Markets Equity",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests primarily in a diverse group of companies related to emerging markets across market sectors, industry groups and countries. The fund may invest in companies of all market capitalizations. Under normal market conditions, the fund will invest at least 80% of its assets in equity securities of companies related to emerging market countries."
+    },
+    "FLUT": {
+        "ticker": "FLUT",
+        "name": "Flutter Entertainment plc",
+        "meta": "Gambling",
+        "type": "EQUITY",
+        "mcap": 26733379584,
+        "currency": "USD",
+        "description": "Flutter Entertainment plc operates as a sports betting and gaming company in the United States, the United Kingdom, Ireland, Australia, Italy, and internationally. It provides sportsbooks; iGaming products, such as blackjack, roulette, slot machines, poker, and rummy, as well as lottery products; and sports betting products, which include Betfair betting exchanges, daily fantasy sports, and horse racing wagering under the TVG brand. The company offers sports betting and gaming services through fanduel.com, tvg.com, betfair.com, paddypower.com, and paddypower.ie, sportsbet.com.au, pokerstars.com, betfair.com, sisal.it, jungleegames.com, maxbet.rs, and adjarabet.com websites under the FanDuel, Sky Betting & Gaming, Sportsbet, PokerStars, Paddy Power, Sisal, tombola, Betfair, TVG, Junglee Games, Adjarabet, and MaxBet brands, as well as live poker tours and events. It also provides business-to-business pricing and risk management services. The company was formerly known as Paddy Power Betfair plc and changed its name to Flutter Entertainment plc in 2019. Flutter Entertainment plc was incorporated in 1958 and is headquartered in New York, New York."
+    },
+    "SNP": {
+        "ticker": "SNP",
+        "name": "SNP",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "FLJH": {
+        "ticker": "FLJH",
+        "name": "Franklin FTSE Japan Hedged ETF",
+        "meta": "Japan Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Under normal market conditions, the fund invests at least 80% of its assets in the component securities of the FTSE Japan Capped Hedged Index and in depositary receipts representing such securities, including indirectly through the Franklin FTSE Japan ETF. The FTSE Japan Capped Hedged Index is based on the FTSE Japan Hedged to USD Index and is designed to measure the performance of Japanese large- and mid-capitalization stocks. The fund is non-diversified."
     }
 }
