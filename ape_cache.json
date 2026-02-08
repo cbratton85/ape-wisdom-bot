@@ -19230,5 +19230,14 @@
         "mcap": 5260651008,
         "currency": "USD",
         "description": "Millrose purchases and develops residential land and sells finished homesites to homebuilders by way of option contracts with predetermined costs and takedown schedules. Millrose serves as a solution for homebuilders seeking to expand access to finished homesites while implementing an asset-light strategy. As fully developed homesites are sold by Millrose, capital is recycled into future land acquisitions for homebuilders, providing customers with durable access to community growth."
+    },
+    "ENTG": {
+        "ticker": "ENTG",
+        "name": "Entegris, Inc.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 18551291904,
+        "currency": "USD",
+        "description": "Entegris, Inc. provides advanced materials and process solutions for the semiconductor and other high-technology industries in North America, Taiwan, South Korea, Japan, China, Europe, and Southeast Asia. The company operates in two segments, Materials Solutions (MS) and Advanced Purity Solutions (APS). The MS segment provides materials-based solutions, such as chemical vapor and atomic layer deposition materials, chemical mechanical planarization slurries and pads, ion implantation specialty gases, formulated etch and clean materials, and other specialty materials. The APS segment offers filtration, purification, and contamination-control solutions for the semiconductor manufacturing processes, semiconductor ecosystem, and other high-technology industries. The company's customers include logic and memory semiconductor device manufacturers, semiconductor equipment makers, gas and chemical manufacturing companies, and wafer grower companies; and flat panel display equipment makers, panel manufacturers, and manufacturers of hard disk drive components and devices, as well as their related ecosystems. It serves manufacturers and suppliers in the solar and life science industries, electrical discharge machining customers, glass and glass container manufacturers, aerospace manufacturers, and manufacturers of biomedical implantation devices. Entegris, Inc. was founded in 1966 and is headquartered in Billerica, Massachusetts."
     }
 }
