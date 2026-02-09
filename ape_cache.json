@@ -10375,5 +10375,167 @@
         "mcap": 2217286656,
         "currency": "USD",
         "description": "Photronics, Inc., together with its subsidiaries, engages in the manufacture and sale of photomask products and services in the United States, Taiwan, China, Korea, Europe, and internationally. It offers photomasks that are used in the manufacture of integrated circuits and flat panel displays (FPDs); and to transfer circuit patterns onto semiconductor wafers, and FDP substrates. The company also provides electrical and optical components. It sells its products to semiconductor and FPD designers, manufacturers, and foundries through its sales personnel and customer service representatives. The company was formerly known as Photronic Labs, Inc. and changed its name to Photronics, Inc. in 1990. Photronics, Inc. was incorporated in 1969 and is based in Brookfield, Connecticut."
+    },
+    "VTRS": {
+        "ticker": "VTRS",
+        "name": "Viatris Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 17963509760,
+        "currency": "USD",
+        "description": "Viatris Inc., together with its subsidiaries, operates as a healthcare company in North America, Europe, China, Taiwan, Hong Kong, Japan, Australia, New Zealand, rest of Asia, Africa, Latin America, and the Middle East. It operates in four segments: Developed Markets, Greater China, JANZ, and Emerging Markets. The company offers prescription brand drugs, generic drugs, complex generic drugs, and biosimilars. It also provides drugs in various therapeutic areas covering various noncommunicable and infectious diseases, including cardiovascular, CNS and anesthesia, dermatology, diabetes and metabolism, eye care, gastroenterology, immunology, oncology, and respiratory and allergy, as well as support services, such as diagnostic clinics, educational seminars, and digital tools to help patients better manage their health. In addition, the company offers medicines in the form of oral solid doses, injectables, and complex dosage forms to retail and pharmacy establishments, wholesalers and distributors, payers, insurers and governments, and institutions. It distributes its products through pharmaceutical wholesalers/distributors, pharmaceutical retailers, institutional pharmacies, mail-order and e-commerce pharmacies, and specialty pharmacies. The company sells its products under the Lyrica, Lipitor, Celebrex, Viagra, Creon, Influvac, Wixela Inhub, EpiPen Auto-Injector, Fraxiparine, Yupelri, Norvasc, Amitiza, Effexor, Lipacreon, Zoloft, Xalabrands, Dymista, Xanax, and Breyna brands. It has collaboration agreements with Mapi Pharma Ltd. to develop and commercialize long-acting glatiramer acetate depot products and additional products; Revance Therapeutics, Inc. to develop, manufacture, and commercialize a biosimilar to the branded biologic product, BOTOX; and Theravance Biopharma, Inc. to develop and commercialize revefenacin. Viatris Inc. was founded in 1961 and is headquartered in Canonsburg, Pennsylvania."
+    },
+    "PIK": {
+        "ticker": "PIK",
+        "name": "Kidpik Corp.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "GUNR": {
+        "ticker": "GUNR",
+        "name": "FlexShares Global Upstream Natu",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index is designed to the performance of a selection of equity securities that are traded in or are issued by companies classified as developed or emerging markets, as determined by the index provider pursuant to its index methodology. The fund will invest at least 80% of its total assets (exclusive of collateral held from securities lending) in the securities of the index and in ADRs and GDRs based on the securities in the index."
+    },
+    "CMCO": {
+        "ticker": "CMCO",
+        "name": "Columbus McKinnon Corporation",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 657877120,
+        "currency": "USD",
+        "description": "Columbus McKinnon Corporation designs, manufactures, and markets motion solutions for moving, lifting, positioning, and securing materials worldwide. It offers manual and electric chain hoists, electric wire rope hoists, hand-operated hoists, winches, lever tools, and air-powered hoists, as well as explosion-protected and custom engineered hoists; high-precision conveying systems solutions which includes low profile, flexible chain, large scale, sanitary, and vertical elevation conveyor systems, as well as pallet system conveyors and accumulation systems; and power control and delivery systems and solutions. The company also provides AC and DC digital motion control systems for underground coal mining equipment; alloy and carbon steel chain; load chain; hooks, shackles, Hammerloks, and master links; and carbon steel forged and stamped products, such as load binders, logging tools, and other securing devices. In addition, it designs and manufactures industrial components comprising mechanical and electromechanical actuators and rotary unions; and manufactures and markets aluminum light rail workstations, as well as crane components and crane kits. Further, the company designs, builds, sells, and supports elevator application-specific drive products. It serves EV production and aerospace, energy and utilities, process industries, industrial automation, construction and infrastructure, food and beverage, entertainment, life sciences, consumer packaged goods, e-commerce, supply chain, and warehousing markets. The company offers its products to end users directly; industrial distributors, including rigging shops and independent crane builders; material handling specialists and integrators, and entertainment equipment distributors; service-after-sale distributors; original equipment manufacturers; government agencies; and engineering procurement and construction firms. Columbus McKinnon Corporation was founded in 1875 and is based in Charlotte, North Carolina."
+    },
+    "SVM": {
+        "ticker": "SVM",
+        "name": "Silvercorp Metals Inc.",
+        "meta": "Silver",
+        "type": "EQUITY",
+        "mcap": 2374955520,
+        "currency": "USD",
+        "description": "Silvercorp Metals Inc., together with its subsidiaries, acquires, explores, develops, and mines mineral properties in China. It explores for copper, silver, gold, lead, and zinc metals. The company was formerly known as SKN Resources Ltd. and changed its name to Silvercorp Metals Inc. in May 2005. Silvercorp Metals Inc. is based in Vancouver, Canada."
+    },
+    "KSS": {
+        "ticker": "KSS",
+        "name": "Kohl's Corporation",
+        "meta": "Department Stores",
+        "type": "EQUITY",
+        "mcap": 1968920192,
+        "currency": "USD",
+        "description": "Kohl's Corporation operates as an omnichannel retailer in the United States. It offers apparel, footwear, accessories, beauty products, and home products through its stores and website. The company provides its products primarily under the brand names of Apt. 9, Croft & Barrow, Jumping Beans, SO, Sonoma Goods for Life, and Tek Gear, as well as LC Lauren Conrad, Nine West, and Simply Vera Vera Wang. Kohl's Corporation was founded in 1988 and is headquartered in Menomonee Falls, Wisconsin."
+    },
+    "ENSC": {
+        "ticker": "ENSC",
+        "name": "Ensysce Biosciences, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2208439,
+        "currency": "USD",
+        "description": "Ensysce Biosciences, Inc., a clinical-stage pharmaceutical company, develops prescription drugs for severe pain relief in opioid misuse, abuse, and overdose in the United States. It develops products using Trypsin Activated Abuse Protection (TAAP) platform, designed to release clinically effective drugs only when exposed to specific physiological conditions; and Multi-Pill Abuse Resistance (MPAR) platform, an over-dose protection opioid prodrug technology. The company's lead product candidate is PF614, a TAAP oxycodone prodrug candidate for the treatment of severe or chronic pain; and PF614-MPAR, a combination product of PF614 and nafamostat for overdose protection. It is also developing PF8001 and PF8026 are extended and immediate-release prodrugs of amphetamine for attention deficit hyperactivity disorder; and PF9001 to treat Opioid use disorder.Ensysce Biosciences, Inc. was founded in 2003 and is based in La Jolla, California."
+    },
+    "APH": {
+        "ticker": "APH",
+        "name": "Amphenol Corporation",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 176508813312,
+        "currency": "USD",
+        "description": "Amphenol Corporation, together with its subsidiaries, designs, manufactures, and markets electrical, electronic, and fiber optic connectors in the United States, China, and internationally. It operates through three segments: Harsh Environment Solutions, Communications Solutions, and Interconnect and Sensor Systems. The company offers connectors and connector systems, including harsh environment data, power, high-speed, fiber optic, and radio frequency interconnect products; busbars and power distribution systems; and power interconnect products. It also provides value-add products, such as backplane interconnect systems, cable assemblies and harnesses, and cable management products; and other products comprising flexible and rigid printed circuit boards, hinges, other mechanical, and production related products. In addition, the company offers consumer device, network infrastructure, and other antennas; coaxial, power, and specialty cables; and sensors and sensor-based products. Amphenol Corporation sells its products through its sales force, independent representatives, and a network of electronics distributors to original equipment manufacturers, electronic manufacturing services companies, original design manufacturers, and service providers in the automotive, broadband communication, commercial aerospace, industrial, information technology and data communication, military, mobile device, and mobile network markets. The company was founded in 1932 and is headquartered in Wallingford, Connecticut."
+    },
+    "BG": {
+        "ticker": "BG",
+        "name": "Bunge Limited",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 22942287872,
+        "currency": "USD",
+        "description": "Bunge Global SA operates as an agribusiness and food company worldwide. It operates through four segments: Agribusiness, Refined and Specialty Oils, Milling, and Sugar and Bioenergy. The Agribusiness segment purchases, stores, transports, processes, and sells agricultural commodities and commodity products, including oilseeds primarily soybeans, rapeseed, canola, and sunflower seeds, as well as grains comprising wheat and corn; and processes oilseeds into vegetable oils and protein meals. This segment offers its products for animal feed manufacturers, livestock producers, wheat and corn millers, and other oilseed processors, as well as third-party edible oil processing and biofuel companies for biofuel production applications. The Refined and Specialty Oils segment sells packaged and bulk oils and fats that comprise cooking oils, shortenings, margarines, mayonnaise, renewable diesel feedstocks, and other products for baked goods companies, snack food producers, confectioners, restaurant chains, foodservice operators, infant nutrition companies, and other food manufacturers, as well as grocery chains, wholesalers, distributors, and other retailers. This segment also refines and fractionates palm oil, palm kernel oil, coconut oil, and shea butter, and olive oil; and produces specialty ingredients derived from vegetable oils, such as lecithin. The Milling segment provides wheat flours and bakery mixes; corn milling products that comprise dry-milled corn meals and flours, wet-milled masa and flours, and flaking and brewer's grits, as well as soy-fortified corn meal, corn-soy blends, and other products; whole grain and fiber ingredients; die-cut pellets; and non-GMO products. The Sugar and Bioenergy segment produces sugar and ethanol; and generates electricity from burning sugarcane bagasse. Bunge Global SA was founded in 1818 and is headquartered in Chesterfield, Missouri."
+    },
+    "TLT": {
+        "ticker": "TLT",
+        "name": "iShares 20+ Year Treasury Bond ",
+        "meta": "Long Government",
+        "type": "ETF",
+        "mcap": 9600944128,
+        "currency": "USD",
+        "description": "The fund will invest at least 80% of its assets in the component securities of the underlying index, and it will invest at least 90% of its assets in U.S. Treasury securities that the advisor believes will help the fund track the underlying index. The underlying index measures the performance of public obligations of the U.S. Treasury that have a remaining maturity greater than or equal to twenty years."
+    },
+    "MSS": {
+        "ticker": "MSS",
+        "name": "Maison Solutions Inc.",
+        "meta": "Grocery Stores",
+        "type": "EQUITY",
+        "mcap": 6584939,
+        "currency": "USD",
+        "description": "Maison Solutions Inc., together with its subsidiaries, operates as a specialty grocery retailer in the United States. The company offers perishable products, such as meat, seafood, vegetables, and fruit; non-perishable products, including grocery products comprising cooking utensils, canned foods, Chinese and Asian seasonings and spices, and snacks, as well as liquor, cigarette, lottery, newspaper, reusable bag, non-food, and health products; and general merchandise, beauty care, pharmacy, and other items and services in its stores. It serves its products online. The company was formerly known as Maison International, Inc. and changed its name to Maison Solutions Inc. in September 2021. Maison Solutions Inc. was incorporated in 2019 and is headquartered in Monterey Park, California."
+    },
+    "DDD": {
+        "ticker": "DDD",
+        "name": "3D Systems Corporation",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 333013792,
+        "currency": "USD",
+        "description": "3D Systems Corporation provides 3D printing and digital manufacturing solutions in North and South America, Europe, the Middle East, Africa, the Asia Pacific, and Oceania. It operates through two segments, Healthcare Solutions and Industrial Solutions. The company offers 3D printing technologies, including stereolithography (SLA), selective laser sintering, direct metal printing, MultiJet printing, ColorJet printing, polymer extrusion, and extrusion and SLA based bioprinting. Its print materials include plastic, nylon, metal, composite, elastomeric, wax, polymeric dental materials, and biocompatible materials. The company also provides digital design tools, such as software, scanners, and haptic devices, as well as solutions for product design, simulation, mold and die design, 3D scan-to-print, reverse engineering, production machining, metrology, and inspection and manufacturing workflows. In addition, it offers software platforms, including 3D Sprint and 3DXpert, which are metal and polymer additive manufacturing solutions; and Oqton industrial manufacturing operating system. Further, the company provides maintenance and training services; advanced manufacturing services; software maintenance and cloud-software subscriptions; and precision healthcare solutions, such as design, planning, modeling, prototyping, manufacturing, printing, and finishing of medical and dental devices, anatomical models, and surgical guides and tools. It serves companies, and small and midsize businesses in the medical, dental, automotive, aerospace, durable goods, government, defense, technology, jewelry, electronic, education, consumer goods, energy, biotechnology, and other industries through direct sales force, channel partners, and appointed distributors. 3D Systems Corporation was founded in 1986 and is headquartered in Rock Hill, South Carolina."
+    },
+    "ACGL": {
+        "ticker": "ACGL",
+        "name": "Arch Capital Group Ltd.",
+        "meta": "Insurance - Diversified",
+        "type": "EQUITY",
+        "mcap": 35851538432,
+        "currency": "USD",
+        "description": "Arch Capital Group Ltd., together with its subsidiaries, provides insurance, reinsurance, and mortgage insurance products in the United States, Canada, Bermuda, the United Kingdom, Europe, and Australia. The Insurance segment offers commercial automobile; commercial multiperil; financial and professional line liability; admitted, excess, and surplus casualty lines; property and short-tail specialty; workers compensation; casualty; marine and aviation; excess and surplus casualty; construction and national accounts; alternative market risks and employer's liability; travel, accident, and health; contract and commercial surety coverage; and other insurance products, as well as Lloyd's syndicates; programs; and warranty and lenders solutions. Its Reinsurance segment provides reinsurance products for casualty; marine and aviation; property catastrophe; property excluding property catastrophe; and other specialty products. The Mortgage segment offers U.S. primary mortgage insurance business written predominantly on loans sold to the Federal National Mortgage Association and Federal Home Loan Mortgage Corporation; reinsurance and underwriting services related to the U.S. credit-risk transfer business and other U.S. mortgage reinsurance transactions; and international mortgage insurance and reinsurance business covering loans. It markets its products through a group of licensed independent retail and wholesale brokers. The company was formerly known as Risk Capital Holdings, Inc. Arch Capital Group Ltd. was founded in 1995 and is headquartered in Pembroke, Bermuda."
+    },
+    "TZA": {
+        "ticker": "TZA",
+        "name": "Direxion Small Cap Bear 3X Shar",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its net assets in financial instruments, including swap agreements, futures contracts, or short positions, that, in combination, provide 3X daily inverse or short exposure to the index or to ETFs that track the index, consistent with the fund\u2019s investment objective. The index measures the performance of approximately 2,000 small-cap companies in the Russell 3000\u00ae Index, based on a combination of their market capitalization and current index membership. It is non-diversified."
+    },
+    "CSD": {
+        "ticker": "CSD",
+        "name": "Invesco S&P Spin-Off ETF",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 90% of its total assets in securities that comprise the underlying index. The underlying index is designed to measure the performance of U.S. companies that have been spun off from a parent company within the past four years. The fund is non-diversified."
+    },
+    "MEDP": {
+        "ticker": "MEDP",
+        "name": "Medpace Holdings, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 14939017216,
+        "currency": "USD",
+        "description": "Medpace Holdings, Inc. provides clinical research-based drug and medical device development services in North America, Europe, and Asia. The company offers a suite of services supporting the clinical development process from Phase I to Phase IV in various therapeutic areas. It provides clinical development services to the pharmaceutical, biotechnology, and medical device industries; and development plan design, coordinated central laboratory, project management, regulatory affairs, clinical monitoring, data management and analysis, pharmacovigilance new drug application submissions, and post-marketing clinical support services. In addition, the company offers bio-analytical laboratory services, clinical human pharmacology, imaging services, and electrocardiography reading support for clinical trials. Medpace Holdings, Inc. was founded in 1992 and is based in Cincinnati, Ohio."
+    },
+    "SENS": {
+        "ticker": "SENS",
+        "name": "Senseonics Holdings, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 328502016,
+        "currency": "USD",
+        "description": "Senseonics Holdings, Inc., a commercial-stage medical technology company, focuses on development and manufacturing of continuous glucose monitoring (CGM) systems for people with diabetes in the United States and internationally. The company's products include Eversense, Eversense XL, Eversense E3, and Eversense 365, which are implantable CGM systems to measure glucose levels in people with diabetes through an under-the-skin sensor, a removable and rechargeable smart transmitter, and an app for real-time diabetes monitoring and management. It serves healthcare providers and patients through a network of distributors and strategic fulfillment partners. The company was founded in 1996 and is headquartered in Germantown, Maryland."
+    },
+    "ENFR": {
+        "ticker": "ENFR",
+        "name": "Alerian Energy Infrastructure E",
+        "meta": "Energy Limited Partnership",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The underlying index is a composite of North American energy infrastructure companies engaged in midstream activities involving energy commodities including gathering and processing, liquefaction, pipeline transportation, rail terminaling, and storage (also known as \"midstream energy businesses\"). The fund will normally invest at least 90% of its total assets in securities that comprise the underlying index. It is non-diversified."
     }
 }
