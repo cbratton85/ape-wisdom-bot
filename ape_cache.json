@@ -10285,5 +10285,95 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund will normally invest at least 90% of its net assets (including investment borrowings) in the securities that comprise the index. The index is a modified equal-dollar weighted index that seeks to objectively identify and select stocks from the Russell 1000\u00ae Index in the consumer discretionary sector that may generate positive alpha relative to traditional passive-style indices through the use of the AlphaDEX\u00ae selection methodology."
+    },
+    "TDOC": {
+        "ticker": "TDOC",
+        "name": "Teladoc Health, Inc.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 884758208,
+        "currency": "USD",
+        "description": "Teladoc Health, Inc. provides virtual healthcare services worldwide. It operates through Teladoc Health Integrated Care and BetterHelp segments. The Integrated Care segment offers virtual medical services, including general medical, expert medical, specialty medical, chronic condition management, and mental health, as well as enabling technologies and enterprise telehealth solutions for hospitals and health systems. The BetterHelp segment operates a mental health platform that provides online counselling and therapy services through website, mobile applications, phones, and text-based interactions by its licensed clinicians. The company offers its products and services under the Teladoc, Livongo, and BetterHelp brands. It serves employers, health plans, hospitals and health systems, and insurance and financial services companies, as well as individual members. The company was formerly known as Teladoc, Inc. and changed its name to Teladoc Health, Inc. in August 2018. Teladoc Health, Inc. was incorporated in 2002 and is headquartered in New York, New York."
+    },
+    "CXAI": {
+        "ticker": "CXAI",
+        "name": "CXApp Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 8653442,
+        "currency": "USD",
+        "description": "CXApp Inc. provides experience solutions and delivering enterprise-grade software in the United States, Canada, and the Philippines. The company offers CXAI Platform, which provides a comprehensive suite of tools to create smarter workplaces; CXAI Apps, a multi-platform suite of applications that offers personalized workflows; CXAI BTS (Behind the Scenes), a core AI engine that powers automation, content management, and security compliance; and CXAI-VU, a generative AI analytics platform that provides actionable insights into workplace utilization, employee engagement, and productivity. It serves software/technology, financial services, next-gen auto manufacturing, entertainment, and life science companies. The company was formerly known as KINS Technology Group Inc. and changed its name to CXApp Inc. in March 2023. CXApp Inc. is headquartered in Palo Alto, California."
+    },
+    "BWAY": {
+        "ticker": "BWAY",
+        "name": "Brainsway Ltd.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 447050048,
+        "currency": "USD",
+        "description": "BrainsWay Ltd. develops and sells noninvasive neurostimulation treatments for mental health disorders in the United States, East Asia, and internationally. It offers Deep Transcranial Magnetic Stimulation platform technology for the treatment of major depressive disorders, anxious depression, obsessive-compulsive disorders, smoking addiction, bipolar disorders, post traumatic stress disorders, schizophrenia, Alzheimer's disease, autism, chronic pain, multiple sclerosis, post stroke rehabilitation, and Parkinson's diseases. The company serves doctors, hospitals, and medical centers in the field of psychiatry. The company was founded in 2003 and is headquartered in Jerusalem, Israel."
+    },
+    "DOCS": {
+        "ticker": "DOCS",
+        "name": "Doximity, Inc.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 5176518656,
+        "currency": "USD",
+        "description": "Doximity, Inc. operates as a digital platform for medical professionals in the United States. Its platform provides its members with digital tools built for medicine, that enables its members to collaborate with colleagues, stay up to date with the latest medical news and research, manage their careers and on-call schedules, streamline documentation and administrative paperwork, and conduct virtual patient visits. The company primarily serves physicians, nurse practitioners, physician assistants, medical students, pharmaceutical manufacturers, and healthcare systems. The company was formerly known as 3MD Communications, Inc. and changed its name to Doximity, Inc. in June 2010. Doximity, Inc. was incorporated in 2010 and is headquartered in San Francisco, California."
+    },
+    "TYL": {
+        "ticker": "TYL",
+        "name": "Tyler Technologies, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 15370056704,
+        "currency": "USD",
+        "description": "Tyler Technologies, Inc. provides integrated software and technology management solutions for the public sector. It operates in two segments, Enterprise Software and Platform Technologies. The company offers platform and transformative technology solutions, including cybersecurity, threat detection and response, customized employee training, and vulnerability testing; data and insights, and digital solutions; billing, presentment, merchant onboarding, collections, reconciliation, and disbursements; and outdoor recreation solutions for use in campsite reservations, activity registrations, licensing sales and renewals, and real-time data for conservation and park management. It also provides public administration solutions comprising civil services for managing permitting, enforcement, health and safety inspections, compliance, maintenance and work orders, 311 requests, and others; financial applications with human resources, revenue management, tax billing, utilities, asset management, and payment processing; property tax life cycle, including appraisal services, valuation, tax billing and collections, assessment administration, land and official records; and licensing and regulatory management solutions. In addition, the company offers courts and public safety solutions, K-12 education solutions, and health and human services solutions. Tyler Technologies, Inc. has a strategic collaboration agreement with Amazon Web Services for cloud hosting services. The company was founded in 1966 and is headquartered in Plano, Texas."
+    },
+    "QQQJ": {
+        "ticker": "QQQJ",
+        "name": "Invesco NASDAQ Next Gen 100 ETF",
+        "meta": "Mid-Cap Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 90% of its total assets in the securities that comprise the underlying index. Strictly in accordance with its guidelines and mandated procedures, Nasdaq, Inc. compiles, maintains and calculates the underlying index, which is comprised of securities of the next generation of Nasdaq-listed non-financial companies; that is, the largest 100 Nasdaq-listed companies outside of the NASDAQ-100 Index\u00ae (the \u201cNASDAQ-100\u201d) based on market capitalization."
+    },
+    "MDT": {
+        "ticker": "MDT",
+        "name": "Medtronic plc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 130365095936,
+        "currency": "USD",
+        "description": "Medtronic plc develops, manufactures, and sells device-based medical therapies to healthcare systems, physicians, clinicians, and patients in the United States, Ireland, and internationally. The Cardiovascular Portfolio segment offers implantable cardiac pacemakers, cardioverter defibrillators, and cardiac resynchronization therapy devices; cardiac ablation products; insertable cardiac monitor systems; TYRX products; and remote monitoring and patient-centered software. It also provides aortic valves, surgical valve replacement and repair products, endovascular stent grafts and accessories, and transcatheter pulmonary valves, and percutaneous coronary intervention products, percutaneous angioplasty balloons, and other products. The Neuroscience Portfolio segment offers medical devices and implants, biologic solutions, spinal cord stimulation and brain modulation systems, implantable drug infusion systems, and interventional products, as well as nerve ablation system under the Accurian name. The segment offers its products for spinal surgeons, neurosurgeons, neurologists, pain management specialists, anesthesiologists, orthopedic surgeons, urologists, urogynecologists, and interventional radiologists, as well as ear, nose, and throat specialists, and energy surgical instruments. The Medical Surgical Portfolio segment offers surgical stapling devices, vessel sealing instruments, wound closure and electrosurgery products, AI-powered surgical video and analytics platform, robotic-assisted surgery products, hernia mechanical devices, mesh implants, gynecology products, gastrointestinal and hepatologic diagnostics and therapies, and therapies to treat diseases and conditions, and patient monitoring and airway management products. The Diabetes Operating Unit segment provides insulin pumps and consumables, continuous glucose monitoring systems and sensors, and InPen, a smart insulin pen. Medtronic plc was founded in 1949 and is headquartered in Galway, Ireland."
+    },
+    "IOT": {
+        "ticker": "IOT",
+        "name": "Samsara Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 15700279296,
+        "currency": "USD",
+        "description": "Samsara Inc. provides solutions to connect physical operations data to its connected operations platform in the United States and internationally. The company's Connected Operations Platform includes Data Platform, which ingests, aggregates, and enriches data from its IoT devices and a growing ecosystem of connected assets and third-party systems, and which has embedded capabilities for AI, workflows and analytics, alerts, API connections, and data security and privacy. Its applications include video-based safety that enables customers to build a safety program and protect their teams with AI-enabled video; vehicle telematics, which provides visibility into real-time vehicle location and diagnostics with GPS tracking, routing and dispatch, fuel management, driver recognition, electric vehicle usage and charge planning, preventative maintenance, and advanced insights to manage fuel and energy costs; and workforce apps that enhance safety and productivity for frontline workers and enable regulatory compliance, capture electronic documents, perform maintenance inspections, maintain compliance logs, complete safety audits and risk assessments, submit timesheets, and message with back-office administration. The company also provides equipment monitoring, which offers visibility and management of unpowered and powered assets, including generators, compressors, and heavy construction equipment and trailers to prevent unplanned downtime and avoid critical safety and compliance issues; and site visibility that provides remote visibility into sites to enhance onsite security, safety, and incident response times. It serves transportation, construction, wholesale and retail trade, field services, logistics, manufacturing, utilities and energy, government, healthcare and education, food and beverage, and other industries. The company was incorporated in 2015 and is headquartered in San Francisco, California."
+    },
+    "GTLB": {
+        "ticker": "GTLB",
+        "name": "GitLab Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 5466264064,
+        "currency": "USD",
+        "description": "GitLab Inc., together with its subsidiaries, develops software for the software development lifecycle in the United States, Europe, and the Asia Pacific. The company provides GitLab that covers various stages of the DevSecOps lifecycle, including project planning, source code management, integration, application security testing, packaging artifacts, delivery and deployment, infrastructure for optimal deployment, monitoring for incidents, protecting the production deployment, and managing the cycle with value stream analytics. Its platform allows customers to manage and secure their applications across various cloud through a single platform. The company also helps organizations to plan, develop, secure, and deploy software. In addition, it offers related training and professional services. The company was formerly known as GitLab B.V. and changed its name to GitLab Inc. in July 2015. GitLab Inc. was founded in 2011 and is headquartered in San Francisco, California."
+    },
+    "PLAB": {
+        "ticker": "PLAB",
+        "name": "Photronics, Inc.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 2217286656,
+        "currency": "USD",
+        "description": "Photronics, Inc., together with its subsidiaries, engages in the manufacture and sale of photomask products and services in the United States, Taiwan, China, Korea, Europe, and internationally. It offers photomasks that are used in the manufacture of integrated circuits and flat panel displays (FPDs); and to transfer circuit patterns onto semiconductor wafers, and FDP substrates. The company also provides electrical and optical components. It sells its products to semiconductor and FPD designers, manufacturers, and foundries through its sales personnel and customer service representatives. The company was formerly known as Photronic Labs, Inc. and changed its name to Photronics, Inc. in 1990. Photronics, Inc. was incorporated in 1969 and is based in Brookfield, Connecticut."
     }
 }
