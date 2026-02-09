@@ -937,7 +937,12 @@ def export_interactive_html(df):
             # --- 17. SYMBOL & PRICE ---
             t = row['Sym']
             tv_ticker = t.replace('-', '.')
-            export_df.at[index, 'Sym'] = f'<a href="https://www.tradingview.com/chart/?symbol={tv_ticker}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
+            export_df.at[index, 'Sym'] = (
+                f'<div class="symbol-container" onmouseenter="loadMiniChart(\'{tv_ticker}\', \'{index}\')">'
+                f'<a href="https://www.tradingview.com/chart/?symbol={tv_ticker}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
+                f'<div id="chart-tooltip-{index}" class="chart-popup"></div>'
+                f'</div>'
+            )
             
             p_val = f"${row.get('Price', 0):.2f}"
 
@@ -1477,6 +1482,23 @@ def export_interactive_html(df):
                 background-position: right 5px center !important;
             }}
 
+            .symbol-container {{ position: relative; display: inline-block; }}
+            .chart-popup {{
+                display: none;
+                position: absolute;
+                left: 105%;
+                top: -100px;
+                width: 500px;
+                height: 330px;
+                background: #111;
+                border: 2px solid #444;
+                border-radius: 12px;
+                z-index: 10000;
+                box-shadow: 0 12px 40px rgba(0,0,0,0.8);
+                padding: 10px;
+            }}
+            .symbol-container:hover .chart-popup {{ display: block; }}
+
         </style>
         </head>
         <body>
@@ -1760,6 +1782,31 @@ def export_interactive_html(df):
         <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
         <script>
     var table;
+
+    function loadMiniChart(symbol, index) {{
+        const container = document.getElementById('chart-tooltip-' + index);
+        if (container && container.innerHTML === "") {{
+            const script = document.createElement('script');
+            script.type = 'module';
+            script.src = 'https://widgets.tradingview-widget.com/w/en/tv-mini-chart.js';
+            document.head.appendChild(script);
+
+            const chart = document.createElement('tv-mini-chart');
+            chart.setAttribute('symbol', symbol);
+            chart.setAttribute('time-frame', '7D');
+            chart.setAttribute('line-chart-type', 'Baseline');
+            chart.setAttribute('width', '100%');
+            chart.setAttribute('height', '100%');
+            chart.setAttribute('theme', 'dark');
+            
+            chart.setAttribute('show-time-range', 'true');
+            chart.setAttribute('show-time-scale', 'true');
+            
+            chart.setAttribute('style', 'display:block;'); 
+            container.appendChild(chart);
+        }}
+    }}
+
     function parseVal(str) {{
         if (!str || str === null) return 0;
         
