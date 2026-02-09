@@ -9808,5 +9808,95 @@
         "mcap": 143088096,
         "currency": "USD",
         "description": "Imperial Petroleum Inc., together with its subsidiaries, provides seaborne transportation services worldwide. The company owns and operates a fleet of medium range refined petroleum product tankers that carry refined petroleum products, such as gasoline, diesel, fuel oil, and jet fuel, as well as edible oils and chemicals; suezmax tankers that carry crude oil; and handysize drybulk carriers that transport bulks, such as iron ore, coal, grains, bauxite, phosphate, and fertilizers. It serves oil producers, refineries, commodities traders and producers, and industrial users of drybulk cargoes. Imperial Petroleum Inc. was incorporated in 2021 and is based in Athens, Greece."
+    },
+    "EQX": {
+        "ticker": "EQX",
+        "name": "Equinox Gold Corp.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 12011002880,
+        "currency": "USD",
+        "description": "Equinox Gold Corp. engages in the acquisition, exploration, development, and operation of mineral properties in the Americas. The company primarily explores gold and silver deposits. It holds interest in properties in California located in the United States; Guerrero State located in Mexico; Maranh\u00e3o, Bahia, and Mina Gerais state located in Brazil; and Ontario, Canada. The company was formerly known as Trek Mining Inc. and changed its name to Equinox Gold Corp. in December 2017. Equinox Gold Corp. was incorporated in 2007 and is headquartered in Vancouver, Canada."
+    },
+    "IRM": {
+        "ticker": "IRM",
+        "name": "Iron Mountain Incorporated (Del",
+        "meta": "REIT - Specialty",
+        "type": "EQUITY",
+        "mcap": 28757903360,
+        "currency": "USD",
+        "description": "Iron Mountain Incorporated is trusted by more than 240,000 customers in 61 countries, including approximately 95% of the Fortune 1000, to help unlock value and intelligence from their assets through services that transcend the physical and digital worlds. Our broad range of solutions address their information management, digital transformation, information security, data center and asset lifecycle management needs. Our longstanding commitment to safety, security, sustainability and innovation in support of our customers underpins everything we do."
+    },
+    "CO": {
+        "ticker": "CO",
+        "name": "CO",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "UPRO": {
+        "ticker": "UPRO",
+        "name": "ProShares UltraPro S&P 500",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of 500 of the largest companies listed and domiciled in the U.S. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index or in instruments with similar economic characteristics. The fund is non-diversified."
+    },
+    "FCUV": {
+        "ticker": "FCUV",
+        "name": "Focus Universal Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 6239764,
+        "currency": "USD",
+        "description": "Focus Universal Inc. develops and manufactures smart instrumentation platforms and devices. It offers Ubiquitor wireless sensor devices; universal smart instrumentation platform (USIP) that utilizes computer or mobile devices to communicate with sensors, instruments, probes, and controllers; and digital sensors and horticultural sensors. The company engages in the wholesale of various digital, analog, and quantum light meters, as well as filtration products, including fan speed adjusters, carbon filters, and HEPA filtration systems; and provision of electronic measurement devices, such as temperature humidity meters, digital meters, quantum PAR meters, pH meters, TDS meters, and CO2 monitors. In addition, it offers integration systems for houses, apartments, commercial complexes, and office spaces; and audio/video systems, home theaters, lighting control, automation, and integration installation and management services. The company was incorporated in 2012 and is headquartered in Ontario, California."
+    },
+    "TGT": {
+        "ticker": "TGT",
+        "name": "Target Corporation",
+        "meta": "Discount Stores",
+        "type": "EQUITY",
+        "mcap": 52246814720,
+        "currency": "USD",
+        "description": "Target Corporation operates as a general merchandise retailer in the United States. The company offers apparel for women, men, young adults, kids, toddlers, and babies, as well as jewelry, accessories, and shoes; and beauty products, such as skin and bath care, cosmetics, hair care, oral care, deodorant, and shaving products. It also provides food and beverage products comprising dry and perishable grocery, including snacks, candy, beverages, deli, bakery, meat, produce, and food service; electronics which includes video games and consoles, toys, sporting goods, entertainment, and luggage; bed and bath, home d\u00e9cor, school/office supplies, storage, small appliances, kitchenware, greeting cards, party supplies, furniture, lighting, home improvement, and seasonal merchandise; and household essentials, such as household cleaning, paper products, over-the-counter healthcare, vitamins and supplements, baby gear, and pet supplies. In addition, the company sells merchandise through periodic design and creative partnerships, and shop-in-shop experience; and in-store amenities. It sells its products through its stores; and digital channels, including Target.com. Target Corporation was incorporated in 1902 and is headquartered in Minneapolis, Minnesota."
+    },
+    "WDAY": {
+        "ticker": "WDAY",
+        "name": "Workday, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 40335691776,
+        "currency": "USD",
+        "description": "Workday, Inc. provides enterprise cloud applications in the United States and internationally. The company offers a suite of financial management applications to maintain accounting information; manage financial processes, such as payables and receivables; identify real-time financial, operational, and management insights; perform financial consolidation; reduce time-to-close; promote internal control and auditability; and achieve consistency across finance operations. It also provides spend management solutions that help organizations to streamline supplier selection and contract management, build and execute sourcing events, such as requests for proposals, and manage indirect spend; expense management solutions to submit and approve expenses; and a suite of human capital management applications that enables HR teams to hire, onboard, pay, develop, reskill, and provide employee experiences. In addition, the company offers planning applications; and applications for analytics and reporting comprising augmented analytics to surface insights to the line of business in simple-to-understand stories. Further, it provides supply chain and inventory solutions to healthcare organizations; solutions to manage the end-to-end student and faculty lifecycle; Workday Extend for customers and their developers to build custom applications; and Workday Illuminate, which helps customers accelerate manual tasks, assist employees, and transform business processes. The company serves the professional and business services, financial services, healthcare, education, government, technology, media, retail, and hospitality industries. It sells its solutions through its direct sales organization. The company was formerly known as North Tahoe Power Tools, Inc. and changed its name to Workday, Inc. in July 2005. Workday, Inc. was incorporated in 2005 and is headquartered in Pleasanton, California."
+    },
+    "CDE": {
+        "ticker": "CDE",
+        "name": "Coeur Mining, Inc.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 14716126208,
+        "currency": "USD",
+        "description": "Coeur Mining, Inc. operates as a gold and silver producer in the United States, Canada, and Mexico. It operates through Palmarejo, Rochester, Kensington, Wharf, Silvertip, and Las Chispas segments. The company explores for gold, silver, zinc, lead, and other related metals. It markets and sells its concentrates to third-party customers, including refiners and smelters, under off-take agreements. The company was formerly known as Coeur d'Alene Mines Corporation and changed its name to Coeur Mining, Inc. in May 2013. Coeur Mining, Inc. was incorporated in 1928 and is headquartered in Chicago, Illinois."
+    },
+    "BTAI": {
+        "ticker": "BTAI",
+        "name": "BioXcel Therapeutics, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 34225756,
+        "currency": "USD",
+        "description": "BioXcel Therapeutics, Inc., together with its subsidiary, OnkosXcel Therapeutics LLC, operates as a biopharmaceutical company that utilizes artificial intelligence approaches to develop medicines in neuroscience and immuno-oncology in the United States. The company IGALMI, a sublingual film for the acute treatment of agitation associated with schizophrenia or bipolar I or II disorder in adults. It also develops its neuroscience candidate, BXCL501, which is an investigational, proprietary, orally dissolving film formulation of dexmedetomidine in Phase 3 trial for the treatment of agitation associated with bipolar disorders, schizophrenia, and Alzheimer's disease, as well as opioid use disorder, alcohol use disorder with comorbid post-traumatic stress disorder, and acute stress disorder; and its immune-oncology candidate, BXCL701, which is an investigational oral innate immune activator that has completed Phase 1b/2a trial for the treatment of aggressive forms of prostate cancer, pancreatic cancer, and other solid and liquid tumors. In addition, the company engages in the development of BXCL502 for the treatment of stress-related neuropsychiatric symptoms in dementia and other stress-related disorders; BXCL503, a drug candidate to target apathy in dementia; and BXCL504, which has the potential to address apathy and aggression in dementia. The company has collaborations with Columbia University, Yale University Medical School, and University of North Carolina for the development of BXCL501. BioXcel Therapeutics, Inc. was incorporated in 2017 and is headquartered in New Haven, Connecticut."
+    },
+    "CRSR": {
+        "ticker": "CRSR",
+        "name": "Corsair Gaming, Inc.",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 552592448,
+        "currency": "USD",
+        "description": "Corsair Gaming, Inc., together with its subsidiaries, designs and sells gaming and streaming peripherals, components, and systems in Europe, the Middle East, North Africa, North America, Latin America, and the Asia Pacific. The company operates in two segments, Gamer and Creator Peripherals, and Gaming Components and Systems. It offers gamer and creator peripherals, including gaming keyboards, mice, headsets, and controllers; and streaming products, such as capture cards, stream decks, microphones and audio interfaces, facecam streaming cameras, studio accessories, sim racing products, gaming furniture, and others. The company also provides gaming components and systems comprising power supply units, cooling solutions, computer cases, SSD, and dynamic random access memory modules, as well as pre- and custom-built gaming personal computers and laptops, and gaming monitors. In addition, it offers personal computer gaming software, which includes software platforms, including iCUE for gamers and Elgato streaming suite for content creators, as well as digital services. The company sells its products through e-retail, retail, and direct-to-consumer channels, as well as distributors. The company was formerly known as Corsair Components (Cayman) Ltd and changed its name to Corsair Gaming, Inc. in 2018. Corsair Gaming, Inc. was incorporated in 1994 and is headquartered in Milpitas, California."
     }
 }
