@@ -9610,5 +9610,41 @@
         "mcap": 754912960,
         "currency": "USD",
         "description": "Cracker Barrel Old Country Store, Inc. develops and operates the Cracker Barrel Old Country Store concept in the United States. Its Cracker Barrel stores consist of restaurants with a gift shop. The company's restaurants serve breakfast, lunch, and dinner, as well as dine-in, pick-up, and delivery services. Its gift shops offer various decorative and functional items, such as rocking chairs, seasonal gifts, apparel, toys, food, cookware, and various other gift items, as well as various candies, preserves, and other food items. Cracker Barrel Old Country Store, Inc. was incorporated in 1969 and is headquartered in Lebanon, Tennessee."
+    },
+    "IX": {
+        "ticker": "IX",
+        "name": "ORIX Corporation",
+        "meta": "Financial Conglomerates",
+        "type": "EQUITY",
+        "mcap": 35717541888,
+        "currency": "USD",
+        "description": "ORIX Corporation provides financial services in Japan, the United States, Asia, Europe, and Australasia. The company's Corporate Financial Services and Maintenance Leasing segment is involved in the finance and fee; and leasing and rental of automobiles, electronic measuring instruments, and ICT-related equipment businesses. Its Real Estate segment develops, rents, and manages real estate properties; operates facilities; provides real estate asset management services. The company's PE Investment and Concession segment engages in the private equity investment and concession businesses. Its Environment and Energy segment provides ESCO, and recycling and waste management services; retails electric power; sells solar panels; and generates renewable energy power. The company's Insurance segment sells life insurance products through agents, banks, and other financial institutions, as well as face-to-face and online. Its Banking and Credit segment provides banking and consumer finance services. The company's Aircraft and Ships segment engages in the aircraft investment and management, ship-related finance and investment, maritime asset management, and ship brokerage businesses. Its ORIX USA segment offers finance, investment, and asset management services. The company's ORIX Europe segment provides asset management services for equity and fixed income. Its Asia and Australia segment engages in the finance and investment businesses. The company was formerly known as Orient Leasing Co., Ltd. and changed its name to ORIX Corporation in 1989. ORIX Corporation was incorporated in 1950 and is headquartered in Tokyo, Japan."
+    },
+    "KITT": {
+        "ticker": "KITT",
+        "name": "Nauticus Robotics, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 13321233,
+        "currency": "USD",
+        "description": "Nauticus Robotics, Inc. develops ocean robots, cloud software, and services to the ocean industry. The company offers Aquanaut, an autonomous underwater vehicle with sensor suite, which provides capability to observe and inspect subsea assets or other subsea features; Olympic Arm, an all-electric manipulator designed for a variety of intervention tasks on work class remotely operated vehicles; and ToolKITT, a software platform, which consists of interrelated products for ocean sensing, manipulation, autonomous behaviors, survey, search and recovery, and manual intervention. The company has strategic alliance with Leidos Holdings, Inc. to develop next-generation autonomous underwater systems for tackling complex missions. The company was founded in 2014 and is headquartered in Webster, Texas."
+    },
+    "ALT": {
+        "ticker": "ALT",
+        "name": "Altimmune, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 609877504,
+        "currency": "USD",
+        "description": "Altimmune, Inc., a clinical stage biopharmaceutical company, focuses on developing treatments for obesity, metabolic, and liver diseases. Its lead product candidate is pemvidutide, a GLP-1/glucagon dual receptor agonist, which is in Phase 3 trial for the treatment of obesity and metabolic associated steatohepatitis. The company was founded in 1997 and is headquartered in Gaithersburg, Maryland."
+    },
+    "VG": {
+        "ticker": "VG",
+        "name": "Venture Global, Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 24236294144,
+        "currency": "USD",
+        "description": "Venture Global, Inc. engages in the development, construction, and production of natural gas liquefaction and export projects near the U.S. Gulf Coast in Louisiana. It is involved in natural gas transport, shipping, and regasification, as well as sells LNG. Venture Global, Inc. was founded in 2013 and is based in Arlington, Virginia. Venture Global, Inc. is a subsidiary of Venture Global Partners II, LLC."
     }
 }
