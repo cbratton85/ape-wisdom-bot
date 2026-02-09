@@ -9403,5 +9403,32 @@
         "mcap": 24150586,
         "currency": "USD",
         "description": "Mobix Labs, Inc. designs, develops, and sells components and systems for advanced wireless and wired connectivity, radio frequency (RF), and switching and electromagnetic interference (EMI) filtering technologies in the United States, and internationally. The company's wireless systems solutions include products for advanced RF and millimeter wave (mmWave) 5G communications, mmWave imaging, software defined radio, and custom RF integrated circuits; interconnect products comprise EMI filter inserts and filtered and non-filtered connectors. Its products are used in the consumer commercial, industrial, automotive, medical, aerospace, military, defense, and other markets. The company is based in Irvine, California."
+    },
+    "UST": {
+        "ticker": "UST",
+        "name": "ProShares Ultra 7-10 Year Treas",
+        "meta": "Trading--Leveraged Debt",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of U.S. dollar denominated sovereign debt publicly issued by the U.S. government. The fund is non-diversified."
+    },
+    "ST": {
+        "ticker": "ST",
+        "name": "Sensata Technologies Holding pl",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 5242977792,
+        "currency": "USD",
+        "description": "Sensata Technologies Holding plc develops, manufactures, and sells sensors and sensor-rich solutions, electrical protection components and systems, and other products used in mission-critical systems and applications in the United States and internationally. It operates through two segments, Performance Sensing and Sensing Solutions. The Performance Sensing segment offers sensors and high-voltage solutions used in subsystems of automobiles, on-road trucks, and off-road equipment, such as tire pressure monitoring, thermal management, electrical protection, regenerative braking, powertrain (engine/transmission), and exhaust management. The Sensing Solutions segment provides application-specific sensor and electrical protection products, such as pressure, temperature, and position sensors; motor and compressor protectors; high-voltage contactors; solid state relays; bimetal electromechanical controls; power inverters; charge controllers; battery management systems; operator controls; and power conversion systems. It serves automotive, on-road truck, and construction; and original equipment manufacturers in agriculture, control, appliance, medical, energy and charging infrastructure, data/telecom, and aerospace and defense industries, as well as systems integrators, aerospace, and motor and compressor distributors. Sensata Technologies Holding plc was founded in 1916 and is headquartered in Attleboro, Massachusetts."
+    },
+    "TMV": {
+        "ticker": "TMV",
+        "name": "Direxion Daily 20-Year Treasury",
+        "meta": "Trading--Inverse Debt",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund, under normal circumstances, invests at least 80% of the fund\u2019s net assets in financial instruments, that, in combination, provide 3X daily inverse (opposite) or short exposure to the index or to ETFs that track the index, consistent with the fund\u2019s investment objective. The index is a market value weighted index that includes publicly issued U.S. Treasury securities that have a remaining maturity of greater than 20 years. It is non-diversified."
     }
 }
