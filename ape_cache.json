@@ -9529,5 +9529,32 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund normally invests at least 80% of its total assets in securities that comprise the fund's benchmark index. The index includes equity securities and depositary receipts issued by companies involved in uranium and nuclear energy. The fund is non-diversified."
+    },
+    "FMCC": {
+        "ticker": "FMCC",
+        "name": "Freddie Mac",
+        "meta": "Mortgage Finance",
+        "type": "EQUITY",
+        "mcap": 4771437568,
+        "currency": "USD",
+        "description": "Federal Home Loan Mortgage Corporation operates in the secondary mortgage market in the United States. It operates through two segments, Single-Family and Multifamily. The Single-Family segment purchases, securitizes, and guarantees single-family loans; and manages single-family mortgage credit and market risk, as well as manages mortgage-related investments portfolio, single-family securitization activities, and treasury functions. This segment serves mortgage banking companies, commercial banks, regional banks, community banks, credit unions, HFAs, savings institutions, and non-depository institutions. The Multifamily segment engages in the purchase, securitization, and guarantee of multifamily loans; issuance of multifamily K certificates; manages multifamily mortgage credit and market risk; and invests in multifamily loans and mortgage-related securities. It serves banks and other depository institutions, insurance companies, money managers, central banks, pension funds, state and local governments, REITs, non-depository institutions, and brokers and dealers. Federal Home Loan Mortgage Corporation incorporated in 1970 and is headquartered in McLean, Virginia."
+    },
+    "FNMA": {
+        "ticker": "FNMA",
+        "name": "Fannie Mae",
+        "meta": "Mortgage Finance",
+        "type": "EQUITY",
+        "mcap": 9577384960,
+        "currency": "USD",
+        "description": "Federal National Mortgage Association provides financing solutions for residential mortgages in the United States. It operates through the Single-Family and Multifamily segments. The company provides mortgage acquisitions and securitizations; credit risk management by underwriting and servicing standards; and credit loss management services. It also engages in mortgage securitization transactions, such as lender swap transactions, portfolio securitization transactions, and structured securitization transactions. The company was founded in 1938 and is based in Washington, District of Columbia."
+    },
+    "RITR": {
+        "ticker": "RITR",
+        "name": "Reitar Logtech Holdings Limited",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 51828312,
+        "currency": "USD",
+        "description": "Reitar Logtech Holdings Limited, through its subsidiaries, provides construction management and engineering design services in Hong Kong. The company operates in two segments, Construction Management and Engineering Design Services; and Asset Management and Professional Consultancy Services. It provides construction management and engineering design services for cold storage facilities, automated warehouses, renovated offices, and tailor-made electrical systems. It also offers asset management services for construction projects, including refrigerated storages and warehouses; and professional consultancy services for construction projects, such as renovation works, interior designs and modification works of commercial units, and residential or commercial redevelopment works. It serves logistics property investors, including investment funds and property owners; and logistics operators and direct users. The company was founded in 2015 and is based in Kwun Tong, Hong Kong."
     }
 }
