@@ -9898,5 +9898,194 @@
         "mcap": 552592448,
         "currency": "USD",
         "description": "Corsair Gaming, Inc., together with its subsidiaries, designs and sells gaming and streaming peripherals, components, and systems in Europe, the Middle East, North Africa, North America, Latin America, and the Asia Pacific. The company operates in two segments, Gamer and Creator Peripherals, and Gaming Components and Systems. It offers gamer and creator peripherals, including gaming keyboards, mice, headsets, and controllers; and streaming products, such as capture cards, stream decks, microphones and audio interfaces, facecam streaming cameras, studio accessories, sim racing products, gaming furniture, and others. The company also provides gaming components and systems comprising power supply units, cooling solutions, computer cases, SSD, and dynamic random access memory modules, as well as pre- and custom-built gaming personal computers and laptops, and gaming monitors. In addition, it offers personal computer gaming software, which includes software platforms, including iCUE for gamers and Elgato streaming suite for content creators, as well as digital services. The company sells its products through e-retail, retail, and direct-to-consumer channels, as well as distributors. The company was formerly known as Corsair Components (Cayman) Ltd and changed its name to Corsair Gaming, Inc. in 2018. Corsair Gaming, Inc. was incorporated in 1994 and is headquartered in Milpitas, California."
+    },
+    "KWEB": {
+        "ticker": "KWEB",
+        "name": "KraneShares CSI China Internet ",
+        "meta": "China Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will invest at least 80% of its net assets in instruments in its underlying index or in instruments that have economic characteristics similar to those in the underlying index. The index is designed to measure the equity market performance of investable publicly traded \"China-based companies\" whose primary business or businesses are in the Internet and Internet-related sectors, and are listed outside of Mainland China, as determined by the index provider. The fund is non-diversified."
+    },
+    "FIS": {
+        "ticker": "FIS",
+        "name": "Fidelity National Information S",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 26500265984,
+        "currency": "USD",
+        "description": "Fidelity National Information Services, Inc. engages in the provision of financial services technology solutions for financial institutions, businesses, and developers worldwide. It operates through Banking Solutions, Capital Market Solutions, and Corporate and Other segments. The company provides core processing and ancillary applications; mobile and online banking; fraud, risk management, and compliance; card and retail payment; electronic funds transfer and network; wealth and retirement; and item processing and output solutions. It also offers trading and asset, lending, leveraged and syndicated loan markets, and treasury and risk solutions. Fidelity National Information Services, Inc. was founded in 1968 and is headquartered in Jacksonville, Florida."
+    },
+    "ELF": {
+        "ticker": "ELF",
+        "name": "e.l.f. Beauty, Inc.",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 4472161280,
+        "currency": "USD",
+        "description": "e.l.f. Beauty, Inc., a beauty company, provides cosmetics and skin care products worldwide. The company offers eye, lip, face, paw, and skin care products. It offers products under the e.l.f. Cosmetics, e.l.f. Skin, Well People, Naturium, and Keys Soulcare brand names. The company sells its products through national and international retailer and direct-to-consumer through its e-commerce channel. e.l.f. Beauty, Inc. was formerly known as J.A. Cosmetics Holdings, Inc. and changed its name to e.l.f. Beauty, Inc. in April 2016. The company was founded in 2004 and is headquartered in Oakland, California."
+    },
+    "RIG": {
+        "ticker": "RIG",
+        "name": "Transocean Ltd (Switzerland)",
+        "meta": "Oil & Gas Drilling",
+        "type": "EQUITY",
+        "mcap": 6245061120,
+        "currency": "USD",
+        "description": "Transocean Ltd., together with its subsidiaries, provides offshore contract drilling services for oil and gas wells in Switzerland and internationally. The company contracts mobile offshore drilling rigs, related equipment, and work crews to drill oil and gas wells. It also operates a fleet of mobile offshore drilling units, consisting of ultra-deepwater floaters and harsh environment floaters. It serves integrated energy companies and their affiliates, government-owned or government-controlled energy companies, and other independent energy companies. Transocean Ltd. was founded in 1926 and is based in Steinhausen, Switzerland."
+    },
+    "LW": {
+        "ticker": "LW",
+        "name": "Lamb Weston Holdings, Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 7077712384,
+        "currency": "USD",
+        "description": "Lamb Weston Holdings, Inc. engages in the production, distribution, and marketing of frozen potato products in the United States, Canada, Mexico, and internationally. It offers frozen potatoes, commercial ingredients, and appetizers under the Lamb Weston brand, as well as under various customer labels. The company also provides its products under its owned or licensed brands, such as Grown in Idaho and Alexia, and other licensed brands, as well as under retailers' own brands. It sells its products through a network of internal sales personnel and independent brokers, agents, and distributors to quick service and full-service restaurants and chains, wholesale, grocery, mass merchants, club retailers, and specialty retailers, as well as foodservice distributors and institutions, including businesses, educational institutions, independent restaurants, regional chain restaurants, and convenience stores. Lamb Weston Holdings, Inc. was incorporated in 1950 and is headquartered in Eagle, Idaho."
+    },
+    "GILT": {
+        "ticker": "GILT",
+        "name": "Gilat Satellite Networks Ltd.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 1381984896,
+        "currency": "USD",
+        "description": "Gilat Satellite Networks Ltd., together with its subsidiaries, provides satellite-based broadband communication solutions in Israel, the United States, Peru, and internationally. It operates in three segments: Satellite Networks, Integrated Solutions, and Network Infrastructure and Services. The company designs and manufactures ground-based satellite communications equipment. Its portfolio consists of cloud-based satellite network platform, very small aperture terminals, amplifiers, modems, on-the-move antennas, IFC ESA antennas, solid state power amplifiers, block upconverters, transceivers, and transportable and portable terminals. The company also develops, manufactures, and supplies products and solutions for mission-critical defense and broadcast satellite communications systems, advanced on-the-move and on-the-pause satellite communications equipment, systems, and solutions, including airborne, ground-mobile satellite systems and solutions; and provides terrestrial, including fiber optic and wireless network, and satellite network construction and operation services. In addition, it provides managed satellite network services, network planning and optimization, remote network operation, call center support, hub and field operations, and communication networks construction and installation services; connectivity services, internet access, and telephony services; and builds telecommunication infrastructure using fiber-optic and wireless technologies for broadband connectivity. The company sells its products and solutions to communication service providers, satellite operators, Mobile Network Operators, and system integrators that use satellite communications to serve enterprise, social inclusion solutions, and government and residential users; and defense and homeland security organizations, as well as directly to end-users. Gilat Satellite Networks Ltd. was incorporated in 1987 and is headquartered in Petah Tikva, Israel."
+    },
+    "CHWY": {
+        "ticker": "CHWY",
+        "name": "Chewy, Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 11391711232,
+        "currency": "USD",
+        "description": "Chewy, Inc., together with its subsidiaries, engages in the e-commerce business in the United States. It offers pet food and treats, pet supplies and pet medications, and other pet-health products, as well as pet services. The company serves its customer through its retail websites and mobile applications, including Autoship subscription program. Chewy, Inc. was founded in 2010 and is based in Plantation, Florida."
+    },
+    "DAR": {
+        "ticker": "DAR",
+        "name": "Darling Ingredients Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 7635642368,
+        "currency": "USD",
+        "description": "Darling Ingredients Inc. develops, produces, and sells natural ingredients from edible and inedible bio-nutrients in North America, Europe, China, South America, and internationally. The company operates through three segments: Feed Ingredients, Food Ingredients, and Fuel Ingredients. It offers ingredients and customized specialty solutions for customers in the pharmaceutical, food, pet food, feed, industrial, fuel, bioenergy, and fertilizer industries. The company also collects and transforms various animal by-product streams into useable and specialty ingredients, such as collagen, edible fats, feed-grade fats, animal proteins and meals, plasma, pet food ingredients, organic fertilizers, yellow grease, fuel feedstock, green energy, natural casings, and hides. In addition, it recovers and converts used cooking oil and animal fats, and residual bakery products into valuable feed ingredients. Further, the company provides environmental services, including grease trap collection and disposal services to food service establishments. It primarily operates under the Rendac, Sonac, FASA, Ecoson, Rousselot, Gelnex, and CTH brands. The company was formerly known as Darling International Inc. and changed its name to Darling Ingredients Inc. in May 2014. Darling Ingredients Inc. was founded in 1882 and is headquartered in Irving, Texas."
+    },
+    "DRIP": {
+        "ticker": "DRIP",
+        "name": "Direxion Daily S&P Oil & Gas Ex",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index measures the performance of the domestic companies included in the integrated oil and gas, oil and gas exploration and production and oil and gas refining and marketing sub-industries as classified by the GICS. The fund invests at least 80% of its net assets in financial instruments, that, in combination, provide 2X daily inverse (opposite) or short exposure to the index or to ETFs that track the index, consistent with the fund\u2019s investment objective. It is non-diversified."
+    },
+    "EDC": {
+        "ticker": "EDC",
+        "name": "Direxion Emerging Markets Bull ",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its net assets (plus borrowing for investment purposes) in financial instruments, such as swap agreements, securities of the index, and exchange-traded funds (\"ETFs\") that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index is designed to represent the performance of large- and mid-capitalization securities across 24 emerging market countries. The fund is non-diversified."
+    },
+    "MVIS": {
+        "ticker": "MVIS",
+        "name": "Microvision, Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 230422240,
+        "currency": "USD",
+        "description": "MicroVision, Inc. develops and commercializes perception solutions for autonomy and mobility applications. It offers product suite, including perception software for industrial, automotive, and defense markets; MAVIN, a MEMS-based long-range sensor capable of small object detection; MOVIA, a flash-based short- to mid-range sensor; lidar sensors for non-automotive industrial markets, such as industrial, smart infrastructure, robotics, and commercial vehicles; and reference and validation software. The company also provides engineering services in connection with hardware and software products, as well as develops custom application software. In addition, it offers industrial and automotive perception systems and advanced driver-assistance systems (ADAS); and MOSAIK suite, a validation software tool for use by OEMs and Tier 1s to validate vehicle sensors for ADAS and autonomous driving applications. The company markets its products to customers directly, through trade shows, and its website. MicroVision, Inc. was founded in 1993 and is headquartered in Redmond, Washington."
+    },
+    "SWVL": {
+        "ticker": "SWVL",
+        "name": "Swvl Holdings Corp",
+        "meta": "Railroads",
+        "type": "EQUITY",
+        "mcap": 16942374,
+        "currency": "USD",
+        "description": "Swvl Holdings Corp., a technology-driven disruptive mobility company, provides mass transit solutions in Egypt, the Kingdom of Saudi Arabia, and the United Arab Emirates. It offers B2C product, which provides riders with a network of minibuses and other vehicles operating on fixed and semi-fixed routes throughout and between the cities it serves; and Swvl Business, a transport as a service and software as a service product for businesses, schools, municipal transit agencies, and other customers available through its Swvl platform. The company was founded in 2017 and is headquartered in Dubai, the United Arab Emirates."
+    },
+    "SR": {
+        "ticker": "SR",
+        "name": "Spire Inc.",
+        "meta": "Utilities - Regulated Gas",
+        "type": "EQUITY",
+        "mcap": 5012572672,
+        "currency": "USD",
+        "description": "Spire Inc., together with its subsidiaries, engages in the purchase, retail distribution, and sale of natural gas to residential, commercial, industrial, and other end-users of natural gas in the United States. The company operates through three segments: Gas Utility, Gas Marketing, and Midstream. It is also involved in the marketing of natural gas and related services; and transportation and storage of natural gas. In addition, the company engages in the operation of propane through its propane pipeline, risk management, and other activities. Spire Inc. was formerly known as The Laclede Group, Inc. and changed its name to Spire Inc. in April 2016. Spire Inc. was founded in 1857 and is based in Saint Louis, Missouri."
+    },
+    "GAMB": {
+        "ticker": "GAMB",
+        "name": "Gambling.com Group Limited",
+        "meta": "Gambling",
+        "type": "EQUITY",
+        "mcap": 159278432,
+        "currency": "USD",
+        "description": "Gambling.com Group Limited operates as a performance marketing company for the online gambling industry in North America, the United Kingdom, Ireland, rest of Europe, and internationally. The company offers digital marketing, and consumer and enterprise data subscription services for iGaming and social casino products. It also operates various branded websites, including Gambling.com, Bookies.com, Casinos.com, and Freebets.com. Gambling.com Group Limited was incorporated in 2006 and is based in Saint Helier, Jersey."
+    },
+    "D": {
+        "ticker": "D",
+        "name": "Dominion Energy, Inc.",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 53053632512,
+        "currency": "USD",
+        "description": "Dominion Energy, Inc. provides regulated electricity and natural gas services in the United States. It operates through Dominion Energy Virginia, Dominion Energy South Carolina, and Contracted Energy segments. The Dominion Energy Virginia segment engages in the generation, distribution, and transmission of electricity to approximately 2.8 million residential, commercial, industrial, and governmental customers in Virginia and North Carolina. The Dominion Energy South Carolina segment generates, transmits, and distributes electricity to approximately 0.8 million customers in the central, southern, and southwestern portions of South Carolina; and distributes natural gas to approximately 0.5 million residential, commercial, and industrial customers in South Carolina. The Contracted Energy segment is involved in the nonregulated long-term contracted renewable electric generation fleet and renewable natural gas facility. As of December 31, 2024, the company's portfolio of assets included approximately 30.3 GW of electric generating capacity, 10,600 miles of electric transmission lines, and 79,700 miles of electric distribution lines. The company was formerly known as Dominion Resources, Inc. Dominion Energy, Inc. was incorporated in 1983 and is headquartered in Richmond, Virginia."
+    },
+    "NOK": {
+        "ticker": "NOK",
+        "name": "Nokia Corporation Sponsored",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 39943032832,
+        "currency": "USD",
+        "description": "Nokia Oyj, together with its subsidiaries, provides mobile, fixed, and cloud network solutions in North and Latin America, Greater China, India, rest of the Asia Pacific, Europe, the Middle East, and Africa. It operates in four segments: Network Infrastructure, Mobile Networks, Cloud and Network Services, and Nokia Technologies. The company offers fixed network solutions, such as fiber and copper technologies, access infrastructure, in-home Wi-Fi solutions, and cloud and virtualization services; IP network solutions, which delivers IP routing and data center networking solutions for residential, mobile, enterprise, and cloud applications; and optical networks solutions, which provides optical transport networks for metro, regional, and long-haul applications. It also provides mobile technology products and services for radio access networks and microwave radio links for transport networks; and network management solutions, as well as network planning, optimization, network deployment, and technical support services. In addition, the company offers cloud and network services, including open, secure, automated, and scalable software and solutions; and 5G core, secure autonomous networks, private wireless and industrial edge, and network APIs. Further, it licenses intellectual property, including patents, technologies, and the Nokia brand. The company serves its products and services to communications service providers, industrial enterprises, governments, digital industries, webscales and hyperscalers, licensees, and the defense sector. Nokia Oyj was founded in 1865 and is headquartered in Espoo, Finland."
+    },
+    "JOBY": {
+        "ticker": "JOBY",
+        "name": "Joby Aviation, Inc.",
+        "meta": "Airports & Air Services",
+        "type": "EQUITY",
+        "mcap": 10234707968,
+        "currency": "USD",
+        "description": "Joby Aviation, Inc., a vertically integrated air mobility company, engages in building an electric vertical takeoff and landing aircraft optimized to deliver air transportation as a service in the United States and Dubai. The company intends to build an aerial ridesharing service, as well as developing an app-based platform that will enable consumers to book rides. Joby Aviation, Inc. was founded in 2009 and is headquartered in Santa Cruz, California."
+    },
+    "VZLA": {
+        "ticker": "VZLA",
+        "name": "Vizsla Silver Corp.",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 1388376320,
+        "currency": "USD",
+        "description": "Vizsla Silver Corp. engages in the acquisition, exploration, and development of mineral resource properties in Canada and Mexico. The company explores for gold, silver, and copper deposits. It owns 100% interest in the Panuco-Copala silver-gold project covering an area of 7,189.5 hectares located in southern Sinaloa, Mexico. The company was formerly known as Vizsla Resources Corp. and changed its name to Vizsla Silver Corp. in February 2021. The company was incorporated in 2017 and is headquartered in Vancouver, Canada."
+    },
+    "ZBH": {
+        "ticker": "ZBH",
+        "name": "Zimmer Biomet Holdings, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 17679775744,
+        "currency": "USD",
+        "description": "Zimmer Biomet Holdings, Inc., together with its subsidiaries, operates as a medical technology company worldwide. The company designs, manufactures, and markets orthopedic reconstructive products, such as knee and hip products; S.E.T. products, including sports medicine, biologics, foot and ankle, extremities, and trauma products; craniomaxillofacial and thoracic products comprising face and skull reconstruction products, as well as products that fixate and stabilize the bones of the chest to facilitate healing or reconstruction after open heart surgery, trauma, or for deformities of the chest. It offers technology and data, bone cement, and surgical products. The company's products and solutions are used to treat patients suffering from disorders of, or injuries to, bones, joints, or supporting soft tissues. It serves orthopedic surgeons, neurosurgeons, hospitals, stocking distributors, healthcare dealers, and other specialists, as well as agents, healthcare purchasing organizations, or buying groups. It also develops surgical robot to enable placement of patient optimized orthopedic implants in the United States. The company was formerly known as Zimmer Holdings, Inc. and changed its name to Zimmer Biomet Holdings, Inc. in June 2015. Zimmer Biomet Holdings, Inc. was founded in 1927 and is headquartered in Warsaw, Indiana."
+    },
+    "UPWK": {
+        "ticker": "UPWK",
+        "name": "Upwork Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 2542067968,
+        "currency": "USD",
+        "description": "Upwork Inc., together with its subsidiaries, operates a work marketplace that connects businesses with various independent professionals and agencies in the United States, India, the Philippines, and internationally. The company's work marketplace provides access to talent with various skills across a range of categories, including administrative support, sales and marketing, design and creative, and customer service, as well as web, mobile, and software development. Its work marketplace also enables clients to streamline workflows, such as talent sourcing, outreach, and contracting. The company's work marketplace offers access to various functionalities for remote engagements with talent, including communication and collaboration, ability to receive talent invoices through their work marketplace, and payment protection. Its marketplace offerings include Upwork Payroll, enterprise, managed, and escrow services. The company was formerly known as Elance-oDesk, Inc. and changed its name to Upwork Inc. in May 2015. Upwork Inc. was incorporated in 2013 and is headquartered in Palo Alto, California."
+    },
+    "LB": {
+        "ticker": "LB",
+        "name": "LandBridge Company LLC",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 4473703936,
+        "currency": "USD",
+        "description": "LandBridge Company LLC, together with its subsidiaries, owns and manages land and resources to support and enhance oil and natural gas development in the United States. It owns surface acres in and around the Delaware Basin in Texas and New Mexico. The company holds a portfolio of oil and gas royalties. It sells brackish water and other surface composite materials. The company was founded in 2021 and is based in Houston, Texas. LandBridge Company LLC operates as a subsidiary of LandBridge Holdings LLC."
     }
 }
