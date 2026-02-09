@@ -508,13 +508,15 @@ def filter_and_process(stocks):
             
             if curr_p < MIN_PRICE or avg_v < MIN_AVG_VOLUME: continue
 
-            # Social & Momentum Math
             name = str(info.get('name', t)).replace('"', '').strip()[:NAME_MAX_WIDTH]
             cur_m = int(stock.get('mentions') or 0)
             old_m = int(stock.get('mentions_24h_ago') or 0)
             
+            v_now = float(hist['Volume'].iloc[-1].item() if hasattr(hist['Volume'].iloc[-1], 'item') else hist['Volume'].iloc[-1])
+            v_avg = float(avg_v.item() if hasattr(avg_v, 'item') else avg_v)
+
             m_perc = int(((cur_m - old_m) / (old_m if old_m > 0 else 1) * 100))
-            s_perc = int((hist['Volume'].iloc[-1] / avg_v * 100)) if avg_v > 0 else 0
+            s_perc = int((v_now / v_avg * 100)) if v_avg > 0 else 0
             
             try: mcap = float(info.get('mcap', 0) or 0)
             except: mcap = 0
