@@ -13,21 +13,27 @@ from bs4 import BeautifulSoup
 import shutil
 import numpy as np
 
-# ==========================================
-#                   CONFIGURATION
-# ==========================================
+# ==============================================================================
+#                               SECTION 1: CONFIGURATION
+# ==============================================================================
+# Paths and Environment Settings
+# ------------------------------------------------------------------------------
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PUBLIC_DIR = os.path.join(SCRIPT_DIR, "public")
 CACHE_FILE = os.path.join(SCRIPT_DIR, "ape_cache.json")
 MARKET_DATA_CACHE_FILE = os.path.join(SCRIPT_DIR, "market_data.pkl")
 HISTORY_FILE = os.path.join(SCRIPT_DIR, "market_history.json")
 DELISTED_CACHE_FILE = os.path.join(SCRIPT_DIR, "delisted_cache.json")
+
+# Timeouts and Retention
 CACHE_EXPIRY_SECONDS = 1800 # 30 minutes
 RETENTION_DAYS = 3
 DELISTED_RETRY_DAYS = 1
 TOOLTIP_HISTORY_DAYS = 12
 
-# --- FILTERS & LAYOUT ---
+# ------------------------------------------------------------------------------
+# Filters & Algorithm Tuning
+# ------------------------------------------------------------------------------
 MIN_PRICE = 1.00
 MIN_AVG_VOLUME = 100000
 AVG_VOLUME_DAYS = 30
@@ -38,17 +44,28 @@ REQUEST_DELAY_MAX = 3.0
 TICKER_FIXES = {}
 PERMANENT_BLACKLIST = ['']
 
-# ANSI COLORS
+# ------------------------------------------------------------------------------
+# Console Presentation (ANSI Colors)
+# ------------------------------------------------------------------------------
 C_GREEN = '\033[92m'
 C_RED = '\033[91m'
 C_YELLOW = '\033[93m'
 C_CYAN = '\033[96m'
 C_RESET = '\033[0m'
 
+# Network Session Setup
 session = requests.Session()
 session.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
 
+
+# ==============================================================================
+#                               SECTION 2: DATA PERSISTENCE CLASS
+# ==============================================================================
 class HistoryTracker:
+    """
+    Manages the historical JSON data, calculating velocity, acceleration,
+    and maintaining the sliding window of data points.
+    """
     def __init__(self, filepath):
         self.filepath = filepath
         self.data = self._load()
@@ -216,6 +233,10 @@ class HistoryTracker:
         with open(self.filepath, 'w') as f:
             json.dump(self.data, f, indent=4)
 
+
+# ==============================================================================
+#                               SECTION 3: UTILITY & HELPER FUNCTIONS
+# ==============================================================================
 def load_cache(filepath):
     """Generic loader for any JSON cache file"""
     if os.path.exists(filepath):
@@ -231,6 +252,7 @@ def save_cache(filepath, cache_data):
     except: pass
 
 def fetch_meta_data_robust(ticker):
+    """Fetches descriptive metadata (Sector, Name, Market Cap) from yfinance."""
     name, meta, quote_type, mcap, currency, description = ticker, "Unknown", "EQUITY", 0, "USD", ""
 
     try:
@@ -301,17 +323,32 @@ def calculate_rsi(series, period=14):
     except Exception:
         return 0
 
+
+# ==============================================================================
+#                               SECTION 4: CORE ANALYSIS ENGINE
+# ==============================================================================
 def filter_and_process(stocks):
+    """
+    The main logic pipeline:
+    1. Check Lottery (retries banned stocks)
+    2. Filter valid tickers
+    3. Fetch Metadata
+    4. Fetch Market Data (Batch Mode)
+    5. Construct DataFrame & Calculate Indicators (RSI, Surge, Squeeze)
+    6. Score and Sort
+    """
     if not stocks: return pd.DataFrame()
 
     # --- LOAD CACHES SEPARATELY ---
-    local_cache = load_cache(CACHE_FILE)           
+    local_cache = load_cache(CACHE_FILE)            
     delisted_cache = load_cache(DELISTED_CACHE_FILE) 
     
     now = datetime.datetime.now(datetime.UTC)
     updated_delisted = False 
 
-    # 1. THE LOTTERY (Random Retry)
+    # -----------------------------------------------------
+    # Step 1. THE LOTTERY (Random Retry)
+    # -----------------------------------------------------
     tickers_to_retry = []
     banned_tickers = list(delisted_cache.keys())
     
@@ -324,7 +361,9 @@ def filter_and_process(stocks):
                 if t in delisted_cache: del delisted_cache[t]
             updated_delisted = True
 
-    # 2. MAIN FILTER LOOP 
+    # -----------------------------------------------------
+    # Step 2. MAIN FILTER LOOP 
+    # -----------------------------------------------------
     us_tickers = []
     for s in stocks:
         raw_ticker = s['ticker']
@@ -336,7 +375,9 @@ def filter_and_process(stocks):
     us_tickers = list(set(us_tickers))
     tracker = HistoryTracker(HISTORY_FILE)
     
-    # 3. METADATA FETCHING
+    # -----------------------------------------------------
+    # Step 3. METADATA FETCHING
+    # -----------------------------------------------------
     missing = [t for t in us_tickers if t not in local_cache and t not in delisted_cache]
     if missing:
         print(f"{C_YELLOW}Fetching metadata for {len(missing)} NEW items...{C_RESET}")
@@ -359,7 +400,9 @@ def filter_and_process(stocks):
             time.sleep(0.75) 
         save_cache(CACHE_FILE, local_cache)
 
-    # 4. MARKET DATA FETCHING (Batch Mode)
+    # -----------------------------------------------------
+    # Step 4. MARKET DATA FETCHING (Batch Mode)
+    # -----------------------------------------------------
     valid_tickers = [t for t in us_tickers if t not in delisted_cache]
     market_data = pd.DataFrame()
     use_cache = os.path.exists(MARKET_DATA_CACHE_FILE) and (time.time() - os.path.getmtime(MARKET_DATA_CACHE_FILE)) < CACHE_EXPIRY_SECONDS
@@ -398,7 +441,9 @@ def filter_and_process(stocks):
 
         if not market_data.empty: market_data.to_pickle(MARKET_DATA_CACHE_FILE)
 
-    # 5. BUILD THE DATAFRAME
+    # -----------------------------------------------------
+    # Step 5. BUILD THE DATAFRAME
+    # -----------------------------------------------------
     final_list = []
 
     for stock in stocks:
@@ -554,7 +599,9 @@ def filter_and_process(stocks):
         print(f"{C_GREEN}[+] Saving updated delisted cache...{C_RESET}")
         save_cache(DELISTED_CACHE_FILE, delisted_cache)
 
-    # 6. SCORING & SAVING
+    # -----------------------------------------------------
+    # Step 6. SCORING & SAVING
+    # -----------------------------------------------------
     df = pd.DataFrame(final_list)
     if not df.empty and 'Sym' in df.columns:
         df = df.drop_duplicates(subset=['Sym'], keep='first')
@@ -612,6 +659,10 @@ def filter_and_process(stocks):
     
     return pd.DataFrame()
 
+
+# ==============================================================================
+#                               SECTION 5: DATA INGESTION (API)
+# ==============================================================================
 def get_all_trending_stocks():
     all_results, page = [], 1
     max_retries = 3
@@ -665,6 +716,10 @@ def get_all_trending_stocks():
 
     return all_results
 
+
+# ==============================================================================
+#                        SECTION 6: FRONTEND GENERATION (HTML/CSS/JS)
+# ==============================================================================
 def export_interactive_html(df):
     try:
         export_df = df.copy()
@@ -934,7 +989,9 @@ def export_interactive_html(df):
         table_html = f'<div class="table-scroll-container">{raw_table}</div>'
         utc_timestamp = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
         
-        # --- 3. FINAL HTML TEMPLATE ---
+        # ---------------------------------------------------------
+        #  HTML TEMPLATE (Embedded CSS/JS)
+        # ---------------------------------------------------------
         html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Ape Wisdom Analysis</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
@@ -942,7 +999,7 @@ def export_interactive_html(df):
         .container-fluid {{
             visibility: hidden;
             opacity: 0;
-            transition: visibility 0s, opacity 0.5s ease-in-out;
+            transition: visibility 0s, opacity 0.3s ease-in-out;
         }}
 
         body.loaded .container-fluid {{
@@ -983,13 +1040,13 @@ def export_interactive_html(df):
                 top: 130%; 
                 left: 50%;
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                font-size: 13px;       
-                line-height: 1.5;      
-                font-weight: 400;      
-                text-align: left;      
-                color: #e0e0e0;        
+                font-size: 13px;        
+                line-height: 1.5;       
+                font-weight: 400;       
+                text-align: left;       
+                color: #e0e0e0;         
                 background-color: #1a1a1a; 
-                padding: 12px 16px;        
+                padding: 12px 16px;         
                 border-radius: 8px; 
                 border: 1px solid #444;
                 text-transform: none; 
@@ -1032,7 +1089,7 @@ def export_interactive_html(df):
                 position: absolute !important;
                 z-index: 9999 !important;
                 top: 110% !important; 
-                left: 0 !important;            
+                left: 0 !important;           
                 opacity: 0;
                 transition: opacity 0.2s;
                 font-family: monospace !important;
@@ -1308,13 +1365,13 @@ def export_interactive_html(df):
             .dataTables_filter {{ position: absolute; left: 48%; transform: translateX(-50%); width: auto; margin: 0 !important; float: none !important; z-index: 10; }}
 
             .dataTables_filter input {{
-                width: 400px !important;
-                max-width: 400px !important;
+                width: 450px !important;
+                max-width: 90% !important;
                 background: #181818 !important;
                 color: #fff !important;
                 border: 1px solid #333 !important;
                 border-radius: 20px !important;
-                padding: 1px 1px !important;
+                padding: 1px 15px !important;
                 outline: none !important;
                 text-align: center !important;
                 font-size: 16px !important;
@@ -1411,6 +1468,13 @@ def export_interactive_html(df):
                 color: #cccccc !important;
                 opacity: 1 !important;
             }}
+
+            .dataTables_length select {{
+                min-width: 70px !important;
+                padding-right: 30px !important;
+                background-position: right 5px center !important;
+            }}
+
         </style>
         </head>
         <body>
@@ -1489,17 +1553,22 @@ def export_interactive_html(df):
 
                     <div class="btn-group" role="group">
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapAll" checked onclick="toggleMcap('all')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapAll" style="font-size: 0.8rem; padding: 4px 4px;">ALL</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapAll" style="font-size: 0.8rem; padding: 4px 4px;" title="Show All Market Caps">ALL</label>
+                        
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMega" onclick="toggleMcap('mega')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.8rem; padding: 4px 4px;">MEG</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.8rem; padding: 4px 4px;" title="Mega Cap: > $200B">MEG</label>
+                        
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapLarge" onclick="toggleMcap('large')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.8rem; padding: 4px 4px;">LRG</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.8rem; padding: 4px 4px;" title="Large Cap: $10B - $200B">LRG</label>
+                        
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMid" onclick="toggleMcap('mid')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.8rem; padding: 4px 4px;">MID</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.8rem; padding: 4px 4px;" title="Mid Cap: $2B - $10B">MID</label>
+                        
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapSmall" onclick="toggleMcap('small')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.8rem; padding: 4px 4px;">SML</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.8rem; padding: 4px 4px;" title="Small Cap: $250M - $2B">SML</label>
+                        
                         <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMicro" onclick="toggleMcap('micro')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.8rem; padding: 4px 4px;">MIC</label>
+                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.8rem; padding: 4px 4px;" title="Micro Cap: < $250M">MIC</label>
                     </div>
                 </div>
 
@@ -1862,7 +1931,7 @@ def export_interactive_html(df):
 
             "language": {{
                 "search": "",
-                "searchPlaceholder": "🔍 Search Ticker..."
+                "searchPlaceholder": "🔍 Search Symbol, Industry, or Value..."
             }},
 
             "initComplete": function(settings, json) {{
@@ -1958,6 +2027,10 @@ def export_interactive_html(df):
         print(f"{C_RED}[!] Error generating HTML: {e}{C_RESET}")
         return None
 
+
+# ==============================================================================
+#                               SECTION 7: NOTIFICATIONS
+# ==============================================================================
 def send_discord_link(filename):
     print(f"\n{C_YELLOW}--- Sending Link to Discord... ---{C_RESET}")
     DISCORD_URL = os.environ.get('DISCORD_WEBHOOK')
@@ -1988,6 +2061,10 @@ def send_discord_link(filename):
     except Exception as e:
         print(f"{C_RED}[!] Exception sending Discord link: {e}{C_RESET}")
 
+
+# ==============================================================================
+#                               SECTION 8: MAINTENANCE
+# ==============================================================================
 def cleanup_old_html_files(days_to_keep=14):
     """
     Scans the PUBLIC_DIR for scan_*.html files.
@@ -2032,6 +2109,10 @@ def cleanup_old_html_files(days_to_keep=14):
     else:
         print(f"{C_GREEN}  > Cleanup complete. Removed {count} files.{C_RESET}")
 
+
+# ==============================================================================
+#                               SECTION 9: MAIN EXECUTION FLOW
+# ==============================================================================
 if __name__ == "__main__":
     # --- CONFIGURATION FOR DATA PERSISTENCE ---
     LATEST_DATA_FILE = os.path.join(SCRIPT_DIR, "latest_scan_data.pkl")
