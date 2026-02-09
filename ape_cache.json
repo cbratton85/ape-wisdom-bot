@@ -9475,5 +9475,59 @@
         "mcap": 743363200,
         "currency": "USD",
         "description": "Vishay Precision Group, Inc. engages in the precision measurement and sensing technologies business in the United States, Europe, Israel, Asia, and Canada. It operates through three segments: Sensors, Weighing Solutions, and Measurement Systems. Its product portfolio includes precision resistors, strain gages, load cells and force measurement transducers, on-board weighing systems, and control process weighing products; rolling force measuring load cell systems and pressure transmitters; web tension measurement load cells and systems; optical strip width gages; and laser velocimeters for speed and length measurements and closed-loop crop optimization control systems for optimal strip cuts. The company also offers data acquisition systems and sensors for product safety testing; thermal-mechanical simulation systems for metallurgical research; and conditioning, data acquisition, and control systems, as well as electronic displays, signal processors, microelectromechanical system sensors, cabling, system software, and communications software/hardware. Its products are used in waste management, bulk hauling, logging, scales manufacturing, engineering systems, pharmaceutical, oil, chemical, steel, paper, and food industries, as well as test and measurement, steel, medical, construction, agricultural, and consumer markets. The company offers its products under the Alpha Electronics, Powertron, Vishay Foil Resistors, Micro-Measurements, APR, Celtron, Revere, Sensortronics, Tedea-Huntleigh, Stress-tek, Vulcan, BLH Nobel, KELK, and DTS brands. Vishay Precision Group, Inc. was incorporated in 2009 and is headquartered in Malvern, Pennsylvania."
+    },
+    "BNDX": {
+        "ticker": "BNDX",
+        "name": "Vanguard Total International Bo",
+        "meta": "Global Bond-USD Hedged",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund employs an indexing investment approach designed to track the performance of the Bloomberg Global Aggregate ex-USD Float Adjusted RIC Capped Index (USD Hedged). This index provides a broad-based measure of the global, investment-grade, fixed-rate debt markets. It is non-diversified."
+    },
+    "WSO": {
+        "ticker": "WSO",
+        "name": "Watsco, Inc.",
+        "meta": "Industrial Distribution",
+        "type": "EQUITY",
+        "mcap": 17078019072,
+        "currency": "USD",
+        "description": "Watsco, Inc., together with its subsidiaries, engages in the distribution of air conditioning, heating, and refrigeration equipment, and related parts and supplies in the United States, Canada, Latin America, and the Caribbean. The company distributes equipment, including residential ducted and ductless air conditioners, such as gas, electric, and oil furnaces; commercial air conditioning and heating equipment systems; and other specialized equipment. It also offers parts comprising replacement compressors, evaporator coils, motors, and other component parts; and supplies, such as thermostats, insulation materials, refrigerants, ductworks, grills, registers, sheet metals, tools, copper tubing, concrete pads, tapes, adhesives, and other ancillary supplies, as well as plumbing and bathroom remodeling supplies. The company serves contractors and dealers that service the replacement and new construction markets for residential and light commercial central air conditioning, heating, and refrigeration systems. Watsco, Inc. was incorporated in 1956 and is headquartered in Miami, Florida."
+    },
+    "BATT": {
+        "ticker": "BATT",
+        "name": "Amplify Lithium & Battery Techn",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will normally invest at least 80% of its net assets in the securities that comprise the index. The index seeks to provide exposure to global companies deriving material revenue associated with the development, production and use of lithium battery technology. It is non-diversified."
+    },
+    "SAFE": {
+        "ticker": "SAFE",
+        "name": "Safehold Inc. New",
+        "meta": "REIT - Diversified",
+        "type": "EQUITY",
+        "mcap": 1081367936,
+        "currency": "USD",
+        "description": "Safehold Inc. (NYSE: SAFE) is revolutionizing real estate ownership by providing a new and better way for owners to unlock the value of the land beneath their buildings. Having created the modern ground lease industry in 2017, Safehold continues to help owners of high quality multifamily, office, industrial, hospitality, student housing, life science and mixed-use properties generate higher returns with less risk. The Company, which is taxed as a real estate investment trust (REIT), seeks to deliver safe, growing income and long-term capital appreciation to its shareholders."
+    },
+    "IBB": {
+        "ticker": "IBB",
+        "name": "iShares Biotechnology ETF",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 12196105216,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents. It is non-diversified."
+    },
+    "NLR": {
+        "ticker": "NLR",
+        "name": "VanEck Uranium and Nuclear ETF",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund normally invests at least 80% of its total assets in securities that comprise the fund's benchmark index. The index includes equity securities and depositary receipts issued by companies involved in uranium and nuclear energy. The fund is non-diversified."
     }
 }
