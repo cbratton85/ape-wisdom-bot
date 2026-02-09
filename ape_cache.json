@@ -10087,5 +10087,203 @@
         "mcap": 4473703936,
         "currency": "USD",
         "description": "LandBridge Company LLC, together with its subsidiaries, owns and manages land and resources to support and enhance oil and natural gas development in the United States. It owns surface acres in and around the Delaware Basin in Texas and New Mexico. The company holds a portfolio of oil and gas royalties. It sells brackish water and other surface composite materials. The company was founded in 2021 and is based in Houston, Texas. LandBridge Company LLC operates as a subsidiary of LandBridge Holdings LLC."
+    },
+    "NCNO": {
+        "ticker": "NCNO",
+        "name": "nCino, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2126937344,
+        "currency": "USD",
+        "description": "nCino, Inc., a software-as-a-service company, provides software solutions to financial institutions in the United States, the United Kingdom, and internationally. It offers solutions on the nCino Platform, including Onboarding solution that streamlines and enhances the customer onboarding process through a digital platform for credit and non-credit onboarding, commercial account opening, and enterprise-level onboarding; and Account Opening solution, which includes Deposit Account Opening solution for consumers and small businesses. The company also provides Lending solution, which provides a loan origination platform for commercial, consumer, small business, and mortgage lending, such as Commercial Loan Origination System that automates loan lifecycle; Consumer Lending solution, which offers an omnichannel solution with automated credit decisioning and integrations; and Small Business Loan Origination solution for automation and machine learning. In addition, it offers Portfolio Management solution to manage credit risks, monitor performance, and uncover growth opportunities through data-driven platform; and Portfolio Analytics solution, which offers customizable dashboards to track loan, deposit, and application data. The company serves community banks, credit unions, enterprise banks, independent mortgage banks, building societies, and mutuals directly through its business development managers, account executives, field sales engineers, and customer success managers. nCino, Inc. was founded in 2011 and is headquartered in Wilmington, North Carolina."
+    },
+    "WOOF": {
+        "ticker": "WOOF",
+        "name": "Petco Health and Wellness Compa",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 717172544,
+        "currency": "USD",
+        "description": "Petco Health and Wellness Company, Inc., operates as a health and wellness company, focuses on enhancing the lives of pets, pet parents, and its Petco partners in the United States, Mexico, and Puerto Rico. The company provides veterinary care, grooming, training, tele-health, and Vital Care and pet health insurance services, as well as veterinary services through Vetco mobile clinics. It also offers pet consumables, supplies, and services through its petco.com, petcoach.co, petinsurancequotes.com, and pupbox.com websites. The company offers its products under the WholeHearted, Reddy, and Well & Good brands. Petco Health and Wellness Company, Inc. was founded in 1965 and is headquartered in San Diego, California."
+    },
+    "OSCR": {
+        "ticker": "OSCR",
+        "name": "Oscar Health, Inc.",
+        "meta": "Healthcare Plans",
+        "type": "EQUITY",
+        "mcap": 3608103424,
+        "currency": "USD",
+        "description": "Oscar Health, Inc. operates as a healthcare technology company in the United States. The company offers health plans to individuals, families, employees, and small group markets. It also provides +Oscar platform that power others throughout the healthcare system; Campaign Builder platform, an engagement and recommendation platform for providers and payors; and reinsurance products. The company was formerly known as Mulberry Health Inc. and changed its name to Oscar Health, Inc. in January 2021. Oscar Health, Inc. was incorporated in 2012 and is headquartered in New York, New York."
+    },
+    "UUP": {
+        "ticker": "UUP",
+        "name": "Invesco DB USD Index Bullish Fu",
+        "meta": "Trading--Miscellaneous",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests in futures contracts in an attempt to track its index. The index is calculated to reflect the changes in market value over time, whether positive or negative, of long positions in DX Contracts."
+    },
+    "BTU": {
+        "ticker": "BTU",
+        "name": "Peabody Energy Corporation",
+        "meta": "Thermal Coal",
+        "type": "EQUITY",
+        "mcap": 4618976256,
+        "currency": "USD",
+        "description": "Peabody Energy Corporation engages in coal mining business. It operates through Seaborne Thermal, Seaborne Metallurgical, Powder River Basin, Other U.S. Thermal, and Corporate and Other segments. The company is involved in the mining, preparation, and sale of thermal coal primarily to electric utilities; mining of bituminous and sub-bituminous coal deposits; utilization of surface and underground extraction processes to mine low-sulfur and high British thermal unit thermal coal; and mining metallurgical coal, such as hard coking coal, semi-hard coking coal, semi-soft coking coal, and pulverized coal injection coal. It also supplies coal primarily to electricity generators, industrial facilities, and steel manufacturers. In addition, the company engages in trading of coal and freight-related contracts, as well as provides transportation-related services. It operates in the United States, Japan, China, Australia, Taiwan, Indonesia, Brazil, Malaysia, Belgium, India, France, Vietnam, South Korea, Germany, and internationally. Peabody Energy Corporation was founded in 1883 and is headquartered in Saint Louis, Missouri."
+    },
+    "LPTH": {
+        "ticker": "LPTH",
+        "name": "LightPath Technologies, Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 606249216,
+        "currency": "USD",
+        "description": "LightPath Technologies, Inc. designs, develops, manufactures, and distributes optical systems and assemblies in the United States. It offers precision molded glass aspheric optics, molded and diamond-turned infrared aspheric lenses, spherical lenses, and other optical components used to produce products that manipulate light; and infrared products, including catalog and custom infrared optics. The company also offers cooled and uncooled camera systems and modules for long range surveillance and detection, and engineering services. The company's products are used in defense products, border security, perimeter security, night vision systems, medical devices, laser aided industrial tools, automotive safety applications, telecommunications, machine vision and sensors, and other sectors. It sells its products directly to customers in Europe and Asia. LightPath Technologies, Inc. was founded in 1985 and is headquartered in Orlando, Florida."
+    },
+    "SATS": {
+        "ticker": "SATS",
+        "name": "EchoStar Corporation",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 32972173312,
+        "currency": "USD",
+        "description": "EchoStar Corporation, together with its subsidiaries, provides networking technologies and services in the United States and internationally. It operates through four segments: Pay-TV, Retail Wireless, 5G Network Deployment, Broadband and Satellite Services. The Pay-TV segment offers a direct broadcast and fixed satellite services; designs, develops, and distributes receiver system; and provides digital broadcast operations, including satellite uplinking/downlinking, transmission and, other services to third-party pay-TV providers; and multichannel, live-linear and on-demand streaming over-the-top internet-based domestic, international, Latino, and Freestream video programming services under the DISH and SLING brand names. Its Retail Wireless segment provides prepaid and postpaid wireless services under the Boost Mobile, Boost postpaid, and Gen Mobile brands, as well various wireless devices. The Network Deployment segment deploys a facilities-based 5G broadband network and commercializes deployment of 5G VoNR. The Broadband and Satellite Services offers broadband services to consumer customers, which include home, and small to medium-sized businesses; and satellite and multi-transport technologies, and managed network services to telecommunications providers, aeronautical service providers, civilian and defense government entities, and other enterprise customers. EchoStar Corporation was incorporated in 2007 and is headquartered in Englewood, Colorado."
+    },
+    "TERM": {
+        "ticker": "TERM",
+        "name": "EquityCompass Tactical Risk Man",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The investment seeks to provide long term capital appreciation with capital preservation as a secondary objective.\n The fund will seek to achieve its investment objectives by investing in equity securities of companies domiciled in the U.S. or listed on a U.S. securities exchange. The fund&#39;s strategy seeks to provide exposure to U.S. listed equity securities and to avoid large, prolonged market losses and reduce volatility. It may also invest in inverse ETFs which seek to provide investment results that match a negative return of the performance of an underlying index like the S&P 500\u00c2\u00ae Index."
+    },
+    "SNN": {
+        "ticker": "SNN",
+        "name": "Smith & Nephew SNATS, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 14838983680,
+        "currency": "USD",
+        "description": "Smith & Nephew plc, together with its subsidiaries, develops, manufactures, markets, and sells medical devices and services in the United Kingdom, the United States, and internationally. It operates in three segments: Orthopaedics, Sports Medicine & ENT, and Advanced Wound Management. The company offers knee implant products for knee replacement procedures; hip implants for revision procedures; trauma and extremities products that include internal and external devices used in the stabilization of severe fractures and deformity correction procedures; and other reconstruction products. It also provides sports medicine joint repair products comprise instruments, technologies, and implants to perform minimally invasive surgery, as well as treating soft tissue injuries and degenerative conditions of the shoulder, knee, hip, and small joints. In addition, the company offers arthroscopic enabling technologies comprising fluid management equipment for surgical access, cameras, digital image capture, scopes, light sources, and monitors to assist with visualization inside the joints, radio frequency, electromechanical and mechanical tissue resection devices, and hand instruments for removing damaged tissue; and ear, nose, and throat solutions. Further, it provides advanced wound care products for the treatment and prevention of acute and chronic wounds, leg, diabetic and pressure ulcers, burns, and post-operative wounds; advanced wound bioactives, such as biologics and other bioactive technologies for debridement and dermal repair/regeneration, and regenerative medicine products, including skin, bone graft, and articular cartilage substitutes; and advanced wound devices, such as traditional and single-use negative pressure wound therapy, and hydrosurgery systems. The company serves the healthcare providers. Smith & Nephew plc was founded in 1856 and is headquartered in Watford, the United Kingdom."
+    },
+    "ROK": {
+        "ticker": "ROK",
+        "name": "Rockwell Automation, Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 46362669056,
+        "currency": "USD",
+        "description": "Rockwell Automation, Inc., together with its subsidiaries, provides industrial automation and digital transformation solutions in North America, Europe, the Middle East, Africa, the Asia Pacific, and Latin America. It operates in three segments: Intelligent Devices, Software & Control, and Lifecycle Services. The company offers drives, motion, advanced material handling, safety, sensing, industrial components, hardware, software, and configured-to-order products; and control and visualization software and hardware, digital twin, simulation and information software, network and security infrastructure, and custom-engineered systems. It also provides digital consulting, professional services, engineered-to-order solutions, recurring services, cybersecurity, safety, remote monitoring, customer technical support and repair, asset management and optimization consulting, and training, as well as spare parts. The company sells its products through independent distributors in relation to its direct sales force. It serves discrete end markets, including automotive, semiconductor, e-commerce, and warehouse automation; hybrid end markets, such as food and beverage, life sciences, and tire; and process end markets comprising energy, mining, and chemicals. The company was formerly known as Rockwell International Corporation and changed its name to Rockwell Automation, Inc. in February 2002. Rockwell Automation, Inc. was founded in 1903 and is headquartered in Milwaukee, Wisconsin."
+    },
+    "VSME": {
+        "ticker": "VSME",
+        "name": "VS Media Holdings Limited",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 4015997,
+        "currency": "USD",
+        "description": "VS MEDIA Holdings Limited, an investment holding company, operates a network of digital creators who create and upload content to social media platforms in Hong Kong and Taiwan. It provides marketing services for brands, including strategy development, creator selection, branding and messaging, content creation and distribution, social media amplification, social media engagement, and data insights and measurement; and creates and publishes content on social media platforms. The company also resells brands' products to its creators and helps them to build their own e-commerce businesses; and sells products directly to customers. It serves creators in the lifestyle, travel, food, gaming, tourism, fast-moving consumer goods, and retail sectors. The company was founded in 2013 and is headquartered in Kwun Tong, Hong Kong."
+    },
+    "HCC": {
+        "ticker": "HCC",
+        "name": "Warrior Met Coal, Inc.",
+        "meta": "Coking Coal",
+        "type": "EQUITY",
+        "mcap": 4932394496,
+        "currency": "USD",
+        "description": "Warrior Met Coal, Inc. engages in the production and export of non-thermal steelmaking coal for the steel production by metal manufacturers in Europe, South America, and Asia. The company offers hard-coking coal through the operation of underground mines located in Alabama. It also sells natural gas extracted as a byproduct from coal production. The company was incorporated in 2015 and is headquartered in Brookwood, Alabama."
+    },
+    "PBD": {
+        "ticker": "PBD",
+        "name": "Invesco Global Clean Energy ETF",
+        "meta": "Global Small/Mid Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 90% of its total assets in the securities that comprise the underlying index, as well as American depositary receipts (\"ADRs\") and global depositary receipts (\"GDRs\") that represent securities in the underlying index. The underlying index is comprised primarily of companies whose technologies focus on the generation and use of cleaner energy, conservation and efficiency, and the advancement of renewable energy in general, as determined by the index provider."
+    },
+    "RUM": {
+        "ticker": "RUM",
+        "name": "Rumble Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 2131063040,
+        "currency": "USD",
+        "description": "Rumble Inc. operates video sharing platforms and cloud services in the United States, Canada, and internationally. The company operates rumble.com, a free-to-use video sharing and livestreaming platform where users can subscribe to channels to stay in touch with creators, and access video on-demand (VOD) and live content streamed by creators. It also operates locals.com, a platform where users can access free content and purchase subscriptions to support creators and access exclusive content in creator communities; Rumble Streaming Marketplace, a patent-pending application designed to enable a first-of-its-kind livestreaming and monetization service for creators; and Rumble Advertising Center (RAC), an in-house advertising marketplace and network. In addition, the company offers Rumble Cloud, an infrastructure-as-a-service offering that provides computing, storage, security, and networking services for startups, small and medium sized businesses, and enterprise clients. Rumble Inc. was founded in 2013 and is headquartered in Longboat Key, Florida."
+    },
+    "PRN": {
+        "ticker": "PRN",
+        "name": "Invesco Dorsey Wright Industria",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 90% of its total assets in securities that comprise the underlying index. The underlying index is composed of at least 30 securities of companies in the industrials sector that have powerful relative strength or \"momentum\" characteristics."
+    },
+    "BWX": {
+        "ticker": "BWX",
+        "name": "SPDR Bloomberg International Tr",
+        "meta": "Global Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index and in securities that the Adviser determines have economic characteristics that are substantially identical to the economic characteristics of the securities that comprise the index. The index is designed to track the fixed-rate local currency sovereign debt of investment grade countries outside the United States. It is non-diversified."
+    },
+    "NUGT": {
+        "ticker": "NUGT",
+        "name": "Direxion Daily Gold Miners Inde",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index is comprised of publicly traded common stocks, ADRs or global depositary receipts of companies that operate globally in both developed and emerging markets, and the index provider defines as involved primarily in mining for gold and, to a lesser extent, in mining for silver. The fund invests at least 80% of its net assets in financial instruments, that, in combination, provide 2X daily leveraged exposure to the index, consistent with the fund's investment objective. It is non-diversified."
+    },
+    "EOSE": {
+        "ticker": "EOSE",
+        "name": "Eos Energy Enterprises, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 4281336832,
+        "currency": "USD",
+        "description": "Eos Energy Enterprises, Inc. designs, develops, manufactures, and markets energy storage solutions for utility-scale, microgrid, and commercial and industrial applications in the United States. The company offers Znyth technology battery energy storage system (BESS), which provides the operating flexibility to manage increased grid complexity and price volatility. It also provides Z3 battery module that provides utilities, independent power producers, renewables developers, and commercial and industrial customers with an alternative to lithium-ion and lead-acid monopolar batteries for critical 3- to 12-hour discharge duration applications; battery management system, which provides a remote asset monitoring capability and service to track the performance and health of BESS and identify future system performance issues through predictive analytics; and project management and commissioning services, as well as long-term maintenance plans. The company was founded in 2008 and is headquartered in Edison, New Jersey."
+    },
+    "KGRN": {
+        "ticker": "KGRN",
+        "name": "KraneShares MSCI China Clean Te",
+        "meta": "China Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will invest at least 80% of its net assets in instruments in its index or in instruments that have economic characteristics similar to those in the index. The underlying index is a free-float adjusted market capitalization weighted index modified per the 10/40 Constraint designed to measure the equity market performance of Chinese companies in the industrial, utility, real estate and technology sectors that contribute to a more environmentally sustainable economy. It is non-diversified."
+    },
+    "ZS": {
+        "ticker": "ZS",
+        "name": "Zscaler, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 27057477632,
+        "currency": "USD",
+        "description": "Zscaler, Inc. operates as a cloud security company worldwide. The company offers cyberthreat protection products, including Zscaler Internet Access, which provides threat protection, cloud sandbox, and cloud browser isolation; Zscaler Private Access solution that includes cyberthreat and data protection, application discovery, secure application access, application segmentation, application protection, reduced attack surface, and browser isolation; Zero Trust Firewall; Cloud Sandbox; and Zero Trust Browser. It also provides data security products, such as web and email DLP, endpoint DLP, BYOD security, multi-mode CASB, unified SaaS security, DSPM, AI-SPM, public gen AI security, and Microsoft Copilot data protection; Zero Trust Cloud solution. In addition, the company offers Zero Trust Branch comprising Zero Trust SD-WAN; IoT/OT segmentation; privileged remote access; Zscaler Cellular; and Zscaler Digital Experience that measures end-to-end user experience across business applications, as well as provides an easy-to-understand digital experience score for each user, application, and location within an enterprise. Further, it provides security operations products, including data fabric for security; asset exposure management; Risk360; unified vulnerability management; deception; managed detection and response; and managed threat hunting. Additionally, the company offers Zero Trust Gateway, a fully managed Zscaler service. It serves the automotive, airlines and transportation, conglomerates, consumer goods and retail, energy, financial services, healthcare, insurance, manufacturing, media and communications, public sector and education, technology, and telecommunications services industries. The company was formerly known as SafeChannel, Inc., and changed its name to Zscaler, Inc. in August 2008. Zscaler, Inc. was incorporated in 2007 and is headquartered in San Jose, California."
+    },
+    "WLK": {
+        "ticker": "WLK",
+        "name": "Westlake Corporation",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 12381565952,
+        "currency": "USD",
+        "description": "Westlake Corporation manufactures and markets performance and essential materials, and housing and infrastructure products in the United States, Canada, Germany, China, Mexico, Brazil, France, Italy, and internationally. The Performance and Essential Materials segment offers ethylene, polyethylene, styrene, chlor-alkali, chlorinated derivative products, ethylene dichloride, vinyl chloride monomer, polyvinyl chloride (PVC), epoxy specialty resins, and base epoxy resins and intermediaries. The Housing and Infrastructure Products segment provides residential PVC sidings; PVC trim and mouldings; architectural stone veneers; windows; PVC decking; PVC films for various inflatables, wallcovering, and tape and roofing applications; polymer composite and cement roof tiles; PVC pipes and fittings for various water, sewer, electrical, and industrial applications; and PVC compounds for various housing, medical, and automobile products. This segment also offers consumer and commercial products, such as landscape edging; industrial, home, and office matting; marine dock edging; and masonry joint controls. It offers its products to chemical processors; plastics fabricators; small construction contractors; municipalities; and supply warehouses for use in various consumer and industrial markets, including residential construction, flexible and rigid packaging, automotive products, healthcare products, water treatment, wind turbines, and coatings, as well as other durable and non-durable goods. The company was formerly known as Westlake Chemical Corporation and changed its name to Westlake Corporation in February 2022. Westlake Corporation was founded in 1986 and is headquartered in Houston, Texas. Westlake Corporation is a subsidiary of TTWF LP."
+    },
+    "FXD": {
+        "ticker": "FXD",
+        "name": "First Trust Cons. Discret. Alph",
+        "meta": "Consumer Cyclical",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will normally invest at least 90% of its net assets (including investment borrowings) in the securities that comprise the index. The index is a modified equal-dollar weighted index that seeks to objectively identify and select stocks from the Russell 1000\u00ae Index in the consumer discretionary sector that may generate positive alpha relative to traditional passive-style indices through the use of the AlphaDEX\u00ae selection methodology."
     }
 }
