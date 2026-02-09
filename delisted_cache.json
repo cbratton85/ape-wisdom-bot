@@ -29,11 +29,6 @@
         "last_checked": "2026-02-08",
         "reason": "No Price Data"
     },
-    "ABB": {
-        "delisted": true,
-        "last_checked": "2026-02-08",
-        "reason": "No Price Data"
-    },
     "JPN": {
         "delisted": true,
         "last_checked": "2026-02-08",
@@ -107,6 +102,11 @@
     "SNP": {
         "delisted": true,
         "last_checked": "2026-02-08",
+        "reason": "No Price Data"
+    },
+    "ABB": {
+        "delisted": true,
+        "last_checked": "2026-02-09",
         "reason": "No Price Data"
     }
 }

@@ -8836,5 +8836,50 @@
         "mcap": 0,
         "currency": "USD",
         "description": "Under normal market conditions, the fund invests at least 80% of its assets in the component securities of the FTSE Japan Capped Hedged Index and in depositary receipts representing such securities, including indirectly through the Franklin FTSE Japan ETF. The FTSE Japan Capped Hedged Index is based on the FTSE Japan Hedged to USD Index and is designed to measure the performance of Japanese large- and mid-capitalization stocks. The fund is non-diversified."
+    },
+    "ABB": {
+        "ticker": "ABB",
+        "name": "ABB",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "HUMA": {
+        "ticker": "HUMA",
+        "name": "Humacyte, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 181088624,
+        "currency": "USD",
+        "description": "Humacyte, Inc., together with its subsidiaries, engages in the development and manufacture of off-the-shelf, implantable, and bioengineered human tissues for the treatment of diseases and conditions across a range of anatomic locations in multiple therapeutic areas. The company using its proprietary and scientific technology platform to engineer and manufacture human acellular vessels (HAVs) to be implanted into patient without inducing a foreign body response or leading to immune rejection. It is developing a portfolio of HAVs, which would target the vascular repair, reconstruction, and replacement market, including vascular trauma; arteriovenous access for hemodialysis; peripheral arterial disease; pediatric heart surgery; and coronary artery bypass grafting, as well as for the delivery of cellular therapy, including pancreatic islet cell transplantation to treat Type 1 diabetes. The company was founded in 2004 and is headquartered in Durham, North Carolina."
+    },
+    "KOLD": {
+        "ticker": "KOLD",
+        "name": "ProShares UltraShort Bloomberg ",
+        "meta": "Trading--Inverse Commodities",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund seeks to meet its investment objective by investing in Natural Gas futures contracts. It may also invest in swaps if the market for a specific futures contract experiences emergencies or disruptions (e.g., a trading halt or a flash crash) or in situations where the Sponsor deems it impractical or inadvisable to buy or sell futures contracts (such as during periods of market volatility or illiquidity)."
+    },
+    "BOIL": {
+        "ticker": "BOIL",
+        "name": "ProShares Ultra Bloomberg Natur",
+        "meta": "Trading--Leveraged Commodities",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund seeks to meet its investment objective by investing normally in Natural Gas futures contracts. It may also invest in swaps if the market for a specific futures contract experiences emergencies (e.g., natural disaster, terrorist attack, or an act of God) or disruptions (e.g., a trading halt or a flash crash) or in situations where the Sponsor deems it impractical or inadvisable to buy or sell futures contracts (such as during periods of market volatility or illiquidity)."
+    },
+    "CART": {
+        "ticker": "CART",
+        "name": "Maplebear Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 9125501952,
+        "currency": "USD",
+        "description": "Maplebear Inc., doing business as Instacart, engages in the provision of online grocery shopping services to households in North America. Its service can be provided through company's mobile application or website. The company also provides advertising services; and software-as-a-service solutions. Maplebear Inc., was incorporated in 2012 and is headquartered in San Francisco, California."
     }
 }
