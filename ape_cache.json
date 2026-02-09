@@ -10537,5 +10537,59 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The underlying index is a composite of North American energy infrastructure companies engaged in midstream activities involving energy commodities including gathering and processing, liquefaction, pipeline transportation, rail terminaling, and storage (also known as \"midstream energy businesses\"). The fund will normally invest at least 90% of its total assets in securities that comprise the underlying index. It is non-diversified."
+    },
+    "OTLY": {
+        "ticker": "OTLY",
+        "name": "Oatly Group AB",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 339658528,
+        "currency": "USD",
+        "description": "Oatly Group AB, an oatmilk company, provides a range of plant-based dairy products made from oats in Europe, the Middle East, Africa, the Asia Pacific, Latin America, the United States, Canada, Mainland China, Hong Kong, and Taiwan. Its oatmilk portfolio includes original, low-fat, full-fat, chocolate flavored, unsweetened, and Super Basic, which are offered in ambient and chilled packaging. The company offers Barista edition oatmilk; Oatgurts, which are oat-based yogurts; frozen desserts; cooking products, including regular and organic cooking cream, cr\u00e8me fraiche, whipping cream, vanilla custard, and spreads in a variety of flavors; and ready-to-go drinks. It sells its products through retail and e-commerce channels. The company was formerly known as Havre Global AB and changed its name to Oatly Group AB in March 2021. Oatly Group AB was founded in 1994 and is headquartered in Malm\u00f6, Sweden."
+    },
+    "VLO": {
+        "ticker": "VLO",
+        "name": "Valero Energy Corporation",
+        "meta": "Oil & Gas Refining & Marketing",
+        "type": "EQUITY",
+        "mcap": 62559047680,
+        "currency": "USD",
+        "description": "Valero Energy Corporation manufactures, markets, and sells petroleum-based and low-carbon liquid transportation fuels and petrochemical products in the United States, Canada, the United Kingdom, Ireland, Latin America, Mexico, Peru, and internationally. It operates through three segments: Refining, Renewable Diesel, and Ethanol. The company produces California Reformulated Gasoline Blendstock for Oxygenate Blending (CARBOB) and Conventional Blendstock for Oxygenate Blending (CBOB) gasolines, CARB diesel, diesel, jet fuel, heating oil, and asphalt; feedstocks; aromatics; sulfur and residual fuel oil; intermediate oils; and sulfur, sweet, and sour crude oils. It sells its refined products through wholesale rack and bulk markets; and through outlets under the Valero, Beacon, Diamond Shamrock, Shamrock, Ultramar, and Texaco brands. The company owns and operates renewable diesel and ethanol plants, as well as produces and sells renewable diesel, renewable naphtha, and neat sustainable aviation fuel under the Diamond Green Diesel brand name. In addition, it offers ethanol and various co-products, including dry distiller grains, syrup, and inedible distillers corn oil to animal feed customers. The company was formerly known as Valero Refining and Marketing Company and changed its name to Valero Energy Corporation in August 1997. Valero Energy Corporation was founded in 1980 and is headquartered in San Antonio, Texas."
+    },
+    "ACM": {
+        "ticker": "ACM",
+        "name": "AECOM",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 13539282944,
+        "currency": "USD",
+        "description": "AECOM, together with its subsidiaries, provides professional infrastructure consulting services for governments, businesses, and organizations internationally. The company operates in three segments: Americas, International, and AECOM Capital. The company offers advisory, planning, consulting, architectural and engineering design, construction and program management services, and investment and development services to public and private clients in major end markets such as transportation, facilities, water, environmental, and energy. It is also involved in the investment and development of real estate projects. The company was formerly known as AECOM Technology Corporation and changed its name to AECOM in January 2015. AECOM was incorporated in 1980 and is headquartered in Dallas, Texas."
+    },
+    "CPER": {
+        "ticker": "CPER",
+        "name": "United States Copper Index Fund",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund seeks to achieve its investment objective by investing in the Benchmark Component Copper Futures Contracts. The SCI is designed to reflect the performance of the investment returns from a portfolio of copper futures contracts on the Commodity Exchange, Inc. exchange (\"COMEX\")."
+    },
+    "QNCX": {
+        "ticker": "QNCX",
+        "name": "Quince Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 7238593,
+        "currency": "USD",
+        "description": "Quince Therapeutics, Inc., a biopharmaceutical company, focuses on acquiring, developing, and commercializing therapeutics for patients with debilitating and rare diseases. The company's lead asset candidature comprises EryDex for the treatment of rare pediatric neurodegenerative disease, including A-T, an inherited autosomal recessive neurodegenerative and immunodeficiency disorder caused by mutations in ATM gene. Its AIDE technology platform, a drug/device combination platform that uses an automated process to encapsulate a drug into a patient's own red blood cells, as well as consists of an automated equipment the RCL, a sterile single-use consumable treatment kit comprising kit medical devices, syringe kit, and process solutions. The company was formerly known as Cortexyme, Inc. and changed its name to Quince Therapeutics, Inc. in August 2022. The company was incorporated in 2012 and is headquartered in South San Francisco, California."
+    },
+    "DVA": {
+        "ticker": "DVA",
+        "name": "DaVita Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 9201096704,
+        "currency": "USD",
+        "description": "DaVita Inc. provides kidney dialysis services for patients suffering from chronic kidney failure in the United States. The company operates kidney dialysis centers and provides related lab services in outpatient dialysis centers. It also offers outpatient, hospital inpatient, and home-based hemodialysis services; operates clinical laboratories that provide routine laboratory tests for dialysis and other physician-prescribed laboratory tests for ESRD patients; and management and administrative services to outpatient dialysis centers. In addition, the company offers integrated care and disease management services to patients in risk-based and other integrated care arrangements; clinical research programs; physician services; and comprehensive kidney care services. Further, it engages in the provision of inpatient dialysis services and related laboratory services; and transplant software business. The company was formerly known as DaVita HealthCare Partners Inc. and changed its name to DaVita Inc. in September 2016. DaVita Inc. was incorporated in 1994 and is headquartered in Denver, Colorado."
     }
 }
