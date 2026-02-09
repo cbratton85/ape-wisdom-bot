@@ -9214,5 +9214,50 @@
         "mcap": 5936064000,
         "currency": "USD",
         "description": "Flagstar Bank, National Association provides banking products and services in the United States. The company's deposit products include interest-bearing checking and money market, savings, and non-interest-bearing accounts, as well as certificates of deposit. Its loan products comprise multi-family loans; commercial real estate loans; acquisition, development, and construction loans; commercial and industrial loans; one-to-four family loans; specialty finance loans and leases; warehouse loans; and other loans, such as home equity lines of credit, as well as other consumer loans, including overdraft loans. The company offers non-deposit investment and insurance products; and online and mobile banking services. It primarily serves individuals, small and mid-size businesses, and professional associations. The company was formerly known as Flagstar Financial, Inc. Flagstar Bank, National Association was founded in 1859 and is headquartered in Hicksville, New York."
+    },
+    "VALE": {
+        "ticker": "VALE",
+        "name": "VALE S.A.",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 69581111296,
+        "currency": "USD",
+        "description": "Vale S.A., together with its subsidiaries, produces iron ore and nickel in Asia, the Americas, Europe, and internationally. It operates through Iron Solutions and Energy Transition Materials segments. The company extracts and produces iron ore, iron ore pellets, briquettes, and other ferrous products; provides logistic related services; and operates mining complexes, railways, maritime terminals, and ports. It also produces nickel, copper, and cobalt, as well as by-products, such as gold, silver, platinum group metals, and other precious metals. In addition, the company engages in greenfield mineral exploration; invests in energy businesses through renewable sources; and operates pelletizing plants and distribution centers to support the delivery of iron ore. The company was formerly known as Companhia Vale do Rio Doce and changed its name to Vale S.A. in May 2009. Vale S.A. was founded in 1942 and is headquartered in Rio De Janeiro, Brazil."
+    },
+    "GAN": {
+        "ticker": "GAN",
+        "name": "GAN",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "NN": {
+        "ticker": "NN",
+        "name": "NextNav Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 2023784704,
+        "currency": "USD",
+        "description": "NextNav Inc. provides positioning, navigation, and timing (PNT) solutions in the United States. The company offers Pinnacle, an accurate altitude service for public safety applications, including enhanced 911 for Verizon and national cellular network providers. It also provides TerraPoiNT, a 3D PNT system, provides positioning, navigation, and timing services provided by GPS through a land-based GPS satellite constellation. The company serves Wi-Fi, telecom, public safety, location apps, and critical infrastructure industries. NextNav Inc. was founded in 2007 and is headquartered in Reston, Virginia."
+    },
+    "DNN": {
+        "ticker": "DNN",
+        "name": "Denison Mines Corp",
+        "meta": "Uranium",
+        "type": "EQUITY",
+        "mcap": 3311002112,
+        "currency": "USD",
+        "description": "Denison Mines Corp. engages in the acquisition, exploration, and development of uranium bearing properties in Canada. It holds 95% interest in its flagship project Wheeler River uranium project located in the Athabasca Basin region in northern Saskatchewan. The company was formerly known as International Uranium Corporation and changed its name to Denison Mines Corp. in December 2006. Denison Mines Corp. was founded in 1954 and is headquartered in Toronto, Canada."
+    },
+    "AUD": {
+        "ticker": "AUD",
+        "name": "AUD",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
     }
 }

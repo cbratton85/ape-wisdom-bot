@@ -59,11 +59,6 @@
         "last_checked": "2026-02-08",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-02-08",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-02-08",
@@ -115,6 +110,16 @@
         "reason": "No Price Data"
     },
     "FI": {
+        "delisted": true,
+        "last_checked": "2026-02-09",
+        "reason": "No Price Data"
+    },
+    "GAN": {
+        "delisted": true,
+        "last_checked": "2026-02-09",
+        "reason": "No Price Data"
+    },
+    "AUD": {
         "delisted": true,
         "last_checked": "2026-02-09",
         "reason": "No Price Data"
