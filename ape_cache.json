@@ -9133,5 +9133,86 @@
         "mcap": 409904832,
         "currency": "USD",
         "description": "Bandwidth Inc. operates as a cloud-based software-powered communications platform-as-a-service provider in the United States and internationally. The company's platform enables enterprises to create, scale, and operate voice or messaging communications services across various mobile applications or connected devices. Its platform also provides voice services through SIP or programmable voice application programming interfaces (API); software APIs for messaging; communications solutions with integrated local emergency services; number management solutions; insights on customer's voice and messaging performance to make data-driven decisions; and bring your own carrier integrations services, which includes unified communications as a service, contact center as a service, conversational AI, and speech-to-text/text-to-speech platforms. In addition, the company offers Call Assure, which provides hands-free alternative routing; application to person messaging solutions that supports SMS and MMS on local numbers, toll free numbers, and short codes; Bandwidth Maestro, an enterprise cloud communications platform; and AIBridge, which enables enterprises to deploy voice-based AI tools in their contact centers. It serves technology companies, enterprise customers, and software-as-a-service platforms. The company was formerly known as Bandwidth.com, Inc. and changed its name to Bandwidth Inc. in September 2017. Bandwidth Inc. was founded in 1999 and is headquartered in Raleigh, North Carolina."
+    },
+    "CPB": {
+        "ticker": "CPB",
+        "name": "The Campbell's Company",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 8595210240,
+        "currency": "USD",
+        "description": "The Campbell's Company, together with its subsidiaries, manufactures and markets food and beverage products in the United States and internationally. It operates through Meals & Beverages, and Snacks segments. The Meals & Beverages segment engages in the retail and foodservice businesses in the United States and Canada. This segment provides Campbell's condensed and ready-to-serve soups; Swanson broth and stocks; Pacific Foods broth, soups, and non-dairy beverages; Prego pasta sauces; Pace Mexican sauces; Campbell's gravies, pasta, beans, and dinner sauces; Swanson canned poultry; V8 juices and beverages; Campbell's tomato juice; Rao's pasta sauces, dry pasta, frozen entr\u00e9es, frozen pizza, and soups; and Michael Angelo's frozen entr\u00e9es and pasta sauces, as well as snacking products in foodservice in Canada. Its Snacks segment retails Pepperidge Farm cookies, crackers, fresh bakery, and frozen products, that includes Goldfish crackers, Snyder's of Hanover pretzels, Lance sandwich crackers, Cape Cod and Kettle Brand potato chips, Late July snacks, Snack Factory pretzel crisps, and other snacking products. This segment is also involved in the snacking, and meals and beverage retail business in Latin America. It sells its products through retail food chains, mass discounters and merchandisers, club stores, convenience and dollar stores, e-commerce and other retail, commercial, and non-commercial establishments, and independent contractor distributors. The company was formerly known as Campbell Soup Company and changed its name to The Campbell's Company in November 2024. The Campbell's Company was founded in 1869 and is headquartered in Camden, New Jersey."
+    },
+    "TILT": {
+        "ticker": "TILT",
+        "name": "FlexShares Mornigstar US Market",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The underlying index is designed to reflect the performance of the U.S. equity market with increased exposure to size and value factors relative to the Morningstar\u00ae U.S. Market Extended Index (the \u201cParent Index\u201d), a float-adjusted market-capitalization weighted index of large-, mid- and small-capitalization companies in the U.S. Under normal circumstances, the fund will invest at least 80% of its total assets in the securities of the underlying index."
+    },
+    "KKR": {
+        "ticker": "KKR",
+        "name": "KKR & Co. Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 95565307904,
+        "currency": "USD",
+        "description": "KKR & Co. Inc. is a private equity and real estate investment firm specializing in direct and fund of fund investments. It specializes in acquisitions, leveraged buyouts, management buyouts, credit special situations, growth equity, mature, mezzanine, distressed, turnaround, lower middle market, and middle market investments. The firm considers investments in all industries with a focus on software, fintech, data and information, security, semiconductors, consumer electronics, internet of things (iot), internet, information services, information technology infrastructure, financial technology, network and cyber security architecture, engineering and operations, content, technology and hardware, energy and infrastructure, real estate, services industry with a focus on business services, intelligence, industry-leading franchises and companies in natural resource, containers and packaging, agriculture, airports, ports, forestry, electric utilities, textiles, apparel and luxury goods, household durables, digital media, insurance, brokerage houses, non-durable goods distribution, supermarket retailing, grocery stores, food, beverage, and tobacco, hospitals, entertainment venues and production companies, publishing, printing services, capital goods, financial services, specialized finance, pipelines, and renewable energy. In energy and infrastructure, it focuses on the upstream oil and gas and equipment, minerals and royalties and services verticals. In real estate, the firm seeks to invest in private and public real estate securities including property-level equity, debt and special situations transactions and businesses with significant real estate holdings, and oil and natural gas properties. The firm also invests in asset services sector that encompasses a broad array of B2B, B2C and B2G services verticals including asset-based, transport, logistics, leisure/hospitality, resource and utility support, infra-like, mission-critical, and environmental services. Within Americas, the firm prefers to invest in consumer products; chemicals, metals and mining; energy and natural resources; financial services; healthcare; biopharmaceutical; medical device; health care services; life science tools/diagnostics; health care information technology sub-sectors; industrials; media and communications; retail; and technology. Within Europe, the firm invests in consumer and retail; energy; financial services; health care; industrials and chemicals; media and digital; and telecom and technologies. Within Asia, it invests in consumer products; energy and resources; financial services; healthcare; industrials; logistics; media and telecom; retail; real estate; and technology. It also seeks to make impact investments focused on identifying and investing behind businesses with positive social or environmental impact. The firm seeks to invest in mid to high-end residential developments but can invest in other projects throughout Mainland China through outright ownership, joint ventures, and merger. It invests globally with a focus on Australia, emerging and developed Asia, Middle East and Africa, Nordic, Southeast Asia, Asia Pacific, Ireland, Hong Kong, Japan, Taiwan, India, Vietnam, Malaysia, Singapore, Indonesia, France, Germany, Netherlands, United Kingdom, Caribbean, Mexico, South America, North America, Israel, Brazil, Latin America, Korea with a focus on South Korea, and United States of America. In the United States and Europe, the firm focuses on buyouts of large, publicly traded companies. For middle market private equity it seeks to invest in companies with enterprise values between $200 million and $5000 million and EBITDA between $50 million to $250 million. The firm prefers to invest in a range of debt and public equity investing and may co-invest. It seeks a board seat in its portfolio companies and a controlling ownership of a company or a strategic minority position. It prefers to invest in initial public offerings, follow-on offerings, PIPE transactions, co-investments or private capital raises. The firm may acquire majority and minority equity interests, particularly when making private equity investments in Asia or sponsoring investments as part of a large investor consortium. The firm typically holds its investment for a period of five to seven years and more and exits through initial public offerings, secondary offerings, and sales to strategic buyers. KKR & Co. Inc. was founded in May 1, 1976 and is based in New York, New York with additional offices across North America, Europe, Australia, Middle East and Asia Pacific."
+    },
+    "FI": {
+        "ticker": "FI",
+        "name": "FI",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "FFAI": {
+        "ticker": "FFAI",
+        "name": "Faraday Future Intelligent Elec",
+        "meta": "Auto Manufacturers",
+        "type": "EQUITY",
+        "mcap": 152710256,
+        "currency": "USD",
+        "description": "Faraday Future Intelligent Electric Inc. engages in the design, development, manufacture, engineering, distribution, and sale of electric vehicles and related products in the United States. The company's technology comprises variable platform architecture, propulsion system, Internet, autonomous driving, and intelligence system. It offers products, including FF 91 series, the FX 5 series, the FX 6 series, and the FX Super One series. Faraday Future Intelligent Electric Inc. was formerly known as Faraday&Future Inc. and changed its mane to Faraday Future Intelligent Electric Inc. in July 2022. The company was founded in 2014 and is headquartered in Gardena, California."
+    },
+    "VONG": {
+        "ticker": "VONG",
+        "name": "Vanguard Russell 1000 Growth ET",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index is designed to measure the performance of large-capitalization growth stocks in the United States. The Advisor attempts to replicate the target index by investing all, or substantially all, of its assets in the stocks that make up the index, holding each stock in approximately the same proportion as its weighting in the index. The fund may become non-diversified, as defined under the Investment Company Act of 1940, solely as a result of a change in relative market capitalization or index weighting of one or more constituents of the index."
+    },
+    "RING": {
+        "ticker": "RING",
+        "name": "iShares MSCI Global Gold Miners",
+        "meta": "Equity Precious Metals",
+        "type": "ETF",
+        "mcap": 955649984,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of the underlying index and in investments that have economic characteristics that are substantially identical to the component securities of the underlying index. The index has been developed by MSCI Inc. (the \"index provider\" or \"MSCI\") to target a minimum of 30 companies in developed and emerging markets that are involved in the business of gold mining. The fund is non-diversified."
+    },
+    "COTY": {
+        "ticker": "COTY",
+        "name": "Coty Inc.",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 2340816896,
+        "currency": "USD",
+        "description": "Coty Inc., together with its subsidiaries, manufactures, markets, distributes, and sells branded beauty products worldwide. It operates through two segments: the Prestige and Consumer Beauty. The company provides fragrance, color cosmetics, and skin and body care products. It offers prestige products through prestige retailers, including perfumeries, department stores, e-retailers, direct-to-consumer websites, and duty-free shops under the Burberry, Calvin Klein, Chloe, Davidoff, Escada, Etro, Gucci, Hugo Boss, Infiniment Coty Paris, Jil Sander, Joop!, Kylie Cosmetics by Kylie Jenner, Lancaster, Marc Jacobs, Orveda, philosophy, and Tiffany & Co. brands. The company provides beauty products through hypermarkets, supermarkets, drug stores, pharmacies, mid-tier department stores, traditional food and drug retailers, and e-commerce retailers under the Adidas, Beckham, Bozzano, Bourjois, Bruno Banani, CoverGirl, Jovan, LeGer by Lena Gercke, Max Factor, Mexx, Monange, Nautica, Paixao, Rimmel, Risque, Vera Wang, and Sally Hansen brands. It also sells its products through third-party distributors. The company was founded in 1904 and is headquartered in New York, New York. Coty Inc. is a subsidiary of JAB Beauty B.V."
+    },
+    "FLG": {
+        "ticker": "FLG",
+        "name": "Flagstar Bank, N.A.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 5936064000,
+        "currency": "USD",
+        "description": "Flagstar Bank, National Association provides banking products and services in the United States. The company's deposit products include interest-bearing checking and money market, savings, and non-interest-bearing accounts, as well as certificates of deposit. Its loan products comprise multi-family loans; commercial real estate loans; acquisition, development, and construction loans; commercial and industrial loans; one-to-four family loans; specialty finance loans and leases; warehouse loans; and other loans, such as home equity lines of credit, as well as other consumer loans, including overdraft loans. The company offers non-deposit investment and insurance products; and online and mobile banking services. It primarily serves individuals, small and mid-size businesses, and professional associations. The company was formerly known as Flagstar Financial, Inc. Flagstar Bank, National Association was founded in 1859 and is headquartered in Hicksville, New York."
     }
 }
