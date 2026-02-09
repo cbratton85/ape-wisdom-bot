@@ -9331,5 +9331,68 @@
         "mcap": 3214753792,
         "currency": "USD",
         "description": "Viking Therapeutics, Inc., a clinical-stage biopharmaceutical company, focuses on the development of novel therapies for metabolic and endocrine disorders. The company's lead drug candidate is VK2809, an orally available tissue and receptor-subtype selective agonist of the thyroid hormone receptor beta (TR\u00df), which is in Phase IIb clinical trials to treat patients with biopsy-confirmed non-alcoholic steatohepatitis, as well as NAFLD. It develops VK5211, an orally available non-steroidal selective androgen receptor modulator that is in Phase II clinical trials for the treatment of patients recovering from non-elective hip fracture surgery; VK0612, an orally available Phase IIb-ready drug candidate for type 2 diabetes; VK2735, a novel dual agonist of the glucagon-like peptide, which is in Phase 1 SAD/MAD clinical trial, and VK0214, an orally available tissue and receptor-subtype selective agonist of the TR\u00df for X-linked adrenoleukodystrophy. The company was incorporated in 2012 and is headquartered in San Diego, California."
+    },
+    "PGR": {
+        "ticker": "PGR",
+        "name": "Progressive Corporation (The)",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 118582394880,
+        "currency": "USD",
+        "description": "The Progressive Corporation operates as an insurance company in the United States. The company writes insurance for personal autos and special lines products, including motorcycles, RVs, and watercraft; and personal residential property insurance for homeowners and renters. It also writes auto-related liability and physical damage insurance for comprising dump trucks, log trucks, garbage trucks, tractors, trailers, straight trucks, tow trucks and wreckers, vans, pick-up trucks, and autos; business-related general liability and commercial property insurance for small businesses; and workers' compensation insurance for the transportation industry. In addition, the company offers other specialty property-casualty insurance and provide related services; personal property reinsurance products; and involved in investment activities. It sells its products through independent insurance agencies, as well as online and over the phone. The Progressive Corporation was founded in 1937 and is headquartered in Mayfield Village, Ohio."
+    },
+    "RVMD": {
+        "ticker": "RVMD",
+        "name": "Revolution Medicines, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 18846748672,
+        "currency": "USD",
+        "description": "Revolution Medicines, Inc., a clinical-stage precision oncology company, develops novel targeted therapies for RAS-addicted cancers. The company's research and development pipeline consist of RAS(ON) inhibitors that binds RAS variants to be used as monotherapy in combination with other RAS(ON) inhibitors and/or in combination with RAS companion inhibitors or other therapeutic agents, and RAS companion inhibitors to suppress cooperating targets and pathways that sustain RAS-addicted cancers. Its RAS(ON) inhibitors include daraxonrasib (RMC-6236), elironrasib G12C (RMC-6291), and zoldonrasib G12D (RMC-9805), which are in phase 1 clinical trial; and development candidates comprise RMC-5127 (G12V), RMC-0708 (Q61H), and RMC-8839 (G13C). The company's RAS companion inhibitors include RMC-4630 that is in phase 2 clinical trial; RMC-5552, a selective inhibitor of mTORC1 signaling in tumors, which is in phase 1 clinical trial; and RMC-5845 that targets SOS1. Revolution Medicines, Inc. was incorporated in 2014 and is headquartered in Redwood City, California."
+    },
+    "DOCN": {
+        "ticker": "DOCN",
+        "name": "DigitalOcean Holdings, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 5756685312,
+        "currency": "USD",
+        "description": "DigitalOcean Holdings, Inc., through its subsidiaries, operates a cloud computing platform in North America, Europe, Asia, and internationally. The company provides on-demand infrastructure and platform tools for developers at growing technology companies. It also offers infrastructure-as-a-service (IaaS) solutions comprising compute, storage, and networking products, including cloud firewalls, managed load balancers, and virtual private cloud software, as well as IP address management and domain name system management. In addition, the company provides platform-as-a-service (PaaS) and software-as-a-service (SaaS) solutions, such as managed databases; managed Kubernetes and container registry; application platform to build, deploy, and scale applications; Functions, a serverless compute solution; and Uptime for real-time uptime and latency alerts, as well as managed hosting and DigitalOcean Marketplace, a platform where developers can find pre-configured applications and solutions. Further, it offers artificial intelligence (AI)/machine learning (ML) applications comprising GPU droplets; GENAI platform, a solution for deploying AI applications; bare metal GPUS which provides access to a GPU server without any virtualization layer and gives developers with customizable server for their use case; and Jupyter Notebooks that provides cloud workspace and managed interactive development environment for exploring data and training, and building machine learning models. Its customers use its platform in various industry verticals, such as gaming, fintech, and cybersecurity, as well as for a range of use cases, including building and hosting websites, web and mobile applications development, AI integration, and building AI products and applications. DigitalOcean Holdings, Inc. was incorporated in 2012 and is headquartered in New York, New York."
+    },
+    "SPXU": {
+        "ticker": "SPXU",
+        "name": "ProShares UltraPro Short S&P500",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of the 500 largest companies listed and domiciled in the U.S. Under normal circumstances, the fund will obtain inverse leveraged exposure to at least 80% of its total assets in components of the index or in instruments with similar economic characteristics. The fund is non-diversified."
+    },
+    "JNUG": {
+        "ticker": "JNUG",
+        "name": "Direxion Daily Junior Gold Mine",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index tracks the performance of domestic and foreign, including developing and emerging, small- and mid-capitalization companies that are involved in the gold and silver mining industry. The fund invests at least 80% of its net assets in financial instruments, such as swap agreements, securities of the index, and exchange-traded funds (\"ETFs\") that track the index, that, in combination, provide 2X daily leveraged exposure to the index, consistent with the fund's investment objective. It is non-diversified."
+    },
+    "S": {
+        "ticker": "S",
+        "name": "SentinelOne, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 4493068288,
+        "currency": "USD",
+        "description": "SentinelOne, Inc. operates as a cybersecurity provider in the United States and internationally. The company's Singularity Platform delivers an artificial intelligence-powered autonomous threat prevention, detection, and response capabilities across an organization's endpoints, cloud workloads, and identify credentials, which enables seamless and autonomous protection against a spectrum of cyber threats. It also offers generative AI-security agent (Purple AI), security information and event management, endpoint security, cloud security, identity security, exposure and vulnerability management, and threat services. The company has a strategic alliance with Schwarz Digits KG for the development of sovereign, an AI-powered cybersecurity platform. The company was formerly known as Sentinel Labs, Inc. and changed its name to SentinelOne, Inc. in March 2021. SentinelOne, Inc. was incorporated in 2013 and is headquartered in Mountain View, California."
+    },
+    "DTC": {
+        "ticker": "DTC",
+        "name": "DTC",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
     }
 }

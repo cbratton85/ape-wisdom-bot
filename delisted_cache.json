@@ -54,11 +54,6 @@
         "last_checked": "2026-02-08",
         "reason": "No Price Data"
     },
-    "DTC": {
-        "delisted": true,
-        "last_checked": "2026-02-08",
-        "reason": "No Price Data"
-    },
     "CO": {
         "delisted": true,
         "last_checked": "2026-02-08",
@@ -115,6 +110,11 @@
         "reason": "No Price Data"
     },
     "OG": {
+        "delisted": true,
+        "last_checked": "2026-02-09",
+        "reason": "No Price Data"
+    },
+    "DTC": {
         "delisted": true,
         "last_checked": "2026-02-09",
         "reason": "No Price Data"
