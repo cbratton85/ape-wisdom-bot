@@ -8881,5 +8881,140 @@
         "mcap": 9125501952,
         "currency": "USD",
         "description": "Maplebear Inc., doing business as Instacart, engages in the provision of online grocery shopping services to households in North America. Its service can be provided through company's mobile application or website. The company also provides advertising services; and software-as-a-service solutions. Maplebear Inc., was incorporated in 2012 and is headquartered in San Francisco, California."
+    },
+    "SCHE": {
+        "ticker": "SCHE",
+        "name": "Schwab Emerging Markets Equity ",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally invests in stocks that are included in the FTSE Emerging Index. The index is comprised of large and mid capitalization companies in emerging market countries, as defined by the index provider. The fund will invest at least 90% of its net assets (including, for this purpose, any borrowings for investment purposes) in these stocks, including depositary receipts representing securities of the index; such depositary receipts may be in the form of ADRs, GDRs and EDRs."
+    },
+    "FLYX": {
+        "ticker": "FLYX",
+        "name": "flyExclusive, Inc.",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 282912224,
+        "currency": "USD",
+        "description": "flyExclusive, Inc. owns and operates jet aircraft in North America. It also offers jet charter services; aircraft maintenance, modification, repair, inspection, overhaul operation services; interior and exterior refurbishment services; and aircraft management services, as well as wholesale and retail ad hoc flights, a jet club program, partnership program, fractional program, and other services. The company is headquartered in Kinston, North Carolina."
+    },
+    "SFM": {
+        "ticker": "SFM",
+        "name": "Sprouts Farmers Market, Inc.",
+        "meta": "Grocery Stores",
+        "type": "EQUITY",
+        "mcap": 6578925568,
+        "currency": "USD",
+        "description": "Sprouts Farmers Market, Inc., together with its subsidiaries, engages in the retailing of fresh, natural, and organic food products in the United States. The company offers perishable product categories, including produce, meat and meat alternatives, seafood, deli, bakery, floral, and dairy and dairy alternatives; and non-perishable product categories, such as grocery, vitamins and supplements, bulk items, frozen foods, beer and wine, and natural health and body care. It sells its products under the Sprouts brand. The company was founded in 1943 and is headquartered in Phoenix, Arizona."
+    },
+    "TTM": {
+        "ticker": "TTM",
+        "name": "TTM",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "FIVA": {
+        "ticker": "FIVA",
+        "name": "Fidelity International Value Fa",
+        "meta": "Foreign Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund normally invests at least 80% of assets in securities included in the Fidelity International Value Factor Index? and in depositary receipts representing securities included in the index. The index is designed to reflect the performance of stocks of large- and mid-capitalization developed international companies that have attractive valuations."
+    },
+    "ACWX": {
+        "ticker": "ACWX",
+        "name": "iShares MSCI ACWI ex U.S. ETF",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of the underlying index and in investments that have economic characteristics that are substantially identical to the component securities of the underlying index. The index is a free float-adjusted market capitalization-weighted index designed to measure the combined equity market performance of developed and emerging markets countries, excluding the United States."
+    },
+    "BROS": {
+        "ticker": "BROS",
+        "name": "Dutch Bros Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 9388192768,
+        "currency": "USD",
+        "description": "Dutch Bros Inc., together with its subsidiaries, operates and franchises drive-thru shops in the United States. The company operates through Company-Operated Shops and Franchising and Other segments. It operates through company-operated shops and online channels under Dutch Bros, Dutch Bros Coffee, Dutch Bros Rebel, Dutch Bros, and Blue Rebel brands. Dutch Bros Inc. was founded in 1992 and is headquartered in Grants Pass, Oregon."
+    },
+    "ZNH": {
+        "ticker": "ZNH",
+        "name": "ZNH",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "GREK": {
+        "ticker": "GREK",
+        "name": "Global X MSCI Greece ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its total assets in the securities of the underlying index and in American Depositary Receipts (\"ADRs\") and Global Depositary Receipts (\"GDRs\") based on the securities in the underlying index. The underlying index is designed to represent the performance of the broad Greece equity universe. The fund is non-diversified."
+    },
+    "TEVA": {
+        "ticker": "TEVA",
+        "name": "Teva Pharmaceutical Industries ",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 39898312704,
+        "currency": "USD",
+        "description": "Teva Pharmaceutical Industries Limited develops, manufactures, markets, and distributes generic and other medicines, and biopharmaceutical products in the United States, Europe, Israel, and internationally. It offers generic medicines in various dosage forms, such as tablets, capsules, injectables, inhalants, liquids, transdermal patches, ointments, and creams; sterile products, hormones, high-potency drugs, and cytotoxic substances in parenteral and solid dosage forms; and generic products with medical devices and combination products. The company also focuses on the central nervous system (CNS), respiratory, and oncology areas. It provides active pharmaceutical ingredients, as well as contract manufacturing services; and operates an out-licensing platform that offers a portfolio of products to other pharmaceutical companies. The company also offers BENDEKA and TREANDA injections for the treatment of chronic lymphocytic leukemia and indolent b-cell non-hodgkin's lymphoma; COPAXONE to treat patients with relapsing forms of multiple sclerosis; AJOVY for the preventive treatment of migraine in adults; AUSTEDO to treat neurodegenerative and movement disorders \u0096 chorea associated with Huntington's disease and tardive dyskinesia; UZEDY for the treatment of schizophrenia; ProAir RespiClick inhalation powder; QVAR RediHaler to treat asthma; BRALTUS, a long-acting muscarinic antagonist; CINQAIR/CINQAERO injection; DuoResp Spiromax budesonide and formoterol powder inhaler; and AirDuo RespiClick fluticasone propionate and salmeterol inhalation powder. The company offers its OTC products under the SUDOCREM, NasenDuo, DICLOX FORTE, OLFEN Max, and FLEGAMINA brand names. It has collaboration agreements with MedinCell S.A.; Sanofi; Alvotech; and Biolojic Design Ltd., as well as license agreement with MODAG GmbH. The company was founded in 1901 and is based in Tel Aviv-Yafo, Israel."
+    },
+    "SLDP": {
+        "ticker": "SLDP",
+        "name": "Solid Power, Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 861889984,
+        "currency": "USD",
+        "description": "Solid Power, Inc. develops solid-state battery technologies for the electric vehicles (EV) and other markets in the United States. The company sells its sulfide-based solid electrolyte; and licenses its solid-state cell designs and manufacturing processes. Solid Power, Inc. was founded in 2011 and is headquartered in Louisville, Colorado."
+    },
+    "MDB": {
+        "ticker": "MDB",
+        "name": "MongoDB, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 28027252736,
+        "currency": "USD",
+        "description": "MongoDB, Inc., together with its subsidiaries, provides general purpose database platform worldwide. The company provides MongoDB Atlas, a hosted multi-cloud database-as-a-service solution; MongoDB Enterprise Advanced, a commercial database server for enterprise customers to run in the cloud, on-premises, or in a hybrid environment; and Community Server, a free-to-download version of its database, which includes the functionality that developers need to get started with MongoDB. It offers professional services comprising consulting and training. The company was formerly known as 10gen, Inc. and changed its name to MongoDB, Inc. in August 2013. MongoDB, Inc. was incorporated in 2007 and is headquartered in New York, New York."
+    },
+    "AZZ": {
+        "ticker": "AZZ",
+        "name": "AZZ Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 3907420928,
+        "currency": "USD",
+        "description": "AZZ Inc. provides hot-dip galvanizing and coil coating solutions in North America. The company offers metal coating solutions for corrosion protection, including hot-dip galvanizing, spin galvanizing, powder coating, anodizing, and plating to the steel fabrication and other industries. It also provides aesthetic and corrosion protective coatings and related value-added services for steel and aluminum coil primarily serving the construction; appliance; heating, ventilation, and air conditioning; container; transportation; and other end markets. The company was incorporated in 1956 and is headquartered in Fort Worth, Texas."
+    },
+    "BODY": {
+        "ticker": "BODY",
+        "name": "BODY",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "TE": {
+        "ticker": "TE",
+        "name": "T1 Energy Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 1756265344,
+        "currency": "USD",
+        "description": "T1 Energy Inc. provides energy solutions for solar and batteries in the United States and Norway. It also manufactures and sells photovoltaic solar modules. The company was formerly known as FREYR Battery, Inc. and changed its name to T1 Energy Inc. in February 2025. T1 Energy Inc. is headquartered in Austin, Texas."
     }
 }
