@@ -9556,5 +9556,59 @@
         "mcap": 51828312,
         "currency": "USD",
         "description": "Reitar Logtech Holdings Limited, through its subsidiaries, provides construction management and engineering design services in Hong Kong. The company operates in two segments, Construction Management and Engineering Design Services; and Asset Management and Professional Consultancy Services. It provides construction management and engineering design services for cold storage facilities, automated warehouses, renovated offices, and tailor-made electrical systems. It also offers asset management services for construction projects, including refrigerated storages and warehouses; and professional consultancy services for construction projects, such as renovation works, interior designs and modification works of commercial units, and residential or commercial redevelopment works. It serves logistics property investors, including investment funds and property owners; and logistics operators and direct users. The company was founded in 2015 and is based in Kwun Tong, Hong Kong."
+    },
+    "MMS": {
+        "ticker": "MMS",
+        "name": "Maximus, Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 4095507200,
+        "currency": "USD",
+        "description": "Maximus, Inc. operates as a provider of government services worldwide. The company operates through three segments: U.S. Federal Services, U.S. Services, and Outside the U.S. The U.S. Federal Services segment offers business process services, eligibility and enrollment, outreach, and other services for federal health and human services programs; clinical services; and technology solutions, such as application development and modernization services, enterprise business solutions, advanced analytics and emerging technologies, cybersecurity services, data management, and infrastructure and engineering solutions. The U.S. Services segment offers program eligibility support and enrollment; centralized multilingual customer contact centers, multichannel, and digital self-service options for enrollment; application assistance and independent health plan choice counseling; beneficiary outreach, education, eligibility, enrollment, and redeterminations; subsidized telephone services; and person-centered independent assessment services. This segment also provides employment services, such as eligibility support, case management, job-readiness preparation, job search and employer outreach, job retention and career advancement, and educational and training services; technology solutions; and system implementation project management services. The Outside the U.S. segment offers BPS and technology solutions for international governments, including health and disability assessments, program administration for employment services, wellbeing solutions and other job seeker-related services, digitally-enabled customer services, and technologies for modernization. Maximus, Inc. was founded in 1975 and is headquartered in McLean, Virginia."
+    },
+    "PZZA": {
+        "ticker": "PZZA",
+        "name": "Papa John's International, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 1137136896,
+        "currency": "USD",
+        "description": "Papa John's International, Inc. operates and franchises pizza delivery and carryout restaurants under the Papa Johns trademark in the United States, Canada, and internationally. It operates through four segments: Domestic Company-Owned Restaurants, North America Franchising, North America Commissaries, and International. The company also operates dine-in and delivery restaurants under the Papa Johns trademark internationally. It offers pizza and other food and beverage products. In addition, the company supplies pizza sauce, dough, food products, paper products, smallware, and cleaning supplies to restaurants. Papa John's International, Inc. was founded in 1984 and is based in Louisville, Kentucky."
+    },
+    "IINN": {
+        "ticker": "IINN",
+        "name": "Inspira Technologies Oxy B.H.N.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 25639002,
+        "currency": "USD",
+        "description": "Inspira Technologies Oxy B.H.N. Ltd., a specialty medical device company, engages in the research, development, manufacturing, and marketing of proprietary life support technologies for the treatment of acute respiratory failure in Israel. It offers INSPIRA ART100, a life support system used in procedures requiring cardiopulmonary bypass for six hours or less. The company was formerly known as Insense Medical Ltd. and changed its name to Inspira Technologies Oxy B.H.N. Ltd. in July 2020. Inspira Technologies Oxy B.H.N. Ltd. was incorporated in 2018 and is headquartered in Ra'anana, Israel."
+    },
+    "MNTS": {
+        "ticker": "MNTS",
+        "name": "Momentus Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 10017378,
+        "currency": "USD",
+        "description": "Momentus Inc. operates as a commercial space company in the United States. The company offers satellites, satellite buses, and satellite technologies, including solar array and transportation and infrastructure services, such as space transportation, hosted payloads, and other in-orbit services to enable the commercialization of space. It serves satellite operators. The company is based in San Jose, California."
+    },
+    "SDA": {
+        "ticker": "SDA",
+        "name": "SunCar Technology Group Inc.",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 193994976,
+        "currency": "USD",
+        "description": "SunCar Technology Group Inc., through its subsidiaries, provides cloud and mobile app-based auto eInsurance, technology, and auto services in the People's Republic of China. It offers one-stop, fully digitalized, and on-demand auto service systems. The company also provides customized service solutions to banks, insurance companies, telecommunication companies, and others. In addition, it offers car wash, oil change, tire repair, car beautification, road assistance, flight pickup, designated driving, VIP lounge, etc. in collaboration with third-party auto service providers. Further, the company facilitates the sale of auto e-Insurance products underwritten by insurance companies through a network of external sales partners; and provides its services through an online software, as well as offers technical services. The company was founded in 2007 and is based in Shanghai, China."
+    },
+    "CBRL": {
+        "ticker": "CBRL",
+        "name": "Cracker Barrel Old Country Stor",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 754912960,
+        "currency": "USD",
+        "description": "Cracker Barrel Old Country Store, Inc. develops and operates the Cracker Barrel Old Country Store concept in the United States. Its Cracker Barrel stores consist of restaurants with a gift shop. The company's restaurants serve breakfast, lunch, and dinner, as well as dine-in, pick-up, and delivery services. Its gift shops offer various decorative and functional items, such as rocking chairs, seasonal gifts, apparel, toys, food, cookware, and various other gift items, as well as various candies, preserves, and other food items. Cracker Barrel Old Country Store, Inc. was incorporated in 1969 and is headquartered in Lebanon, Tennessee."
     }
 }
