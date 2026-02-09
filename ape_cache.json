@@ -9016,5 +9016,122 @@
         "mcap": 1756265344,
         "currency": "USD",
         "description": "T1 Energy Inc. provides energy solutions for solar and batteries in the United States and Norway. It also manufactures and sells photovoltaic solar modules. The company was formerly known as FREYR Battery, Inc. and changed its name to T1 Energy Inc. in February 2025. T1 Energy Inc. is headquartered in Austin, Texas."
+    },
+    "TT": {
+        "ticker": "TT",
+        "name": "Trane Technologies plc",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 100838031360,
+        "currency": "USD",
+        "description": "Trane Technologies plc designs, manufactures, sells, and services of solutions for heating, ventilation, air conditioning, and custom and transport refrigeration. It offers air conditioners, exchangers, and handlers; airside and terminal devices; air sourced heat pumps; chillers; coils and condensers; auxiliary power, cold storage, and condensing units; controls contracting and commissioning, decarbonization programs, and gensets; dehumidifiers; energy and water efficiency programs; energy recovery ventilators and power solutions; energy storage; furnaces; home automation; humidifiers; HVAC performance-monitoring products; and indoor air quality assessments and related products for HVAC and transport solutions. The company also provides asset management, building management, bus air purification, bus and rail HVAC, container refrigeration, control, ductless, geothermal, data center and multi-pipe HVAC, package heating and cooling, rail refrigeration, residential air filtration, self and vehicle powered truck refrigeration, temporary heating and cooling, truck refrigeration, unitary, variable refrigerant flow, and trailer refrigeration systems. In addition, it offers industrial process refrigeration, installation contracting, lighting retrofit, medical grade refrigeration, refrigerant reclamation, renewable energy and storage, residential hybrid heating, telematics, thermostats/controls and associated digital, ventilation, and stationary cold storage solutions; packaged rooftop units; rate chambers; residential air filters; thermal energy storage; transport heater products; temperature freezers; energy infrastructure programs and management, repair and maintenance, smart and AI-enabled, and rental services; water source heat pumps; and aftermarket and OEM parts and supplies. The company was formerly known as Ingersoll-Rand Plc and changed its name to Trane Technologies plc in March 2020. The company was founded in 1885 and is headquartered in Swords, Ireland."
+    },
+    "NU": {
+        "ticker": "NU",
+        "name": "Nu Holdings Ltd.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 84313014272,
+        "currency": "USD",
+        "description": "Nu Holdings Ltd. provides digital banking platform in Brazil, Mexico, Colombia, the Cayman Islands, and the United States. It offers spending solutions comprising Nu credit and prepaid card, a digitally enabled card that acts as a credit and a prepaid card; Nubank+ Tier, an evolution of the Nu experience; Ultraviolet credit and prepaid card, a premium metal credit card; mobile payment solutions for NuAccount customers to make and receive transfers, pay bills, and make everyday purchases through their mobile phones; and Nu Shopping, an integrated marketplace that enables customers to purchase goods and services from various ecommerce retailers. The company also provides transactional Solutions, such as Nu Personal Accounts, a digital account solution for personal financial activities; Nu business accounts for entrepreneur customers and their businesses; and Nu business prepaid and credit card. In addition, it offers savings and investing solutions, including Money Boxes, a solution for goal-based investing; investing solutions, an attractive investment product with customized and conflict-free guidance; and NuCrypto, a solution for buying and selling cryptocurrencies through the Nu app. Further, the company provides borrowing solutions comprising personal unsecured and secured loans; Pix financing that enables credit card and digital account customers to make free and instant peer-to-peer transfers; Boleto financing, which enables credit card and digital account customers to make payments; purchase financing; cash-in financing; and NuPay to make online purchases and pay for services through Nu app. Additionally, it offers protection solutions, such as NuInsurance protection solutions, including life, mobile, auto, home, and financial protection insurance policies; and beyond financial services solutions, including NuTravel, a travel portal; and NuCel, a mobile phone service. Nu Holdings Ltd. was founded in 2013 and is headquartered in S\u00e3o Paulo, Brazil."
+    },
+    "WOW": {
+        "ticker": "WOW",
+        "name": "WideOpenWest, Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 445855520,
+        "currency": "USD",
+        "description": "WideOpenWest, Inc. provides high-speed data, cable television, and digital telephony services to residential and business customers in the United States. The company's video services include basic cable services that comprise local broadcast television and local community programming; digital cable services; WOW tv+ that offers traditional cable video and cloud DVR functionality, voice remote with Google Assistant, and Netflix integration along with access to various streaming services and apps through the Google Play Store; and HBO, Showtime, STARZ, STARZ ENCORE, and Cinemax channels provide commercial free movies, TV shows, sports, and other special event entertainment programs. Its telephony services consist of local and long-distance telephone services; and business telephony and data services include fiber network, office-to-office metro Ethernet, session-initiated protocol trunking, colocation infrastructure, cloud computing, managed backup, and recovery services. The company was formerly known as WideOpenWest Kite, Inc. and changed its name to WideOpenWest, Inc. in March 2017. WideOpenWest, Inc. was founded in 2001 and is based in Englewood, Colorado. As of December 31, 2025, WideOpenWest, Inc. operates as a subsidiary of DigitalBridge Investments, LLC."
+    },
+    "SII": {
+        "ticker": "SII",
+        "name": "Sprott Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 3065212672,
+        "currency": "USD",
+        "description": "Sprott Inc. is a publicly owned asset management holding company. Through its subsidiaries, the firm provides asset management, portfolio management, wealth management, fund management, and administrative and consulting services to its clients. It offers mutual funds, hedge funds, and offshore funds, along with managed accounts. Further, the firm also provides broker-dealer activities. Sprott Inc. was formed on February 13, 2008 and is based in Toronto, Canada."
+    },
+    "UGL": {
+        "ticker": "UGL",
+        "name": "ProShares Ultra Gold",
+        "meta": "Trading--Leveraged Commodities",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund seeks to meet its investment objective by investing, under normal market conditions, in any one of, or combinations of, Financial Instruments (including swap agreements, futures contracts, forward contracts and option contracts) based on the benchmark. The types and mix of Financial Instruments in which the fund invests may vary daily at the discretion of the Sponsor. It will not invest directly in any commodity."
+    },
+    "ROCK": {
+        "ticker": "ROCK",
+        "name": "Gibraltar Industries, Inc.",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 1592644864,
+        "currency": "USD",
+        "description": "Gibraltar Industries, Inc. manufactures and provides products and services for the residential, renewable energy, agtech, and infrastructure markets in the United States and internationally. The company operates through four segments: Residential, Renewables, Agtech, and Infrastructure. The Residential segment offers roof and foundation ventilation products; mail systems and package solutions, including single mailboxes, and cluster style mail and parcel boxes for single and multi-family housing, and package locker systems; roof edgings and flashings; soffits and trims; drywall corner beads; metal roofing and accessories; rain dispersion products comprising gutters and accessories; and exterior retractable awnings. This segment also provides pipe flashings, and remote-controlled deck awnings and valances for sun protection. The Renewables segment designs, engineers, manufactures, and installs solar racking and electrical balance of systems for commercial and distributed generation scale solar installations. The Agtech segment offers controlled environmental agriculture, and custom greenhouse solutions and structural canopies, including the designing, engineering, manufacturing, construction of the structure, and integration of subsystems for retail, fruits and vegetables, flowers, commercial, institutional and conservatories, and car wash structure applications. The Infrastructure segment offers expansion joints, structural bearings, rubber pre-formed seals and other sealants, elastomeric concrete, and bridge cable protection systems. The company serves solar developers, renewable energy developers, home improvement retailers, wholesalers, distributors, and contractors, as well as institutional and commercial growers of fruit, vegetables, flowers, and plants. Gibraltar Industries, Inc. was founded in 1972 and is headquartered in Buffalo, New York."
+    },
+    "METC": {
+        "ticker": "METC",
+        "name": "Ramaco Resources, Inc.",
+        "meta": "Coking Coal",
+        "type": "EQUITY",
+        "mcap": 1206071040,
+        "currency": "USD",
+        "description": "Ramaco Resources, Inc. engages in the development, operation, and sale of metallurgical coal. Its development portfolio includes the Elk Creek project that covers an area of approximately 20,200 acres located in southern West Virginia; the Berwind property covering an area of approximately 62,500 acres situated on the border of West Virginia and Virginia; the Knox Creek property, which covers an area of approximately 64,050 acres is located in Virginia; the Maben property covering an area of approximately 28,000 acres situated in southwestern Pennsylvania southern West Virginia; and the Brook Mine property that covers an area of approximately 16,000 acres located in northeastern Wyoming. The company serves blast furnace steel mills and coke plants in North America, as well as metallurgical coal consumers internationally. Ramaco Resources, Inc. was founded in 2015 and is based in Lexington, Kentucky."
+    },
+    "TECL": {
+        "ticker": "TECL",
+        "name": "Direxion Technology Bull 3X Sha",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its net assets (plus borrowing for investment purposes) in financial instruments, such as swap agreements, securities of the index, and exchange-traded funds (\"ETFs\") that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index includes domestic companies from the technology sector. It is non-diversified."
+    },
+    "DK": {
+        "ticker": "DK",
+        "name": "Delek US Holdings, Inc.",
+        "meta": "Oil & Gas Refining & Marketing",
+        "type": "EQUITY",
+        "mcap": 2137214976,
+        "currency": "USD",
+        "description": "Delek US Holdings, Inc. engages in the integrated downstream energy business in the United States. The company operates in two segments: Refining and Logistics. The Refining segment processes crude oil and other feedstock for the manufacture of various grades of gasoline, diesel fuel, aviation fuel, asphalt, and other petroleum-based products that are distributed through owned and third-party product terminal. It owns and operates refineries located in Tyler, Texas; El Dorado, Arkansas; Big Spring, Texas; and Krotz Springs, Louisiana. The Logistics segment gathers, transports, and stores crude oil, intermediate, and refined products; and markets, distributes, transports, and stores refined products, as well as disposes and recycles water for third parties. It owns or leases crude oil transportation pipelines, refined product pipelines, crude oil gathering systems, and associated crude oil storage tanks; and owns and operates light product distribution terminals, as well as markets light products using third-party terminals. It serves oil companies, independent refiners and marketers, jobbers, distributors, utility and transportation companies, government, and independent retail fuel operators. Delek US Holdings, Inc. was founded in 2001 and is headquartered in Brentwood, Tennessee."
+    },
+    "BASE": {
+        "ticker": "BASE",
+        "name": "BASE",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "PAAS": {
+        "ticker": "PAAS",
+        "name": "Pan American Silver Corp.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 23301214208,
+        "currency": "USD",
+        "description": "Pan American Silver Corp. engages in the exploration, mine development, extraction, processing, refining, and reclamation of mines in Canada, Mexico, Peru, Bolivia, Argentina, Chile, and Brazil. It explores for silver, gold, zinc, lead, and copper deposits. The company was formerly known as Pan American Minerals Corp. and changed its name to Pan American Silver Corp. in April 1995. Pan American Silver Corp. was incorporated in 1979 and is headquartered in Vancouver, Canada."
+    },
+    "GNPX": {
+        "ticker": "GNPX",
+        "name": "Genprex, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3590050,
+        "currency": "USD",
+        "description": "Genprex, Inc., a clinical-stage gene therapy company, focuses on developing therapies for patients with cancer and diabetes. The company's technologies are designed to administer disease-fighting genes to provide new therapies for patient populations with cancer and diabetes. Its oncology program utilizes its systemic, non-viral Oncoprex Delivery System, which encapsulates the gene-expressing plasmids using lipid-based nanoparticles in a lipoplex form. The company's lead product candidate, Reqorsa Immunogene Therapy (quaratusugene ozeplasmid), is being evaluated in three clinical trials as a treatment for NSCLC and SCLC. Its three-lung cancer clinical programs have received a Fast Track Designation from the FDA for the treatment of that patient population, and SCLC program has received an FDA Orphan Drug Designation. The company's diabetes gene therapy comprises of a novel infusion process that uses an AAV vector to deliver Pdx1 and MafA genes directly to the pancreas. In models of Type 1 diabetes, its GPX-002 transforms alpha cells in the pancreas into functional beta-like cells, which produce insulin but distinct enough from beta cells to evade the body's immune system; and GPX-002 for Type 2 diabetes, where autoimmunity is not at play, is believed to rejuvenate and replenish exhausted beta cells. It has research agreement with The University of Michigan Rogel Cancer Center and Lung Cancer Study Collaboration with ALK Positive. Genprex, Inc. was incorporated in 2009 and is based in Austin, Texas."
+    },
+    "BAND": {
+        "ticker": "BAND",
+        "name": "Bandwidth Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 409904832,
+        "currency": "USD",
+        "description": "Bandwidth Inc. operates as a cloud-based software-powered communications platform-as-a-service provider in the United States and internationally. The company's platform enables enterprises to create, scale, and operate voice or messaging communications services across various mobile applications or connected devices. Its platform also provides voice services through SIP or programmable voice application programming interfaces (API); software APIs for messaging; communications solutions with integrated local emergency services; number management solutions; insights on customer's voice and messaging performance to make data-driven decisions; and bring your own carrier integrations services, which includes unified communications as a service, contact center as a service, conversational AI, and speech-to-text/text-to-speech platforms. In addition, the company offers Call Assure, which provides hands-free alternative routing; application to person messaging solutions that supports SMS and MMS on local numbers, toll free numbers, and short codes; Bandwidth Maestro, an enterprise cloud communications platform; and AIBridge, which enables enterprises to deploy voice-based AI tools in their contact centers. It serves technology companies, enterprise customers, and software-as-a-service platforms. The company was formerly known as Bandwidth.com, Inc. and changed its name to Bandwidth Inc. in September 2017. Bandwidth Inc. was founded in 1999 and is headquartered in Raleigh, North Carolina."
     }
 }
