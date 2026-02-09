@@ -9430,5 +9430,50 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund, under normal circumstances, invests at least 80% of the fund\u2019s net assets in financial instruments, that, in combination, provide 3X daily inverse (opposite) or short exposure to the index or to ETFs that track the index, consistent with the fund\u2019s investment objective. The index is a market value weighted index that includes publicly issued U.S. Treasury securities that have a remaining maturity of greater than 20 years. It is non-diversified."
+    },
+    "STM": {
+        "ticker": "STM",
+        "name": "STMicroelectronics N.V.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 26957025280,
+        "currency": "USD",
+        "description": "STMicroelectronics N.V., together with its subsidiaries, designs, develops, manufactures, and sells semiconductor products in Europe, the Middle East, Africa, the Americas, and the Asia Pacific. The company operates through Analog products, MEMS and Sensors Group (AM&S); Power and Discrete products (P&D); Microcontrollers (MCU); and Digital ICs and RF Products (D&RF) segments. It offers industrial application-specific integrated circuits (ASICs) and application-specific standard products (ASSPs); power management solutions; custom analog ICs, wireless charging solutions; galvanic isolated gate and LED drivers; converters, transistors, intelligent power switches, clocks and timers, comparators, and current-sense amplifiers; micro-electro-mechanical systems (MEMS) sensors, including accelerometers, gyroscopes, magnetic sensors, pressure, temperature, presence detection, biosensors, microphones, machine learning, and edge AI processing smart sensors, as well as thermal and piezoelectric actuators; and optical sensing solutions. The company also provides silicon MOSFETs, SiC MOSFETs, IGBTs, thyristors, rectifiers, and power modules and bipolar transistors; microcontrollers, NFC solutions, memories, and automotive MCUs; and radio frequency (RF) communications and ASICs, driver assistance systems, and RF and infotainment products. It serves automotive, industrial, personal electronics and communications equipment, and computers and peripherals markets. STMicroelectronics N.V. was incorporated in 1987 and is headquartered in Schiphol, the Netherlands."
+    },
+    "CBT": {
+        "ticker": "CBT",
+        "name": "Cabot Corporation",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 3894687232,
+        "currency": "USD",
+        "description": "Cabot Corporation operates as a specialty chemicals and performance materials company. It operates through two segments, Reinforcement Materials and Performance Chemicals. The company offers reinforcing carbons that are used in tires as a rubber reinforcing agent and performance additive, as well as in industrial products, such as hoses, belts, extruded profiles, and molded goods; and engineered elastomer composites solutions. It also provides specialty carbons for use in inks, coatings, plastics, adhesives, toners, batteries, and displays; conductive additives and fumed alumina used in lead acid and lithium-ion batteries for electric vehicles; fumed silica used in adhesives, sealants, cosmetics, batteries, inks, toners, silicone elastomers, coatings, polishing slurries, and pharmaceuticals; and fumed alumina for use in various products, including inkjet media, lighting, coatings, cosmetics, and polishing slurries. In addition, it offers aerogel, a hydrophobic, silica-based particle to use in various thermal insulation and specialty chemical applications; masterbatch and conductive compound products that are used in automotive, industrial, packaging, infrastructure, agriculture, consumer products, and electronics industries; and inkjet colorants for inkjet printing applications, as well as carbon nanotubes and fumed metal oxides. The company sells its products through distributors and sales representatives in the Americas, Europe, the Middle East, Africa, and the Asia Pacific. Cabot Corporation was founded in 1882 and is headquartered in Boston, Massachusetts."
+    },
+    "KR": {
+        "ticker": "KR",
+        "name": "Kroger Company (The)",
+        "meta": "Grocery Stores",
+        "type": "EQUITY",
+        "mcap": 44730777600,
+        "currency": "USD",
+        "description": "The Kroger Co. operates as a food and drug retailer in the United States. The company operates combination food and drug stores, multi-department stores, marketplace stores, and price impact warehouses. Its combination food and drug stores offer natural food and organic sections, pharmacies, general merchandise, pet centers, fresh seafood, and organic produce; and its multi-department stores provide apparel, home fashion and furnishings, outdoor living, electronics, automotive products, and toys. The company's marketplace stores offer full-service grocery, pharmacy, health and beauty care, and perishable goods, as well as general merchandise, including apparel, home goods, and toys; and its price impact warehouse stores provide grocery, and health and beauty care items, as well as meat, dairy, baked goods, and fresh produce items. It also manufactures and processes food products for sale in its supermarkets and online; and sells fuel through its fuel centers. The company sells its products through its stores, fuel centers, and online platforms. The Kroger Co. was founded in 1883 and is based in Cincinnati, Ohio."
+    },
+    "DFNS": {
+        "ticker": "DFNS",
+        "name": "DFNS",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "VPG": {
+        "ticker": "VPG",
+        "name": "Vishay Precision Group, Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 743363200,
+        "currency": "USD",
+        "description": "Vishay Precision Group, Inc. engages in the precision measurement and sensing technologies business in the United States, Europe, Israel, Asia, and Canada. It operates through three segments: Sensors, Weighing Solutions, and Measurement Systems. Its product portfolio includes precision resistors, strain gages, load cells and force measurement transducers, on-board weighing systems, and control process weighing products; rolling force measuring load cell systems and pressure transmitters; web tension measurement load cells and systems; optical strip width gages; and laser velocimeters for speed and length measurements and closed-loop crop optimization control systems for optimal strip cuts. The company also offers data acquisition systems and sensors for product safety testing; thermal-mechanical simulation systems for metallurgical research; and conditioning, data acquisition, and control systems, as well as electronic displays, signal processors, microelectromechanical system sensors, cabling, system software, and communications software/hardware. Its products are used in waste management, bulk hauling, logging, scales manufacturing, engineering systems, pharmaceutical, oil, chemical, steel, paper, and food industries, as well as test and measurement, steel, medical, construction, agricultural, and consumer markets. The company offers its products under the Alpha Electronics, Powertron, Vishay Foil Resistors, Micro-Measurements, APR, Celtron, Revere, Sensortronics, Tedea-Huntleigh, Stress-tek, Vulcan, BLH Nobel, KELK, and DTS brands. Vishay Precision Group, Inc. was incorporated in 2009 and is headquartered in Malvern, Pennsylvania."
     }
 }
