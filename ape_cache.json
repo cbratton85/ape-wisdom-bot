@@ -9295,5 +9295,41 @@
         "mcap": 4686715392,
         "currency": "USD",
         "description": "Crocs, Inc., together with its subsidiaries, designs, develops, manufactures, markets, distributes, and sells casual lifestyle footwear and accessories for men, women, and children under the Crocs and HEYDUDE Brands in the United States and internationally. The company offers various footwear products, including clogs, sandals, platforms, wedges, boots, slides, flip flops, flips, sneakers, and slippers, as well as lace and beads, straps, strap covers, bags, socks, and charms. It sells its products through wholesalers, retail stores, e-commerce sites, third-party marketplaces, and kiosks/store-in-store locations. Crocs, Inc. was founded in 1999 and is headquartered in Broomfield, Colorado."
+    },
+    "MRAM": {
+        "ticker": "MRAM",
+        "name": "Everspin Technologies, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 249593136,
+        "currency": "USD",
+        "description": "Everspin Technologies, Inc. manufactures and sells magnetoresistive random access memory (MRAM) technologies in the United States, Japan, Hong Kong, Germany, Singapore, China, Canada, and internationally. It offers Toggle MRAM, spin-transfer torque MRAM, and tunnel magneto resistance sensor products, as well as foundry services for MRAM products. The company provides its products for applications, including industrial, medical, automotive/transportation, aerospace, and data center markets. It serves original equipment manufacturers, contract manufacturers, and original design manufacturers through a direct sales channel, and a network of representatives and distributors. Everspin Technologies, Inc. was incorporated in 2008 and is headquartered in Chandler, Arizona."
+    },
+    "USB": {
+        "ticker": "USB",
+        "name": "U.S. Bancorp",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 94372954112,
+        "currency": "USD",
+        "description": "U.S. Bancorp, a financial services holding company, provides various financial services to individuals, businesses, institutional organizations, governmental entities, and other financial institutions in the United States. The company operates through Wealth, Corporate, Commercial and Institutional Banking; Consumer and Business Banking; Payment Services; and Treasury and Corporate Support segments. It offers depository services, including checking accounts, savings accounts, and time certificate contracts; and lending services, such as traditional credit products and credit card services, lease financing and import/export trade, asset-backed lending, agricultural finance, and other products. The company also provides cash management, capital markets, and trust and investment management services; and ancillary services comprising capital markets, treasury management, and receivable lock-box collection services to corporate and governmental entity customers. In addition, it offers asset management and fiduciary services for individuals, estates, foundations, business corporations, and charitable organizations; and investment and insurance products to its customers principally within its domestic markets, as well as fund administration services to mutual and other funds. Further, the company provides corporate and purchasing card, and corporate trust services; and credit card services, merchant and ATM processing, mortgage banking, insurance, brokerage and leasing services. U.S. Bancorp was founded in 1863 and is headquartered in Minneapolis, Minnesota."
+    },
+    "CCO": {
+        "ticker": "CCO",
+        "name": "Clear Channel Outdoor Holdings,",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 1079152256,
+        "currency": "USD",
+        "description": "Clear Channel Outdoor Holdings, Inc. operates as an out-of-home advertising company in the United States and Singapore. The company operates in two segments, America and Airports. It provides advertising services through billboards, including bulletins and posters, as well as spectaculars, which are customized display structures with videos, three-dimensional elements and moving parts; street furniture displays, such as advertising surfaces on bus shelters, kiosks, news racks, and other public structures; transit displays in rail stations and on buses, trains, and trams; and wallscapes, as well as advertising solutions to commercial and private airports. The company offers solutions, such as RADARView, an audience and campaign planning tool, which uses historical mobile location data; RADARConnect, a campaign amplification solution that delivers supportive advertisements across mobile and other devices; RADARProof, a campaign measurement and attribution solutions, which analyzes anonymized and/or aggregated data; and RADARSync, a data integration platform designed to enable customized application of the RADAR tools and privacy-compliant sharing of RADAR insights with analytics platforms. The company was formerly known as Eller Media Company and changed its name to Clear Channel Outdoor Holdings, Inc. in August 2005. Clear Channel Outdoor Holdings, Inc. was incorporated in 1995 and is headquartered in San Antonio, Texas."
+    },
+    "VKTX": {
+        "ticker": "VKTX",
+        "name": "Viking Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3214753792,
+        "currency": "USD",
+        "description": "Viking Therapeutics, Inc., a clinical-stage biopharmaceutical company, focuses on the development of novel therapies for metabolic and endocrine disorders. The company's lead drug candidate is VK2809, an orally available tissue and receptor-subtype selective agonist of the thyroid hormone receptor beta (TR\u00df), which is in Phase IIb clinical trials to treat patients with biopsy-confirmed non-alcoholic steatohepatitis, as well as NAFLD. It develops VK5211, an orally available non-steroidal selective androgen receptor modulator that is in Phase II clinical trials for the treatment of patients recovering from non-elective hip fracture surgery; VK0612, an orally available Phase IIb-ready drug candidate for type 2 diabetes; VK2735, a novel dual agonist of the glucagon-like peptide, which is in Phase 1 SAD/MAD clinical trial, and VK0214, an orally available tissue and receptor-subtype selective agonist of the TR\u00df for X-linked adrenoleukodystrophy. The company was incorporated in 2012 and is headquartered in San Diego, California."
     }
 }
