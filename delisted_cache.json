@@ -113,5 +113,10 @@
         "delisted": true,
         "last_checked": "2026-02-09",
         "reason": "No Price Data"
+    },
+    "DIDI": {
+        "delisted": true,
+        "last_checked": "2026-02-09",
+        "reason": "No Price Data"
     }
 }

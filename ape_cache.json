@@ -9646,5 +9646,167 @@
         "mcap": 24236294144,
         "currency": "USD",
         "description": "Venture Global, Inc. engages in the development, construction, and production of natural gas liquefaction and export projects near the U.S. Gulf Coast in Louisiana. It is involved in natural gas transport, shipping, and regasification, as well as sells LNG. Venture Global, Inc. was founded in 2013 and is based in Arlington, Virginia. Venture Global, Inc. is a subsidiary of Venture Global Partners II, LLC."
+    },
+    "VAL": {
+        "ticker": "VAL",
+        "name": "Valaris Limited",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 5403677696,
+        "currency": "USD",
+        "description": "Valaris Limited, together with its subsidiaries, provides offshore contract drilling services in Brazil, the United Kingdom, U.S. Gulf of Mexico, Australia, Angola, and internationally. It operates in four segments: Floaters, Jackups, ARO, and Other. The company owns an offshore drilling rig fleet, which includes drillships, dynamically positioned semisubmersible rigs, a moored semisubmersible rig, and jackup rigs. It also offers management services on rigs owned by third parties. The company serves international, government-owned, and independent oil and gas. Valaris Limited was founded in 1975 and is based in Hamilton, Bermuda."
+    },
+    "EET": {
+        "ticker": "EET",
+        "name": "ProShares Ultra MSCI Emerging M",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of large and mid-capitalization companies across 24 emerging market countries. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index or in instruments with similar economic characteristics. The fund is non-diversified."
+    },
+    "IH": {
+        "ticker": "IH",
+        "name": "iHuman Inc.",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 93961264,
+        "currency": "USD",
+        "description": "iHuman Inc. provides intellectual development products to individual users, kindergartens, and distributors in the People's Republic of China and internationally. The company offers interactive and self-directed apps, including iHuman Chinese, iHuman ABC, iHuman Pinyin, iHuman Magic Thinking, iHuman Books, iHuman Stories, iHuman Chinese Classics, iHumanpedia, iHuman Kids Workout, iHuman Coding, iHuman Fun Idioms, iHuman Little Artists, iHuman Readers, iHuman Writing, iHuman Fantastic Friends, iHuman AI Coding, and iHuman Chinese Reading; bekids Coding, bekids Coloring, bekids Reading, bekids Puzzle, bekids Academy, and Gogo series; and Aha World and Aha Makeover. It also provides intellectually stimulating materials, including books, interactive materials, and smart devices that develop children's abilities in speaking, critical thinking, independent reading, and creativity; and Cosmicrew, a 3D comedic adventure animation series. iHuman Inc. was founded in 1996 and is based in Beijing, the People's Republic of China."
+    },
+    "AMR": {
+        "ticker": "AMR",
+        "name": "Alpha Metallurgical Resources, ",
+        "meta": "Coking Coal",
+        "type": "EQUITY",
+        "mcap": 2649926144,
+        "currency": "USD",
+        "description": "Alpha Metallurgical Resources, Inc., a mining company, produces, processes, and sells met and thermal coal in Virginia and West Virginia. The company provides metallurgical coal products. It operates twenty active mines and eight active coal preparation and load-out facilities. The company was formerly known as Contura Energy, Inc. and changed its name to Alpha Metallurgical Resources, Inc. in February 2021. Alpha Metallurgical Resources, Inc. was incorporated in 2016 and is headquartered in Bristol, Tennessee."
+    },
+    "FLWS": {
+        "ticker": "FLWS",
+        "name": "1-800-FLOWERS.COM, Inc.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 254661568,
+        "currency": "USD",
+        "description": "1-800-FLOWERS.COM, Inc. provides gifts for various occasions in the United States and internationally. It operates through three segments: Consumer Floral & Gifts, Gourmet Foods & Gift Baskets, and BloomNet. The company offers a range of products, including fresh-cut flowers, floral and fruit arrangements, plants, gifts, greeting cards personalized products, dipped berries, popcorns, gourmet foods and gift baskets, cookies, chocolates, candies, wines, and gift-quality fruits. It offers its products and services through online platform under the 1-800-Flowers.com, 1-800-Baskets.com, Cheryl's Cookies, FruitBouquets.com, Harry & David, PersonalizationMall.com, Shari's Berries, Mrs. Beasley, Things Remembered, Moose Munch, The Popcorn Factory, Wolferman's Bakery, Simply Chocolate, Vital Choice, Scharffen Berger, DesignPac, BloomNet, Napco, Alice's Table, Card Isle, and Flowerama brand names. 1-800-FLOWERS.COM, Inc. was founded in 1976 and is headquartered in Jericho, New York."
+    },
+    "AEO": {
+        "ticker": "AEO",
+        "name": "American Eagle Outfitters, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 3945391616,
+        "currency": "USD",
+        "description": "American Eagle Outfitters, Inc. operates as a multi-brand specialty retailer in the United States and internationally. The company provides jeans, apparel and accessories, and personal care products for women and men under the American Eagle brand; and intimates, apparel, activewear, and swim collections under the Aerie and OFFLINE by Aerie brands. It also offers menswear products under the Todd Snyder New York brand; and fashion clothing and accessories under the Unsubscribed brand. The company sells its products through its own and licensed retail stores, concession-based shops-within-shops, wholesale markets, and online marketplaces; and digital channels, such as www.ae.com, www.aerie.com, www.toddsnyder.com, and www.unsubscribed.com. American Eagle Outfitters, Inc. was founded in 1977 and is headquartered in Pittsburgh, Pennsylvania."
+    },
+    "TEM": {
+        "ticker": "TEM",
+        "name": "Tempus AI, Inc.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 9723503616,
+        "currency": "USD",
+        "description": "Tempus AI, Inc. operates as a healthcare technology company. It engages in providing next generation sequencing diagnostics, polymerase chain reaction profiling, molecular genotyping, and other anatomic and molecular pathology testing to healthcare providers, pharmaceutical companies, biotechnology companies, researchers, and other third parties. The company offers Insights, a license library of linked clinical, molecular, and imaging de-identified data, as well as a suite of analytical services to analytic and cloud-and-compute tools to pharmaceutical and biotechnology companies; and Trials that provides clinical trial matching services to pharmaceutical companies. In addition, it operates Next; Algos, a suite of algorithmic tests in oncology; Hub, a desktop and mobile platform for ordering, managing, and receiving tests and patient results; and Lens, a platform for researchers and scientists to find, access, and analyze Tempus data. The company has a strategic collaboration agreement with AstraZeneca and Pathos AI, Inc. to develop therapeutic programs in oncology, as well as strategic collaboration with Personalis, Inc. and Whitehawk Therapeutics, Inc. The company was formerly known as Tempus Labs, Inc. and changed its name to Tempus AI, Inc. in January 2023. Tempus AI, Inc. was incorporated in 2015 and is headquartered in Chicago, Illinois."
+    },
+    "UPXI": {
+        "ticker": "UPXI",
+        "name": "Upexi, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 64788284,
+        "currency": "USD",
+        "description": "Upexi, Inc. engages in the development, manufacture, and distribution of consumer products. It offers nail grinder and healthy all-natural pet supplements under the LuckyTail brand; energy solutions under the PRAX brand; functional mushrooms under the Cure Mushrooms brand; cannabinoid under the Moonwlkr brand; and gummies and other products under the Gumi Labs brand name. The company sells its products through direct-to-consumer network, wholesale partnerships, and third-party platform. It also focuses on cryptocurrency industry and management of cash assets. The company was formerly known as Grove, Inc. and changed its name to Upexi, Inc. in August 2022. Upexi, Inc. was incorporated in 2018 and is headquartered in Tampa, Florida."
+    },
+    "SCHW": {
+        "ticker": "SCHW",
+        "name": "Charles Schwab Corporation (The",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 191678087168,
+        "currency": "USD",
+        "description": "The Charles Schwab Corporation, together with its subsidiaries, operates as a savings and loan holding company that provides wealth management, securities brokerage, banking, asset management, custody, and financial advisory services in the United States and internationally. The company operates in two segments, Investor Services and Advisor Services. It offers brokerage accounts with equity and fixed income trading, margin lending, options trading, futures and forex trading, and cash management capabilities, including certificates of deposit; third-party mutual funds through the Mutual Fund Marketplace and Mutual Fund OneSource service, as well as mutual fund trading and clearing services to broker-dealers; exchange-traded funds; advisory solutions for managed portfolios, separately managed accounts, customized personal advice for tailored portfolios, specialized planning, and full-time portfolio management; banking products comprising checking and savings accounts, first lien residential real estate mortgage loans, home equity lines of credit, and pledged asset lines; and trust custody services, personal trust reporting services, and administrative trustee services. It provides digital retirement calculators; integrated web-, mobile-, and software-based trading platforms, real-time market data, options trading, premium research, and multi-channel access; self-service education and support tools; online research and analysis tools; equity compensation plan sponsors full-service recordkeeping for stock plans, stock options, restricted stock, performance shares, and stock appreciation rights; retirement plan services; mutual fund clearing services; and advisor services, including interactive tools and educational content. The Company operates through branch offices. The Charles Schwab Corporation was founded in 1971 and is headquartered in Westlake, Texas."
+    },
+    "BRLS": {
+        "ticker": "BRLS",
+        "name": "Borealis Foods Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 24897436,
+        "currency": "USD",
+        "description": "Borealis Foods Inc. operates as a food tech company that provides nutritious food products. It provides ramen noodles under the Chef Woo, Chef Ramsay, Ramen Express, and Woodles brands. The company is based in Oakville, Canada."
+    },
+    "PK": {
+        "ticker": "PK",
+        "name": "Park Hotels & Resorts Inc.",
+        "meta": "REIT - Hotel & Motel",
+        "type": "EQUITY",
+        "mcap": 2273016576,
+        "currency": "USD",
+        "description": "Park is one of the largest publicly-traded lodging real estate investment trusts (\u0093REIT\u0094) with a diverse portfolio of iconic and market-leading hotels and resorts with significant underlying real estate value. Park's portfolio currently consists of 38 premium-branded hotels and resorts with over 24,000 rooms primarily located in prime city center and resort locations."
+    },
+    "SYM": {
+        "ticker": "SYM",
+        "name": "Symbotic Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 37533827072,
+        "currency": "USD",
+        "description": "Symbotic Inc., an automation technology company, develops technologies to enhance operating efficiencies in modern warehouses. The company automates the processing of pallets, cases, and individual items in warehouses. Its systems enhance operations at the front end of the supply chain. The company is headquartered in Wilmington, Massachusetts."
+    },
+    "DIDI": {
+        "ticker": "DIDI",
+        "name": "DIDI",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "XLF": {
+        "ticker": "XLF",
+        "name": "State Street Financial Select S",
+        "meta": "Financial",
+        "type": "ETF",
+        "mcap": 47816458240,
+        "currency": "USD",
+        "description": "The fund generally invests substantially all, but at least 95%, of its total assets in the securities comprising the index. The index includes companies that have been identified as Financial companies by the Global Industry Classification Standard, including securities of companies from the following industries: financial services; insurance; banks; capital markets; mortgage real estate investment trusts; and consumer finance. The fund is non-diversified."
+    },
+    "EXPE": {
+        "ticker": "EXPE",
+        "name": "Expedia Group, Inc.",
+        "meta": "Travel Services",
+        "type": "EQUITY",
+        "mcap": 29378740224,
+        "currency": "USD",
+        "description": "Expedia Group, Inc. operates as an online travel company in the United States and internationally. The company operates through B2C, B2B, and trivago segments. The B2C segment includes Brand Expedia, a full-service online travel brand offers various travel products and services; Hotels.com for lodging accommodations; Vrbo, an online marketplace for the alternative accommodations; Orbitz, Travelocity, Wotif Group, ebookers, CheapTickets, Hotwire.com and CarRentals.com. The B2B segment provides various travel and non-travel companies including airlines, offline travel agents, online retailers, corporate travel management, and financial institutions who leverage its travel technology and tap into its diverse supply to augment their offerings and market Expedia Group rates and availabilities to its travelers. The trivago segment send referrals to online travel companies and travel service providers from hotel metasearch websites. In addition, the company provides brand advertising through online and offline channels, loyalty programs, mobile apps, and search engine marketing, as well as metasearch, social media, direct and personalized traveler communications on its websites, and through direct e-mail communication with its travelers. The company was formerly known as Expedia, Inc. and changed its name to Expedia Group, Inc. in March 2018. Expedia Group, Inc. was founded in 1996 and is headquartered in Seattle, Washington."
+    },
+    "USO": {
+        "ticker": "USO",
+        "name": "United States Oil Fund",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 9238587392,
+        "currency": "USD",
+        "description": "USO invests primarily in futures contracts for light, sweet crude oil, other types of crude oil, diesel-heating oil, gasoline, natural gas, and other petroleum-based fuels."
+    },
+    "NRG": {
+        "ticker": "NRG",
+        "name": "NRG Energy, Inc.",
+        "meta": "Utilities - Independent Power Producers",
+        "type": "EQUITY",
+        "mcap": 33488764928,
+        "currency": "USD",
+        "description": "NRG Energy, Inc., together with its subsidiaries, operates as an energy and home services company in the United States and Canada. It operates through Texas; East; West/Services/Other; Vivint Smart Home; and Corporate Activities segments. The company produces and sells electricity generated using coal, oil, solar, and battery storage; natural gas; and a cloud-based home platform, including hardware, software, sales, installation, customer service, technical support, and professional monitoring solutions. It offers retail electricity and energy management, line and surge protection products, HVAC installation, repair and maintenance, home protection products, repair and maintenance, and carbon offsets; retail services comprising demand response, commodity sales, energy efficiency, and energy management solutions; and system power, distributed generation, renewable and low-carbon products, carbon management and specialty services, backup generation, storage and distributed solar, and energy advisory services. In addition, the company trades in power, natural gas, and related commodities; environmental products; weather products; and financial products, including forwards, futures, options, and swaps. It offers its products and services under the NRG, Reliant, Direct Energy, Green Mountain Energy, and Vivint. It serves residential, commercial, government, industrial, and wholesale customers. NRG Energy, Inc. was founded in 1989 and is headquartered in Houston, Texas."
+    },
+    "IMPP": {
+        "ticker": "IMPP",
+        "name": "Imperial Petroleum Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 143088096,
+        "currency": "USD",
+        "description": "Imperial Petroleum Inc., together with its subsidiaries, provides seaborne transportation services worldwide. The company owns and operates a fleet of medium range refined petroleum product tankers that carry refined petroleum products, such as gasoline, diesel, fuel oil, and jet fuel, as well as edible oils and chemicals; suezmax tankers that carry crude oil; and handysize drybulk carriers that transport bulks, such as iron ore, coal, grains, bauxite, phosphate, and fertilizers. It serves oil producers, refineries, commodities traders and producers, and industrial users of drybulk cargoes. Imperial Petroleum Inc. was incorporated in 2021 and is based in Athens, Greece."
     }
 }
