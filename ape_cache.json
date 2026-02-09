@@ -9259,5 +9259,41 @@
         "mcap": 0,
         "currency": "USD",
         "description": ""
+    },
+    "DGRO": {
+        "ticker": "DGRO",
+        "name": "iShares Core Dividend Growth ET",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The underlying index is a subset of the Morningstar\u00ae U.S. Market IndexSM, which is a broad market index that represents approximately 97% of the market capitalization of publicly-traded U.S. stocks."
+    },
+    "SONO": {
+        "ticker": "SONO",
+        "name": "Sonos, Inc.",
+        "meta": "Consumer Electronics",
+        "type": "EQUITY",
+        "mcap": 2064635136,
+        "currency": "USD",
+        "description": "Sonos, Inc., together with its subsidiaries, designs, develops, manufactures, and sells audio products and services in the Americas, Europe, the Middle East, Africa, and the Asia Pacific. The company offers wireless, portable, plug-in, and home theater speakers; and headphones, soundbars, components, and accessories. It offers its products through physical stores, websites, online retailers, and custom installers. The company was formerly known as Rincon Audio, Inc. and changed its name to Sonos, Inc. in May 2004. Sonos, Inc. was incorporated in 2002 and is based in Santa Barbara, California."
+    },
+    "SYK": {
+        "ticker": "SYK",
+        "name": "Stryker Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 137018572800,
+        "currency": "USD",
+        "description": "Stryker Corporation operates as a medical technology company. It operates through two segments, MedSurg and Neurotechnology, and Orthopaedics. The MedSurg and Neurotechnology segment offers surgical equipment, and surgical navigation systems, endoscopic and communications systems, patient handling, emergency medical equipment and intensive care disposable products, clinical communication and  artificial intelligence-assisted virtual care platform technology, minimally invasive products for the treatment of acute ischemic and hemorrhagic stroke, cranial, and maxillofacial and chest wall devices, as well as dural substitutes and sealants; traditional brain and open skull based surgical procedures products; and orthobiologic and biosurgery products, including synthetic bone grafts and vertebral augmentation products. The Orthopaedics segment provides implants for use in total joint replacements, such as hip, knee and shoulder, and trauma and extremities surgeries; thoracolumbar systems that include fixation, minimally invasive and interbody systems used in spinal injury, complex spine and degenerative therapies. The company sells its products to doctors, hospitals, and other healthcare facilities through company-owned subsidiaries and branches, as well as third-party dealers and distributors in approximately 75 countries. Stryker Corporation was founded in 1941 and is headquartered in Portage, Michigan."
+    },
+    "CROX": {
+        "ticker": "CROX",
+        "name": "Crocs, Inc.",
+        "meta": "Footwear & Accessories",
+        "type": "EQUITY",
+        "mcap": 4686715392,
+        "currency": "USD",
+        "description": "Crocs, Inc., together with its subsidiaries, designs, develops, manufactures, markets, distributes, and sells casual lifestyle footwear and accessories for men, women, and children under the Crocs and HEYDUDE Brands in the United States and internationally. The company offers various footwear products, including clogs, sandals, platforms, wedges, boots, slides, flip flops, flips, sneakers, and slippers, as well as lace and beads, straps, strap covers, bags, socks, and charms. It sells its products through wholesalers, retail stores, e-commerce sites, third-party marketplaces, and kiosks/store-in-store locations. Crocs, Inc. was founded in 1999 and is headquartered in Broomfield, Colorado."
     }
 }
