@@ -9278,5 +9278,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "CCI": {
+        "ticker": "CCI",
+        "name": "Crown Castle Inc.",
+        "meta": "REIT - Specialty",
+        "type": "EQUITY",
+        "mcap": 36179595264,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "JETS": {
+        "ticker": "JETS",
+        "name": "U.S. Global Jets ETF",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SHIP": {
+        "ticker": "SHIP",
+        "name": "Seanergy Maritime Holdings Corp",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 228243408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
