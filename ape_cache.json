@@ -10897,5 +10897,68 @@
         "mcap": 0,
         "currency": "USD",
         "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is a price-weighted index and includes 30 large-cap, \"blue-chip\" U.S. stocks, excluding utility and transportation companies. The fund is non-diversified."
+    },
+    "DHR": {
+        "ticker": "DHR",
+        "name": "Danaher Corporation",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 153156943872,
+        "currency": "USD",
+        "description": "Danaher Corporation designs, manufactures, and markets professional, medical, research, and industrial products and services in the United States, China, and internationally. It operates through Biotechnology, Life Sciences, and Diagnostics segments. The Biotechnology segment provides bioprocessing technologies, consumables, services, and solutions that advance, accelerate, and integrate the development and manufacture of therapeutics; cell line and cell culture media development services; cell culture media, process liquids and buffers for manufacturing, chromatography resins, filtration technologies, and aseptic fill finish; single-use hardware, consumables, and services, such as the design and installation of full manufacturing suites; lab filtration, separation, and purification; lab-scale protein purification and analytical tools; reagents, membranes, and services for diagnostic and assay development; and healthcare filtration solutions. The Life Sciences segment provides mass spectrometers; bioanalytical measurement systems; flow cytometry, genomics, lab automation, centrifugation, liquid handling automation instruments, antibodies, and particle counting and characterization; genome sample preparation; microscopes; protein consumables; filtration products; and genomic medicines, such as custom nucleic acid products, and plasmid DNA, RNA, and proteins under the ABCAM, ALDEVRON, BECKMAN COULTER, GENEDATA, IDT, LEICA MICROSYSTEMS, MOLECULAR DEVICES, PALL, PHENOMENEX, and SCIEX brands. The Diagnostics segment offers clinical instruments, consumables, software, and services in the areas of clinical chemistry, immunoassay, hematology, and microbiology for hospitals, physicians' offices, reference laboratories, and other critical care settings. The company was formerly known as Diversified Mortgage Investors, Inc. and changed its name to Danaher Corporation in 1984. Danaher Corporation was founded in 1969 and is headquartered in Washington, the District Of Columbia."
+    },
+    "FMX": {
+        "ticker": "FMX",
+        "name": "Fomento Economico Mexicano S.A.",
+        "meta": "Beverages - Brewers",
+        "type": "EQUITY",
+        "mcap": 38506668032,
+        "currency": "USD",
+        "description": "Fomento Econ\u00f3mico Mexicano, S.A.B. de C.V., through its subsidiaries, operates as a franchise bottler of Coca-Cola trademark beverages worldwide. It operates through Coca-Cola FEMSA, Proximity Americas Division, Proximity Europe Division, Health Division, Fuel Division, and Others segments. The company produces, markets, and distributes Coca-Cola trademark beverages in Mexico, Guatemala, Nicaragua, Costa Rica, Panama, Colombia, Venezuela, Brazil, Argentina, and Uruguay. It also operates small-box retail chain stores in Mexico, Colombia, Peru, Chile, Brazil, and the United States under the OXXO name; retail service stations for fuels, motor oils, lubricants, and car care products under the OXXO GAS name in Mexico; and drugstores in Chile, Colombia, Ecuador, and Mexico under the Cruz Verde, Fybeca, Sana Sana, YZA, La Moderna, and Farmacon names. In addition, the company provides transport logistics and maintenance services in Mexico, Brazil, and Colombia; processes electronic transactions for small and medium-sized businesses under the Spin name; and engages in the proximity discount grocery business under the Bara name. Further, it operates small-box retail and foodvenience chain stores in Switzerland, Germany, Austria, Luxembourg, and the Netherlands under the k kiosk, Brezelk\u00f6nig, BackWerk, Ditsch, Press & Books, avec, Caff\u00e8 Spettacolo, and ok.\u0096 brands. Fomento Econ\u00f3mico Mexicano, S.A.B. de C.V. was founded in 1890 and is headquartered in Monterrey, Mexico."
+    },
+    "RCL": {
+        "ticker": "RCL",
+        "name": "Royal Caribbean Cruises Ltd.",
+        "meta": "Travel Services",
+        "type": "EQUITY",
+        "mcap": 94912290816,
+        "currency": "USD",
+        "description": "Royal Caribbean Cruises Ltd. operates as a cruise company worldwide. The company operates cruises under the Royal Caribbean International, Celebrity Cruises, and Silversea Cruises brands, which comprise a range of itineraries. As of February 12, 2025, it operated 67 ships. Royal Caribbean Cruises Ltd. was founded in 1968 and is headquartered in Miami, Florida."
+    },
+    "DAL": {
+        "ticker": "DAL",
+        "name": "Delta Air Lines, Inc.",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 48972206080,
+        "currency": "USD",
+        "description": "Delta Air Lines, Inc. provides scheduled air transportation for passengers and cargo in the United States and internationally. The company operates through two segments, Airline and Refinery. Its domestic network centered on core hubs in Atlanta, Detroit, Minneapolis-St. Paul, and Salt Lake City, as well as coastal hub positions in Boston, Los Angeles, New York-LaGuardia, New York-JFK, and Seattle; and international network centered on hubs and market presence in Amsterdam, Bogota, Lima, Mexico City, London-Heathrow, Paris-Charles de Gaulle, Santiago (Chile), Sao Paulo, Seoul-Incheon, and Tokyo. The company sells its tickets through various distribution channels, including delta.com and the Fly Delta app; and acts as a reservations specialists. It also provides aircraft maintenance and engineering support, repair, and overhaul services; and vacation packages to third-party consumers. The company operates through a fleet of approximately 1,292 aircraft. Delta Air Lines, Inc. was founded in 1924 and is headquartered in Atlanta, Georgia."
+    },
+    "NMR": {
+        "ticker": "NMR",
+        "name": "Nomura Holdings Inc",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 27255513088,
+        "currency": "USD",
+        "description": "Nomura Holdings, Inc. engages in the provision of investment, financing, and related services to individual, institutional, and government clients worldwide. It operates through three segments: Wealth Management, Investment Management, and Wholesale. The Wealth Management segment offers investment consultation services. The Investment Management segment provides investment management services and investment solutions, such as establishing and managing investment trusts, discretionary investment services, as well as investment and management for investment vehicles, and for funds for institutional investors, and management of silent partnerships. The Wholesale segment is involved in the sales and trading of debt and equity securities, foreign exchange contracts and derivatives; offers investment banking services, including underwriting and distribution of debt and equity securities, mergers and acquisitions, and financial advisory. The company was formerly known as The Nomura Securities Co., Ltd. and changed its name to Nomura Holdings, Inc. in October 2001. Nomura Holdings, Inc. was incorporated in 1925 and is headquartered in Tokyo, Japan."
+    },
+    "HAL": {
+        "ticker": "HAL",
+        "name": "Halliburton Company",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 29372770304,
+        "currency": "USD",
+        "description": "Halliburton Company provides products and services to the energy industry worldwide. It operates in two segments, Completion and Production, and Drilling and Evaluation. The Completion and Production segment offers production enhancement services that include stimulation and sand control services; cementing services, such as well bonding and casing, and casing equipment; and completion tools that offer downhole solutions and services, including well completion products and services, intelligent well completions, liner hanger systems, sand control systems, multilateral systems, and service tools. This segment also provides electrical submersible pumps, as well as artificial lift services; production solutions comprising coiled tubing, hydraulic workover units, downhole tools, and pumping and nitrogen services; pipeline and process services, such as pre-commissioning, commissioning, maintenance, and decommissioning; and specialty chemicals and services. The Drilling and Evaluation segment offers drilling fluid systems, performance additives, completion fluids, solids control, specialized testing equipment, and waste management services; drilling systems and services; wireline and perforating services consisting of open-hole logging, and cased-hole and slickline; and drill bits and services comprising roller cone bits, fixed cutter bits, hole enlargement, and related downhole tools and services, as well as coring equipment and services. This segment also provides cloud based digital services and artificial intelligence solutions on an open architecture for subsurface insights, integrated well construction, and reservoir and production management; testing and subsea services, such as acquisition and analysis of reservoir information and optimization solutions; and project management and integrated asset management services. Halliburton Company was founded in 1919 and is based in Houston, Texas."
+    },
+    "CRNT": {
+        "ticker": "CRNT",
+        "name": "Ceragon Networks Ltd.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 214837040,
+        "currency": "USD",
+        "description": "Ceragon Networks Ltd. provides wireless transport solutions for cellular operators and other wireless service providers in North America, Europe, Africa, the Asia Pacific, the Middle East, India, and Latin America. The company's solutions use microwave and millimeter wave radio technology to transfer telecommunication traffic between base stations, small/distributed cells, and the service provider's network. It provides IP-20 all-outdoor solutions, such as IP-20C, IP-20C-HP, IP-20S, IP-20E, and IP-20V; IP-20 split-mount/ all-indoor solutions comprising IP-20N/IP-20A, IP-20F, and IP-20G; and IP-50 disaggregated solutions, including IP-50E, IP-50EX, IP-50C, IP-50CX, and IP-50FX for various short-haul, long-haul, fronthaul, small cells, routing, and enterprise access applications. In addition, the company offers network and radio planning, site surveys, solutions development, installation, network rollout, wireless transport network auditing and optimization, maintenance, training, and other services. It serves internet service providers, municipalities, government, utilities, and maritime communications broadcasters and defense, as well as oil and gas companies, public safety organizations, business and public institutions, broadcasters, energy utilities, and private communications networks. The company sells its products through direct sales, original equipment manufacturers, distributors, and system integrators. The company was formerly known as Giganet Ltd. and changed its name to Ceragon Networks Ltd. in September 2000. Ceragon Networks Ltd. was incorporated in 1996 and is headquartered in Rosh Haayin, Israel."
     }
 }
