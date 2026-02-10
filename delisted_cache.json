@@ -1,9 +1,4 @@
 {
-    "GPS": {
-        "delisted": true,
-        "last_checked": "2026-02-08",
-        "reason": "No Price Data"
-    },
     "RE": {
         "delisted": true,
         "last_checked": "2026-02-08",
@@ -122,6 +117,11 @@
     "PIK": {
         "delisted": true,
         "last_checked": "2026-02-09",
+        "reason": "No Price Data"
+    },
+    "GPS": {
+        "delisted": true,
+        "last_checked": "2026-02-10",
         "reason": "No Price Data"
     }
 }

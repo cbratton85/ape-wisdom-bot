@@ -10591,5 +10591,131 @@
         "mcap": 9201096704,
         "currency": "USD",
         "description": "DaVita Inc. provides kidney dialysis services for patients suffering from chronic kidney failure in the United States. The company operates kidney dialysis centers and provides related lab services in outpatient dialysis centers. It also offers outpatient, hospital inpatient, and home-based hemodialysis services; operates clinical laboratories that provide routine laboratory tests for dialysis and other physician-prescribed laboratory tests for ESRD patients; and management and administrative services to outpatient dialysis centers. In addition, the company offers integrated care and disease management services to patients in risk-based and other integrated care arrangements; clinical research programs; physician services; and comprehensive kidney care services. Further, it engages in the provision of inpatient dialysis services and related laboratory services; and transplant software business. The company was formerly known as DaVita HealthCare Partners Inc. and changed its name to DaVita Inc. in September 2016. DaVita Inc. was incorporated in 1994 and is headquartered in Denver, Colorado."
+    },
+    "FRDM": {
+        "ticker": "FRDM",
+        "name": "Freedom 100 Emerging Markets ET",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "Under normal circumstances, at least 80% of the fund's total assets (exclusive of collateral held from securities lending) will be invested in the component securities of the index or in depositary receipts representing such component securities. The index is designed to track the performance of a portfolio of approximately 100 equity securities in emerging market countries."
+    },
+    "TXN": {
+        "ticker": "TXN",
+        "name": "Texas Instruments Incorporated",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 198779469824,
+        "currency": "USD",
+        "description": "Texas Instruments Incorporated designs, manufactures, and sells semiconductors to electronics designers and manufacturers in the United States, China, the rest of Asia, Europe, the Middle East, Africa, Japan, and internationally. It operates through Analog and Embedded Processing segments. The Analog segment offers power products to manage power requirements across various voltage levels, including battery-management solutions, DC/DC switching regulators, AC/DC and isolated controllers and converters, power switches, linear regulators, voltage references, multiphase controllers and power stages, and lighting products. This segment also provides signal chain products that sense, condition, and measure real-world signals and convert them into data to be transferred or converted for further processing and control, such as amplifiers, data converters, interface products, motor drives, clocks, and logic and sensing products. The Embedded Processing segment offers microcontrollers, processors, wireless connectivity, and radar products; and applications processors for specific computing activity. It also provides DLP products primarily for use in projecting high-definition images; calculators; and application-specific integrated circuits. Its products are used in various markets, such as industrial, automotive, personal electronics, communications equipment, enterprise systems, calculators, and others. The company markets and sells its semiconductor products through direct sales and distributors, as well as through its website. Texas Instruments Incorporated was founded in 1930 and is headquartered in Dallas, Texas."
+    },
+    "HDV": {
+        "ticker": "HDV",
+        "name": "iShares Core High Dividend ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The underlying index is comprised of qualified income paying securities that are screened for superior company quality and financial health as determined by Morningstar, Inc.'s proprietary index methodology. The fund is non-diversified."
+    },
+    "WING": {
+        "ticker": "WING",
+        "name": "Wingstop Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 7867517440,
+        "currency": "USD",
+        "description": "Wingstop Inc., together with its subsidiaries, franchises and operates restaurants under the Wingstop brand in United States, Australia, Bahrain, Kuwait, Puerto Rico, Saudi Arabia, and The Netherlands. Its restaurants offer classic wings, boneless wings, tenders, and hand-sauced-and-tossed in various flavors, as well as chicken sandwiches, fries, and hand-cut carrots and celery that are cooked-to-order. The company was founded in 1994 and is headquartered in Dallas, Texas."
+    },
+    "AWAY": {
+        "ticker": "AWAY",
+        "name": "Amplify Travel Tech ETF",
+        "meta": "Consumer Cyclical",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index tracks the performance of globally exchange-listed equity securities (or corresponding American Depositary Receipts (\u201cADRs\u201d) or Global Depositary Receipts (\u201cGDRs\u201d)) of companies across the globe that are engaged in \u201cTravel Technology Business\u201d. The fund invests at least 80% of its net assets (plus borrowings for investment purposes) in the component securities of the index and in ADRs or GDRs based on the component securities in the index. The fund is non-diversified."
+    },
+    "RAIL": {
+        "ticker": "RAIL",
+        "name": "Freightcar America, Inc.",
+        "meta": "Railroads",
+        "type": "EQUITY",
+        "mcap": 248465072,
+        "currency": "USD",
+        "description": "FreightCar America, Inc., through its subsidiaries, engages in design, manufacture, and sale of railcars and railcar components for the transportation of bulk commodities and containerized freight products in the United States and Mexico. It operates through two segments: Manufacturing and Parts. The company offers a range of railcars, including boxcars, covered and open-top hopper cars, intermodal and non-intermodal flat cars, mill gondola cars, coil steel cars, coal cars, dynastack series, steel products, boxcars, aluminum coal cars, stainless steel and hybrid stainless steel cars, and other railcar types. It also sells used railcars; rebuilds, converts, and leases railcars; and sells forged, cast, and fabricated parts for various railcars. It serves shippers, railroads, and financial institutions. FreightCar America, Inc. was founded in 1901 and is headquartered in Chicago, Illinois."
+    },
+    "CPS": {
+        "ticker": "CPS",
+        "name": "Cooper-Standard Holdings Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 609887744,
+        "currency": "USD",
+        "description": "Cooper-Standard Holdings Inc., through its subsidiary, manufactures and sells sealing, fuel and brake delivery, and fluid transfer systems in the North America, Europe, the Asia Pacific, and the South America. The company offers sealing systems, such as metal, plastic or wire carrier seals; rubber, silicone, and plastic sheeting; aesthetic and functional exterior surface treatment, as well as molded seals and gaskets, including compression molded, and transfer molded or injection molded products from various rubber and plastic materials. It also provides fuel and brake delivery systems, such as bundles, fuel rails, fuel rail technology, fuel and vapor lines, metallic brake and tank lines; fluid transfer systems, including air intake and charge air hoses, brake and clutch hoses, diesel particulate filter and SCR emissions lines, heater and coolant, secondary air, and transmission oil cooling hoses, sense, deliver, connect and control fluid delivery for optimal thermal management, powertrain & HVAC operation. In addition, the company exports rubber, silicone, plastics and select metals. Its products are primarily used in passenger vehicles and light trucks that are manufactured by automotive original equipment manufacturers and replacement markets. Cooper-Standard Holdings Inc. was founded in 1960 and is headquartered in Northville, Michigan."
+    },
+    "NOTV": {
+        "ticker": "NOTV",
+        "name": "Inotiv, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 12427499,
+        "currency": "USD",
+        "description": "Inotiv, Inc. provides nonclinical and analytical drug discovery and development services to the pharmaceutical and medical device industries in the United States, the Netherlands, and internationally. The company operates through two segments, Discovery and Safety Assessment (DSA) and Research Models and Services (RMS). The DMS segment manufactures scientific instruments for life sciences research and the related software for use by pharmaceutical companies, universities, government research centers, and medical research institutions under the company's BASi product line. The RMS segment engages in commercial production and sales of research models, diets, bedding, and bioproducts. The company was formerly known as Bioanalytical Systems, Inc. and changed its name to Inotiv, Inc. in March 2021. Inotiv, Inc. was incorporated in 1974 and is headquartered in West Lafayette, Indiana."
+    },
+    "DFEN": {
+        "ticker": "DFEN",
+        "name": "Direxion Daily Aerospace & Defe",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests at least 80% of its net assets (plus borrowing for investment purposes) in financial instruments, such as swap agreements, securities of the index, and exchange-traded funds (\"ETFs\") that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index attempts to measure the performance of the aerospace and defense industry of the U.S. equity market. The fund is non-diversified."
+    },
+    "QLYS": {
+        "ticker": "QLYS",
+        "name": "Qualys, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 3939865344,
+        "currency": "USD",
+        "description": "Qualys, Inc. provides cloud-based platform delivering information technology (IT), security, and compliance solutions in the United States and internationally. It offers Qualys Cloud Apps, which include Cybersecurity Asset Management and External Attack Surface Management; Vulnerability Management, Detection and Response; Web Application Scanning; Patch Management; Custom Assessment and Remediation; Multi-Vector Endpoint Detection and Response; Policy Compliance; File Integrity Monitoring; and Qualys TotalCloud, as well as Cloud Workload Protection, Cloud Detection and Response, Cloud Security Posture Management, Infrastructure as Code, SaaS Security Posture Management, Kubernetes, and Container Security. The company's integrated suite of IT, security, and compliance solutions delivered on its Qualys' Enterprise TruRisk Platform that enables customers to identify and manage IT and operational technology assets; collect and analyze IT security data; discover and prioritize vulnerabilities; quantify cyber risk exposure; recommend and implement remediation actions; and verify the implementation of such actions. It also provides asset tagging and management, reporting and dashboards, questionnaires and collaboration, remediation and workflow, big data correlation and analytics engine, and alerts and notifications that enable clients to detect vulnerabilities, and measure and remediate cyber risk. The company offers its solutions to enterprises, government entities, and small and medium-sized businesses in various industries, including education, financial services, government, healthcare, insurance, manufacturing, media, retail, technology, and utilities through its sales teams, as well as through its network of channel partners, such as security consulting organizations, managed service providers, resellers, cloud providers, and consulting firms. Qualys, Inc. was incorporated in 1999 and is headquartered in Foster City, California."
+    },
+    "CLX": {
+        "ticker": "CLX",
+        "name": "Clorox Company (The)",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 14587632640,
+        "currency": "USD",
+        "description": "The Clorox Company manufactures and markets consumer and professional products worldwide. The company operates through four segments: Health and Wellness, Household, Lifestyle, and International. The Health and Wellness segment offers home care cleaning and disinfecting products, bleach, clog removers, and laundry additives under the Clorox, Clorox2, Pine-Sol, Scentiva, Tilex, Liquid-Plumr, Poett, and Formula 409 brands; professional cleaning and disinfecting products under the CloroxPro and Clorox Healthcare brands; professional food service products under the Hidden Valley brand in the United States. The Household segment provides cat litter products under the Fresh Step and Scoop Away brands; bags and wraps under the Glad brand; and grilling products under the Kingsford brand in the United States. The Lifestyle segment offers dressings, dips, seasonings, and sauces primarily under the Hidden Valley brand; water-filtration products under the Brita brand; and natural personal care products under the Burt's Bees brand in the United States. The International segment provides laundry additives, home care products, bags and wraps, cat litter products, water-filtration systems, professional cleaning and disinfecting products, natural personal care products, food, grilling products, and digestive health products internationally primarily under the Clorox, Glad, Poett, Brita, Burt's Bees, Pine-Sol, Ever Clean, Clorinda, Chux and Fresh Step Brands. It also offers vitamins, minerals, and supplement products under the Natural Vitality, RenewLife, NeoCell, and Rainbow Light brands. The company sells its products through mass retailers; grocery outlets; warehouse clubs; dollar stores; home hardware centers; drug, pet, and military stores; third-party and owned e-commerce channels; and distributors, as well as a direct sales force. The company was founded in 1913 and is headquartered in Oakland, California."
+    },
+    "GPS": {
+        "ticker": "GPS",
+        "name": "GPS",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
+    },
+    "LSAT": {
+        "ticker": "LSAT",
+        "name": "LeaderShares AlphaFactor Tactic",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund will typically be invested in a diversified portfolio of equity securities of companies with market capitalizations of at least $1 billion at the time of initial purchase. It may focus its investments in a particular sector, industry or group of industries."
+    },
+    "AMGN": {
+        "ticker": "AMGN",
+        "name": "Amgen Inc.",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 202566991872,
+        "currency": "USD",
+        "description": "Amgen Inc. discovers, develops, manufactures, and delivers human therapeutics worldwide. The company's principal products include Enbrel for the treatment of rheumatoid arthritis, plaque psoriasis, and psoriatic arthritis; Otezla for the treatment of adult patients with plaque psoriasis, psoriatic arthritis, and oral ulcers associated with Beh\u00e7et's disease; Prolia to treat postmenopausal women with osteoporosis; XGEVA for skeletal-related events prevention; Repatha, which reduces the risks of myocardial infarction, stroke, and coronary revascularization; Nplate for the treatment of patients with immune thrombocytopenia; KYPROLIS to treat patients with relapsed or refractory multiple myeloma; Aranesp to treat a lower-than-normal number of red blood cells and anemia; EVENITY for the treatment of osteoporosis in postmenopausal for men and women; Vectibix to treat patients with wild-type RAS metastatic colorectal cancer; BLINCYTO for the treatment of patients with acute lymphoblastic leukemia; TEPEZZA to treat thyroid eye disease; and KRYSTEXXA for the treatment of chronic refractory gout. It also markets other products, including Neulasta, MVASI, AMJEVITA/AMGEVITA, TEZSPIRE, Parsabiv, Aimovig, LUMAKRAS/LUMYKRAS, EPOGEN, KANJINTI, TAVNEOS, RAVICTI, UPLIZNA and PROCYSBI. The company serves healthcare providers, including physicians or their clinics, dialysis centers, hospitals, and pharmacies. It distributes its products through pharmaceutical wholesale distributors, as well as direct-to-consumer channels. The company has collaboration agreements with AstraZeneca plc for the development and commercialization of TEZSPIRE; Novartis Pharma AG to develop and commercialize Aimovig; UCB for the development and commercialization of EVENITY; Kyowa Kirin Co., Ltd. for rocatinlimab development and commercialization; and BeiGene, Ltd. for oncology products expansion and development. Amgen Inc. was incorporated in 1980 and is headquartered in Thousand Oaks, California."
     }
 }
