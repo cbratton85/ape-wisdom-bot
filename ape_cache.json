@@ -9238,5 +9238,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "HESM": {
+        "ticker": "HESM",
+        "name": "Hess Midstream LP",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 7608510464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "UNG": {
+        "ticker": "UNG",
+        "name": "United States Natural Gas Fund ",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 147069584,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
