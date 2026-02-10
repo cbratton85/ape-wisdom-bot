@@ -10789,5 +10789,50 @@
         "mcap": 9382576128,
         "currency": "USD",
         "description": "The Mosaic Company, through its subsidiaries, produces and markets concentrated phosphate and potash crop nutrients. It operates in three segments: Phosphates, Potash, and Mosaic Fertilizantes. The company owns and operates mines and production facilities, which produce concentrated phosphate crop nutrients, such as diammonium phosphate, monoammonium phosphate, and MicroEssentials ammoniated phosphate products; and phosphate based animal feed ingredients under the Biofos and Nexfos brands, as well as produces a double sulfate of potash magnesia product under the K-Mag brand. It also produces and sells potash for use in the manufacturing of mixed crop nutrients and animal feed ingredients, and for industrial use; and for use in the deicing and as a water softener regenerant. In addition, the company provides blended crop nutrients for agricultural use; triple superphosphate, single superphosphate, and dicalcium phosphate; and biological fertilizer complements, industrial products, and other ancillary services. Further, it owns and operates chemical plants, crop nutrient blending and bagging facilities, port terminals, and warehouses; distributes nitrogen based crop nutrients and phosphogypsum; and purchases and sells phosphates, potash, and nitrogen products. The company sells its products to distributors, retail chains, cooperatives, independent retailers and dealers, industrial accounts, animal feed industry, wholesalers, farmers, crop nutrient manufacturers, and national accounts through its sales force. It also exports its products. The company operates in the United States, Brazil, China, Canada, Paraguay, Argentina, Japan, Colombia, India, Australia, Peru, Mexico, Honduras, the Dominican Republic, Thailand, Indonesia, and internationally. The Mosaic Company was incorporated in 1987 and is headquartered in Tampa, Florida."
+    },
+    "AON": {
+        "ticker": "AON",
+        "name": "Aon plc",
+        "meta": "Insurance Brokers",
+        "type": "EQUITY",
+        "mcap": 66703007744,
+        "currency": "USD",
+        "description": "Aon plc, a professional services firm, provides a range of risk and human capital solutions worldwide. It offers commercial risk solutions, including retail brokerage, specialty solutions, global risk consulting and captive management, and affinity programs; and health solutions, such as consulting and brokerage, consumer benefit, and talent advisory services. The company also provides insurance-linked securities, capital raising, strategic advice, restructuring, and merger and acquisition services; and risk management products and services, capital market solutions, and corporate finance advisory services. In addition, the company offers treaty and facultative reinsurance services; strategic design advice and actuarial services; and investment advisory services on developing and maintaining investment programs across various plan types, including defined benefit plans, defined contribution plans, and trusts for corporations, public pensions, endowments, and foundations. The company was founded in 1919 and is headquartered in Dublin, Ireland."
+    },
+    "AJG": {
+        "ticker": "AJG",
+        "name": "Arthur J. Gallagher & Co.",
+        "meta": "Insurance Brokers",
+        "type": "EQUITY",
+        "mcap": 55966801920,
+        "currency": "USD",
+        "description": "Arthur J. Gallagher & Co., together with its subsidiaries, provides insurance and reinsurance brokerage, consulting, and third-party property/casualty claims settlement and administration services to entities and individuals worldwide. It operates in Brokerage and Risk Management segments. The Brokerage segment offers retail and wholesale insurance and reinsurance brokerage services; assists retail brokers and other non-affiliated brokers in the placement of specialized and hard-to-place insurance; and acts as a brokerage wholesaler, managing general agent, and managing general underwriter for distributing specialized insurance coverages to underwriting enterprises. This segment performs activities, including marketing, underwriting, issuing policies, collecting premiums, appointing and supervising other agents, paying claims, and negotiating reinsurance; and offers services in the areas of insurance and reinsurance placement, risk of loss management, and management of employer sponsored benefit programs. The Risk Management segment provides contract claim settlement and administration services; and claims management, loss control consulting, and insurance property appraisal services. The company offers its services through a network of correspondent brokers and consultants. It serves commercial, industrial, public, religious, and nonprofit entities, as well as underwriting enterprises. The company was founded in 1927 and is headquartered in Rolling Meadows, Illinois."
+    },
+    "YANG": {
+        "ticker": "YANG",
+        "name": "Direxion Daily FTSE China Bear ",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund, under normal circumstances, invests at least 80% of the fund\u2019s net assets (plus borrowing for investment purposes) in financial instruments, that, in combination, provide 3X daily inverse (opposite) or short exposure to the index or to ETFs that track the index, consistent with the fund\u2019s investment objective. The index consists of the 50 largest and most liquid public Chinese companies currently trading on the Hong Kong Stock Exchange (\"SEHK\"). The fund is non-diversified."
+    },
+    "RYAN": {
+        "ticker": "RYAN",
+        "name": "Ryan Specialty Holdings, Inc.",
+        "meta": "Insurance - Specialty",
+        "type": "EQUITY",
+        "mcap": 11577122816,
+        "currency": "USD",
+        "description": "Ryan Specialty Holdings, Inc. operates as a service provider of specialty products and solutions for insurance brokers, agents, and carriers in the United States, Canada, the United Kingdom, rest of Europe, India, and Singapore. The company offers distribution, underwriting, product development, administration, and risk management services by acting as a wholesale broker and a managing underwriter. It serves commercial, industrial, institutional, and government sectors. The company was founded in 2010 and is headquartered in Chicago, Illinois."
+    },
+    "WTW": {
+        "ticker": "WTW",
+        "name": "Willis Towers Watson Public Lim",
+        "meta": "Insurance Brokers",
+        "type": "EQUITY",
+        "mcap": 27775715328,
+        "currency": "USD",
+        "description": "Willis Towers Watson Public Limited Company operates as an advisory, broking, and solutions company worldwide. It operates through two segments: Health, Wealth & Career and Risk & Broking. The company offers strategy and design consulting, plan management service and support, broking and administration services for health, wellbeing, and other group benefit programs, including medical, dental, disability, life, voluntary benefits, and other coverages; actuarial support, plan design, and administrative services for pension and retirement savings plans; retirement consulting services and solutions; and integrated solutions that consists of investment discretionary management, pension administration, core actuarial, and communication and change management assistance services. It also provides advice, data, software, and products to address clients' total rewards and talent issues; and risk advice, insurance brokerage, and consulting services in the areas of property and casualty, affinity, risk and analytics, aerospace, construction, global markets direct and facultative, financial, executive and professional risks, financial solutions, crisis management, surety, marine, and natural resources. In addition, the company offers software and technology, risk and capital management, products and product pricing, financial and regulatory reporting, financial and capital modeling, M&A, outsourcing, and business management services. The company was formerly known as Willis Group Holdings Public Limited Company and changed its name to Willis Towers Watson Public Limited Company in January 2016. Willis Towers Watson Public Limited Company was founded in 1828 and is based in London, the United Kingdom."
     }
 }
