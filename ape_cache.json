@@ -9738,5 +9738,155 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "GRAB": {
+        "ticker": "GRAB",
+        "name": "Grab Holdings Limited",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 17860190208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TGL": {
+        "ticker": "TGL",
+        "name": "Treasure Global Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 8319975,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "FRMI": {
+        "ticker": "FRMI",
+        "name": "Fermi Inc.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 5655174144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "INOD": {
+        "ticker": "INOD",
+        "name": "Innodata Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 1529271552,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "KLAR": {
+        "ticker": "KLAR",
+        "name": "Klarna Group plc",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 8099665408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SLQT": {
+        "ticker": "SLQT",
+        "name": "SelectQuote, Inc.",
+        "meta": "Insurance Brokers",
+        "type": "EQUITY",
+        "mcap": 169273344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ICHR": {
+        "ticker": "ICHR",
+        "name": "Ichor Holdings",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 1566201728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "RIOT": {
+        "ticker": "RIOT",
+        "name": "Riot Platforms, Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 5684932096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ASTI": {
+        "ticker": "ASTI",
+        "name": "Ascent Solar Technologies, Inc",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 57949248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CRTO": {
+        "ticker": "CRTO",
+        "name": "Criteo S.A.",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 984417664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GOCO": {
+        "ticker": "GOCO",
+        "name": "GoHealth, Inc.",
+        "meta": "Insurance Brokers",
+        "type": "EQUITY",
+        "mcap": 57140860,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "VRE": {
+        "ticker": "VRE",
+        "name": "Veris Residential, Inc.",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 1860299776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EHTH": {
+        "ticker": "EHTH",
+        "name": "eHealth, Inc.",
+        "meta": "Insurance Brokers",
+        "type": "EQUITY",
+        "mcap": 63821548,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ASAN": {
+        "ticker": "ASAN",
+        "name": "Asana, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2027204992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VOOG": {
+        "ticker": "VOOG",
+        "name": "Vanguard S&P 500 Growth ETF",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 7456883712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
