@@ -9258,5 +9258,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SLB": {
+        "ticker": "SLB",
+        "name": "SLB Limited",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 75574050816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BABY": {
+        "ticker": "BABY",
+        "name": "BABY",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
