@@ -9888,5 +9888,455 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "HYG": {
+        "ticker": "HYG",
+        "name": "iShares iBoxx $ High Yield Corp",
+        "meta": "High Yield Bond",
+        "type": "ETF",
+        "mcap": 15834798080,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "TPL": {
+        "ticker": "TPL",
+        "name": "Texas Pacific Land Corporation",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 27686283264,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HOG": {
+        "ticker": "HOG",
+        "name": "Harley-Davidson, Inc.",
+        "meta": "Recreational Vehicles",
+        "type": "EQUITY",
+        "mcap": 2528299008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SCYX": {
+        "ticker": "SCYX",
+        "name": "SCYNEXIS, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 34612780,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CQQQ": {
+        "ticker": "CQQQ",
+        "name": "Invesco China Technology ETF",
+        "meta": "China Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "USLM": {
+        "ticker": "USLM",
+        "name": "United States Lime & Minerals, ",
+        "meta": "Building Materials",
+        "type": "EQUITY",
+        "mcap": 3093070336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CNI": {
+        "ticker": "CNI",
+        "name": "Canadian National Railway Compa",
+        "meta": "Railroads",
+        "type": "EQUITY",
+        "mcap": 65375244288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PSN": {
+        "ticker": "PSN",
+        "name": "Parsons Corporation",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 7509208576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EWS": {
+        "ticker": "EWS",
+        "name": "iShares MSCI Singapore ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 708643008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "GUTS": {
+        "ticker": "GUTS",
+        "name": "Fractyl Health, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 69968328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "AAP": {
+        "ticker": "AAP",
+        "name": "Advance Auto Parts Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 3393057280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BSX": {
+        "ticker": "BSX",
+        "name": "Boston Scientific Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 110737227776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FEZ": {
+        "ticker": "FEZ",
+        "name": "State Street SPDR EURO STOXX 50",
+        "meta": "Europe Stock",
+        "type": "ETF",
+        "mcap": 4150408448,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "AN": {
+        "ticker": "AN",
+        "name": "AutoNation, Inc.",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 7623323136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SN": {
+        "ticker": "SN",
+        "name": "SharkNinja, Inc.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 16811972608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TSAT": {
+        "ticker": "TSAT",
+        "name": "Telesat Corporation",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 1430369024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "NEM": {
+        "ticker": "NEM",
+        "name": "Newmont Corporation",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 132538941440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "XLB": {
+        "ticker": "XLB",
+        "name": "State Street Materials Select S",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 3801160192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "PDD": {
+        "ticker": "PDD",
+        "name": "PDD Holdings Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 150468329472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ARMN": {
+        "ticker": "ARMN",
+        "name": "Aris Mining Corporation",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 3942287360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "GDX": {
+        "ticker": "GDX",
+        "name": "VanEck Gold Miners ETF",
+        "meta": "Equity Precious Metals",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FLNC": {
+        "ticker": "FLNC",
+        "name": "Fluence Energy, Inc.",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 3798447360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LPLA": {
+        "ticker": "LPLA",
+        "name": "LPL Financial Holdings Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 28592140288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SEZL": {
+        "ticker": "SEZL",
+        "name": "Sezzle Inc.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 2377056000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "WFH": {
+        "ticker": "WFH",
+        "name": "Direxion Work From Home ETF",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SSO": {
+        "ticker": "SSO",
+        "name": "ProShares Ultra S&P500",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "HOPE": {
+        "ticker": "HOPE",
+        "name": "Hope Bancorp, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 1584572416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "INTS": {
+        "ticker": "INTS",
+        "name": "Intensity Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 22944816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "MOVE": {
+        "ticker": "MOVE",
+        "name": "Movano Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 15256184,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SQ": {
+        "ticker": "SQ",
+        "name": "SQ",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "WHR": {
+        "ticker": "WHR",
+        "name": "Whirlpool Corporation",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 5186450944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FNV": {
+        "ticker": "FNV",
+        "name": "Franco-Nevada Corporation",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 48705466368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EH": {
+        "ticker": "EH",
+        "name": "EHang Holdings Limited",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 893152128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "CMCSA": {
+        "ticker": "CMCSA",
+        "name": "Comcast Corporation",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 117351989248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ODD": {
+        "ticker": "ODD",
+        "name": "ODDITY Tech Ltd.",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 1766245376,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "OZ": {
+        "ticker": "OZ",
+        "name": "Belpointe PREP, LLC",
+        "meta": "Real Estate - Development",
+        "type": "EQUITY",
+        "mcap": 190260272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "RSG": {
+        "ticker": "RSG",
+        "name": "Republic Services, Inc.",
+        "meta": "Waste Management",
+        "type": "EQUITY",
+        "mcap": 69936340992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MRMD": {
+        "ticker": "MRMD",
+        "name": "MariMed Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 34568944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OQX"
+    },
+    "JBLU": {
+        "ticker": "JBLU",
+        "name": "JetBlue Airways Corporation",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 2224090880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BX": {
+        "ticker": "BX",
+        "name": "Blackstone Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 164390387712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AIRE": {
+        "ticker": "AIRE",
+        "name": "reAlpha Tech Corp.",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 48504788,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "RJF": {
+        "ticker": "RJF",
+        "name": "Raymond James Financial, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 31524096000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HOTH": {
+        "ticker": "HOTH",
+        "name": "Hoth Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 13682072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CFLT": {
+        "ticker": "CFLT",
+        "name": "Confluent, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 10868458496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "MTCH": {
+        "ticker": "MTCH",
+        "name": "Match Group, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 7800969216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
