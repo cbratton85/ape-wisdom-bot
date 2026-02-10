@@ -10852,5 +10852,50 @@
         "mcap": 0,
         "currency": "USD",
         "description": ""
+    },
+    "UNIT": {
+        "ticker": "UNIT",
+        "name": "Uniti Group Inc.",
+        "meta": "REIT - Specialty",
+        "type": "EQUITY",
+        "mcap": 1986766336,
+        "currency": "USD",
+        "description": "Uniti (NASDAQ: UNIT) is a premier insurgent fiber provider dedicated to enabling mission-critical connectivity across the United States. We build, operate, and deliver fast and reliable communications services, empowering more than a million consumers and businesses in the digital economy. Our broad portfolio of services is offered through a suite of brands: Uniti Wholesale, Kinetic, Uniti Fiber, and Uniti Solutions."
+    },
+    "MGK": {
+        "ticker": "MGK",
+        "name": "Vanguard Mega Cap Growth ETF",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund employs an indexing investment approach designed to track the performance of the index. The index is a float-adjusted, market-capitalization-weighted index designed to measure equity market performance of mega-capitalization growth stocks in the United States. The Advisor attempts to replicate the target index by investing all, or substantially all, of its assets in the stocks that make up the index, holding each stock in approximately the same proportion as its weighting in the index. The fund is non-diversified."
+    },
+    "BOND": {
+        "ticker": "BOND",
+        "name": "PIMCO Active Bond Exchange-Trad",
+        "meta": "Intermediate Core-Plus Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund normally invests at least 80% of its assets in a diversified portfolio of Fixed Income Instruments of varying maturities, which may be represented by forwards or derivatives such as options, futures contracts, or swap agreement. It invests primarily in investment grade debt securities, but may invest up to 30% of its total assets in high yield securities, as rated by Moody's, S&P or Fitch, or, if unrated, as determined by PIMCO."
+    },
+    "ICLN": {
+        "ticker": "ICLN",
+        "name": "iShares Global Clean Energy ETF",
+        "meta": "Miscellaneous Sector",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The index is designed to track the performance of approximately 100 clean energy-related companies. The fund generally invests at least 80% of its assets in the component securities of the index and in investments that have economic characteristics that are substantially identical to the component securities of the index and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents, as well as in securities not included in the index. It is non-diversified."
+    },
+    "DOG": {
+        "ticker": "DOG",
+        "name": "ProShares Short Dow30",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is a price-weighted index and includes 30 large-cap, \"blue-chip\" U.S. stocks, excluding utility and transportation companies. The fund is non-diversified."
     }
 }
