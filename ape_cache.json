@@ -10968,5 +10968,165 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "GILD": {
+        "ticker": "GILD",
+        "name": "Gilead Sciences, Inc.",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 182683992064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "RENT": {
+        "ticker": "RENT",
+        "name": "Rent the Runway, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 223755856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "LPL": {
+        "ticker": "LPL",
+        "name": "LG Display Co, Ltd AMERICAN DEP",
+        "meta": "Consumer Electronics",
+        "type": "EQUITY",
+        "mcap": 3980000000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LEU": {
+        "ticker": "LEU",
+        "name": "Centrus Energy Corp.",
+        "meta": "Uranium",
+        "type": "EQUITY",
+        "mcap": 4826006016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "REKR": {
+        "ticker": "REKR",
+        "name": "Rekor Systems, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 128613632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "IAT": {
+        "ticker": "IAT",
+        "name": "iShares U.S. Regional Banks ETF",
+        "meta": "Financial",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "HL": {
+        "ticker": "HL",
+        "name": "Hecla Mining Company",
+        "meta": "Other Precious Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 15398867968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "STIM": {
+        "ticker": "STIM",
+        "name": "Neuronetics, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 99989448,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SERV": {
+        "ticker": "SERV",
+        "name": "Serve Robotics Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 769008384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ONL": {
+        "ticker": "ONL",
+        "name": "Orion Properties Inc.",
+        "meta": "REIT - Office",
+        "type": "EQUITY",
+        "mcap": 146981200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "F": {
+        "ticker": "F",
+        "name": "Ford Motor Company",
+        "meta": "Auto Manufacturers",
+        "type": "EQUITY",
+        "mcap": 54069645312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BUL": {
+        "ticker": "BUL",
+        "name": "Pacer US Cash Cows Growth ETF",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ASPI": {
+        "ticker": "ASPI",
+        "name": "ASP Isotopes Inc.",
+        "meta": "Chemicals",
+        "type": "EQUITY",
+        "mcap": 684352320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "GGB": {
+        "ticker": "GGB",
+        "name": "Gerdau S.A.",
+        "meta": "Steel",
+        "type": "EQUITY",
+        "mcap": 8374609920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AISP": {
+        "ticker": "AISP",
+        "name": "Airship AI Holdings, Inc",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 88856464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "MAT": {
+        "ticker": "MAT",
+        "name": "Mattel, Inc.",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 6785531904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
