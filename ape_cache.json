@@ -9308,5 +9308,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "MBOT": {
+        "ticker": "MBOT",
+        "name": "Microbot Medical Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 123570808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "EWC": {
+        "ticker": "EWC",
+        "name": "iShares MSCI Canada Index Fund",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 5334395904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "VRNS": {
+        "ticker": "VRNS",
+        "name": "Varonis Systems, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 3019350272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "EZA": {
+        "ticker": "EZA",
+        "name": "iShares MSCI South Africa Index",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 598188032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "EWN": {
+        "ticker": "EWN",
+        "name": "iShares MSCI Netherlands Index ",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 349594496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "XP": {
+        "ticker": "XP",
+        "name": "XP Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 10625693696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
