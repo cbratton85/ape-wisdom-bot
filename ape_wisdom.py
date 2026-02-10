@@ -252,8 +252,9 @@ def save_cache(filepath, cache_data):
     except: pass
 
 def fetch_meta_data_robust(ticker):
-    """Fetches descriptive metadata (Sector, Name, Market Cap) from yfinance."""
-    name, meta, quote_type, mcap, currency, description = ticker, "Unknown", "EQUITY", 0, "USD", ""
+    """Fetches descriptive metadata and exchange info from yfinance."""
+    name, meta, quote_type = ticker, "Unknown", "EQUITY"
+    mcap, currency, description, exchange = 0, "USD", "", "Unknown"
 
     try:
         dat = yf.Ticker(ticker)
@@ -263,7 +264,9 @@ def fetch_meta_data_robust(ticker):
             name = info.get('shortName') or info.get('longName') or ticker
             mcap = info.get('marketCap', 0)
             currency = info.get('currency', 'USD')
-            description = info.get('longBusinessSummary', '')
+            description = ""
+            
+            exchange = info.get('exchange', 'Unknown')
             
             if quote_type == 'ETF':
                 meta = info.get('category', 'Unknown')
@@ -272,16 +275,19 @@ def fetch_meta_data_robust(ticker):
                 meta = meta.replace('\r', '').replace('\n', '').strip()
                 if not meta or meta == name or meta == "Unknown - Unknown":
                     meta = "Unknown"
-    except Exception as e:
+    except Exception:
         pass
-    return {'ticker': ticker,
-            'name': name,
-            'meta': meta,
-            'type': quote_type,
-            'mcap': mcap,
-            'currency': currency,
-            'description': description
-            }
+
+    return {
+        'ticker': ticker,
+        'name': name,
+        'meta': meta,
+        'type': quote_type,
+        'mcap': mcap,
+        'currency': currency,
+        'description': "",
+        'exchange': exchange  # Now correctly populated from yfinance
+    }
 
 def calculate_rsi(series, period=14):
     """
@@ -912,14 +918,17 @@ def export_interactive_html(df):
             heat_span = f'<span style="color:{h_clr}; font-weight:bold;">{score:.1f}</span>'
             export_df.at[index, 'Heat'] = with_hist(heat_span, heat_hist)
             
-            # --- 8. NAME (Fixed Description Tooltip) ---
-            raw_desc = str(row.get('Desc', 'No description available.'))
-            desc_text = raw_desc.replace('"', '&quot;').replace("'", "&apos;")
+            # --- 8. NAME ---
             name_txt = row.get("Name", "")
+            t_raw = row['Sym']
+            tv_ticker_name = t_raw.replace('-', '.') 
 
+            exg = row.get("exchange", "Unknown")
+            
             html_name = (
-                f'<div class="d-tooltip" data-tooltip="{desc_text}" tabindex="0">'
-                f'<span class="text-content"><b>{name_txt}</b></span>'
+                f'<div class="symbol-container" onmouseenter="loadSymbolProfile(\'{tv_ticker_name}\', \'profile-{index}\', \'{exg}\', event)">'
+                f'<span class="text-content" style="cursor:help;"><b>{name_txt}</b></span>'
+                f'<div id="profile-{index}" class="chart-popup"></div>'
                 f'</div>'
             )
 
@@ -1013,7 +1022,7 @@ def export_interactive_html(df):
             # We pass the raw symbol here; the JavaScript loader (Step 3) 
             # will handle the 'NASDAQ:' or 'NYSE:' prefixing for us.
             export_df.at[index, 'Sym'] = (
-                f'<div class="symbol-container" onmouseenter="loadMiniChart(\'{tv_ticker}\', \'{index}\')">'
+                f'<div class="symbol-container" onmouseenter="loadMiniChart(\'{tv_ticker}\', \'{index}\', \'{row.get("exchange", "")}\', event)">'
                 f'<a href="https://www.tradingview.com/chart/?symbol={tv_ticker}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
                 f'<div id="chart-tooltip-{index}" class="chart-popup"></div>'
                 f'</div>'
@@ -1560,23 +1569,22 @@ def export_interactive_html(df):
             .symbol-container {{ position: relative; display: inline-block; }}
             .chart-popup {{
                 display: none;
-                position: absolute;
-                left: 110%;
-                top: -120px;
-                width: 500px;
-                height: 350px;
+                position: fixed;
+                width: 600px;
+                height: 400px;
                 background: #111;
                 border: 1px solid #444;
                 border-radius: 12px;
                 z-index: 99999;
-                box-shadow: 0 15px 50px rgba(0,0,0,0.9);
-                padding: 10px;
-                pointer-events: auto; /* Required for the price tracking you wanted */
+                box-shadow: 0 10px 50px rgba(0,0,0,0.9);
+                padding: 0 !important;
+                pointer-events: auto;
                 overflow: hidden;
-                /* This is the secret sauce for the newer version: */
                 flex-direction: column;
             }}
-            .symbol-container:hover .chart-popup {{ display: flex; }}
+            .symbol-container:hover .chart-popup {{
+                display: flex;
+            }}
 
         </style>
         </head>
@@ -1869,28 +1877,67 @@ def export_interactive_html(df):
         <script>
     var table;
 
-    function loadMiniChart(symbol, index) {{
-        const container = document.getElementById('chart-tooltip-' + index);
-    
-        if (container) {{
-            container.innerHTML = ""; 
+    function positionPopup(container, event, boxHeight = 450) {{
+        if (!event) return;
+        const mouseY = event.clientY;
+        const mouseX = event.clientX;
+        const screenHeight = window.innerHeight;
+        const screenWidth = window.innerWidth;
+        const boxWidth = 600;  
+        const margin = 35; // Vertical space
+        const horizontalOffset = 50; // How far to the RIGHT of the pointer
 
-            let finalSymbol = symbol;
+        if (mouseY > screenHeight / 2) {{
+            container.style.top = (mouseY - boxHeight - margin) + "px";
+        }} else {{
+            container.style.top = (mouseY + margin) + "px";
+        }}
 
-            const exchanges = {{
+        if (mouseX + boxWidth + margin > screenWidth) {{
+            container.style.left = (screenWidth - boxWidth - margin) + "px";
+        }} else {{
+            container.style.left = (mouseX - 20) + "px";
+        }}
+    }}
+
+    function getFinalSymbol(symbol, yfExchange) {{
+        const exchangeMap = {{
+            'NMS': 'NASDAQ:',
+            'NGM': 'NASDAQ:',
+            'NCM': 'NASDAQ:',
+            'NYQ': 'NYSE:',
+            'ASE': 'AMEX:',
+            'PCX': 'AMEX:', 
+            'LSE': 'LSE:',
+            'BATS': 'BATS:'
+        }};
+
+        const manualOverrides = {{
             'SPY': 'AMEX:SPY',
             'VOO': 'AMEX:VOO',
-            'IVV': 'AMEX:IVV',
-            'UPRO': 'AMEX:UPRO',
             'TQQQ': 'NASDAQ:TQQQ',
-            'VPN': 'LSE:VPN',
-            'SLV': 'AMEX:SLV',
-            'GLD': 'AMEX:GLD'
+            'VPN': 'NASDAQ:VPN',
+            'AM': 'NYSE:AM'
         }};
-        
-        if (exchanges[symbol.toUpperCase()]) {{
-            finalSymbol = exchanges[symbol.toUpperCase()];
+
+        if (manualOverrides[symbol.toUpperCase()]) {{
+            return manualOverrides[symbol.toUpperCase()];
         }}
+
+        let prefix = exchangeMap[yfExchange] || "";
+        return prefix + symbol;
+    }}
+
+    function loadMiniChart(symbol, index, yfExchange, event) {{
+        const container = document.getElementById('chart-tooltip-' + index);
+        if (!container) return;
+        
+        container.innerHTML = "";
+        
+        // Dynamic positioning
+        positionPopup(container, event || window.event);
+        
+        const finalSymbol = getFinalSymbol(symbol, yfExchange);
 
         if (!customElements.get('tv-mini-chart')) {{
             if (!document.getElementById('tv-widget-loader')) {{
@@ -1903,9 +1950,7 @@ def export_interactive_html(df):
         }}
 
         const chart = document.createElement('tv-mini-chart');
-        
-        chart.setAttribute('symbol', finalSymbol); 
-
+        chart.setAttribute('symbol', finalSymbol);
         chart.setAttribute('time-frame', '7D');
         chart.setAttribute('line-chart-type', 'Baseline');
         chart.setAttribute('theme', 'dark');
@@ -1913,11 +1958,45 @@ def export_interactive_html(df):
         chart.setAttribute('height', '100%');
         chart.setAttribute('show-time-range', 'true');
         chart.setAttribute('show-time-scale', 'true');
-        
         container.appendChild(chart);
     }}
-}}
-    
+
+    function loadSymbolProfile(symbol, containerId, yfExchange, event) {{
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        container.innerHTML = "";
+        
+        // Dynamic positioning
+        positionPopup(container, event || window.event);
+        
+        const finalSymbol = getFinalSymbol(symbol, yfExchange);
+
+        const widgetContainer = document.createElement('div');
+        widgetContainer.className = 'tradingview-widget-container';
+        
+        const widgetDiv = document.createElement('div');
+        widgetDiv.className = 'tradingview-widget-container__widget';
+        widgetContainer.appendChild(widgetDiv);
+
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js';
+        script.async = true;
+        script.innerHTML = JSON.stringify({{
+            "symbol": finalSymbol,
+            "width": "100%",
+            "height": "100%",
+            "colorTheme": "dark",
+            "isTransparent": false,
+            "showHeadline": true,
+            "locale": "en"
+        }});
+
+        widgetContainer.appendChild(script);
+        container.appendChild(widgetContainer);
+    }}
+
     function parseVal(str) {{
         if (!str || str === null) return 0;
         
