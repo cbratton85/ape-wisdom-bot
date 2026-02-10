@@ -9528,5 +9528,215 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "IPW": {
+        "ticker": "IPW",
+        "name": "iPower Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 5032889,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "DIDI": {
+        "ticker": "DIDI",
+        "name": "DIDI",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "SUUN": {
+        "ticker": "SUUN",
+        "name": "PowerBank Corporation",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 59823792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "QURE": {
+        "ticker": "QURE",
+        "name": "uniQure N.V.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1605567616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LNG": {
+        "ticker": "LNG",
+        "name": "Cheniere Energy, Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 47817142272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MAR": {
+        "ticker": "MAR",
+        "name": "Marriott International",
+        "meta": "Lodging",
+        "type": "EQUITY",
+        "mcap": 98106212352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BNS": {
+        "ticker": "BNS",
+        "name": "Bank Nova Scotia Halifax Pfd 3",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 97336369152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IVW": {
+        "ticker": "IVW",
+        "name": "iShares S&P 500 Growth ETF",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 16045236224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SHE": {
+        "ticker": "SHE",
+        "name": "State Street SPDR MSCI USA Gend",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "PSKY": {
+        "ticker": "PSKY",
+        "name": "Paramount Skydance Corporation",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 11990103040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "EME": {
+        "ticker": "EME",
+        "name": "EMCOR Group, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 34766065664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "JEPI": {
+        "ticker": "JEPI",
+        "name": "JPMorgan Equity Premium Income ",
+        "meta": "Derivative Income",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "LCG": {
+        "ticker": "LCG",
+        "name": "Sterling Capital Focus Equity E",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "BRC": {
+        "ticker": "BRC",
+        "name": "Brady Corporation",
+        "meta": "Security & Protection Services",
+        "type": "EQUITY",
+        "mcap": 4378000384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SIDU": {
+        "ticker": "SIDU",
+        "name": "Sidus Space, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 162973648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "MID": {
+        "ticker": "MID",
+        "name": "American Century Mid Cap Growth",
+        "meta": "Mid-Cap Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CISO": {
+        "ticker": "CISO",
+        "name": "CISO Global, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 16367622,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "IAI": {
+        "ticker": "IAI",
+        "name": "iShares U.S. Broker-Dealers & S",
+        "meta": "Financial",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "DIS": {
+        "ticker": "DIS",
+        "name": "Walt Disney Company (The)",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 195037282304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FROG": {
+        "ticker": "FROG",
+        "name": "JFrog Ltd.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 6309623296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "O": {
+        "ticker": "O",
+        "name": "Realty Income Corporation",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 58244628480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
