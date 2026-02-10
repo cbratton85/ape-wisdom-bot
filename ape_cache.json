@@ -10548,5 +10548,135 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PPA": {
+        "ticker": "PPA",
+        "name": "Invesco Aerospace & Defense ETF",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 2668217856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "QSR": {
+        "ticker": "QSR",
+        "name": "Restaurant Brands International",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 32268718080,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NOVA": {
+        "ticker": "NOVA",
+        "name": "NOVA",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "MNMD": {
+        "ticker": "MNMD",
+        "name": "Mind Medicine (MindMed) Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1460232320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FCFS": {
+        "ticker": "FCFS",
+        "name": "FirstCash Holdings, Inc.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 8064147968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CNXT": {
+        "ticker": "CNXT",
+        "name": "VanEck ChiNext ETF",
+        "meta": "China Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "MIR": {
+        "ticker": "MIR",
+        "name": "Mirion Technologies, Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 5812345344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PFS": {
+        "ticker": "PFS",
+        "name": "Provident Financial Services, I",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 3056550656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GOVT": {
+        "ticker": "GOVT",
+        "name": "iShares U.S. Treasury Bond ETF",
+        "meta": "Intermediate Government",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "DDG": {
+        "ticker": "DDG",
+        "name": "ProShares Short Oil & Gas",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "LAW": {
+        "ticker": "LAW",
+        "name": "CS Disco, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 238717872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NNDM": {
+        "ticker": "NNDM",
+        "name": "Nano Dimension Ltd.",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 477121504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "NOV": {
+        "ticker": "NOV",
+        "name": "NOV Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 6924095488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

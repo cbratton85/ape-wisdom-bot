@@ -109,11 +109,6 @@
         "last_checked": "2026-02-10",
         "reason": "No Price Data"
     },
-    "DIDI": {
-        "delisted": true,
-        "last_checked": "2026-02-10",
-        "reason": "No Price Data"
-    },
     "ZNH": {
         "delisted": true,
         "last_checked": "2026-02-10",
@@ -135,6 +130,21 @@
         "reason": "No Price Data"
     },
     "LBJ": {
+        "delisted": true,
+        "last_checked": "2026-02-10",
+        "reason": "No Price Data"
+    },
+    "DDG": {
+        "delisted": true,
+        "last_checked": "2026-02-10",
+        "reason": "No Price Data"
+    },
+    "NOVA": {
+        "delisted": true,
+        "last_checked": "2026-02-10",
+        "reason": "No Price Data"
+    },
+    "DIDI": {
         "delisted": true,
         "last_checked": "2026-02-10",
         "reason": "No Price Data"
