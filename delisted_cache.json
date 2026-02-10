@@ -1,9 +1,4 @@
 {
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-02-08",
-        "reason": "No Price Data"
-    },
     "SAVE": {
         "delisted": true,
         "last_checked": "2026-02-08",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "DIDI": {
+        "delisted": true,
+        "last_checked": "2026-02-10",
+        "reason": "No Price Data"
+    },
+    "RE": {
         "delisted": true,
         "last_checked": "2026-02-10",
         "reason": "No Price Data"
