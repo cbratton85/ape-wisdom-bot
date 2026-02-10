@@ -9368,5 +9368,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "TECH": {
+        "ticker": "TECH",
+        "name": "Bio-Techne Corp",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 10244561920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PHIO": {
+        "ticker": "PHIO",
+        "name": "Phio Pharmaceuticals Corp.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 9935939,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "TTAN": {
+        "ticker": "TTAN",
+        "name": "ServiceTitan, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 5897864704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
