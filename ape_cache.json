@@ -10834,5 +10834,23 @@
         "mcap": 27775715328,
         "currency": "USD",
         "description": "Willis Towers Watson Public Limited Company operates as an advisory, broking, and solutions company worldwide. It operates through two segments: Health, Wealth & Career and Risk & Broking. The company offers strategy and design consulting, plan management service and support, broking and administration services for health, wellbeing, and other group benefit programs, including medical, dental, disability, life, voluntary benefits, and other coverages; actuarial support, plan design, and administrative services for pension and retirement savings plans; retirement consulting services and solutions; and integrated solutions that consists of investment discretionary management, pension administration, core actuarial, and communication and change management assistance services. It also provides advice, data, software, and products to address clients' total rewards and talent issues; and risk advice, insurance brokerage, and consulting services in the areas of property and casualty, affinity, risk and analytics, aerospace, construction, global markets direct and facultative, financial, executive and professional risks, financial solutions, crisis management, surety, marine, and natural resources. In addition, the company offers software and technology, risk and capital management, products and product pricing, financial and regulatory reporting, financial and capital modeling, M&A, outsourcing, and business management services. The company was formerly known as Willis Group Holdings Public Limited Company and changed its name to Willis Towers Watson Public Limited Company in January 2016. Willis Towers Watson Public Limited Company was founded in 1828 and is based in London, the United Kingdom."
+    },
+    "SE": {
+        "ticker": "SE",
+        "name": "Sea Limited",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 64447287296,
+        "currency": "USD",
+        "description": "Sea Limited, through its subsidiaries, operates as a consumer internet company in Southeast Asia, Latin America, the rest of Asia, and internationally. The company operates through E-commerce, Digital financial services, and Digital entertainment segments. It offers Garena, a digital entertainment platform for users to access mobile and PC online games, as well as promotes eSports operations and develops games. The company also operates the Shopee e-commerce platform, a mobile-centric marketplace that provides integrated payments, logistics infrastructure, and seller services. In addition, it offers SeaMoney digital financial services comprising consumer, and small and medium-sized enterprises (SME) credit, mobile wallets, payment processing, banking, and insurtech services under the SPayLater tradename; and acts as an underwriter for various life and non-life insurance products under the SeaInsure tradename, as well as insurance agency services. It serves buyers, such as individuals and households; and sellers, including small and medium businesses, brands, and large retailers. The company was formerly known as Garena Interactive Holding Limited and changed its name to Sea Limited in April 2017. Sea Limited was incorporated in 2009 and is headquartered in Singapore."
+    },
+    "BABY": {
+        "ticker": "BABY",
+        "name": "BABY",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": ""
     }
 }
