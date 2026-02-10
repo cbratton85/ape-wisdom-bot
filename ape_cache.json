@@ -9398,5 +9398,135 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ADN": {
+        "ticker": "ADN",
+        "name": "ADN",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "WPM": {
+        "ticker": "WPM",
+        "name": "Wheaton Precious Metals Corp",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 64910540800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GLDM": {
+        "ticker": "GLDM",
+        "name": "SPDR Gold MiniShares Trust",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ROST": {
+        "ticker": "ROST",
+        "name": "Ross Stores, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 63256510464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SG": {
+        "ticker": "SG",
+        "name": "Sweetgreen, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 667626752,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MLR": {
+        "ticker": "MLR",
+        "name": "Miller Industries, Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 507136512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TMF": {
+        "ticker": "TMF",
+        "name": "Direxion Daily 20-Yr Treasury B",
+        "meta": "Trading--Leveraged Debt",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "RAMP": {
+        "ticker": "RAMP",
+        "name": "LiveRamp Holdings, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1508477696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HBIO": {
+        "ticker": "HBIO",
+        "name": "Harvard Bioscience, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 23706016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "GTM": {
+        "ticker": "GTM",
+        "name": "ZoomInfo Technologies Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2332377344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "MTD": {
+        "ticker": "MTD",
+        "name": "Mettler-Toledo International, I",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 28209229824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SAVE": {
+        "ticker": "SAVE",
+        "name": "SAVE",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "CON": {
+        "ticker": "CON",
+        "name": "Concentra Group Holdings Parent",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 2965875712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
