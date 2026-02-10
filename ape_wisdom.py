@@ -1168,6 +1168,7 @@ def export_interactive_html(df):
                 position: relative;
                 display: inline-block;
                 cursor: help;
+                z-index: 9999999 !important;
             }}
 
             .tooltip .tooltiptext {{
@@ -1349,7 +1350,19 @@ def export_interactive_html(df):
                 z-index: 1 !important;
             }}
 
-            .header-flex {{ display: flex; justify-content: space-between; align-items: center; height: 68px; width: 100%; padding: 0 15px; background: #111; margin-bottom: 0px; box-sizing: border-box; overflow: hidden; }}
+            .header-flex {{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 68px; width: 100%;
+                padding: 0 15px;
+                background: #111;
+                margin-bottom: 0px;
+                box-sizing: border-box;
+                overflow: hidden;
+                z-index: 100;
+            }}
+            
             .header-left {{ flex: 0 0 200px; display: flex; align-items: center; z-index: 1; }}
             .header-right {{ flex: 0 0 400px; display: flex; justify-content: flex-end; align-items: center; z-index: 10; }}
 
@@ -1361,7 +1374,7 @@ def export_interactive_html(df):
                 grid-template-columns: max-content max-content;
                 gap: 0px
                 max-width: 90%;
-                z-index: 1000;
+                z-index: 101;
             }}
 
             .summary-row {{
@@ -1566,16 +1579,67 @@ def export_interactive_html(df):
                 background-position: right 5px center !important;
             }}
 
-            .symbol-container {{ position: relative; display: inline-block; }}
+            .symbol-container {{
+                position: relative;
+                display: inline-block;
+            }}
+
+
+
+            .d-tooltip {{
+                position: relative;
+                cursor: help;
+            }}
+
+            .d-tooltip::after {{
+                content: attr(data-tooltip); 
+                position: absolute;
+                top: 130%; 
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #000 !important; 
+                color: #00ffff !important; 
+                padding: 10px 15px; 
+                border-radius: 8px; 
+                border: 1px solid #444;
+                font-family: 'Consolas', monospace;
+                font-size: 13px; 
+                white-space: pre-wrap; 
+                width: max-content; 
+                max-width: 500px;
+                z-index: 9999999 !important;
+                opacity: 0; 
+                visibility: hidden; 
+                transition: opacity 0.1s ease-in-out;
+                pointer-events: none;
+                box-shadow: 0 10px 30px rgba(0,0,0,1);
+            }}
+
+            .d-tooltip:hover::after, .d-tooltip:focus::after {{
+                opacity: 1;
+                visibility: visible;
+            }}
+
+            .header-flex, .header-center {{
+                z-index: 10 !important;
+                position: relative;
+            }}
+
+            .table-scroll-container, 
+            .table-responsive, 
+            .container-fluid {{
+                overflow: visible !important; 
+            }}
+
             .chart-popup {{
                 display: none;
                 position: fixed;
-                width: 600px;
+                width: 700px;
                 height: 400px;
-                background: #111;
+                background: #0F0F0F;
                 border: 1px solid #444;
-                border-radius: 12px;
-                z-index: 99999;
+                border-radius: 8px;
+                z-index: 9999999 !important;
                 box-shadow: 0 10px 50px rgba(0,0,0,0.9);
                 padding: 0 !important;
                 pointer-events: auto;
@@ -1877,15 +1941,14 @@ def export_interactive_html(df):
         <script>
     var table;
 
-    function positionPopup(container, event, boxHeight = 450) {{
+    function positionPopup(container, event, boxHeight = 400) {{
         if (!event) return;
         const mouseY = event.clientY;
         const mouseX = event.clientX;
         const screenHeight = window.innerHeight;
         const screenWidth = window.innerWidth;
-        const boxWidth = 600;  
-        const margin = 35; // Vertical space
-        const horizontalOffset = 50; // How far to the RIGHT of the pointer
+        const boxWidth = 700;  
+        const margin = 20; 
 
         if (mouseY > screenHeight / 2) {{
             container.style.top = (mouseY - boxHeight - margin) + "px";
@@ -1896,7 +1959,7 @@ def export_interactive_html(df):
         if (mouseX + boxWidth + margin > screenWidth) {{
             container.style.left = (screenWidth - boxWidth - margin) + "px";
         }} else {{
-            container.style.left = (mouseX - 20) + "px";
+            container.style.left = (mouseX + 10) + "px";
         }}
     }}
 
@@ -1934,31 +1997,49 @@ def export_interactive_html(df):
         
         container.innerHTML = "";
         
-        // Dynamic positioning
-        positionPopup(container, event || window.event);
+        // Dynamic positioning for 800x500
+        positionPopup(container, event || window.event, 500);
         
         const finalSymbol = getFinalSymbol(symbol, yfExchange);
 
-        if (!customElements.get('tv-mini-chart')) {{
-            if (!document.getElementById('tv-widget-loader')) {{
-                const script = document.createElement('script');
-                script.id = 'tv-widget-loader';
-                script.type = 'module';
-                script.src = 'https://widgets.tradingview-widget.com/w/en/tv-mini-chart.js';
-                document.head.appendChild(script);
-            }}
-        }}
+        // Create the Advanced Widget Structure
+        const widgetContainer = document.createElement('div');
+        widgetContainer.className = 'tradingview-widget-container';
+        
+        const widgetDiv = document.createElement('div');
+        widgetDiv.className = 'tradingview-widget-container__widget';
+        widgetContainer.appendChild(widgetDiv);
 
-        const chart = document.createElement('tv-mini-chart');
-        chart.setAttribute('symbol', finalSymbol);
-        chart.setAttribute('time-frame', '7D');
-        chart.setAttribute('line-chart-type', 'Baseline');
-        chart.setAttribute('theme', 'dark');
-        chart.setAttribute('width', '100%');
-        chart.setAttribute('height', '100%');
-        chart.setAttribute('show-time-range', 'true');
-        chart.setAttribute('show-time-scale', 'true');
-        container.appendChild(chart);
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
+        script.async = true;
+        
+        // Pass the JSON config for the Advanced Chart
+        script.innerHTML = JSON.stringify({{
+            "allow_symbol_change": false,
+            "calendar": false,
+            "details": false,
+            "hide_side_toolbar": true,
+            "hide_top_toolbar": true,
+            "hide_legend": true,
+            "hide_volume": false,
+            "hotlist": false,
+            "interval": "D",
+            "locale": "en",
+            "save_image": false,
+            "style": "1",
+            "symbol": finalSymbol,
+            "theme": "dark",
+            "timezone": "Etc/UTC",
+            "backgroundColor": "#0F0F0F",
+            "gridColor": "rgba(242, 242, 242, 0.06)",
+            "width": "100%",
+            "height": "100%"
+        }});
+
+        widgetContainer.appendChild(script);
+        container.appendChild(widgetContainer);
     }}
 
     function loadSymbolProfile(symbol, containerId, yfExchange, event) {{
