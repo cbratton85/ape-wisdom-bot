@@ -10678,5 +10678,165 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "IXHL": {
+        "ticker": "IXHL",
+        "name": "Incannex Healthcare Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 97635592,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "MNTN": {
+        "ticker": "MNTN",
+        "name": "MNTN, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 593108608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HLT": {
+        "ticker": "HLT",
+        "name": "Hilton Worldwide Holdings Inc.",
+        "meta": "Lodging",
+        "type": "EQUITY",
+        "mcap": 76153389056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ITA": {
+        "ticker": "ITA",
+        "name": "iShares U.S. Aerospace & Defens",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "QVCGA": {
+        "ticker": "QVCGA",
+        "name": "QVC Group, Inc. - Series A",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 30989150,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "PMNT": {
+        "ticker": "PMNT",
+        "name": "Perfect Moment Ltd.",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 10348205,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "CORP": {
+        "ticker": "CORP",
+        "name": "Pimco Investment Grade Corporat",
+        "meta": "Corporate Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "KFS": {
+        "ticker": "KFS",
+        "name": "Kingsway Financial Services, In",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 370822528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MPW": {
+        "ticker": "MPW",
+        "name": "Medical Properties Trust, Inc.",
+        "meta": "REIT - Healthcare Facilities",
+        "type": "EQUITY",
+        "mcap": 3019530240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KVYO": {
+        "ticker": "KVYO",
+        "name": "Klaviyo, Inc. Series A",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 6383122944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VUZI": {
+        "ticker": "VUZI",
+        "name": "Vuzix Corporation",
+        "meta": "Consumer Electronics",
+        "type": "EQUITY",
+        "mcap": 212335200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "LSCC": {
+        "ticker": "LSCC",
+        "name": "Lattice Semiconductor Corporati",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 12450651136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "EW": {
+        "ticker": "EW",
+        "name": "Edwards Lifesciences Corporatio",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 45271285760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AVTR": {
+        "ticker": "AVTR",
+        "name": "Avantor, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 7605644288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TDC": {
+        "ticker": "TDC",
+        "name": "Teradata Corporation",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 2762707456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FRSH": {
+        "ticker": "FRSH",
+        "name": "Freshworks Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2544172288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
