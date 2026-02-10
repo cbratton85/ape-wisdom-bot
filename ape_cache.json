@@ -10717,5 +10717,50 @@
         "mcap": 202566991872,
         "currency": "USD",
         "description": "Amgen Inc. discovers, develops, manufactures, and delivers human therapeutics worldwide. The company's principal products include Enbrel for the treatment of rheumatoid arthritis, plaque psoriasis, and psoriatic arthritis; Otezla for the treatment of adult patients with plaque psoriasis, psoriatic arthritis, and oral ulcers associated with Beh\u00e7et's disease; Prolia to treat postmenopausal women with osteoporosis; XGEVA for skeletal-related events prevention; Repatha, which reduces the risks of myocardial infarction, stroke, and coronary revascularization; Nplate for the treatment of patients with immune thrombocytopenia; KYPROLIS to treat patients with relapsed or refractory multiple myeloma; Aranesp to treat a lower-than-normal number of red blood cells and anemia; EVENITY for the treatment of osteoporosis in postmenopausal for men and women; Vectibix to treat patients with wild-type RAS metastatic colorectal cancer; BLINCYTO for the treatment of patients with acute lymphoblastic leukemia; TEPEZZA to treat thyroid eye disease; and KRYSTEXXA for the treatment of chronic refractory gout. It also markets other products, including Neulasta, MVASI, AMJEVITA/AMGEVITA, TEZSPIRE, Parsabiv, Aimovig, LUMAKRAS/LUMYKRAS, EPOGEN, KANJINTI, TAVNEOS, RAVICTI, UPLIZNA and PROCYSBI. The company serves healthcare providers, including physicians or their clinics, dialysis centers, hospitals, and pharmacies. It distributes its products through pharmaceutical wholesale distributors, as well as direct-to-consumer channels. The company has collaboration agreements with AstraZeneca plc for the development and commercialization of TEZSPIRE; Novartis Pharma AG to develop and commercialize Aimovig; UCB for the development and commercialization of EVENITY; Kyowa Kirin Co., Ltd. for rocatinlimab development and commercialization; and BeiGene, Ltd. for oncology products expansion and development. Amgen Inc. was incorporated in 1980 and is headquartered in Thousand Oaks, California."
+    },
+    "KC": {
+        "ticker": "KC",
+        "name": "Kingsoft Cloud Holdings Limited",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 3969885184,
+        "currency": "USD",
+        "description": "Kingsoft Cloud Holdings Limited provides cloud services to businesses and organizations primarily in China. The company's product portfolio includes cloud products, such as infrastructure as a service (IaaS) infrastructure, platform as a service (PaaS) middleware, and software as a service (SaaS) applications that primarily consist of cloud computing, network, containers, database, big data, security, storage, and delivery solutions. It offers research and development services, as well as enterprise digital solutions and related services. The company also provides public cloud services to customers in various verticals, including video, e-commerce, intelligent mobility, artificial intelligence, and mobile internet; and enterprise cloud services to customers in financial services, public service, and healthcare businesses. Kingsoft Cloud Holdings Limited was incorporated in 2012 and is headquartered in Beijing, China."
+    },
+    "MGM": {
+        "ticker": "MGM",
+        "name": "MGM Resorts International",
+        "meta": "Resorts & Casinos",
+        "type": "EQUITY",
+        "mcap": 10409655296,
+        "currency": "USD",
+        "description": "MGM Resorts International, through its subsidiaries, operates as a gaming and entertainment company in the United States, China, and internationally. The company operates through four segments: Las Vegas Strip Resorts, Regional Operations, MGM China, and MGM Digital. It operates casino resorts that offer gaming, hotel, convention, dining, entertainment, retail, and other resort amenities, as well as online/digital games through its online platforms. The company's casino operations include slots and table games, as well as live dealer, online sports betting, and iGaming through BetMGM. Its customers include premium gaming customers; leisure and wholesale travel customers; business travelers; and group customers, including conventions, trade associations, and small meetings. The company was formerly known as MGM MIRAGE and changed its name to MGM Resorts International in June 2010. MGM Resorts International was incorporated in 1986 and is based in Las Vegas, Nevada."
+    },
+    "KRE": {
+        "ticker": "KRE",
+        "name": "State Street SPDR S&P Regional ",
+        "meta": "Financial",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "In seeking to track the performance of the S&P Regional Banks Select Industry Index (the \"index\"), the fund employs a sampling strategy. It generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index. The index represents the regional banks segment of the S&P Total Market Index (\"S&P TMI\")."
+    },
+    "WFC": {
+        "ticker": "WFC",
+        "name": "Wells Fargo & Company",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 296988803072,
+        "currency": "USD",
+        "description": "Wells Fargo & Company, a financial services company, provides diversified banking, investment, mortgage, and consumer and commercial finance products and services in the United States and internationally. It operates through four segments: Consumer Banking and Lending; Commercial Banking; Corporate and Investment Banking; and Wealth and Investment Management. The Consumer Banking and Lending segment offers diversified financial products and services for consumers and small businesses. Its financial products and services include checking and savings accounts, and credit and debit cards, as well as home, auto, personal, and small business lending services. The Commercial Banking segment provides financial solutions to private, family owned, and certain public companies. Its products and services include banking and credit products across various industry sectors and municipalities, secured lending and lease products, and treasury management services. The Corporate and Investment Banking segment offers a suite of capital markets, banking, and financial products and services, such as corporate banking, investment banking, treasury management, commercial real estate lending and servicing, equity, and fixed income solutions, as well as sales, trading, and research capabilities services to corporate, commercial real estate, government, and institutional clients. The Wealth and Investment Management segment provides personalized wealth management, brokerage, financial planning, lending, private banking, and trust and fiduciary products and services to affluent, high-net worth, and ultra-high-net worth clients. It also operates through financial advisors in brokerage and wealth offices, consumer bank branches, independent offices, and digitally through WellsTrade and Intuitive Investor. Wells Fargo & Company was founded in 1852 and is headquartered in San Francisco, California."
+    },
+    "CCS": {
+        "ticker": "CCS",
+        "name": "Century Communities, Inc.",
+        "meta": "Real Estate - Development",
+        "type": "EQUITY",
+        "mcap": 2051905024,
+        "currency": "USD",
+        "description": "Century Communities, Inc., together with its subsidiaries, engages in the design, development, construction, marketing, and sale of single-family attached and detached homes. It is also involved in the entitlement and development of the underlying land; and provision of mortgage, title, and insurance services to its homebuyers. The company offers homes under the Century Communities and Century Complete brands. It sells homes through its sales representatives, retail studios, and internet, as well as through independent real estate brokers in 18 states in the United States. Century Communities, Inc. was founded in 2002 and is headquartered in Greenwood Village, Colorado."
     }
 }
