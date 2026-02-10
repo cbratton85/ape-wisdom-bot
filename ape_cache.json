@@ -10338,5 +10338,215 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ELAB": {
+        "ticker": "ELAB",
+        "name": "PMGC Holdings Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1944703,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "PNC": {
+        "ticker": "PNC",
+        "name": "PNC Financial Services Group, I",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 95830482944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GPS": {
+        "ticker": "GPS",
+        "name": "GPS",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "BAC": {
+        "ticker": "BAC",
+        "name": "Bank of America Corporation",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 396452495360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BTDR": {
+        "ticker": "BTDR",
+        "name": "Bitdeer Technologies Group",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2761783296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SWK": {
+        "ticker": "SWK",
+        "name": "Stanley Black & Decker, Inc.",
+        "meta": "Tools & Accessories",
+        "type": "EQUITY",
+        "mcap": 14337700864,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SPMO": {
+        "ticker": "SPMO",
+        "name": "Invesco S&P 500 Momentum ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "PLCE": {
+        "ticker": "PLCE",
+        "name": "Children's Place, Inc. (The)",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 92218416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LBJ": {
+        "ticker": "LBJ",
+        "name": "Direxion Daily Latin America Bu",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "AAAU": {
+        "ticker": "AAAU",
+        "name": "Goldman Sachs Physical Gold ETF",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "PCI": {
+        "ticker": "PCI",
+        "name": "PGIM Corporate Bond 5-10 Year E",
+        "meta": "Corporate Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "DEA": {
+        "ticker": "DEA",
+        "name": "Easterly Government Properties,",
+        "meta": "REIT - Office",
+        "type": "EQUITY",
+        "mcap": 1243754496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NFE": {
+        "ticker": "NFE",
+        "name": "New Fortress Energy Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 358536512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GFS": {
+        "ticker": "GFS",
+        "name": "GlobalFoundries Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 24330524672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PSP": {
+        "ticker": "PSP",
+        "name": "Invesco Global Listed Private E",
+        "meta": "Financial",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CHPT": {
+        "ticker": "CHPT",
+        "name": "ChargePoint Holdings, Inc.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 155282528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TWLO": {
+        "ticker": "TWLO",
+        "name": "Twilio Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 18203361280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RUN": {
+        "ticker": "RUN",
+        "name": "Sunrun Inc.",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 4709288960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ZETA": {
+        "ticker": "ZETA",
+        "name": "Zeta Global Holdings Corp.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 4168233216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EMB": {
+        "ticker": "EMB",
+        "name": "iShares J.P. Morgan USD Emergin",
+        "meta": "Emerging Markets Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "TMUS": {
+        "ticker": "TMUS",
+        "name": "T-Mobile US, Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 224172212224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
