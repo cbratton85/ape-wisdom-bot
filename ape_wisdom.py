@@ -769,7 +769,61 @@ def export_interactive_html(df):
         export_df['Type_Tag'] = 'STOCK'
 
         if 'MENT' not in export_df.columns: export_df['MENT'] = 0
+
+        def clean_vol_num(x):
+            if isinstance(x, str):
+                # Remove symbols and handle M/K
+                x = x.replace(',', '').replace('$', '').replace('%', '')
+                if x.strip() == "": return 0
+                if 'M' in x: return float(x.replace('M', '')) * 1_000_000
+                if 'K' in x: return float(x.replace('K', '')) * 1_000
+                return float(x)
+            return float(x) if x else 0
+
+        # 1. SMART COLUMN FINDER
+        # We check which volume column actually exists in your data
+        current_vol_col = None
+        avg_vol_col = None
+
+        # Look for Current Volume (Added 'VOL' with spaces just in case)
+        # We use .strip() on columns during check to be safe
+        clean_columns = [c.strip() for c in export_df.columns]
         
+        # Mapping candidates to actual columns
+        col_map = dict(zip(clean_columns, export_df.columns))
+
+        for candidate in ['VOL', 'Vol', 'Volume', 'CurVol', 'Current Volume']:
+            if candidate in col_map:
+                current_vol_col = col_map[candidate]
+                break
+
+        # Look for Average Volume
+        for candidate in ['VOL(30)', 'AvgVol', 'Average Volume', 'Vol(30)', 'Avg Volume', 'AveVol']:
+            if candidate in col_map:
+                avg_vol_col = col_map[candidate]
+                break
+
+        # 2. CALCULATE SURGE (Safely)
+        if current_vol_col and avg_vol_col:
+            # print(f"Found Volume Columns: {current_vol_col} and {avg_vol_col}") # Debug print
+            
+            curr_vol = export_df[current_vol_col].apply(clean_vol_num)
+            avg_vol = export_df[avg_vol_col].apply(clean_vol_num)
+            
+            # Calculate Ratio
+            # We add a tiny epsilon (0.0001) to avg_vol to prevent DivisionByZero crashes
+            surge_calc = (curr_vol / (avg_vol + 0.0001)) * 100
+            
+            # Handle Infinity/NaN
+            import numpy as np
+            surge_calc = surge_calc.replace([np.inf, -np.inf], 0).fillna(0)
+            
+            export_df['SRG'] = surge_calc.astype(int).astype(str) + '%'
+        else:
+            # Fallback if columns are missing
+            print("[!] Warning: Could not find Volume columns. Setting SRG to 0%")
+            export_df['SRG'] = "0%"
+
         for index, row in export_df.iterrows():
             v_raw = row.get('CurVol_Disp', '0')
             export_df.at[index, 'CurVol_Disp'] = f'<div style="text-align: right; padding-right: 10px; color: #fff; font-weight:bold;">{v_raw}</div>'
@@ -804,10 +858,11 @@ def export_interactive_html(df):
             # --- 3. EFFICIENCY (Eff) ---
             eff_val = float(row.get('Eff', 0)) 
             eff_hist = row.get('h_eff', '') 
-            if eff_val >= 1.0: eff_clr = "#00ff00"
-            elif eff_val >= 0.5: eff_clr = "#ffff00"
-            elif eff_val < 0.1 and eff_val > -0.1: eff_clr = "#666"
-            else: eff_clr = "#ff4444"
+            if eff_val >= 1.0: eff_clr = "#00ff00"       # Strong Green
+            elif eff_val >= 0.5: eff_clr = "#ffff00"     # Yellow
+            elif eff_val >= 0.1: eff_clr = "#ffffff"     # White (Small Positive - THE FIX)
+            elif eff_val > -0.1: eff_clr = "#666666"     # Grey (Flat/Zero)
+            else: eff_clr = "#ff4444"                    # Red (Negative)
             export_df.at[index, 'Eff'] = with_hist(color_span(f"{eff_val:.1f}", eff_clr), eff_hist)
 
             # --- 4. CONVICTION (Conv) ---
@@ -822,14 +877,29 @@ def export_interactive_html(df):
             upchg_clr = C_GREEN if upchg_val > 0 else (C_RED if upchg_val < 0 else "#666")
             export_df.at[index, 'Upv+'] = with_hist(color_span(f"{upchg_val:+d}", upchg_clr), upchg_hist)
 
-            # --- 6. STREAK (Strk) ---
-            trend_val = row.get('Strk', 0)
+            # --- 6. STREAK (Strk) - CALCULATION & FORMATTING ---
+            rank_change_str = str(row.get('RANK+', '0')).replace(',', '')
+            if '▲' in rank_change_str:
+                rank_delta = float(rank_change_str.replace('▲', '').strip())
+            elif '▼' in rank_change_str:
+                rank_delta = -abs(float(rank_change_str.replace('▼', '').strip()))
+            else:
+                try: rank_delta = float(rank_change_str)
+                except: rank_delta = 0.0
+            old_streak = float(row.get('Strk', 0))
+            if rank_delta > 0:
+                new_streak = 1 if old_streak < 0 else old_streak + 1
+            elif rank_delta < 0:
+                new_streak = -1 if old_streak > 0 else old_streak - 1
+            else:
+                new_streak = old_streak
+            trend_val = int(new_streak)
             trend_hist = row.get('h_streak', '') 
             sig_text = f"{trend_val:+d}"
-            if trend_val >= 3: sig_color = "#00ff00"
-            elif trend_val > 0: sig_color = "#99ff99"
-            elif trend_val <= -2: sig_color = "#ff4444"
-            else: sig_color = "#ffffff"
+            if trend_val >= 3: sig_color = "#00ff00"   
+            elif trend_val > 0: sig_color = "#99ff99"  
+            elif trend_val <= -2: sig_color = "#ff4444" 
+            else: sig_color = "#ffffff"              
             export_df.at[index, 'Strk'] = with_hist(color_span(sig_text, sig_color), trend_hist)
 
             # --- 7. HEAT SCORE ---
@@ -934,9 +1004,14 @@ def export_interactive_html(df):
             export_df.at[index, 'Meta'] = f"{badge}{color_span(meta_val, C_WHITE)}"
             export_df.at[index, 'Type_Tag'] = 'ETF' if is_fund else 'STOCK'
             
-            # --- 17. SYMBOL & PRICE ---
+            # --- 17. SYMBOL & PRICE (Updated for Chart Reliability) ---
             t = row['Sym']
+            
+            # TradingView uses dots (BRK.B) not dashes (BRK-B)
             tv_ticker = t.replace('-', '.')
+            
+            # We pass the raw symbol here; the JavaScript loader (Step 3) 
+            # will handle the 'NASDAQ:' or 'NYSE:' prefixing for us.
             export_df.at[index, 'Sym'] = (
                 f'<div class="symbol-container" onmouseenter="loadMiniChart(\'{tv_ticker}\', \'{index}\')">'
                 f'<a href="https://www.tradingview.com/chart/?symbol={tv_ticker}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
@@ -1486,18 +1561,22 @@ def export_interactive_html(df):
             .chart-popup {{
                 display: none;
                 position: absolute;
-                left: 105%;
-                top: -100px;
+                left: 110%;
+                top: -120px;
                 width: 500px;
-                height: 330px;
+                height: 350px;
                 background: #111;
-                border: 2px solid #444;
+                border: 1px solid #444;
                 border-radius: 12px;
-                z-index: 10000;
-                box-shadow: 0 12px 40px rgba(0,0,0,0.8);
+                z-index: 99999;
+                box-shadow: 0 15px 50px rgba(0,0,0,0.9);
                 padding: 10px;
+                pointer-events: auto; /* Required for the price tracking you wanted */
+                overflow: hidden;
+                /* This is the secret sauce for the newer version: */
+                flex-direction: column;
             }}
-            .symbol-container:hover .chart-popup {{ display: block; }}
+            .symbol-container:hover .chart-popup {{ display: flex; }}
 
         </style>
         </head>
@@ -1721,7 +1800,12 @@ def export_interactive_html(df):
                             </div>
                             <div class="legend-row">
                                 <span class="color-key">EFF</span>
-                                <span class="color-desc"><span style="color:#00ff00">Green</span> (> 1.0), <span style="color:#ffff00">Yellow</span> (> 0.5), <span style="color:#ff4444">Red</span> (Low).</span>
+                                <span class="color-desc">
+                                    <span style="color:#00ff00">Green</span> (> 1.0), 
+                                    <span style="color:#ffff00">Yellow</span> (> 0.5), 
+                                    <span style="color:#ffffff">White</span> (> 0.1), 
+                                    <span style="color:#ff4444">Red</span> (< 0)
+                                </span>
                             </div>
                             <div class="legend-row">
                                 <span class="color-key">CONV</span>
@@ -1753,7 +1837,9 @@ def export_interactive_html(df):
                             </div>
                             <div class="legend-row">
                                 <span class="color-key">STRK</span>
-                                <span class="color-desc"><span style="color:#00ff00">Green</span> (3+ Hours), <span style="color:#ff4444">Red</span> (Reversing).</span>
+                                <span class="color-desc">
+                                    <span style="color:#00ff00; font-weight:bold;">Bright</span> (3+), <span style="color:#99ff99;">Pale</span> (>0), <span style="color:#ff4444;">Red</span> (≤ -2/Cold)
+                                </span>
                             </div>
                             <div class="legend-row">
                                 <span class="color-key">MNT%</span>
@@ -1785,28 +1871,53 @@ def export_interactive_html(df):
 
     function loadMiniChart(symbol, index) {{
         const container = document.getElementById('chart-tooltip-' + index);
-        if (container && container.innerHTML === "") {{
-            const script = document.createElement('script');
-            script.type = 'module';
-            script.src = 'https://widgets.tradingview-widget.com/w/en/tv-mini-chart.js';
-            document.head.appendChild(script);
+    
+        if (container) {{
+            container.innerHTML = ""; 
 
-            const chart = document.createElement('tv-mini-chart');
-            chart.setAttribute('symbol', symbol);
-            chart.setAttribute('time-frame', '7D');
-            chart.setAttribute('line-chart-type', 'Baseline');
-            chart.setAttribute('width', '100%');
-            chart.setAttribute('height', '100%');
-            chart.setAttribute('theme', 'dark');
-            
-            chart.setAttribute('show-time-range', 'true');
-            chart.setAttribute('show-time-scale', 'true');
-            
-            chart.setAttribute('style', 'display:block;'); 
-            container.appendChild(chart);
+            let finalSymbol = symbol;
+
+            const exchanges = {{
+            'SPY': 'AMEX:SPY',
+            'VOO': 'AMEX:VOO',
+            'IVV': 'AMEX:IVV',
+            'UPRO': 'AMEX:UPRO',
+            'TQQQ': 'NASDAQ:TQQQ',
+            'VPN': 'LSE:VPN',
+            'SLV': 'AMEX:SLV',
+            'GLD': 'AMEX:GLD'
+        }};
+        
+        if (exchanges[symbol.toUpperCase()]) {{
+            finalSymbol = exchanges[symbol.toUpperCase()];
         }}
-    }}
 
+        if (!customElements.get('tv-mini-chart')) {{
+            if (!document.getElementById('tv-widget-loader')) {{
+                const script = document.createElement('script');
+                script.id = 'tv-widget-loader';
+                script.type = 'module';
+                script.src = 'https://widgets.tradingview-widget.com/w/en/tv-mini-chart.js';
+                document.head.appendChild(script);
+            }}
+        }}
+
+        const chart = document.createElement('tv-mini-chart');
+        
+        chart.setAttribute('symbol', finalSymbol); 
+
+        chart.setAttribute('time-frame', '7D');
+        chart.setAttribute('line-chart-type', 'Baseline');
+        chart.setAttribute('theme', 'dark');
+        chart.setAttribute('width', '100%');
+        chart.setAttribute('height', '100%');
+        chart.setAttribute('show-time-range', 'true');
+        chart.setAttribute('show-time-scale', 'true');
+        
+        container.appendChild(chart);
+    }}
+}}
+    
     function parseVal(str) {{
         if (!str || str === null) return 0;
         
