@@ -10838,5 +10838,135 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "REE": {
+        "ticker": "REE",
+        "name": "REE Automotive Ltd.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 16752325,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "OWL": {
+        "ticker": "OWL",
+        "name": "Blue Owl Capital Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 20274876416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BRZE": {
+        "ticker": "BRZE",
+        "name": "Braze, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2251633664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LEE": {
+        "ticker": "LEE",
+        "name": "Lee Enterprises, Incorporated",
+        "meta": "Publishing",
+        "type": "EQUITY",
+        "mcap": 124342064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VSCO": {
+        "ticker": "VSCO",
+        "name": "Victorias Secret & Co.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 4753525760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BETA": {
+        "ticker": "BETA",
+        "name": "Beta Technologies, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 3983405312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LUV": {
+        "ticker": "LUV",
+        "name": "Southwest Airlines Company",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 27962574848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BCS": {
+        "ticker": "BCS",
+        "name": "Barclays PLC",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 90230071296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MIAX": {
+        "ticker": "MIAX",
+        "name": "Miami International Holdings, I",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 3472359936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "REV": {
+        "ticker": "REV",
+        "name": "REV",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "ORLY": {
+        "ticker": "ORLY",
+        "name": "O'Reilly Automotive, Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 78873083904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "HNGE": {
+        "ticker": "HNGE",
+        "name": "Hinge Health, Inc.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 2601676544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LYFT": {
+        "ticker": "LYFT",
+        "name": "Lyft, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 6848539648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
