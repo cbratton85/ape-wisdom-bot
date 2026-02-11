@@ -12608,5 +12608,145 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "WWW": {
+        "ticker": "WWW",
+        "name": "Wolverine World Wide, Inc.",
+        "meta": "Footwear & Accessories",
+        "type": "EQUITY",
+        "mcap": 1488536960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MAPS": {
+        "ticker": "MAPS",
+        "name": "WM Technology, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 117747552,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VGK": {
+        "ticker": "VGK",
+        "name": "Vanguard FTSEEuropean ETF",
+        "meta": "Europe Stock",
+        "type": "ETF",
+        "mcap": 25221963776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "Z": {
+        "ticker": "Z",
+        "name": "Zillow Group, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 11059293184,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ACMR": {
+        "ticker": "ACMR",
+        "name": "ACM Research, Inc.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 4448578048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "COM": {
+        "ticker": "COM",
+        "name": "Direxion Auspice Broad Commodit",
+        "meta": "Commodities Broad Basket",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CFR": {
+        "ticker": "CFR",
+        "name": "Cullen/Frost Bankers, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 9348828160,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "YY": {
+        "ticker": "YY",
+        "name": "YY",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "THC": {
+        "ticker": "THC",
+        "name": "Tenet Healthcare Corporation",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 19850702848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SMPL": {
+        "ticker": "SMPL",
+        "name": "The Simply Good Foods Company",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 1551336576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CX": {
+        "ticker": "CX",
+        "name": "Cemex, S.A.B. de C.V. Sponsored",
+        "meta": "Building Materials",
+        "type": "EQUITY",
+        "mcap": 18744760320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SPHD": {
+        "ticker": "SPHD",
+        "name": "Invesco S&P 500 High Dividend L",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "PLUS": {
+        "ticker": "PLUS",
+        "name": "ePlus inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2224567040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LMND": {
+        "ticker": "LMND",
+        "name": "Lemonade, Inc.",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 5032387072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
