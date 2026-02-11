@@ -18,9 +18,9 @@ import numpy as np
 # ==============================================================================
 # Paths and Environment Settings
 # ------------------------------------------------------------------------------
-LOGOS_DIR = os.path.join(PUBLIC_DIR, "logos")
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PUBLIC_DIR = os.path.join(SCRIPT_DIR, "public")
+LOGOS_DIR = os.path.join(PUBLIC_DIR, "logos")
 CACHE_FILE = os.path.join(SCRIPT_DIR, "ape_cache.json")
 MARKET_DATA_CACHE_FILE = os.path.join(SCRIPT_DIR, "market_data.pkl")
 HISTORY_FILE = os.path.join(SCRIPT_DIR, "market_history.json")
