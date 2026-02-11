@@ -332,34 +332,30 @@ def calculate_rsi(series, period=14):
         return 0
 
 def get_cached_logo(ticker):
-    """Downloads logo from logo.dev or TV if missing."""
-    token = os.environ.get('LOGO_DEV_TOKEN')
+    token = "pk_ImkSKumwRCmkWcPmMwvPwA"
+    
     file_name = f"{ticker.upper()}.png"
     local_path = os.path.join(LOGOS_DIR, file_name)
-    html_path = f"logos/{file_name}"
+    
+    # This is what the HTML will put in the <img src="..."> tag
+    html_src_path = f"logos/{file_name}"
 
     if os.path.exists(local_path):
-        return html_path
+        return html_src_path
 
-    # Try Logo.dev first
-    url = f"https://img.logo.dev/ticker/{ticker.upper()}?token={token}" if token else f"https://img.logo.dev/ticker/{ticker.upper()}"
+    url = f"https://img.logo.dev/ticker/{ticker.lower()}?token={token}"
     
     try:
-        # Added 'Referer' - this is the magic key to stop 'Access Denied'
-        headers = {
-            'User-Agent': 'Mozilla/5.0',
-            'Referer': 'https://www.tradingview.com/' 
-        }
-        r = requests.get(url, headers=headers, timeout=5)
+        r = requests.get(url, timeout=10)
         if r.status_code == 200:
             with open(local_path, 'wb') as f:
                 f.write(r.content)
-            return html_path
+            return html_src_path
+        else:
+            return "https://s3-symbol-logo.tradingview.com/indices/nasdaq-100.svg"
+            
     except Exception:
-        pass
-    
-    # Final Fallback
-    return "https://s3-symbol-logo.tradingview.com/indices/nasdaq-100.svg"
+        return "https://s3-symbol-logo.tradingview.com/indices/nasdaq-100.svg"
 
 # ==============================================================================
 #                               SECTION 4: CORE ANALYSIS ENGINE
@@ -955,16 +951,22 @@ def export_interactive_html(df):
             heat_span = f'<span style="color:{h_clr}; font-weight:bold;">{score:.1f}</span>'
             export_df.at[index, 'Heat'] = with_hist(heat_span, heat_hist)
 
-            # --- 8. NAME & LOGO (LOCAL CACHE VERSION) ---
-            ticker = row['Sym'].replace('-', '.')
-        
-            logo_src = get_cached_logo(ticker)
+            # --- 8. NAME & LOGO ---
+            t_raw = row['Sym']
+            clean_ticker = t_raw.replace('-', '.')
+            
+            logo_src = get_cached_logo(clean_ticker) 
+            
+            exchange_name = row.get("exchange", "Unknown")
 
             html_name = (
-                f'<div class="symbol-container" style="display: flex; align-items: center; gap: 10px;">'
-                f'<img src="{logo_src}" '
-                f'style="width: 24px; height: 24px; border-radius: 50%; background: #2a2e39; flex-shrink: 0; object-fit: contain;">'
-                f'<b>{row.get("Name", ticker)}</b>'
+                f'<div class="symbol-container" style="display: flex; align-items: center; gap: 8px;" '
+                f'onmouseenter="loadSymbolProfile(\'{clean_ticker}\', \'profile-{index}\', \'{exchange_name}\', event)" '
+                f'onmouseleave="hideSymbolProfile(\'profile-{index}\')">' 
+                f'<img src="{logo_src}" style="width: 24px; height: 24px; border-radius: 50%; background: #2a2e39; flex-shrink: 0; object-fit: contain;" '
+                f'onerror="this.src=\'https://s3-symbol-logo.tradingview.com/indices/nasdaq-100.svg\'">'
+                f'<span class="text-content"><b>{row.get("Name", clean_ticker)}</b></span>'
+                f'<div id="profile-{index}" class="chart-popup"></div>'
                 f'</div>'
             )
             export_df.at[index, 'Name'] = html_name
@@ -1116,6 +1118,11 @@ def export_interactive_html(df):
         #  HTML TEMPLATE (Embedded CSS/JS)
         # ---------------------------------------------------------
         html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Ape Wisdom Analysis</title>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="manifest" href="site.webmanifest">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
         <style>
@@ -1973,20 +1980,31 @@ def export_interactive_html(df):
         const mouseX = event.clientX;
         const screenHeight = window.innerHeight;
         const screenWidth = window.innerWidth;
-        const boxWidth = 700;  
-        const margin = 20; 
+
+        const boxWidth = 700;
+        const halfWidth = boxWidth / 2;
+    
+        const margin = 15;
+        const overlap = 10;
+        const screenPadding = 20;
 
         if (mouseY > screenHeight * 0.55) {{
-            container.style.top = (mouseY - boxHeight - margin) + "px";
+            container.style.top = (mouseY - boxHeight + overlap) + "px";
         }} else {{
             container.style.top = (mouseY + margin) + "px";
         }}
 
-        if (mouseX + boxWidth + margin > screenWidth) {{
-            container.style.left = (screenWidth - boxWidth - margin) + "px";
-        }} else {{
-            container.style.left = (mouseX + 10) + "px";
+        let leftPos = mouseX - halfWidth;
+
+        if (leftPos < screenPadding) {{
+            leftPos = screenPadding;
         }}
+
+        if (leftPos + boxWidth > screenWidth - screenPadding) {{
+            leftPos = screenWidth - boxWidth - screenPadding;
+        }}
+
+        container.style.left = leftPos + "px";
     }}
 
     function getFinalSymbol(symbol, yfExchange) {{
@@ -2087,20 +2105,23 @@ def export_interactive_html(df):
         const container = document.getElementById(containerId);
         if (!container) return;
 
-        container.innerHTML = "";
-        
-        // Dynamic positioning
-        positionPopup(container, event || window.event);
+        // 1. If content already exists, just show it and reposition
+        if (container.innerHTML !== "") {{
+            container.style.display = "flex";
+            positionPopup(container, event, 400);
+            return;
+        }}
+
+        // 2. If empty, prepare to load
+        container.style.display = "flex"; 
+        positionPopup(container, event || window.event, 400);
         
         const finalSymbol = getFinalSymbol(symbol, yfExchange);
-
         const widgetContainer = document.createElement('div');
         widgetContainer.className = 'tradingview-widget-container';
+        widgetContainer.style.width = "100%";
+        widgetContainer.style.height = "100%";
         
-        const widgetDiv = document.createElement('div');
-        widgetDiv.className = 'tradingview-widget-container__widget';
-        widgetContainer.appendChild(widgetDiv);
-
         const script = document.createElement('script');
         script.type = 'text/javascript';
         script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js';
@@ -2117,6 +2138,15 @@ def export_interactive_html(df):
 
         widgetContainer.appendChild(script);
         container.appendChild(widgetContainer);
+    }}
+
+    // MOVED OUTSIDE: This must be a top-level function to be called by onmouseleave
+    function hideSymbolProfile(containerId) {{
+        const container = document.getElementById(containerId);
+        if (container) {{
+            container.style.display = "none";
+            container.innerHTML = ""; // Clears the widget to stop network activity/save memory
+        }}
     }}
 
     function parseVal(str) {{
