@@ -11608,5 +11608,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "NVMI": {
+        "ticker": "NVMI",
+        "name": "Nova Ltd.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 13663854592,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SOC": {
+        "ticker": "SOC",
+        "name": "Sable Offshore Corp.",
+        "meta": "Oil & Gas Drilling",
+        "type": "EQUITY",
+        "mcap": 1181438592,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FOUR": {
+        "ticker": "FOUR",
+        "name": "Shift4 Payments, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 5300316160,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HHS": {
+        "ticker": "HHS",
+        "name": "Harte Hanks, Inc.",
+        "meta": "Conglomerates",
+        "type": "EQUITY",
+        "mcap": 21577052,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "EZPW": {
+        "ticker": "EZPW",
+        "name": "EZCORP, Inc.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 1526389248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ALB": {
+        "ticker": "ALB",
+        "name": "Albemarle Corporation",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 19839096832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
