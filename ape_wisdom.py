@@ -922,11 +922,19 @@ def export_interactive_html(df):
             name_txt = row.get("Name", "")
             t_raw = row['Sym']
             tv_ticker_name = t_raw.replace('-', '.') 
-
             exg = row.get("exchange", "Unknown")
             
+            # Create a 'TradingView-friendly' exchange prefix for the logo URL
+            # Nasdaq stocks need 'NASDAQ', NYSE stocks need 'NYSE'
+            logo_exg = "NASDAQ" if "N" in exg else "NYSE"
+            logo_url = f"https://s3-symbol-logo.tradingview.com/{logo_exg}--{tv_ticker_name.upper()}.svg"
+
             html_name = (
-                f'<div class="symbol-container" onmouseenter="loadSymbolProfile(\'{tv_ticker_name}\', \'profile-{index}\', \'{exg}\', event)">'
+                f'<div class="symbol-container" style="display: flex; align-items: center; gap: 8px;" '
+                f'onmouseenter="loadSymbolProfile(\'{tv_ticker_name}\', \'profile-{index}\', \'{exg}\', event)">'
+                f'<img src="{logo_url}" '
+                f'onerror="this.src=\'https://s3-symbol-logo.tradingview.com/indices/nasdaq-100.svg\'; this.style.opacity=\'0.3\';" '
+                f'style="width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; background: #2a2e39;">'
                 f'<span class="text-content" style="cursor:help;"><b>{name_txt}</b></span>'
                 f'<div id="profile-{index}" class="chart-popup"></div>'
                 f'</div>'
@@ -1013,14 +1021,9 @@ def export_interactive_html(df):
             export_df.at[index, 'Meta'] = f"{badge}{color_span(meta_val, C_WHITE)}"
             export_df.at[index, 'Type_Tag'] = 'ETF' if is_fund else 'STOCK'
             
-            # --- 17. SYMBOL & PRICE (Updated for Chart Reliability) ---
+            # --- 17. SYMBOL & PRICE ---
             t = row['Sym']
-            
-            # TradingView uses dots (BRK.B) not dashes (BRK-B)
             tv_ticker = t.replace('-', '.')
-            
-            # We pass the raw symbol here; the JavaScript loader (Step 3) 
-            # will handle the 'NASDAQ:' or 'NYSE:' prefixing for us.
             export_df.at[index, 'Sym'] = (
                 f'<div class="symbol-container" onmouseenter="loadMiniChart(\'{tv_ticker}\', \'{index}\', \'{row.get("exchange", "")}\', event)">'
                 f'<a href="https://www.tradingview.com/chart/?symbol={tv_ticker}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
@@ -1165,43 +1168,11 @@ def export_interactive_html(df):
             }}
 
             .tooltip {{
-                position: relative;
-                display: inline-block;
-                cursor: help;
-                z-index: 9999999 !important;
+                z-index: 10000000 !important; 
             }}
 
-            .tooltip .tooltiptext {{
-                visibility: hidden;
-                width: 300px;
-                background-color: #111 !important;
-                color: #00ffff !important;
-                border: 1px solid #444 !important;
-                padding: 10px !important;
-                position: absolute !important;
-                z-index: 9999 !important;
-                top: 110% !important; 
-                left: 0 !important;           
-                opacity: 0;
-                transition: opacity 0.2s;
-                font-family: monospace !important;
-                white-space: pre-wrap !important;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            }}
-
-            .tooltip .tooltiptext::after {{
-                content: "";
-                position: absolute;
-                bottom: 100%;
-                left: 20px;
-                border-width: 6px;
-                border-style: solid;
-                border-color: transparent transparent #444 transparent;
-            }}
-
-            .tooltip:hover .tooltiptext {{
-                visibility: visible !important;
-                opacity: 1 !important;
+            .tooltip-inner {{
+                max-width: 400px !important;
             }}
 
             .table-responsive, .container-fluid {{
@@ -1240,9 +1211,12 @@ def export_interactive_html(df):
             th:nth-child(3), td:nth-child(3) {{ width: 1%; text-align: center; font-weight: bold; }}
             
             th:nth-child(4), td:nth-child(4) {{
-                width: 60px;
+                width: 1%;
                 min-width: 60px;
-                max-width: 60px;
+                max-width: 12vw;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
                 text-align: left;
                 padding: 0 5px;
                 vertical-align: middle;
@@ -1359,8 +1333,7 @@ def export_interactive_html(df):
                 background: #111;
                 margin-bottom: 0px;
                 box-sizing: border-box;
-                overflow: hidden;
-                z-index: 100;
+                z-index: 2000;
             }}
             
             .header-left {{ flex: 0 0 200px; display: flex; align-items: center; z-index: 1; }}
@@ -1369,24 +1342,33 @@ def export_interactive_html(df):
             .header-center {{
                 position: absolute;
                 left: 50%;
-                transform: translateX(-50%);
-                display: grid; 
-                grid-template-columns: max-content max-content;
-                gap: 0px
-                max-width: 90%;
+                top: 50%;
+                transform: translate(-50%, -50%); /* Perfectly centers vertically & horizontally */
+                
+                /* Create a vertical stack */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 4px;
+                
+                width: auto;
+                white-space: nowrap;
                 z-index: 101;
             }}
 
             .summary-row {{
-                display: contents;
-                line-height: 1.1;
-                margin-bottom: 0px;  
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                line-height: 1;
+                font-size: 11px;
+                height: 10px;
             }}
 
-            .summary-row:nth-child(1) {{ z-index: 10; }}
-            .summary-row:nth-child(2) {{ z-index: 20; }}
-            .summary-row:nth-child(3) {{ z-index: 30; }}
-            .summary-row:nth-child(4) {{ z-index: 40; }}
+            .summary-row:nth-child(1) {{ z-index: 40; }}
+            .summary-row:nth-child(2) {{ z-index: 30; }}
+            .summary-row:nth-child(3) {{ z-index: 20; }}
+            .summary-row:nth-child(4) {{ z-index: 10; }}
 
             .row-label {{
                 font-size: 11px;
@@ -1469,13 +1451,14 @@ def export_interactive_html(df):
             .dataTables_filter {{ position: absolute; left: 48%; transform: translateX(-50%); width: auto; margin: 0 !important; float: none !important; z-index: 10; }}
 
             .dataTables_filter input {{
-                width: 450px !important;
-                max-width: 90% !important;
+                width: 20vw !important;
+                min-width: 135px !important;
+                max-width: 400px !important;
                 background: #181818 !important;
                 color: #fff !important;
                 border: 1px solid #333 !important;
                 border-radius: 20px !important;
-                padding: 1px 15px !important;
+                padding: 0px 15px !important;
                 outline: none !important;
                 text-align: center !important;
                 font-size: 16px !important;
@@ -1502,6 +1485,14 @@ def export_interactive_html(df):
             tr:hover {{
                 position: relative;
                 z-index: 100;
+                background-color: #333333 !important;
+                cursor: pointer;
+                transition: background-color 0.1s ease-in-out;
+            }}
+            
+            tr:hover td {{
+                background-color: transparent !important;
+                color: #ffffff !important;
             }}
 
             th:nth-child(-n+5)::after, td:nth-child(-n+5) .d-tooltip::after {{
@@ -1538,13 +1529,13 @@ def export_interactive_html(df):
             th.sorting::after, th.sorting_asc::after, th.sorting_desc::after {{ content: none !important; }}
             th.sorting::before, th.sorting_asc::before, th.sorting_desc::before {{ content: none !important; }}
 
-            .dataTables_filter input, .dataTables_length select {{
+            .dataTables_length select {{
                 background-color: #111 !important;
                 color: #fff !important;
                 border: 1px solid #444 !important;
                 border-radius: 4px;
                 padding: 4px 10px !important; 
-                height: 32px !important; 
+                height: 36px !important; 
                 font-size: 16px !important;
                 outline: none !important;
                 box-shadow: none !important; 
@@ -1574,14 +1565,20 @@ def export_interactive_html(df):
             }}
 
             .dataTables_length select {{
-                min-width: 70px !important;
-                padding-right: 30px !important;
-                background-position: right 5px center !important;
+                min-width: 55px !important;
+                padding-right: 20px !important;
+                background-position: right 2px center !important;
+                text-align: center !important;
+                padding-left: 5px !important;
             }}
 
             .symbol-container {{
                 position: relative;
-                display: inline-block;
+                display: flex !important;
+                align-items: center;
+                gap: 8px;
+                width: 100%;
+                overflow: visible !important;
             }}
 
 
@@ -1604,9 +1601,9 @@ def export_interactive_html(df):
                 border: 1px solid #444;
                 font-family: 'Consolas', monospace;
                 font-size: 13px; 
-                white-space: pre-wrap; 
-                width: max-content; 
-                max-width: 500px;
+                white-space: nowrap; 
+                width: auto; 
+                max-width: none;
                 z-index: 9999999 !important;
                 opacity: 0; 
                 visibility: hidden; 
@@ -1620,7 +1617,7 @@ def export_interactive_html(df):
                 visibility: visible;
             }}
 
-            .header-flex, .header-center {{
+            .header-flex {{
                 z-index: 10 !important;
                 position: relative;
             }}
@@ -1659,7 +1656,7 @@ def export_interactive_html(df):
             <div class="header-flex">
     <div class="header-left">
         <a href="https://apewisdom.io" target="_blank">
-            <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" style="height: 54px;">
+            <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" title="apewisdom.io" style="height: 54px;">
         </a>
         <div class="mode-toggle">
             <input type="checkbox" id="modeSwitch" onclick="updateSummary()">
@@ -1699,7 +1696,7 @@ def export_interactive_html(df):
 
             <div class="filter-bar">
                 <span style="color:#fff; font-weight:bold; margin-right:5px;">⚡ FILTERS:</span>
-                <button id="btnColors" class="btn btn-sm btn-reset" onclick="toggleColors()" style="margin-right: 5px;">🎨 Colors: ON</button>
+                <button id="btnColors" class="btn btn-sm btn-reset" onclick="toggleColors()" title="Toggle Colors" style="margin-right: 5px;">🎨</button>
                 <button class="btn btn-sm btn-reset" onclick="resetFilters()" title="Reset Filters">🔄</button>
 
                 <div class="filter-group" style="margin-left: 10px; margin-right: 10px;">
@@ -1950,7 +1947,7 @@ def export_interactive_html(df):
         const boxWidth = 700;  
         const margin = 20; 
 
-        if (mouseY > screenHeight / 2) {{
+        if (mouseY > screenHeight * 0.55) {{
             container.style.top = (mouseY - boxHeight - margin) + "px";
         }} else {{
             container.style.top = (mouseY + margin) + "px";
@@ -2191,7 +2188,7 @@ def export_interactive_html(df):
     function toggleColors() {{
         var t = document.querySelector('table'); var btn = document.getElementById('btnColors');
         t.classList.toggle('no-colors');
-        if (t.classList.contains('no-colors')) {{ btn.innerHTML = "🎨 Colors: OFF"; btn.style.opacity = "0.6"; }} else {{ btn.innerHTML = "🎨 Colors: ON"; btn.style.opacity = "1.0"; }}
+        if (t.classList.contains('no-colors')) {{ btn.innerHTML = "🎨"; btn.style.opacity = "0.6"; }} else {{ btn.innerHTML = "🎨"; btn.style.opacity = "1.0"; }}
     }}
 
     function resetFilters() {{ 
@@ -2365,7 +2362,7 @@ def send_discord_link(filename):
 
     try:
         user, repo = REPO_NAME.split('/')
-        website_url = f"https://{user}.github.io/{repo}/{filename}"
+        website_url = f"https://{user}.github.io/{repo}/"
         
         msg = (f"🦍 **APE Wisdom Scanner**\n"
                f"🔗 **[Click Here to Open Dashboard]({website_url})**\n"
