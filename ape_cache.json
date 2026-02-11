@@ -12058,5 +12058,125 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "JCI": {
+        "ticker": "JCI",
+        "name": "Johnson Controls International ",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 86286032896,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ZONE": {
+        "ticker": "ZONE",
+        "name": "CleanCore Solutions Inc.",
+        "meta": "Pollution & Treatment Controls",
+        "type": "EQUITY",
+        "mcap": 1983687,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "POWL": {
+        "ticker": "POWL",
+        "name": "Powell Industries, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 7074701312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "HUBC": {
+        "ticker": "HUBC",
+        "name": "Hub Cyber Security Ltd.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 4673191,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ACLS": {
+        "ticker": "ACLS",
+        "name": "Axcelis Technologies, Inc.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 2854089984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FANG": {
+        "ticker": "FANG",
+        "name": "Diamondback Energy, Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 48374460416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "OTLK": {
+        "ticker": "OTLK",
+        "name": "Outlook Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 31609066,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "IESC": {
+        "ticker": "IESC",
+        "name": "IES Holdings, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 10415269888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "PRIM": {
+        "ticker": "PRIM",
+        "name": "Primoris Services Corporation",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 9012596736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AEHR": {
+        "ticker": "AEHR",
+        "name": "Aehr Test Systems",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 1055111936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "AGCO": {
+        "ticker": "AGCO",
+        "name": "AGCO Corporation",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 10249919488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ARLP": {
+        "ticker": "ARLP",
+        "name": "Alliance Resource Partners, L.P",
+        "meta": "Thermal Coal",
+        "type": "EQUITY",
+        "mcap": 3307021568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
