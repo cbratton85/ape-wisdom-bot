@@ -11668,5 +11668,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "DLS": {
+        "ticker": "DLS",
+        "name": "WisdomTree International SmallC",
+        "meta": "Foreign Small/Mid Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "GERN": {
+        "ticker": "GERN",
+        "name": "Geron Corporation",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1034135552,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ADM": {
+        "ticker": "ADM",
+        "name": "Archer-Daniels-Midland Company",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 32976695296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ACWI": {
+        "ticker": "ACWI",
+        "name": "iShares MSCI ACWI ETF",
+        "meta": "Global Large-Stock Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "TTM": {
+        "ticker": "TTM",
+        "name": "TTM",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
