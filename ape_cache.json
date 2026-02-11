@@ -13138,5 +13138,105 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "WF": {
+        "ticker": "WF",
+        "name": "Woori Financial Group Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 18762180608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SEDG": {
+        "ticker": "SEDG",
+        "name": "SolarEdge Technologies, Inc.",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 2172536064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CGNX": {
+        "ticker": "CGNX",
+        "name": "Cognex Corporation",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 7211743744,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "MG": {
+        "ticker": "MG",
+        "name": "Mistras Group Inc",
+        "meta": "Security & Protection Services",
+        "type": "EQUITY",
+        "mcap": 449876640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ROL": {
+        "ticker": "ROL",
+        "name": "Rollins, Inc.",
+        "meta": "Personal Services",
+        "type": "EQUITY",
+        "mcap": 31563476992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EQIX": {
+        "ticker": "EQIX",
+        "name": "Equinix, Inc.",
+        "meta": "REIT - Specialty",
+        "type": "EQUITY",
+        "mcap": 85178392576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "IRON": {
+        "ticker": "IRON",
+        "name": "Disc Medicine, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2717634048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "AGNC": {
+        "ticker": "AGNC",
+        "name": "AGNC Investment Corp.",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 12659868672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "YI": {
+        "ticker": "YI",
+        "name": "111, Inc.",
+        "meta": "Medical Distribution",
+        "type": "EQUITY",
+        "mcap": 68126048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ENPH": {
+        "ticker": "ENPH",
+        "name": "Enphase Energy, Inc.",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 6311364096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
