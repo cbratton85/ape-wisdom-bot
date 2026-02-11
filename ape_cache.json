@@ -11188,5 +11188,115 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TS": {
+        "ticker": "TS",
+        "name": "Tenaris S.A.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 23888715776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IEX": {
+        "ticker": "IEX",
+        "name": "IDEX Corporation",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 16155146240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HTB": {
+        "ticker": "HTB",
+        "name": "HomeTrust Bancshares, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 768235200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LRCX": {
+        "ticker": "LRCX",
+        "name": "Lam Research Corporation",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 284628942848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ZG": {
+        "ticker": "ZG",
+        "name": "Zillow Group, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 13653958656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BND": {
+        "ticker": "BND",
+        "name": "Vanguard Total Bond Market ETF",
+        "meta": "Intermediate Core Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "INTL": {
+        "ticker": "INTL",
+        "name": "Main International ETF",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "BH": {
+        "ticker": "BH",
+        "name": "Biglari Holdings Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 1273557760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "COOK": {
+        "ticker": "COOK",
+        "name": "Traeger, Inc.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 105189096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NH": {
+        "ticker": "NH",
+        "name": "NH",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "LDOS": {
+        "ticker": "LDOS",
+        "name": "Leidos Holdings, Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 24982056960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
