@@ -104,11 +104,6 @@
         "last_checked": "2026-02-10",
         "reason": "No Price Data"
     },
-    "NOVA": {
-        "delisted": true,
-        "last_checked": "2026-02-10",
-        "reason": "No Price Data"
-    },
     "DIDI": {
         "delisted": true,
         "last_checked": "2026-02-10",
@@ -140,6 +135,11 @@
         "reason": "No Price Data"
     },
     "CN": {
+        "delisted": true,
+        "last_checked": "2026-02-11",
+        "reason": "No Price Data"
+    },
+    "NOVA": {
         "delisted": true,
         "last_checked": "2026-02-11",
         "reason": "No Price Data"

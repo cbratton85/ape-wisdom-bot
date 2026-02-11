@@ -11458,5 +11458,105 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "UPB": {
+        "ticker": "UPB",
+        "name": "Upstream Bio, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1502813184,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "EVMN": {
+        "ticker": "EVMN",
+        "name": "Evommune, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 915144384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DXJ": {
+        "ticker": "DXJ",
+        "name": "WisdomTree Japan Hedged Equity ",
+        "meta": "Japan Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "HALO": {
+        "ticker": "HALO",
+        "name": "Halozyme Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 9433631744,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CRVS": {
+        "ticker": "CRVS",
+        "name": "Corvus Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1640170496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ESTC": {
+        "ticker": "ESTC",
+        "name": "Elastic N.V.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 6735547392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CSGP": {
+        "ticker": "CSGP",
+        "name": "CoStar Group, Inc.",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 21551388672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BIRK": {
+        "ticker": "BIRK",
+        "name": "Birkenstock Holding plc",
+        "meta": "Footwear & Accessories",
+        "type": "EQUITY",
+        "mcap": 7387505664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ISHG": {
+        "ticker": "ISHG",
+        "name": "iShares 1-3 Year International ",
+        "meta": "Global Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "CHKP": {
+        "ticker": "CHKP",
+        "name": "Check Point Software Technologi",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 19385042944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
