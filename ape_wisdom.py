@@ -18,6 +18,7 @@ import numpy as np
 # ==============================================================================
 # Paths and Environment Settings
 # ------------------------------------------------------------------------------
+LOGOS_DIR = os.path.join(PUBLIC_DIR, "logos")
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PUBLIC_DIR = os.path.join(SCRIPT_DIR, "public")
 CACHE_FILE = os.path.join(SCRIPT_DIR, "ape_cache.json")
@@ -329,6 +330,40 @@ def calculate_rsi(series, period=14):
     except Exception:
         return 0
 
+def get_cached_logo(ticker):
+    # 1. Look for the API token in the environment variables
+    # This matches the 'env' name we put in the .yml file
+    token = os.environ.get('LOGO_DEV_TOKEN')
+    
+    logo_dir = os.path.join(PUBLIC_DIR, "logos")
+    if not os.path.exists(logo_dir):
+        os.makedirs(logo_dir)
+
+    file_name = f"{ticker.upper()}.png"
+    local_path = os.path.join(logo_dir, file_name)
+    relative_path = f"logos/{file_name}"
+
+    if os.path.exists(local_path):
+        return relative_path
+
+    # 2. Use the token in the URL. 
+    # If no token is found, it will try the URL without one (some APIs allow limited free hits)
+    url = f"https://img.logo.dev/ticker/{ticker.upper()}"
+    if token:
+        url += f"?token={token}"
+    
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        r = requests.get(url, headers=headers, timeout=5)
+        
+        if r.status_code == 200:
+            with open(local_path, 'wb') as f:
+                f.write(r.content)
+            return relative_path
+    except Exception as e:
+        print(f"    > Logo.dev fail: {e}")
+    
+    return "https://s3-symbol-logo.tradingview.com/indices/nasdaq-100.svg"
 
 # ==============================================================================
 #                               SECTION 4: CORE ANALYSIS ENGINE
@@ -777,57 +812,63 @@ def export_interactive_html(df):
         if 'MENT' not in export_df.columns: export_df['MENT'] = 0
 
         def clean_vol_num(x):
-            if isinstance(x, str):
-                # Remove symbols and handle M/K
-                x = x.replace(',', '').replace('$', '').replace('%', '')
-                if x.strip() == "": return 0
-                if 'M' in x: return float(x.replace('M', '')) * 1_000_000
-                if 'K' in x: return float(x.replace('K', '')) * 1_000
+            if x is None or (isinstance(x, float) and np.isnan(x)):
+                return 0.0
+            if isinstance(x, (int, float, np.integer, np.floating)):
                 return float(x)
-            return float(x) if x else 0
+            
+            # If it's a string (like "65.0M" or "$1,200")
+            s = str(x).upper().replace(',', '').replace('$', '').replace('%', '').strip()
+            if s == "" or s == "-": 
+                return 0.0
+            
+            try:
+                if 'M' in s:
+                    return float(s.replace('M', '')) * 1_000_000
+                if 'K' in s:
+                    return float(s.replace('K', '')) * 1_000
+                if 'B' in s:
+                    return float(s.replace('B', '')) * 1_000_000_000
+                return float(s)
+            except ValueError:
+                return 0.0
 
         # 1. SMART COLUMN FINDER
-        # We check which volume column actually exists in your data
-        current_vol_col = None
-        avg_vol_col = None
-
-        # Look for Current Volume (Added 'VOL' with spaces just in case)
-        # We use .strip() on columns during check to be safe
+        # We prioritize raw numeric columns ('CurVol', 'AvgVol') set in filter_and_process
         clean_columns = [c.strip() for c in export_df.columns]
-        
-        # Mapping candidates to actual columns
         col_map = dict(zip(clean_columns, export_df.columns))
 
-        for candidate in ['VOL', 'Vol', 'Volume', 'CurVol', 'Current Volume']:
+        # Priority search for Current Volume
+        current_vol_col = None
+        for candidate in ['CurVol', 'VOL', 'Vol', 'Volume', 'Current Volume']:
             if candidate in col_map:
                 current_vol_col = col_map[candidate]
                 break
 
-        # Look for Average Volume
-        for candidate in ['VOL(30)', 'AvgVol', 'Average Volume', 'Vol(30)', 'Avg Volume', 'AveVol']:
+        # Priority search for Average Volume
+        avg_vol_col = None
+        for candidate in ['AvgVol', 'VOL(30)', 'Vol(30)', 'Avg Volume', 'Average Volume']:
             if candidate in col_map:
                 avg_vol_col = col_map[candidate]
                 break
 
         # 2. CALCULATE SURGE (Safely)
         if current_vol_col and avg_vol_col:
-            # print(f"Found Volume Columns: {current_vol_col} and {avg_vol_col}") # Debug print
+            # Convert both columns to clean floats for math
+            curr_series = export_df[current_vol_col].apply(clean_vol_num)
+            avg_series  = export_df[avg_vol_col].apply(clean_vol_num)
             
-            curr_vol = export_df[current_vol_col].apply(clean_vol_num)
-            avg_vol = export_df[avg_vol_col].apply(clean_vol_num)
+            # Calculate Ratio with epsilon to prevent DivisionByZero
+            surge_calc = (curr_series / (avg_series + 0.000001)) * 100
             
-            # Calculate Ratio
-            # We add a tiny epsilon (0.0001) to avg_vol to prevent DivisionByZero crashes
-            surge_calc = (curr_vol / (avg_vol + 0.0001)) * 100
-            
-            # Handle Infinity/NaN
-            import numpy as np
+            # Clean up Infinity/NaN from division
             surge_calc = surge_calc.replace([np.inf, -np.inf], 0).fillna(0)
             
-            export_df['SRG'] = surge_calc.astype(int).astype(str) + '%'
+            # Save the raw numeric result to 'Surge' and the display string to 'SRG'
+            export_df['Surge'] = surge_calc.astype(float)
+            export_df['SRG']   = surge_calc.astype(int).astype(str) + '%'
         else:
-            # Fallback if columns are missing
-            print("[!] Warning: Could not find Volume columns. Setting SRG to 0%")
+            print(f"[!] Warning: Missing volume columns for Surge calculation.")
             export_df['SRG'] = "0%"
 
         for index, row in export_df.iterrows():
@@ -917,29 +958,19 @@ def export_interactive_html(df):
             else: h_clr = "#888888"
             heat_span = f'<span style="color:{h_clr}; font-weight:bold;">{score:.1f}</span>'
             export_df.at[index, 'Heat'] = with_hist(heat_span, heat_hist)
-            
-            # --- 8. NAME ---
-            name_txt = row.get("Name", "")
-            t_raw = row['Sym']
-            tv_ticker_name = t_raw.replace('-', '.') 
-            exg = row.get("exchange", "Unknown")
-            
-            # Create a 'TradingView-friendly' exchange prefix for the logo URL
-            # Nasdaq stocks need 'NASDAQ', NYSE stocks need 'NYSE'
-            logo_exg = "NASDAQ" if "N" in exg else "NYSE"
-            logo_url = f"https://s3-symbol-logo.tradingview.com/{logo_exg}--{tv_ticker_name.upper()}.svg"
+
+            # --- 8. NAME & LOGO (LOCAL CACHE VERSION) ---
+            ticker = row['Sym'].replace('-', '.')
+        
+            logo_src = get_cached_logo(ticker)
 
             html_name = (
-                f'<div class="symbol-container" style="display: flex; align-items: center; gap: 8px;" '
-                f'onmouseenter="loadSymbolProfile(\'{tv_ticker_name}\', \'profile-{index}\', \'{exg}\', event)">'
-                f'<img src="{logo_url}" '
-                f'onerror="this.src=\'https://s3-symbol-logo.tradingview.com/indices/nasdaq-100.svg\'; this.style.opacity=\'0.3\';" '
-                f'style="width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; background: #2a2e39;">'
-                f'<span class="text-content" style="cursor:help;"><b>{name_txt}</b></span>'
-                f'<div id="profile-{index}" class="chart-popup"></div>'
+                f'<div class="symbol-container" style="display: flex; align-items: center; gap: 10px;">'
+                f'<img src="{logo_src}" '
+                f'style="width: 24px; height: 24px; border-radius: 50%; background: #2a2e39; flex-shrink: 0; object-fit: contain;">'
+                f'<b>{row.get("Name", ticker)}</b>'
                 f'</div>'
             )
-
             export_df.at[index, 'Name'] = html_name
 
             # --- 9. RANK+ ---
@@ -959,18 +990,20 @@ def export_interactive_html(df):
             rank_hist = row.get('h_rank', '')
             export_df.at[index, 'Rank'] = with_hist(rank_val, rank_hist)
 
-            # --- 11. SURGE & MNT% ---
-            srg_val = f"{export_df.at[index, 'Srg']:.0f}%"
+            # --- 11. SURGE & MNT% (FIXED FORMATTING) ---
+            srg_raw = row.get('Srg', 0)
+            srg_val_str = f"{int(srg_raw)}%"
             srg_hist = row.get('h_surge', '')
             srg_z = row.get('z_Surge', 0)
             srg_clr = C_YELLOW if srg_z >= 2.0 else (C_GREEN if srg_z >= 1.0 else C_WHITE)
-            export_df.at[index, 'Srg'] = with_hist(color_span(srg_val, srg_clr), srg_hist)
+            export_df.at[index, 'Srg'] = with_hist(color_span(srg_val_str, srg_clr), srg_hist)
 
-            mnt_val = f"{export_df.at[index, 'Mnt%']:.0f}%"
+            mnt_raw = row.get('Mnt%', 0)
+            mnt_val_str = f"{int(mnt_raw)}%"
             mnt_hist = row.get('h_mnt_perc', '')
             mnt_z = row.get('z_Mnt%', 0)
             mnt_clr = C_YELLOW if mnt_z >= 2.0 else (C_GREEN if mnt_z >= 1.0 else C_WHITE)
-            export_df.at[index, 'Mnt%'] = with_hist(color_span(mnt_val, mnt_clr), mnt_hist)
+            export_df.at[index, 'Mnt%'] = with_hist(color_span(mnt_val_str, mnt_clr), mnt_hist)
 
             # --- 12. SQUEEZE ---
             sq_val = int(row.get('Sqz', 0))
