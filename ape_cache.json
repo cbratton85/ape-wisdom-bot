@@ -11938,5 +11938,125 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "YYAI": {
+        "ticker": "YYAI",
+        "name": "AiRWA Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 42099452,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "MOM": {
+        "ticker": "MOM",
+        "name": "AGFiQ U.S. Market Neutral Momen",
+        "meta": "Market Neutral",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CHEF": {
+        "ticker": "CHEF",
+        "name": "The Chefs' Warehouse, Inc.",
+        "meta": "Food Distribution",
+        "type": "EQUITY",
+        "mcap": 2664247296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "INSM": {
+        "ticker": "INSM",
+        "name": "Insmed Incorporated",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 31681775616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GLIF": {
+        "ticker": "GLIF",
+        "name": "AGF Global Infrastructure ETF",
+        "meta": "Infrastructure",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "DARE": {
+        "ticker": "DARE",
+        "name": "Dare Bioscience, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 22780360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "HELP": {
+        "ticker": "HELP",
+        "name": "Cybin Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 319821376,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "NEE": {
+        "ticker": "NEE",
+        "name": "NextEra Energy, Inc.",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 189163438080,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PRFX": {
+        "ticker": "PRFX",
+        "name": "PRF Technologies Ltd.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 2310050,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ETOR": {
+        "ticker": "ETOR",
+        "name": "eToro Group Ltd.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 2367149056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "XPON": {
+        "ticker": "XPON",
+        "name": "Expion360 Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 8014129,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "INDA": {
+        "ticker": "INDA",
+        "name": "Ishares MSCI India ETF",
+        "meta": "India Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
