@@ -11718,5 +11718,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "DEM": {
+        "ticker": "DEM",
+        "name": "WisdomTree Emerging Markets Hig",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
