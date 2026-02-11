@@ -11388,5 +11388,75 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ALLE": {
+        "ticker": "ALLE",
+        "name": "Allegion plc",
+        "meta": "Security & Protection Services",
+        "type": "EQUITY",
+        "mcap": 15394557952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NKTR": {
+        "ticker": "NKTR",
+        "name": "Nektar Therapeutics",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1139128960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "AZO": {
+        "ticker": "AZO",
+        "name": "AutoZone, Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 60956053504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AYI": {
+        "ticker": "AYI",
+        "name": "Acuity Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 10186225664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AVY": {
+        "ticker": "AVY",
+        "name": "Avery Dennison Corporation",
+        "meta": "Packaging & Containers",
+        "type": "EQUITY",
+        "mcap": 14737911808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GLASF": {
+        "ticker": "GLASF",
+        "name": "Glass House Brands Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 703874112,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OQX"
+    },
+    "NTSK": {
+        "ticker": "NTSK",
+        "name": "Netskope, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 4805623296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
