@@ -144,17 +144,17 @@
         "last_checked": "2026-02-11",
         "reason": "No Price Data"
     },
-    "YY": {
-        "delisted": true,
-        "last_checked": "2026-02-11",
-        "reason": "No Price Data"
-    },
     "LCG": {
         "delisted": true,
         "last_checked": "2026-02-11",
         "reason": "No Price Data"
     },
     "NOVA": {
+        "delisted": true,
+        "last_checked": "2026-02-11",
+        "reason": "No Price Data"
+    },
+    "YY": {
         "delisted": true,
         "last_checked": "2026-02-11",
         "reason": "No Price Data"

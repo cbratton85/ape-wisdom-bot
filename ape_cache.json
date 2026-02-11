@@ -12788,5 +12788,115 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "PIE": {
+        "ticker": "PIE",
+        "name": "Invesco Dorsey Wright Emerging ",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "NP": {
+        "ticker": "NP",
+        "name": "Neptune Insurance Holdings Inc.",
+        "meta": "Insurance Brokers",
+        "type": "EQUITY",
+        "mcap": 2760700160,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SSB": {
+        "ticker": "SSB",
+        "name": "SouthState Bank Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 10437514240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "POAS": {
+        "ticker": "POAS",
+        "name": "Phaos Technology Holdings (Caym",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 86629824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "TK": {
+        "ticker": "TK",
+        "name": "Teekay Corporation Ltd.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 951593856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CHTR": {
+        "ticker": "CHTR",
+        "name": "Charter Communications, Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 31269832704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TNA": {
+        "ticker": "TNA",
+        "name": "Direxion Small Cap Bull 3X Shar",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "DTCK": {
+        "ticker": "DTCK",
+        "name": "Davis Commodities Limited",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 4897675,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SCHX": {
+        "ticker": "SCHX",
+        "name": "Schwab U.S. Large-Cap ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SIRI": {
+        "ticker": "SIRI",
+        "name": "SiriusXM Holdings Inc.",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 7375748608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PH": {
+        "ticker": "PH",
+        "name": "Parker-Hannifin Corporation",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 126050549760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
