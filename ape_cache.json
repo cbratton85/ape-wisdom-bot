@@ -11838,5 +11838,105 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PCT": {
+        "ticker": "PCT",
+        "name": "PureCycle Technologies, Inc.",
+        "meta": "Pollution & Treatment Controls",
+        "type": "EQUITY",
+        "mcap": 1692062464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ELP": {
+        "ticker": "ELP",
+        "name": "Companhia Paranaense de Energia",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 6882123776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AGL": {
+        "ticker": "AGL",
+        "name": "agilon health, inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 186769008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GCTS": {
+        "ticker": "GCTS",
+        "name": "GCT Semiconductor Holding, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 70803456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DTIL": {
+        "ticker": "DTIL",
+        "name": "Precision BioSciences, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 90509784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SH": {
+        "ticker": "SH",
+        "name": "ProShares Short S&P500",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "NL": {
+        "ticker": "NL",
+        "name": "NL Industries, Inc.",
+        "meta": "Security & Protection Services",
+        "type": "EQUITY",
+        "mcap": 313698784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NVA": {
+        "ticker": "NVA",
+        "name": "Nova Minerals Limited",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 304213952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "TSEM": {
+        "ticker": "TSEM",
+        "name": "Tower Semiconductor Ltd.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 15356988416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "KLAC": {
+        "ticker": "KLAC",
+        "name": "KLA Corporation",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 188001402880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }

@@ -129,12 +129,17 @@
         "last_checked": "2026-02-11",
         "reason": "No Price Data"
     },
-    "DS": {
+    "WFH": {
         "delisted": true,
         "last_checked": "2026-02-11",
         "reason": "No Price Data"
     },
-    "WFH": {
+    "ELP": {
+        "delisted": true,
+        "last_checked": "2026-02-11",
+        "reason": "No Price Data"
+    },
+    "DS": {
         "delisted": true,
         "last_checked": "2026-02-11",
         "reason": "No Price Data"
