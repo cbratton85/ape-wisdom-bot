@@ -21,6 +21,7 @@ import numpy as np
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PUBLIC_DIR = os.path.join(SCRIPT_DIR, "public")
 LOGOS_DIR = os.path.join(PUBLIC_DIR, "logos")
+os.makedirs(LOGOS_DIR, exist_ok=True)
 CACHE_FILE = os.path.join(SCRIPT_DIR, "ape_cache.json")
 MARKET_DATA_CACHE_FILE = os.path.join(SCRIPT_DIR, "market_data.pkl")
 HISTORY_FILE = os.path.join(SCRIPT_DIR, "market_history.json")
@@ -331,38 +332,33 @@ def calculate_rsi(series, period=14):
         return 0
 
 def get_cached_logo(ticker):
-    # 1. Look for the API token in the environment variables
-    # This matches the 'env' name we put in the .yml file
+    """Downloads logo from logo.dev or TV if missing."""
     token = os.environ.get('LOGO_DEV_TOKEN')
-    
-    logo_dir = os.path.join(PUBLIC_DIR, "logos")
-    if not os.path.exists(logo_dir):
-        os.makedirs(logo_dir)
-
     file_name = f"{ticker.upper()}.png"
-    local_path = os.path.join(logo_dir, file_name)
-    relative_path = f"logos/{file_name}"
+    local_path = os.path.join(LOGOS_DIR, file_name)
+    html_path = f"logos/{file_name}"
 
     if os.path.exists(local_path):
-        return relative_path
+        return html_path
 
-    # 2. Use the token in the URL. 
-    # If no token is found, it will try the URL without one (some APIs allow limited free hits)
-    url = f"https://img.logo.dev/ticker/{ticker.upper()}"
-    if token:
-        url += f"?token={token}"
+    # Try Logo.dev first
+    url = f"https://img.logo.dev/ticker/{ticker.upper()}?token={token}" if token else f"https://img.logo.dev/ticker/{ticker.upper()}"
     
     try:
-        headers = {'User-Agent': 'Mozilla/5.0'}
+        # Added 'Referer' - this is the magic key to stop 'Access Denied'
+        headers = {
+            'User-Agent': 'Mozilla/5.0',
+            'Referer': 'https://www.tradingview.com/' 
+        }
         r = requests.get(url, headers=headers, timeout=5)
-        
         if r.status_code == 200:
             with open(local_path, 'wb') as f:
                 f.write(r.content)
-            return relative_path
-    except Exception as e:
-        print(f"    > Logo.dev fail: {e}")
+            return html_path
+    except Exception:
+        pass
     
+    # Final Fallback
     return "https://s3-symbol-logo.tradingview.com/indices/nasdaq-100.svg"
 
 # ==============================================================================
@@ -1994,32 +1990,47 @@ def export_interactive_html(df):
     }}
 
     function getFinalSymbol(symbol, yfExchange) {{
-        const exchangeMap = {{
-            'NMS': 'NASDAQ:',
-            'NGM': 'NASDAQ:',
-            'NCM': 'NASDAQ:',
-            'NYQ': 'NYSE:',
-            'ASE': 'AMEX:',
-            'PCX': 'AMEX:', 
-            'LSE': 'LSE:',
-            'BATS': 'BATS:'
-        }};
+    const ex = String(yfExchange || "").toUpperCase();
+    const s = String(symbol || "").toUpperCase().replace('-', '.');
 
-        const manualOverrides = {{
-            'SPY': 'AMEX:SPY',
-            'VOO': 'AMEX:VOO',
-            'TQQQ': 'NASDAQ:TQQQ',
-            'VPN': 'NASDAQ:VPN',
-            'AM': 'NYSE:AM'
-        }};
+    // 1. Manual Overrides (High-priority fixes for common ETFs/Stocks)
+    const manualOverrides = {{
+        'SPY': 'AMEX:SPY',
+        'VOO': 'AMEX:VOO',
+        'IVV': 'AMEX:IVV',
+        'TQQQ': 'NASDAQ:TQQQ',
+        'SQQQ': 'NASDAQ:SQQQ',
+        'VPN': 'NASDAQ:VPN',
+        'AM': 'NYSE:AM',
+        'DIA': 'AMEX:DIA',
+        'IWM': 'AMEX:IWM'
+    }};
 
-        if (manualOverrides[symbol.toUpperCase()]) {{
-            return manualOverrides[symbol.toUpperCase()];
-        }}
+    if (manualOverrides[s]) return manualOverrides[s];
 
-        let prefix = exchangeMap[yfExchange] || "";
-        return prefix + symbol;
+    // 2. Intelligent Exchange Mapping
+    // TradingView requires specific prefixes for certain data folders
+    if (ex.includes('NMS') || ex.includes('NGM') || ex.includes('NCM') || ex.includes('NASDAQ')) {{
+        return 'NASDAQ:' + s;
     }}
+    if (ex.includes('NYQ') || ex.includes('NYSE')) {{
+        return 'NYSE:' + s;
+    }}
+    if (ex.includes('ASE') || ex.includes('AMEX') || ex.includes('PCX') || ex.includes('ARCA')) {{
+        return 'AMEX:' + s; // TradingView often bundles these under AMEX
+    }}
+    if (ex.includes('BATS') || ex.includes('BZX')) {{
+        return 'BATS:' + s;
+    }}
+    if (ex.includes('LSE')) {{
+        return 'LSE:' + s;
+    }}
+
+    // 3. Fallback
+    // If we can't identify the exchange, just return the symbol.
+    // TradingView will try to auto-detect, but the widgets prefer the prefix.
+    return s;
+}}
 
     function loadMiniChart(symbol, index, yfExchange, event) {{
         const container = document.getElementById('chart-tooltip-' + index);
