@@ -11788,5 +11788,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PBS": {
+        "ticker": "PBS",
+        "name": "Invesco Dynamic Media ETF",
+        "meta": "Consumer Cyclical",
+        "type": "ETF",
+        "mcap": 72737720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SBSW": {
+        "ticker": "SBSW",
+        "name": "D/B/A Sibanye-Stillwater Limite",
+        "meta": "Other Precious Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 12053389312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "QXO": {
+        "ticker": "QXO",
+        "name": "QXO, Inc.",
+        "meta": "Industrial Distribution",
+        "type": "EQUITY",
+        "mcap": 16390733824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CAE": {
+        "ticker": "CAE",
+        "name": "CAE Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 10471512064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PTC": {
+        "ticker": "PTC",
+        "name": "PTC Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 19363047424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
