@@ -11558,5 +11558,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SNDR": {
+        "ticker": "SNDR",
+        "name": "Schneider National, Inc.",
+        "meta": "Trucking",
+        "type": "EQUITY",
+        "mcap": 5227433984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EC": {
+        "ticker": "EC",
+        "name": "Ecopetrol S.A.",
+        "meta": "Oil & Gas Integrated",
+        "type": "EQUITY",
+        "mcap": 25851236352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BOLD": {
+        "ticker": "BOLD",
+        "name": "Boundless Bio, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 25071886,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ZIM": {
+        "ticker": "ZIM",
+        "name": "ZIM Integrated Shipping Service",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 2497084160,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PONY": {
+        "ticker": "PONY",
+        "name": "Pony AI Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 6424484352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
