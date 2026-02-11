@@ -12748,5 +12748,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "KEY": {
+        "ticker": "KEY",
+        "name": "KeyCorp",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 24776464384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GCT": {
+        "ticker": "GCT",
+        "name": "GigaCloud Technology Inc",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1389124480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "COLD": {
+        "ticker": "COLD",
+        "name": "Americold Realty Trust, Inc.",
+        "meta": "REIT - Industrial",
+        "type": "EQUITY",
+        "mcap": 3616667648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RLAY": {
+        "ticker": "RLAY",
+        "name": "Relay Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1559901440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
