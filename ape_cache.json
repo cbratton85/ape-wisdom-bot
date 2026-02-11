@@ -13238,5 +13238,85 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "AREC": {
+        "ticker": "AREC",
+        "name": "American Resources Corporation",
+        "meta": "Coking Coal",
+        "type": "EQUITY",
+        "mcap": 297921408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "HYPD": {
+        "ticker": "HYPD",
+        "name": "Hyperion DeFi, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 32854090,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "BBJP": {
+        "ticker": "BBJP",
+        "name": "JPMorgan BetaBuilders Japan ETF",
+        "meta": "Japan Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "NTR": {
+        "ticker": "NTR",
+        "name": "Nutrien Ltd.",
+        "meta": "Agricultural Inputs",
+        "type": "EQUITY",
+        "mcap": 35587985408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SQM": {
+        "ticker": "SQM",
+        "name": "Sociedad Quimica y Minera S.A.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 21491388416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "JAAA": {
+        "ticker": "JAAA",
+        "name": "Janus Henderson AAA CLO ETF",
+        "meta": "Securitized Bond - Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "AIN": {
+        "ticker": "AIN",
+        "name": "Albany International Corporatio",
+        "meta": "Textile Manufacturing",
+        "type": "EQUITY",
+        "mcap": 1732427008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VCIT": {
+        "ticker": "VCIT",
+        "name": "Vanguard Intermediate-Term Corp",
+        "meta": "Corporate Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
