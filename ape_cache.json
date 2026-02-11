@@ -12898,5 +12898,245 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CB": {
+        "ticker": "CB",
+        "name": "Chubb Limited",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 129470365696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CE": {
+        "ticker": "CE",
+        "name": "Celanese Corporation",
+        "meta": "Chemicals",
+        "type": "EQUITY",
+        "mcap": 6634573312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HHC": {
+        "ticker": "HHC",
+        "name": "HHC",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "AB": {
+        "ticker": "AB",
+        "name": "AllianceBernstein Holding L.P.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 4449126400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FLR": {
+        "ticker": "FLR",
+        "name": "Fluor Corporation",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 7651574784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BAH": {
+        "ticker": "BAH",
+        "name": "Booz Allen Hamilton Holding Cor",
+        "meta": "Consulting Services",
+        "type": "EQUITY",
+        "mcap": 9836477440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KDP": {
+        "ticker": "KDP",
+        "name": "Keurig Dr Pepper Inc.",
+        "meta": "Beverages - Non-Alcoholic",
+        "type": "EQUITY",
+        "mcap": 40608051200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "HSHP": {
+        "ticker": "HSHP",
+        "name": "Himalaya Shipping Ltd.",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 559777792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "JHX": {
+        "ticker": "JHX",
+        "name": "James Hardie Industries plc.",
+        "meta": "Building Materials",
+        "type": "EQUITY",
+        "mcap": 15066496000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SPSK": {
+        "ticker": "SPSK",
+        "name": "SP Funds Dow Jones Global Sukuk",
+        "meta": "Global Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ERIC": {
+        "ticker": "ERIC",
+        "name": "Ericsson",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 37132816384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CXW": {
+        "ticker": "CXW",
+        "name": "CoreCivic, Inc.",
+        "meta": "Security & Protection Services",
+        "type": "EQUITY",
+        "mcap": 1979538432,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CALM": {
+        "ticker": "CALM",
+        "name": "Cal-Maine Foods, Inc.",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 3963863808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DLO": {
+        "ticker": "DLO",
+        "name": "DLocal Limited",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 3778407168,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SKYX": {
+        "ticker": "SKYX",
+        "name": "SKYX Platforms Corp.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 297738688,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "FICO": {
+        "ticker": "FICO",
+        "name": "Fair Isaac Corporation",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 32334338048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SHEL": {
+        "ticker": "SHEL",
+        "name": "Shell PLC",
+        "meta": "Oil & Gas Integrated",
+        "type": "EQUITY",
+        "mcap": 226638626816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FDX": {
+        "ticker": "FDX",
+        "name": "FedEx Corporation",
+        "meta": "Integrated Freight & Logistics",
+        "type": "EQUITY",
+        "mcap": 86583861248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EXPD": {
+        "ticker": "EXPD",
+        "name": "Expeditors International of Was",
+        "meta": "Integrated Freight & Logistics",
+        "type": "EQUITY",
+        "mcap": 21971472384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ZTS": {
+        "ticker": "ZTS",
+        "name": "Zoetis Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 57028849664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ADSK": {
+        "ticker": "ADSK",
+        "name": "Autodesk, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 49541668864,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PSMT": {
+        "ticker": "PSMT",
+        "name": "PriceSmart, Inc.",
+        "meta": "Discount Stores",
+        "type": "EQUITY",
+        "mcap": 4780233728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GRMN": {
+        "ticker": "GRMN",
+        "name": "Garmin Ltd.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 39749038080,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NOG": {
+        "ticker": "NOG",
+        "name": "Northern Oil and Gas, Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 2593310976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
