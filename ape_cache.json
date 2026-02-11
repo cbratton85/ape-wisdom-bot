@@ -12178,5 +12178,245 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "COKE": {
+        "ticker": "COKE",
+        "name": "Coca-Cola Consolidated, Inc.",
+        "meta": "Beverages - Non-Alcoholic",
+        "type": "EQUITY",
+        "mcap": 10371130368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GAIN": {
+        "ticker": "GAIN",
+        "name": "Gladstone Investment Corporatio",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 551534272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FXF": {
+        "ticker": "FXF",
+        "name": "Invesco CurrencyShares Swiss Fr",
+        "meta": "Single Currency",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FUN": {
+        "ticker": "FUN",
+        "name": "Six Flags Entertainment Corpora",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 1817405568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SRFM": {
+        "ticker": "SRFM",
+        "name": "Surf Air Mobility Inc.",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 128659720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PROP": {
+        "ticker": "PROP",
+        "name": "Prairie Operating Co.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 104381568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "NRGV": {
+        "ticker": "NRGV",
+        "name": "Energy Vault Holdings, Inc.",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 733242304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BAM": {
+        "ticker": "BAM",
+        "name": "Brookfield Asset Management Inc",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 82974965760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BWA": {
+        "ticker": "BWA",
+        "name": "BorgWarner Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 13999537152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CELH": {
+        "ticker": "CELH",
+        "name": "Celsius Holdings, Inc.",
+        "meta": "Beverages - Non-Alcoholic",
+        "type": "EQUITY",
+        "mcap": 11379932160,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "HUBS": {
+        "ticker": "HUBS",
+        "name": "HubSpot, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 11308469248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PY": {
+        "ticker": "PY",
+        "name": "Principal Value ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SJ": {
+        "ticker": "SJ",
+        "name": "Scienjoy Holding Corporation",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 54615720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "VRDN": {
+        "ticker": "VRDN",
+        "name": "Viridian Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2839399680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "MQ": {
+        "ticker": "MQ",
+        "name": "Marqeta, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1864648192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SM": {
+        "ticker": "SM",
+        "name": "SM Energy Company",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 5097542144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ANIP": {
+        "ticker": "ANIP",
+        "name": "ANI Pharmaceuticals, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 1753084544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "MNST": {
+        "ticker": "MNST",
+        "name": "Monster Beverage Corporation",
+        "meta": "Beverages - Non-Alcoholic",
+        "type": "EQUITY",
+        "mcap": 78620893184,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VRAX": {
+        "ticker": "VRAX",
+        "name": "Virax Biolabs Group Limited",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1780139,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "EPD": {
+        "ticker": "EPD",
+        "name": "Enterprise Products Partners L.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 76703891456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RTC": {
+        "ticker": "RTC",
+        "name": "Baijiayun Group Ltd",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "NMAX": {
+        "ticker": "NMAX",
+        "name": "Newsmax, Inc.",
+        "meta": "Broadcasting",
+        "type": "EQUITY",
+        "mcap": 769609536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GNMA": {
+        "ticker": "GNMA",
+        "name": "iShares GNMA Bond ETF",
+        "meta": "Government Mortgage-Backed Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "JOE": {
+        "ticker": "JOE",
+        "name": "St. Joe Company (The)",
+        "meta": "Real Estate - Diversified",
+        "type": "EQUITY",
+        "mcap": 4037360896,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
