@@ -11748,5 +11748,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "PPTA": {
+        "ticker": "PPTA",
+        "name": "Perpetua Resources Corp.",
+        "meta": "Other Precious Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 3609096448,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "OTCM": {
+        "ticker": "OTCM",
+        "name": "OTC Markets Group Inc.",
+        "meta": "Financial Data & Stock Exchanges",
+        "type": "EQUITY",
+        "mcap": 655204800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OQX"
     }
 }
