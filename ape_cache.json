@@ -12418,5 +12418,195 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FXA": {
+        "ticker": "FXA",
+        "name": "Invesco CurrencyShares Australi",
+        "meta": "Single Currency",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FXE": {
+        "ticker": "FXE",
+        "name": "Invesco CurrencyShares Euro Cur",
+        "meta": "Single Currency",
+        "type": "ETF",
+        "mcap": 224721008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "WIX": {
+        "ticker": "WIX",
+        "name": "Wix.com Ltd.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 3920310528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DRTS": {
+        "ticker": "DRTS",
+        "name": "Alpha Tau Medical Ltd.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 619017728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "COHR": {
+        "ticker": "COHR",
+        "name": "Coherent Corp.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 41816330240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LASR": {
+        "ticker": "LASR",
+        "name": "nLIGHT, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 2914710016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "RELL": {
+        "ticker": "RELL",
+        "name": "Richardson Electronics, Ltd.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 202960544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BBBY": {
+        "ticker": "BBBY",
+        "name": "Bed Bath & Beyond, Inc.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 359588832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FXC": {
+        "ticker": "FXC",
+        "name": "Invesco CurrencyShares Canadian",
+        "meta": "Single Currency",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "NCI": {
+        "ticker": "NCI",
+        "name": "Neo-Concept International Group",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 6746269,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "HTZ": {
+        "ticker": "HTZ",
+        "name": "Hertz Global Holdings, Inc",
+        "meta": "Rental & Leasing Services",
+        "type": "EQUITY",
+        "mcap": 1618725120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "YCBD": {
+        "ticker": "YCBD",
+        "name": "cbdMD, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 9103850,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "CUT": {
+        "ticker": "CUT",
+        "name": "Invesco MSCI Global Timber ETF",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SGN": {
+        "ticker": "SGN",
+        "name": "Signing Day Sports, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2900993,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "LOW": {
+        "ticker": "LOW",
+        "name": "Lowe's Companies, Inc.",
+        "meta": "Home Improvement Retail",
+        "type": "EQUITY",
+        "mcap": 160687587328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GNK": {
+        "ticker": "GNK",
+        "name": "Genco Shipping & Trading Limite",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 956106368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ESS": {
+        "ticker": "ESS",
+        "name": "Essex Property Trust, Inc.",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 18388535296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CRK": {
+        "ticker": "CRK",
+        "name": "Comstock Resources, Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 6056225792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BKSY": {
+        "ticker": "BKSY",
+        "name": "BlackSky Technology Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 749725760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
