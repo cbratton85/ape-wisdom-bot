@@ -11128,5 +11128,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "MRNA": {
+        "ticker": "MRNA",
+        "name": "Moderna, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 16408858624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "MUR": {
+        "ticker": "MUR",
+        "name": "Murphy Oil Corporation",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 4624737792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PIK": {
+        "ticker": "PIK",
+        "name": "Kidpik Corp.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "JACK": {
+        "ticker": "JACK",
+        "name": "Jack In The Box Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 389895424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "YUM": {
+        "ticker": "YUM",
+        "name": "Yum! Brands, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 44105154560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DVN": {
+        "ticker": "DVN",
+        "name": "Devon Energy Corporation",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 27275001856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
