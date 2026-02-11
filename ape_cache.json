@@ -11298,5 +11298,95 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SNPS": {
+        "ticker": "SNPS",
+        "name": "Synopsys, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 83692150784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VNQ": {
+        "ticker": "VNQ",
+        "name": "Vanguard Real Estate ETF",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 34752589824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "KB": {
+        "ticker": "KB",
+        "name": "KB Financial Group Inc",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 38089187328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EPI": {
+        "ticker": "EPI",
+        "name": "WisdomTree India Earnings Fund",
+        "meta": "India Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "MAIN": {
+        "ticker": "MAIN",
+        "name": "Main Street Capital Corporation",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 5559802880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CDNS": {
+        "ticker": "CDNS",
+        "name": "Cadence Design Systems, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 81474502656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FSLY": {
+        "ticker": "FSLY",
+        "name": "Fastly, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 1358046080,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DIOD": {
+        "ticker": "DIOD",
+        "name": "Diodes Incorporated",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 2865516800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "AURA": {
+        "ticker": "AURA",
+        "name": "Aura Biosciences, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 357523392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
