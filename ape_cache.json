@@ -11768,5 +11768,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "OQX"
+    },
+    "PIN": {
+        "ticker": "PIN",
+        "name": "Invesco India ETF",
+        "meta": "India Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "BDC": {
+        "ticker": "BDC",
+        "name": "Belden Inc",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 5622451712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
