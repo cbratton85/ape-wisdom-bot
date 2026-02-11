@@ -11728,5 +11728,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "GSM": {
+        "ticker": "GSM",
+        "name": "Ferroglobe PLC",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 1001427520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "DS": {
+        "ticker": "DS",
+        "name": "DS",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
