@@ -2320,8 +2320,8 @@ def export_interactive_html(df):
     $(document).ready(function(){{ 
         table = $('.table').DataTable({{
             "order":[[0,"asc"]], 
-            "pageLength": 10,
-            "lengthMenu": [[10, 25, 50, 100, 150, 200, 250, -1], [10, 25, 50, 100, 150, 200, 250, "All"]],
+            "pageLength": 20,
+            "lengthMenu": [[10, 20, 50, 100, 150, 200, 250, -1], [10, 20, 50, 100, 150, 200, 250, "All"]],
 
             "language": {{
                 "search": "",
