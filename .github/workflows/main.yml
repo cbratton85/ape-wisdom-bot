@@ -50,8 +50,15 @@ jobs:
           git add public/logos/
           git add .
           
-          git commit -m "Update Market Data & Cached Logos [skip ci]" || echo "No changes to commit"
-          git push
+          # Commit only if there are changes
+          git commit -m "Update Market Data & Cached Logos [skip ci]" || exit 0
+          
+          # Handle potential collisions with a rebase-pull and a retry loop
+          # This pulls down any new logos/scans that happened while this job was running
+          git pull --rebase origin main
+          
+          # Push the final combined work
+          git push origin main
 
       # --- STEP 3: DEPLOY TO PAGES ---
       - name: Deploy to GitHub Pages
