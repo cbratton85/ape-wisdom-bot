@@ -84,11 +84,6 @@
         "last_checked": "2026-02-11",
         "reason": "No Price Data"
     },
-    "WFH": {
-        "delisted": true,
-        "last_checked": "2026-02-11",
-        "reason": "No Price Data"
-    },
     "DS": {
         "delisted": true,
         "last_checked": "2026-02-11",
@@ -175,6 +170,11 @@
         "reason": "No Price Data"
     },
     "NOVA": {
+        "delisted": true,
+        "last_checked": "2026-02-12",
+        "reason": "No Price Data"
+    },
+    "WFH": {
         "delisted": true,
         "last_checked": "2026-02-12",
         "reason": "No Price Data"
