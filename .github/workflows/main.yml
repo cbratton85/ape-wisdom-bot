@@ -24,7 +24,6 @@ jobs:
           python-version: '3.11'
 
       # --- STEP 1: RESTORE LOGO CACHE ---
-      # This pulls existing logos from GitHub's internal storage
       - name: Cache Logos
         uses: actions/cache@v4
         with:
@@ -40,10 +39,8 @@ jobs:
 
       - name: Run Market Scan
         env:
-          # DISCORD_WEBHOOK Removed
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           LOGO_DEV_TOKEN: ${{ secrets.LOGO_DEV_TOKEN }} 
-          # GITHUB_REPOSITORY Removed (was only used for Discord link)
         run: python ape_wisdom.py --auto
 
       # --- STEP 2: COMMIT EVERYTHING ---
@@ -65,5 +62,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          # Ensure we keep the existing files in the gh-pages branch
           keep_files: true
+          force_orphan: true  # <--- THIS FIXES THE "STOPPED UPDATING" ISSUE
