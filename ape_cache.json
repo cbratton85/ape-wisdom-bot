@@ -14018,5 +14018,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "CAR": {
+        "ticker": "CAR",
+        "name": "Avis Budget Group, Inc.",
+        "meta": "Rental & Leasing Services",
+        "type": "EQUITY",
+        "mcap": 4079331328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BNDW": {
+        "ticker": "BNDW",
+        "name": "Vanguard Total World Bond ETF",
+        "meta": "Global Bond-USD Hedged",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "PAM": {
+        "ticker": "PAM",
+        "name": "Pampa Energia S.A.",
+        "meta": "Utilities - Independent Power Producers",
+        "type": "EQUITY",
+        "mcap": 4922922496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SCI": {
+        "ticker": "SCI",
+        "name": "Service Corporation Internation",
+        "meta": "Personal Services",
+        "type": "EQUITY",
+        "mcap": 11832709120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
