@@ -13318,5 +13318,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "MOD": {
+        "ticker": "MOD",
+        "name": "Modine Manufacturing Company",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 11574497280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NVCR": {
+        "ticker": "NVCR",
+        "name": "NovoCure Limited",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 1175810816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SNP": {
+        "ticker": "SNP",
+        "name": "SNP",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "ABVX": {
+        "ticker": "ABVX",
+        "name": "Abivax SA",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 9707745280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "R": {
+        "ticker": "R",
+        "name": "Ryder System, Inc.",
+        "meta": "Rental & Leasing Services",
+        "type": "EQUITY",
+        "mcap": 8864212992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BOSS": {
+        "ticker": "BOSS",
+        "name": "Global X Funds Global X Founder",
+        "meta": "Mid-Cap Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
