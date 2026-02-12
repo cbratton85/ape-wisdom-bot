@@ -15218,5 +15218,115 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "LDI": {
+        "ticker": "LDI",
+        "name": "loanDepot, Inc.",
+        "meta": "Mortgage Finance",
+        "type": "EQUITY",
+        "mcap": 700287104,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PTON": {
+        "ticker": "PTON",
+        "name": "Peloton Interactive, Inc.",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 1799818880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ZH": {
+        "ticker": "ZH",
+        "name": "Zhihu Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 311829216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SCNX": {
+        "ticker": "SCNX",
+        "name": "Scienture Holdings, Inc.",
+        "meta": "Pharmaceutical Retailers",
+        "type": "EQUITY",
+        "mcap": 17491566,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CGC": {
+        "ticker": "CGC",
+        "name": "Canopy Growth Corporation",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 428511008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GEMI": {
+        "ticker": "GEMI",
+        "name": "Gemini Space Station, Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 788279872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "MAMO": {
+        "ticker": "MAMO",
+        "name": "Massimo Group",
+        "meta": "Recreational Vehicles",
+        "type": "EQUITY",
+        "mcap": 41432748,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "RANI": {
+        "ticker": "RANI",
+        "name": "Rani Therapeutics Holdings, Inc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 153306912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "BMO": {
+        "ticker": "BMO",
+        "name": "Bank Of Montreal",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 100714463232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VTYX": {
+        "ticker": "VTYX",
+        "name": "Ventyx Biosciences, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 999479552,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "RTM": {
+        "ticker": "RTM",
+        "name": "Invesco S&P 500 Equal Weight Ma",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
