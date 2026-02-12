@@ -13988,5 +13988,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "COR": {
+        "ticker": "COR",
+        "name": "Cencora, Inc.",
+        "meta": "Medical Distribution",
+        "type": "EQUITY",
+        "mcap": 71139876864,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PRZO": {
+        "ticker": "PRZO",
+        "name": "ParaZero Technologies Ltd.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 21386108,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "INDO": {
+        "ticker": "INDO",
+        "name": "Indonesia Energy Corporation Li",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 59800020,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
