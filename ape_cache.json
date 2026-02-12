@@ -14498,5 +14498,125 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "GTX": {
+        "ticker": "GTX",
+        "name": "Garrett Motion Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 4193777408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "REZI": {
+        "ticker": "REZI",
+        "name": "Resideo Technologies, Inc.",
+        "meta": "Industrial Distribution",
+        "type": "EQUITY",
+        "mcap": 5352309248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ROAD": {
+        "ticker": "ROAD",
+        "name": "Construction Partners, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 7840943616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CCJ": {
+        "ticker": "CCJ",
+        "name": "Cameco Corporation",
+        "meta": "Uranium",
+        "type": "EQUITY",
+        "mcap": 51743260672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "UAL": {
+        "ticker": "UAL",
+        "name": "United Airlines Holdings, Inc.",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 36138868736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ASIX": {
+        "ticker": "ASIX",
+        "name": "AdvanSix Inc.",
+        "meta": "Chemicals",
+        "type": "EQUITY",
+        "mcap": 496984672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "Q": {
+        "ticker": "Q",
+        "name": "Qnity Electronics, Inc.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 23461974016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HUBB": {
+        "ticker": "HUBB",
+        "name": "Hubbell Inc",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 28169375744,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LENZ": {
+        "ticker": "LENZ",
+        "name": "LENZ Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 418033952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ISSC": {
+        "ticker": "ISSC",
+        "name": "Innovative Solutions and Suppor",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 392812512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ZSPC": {
+        "ticker": "ZSPC",
+        "name": "zSpace, Inc.",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 7538492,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "TTMI": {
+        "ticker": "TTMI",
+        "name": "TTM Technologies, Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 9283231744,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
