@@ -2408,43 +2408,8 @@ def export_interactive_html(df):
         print(f"{C_RED}[!] Error generating HTML: {e}{C_RESET}")
         return None
 
-
 # ==============================================================================
-#                               SECTION 7: NOTIFICATIONS
-# ==============================================================================
-def send_discord_link(filename):
-    print(f"\n{C_YELLOW}--- Sending Link to Discord... ---{C_RESET}")
-    DISCORD_URL = os.environ.get('DISCORD_WEBHOOK')
-    REPO_NAME = os.environ.get('GITHUB_REPOSITORY') 
-
-    if not DISCORD_URL:
-        print(f"{C_RED}[!] Error: DISCORD_WEBHOOK is missing. Check GitHub Secrets.{C_RESET}")
-        return
-    if not REPO_NAME:
-        print(f"{C_RED}[!] Error: GITHUB_REPOSITORY is missing.{C_RESET}")
-        return
-
-    try:
-        user, repo = REPO_NAME.split('/')
-        website_url = f"https://{user}.github.io/{repo}/"
-        
-        msg = (f"🦍 **APE Wisdom Scanner**\n"
-               f"🔗 **[Click Here to Open Dashboard]({website_url})**\n"
-               f"*(Note: It may take ~30s for the link to go live)*")
-
-        response = requests.post(DISCORD_URL, json={"content": msg})
-        
-        if response.status_code == 204:
-            print(f"{C_GREEN}[+] Discord Link Sent Successfully!{C_RESET}")
-        else:
-            print(f"{C_RED}[!] Discord Failed: {response.status_code} - {response.text}{C_RESET}")
-
-    except Exception as e:
-        print(f"{C_RED}[!] Exception sending Discord link: {e}{C_RESET}")
-
-
-# ==============================================================================
-#                               SECTION 8: MAINTENANCE
+#                               SECTION 7: MAINTENANCE
 # ==============================================================================
 def cleanup_old_html_files(days_to_keep=14):
     """
@@ -2492,7 +2457,7 @@ def cleanup_old_html_files(days_to_keep=14):
 
 
 # ==============================================================================
-#                               SECTION 9: MAIN EXECUTION FLOW
+#                               SECTION 8: MAIN EXECUTION FLOW
 # ==============================================================================
 if __name__ == "__main__":
     # --- CONFIGURATION FOR DATA PERSISTENCE ---
@@ -2550,8 +2515,5 @@ if __name__ == "__main__":
     # 4. GENERATE HTML
     fname = export_interactive_html(df)
     
-    if fname:
-        send_discord_link(fname)
-        
     cleanup_old_html_files(days_to_keep=0.2)
     print(f"{C_GREEN}Done.{C_RESET}")
