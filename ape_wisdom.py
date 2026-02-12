@@ -671,10 +671,12 @@ def filter_and_process(stocks):
         df['z_Squeeze'] = 0 if std_sq == 0 else (log_sq - mean_sq) / std_sq
         df['Heat'] = df['Master_Score']
 
-        # --- STEP 1: CALCULATE METRICS & HISTORIES ---
-        # Loop through rows to generate tooltips using the HistoryTracker
+        # --- STEP 1: SAVE RAW DATA FIRST (THE FIX) ---
+        # We save here so that 'get_metrics' below can see the current timestamp in 'self.data'
+        tracker.save(df)
+
+        # --- STEP 2: CALCULATE METRICS & HISTORIES ---
         for index, row in df.iterrows():
-            # FIXED: Added row['Surge'] as the required 6th argument
             m = tracker.get_metrics(
                 row['Sym'], 
                 row['Price'], 
@@ -707,8 +709,7 @@ def filter_and_process(stocks):
             df.at[index, 'h_squeeze'] = histories.get('squeeze', '')
             df.at[index, 'h_heat'] = histories.get('master_score', '')
 
-        # --- STEP 2: SAVE THE FINALIZED DATA ---
-        tracker.save(df) 
+        # --- STEP 3: FLUSH TO DISK ---
         tracker.flush()
         
         return df
