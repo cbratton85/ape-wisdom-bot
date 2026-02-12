@@ -14348,5 +14348,155 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "HRB": {
+        "ticker": "HRB",
+        "name": "H&R Block, Inc.",
+        "meta": "Personal Services",
+        "type": "EQUITY",
+        "mcap": 3792638720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CHAD": {
+        "ticker": "CHAD",
+        "name": "Direxion Daily CSI 300 China A ",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 197390192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "BW": {
+        "ticker": "BW",
+        "name": "Babcock & Wilcox Enterprises, I",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 1104334848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TREE": {
+        "ticker": "TREE",
+        "name": "LendingTree, Inc.",
+        "meta": "Financial Conglomerates",
+        "type": "EQUITY",
+        "mcap": 573348992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "RWT": {
+        "ticker": "RWT",
+        "name": "Redwood Trust, Inc.",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 892947072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DPST": {
+        "ticker": "DPST",
+        "name": "Direxion Daily Regional Banks B",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "UTZ": {
+        "ticker": "UTZ",
+        "name": "Utz Brands Inc",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 802464640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RPM": {
+        "ticker": "RPM",
+        "name": "RPM International Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 15356755968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "XHB": {
+        "ticker": "XHB",
+        "name": "State Street SPDR S&P Homebuild",
+        "meta": "Consumer Cyclical",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "MORN": {
+        "ticker": "MORN",
+        "name": "Morningstar, Inc.",
+        "meta": "Financial Data & Stock Exchanges",
+        "type": "EQUITY",
+        "mcap": 6473228288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FDS": {
+        "ticker": "FDS",
+        "name": "FactSet Research Systems Inc.",
+        "meta": "Financial Data & Stock Exchanges",
+        "type": "EQUITY",
+        "mcap": 7233273856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TRIN": {
+        "ticker": "TRIN",
+        "name": "Trinity Capital Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 1203743744,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TSE": {
+        "ticker": "TSE",
+        "name": "Trinseo PLC",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 16279900,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KE": {
+        "ticker": "KE",
+        "name": "Kimball Electronics, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 594829632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SCZ": {
+        "ticker": "SCZ",
+        "name": "iShares MSCI EAFE Small-Cap ETF",
+        "meta": "Foreign Small/Mid Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
