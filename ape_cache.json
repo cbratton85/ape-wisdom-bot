@@ -15338,5 +15338,105 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "QYLD": {
+        "ticker": "QYLD",
+        "name": "Global X NASDAQ 100 Covered Cal",
+        "meta": "Derivative Income",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "VHT": {
+        "ticker": "VHT",
+        "name": "Vanguard Health Care ETF",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 15628630016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CAH": {
+        "ticker": "CAH",
+        "name": "Cardinal Health, Inc.",
+        "meta": "Medical Distribution",
+        "type": "EQUITY",
+        "mcap": 50607063040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MCK": {
+        "ticker": "MCK",
+        "name": "McKesson Corporation",
+        "meta": "Medical Distribution",
+        "type": "EQUITY",
+        "mcap": 113058807808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FLUX": {
+        "ticker": "FLUX",
+        "name": "Flux Power Holdings, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 26888572,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "APA": {
+        "ticker": "APA",
+        "name": "APA Corporation",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 9631611904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "NVS": {
+        "ticker": "NVS",
+        "name": "Novartis AG",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 311572267008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PCOR": {
+        "ticker": "PCOR",
+        "name": "Procore Technologies, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 7443896832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CET": {
+        "ticker": "CET",
+        "name": "11017",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 1489608576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "OPRA": {
+        "ticker": "OPRA",
+        "name": "Opera Limited",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 1101774592,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
