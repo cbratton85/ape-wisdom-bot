@@ -149,11 +149,6 @@
         "last_checked": "2026-02-11",
         "reason": "No Price Data"
     },
-    "REV": {
-        "delisted": true,
-        "last_checked": "2026-02-11",
-        "reason": "No Price Data"
-    },
     "SNP": {
         "delisted": true,
         "last_checked": "2026-02-12",
@@ -165,6 +160,11 @@
         "reason": "No Price Data"
     },
     "YY": {
+        "delisted": true,
+        "last_checked": "2026-02-12",
+        "reason": "No Price Data"
+    },
+    "REV": {
         "delisted": true,
         "last_checked": "2026-02-12",
         "reason": "No Price Data"

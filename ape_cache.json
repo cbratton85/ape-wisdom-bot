@@ -13598,5 +13598,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TLH": {
+        "ticker": "TLH",
+        "name": "iShares 10-20 Year Treasury Bon",
+        "meta": "Long Government",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ETSY": {
+        "ticker": "ETSY",
+        "name": "Etsy, Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 4703692800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SY": {
+        "ticker": "SY",
+        "name": "So-Young International Inc. - A",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 368660224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
