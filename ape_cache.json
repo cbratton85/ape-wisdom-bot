@@ -13908,5 +13908,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "DOCU": {
+        "ticker": "DOCU",
+        "name": "DocuSign, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 8880093184,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "NGD": {
+        "ticker": "NGD",
+        "name": "New Gold Inc.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 9041228800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "CROC": {
+        "ticker": "CROC",
+        "name": "ProShares UltraShort Australian",
+        "meta": "Trading--Miscellaneous",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }

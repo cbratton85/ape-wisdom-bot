@@ -164,12 +164,17 @@
         "last_checked": "2026-02-12",
         "reason": "No Price Data"
     },
-    "NOVA": {
+    "MOM": {
         "delisted": true,
         "last_checked": "2026-02-12",
         "reason": "No Price Data"
     },
-    "MOM": {
+    "CROC": {
+        "delisted": true,
+        "last_checked": "2026-02-12",
+        "reason": "No Price Data"
+    },
+    "NOVA": {
         "delisted": true,
         "last_checked": "2026-02-12",
         "reason": "No Price Data"
