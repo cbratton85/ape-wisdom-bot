@@ -14618,5 +14618,135 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "TJX": {
+        "ticker": "TJX",
+        "name": "TJX Companies, Inc. (The)",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 172477693952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BUD": {
+        "ticker": "BUD",
+        "name": "Anheuser-Busch Inbev SA Sponsor",
+        "meta": "Beverages - Brewers",
+        "type": "EQUITY",
+        "mcap": 157078142976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "STLD": {
+        "ticker": "STLD",
+        "name": "Steel Dynamics, Inc.",
+        "meta": "Steel",
+        "type": "EQUITY",
+        "mcap": 29229680640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DIVO": {
+        "ticker": "DIVO",
+        "name": "Amplify CWP Enhanced Dividend I",
+        "meta": "Derivative Income",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "NVTS": {
+        "ticker": "NVTS",
+        "name": "Navitas Semiconductor Corporati",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 1934323968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "EB": {
+        "ticker": "EB",
+        "name": "Eventbrite, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 442412576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "JKH": {
+        "ticker": "JKH",
+        "name": "iShares Morningstar Mid-Cap Gro",
+        "meta": "Unknown",
+        "type": "ETF",
+        "mcap": 898005632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "BZ": {
+        "ticker": "BZ",
+        "name": "KANZHUN LIMITED - American Depo",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 8040515072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "IAUX": {
+        "ticker": "IAUX",
+        "name": "i-80 Gold Corp.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 1652563968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "MAC": {
+        "ticker": "MAC",
+        "name": "Macerich Company (The)",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 4784704512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HRL": {
+        "ticker": "HRL",
+        "name": "Hormel Foods Corporation",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 12963277824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CAG": {
+        "ticker": "CAG",
+        "name": "ConAgra Brands, Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 9627185152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ZD": {
+        "ticker": "ZD",
+        "name": "Ziff Davis, Inc.",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 1246078208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
