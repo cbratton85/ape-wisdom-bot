@@ -1388,20 +1388,35 @@ def export_interactive_html(df):
             }}
             
             .header-left {{ flex: 0 0 200px; display: flex; align-items: center; z-index: 1; }}
-            .header-right {{ flex: 0 0 400px; display: flex; justify-content: flex-end; align-items: center; z-index: 10; }}
+            
+            .header-right {{
+                flex: 0 0 250px; 
+                display: flex; 
+                flex-direction: column;
+                justify-content: center; 
+                align-items: center;
+                z-index: 10; 
+                margin-left: auto;
+            }}
+
+            .update-label {{
+                font-size: 10px;
+                font-weight: bold;
+                color: #00ff00;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                margin-bottom: -2px;
+            }}
 
             .header-center {{
                 position: absolute;
                 left: 50%;
                 top: 50%;
-                transform: translate(-50%, -50%); /* Perfectly centers vertically & horizontally */
-                
-                /* Create a vertical stack */
+                transform: translate(-50%, -50%);
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 gap: 4px;
-                
                 width: auto;
                 white-space: nowrap;
                 z-index: 101;
@@ -1563,7 +1578,7 @@ def export_interactive_html(df):
                 font-family: monospace; 
                 font-size: 14px !important; 
                 font-weight: bold; 
-                color: #00ff00; /* Changed to Green to match your theme */
+                color: #ffffff;
             }}
 
             table.dataTable thead > tr > th.sorting:before,
@@ -1741,7 +1756,8 @@ def export_interactive_html(df):
     </div>
 
     <div class="header-right">
-        <span id="time" data-utc="{utc_timestamp}" style="font-family:monospace; font-size:11px; color:#666;">Loading...</span>
+        <span class="update-label">LAST UPDATED</span>
+        <span id="time" data-utc="{utc_timestamp}">Loading...</span>
     </div>
 </div>
 
