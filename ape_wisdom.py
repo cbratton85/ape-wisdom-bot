@@ -1160,9 +1160,12 @@ def export_interactive_html(df):
         utc_timestamp = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
         
         # ---------------------------------------------------------
-        #  HTML TEMPLATE (Embedded CSS/JS)
+        #   HTML TEMPLATE (Embedded CSS/JS)
         # ---------------------------------------------------------
-        html_content = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Ape Wisdom Analysis</title>
+        html_content = f"""<!DOCTYPE html><html lang="en"><head>
+        <meta charset="UTF-8">
+        <meta http-equiv="refresh" content="300">
+        <title>Ape Wisdom Analysis</title>
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
