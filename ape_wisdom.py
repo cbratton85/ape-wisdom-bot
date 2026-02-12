@@ -1056,7 +1056,9 @@ def export_interactive_html(df):
             t = row['Sym']
             tv_ticker = t.replace('-', '.')
             export_df.at[index, 'Sym'] = (
-                f'<div class="symbol-container" onmouseenter="loadMiniChart(\'{tv_ticker}\', \'{index}\', \'{row.get("exchange", "")}\', event)">'
+                f'<div class="symbol-container" '
+                f'onmouseenter="loadMiniChart(\'{tv_ticker}\', \'{index}\', \'{row.get("exchange", "")}\', event)" '
+                f'onmouseleave="hideSymbolProfile(\'chart-tooltip-{index}\')">' 
                 f'<a href="https://www.tradingview.com/chart/?symbol={tv_ticker}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
                 f'<div id="chart-tooltip-{index}" class="chart-popup"></div>'
                 f'</div>'
@@ -1974,38 +1976,26 @@ def export_interactive_html(df):
         <script>
     var table;
 
-    function positionPopup(container, event, boxHeight = 400) {{
-        if (!event) return;
-        const mouseY = event.clientY;
-        const mouseX = event.clientX;
-        const screenHeight = window.innerHeight;
-        const screenWidth = window.innerWidth;
+    function positionPopup(container, event) {{
+            if (!event || !container) return;
+            container.style.display = "flex";
+            const mouseY = event.clientY;
+            const mouseX = event.clientX;
+            const screenHeight = window.innerHeight;
+            const screenWidth = window.innerWidth;
+            const actualHeight = container.offsetHeight || 400; 
+            const boxWidth = 700;
+            const gap = 30; 
+            const screenPadding = 20;
 
-        const boxWidth = 700;
-        const halfWidth = boxWidth / 2;
-    
-        const margin = 15;
-        const overlap = 10;
-        const screenPadding = 20;
+            if (mouseY > screenHeight * 0.55) {{ container.style.top = (mouseY - actualHeight - gap) + "px"; }} 
+            else {{ container.style.top = (mouseY + gap + 16) + "px"; }}
 
-        if (mouseY > screenHeight * 0.55) {{
-            container.style.top = (mouseY - boxHeight + overlap) + "px";
-        }} else {{
-            container.style.top = (mouseY + margin) + "px";
+            let leftPos = mouseX - (boxWidth / 2);
+            if (leftPos < screenPadding) leftPos = screenPadding;
+            if (leftPos + boxWidth > screenWidth - screenPadding) leftPos = screenWidth - boxWidth - screenPadding;
+            container.style.left = leftPos + "px";
         }}
-
-        let leftPos = mouseX - halfWidth;
-
-        if (leftPos < screenPadding) {{
-            leftPos = screenPadding;
-        }}
-
-        if (leftPos + boxWidth > screenWidth - screenPadding) {{
-            leftPos = screenWidth - boxWidth - screenPadding;
-        }}
-
-        container.style.left = leftPos + "px";
-    }}
 
     function getFinalSymbol(symbol, yfExchange) {{
     const ex = String(yfExchange || "").toUpperCase();
@@ -2317,8 +2307,8 @@ def export_interactive_html(df):
     $(document).ready(function(){{ 
         table = $('.table').DataTable({{
             "order":[[0,"asc"]], 
-            "pageLength": 25,
-            "lengthMenu": [[25, 50, 75, 100, 150, 200, 250, 500, -1], [25, 50, 75, 100, 150, 200, 250, 500, "All"]],
+            "pageLength": 10,
+            "lengthMenu": [[10, 25, 50, 100, 150, 200, 250, -1], [10, 25, 50, 100, 150, 200, 250, "All"]],
 
             "language": {{
                 "search": "",
