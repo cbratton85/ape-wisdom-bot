@@ -825,7 +825,7 @@ def export_interactive_html(df):
             except ValueError:
                 return 0.0
 
-        # 1. SMART COLUMN FINDER
+       # 1. SMART COLUMN FINDER
         # We prioritize raw numeric columns ('CurVol', 'AvgVol') set in filter_and_process
         clean_columns = [c.strip() for c in export_df.columns]
         col_map = dict(zip(clean_columns, export_df.columns))
@@ -844,23 +844,34 @@ def export_interactive_html(df):
                 avg_vol_col = col_map[candidate]
                 break
 
-        # 2. CALCULATE SURGE (Safely)
-        if current_vol_col and avg_vol_col:
-            # Convert both columns to clean floats for math
+        # 2. CALCULATE SURGE (Direct & Fresh)
+        # This forces the math: Current Volume / 30-Day Average
+        if 'CurVol' in export_df.columns and 'AvgVol' in export_df.columns:
+            # Use the raw numbers directly (fastest and most accurate)
+            c_series = export_df['CurVol'].astype(float)
+            a_series = export_df['AvgVol'].astype(float).replace(0, 1) # Prevent div/0 errors
+            
+            # Perform the division
+            surge_calc = (c_series / a_series) * 100
+            
+            # 1. Save float for sorting ('Srg')
+            export_df['Srg'] = surge_calc.fillna(0).astype(float)
+            # 2. Save string for display ('SRG')
+            export_df['SRG'] = export_df['Srg'].astype(int).astype(str) + '%'
+
+        elif current_vol_col and avg_vol_col:
+            # Fallback: Parse text columns if raw data is missing
             curr_series = export_df[current_vol_col].apply(clean_vol_num)
             avg_series  = export_df[avg_vol_col].apply(clean_vol_num)
             
-            # Calculate Ratio with epsilon to prevent DivisionByZero
             surge_calc = (curr_series / (avg_series + 0.000001)) * 100
-            
-            # Clean up Infinity/NaN from division
             surge_calc = surge_calc.replace([np.inf, -np.inf], 0).fillna(0)
             
-            # Save the raw numeric result to 'Surge' and the display string to 'SRG'
             export_df['Srg'] = surge_calc.astype(float)
             export_df['SRG'] = surge_calc.astype(int).astype(str) + '%'
         else:
             print(f"[!] Warning: Missing volume columns for Surge calculation.")
+            export_df['Srg'] = 0.0
             export_df['SRG'] = "0%"
 
         for index, row in export_df.iterrows():
