@@ -857,8 +857,8 @@ def export_interactive_html(df):
             surge_calc = surge_calc.replace([np.inf, -np.inf], 0).fillna(0)
             
             # Save the raw numeric result to 'Surge' and the display string to 'SRG'
-            export_df['Surge'] = surge_calc.astype(float)
-            export_df['SRG']   = surge_calc.astype(int).astype(str) + '%'
+            export_df['Srg'] = surge_calc.astype(float)
+            export_df['SRG'] = surge_calc.astype(int).astype(str) + '%'
         else:
             print(f"[!] Warning: Missing volume columns for Surge calculation.")
             export_df['SRG'] = "0%"
