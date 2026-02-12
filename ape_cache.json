@@ -14108,5 +14108,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "REMX": {
+        "ticker": "REMX",
+        "name": "VanEck Rare Earth and Strategic",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "GIS": {
+        "ticker": "GIS",
+        "name": "General Mills, Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 26150856704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "URNM": {
+        "ticker": "URNM",
+        "name": "Sprott Uranium Miners ETF",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "RC": {
+        "ticker": "RC",
+        "name": "Ready Capital Corporation",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 301822336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
