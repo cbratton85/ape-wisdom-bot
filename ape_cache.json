@@ -13628,5 +13628,135 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ZN": {
+        "ticker": "ZN",
+        "name": "ZN",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "STNE": {
+        "ticker": "STNE",
+        "name": "StoneCo Ltd.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 4727156224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TDY": {
+        "ticker": "TDY",
+        "name": "Teledyne Technologies Incorpora",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 31054790656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GSAT": {
+        "ticker": "GSAT",
+        "name": "Globalstar, Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 7436536320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "COO": {
+        "ticker": "COO",
+        "name": "The Cooper Companies, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 16511082496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BZQ": {
+        "ticker": "BZQ",
+        "name": "ProShares UltraShort MSCI Brazi",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CVLT": {
+        "ticker": "CVLT",
+        "name": "Commvault Systems, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 3871925760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ATS": {
+        "ticker": "ATS",
+        "name": "ATS Corporation",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 2982201856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "OKTA": {
+        "ticker": "OKTA",
+        "name": "Okta, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 15628161024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "RRX": {
+        "ticker": "RRX",
+        "name": "Regal Rexnord Corporation",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 14876598272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "STRL": {
+        "ticker": "STRL",
+        "name": "Sterling Infrastructure, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 13329442816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PAGS": {
+        "ticker": "PAGS",
+        "name": "PagSeguro Digital Ltd.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 3260205312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CUZ": {
+        "ticker": "CUZ",
+        "name": "Cousins Properties Incorporated",
+        "meta": "REIT - Office",
+        "type": "EQUITY",
+        "mcap": 3886001664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

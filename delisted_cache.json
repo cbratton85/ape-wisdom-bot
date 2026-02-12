@@ -54,11 +54,6 @@
         "last_checked": "2026-02-10",
         "reason": "No Price Data"
     },
-    "DDG": {
-        "delisted": true,
-        "last_checked": "2026-02-10",
-        "reason": "No Price Data"
-    },
     "DIDI": {
         "delisted": true,
         "last_checked": "2026-02-10",
@@ -165,6 +160,16 @@
         "reason": "No Price Data"
     },
     "REV": {
+        "delisted": true,
+        "last_checked": "2026-02-12",
+        "reason": "No Price Data"
+    },
+    "DDG": {
+        "delisted": true,
+        "last_checked": "2026-02-12",
+        "reason": "No Price Data"
+    },
+    "ZN": {
         "delisted": true,
         "last_checked": "2026-02-12",
         "reason": "No Price Data"
