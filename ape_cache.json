@@ -13378,5 +13378,225 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "ABR": {
+        "ticker": "ABR",
+        "name": "Arbor Realty Trust",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 1610321408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HSAI": {
+        "ticker": "HSAI",
+        "name": "Hesai Group",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 4171079424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CACI": {
+        "ticker": "CACI",
+        "name": "CACI International, Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 12651394048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GNLN": {
+        "ticker": "GNLN",
+        "name": "Greenlane Holdings, Inc.",
+        "meta": "Tobacco",
+        "type": "EQUITY",
+        "mcap": 7329390,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CBRE": {
+        "ticker": "CBRE",
+        "name": "CBRE Group Inc",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 44487176192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LAND": {
+        "ticker": "LAND",
+        "name": "Gladstone Land Corporation",
+        "meta": "REIT - Specialty",
+        "type": "EQUITY",
+        "mcap": 415525152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "AMBA": {
+        "ticker": "AMBA",
+        "name": "Ambarella, Inc.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 2878786304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PAVE": {
+        "ticker": "PAVE",
+        "name": "Global X U.S. Infrastructure De",
+        "meta": "Infrastructure",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "BMY": {
+        "ticker": "BMY",
+        "name": "Bristol-Myers Squibb Company",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 122002685952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SIMO": {
+        "ticker": "SIMO",
+        "name": "Silicon Motion Technology Corpo",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 4755675136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "MBLY": {
+        "ticker": "MBLY",
+        "name": "Mobileye Global Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 8089717760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CW": {
+        "ticker": "CW",
+        "name": "Curtiss-Wright Corporation",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 23897341952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MLI": {
+        "ticker": "MLI",
+        "name": "Mueller Industries, Inc.",
+        "meta": "Metal Fabrication",
+        "type": "EQUITY",
+        "mcap": 13384913920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TPC": {
+        "ticker": "TPC",
+        "name": "Tutor Perini Corporation",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 4486867968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KMB": {
+        "ticker": "KMB",
+        "name": "Kimberly-Clark Corporation",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 35711700992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ABBV": {
+        "ticker": "ABBV",
+        "name": "AbbVie Inc.",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 390397591552,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GSY": {
+        "ticker": "GSY",
+        "name": "Invesco Ultra Short Duration ET",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CWK": {
+        "ticker": "CWK",
+        "name": "Cushman & Wakefield Ltd.",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 3235515648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "JLL": {
+        "ticker": "JLL",
+        "name": "Jones Lang LaSalle Incorporated",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 14361724928,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SAIC": {
+        "ticker": "SAIC",
+        "name": "Science Applications Internatio",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 3783928832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "RXRX": {
+        "ticker": "RXRX",
+        "name": "Recursion Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1933884800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FPI": {
+        "ticker": "FPI",
+        "name": "Farmland Partners Inc.",
+        "meta": "REIT - Specialty",
+        "type": "EQUITY",
+        "mcap": 544799360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

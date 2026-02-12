@@ -134,11 +134,6 @@
         "last_checked": "2026-02-11",
         "reason": "No Price Data"
     },
-    "YY": {
-        "delisted": true,
-        "last_checked": "2026-02-11",
-        "reason": "No Price Data"
-    },
     "ELP": {
         "delisted": true,
         "last_checked": "2026-02-11",
@@ -165,6 +160,11 @@
         "reason": "No Price Data"
     },
     "BOSS": {
+        "delisted": true,
+        "last_checked": "2026-02-12",
+        "reason": "No Price Data"
+    },
+    "YY": {
         "delisted": true,
         "last_checked": "2026-02-12",
         "reason": "No Price Data"
