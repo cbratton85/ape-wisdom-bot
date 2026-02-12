@@ -15328,5 +15328,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "XLRE": {
+        "ticker": "XLRE",
+        "name": "State Street Real Estate Select",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
