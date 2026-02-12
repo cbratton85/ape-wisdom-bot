@@ -13758,5 +13758,115 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "NVAX": {
+        "ticker": "NVAX",
+        "name": "Novavax, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1457616000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CYRX": {
+        "ticker": "CYRX",
+        "name": "CryoPort, Inc.",
+        "meta": "Integrated Freight & Logistics",
+        "type": "EQUITY",
+        "mcap": 425585696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "EWU": {
+        "ticker": "EWU",
+        "name": "iShares MSCI",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 3215753984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "EFV": {
+        "ticker": "EFV",
+        "name": "iShares MSCI EAFE Value ETF",
+        "meta": "Foreign Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "BAK": {
+        "ticker": "BAK",
+        "name": "Braskem SA",
+        "meta": "Chemicals",
+        "type": "EQUITY",
+        "mcap": 1713482112,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LEG": {
+        "ticker": "LEG",
+        "name": "Leggett & Platt, Incorporated",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 1679409920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GDDY": {
+        "ticker": "GDDY",
+        "name": "GoDaddy Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 12557326336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PACB": {
+        "ticker": "PACB",
+        "name": "Pacific Biosciences of Californ",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 555509696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "EPU": {
+        "ticker": "EPU",
+        "name": "iShares MSCI Peru and Global Ex",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "AXP": {
+        "ticker": "AXP",
+        "name": "American Express Company",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 243860373504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IBD": {
+        "ticker": "IBD",
+        "name": "Inspire Corporate Bond ETF",
+        "meta": "Corporate Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
