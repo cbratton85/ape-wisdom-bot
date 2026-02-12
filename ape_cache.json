@@ -15198,5 +15198,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "DDL": {
+        "ticker": "DDL",
+        "name": "Dingdong (Cayman) Limited",
+        "meta": "Grocery Stores",
+        "type": "EQUITY",
+        "mcap": 628174272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CMPS": {
+        "ticker": "CMPS",
+        "name": "COMPASS Pathways Plc - American",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 561699648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }

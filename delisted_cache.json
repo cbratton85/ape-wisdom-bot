@@ -44,11 +44,6 @@
         "last_checked": "2026-02-10",
         "reason": "No Price Data"
     },
-    "SAVE": {
-        "delisted": true,
-        "last_checked": "2026-02-11",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-02-11",
@@ -175,6 +170,11 @@
         "reason": "No Price Data"
     },
     "CHAD": {
+        "delisted": true,
+        "last_checked": "2026-02-12",
+        "reason": "No Price Data"
+    },
+    "SAVE": {
         "delisted": true,
         "last_checked": "2026-02-12",
         "reason": "No Price Data"
