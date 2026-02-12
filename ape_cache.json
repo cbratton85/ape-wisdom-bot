@@ -13878,5 +13878,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "EWX": {
+        "ticker": "EWX",
+        "name": "State Street SPDR S&P Emerging ",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "H": {
+        "ticker": "H",
+        "name": "Hyatt Hotels Corporation",
+        "meta": "Lodging",
+        "type": "EQUITY",
+        "mcap": 16101635072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CARR": {
+        "ticker": "CARR",
+        "name": "Carrier Global Corporation",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 56068411392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

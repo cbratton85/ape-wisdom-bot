@@ -94,11 +94,6 @@
         "last_checked": "2026-02-11",
         "reason": "No Price Data"
     },
-    "MOM": {
-        "delisted": true,
-        "last_checked": "2026-02-11",
-        "reason": "No Price Data"
-    },
     "LBJ": {
         "delisted": true,
         "last_checked": "2026-02-11",
@@ -170,6 +165,11 @@
         "reason": "No Price Data"
     },
     "NOVA": {
+        "delisted": true,
+        "last_checked": "2026-02-12",
+        "reason": "No Price Data"
+    },
+    "MOM": {
         "delisted": true,
         "last_checked": "2026-02-12",
         "reason": "No Price Data"
