@@ -13868,5 +13868,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "EWI": {
+        "ticker": "EWI",
+        "name": "iShares MSCI Italy ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 487179008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
