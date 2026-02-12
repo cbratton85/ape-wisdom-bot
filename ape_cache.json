@@ -14188,5 +14188,85 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "LINE": {
+        "ticker": "LINE",
+        "name": "Lineage, Inc.",
+        "meta": "REIT - Industrial",
+        "type": "EQUITY",
+        "mcap": 9712116736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "NC": {
+        "ticker": "NC",
+        "name": "NACCO Industries, Inc.",
+        "meta": "Thermal Coal",
+        "type": "EQUITY",
+        "mcap": 401270976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HWM": {
+        "ticker": "HWM",
+        "name": "Howmet Aerospace Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 92917129216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DOL": {
+        "ticker": "DOL",
+        "name": "WisdomTree True Developed Inter",
+        "meta": "Foreign Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "BTI": {
+        "ticker": "BTI",
+        "name": "British American Tobacco  Indus",
+        "meta": "Tobacco",
+        "type": "EQUITY",
+        "mcap": 130847334400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AGO": {
+        "ticker": "AGO",
+        "name": "Assured Guaranty Ltd.",
+        "meta": "Insurance - Specialty",
+        "type": "EQUITY",
+        "mcap": 4124904192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FINX": {
+        "ticker": "FINX",
+        "name": "Global X FinTech ETF",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ORGN": {
+        "ticker": "ORGN",
+        "name": "Origin Materials, Inc.",
+        "meta": "Chemicals",
+        "type": "EQUITY",
+        "mcap": 24182720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
