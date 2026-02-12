@@ -650,6 +650,10 @@ def filter_and_process(stocks):
         cols = ['Rank+', 'Surge', 'Mnt%', 'Upvotes', 'Accel', 'Upv+', 'MENT']
         weights = {'Rank+': 1.1, 'Surge': 1.1, 'Mnt%': 0.7, 'Upvotes': 1.0, 'Accel': 1.2, 'Upv+': 1.0, 'MENT': 0.8}
         
+        # Ensure columns exist to prevent errors
+        for col in cols:
+            if col not in df.columns: df[col] = 0
+
         for col in cols:
             clean_series = df[col].clip(lower=0).astype(float)
             log_data = np.log1p(clean_series)
@@ -660,6 +664,7 @@ def filter_and_process(stocks):
         for col in cols:
             df['Master_Score'] += df[f'z_{col}'].clip(lower=0) * weights.get(col, 1.0)
         
+        if 'Squeeze' not in df.columns: df['Squeeze'] = 0
         sq_series = df['Squeeze'].clip(lower=0).astype(float)
         log_sq = np.log1p(sq_series)
         mean_sq = log_sq.mean(); std_sq = log_sq.std(ddof=0)
@@ -667,8 +672,17 @@ def filter_and_process(stocks):
         df['Heat'] = df['Master_Score']
 
         # --- STEP 1: CALCULATE METRICS & HISTORIES ---
+        # Loop through rows to generate tooltips using the HistoryTracker
         for index, row in df.iterrows():
-            m = tracker.get_metrics(row['Sym'], row['Price'], row['MENT'], row['Rank+'], row['Upvotes'])
+            # FIXED: Added row['Surge'] as the required 6th argument
+            m = tracker.get_metrics(
+                row['Sym'], 
+                row['Price'], 
+                row['MENT'], 
+                row['Rank+'], 
+                row['Upvotes'], 
+                row['Surge']
+            )
             
             df.at[index, 'Accel'] = m.get('accel', 0)
             df.at[index, 'Upv+'] = m.get('upv_chg', 0)
