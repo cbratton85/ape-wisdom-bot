@@ -14058,5 +14058,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ORKT": {
+        "ticker": "ORKT",
+        "name": "Orangekloud Technology Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 6890904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "PLAY": {
+        "ticker": "PLAY",
+        "name": "Dave & Buster's Entertainment, ",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 607251456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CRS": {
+        "ticker": "CRS",
+        "name": "Carpenter Technology Corporatio",
+        "meta": "Metal Fabrication",
+        "type": "EQUITY",
+        "mcap": 18418020352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DTC": {
+        "ticker": "DTC",
+        "name": "DTC",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "TNXP": {
+        "ticker": "TNXP",
+        "name": "Tonix Pharmaceuticals Holding C",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 202818784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
