@@ -850,14 +850,14 @@ def export_interactive_html(df):
             # Use the raw numbers directly (fastest and most accurate)
             c_series = export_df['CurVol'].astype(float)
             a_series = export_df['AvgVol'].astype(float).replace(0, 1) # Prevent div/0 errors
-            
-            # Perform the division
+        
             surge_calc = (c_series / a_series) * 100
             
-            # 1. Save float for sorting ('Srg')
             export_df['Srg'] = surge_calc.fillna(0).astype(float)
-            # 2. Save string for display ('SRG')
+            
             export_df['SRG'] = export_df['Srg'].astype(int).astype(str) + '%'
+            
+            export_df['Srg'] = export_df['Srg'].astype(object)
 
         elif current_vol_col and avg_vol_col:
             # Fallback: Parse text columns if raw data is missing
@@ -869,10 +869,12 @@ def export_interactive_html(df):
             
             export_df['Srg'] = surge_calc.astype(float)
             export_df['SRG'] = surge_calc.astype(int).astype(str) + '%'
+            export_df['Srg'] = export_df['Srg'].astype(object)
         else:
             print(f"[!] Warning: Missing volume columns for Surge calculation.")
             export_df['Srg'] = 0.0
             export_df['SRG'] = "0%"
+            export_df['Srg'] = export_df['Srg'].astype(object)
 
         for index, row in export_df.iterrows():
             v_raw = row.get('CurVol_Disp', '0')
