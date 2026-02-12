@@ -1,12 +1,10 @@
 name: Market Momentum Tracker
 
 on:
-  workflow_dispatch:        # Manual Trigger
-  # schedule:               # Optional: Run every hour
-  #   - cron: '0 * * * *'
+  workflow_dispatch: 
 
 permissions:
-  contents: write           # Allows saving history and logos
+  contents: write 
 
 jobs:
   build:
@@ -39,7 +37,6 @@ jobs:
 
       - name: Run Market Scan
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           LOGO_DEV_TOKEN: ${{ secrets.LOGO_DEV_TOKEN }} 
         run: python ape_wisdom.py --auto
 
@@ -63,4 +60,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           keep_files: true
-          force_orphan: true  # <--- THIS FIXES THE "STOPPED UPDATING" ISSUE
+          force_orphan: true
