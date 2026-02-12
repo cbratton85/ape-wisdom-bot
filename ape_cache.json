@@ -14748,5 +14748,455 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CIM": {
+        "ticker": "CIM",
+        "name": "Chimera Investment Corporation",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 1102171904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GNS": {
+        "ticker": "GNS",
+        "name": "Genius Group Limited",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 34211360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "AUID": {
+        "ticker": "AUID",
+        "name": "authID Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 25468608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "AAOI": {
+        "ticker": "AAOI",
+        "name": "Applied Optoelectronics, Inc.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 2976320256,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "CHRW": {
+        "ticker": "CHRW",
+        "name": "C.H. Robinson Worldwide, Inc.",
+        "meta": "Integrated Freight & Logistics",
+        "type": "EQUITY",
+        "mcap": 19737178112,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PWR": {
+        "ticker": "PWR",
+        "name": "Quanta Services, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 77377724416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FAN": {
+        "ticker": "FAN",
+        "name": "First Trust Global Wind Energy ",
+        "meta": "Miscellaneous Sector",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "PTLO": {
+        "ticker": "PTLO",
+        "name": "Portillo's Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 389873152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "NGG": {
+        "ticker": "NGG",
+        "name": "National Grid Transco, PLC Nati",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 91024343040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BCSF": {
+        "ticker": "BCSF",
+        "name": "Bain Capital Specialty Finance,",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 877022272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FSLR": {
+        "ticker": "FSLR",
+        "name": "First Solar, Inc.",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 23834212352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ALLY": {
+        "ticker": "ALLY",
+        "name": "Ally Financial Inc.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 12611193856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PPL": {
+        "ticker": "PPL",
+        "name": "PPL Corporation",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 27226101760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RXO": {
+        "ticker": "RXO",
+        "name": "RXO, Inc.",
+        "meta": "Trucking",
+        "type": "EQUITY",
+        "mcap": 2126311808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VVV": {
+        "ticker": "VVV",
+        "name": "Valvoline Inc.",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 4800443392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BWXT": {
+        "ticker": "BWXT",
+        "name": "BWX Technologies, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 18083295232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SCHQ": {
+        "ticker": "SCHQ",
+        "name": "Schwab Long-Term U.S. Treasury ",
+        "meta": "Long Government",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FLKR": {
+        "ticker": "FLKR",
+        "name": "Franklin FTSE South Korea ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "DRS": {
+        "ticker": "DRS",
+        "name": "Leonardo DRS, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 10062135296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VV": {
+        "ticker": "VV",
+        "name": "Vanguard Large-Cap ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 33778096128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "KVUE": {
+        "ticker": "KVUE",
+        "name": "Kenvue Inc.",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 35742494720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BR": {
+        "ticker": "BR",
+        "name": "Broadridge Financial Solutions,",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 19818678272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SSL": {
+        "ticker": "SSL",
+        "name": "Sasol Ltd.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 4886726144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RNR": {
+        "ticker": "RNR",
+        "name": "RenaissanceRe Holdings Ltd.",
+        "meta": "Insurance - Reinsurance",
+        "type": "EQUITY",
+        "mcap": 13572058112,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ISRG": {
+        "ticker": "ISRG",
+        "name": "Intuitive Surgical, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 170498031616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LION": {
+        "ticker": "LION",
+        "name": "Lionsgate Studios Corp",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 2312792064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RXT": {
+        "ticker": "RXT",
+        "name": "Rackspace Technology, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 98411224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "UEC": {
+        "ticker": "UEC",
+        "name": "Uranium Energy Corp.",
+        "meta": "Uranium",
+        "type": "EQUITY",
+        "mcap": 7308666368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "GFI": {
+        "ticker": "GFI",
+        "name": "Gold Fields Limited",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 47482818560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "UNP": {
+        "ticker": "UNP",
+        "name": "Union Pacific Corporation",
+        "meta": "Railroads",
+        "type": "EQUITY",
+        "mcap": 154895941632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IRDM": {
+        "ticker": "IRDM",
+        "name": "Iridium Communications Inc",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 2374298880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VBR": {
+        "ticker": "VBR",
+        "name": "Vanguard Small-Cap Value ETF",
+        "meta": "Small Value",
+        "type": "ETF",
+        "mcap": 23231168512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "TOWN": {
+        "ticker": "TOWN",
+        "name": "Towne Bank",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 3318267904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "NXT": {
+        "ticker": "NXT",
+        "name": "Nextpower Inc.",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 17328826368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PICK": {
+        "ticker": "PICK",
+        "name": "iShares MSCI Global Select Meta",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 507763520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "VRTX": {
+        "ticker": "VRTX",
+        "name": "Vertex Pharmaceuticals Incorpor",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 119672905728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SATL": {
+        "ticker": "SATL",
+        "name": "Satellogic Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 407884544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ENB": {
+        "ticker": "ENB",
+        "name": "Enbridge Inc",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 113352278016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MET": {
+        "ticker": "MET",
+        "name": "MetLife, Inc.",
+        "meta": "Insurance - Life",
+        "type": "EQUITY",
+        "mcap": 50948796416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VIAV": {
+        "ticker": "VIAV",
+        "name": "Viavi Solutions Inc.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 6152642560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FVRR": {
+        "ticker": "FVRR",
+        "name": "Fiverr International Ltd.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 507827424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VITL": {
+        "ticker": "VITL",
+        "name": "Vital Farms, Inc.",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 1230000896,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SCHB": {
+        "ticker": "SCHB",
+        "name": "Schwab U.S. Broad Market ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CTRI": {
+        "ticker": "CTRI",
+        "name": "Centuri Holdings, Inc.",
+        "meta": "Utilities - Regulated Gas",
+        "type": "EQUITY",
+        "mcap": 3094927360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DIN": {
+        "ticker": "DIN",
+        "name": "Dine Brands Global, Inc. Common",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 511285568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
