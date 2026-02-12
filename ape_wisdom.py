@@ -143,7 +143,11 @@ class HistoryTracker:
         # 5. Update Memory (Wait for flush() to write to disk)
         self.data = new_data_cleaned
 
-    def get_metrics(self, ticker, current_price, current_mnt, current_rank_plus, current_upvotes):
+    def get_metrics(self, ticker, current_price, current_mnt, current_rank_plus, current_upvotes, current_surge):
+        """
+        Calculates momentum metrics and builds history strings for tooltips.
+        Passes 'current_surge' to ensure tooltip history matches the live SRG column.
+        """
         if ticker not in self.data or not self.data[ticker]:
             return {"vel": 0, "accel": 0, "upv_chg": 0, "streak": 0, "rolling_trend": 0, "hist": {}}
 
@@ -153,12 +157,13 @@ class HistoryTracker:
         current_entry = self.data[ticker][dates[-1]]
         prev_entry = self.data[ticker][dates[-2]] if len(dates) > 1 else current_entry
 
-        # === FORCE UPDATE PRICE ===
-        # This guarantees the history file gets the fresh price regardless of save() logic
+        # === LIVE DATA SYNC ===
         try:
             current_entry['upvotes'] = int(current_upvotes)
+            current_entry['price'] = float(current_price)
+            current_entry['surge'] = int(current_surge)  # Syncs real-time SRG to history
         except:
-            pass # Keep existing if conversion fails
+            pass 
 
         curr_rank = current_rank_plus 
         prev_rank = prev_entry.get('rank_plus', 0)
@@ -180,7 +185,7 @@ class HistoryTracker:
             if val > 0: rolling_trend = rolling_trend + 1 if rolling_trend >= 0 else 1
             elif val < 0: rolling_trend = rolling_trend - 1 if rolling_trend <= 0 else -1
 
-        # --- UPDATE THE ENTRY IN MEMORY NOW ---
+        # --- UPDATE THE ENTRY IN MEMORY ---
         current_entry['velocity'] = velocity
         current_entry['accel'] = accel
         current_entry['upv_plus'] = upv_chg
@@ -661,8 +666,7 @@ def filter_and_process(stocks):
         df['z_Squeeze'] = 0 if std_sq == 0 else (log_sq - mean_sq) / std_sq
         df['Heat'] = df['Master_Score']
 
-        tracker.save(df) 
-
+        # --- STEP 1: CALCULATE METRICS & HISTORIES ---
         for index, row in df.iterrows():
             m = tracker.get_metrics(row['Sym'], row['Price'], row['MENT'], row['Rank+'], row['Upvotes'])
             
@@ -689,7 +693,10 @@ def filter_and_process(stocks):
             df.at[index, 'h_squeeze'] = histories.get('squeeze', '')
             df.at[index, 'h_heat'] = histories.get('master_score', '')
 
+        # --- STEP 2: SAVE THE FINALIZED DATA ---
+        tracker.save(df) 
         tracker.flush()
+        
         return df
     
     return pd.DataFrame()
