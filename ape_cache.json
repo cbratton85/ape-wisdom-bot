@@ -13938,5 +13938,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NAK": {
+        "ticker": "NAK",
+        "name": "Northern Dynasty Minerals, Ltd.",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 1216927488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "APG": {
+        "ticker": "APG",
+        "name": "APi Group Corporation",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 19396454400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FEM": {
+        "ticker": "FEM",
+        "name": "First Trust Emerging Markets Al",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "IEZ": {
+        "ticker": "IEZ",
+        "name": "iShares U.S. Oil Equipment & Se",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "KORU": {
+        "ticker": "KORU",
+        "name": "Direxion Daily South Korea Bull",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
