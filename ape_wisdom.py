@@ -332,7 +332,7 @@ def calculate_rsi(series, period=14):
         return 0
 
 def get_cached_logo(ticker):
-    token = "pk_ImkSKumwRCmkWcPmMwvPwA"
+    token = os.environ.get("LOGO_DEV_TOKEN")
     
     file_name = f"{ticker.upper()}.png"
     local_path = os.path.join(LOGOS_DIR, file_name)
