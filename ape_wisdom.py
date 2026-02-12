@@ -1001,12 +1001,21 @@ def export_interactive_html(df):
             rank_hist = row.get('h_rank', '')
             export_df.at[index, 'Rank'] = with_hist(rank_val, rank_hist)
 
-            # --- 11. SURGE & MNT% (FIXED FORMATTING) ---
-            srg_raw = row.get('Srg', 0)
+            # --- 11. SURGE (SRG) - Linear Color Logic ---
+            srg_raw = float(row.get('Srg', 0))
             srg_val_str = f"{int(srg_raw)}%"
             srg_hist = row.get('h_surge', '')
-            srg_z = row.get('z_Surge', 0)
-            srg_clr = C_YELLOW if srg_z >= 2.0 else (C_GREEN if srg_z >= 1.0 else C_WHITE)
+            
+            # Linear thresholding: makes the dashboard much more intuitive
+            if srg_raw >= 300:
+                srg_clr = "#ffff00"  # Yellow: Extreme Surge (3x+ average)
+            elif srg_raw >= 100:
+                srg_clr = "#00ff00"  # Green: Above Average (1x+ average)
+            elif srg_raw >= 50:
+                srg_clr = "#ffffff"  # White: Significant Progress
+            else:
+                srg_clr = "#888888"  # Grey: Low relative volume
+                
             export_df.at[index, 'Srg'] = with_hist(color_span(srg_val_str, srg_clr), srg_hist)
 
             mnt_raw = row.get('Mnt%', 0)
