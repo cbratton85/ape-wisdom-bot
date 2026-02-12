@@ -14268,5 +14268,85 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "TG": {
+        "ticker": "TG",
+        "name": "Tredegar Corporation",
+        "meta": "Metal Fabrication",
+        "type": "EQUITY",
+        "mcap": 314521056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "UMC": {
+        "ticker": "UMC",
+        "name": "United Microelectronics Corpora",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 25931601920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NEAR": {
+        "ticker": "NEAR",
+        "name": "iShares Short Duration Bond Act",
+        "meta": "Short-Term Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "TSCO": {
+        "ticker": "TSCO",
+        "name": "Tractor Supply Company",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 28813846528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ALBT": {
+        "ticker": "ALBT",
+        "name": "Avalon GloboCare Corp.",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 3175470,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "VCR": {
+        "ticker": "VCR",
+        "name": "Vanguard Consumer Discretion ET",
+        "meta": "Consumer Cyclical",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ONTO": {
+        "ticker": "ONTO",
+        "name": "Onto Innovation Inc.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 11043806208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ICLR": {
+        "ticker": "ICLR",
+        "name": "ICON plc",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 10354581504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
