@@ -2052,88 +2052,135 @@ def export_interactive_html(df):
         <script>
     var table;
 
-    function positionPopup(container, event) {{
-            if (!event || !container) return;
-            container.style.display = "flex";
-            const mouseY = event.clientY;
-            const mouseX = event.clientX;
-            const screenHeight = window.innerHeight;
-            const screenWidth = window.innerWidth;
-            const actualHeight = container.offsetHeight || 400; 
-            const boxWidth = 700;
-            const gap = 30; 
-            const screenPadding = 20;
+    // 1. UPDATED: Added 'heightOverride' to parameter list so it actually works
+    function positionPopup(container, event, heightOverride) {{
+        if (!event || !container) return;
+        container.style.display = "flex";
+        
+        const mouseY = event.clientY;
+        const mouseX = event.clientX;
+        const screenHeight = window.innerHeight;
+        const screenWidth = window.innerWidth;
+        
+        // Use override if provided, otherwise fallback to auto-height or 400
+        const actualHeight = heightOverride || container.offsetHeight || 400; 
+        const boxWidth = 700; // Standard width for charts
+        const gap = 20; 
+        const screenPadding = 20;
 
-            if (mouseY > screenHeight * 0.55) {{ container.style.top = (mouseY - actualHeight - gap) + "px"; }} 
-            else {{ container.style.top = (mouseY + gap + 16) + "px"; }}
-
-            let leftPos = mouseX - (boxWidth / 2);
-            if (leftPos < screenPadding) leftPos = screenPadding;
-            if (leftPos + boxWidth > screenWidth - screenPadding) leftPos = screenWidth - boxWidth - screenPadding;
-            container.style.left = leftPos + "px";
+        // Logic: If box fits below, put it below. If not, put it above.
+        if (mouseY + actualHeight + gap < screenHeight) {{
+            // Fits below
+            container.style.top = (mouseY + gap) + "px";
+        }} else {{
+            // Fits above (or force above)
+            container.style.top = (mouseY - actualHeight - gap) + "px";
         }}
 
+        let leftPos = mouseX - (boxWidth / 2);
+        // Fix left/right overflow
+        if (leftPos < screenPadding) leftPos = screenPadding;
+        if (leftPos + boxWidth > screenWidth - screenPadding) leftPos = screenWidth - boxWidth - screenPadding;
+        
+        container.style.left = leftPos + "px";
+    }}
+
     function getFinalSymbol(symbol, yfExchange) {{
-    const ex = String(yfExchange || "").toUpperCase();
-    const s = String(symbol || "").toUpperCase().replace('-', '.');
+        const ex = String(yfExchange || "").toUpperCase();
+        const s = String(symbol || "").toUpperCase().replace('-', '.');
 
-    // 1. Manual Overrides (High-priority fixes for common ETFs/Stocks)
-    const manualOverrides = {{
-        'SPY': 'AMEX:SPY',
-        'VOO': 'AMEX:VOO',
-        'IVV': 'AMEX:IVV',
-        'TQQQ': 'NASDAQ:TQQQ',
-        'SQQQ': 'NASDAQ:SQQQ',
-        'VPN': 'NASDAQ:VPN',
-        'AM': 'NYSE:AM',
-        'DIA': 'AMEX:DIA',
-        'IWM': 'AMEX:IWM'
-    }};
+        const manualOverrides = {{
+            'SPY': 'AMEX:SPY', 'VOO': 'AMEX:VOO', 'IVV': 'AMEX:IVV',
+            'TQQQ': 'NASDAQ:TQQQ', 'SQQQ': 'NASDAQ:SQQQ', 'VPN': 'NASDAQ:VPN',
+            'AM': 'NYSE:AM', 'DIA': 'AMEX:DIA', 'IWM': 'AMEX:IWM'
+        }};
 
-    if (manualOverrides[s]) return manualOverrides[s];
+        if (manualOverrides[s]) return manualOverrides[s];
 
-    // 2. Intelligent Exchange Mapping
-    // TradingView requires specific prefixes for certain data folders
-    if (ex.includes('NMS') || ex.includes('NGM') || ex.includes('NCM') || ex.includes('NASDAQ')) {{
-        return 'NASDAQ:' + s;
-    }}
-    if (ex.includes('NYQ') || ex.includes('NYSE')) {{
-        return 'NYSE:' + s;
-    }}
-    if (ex.includes('ASE') || ex.includes('AMEX') || ex.includes('PCX') || ex.includes('ARCA')) {{
-        return 'AMEX:' + s; // TradingView often bundles these under AMEX
-    }}
-    if (ex.includes('BATS') || ex.includes('BZX')) {{
-        return 'BATS:' + s;
-    }}
-    if (ex.includes('LSE')) {{
-        return 'LSE:' + s;
+        if (ex.includes('NMS') || ex.includes('NGM') || ex.includes('NCM') || ex.includes('NASDAQ')) {{
+            return 'NASDAQ:' + s;
+        }}
+        if (ex.includes('NYQ') || ex.includes('NYSE')) {{
+            return 'NYSE:' + s;
+        }}
+        if (ex.includes('ASE') || ex.includes('AMEX') || ex.includes('PCX') || ex.includes('ARCA')) {{
+            return 'AMEX:' + s;
+        }}
+        if (ex.includes('BATS') || ex.includes('BZX')) {{
+            return 'BATS:' + s;
+        }}
+        if (ex.includes('LSE')) {{
+            return 'LSE:' + s;
+        }}
+        return s;
     }}
 
-    // 3. Fallback
-    // If we can't identify the exchange, just return the symbol.
-    // TradingView will try to auto-detect, but the widgets prefer the prefix.
-    return s;
-}}
+    // 2. RESTORED: This function was missing in your snippet
+    function loadMiniChart(symbol, index, yfExchange, event) {{
+        const container = document.getElementById('chart-tooltip-' + index);
+        if (!container) return;
+        
+        container.innerHTML = "";
+        
+        // Pass 500 for chart height
+        positionPopup(container, event || window.event, 500);
+        
+        const finalSymbol = getFinalSymbol(symbol, yfExchange);
 
+        const widgetContainer = document.createElement('div');
+        widgetContainer.className = 'tradingview-widget-container';
+        
+        const widgetDiv = document.createElement('div');
+        widgetDiv.className = 'tradingview-widget-container__widget';
+        widgetContainer.appendChild(widgetDiv);
+
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
+        script.async = true;
+        
+        script.innerHTML = JSON.stringify({{
+            "allow_symbol_change": false,
+            "calendar": false,
+            "details": false,
+            "hide_side_toolbar": true,
+            "hide_top_toolbar": true,
+            "hide_legend": true,
+            "hide_volume": false,
+            "hotlist": false,
+            "interval": "D",
+            "locale": "en",
+            "save_image": false,
+            "style": "1",
+            "symbol": finalSymbol,
+            "theme": "dark",
+            "timezone": "Etc/UTC",
+            "backgroundColor": "#0F0F0F",
+            "gridColor": "rgba(242, 242, 242, 0.06)",
+            "width": "100%",
+            "height": "100%"
+        }});
+
+        widgetContainer.appendChild(script);
+        container.appendChild(widgetContainer);
+    }}
+
+    // 3. CORRECTED: Now uses the fixed positionPopup to show small box
     function loadPriceWidget(symbol, containerId, yfExchange, event) {{
         const container = document.getElementById(containerId);
         if (!container) return;
 
-        // 1. If content already exists, just show it and reposition
         if (container.innerHTML !== "") {{
             container.style.display = "flex";
-            positionPopup(container, event, 150); // 150px height adjustment
+            positionPopup(container, event, 150);
             return;
         }}
 
-        // 2. Prepare container
         container.style.display = "flex";
         positionPopup(container, event || window.event, 150);
 
         const finalSymbol = getFinalSymbol(symbol, yfExchange);
 
-        // 3. Create Widget
         const widgetContainer = document.createElement('div');
         widgetContainer.className = 'tradingview-widget-container';
         
@@ -2146,7 +2193,6 @@ def export_interactive_html(df):
         script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js';
         script.async = true;
         
-        // Note: We use double curly braces {{{{ }}}} because we are inside a Python f-string
         script.innerHTML = JSON.stringify({{
             "symbol": finalSymbol,
             "colorTheme": "dark",
@@ -2163,14 +2209,12 @@ def export_interactive_html(df):
         const container = document.getElementById(containerId);
         if (!container) return;
 
-        // 1. If content already exists, just show it and reposition
         if (container.innerHTML !== "") {{
             container.style.display = "flex";
             positionPopup(container, event, 400);
             return;
         }}
 
-        // 2. If empty, prepare to load
         container.style.display = "flex"; 
         positionPopup(container, event || window.event, 400);
         
@@ -2198,12 +2242,11 @@ def export_interactive_html(df):
         container.appendChild(widgetContainer);
     }}
 
-    // MOVED OUTSIDE: This must be a top-level function to be called by onmouseleave
     function hideSymbolProfile(containerId) {{
         const container = document.getElementById(containerId);
         if (container) {{
             container.style.display = "none";
-            container.innerHTML = ""; // Clears the widget to stop network activity/save memory
+            container.innerHTML = ""; 
         }}
     }}
 
