@@ -16698,5 +16698,155 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "EVO": {
+        "ticker": "EVO",
+        "name": "Evotec SE",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 1257444224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BCOM": {
+        "ticker": "BCOM",
+        "name": "BCOM",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "OLED": {
+        "ticker": "OLED",
+        "name": "Universal Display Corporation",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 5938026496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LFS": {
+        "ticker": "LFS",
+        "name": "LEIFRAS Co., Ltd.",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 63308704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "EWW": {
+        "ticker": "EWW",
+        "name": "iShares MSCI Mexico ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 1531467008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "EWJV": {
+        "ticker": "EWJV",
+        "name": "iShares MSCI Japan Value ETF",
+        "meta": "Japan Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "BASE": {
+        "ticker": "BASE",
+        "name": "BASE",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "SRAD": {
+        "ticker": "SRAD",
+        "name": "Sportradar Group AG",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 4874323456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VB": {
+        "ticker": "VB",
+        "name": "Vanguard Small-Cap ETF",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 244099170304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "HACK": {
+        "ticker": "HACK",
+        "name": "Amplify Cybersecurity ETF",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "EPOW": {
+        "ticker": "EPOW",
+        "name": "Sunrise New Energy Co., Ltd",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 39891124,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "GENI": {
+        "ticker": "GENI",
+        "name": "Genius Sports Limited",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 1382177920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IJR": {
+        "ticker": "IJR",
+        "name": "iShares Core S&P Small-Cap ETF",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 74084966400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "XMMO": {
+        "ticker": "XMMO",
+        "name": "Invesco S&P MidCap Momentum ETF",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "IJH": {
+        "ticker": "IJH",
+        "name": "iShares Core S&P Mid-Cap ETF",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 18337175552,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
