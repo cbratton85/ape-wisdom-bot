@@ -16608,5 +16608,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "VMC": {
+        "ticker": "VMC",
+        "name": "Vulcan Materials Company (Holdi",
+        "meta": "Building Materials",
+        "type": "EQUITY",
+        "mcap": 43150651392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
