@@ -15738,5 +15738,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "GROW": {
+        "ticker": "GROW",
+        "name": "U.S. Global Investors, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 41218116,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
