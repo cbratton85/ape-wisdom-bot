@@ -15728,5 +15728,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "PBR": {
+        "ticker": "PBR",
+        "name": "Petroleo Brasileiro S.A. Petrob",
+        "meta": "Oil & Gas Integrated",
+        "type": "EQUITY",
+        "mcap": 98276589568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

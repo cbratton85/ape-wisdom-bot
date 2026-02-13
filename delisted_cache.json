@@ -59,11 +59,6 @@
         "last_checked": "2026-02-11",
         "reason": "No Price Data"
     },
-    "LCG": {
-        "delisted": true,
-        "last_checked": "2026-02-11",
-        "reason": "No Price Data"
-    },
     "SNP": {
         "delisted": true,
         "last_checked": "2026-02-12",
@@ -175,6 +170,11 @@
         "reason": "No Price Data"
     },
     "MOM": {
+        "delisted": true,
+        "last_checked": "2026-02-13",
+        "reason": "No Price Data"
+    },
+    "LCG": {
         "delisted": true,
         "last_checked": "2026-02-13",
         "reason": "No Price Data"
