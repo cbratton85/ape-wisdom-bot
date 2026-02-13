@@ -1858,7 +1858,7 @@ def export_interactive_html(df):
                     </div>
                 </div>
 
-                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal()" title="Stock Heatmap" style="margin-left: 10px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">🔥 HEAT MAP</button>
+                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal()" title="Stock Heatmap" style="margin-left: 10px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">🔥 MAP</button>
                 <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">.TXT</button>
                 <button class="btn btn-sm btn-reset" onclick="copyTableToClipboard(event)" title="Copy Table" style="margin-left: 10px;">📋 Copy</button>
                 
@@ -2047,10 +2047,10 @@ def export_interactive_html(df):
             
             <!-- Heatmap Modal -->
             <div id="heatmapModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 9999; overflow: auto;">
-                <div style="position: relative; width: 95%; max-width: 1200px; margin: 20px auto; background: #0F0F0F; padding: 20px; border-radius: 8px; border: 2px solid #ff6b00;">
+                <div style="position: relative; width: 100%; max-width: 1280px; margin: 20px auto; background: #0F0F0F; padding: 20px; border-radius: 8px; border: 2px solid #ff6b00;">
                     <button onclick="closeHeatmapModal()" style="position: absolute; top: 10px; right: 10px; background: #ff6b00; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold;">✕ Close</button>
-                    <h2 style="color: #ff6b00; margin-top: 0; margin-bottom: 20px;">🔥 Stock Heatmap</h2>
-                    <div id="heatmapContainer" style="width: 100%; height: 800px;"></div>
+                    <h2 style="color: #ff6b00; margin-top: 0; margin-bottom: 20px; letter-spacing: -1px;">🔥 Stock Heatmap</h2>
+                    <div id="heatmapContainer" style="width: 100%; height: 720px;"></div>
                 </div>
             </div>
         </div>
@@ -2448,7 +2448,7 @@ def export_interactive_html(df):
         script.async = true;
         script.innerHTML = JSON.stringify({{
             "dataSource": "SPX500",
-            "blockSize": "volume",
+            "blockSize": "price_volume",
             "blockColor": "change",
             "grouping": "sector",
             "locale": "en",
