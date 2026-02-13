@@ -15818,5 +15818,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "GIC": {
+        "ticker": "GIC",
+        "name": "Global Industrial Company",
+        "meta": "Industrial Distribution",
+        "type": "EQUITY",
+        "mcap": 1231422336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ROLL": {
+        "ticker": "ROLL",
+        "name": "ROLL",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "WU": {
+        "ticker": "WU",
+        "name": "Western Union Company (The)",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 3168309248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PETS": {
+        "ticker": "PETS",
+        "name": "PetMed Express, Inc.",
+        "meta": "Pharmaceutical Retailers",
+        "type": "EQUITY",
+        "mcap": 62703456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DIG": {
+        "ticker": "DIG",
+        "name": "ProShares Ultra Energy",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
