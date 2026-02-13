@@ -15438,5 +15438,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ULTA": {
+        "ticker": "ULTA",
+        "name": "Ulta Beauty, Inc.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 29915258880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "EBS": {
+        "ticker": "EBS",
+        "name": "Emergent BioSolutions Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 578859456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "XPO": {
+        "ticker": "XPO",
+        "name": "XPO, Inc.",
+        "meta": "Trucking",
+        "type": "EQUITY",
+        "mcap": 22280706048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GEM": {
+        "ticker": "GEM",
+        "name": "Goldman Sachs ActiveBeta Emergi",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
