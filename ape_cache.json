@@ -15648,5 +15648,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "SYY": {
+        "ticker": "SYY",
+        "name": "Sysco Corporation",
+        "meta": "Food Distribution",
+        "type": "EQUITY",
+        "mcap": 43060658176,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
