@@ -2519,18 +2519,27 @@ def export_interactive_html(df):
     </script>
     </body></html>"""
     
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
-    filename = f"scan_{timestamp}.html"
-    filepath = os.path.join(PUBLIC_DIR, filename)
-    with open(filepath, "w", encoding="utf-8") as f: f.write(html_content)
-    index_path = os.path.join(PUBLIC_DIR, "index.html")
-    shutil.copy(filepath, index_path)
-    print(f"{{C_GREEN}}[+] Dashboard generated at: {{filepath}}{{C_RESET}}")
-    return filename
+    # 1. Generate the filename and save the file
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
+        filename = f"scan_{timestamp}.html"
+        filepath = os.path.join(PUBLIC_DIR, filename)
+        
+        with open(filepath, "w", encoding="utf-8") as f: 
+            f.write(html_content)
+        
+        index_path = os.path.join(PUBLIC_DIR, "index.html")
+        shutil.copy(filepath, index_path)
+        
+        # Note: Use single { } here, not double {{ }}
+        print(f"{C_GREEN}[+] Dashboard generated at: {filepath}{C_RESET}")
+        return filename
 
-except Exception as e:
-    print(f"{C_RED}[!] Error generating HTML: {e}{C_RESET}")
-    return None
+    except Exception as e:
+        # This MUST be indented 4 spaces to match the 'try' at the top
+        print(f"{C_RED}[!] Error generating HTML: {e}{C_RESET}")
+        return None
+
+
 
 # ==============================================================================
 #                               SECTION 7: MAINTENANCE
