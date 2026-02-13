@@ -1110,9 +1110,20 @@ def export_interactive_html(df):
                 f'</div>'
             )
             
-            p_val = f"${row.get('Price', 0):.2f}"
+            p_clean = row.get('Price', 0)
+            exchange_name = row.get("exchange", "Unknown")
 
-            export_df.at[index, 'Price'] = p_val
+            price_html = (
+                f'<div class="symbol-container" style="justify-content: flex-end;" '
+                f'onmouseenter="loadPriceWidget(\'{tv_ticker}\', \'price-tooltip-{index}\', \'{exchange_name}\', event)" '
+                f'onmouseleave="hideSymbolProfile(\'price-tooltip-{index}\')">'
+                f'<span style="cursor:help;">${p_clean:.2f}</span>'
+                # We override width/height here to match the small widget size
+                f'<div id="price-tooltip-{index}" class="chart-popup" style="width: 265px; height: 130px;"></div>'
+                f'</div>'
+            )
+
+            export_df.at[index, 'Price'] = price_html
 
             vol_raw = export_df.at[index, 'Vol_Display']
             export_df.at[index, 'Vol_Display'] = f'<div style="text-align: right; color: #ccc;">{vol_raw}</div>'
@@ -2105,18 +2116,24 @@ def export_interactive_html(df):
     return s;
 }}
 
-    function loadMiniChart(symbol, index, yfExchange, event) {{
-        const container = document.getElementById('chart-tooltip-' + index);
+    function loadPriceWidget(symbol, containerId, yfExchange, event) {{
+        const container = document.getElementById(containerId);
         if (!container) return;
-        
-        container.innerHTML = "";
-        
-        // Dynamic positioning for 800x500
-        positionPopup(container, event || window.event, 500);
-        
+
+        // 1. If content already exists, just show it and reposition
+        if (container.innerHTML !== "") {{
+            container.style.display = "flex";
+            positionPopup(container, event, 150); // 150px height adjustment
+            return;
+        }}
+
+        // 2. Prepare container
+        container.style.display = "flex";
+        positionPopup(container, event || window.event, 150);
+
         const finalSymbol = getFinalSymbol(symbol, yfExchange);
 
-        // Create the Advanced Widget Structure
+        // 3. Create Widget
         const widgetContainer = document.createElement('div');
         widgetContainer.className = 'tradingview-widget-container';
         
@@ -2126,30 +2143,16 @@ def export_interactive_html(df):
 
         const script = document.createElement('script');
         script.type = 'text/javascript';
-        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
+        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js';
         script.async = true;
         
-        // Pass the JSON config for the Advanced Chart
+        // Note: We use double curly braces {{{{ }}}} because we are inside a Python f-string
         script.innerHTML = JSON.stringify({{
-            "allow_symbol_change": false,
-            "calendar": false,
-            "details": false,
-            "hide_side_toolbar": true,
-            "hide_top_toolbar": true,
-            "hide_legend": true,
-            "hide_volume": false,
-            "hotlist": false,
-            "interval": "D",
-            "locale": "en",
-            "save_image": false,
-            "style": "1",
             "symbol": finalSymbol,
-            "theme": "dark",
-            "timezone": "Etc/UTC",
-            "backgroundColor": "#0F0F0F",
-            "gridColor": "rgba(242, 242, 242, 0.06)",
-            "width": "100%",
-            "height": "100%"
+            "colorTheme": "dark",
+            "isTransparent": false,
+            "locale": "en",
+            "width": 265
         }});
 
         widgetContainer.appendChild(script);
