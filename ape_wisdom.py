@@ -1167,7 +1167,7 @@ def export_interactive_html(df):
         # ---------------------------------------------------------
         html_content = f"""<!DOCTYPE html><html lang="en"><head>
         <meta charset="UTF-8">
-        <meta http-equiv="refresh" content="300">
+        <meta http-equiv="refresh" content="900">
         <title>Ape Wisdom Analysis</title>
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
