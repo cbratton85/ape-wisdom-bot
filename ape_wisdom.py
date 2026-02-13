@@ -1858,6 +1858,7 @@ def export_interactive_html(df):
                     </div>
                 </div>
 
+                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal()" title="Stock Heatmap" style="margin-left: 10px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">🔥 HEAT MAP</button>
                 <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">.TXT</button>
                 <button class="btn btn-sm btn-reset" onclick="copyTableToClipboard(event)" title="Copy Table" style="margin-left: 10px;">📋 Copy</button>
                 
@@ -2043,6 +2044,15 @@ def export_interactive_html(df):
             </div>
             
             {table_html}
+            
+            <!-- Heatmap Modal -->
+            <div id="heatmapModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 9999; overflow: auto;">
+                <div style="position: relative; width: 95%; max-width: 1200px; margin: 20px auto; background: #0F0F0F; padding: 20px; border-radius: 8px; border: 2px solid #ff6b00;">
+                    <button onclick="closeHeatmapModal()" style="position: absolute; top: 10px; right: 10px; background: #ff6b00; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold;">✕ Close</button>
+                    <h2 style="color: #ff6b00; margin-top: 0; margin-bottom: 20px;">🔥 Stock Heatmap</h2>
+                    <div id="heatmapContainer" style="width: 100%; height: 800px;"></div>
+                </div>
+            </div>
         </div>
         
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
@@ -2053,39 +2063,66 @@ def export_interactive_html(df):
     var table;
 
     // 1. UPDATED: Added 'heightOverride' to parameter list so it actually works
-    function positionPopup(container, event, heightOverride) {{
+    function positionPopup(container, event, heightOverride, preferRight) {{
         if (!event || !container) return;
-        
+
         container.style.display = "flex";
-        
+
         const mouseY = event.clientY;
         const mouseX = event.clientX;
         const screenHeight = window.innerHeight;
         const screenWidth = window.innerWidth;
-        
-        const actualWidth = container.offsetWidth || 700;
-        const actualHeight = heightOverride || container.offsetHeight || 400; 
-        
-        const gapBelow = 50; 
-        const gapAbove = 5; 
 
-        const screenPadding = 15;
-        
-        let topPos = mouseY + gapBelow;
-        
-        if (topPos + actualHeight > screenHeight - screenPadding) {{
+        const actualWidth = container.offsetWidth || 700;
+        const actualHeight = heightOverride || container.offsetHeight || 400;
+
+        const gapBelow = 1;
+        const gapAbove = 1;
+
+        const screenPadding = 5;
+
+        const spaceBelow = screenHeight - mouseY - screenPadding;
+        const spaceAbove = mouseY - screenPadding;
+        let topPos;
+
+        // Prefer placing below if there's enough space or more space below than above
+        if (spaceBelow >= actualHeight + gapBelow || spaceBelow >= spaceAbove) {{
+            topPos = mouseY + gapBelow;
+            if (topPos + actualHeight > screenHeight - screenPadding) {{
+                topPos = screenHeight - actualHeight - screenPadding;
+            }}
+        }} else {{
+            // Place above; clamp so it never goes off-screen at the top
             topPos = mouseY - actualHeight - gapAbove;
+            if (topPos < screenPadding) {{
+                topPos = screenPadding;
+            }}
         }}
-        
+
         container.style.top = topPos + "px";
 
+        // Horizontal placement
         let leftPos = mouseX - (actualWidth / 2);
-        
+        const gapRight = 20;
+        const spaceRight = screenWidth - mouseX - screenPadding;
+        const spaceLeft = mouseX - screenPadding;
+
+        if (preferRight) {{
+            if (spaceRight >= actualWidth + gapRight) {{
+                leftPos = mouseX + gapRight;
+            }} else if (spaceLeft >= actualWidth + gapRight) {{
+                leftPos = mouseX - actualWidth - gapRight;
+            }} else {{
+                // fallback to clamped center
+                leftPos = mouseX - (actualWidth / 2);
+            }}
+        }}
+
         if (leftPos < screenPadding) leftPos = screenPadding;
         if (leftPos + actualWidth > screenWidth - screenPadding) {{
             leftPos = screenWidth - actualWidth - screenPadding;
         }}
-        
+
         container.style.left = leftPos + "px";
     }}
 
@@ -2127,7 +2164,7 @@ def export_interactive_html(df):
         container.innerHTML = "";
         
         // Pass 500 for chart height
-        positionPopup(container, event || window.event, 500);
+        positionPopup(container, event || window.event, 500, true);
         
         const finalSymbol = getFinalSymbol(symbol, yfExchange);
 
@@ -2215,12 +2252,12 @@ def export_interactive_html(df):
 
         if (container.innerHTML !== "") {{
             container.style.display = "flex";
-            positionPopup(container, event, 400);
+            positionPopup(container, event, 400, true);
             return;
         }}
 
         container.style.display = "flex"; 
-        positionPopup(container, event || window.event, 400);
+        positionPopup(container, event || window.event, 400, true);
         
         const finalSymbol = getFinalSymbol(symbol, yfExchange);
         const widgetContainer = document.createElement('div');
@@ -2386,6 +2423,68 @@ def export_interactive_html(df):
         var blob = new Blob([tickers.join(", ")], {{ type: "text/plain;charset=utf-8" }}); 
         var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "ape_tickers.txt"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
     }}
+
+    function openHeatmapModal() {{
+        const modal = document.getElementById('heatmapModal');
+        const container = document.getElementById('heatmapContainer');
+        modal.style.display = 'block';
+        
+        // Clear previous content
+        container.innerHTML = '';
+        
+        // Create TradingView heatmap widget
+        const widgetContainer = document.createElement('div');
+        widgetContainer.className = 'tradingview-widget-container';
+        widgetContainer.style.width = '100%';
+        widgetContainer.style.height = '100%';
+        
+        const widgetDiv = document.createElement('div');
+        widgetDiv.className = 'tradingview-widget-container__widget';
+        widgetContainer.appendChild(widgetDiv);
+        
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js';
+        script.async = true;
+        script.innerHTML = JSON.stringify({{
+            "dataSource": "SPX500",
+            "blockSize": "volume",
+            "blockColor": "change",
+            "grouping": "sector",
+            "locale": "en",
+            "symbolUrl": "",
+            "colorTheme": "dark",
+            "exchanges": [],
+            "hasTopBar": true,
+            "isDataSetEnabled": true,
+            "isZoomEnabled": true,
+            "hasSymbolTooltip": true,
+            "isMonoSize": false,
+            "width": "100%",
+            "height": "100%"
+        }});
+        
+        widgetContainer.appendChild(script);
+        container.appendChild(widgetContainer);
+    }}
+
+    function closeHeatmapModal() {{
+        const modal = document.getElementById('heatmapModal');
+        modal.style.display = 'none';
+        const container = document.getElementById('heatmapContainer');
+        container.innerHTML = '';
+    }}
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', function(event) {{
+        const modal = document.getElementById('heatmapModal');
+        if (event.target === modal) {{
+            modal.style.display = 'none';
+            const container = document.getElementById('heatmapContainer');
+            container.innerHTML = '';
+        }}
+    }});
+
 
     function toggleMcap(type) {{
         if (type === 'all') {{ 
