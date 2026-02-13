@@ -2055,6 +2055,8 @@ def export_interactive_html(df):
     // 1. UPDATED: Added 'heightOverride' to parameter list so it actually works
     function positionPopup(container, event, heightOverride) {{
         if (!event || !container) return;
+        
+        // 1. Force display so we can read the correct dimensions
         container.style.display = "flex";
         
         const mouseY = event.clientY;
@@ -2062,25 +2064,34 @@ def export_interactive_html(df):
         const screenHeight = window.innerHeight;
         const screenWidth = window.innerWidth;
         
-        // Use override if provided, otherwise fallback to auto-height or 400
+        // 2. DYNAMIC WIDTH: Checks if it's a small widget (265px) or big chart (700px)
+        const actualWidth = container.offsetWidth || 700;
         const actualHeight = heightOverride || container.offsetHeight || 400; 
-        const boxWidth = 700; // Standard width for charts
-        const gap = 20; 
-        const screenPadding = 20;
+        
+        const gap = 15; 
+        const screenPadding = 15;
 
-        // Logic: If box fits below, put it below. If not, put it above.
-        if (mouseY + actualHeight + gap < screenHeight) {{
-            // Fits below
-            container.style.top = (mouseY + gap) + "px";
-        }} else {{
-            // Fits above (or force above)
-            container.style.top = (mouseY - actualHeight - gap) + "px";
+        // --- VERTICAL LOGIC ---
+        // Default: Place below cursor
+        let topPos = mouseY + gap;
+        
+        // If it hits bottom edge, flip above
+        if (topPos + actualHeight > screenHeight - screenPadding) {{
+            topPos = mouseY - actualHeight - gap;
         }}
+        container.style.top = topPos + "px";
 
-        let leftPos = mouseX - (boxWidth / 2);
-        // Fix left/right overflow
+        // --- HORIZONTAL LOGIC (The Spacing Fix) ---
+        // Center the box on the mouse cursor using the ACTUAL width
+        let leftPos = mouseX - (actualWidth / 2);
+        
+        // Safety: Keep inside left edge
         if (leftPos < screenPadding) leftPos = screenPadding;
-        if (leftPos + boxWidth > screenWidth - screenPadding) leftPos = screenWidth - boxWidth - screenPadding;
+        
+        // Safety: Keep inside right edge
+        if (leftPos + actualWidth > screenWidth - screenPadding) {{
+            leftPos = screenWidth - actualWidth - screenPadding;
+        }}
         
         container.style.left = leftPos + "px";
     }}
