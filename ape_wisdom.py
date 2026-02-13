@@ -2065,31 +2065,25 @@ def export_interactive_html(df):
         
         const actualWidth = container.offsetWidth || 700;
         const actualHeight = heightOverride || container.offsetHeight || 400; 
-
-        let gap = 15;
-
-        if (container.id.includes('profile-')) {{
-            gap = 40;
-        }}
+        
+        const gapBelow = 35; 
+        
+        const gapAbove = 10; 
 
         const screenPadding = 15;
-    
+        
         let topPos = mouseY + gap;
         
-        // If it hits bottom edge, flip above
         if (topPos + actualHeight > screenHeight - screenPadding) {{
             topPos = mouseY - actualHeight - gap;
         }}
+        
         container.style.top = topPos + "px";
 
-        // --- HORIZONTAL LOGIC (The Spacing Fix) ---
-        // Center the box on the mouse cursor using the ACTUAL width
         let leftPos = mouseX - (actualWidth / 2);
         
-        // Safety: Keep inside left edge
         if (leftPos < screenPadding) leftPos = screenPadding;
         
-        // Safety: Keep inside right edge
         if (leftPos + actualWidth > screenWidth - screenPadding) {{
             leftPos = screenWidth - actualWidth - screenPadding;
         }}
