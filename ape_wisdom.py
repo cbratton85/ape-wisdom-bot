@@ -602,6 +602,8 @@ def filter_and_process(stocks):
             except Exception as e:
                 pass
 
+            s_perc = int((curr_v / avg_v * 100)) if avg_v > 0 else 0
+            
             final_list.append({
                 "Rank": rank_now, 
                 "Name": name, 
