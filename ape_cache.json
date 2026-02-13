@@ -15808,5 +15808,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SKM": {
+        "ticker": "SKM",
+        "name": "SK Telecom Co., Ltd.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 11811881984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
