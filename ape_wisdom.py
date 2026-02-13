@@ -2056,7 +2056,6 @@ def export_interactive_html(df):
     function positionPopup(container, event, heightOverride) {{
         if (!event || !container) return;
         
-        // 1. Force display so we can read the correct dimensions
         container.style.display = "flex";
         
         const mouseY = event.clientY;
@@ -2064,15 +2063,17 @@ def export_interactive_html(df):
         const screenHeight = window.innerHeight;
         const screenWidth = window.innerWidth;
         
-        // 2. DYNAMIC WIDTH: Checks if it's a small widget (265px) or big chart (700px)
         const actualWidth = container.offsetWidth || 700;
         const actualHeight = heightOverride || container.offsetHeight || 400; 
-        
-        const gap = 15; 
-        const screenPadding = 15;
 
-        // --- VERTICAL LOGIC ---
-        // Default: Place below cursor
+        let gap = 15;
+
+        if (container.id.includes('profile-')) {{
+            gap = 40;
+        }}
+
+        const screenPadding = 15;
+    
         let topPos = mouseY + gap;
         
         // If it hits bottom edge, flip above
