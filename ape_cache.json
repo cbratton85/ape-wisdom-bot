@@ -15658,5 +15658,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CNR": {
+        "ticker": "CNR",
+        "name": "Core Natural Resources, Inc.",
+        "meta": "Thermal Coal",
+        "type": "EQUITY",
+        "mcap": 4635010560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GRND": {
+        "ticker": "GRND",
+        "name": "Grindr Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 1890979968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KGC": {
+        "ticker": "KGC",
+        "name": "Kinross Gold Corporation",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 39560867840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HI": {
+        "ticker": "HI",
+        "name": "Hillenbrand Inc",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 2259598336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
