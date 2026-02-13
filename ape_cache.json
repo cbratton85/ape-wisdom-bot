@@ -16618,5 +16618,85 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VPU": {
+        "ticker": "VPU",
+        "name": "Vanguard Utilities ETF",
+        "meta": "Utilities",
+        "type": "ETF",
+        "mcap": 5377314304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "TXRH": {
+        "ticker": "TXRH",
+        "name": "Texas Roadhouse, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 12020915200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DELL": {
+        "ticker": "DELL",
+        "name": "Dell Technologies Inc.",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 78725062656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MLPX": {
+        "ticker": "MLPX",
+        "name": "Global X MLP & Energy Infrastru",
+        "meta": "Energy Limited Partnership",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "HSBC": {
+        "ticker": "HSBC",
+        "name": "HSBC Holdings, plc.",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 292404527104,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ONCY": {
+        "ticker": "ONCY",
+        "name": "Oncolytics Biotech Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 114062752,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "RARE": {
+        "ticker": "RARE",
+        "name": "Ultragenyx Pharmaceutical Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1979719680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PEPG": {
+        "ticker": "PEPG",
+        "name": "PepGen Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 442738560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
