@@ -15868,5 +15868,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "IMUX": {
+        "ticker": "IMUX",
+        "name": "Immunic, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 104659736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SNDX": {
+        "ticker": "SNDX",
+        "name": "Syndax Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1837379712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PSTG": {
+        "ticker": "PSTG",
+        "name": "Pure Storage, Inc.",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 23379453952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RF": {
+        "ticker": "RF",
+        "name": "Regions Financial Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 26113382400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
