@@ -15478,5 +15478,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SELF": {
+        "ticker": "SELF",
+        "name": "Global Self Storage, Inc.",
+        "meta": "REIT - Specialty",
+        "type": "EQUITY",
+        "mcap": 56917976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "EIS": {
+        "ticker": "EIS",
+        "name": "iShares MSCI Israel ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 313573504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CSA": {
+        "ticker": "CSA",
+        "name": "VictoryShares US Small Cap Vola",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "OIH": {
+        "ticker": "OIH",
+        "name": "VanEck Oil Services ETF",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
