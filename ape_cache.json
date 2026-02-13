@@ -16278,5 +16278,145 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "VVPR": {
+        "ticker": "VVPR",
+        "name": "VivoPower International PLC",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 31229854,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CNH": {
+        "ticker": "CNH",
+        "name": "CNH Industrial N.V.",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 16016751616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VEON": {
+        "ticker": "VEON",
+        "name": "VEON Ltd.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 3605020160,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "WY": {
+        "ticker": "WY",
+        "name": "Weyerhaeuser Company",
+        "meta": "REIT - Specialty",
+        "type": "EQUITY",
+        "mcap": 19553353728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ITRI": {
+        "ticker": "ITRI",
+        "name": "Itron, Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 4229298432,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "NEO": {
+        "ticker": "NEO",
+        "name": "NeoGenomics, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 1458200576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "KMX": {
+        "ticker": "KMX",
+        "name": "CarMax Inc",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 5922994688,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SHLS": {
+        "ticker": "SHLS",
+        "name": "Shoals Technologies Group, Inc.",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 1714057344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "CEVA": {
+        "ticker": "CEVA",
+        "name": "CEVA, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 623300736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ADV": {
+        "ticker": "ADV",
+        "name": "Advantage Solutions Inc.",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 197264000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GPC": {
+        "ticker": "GPC",
+        "name": "Genuine Parts Company",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 20728854528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EG": {
+        "ticker": "EG",
+        "name": "Everest Group, Ltd.",
+        "meta": "Insurance - Reinsurance",
+        "type": "EQUITY",
+        "mcap": 14122677248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AEP": {
+        "ticker": "AEP",
+        "name": "American Electric Power Company",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 69322244096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "OLB": {
+        "ticker": "OLB",
+        "name": "The OLB Group, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 5328089,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
