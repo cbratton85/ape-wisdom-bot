@@ -1220,55 +1220,7 @@ def export_interactive_html(df):
             * {{ box-sizing: border-box; }}
             body {{ background-color: #101010; color: #e0e0e0; font-family: 'Consolas', 'Monaco', monospace; padding: 0; margin: 0; overflow-x: hidden; }}
             .table-dark {{ --bs-table-bg:#18181b; color:#ccc; }}
-
-            /* --- HEATMAP MODAL CSS --- */
-            .modal-overlay {{
-                display: none; /* Hidden by default */
-                position: fixed;
-                z-index: 9999; /* Sit on top of everything */
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                overflow: hidden;
-                background-color: rgba(0, 0, 0, 0.85); /* Dark dimming effect */
-                backdrop-filter: blur(5px); /* Cool blur effect */
-            }}
-
-            .modal-content {{
-                background-color: #131722; /* TradingView Dark Background */
-                margin: 2% auto; /* Center vertically roughly */
-                padding: 0;
-                border: 1px solid #444;
-                width: 90%;  /* Width of the popup */
-                height: 90%; /* Height of the popup */
-                border-radius: 8px;
-                position: relative;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            }}
-
-            .close-btn {{
-                color: #aaa;
-                float: right;
-                font-size: 28px;
-                font-weight: bold;
-                position: absolute;
-                right: 15px;
-                top: 5px;
-                z-index: 10001;
-                cursor: pointer;
-                background: rgba(0,0,0,0.5);
-                padding: 0 10px;
-                border-radius: 4px;
-            }}
-
-            .close-btn:hover,
-            .close-btn:focus {{
-                color: #fff;
-                text-decoration: none;
-                cursor: pointer;
-            }}
-
+            
             th, .d-tooltip {{
                 position: relative;
                 cursor: help;
@@ -1808,53 +1760,53 @@ def export_interactive_html(df):
                 display: flex;
             }}
 
-</style>
+        </style>
         </head>
         <body>
         <div id="page-loader">Loading Market Data...</div>
         <div class="container-fluid" style="width: auto; display: inline-block; min-width: 100%; margin: 0 auto;">
             
             <div class="header-flex">
-                <div class="header-left">
-                    <a href="https://apewisdom.io" target="_blank">
-                        <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" title="apewisdom.io" style="height: 54px;">
-                    </a>
-                    <div class="mode-toggle">
-                        <input type="checkbox" id="modeSwitch" onclick="updateSummary()">
-                        <label for="modeSwitch">
-                            <span class="mode-label s-label" style="font-size:12px; font-weight:bold; padding:5px 12px; color:#666;">STOCKS</span>
-                            <span class="mode-label e-label" style="font-size:12px; font-weight:bold; padding:5px 12px; color:#666;">ETFS</span>
-                        </label>
-                    </div>
-                </div>
+    <div class="header-left">
+        <a href="https://apewisdom.io" target="_blank">
+            <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" title="apewisdom.io" style="height: 54px;">
+        </a>
+        <div class="mode-toggle">
+            <input type="checkbox" id="modeSwitch" onclick="updateSummary()">
+            <label for="modeSwitch">
+                <span class="mode-label s-label" style="font-size:12px; font-weight:bold; padding:5px 12px; color:#666;">STOCKS</span>
+                <span class="mode-label e-label" style="font-size:12px; font-weight:bold; padding:5px 12px; color:#666;">ETFS</span>
+            </label>
+        </div>
+    </div>
 
-                <div class="header-center">
-                    <div class="summary-row">
-                        <span class="row-label clr-rank" data-tooltip="Total Rank Change by Industry.">RANK CLIMBERS:</span>
-                        <span id="rankBreadcrumb" class="row-content">...</span>
-                    </div>
-                    
-                    <div class="summary-row">
-                        <span class="row-label clr-upv" style="color: #00ff00;" data-tooltip="Total New Upvotes by Industry.">UPVOTE GAIN:</span>
-                        <span id="upvBreadcrumb" class="row-content">...</span>
-                    </div>
+    <div class="header-center">
+        <div class="summary-row">
+            <span class="row-label clr-rank" data-tooltip="Total Rank Change by Industry.">RANK CLIMBERS:</span>
+            <span id="rankBreadcrumb" class="row-content">...</span>
+        </div>
+        
+        <div class="summary-row">
+            <span class="row-label clr-upv" style="color: #00ff00;" data-tooltip="Total New Upvotes by Industry.">UPVOTE GAIN:</span>
+            <span id="upvBreadcrumb" class="row-content">...</span>
+        </div>
 
-                    <div class="summary-row">
-                        <span class="row-label clr-surge" data-tooltip="Total Volume Surge by Industry.">VOL SURGE:</span>
-                        <span id="surgeBreadcrumb" class="row-content">...</span>
-                    </div>
+        <div class="summary-row">
+            <span class="row-label clr-surge" data-tooltip="Total Volume Surge by Industry.">VOL SURGE:</span>
+            <span id="surgeBreadcrumb" class="row-content">...</span>
+        </div>
 
-                    <div class="summary-row">
-                        <span class="row-label clr-buzz" data-tooltip="Total Social Buzz (Mentions) by Industry.">SOCIAL BUZZ:</span>
-                        <span id="mntBreadcrumb" class="row-content">...</span>
-                    </div>
-                </div>
+        <div class="summary-row">
+            <span class="row-label clr-buzz" data-tooltip="Total Social Buzz (Mentions) by Industry.">SOCIAL BUZZ:</span>
+            <span id="mntBreadcrumb" class="row-content">...</span>
+        </div>
+    </div>
 
-                <div class="header-right">
-                    <span class="update-label">LAST UPDATED</span>
-                    <span id="time" data-utc="{utc_timestamp}">Loading...</span>
-                </div>
-            </div>
+    <div class="header-right">
+        <span class="update-label">LAST UPDATED</span>
+        <span id="time" data-utc="{utc_timestamp}">Loading...</span>
+    </div>
+</div>
 
             <div class="filter-bar">
                 <span style="color:#fff; font-weight:bold; margin-right:5px;">⚡ FILTERS:</span>
@@ -1906,15 +1858,10 @@ def export_interactive_html(df):
                     </div>
                 </div>
 
-                <button class="btn btn-sm btn-reset" onclick="document.getElementById('heatmapModal').style.display='block'" 
-                        style="background-color: #2962ff !important; margin-left: 10px; font-weight: bold; border: none;">
-                    🔥 HEATMAP
-                </button>
-
                 <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">.TXT</button>
                 <button class="btn btn-sm btn-reset" onclick="copyTableToClipboard(event)" title="Copy Table" style="margin-left: 10px;">📋 Copy</button>
                 
-                <span id="stockCounter" style="margin-left: auto;">Loading...</span>
+                <span id="stockCounter">Loading...</span>
             </div>
 
             <div class="legend-container">
@@ -2033,7 +1980,6 @@ def export_interactive_html(df):
                                     <span style="color:#ffffff">White</span> (Steady 0), 
                                     <span style="color:#ff4444">Red</span> (Slow <0).
                                 </span>
-                                
                             </div>
                             <div class="legend-row">
                                 <span class="color-key">EFF</span>
@@ -2043,7 +1989,6 @@ def export_interactive_html(df):
                                     <span style="color:#ffffff">White</span> (> 0.1), 
                                     <span style="color:#ff4444">Red</span> (< 0)
                                 </span>
-                                
                             </div>
                             <div class="legend-row">
                                 <span class="color-key">CONV</span>
@@ -2078,7 +2023,6 @@ def export_interactive_html(df):
                                 <span class="color-desc">
                                     <span style="color:#00ff00; font-weight:bold;">Bright</span> (3+), <span style="color:#99ff99;">Pale</span> (>0), <span style="color:#ff4444;">Red</span> (≤ -2/Cold)
                                 </span>
-                                
                             </div>
                             <div class="legend-row">
                                 <span class="color-key">MNT%</span>
@@ -2108,6 +2052,7 @@ def export_interactive_html(df):
         <script>
     var table;
 
+    // 1. UPDATED: Added 'heightOverride' to parameter list so it actually works
     function positionPopup(container, event, heightOverride) {{
         if (!event || !container) return;
         
@@ -2174,14 +2119,18 @@ def export_interactive_html(df):
         return s;
     }}
 
+    // 2. RESTORED: This function was missing in your snippet
     function loadMiniChart(symbol, index, yfExchange, event) {{
         const container = document.getElementById('chart-tooltip-' + index);
         if (!container) return;
         
         container.innerHTML = "";
+        
+        // Pass 500 for chart height
         positionPopup(container, event || window.event, 500);
         
         const finalSymbol = getFinalSymbol(symbol, yfExchange);
+
         const widgetContainer = document.createElement('div');
         widgetContainer.className = 'tradingview-widget-container';
         
@@ -2220,6 +2169,7 @@ def export_interactive_html(df):
         container.appendChild(widgetContainer);
     }}
 
+    // 3. CORRECTED: Now uses the fixed positionPopup to show small box
     function loadPriceWidget(symbol, containerId, yfExchange, event) {{
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -2234,6 +2184,7 @@ def export_interactive_html(df):
         positionPopup(container, event || window.event, 150);
 
         const finalSymbol = getFinalSymbol(symbol, yfExchange);
+
         const widgetContainer = document.createElement('div');
         widgetContainer.className = 'tradingview-widget-container';
         
@@ -2305,12 +2256,21 @@ def export_interactive_html(df):
 
     function parseVal(str) {{
         if (!str || str === null) return 0;
+        
+        // 1. Convert to string and STRIP ALL HTML TAGS first
+        // This removes the <span class="d-tooltip" ...> but leaves the value behind
         var clean = str.toString().replace(/<[^>]+>/g, '').trim();
+
+        // 2. Remove symbols that aren't numbers ($, %, Arrows, Plus, 'x' for conviction)
         clean = clean.replace(/[$,%▲▼+x]/g, '').toLowerCase();
+
+        // 3. Handle K/M/B Multipliers
         let mult = 1;
         if (clean.endsWith('k')) {{ mult = 1000; clean = clean.slice(0, -1); }}
         else if (clean.endsWith('m')) {{ mult = 1000000; clean = clean.slice(0, -1); }}
         else if (clean.endsWith('b')) {{ mult = 1000000000; clean = clean.slice(0, -1); }}
+
+        // 4. Convert to number and multiply
         var result = parseFloat(clean) * mult;
         return isNaN(result) ? 0 : result;
     }}
@@ -2326,49 +2286,76 @@ def export_interactive_html(df):
                 var rawType = row[22].toString().replace(/<[^>]+>/g, ''); 
                 if (topSwitchIsETF && !rawType.includes('ETF')) return;
                 if (!topSwitchIsETF && rawType.includes('ETF')) return;
+
                 var sector = row[20].toString().replace(/<[^>]+>/g, '').trim().replace(/^ETF/i, '');
                 if (!topSwitchIsETF && sector === 'Exchange Traded Fund') return;
                 var val = parseVal(row[metricIdx]); 
                 var sym = row[4].replace(/<[^>]+>/g, '').trim();
                 var name = row[3].replace(/<[^>]+>/g, '').trim();
+
                 if (!sectorData[sector]) {{ sectorData[sector] = {{ totalSum: 0, count: 0, stocks: [] }}; }}
                 sectorData[sector].totalSum += val;
                 sectorData[sector].count += 1;
                 sectorData[sector].stocks.push({{ s: sym, n: name, v: val }});
             }});
+
             var sorted = Object.keys(sectorData).map(function(s) {{
                 return {{ name: s, total: sectorData[s].totalSum, count: sectorData[s].count, stocks: sectorData[s].stocks }};
             }});
-            sorted = sorted.filter(function(s) {{ return s.count >= 2; }});
+
+            // Filter: Ensure the sector has at least 2 stocks (or 1 if you prefer)
+            sorted = sorted.filter(function(s) {{ 
+                return s.count >= 2; 
+            }});
+
+            // Sort with Tie-Breaker: Sort by total first, then alphabetically by name
             sorted.sort(function(a, b) {{ 
-                if (b.total !== a.total) {{ return b.total - a.total; }}
+                if (b.total !== a.total) {{
+                    return b.total - a.total; // Primary Sort: Highest Total Gain
+                }}
+                // Secondary Sort: Alphabetical (prevents flip-flopping on ties)
                 return a.name.localeCompare(b.name); 
             }});
+
             if (sorted.length === 0) return '<span style="color:#666;">---</span>';
+
             var topThree = sorted.slice(0, 5);
             return topThree.map(function(s, i) {{
                 s.stocks.sort(function(a, b) {{ return b.v - a.v; }});
-                var tipRows = s.stocks.map(function(st) {{
+                var topStocks = s.stocks; 
+                
+                var tipRows = topStocks.map(function(st) {{
                     var val = Math.round(st.v);
                     var numStr = val > 0 ? '+' + val : val;
-                    var color = val > 0 ? '#00ff00' : (val < 0 ? '#ff4444' : '#cccccc');
+                    var color = val > 0 ? '#00ff00' : (val < 0 ? '#ff4444' : '#cccccc'); // Grey for 0
                     return "<div style='display:flex; justify-content:flex-start; align-items:center; font-size:11px; margin-bottom:1px;'>" +
                                 "<span style='min-width:45px; text-align:left; color:" + color + "; font-weight:bold;'>" + numStr + "</span>" +
                                 "<span style='color:#fff; white-space:nowrap;'><b>" + st.s + "</b>: " + st.n + "</span>" +
                             "</div>";
                 }}).join('');
+
                 var tooltipHTML = "<div style='text-align:left; padding:2px;'>" + tipRows + "</div>";
                 return '<span class="crumb-num">' + (i+1) + '.</span>' + 
                        '<span class="sector-tooltip" data-bs-title="' + tooltipHTML + '" style="cursor:help;">' + s.name + '</span>';
             }}).join('<span class="crumb-sep"> > </span>');
         }}
+
         $('.sector-tooltip').each(function() {{ var old = bootstrap.Tooltip.getInstance(this); if (old) old.dispose(); }});
         $('#rankBreadcrumb').html(getTopSectors(1));
         $('#upvBreadcrumb').html(getTopSectors(11));
         $('#surgeBreadcrumb').html(getTopSectors(14)); 
         $('#mntBreadcrumb').html(getTopSectors(18));  
+
         $('.sector-tooltip').each(function() {{
-            new bootstrap.Tooltip(this, {{ html: true, sanitize: false, animation: false, container: 'body', placement: 'bottom', boundary: 'viewport' }});
+            new bootstrap.Tooltip(this, {{
+                html: true,
+                sanitize: false,
+                animation: false,
+                container: 'body',
+                container: 'body',
+                placement: 'bottom',
+                boundary: 'viewport'
+                }});
         }});
     }}
 
@@ -2380,6 +2367,7 @@ def export_interactive_html(df):
     function toggleColors() {{
         var t = document.querySelector('table'); var btn = document.getElementById('btnColors');
         t.classList.toggle('no-colors');
+        if (t.classList.contains('no-colors')) {{ btn.innerHTML = "🎨"; btn.style.opacity = "0.6"; }} else {{ btn.innerHTML = "🎨"; btn.style.opacity = "1.0"; }}
     }}
 
     function resetFilters() {{ 
@@ -2394,23 +2382,32 @@ def export_interactive_html(df):
         var data = table.rows({{ search: 'applied', order: 'current', page: 'current' }}).data();
         var tickers = []; 
         data.each(function (value) {{ var clean = value[4].replace(/<[^>]+>/g, '').trim(); if(clean) tickers.push(clean); }});
+        if (tickers.length === 0) {{ alert("No visible tickers!"); return; }}
         var blob = new Blob([tickers.join(", ")], {{ type: "text/plain;charset=utf-8" }}); 
         var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "ape_tickers.txt"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
     }}
 
     function toggleMcap(type) {{
         if (type === 'all') {{ 
+            // Force 'All' to stay checked and uncheck others
             $('#mcapAll').prop('checked', true);
             $('input[name="mcapFilter"]').not('#mcapAll').prop('checked', false); 
-        }} else {{ 
+        }} 
+        else {{ 
+            // Uncheck 'All' when a specific cap is selected
             $('#mcapAll').prop('checked', false); 
-            if ($('input[name="mcapFilter"]:checked').length === 0) {{ $('#mcapAll').prop('checked', true); }}
+            
+            // If everything is unchecked, default back to 'All'
+            if ($('input[name="mcapFilter"]:checked').length === 0) {{ 
+                $('#mcapAll').prop('checked', true); 
+            }}
         }}
         table.draw(); 
     }}
 
     function copyTableToClipboard(event) {{ 
         const btn = event.currentTarget; const table = document.querySelector(".table");
+        if (!table) return;
         let rows = Array.from(table.querySelectorAll("tr"));
         let textToCopy = rows.map(row => {{
             let cells = Array.from(row.querySelectorAll("th, td"));
@@ -2427,21 +2424,36 @@ def export_interactive_html(df):
             "order":[[0,"asc"]], 
             "pageLength": 20,
             "lengthMenu": [[10, 20, 50, 100, 150, 200, 250, -1], [10, 20, 50, 100, 150, 200, 250, "All"]],
-            "language": {{ "search": "", "searchPlaceholder": "🔍 Search Symbol, Industry..." }},
+
+            "language": {{
+                "search": "",
+                "searchPlaceholder": "🔍 Search Symbol, Industry, or Value..."
+            }},
+
             "initComplete": function(settings, json) {{
                 $('#page-loader').remove();
                 $('body').addClass('loaded');
                 this.api().columns.adjust();
             }},
+
             "columnDefs": [ 
+                // Metadata: Type_Tag (21), AvgVol (22), MCap (23) hidden
                 {{ "visible": false, "targets": [22, 23, 24] }}, 
+                
+                // Numeric sorting: Indices for all metric columns including RSI (20)
                 {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21], 
                    "type": "num", 
                    "render": function(data, type) {{ 
                        if (type === 'sort' || type === 'type') {{ return parseVal(data); }} 
                        return data; 
                    }} 
-                }}
+                }},
+
+                // Industry/Sector (19) as string
+                {{ "targets": [19], "type": "string", "render": function(data, type) {{ 
+                    if (type === 'sort' || type === 'type') {{ return data.toString().replace(/<[^>]+>/g, '').trim(); }} 
+                    return data; 
+                }} }}
             ],
             "drawCallback": function() {{ 
                 var api = this.api(); 
@@ -2449,14 +2461,21 @@ def export_interactive_html(df):
             }}
         }});
 
+        // --- CUSTOM FILTERING LOGIC ---
         $.fn.dataTable.ext.search.push(function(settings, data) {{
+            // UPDATED INDICES:
             var typeTag = data[22] || "";
             var avgVol  = parseVal(data[23]);
             var mcap    = parseVal(data[24]);
+            
             var viewMode = $('input[name="btnradio"]:checked').attr('id');
             var isETF = typeTag.includes("ETF");
+
+            // 1. Stock/ETF Toggle
             if (viewMode == 'btnradio2' && isETF) return false; 
             if (viewMode == 'btnradio3' && !isETF) return false; 
+            
+            // 2. Market Cap Buttons
             if (!$('#mcapAll').is(':checked')) {{
                 var match = false;
                 if ($('#mcapMega').is(':checked') && mcap >= 200000000000) match = true;
@@ -2466,80 +2485,43 @@ def export_interactive_html(df):
                 if ($('#mcapMicro').is(':checked') && mcap < 250000000) match = true;
                 if (!match) return false; 
             }}
-            var minP = parseVal($('#minPrice').val()), maxP = parseVal($('#maxPrice').val()), p = parseVal(data[5]);
+
+            // 3. Price Filter (Index 5 = Price)
+            var minP = parseVal($('#minPrice').val()), maxP = parseVal($('#maxPrice').val()); 
+            var p = parseVal(data[5]);
             if (minP > 0 && p < minP) return false; 
             if (maxP > 0 && p > maxP) return false;
+            
+            // 4. Volume Filter (CORRECTED Index 22)
             var minV = parseVal($('#minVol').val()), maxV = parseVal($('#maxVol').val()); 
             if (minV > 0 && avgVol < minV) return false; 
             if (maxV > 0 && avgVol > maxV) return false;
+            
             return true;
         }});
 
         $('#minPrice, #maxPrice, #minVol, #maxVol').on('keyup change', function() {{ table.draw(); }});
         window.redraw = function() {{ table.draw(); }};
+
         var d = new Date($("#time").data("utc")); 
         $("#time").text(d.toLocaleString('en-US', {{ hour12: false }}).replace(',', ''));
+        
         table.on('draw', updateSummary);
         setTimeout(updateSummary, 100);
     }});
-    </script>
-    """
-
-    # --- HEATMAP MODAL HTML ATTACHMENT ---
-    html_content += f"""
-    <div id="heatmapModal" class="modal-overlay">
-      <div class="modal-content">
-        <span class="close-btn" onclick="document.getElementById('heatmapModal').style.display='none'">&times;</span>
-        <div class="tradingview-widget-container" style="width: 100%; height: 100%;">
-          <div class="tradingview-widget-container__widget" style="width: 100%; height: 100%;"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>
-          {{
-            "dataSource": "SPX500",
-            "blockSize": "volume",
-            "blockColor": "change",
-            "grouping": "sector",
-            "locale": "en",
-            "colorTheme": "dark",
-            "hasTopBar": true,
-            "isDataSetEnabled": true,
-            "isZoomEnabled": true,
-            "hasSymbolTooltip": true,
-            "width": "100%",
-            "height": "100%"
-          }}
-          </script>
-        </div>
-      </div>
-    </div>
-    <script>
-        window.onclick = function(event) {{
-            const modal = document.getElementById('heatmapModal');
-            if (event.target == modal) {{ modal.style.display = "none"; }}
-        }}
-    </script>
-    </body></html>"""
-    
-    # 1. Generate the filename and save the file
+</script></body></html>"""
+        
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
         filename = f"scan_{timestamp}.html"
         filepath = os.path.join(PUBLIC_DIR, filename)
-        
-        with open(filepath, "w", encoding="utf-8") as f: 
-            f.write(html_content)
-        
+        with open(filepath, "w", encoding="utf-8") as f: f.write(html_content)
         index_path = os.path.join(PUBLIC_DIR, "index.html")
         shutil.copy(filepath, index_path)
-        
-        # Note: Use single { } here, not double {{ }}
         print(f"{C_GREEN}[+] Dashboard generated at: {filepath}{C_RESET}")
         return filename
-
     except Exception as e:
-        # This MUST be indented 4 spaces to match the 'try' at the top
         print(f"{C_RED}[!] Error generating HTML: {e}{C_RESET}")
         return None
-
-
 
 # ==============================================================================
 #                               SECTION 7: MAINTENANCE
