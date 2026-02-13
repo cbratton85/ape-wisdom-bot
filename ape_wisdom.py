@@ -2528,6 +2528,10 @@ def export_interactive_html(df):
     print(f"{{C_GREEN}}[+] Dashboard generated at: {{filepath}}{{C_RESET}}")
     return filename
 
+except Exception as e:
+    print(f"{C_RED}[!] Error generating HTML: {e}{C_RESET}")
+    return None
+
 # ==============================================================================
 #                               SECTION 7: MAINTENANCE
 # ==============================================================================
