@@ -16178,5 +16178,105 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "KNSL": {
+        "ticker": "KNSL",
+        "name": "Kinsale Capital Group, Inc.",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 8324509696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GPRO": {
+        "ticker": "GPRO",
+        "name": "GoPro, Inc.",
+        "meta": "Consumer Electronics",
+        "type": "EQUITY",
+        "mcap": 147908384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "STN": {
+        "ticker": "STN",
+        "name": "Stantec Inc",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 9877386240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FUTU": {
+        "ticker": "FUTU",
+        "name": "Futu Holdings Limited",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 20466442240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "KOS": {
+        "ticker": "KOS",
+        "name": "Kosmos Energy Ltd.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 765323136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AEVA": {
+        "ticker": "AEVA",
+        "name": "Aeva Technologies, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 807173568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SOS": {
+        "ticker": "SOS",
+        "name": "SOS Limited",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 11230393,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "YLDE": {
+        "ticker": "YLDE",
+        "name": "Franklin ClearBridge Enhanced I",
+        "meta": "Derivative Income",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "EXP": {
+        "ticker": "EXP",
+        "name": "Eagle Materials Inc",
+        "meta": "Building Materials",
+        "type": "EQUITY",
+        "mcap": 7520902656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CRIS": {
+        "ticker": "CRIS",
+        "name": "Curis, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 15449980,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
