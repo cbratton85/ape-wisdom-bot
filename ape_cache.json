@@ -16848,5 +16848,75 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "OLD": {
+        "ticker": "OLD",
+        "name": "The Long-Term Care ETF",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "EXR": {
+        "ticker": "EXR",
+        "name": "Extra Space Storage Inc",
+        "meta": "REIT - Industrial",
+        "type": "EQUITY",
+        "mcap": 32433588224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IYW": {
+        "ticker": "IYW",
+        "name": "iShares U.S. Technology ETF",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 3934650880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "VXF": {
+        "ticker": "VXF",
+        "name": "Vanguard Extended Market ETF",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 37022597120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "DASH": {
+        "ticker": "DASH",
+        "name": "DoorDash, Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 69106302976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FTEC": {
+        "ticker": "FTEC",
+        "name": "Fidelity MSCI Information Techn",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "NSC": {
+        "ticker": "NSC",
+        "name": "Norfolk Southern Corporation",
+        "meta": "Railroads",
+        "type": "EQUITY",
+        "mcap": 70726713344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
