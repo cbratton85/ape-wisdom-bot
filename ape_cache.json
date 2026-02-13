@@ -15698,5 +15698,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "JBL": {
+        "ticker": "JBL",
+        "name": "Jabil Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 26826450944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CRSP": {
+        "ticker": "CRSP",
+        "name": "CRISPR Therapeutics AG",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 4663040512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "UHG": {
+        "ticker": "UHG",
+        "name": "United Homes Group, Inc",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 141152736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
