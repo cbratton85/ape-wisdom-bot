@@ -2067,15 +2067,14 @@ def export_interactive_html(df):
         const actualHeight = heightOverride || container.offsetHeight || 400; 
         
         const gapBelow = 35; 
-        
         const gapAbove = 10; 
 
         const screenPadding = 15;
         
-        let topPos = mouseY + gap;
+        let topPos = mouseY + gapBelow;
         
         if (topPos + actualHeight > screenHeight - screenPadding) {{
-            topPos = mouseY - actualHeight - gap;
+            topPos = mouseY - actualHeight - gapAbove;
         }}
         
         container.style.top = topPos + "px";
@@ -2083,7 +2082,6 @@ def export_interactive_html(df):
         let leftPos = mouseX - (actualWidth / 2);
         
         if (leftPos < screenPadding) leftPos = screenPadding;
-        
         if (leftPos + actualWidth > screenWidth - screenPadding) {{
             leftPos = screenWidth - actualWidth - screenPadding;
         }}
