@@ -15748,5 +15748,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "VSAT": {
+        "ticker": "VSAT",
+        "name": "ViaSat, Inc.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 6333818880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BBIG": {
+        "ticker": "BBIG",
+        "name": "Vinco Ventures, Inc.",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 41600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
+    },
+    "KOPN": {
+        "ticker": "KOPN",
+        "name": "Kopin Corporation",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 379173344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
