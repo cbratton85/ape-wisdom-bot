@@ -1119,7 +1119,7 @@ def export_interactive_html(df):
                 f'onmouseleave="hideSymbolProfile(\'price-tooltip-{index}\')">'
                 f'<span style="cursor:help;">${p_clean:.2f}</span>'
                 # We override width/height here to match the small widget size
-                f'<div id="price-tooltip-{index}" class="chart-popup" style="width: 265px; height: 130px;"></div>'
+                f'<div id="price-tooltip-{index}" class="chart-popup" style="width: 320px; height: 130px;"></div>'
                 f'</div>'
             )
 
@@ -2209,7 +2209,7 @@ def export_interactive_html(df):
             "colorTheme": "dark",
             "isTransparent": false,
             "locale": "en",
-            "width": 265
+            "width": 320
         }});
 
         widgetContainer.appendChild(script);
