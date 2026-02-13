@@ -15628,5 +15628,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ADI": {
+        "ticker": "ADI",
+        "name": "Analog Devices, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 162251784192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "HITI": {
+        "ticker": "HITI",
+        "name": "High Tide Inc.",
+        "meta": "Pharmaceutical Retailers",
+        "type": "EQUITY",
+        "mcap": 202909792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
