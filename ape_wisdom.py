@@ -2066,8 +2066,8 @@ def export_interactive_html(df):
         const actualWidth = container.offsetWidth || 700;
         const actualHeight = heightOverride || container.offsetHeight || 400; 
         
-        const gapBelow = 35; 
-        const gapAbove = 10; 
+        const gapBelow = 50; 
+        const gapAbove = 5; 
 
         const screenPadding = 15;
         
