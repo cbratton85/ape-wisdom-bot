@@ -2063,7 +2063,7 @@ def export_interactive_html(df):
     var table;
 
     // 1. UPDATED: Added 'heightOverride' to parameter list so it actually works
-    function positionPopup(container, event, heightOverride, preferRight) {{
+    function positionPopup(container, event, heightOverride, preferRight, centerVertically) {{
         if (!event || !container) return;
 
         container.style.display = "flex";
@@ -2079,23 +2079,33 @@ def export_interactive_html(df):
         const gapBelow = 1;
         const gapAbove = 1;
 
-        const screenPadding = 5;
+        const screenPadding = 20;
 
         const spaceBelow = screenHeight - mouseY - screenPadding;
         const spaceAbove = mouseY - screenPadding;
         let topPos;
 
-        // Prefer placing below if there's enough space or more space below than above
-        if (spaceBelow >= actualHeight + gapBelow || spaceBelow >= spaceAbove) {{
-            topPos = mouseY + gapBelow;
+        // If centerVertically is true, center on mouse Y position
+        if (centerVertically) {{
+            topPos = mouseY - (actualHeight / 2);
+            // Clamp to screen bounds
+            if (topPos < screenPadding) topPos = screenPadding;
             if (topPos + actualHeight > screenHeight - screenPadding) {{
                 topPos = screenHeight - actualHeight - screenPadding;
             }}
         }} else {{
-            // Place above; clamp so it never goes off-screen at the top
-            topPos = mouseY - actualHeight - gapAbove;
-            if (topPos < screenPadding) {{
-                topPos = screenPadding;
+            // Prefer placing below if there's enough space or more space below than above
+            if (spaceBelow >= actualHeight + gapBelow || spaceBelow >= spaceAbove) {{
+                topPos = mouseY + gapBelow;
+                if (topPos + actualHeight > screenHeight - screenPadding) {{
+                    topPos = screenHeight - actualHeight - screenPadding;
+                }}
+            }} else {{
+                // Place above; clamp so it never goes off-screen at the top
+                topPos = mouseY - actualHeight - gapAbove;
+                if (topPos < screenPadding) {{
+                    topPos = screenPadding;
+                }}
             }}
         }}
 
@@ -2163,8 +2173,8 @@ def export_interactive_html(df):
         
         container.innerHTML = "";
         
-        // Pass 500 for chart height
-        positionPopup(container, event || window.event, 500, true);
+        // Pass 500 for chart height and center vertically
+        positionPopup(container, event || window.event, 500, true, true);
         
         const finalSymbol = getFinalSymbol(symbol, yfExchange);
 
@@ -2213,12 +2223,12 @@ def export_interactive_html(df):
 
         if (container.innerHTML !== "") {{
             container.style.display = "flex";
-            positionPopup(container, event, 150);
+            positionPopup(container, event, 150, true, true);
             return;
         }}
 
         container.style.display = "flex";
-        positionPopup(container, event || window.event, 150);
+        positionPopup(container, event || window.event, 150, true, true);
 
         const finalSymbol = getFinalSymbol(symbol, yfExchange);
 
@@ -2252,12 +2262,12 @@ def export_interactive_html(df):
 
         if (container.innerHTML !== "") {{
             container.style.display = "flex";
-            positionPopup(container, event, 400, true);
+            positionPopup(container, event, 400, true, true);
             return;
         }}
 
         container.style.display = "flex"; 
-        positionPopup(container, event || window.event, 400, true);
+        positionPopup(container, event || window.event, 400, true, true);
         
         const finalSymbol = getFinalSymbol(symbol, yfExchange);
         const widgetContainer = document.createElement('div');
