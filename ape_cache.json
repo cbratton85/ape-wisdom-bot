@@ -15518,5 +15518,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NINE": {
+        "ticker": "NINE",
+        "name": "Nine Energy Service, Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 25402234,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
