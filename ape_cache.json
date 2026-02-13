@@ -15908,5 +15908,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SPYG": {
+        "ticker": "SPYG",
+        "name": "State Street SPDR Portfolio S&P",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 14296790016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "NDAQ": {
+        "ticker": "NDAQ",
+        "name": "Nasdaq, Inc.",
+        "meta": "Financial Data & Stock Exchanges",
+        "type": "EQUITY",
+        "mcap": 45335564288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FUBO": {
+        "ticker": "FUBO",
+        "name": "fuboTV Inc.",
+        "meta": "Broadcasting",
+        "type": "EQUITY",
+        "mcap": 469111232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "REM": {
+        "ticker": "REM",
+        "name": "iShares Mortgage Real Estate ET",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "CHDN": {
+        "ticker": "CHDN",
+        "name": "Churchill Downs, Incorporated",
+        "meta": "Gambling",
+        "type": "EQUITY",
+        "mcap": 6370093056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
