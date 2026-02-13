@@ -15528,5 +15528,105 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "GRID": {
+        "ticker": "GRID",
+        "name": "First Trust NASDAQ Clean Edge S",
+        "meta": "Infrastructure",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "FLMX": {
+        "ticker": "FLMX",
+        "name": "Franklin FTSE Mexico ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ODFL": {
+        "ticker": "ODFL",
+        "name": "Old Dominion Freight Line, Inc.",
+        "meta": "Trucking",
+        "type": "EQUITY",
+        "mcap": 38988292096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "EWP": {
+        "ticker": "EWP",
+        "name": "iShares MSCI Spain ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 2097575936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ETR": {
+        "ticker": "ETR",
+        "name": "Entergy Corporation",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 45535019008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TFII": {
+        "ticker": "TFII",
+        "name": "TFI International Inc.",
+        "meta": "Trucking",
+        "type": "EQUITY",
+        "mcap": 9565484032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ACI": {
+        "ticker": "ACI",
+        "name": "Albertsons Companies, Inc.",
+        "meta": "Grocery Stores",
+        "type": "EQUITY",
+        "mcap": 9849083904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PDYN": {
+        "ticker": "PDYN",
+        "name": "Palladyne AI Corp.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 279880992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SWX": {
+        "ticker": "SWX",
+        "name": "Southwest Gas Holdings, Inc.",
+        "meta": "Utilities - Regulated Gas",
+        "type": "EQUITY",
+        "mcap": 6287940096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ASEA": {
+        "ticker": "ASEA",
+        "name": "Global X FTSE Southeast Asia ET",
+        "meta": "Pacific/Asia ex-Japan Stk",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
