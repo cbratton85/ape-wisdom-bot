@@ -783,6 +783,8 @@ def export_interactive_html(df):
         if not os.path.exists(PUBLIC_DIR): os.makedirs(PUBLIC_DIR)
 
         # --- TOOLTIP CONFIGURATION ---
+        # 1. Use class="d-tooltip" for custom CSS styling (Instant, Black Box)
+        # 2. tabindex="0" ensures it works on Mobile taps
         def with_hist(val_str, history_str):
             if not history_str or history_str == "New" or history_str == "": 
                 return val_str
@@ -798,7 +800,7 @@ def export_interactive_html(df):
             'Rolling': 'Strk', 
             'Squeeze': 'Sqz',
             'Upvotes': 'Upvs',
-            'Surge': 'Srg'  # <--- Renamed here. Backend value is now in 'Srg'
+            'Surge': 'Srg'
         }, inplace=True)
 
         export_df = export_df.astype(object)
@@ -823,20 +825,78 @@ def export_interactive_html(df):
 
         if 'MENT' not in export_df.columns: export_df['MENT'] = 0
 
-        # --- FIX: REMOVE SURGE RE-CALCULATION BLOCK ---
-        # We rely on the 'Srg' column coming from the backend to match history tooltips exactly.
+        def clean_vol_num(x):
+            if x is None or (isinstance(x, float) and np.isnan(x)):
+                return 0.0
+            if isinstance(x, (int, float, np.integer, np.floating)):
+                return float(x)
+            
+            # If it's a string (like "65.0M" or "$1,200")
+            s = str(x).upper().replace(',', '').replace('$', '').replace('%', '').strip()
+            if s == "" or s == "-": 
+                return 0.0
+            
+            try:
+                if 'M' in s:
+                    return float(s.replace('M', '')) * 1_000_000
+                if 'K' in s:
+                    return float(s.replace('K', '')) * 1_000
+                if 'B' in s:
+                    return float(s.replace('B', '')) * 1_000_000_000
+                return float(s)
+            except ValueError:
+                return 0.0
+
+       # 1. SMART COLUMN FINDER
+        # We prioritize raw numeric columns ('CurVol', 'AvgVol') set in filter_and_process
+        clean_columns = [c.strip() for c in export_df.columns]
+        col_map = dict(zip(clean_columns, export_df.columns))
+
+        # Priority search for Current Volume
+        current_vol_col = None
+        for candidate in ['CurVol', 'VOL', 'Vol', 'Volume', 'Current Volume']:
+            if candidate in col_map:
+                current_vol_col = col_map[candidate]
+                break
+
+        # Priority search for Average Volume
+        avg_vol_col = None
+        for candidate in ['AvgVol', 'VOL(30)', 'Vol(30)', 'Avg Volume', 'Average Volume']:
+            if candidate in col_map:
+                avg_vol_col = col_map[candidate]
+                break
+
+        # 2. CALCULATE SURGE (Direct & Fresh)
+        # This forces the math: Current Volume / 30-Day Average
+        if 'CurVol' in export_df.columns and 'AvgVol' in export_df.columns:
+            # Use the raw numbers directly (fastest and most accurate)
+            c_series = export_df['CurVol'].astype(float)
+            a_series = export_df['AvgVol'].astype(float).replace(0, 1) # Prevent div/0 errors
         
-        # 1. Ensure 'Srg' is numeric for coloring logic
-        if 'Srg' in export_df.columns:
-            export_df['Srg'] = export_df['Srg'].fillna(0).astype(float)
-            # Create the display string
+            surge_calc = (c_series / a_series) * 100
+            
+            export_df['Srg'] = surge_calc.fillna(0).astype(float)
+            
             export_df['SRG'] = export_df['Srg'].astype(int).astype(str) + '%'
+            
+            export_df['Srg'] = export_df['Srg'].astype(object)
+
+        elif current_vol_col and avg_vol_col:
+            # Fallback: Parse text columns if raw data is missing
+            curr_series = export_df[current_vol_col].apply(clean_vol_num)
+            avg_series  = export_df[avg_vol_col].apply(clean_vol_num)
+            
+            surge_calc = (curr_series / (avg_series + 0.000001)) * 100
+            surge_calc = surge_calc.replace([np.inf, -np.inf], 0).fillna(0)
+            
+            export_df['Srg'] = surge_calc.astype(float)
+            export_df['SRG'] = surge_calc.astype(int).astype(str) + '%'
+            export_df['Srg'] = export_df['Srg'].astype(object)
         else:
-            # Fallback (shouldn't happen if backend works)
+            print(f"[!] Warning: Missing volume columns for Surge calculation.")
             export_df['Srg'] = 0.0
             export_df['SRG'] = "0%"
-
-        # -------------------------------------------------------------------
+            export_df['Srg'] = export_df['Srg'].astype(object)
 
         for index, row in export_df.iterrows():
             v_raw = row.get('CurVol_Disp', '0')
@@ -964,9 +1024,8 @@ def export_interactive_html(df):
             export_df.at[index, 'Rank'] = with_hist(rank_val, rank_hist)
 
             # --- 11. SURGE (SRG) - Linear Color Logic ---
-            # IMPORTANT: We use the value from backend, NOT re-calculated
             srg_raw = float(row.get('Srg', 0))
-            srg_val_str = row.get('SRG', '0%')  # Use the pre-formatted string
+            srg_val_str = f"{int(srg_raw)}%"
             srg_hist = row.get('h_surge', '')
             
             # Linear thresholding: makes the dashboard much more intuitive
@@ -1161,9 +1220,9 @@ def export_interactive_html(df):
                 left: 50%;
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 font-size: 13px;        
-                line-height: 1.5;        
-                font-weight: 400;        
-                text-align: left;        
+                line-height: 1.5;       
+                font-weight: 400;       
+                text-align: left;       
                 color: #e0e0e0;         
                 background-color: #1a1a1a; 
                 padding: 12px 16px;         
@@ -2383,7 +2442,6 @@ def export_interactive_html(df):
             
             // 4. Volume Filter (CORRECTED Index 22)
             var minV = parseVal($('#minVol').val()), maxV = parseVal($('#maxVol').val()); 
-            var p = parseVal(data[22]); // Actually, avgVol is index 23 in our setup, but let's check parseVal above
             if (minV > 0 && avgVol < minV) return false; 
             if (maxV > 0 && avgVol > maxV) return false;
             
