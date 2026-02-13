@@ -15778,5 +15778,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "CBD": {
+        "ticker": "CBD",
+        "name": "CBD",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "WOOD": {
+        "ticker": "WOOD",
+        "name": "iShares Global Timber & Forestr",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "FILL": {
+        "ticker": "FILL",
+        "name": "iShares MSCI Global Energy Prod",
+        "meta": "Infrastructure",
+        "type": "ETF",
+        "mcap": 60849840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }

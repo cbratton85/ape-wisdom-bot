@@ -134,11 +134,6 @@
         "last_checked": "2026-02-13",
         "reason": "No Price Data"
     },
-    "HHC": {
-        "delisted": true,
-        "last_checked": "2026-02-13",
-        "reason": "No Price Data"
-    },
     "CSA": {
         "delisted": true,
         "last_checked": "2026-02-13",
@@ -175,6 +170,16 @@
         "reason": "No Price Data"
     },
     "YY": {
+        "delisted": true,
+        "last_checked": "2026-02-13",
+        "reason": "No Price Data"
+    },
+    "CBD": {
+        "delisted": true,
+        "last_checked": "2026-02-13",
+        "reason": "No Price Data"
+    },
+    "HHC": {
         "delisted": true,
         "last_checked": "2026-02-13",
         "reason": "No Price Data"
