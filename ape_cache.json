@@ -16498,5 +16498,115 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TLN": {
+        "ticker": "TLN",
+        "name": "Talen Energy Corporation",
+        "meta": "Utilities - Independent Power Producers",
+        "type": "EQUITY",
+        "mcap": 17173141504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SRPT": {
+        "ticker": "SRPT",
+        "name": "Sarepta Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1868355456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LRMR": {
+        "ticker": "LRMR",
+        "name": "Larimar Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 275173088,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "EQR": {
+        "ticker": "EQR",
+        "name": "Equity Residential",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 25235189760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SHOT": {
+        "ticker": "SHOT",
+        "name": "Safety Shot, Inc.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "V": {
+        "ticker": "V",
+        "name": "Visa Inc.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 608200097792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VIVK": {
+        "ticker": "VIVK",
+        "name": "Vivakor Inc.",
+        "meta": "Oil & Gas Integrated",
+        "type": "EQUITY",
+        "mcap": 5073328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
+    },
+    "XLG": {
+        "ticker": "XLG",
+        "name": "Invesco S&P 500 Top 50 ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SGC": {
+        "ticker": "SGC",
+        "name": "Superior Group of Companies, In",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 167752160,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "OEF": {
+        "ticker": "OEF",
+        "name": "iShares S&P 100 Fund",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 13075919872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "APE": {
+        "ticker": "APE",
+        "name": "APE",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
