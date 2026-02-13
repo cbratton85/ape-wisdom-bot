@@ -16418,5 +16418,85 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "TPB": {
+        "ticker": "TPB",
+        "name": "Turning Point Brands, Inc.",
+        "meta": "Tobacco",
+        "type": "EQUITY",
+        "mcap": 2538699008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GDXJ": {
+        "ticker": "GDXJ",
+        "name": "VanEck Junior Gold Miners ETF",
+        "meta": "Equity Precious Metals",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CIEN": {
+        "ticker": "CIEN",
+        "name": "Ciena Corporation",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 42038185984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "JZ": {
+        "ticker": "JZ",
+        "name": "Jianzhi Education Technology Gr",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 11308037,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "VEGA": {
+        "ticker": "VEGA",
+        "name": "AdvisorShares STAR Global Buy-W",
+        "meta": "Derivative Income",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "EIX": {
+        "ticker": "EIX",
+        "name": "Edison International",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 27469451264,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AMT": {
+        "ticker": "AMT",
+        "name": "American Tower Corporation (REI",
+        "meta": "REIT - Specialty",
+        "type": "EQUITY",
+        "mcap": 89812926464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IHS": {
+        "ticker": "IHS",
+        "name": "IHS Holding Limited",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 2804957184,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
