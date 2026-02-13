@@ -15958,5 +15958,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "BL": {
+        "ticker": "BL",
+        "name": "BlackLine, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2384537856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SYRE": {
+        "ticker": "SYRE",
+        "name": "Spyre Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2703309824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "IWY": {
+        "ticker": "IWY",
+        "name": "iShares Russell Top 200 Growth ",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "QLD": {
+        "ticker": "QLD",
+        "name": "ProShares Ultra QQQ",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "KBH": {
+        "ticker": "KBH",
+        "name": "KB Home",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 4142349312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MLEC": {
+        "ticker": "MLEC",
+        "name": "Moolec Science SA",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3703201,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
