@@ -2458,7 +2458,7 @@ def export_interactive_html(df):
         script.async = true;
         script.innerHTML = JSON.stringify({{
             "dataSource": "SPX500",
-            "blockSize": "price_volume",
+            "blockSize": "Value.Traded",
             "blockColor": "change",
             "grouping": "sector",
             "locale": "en",
