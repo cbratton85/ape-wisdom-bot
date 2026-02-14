@@ -17338,5 +17338,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "SAIL": {
+        "ticker": "SAIL",
+        "name": "SailPoint, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 8941081600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
