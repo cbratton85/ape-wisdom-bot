@@ -17098,5 +17098,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "DJD": {
+        "ticker": "DJD",
+        "name": "Invesco Dow Jones Industrial Av",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CNX": {
+        "ticker": "CNX",
+        "name": "CNX Resources Corporation",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 5781547520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
