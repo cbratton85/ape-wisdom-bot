@@ -17018,5 +17018,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "TUR": {
+        "ticker": "TUR",
+        "name": "iShares MSCI Turkey ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 660743040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SID": {
+        "ticker": "SID",
+        "name": "Companhia Siderurgica Nacional ",
+        "meta": "Steel",
+        "type": "EQUITY",
+        "mcap": 2241098752,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GDS": {
+        "ticker": "GDS",
+        "name": "GDS Holdings Limited",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 9241415680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
