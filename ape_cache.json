@@ -17348,5 +17348,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "IFS": {
+        "ticker": "IFS",
+        "name": "Intercorp Financial Services In",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 5276428288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CMT": {
+        "ticker": "CMT",
+        "name": "Core Molding Technologies Inc",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 164035520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
