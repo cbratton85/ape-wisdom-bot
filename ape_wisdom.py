@@ -1858,9 +1858,10 @@ def export_interactive_html(df):
                     </div>
                 </div>
 
-                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal()" title="Stock Heatmap" style="margin-left: 10px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">🔥 MAP</button>
-                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 10px;">.TXT</button>
-                <button class="btn btn-sm btn-reset" onclick="copyTableToClipboard(event)" title="Copy Table" style="margin-left: 10px;">📋 Copy</button>
+                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('stock')" title="Stock Heatmap" style="margin-left: 10px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">STOCKS</button>
+                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('etf')" title="ETF Heatmap" style="margin-left: 10px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">ETFs</button>
+                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 6px;">.TXT</button>
+                <button class="btn btn-sm btn-reset" onclick="copyTableToClipboard(event)" title="Copy Table" style="margin-left: 6px;">📋 Copy</button>
                 
                 <span id="stockCounter">Loading...</span>
             </div>
@@ -2047,9 +2048,9 @@ def export_interactive_html(df):
             
             <!-- Heatmap Modal -->
             <div id="heatmapModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 9999; overflow: auto;">
-                <div style="position: relative; width: 100%; max-width: 1280px; margin: 20px auto; background: #0F0F0F; padding: 20px; border-radius: 8px; border: 2px solid #ff6b00;">
+                <div style="position: relative; width: 100%; max-width: 1600px; margin: 20px auto; background: #0F0F0F; padding: 20px; border-radius: 8px; border: 2px solid #ff6b00;">
                     <button onclick="closeHeatmapModal()" style="position: absolute; top: 10px; right: 10px; background: #ff6b00; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold;">✕ Close</button>
-                    <h2 style="color: #ff6b00; margin-top: 0; margin-bottom: 20px; letter-spacing: -1px;">🔥 Stock Heatmap</h2>
+                    <h2 id="heatmapTitle" style="color: #ff6b00; margin-top: 0; margin-bottom: 20px; letter-spacing: -1px;">🔥 Stock Heatmap</h2>
                     <div id="heatmapContainer" style="width: 100%; height: 720px;"></div>
                 </div>
             </div>
@@ -2434,10 +2435,18 @@ def export_interactive_html(df):
         var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "ape_tickers.txt"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
     }}
 
-    function openHeatmapModal() {{
+    function openHeatmapModal(type) {{
         const modal = document.getElementById('heatmapModal');
         const container = document.getElementById('heatmapContainer');
+        const title = document.getElementById('heatmapTitle');
         modal.style.display = 'block';
+        
+        // Set title based on type
+        if (type === 'etf') {{
+            title.innerHTML = '📈 ETF Heatmap';
+        }} else {{
+            title.innerHTML = '🔥 Stock Heatmap';
+        }}
         
         // Clear previous content
         container.innerHTML = '';
@@ -2454,25 +2463,49 @@ def export_interactive_html(df):
         
         const script = document.createElement('script');
         script.type = 'text/javascript';
-        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js';
         script.async = true;
-        script.innerHTML = JSON.stringify({{
-            "dataSource": "SPX500",
-            "blockSize": "Value.Traded",
-            "blockColor": "change",
-            "grouping": "sector",
-            "locale": "en",
-            "symbolUrl": "",
-            "colorTheme": "dark",
-            "exchanges": [],
-            "hasTopBar": true,
-            "isDataSetEnabled": true,
-            "isZoomEnabled": true,
-            "hasSymbolTooltip": true,
-            "isMonoSize": false,
-            "width": "100%",
-            "height": "100%"
-        }});
+        
+        let config;
+        if (type === 'etf') {{
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-etf-heatmap.js';
+            config = {{
+                "dataSource": "AllUSEtf",
+                "blockSize": "volume",
+                "blockColor": "change",
+                "grouping": "asset_class",
+                "locale": "en",
+                "symbolUrl": "",
+                "colorTheme": "dark",
+                "hasTopBar": true,
+                "isDataSetEnabled": true,
+                "isZoomEnabled": true,
+                "hasSymbolTooltip": true,
+                "isMonoSize": false,
+                "width": "100%",
+                "height": "100%"
+            }};
+        }} else {{
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js';
+            config = {{
+                "dataSource": "SPX500",
+                "blockSize": "Value.Traded",
+                "blockColor": "change",
+                "grouping": "sector",
+                "locale": "en",
+                "symbolUrl": "",
+                "colorTheme": "dark",
+                "exchanges": [],
+                "hasTopBar": true,
+                "isDataSetEnabled": true,
+                "isZoomEnabled": true,
+                "hasSymbolTooltip": true,
+                "isMonoSize": false,
+                "width": "100%",
+                "height": "100%"
+            }};
+        }}
+        
+        script.innerHTML = JSON.stringify(config);
         
         widgetContainer.appendChild(script);
         container.appendChild(widgetContainer);
