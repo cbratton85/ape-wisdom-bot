@@ -17048,5 +17048,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CARG": {
+        "ticker": "CARG",
+        "name": "CarGurus, Inc.",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 2713773568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FDP": {
+        "ticker": "FDP",
+        "name": "Fresh Del Monte Produce, Inc.",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 1940586368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CURE": {
+        "ticker": "CURE",
+        "name": "Direxion Daily Healthcare Bull ",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
