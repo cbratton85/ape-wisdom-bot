@@ -16978,5 +16978,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NI": {
+        "ticker": "NI",
+        "name": "NiSource Inc",
+        "meta": "Utilities - Regulated Gas",
+        "type": "EQUITY",
+        "mcap": 21939060736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FLIN": {
+        "ticker": "FLIN",
+        "name": "Franklin FTSE India ETF",
+        "meta": "India Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "STI": {
+        "ticker": "STI",
+        "name": "Solidion Technology, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 34595488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "FLBR": {
+        "ticker": "FLBR",
+        "name": "Franklin FTSE Brazil ETF",
+        "meta": "Latin America Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
