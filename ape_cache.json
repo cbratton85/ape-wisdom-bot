@@ -17258,5 +17258,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "JBS": {
+        "ticker": "JBS",
+        "name": "JBS N.V.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 17744930816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NVT": {
+        "ticker": "NVT",
+        "name": "nVent Electric plc",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 18273970176,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
