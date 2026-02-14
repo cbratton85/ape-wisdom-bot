@@ -109,11 +109,6 @@
         "last_checked": "2026-02-13",
         "reason": "No Price Data"
     },
-    "HHC": {
-        "delisted": true,
-        "last_checked": "2026-02-13",
-        "reason": "No Price Data"
-    },
     "WFH": {
         "delisted": true,
         "last_checked": "2026-02-13",
@@ -185,6 +180,11 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-02-14",
+        "reason": "No Price Data"
+    },
+    "HHC": {
         "delisted": true,
         "last_checked": "2026-02-14",
         "reason": "No Price Data"

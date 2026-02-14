@@ -17088,5 +17088,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "KROS": {
+        "ticker": "KROS",
+        "name": "Keros Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 505127392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
