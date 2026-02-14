@@ -17418,5 +17418,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FRGT": {
+        "ticker": "FRGT",
+        "name": "Freight Technologies, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2299443,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ERNA": {
+        "ticker": "ERNA",
+        "name": "Ernexa Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 9394492,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "LZ": {
+        "ticker": "LZ",
+        "name": "LegalZoom.com, Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 1238313216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
