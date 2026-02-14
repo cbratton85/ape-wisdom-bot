@@ -17298,5 +17298,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "UL": {
+        "ticker": "UL",
+        "name": "Unilever PLC",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 163097165824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "STEP": {
+        "ticker": "STEP",
+        "name": "StepStone Group Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 7094811136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DRUG": {
+        "ticker": "DRUG",
+        "name": "Bright Minds Biosciences Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 773425664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "DTI": {
+        "ticker": "DTI",
+        "name": "Drilling Tools International Co",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 140443136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
