@@ -17368,5 +17368,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "SCM": {
+        "ticker": "SCM",
+        "name": "Stellus Capital Investment Corp",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 332025024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VYM": {
+        "ticker": "VYM",
+        "name": "Vanguard High Dividend Yield ET",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CENT": {
+        "ticker": "CENT",
+        "name": "Central Garden & Pet Company",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 2363049472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DX": {
+        "ticker": "DX",
+        "name": "Dynex Capital, Inc.",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 2804176384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PFLT": {
+        "ticker": "PFLT",
+        "name": "PennantPark Floating Rate Capit",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 856250432,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
