@@ -17118,5 +17118,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ALTS": {
+        "ticker": "ALTS",
+        "name": "ALT5 Sigma Corporation",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 188245296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
