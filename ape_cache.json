@@ -16918,5 +16918,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FSTA": {
+        "ticker": "FSTA",
+        "name": "Fidelity MSCI COnsumer Staples ",
+        "meta": "Consumer Defensive",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ROBO": {
+        "ticker": "ROBO",
+        "name": "ROBO Global Robotics and Automa",
+        "meta": "Global Small/Mid Stock",
+        "type": "ETF",
+        "mcap": 1498577024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
