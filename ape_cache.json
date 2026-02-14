@@ -17128,5 +17128,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "TEN": {
+        "ticker": "TEN",
+        "name": "Tsakos Energy Navigation Ltd",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 853213760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HGV": {
+        "ticker": "HGV",
+        "name": "Hilton Grand Vacations Inc.",
+        "meta": "Resorts & Casinos",
+        "type": "EQUITY",
+        "mcap": 4072727552,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IYM": {
+        "ticker": "IYM",
+        "name": "iShares U.S. Basic Materials ET",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 768936000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
