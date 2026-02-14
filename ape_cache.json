@@ -17278,5 +17278,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "AOA": {
+        "ticker": "AOA",
+        "name": "iShares Core 80/20 Aggressive A",
+        "meta": "Global Aggressive Allocation",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "AOR": {
+        "ticker": "AOR",
+        "name": "iShares Core 60/40 Balanced All",
+        "meta": "Global Moderate Allocation",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
