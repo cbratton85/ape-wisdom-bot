@@ -16938,5 +16938,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "XYLD": {
+        "ticker": "XYLD",
+        "name": "Global X S&P 500 Covered Call E",
+        "meta": "Derivative Income",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
