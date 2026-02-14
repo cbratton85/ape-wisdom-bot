@@ -17218,5 +17218,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "RCKT": {
+        "ticker": "RCKT",
+        "name": "Rocket Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 353886656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "DBA": {
+        "ticker": "DBA",
+        "name": "Invesco DB Agriculture Fund",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 711804032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
