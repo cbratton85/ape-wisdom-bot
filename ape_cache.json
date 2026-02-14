@@ -17078,5 +17078,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "XME": {
+        "ticker": "XME",
+        "name": "State Street SPDR S&P Metals & ",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 2062048640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
