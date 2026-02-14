@@ -16948,5 +16948,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "MVST": {
+        "ticker": "MVST",
+        "name": "Microvast Holdings, Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 774511488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "JL": {
+        "ticker": "JL",
+        "name": "J-Long Group Limited",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 15498212,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CMF": {
+        "ticker": "CMF",
+        "name": "iShares California Muni Bond ET",
+        "meta": "Muni California Long",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
