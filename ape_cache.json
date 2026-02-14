@@ -17158,5 +17158,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "DEO": {
+        "ticker": "DEO",
+        "name": "Diageo plc",
+        "meta": "Beverages - Wineries & Distilleries",
+        "type": "EQUITY",
+        "mcap": 55124598784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LPX": {
+        "ticker": "LPX",
+        "name": "Louisiana-Pacific Corporation",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 6520021504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TOL": {
+        "ticker": "TOL",
+        "name": "Toll Brothers, Inc.",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 15781898240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BLDR": {
+        "ticker": "BLDR",
+        "name": "Builders FirstSource, Inc.",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 12686910464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FV": {
+        "ticker": "FV",
+        "name": "First Trust Dorsey Wright Focus",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
