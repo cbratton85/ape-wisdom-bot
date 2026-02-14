@@ -17238,5 +17238,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "PXF": {
+        "ticker": "PXF",
+        "name": "Invesco RAFI Developed Markets ",
+        "meta": "Foreign Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CCC": {
+        "ticker": "CCC",
+        "name": "CCC Intelligent Solutions Holdi",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 3217201920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
