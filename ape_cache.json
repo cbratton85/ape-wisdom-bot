@@ -17868,5 +17868,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "BEN": {
+        "ticker": "BEN",
+        "name": "Franklin Resources, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 14093190144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

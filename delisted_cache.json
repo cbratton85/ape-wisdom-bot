@@ -134,11 +134,6 @@
         "last_checked": "2026-02-15",
         "reason": "No Price Data"
     },
-    "KIND": {
-        "delisted": true,
-        "last_checked": "2026-02-15",
-        "reason": "No Price Data"
-    },
     "FEDX": {
         "delisted": true,
         "last_checked": "2026-02-15",
@@ -185,6 +180,11 @@
         "reason": "No Price Data"
     },
     "CORR": {
+        "delisted": true,
+        "last_checked": "2026-02-15",
+        "reason": "No Price Data"
+    },
+    "KIND": {
         "delisted": true,
         "last_checked": "2026-02-15",
         "reason": "No Price Data"
