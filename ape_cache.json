@@ -17898,5 +17898,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "HTH": {
+        "ticker": "HTH",
+        "name": "Hilltop Holdings Inc.",
+        "meta": "Financial Conglomerates",
+        "type": "EQUITY",
+        "mcap": 2408371712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RVP": {
+        "ticker": "RVP",
+        "name": "Retractable Technologies, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 19788464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "CBC": {
+        "ticker": "CBC",
+        "name": "Central Bancompany, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 5910713344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "AKAM": {
+        "ticker": "AKAM",
+        "name": "Akamai Technologies, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 16078379008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
