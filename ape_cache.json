@@ -17638,5 +17638,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "FI": {
+        "ticker": "FI",
+        "name": "FI",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "FEDX": {
+        "ticker": "FEDX",
+        "name": "Emles Federal Contractors ETF",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "LSTR": {
+        "ticker": "LSTR",
+        "name": "Landstar System, Inc.",
+        "meta": "Integrated Freight & Logistics",
+        "type": "EQUITY",
+        "mcap": 4848600576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
