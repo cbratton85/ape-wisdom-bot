@@ -17948,5 +17948,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "IRBT": {
+        "ticker": "IRBT",
+        "name": "iRobot Corporation",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 14843741,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
