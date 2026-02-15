@@ -1499,7 +1499,7 @@ def export_interactive_html(df):
 
             .crumb-sep {{
                 color: #555; 
-                margin: 0 8px; 
+                margin: 0 4px; 
                 font-weight: bold; 
             }}
 
@@ -1769,13 +1769,13 @@ def export_interactive_html(df):
             <div class="header-flex">
     <div class="header-left">
         <a href="https://apewisdom.io" target="_blank">
-            <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" title="apewisdom.io" style="height: 35px;">
+            <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" title="apewisdom.io" style="height: 40px;">
         </a>
         <div class="mode-toggle">
             <input type="checkbox" id="modeSwitch" onclick="updateSummary()">
             <label for="modeSwitch">
-                <span class="mode-label s-label" style="font-size:12px; font-weight:bold; padding:5px 12px; color:#666;">STOCKS</span>
-                <span class="mode-label e-label" style="font-size:12px; font-weight:bold; padding:5px 12px; color:#666;">ETFS</span>
+                <span class="mode-label s-label" style="font-size:12px; font-weight:bold; padding:5px 8px; color:#666;">STOCKS</span>
+                <span class="mode-label e-label" style="font-size:12px; font-weight:bold; padding:5px 8px; color:#666;">ETFS</span>
             </label>
         </div>
     </div>
