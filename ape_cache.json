@@ -17578,5 +17578,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "ONEQ": {
+        "ticker": "ONEQ",
+        "name": "Fidelity Nasdaq Composite Index",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 585777728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "BUFF": {
+        "ticker": "BUFF",
+        "name": "Innovator Laddered Allocation P",
+        "meta": "Defined Outcome",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "EGP": {
+        "ticker": "EGP",
+        "name": "EastGroup Properties, Inc.",
+        "meta": "REIT - Industrial",
+        "type": "EQUITY",
+        "mcap": 10185353216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CNS": {
+        "ticker": "CNS",
+        "name": "Cohen & Steers Inc",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 3400162816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CMA": {
+        "ticker": "CMA",
+        "name": "Comerica Incorporated",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 11348051968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
