@@ -17958,5 +17958,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "IPGP": {
+        "ticker": "IPGP",
+        "name": "IPG Photonics Corporation",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 6483777024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TAC": {
+        "ticker": "TAC",
+        "name": "TransAlta Corporation",
+        "meta": "Utilities - Independent Power Producers",
+        "type": "EQUITY",
+        "mcap": 4029186048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "OPTX": {
+        "ticker": "OPTX",
+        "name": "Syntec Optics Holdings, Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 223736560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
