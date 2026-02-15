@@ -17758,5 +17758,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "HCKT": {
+        "ticker": "HCKT",
+        "name": "The Hackett Group, Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 377932288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BOF": {
+        "ticker": "BOF",
+        "name": "BranchOut Food Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 42511160,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
