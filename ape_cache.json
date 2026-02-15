@@ -17558,5 +17558,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "DAC": {
+        "ticker": "DAC",
+        "name": "Danaos Corporation",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 1978363392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KIND": {
+        "ticker": "KIND",
+        "name": "KIND",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
