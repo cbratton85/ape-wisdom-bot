@@ -143,6 +143,83 @@ class HistoryTracker:
         # 5. Update Memory (Wait for flush() to write to disk)
         self.data = new_data_cleaned
 
+    def get_history_color(self, value, column_type):
+        """Determine the color for a historical value based on column type."""
+        try:
+            if column_type in ['velocity', 'upv_plus']:
+                # These are signed values like "+5", "-2", "0"
+                if isinstance(value, str):
+                    if value.startswith('+'): return "#00ff00"
+                    elif value.startswith('-'): return "#ff4444"
+                    else: return "#666"
+                else:
+                    return "#00ff00" if value > 0 else ("#ff4444" if value < 0 else "#666")
+            elif column_type == 'accel':
+                # Accel has special thresholds
+                val = int(float(value.replace('+', '')))  # Remove sign and convert
+                if val >= 5: return "#ff00ff"
+                elif val > 0: return "#00ffff"
+                elif val < 0: return "#ff4444"
+                else: return "#ffffff"
+            elif column_type == 'streak':
+                # Streak has special thresholds
+                val = int(float(value.replace('+', '')))  # Remove sign and convert
+                if val >= 3: return "#00ff00"
+                elif val > 0: return "#99ff99"
+                elif val <= -2: return "#ff4444"
+                else: return "#ffffff"
+            elif column_type == 'eff':
+                val = float(value)
+                if val >= 1.0: return "#00ff00"
+                elif val >= 0.5: return "#ffff00"
+                elif val > 0.1: return "#ffffff"
+                else: return "#ff4444"
+            elif column_type == 'conv':
+                val = float(value)
+                return "#ffcc00" if val > 1.0 else "#ffffff"
+            elif column_type == 'surge':
+                val = float(value.replace('%', ''))
+                if val >= 300: return "#ffff00"
+                elif val >= 100: return "#00ff00"
+                else: return "#ffffff"
+            elif column_type == 'mnt_perc':
+                val = float(value.replace('%', ''))
+                # For historical mnt_perc, we don't have z-score, so use simple thresholds
+                if val >= 50: return "#ffff00"
+                elif val >= 25: return "#00ff00"
+                else: return "#ffffff"
+            elif column_type == 'squeeze':
+                # Use z-score if available in entry, else fallback to value
+                try:
+                    # Try to get z_Squeeze from the entry if available
+                    if isinstance(value, dict):
+                        z = value.get('z_Squeeze', 0)
+                        return "#00ffff" if z > 1.5 else "#ffffff"
+                    # If not, fallback to numeric threshold (legacy)
+                    val = int(float(value))
+                    return "#00ffff" if val > 6 else "#ffffff"
+                except:
+                    return "#ffffff"
+            elif column_type == 'upvotes':
+                val = int(float(value))
+                # For historical upvotes, we don't have z-score, so use simple thresholds
+                return "#00ff00" if val > 20 else "#ffffff"
+            elif column_type == 'master_score':
+                val = float(value)
+                if val > 2.0: return "#ff0000"
+                elif val > 1.5: return "#ff8800"
+                elif val > 1.0: return "#ffff00"
+                else: return "#888888"
+            elif column_type == 'rank_plus':
+                # Value is already formatted like "+5", "-3", or "0"
+                if value.startswith('+'): return "#00ff00"
+                elif value.startswith('-'): return "#ff4444"
+                else: return "#888"
+            else:
+                return "#ffffff"  # Default white
+        except:
+            return "#ffffff"
+
     def get_metrics(self, ticker, current_price, current_mnt, current_rank_plus, current_upvotes, current_surge):
         """
         Calculates momentum metrics and builds history strings for tooltips.
@@ -199,31 +276,40 @@ class HistoryTracker:
             'eff': [], 'conv': [], 'surge': [], 'mnt_perc': [], 'squeeze': [], 'master_score': []
         }
 
-        def get_val(entry, key, signed=False, is_perc=False, decimals=2):
+        def get_val(entry, key, signed=False, is_perc=False, decimals=2, color_type=None):
             val = entry.get(key, 0)
             if isinstance(val, (float, np.floating)): 
                 val = round(float(val), decimals)
             if is_perc: 
-                return f"{val}%"
-            return f"{'+' if signed and val > 0 else ''}{val}"
+                display_val = f"{val}%"
+            else:
+                display_val = f"{'+' if signed and val > 0 else ''}{val}"
+            
+            if color_type:
+                color_val = display_val if (signed or is_perc) else val
+                color = self.get_history_color(color_val, color_type)
+                return f"<span style='color: {color}; font-weight: bold;'>{display_val}</span>"
+            else:
+                return display_val
 
         for d in recent_dates:
             entry = self.data[ticker][d]
             history_map['rank'].append(get_val(entry, 'rank'))
-            history_map['rank_plus'].append(get_val(entry, 'rank_plus', signed=True))
+            history_map['rank_plus'].append(get_val(entry, 'rank_plus', signed=True, color_type='rank_plus'))
             history_map['price'].append(get_val(entry, 'price'))
             history_map['ment'].append(get_val(entry, 'ment'))
-            history_map['upvotes'].append(get_val(entry, 'upvotes'))
-            history_map['accel'].append(get_val(entry, 'accel', signed=True))
-            history_map['velocity'].append(get_val(entry, 'velocity', signed=True)) 
-            history_map['streak'].append(get_val(entry, 'streak', signed=True))
-            history_map['upv_plus'].append(get_val(entry, 'upv_plus', signed=True))
-            history_map['eff'].append(get_val(entry, 'eff'))
-            history_map['conv'].append(get_val(entry, 'conv'))
-            history_map['surge'].append(get_val(entry, 'surge', is_perc=True))
-            history_map['mnt_perc'].append(get_val(entry, 'mnt_perc', is_perc=True))
-            history_map['squeeze'].append(get_val(entry, 'squeeze'))
-            history_map['master_score'].append(get_val(entry, 'master_score', decimals=1))
+            history_map['upvotes'].append(get_val(entry, 'upvotes', color_type='upvotes'))
+            history_map['accel'].append(get_val(entry, 'accel', signed=True, color_type='accel'))
+            history_map['velocity'].append(get_val(entry, 'velocity', signed=True, color_type='velocity')) 
+            history_map['streak'].append(get_val(entry, 'streak', signed=True, color_type='streak'))
+            history_map['upv_plus'].append(get_val(entry, 'upv_plus', signed=True, color_type='upv_plus'))
+            history_map['eff'].append(get_val(entry, 'eff', color_type='eff'))
+            history_map['conv'].append(get_val(entry, 'conv', color_type='conv'))
+            history_map['surge'].append(get_val(entry, 'surge', is_perc=True, color_type='surge'))
+            history_map['mnt_perc'].append(get_val(entry, 'mnt_perc', is_perc=True, color_type='mnt_perc'))
+            # For squeeze, pass the entry itself so get_history_color can access z_Squeeze
+            history_map['squeeze'].append(get_val(entry, 'squeeze', color_type='squeeze') if 'z_Squeeze' not in entry else get_val(entry, entry, color_type='squeeze'))
+            history_map['master_score'].append(get_val(entry, 'master_score', decimals=1, color_type='master_score'))
     
         final_histories = {k: " → ".join(v) for k, v in history_map.items()}
 
@@ -791,7 +877,7 @@ def export_interactive_html(df):
             if not history_str or history_str == "New" or history_str == "": 
                 return val_str
             safe_hist = history_str.replace('"', '&quot;')
-            return f'<span class="d-tooltip" data-tooltip="{safe_hist}" tabindex="0">{val_str}</span>'
+            return f'<span data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="{safe_hist}" tabindex="0">{val_str}</span>'
 
         for c in ['Accel', 'Velocity', 'Rolling', 'Squeeze', 'Upvotes', 'Rank+', 'Surge', 'Mnt%', 'Master_Score', 'z_Upvotes', 'z_Surge', 'z_Squeeze']:
             if c not in export_df.columns: export_df[c] = 0
@@ -934,11 +1020,10 @@ def export_interactive_html(df):
             # --- 3. EFFICIENCY (Eff) ---
             eff_val = float(row.get('Eff', 0)) 
             eff_hist = row.get('h_eff', '') 
-            if eff_val >= 1.0: eff_clr = "#00ff00"       # Strong Green
+            if eff_val >= 1.0: eff_clr = "#00ff00"       # Green
             elif eff_val >= 0.5: eff_clr = "#ffff00"     # Yellow
-            elif eff_val >= 0.1: eff_clr = "#ffffff"     # White (Small Positive - THE FIX)
-            elif eff_val > -0.1: eff_clr = "#666666"     # Grey (Flat/Zero)
-            else: eff_clr = "#ff4444"                    # Red (Negative)
+            elif eff_val > 0.1: eff_clr = "#ffffff"      # White
+            else: eff_clr = "#ff4444"                    # Red
             export_df.at[index, 'Eff'] = with_hist(color_span(f"{eff_val:.1f}", eff_clr), eff_hist)
 
             # --- 4. CONVICTION (Conv) ---
@@ -981,9 +1066,9 @@ def export_interactive_html(df):
             # --- 7. HEAT SCORE ---
             score = float(row.get('Master_Score', 0))
             heat_hist = row.get('h_heat', '') 
-            if score > 10: h_clr = "#ff0000"
-            elif score > 5: h_clr = "#ff8800"
-            elif score > 2: h_clr = "#ffff00"
+            if score > 2.0: h_clr = "#ff0000"  # Red
+            elif score > 1.5: h_clr = "#ff8800"  # Orange
+            elif score > 1.0: h_clr = "#ffff00"  # Yellow
             else: h_clr = "#888888"
             heat_span = f'<span style="color:{h_clr}; font-weight:bold;">{score:.1f}</span>'
             export_df.at[index, 'Heat'] = with_hist(heat_span, heat_hist)
@@ -1025,20 +1110,17 @@ def export_interactive_html(df):
             rank_hist = row.get('h_rank', '')
             export_df.at[index, 'Rank'] = with_hist(rank_val, rank_hist)
 
-            # --- 11. SURGE (SRG) - Linear Color Logic ---
+            # --- 11. SURGE (SRG) - Raw Threshold Color Logic ---
             srg_raw = float(row.get('Srg', 0))
             srg_val_str = f"{int(srg_raw)}%"
             srg_hist = row.get('h_surge', '')
             
-            # Linear thresholding: makes the dashboard much more intuitive
             if srg_raw >= 300:
-                srg_clr = "#ffff00"  # Yellow: Extreme Surge (3x+ average)
+                srg_clr = "#ffff00"  # Yellow: Extreme Surge
             elif srg_raw >= 100:
-                srg_clr = "#00ff00"  # Green: Above Average (1x+ average)
-            elif srg_raw >= 50:
-                srg_clr = "#ffffff"  # White: Significant Progress
+                srg_clr = "#00ff00"  # Green: High Surge
             else:
-                srg_clr = "#888888"  # Grey: Low relative volume
+                srg_clr = "#ffffff"  # White: Normal
                 
             export_df.at[index, 'Srg'] = with_hist(color_span(srg_val_str, srg_clr), srg_hist)
 
@@ -1426,8 +1508,8 @@ def export_interactive_html(df):
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                height: 68px; width: 100%;
-                padding: 0 15px;
+                height: 50px; width: 100%;
+                padding: 0 10px;
                 background: #111;
                 margin-bottom: 0px;
                 box-sizing: border-box;
@@ -1515,7 +1597,7 @@ def export_interactive_html(df):
                 white-space: nowrap;
             }}
             
-            .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 6px; margin-bottom: 10px; overflow: hidden; }}
+            .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 6px; margin-bottom: 5px; overflow: hidden; }}
             .legend-header {{ background: #2a2a2a; padding: 4px 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; }}
             .legend-box {{ padding: 5px; display: none; background-color: #1a1a1a; }}
             .legend-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }}
@@ -1769,7 +1851,7 @@ def export_interactive_html(df):
             <div class="header-flex">
     <div class="header-left">
         <a href="https://apewisdom.io" target="_blank">
-            <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" title="apewisdom.io" style="height: 54px;">
+            <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" title="apewisdom.io" style="height: 40px;">
         </a>
         <div class="mode-toggle">
             <input type="checkbox" id="modeSwitch" onclick="updateSummary()">
@@ -2048,10 +2130,10 @@ def export_interactive_html(df):
             
             <!-- Heatmap Modal -->
             <div id="heatmapModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 9999; overflow: auto;">
-                <div style="position: relative; width: 100%; max-width: 1600px; margin: 20px auto; background: #0F0F0F; padding: 20px; border-radius: 8px; border: 2px solid #ff6b00;">
-                    <button onclick="closeHeatmapModal()" style="position: absolute; top: 10px; right: 10px; background: #ff6b00; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold;">✕ Close</button>
-                    <h2 id="heatmapTitle" style="color: #ff6b00; margin-top: 0; margin-bottom: 20px; letter-spacing: -1px;">🔥 Stock Heatmap</h2>
-                    <div id="heatmapContainer" style="width: 100%; height: 720px;"></div>
+                <div style="position: relative; width: 100%; max-width: 1800px; margin: 5px auto; background: #0F0F0F; padding: 5px; border-radius: 4px; border: 1px solid #ff6b00;">
+                    <button onclick="closeHeatmapModal()" style="position: absolute; top: 5px; right: 5px; background: #ff6b00; color: white; border: none; padding: 4px 8px; border-radius: 2px; cursor: pointer; font-weight: bold; font-size: 12px;">✕</button>
+                    <h2 id="heatmapTitle" style="color: #ff6b00; margin: 0 0 5px 0; padding: 0; font-size: 16px; letter-spacing: -1px;">🔥 Stock Heatmap</h2>
+                    <div id="heatmapContainer" style="width: 100%; height: 100%;"></div>
                 </div>
             </div>
         </div>
@@ -2600,6 +2682,19 @@ def export_interactive_html(df):
             "drawCallback": function() {{ 
                 var api = this.api(); 
                 $("#stockCounter").text("" + api.rows({{filter:'applied'}}).count() + " / " + api.rows().count() + " Tickers"); 
+                // Reinitialize tooltips after draw
+                $('[data-bs-toggle="tooltip"]').each(function() {{
+                    var existing = bootstrap.Tooltip.getInstance(this);
+                    if (existing) existing.dispose();
+                    new bootstrap.Tooltip(this, {{
+                        html: true,
+                        sanitize: false,
+                        animation: false,
+                        container: 'body',
+                        placement: 'top',
+                        boundary: 'viewport'
+                    }});
+                }});
             }}
         }});
 
@@ -2650,6 +2745,18 @@ def export_interactive_html(df):
         
         table.on('draw', updateSummary);
         setTimeout(updateSummary, 100);
+
+        // Initialize Bootstrap tooltips for history
+        $('[data-bs-toggle="tooltip"]').each(function() {{
+            new bootstrap.Tooltip(this, {{
+                html: true,
+                sanitize: false,
+                animation: false,
+                container: 'body',
+                placement: 'top',
+                boundary: 'viewport'
+            }});
+        }});
     }});
 </script></body></html>"""
         
