@@ -1,9 +1,4 @@
 {
-    "TERM": {
-        "delisted": true,
-        "last_checked": "2026-02-10",
-        "reason": "No Price Data"
-    },
     "ADN": {
         "delisted": true,
         "last_checked": "2026-02-10",
@@ -180,6 +175,16 @@
         "reason": "No Price Data"
     },
     "CSA": {
+        "delisted": true,
+        "last_checked": "2026-02-15",
+        "reason": "No Price Data"
+    },
+    "SCS": {
+        "delisted": true,
+        "last_checked": "2026-02-15",
+        "reason": "No Price Data"
+    },
+    "TERM": {
         "delisted": true,
         "last_checked": "2026-02-15",
         "reason": "No Price Data"
