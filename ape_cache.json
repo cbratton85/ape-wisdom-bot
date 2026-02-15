@@ -17528,5 +17528,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SNA": {
+        "ticker": "SNA",
+        "name": "Snap-On Incorporated",
+        "meta": "Tools & Accessories",
+        "type": "EQUITY",
+        "mcap": 20002625536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SPHY": {
+        "ticker": "SPHY",
+        "name": "State Street SPDR Portfolio Hig",
+        "meta": "High Yield Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "BBIO": {
+        "ticker": "BBIO",
+        "name": "BridgeBio Pharma, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 14419931136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
