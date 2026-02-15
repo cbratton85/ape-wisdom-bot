@@ -17838,5 +17838,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "DIV": {
+        "ticker": "DIV",
+        "name": "Global X Super Dividend ETF",
+        "meta": "Small Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FVD": {
+        "ticker": "FVD",
+        "name": "First Trust VL Dividend",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 9414799360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CORR": {
+        "ticker": "CORR",
+        "name": "CORR",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
