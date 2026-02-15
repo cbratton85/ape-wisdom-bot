@@ -1426,7 +1426,7 @@ def export_interactive_html(df):
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                height: 68px; width: 100%;
+                height: 45px; width: 100%;
                 padding: 0 15px;
                 background: #111;
                 margin-bottom: 0px;
@@ -1463,7 +1463,7 @@ def export_interactive_html(df):
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                gap: 4px;
+                gap: 1px;
                 width: auto;
                 white-space: nowrap;
                 z-index: 101;
@@ -1536,7 +1536,7 @@ def export_interactive_html(df):
                 left: 50%; 
                 transform: translateX(-50%);
                 background-color: #000; 
-                color: #00ffff; 
+                color: #ffffff; 
                 padding: 8px 12px; 
                 border-radius: 6px; 
                 border: 1px solid #444;
@@ -1708,7 +1708,7 @@ def export_interactive_html(df):
                 left: 50%;
                 transform: translateX(-50%);
                 background-color: #000 !important; 
-                color: #00ffff !important; 
+                color: #ffffff !important; 
                 padding: 10px 15px; 
                 border-radius: 8px; 
                 border: 1px solid #444;
@@ -1769,7 +1769,7 @@ def export_interactive_html(df):
             <div class="header-flex">
     <div class="header-left">
         <a href="https://apewisdom.io" target="_blank">
-            <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" title="apewisdom.io" style="height: 54px;">
+            <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" title="apewisdom.io" style="height: 35px;">
         </a>
         <div class="mode-toggle">
             <input type="checkbox" id="modeSwitch" onclick="updateSummary()">
