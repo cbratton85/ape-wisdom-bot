@@ -1858,10 +1858,10 @@ def export_interactive_html(df):
                     </div>
                 </div>
 
-                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('stock')" title="Stock Heatmap" style="margin-left: 10px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">STOCKS</button>
-                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('etf')" title="ETF Heatmap" style="margin-left: 10px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">ETFs</button>
-                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 6px;">.TXT</button>
-                <button class="btn btn-sm btn-reset" onclick="copyTableToClipboard(event)" title="Copy Table" style="margin-left: 6px;">📋 Copy</button>
+                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('stock')" title="Stock Heatmap" style="margin-left: 4px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">STOCKS</button>
+                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('etf')" title="ETF Heatmap" style="margin-left: 4px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">ETFs</button>
+                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 2px;">.TXT</button>
+                <button class="btn btn-sm btn-reset" onclick="copyTableToClipboard(event)" title="Copy Table" style="margin-left: 2px;">📋 Copy</button>
                 
                 <span id="stockCounter">Loading...</span>
             </div>
