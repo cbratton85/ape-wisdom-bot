@@ -2382,9 +2382,9 @@ def export_interactive_html(df):
                             "</div>";
                 }}).join('');
 
-                var tooltipHTML = "<div style='text-align:left; padding:2px;'>" + tipRows + "</div>";
+                var tooltipHTML = "<div style='text-align:left; padding:2px;'><div style='font-size:10px; color:#00ff00; margin-bottom:4px;'>Click to filter table</div>" + tipRows + "</div>";
                 return '<span class="crumb-num">' + (i+1) + '.</span>' + 
-                       '<span class="sector-tooltip" data-bs-title="' + tooltipHTML + '" style="cursor:help;">' + s.name + '</span>';
+                       '<span class="sector-tooltip" data-bs-title="' + tooltipHTML + '" style="cursor:pointer;" onclick="filterByIndustry(\'' + s.name.replace(/'/g, "\\'") + '\')">' + s.name + '</span>';
             }}).join('<span class="crumb-sep"> > </span>');
         }}
 
@@ -2405,6 +2405,11 @@ def export_interactive_html(df):
                 boundary: 'viewport'
                 }});
         }});
+    }}
+
+    function filterByIndustry(industry) {{
+        $('.dataTables_filter input').val(industry);
+        table.search(industry).draw();
     }}
 
     function toggleLegend() {{
