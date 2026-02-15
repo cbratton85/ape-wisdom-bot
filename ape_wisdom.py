@@ -1814,14 +1814,14 @@ def export_interactive_html(df):
                 <button class="btn btn-sm btn-reset" onclick="resetFilters()" title="Reset Filters">🔄</button>
 
                 <div class="filter-group" style="margin-left: 10px; margin-right: 10px;">
-                    <label style="font-family: 'Arial Narrow', Arial, sans-serif; font-size: 0.9em; font-weight: bold;">Price:</label>
+                    <label>Price:</label>
                     <input type="text" id="minPrice" class="form-control form-control-sm" placeholder="Min" style="width: 50px;">
                     <span style="color:#666">-</span>
                     <input type="text" id="maxPrice" class="form-control form-control-sm" placeholder="Max" style="width: 50px;">
                 </div>
                 
                 <div class="filter-group" style="margin-right: 10px;">
-                    <label style="font-family: 'Arial Narrow', Arial, sans-serif; font-size: 0.9em; font-weight: bold;">Vol(30):</label>
+                    <label>Vol(30):</label>
                     <input type="text" id="minVol" class="form-control form-control-sm" placeholder="Min" style="width: 50px;">
                     <span style="color:#666">-</span>
                     <input type="text" id="maxVol" class="form-control form-control-sm" placeholder="Max" style="width: 50px;">
@@ -1858,10 +1858,10 @@ def export_interactive_html(df):
                     </div>
                 </div>
 
-                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('stock')" title="Stock Heatmap" style="margin-left: 6px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">STOCKS</button>
-                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('etf')" title="ETF Heatmap" style="margin-left: 2px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">ETFs</button>
-                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 2px;">.TXT</button>
-                <button class="btn btn-sm btn-reset" onclick="copyTableToClipboard(event)" title="Copy Table" style="margin-left: 2px;">📋 Copy</button>
+                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('stock')" title="Stock Heatmap" style="margin-left: 10px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">STOCKS</button>
+                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('etf')" title="ETF Heatmap" style="margin-left: 10px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">ETFs</button>
+                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 6px;">.TXT</button>
+                <button class="btn btn-sm btn-reset" onclick="copyTableToClipboard(event)" title="Copy Table" style="margin-left: 6px;">📋 Copy</button>
                 
                 <span id="stockCounter">Loading...</span>
             </div>
@@ -2048,10 +2048,10 @@ def export_interactive_html(df):
             
             <!-- Heatmap Modal -->
             <div id="heatmapModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 9999; overflow: auto;">
-                <div style="position: relative; width: 100%; max-width: 1800px; margin: 5px auto; background: #0F0F0F; padding: 10px; border-radius: 8px; border: 2px solid #ff6b00;">
+                <div style="position: relative; width: 100%; max-width: 1600px; margin: 20px auto; background: #0F0F0F; padding: 20px; border-radius: 8px; border: 2px solid #ff6b00;">
                     <button onclick="closeHeatmapModal()" style="position: absolute; top: 10px; right: 10px; background: #ff6b00; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold;">✕ Close</button>
-                    <h2 id="heatmapTitle" style="color: #ff6b00; margin-top: 0; margin-bottom: 5px; letter-spacing: -1px; font-size: 1.2em;">🔥 Stock Heatmap</h2>
-                    <div id="heatmapContainer" style="width: 100%; height: calc(100vh - 80px);"></div>
+                    <h2 id="heatmapTitle" style="color: #ff6b00; margin-top: 0; margin-bottom: 20px; letter-spacing: -1px;">🔥 Stock Heatmap</h2>
+                    <div id="heatmapContainer" style="width: 100%; height: 720px;"></div>
                 </div>
             </div>
         </div>
@@ -2382,9 +2382,9 @@ def export_interactive_html(df):
                             "</div>";
                 }}).join('');
 
-                var tooltipHTML = "<div style='text-align:left; padding:2px;'><div style='font-size:10px; color:#00ff00; margin-bottom:4px;'>Click to filter table</div>" + tipRows + "</div>";
+                var tooltipHTML = "<div style='text-align:left; padding:2px;'>" + tipRows + "</div>";
                 return '<span class="crumb-num">' + (i+1) + '.</span>' + 
-                       '<span class="sector-tooltip" data-bs-title="' + tooltipHTML + '" style="cursor:pointer;" onclick="filterByIndustry(\'' + s.name.replace(/'/g, "\\'") + '\')">' + s.name + '</span>';
+                       '<span class="sector-tooltip" data-bs-title="' + tooltipHTML + '" style="cursor:help;">' + s.name + '</span>';
             }}).join('<span class="crumb-sep"> > </span>');
         }}
 
@@ -2405,11 +2405,6 @@ def export_interactive_html(df):
                 boundary: 'viewport'
                 }});
         }});
-    }}
-
-    function filterByIndustry(industry) {{
-        $('.dataTables_filter input').val(industry);
-        table.search(industry).draw();
     }}
 
     function toggleLegend() {{
