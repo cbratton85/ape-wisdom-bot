@@ -17788,5 +17788,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "VLN": {
+        "ticker": "VLN",
+        "name": "Valens Semiconductor Ltd.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 155595584,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "THY": {
+        "ticker": "THY",
+        "name": "Toews Agility Shares Dynamic Ta",
+        "meta": "High Yield Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ATEX": {
+        "ticker": "ATEX",
+        "name": "Anterix Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 597391808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "GCC": {
+        "ticker": "GCC",
+        "name": "WisdomTree EnhancedContinuous C",
+        "meta": "Commodities Broad Basket",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FNDE": {
+        "ticker": "FNDE",
+        "name": "Schwab Fundamental Emerging Mar",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
