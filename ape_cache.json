@@ -17878,5 +17878,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "YUMC": {
+        "ticker": "YUMC",
+        "name": "Yum China Holdings, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 19578290176,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ACB": {
+        "ticker": "ACB",
+        "name": "Aurora Cannabis Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 201318448,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
