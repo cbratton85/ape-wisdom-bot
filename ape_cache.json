@@ -17668,5 +17668,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "IVOL": {
+        "ticker": "IVOL",
+        "name": "Quadratic Interest Rate Volatil",
+        "meta": "Inflation-Protected Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "BXP": {
+        "ticker": "BXP",
+        "name": "BXP, Inc.",
+        "meta": "REIT - Office",
+        "type": "EQUITY",
+        "mcap": 10882264064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SLG": {
+        "ticker": "SLG",
+        "name": "SL Green Realty Corp",
+        "meta": "REIT - Office",
+        "type": "EQUITY",
+        "mcap": 3082136576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VNO": {
+        "ticker": "VNO",
+        "name": "Vornado Realty Trust",
+        "meta": "REIT - Office",
+        "type": "EQUITY",
+        "mcap": 6239510528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PLD": {
+        "ticker": "PLD",
+        "name": "Prologis, Inc.",
+        "meta": "REIT - Industrial",
+        "type": "EQUITY",
+        "mcap": 129084645376,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "OCS": {
+        "ticker": "OCS",
+        "name": "Oculis Holding AG",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1646918784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
