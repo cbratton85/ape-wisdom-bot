@@ -17938,5 +17938,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CTSO": {
+        "ticker": "CTSO",
+        "name": "Cytosorbents Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 40282680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
