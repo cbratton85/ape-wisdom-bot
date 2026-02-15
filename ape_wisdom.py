@@ -2047,14 +2047,15 @@ def export_interactive_html(df):
             {table_html}
             
             <!-- Heatmap Modal -->
-            <div id="heatmapModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 9999; overflow: auto;">
-                <div style="position: relative; width: 100%; max-width: 1600px; margin: 20px auto; background: #0F0F0F; padding: 20px; border-radius: 8px; border: 2px solid #ff6b00;">
-                    <button onclick="closeHeatmapModal()" style="position: absolute; top: 10px; right: 10px; background: #ff6b00; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold;">✕ Close</button>
-                    <h2 id="heatmapTitle" style="color: #ff6b00; margin-top: 0; margin-bottom: 20px; letter-spacing: -1px;">🔥 Stock Heatmap</h2>
-                    <div id="heatmapContainer" style="width: 100%; height: 720px;"></div>
+            <div id="heatmapModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 96vw; height: 96vh; background: #0F0F0F; display: flex; flex-direction: column; border: 1px solid #333; box-shadow: 0 0 50px rgba(0,0,0,0.9);">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #1a1a1a; border-bottom: 1px solid #333; flex-shrink: 0;">
+                    <h2 id="heatmapTitle" style="color: #ff6b00; margin: 0; font-size: 20px; letter-spacing: -1px;">🔥 Stock Heatmap</h2>
+                    <button onclick="closeHeatmapModal()" style="background: #ff6b00; color: white; border: none; padding: 6px 12px; border-radius: 2px; cursor: pointer; font-weight: bold; font-size: 14px;">✕ Close</button>
                 </div>
+                <div id="heatmapContainer" style="flex: 1; width: 100%; height: 100%; position: relative;"></div>
             </div>
-        </div>
+    </div>
         
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
