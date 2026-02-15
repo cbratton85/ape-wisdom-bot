@@ -17728,5 +17728,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "KGS": {
+        "ticker": "KGS",
+        "name": "Kodiak Gas Services, Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 4312945664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EQT": {
+        "ticker": "EQT",
+        "name": "EQT Corporation",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 36632961024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
