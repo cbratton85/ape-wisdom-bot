@@ -17498,5 +17498,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "OILU": {
+        "ticker": "OILU",
+        "name": "MicroSectors Oil & Gas Exp. & P",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "VO": {
+        "ticker": "VO",
+        "name": "Vanguard Mid-Cap ETF",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 46521401344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "UCO": {
+        "ticker": "UCO",
+        "name": "ProShares Ultra Bloomberg Crude",
+        "meta": "Trading--Leveraged Commodities",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
