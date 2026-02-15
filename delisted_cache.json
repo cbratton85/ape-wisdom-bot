@@ -114,11 +114,6 @@
         "last_checked": "2026-02-14",
         "reason": "No Price Data"
     },
-    "ZN": {
-        "delisted": true,
-        "last_checked": "2026-02-14",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-02-14",
@@ -170,6 +165,11 @@
         "reason": "No Price Data"
     },
     "DIDI": {
+        "delisted": true,
+        "last_checked": "2026-02-15",
+        "reason": "No Price Data"
+    },
+    "ZN": {
         "delisted": true,
         "last_checked": "2026-02-15",
         "reason": "No Price Data"

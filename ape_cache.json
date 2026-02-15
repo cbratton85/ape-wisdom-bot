@@ -17468,5 +17468,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "DHI": {
+        "ticker": "DHI",
+        "name": "D.R. Horton, Inc.",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 48840683520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LEN": {
+        "ticker": "LEN",
+        "name": "Lennar Corporation",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 30201540608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NVR": {
+        "ticker": "NVR",
+        "name": "NVR, Inc.",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 21316837376,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
