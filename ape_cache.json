@@ -17448,5 +17448,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "BV": {
+        "ticker": "BV",
+        "name": "BrightView Holdings, Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 1287714048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GEF": {
+        "ticker": "GEF",
+        "name": "Greif Inc.",
+        "meta": "Packaging & Containers",
+        "type": "EQUITY",
+        "mcap": 4382814720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
