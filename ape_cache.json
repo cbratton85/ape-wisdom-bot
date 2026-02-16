@@ -18238,5 +18238,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "APD": {
+        "ticker": "APD",
+        "name": "Air Products and Chemicals, Inc",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 62285787136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FVC": {
+        "ticker": "FVC",
+        "name": "First Trust Dorsey Wright Dynam",
+        "meta": "Tactical Allocation",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
