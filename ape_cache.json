@@ -18058,5 +18058,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "EPR": {
+        "ticker": "EPR",
+        "name": "EPR Properties",
+        "meta": "REIT - Specialty",
+        "type": "EQUITY",
+        "mcap": 4453448704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LOAN": {
+        "ticker": "LOAN",
+        "name": "Manhattan Bridge Capital, Inc",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 50902000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "VTIP": {
+        "ticker": "VTIP",
+        "name": "Vanguard Short-Term Inflation-P",
+        "meta": "Short-Term Inflation-Protected Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
