@@ -18088,5 +18088,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "LAZY": {
+        "ticker": "LAZY",
+        "name": "LAZY",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "FET": {
+        "ticker": "FET",
+        "name": "Forum Energy Technologies, Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 597544512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
