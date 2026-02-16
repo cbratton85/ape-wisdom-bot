@@ -2192,9 +2192,8 @@ def export_interactive_html(df):
             "allow_symbol_change": false,
             "calendar": false,
             "studies": [
-                {"id": "MASimple@tv-basicstudies", "inputs": {"length": 50}, "overrides": {"Plot.color": "blue"}},
-                {"id": "MASimple@tv-basicstudies", "inputs": {"length": 200}, "overrides": {"Plot.color": "red"}},
-                {"id": "VWMA@tv-basicstudies", "inputs": {"length": 20}, "overrides": {"Plot.color": "rgba(255, 255, 0, 0.5)", "Plot.linewidth": 4 }}
+                {"id": "MASimple@tv-basicstudies", "inputs": {"length": 50}, "overrides": { "Plot.color": "blue" }},
+                {"id": "MASimple@tv-basicstudies", "inputs": {"length": 200}, "overrides": { "Plot.color": "red" }}
             ],
             "details": true,
             "hide_side_toolbar": true,
