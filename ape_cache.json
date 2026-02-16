@@ -18258,5 +18258,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "PRPL": {
+        "ticker": "PRPL",
+        "name": "Purple Innovation, Inc.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 74613880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CETX": {
+        "ticker": "CETX",
+        "name": "Cemtrex Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 12600773,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "UDN": {
+        "ticker": "UDN",
+        "name": "Invesco DB USD Index Bearish ET",
+        "meta": "Trading--Miscellaneous",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CDLX": {
+        "ticker": "CDLX",
+        "name": "Cardlytics, Inc. Common Stock",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 50407732,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
