@@ -988,17 +988,24 @@ def export_interactive_html(df):
             heat_span = f'<span style="color:{h_clr}; font-weight:bold;">{score:.1f}</span>'
             export_df.at[index, 'Heat'] = with_hist(heat_span, heat_hist)
 
-            # --- 8. NAME & LOGO ---
+            # --- 8. NAME & LOGO (FIXED) ---
             t_raw = row['Sym']
             clean_ticker = t_raw.replace('-', '.')
             
+            # Define p_clean early so it's available if needed
+            p_clean = row.get('Price', 0) or 0.0
+            
             logo_src = get_cached_logo(clean_ticker) 
             
-            exchange_name = row.get("exchange", "Unknown")
+            # Use the actual 'Name' from the row, not the price variable
+            display_name = str(row.get('Name', t_raw))
 
             html_name = (
-                f'<div class="symbol-container" style="justify-content: flex-end;">'
-                f'<span>${p_clean:.2f}</span>'
+                f'<div class="symbol-container">'
+                f'<img src="{logo_src}" width="20" height="20" style="border-radius:50%; margin-right:8px;">'
+                f'<span class="d-tooltip" data-tooltip="{display_name}">'
+                f'<span class="text-content">{display_name}</span>'
+                f'</span>'
                 f'</div>'
             )
             export_df.at[index, 'Name'] = html_name
