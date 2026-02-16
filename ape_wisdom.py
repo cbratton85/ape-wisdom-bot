@@ -900,6 +900,16 @@ def export_interactive_html(df):
             export_df['SRG'] = "0%"
             export_df['Srg'] = export_df['Srg'].astype(object)
 
+        cols = [
+            'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Day%', 'Acc', 'Eff', 'Conv', 'Upvs', 
+            'Upv+', 'VOL', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 'RSI', 
+            'Type_Tag', 'AvgVol', 'MCap'
+        ]
+
+        for c in cols:
+            if c not in export_df.columns:
+                export_df[c] = 0
+
         for index, row in export_df.iterrows():
             # --- INITIAL DATA PREP ---
             t_raw = row['Sym']
