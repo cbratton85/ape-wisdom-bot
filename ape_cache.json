@@ -18208,5 +18208,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "DBRG": {
+        "ticker": "DBRG",
+        "name": "DigitalBridge Group, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 3006718976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SHAK": {
+        "ticker": "SHAK",
+        "name": "Shake Shack, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 3763421184,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KAI": {
+        "ticker": "KAI",
+        "name": "Kadant Inc",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 3933897216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
