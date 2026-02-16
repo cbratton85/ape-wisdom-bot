@@ -18418,5 +18418,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "AIP": {
+        "ticker": "AIP",
+        "name": "Arteris, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 664731328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SPB": {
+        "ticker": "SPB",
+        "name": "Spectrum Brands Holdings, Inc.",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 1772463360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
