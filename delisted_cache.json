@@ -89,11 +89,6 @@
         "last_checked": "2026-02-15",
         "reason": "No Price Data"
     },
-    "QED": {
-        "delisted": true,
-        "last_checked": "2026-02-15",
-        "reason": "No Price Data"
-    },
     "CORR": {
         "delisted": true,
         "last_checked": "2026-02-15",
@@ -175,6 +170,11 @@
         "reason": "No Price Data"
     },
     "JPN": {
+        "delisted": true,
+        "last_checked": "2026-02-16",
+        "reason": "No Price Data"
+    },
+    "QED": {
         "delisted": true,
         "last_checked": "2026-02-16",
         "reason": "No Price Data"
