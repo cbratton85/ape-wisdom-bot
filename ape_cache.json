@@ -18148,5 +18148,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CMC": {
+        "ticker": "CMC",
+        "name": "Commercial Metals Company",
+        "meta": "Steel",
+        "type": "EQUITY",
+        "mcap": 8843857920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AZTA": {
+        "ticker": "AZTA",
+        "name": "Azenta, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 1318280960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PFSI": {
+        "ticker": "PFSI",
+        "name": "PennyMac Financial Services, In",
+        "meta": "Mortgage Finance",
+        "type": "EQUITY",
+        "mcap": 4790164480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CVCO": {
+        "ticker": "CVCO",
+        "name": "Cavco Industries, Inc.",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 4607938560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "RBBN": {
+        "ticker": "RBBN",
+        "name": "Ribbon Communications Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 370101056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VCIG": {
+        "ticker": "VCIG",
+        "name": "VCI Global Limited",
+        "meta": "Consulting Services",
+        "type": "EQUITY",
+        "mcap": 11687186,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
