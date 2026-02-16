@@ -18478,5 +18478,75 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "TNYA": {
+        "ticker": "TNYA",
+        "name": "Tenaya Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 142893888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ZI": {
+        "ticker": "ZI",
+        "name": "ZI",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "DRCT": {
+        "ticker": "DRCT",
+        "name": "Direct Digital Holdings, Inc.",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 3979653,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "TTC": {
+        "ticker": "TTC",
+        "name": "Toro Company (The)",
+        "meta": "Tools & Accessories",
+        "type": "EQUITY",
+        "mcap": 9799279616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SES": {
+        "ticker": "SES",
+        "name": "SES AI Corporation",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 620621952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AGM": {
+        "ticker": "AGM",
+        "name": "Federal Agricultural Mortgage C",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 1897421824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MWA": {
+        "ticker": "MWA",
+        "name": "MUELLER WATER PRODUCTS",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 4711889408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
