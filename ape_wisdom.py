@@ -1100,26 +1100,27 @@ def export_interactive_html(df):
             export_df.at[index, 'Meta'] = f"{badge}{color_span(meta_val, C_WHITE)}"
             export_df.at[index, 'Type_Tag'] = 'ETF' if is_fund else 'STOCK'
             
-            # --- 17. SYMBOL & PRICE ---
-            t = row['Sym']
-            tv_ticker = t.replace('-', '.')
-            export_df.at[index, 'Sym'] = (
-                f'<div class="symbol-container" '
-                f'onmouseenter="loadMiniChart(\'{tv_ticker}\', \'{index}\', \'{row.get("exchange", "")}\', event)" '
-                f'onmouseleave="hideSymbolProfile(\'chart-tooltip-{index}\')">' 
-                f'<a href="https://www.tradingview.com/chart/?symbol={tv_ticker}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
-                f'<div id="chart-tooltip-{index}" class="chart-popup"></div>'
-                f'</div>'
-            )
+            # --- 8. NAME & LOGO (FIXED) ---
+            t_raw = row['Sym']
+            clean_ticker = t_raw.replace('-', '.')
             
+            # Define p_clean early so it's available if needed
             p_clean = row.get('Price', 0) or 0.0
-            exchange_name = row.get("exchange", "Unknown")
+            
+            logo_src = get_cached_logo(clean_ticker) 
+            
+            # Use the actual 'Name' from the row, not the price variable
+            display_name = str(row.get('Name', t_raw))
 
-            price_html = (
-                f'<div class="symbol-container" style="justify-content: flex-end;">'
-                f'<span>${float(p_clean):.2f}</span>'
+            html_name = (
+                f'<div class="symbol-container">'
+                f'<img src="{logo_src}" width="20" height="20" style="border-radius:50%; margin-right:8px;">'
+                f'<span class="d-tooltip" data-tooltip="{display_name}">'
+                f'<span class="text-content">{display_name}</span>'
+                f'</span>'
                 f'</div>'
             )
+            export_df.at[index, 'Name'] = html_name
 
             export_df.at[index, 'Price'] = price_html
 
