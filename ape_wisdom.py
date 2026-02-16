@@ -901,19 +901,26 @@ def export_interactive_html(df):
             export_df['Srg'] = export_df['Srg'].astype(object)
 
         for index, row in export_df.iterrows():
+            # --- INITIAL DATA PREP ---
+            t_raw = row['Sym']
+            clean_ticker = t_raw.replace('-', '.')
+            p_clean = row.get('Price', 0) or 0.0
+            display_name = str(row.get('Name', t_raw))
+            logo_src = get_cached_logo(clean_ticker)
+
+            # --- VOLUME & MENTIONS ---
             v_raw = row.get('CurVol_Disp', '0')
             export_df.at[index, 'CurVol_Disp'] = f'<div style="text-align: right; padding-right: 10px; color: #fff; font-weight:bold;">{v_raw}</div>'
             
             avg_v_raw = row.get('Vol_Display', '0')
             export_df.at[index, 'Vol_Display'] = f'<div style="text-align: right; padding-right: 10px; color: #ccc;">{avg_v_raw}</div>'
+            
             m_val = row.get('MENT', 0)
             z_score = row.get('z_MENT', 0)
-            
             if z_score >= 2.0: m_clr = "#ffff00"
             elif z_score >= 1.0: m_clr = "#00ff00"
             else: m_clr = "#ffffff"  
-            
-            export_df.at[index, 'MENT'] = color_span(f"{int(m_val)}", m_clr)
+            export_df.at[index, 'MENT'] = with_hist(color_span(f"{int(m_val)}", m_clr), row.get('h_ment', ''))
 
             # --- 1. VELOCITY (Vel) ---
             v_val = row.get('Vel', 0)
@@ -934,11 +941,11 @@ def export_interactive_html(df):
             # --- 3. EFFICIENCY (Eff) ---
             eff_val = float(row.get('Eff', 0)) 
             eff_hist = row.get('h_eff', '') 
-            if eff_val >= 1.0: eff_clr = "#00ff00"       # Strong Green
-            elif eff_val >= 0.5: eff_clr = "#ffff00"     # Yellow
-            elif eff_val >= 0.1: eff_clr = "#ffffff"     # White (Small Positive - THE FIX)
-            elif eff_val > -0.1: eff_clr = "#666666"     # Grey (Flat/Zero)
-            else: eff_clr = "#ff4444"                    # Red (Negative)
+            if eff_val >= 1.0: eff_clr = "#00ff00"
+            elif eff_val >= 0.5: eff_clr = "#ffff00"
+            elif eff_val >= 0.1: eff_clr = "#ffffff"
+            elif eff_val > -0.1: eff_clr = "#666666"
+            else: eff_clr = "#ff4444"
             export_df.at[index, 'Eff'] = with_hist(color_span(f"{eff_val:.1f}", eff_clr), eff_hist)
 
             # --- 4. CONVICTION (Conv) ---
@@ -953,7 +960,7 @@ def export_interactive_html(df):
             upchg_clr = C_GREEN if upchg_val > 0 else (C_RED if upchg_val < 0 else "#666")
             export_df.at[index, 'Upv+'] = with_hist(color_span(f"{upchg_val:+d}", upchg_clr), upchg_hist)
 
-            # --- 6. STREAK (Strk) - CALCULATION & FORMATTING ---
+            # --- 6. STREAK (Strk) ---
             rank_change_str = str(row.get('RANK+', '0')).replace(',', '')
             if '▲' in rank_change_str:
                 rank_delta = float(rank_change_str.replace('▲', '').strip())
@@ -962,6 +969,7 @@ def export_interactive_html(df):
             else:
                 try: rank_delta = float(rank_change_str)
                 except: rank_delta = 0.0
+            
             old_streak = float(row.get('Strk', 0))
             if rank_delta > 0:
                 new_streak = 1 if old_streak < 0 else old_streak + 1
@@ -969,6 +977,7 @@ def export_interactive_html(df):
                 new_streak = -1 if old_streak > 0 else old_streak - 1
             else:
                 new_streak = old_streak
+            
             trend_val = int(new_streak)
             trend_hist = row.get('h_streak', '') 
             sig_text = f"{trend_val:+d}"
@@ -988,19 +997,8 @@ def export_interactive_html(df):
             heat_span = f'<span style="color:{h_clr}; font-weight:bold;">{score:.1f}</span>'
             export_df.at[index, 'Heat'] = with_hist(heat_span, heat_hist)
 
-            # --- 8. NAME & LOGO (FIXED) ---
-            t_raw = row['Sym']
-            clean_ticker = t_raw.replace('-', '.')
-            
-            # Define p_clean early so it's available if needed
-            p_clean = row.get('Price', 0) or 0.0
-            
-            logo_src = get_cached_logo(clean_ticker) 
-            
-            # Use the actual 'Name' from the row, not the price variable
-            display_name = str(row.get('Name', t_raw))
-
-            html_name = (
+            # --- 8. NAME & LOGO ---
+            export_df.at[index, 'Name'] = (
                 f'<div class="symbol-container">'
                 f'<img src="{logo_src}" width="20" height="20" style="border-radius:50%; margin-right:8px;">'
                 f'<span class="d-tooltip" data-tooltip="{display_name}">'
@@ -1008,12 +1006,10 @@ def export_interactive_html(df):
                 f'</span>'
                 f'</div>'
             )
-            export_df.at[index, 'Name'] = html_name
 
             # --- 9. RANK+ ---
             r_val = row.get('Rank+', 0)
             r_hist = row.get('h_rank_plus', '')
-            
             if r_val != 0:
                 r_color = C_GREEN if r_val > 0 else C_RED
                 r_arrow = "▲" if r_val > 0 else "▼"
@@ -1023,120 +1019,62 @@ def export_interactive_html(df):
                 export_df.at[index, 'Rank+'] = with_hist('<span style="color:#888">0</span>', r_hist)
 
             # --- 10. RANK ---
-            rank_val = str(row.get('Rank', 0))
-            rank_hist = row.get('h_rank', '')
-            export_df.at[index, 'Rank'] = with_hist(rank_val, rank_hist)
+            export_df.at[index, 'Rank'] = with_hist(str(row.get('Rank', 0)), row.get('h_rank', ''))
 
-            # --- 11. SURGE (SRG) - Linear Color Logic ---
+            # --- 11. SURGE (SRG) ---
             srg_raw = float(row.get('Srg', 0))
             srg_val_str = f"{int(srg_raw)}%"
             srg_hist = row.get('h_surge', '')
-            
-            # Linear thresholding: makes the dashboard much more intuitive
-            if srg_raw >= 300:
-                srg_clr = "#ffff00"  # Yellow: Extreme Surge (3x+ average)
-            elif srg_raw >= 100:
-                srg_clr = "#00ff00"  # Green: Above Average (1x+ average)
-            elif srg_raw >= 50:
-                srg_clr = "#ffffff"  # White: Significant Progress
-            else:
-                srg_clr = "#888888"  # Grey: Low relative volume
-                
+            if srg_raw >= 300: srg_clr = "#ffff00"
+            elif srg_raw >= 100: srg_clr = "#00ff00"
+            elif srg_raw >= 50: srg_clr = "#ffffff"
+            else: srg_clr = "#888888"
             export_df.at[index, 'Srg'] = with_hist(color_span(srg_val_str, srg_clr), srg_hist)
 
+            # --- 12. MNT% & SQUEEZE ---
             mnt_raw = row.get('Mnt%', 0)
-            mnt_val_str = f"{int(mnt_raw)}%"
-            mnt_hist = row.get('h_mnt_perc', '')
             mnt_z = row.get('z_Mnt%', 0)
             mnt_clr = C_YELLOW if mnt_z >= 2.0 else (C_GREEN if mnt_z >= 1.0 else C_WHITE)
-            export_df.at[index, 'Mnt%'] = with_hist(color_span(mnt_val_str, mnt_clr), mnt_hist)
+            export_df.at[index, 'Mnt%'] = with_hist(color_span(f"{int(mnt_raw)}%", mnt_clr), row.get('h_mnt_perc', ''))
 
-            # --- 12. SQUEEZE ---
             sq_val = int(row.get('Sqz', 0))
-            sq_hist = row.get('h_squeeze', '') 
             sq_z = row.get('z_Squeeze', 0)
-            sq_color = C_CYAN if sq_z > 1.5 else C_WHITE
-            export_df.at[index, 'Sqz'] = with_hist(color_span(sq_val, sq_color), sq_hist)
+            export_df.at[index, 'Sqz'] = with_hist(color_span(sq_val, C_CYAN if sq_z > 1.5 else C_WHITE), row.get('h_squeeze', ''))
             
             # --- 13. UPVOTES ---
             upvs_val = row.get('Upvs', 0)
-            upvs_hist = row.get('h_upvotes', '')
             z_up = row.get('z_Upvotes', 0)
             upvs_clr = C_GREEN if z_up > 1.5 else C_WHITE
-            upvs_str = color_span(upvs_val, upvs_clr)
-            export_df.at[index, 'Upvs'] = with_hist(upvs_str, upvs_hist)
-            
-            # --- 14. MENTIONS ---
-            ment_val = str(row.get('MENT', 0))
-            ment_hist = row.get('h_ment', '')
-            export_df.at[index, 'MENT'] = with_hist(ment_val, ment_hist)
+            export_df.at[index, 'Upvs'] = with_hist(color_span(upvs_val, upvs_clr), row.get('h_upvotes', ''))
 
-            # --- INSERT RSI COLOR LOGIC HERE ---
+            # --- 14. RSI ---
             rsi_raw = float(row.get('RSI', 0))
-            if rsi_raw >= 70: 
-                rsi_clr = "#ff4444" # Red (Overbought)
-            elif rsi_raw <= 30 and rsi_raw > 0: 
-                rsi_clr = "#00ff00" # Green (Oversold)
-            else: 
-                rsi_clr = "#ffffff"
-            
-            rsi_str = color_span(f"{rsi_raw:.1f}", rsi_clr)
-            # Use with_hist if you want RSI history in the tooltip, or just color_span
-            export_df.at[index, 'RSI'] = rsi_str
+            rsi_clr = "#ff4444" if rsi_raw >= 70 else ("#00ff00" if rsi_raw <= 30 and rsi_raw > 0 else "#ffffff")
+            export_df.at[index, 'RSI'] = color_span(f"{rsi_raw:.1f}", rsi_clr)
 
-            # --- 15. Percent Change ---
+            # --- 15. DAY% & PRICE ---
             d_val = row.get('Day%', 0)
             d_clr = "#00ff00" if d_val > 0 else ("#ff4444" if d_val < 0 else "#888")
             export_df.at[index, 'Day%'] = color_span(f"{d_val:+.1f}%", d_clr)
-
-            # --- 16. ETF BADGE & META ---
-            is_fund = row.get('Type', 'EQUITY') == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
-            meta_val = row.get('Meta', '-')
-            if is_fund:
-                badge = '<span style="background-color:#ff00ff; color:black; padding:2px 5px; border-radius:4px; font-size:11px; font-weight:bold; margin-right:6px; vertical-align:middle;">ETF</span>'
-            else:
-                badge = ""
             
-            export_df.at[index, 'Meta'] = f"{badge}{color_span(meta_val, C_WHITE)}"
+            # Format price correctly using p_clean
+            export_df.at[index, 'Price'] = f'<div class="symbol-container" style="justify-content: flex-end;"><span>${float(p_clean):.2f}</span></div>'
+
+            # --- 16. ETF BADGE & INDUSTRY ---
+            is_fund = row.get('Type', 'EQUITY') == 'ETF' or 'Trust' in display_name or 'Fund' in display_name
+            badge = '<span style="background-color:#ff00ff; color:black; padding:2px 5px; border-radius:4px; font-size:11px; font-weight:bold; margin-right:6px; vertical-align:middle;">ETF</span>' if is_fund else ""
+            export_df.at[index, 'Meta'] = f"{badge}{color_span(row.get('Meta', '-'), C_WHITE)}"
             export_df.at[index, 'Type_Tag'] = 'ETF' if is_fund else 'STOCK'
-            
-            # --- 8. NAME & LOGO (FIXED) ---
-            t_raw = row['Sym']
-            clean_ticker = t_raw.replace('-', '.')
-            
-            # Define p_clean early so it's available if needed
-            p_clean = row.get('Price', 0) or 0.0
-            
-            logo_src = get_cached_logo(clean_ticker) 
-            
-            # Use the actual 'Name' from the row, not the price variable
-            display_name = str(row.get('Name', t_raw))
 
-            html_name = (
-                f'<div class="symbol-container">'
-                f'<img src="{logo_src}" width="20" height="20" style="border-radius:50%; margin-right:8px;">'
-                f'<span class="d-tooltip" data-tooltip="{display_name}">'
-                f'<span class="text-content">{display_name}</span>'
-                f'</span>'
+            # --- 17. SYMBOL LINK ---
+            export_df.at[index, 'Sym'] = (
+                f'<div class="symbol-container" '
+                f'onmouseenter="loadMiniChart(\'{clean_ticker}\', \'{index}\', \'{row.get("exchange", "")}\', event)" '
+                f'onmouseleave="hideSymbolProfile(\'chart-tooltip-{index}\')">' 
+                f'<a href="https://www.tradingview.com/chart/?symbol={clean_ticker}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t_raw}</a>'
+                f'<div id="chart-tooltip-{index}" class="chart-popup"></div>'
                 f'</div>'
             )
-            export_df.at[index, 'Name'] = html_name
-
-            export_df.at[index, 'Price'] = price_html
-
-            vol_raw = export_df.at[index, 'Vol_Display']
-            export_df.at[index, 'Vol_Display'] = f'<div style="text-align: right; color: #ccc;">{vol_raw}</div>'
-
-        export_df.rename(columns={'Meta': 'INDUSTRY/SECTOR', 'Vol_Display': 'VOL(30)', 'CurVol_Disp': 'VOL'}, inplace=True)
-
-        cols = [
-            'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Day%', 'Acc', 'Eff', 'Conv', 'Upvs', 
-            'Upv+', 'VOL', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 'RSI', 
-            'Type_Tag', 'AvgVol', 'MCap'
-        ]
-        for c in cols:
-            if c not in export_df.columns:
-                export_df[c] = 0
 
         # --- 1. GENERATE RAW HTML TABLE ---
         raw_table = export_df[cols].to_html(classes='table table-dark table-hover', index=False, escape=False)
