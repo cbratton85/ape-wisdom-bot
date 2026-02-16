@@ -18348,5 +18348,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "EQL": {
+        "ticker": "EQL",
+        "name": "ALPS Equal Sector Weight ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "RMBS": {
+        "ticker": "RMBS",
+        "name": "Rambus, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 10974930944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FLS": {
+        "ticker": "FLS",
+        "name": "Flowserve Corporation",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 11400990720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EQH": {
+        "ticker": "EQH",
+        "name": "Equitable Holdings, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 12719156224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SAN": {
+        "ticker": "SAN",
+        "name": "Banco Santander, S.A. Sponsored",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 175661105152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
