@@ -18018,5 +18018,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ABB": {
+        "ticker": "ABB",
+        "name": "ABB",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "PDBC": {
+        "ticker": "PDBC",
+        "name": "Invesco Optimum Yield Diversifi",
+        "meta": "Commodities Broad Basket",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "GTN": {
+        "ticker": "GTN",
+        "name": "Gray Media, Inc.",
+        "meta": "Broadcasting",
+        "type": "EQUITY",
+        "mcap": 525025632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "XDIV": {
+        "ticker": "XDIV",
+        "name": "Roundhill S&P 500 No Dividend T",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
