@@ -18438,5 +18438,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "JW": {
+        "ticker": "JW",
+        "name": "JW",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "QSI": {
+        "ticker": "QSI",
+        "name": "Quantum-Si Incorporated",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 213464064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "OCUL": {
+        "ticker": "OCUL",
+        "name": "Ocular Therapeutix, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1933102976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "VOE": {
+        "ticker": "VOE",
+        "name": "Vanguard Mid-Cap Value ETF",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
