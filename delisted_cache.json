@@ -164,11 +164,6 @@
         "last_checked": "2026-02-16",
         "reason": "No Price Data"
     },
-    "FEDX": {
-        "delisted": true,
-        "last_checked": "2026-02-16",
-        "reason": "No Price Data"
-    },
     "ABB": {
         "delisted": true,
         "last_checked": "2026-02-16",
@@ -180,6 +175,11 @@
         "reason": "No Price Data"
     },
     "SCS": {
+        "delisted": true,
+        "last_checked": "2026-02-16",
+        "reason": "No Price Data"
+    },
+    "FEDX": {
         "delisted": true,
         "last_checked": "2026-02-16",
         "reason": "No Price Data"
