@@ -997,8 +997,13 @@ def export_interactive_html(df):
             exchange_name = row.get("exchange", "Unknown")
 
             html_name = (
-                f'<div class="symbol-container" style="justify-content: flex-end;">'
-                f'<span>${p_clean:.2f}</span>'
+                f'<div class="symbol-container" style="display: flex; align-items: center; gap: 8px;" '
+                f'onmouseenter="loadSymbolProfile(\'{clean_ticker}\', \'profile-{index}\', \'{exchange_name}\', event)" '
+                f'onmouseleave="hideSymbolProfile(\'profile-{index}\')">' 
+                f'<img src="{logo_src}" style="width: 24px; height: 24px; border-radius: 50%; background: #2a2e39; flex-shrink: 0; object-fit: contain;" '
+                f'onerror="this.src=\'https://s3-symbol-logo.tradingview.com/indices/nasdaq-100.svg\'">'
+                f'<span class="text-content"><b>{row.get("Name", clean_ticker)}</b></span>'
+                f'<div id="profile-{index}" class="chart-popup"></div>'
                 f'</div>'
             )
             export_df.at[index, 'Name'] = html_name
@@ -1739,8 +1744,8 @@ def export_interactive_html(df):
             .chart-popup {{
                 display: none;
                 position: fixed;
-                width: 60vw;   
-                height: 65vh;
+                width: 700px;
+                height: 400px;
                 background: #0F0F0F;
                 border: 1px solid #444;
                 border-radius: 8px;
@@ -2169,8 +2174,9 @@ def export_interactive_html(df):
         if (!container) return;
         
         container.innerHTML = "";
-        container.style.display = "flex";
-        positionPopup(container, event || window.event, null, true, true);
+        
+        // Pass 500 for chart height and center vertically
+        positionPopup(container, event || window.event, 500, true, true);
         
         const finalSymbol = getFinalSymbol(symbol, yfExchange);
 
@@ -2187,18 +2193,12 @@ def export_interactive_html(df):
         script.async = true;
         
         script.innerHTML = JSON.stringify({{
-            "autosize": true,
-            "withdateranges": true,
             "allow_symbol_change": false,
             "calendar": false,
-            "studies": [
-                {"id": "MASimple@tv-basicstudies", "inputs": {"length": 50}, "overrides": { "Plot.color": "blue" }},
-                {"id": "MASimple@tv-basicstudies", "inputs": {"length": 200}, "overrides": { "Plot.color": "red" }}
-            ],
-            "details": true,
+            "details": false,
             "hide_side_toolbar": true,
             "hide_top_toolbar": true,
-            "hide_legend": false,
+            "hide_legend": true,
             "hide_volume": false,
             "hotlist": false,
             "interval": "D",
