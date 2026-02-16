@@ -1062,12 +1062,16 @@ def export_interactive_html(df):
             rsi_clr = "#ff4444" if rsi_raw >= 70 else ("#00ff00" if rsi_raw <= 30 and rsi_raw > 0 else "#ffffff")
             export_df.at[index, 'RSI'] = color_span(f"{rsi_raw:.1f}", rsi_clr)
 
-            # --- 15. DAY% & PRICE ---
+            # --- 15. DAY% & PRICE (FIXED) ---
             d_val = row.get('Day%', 0)
             d_clr = "#00ff00" if d_val > 0 else ("#ff4444" if d_val < 0 else "#888")
             export_df.at[index, 'Day%'] = color_span(f"{d_val:+.1f}%", d_clr)
             
-            # Format price correctly using p_clean
+            try:
+                p_val = float(p_clean)
+            except:
+                p_val = 0.0
+                
             export_df.at[index, 'Price'] = f'<div class="symbol-container" style="justify-content: flex-end;"><span>${float(p_clean):.2f}</span></div>'
 
             # --- 16. ETF BADGE & INDUSTRY ---
