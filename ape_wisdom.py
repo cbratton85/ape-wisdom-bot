@@ -1105,12 +1105,16 @@ def export_interactive_html(df):
                 f'</div>'
             )
             
-            p_clean = row.get('Price', 0) or 0.0
+            p_clean = row.get('Price', 0)
             exchange_name = row.get("exchange", "Unknown")
 
             price_html = (
-                f'<div class="symbol-container" style="justify-content: flex-end;">'
-                f'<span>${float(p_clean):.2f}</span>'
+                f'<div class="symbol-container" style="justify-content: flex-end;" '
+                f'onmouseenter="loadPriceWidget(\'{tv_ticker}\', \'price-tooltip-{index}\', \'{exchange_name}\', event)" '
+                f'onmouseleave="hideSymbolProfile(\'price-tooltip-{index}\')">'
+                f'<span style="cursor:help;">${p_clean:.2f}</span>'
+                # We override width/height here to match the small widget size
+                f'<div id="price-tooltip-{index}" class="chart-popup" style="width: 320px; height: 130px;"></div>'
                 f'</div>'
             )
 
