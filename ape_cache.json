@@ -18298,5 +18298,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "NERV": {
+        "ticker": "NERV",
+        "name": "Minerva Neurosciences, Inc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 271330496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "GLUE": {
+        "ticker": "GLUE",
+        "name": "Monte Rosa Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1366270208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "INSP": {
+        "ticker": "INSP",
+        "name": "Inspire Medical Systems, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 1736412544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KOD": {
+        "ticker": "KOD",
+        "name": "Kodiak Sciences Inc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1347338752,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "TMDX": {
+        "ticker": "TMDX",
+        "name": "TransMedics Group, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 4437194240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
