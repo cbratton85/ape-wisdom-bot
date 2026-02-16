@@ -2215,46 +2215,6 @@ def export_interactive_html(df):
         container.appendChild(widgetContainer);
     }}
 
-    // 3. CORRECTED: Now uses the fixed positionPopup to show small box
-    function loadPriceWidget(symbol, containerId, yfExchange, event) {{
-        const container = document.getElementById(containerId);
-        if (!container) return;
-
-        if (container.innerHTML !== "") {{
-            container.style.display = "flex";
-            positionPopup(container, event, 150, true, true);
-            return;
-        }}
-
-        container.style.display = "flex";
-        positionPopup(container, event || window.event, 150, true, true);
-
-        const finalSymbol = getFinalSymbol(symbol, yfExchange);
-
-        const widgetContainer = document.createElement('div');
-        widgetContainer.className = 'tradingview-widget-container';
-        
-        const widgetDiv = document.createElement('div');
-        widgetDiv.className = 'tradingview-widget-container__widget';
-        widgetContainer.appendChild(widgetDiv);
-
-        const script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js';
-        script.async = true;
-        
-        script.innerHTML = JSON.stringify({{
-            "symbol": finalSymbol,
-            "colorTheme": "dark",
-            "isTransparent": false,
-            "locale": "en",
-            "width": 320
-        }});
-
-        widgetContainer.appendChild(script);
-        container.appendChild(widgetContainer);
-    }}
-
     function loadSymbolProfile(symbol, containerId, yfExchange, event) {{
         const container = document.getElementById(containerId);
         if (!container) return;
