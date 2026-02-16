@@ -2187,12 +2187,18 @@ def export_interactive_html(df):
         script.async = true;
         
         script.innerHTML = JSON.stringify({{
+            "autosize": true,
+            "withdateranges": true,
             "allow_symbol_change": false,
             "calendar": false,
-            "details": false,
+            "studies": [
+                {"id": "MASimple@tv-basicstudies", "inputs": {"length": 50}, "overrides": { "Plot.color": "blue" }},
+                {"id": "MASimple@tv-basicstudies", "inputs": {"length": 200}, "overrides": { "Plot.color": "red" }}
+            ],
+            "details": true,
             "hide_side_toolbar": true,
             "hide_top_toolbar": true,
-            "hide_legend": true,
+            "hide_legend": false,
             "hide_volume": false,
             "hotlist": false,
             "interval": "D",
