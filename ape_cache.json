@@ -18598,5 +18598,85 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SPG": {
+        "ticker": "SPG",
+        "name": "Simon Property Group, Inc.",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 74240966656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GLPI": {
+        "ticker": "GLPI",
+        "name": "Gaming and Leisure Properties, ",
+        "meta": "REIT - Specialty",
+        "type": "EQUITY",
+        "mcap": 13131587584,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TMP": {
+        "ticker": "TMP",
+        "name": "Tompkins Financial Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 1194382464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "K": {
+        "ticker": "K",
+        "name": "K",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "NNN": {
+        "ticker": "NNN",
+        "name": "NNN REIT, Inc.",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 8421914624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RYI": {
+        "ticker": "RYI",
+        "name": "Ryerson Holding Corporation",
+        "meta": "Metal Fabrication",
+        "type": "EQUITY",
+        "mcap": 870688896,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CZR": {
+        "ticker": "CZR",
+        "name": "Caesars Entertainment, Inc.",
+        "meta": "Resorts & Casinos",
+        "type": "EQUITY",
+        "mcap": 3772966400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GUSH": {
+        "ticker": "GUSH",
+        "name": "Direxion Daily S&P Oil & Gas Ex",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
