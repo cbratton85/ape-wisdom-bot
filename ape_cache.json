@@ -18398,5 +18398,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BKKT": {
+        "ticker": "BKKT",
+        "name": "Bakkt, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 274789856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KOMP": {
+        "ticker": "KOMP",
+        "name": "State Street SPDR S&P Kensho Ne",
+        "meta": "Mid-Cap Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
