@@ -18678,5 +18678,75 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ABCL": {
+        "ticker": "ABCL",
+        "name": "AbCellera Biologics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 927938624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "NANC": {
+        "ticker": "NANC",
+        "name": "Unusual Whales Subversive Democ",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "OPTT": {
+        "ticker": "OPTT",
+        "name": "Ocean Power Technologies, Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 84827064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "GMAB": {
+        "ticker": "GMAB",
+        "name": "Genmab A/S",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 18498273280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ABSI": {
+        "ticker": "ABSI",
+        "name": "Absci Corporation",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 383447424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LE": {
+        "ticker": "LE",
+        "name": "Lands' End, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 558779072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "BEAM": {
+        "ticker": "BEAM",
+        "name": "Beam Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2833180416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
