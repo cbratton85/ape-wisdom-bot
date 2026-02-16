@@ -18548,5 +18548,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ESAB": {
+        "ticker": "ESAB",
+        "name": "ESAB Corporation",
+        "meta": "Metal Fabrication",
+        "type": "EQUITY",
+        "mcap": 8354151424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CDLR": {
+        "ticker": "CDLR",
+        "name": "Cadeler A/S",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 2269352960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NX": {
+        "ticker": "NX",
+        "name": "Quanex Building Products Corpor",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 1012482368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TILE": {
+        "ticker": "TILE",
+        "name": "Interface, Inc.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 1950246656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VICI": {
+        "ticker": "VICI",
+        "name": "VICI Properties Inc.",
+        "meta": "REIT - Diversified",
+        "type": "EQUITY",
+        "mcap": 31316172800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
