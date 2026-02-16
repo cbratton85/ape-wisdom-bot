@@ -18108,5 +18108,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "RELX": {
+        "ticker": "RELX",
+        "name": "RELX PLC PLC",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 56174628864,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MDY": {
+        "ticker": "MDY",
+        "name": "State Street SPDR S&P MIDCAP 40",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 36056387584,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ARMK": {
+        "ticker": "ARMK",
+        "name": "Aramark",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 10245347328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GSK": {
+        "ticker": "GSK",
+        "name": "GSK plc",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 118251421696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
