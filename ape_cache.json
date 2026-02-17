@@ -19688,5 +19688,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "FRPT": {
+        "ticker": "FRPT",
+        "name": "Freshpet, Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 3437571072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "URI": {
+        "ticker": "URI",
+        "name": "United Rentals, Inc.",
+        "meta": "Rental & Leasing Services",
+        "type": "EQUITY",
+        "mcap": 55481671680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PRPH": {
+        "ticker": "PRPH",
+        "name": "ProPhase Labs, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 808607,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
+    },
+    "LTM": {
+        "ticker": "LTM",
+        "name": "LATAM Airlines Group S.A.",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 17266186240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CBZ": {
+        "ticker": "CBZ",
+        "name": "CBIZ, Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 1537928320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PLG": {
+        "ticker": "PLG",
+        "name": "Platinum Group Metals Ltd.",
+        "meta": "Other Precious Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 273342144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
