@@ -19188,5 +19188,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "TKO": {
+        "ticker": "TKO",
+        "name": "TKO Group Holdings, Inc.",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 16981801984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IYR": {
+        "ticker": "IYR",
+        "name": "iShares U.S. Real Estate ETF",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 4945857024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
