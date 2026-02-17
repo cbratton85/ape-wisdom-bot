@@ -19258,5 +19258,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VDE": {
+        "ticker": "VDE",
+        "name": "Vanguard Energy ETF",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 6385922560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "UWM": {
+        "ticker": "UWM",
+        "name": "ProShares Ultra Russell2000",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SECT": {
+        "ticker": "SECT",
+        "name": "Main Sector Rotation ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "BRZU": {
+        "ticker": "BRZU",
+        "name": "Direxion Daily Brazil Bull 2X S",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
