@@ -18748,5 +18748,75 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "HYS": {
+        "ticker": "HYS",
+        "name": "PIMCO 0-5 Year High Yield Corpo",
+        "meta": "High Yield Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "COF": {
+        "ticker": "COF",
+        "name": "Capital One Financial Corporati",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 131832078336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DRV": {
+        "ticker": "DRV",
+        "name": "Direxion Daily Real Estate Bear",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "BDX": {
+        "ticker": "BDX",
+        "name": "Becton, Dickinson and Company",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 63724085248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DPRO": {
+        "ticker": "DPRO",
+        "name": "Draganfly Inc.",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 176258608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "PBI": {
+        "ticker": "PBI",
+        "name": "Pitney Bowes Inc.",
+        "meta": "Integrated Freight & Logistics",
+        "type": "EQUITY",
+        "mcap": 1764260608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ENSG": {
+        "ticker": "ENSG",
+        "name": "The Ensign Group, Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 12397779968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
