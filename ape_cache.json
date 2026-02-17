@@ -19088,5 +19088,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "SRVR": {
+        "ticker": "SRVR",
+        "name": "Pacer Data & Infrastructure Rea",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "IFRA": {
+        "ticker": "IFRA",
+        "name": "iShares U.S. Infrastructure ETF",
+        "meta": "Infrastructure",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "DLR": {
+        "ticker": "DLR",
+        "name": "Digital Realty Trust, Inc.",
+        "meta": "REIT - Specialty",
+        "type": "EQUITY",
+        "mcap": 63296069632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
