@@ -20048,5 +20048,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "UONE": {
+        "ticker": "UONE",
+        "name": "Urban One, Inc.",
+        "meta": "Broadcasting",
+        "type": "EQUITY",
+        "mcap": 53226092,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "TRS": {
+        "ticker": "TRS",
+        "name": "TriMas Corporation",
+        "meta": "Packaging & Containers",
+        "type": "EQUITY",
+        "mcap": 1486818816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "UWMC": {
+        "ticker": "UWMC",
+        "name": "UWM Holdings Corporation",
+        "meta": "Mortgage Finance",
+        "type": "EQUITY",
+        "mcap": 7775657472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VERI": {
+        "ticker": "VERI",
+        "name": "Veritone, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 278172256,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "NESR": {
+        "ticker": "NESR",
+        "name": "National Energy Services Reunit",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 2435798528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
