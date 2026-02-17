@@ -19448,5 +19448,125 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ALLO": {
+        "ticker": "ALLO",
+        "name": "Allogene Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 457325856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LNTH": {
+        "ticker": "LNTH",
+        "name": "Lantheus Holdings, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 4753810944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ROKT": {
+        "ticker": "ROKT",
+        "name": "State Street SPDR S&P Kensho Fi",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "STNG": {
+        "ticker": "STNG",
+        "name": "Scorpio Tankers Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 3632195072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ACHV": {
+        "ticker": "ACHV",
+        "name": "Achieve Life Sciences, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 224647424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "AGX": {
+        "ticker": "AGX",
+        "name": "Argan, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 5742273536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NATL": {
+        "ticker": "NATL",
+        "name": "NCR Atleos Corporation",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 3178025472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FTNT": {
+        "ticker": "FTNT",
+        "name": "Fortinet, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 62573289472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PLNT": {
+        "ticker": "PLNT",
+        "name": "Planet Fitness, Inc.",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 7799184384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NNE": {
+        "ticker": "NNE",
+        "name": "Nano Nuclear Energy Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 1250876288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "WAVE": {
+        "ticker": "WAVE",
+        "name": "Eco Wave Power Global AB (publ)",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 28916572,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SMJF": {
+        "ticker": "SMJF",
+        "name": "SMJ International Holdings Inc.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 33800100,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
