@@ -19748,5 +19748,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "DPZ": {
+        "ticker": "DPZ",
+        "name": "Domino's Pizza Inc",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 12725922816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "EXE": {
+        "ticker": "EXE",
+        "name": "Expand Energy Corporation",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 24460027904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PTRN": {
+        "ticker": "PTRN",
+        "name": "Pattern Group Inc. - Series A",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2111885824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "AMRX": {
+        "ticker": "AMRX",
+        "name": "Amneal Pharmaceuticals, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 4816039936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FRO": {
+        "ticker": "FRO",
+        "name": "Frontline Plc",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 6954739200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PBH": {
+        "ticker": "PBH",
+        "name": "Prestige Consumer Healthcare In",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 3193740032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
