@@ -19048,5 +19048,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "GTO": {
+        "ticker": "GTO",
+        "name": "Invesco Total Return Bond ETF",
+        "meta": "Intermediate Core-Plus Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "DG": {
+        "ticker": "DG",
+        "name": "Dollar General Corporation",
+        "meta": "Discount Stores",
+        "type": "EQUITY",
+        "mcap": 33863086080,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "UNM": {
+        "ticker": "UNM",
+        "name": "Unum Group",
+        "meta": "Insurance - Life",
+        "type": "EQUITY",
+        "mcap": 11987611648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PPCB": {
+        "ticker": "PPCB",
+        "name": "Propanc Biopharma, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3214411,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }

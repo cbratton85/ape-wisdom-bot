@@ -24,11 +24,6 @@
         "last_checked": "2026-02-15",
         "reason": "No Price Data"
     },
-    "NH": {
-        "delisted": true,
-        "last_checked": "2026-02-15",
-        "reason": "No Price Data"
-    },
     "CO": {
         "delisted": true,
         "last_checked": "2026-02-15",
@@ -155,6 +150,16 @@
         "reason": "No Price Data"
     },
     "TTM": {
+        "delisted": true,
+        "last_checked": "2026-02-17",
+        "reason": "No Price Data"
+    },
+    "DS": {
+        "delisted": true,
+        "last_checked": "2026-02-17",
+        "reason": "No Price Data"
+    },
+    "NH": {
         "delisted": true,
         "last_checked": "2026-02-17",
         "reason": "No Price Data"
