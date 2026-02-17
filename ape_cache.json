@@ -19808,5 +19808,135 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FARM": {
+        "ticker": "FARM",
+        "name": "Farmer Brothers Company",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 31754958,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "NMM": {
+        "ticker": "NMM",
+        "name": "Navios Maritime Partners LP",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 1817448064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LMB": {
+        "ticker": "LMB",
+        "name": "Limbach Holdings, Inc.",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 1059900416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ASA": {
+        "ticker": "ASA",
+        "name": "ASA  Gold and Precious Metals L",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 1258041472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GWRE": {
+        "ticker": "GWRE",
+        "name": "Guidewire Software, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 10398695424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HWKN": {
+        "ticker": "HWKN",
+        "name": "Hawkins, Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 3029967360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ANF": {
+        "ticker": "ANF",
+        "name": "Abercrombie & Fitch Company",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 4430682112,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TNK": {
+        "ticker": "TNK",
+        "name": "Teekay Tankers Ltd.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 2475062272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PSI": {
+        "ticker": "PSI",
+        "name": "Invesco Semiconductors ETF",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 321248000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "GMM": {
+        "ticker": "GMM",
+        "name": "Global Mofy AI Limited",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 76836400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CBAT": {
+        "ticker": "CBAT",
+        "name": "CBAK Energy Technology, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 91305216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "UFPT": {
+        "ticker": "UFPT",
+        "name": "UFP Technologies, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 1898263936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "PID": {
+        "ticker": "PID",
+        "name": "Invesco International Dividend ",
+        "meta": "Foreign Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
