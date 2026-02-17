@@ -18928,5 +18928,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "MPC": {
+        "ticker": "MPC",
+        "name": "Marathon Petroleum Corporation",
+        "meta": "Oil & Gas Refining & Marketing",
+        "type": "EQUITY",
+        "mcap": 61100462080,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NTLA": {
+        "ticker": "NTLA",
+        "name": "Intellia Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1374901248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "CDW": {
+        "ticker": "CDW",
+        "name": "CDW Corporation",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 16626366464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CWD": {
+        "ticker": "CWD",
+        "name": "CaliberCos Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 8631426,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "AFL": {
+        "ticker": "AFL",
+        "name": "AFLAC Incorporated",
+        "meta": "Insurance - Life",
+        "type": "EQUITY",
+        "mcap": 60225933312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
