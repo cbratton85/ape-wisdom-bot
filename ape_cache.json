@@ -19298,5 +19298,125 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "GVH": {
+        "ticker": "GVH",
+        "name": "Globavend Holdings Limited - Or",
+        "meta": "Integrated Freight & Logistics",
+        "type": "EQUITY",
+        "mcap": 2413107,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "PLYX": {
+        "ticker": "PLYX",
+        "name": "Polaryx Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "EGY": {
+        "ticker": "EGY",
+        "name": "VAALCO Energy, Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 498354496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TAP": {
+        "ticker": "TAP",
+        "name": "Molson Coors Beverage Company",
+        "meta": "Beverages - Brewers",
+        "type": "EQUITY",
+        "mcap": 10539395072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "STAG": {
+        "ticker": "STAG",
+        "name": "Stag Industrial, Inc.",
+        "meta": "REIT - Industrial",
+        "type": "EQUITY",
+        "mcap": 7466940416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EQPT": {
+        "ticker": "EQPT",
+        "name": "EquipmentShare.com Inc",
+        "meta": "Rental & Leasing Services",
+        "type": "EQUITY",
+        "mcap": 8172976640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "IDCC": {
+        "ticker": "IDCC",
+        "name": "InterDigital, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 9526321152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "C": {
+        "ticker": "C",
+        "name": "Citigroup, Inc.",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 203171184640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "WIP": {
+        "ticker": "WIP",
+        "name": "SPDR FTSE International Governm",
+        "meta": "Global Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "GAP": {
+        "ticker": "GAP",
+        "name": "Gap, Inc. (The)",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 10157181952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CRCT": {
+        "ticker": "CRCT",
+        "name": "Cricut, Inc.",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 970971456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CCOI": {
+        "ticker": "CCOI",
+        "name": "Cogent Communications Holdings,",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 1312932352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
