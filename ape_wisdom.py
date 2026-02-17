@@ -1733,7 +1733,7 @@ def export_interactive_html(df):
             .chart-popup {{
                 display: none;
                 position: fixed;
-                width: 700px;
+                width: 400px;
                 height: 400px;
                 background: #0F0F0F;
                 border: 1px solid #444;
@@ -2431,9 +2431,9 @@ def export_interactive_html(df):
         
         // Set title based on type
         if (type === 'etf') {{
-            title.innerHTML = '📈 ETF Heatmap';
+            title.innerHTML = '📈 ETF Heatmap (Updated End of Day)';
         }} else {{
-            title.innerHTML = '🔥 Stock Heatmap';
+            title.innerHTML = '🔥 Stock Heatmap (Updated End of Day)';
         }}
         
         // Clear previous content
