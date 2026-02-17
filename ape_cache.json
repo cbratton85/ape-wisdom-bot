@@ -19168,5 +19168,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PNK"
+    },
+    "SSP": {
+        "ticker": "SSP",
+        "name": "E.W. Scripps Company (The)",
+        "meta": "Broadcasting",
+        "type": "EQUITY",
+        "mcap": 309031392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "JOYY": {
+        "ticker": "JOYY",
+        "name": "JOYY Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 3142383616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
