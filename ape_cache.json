@@ -18978,5 +18978,75 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HEI": {
+        "ticker": "HEI",
+        "name": "Heico Corporation",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 46356451328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BLBD": {
+        "ticker": "BLBD",
+        "name": "Blue Bird Corporation",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 1820823296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "VICR": {
+        "ticker": "VICR",
+        "name": "Vicor Corporation",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 7005608960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ERII": {
+        "ticker": "ERII",
+        "name": "Energy Recovery, Inc.",
+        "meta": "Pollution & Treatment Controls",
+        "type": "EQUITY",
+        "mcap": 829894784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VFC": {
+        "ticker": "VFC",
+        "name": "V.F. Corporation",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 7942645248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VFH": {
+        "ticker": "VFH",
+        "name": "Vanguard Financials ETF",
+        "meta": "Financial",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CTAS": {
+        "ticker": "CTAS",
+        "name": "Cintas Corporation",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 77737091072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
