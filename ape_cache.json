@@ -18888,5 +18888,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "WMB": {
+        "ticker": "WMB",
+        "name": "Williams Companies, Inc. (The)",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 88326160384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RYCEF": {
+        "ticker": "RYCEF",
+        "name": "Rolls Royce Holdings plc",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 144126476288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
+    },
+    "QLS": {
+        "ticker": "QLS",
+        "name": "IQ Hedge Long Short Tracker ETF",
+        "meta": "Long-Short Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "AVUS": {
+        "ticker": "AVUS",
+        "name": "Avantis U.S. Equity ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
