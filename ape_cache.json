@@ -19238,5 +19238,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "MYNZ": {
+        "ticker": "MYNZ",
+        "name": "Mainz Biomed N.V.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 7248113,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "WAB": {
+        "ticker": "WAB",
+        "name": "Westinghouse Air Brake Technolo",
+        "meta": "Railroads",
+        "type": "EQUITY",
+        "mcap": 43775295488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
