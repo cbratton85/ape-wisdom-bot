@@ -2140,7 +2140,7 @@ def export_interactive_html(df):
         const manualOverrides = {{
             'SPY': 'AMEX:SPY', 'VOO': 'AMEX:VOO', 'IVV': 'AMEX:IVV',
             'TQQQ': 'NASDAQ:TQQQ', 'SQQQ': 'NASDAQ:SQQQ', 'VPN': 'NASDAQ:VPN',
-            'AM': 'NYSE:AM', 'DIA': 'AMEX:DIA', 'IWM': 'AMEX:IWM'
+            'AM': 'NYSE:AM', 'DIA': 'AMEX:DIA', 'IWM': 'AMEX:IWM', 'DTE': 'NYSE:DTE'
         }};
 
         if (manualOverrides[s]) return manualOverrides[s];
