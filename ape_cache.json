@@ -19938,5 +19938,115 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "GPI": {
+        "ticker": "GPI",
+        "name": "Group 1 Automotive, Inc.",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 4172145408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "QMCO": {
+        "ticker": "QMCO",
+        "name": "Quantum Corporation",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 91861504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ORI": {
+        "ticker": "ORI",
+        "name": "Old Republic International Corp",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 10531472384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TFSL": {
+        "ticker": "TFSL",
+        "name": "TFS Financial Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 4302115840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "WGRX": {
+        "ticker": "WGRX",
+        "name": "Wellgistics Health, Inc.",
+        "meta": "Pharmaceutical Retailers",
+        "type": "EQUITY",
+        "mcap": 26305648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "AMTD": {
+        "ticker": "AMTD",
+        "name": "AMTD IDEA Group",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 81833112,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SSRM": {
+        "ticker": "SSRM",
+        "name": "SSR Mining Inc.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 5281673216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "OPI": {
+        "ticker": "OPI",
+        "name": "OPI",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "ZROZ": {
+        "ticker": "ZROZ",
+        "name": "PIMCO 25  Year Zero Coupon U.S.",
+        "meta": "Long Government",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "MASI": {
+        "ticker": "MASI",
+        "name": "Masimo Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 9383289856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SPCE": {
+        "ticker": "SPCE",
+        "name": "Virgin Galactic Holdings, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 182823360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
