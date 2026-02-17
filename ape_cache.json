@@ -19208,5 +19208,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "WBS": {
+        "ticker": "WBS",
+        "name": "Webster Financial Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 11468723200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AHR": {
+        "ticker": "AHR",
+        "name": "American Healthcare REIT, Inc.",
+        "meta": "REIT - Healthcare Facilities",
+        "type": "EQUITY",
+        "mcap": 9648503808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FEIM": {
+        "ticker": "FEIM",
+        "name": "Frequency Electronics, Inc.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 456811680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
