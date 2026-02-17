@@ -49,11 +49,6 @@
         "last_checked": "2026-02-15",
         "reason": "No Price Data"
     },
-    "KIND": {
-        "delisted": true,
-        "last_checked": "2026-02-15",
-        "reason": "No Price Data"
-    },
     "FI": {
         "delisted": true,
         "last_checked": "2026-02-15",
@@ -162,6 +157,11 @@
     "BCOM": {
         "delisted": true,
         "last_checked": "2026-02-16",
+        "reason": "No Price Data"
+    },
+    "KIND": {
+        "delisted": true,
+        "last_checked": "2026-02-17",
         "reason": "No Price Data"
     }
 }

@@ -18818,5 +18818,75 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "TSSI": {
+        "ticker": "TSSI",
+        "name": "TSS, Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 234798608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "LNC": {
+        "ticker": "LNC",
+        "name": "Lincoln National Corporation",
+        "meta": "Insurance - Life",
+        "type": "EQUITY",
+        "mcap": 7764708864,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LQDA": {
+        "ticker": "LQDA",
+        "name": "Liquidia Corporation",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3323227392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "INSW": {
+        "ticker": "INSW",
+        "name": "International Seaways, Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 3158780416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GFL": {
+        "ticker": "GFL",
+        "name": "GFL Environmental Inc. Subordin",
+        "meta": "Waste Management",
+        "type": "EQUITY",
+        "mcap": 15581274112,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LPG": {
+        "ticker": "LPG",
+        "name": "Dorian LPG Ltd.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 1430217728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CPNG": {
+        "ticker": "CPNG",
+        "name": "Coupang, Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 31016474624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
