@@ -1111,19 +1111,8 @@ def export_interactive_html(df):
             )
             
             p_clean = row.get('Price', 0)
-            exchange_name = row.get("exchange", "Unknown")
-
-            price_html = (
-                f'<div class="symbol-container" style="justify-content: flex-end;" '
-                f'onmouseenter="loadPriceWidget(\'{tv_ticker}\', \'price-tooltip-{index}\', \'{exchange_name}\', event)" '
-                f'onmouseleave="hideSymbolProfile(\'price-tooltip-{index}\')">'
-                f'<span style="cursor:help;">${p_clean:.2f}</span>'
-                # We override width/height here to match the small widget size
-                f'<div id="price-tooltip-{index}" class="chart-popup" style="width: 320px; height: 130px;"></div>'
-                f'</div>'
-            )
-
-            export_df.at[index, 'Price'] = price_html
+            
+            export_df.at[index, 'Price'] = f'<div style="text-align: right; padding-right: 8px;">${p_clean:.2f}</div>'
 
             vol_raw = export_df.at[index, 'Vol_Display']
             export_df.at[index, 'Vol_Display'] = f'<div style="text-align: right; color: #ccc;">{vol_raw}</div>'
@@ -1756,6 +1745,12 @@ def export_interactive_html(df):
                 overflow: hidden;
                 flex-direction: column;
             }}
+
+            .chart-popup.large-chart {{
+                width: 75vw;
+                height: 80vh;
+            }}
+
             .symbol-container:hover .chart-popup {{
                 display: flex;
             }}
@@ -2048,10 +2043,10 @@ def export_interactive_html(df):
             
             <!-- Heatmap Modal -->
             <div id="heatmapModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999;">
-            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 96vw; height: 96vh; background: #0F0F0F; display: flex; flex-direction: column; border: 1px solid #333; box-shadow: 0 0 50px rgba(0,0,0,0.9);">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #1a1a1a; border-bottom: 1px solid #333; flex-shrink: 0;">
-                    <h2 id="heatmapTitle" style="color: #ff6b00; margin: 0; font-size: 20px; letter-spacing: -1px;">🔥 Stock Heatmap</h2>
-                    <button onclick="closeHeatmapModal()" style="background: #ff6b00; color: white; border: none; padding: 6px 12px; border-radius: 2px; cursor: pointer; font-weight: bold; font-size: 14px;">✕ Close</button>
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 99vw; height: 96vh; background: #0F0F0F; display: flex; flex-direction: column; border: 1px solid #333; box-shadow: 0 0 50px rgba(0,0,0,0.9);">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 4px 10px; background: #1a1a1a; border-bottom: 1px solid #333; flex-shrink: 0;">
+                    <h2 id="heatmapTitle" style="color: #ff6b00; margin: 0; font-size: 16px; letter-spacing: -1px;">🔥 Stock Heatmap</h2>
+                    <button onclick="closeHeatmapModal()" style="background: #ff6b00; color: white; border: none; padding: 2px 8px; border-radius: 2px; cursor: pointer; font-weight: bold; font-size: 14px;">✕ Close</button>
                 </div>
                 <div id="heatmapContainer" style="flex: 1; width: 100%; height: 100%; position: relative;"></div>
             </div>
@@ -2168,20 +2163,45 @@ def export_interactive_html(df):
         return s;
     }}
 
-    // 2. RESTORED: This function was missing in your snippet
     function loadMiniChart(symbol, index, yfExchange, event) {{
         const container = document.getElementById('chart-tooltip-' + index);
         if (!container) return;
         
         container.innerHTML = "";
         
-        // Pass 500 for chart height and center vertically
-        positionPopup(container, event || window.event, 500, true, true);
+        // 1. Reset any previous inline styles
+        container.style.width = ""; 
+        container.classList.add('large-chart'); // Base preference (e.g., 75vw)
+        
+        // --- SMART SIZING LOGIC ---
+        const mouseX = (event || window.event).clientX;
+        const screenW = window.innerWidth;
+        const spaceOnRight = screenW - mouseX - 40; // 40px buffer for scrollbar/padding
+        
+        // Define your ideal width (75% of screen) and minimum readable width (e.g., 500px)
+        const idealWidth = screenW * 0.75; 
+        const minWidth = 500; 
+
+        // Check if ideal width fits on the right
+        if (idealWidth > spaceOnRight) {{
+            // It doesn't fit! 
+            // If the available space is decent (>500px), shrink the chart to fit that space.
+            if (spaceOnRight > minWidth) {{
+                container.style.width = spaceOnRight + "px";
+            }} 
+            // If space is too small (<500px), we leave it big and let positionPopup flip it to the left.
+        }}
+        // ---------------------------
+
+        const dynamicHeight = window.innerHeight * 0.8;
+        positionPopup(container, event || window.event, dynamicHeight, true, true);
         
         const finalSymbol = getFinalSymbol(symbol, yfExchange);
 
         const widgetContainer = document.createElement('div');
         widgetContainer.className = 'tradingview-widget-container';
+        widgetContainer.style.width = "100%";
+        widgetContainer.style.height = "100%";
         
         const widgetDiv = document.createElement('div');
         widgetDiv.className = 'tradingview-widget-container__widget';
@@ -2193,65 +2213,31 @@ def export_interactive_html(df):
         script.async = true;
         
         script.innerHTML = JSON.stringify({{
-            "allow_symbol_change": false,
+            "autosize": true,
+            "symbol": finalSymbol,
+            "interval": "D",
+            "timezone": "Etc/UTC",
+            "theme": "dark",
+            "style": "1",
+            "locale": "en",
+            "enable_publishing": false,
+            "allow_symbol_change": true,
             "calendar": false,
-            "details": false,
+            "details": true,
+            "hotlist": false,
             "hide_side_toolbar": true,
             "hide_top_toolbar": true,
-            "hide_legend": true,
+            "hide_legend": false,
             "hide_volume": false,
-            "hotlist": false,
-            "interval": "D",
-            "locale": "en",
+            "withdateranges": true,
+            "range": "12M",
             "save_image": false,
-            "style": "1",
-            "symbol": finalSymbol,
-            "theme": "dark",
-            "timezone": "Etc/UTC",
             "backgroundColor": "#0F0F0F",
             "gridColor": "rgba(242, 242, 242, 0.06)",
-            "width": "100%",
-            "height": "100%"
-        }});
-
-        widgetContainer.appendChild(script);
-        container.appendChild(widgetContainer);
-    }}
-
-    // 3. CORRECTED: Now uses the fixed positionPopup to show small box
-    function loadPriceWidget(symbol, containerId, yfExchange, event) {{
-        const container = document.getElementById(containerId);
-        if (!container) return;
-
-        if (container.innerHTML !== "") {{
-            container.style.display = "flex";
-            positionPopup(container, event, 150, true, true);
-            return;
-        }}
-
-        container.style.display = "flex";
-        positionPopup(container, event || window.event, 150, true, true);
-
-        const finalSymbol = getFinalSymbol(symbol, yfExchange);
-
-        const widgetContainer = document.createElement('div');
-        widgetContainer.className = 'tradingview-widget-container';
-        
-        const widgetDiv = document.createElement('div');
-        widgetDiv.className = 'tradingview-widget-container__widget';
-        widgetContainer.appendChild(widgetDiv);
-
-        const script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js';
-        script.async = true;
-        
-        script.innerHTML = JSON.stringify({{
-            "symbol": finalSymbol,
-            "colorTheme": "dark",
-            "isTransparent": false,
-            "locale": "en",
-            "width": 320
+            "watchlist": [],
+            "compareSymbols": [],
+            "studies": [
+                "STD;VWMA" ]
         }});
 
         widgetContainer.appendChild(script);
@@ -2299,7 +2285,8 @@ def export_interactive_html(df):
         const container = document.getElementById(containerId);
         if (container) {{
             container.style.display = "none";
-            container.innerHTML = ""; 
+            container.innerHTML = "";
+            container.classList.remove('large-chart');
         }}
     }}
 
