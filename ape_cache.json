@@ -19568,5 +19568,125 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "PODD": {
+        "ticker": "PODD",
+        "name": "Insulet Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 17207455744,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GLBE": {
+        "ticker": "GLBE",
+        "name": "Global-E Online Ltd.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 5095177216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CLDX": {
+        "ticker": "CLDX",
+        "name": "Celldex Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1528337920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "QUAD": {
+        "ticker": "QUAD",
+        "name": "Quad Graphics, Inc",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 332509792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BBNX": {
+        "ticker": "BBNX",
+        "name": "Beta Bionics, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 610841792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "TWST": {
+        "ticker": "TWST",
+        "name": "Twist Bioscience Corporation",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 3176252928,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LCII": {
+        "ticker": "LCII",
+        "name": "LCI Industries",
+        "meta": "Recreational Vehicles",
+        "type": "EQUITY",
+        "mcap": 3773380352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DHT": {
+        "ticker": "DHT",
+        "name": "DHT Holdings, Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 2588066304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MKSI": {
+        "ticker": "MKSI",
+        "name": "MKS Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 18044741632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VRSK": {
+        "ticker": "VRSK",
+        "name": "Verisk Analytics, Inc.",
+        "meta": "Consulting Services",
+        "type": "EQUITY",
+        "mcap": 25157079040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TNL": {
+        "ticker": "TNL",
+        "name": "Travel   Leisure Co.",
+        "meta": "Travel Services",
+        "type": "EQUITY",
+        "mcap": 4693211136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BELFB": {
+        "ticker": "BELFB",
+        "name": "Bel Fuse Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 2948012288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
