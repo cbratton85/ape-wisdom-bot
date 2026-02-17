@@ -19158,5 +19158,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "TCEHY": {
+        "ticker": "TCEHY",
+        "name": "Tencent Holding Ltd.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 616147320832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
     }
 }
