@@ -19148,5 +19148,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "WEST": {
+        "ticker": "WEST",
+        "name": "Westrock Coffee Company",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 485092832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
