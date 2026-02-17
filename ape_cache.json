@@ -19418,5 +19418,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "DAVE": {
+        "ticker": "DAVE",
+        "name": "Dave Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2367670784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "FF": {
+        "ticker": "FF",
+        "name": "FutureFuel Corp.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 164459280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AIR": {
+        "ticker": "AIR",
+        "name": "AAR Corp.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 4443201024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
