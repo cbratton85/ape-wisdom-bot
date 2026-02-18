@@ -20938,5 +20938,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "RGLD": {
+        "ticker": "RGLD",
+        "name": "Royal Gold, Inc.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 23443249152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SLM": {
+        "ticker": "SLM",
+        "name": "SLM Corporation",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 4852623872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GPN": {
+        "ticker": "GPN",
+        "name": "Global Payments Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 22751821824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FOLD": {
+        "ticker": "FOLD",
+        "name": "Amicus Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 4498514944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "FAS": {
+        "ticker": "FAS",
+        "name": "Direxion Financial Bull 3X Shar",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
