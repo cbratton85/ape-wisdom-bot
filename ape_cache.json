@@ -20508,5 +20508,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "EWO": {
+        "ticker": "EWO",
+        "name": "iShares MSCI Austria ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 142783008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "MNDR": {
+        "ticker": "MNDR",
+        "name": "Mobile-health Network Solutions",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 2338723,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
