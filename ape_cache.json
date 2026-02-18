@@ -20408,5 +20408,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CSM": {
+        "ticker": "CSM",
+        "name": "ProShares Large Cap Core Plus",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "ENVX": {
+        "ticker": "ENVX",
+        "name": "Enovix Corporation",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 1288561792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LESL": {
+        "ticker": "LESL",
+        "name": "Leslie's, Inc.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 11179890,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
