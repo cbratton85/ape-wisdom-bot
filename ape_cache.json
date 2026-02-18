@@ -20658,5 +20658,75 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CAKE": {
+        "ticker": "CAKE",
+        "name": "The Cheesecake Factory Incorpor",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 3255160576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CLH": {
+        "ticker": "CLH",
+        "name": "Clean Harbors, Inc.",
+        "meta": "Waste Management",
+        "type": "EQUITY",
+        "mcap": 15181783040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "APLT": {
+        "ticker": "APLT",
+        "name": "Applied Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 14862969,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "LI": {
+        "ticker": "LI",
+        "name": "Li Auto Inc.",
+        "meta": "Auto Manufacturers",
+        "type": "EQUITY",
+        "mcap": 18659631104,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LPCN": {
+        "ticker": "LPCN",
+        "name": "Lipocine Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 57712324,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "FTI": {
+        "ticker": "FTI",
+        "name": "TechnipFMC plc",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 25770733568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BLX": {
+        "ticker": "BLX",
+        "name": "Banco Latinoamericano de Comerc",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 1851569152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
