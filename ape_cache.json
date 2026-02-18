@@ -20098,5 +20098,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "CANF": {
+        "ticker": "CANF",
+        "name": "Can-Fite Biopharma Ltd",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 5773624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "ZEV": {
+        "ticker": "ZEV",
+        "name": "ZEV",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "REC": {
+        "ticker": "REC",
+        "name": "Emles Real Estate Credit ETF",
+        "meta": "Multisector Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "AIXI": {
+        "ticker": "AIXI",
+        "name": "XIAO-I Corporation",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 3737844,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "LWLG": {
+        "ticker": "LWLG",
+        "name": "Lightwave Logic, Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 503189952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "NVNO": {
+        "ticker": "NVNO",
+        "name": "enVVeno Medical Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 5684104,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
