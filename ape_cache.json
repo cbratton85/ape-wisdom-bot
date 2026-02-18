@@ -20588,5 +20588,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "AER": {
+        "ticker": "AER",
+        "name": "AerCap Holdings N.V.",
+        "meta": "Rental & Leasing Services",
+        "type": "EQUITY",
+        "mcap": 25967527936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
