@@ -20488,5 +20488,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "PIO": {
+        "ticker": "PIO",
+        "name": "Invesco Global Water ETF",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "RNG": {
+        "ticker": "RNG",
+        "name": "Ringcentral, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2510376960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

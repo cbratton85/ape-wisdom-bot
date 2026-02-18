@@ -154,11 +154,6 @@
         "last_checked": "2026-02-18",
         "reason": "No Price Data"
     },
-    "RODE": {
-        "delisted": true,
-        "last_checked": "2026-02-18",
-        "reason": "No Price Data"
-    },
     "REC": {
         "delisted": true,
         "last_checked": "2026-02-18",
@@ -175,6 +170,11 @@
         "reason": "No Price Data"
     },
     "GPS": {
+        "delisted": true,
+        "last_checked": "2026-02-18",
+        "reason": "No Price Data"
+    },
+    "RODE": {
         "delisted": true,
         "last_checked": "2026-02-18",
         "reason": "No Price Data"
