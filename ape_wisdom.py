@@ -1177,6 +1177,7 @@ def export_interactive_html(df):
             
             '<th>RSI</th>': '<th><span class="d-tooltip" data-tooltip="Relative Strength Index. Math: 100 - (100 / (1 + AvgGain/AvgLoss)). Description: Momentum oscillator. >70 is Overbought (Red), <30 is Oversold (Green).">&nbsp;RSI</span></th>'
         }
+        
         for old_tag, new_tag in header_map.items():
             raw_table = raw_table.replace(old_tag, new_tag)
 
@@ -1751,10 +1752,10 @@ def export_interactive_html(df):
                 overflow: visible !important; 
             }}
 
-            .chart-popup {{
+            p {{
                 display: none;
                 position: fixed;
-                width: 600px;
+                width: 400px;
                 height: 600px;
                 background: #0F0F0F;
                 border: 1px solid #444;
