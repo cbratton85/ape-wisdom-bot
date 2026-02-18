@@ -20228,5 +20228,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "IEP": {
+        "ticker": "IEP",
+        "name": "Icahn Enterprises L.P. - Deposi",
+        "meta": "Oil & Gas Refining & Marketing",
+        "type": "EQUITY",
+        "mcap": 4795665920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "WRD": {
+        "ticker": "WRD",
+        "name": "WERIDE INC.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2629945600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "IVA": {
+        "ticker": "IVA",
+        "name": "Inventiva S.A. - American Depos",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1263045504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
