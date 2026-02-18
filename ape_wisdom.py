@@ -1754,7 +1754,7 @@ def export_interactive_html(df):
             .chart-popup {{
                 display: none;
                 position: fixed;
-                width: 300px;
+                width: 600px;
                 height: 600px;
                 background: #0F0F0F;
                 border: 1px solid #444;
