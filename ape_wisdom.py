@@ -1133,29 +1133,30 @@ def export_interactive_html(df):
 
         # --- 2. INJECT FAST TOOLTIPS (Find & Replace Headers) ---
         header_map = {
-            '<th>Rank</th>': '<th data-tooltip="Current Rank Position">RANK</th>',
-            '<th>Rank+</th>': '<th data-tooltip="Rank Change vs 24h ago">&nbsp;RANK+</th>',
-            '<th>Heat</th>': '<th data-tooltip="Master Momentum Score (Weighted)">&nbsp;HEAT</th>',
-            '<th>Name</th>': '<th data-tooltip="Company Name">&nbsp;NAME</th>',
-            '<th>Sym</th>': '<th data-tooltip="Ticker Symbol">&nbsp;SYM</th>',
-            '<th>Price</th>': '<th data-tooltip="Current Stock Price">&nbsp;&nbsp;PRICE</th>',
-            '<th>Day%</th>': '<th data-tooltip="Price Change Since Yesterday Close">&nbsp;&nbsp;DAY%</th>',
-            '<th>Acc</th>': '<th data-tooltip="Acceleration: Speed Change vs 1h ago">ACC</th>',
-            '<th>Eff</th>': '<th data-tooltip="Efficiency: Rank gain per unit of volume">&nbsp;&nbsp;EFF</th>',
-            '<th>Conv</th>': '<th data-tooltip="Conviction: Upvotes per Mention ratio">&nbsp;CONV</th>',
-            '<th>Upvs</th>': '<th data-tooltip="Total Upvotes (24h)">UPVS</th>',
-            '<th>Upv+</th>': '<th data-tooltip="New Upvotes gained in last hour">&nbsp;UPV+</th>',
-            '<th>VOL</th>': '<th data-tooltip="Current Session Trading Volume">&nbsp;&nbsp;VOL</th>',
-            '<th>VOL(30)</th>': '<th data-tooltip="30-Day Average Volume">&nbsp;VOL(30)</th>',
-            '<th>Srg</th>': '<th data-tooltip="Surge: Current Vol vs 30d Avg">&nbsp;SRG</th>',
-            '<th>Vel</th>': '<th data-tooltip="Velocity: Rank change speed (1h)">VEL</th>',
-            '<th>Strk</th>': '<th data-tooltip="Streak: Hours maintaining direction">STRK</th>',
-            '<th>MENT</th>': '<th data-tooltip="Total Mentions (24h)">MENT</th>',
-            '<th>Mnt%</th>': '<th data-tooltip="Mention % Change vs 24h ago">&nbsp;MNT%</th>',
-            '<th>Sqz</th>': '<th data-tooltip="Short Squeeze Score">&nbsp;SQZ</th>',
-            '<th>INDUSTRY/SECTOR</th>': '<th data-tooltip="Sector / Industry Group">&nbsp;INDUSTRY/SECTOR</th>',
-            '<th>RSI</th>': '<th data-tooltip="Relative Strength Index (14-Day)">&nbsp;RSI</th>'
+            '<th>Rank</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Current rank in popularity list.">RANK</span></th>',
+            '<th>Rank+</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Rank(Yest) - Rank(Today)\nGreen: Climbing | Red: Falling">&nbsp;RANK+</span></th>',
+            '<th>Heat</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Weighted aggregate momentum score.\nRed: >2.0σ | Orange: >1.5σ | Yellow: >1σ">&nbsp;HEAT</span></th>',
+            '<th>Name</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Official security or ETF name.">&nbsp;NAME</span></th>',
+            '<th>Sym</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Ticker symbol for trading.">&nbsp;SYM</span></th>',
+            '<th>Price</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Real-time trading price.">&nbsp;&nbsp;PRICE</span></th>',
+            '<th>Day%</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Daily % change since last close.\nGreen: Positive | Red: Negative">&nbsp;&nbsp;DAY%</span></th>',
+            '<th>Acc</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Vel(Now) - Vel(1h ago)\nMag: Expl. | Cyan: Fast | Red: Slow">ACC</span></th>',
+            '<th>Eff</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Rank gain per unit of volume.\nGrn: >1.0 | Yel: >0.5 | Red: <0">&nbsp;&nbsp;EFF</span></th>',
+            '<th>Conv</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Upvotes / Mentions ratio.\nGold: >1.0x | White: Diluted">&nbsp;CONV</span></th>',
+            '<th>Upvs</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Total upvotes (24h).\nGreen: High Activity (>1.5σ)">UPVS</span></th>',
+            '<th>Upv+</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Upv(Now) - Upv(1h ago)\nGreen: Positive | Red: Negative">&nbsp;UPV+</span></th>',
+            '<th>VOL</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Current session trading volume.">&nbsp;&nbsp;VOL</span></th>',
+            '<th>VOL(30)</th>': '<th><span class="d-tooltip header-fix" data-tooltip="30-day average volume baseline.">&nbsp;VOL(30)</span></th>',
+            '<th>Srg</th>': '<th><span class="d-tooltip header-fix" data-tooltip="(Vol / Avg) * 100\nYel: Anomaly | Green: High Surge">&nbsp;SRG</span></th>',
+            '<th>Vel</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Hourly change in Rank+.\nGreen: Speeding Up | Red: Slowing">VEL</span></th>',
+            '<th>Strk</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Consecutive hours in direction.\nBrgt: 3+ | Pale: >0 | Red: Cold">STRK</span></th>',
+            '<th>MENT</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Total comments/posts (24h).">MENT</span></th>',
+            '<th>Mnt%</th>': '<th><span class="d-tooltip header-fix" data-tooltip="% change in mentions (24h).\nYel: >2σ | Green: >1σ">&nbsp;MNT%</span></th>',
+            '<th>Sqz</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Mentions * Surge / log(MCap)\nCyan: >1.5σ | White: Normal">&nbsp;SQZ</span></th>',
+            '<th>INDUSTRY/SECTOR</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Industry category group.">&nbsp;INDUSTRY/SECTOR</span></th>',
+            '<th>RSI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Relative Strength Index (14d).\nRed: Overbought | Green: Oversold">&nbsp;RSI</span></th>'
         }
+        
         for old_tag, new_tag in header_map.items():
             raw_table = raw_table.replace(old_tag, new_tag)
 
@@ -1273,6 +1274,7 @@ def export_interactive_html(df):
                 padding: 5px 3px !important;
                 background-color: #1a1a1a;
                 border-bottom: 2px solid #444;
+                z-index: 10;
             }}
 
             td {{
@@ -1386,12 +1388,28 @@ def export_interactive_html(df):
             table.no-colors a {{ color: #4da6ff !important; }}
             
             .filter-bar {{
-                display: flex; gap: 8px; align-items: center; background: #2a2a2a; padding: 2px 4px; /* Reduced from 8px */
-                border-radius: 5px; margin-bottom: 5px; /* Optional: Pulls the table up closer */
-                border: 1px solid #444; font-size: 0.85rem;
-                flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; -ms-overflow-style: none; scrollbar-width: none;
+                display: flex;
+                gap: 8px;
+                align-items: center;
+                background: #2a2a2a;
+                padding: 2px 4px;
+                border-radius: 5px;
+                margin-bottom: 5px;
+                border: 1px solid #444;
+                font-size: 0.85rem;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                white-space: nowrap;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+                z-index: 9998 !important;
             }}
-            
+
+            .dataTables_wrapper .dataTables_filter {{
+                position: sticky !important;
+                top: 10px;
+            }}
+
             .filter-bar::-webkit-scrollbar {{ display: none; }} 
             .filter-group {{ display:flex; align-items:center; gap:4px; }}
             .form-control-sm {{ background: #111; border: 1px solid #555; color: #fff !important; height: 28px; font-size: 0.85rem; padding: 2px 8px; outline: none; }}
@@ -1458,6 +1476,12 @@ def export_interactive_html(df):
                 z-index: 101;
             }}
 
+            .header-fix {{
+                display: inline-block;
+                max-width: 100%;
+                white-space: nowrap;
+            }}
+
             .summary-row {{
                 display: flex;
                 align-items: center;
@@ -1504,20 +1528,6 @@ def export_interactive_html(df):
                 white-space: nowrap;
             }}
             
-            .legend-container {{ background-color: #222; border: 1px solid #444; border-radius: 6px; margin-bottom: 10px; overflow: hidden; }}
-            .legend-header {{ background: #2a2a2a; padding: 4px 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #fff; }}
-            .legend-box {{ padding: 5px; display: none; background-color: #1a1a1a; }}
-            .legend-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }}
-            .legend-col {{ background: #222; border: 1px solid #333; padding: 6px; border-radius: 5px; }}
-            .legend-title {{ color: #00ff00; font-weight: bold; border-bottom: 1px solid #444; margin-bottom: 5px; font-size: 0.85rem; text-transform: uppercase; padding-bottom: 2px; }}
-            .legend-row {{ display: flex; align-items: flex-start; margin-bottom: 0px; font-size: 13px; border-bottom: 1px dashed #333; padding: 2px 0; line-height: 1.2; }}
-            .metric-name {{ color: #00ffff; font-weight: bold; width: 60px; flex-shrink: 0; }}
-            .metric-math {{ color: #888; font-family: monospace; font-size: 0.75rem; margin-right: 10px; flex-shrink: 0; }}
-            .metric-desc {{ color: #ccc; }}
-            .color-key {{ width: 80px; font-weight: bold; flex-shrink: 0; }}
-            .color-desc {{ color: #bbb; }}
-            @media (max-width: 900px) {{ .legend-grid {{ grid-template-columns: 1fr; }} }}
-
             .row-label::after {{
                 content: attr(data-tooltip); 
                 position: absolute; 
@@ -1549,12 +1559,34 @@ def export_interactive_html(df):
             .clr-surge:hover::after {{ color: #ffcc00 !important; border-color: #ffcc00 !important; }}
             .clr-buzz:hover::after {{ color: #ff00ff !important; border-color: #ff00ff !important; }}
 
-            .dataTables_wrapper .data_tables_header {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
-            .dataTables_filter {{ position: absolute; left: 48%; transform: translateX(-50%); width: auto; margin: 0 !important; float: none !important; z-index: 10; }}
+            .dataTables_wrapper .data_tables_header {{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 15px;
+            }}
+
+            .dataTables_filter {{
+                position: fixed !important;
+                position: absolute !important;
+                left: 50vw !important;
+                transform: translateX(-50%) !important;
+                pointer-events: none !important;
+                width: max-content !important;
+                top: 5px !important;
+                z-index: 10 !important;
+                margin: 0 !important;
+            }}
+
+            .d-tooltip::after,
+                th[data-tooltip]::after {{
+                z-index: 999999 !important;
+            }}
 
             .dataTables_filter input {{
-                width: 20vw !important;
-                min-width: 135px !important;
+                pointer-events: auto !important;
+                width: 25vw !important;
+                min-width: 200px !important;
                 max-width: 400px !important;
                 background: #181818 !important;
                 color: #fff !important;
@@ -1597,17 +1629,20 @@ def export_interactive_html(df):
                 color: #ffffff !important;
             }}
 
-            th:nth-child(-n+5)::after, td:nth-child(-n+5) .d-tooltip::after {{
+            th:nth-child(-n+5) .d-tooltip::after, 
+            td:nth-child(-n+5) .d-tooltip::after {{
                 left: 0 !important;
                 right: auto !important;
                 transform: none !important;
+                text-align: left !important;
             }}
 
-            th:nth-last-child(-n+7)::after, td:nth-last-child(-n+7) .d-tooltip::after {{
+            th:nth-last-child(-n+7) .d-tooltip::after, 
+            td:nth-last-child(-n+7) .d-tooltip::after {{
                 right: 0 !important;
                 left: auto !important;
                 transform: none !important;
-                text-align: right !important;
+                text-align: left !important;
             }}
 
             #time {{
@@ -1693,30 +1728,44 @@ def export_interactive_html(df):
             .d-tooltip::after {{
                 content: attr(data-tooltip); 
                 position: absolute;
-                top: 130%; 
                 left: 50%;
                 transform: translateX(-50%);
                 background-color: #000 !important; 
-                color: #ffffff !important; 
-                padding: 10px 15px; 
-                border-radius: 8px; 
+                color: #ffffff !important;
+                display: block;
+                height: auto !important;
+                min-width: max-content;
+                padding: 6px 10px; 
+                border-radius: 3px; 
                 border: 1px solid #444;
                 font-family: 'Consolas', monospace;
-                font-size: 13px; 
-                white-space: nowrap; 
-                width: auto; 
+                font-size: 12px;
+                white-space: pre !important;
+                text-align: left !important;
+                line-height: 1.2;
+                width: max-content;
                 max-width: none;
-                z-index: 9999999 !important;
                 opacity: 0; 
                 visibility: hidden; 
                 transition: opacity 0.1s ease-in-out;
                 pointer-events: none;
                 box-shadow: 0 10px 30px rgba(0,0,0,1);
+                z-index: 99999 !important;
             }}
 
             .d-tooltip:hover::after, .d-tooltip:focus::after {{
                 opacity: 1;
                 visibility: visible;
+            }}
+
+            td .d-tooltip::after {{
+                top: 110%;
+                bottom: auto;
+            }}
+
+            th .d-tooltip::after {{
+                bottom: 110%;
+                top: auto;
             }}
 
             .header-flex {{
@@ -1753,6 +1802,21 @@ def export_interactive_html(df):
 
             .symbol-container:hover .chart-popup {{
                 display: flex;
+            }}
+
+            th:nth-child(4), 
+            th:nth-child(21) {{
+                overflow: visible !important;
+                z-index: 50 !important;
+            }}
+
+            th:nth-child(4) span, 
+            th:nth-child(21) span {{
+                white-space: nowrap;
+            }}
+
+            th:hover {{
+                z-index: 100 !important; 
             }}
 
         </style>
@@ -1861,184 +1925,6 @@ def export_interactive_html(df):
                 <span id="stockCounter">Loading...</span>
             </div>
 
-            <div class="legend-container">
-                <div class="legend-header" onclick="toggleLegend()">
-                    <span>ℹ️ DATA DEFINITIONS & COLOR GUIDE (Click to Toggle)</span>
-                    <span id="legendArrow">▼</span>
-                </div>
-                <div class="legend-box" id="legendContent">
-                    <div class="legend-grid">
-                        
-                        <div class="legend-col">
-                            <div class="legend-title">📉 Column Definitions</div>
-                            
-                            <div class="legend-row">
-                                <span class="metric-name">RANK</span>
-                                <span class="metric-math">Current Pos</span>
-                                <span class="metric-desc">Current rank in the popularity list.</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="metric-name">RANK+</span>
-                                <span class="metric-math">Rank(Yest) - Rank(Today)</span>
-                                <span class="metric-desc">Positions changed vs 24h ago.</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="metric-name">HEAT</span>
-                                <span class="metric-math">Master Score</span>
-                                <span class="metric-desc">Weighted aggregate of all momentum signals.</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="metric-name">ACC</span>
-                                <span class="metric-math">Vel(Now) - Vel(1h ago)</span>
-                                <span class="metric-desc">Acceleration: (Rate of change of speed).</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="metric-name">EFF</span>
-                                <span class="metric-math">Rank+ / Surge</span>
-                                <span class="metric-desc">Efficiency: Rank gain per unit of volume.</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="metric-name">CONV</span>
-                                <span class="metric-math">Upvotes / Mentions</span>
-                                <span class="metric-desc">Conviction: Sentiment Quality Ratio.</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="metric-name">UPVS</span>
-                                <span class="metric-math">Raw Count</span>
-                                <span class="metric-desc">Total upvotes in last 24h.</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="metric-name">UPV+</span>
-                                <span class="metric-math">Upv(Now) - Upv(1hr ago)</span>
-                                <span class="metric-desc">New upvotes gained since <b>Last Scan (1h)</b>.</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="metric-name">VOL</span>
-                                <span class="metric-math">Current</span>
-                                <span class="metric-desc">Total shares traded in the current session.</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="metric-name">VOL(30)</span>
-                                <span class="metric-math">30-Day Mean</span>
-                                <span class="metric-desc">Average daily trading volume (Baseline).</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="metric-name">SRG</span>
-                                <span class="metric-math">(Vol / Avg) * 100</span>
-                                <span class="metric-desc">Surge: Current volume as % of 30-day Avg.</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="metric-name">VEL</span>
-                                <span class="metric-math">Rank+(Now) - Rank+(1hr ago)</span>
-                                <span class="metric-desc">Hourly change in Rank+. (Speeding up vs 1h ago?)</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="metric-name">STRK</span>
-                                <span class="metric-math">Hourly Streak</span>
-                                <span class="metric-desc">Streak: Consecutive <b>HOURS</b> sustaining direction.</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="metric-name">MNT%</span>
-                                <span class="metric-math">% Change</span>
-                                <span class="metric-desc">Percent change in mentions vs 24h ago.</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="metric-name">SQZ</span>
-                                <span class="metric-math">Mnt * Surge / log(MCap)</span>
-                                <span class="metric-desc">Short Squeeze Score (Vol+Chatter/Cap).</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="metric-name">RSI</span>
-                                <span class="metric-math">Wilder's 14d</span>
-                                <span class="metric-desc">Relative Strength Index (Momentum Oscillator).</span>
-                            </div>
-                        </div>
-
-                        <div class="legend-col">
-                            <div class="legend-title">🎨 Color Indicators</div>
-
-                            <div class="legend-row">
-                                <span class="color-key">RANK</span>
-                                <span class="color-desc">White (Standard).</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="color-key">RANK+</span>
-                                <span class="color-desc"><span style="color:#00ff00">Green</span> (Climbing), <span style="color:#ff4444">Red</span> (Falling).</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="color-key">HEAT</span>
-                                <span class="color-desc"><span style="color:#ff0000">Red</span> (> 2.0σ), <span style="color:#ff8800">Orange</span> (> 1.5σ), <span style="color:#ffff00">Yellow</span> (> 1σ).</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="color-key">ACC</span>
-                                <span class="color-desc">
-                                    <span style="color:#ff00ff">Magenta</span> (Expl. ≥5), 
-                                    <span style="color:#00ffff">Cyan</span> (Fast >0), 
-                                    <span style="color:#ffffff">White</span> (Steady 0), 
-                                    <span style="color:#ff4444">Red</span> (Slow <0).
-                                </span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="color-key">EFF</span>
-                                <span class="color-desc">
-                                    <span style="color:#00ff00">Green</span> (> 1.0), 
-                                    <span style="color:#ffff00">Yellow</span> (> 0.5), 
-                                    <span style="color:#ffffff">White</span> (> 0.1), 
-                                    <span style="color:#ff4444">Red</span> (< 0)
-                                </span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="color-key">CONV</span>
-                                <span class="color-desc"><span style="color:#ffcc00">Gold</span> (> 1.0x), White (Diluted).</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="color-key">UPVS</span>
-                                <span class="color-desc"><span style="color:#00ff00">Green</span> (High Activity > 1.5σ).</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="color-key">UPV+</span>
-                                <span class="color-desc"><span style="color:#00ff00">Green</span> (Positive), <span style="color:#ff4444">Red</span> (Negative).</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="color-key">VOL</span>
-                                <span class="color-desc"><span style="color:#ffffff">Bold White</span> (Current Session Activity).</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="color-key">VOL(30)</span>
-                                <span class="color-desc"><span style="color:#ccc">Gray</span> (Baseline average volume).</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="color-key">SRG</span>
-                                <span class="color-desc"><span style="color:#ffff00">Yellow</span> (Anomaly > 2σ), <span style="color:#00ff00">Green</span> (High > 1σ).</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="color-key">VEL</span>
-                                <span class="color-desc"><span style="color:#00ff00">Green</span> (Speeding Up), <span style="color:#ff4444">Red</span> (Slowing).</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="color-key">STRK</span>
-                                <span class="color-desc">
-                                    <span style="color:#00ff00; font-weight:bold;">Bright</span> (3+), <span style="color:#99ff99;">Pale</span> (>0), <span style="color:#ff4444;">Red</span> (≤ -2/Cold)
-                                </span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="color-key">MNT%</span>
-                                <span class="color-desc"><span style="color:#ffff00">Yellow</span> (> 2σ), <span style="color:#00ff00">Green</span> (> 1σ).</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="color-key">SQZ</span>
-                                <span class="color-desc"><span style="color:#00ffff">Cyan</span> (Score > 1.5σ), White (Normal).</span>
-                            </div>
-                            <div class="legend-row">
-                                <span class="color-key">RSI</span>
-                                <span class="color-desc"><span style="color:#ff4444">Red</span> (Overbought ≥70), <span style="color:#00ff00">Green</span> (Oversold ≤30).</span>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            
             {table_html}
             
             <!-- Heatmap Modal -->
@@ -2395,11 +2281,6 @@ def export_interactive_html(df):
         }});
     }}
 
-    function toggleLegend() {{
-        var x = document.getElementById("legendContent"); var arrow = document.getElementById("legendArrow");
-        if (x.style.display === "block") {{ x.style.display = "none"; arrow.innerText = "▼"; }} else {{ x.style.display = "block"; arrow.innerText = "▲"; }}
-    }}
-
     function toggleColors() {{
         var t = document.querySelector('table'); var btn = document.getElementById('btnColors');
         t.classList.toggle('no-colors');
@@ -2552,8 +2433,8 @@ def export_interactive_html(df):
     $(document).ready(function(){{ 
         table = $('.table').DataTable({{
             "order":[[0,"asc"]], 
-            "pageLength": 20,
-            "lengthMenu": [[10, 20, 50, 100, 150, 200, 250, -1], [10, 20, 50, 100, 150, 200, 250, "All"]],
+            "pageLength": 25,
+            "lengthMenu": [[25, 50, 100, 150, 200, 250, -1], [25, 50, 100, 150, 200, 250, "All"]],
 
             "language": {{
                 "search": "",
