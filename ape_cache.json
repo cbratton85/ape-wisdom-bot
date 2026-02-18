@@ -20728,5 +20728,75 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MFA": {
+        "ticker": "MFA",
+        "name": "MFA Financial, Inc.",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 1045680768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RGEN": {
+        "ticker": "RGEN",
+        "name": "Repligen Corporation",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 7774033408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ABT": {
+        "ticker": "ABT",
+        "name": "Abbott Laboratories",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 196236754944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "WST": {
+        "ticker": "WST",
+        "name": "West Pharmaceutical Services, I",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 17690617856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RILY": {
+        "ticker": "RILY",
+        "name": "BRC Group Holdings, Inc.",
+        "meta": "Financial Conglomerates",
+        "type": "EQUITY",
+        "mcap": 220091648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "TRNS": {
+        "ticker": "TRNS",
+        "name": "Transcat, Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 714705600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "MAA": {
+        "ticker": "MAA",
+        "name": "Mid-America Apartment Communiti",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 16138142720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
