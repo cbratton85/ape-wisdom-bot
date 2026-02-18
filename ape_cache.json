@@ -20798,5 +20798,85 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "INGR": {
+        "ticker": "INGR",
+        "name": "Ingredion Incorporated",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 7372672512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LKQ": {
+        "ticker": "LKQ",
+        "name": "LKQ Corporation",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 8421206016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SIVR": {
+        "ticker": "SIVR",
+        "name": "abrdn Physical Silver Shares ET",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "EPAM": {
+        "ticker": "EPAM",
+        "name": "EPAM Systems, Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 9472095232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VDC": {
+        "ticker": "VDC",
+        "name": "Vanguard Consumer Staples ETF",
+        "meta": "Consumer Defensive",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "APPN": {
+        "ticker": "APPN",
+        "name": "Appian Corporation",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1806379776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "W": {
+        "ticker": "W",
+        "name": "Wayfair Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 11872495616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PRAX": {
+        "ticker": "PRAX",
+        "name": "Praxis Precision Medicines, Inc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 9142738944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
