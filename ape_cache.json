@@ -20468,5 +20468,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "MREO": {
+        "ticker": "MREO",
+        "name": "Mereo BioPharma Group plc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 66151044,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ARKF": {
+        "ticker": "ARKF",
+        "name": "ARK Blockchain & Fintech Innova",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
