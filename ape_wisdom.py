@@ -1003,7 +1003,7 @@ def export_interactive_html(df):
                 f'<img src="{logo_src}" style="width: 24px; height: 24px; border-radius: 50%; background: #2a2e39; flex-shrink: 0; object-fit: contain;" '
                 f'onerror="this.src=\'https://s3-symbol-logo.tradingview.com/indices/nasdaq-100.svg\'">'
                 f'<span class="text-content"><b>{row.get("Name", clean_ticker)}</b></span>'
-                f'<div id="profile-{index}" class="c"></div>'
+                f'<div id="profile-{index}" class="chart-popup"></div>'
                 f'</div>'
             )
             export_df.at[index, 'Name'] = html_name
@@ -1106,7 +1106,7 @@ def export_interactive_html(df):
                 f'onmouseenter="loadMiniChart(\'{tv_ticker}\', \'{index}\', \'{row.get("exchange", "")}\', event)" '
                 f'onmouseleave="hideSymbolProfile(\'chart-tooltip-{index}\')">' 
                 f'<a href="https://www.tradingview.com/chart/?symbol={tv_ticker}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
-                f'<div id="chart-tooltip-{index}" class="c"></div>'
+                f'<div id="chart-tooltip-{index}" class="chart-popup"></div>'
                 f'</div>'
             )
             
@@ -1156,7 +1156,6 @@ def export_interactive_html(df):
             '<th>INDUSTRY/SECTOR</th>': '<th data-tooltip="Sector / Industry Group">&nbsp;INDUSTRY/SECTOR</th>',
             '<th>RSI</th>': '<th data-tooltip="Relative Strength Index (14-Day)">&nbsp;RSI</th>'
         }
-        
         for old_tag, new_tag in header_map.items():
             raw_table = raw_table.replace(old_tag, new_tag)
 
@@ -1731,11 +1730,11 @@ def export_interactive_html(df):
                 overflow: visible !important; 
             }}
 
-            p {{
+            .chart-popup {{
                 display: none;
                 position: fixed;
                 width: 400px;
-                height: 600px;
+                height: 400px;
                 background: #0F0F0F;
                 border: 1px solid #444;
                 border-radius: 8px;
@@ -2251,12 +2250,12 @@ def export_interactive_html(df):
 
         if (container.innerHTML !== "") {{
             container.style.display = "flex";
-            positionPopup(container, event, 600, true, true);
+            positionPopup(container, event, 400, true, true);
             return;
         }}
 
         container.style.display = "flex"; 
-        positionPopup(container, event || window.event, 600, true, true);
+        positionPopup(container, event || window.event, 400, true, true);
         
         const finalSymbol = getFinalSymbol(symbol, yfExchange);
         const widgetContainer = document.createElement('div');
