@@ -20988,5 +20988,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ALIT": {
+        "ticker": "ALIT",
+        "name": "Alight, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 719832000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LC": {
+        "ticker": "LC",
+        "name": "LendingClub Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 1871342336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EMR": {
+        "ticker": "EMR",
+        "name": "Emerson Electric Company",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 84986339328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
