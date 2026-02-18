@@ -20298,5 +20298,95 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "IXC": {
+        "ticker": "IXC",
+        "name": "iShares Global Energy ETF",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 1283746560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SFL": {
+        "ticker": "SFL",
+        "name": "SFL Corporation Ltd",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 1381096960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MSA": {
+        "ticker": "MSA",
+        "name": "MSA Safety Incorporated",
+        "meta": "Security & Protection Services",
+        "type": "EQUITY",
+        "mcap": 7914198016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ZIP": {
+        "ticker": "ZIP",
+        "name": "ZipRecruiter, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 150017920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AMLP": {
+        "ticker": "AMLP",
+        "name": "Alerian MLP ETF",
+        "meta": "Energy Limited Partnership",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SKLZ": {
+        "ticker": "SKLZ",
+        "name": "Skillz Inc.",
+        "meta": "Electronic Gaming & Multimedia",
+        "type": "EQUITY",
+        "mcap": 54029100,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HPK": {
+        "ticker": "HPK",
+        "name": "HighPeak Energy, Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 602912384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "COMP": {
+        "ticker": "COMP",
+        "name": "Compass, Inc.",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 7315385344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PAK": {
+        "ticker": "PAK",
+        "name": "Global X MSCI Pakistan ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
