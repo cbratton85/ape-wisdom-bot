@@ -20158,5 +20158,75 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "XEL": {
+        "ticker": "XEL",
+        "name": "Xcel Energy Inc.",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 47766835200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "UGRO": {
+        "ticker": "UGRO",
+        "name": "urban-gro, Inc.",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 2211158,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "EXC": {
+        "ticker": "EXC",
+        "name": "Exelon Corporation",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 49139761152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GEHC": {
+        "ticker": "GEHC",
+        "name": "GE HealthCare Technologies Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 37193736192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "AOK": {
+        "ticker": "AOK",
+        "name": "iShares Core 30/70 Conservative",
+        "meta": "Global Conservative Allocation",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ATYR": {
+        "ticker": "ATYR",
+        "name": "aTyr Pharma, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 96320856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "FTAI": {
+        "ticker": "FTAI",
+        "name": "FTAI Aviation Ltd.",
+        "meta": "Rental & Leasing Services",
+        "type": "EQUITY",
+        "mcap": 29310214144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
