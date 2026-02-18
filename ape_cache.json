@@ -20258,5 +20258,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "SSNC": {
+        "ticker": "SSNC",
+        "name": "SS&C Technologies Holdings, Inc",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 17449564160,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VTOL": {
+        "ticker": "VTOL",
+        "name": "Bristow Group, Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 1278264064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SEIC": {
+        "ticker": "SEIC",
+        "name": "SEI Investments Company",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 9675161600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
