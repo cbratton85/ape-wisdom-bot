@@ -21018,5 +21018,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "WKHS": {
+        "ticker": "WKHS",
+        "name": "Workhorse Group, Inc.",
+        "meta": "Auto Manufacturers",
+        "type": "EQUITY",
+        "mcap": 31942432,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "MIST": {
+        "ticker": "MIST",
+        "name": "Milestone Pharmaceuticals Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 142232800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "JXN": {
+        "ticker": "JXN",
+        "name": "Jackson Financial Inc.",
+        "meta": "Insurance - Life",
+        "type": "EQUITY",
+        "mcap": 8144344576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
