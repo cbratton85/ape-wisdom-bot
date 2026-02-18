@@ -64,11 +64,6 @@
         "last_checked": "2026-02-16",
         "reason": "No Price Data"
     },
-    "CORR": {
-        "delisted": true,
-        "last_checked": "2026-02-16",
-        "reason": "No Price Data"
-    },
     "CN": {
         "delisted": true,
         "last_checked": "2026-02-16",
@@ -175,6 +170,11 @@
         "reason": "No Price Data"
     },
     "PAK": {
+        "delisted": true,
+        "last_checked": "2026-02-18",
+        "reason": "No Price Data"
+    },
+    "RODE": {
         "delisted": true,
         "last_checked": "2026-02-18",
         "reason": "No Price Data"

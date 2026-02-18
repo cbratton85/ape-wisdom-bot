@@ -20388,5 +20388,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "RODE": {
+        "ticker": "RODE",
+        "name": "Hartford Multifactor Diversifie",
+        "meta": "Foreign Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "BRT": {
+        "ticker": "BRT",
+        "name": "BRT Apartments Corp. (MD)",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 285305920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
