@@ -20528,5 +20528,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "GEVO": {
+        "ticker": "GEVO",
+        "name": "Gevo, Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 453117472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CHRD": {
+        "ticker": "CHRD",
+        "name": "Chord Energy Corporation",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 5693173248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LCID": {
+        "ticker": "LCID",
+        "name": "Lucid Group, Inc.",
+        "meta": "Auto Manufacturers",
+        "type": "EQUITY",
+        "mcap": 3215750912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "KEYS": {
+        "ticker": "KEYS",
+        "name": "Keysight Technologies Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 40272216064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "WEC": {
+        "ticker": "WEC",
+        "name": "WEC Energy Group, Inc.",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 37574529024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "UROY": {
+        "ticker": "UROY",
+        "name": "Uranium Royalty Corp.",
+        "meta": "Uranium",
+        "type": "EQUITY",
+        "mcap": 564479040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
