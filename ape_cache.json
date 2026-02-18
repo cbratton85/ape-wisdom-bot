@@ -20598,5 +20598,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BLGO": {
+        "ticker": "BLGO",
+        "name": "BioLargo, Inc.",
+        "meta": "Chemicals",
+        "type": "EQUITY",
+        "mcap": 51873864,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OQX"
+    },
+    "ARDX": {
+        "ticker": "ARDX",
+        "name": "Ardelyx, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1648580608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "LIDR": {
+        "ticker": "LIDR",
+        "name": "AEye, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 73502720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "MOO": {
+        "ticker": "MOO",
+        "name": "VanEck Agribusiness ETF",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 948639936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SABR": {
+        "ticker": "SABR",
+        "name": "Sabre Corporation",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 448194368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "NOMD": {
+        "ticker": "NOMD",
+        "name": "Nomad Foods Limited",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 1902732672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
