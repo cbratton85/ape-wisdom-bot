@@ -20288,5 +20288,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PAL": {
+        "ticker": "PAL",
+        "name": "Proficient Auto Logistics, Inc.",
+        "meta": "Integrated Freight & Logistics",
+        "type": "EQUITY",
+        "mcap": 204029088,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
