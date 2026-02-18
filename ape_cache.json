@@ -20878,5 +20878,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "RELY": {
+        "ticker": "RELY",
+        "name": "Remitly Global, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 2832572416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DSP": {
+        "ticker": "DSP",
+        "name": "Viant Technology Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 576716032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PAPL": {
+        "ticker": "PAPL",
+        "name": "Pineapple Financial Inc.",
+        "meta": "Mortgage Finance",
+        "type": "EQUITY",
+        "mcap": 18001170,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "EBAY": {
+        "ticker": "EBAY",
+        "name": "eBay Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 37752770560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DGNX": {
+        "ticker": "DGNX",
+        "name": "Diginex Limited",
+        "meta": "Consulting Services",
+        "type": "EQUITY",
+        "mcap": 159139872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
