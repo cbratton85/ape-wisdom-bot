@@ -89,7 +89,7 @@ class HistoryTracker:
             'sym', 'name', 'meta', 'history', 'desc', 'type', 'avgvol', 'mcap', 'rolling',
             'z_rank_plus', 'z_surge', 'z_mnt_perc', 'z_upvotes', 'z_accel', 'z_upv_plus', 
             'z_ment', 'z_squeeze', 'type_tag', 'industry/sector', 'heat',
-            'velocity', 'accel', 'streak', 'upv_chg', 'day_perc', 'price', 'rsi', 'curvol'] 
+            'velocity', 'accel', 'streak', 'upv_chg', 'day_perc', 'price', 'rsi', 'adx', 'di_plus', 'di-', 'curvol'] 
 
         no_round_list = ['rank', 'rank_plus', 'ment', 'upvotes', 'upv_plus', 'streak']
 
@@ -336,6 +336,57 @@ def calculate_rsi(series, period=14):
     except Exception:
         return 0
 
+def calculate_adx_subset(df, period=13): # Default set to 13 to match your "len"
+    """
+    Calculates ADX using SMA smoothing to match the specific Pine Script provided.
+    """
+    try:
+        # We need enough data for the lookback. 
+        # 13 (DI) + 13 (ADX) = ~26 days minimum required.
+        if df.empty or len(df) < (period * 2):
+            return 0, 0, 0
+
+        df = df.copy()
+        
+        # 1. Calculate True Range and Directional Movement
+        df['H-L'] = df['High'] - df['Low']
+        df['H-PC'] = abs(df['High'] - df['Close'].shift(1))
+        df['L-PC'] = abs(df['Low'] - df['Close'].shift(1))
+        df['TR'] = df[['H-L', 'H-PC', 'L-PC']].max(axis=1)
+
+        df['UpMove'] = df['High'] - df['High'].shift(1)
+        df['DownMove'] = df['Low'].shift(1) - df['Low']
+
+        df['+DM'] = np.where((df['UpMove'] > df['DownMove']) & (df['UpMove'] > 0), df['UpMove'], 0)
+        df['-DM'] = np.where((df['DownMove'] > df['UpMove']) & (df['DownMove'] > 0), df['DownMove'], 0)
+
+        # 2. Wilder's Smoothing for DI (Matches Pine Script's manual smoothing loop)
+        alpha = 1 / period
+        df['TR14'] = df['TR'].ewm(alpha=alpha, adjust=False).mean()
+        df['+DM14'] = df['+DM'].ewm(alpha=alpha, adjust=False).mean()
+        df['-DM14'] = df['-DM'].ewm(alpha=alpha, adjust=False).mean()
+
+        # 3. Calculate DI+ and DI-
+        df['DI+'] = 100 * (df['+DM14'] / df['TR14'])
+        df['DI-'] = 100 * (df['-DM14'] / df['TR14'])
+        
+        # 4. Calculate DX
+        # Handle division by zero
+        sum_di = df['DI+'] + df['DI-']
+        df['DX'] = 100 * abs(df['DI+'] - df['DI-']) / sum_di.replace(0, np.nan)
+        df['DX'] = df['DX'].fillna(0)
+
+        # 5. FINAL ADX CALCULATION (The Change)
+        # Your script uses: ADX = sma(DX, len)
+        # Python equivalent: .rolling(window=period).mean()
+        df['ADX'] = df['DX'].rolling(window=period).mean()
+
+        # Return latest values
+        return df['ADX'].iloc[-1], df['DI+'].iloc[-1], df['DI-'].iloc[-1]
+
+    except Exception as e:
+        return 0, 0, 0
+
 def get_cached_logo(ticker):
     token = os.environ.get("LOGO_DEV_TOKEN")
     
@@ -465,7 +516,7 @@ def filter_and_process(stocks):
                         batch_data.columns = pd.MultiIndex.from_product([[batch[0]], batch_data.columns])
                 else:
                     # Multi ticker handling
-                    batch_data = yf.download(batch, period="40d", interval="1d", group_by='ticker', progress=False, threads=True)
+                    batch_data = yf.download(batch, period="3mo", interval="1d", group_by='ticker', progress=False, threads=True)
 
                 if not batch_data.empty:
                     if market_data.empty: market_data = batch_data
@@ -495,7 +546,7 @@ def filter_and_process(stocks):
             if isinstance(market_data.columns, pd.MultiIndex):
                 if t in market_data.columns.get_level_values(0):
                     # Only drop rows where the specific columns we need are missing
-                    hist = market_data[t][['Close', 'Volume']].dropna(subset=['Close'])
+                    hist = market_data[t][['High', 'Low', 'Close', 'Volume']].dropna(subset=['Close'])
             else:
                 if t in market_data.columns:
                     hist = market_data[[t]].dropna() # Fallback for single-column DF
@@ -534,9 +585,10 @@ def filter_and_process(stocks):
             # 4. CALCULATE RSI (Requires ~15-20 days for accuracy)
             if not hist.empty and len(hist) >= 15:
                 rsi_val = calculate_rsi(hist['Close'])
+                adx_val, di_plus, di_minus = calculate_adx_subset(hist)
             else:
-                # If a stock is brand new or yfinance data is missing, we default to 0
                 rsi_val = 0
+                adx_val, di_plus, di_minus = 0, 0, 0
             clean_hist = hist['Volume'] 
             actual_vol_days = min(len(clean_hist), AVG_VOLUME_DAYS)
             avg_v = clean_hist.tail(actual_vol_days).mean()
@@ -630,7 +682,10 @@ def filter_and_process(stocks):
                 "Streak": 0, 
                 "Rolling": 0, 
                 "History": "New",
-                "RSI": rsi_val
+                "RSI": rsi_val,
+                "ADX": adx_val,
+                "DI+": di_plus,
+                "DI-": di_minus
             })
             
         except Exception as e:
@@ -1069,7 +1124,42 @@ def export_interactive_html(df):
             ment_hist = row.get('h_ment', '')
             export_df.at[index, 'MENT'] = with_hist(ment_val, ment_hist)
 
-            # --- INSERT RSI COLOR LOGIC HERE ---
+            # --- ADX VISUALIZATION ---
+            adx_v = float(row.get('ADX', 0))
+            dip_v = float(row.get('DI+', 0))
+            dim_v = float(row.get('DI-', 0))
+
+            # Tooltip content: Shows the breakdown
+            adx_tooltip = f"ADX: {adx_v:.1f}&#10;DI+: {dip_v:.1f}&#10;DI-: {dim_v:.1f}"
+            
+            # --- ADX COLOR LOGIC (User Settings: 13 Period, 8 Threshold) ---
+            
+            # Tooltip: Vertical Stack
+            adx_tooltip = f"ADX: {adx_v:.1f}&#10;DI+: {dip_v:.1f}&#10;DI-: {dim_v:.1f}"
+            
+            # 1. Strong Trend (ADX > 25) - Standard "Very Strong" Level
+            if adx_v >= 25:
+                if dip_v > dim_v:
+                    adx_clr = "#00ff00" # Bright Green (Strong Bullish)
+                else:
+                    adx_clr = "#ff0000" # Bright Red (Strong Bearish)
+
+            # 2. Active Trend (ADX > 8) - Your Custom Threshold
+            elif adx_v >= 8:
+                if dip_v > dim_v:
+                    adx_clr = "#008000" # Standard Green (Trend Active)
+                else:
+                    adx_clr = "#cc0000" # Standard Red (Trend Active)
+
+            # 3. No Trend (ADX < 8)
+            else:
+                adx_clr = "#666666" # Grey (Chop/Sideways)
+
+            # Create the HTML span with the tooltip
+            adx_str = f'<span class="d-tooltip" data-tooltip="{adx_tooltip}" tabindex="0" style="color:{adx_clr}; font-weight:bold;">{adx_v:.1f}</span>'
+            export_df.at[index, 'ADX'] = adx_str
+
+            # --- RSI COLOR LOGIC ---
             rsi_raw = float(row.get('RSI', 0))
             if rsi_raw >= 70: 
                 rsi_clr = "#ff4444" # Red (Overbought)
@@ -1078,8 +1168,8 @@ def export_interactive_html(df):
             else: 
                 rsi_clr = "#ffffff"
             
+            # Render RSI
             rsi_str = color_span(f"{rsi_raw:.1f}", rsi_clr)
-            # Use with_hist if you want RSI history in the tooltip, or just color_span
             export_df.at[index, 'RSI'] = rsi_str
 
             # --- 15. Percent Change ---
@@ -1121,8 +1211,8 @@ def export_interactive_html(df):
 
         cols = [
             'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Day%', 'Acc', 'Eff', 'Conv', 'Upvs', 
-            'Upv+', 'VOL', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR', 'RSI', 
-            'Type_Tag', 'AvgVol', 'MCap'
+            'Upv+', 'VOL', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR',
+            'RSI', 'ADX', 'Type_Tag', 'AvgVol', 'MCap'
         ]
         for c in cols:
             if c not in export_df.columns:
@@ -1154,7 +1244,8 @@ def export_interactive_html(df):
             '<th>Mnt%</th>': '<th><span class="d-tooltip header-fix" data-tooltip="% change in mentions (24h).\nYel: >2σ | Green: >1σ">&nbsp;MNT%</span></th>',
             '<th>Sqz</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Mentions * Surge / log(MCap)\nCyan: >1.5σ | White: Normal">&nbsp;SQZ</span></th>',
             '<th>INDUSTRY/SECTOR</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Industry category group.">&nbsp;INDUSTRY/SECTOR</span></th>',
-            '<th>RSI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Relative Strength Index (14d).\nRed: Overbought | Green: Oversold">&nbsp;RSI</span></th>'
+            '<th>RSI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Relative Strength Index (14d).\nRed: Overbought | Green: Oversold">&nbsp;RSI</span></th>',
+            '<th>ADX</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Avg Directional Index.\nGreen: Bull Trend | Red: Bear Trend">&nbsp;ADX</span></th>'
         }
         
         for old_tag, new_tag in header_map.items():
@@ -1381,7 +1472,9 @@ def export_interactive_html(df):
                 text-align: left;
             }}
 
-            th:nth-child(22), td:nth-child(22) {{ width: 1%; text-align: center; font-weight: bold; border-right: 1px solid #444 !important; }}
+            th:nth-child(22), td:nth-child(22) {{ width: 1%; text-align: center; font-weight: bold; }}
+
+            th:nth-child(23), td:nth-child(23) {{ width: 1%; text-align: center; font-weight: bold; border-right: 1px solid #444 !important; }}
             
             a {{ color:#4da6ff; text-decoration:none; }} a:hover {{ text-decoration:underline; }}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
@@ -1740,7 +1833,7 @@ def export_interactive_html(df):
                 border: 1px solid #444;
                 font-family: 'Consolas', monospace;
                 font-size: 12px;
-                white-space: pre !important;
+                white-space: pre-wrap !important;
                 text-align: left !important;
                 line-height: 1.2;
                 width: max-content;
@@ -2448,11 +2541,11 @@ def export_interactive_html(df):
             }},
 
             "columnDefs": [ 
-                // Metadata: Type_Tag (21), AvgVol (22), MCap (23) hidden
-                {{ "visible": false, "targets": [22, 23, 24] }}, 
+                // Metadata: Type_Tag (23), AvgVol (24), MCap (25) hidden
+                {{ "visible": false, "targets": [23, 24, 25] }}, 
                 
                 // Numeric sorting: Indices for all metric columns including RSI (20)
-                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21], 
+                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22], 
                    "type": "num", 
                    "render": function(data, type) {{ 
                        if (type === 'sort' || type === 'type') {{ return parseVal(data); }} 
@@ -2475,9 +2568,9 @@ def export_interactive_html(df):
         // --- CUSTOM FILTERING LOGIC ---
         $.fn.dataTable.ext.search.push(function(settings, data) {{
             // UPDATED INDICES:
-            var typeTag = data[22] || "";
-            var avgVol  = parseVal(data[23]);
-            var mcap    = parseVal(data[24]);
+            var typeTag = data[23] || "";
+            var avgVol  = parseVal(data[24]);
+            var mcap    = parseVal(data[25]);
             
             var viewMode = $('input[name="btnradio"]:checked').attr('id');
             var isETF = typeTag.includes("ETF");
