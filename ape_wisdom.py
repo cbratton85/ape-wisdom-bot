@@ -1003,7 +1003,7 @@ def export_interactive_html(df):
                 f'<img src="{logo_src}" style="width: 24px; height: 24px; border-radius: 50%; background: #2a2e39; flex-shrink: 0; object-fit: contain;" '
                 f'onerror="this.src=\'https://s3-symbol-logo.tradingview.com/indices/nasdaq-100.svg\'">'
                 f'<span class="text-content"><b>{row.get("Name", clean_ticker)}</b></span>'
-                f'<div id="profile-{index}" class="chart-popup"></div>'
+                f'<div id="profile-{index}" class="c"></div>'
                 f'</div>'
             )
             export_df.at[index, 'Name'] = html_name
@@ -1106,7 +1106,7 @@ def export_interactive_html(df):
                 f'onmouseenter="loadMiniChart(\'{tv_ticker}\', \'{index}\', \'{row.get("exchange", "")}\', event)" '
                 f'onmouseleave="hideSymbolProfile(\'chart-tooltip-{index}\')">' 
                 f'<a href="https://www.tradingview.com/chart/?symbol={tv_ticker}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
-                f'<div id="chart-tooltip-{index}" class="chart-popup"></div>'
+                f'<div id="chart-tooltip-{index}" class="c"></div>'
                 f'</div>'
             )
             
@@ -1133,49 +1133,49 @@ def export_interactive_html(df):
 
         # --- 2. INJECT FAST TOOLTIPS (Find & Replace Headers) ---
         header_map = {
-            '<th>Rank</th>': '<th data-tooltip="Current Rank Position. Description: The stock\'s current standing in the popularity list based on social activity.">RANK</th>',
+            '<th>Rank</th>': '<th><span class="d-tooltip" data-tooltip="Current Rank Position. Description: The stock\'s current standing in the popularity list based on social activity.">RANK</span></th>',
             
-            '<th>Rank+</th>': '<th data-tooltip="24h Rank Change. Math: Rank(Yesterday) - Rank(Today). Description: How many spots the stock has climbed or fallen in the last 24 hours.">&nbsp;RANK+</th>',
+            '<th>Rank+</th>': '<th><span class="d-tooltip" data-tooltip="24h Rank Change. Math: Rank(Yesterday) - Rank(Today). Description: How many spots the stock has climbed or fallen in the last 24 hours.">&nbsp;RANK+</span></th>',
             
-            '<th>Heat</th>': '<th data-tooltip="Master Momentum Score. Math: Weighted Sum of Z-Scores (Rank + Surge + Mentions + Upvotes). Description: An aggregate score identifying the hottest overall stocks right now.">&nbsp;HEAT</th>',
+            '<th>Heat</th>': '<th><span class="d-tooltip" data-tooltip="Master Momentum Score. Math: Weighted Sum of Z-Scores (Rank + Surge + Mentions + Upvotes). Description: An aggregate score identifying the hottest overall stocks right now.">&nbsp;HEAT</span></th>',
             
-            '<th>Name</th>': '<th data-tooltip="Company Name. Description: Official name of the security or ETF.">&nbsp;NAME</th>',
+            '<th>Name</th>': '<th><span class="d-tooltip" data-tooltip="Company Name. Description: Official name of the security or ETF.">&nbsp;NAME</span></th>',
             
-            '<th>Sym</th>': '<th data-tooltip="Ticker Symbol. Description: The unique series of letters assigned to a security for trading purposes.">&nbsp;SYM</th>',
+            '<th>Sym</th>': '<th><span class="d-tooltip" data-tooltip="Ticker Symbol. Description: The unique series of letters assigned to a security for trading purposes.">&nbsp;SYM</span></th>',
             
-            '<th>Price</th>': '<th data-tooltip="Current Stock Price. Description: The real-time trading price (or most recent close).">&nbsp;&nbsp;PRICE</th>',
+            '<th>Price</th>': '<th><span class="d-tooltip" data-tooltip="Current Stock Price. Description: The real-time trading price (or most recent close).">&nbsp;&nbsp;PRICE</span></th>',
             
-            '<th>Day%</th>': '<th data-tooltip="Daily Price Change. Math: ((CurrentPrice - PrevClose) / PrevClose) * 100. Description: The percentage the stock is up or down since the last market close.">&nbsp;&nbsp;DAY%</th>',
+            '<th>Day%</th>': '<th><span class="d-tooltip" data-tooltip="Daily Price Change. Math: ((CurrentPrice - PrevClose) / PrevClose) * 100. Description: The percentage the stock is up or down since the last market close.">&nbsp;&nbsp;DAY%</span></th>',
             
-            '<th>Acc</th>': '<th data-tooltip="Acceleration (1h). Math: Velocity(Now) - Velocity(1h ago). Description: Measures if the trend is speeding up (Positive) or slowing down (Negative).">ACC</th>',
+            '<th>Acc</th>': '<th><span class="d-tooltip" data-tooltip="Acceleration (1h). Math: Velocity(Now) - Velocity(1h ago). Description: Measures if the trend is speeding up (Positive) or slowing down (Negative).">ACC</span></th>',
             
-            '<th>Eff</th>': '<th data-tooltip="Efficiency Score. Math: Rank_Gain / Surge_Percentage. Description: How efficiently the stock gains rank per unit of volume. High Efficiency = Climbing fast on low volume.">&nbsp;&nbsp;EFF</th>',
+            '<th>Eff</th>': '<th><span class="d-tooltip" data-tooltip="Efficiency Score. Math: Rank_Gain / Surge_Percentage. Description: How efficiently the stock gains rank per unit of volume. High Efficiency = Climbing fast on low volume.">&nbsp;&nbsp;EFF</span></th>',
             
-            '<th>Conv</th>': '<th data-tooltip="Conviction Ratio. Math: Upvotes / Mentions. Description: Indicates sentiment quality. A high ratio means people are bullish (upvoting) rather than just talking (mentions).">&nbsp;CONV</th>',
+            '<th>Conv</th>': '<th><span class="d-tooltip" data-tooltip="Conviction Ratio. Math: Upvotes / Mentions. Description: Indicates sentiment quality. A high ratio means people are bullish (upvoting) rather than just talking (mentions).">&nbsp;CONV</span></th>',
             
-            '<th>Upvs</th>': '<th data-tooltip="Total Upvotes. Description: The total number of upvotes this ticker has received in the last 24 hours.">UPVS</th>',
+            '<th>Upvs</th>': '<th><span class="d-tooltip" data-tooltip="Total Upvotes. Description: The total number of upvotes this ticker has received in the last 24 hours.">UPVS</span></th>',
             
-            '<th>Upv+</th>': '<th data-tooltip="Hourly Upvote Change. Math: Upvotes(Now) - Upvotes(1h ago). Description: The number of new upvotes gained since the last hourly scan.">&nbsp;UPV+</th>',
+            '<th>Upv+</th>': '<th><span class="d-tooltip" data-tooltip="Hourly Upvote Change. Math: Upvotes(Now) - Upvotes(1h ago). Description: The number of new upvotes gained since the last hourly scan.">&nbsp;UPV+</span></th>',
             
-            '<th>VOL</th>': '<th data-tooltip="Current Volume. Description: Total number of shares traded in the current market session.">&nbsp;&nbsp;VOL</th>',
+            '<th>VOL</th>': '<th><span class="d-tooltip" data-tooltip="Current Volume. Description: Total number of shares traded in the current market session.">&nbsp;&nbsp;VOL</span></th>',
             
-            '<th>VOL(30)</th>': '<th data-tooltip="Average Volume. Math: Mean(Volume_Last_30_Days). Description: The baseline trading volume, used to detect abnormal activity.">&nbsp;VOL(30)</th>',
+            '<th>VOL(30)</th>': '<th><span class="d-tooltip" data-tooltip="Average Volume. Math: Mean(Volume_Last_30_Days). Description: The baseline trading volume, used to detect abnormal activity.">&nbsp;VOL(30)</span></th>',
             
-            '<th>Srg</th>': '<th data-tooltip="Volume Surge. Math: (CurrentVol / AvgVol_30d) * 100. Description: How much higher current volume is compared to the monthly average.">&nbsp;SRG</th>',
+            '<th>Srg</th>': '<th><span class="d-tooltip" data-tooltip="Volume Surge. Math: (CurrentVol / AvgVol_30d) * 100. Description: How much higher current volume is compared to the monthly average.">&nbsp;SRG</span></th>',
             
-            '<th>Vel</th>': '<th data-tooltip="Velocity (1h). Math: Rank(Now) - Rank(1h ago). Description: The speed of rank change over the last hour. Positive = Climbing.">VEL</th>',
+            '<th>Vel</th>': '<th><span class="d-tooltip" data-tooltip="Velocity (1h). Math: Rank(Now) - Rank(1h ago). Description: The speed of rank change over the last hour. Positive = Climbing.">VEL</span></th>',
             
-            '<th>Strk</th>': '<th data-tooltip="Trend Streak. Description: The number of consecutive hourly scans the stock has maintained its current direction (Up or Down).">STRK</th>',
+            '<th>Strk</th>': '<th><span class="d-tooltip" data-tooltip="Trend Streak. Description: The number of consecutive hourly scans the stock has maintained its current direction (Up or Down).">STRK</span></th>',
             
-            '<th>MENT</th>': '<th data-tooltip="Total Mentions. Description: The raw number of comments or posts mentioning this ticker in the last 24 hours.">MENT</th>',
+            '<th>MENT</th>': '<th><span class="d-tooltip" data-tooltip="Total Mentions. Description: The raw number of comments or posts mentioning this ticker in the last 24 hours.">MENT</span></th>',
             
-            '<th>Mnt%</th>': '<th data-tooltip="Mention Change %. Math: ((Mentions_Now - Mentions_24h_Ago) / Mentions_24h_Ago) * 100. Description: The percentage growth or decline in social chatter vs yesterday.">&nbsp;MNT%</th>',
+            '<th>Mnt%</th>': '<th><span class="d-tooltip" data-tooltip="Mention Change %. Math: ((Mentions_Now - Mentions_24h_Ago) / Mentions_24h_Ago) * 100. Description: The percentage growth or decline in social chatter vs yesterday.">&nbsp;MNT%</span></th>',
             
-            '<th>Sqz</th>': '<th data-tooltip="Squeeze Score. Math: (Mentions * Surge) / Log(MarketCap). Description: Identifies stocks with high volume and chatter relative to their size (Small Cap bias).">&nbsp;SQZ</th>',
+            '<th>Sqz</th>': '<th><span class="d-tooltip" data-tooltip="Squeeze Score. Math: (Mentions * Surge) / Log(MarketCap). Description: Identifies stocks with high volume and chatter relative to their size (Small Cap bias).">&nbsp;SQZ</span></th>',
             
-            '<th>INDUSTRY/SECTOR</th>': '<th data-tooltip="Sector. Description: The category or industry group the company belongs to.">&nbsp;INDUSTRY/SECTOR</th>',
+            '<th>INDUSTRY/SECTOR</th>': '<th><span class="d-tooltip" data-tooltip="Sector. Description: The category or industry group the company belongs to.">&nbsp;INDUSTRY/SECTOR</span></th>',
             
-            '<th>RSI</th>': '<th data-tooltip="Relative Strength Index. Math: 100 - (100 / (1 + AvgGain/AvgLoss)). Description: Momentum oscillator. >70 is Overbought (Red), <30 is Oversold (Green).">&nbsp;RSI</th>'
+            '<th>RSI</th>': '<th><span class="d-tooltip" data-tooltip="Relative Strength Index. Math: 100 - (100 / (1 + AvgGain/AvgLoss)). Description: Momentum oscillator. >70 is Overbought (Red), <30 is Oversold (Green).">&nbsp;RSI</span></th>'
         }
         for old_tag, new_tag in header_map.items():
             raw_table = raw_table.replace(old_tag, new_tag)
@@ -1754,8 +1754,8 @@ def export_interactive_html(df):
             .chart-popup {{
                 display: none;
                 position: fixed;
-                width: 400px;
-                height: 400px;
+                width: 300px;
+                height: 600px;
                 background: #0F0F0F;
                 border: 1px solid #444;
                 border-radius: 8px;
@@ -2271,12 +2271,12 @@ def export_interactive_html(df):
 
         if (container.innerHTML !== "") {{
             container.style.display = "flex";
-            positionPopup(container, event, 400, true, true);
+            positionPopup(container, event, 600, true, true);
             return;
         }}
 
         container.style.display = "flex"; 
-        positionPopup(container, event || window.event, 400, true, true);
+        positionPopup(container, event || window.event, 600, true, true);
         
         const finalSymbol = getFinalSymbol(symbol, yfExchange);
         const widgetContainer = document.createElement('div');
