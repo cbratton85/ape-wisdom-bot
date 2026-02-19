@@ -21168,5 +21168,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ATO": {
+        "ticker": "ATO",
+        "name": "Atmos Energy Corporation",
+        "meta": "Utilities - Regulated Gas",
+        "type": "EQUITY",
+        "mcap": 29467983872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
