@@ -393,11 +393,12 @@ def calculate_raw_sctr(hist, ticker_name="Unknown"):
     Calculates the raw technical score based on the SCTR formula.
     """
     try:
-        if hist.empty or len(hist) < 200:
-            print(f"  > SCTR Skipped for {ticker_name}: Not enough data ({len(hist)} days)")
-            return 0.0
+        # Clean the data: Drop any blank days yfinance might have padded
+        close = pd.to_numeric(hist['Close'], errors='coerce').dropna()
 
-        close = hist['Close']
+        if close.empty or len(close) < 200:
+            print(f"  > SCTR Skipped for {ticker_name}: Not enough data ({len(close)} days)")
+            return -9999.0  # <--- Impossible number for failures
 
         # 1. Long-Term Indicators
         ema200 = close.ewm(span=200, adjust=False).mean()
@@ -428,7 +429,7 @@ def calculate_raw_sctr(hist, ticker_name="Unknown"):
         return float(raw_score)
     except Exception as e:
         print(f"  > SCTR Math Error for {ticker_name}: {e}")
-        return 0.0
+        return -9999.0  # <--- Impossible number for failures
 
 def get_cached_logo(ticker):
     token = os.environ.get("LOGO_DEV_TOKEN")
@@ -633,7 +634,7 @@ def filter_and_process(stocks):
             else:
                 rsi_val = 0
                 adx_val, di_plus, di_minus = 0, 0, 0
-                raw_sctr = 0.0
+                raw_sctr = -9999.0
             clean_hist = hist['Volume'] 
             actual_vol_days = min(len(clean_hist), AVG_VOLUME_DAYS)
             avg_v = clean_hist.tail(actual_vol_days).mean()
@@ -775,10 +776,14 @@ def filter_and_process(stocks):
         df['z_Squeeze'] = 0 if std_sq == 0 else (log_sq - mean_sq) / std_sq
         df['Heat'] = df['Master_Score']
 
+        # --- RANK THE SCTR UNIVERSE (UPDATED) ---
         df['SCTR'] = 0.0
         if 'Raw_SCTR' in df.columns:
-            valid_mask = df['Raw_SCTR'] > 0
+            # Check for > -9000 to catch valid negative technical scores, 
+            # while safely ignoring our -9999.0 error flags.
+            valid_mask = df['Raw_SCTR'] > -9000.0
             if valid_mask.any():
+                # Rank only the valid ones, scale to 99.9
                 df.loc[valid_mask, 'SCTR'] = (df.loc[valid_mask, 'Raw_SCTR'].rank(pct=True) * 99.9).round(1)
 
         tracker.save(df)
