@@ -1308,10 +1308,10 @@ def export_interactive_html(df):
             '<th>MENT</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Total comments/posts (24h).">MENT</span></th>',
             '<th>Mnt%</th>': '<th><span class="d-tooltip header-fix" data-tooltip="% change in mentions (24h).\nYel: >2σ | Green: >1σ">&nbsp;MNT%</span></th>',
             '<th>Sqz</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Mentions * Surge / log(MCap)\nCyan: >1.5σ | White: Normal">&nbsp;SQZ</span></th>',
-            '<th>INDUSTRY</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Industry category group.">&nbsp;INDUSTRY</span></th>',
+            '<th>INDUSTRY</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Industry category group.">INDUSTRY</span></th>',
             '<th>RSI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Relative Strength Index (14d).\nRed: Overbought | Green: Oversold">&nbsp;RSI</span></th>',
             '<th>ADX</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Avg Directional Index.\nGreen: Bull Trend | Red: Bear Trend">&nbsp;ADX</span></th>',
-            '<th>SCTR</th>': '<th><span class="d-tooltip header-fix" data-tooltip="SCTR Rank (0-99.9) relative to this list.">SCTR</span></th>'
+            '<th>SCTR</th>': '<th><span class="d-tooltip header-fix" data-tooltip="SCTR Rank (0-99.9) relative to this list.">&ensp;SCTR</span></th>'
         }
         
         for old_tag, new_tag in header_map.items():
