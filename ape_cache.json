@@ -21418,5 +21418,115 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CVE": {
+        "ticker": "CVE",
+        "name": "Cenovus Energy Inc",
+        "meta": "Oil & Gas Integrated",
+        "type": "EQUITY",
+        "mcap": 43217485824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DDM": {
+        "ticker": "DDM",
+        "name": "ProShares Ultra Dow30",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "MTN": {
+        "ticker": "MTN",
+        "name": "Vail Resorts, Inc.",
+        "meta": "Resorts & Casinos",
+        "type": "EQUITY",
+        "mcap": 5108231680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BATL": {
+        "ticker": "BATL",
+        "name": "Battalion Oil Corporation",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 82200528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "BFRG": {
+        "ticker": "BFRG",
+        "name": "Bullfrog AI Holdings, Inc.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 7315640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "BANL": {
+        "ticker": "BANL",
+        "name": "CBL International Limited",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 11355301,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "AHH": {
+        "ticker": "AHH",
+        "name": "Armada Hoffler Properties, Inc.",
+        "meta": "REIT - Diversified",
+        "type": "EQUITY",
+        "mcap": 639619904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BHC": {
+        "ticker": "BHC",
+        "name": "Bausch Health Companies Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 2303597824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BNKD": {
+        "ticker": "BNKD",
+        "name": "MicroSectors U.S. Big Banks -3 ",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SPRO": {
+        "ticker": "SPRO",
+        "name": "Spero Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 134087528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ONON": {
+        "ticker": "ONON",
+        "name": "On Holding AG",
+        "meta": "Footwear & Accessories",
+        "type": "EQUITY",
+        "mcap": 15785286656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
