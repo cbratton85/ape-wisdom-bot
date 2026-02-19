@@ -54,11 +54,6 @@
         "last_checked": "2026-02-17",
         "reason": "No Price Data"
     },
-    "DTC": {
-        "delisted": true,
-        "last_checked": "2026-02-17",
-        "reason": "No Price Data"
-    },
     "ZI": {
         "delisted": true,
         "last_checked": "2026-02-17",
@@ -165,6 +160,16 @@
         "reason": "No Price Data"
     },
     "OG": {
+        "delisted": true,
+        "last_checked": "2026-02-19",
+        "reason": "No Price Data"
+    },
+    "ARIS": {
+        "delisted": true,
+        "last_checked": "2026-02-19",
+        "reason": "No Price Data"
+    },
+    "DTC": {
         "delisted": true,
         "last_checked": "2026-02-19",
         "reason": "No Price Data"

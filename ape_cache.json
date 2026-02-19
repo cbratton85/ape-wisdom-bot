@@ -21248,5 +21248,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ARIS": {
+        "ticker": "ARIS",
+        "name": "ARIS",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
