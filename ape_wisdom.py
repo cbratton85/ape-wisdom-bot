@@ -88,7 +88,7 @@ class HistoryTracker:
         exclude_list = [
             'sym', 'name', 'meta', 'history', 'desc', 'type', 'avgvol', 'mcap', 'rolling',
             'z_rank_plus', 'z_surge', 'z_mnt_perc', 'z_upvotes', 'z_accel', 'z_upv_plus', 
-            'z_ment', 'z_squeeze', 'type_tag', 'industry/sector', 'heat', 'velocity', 'accel',
+            'z_ment', 'z_squeeze', 'type_tag', 'industry', 'heat', 'velocity', 'accel',
             'streak', 'upv_chg', 'day_perc', 'price', 'rsi', 'adx', 'di_plus', 'di-', 'curvol',
             'raw_sctr'] 
 
@@ -1267,11 +1267,11 @@ def export_interactive_html(df):
             vol_raw = export_df.at[index, 'Vol_Display']
             export_df.at[index, 'Vol_Display'] = f'<div style="text-align: right; color: #ccc;">{vol_raw}</div>'
 
-        export_df.rename(columns={'Meta': 'INDUSTRY/SECTOR', 'Vol_Display': 'VOL(30)', 'CurVol_Disp': 'VOL'}, inplace=True)
+        export_df.rename(columns={'Meta': 'INDUSTRY', 'Vol_Display': 'VOL(30)', 'CurVol_Disp': 'VOL'}, inplace=True)
 
         cols = [
             'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Day%', 'Acc', 'Eff', 'Conv', 'Upvs', 
-            'Upv+', 'VOL', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR',
+            'Upv+', 'VOL', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY',
             'RSI', 'ADX', 'SCTR', 'Type_Tag', 'AvgVol', 'MCap'
         ]
         for c in cols:
@@ -1303,7 +1303,7 @@ def export_interactive_html(df):
             '<th>MENT</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Total comments/posts (24h).">MENT</span></th>',
             '<th>Mnt%</th>': '<th><span class="d-tooltip header-fix" data-tooltip="% change in mentions (24h).\nYel: >2σ | Green: >1σ">&nbsp;MNT%</span></th>',
             '<th>Sqz</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Mentions * Surge / log(MCap)\nCyan: >1.5σ | White: Normal">&nbsp;SQZ</span></th>',
-            '<th>INDUSTRY/SECTOR</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Industry category group.">&nbsp;INDUSTRY/SECTOR</span></th>',
+            '<th>INDUSTRY</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Industry category group.">&nbsp;INDUSTRY</span></th>',
             '<th>RSI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Relative Strength Index (14d).\nRed: Overbought | Green: Oversold">&nbsp;RSI</span></th>',
             '<th>ADX</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Avg Directional Index.\nGreen: Bull Trend | Red: Bear Trend">&nbsp;ADX</span></th>',
             '<th>SCTR</th>': '<th><span class="d-tooltip header-fix" data-tooltip="SCTR Rank (0-99.9) relative to this list.">SCTR</span></th>'
@@ -2614,7 +2614,7 @@ def export_interactive_html(df):
                    }} 
                 }},
 
-                // Industry/Sector (19) as string
+                // Industry (19) as string
                 {{ "targets": [19], "type": "string", "render": function(data, type) {{ 
                     if (type === 'sort' || type === 'type') {{ return data.toString().replace(/<[^>]+>/g, '').trim(); }} 
                     return data; 
