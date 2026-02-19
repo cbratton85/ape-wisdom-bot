@@ -21048,5 +21048,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ULS": {
+        "ticker": "ULS",
+        "name": "UL Solutions Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 14322121728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "OILK": {
+        "ticker": "OILK",
+        "name": "ProShares K-1 Free Crude Oil ET",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
