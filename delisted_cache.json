@@ -154,17 +154,17 @@
         "last_checked": "2026-02-19",
         "reason": "No Price Data"
     },
-    "KNW": {
-        "delisted": true,
-        "last_checked": "2026-02-19",
-        "reason": "No Price Data"
-    },
     "RE": {
         "delisted": true,
         "last_checked": "2026-02-19",
         "reason": "No Price Data"
     },
     "JW": {
+        "delisted": true,
+        "last_checked": "2026-02-19",
+        "reason": "No Price Data"
+    },
+    "KNW": {
         "delisted": true,
         "last_checked": "2026-02-19",
         "reason": "No Price Data"

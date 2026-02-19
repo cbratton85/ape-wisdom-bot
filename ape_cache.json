@@ -21898,5 +21898,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "GRAL": {
+        "ticker": "GRAL",
+        "name": "GRAIL, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 3957865216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CSAI": {
+        "ticker": "CSAI",
+        "name": "Cloudastructure, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 20474562,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
