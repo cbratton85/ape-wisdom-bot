@@ -21218,5 +21218,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "COCO": {
+        "ticker": "COCO",
+        "name": "The Vita Coco Company, Inc.",
+        "meta": "Beverages - Non-Alcoholic",
+        "type": "EQUITY",
+        "mcap": 2850829824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "KEP": {
+        "ticker": "KEP",
+        "name": "Korea Electric Power Corporatio",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 27578777600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
