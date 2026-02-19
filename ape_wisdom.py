@@ -28,7 +28,7 @@ HISTORY_FILE = os.path.join(SCRIPT_DIR, "market_history.json")
 DELISTED_CACHE_FILE = os.path.join(SCRIPT_DIR, "delisted_cache.json")
 
 # Timeouts and Retention
-CACHE_EXPIRY_SECONDS = 1800 # 30 minutes
+CACHE_EXPIRY_SECONDS = 43200 # 12 hours
 RETENTION_DAYS = 3
 DELISTED_RETRY_DAYS = 1
 TOOLTIP_HISTORY_DAYS = 12
@@ -88,8 +88,9 @@ class HistoryTracker:
         exclude_list = [
             'sym', 'name', 'meta', 'history', 'desc', 'type', 'avgvol', 'mcap', 'rolling',
             'z_rank_plus', 'z_surge', 'z_mnt_perc', 'z_upvotes', 'z_accel', 'z_upv_plus', 
-            'z_ment', 'z_squeeze', 'type_tag', 'industry/sector', 'heat',
-            'velocity', 'accel', 'streak', 'upv_chg', 'day_perc', 'price', 'rsi', 'adx', 'di_plus', 'di-', 'curvol'] 
+            'z_ment', 'z_squeeze', 'type_tag', 'industry/sector', 'heat', 'velocity', 'accel',
+            'streak', 'upv_chg', 'day_perc', 'price', 'rsi', 'adx', 'di_plus', 'di-', 'curvol',
+            'raw_sctr'] 
 
         no_round_list = ['rank', 'rank_plus', 'ment', 'upvotes', 'upv_plus', 'streak']
 
@@ -387,6 +388,48 @@ def calculate_adx_subset(df, period=13): # Default set to 13 to match your "len"
     except Exception as e:
         return 0, 0, 0
 
+def calculate_raw_sctr(hist, ticker_name="Unknown"):
+    """
+    Calculates the raw technical score based on the SCTR formula.
+    """
+    try:
+        if hist.empty or len(hist) < 200:
+            print(f"  > SCTR Skipped for {ticker_name}: Not enough data ({len(hist)} days)")
+            return 0.0
+
+        close = hist['Close']
+
+        # 1. Long-Term Indicators
+        ema200 = close.ewm(span=200, adjust=False).mean()
+        pct_above_ema200 = ((close.iloc[-1] - ema200.iloc[-1]) / ema200.iloc[-1]) * 100
+        roc125 = ((close.iloc[-1] - close.iloc[-125]) / close.iloc[-125]) * 100
+
+        # 2. Medium-Term Indicators
+        ema50 = close.ewm(span=50, adjust=False).mean()
+        pct_above_ema50 = ((close.iloc[-1] - ema50.iloc[-1]) / ema50.iloc[-1]) * 100
+        roc20 = ((close.iloc[-1] - close.iloc[-20]) / close.iloc[-20]) * 100
+
+        # 3. Short-Term Indicators
+        rsi14 = calculate_rsi(close)
+        
+        # PPO Histogram Slope
+        ema12 = close.ewm(span=12, adjust=False).mean()
+        ema26 = close.ewm(span=26, adjust=False).mean()
+        ppo = ((ema12 - ema26) / ema26) * 100
+        ppo_ema9 = ppo.ewm(span=9, adjust=False).mean()
+        ppo_hist = ppo - ppo_ema9
+        ppo_slope = (ppo_hist.iloc[-1] - ppo_hist.iloc[-4]) / 3
+
+        # Final Raw Score
+        raw_score = (pct_above_ema200 * 0.30) + (roc125 * 0.30) + \
+                    (pct_above_ema50 * 0.15) + (roc20 * 0.15) + \
+                    (rsi14 * 0.05) + (ppo_slope * 0.05)
+
+        return float(raw_score)
+    except Exception as e:
+        print(f"  > SCTR Math Error for {ticker_name}: {e}")
+        return 0.0
+
 def get_cached_logo(ticker):
     token = os.environ.get("LOGO_DEV_TOKEN")
     
@@ -510,13 +553,13 @@ def filter_and_process(stocks):
             try:
                 if len(batch) == 1:
                     # Single ticker handling
-                    batch_data = yf.download(batch[0], period="40d", interval="1d", progress=False)
+                    batch_data = yf.download(batch[0], period="2y", interval="1d", progress=False)
                     if not batch_data.empty:
                         # Normalize format to match multi-index batch
                         batch_data.columns = pd.MultiIndex.from_product([[batch[0]], batch_data.columns])
                 else:
                     # Multi ticker handling
-                    batch_data = yf.download(batch, period="3mo", interval="1d", group_by='ticker', progress=False, threads=True)
+                    batch_data = yf.download(batch, period="2y", interval="1d", group_by='ticker', progress=False, threads=True)
 
                 if not batch_data.empty:
                     if market_data.empty: market_data = batch_data
@@ -555,7 +598,7 @@ def filter_and_process(stocks):
             if hist.empty or len(hist) < 2:
                 try:
                     # If batch failed, we need 20 days for a healthy 14-period RSI
-                    retry_data = yf.download(t, period="25d", interval="1d", progress=False)
+                    retry_data = yf.download(t, period="1y", interval="1d", progress=False)
                     if not retry_data.empty:
                         hist = retry_data
                         if isinstance(hist.columns, pd.MultiIndex):
@@ -586,9 +629,11 @@ def filter_and_process(stocks):
             if not hist.empty and len(hist) >= 15:
                 rsi_val = calculate_rsi(hist['Close'])
                 adx_val, di_plus, di_minus = calculate_adx_subset(hist)
+                raw_sctr = calculate_raw_sctr(hist, t)
             else:
                 rsi_val = 0
                 adx_val, di_plus, di_minus = 0, 0, 0
+                raw_sctr = 0.0
             clean_hist = hist['Volume'] 
             actual_vol_days = min(len(clean_hist), AVG_VOLUME_DAYS)
             avg_v = clean_hist.tail(actual_vol_days).mean()
@@ -685,7 +730,8 @@ def filter_and_process(stocks):
                 "RSI": rsi_val,
                 "ADX": adx_val,
                 "DI+": di_plus,
-                "DI-": di_minus
+                "DI-": di_minus,
+                "Raw_SCTR": raw_sctr
             })
             
         except Exception as e:
@@ -725,14 +771,18 @@ def filter_and_process(stocks):
         sq_series = df['Squeeze'].clip(lower=0).astype(float)
         log_sq = np.log1p(sq_series)
         mean_sq = log_sq.mean(); std_sq = log_sq.std(ddof=0)
+
         df['z_Squeeze'] = 0 if std_sq == 0 else (log_sq - mean_sq) / std_sq
         df['Heat'] = df['Master_Score']
 
-        # --- STEP 1: SAVE RAW DATA FIRST (THE FIX) ---
-        # We save here so that 'get_metrics' below can see the current timestamp in 'self.data'
+        df['SCTR'] = 0.0
+        if 'Raw_SCTR' in df.columns:
+            valid_mask = df['Raw_SCTR'] > 0
+            if valid_mask.any():
+                df.loc[valid_mask, 'SCTR'] = (df.loc[valid_mask, 'Raw_SCTR'].rank(pct=True) * 99.9).round(1)
+
         tracker.save(df)
 
-        # --- STEP 2: CALCULATE METRICS & HISTORIES ---
         for index, row in df.iterrows():
             m = tracker.get_metrics(
                 row['Sym'], 
@@ -1172,6 +1222,16 @@ def export_interactive_html(df):
             rsi_str = color_span(f"{rsi_raw:.1f}", rsi_clr)
             export_df.at[index, 'RSI'] = rsi_str
 
+            # --- SCTR COLOR LOGIC ---
+            sctr_raw = float(row.get('SCTR', 0))
+            if sctr_raw >= 80: sctr_clr = "#00ff00"       # Strong Green
+            elif sctr_raw >= 40: sctr_clr = "#ffff00"     # Yellow
+            elif sctr_raw > 0: sctr_clr = "#ff4444"       # Red
+            else: sctr_clr = "#666666"                    # Grey (Not enough data)
+            
+            sctr_str = f'<span style="color:{sctr_clr}; font-weight:bold;">{sctr_raw:.1f}</span>'
+            export_df.at[index, 'SCTR'] = sctr_str
+
             # --- 15. Percent Change ---
             d_val = row.get('Day%', 0)
             d_clr = "#00ff00" if d_val > 0 else ("#ff4444" if d_val < 0 else "#888")
@@ -1212,7 +1272,7 @@ def export_interactive_html(df):
         cols = [
             'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Day%', 'Acc', 'Eff', 'Conv', 'Upvs', 
             'Upv+', 'VOL', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY/SECTOR',
-            'RSI', 'ADX', 'Type_Tag', 'AvgVol', 'MCap'
+            'RSI', 'ADX', 'SCTR', 'Type_Tag', 'AvgVol', 'MCap'
         ]
         for c in cols:
             if c not in export_df.columns:
@@ -1245,7 +1305,8 @@ def export_interactive_html(df):
             '<th>Sqz</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Mentions * Surge / log(MCap)\nCyan: >1.5σ | White: Normal">&nbsp;SQZ</span></th>',
             '<th>INDUSTRY/SECTOR</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Industry category group.">&nbsp;INDUSTRY/SECTOR</span></th>',
             '<th>RSI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Relative Strength Index (14d).\nRed: Overbought | Green: Oversold">&nbsp;RSI</span></th>',
-            '<th>ADX</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Avg Directional Index.\nGreen: Bull Trend | Red: Bear Trend">&nbsp;ADX</span></th>'
+            '<th>ADX</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Avg Directional Index.\nGreen: Bull Trend | Red: Bear Trend">&nbsp;ADX</span></th>',
+            '<th>SCTR</th>': '<th><span class="d-tooltip header-fix" data-tooltip="SCTR Rank (0-99.9) relative to this list.">SCTR</span></th>'
         }
         
         for old_tag, new_tag in header_map.items():
@@ -1473,8 +1534,8 @@ def export_interactive_html(df):
             }}
 
             th:nth-child(22), td:nth-child(22) {{ width: 1%; text-align: center; font-weight: bold; }}
-
-            th:nth-child(23), td:nth-child(23) {{ width: 1%; text-align: center; font-weight: bold; border-right: 1px solid #444 !important; }}
+            th:nth-child(23), td:nth-child(23) {{ width: 1%; text-align: center; font-weight: bold; }}
+            th:nth-child(24), td:nth-child(24) {{ width: 1%; text-align: center; font-weight: bold; border-right: 1px solid #444 !important; }}
             
             a {{ color:#4da6ff; text-decoration:none; }} a:hover {{ text-decoration:underline; }}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
@@ -2298,7 +2359,7 @@ def export_interactive_html(df):
         function getTopSectors(metricIdx) {{
             var sectorData = {{}};
             allData.each(function(row) {{
-                var rawType = row[23].toString().replace(/<[^>]+>/g, ''); 
+                var rawType = row[24].toString().replace(/<[^>]+>/g, ''); 
                 if (topSwitchIsETF && !rawType.includes('ETF')) return;
                 if (!topSwitchIsETF && rawType.includes('ETF')) return;
 
@@ -2541,11 +2602,11 @@ def export_interactive_html(df):
             }},
 
             "columnDefs": [ 
-                // Metadata: Type_Tag (23), AvgVol (24), MCap (25) hidden
-                {{ "visible": false, "targets": [23, 24, 25] }}, 
+                // Metadata: Type_Tag (24), AvgVol (25), MCap (26) hidden
+                {{ "visible": false, "targets": [24, 25, 26] }}, 
                 
                 // Numeric sorting: Indices for all metric columns including RSI (20)
-                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22], 
+                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23], 
                    "type": "num", 
                    "render": function(data, type) {{ 
                        if (type === 'sort' || type === 'type') {{ return parseVal(data); }} 
@@ -2568,9 +2629,9 @@ def export_interactive_html(df):
         // --- CUSTOM FILTERING LOGIC ---
         $.fn.dataTable.ext.search.push(function(settings, data) {{
             // UPDATED INDICES:
-            var typeTag = data[23] || "";
-            var avgVol  = parseVal(data[24]);
-            var mcap    = parseVal(data[25]);
+            var typeTag = data[24] || "";
+            var avgVol  = parseVal(data[25]);
+            var mcap    = parseVal(data[26]);
             
             var viewMode = $('input[name="btnradio"]:checked').attr('id');
             var isETF = typeTag.includes("ETF");
