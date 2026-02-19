@@ -21708,5 +21708,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "HYLN": {
+        "ticker": "HYLN",
+        "name": "Hyliion Holdings Corp.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 357227680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "FNF": {
+        "ticker": "FNF",
+        "name": "Fidelity National Financial, In",
+        "meta": "Insurance - Specialty",
+        "type": "EQUITY",
+        "mcap": 14660323328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AEG": {
+        "ticker": "AEG",
+        "name": "Aegon Ltd. New York Registry Sh",
+        "meta": "Insurance - Diversified",
+        "type": "EQUITY",
+        "mcap": 11156242432,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BMBL": {
+        "ticker": "BMBL",
+        "name": "Bumble Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 452209024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ORA": {
+        "ticker": "ORA",
+        "name": "Ormat Technologies, Inc.",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 7276491776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
