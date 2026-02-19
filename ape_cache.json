@@ -21758,5 +21758,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SPWR": {
+        "ticker": "SPWR",
+        "name": "SunPower Inc.",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 173009808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ALEX": {
+        "ticker": "ALEX",
+        "name": "Alexander & Baldwin, Inc.",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 1513201152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PICS": {
+        "ticker": "PICS",
+        "name": "PicS N.V.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VWOB": {
+        "ticker": "VWOB",
+        "name": "Vanguard Emerging Markets Gover",
+        "meta": "Emerging Markets Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SSSS": {
+        "ticker": "SSSS",
+        "name": "SuRo Capital Corp.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 234660048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
