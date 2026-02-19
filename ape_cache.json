@@ -21238,5 +21238,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ABAT": {
+        "ticker": "ABAT",
+        "name": "American Battery Technology Com",
+        "meta": "Waste Management",
+        "type": "EQUITY",
+        "mcap": 482055872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
