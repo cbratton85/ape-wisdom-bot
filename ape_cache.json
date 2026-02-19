@@ -21258,5 +21258,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "NRC": {
+        "ticker": "NRC",
+        "name": "National Research Corporation",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 279365984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
