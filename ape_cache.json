@@ -21068,5 +21068,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "FXI": {
+        "ticker": "FXI",
+        "name": "iShares China Large-Cap ETF",
+        "meta": "China Region",
+        "type": "ETF",
+        "mcap": 5012304384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "QQC": {
+        "ticker": "QQC",
+        "name": "Simplify Nasdaq 100 PLUS Convex",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "YIBO": {
+        "ticker": "YIBO",
+        "name": "Planet Image International Limi",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 51533772,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
