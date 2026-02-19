@@ -21528,5 +21528,185 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "EMBJ": {
+        "ticker": "EMBJ",
+        "name": "Embraer S.A.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 13058508800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "OSIS": {
+        "ticker": "OSIS",
+        "name": "OSI Systems, Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 4766410752,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DBX": {
+        "ticker": "DBX",
+        "name": "Dropbox, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 6455797248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VONE": {
+        "ticker": "VONE",
+        "name": "Vanguard Russell 1000 ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "WK": {
+        "ticker": "WK",
+        "name": "Workiva Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 3207156736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FIVN": {
+        "ticker": "FIVN",
+        "name": "Five9, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1302297216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "DCO": {
+        "ticker": "DCO",
+        "name": "Ducommun Incorporated",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 1857794304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KNW": {
+        "ticker": "KNW",
+        "name": "KNW",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "TFPM": {
+        "ticker": "TFPM",
+        "name": "Triple Flag Precious Metals Cor",
+        "meta": "Other Precious Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 7516126720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HLF": {
+        "ticker": "HLF",
+        "name": "Herbalife Ltd.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 2023857024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SANM": {
+        "ticker": "SANM",
+        "name": "Sanmina Corporation",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 8014905344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LXFR": {
+        "ticker": "LXFR",
+        "name": "Luxfer Holdings PLC",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 413648960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HXL": {
+        "ticker": "HXL",
+        "name": "Hexcel Corporation",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 6865210368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ZEVY": {
+        "ticker": "ZEVY",
+        "name": "Lightning eMotors, Inc.",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 659,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
+    },
+    "ENS": {
+        "ticker": "ENS",
+        "name": "EnerSys",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 6436215296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ATI": {
+        "ticker": "ATI",
+        "name": "ATI Inc.",
+        "meta": "Metal Fabrication",
+        "type": "EQUITY",
+        "mcap": 20977704960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VERX": {
+        "ticker": "VERX",
+        "name": "Vertex, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2026802816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "HBAN": {
+        "ticker": "HBAN",
+        "name": "Huntington Bancshares Incorpora",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 35917176832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
