@@ -21138,5 +21138,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "EBR": {
+        "ticker": "EBR",
+        "name": "EBR",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "FID": {
+        "ticker": "FID",
+        "name": "First Trust S&P International D",
+        "meta": "Foreign Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "FLGT": {
+        "ticker": "FLGT",
+        "name": "Fulgent Genetics, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 721495232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
