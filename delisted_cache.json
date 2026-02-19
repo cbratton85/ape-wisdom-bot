@@ -94,11 +94,6 @@
         "last_checked": "2026-02-18",
         "reason": "No Price Data"
     },
-    "DS": {
-        "delisted": true,
-        "last_checked": "2026-02-18",
-        "reason": "No Price Data"
-    },
     "PAK": {
         "delisted": true,
         "last_checked": "2026-02-18",
@@ -170,6 +165,16 @@
         "reason": "No Price Data"
     },
     "ZEV": {
+        "delisted": true,
+        "last_checked": "2026-02-19",
+        "reason": "No Price Data"
+    },
+    "DS": {
+        "delisted": true,
+        "last_checked": "2026-02-19",
+        "reason": "No Price Data"
+    },
+    "TERM": {
         "delisted": true,
         "last_checked": "2026-02-19",
         "reason": "No Price Data"

@@ -21178,5 +21178,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HWC": {
+        "ticker": "HWC",
+        "name": "Hancock Whitney Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 5916464640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CFG": {
+        "ticker": "CFG",
+        "name": "Citizens Financial Group, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 27933784064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TFC": {
+        "ticker": "TFC",
+        "name": "Truist Financial Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 67403489280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
