@@ -19,11 +19,6 @@
         "last_checked": "2026-02-15",
         "reason": "No Price Data"
     },
-    "FI": {
-        "delisted": true,
-        "last_checked": "2026-02-15",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-02-16",
@@ -165,6 +160,11 @@
         "reason": "No Price Data"
     },
     "KNW": {
+        "delisted": true,
+        "last_checked": "2026-02-19",
+        "reason": "No Price Data"
+    },
+    "FI": {
         "delisted": true,
         "last_checked": "2026-02-19",
         "reason": "No Price Data"

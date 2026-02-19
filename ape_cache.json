@@ -21918,5 +21918,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "MGRX": {
+        "ticker": "MGRX",
+        "name": "Mangoceuticals, Inc.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 5800440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "NB": {
+        "ticker": "NB",
+        "name": "NioCorp Developments Ltd.",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 694279296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "VIXY": {
+        "ticker": "VIXY",
+        "name": "VIX Short-Term Futures ETF",
+        "meta": "Trading--Miscellaneous",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "RGC": {
+        "ticker": "RGC",
+        "name": "Regencell Bioscience Holdings L",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 16545598464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "INDI": {
+        "ticker": "INDI",
+        "name": "indie Semiconductor, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 694956608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SPYD": {
+        "ticker": "SPYD",
+        "name": "State Street SPDR Portfolio S&P",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
