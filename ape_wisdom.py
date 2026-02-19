@@ -2298,7 +2298,7 @@ def export_interactive_html(df):
         function getTopSectors(metricIdx) {{
             var sectorData = {{}};
             allData.each(function(row) {{
-                var rawType = row[22].toString().replace(/<[^>]+>/g, ''); 
+                var rawType = row[23].toString().replace(/<[^>]+>/g, ''); 
                 if (topSwitchIsETF && !rawType.includes('ETF')) return;
                 if (!topSwitchIsETF && rawType.includes('ETF')) return;
 
