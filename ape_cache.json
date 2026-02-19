@@ -21098,5 +21098,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "VOOV": {
+        "ticker": "VOOV",
+        "name": "Vanguard S&P 500 Value ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "BOW": {
+        "ticker": "BOW",
+        "name": "Bowhead Specialty Holdings Inc.",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 843453056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PNNT": {
+        "ticker": "PNNT",
+        "name": "PennantPark Investment Corporat",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 336274912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HUT": {
+        "ticker": "HUT",
+        "name": "Hut 8 Corp.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 5792384000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
