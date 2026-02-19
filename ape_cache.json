@@ -21348,5 +21348,75 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "TCMD": {
+        "ticker": "TCMD",
+        "name": "Tactile Systems Technology, Inc",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 683803840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "PPG": {
+        "ticker": "PPG",
+        "name": "PPG Industries, Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 28447227904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LNT": {
+        "ticker": "LNT",
+        "name": "Alliant Energy Corporation",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 18078586880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LYB": {
+        "ticker": "LYB",
+        "name": "LyondellBasell Industries NV",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 17947635712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KEX": {
+        "ticker": "KEX",
+        "name": "Kirby Corporation",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 7189830144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BEP": {
+        "ticker": "BEP",
+        "name": "Brookfield Renewable Partners L",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 20121225216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SCL": {
+        "ticker": "SCL",
+        "name": "Stepan Company",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 1476795520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
