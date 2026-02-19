@@ -1228,13 +1228,16 @@ def export_interactive_html(df):
             export_df.at[index, 'RSI'] = rsi_str
 
             # --- SCTR COLOR LOGIC ---
-            sctr_raw = float(row.get('SCTR', 0))
-            if sctr_raw >= 80: sctr_clr = "#00ff00"       # Strong Green
-            elif sctr_raw >= 40: sctr_clr = "#ffff00"     # Yellow
-            elif sctr_raw > 0: sctr_clr = "#ff4444"       # Red
-            else: sctr_clr = "#666666"                    # Grey (Not enough data)
+            sctr_global = float(row.get('SCTR', 0.0))
+            sctr_raw_math = float(row.get('Raw_SCTR', -9999.0)) # Grab the hidden raw math
             
-            sctr_str = f'<span style="color:{sctr_clr}; font-weight:bold;">{sctr_raw:.1f}</span>'
+            if sctr_global >= 80: sctr_clr = "#00ff00"       
+            elif sctr_global >= 40: sctr_clr = "#ffff00"     
+            elif sctr_global > 0: sctr_clr = "#ff4444"       
+            else: sctr_clr = "#666666"                    
+            
+            # We add data-global and data-raw attributes so JavaScript can read them
+            sctr_str = f'<span class="sctr-val" data-global="{sctr_global:.1f}" data-raw="{sctr_raw_math:.1f}" style="color:{sctr_clr}; font-weight:bold;">{sctr_global:.1f}</span>'
             export_df.at[index, 'SCTR'] = sctr_str
 
             # --- 15. Percent Change ---
@@ -1311,7 +1314,7 @@ def export_interactive_html(df):
             '<th>INDUSTRY</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Industry category group.">INDUSTRY</span></th>',
             '<th>RSI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Relative Strength Index (14d).\nRed: Overbought | Green: Oversold">&nbsp;RSI</span></th>',
             '<th>ADX</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Avg Directional Index.\nGreen: Bull Trend | Red: Bear Trend">&nbsp;ADX</span></th>',
-            '<th>SCTR</th>': '<th><span class="d-tooltip header-fix" data-tooltip="SCTR Rank (0-99.9) relative to this list.">&ensp;SCTR</span></th>'
+            '<th>SCTR</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="sctr-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleSCTRMode(event)" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Momentum ranking system that scores stocks from 0 to 99.9 based on their technical strength compared to their peers.\nScores relative technical strength." style="line-height:1;">SCTR</span></div></th>'
         }
         
         for old_tag, new_tag in header_map.items():
@@ -1452,6 +1455,20 @@ def export_interactive_html(df):
                 border-spacing: 0;
             }}
             
+            .dataTables_wrapper > .row {{
+                --bs-gutter-y: 0 !important;
+            }}
+            
+            .dataTables_wrapper > div.row:first-child {{
+                margin-bottom: 0px !important;
+                padding-bottom: 0px !important;
+            }}
+            
+            .dataTables_wrapper > div.row:nth-child(2) > div {{
+                padding-top: 0px !important;
+                margin-top: 0px !important;
+            }}
+
             th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; font-weight: bold; }}
             th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }}
             th:nth-child(3), td:nth-child(3) {{ width: 1%; text-align: center; font-weight: bold; }}
@@ -1562,6 +1579,25 @@ def export_interactive_html(df):
                 -ms-overflow-style: none;
                 scrollbar-width: none;
                 z-index: 9998 !important;
+            }}
+
+            .dataTables_wrapper > .row:first-child {{
+                margin-bottom: 0px !important; 
+                padding-bottom: 0px !important;
+                min-height: 30px;
+            }}
+            
+            .dataTables_length {{
+                margin-bottom: 0px !important;
+                margin-top: 0px !important; /* Pulls the "Show entries" box slightly up */
+            }}
+            
+            .dataTables_filter {{
+                top: 0px !important; /* Moves your floating search bar up to match */
+            }}
+            
+            .filter-bar {{
+                margin-bottom: 0px !important; /* Shrinks the gap below your custom buttons */
             }}
 
             .dataTables_wrapper .dataTables_filter {{
@@ -1978,6 +2014,24 @@ def export_interactive_html(df):
                 z-index: 100 !important; 
             }}
 
+            .dataTables_wrapper .row {{
+                padding-top: 2px !important;
+                padding-bottom: 2px !important;
+            }}
+
+            .dataTables_length label {{
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+                padding: 0 !important;
+                line-height: 1 !important;
+            }}
+
+            .dataTables_length select {{
+                height: 24px !important;
+                padding: 0 5px !important;
+                font-size: 13px !important;
+            }}
+
         </style>
         </head>
         <body>
@@ -2361,6 +2415,7 @@ def export_interactive_html(df):
         var api = $('.table').DataTable();
         var topSwitchIsETF = $('#modeSwitch').is(':checked');
         var allData = api.rows({{ search: 'none', order: 'index' }}).data();
+        
         function getTopSectors(metricIdx) {{
             var sectorData = {{}};
             allData.each(function(row) {{
@@ -2384,17 +2439,10 @@ def export_interactive_html(df):
                 return {{ name: s, total: sectorData[s].totalSum, count: sectorData[s].count, stocks: sectorData[s].stocks }};
             }});
 
-            // Filter: Ensure the sector has at least 2 stocks (or 1 if you prefer)
-            sorted = sorted.filter(function(s) {{ 
-                return s.count >= 2; 
-            }});
+            sorted = sorted.filter(function(s) {{ return s.count >= 2; }});
 
-            // Sort with Tie-Breaker: Sort by total first, then alphabetically by name
             sorted.sort(function(a, b) {{ 
-                if (b.total !== a.total) {{
-                    return b.total - a.total; // Primary Sort: Highest Total Gain
-                }}
-                // Secondary Sort: Alphabetical (prevents flip-flopping on ties)
+                if (b.total !== a.total) {{ return b.total - a.total; }}
                 return a.name.localeCompare(b.name); 
             }});
 
@@ -2408,7 +2456,7 @@ def export_interactive_html(df):
                 var tipRows = topStocks.map(function(st) {{
                     var val = Math.round(st.v);
                     var numStr = val > 0 ? '+' + val : val;
-                    var color = val > 0 ? '#00ff00' : (val < 0 ? '#ff4444' : '#cccccc'); // Grey for 0
+                    var color = val > 0 ? '#00ff00' : (val < 0 ? '#ff4444' : '#cccccc');
                     return "<div style='display:flex; justify-content:flex-start; align-items:center; font-size:11px; margin-bottom:1px;'>" +
                                 "<span style='min-width:45px; text-align:left; color:" + color + "; font-weight:bold;'>" + numStr + "</span>" +
                                 "<span style='color:#fff; white-space:nowrap;'><b>" + st.s + "</b>: " + st.n + "</span>" +
@@ -2433,11 +2481,13 @@ def export_interactive_html(df):
                 sanitize: false,
                 animation: false,
                 container: 'body',
-                container: 'body',
                 placement: 'bottom',
                 boundary: 'viewport'
                 }});
         }});
+
+        // The dynamic trigger safely tucked inside
+        if (sctrMode === "dynamic") {{ recalculateSCTR(); }}
     }}
 
     function toggleColors() {{
@@ -2556,6 +2606,109 @@ def export_interactive_html(df):
         }}
     }});
 
+    let sctrMode = "global"; // Default state
+
+    function toggleSCTRMode(event) {{
+        // Stop the click from bubbling up to the DataTables header
+        if (event) {{
+            event.stopPropagation();
+            event.preventDefault();
+        }}
+
+        const toggleBtn = document.getElementById("sctr-toggle");
+        if (sctrMode === "global") {{
+            sctrMode = "dynamic";
+            toggleBtn.innerText = "DYNAMIC";
+            toggleBtn.style.color = "#ffff00"; 
+            toggleBtn.style.borderColor = "#ffff00"; // Turns border yellow
+        }} else {{
+            sctrMode = "global";
+            toggleBtn.innerText = "GLOBAL";
+            toggleBtn.style.color = "#00ff00"; 
+            toggleBtn.style.borderColor = "#00ff00"; // Turns border green
+        }}
+        
+        recalculateSCTR();
+        
+        // Automatically sort SCTR Highest to Lowest
+        if ($.fn.DataTable.isDataTable('.table')) {{
+            var api = $('.table').DataTable();
+            api.order([23, 'desc']).draw(false);
+        }}
+    }}
+
+    function recalculateSCTR() {{
+        if (!$.fn.DataTable.isDataTable('.table')) return;
+        var api = $('.table').DataTable();
+        
+        if (sctrMode === "dynamic") {{
+            // Get all rows that survive the current filters
+            var validRows = api.rows({{ filter: 'applied' }}).indexes();
+            let visibleSpans = [];
+
+            validRows.each(function(idx) {{
+                var cellHtml = api.cell(idx, 23).data(); 
+                if (!cellHtml) return;
+                var rawMatch = cellHtml.match(/data-raw="([^"]+)"/);
+                var globalMatch = cellHtml.match(/data-global="([^"]+)"/);
+                
+                if (rawMatch && globalMatch) {{
+                    var rawVal = parseFloat(rawMatch[1]);
+                    var globalVal = parseFloat(globalMatch[1]);
+                    
+                    if (rawVal > -9000) {{
+                        visibleSpans.push({{ rowIdx: idx, raw: rawVal, global: globalVal }});
+                    }} else {{
+                        var newHtml = '<span class="sctr-val" data-global="' + globalVal + '" data-raw="' + rawVal + '" style="color:#666666; font-weight:bold;">0.0</span>';
+                        api.cell(idx, 23).data(newHtml); // Update Memory
+                        var node = api.cell(idx, 23).node();
+                        if (node) node.innerHTML = newHtml; // Update Visuals
+                    }}
+                }}
+            }});
+
+            if (visibleSpans.length > 0) {{
+                // Sort math lowest to highest
+                visibleSpans.sort(function(a, b) {{ return a.raw - b.raw; }});
+                
+                let total = visibleSpans.length;
+                visibleSpans.forEach(function(item, index) {{
+                    let newSctr = ((index + 1) / total) * 99.9;
+                    let clr = "#ff4444";
+                    if (newSctr >= 80) clr = "#00ff00";
+                    else if (newSctr >= 40) clr = "#ffff00";
+                    
+                    var newHtml = '<span class="sctr-val" data-global="' + item.global + '" data-raw="' + item.raw + '" style="color:' + clr + '; font-weight:bold;">' + newSctr.toFixed(1) + '</span>';
+                    api.cell(item.rowIdx, 23).data(newHtml);
+                    var node = api.cell(item.rowIdx, 23).node();
+                    if (node) node.innerHTML = newHtml;
+                }});
+            }}
+        }} else {{
+            // Reset ALL rows back to Global
+            api.rows().indexes().each(function(idx) {{
+                var cellHtml = api.cell(idx, 23).data(); 
+                if (!cellHtml) return;
+                var rawMatch = cellHtml.match(/data-raw="([^"]+)"/);
+                var globalMatch = cellHtml.match(/data-global="([^"]+)"/);
+                
+                if (rawMatch && globalMatch) {{
+                    var rawVal = parseFloat(rawMatch[1]);
+                    var globalVal = parseFloat(globalMatch[1]);
+                    
+                    let clr = "#ff4444";
+                    if (rawVal <= -9000) clr = "#666666";
+                    else if (globalVal >= 80) clr = "#00ff00";
+                    else if (globalVal >= 40) clr = "#ffff00";
+
+                    var newHtml = '<span class="sctr-val" data-global="' + globalVal + '" data-raw="' + rawVal + '" style="color:' + clr + '; font-weight:bold;">' + globalVal.toFixed(1) + '</span>';
+                    api.cell(idx, 23).data(newHtml);
+                    var node = api.cell(idx, 23).node();
+                    if (node) node.innerHTML = newHtml;
+                }}
+            }});
+        }}
+    }}
 
     function toggleMcap(type) {{
         if (type === 'all') {{ 
