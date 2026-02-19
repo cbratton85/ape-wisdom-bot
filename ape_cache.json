@@ -21808,5 +21808,95 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "WATT": {
+        "ticker": "WATT",
+        "name": "Energous Corporation",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 26101752,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "VNM": {
+        "ticker": "VNM",
+        "name": "VanEck Vietnam ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "LYV": {
+        "ticker": "LYV",
+        "name": "Live Nation Entertainment, Inc.",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 36563668992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PTF": {
+        "ticker": "PTF",
+        "name": "Invesco Dorsey Wright Technolog",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ITB": {
+        "ticker": "ITB",
+        "name": "iShares U.S. Home Construction ",
+        "meta": "Consumer Cyclical",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "IOVA": {
+        "ticker": "IOVA",
+        "name": "Iovance Biotherapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1131358720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "TPET": {
+        "ticker": "TPET",
+        "name": "Trio Petroleum Corp.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 5808415,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "IHF": {
+        "ticker": "IHF",
+        "name": "iShares U.S. Health Care Provid",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "UTES": {
+        "ticker": "UTES",
+        "name": "Virtus Reaves Utilities ETF",
+        "meta": "Utilities",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
