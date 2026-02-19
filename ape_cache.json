@@ -21268,5 +21268,85 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AROC": {
+        "ticker": "AROC",
+        "name": "Archrock, Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 5859100160,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "OII": {
+        "ticker": "OII",
+        "name": "Oceaneering International, Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 3488727552,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AFK": {
+        "ticker": "AFK",
+        "name": "VanEck Africa Index ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SBRCY": {
+        "ticker": "SBRCY",
+        "name": "SBRCY",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "ODC": {
+        "ticker": "ODC",
+        "name": "Oil-Dri Corporation Of America",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 930506624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SKT": {
+        "ticker": "SKT",
+        "name": "Tanger Inc.",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 3973497088,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "POOL": {
+        "ticker": "POOL",
+        "name": "Pool Corporation",
+        "meta": "Industrial Distribution",
+        "type": "EQUITY",
+        "mcap": 8334231040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VSS": {
+        "ticker": "VSS",
+        "name": "Vanguard FTSE All-Wld ex-US SmC",
+        "meta": "Foreign Small/Mid Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
