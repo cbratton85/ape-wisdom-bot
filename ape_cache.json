@@ -21978,5 +21978,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "AZN": {
+        "ticker": "AZN",
+        "name": "AstraZeneca PLC",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 323420127232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
