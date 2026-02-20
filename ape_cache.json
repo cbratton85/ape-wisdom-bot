@@ -22128,5 +22128,75 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ANNX": {
+        "ticker": "ANNX",
+        "name": "Annexon, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 760184960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "OMC": {
+        "ticker": "OMC",
+        "name": "Omnicom Group Inc.",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 25685436416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BUG": {
+        "ticker": "BUG",
+        "name": "Global X Cybersecurity ETF",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "CRC": {
+        "ticker": "CRC",
+        "name": "California Resources Corporatio",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 5305128448,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TTI": {
+        "ticker": "TTI",
+        "name": "Tetra Technologies, Inc.",
+        "meta": "Conglomerates",
+        "type": "EQUITY",
+        "mcap": 1503313024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CTXR": {
+        "ticker": "CTXR",
+        "name": "Citius Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 15462111,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "LRN": {
+        "ticker": "LRN",
+        "name": "Stride, Inc.",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 3637634816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

@@ -39,11 +39,6 @@
         "last_checked": "2026-02-17",
         "reason": "No Price Data"
     },
-    "PAK": {
-        "delisted": true,
-        "last_checked": "2026-02-18",
-        "reason": "No Price Data"
-    },
     "OLD": {
         "delisted": true,
         "last_checked": "2026-02-18",
@@ -155,6 +150,11 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-02-20",
+        "reason": "No Price Data"
+    },
+    "MOM": {
         "delisted": true,
         "last_checked": "2026-02-20",
         "reason": "No Price Data"
