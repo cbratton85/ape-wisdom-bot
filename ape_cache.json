@@ -22048,5 +22048,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "OIS": {
+        "ticker": "OIS",
+        "name": "Oil States International, Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 605926528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
