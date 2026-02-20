@@ -22598,5 +22598,75 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "MOMO": {
+        "ticker": "MOMO",
+        "name": "Hello Group Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 1071665408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "JBTM": {
+        "ticker": "JBTM",
+        "name": "JBT Marel Corporation",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 8570598912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SVRA": {
+        "ticker": "SVRA",
+        "name": "Savara, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1125177216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "RPD": {
+        "ticker": "RPD",
+        "name": "Rapid7, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 430208704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "TENB": {
+        "ticker": "TENB",
+        "name": "Tenable Holdings, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 2376144384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CYBR": {
+        "ticker": "CYBR",
+        "name": "CyberArk Software Ltd.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 20637501440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ALC": {
+        "ticker": "ALC",
+        "name": "Alcon Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 40743641088,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
