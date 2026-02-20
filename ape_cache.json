@@ -22548,5 +22548,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "DECK": {
+        "ticker": "DECK",
+        "name": "Deckers Outdoor Corporation",
+        "meta": "Footwear & Accessories",
+        "type": "EQUITY",
+        "mcap": 17300639744,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CYN": {
+        "ticker": "CYN",
+        "name": "Cyngn Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 11403364,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "FLAU": {
+        "ticker": "FLAU",
+        "name": "Franklin FTSE Australia ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "EGO": {
+        "ticker": "EGO",
+        "name": "Eldorado Gold Corporation",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 8682137600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
