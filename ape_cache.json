@@ -22198,5 +22198,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "OBDC": {
+        "ticker": "OBDC",
+        "name": "Blue Owl Capital Corporation",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 5808062976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DOLE": {
+        "ticker": "DOLE",
+        "name": "Dole plc",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 1514989440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PDS": {
+        "ticker": "PDS",
+        "name": "Precision Drilling Corporation",
+        "meta": "Oil & Gas Drilling",
+        "type": "EQUITY",
+        "mcap": 1164880128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GFAI": {
+        "ticker": "GFAI",
+        "name": "Guardforce AI Co., Limited",
+        "meta": "Security & Protection Services",
+        "type": "EQUITY",
+        "mcap": 11275215,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "FFR": {
+        "ticker": "FFR",
+        "name": "First Trust FTSE EPRA/NAREIT Gl",
+        "meta": "Global Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "PDSB": {
+        "ticker": "PDSB",
+        "name": "PDS Biotechnology Corporation",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 37473152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
