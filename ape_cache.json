@@ -22068,5 +22068,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FSM": {
+        "ticker": "FSM",
+        "name": "Fortuna Mining Corp.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 3351698944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LYFE": {
+        "ticker": "LYFE",
+        "name": "2ndVote Life Neutral Plus ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 6685054464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
