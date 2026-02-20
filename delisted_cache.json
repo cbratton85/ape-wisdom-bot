@@ -109,11 +109,6 @@
         "last_checked": "2026-02-19",
         "reason": "No Price Data"
     },
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-02-19",
-        "reason": "No Price Data"
-    },
     "KNW": {
         "delisted": true,
         "last_checked": "2026-02-19",
@@ -155,6 +150,11 @@
         "reason": "No Price Data"
     },
     "LYFE": {
+        "delisted": true,
+        "last_checked": "2026-02-20",
+        "reason": "No Price Data"
+    },
+    "SOL": {
         "delisted": true,
         "last_checked": "2026-02-20",
         "reason": "No Price Data"

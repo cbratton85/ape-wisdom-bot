@@ -22098,5 +22098,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "TTEC": {
+        "ticker": "TTEC",
+        "name": "TTEC Holdings, Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 107780256,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BHAT": {
+        "ticker": "BHAT",
+        "name": "Blue Hat Interactive Entertainm",
+        "meta": "Electronic Gaming & Multimedia",
+        "type": "EQUITY",
+        "mcap": 16210639,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
