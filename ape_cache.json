@@ -22518,5 +22518,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PJT": {
+        "ticker": "PJT",
+        "name": "PJT Partners Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 6000252416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "STUB": {
+        "ticker": "STUB",
+        "name": "StubHub Holdings, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 3473996288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "INVA": {
+        "ticker": "INVA",
+        "name": "Innoviva, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1756325248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
