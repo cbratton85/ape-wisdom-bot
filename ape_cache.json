@@ -22118,5 +22118,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "CURI": {
+        "ticker": "CURI",
+        "name": "CuriosityStream Inc.",
+        "meta": "Broadcasting",
+        "type": "EQUITY",
+        "mcap": 188304176,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
