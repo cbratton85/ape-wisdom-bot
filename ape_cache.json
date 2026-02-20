@@ -22378,5 +22378,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "BDMD": {
+        "ticker": "BDMD",
+        "name": "Baird Medical Investment Holdin",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 57604576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "FND": {
+        "ticker": "FND",
+        "name": "Floor & Decor Holdings, Inc.",
+        "meta": "Home Improvement Retail",
+        "type": "EQUITY",
+        "mcap": 7429784576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RH": {
+        "ticker": "RH",
+        "name": "RH",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 3845954560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MOB": {
+        "ticker": "MOB",
+        "name": "Mobilicom Limited",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 65766608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
