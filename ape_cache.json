@@ -22258,5 +22258,125 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "BHF": {
+        "ticker": "BHF",
+        "name": "Brighthouse Financial, Inc.",
+        "meta": "Insurance - Life",
+        "type": "EQUITY",
+        "mcap": 3631190272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VSTM": {
+        "ticker": "VSTM",
+        "name": "Verastem, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 449659200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "FTA": {
+        "ticker": "FTA",
+        "name": "First Trust Large Cap Value Alp",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "VNDA": {
+        "ticker": "VNDA",
+        "name": "Vanda Pharmaceuticals Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 351160832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "FNKO": {
+        "ticker": "FNKO",
+        "name": "Funko, Inc.",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 313129920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "STRS": {
+        "ticker": "STRS",
+        "name": "Stratus Properties Inc.",
+        "meta": "Real Estate - Diversified",
+        "type": "EQUITY",
+        "mcap": 232264208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "EPC": {
+        "ticker": "EPC",
+        "name": "Edgewell Personal Care Company",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 1043181760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "INSG": {
+        "ticker": "INSG",
+        "name": "Inseego Corp.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 181324032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LAD": {
+        "ticker": "LAD",
+        "name": "Lithia Motors, Inc.",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 7180069888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ATRO": {
+        "ticker": "ATRO",
+        "name": "Astronics Corporation",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 2816482048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LIT": {
+        "ticker": "LIT",
+        "name": "Global X Lithium & Battery Tech",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "PSC": {
+        "ticker": "PSC",
+        "name": "Principal U.S. Small-Cap ETF",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
