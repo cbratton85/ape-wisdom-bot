@@ -159,12 +159,12 @@
         "last_checked": "2026-02-19",
         "reason": "No Price Data"
     },
-    "FI": {
+    "SBRCY": {
         "delisted": true,
-        "last_checked": "2026-02-19",
+        "last_checked": "2026-02-20",
         "reason": "No Price Data"
     },
-    "SBRCY": {
+    "FI": {
         "delisted": true,
         "last_checked": "2026-02-20",
         "reason": "No Price Data"

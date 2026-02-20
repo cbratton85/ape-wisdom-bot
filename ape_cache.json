@@ -21988,5 +21988,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ISPC": {
+        "ticker": "ISPC",
+        "name": "iSpecimen Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 2765206,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ALMS": {
+        "ticker": "ALMS",
+        "name": "Alumis Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3641597952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
