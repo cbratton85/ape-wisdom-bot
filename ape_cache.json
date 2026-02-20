@@ -22018,5 +22018,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "DGX": {
+        "ticker": "DGX",
+        "name": "Quest Diagnostics Incorporated",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 22519904256,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MGX": {
+        "ticker": "MGX",
+        "name": "Metagenomi Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 57071064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "MLTX": {
+        "ticker": "MLTX",
+        "name": "MoonLake Immunotherapeutics",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1287297280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
