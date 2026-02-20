@@ -124,11 +124,6 @@
         "last_checked": "2026-02-20",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-02-20",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-02-20",
@@ -155,6 +150,11 @@
         "reason": "No Price Data"
     },
     "SOL": {
+        "delisted": true,
+        "last_checked": "2026-02-20",
+        "reason": "No Price Data"
+    },
+    "RE": {
         "delisted": true,
         "last_checked": "2026-02-20",
         "reason": "No Price Data"
