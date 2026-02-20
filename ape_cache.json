@@ -22088,5 +22088,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "BLMN": {
+        "ticker": "BLMN",
+        "name": "Bloomin' Brands, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 565841472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
