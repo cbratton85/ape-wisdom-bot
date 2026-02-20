@@ -1448,7 +1448,7 @@ def export_interactive_html(df):
             
             table.dataTable {{ 
                 width: auto !important; 
-                margin: 0 auto; 
+                margin: 0 auto;
                 border-right: 1px solid #444 !important;
                 border-left: 1px solid #444 !important;
                 border-collapse: separate !important;
@@ -1602,7 +1602,7 @@ def export_interactive_html(df):
 
             .dataTables_wrapper .dataTables_filter {{
                 position: sticky !important;
-                top: 10px;
+                top: 1px;
             }}
 
             .filter-bar::-webkit-scrollbar {{ display: none; }} 
@@ -1768,9 +1768,10 @@ def export_interactive_html(df):
                 transform: translateX(-50%) !important;
                 pointer-events: none !important;
                 width: max-content !important;
-                top: 5px !important;
+                top: 0px !important;
                 z-index: 10 !important;
                 margin: 0 !important;
+                padding: 0 !important;
             }}
 
             .d-tooltip::after,
@@ -1781,19 +1782,18 @@ def export_interactive_html(df):
             .dataTables_filter input {{
                 pointer-events: auto !important;
                 width: 25vw !important;
-                min-width: 200px !important;
-                max-width: 400px !important;
+                min-width: 150px !important;
+                max-width: 350px !important;
                 background: #181818 !important;
                 color: #fff !important;
                 border: 1px solid #333 !important;
                 border-radius: 20px !important;
-                padding: 0px 15px !important;
+                padding: 0px 0px !important;
                 outline: none !important;
                 text-align: center !important;
-                font-size: 16px !important;
-                font-weight: bold !important;
-                height: 16px !important;
-                line-height: 16px !important;
+                font-size: 14px !important;
+                font-weight: 600 !important;
+                height: 14px !important;
             }}
             
             .dataTables_filter input::placeholder {{ color: white !important; opacity: 1; }}
@@ -1912,8 +1912,6 @@ def export_interactive_html(df):
                 width: 100%;
                 overflow: visible !important;
             }}
-
-
 
             .d-tooltip {{
                 position: relative;
@@ -2609,7 +2607,6 @@ def export_interactive_html(df):
     let sctrMode = "global"; // Default state
 
     function toggleSCTRMode(event) {{
-        // Stop the click from bubbling up to the DataTables header
         if (event) {{
             event.stopPropagation();
             event.preventDefault();
@@ -2633,7 +2630,7 @@ def export_interactive_html(df):
         // Automatically sort SCTR Highest to Lowest
         if ($.fn.DataTable.isDataTable('.table')) {{
             var api = $('.table').DataTable();
-            api.order([23, 'desc']).draw(false);
+            api.draw(false);
         }}
     }}
 
