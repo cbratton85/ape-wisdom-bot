@@ -22478,5 +22478,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FUL": {
+        "ticker": "FUL",
+        "name": "H. B. Fuller Company",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 3571543040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "OFLX": {
+        "ticker": "OFLX",
+        "name": "Omega Flex, Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 377224800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "LVMUY": {
+        "ticker": "LVMUY",
+        "name": "LVMH-Moet Hennessy Louis Vuitto",
+        "meta": "Luxury Goods",
+        "type": "EQUITY",
+        "mcap": 324723146752,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
+    },
+    "SEI": {
+        "ticker": "SEI",
+        "name": "Solaris Energy Infrastructure, ",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 3510834432,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
