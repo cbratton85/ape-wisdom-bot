@@ -22418,5 +22418,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "TNDM": {
+        "ticker": "TNDM",
+        "name": "Tandem Diabetes Care, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 1725570176,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "HEAR": {
+        "ticker": "HEAR",
+        "name": "HEAR",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "PSNY": {
+        "ticker": "PSNY",
+        "name": "Polestar Automotive Holding UK ",
+        "meta": "Auto Manufacturers",
+        "type": "EQUITY",
+        "mcap": 1583083520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "NFGC": {
+        "ticker": "NFGC",
+        "name": "New Found Gold Corp",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 923640320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "CTS": {
+        "ticker": "CTS",
+        "name": "CTS Corporation",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 1586727424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SMWB": {
+        "ticker": "SMWB",
+        "name": "Similarweb Ltd.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 239862048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
