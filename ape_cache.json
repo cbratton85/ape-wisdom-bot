@@ -22688,5 +22688,115 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "LODE": {
+        "ticker": "LODE",
+        "name": "Comstock Inc.",
+        "meta": "Other Precious Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 224821408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "THM": {
+        "ticker": "THM",
+        "name": "International Tower Hill Mines,",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 702298432,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "WRN": {
+        "ticker": "WRN",
+        "name": "Western Copper and Gold Corpora",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 639480128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "GAU": {
+        "ticker": "GAU",
+        "name": "Galiano Gold Inc.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 803267136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "XPL": {
+        "ticker": "XPL",
+        "name": "Solitario Resources Corp.",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 67566960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "ITRG": {
+        "ticker": "ITRG",
+        "name": "Integra Resources Corp.",
+        "meta": "Other Precious Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 785804416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "FURY": {
+        "ticker": "FURY",
+        "name": "Fury Gold Mines Limited",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 139366800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "VGZ": {
+        "ticker": "VGZ",
+        "name": "Vista Gold Corp",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 342026688,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "NUE": {
+        "ticker": "NUE",
+        "name": "Nucor Corporation",
+        "meta": "Steel",
+        "type": "EQUITY",
+        "mcap": 41196847104,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VRSN": {
+        "ticker": "VRSN",
+        "name": "VeriSign, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 20014858240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SKE": {
+        "ticker": "SKE",
+        "name": "Skeena Resources Limited",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 4250375936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
