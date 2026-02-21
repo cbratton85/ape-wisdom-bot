@@ -22808,5 +22808,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SCHA": {
+        "ticker": "SCHA",
+        "name": "Schwab U.S. Small-Cap ETF",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
