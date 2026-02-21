@@ -22848,5 +22848,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NLY": {
+        "ticker": "NLY",
+        "name": "Annaly Capital Management Inc.",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 16537268224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "JPUS": {
+        "ticker": "JPUS",
+        "name": "JPMorgan Diversified Return U.S",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "AWK": {
+        "ticker": "AWK",
+        "name": "American Water Works Company, I",
+        "meta": "Utilities - Regulated Water",
+        "type": "EQUITY",
+        "mcap": 25250068480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "WTRG": {
+        "ticker": "WTRG",
+        "name": "Essential Utilities, Inc.",
+        "meta": "Utilities - Regulated Water",
+        "type": "EQUITY",
+        "mcap": 10949643264,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BWB": {
+        "ticker": "BWB",
+        "name": "Bridgewater Bancshares, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 536600224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
