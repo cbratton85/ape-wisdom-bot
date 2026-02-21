@@ -59,11 +59,6 @@
         "last_checked": "2026-02-20",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-02-20",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-02-20",
@@ -145,6 +140,16 @@
         "reason": "No Price Data"
     },
     "LYFE": {
+        "delisted": true,
+        "last_checked": "2026-02-21",
+        "reason": "No Price Data"
+    },
+    "RE": {
+        "delisted": true,
+        "last_checked": "2026-02-21",
+        "reason": "No Price Data"
+    },
+    "APE": {
         "delisted": true,
         "last_checked": "2026-02-21",
         "reason": "No Price Data"
