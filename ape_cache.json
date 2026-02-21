@@ -23108,5 +23108,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NHI": {
+        "ticker": "NHI",
+        "name": "National Health Investors, Inc.",
+        "meta": "REIT - Healthcare Facilities",
+        "type": "EQUITY",
+        "mcap": 4226011648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IGM": {
+        "ticker": "IGM",
+        "name": "iShares Expanded Tech Sector ET",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 964732992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SRS": {
+        "ticker": "SRS",
+        "name": "ProShares UltraShort Real Estat",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
