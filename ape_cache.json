@@ -22818,5 +22818,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "EWA": {
+        "ticker": "EWA",
+        "name": "iShares MSCI Australia Index Fu",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 1888920064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
