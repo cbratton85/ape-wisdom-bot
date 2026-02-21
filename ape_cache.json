@@ -23098,5 +23098,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "GLTR": {
+        "ticker": "GLTR",
+        "name": "abrdn Physical Precious Metals ",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
