@@ -22898,5 +22898,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "LIND": {
+        "ticker": "LIND",
+        "name": "Lindblad Expeditions Holdings I",
+        "meta": "Travel Services",
+        "type": "EQUITY",
+        "mcap": 1155105536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "IPG": {
+        "ticker": "IPG",
+        "name": "IPG",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
