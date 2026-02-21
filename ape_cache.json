@@ -22938,5 +22938,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ROP": {
+        "ticker": "ROP",
+        "name": "Roper Technologies, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 36143575040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "NAVN": {
+        "ticker": "NAVN",
+        "name": "Navan, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2513791488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CRMD": {
+        "ticker": "CRMD",
+        "name": "CorMedix Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 553887040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "AGYS": {
+        "ticker": "AGYS",
+        "name": "Agilysys, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2210432512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GDOT": {
+        "ticker": "GDOT",
+        "name": "Green Dot Corporation",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 668805312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PAR": {
+        "ticker": "PAR",
+        "name": "PAR Technology Corporation",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 887725888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
