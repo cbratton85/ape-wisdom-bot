@@ -22668,5 +22668,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "AES": {
+        "ticker": "AES",
+        "name": "The AES Corporation",
+        "meta": "Utilities - Diversified",
+        "type": "EQUITY",
+        "mcap": 11757117440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ARBE": {
+        "ticker": "ARBE",
+        "name": "Arbe Robotics Ltd.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 139550944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
