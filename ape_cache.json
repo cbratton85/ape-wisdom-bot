@@ -23038,5 +23038,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "CARS": {
+        "ticker": "CARS",
+        "name": "Cars.com Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 704779840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ECL": {
+        "ticker": "ECL",
+        "name": "Ecolab Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 86267346944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
