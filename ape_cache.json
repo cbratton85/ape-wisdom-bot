@@ -23058,5 +23058,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "KOF": {
+        "ticker": "KOF",
+        "name": "Coca Cola Femsa S.A.B. de C.V.",
+        "meta": "Beverages - Non-Alcoholic",
+        "type": "EQUITY",
+        "mcap": 23754110976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "XYL": {
+        "ticker": "XYL",
+        "name": "Xylem Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 31344011264,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SAR": {
+        "ticker": "SAR",
+        "name": "Saratoga Investment Corp New",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 376926752,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CAPR": {
+        "ticker": "CAPR",
+        "name": "Capricor Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1550923648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
