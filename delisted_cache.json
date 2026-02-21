@@ -89,11 +89,6 @@
         "last_checked": "2026-02-21",
         "reason": "No Price Data"
     },
-    "CN": {
-        "delisted": true,
-        "last_checked": "2026-02-21",
-        "reason": "No Price Data"
-    },
     "DS": {
         "delisted": true,
         "last_checked": "2026-02-21",
@@ -145,6 +140,11 @@
         "reason": "No Price Data"
     },
     "KNW": {
+        "delisted": true,
+        "last_checked": "2026-02-21",
+        "reason": "No Price Data"
+    },
+    "CN": {
         "delisted": true,
         "last_checked": "2026-02-21",
         "reason": "No Price Data"
