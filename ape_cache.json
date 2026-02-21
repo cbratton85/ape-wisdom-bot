@@ -22798,5 +22798,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VIOV": {
+        "ticker": "VIOV",
+        "name": "Vanguard S&P Small-Cap 600 Valu",
+        "meta": "Small Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
