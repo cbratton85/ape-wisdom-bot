@@ -23368,5 +23368,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BBCA": {
+        "ticker": "BBCA",
+        "name": "JPMorgan BetaBuilders Canada ET",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "ASR": {
+        "ticker": "ASR",
+        "name": "Grupo Aeroportuario del Sureste",
+        "meta": "Airports & Air Services",
+        "type": "EQUITY",
+        "mcap": 11500083200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "OMAB": {
+        "ticker": "OMAB",
+        "name": "Grupo Aeroportuario del Centro ",
+        "meta": "Airports & Air Services",
+        "type": "EQUITY",
+        "mcap": 6515642880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
