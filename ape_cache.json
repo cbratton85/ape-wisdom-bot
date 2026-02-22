@@ -23308,5 +23308,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TTE": {
+        "ticker": "TTE",
+        "name": "TotalEnergies SE",
+        "meta": "Oil & Gas Integrated",
+        "type": "EQUITY",
+        "mcap": 166825590784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AVPT": {
+        "ticker": "AVPT",
+        "name": "AvePoint, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 2265787904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
