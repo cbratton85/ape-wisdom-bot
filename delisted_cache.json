@@ -4,11 +4,6 @@
         "last_checked": "2026-02-18",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-02-19",
-        "reason": "No Price Data"
-    },
     "ARIS": {
         "delisted": true,
         "last_checked": "2026-02-19",
@@ -147,6 +142,11 @@
     "CN": {
         "delisted": true,
         "last_checked": "2026-02-21",
+        "reason": "No Price Data"
+    },
+    "AUD": {
+        "delisted": true,
+        "last_checked": "2026-02-22",
         "reason": "No Price Data"
     }
 }

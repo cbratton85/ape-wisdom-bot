@@ -23138,5 +23138,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "BCD": {
+        "ticker": "BCD",
+        "name": "abrdn Bloomberg All Commodity L",
+        "meta": "Commodities Broad Basket",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "XLY": {
+        "ticker": "XLY",
+        "name": "State Street Consumer Discretio",
+        "meta": "Consumer Cyclical",
+        "type": "ETF",
+        "mcap": 14123714560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "LUNA": {
+        "ticker": "LUNA",
+        "name": "Luna Innovations, Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 52045528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
     }
 }
