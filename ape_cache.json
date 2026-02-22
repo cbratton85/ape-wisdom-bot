@@ -23198,5 +23198,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MDLZ": {
+        "ticker": "MDLZ",
+        "name": "Mondelez International, Inc.",
+        "meta": "Confectioners",
+        "type": "EQUITY",
+        "mcap": 75873083392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
