@@ -23248,5 +23248,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ESI": {
+        "ticker": "ESI",
+        "name": "Element Solutions Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 8576476672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
