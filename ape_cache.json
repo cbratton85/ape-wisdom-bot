@@ -23238,5 +23238,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BLD": {
+        "ticker": "BLD",
+        "name": "TopBuild Corp.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 14601801728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
