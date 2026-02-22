@@ -89,8 +89,8 @@ class HistoryTracker:
             'sym', 'name', 'meta', 'history', 'desc', 'type', 'avgvol', 'mcap', 'rolling',
             'z_rank_plus', 'z_surge', 'z_mnt_perc', 'z_upvotes', 'z_accel', 'z_upv_plus', 
             'z_ment', 'z_squeeze', 'type_tag', 'industry', 'heat', 'velocity', 'accel',
-            'streak', 'upv_chg', 'day_perc', 'price', 'rsi', 'adx', 'di_plus', 'di-', 'curvol',
-            'raw_sctr'] 
+            'streak', 'upv_chg', 'day_perc', 'price', 'rsi', 'di_plus', 'di-', 'stoch_k',
+            'stoch_d', 'curvol', 'raw_sctr', 'raw_ibd', 'ibd_rs'] 
 
         no_round_list = ['rank', 'rank_plus', 'ment', 'upvotes', 'upv_plus', 'streak']
 
@@ -337,56 +337,32 @@ def calculate_rsi(series, period=14):
     except Exception:
         return 0
 
-def calculate_adx_subset(df, period=13): # Default set to 13 to match your "len"
+def calculate_stochastic(df, k_period=5, d_period=1, smooth_k=3):
     """
-    Calculates ADX using SMA smoothing to match the specific Pine Script provided.
+    Calculates the Slow Stochastic Oscillator.
+    Standard Slow Stochastic smooths the fast %K with a 3-period SMA.
     """
     try:
-        # We need enough data for the lookback. 
-        # 13 (DI) + 13 (ADX) = ~26 days minimum required.
-        if df.empty or len(df) < (period * 2):
-            return 0, 0, 0
+        if df.empty or len(df) < (k_period + smooth_k):
+            return 50.0, 50.0 # Return neutral if not enough data
 
-        df = df.copy()
+        low_min = df['Low'].rolling(window=k_period).min()
+        high_max = df['High'].rolling(window=k_period).max()
         
-        # 1. Calculate True Range and Directional Movement
-        df['H-L'] = df['High'] - df['Low']
-        df['H-PC'] = abs(df['High'] - df['Close'].shift(1))
-        df['L-PC'] = abs(df['Low'] - df['Close'].shift(1))
-        df['TR'] = df[['H-L', 'H-PC', 'L-PC']].max(axis=1)
-
-        df['UpMove'] = df['High'] - df['High'].shift(1)
-        df['DownMove'] = df['Low'].shift(1) - df['Low']
-
-        df['+DM'] = np.where((df['UpMove'] > df['DownMove']) & (df['UpMove'] > 0), df['UpMove'], 0)
-        df['-DM'] = np.where((df['DownMove'] > df['UpMove']) & (df['DownMove'] > 0), df['DownMove'], 0)
-
-        # 2. Wilder's Smoothing for DI (Matches Pine Script's manual smoothing loop)
-        alpha = 1 / period
-        df['TR14'] = df['TR'].ewm(alpha=alpha, adjust=False).mean()
-        df['+DM14'] = df['+DM'].ewm(alpha=alpha, adjust=False).mean()
-        df['-DM14'] = df['-DM'].ewm(alpha=alpha, adjust=False).mean()
-
-        # 3. Calculate DI+ and DI-
-        df['DI+'] = 100 * (df['+DM14'] / df['TR14'])
-        df['DI-'] = 100 * (df['-DM14'] / df['TR14'])
+        # Fast %K
+        fast_k = 100 * (df['Close'] - low_min) / (high_max - low_min).replace(0, np.nan)
+        fast_k = fast_k.fillna(50.0)
         
-        # 4. Calculate DX
-        # Handle division by zero
-        sum_di = df['DI+'] + df['DI-']
-        df['DX'] = 100 * abs(df['DI+'] - df['DI-']) / sum_di.replace(0, np.nan)
-        df['DX'] = df['DX'].fillna(0)
-
-        # 5. FINAL ADX CALCULATION (The Change)
-        # Your script uses: ADX = sma(DX, len)
-        # Python equivalent: .rolling(window=period).mean()
-        df['ADX'] = df['DX'].rolling(window=period).mean()
-
-        # Return latest values
-        return df['ADX'].iloc[-1], df['DI+'].iloc[-1], df['DI-'].iloc[-1]
-
-    except Exception as e:
-        return 0, 0, 0
+        # Slow %K (Smoothed Fast %K)
+        slow_k = fast_k.rolling(window=smooth_k).mean()
+        
+        # %D (Moving Average of Slow %K)
+        slow_d = slow_k.rolling(window=d_period).mean() if d_period > 1 else slow_k
+        
+        # Return the latest %K and %D
+        return float(slow_k.iloc[-1]), float(slow_d.iloc[-1])
+    except Exception:
+        return 50.0, 50.0
 
 def calculate_raw_sctr(hist, ticker_name="Unknown"):
     """
@@ -429,7 +405,33 @@ def calculate_raw_sctr(hist, ticker_name="Unknown"):
         return float(raw_score)
     except Exception as e:
         print(f"  > SCTR Math Error for {ticker_name}: {e}")
-        return -9999.0  # <--- Impossible number for failures
+        return -9999.0
+
+def calculate_raw_ibd_rs(hist, ticker_name="Unknown"):
+    """
+    Calculates a raw Relative Strength score approximating the IBD RS formula.
+    Uses 12-month data with heavier weighting on the most recent 3 months.
+    """
+    try:
+        close = pd.to_numeric(hist['Close'], errors='coerce').dropna()
+        if close.empty or len(close) < 63:
+            return -9999.0
+        
+        # Pull prices at roughly 1Q, 2Q, 3Q, and 4Q ago (63 trading days per quarter)
+        c_now = close.iloc[-1]
+        c_63 = close.iloc[-63] if len(close) >= 63 else close.iloc[0]
+        c_126 = close.iloc[-126] if len(close) >= 126 else close.iloc[0]
+        c_189 = close.iloc[-189] if len(close) >= 189 else close.iloc[0]
+        c_252 = close.iloc[-252] if len(close) >= 252 else close.iloc[0]
+
+        # IBD Formula Approximation: 40% Q1, 20% Q2, 20% Q3, 20% Q4
+        rs_raw = ((c_now - c_63) / c_63) * 0.4 + \
+                 ((c_63 - c_126) / c_126) * 0.2 + \
+                 ((c_126 - c_189) / c_189) * 0.2 + \
+                 ((c_189 - c_252) / c_252) * 0.2
+        return float(rs_raw * 100)
+    except Exception as e:
+        return -9999.0
 
 def get_cached_logo(ticker):
     token = os.environ.get("LOGO_DEV_TOKEN")
@@ -626,15 +628,17 @@ def filter_and_process(stocks):
             curr_p = float(hist['Close'].iloc[-1])
             if isinstance(curr_p, pd.Series): curr_p = curr_p.iloc[0]
 
-            # 4. CALCULATE RSI (Requires ~15-20 days for accuracy)
+            # 4. CALCULATE RSI & STOCHASTIC
             if not hist.empty and len(hist) >= 15:
                 rsi_val = calculate_rsi(hist['Close'])
-                adx_val, di_plus, di_minus = calculate_adx_subset(hist)
+                stoch_k, stoch_d = calculate_stochastic(hist, k_period=5, d_period=1)
                 raw_sctr = calculate_raw_sctr(hist, t)
+                raw_ibd = calculate_raw_ibd_rs(hist, t)
             else:
                 rsi_val = 0
-                adx_val, di_plus, di_minus = 0, 0, 0
+                stoch_k, stoch_d = 50.0, 50.0
                 raw_sctr = -9999.0
+                raw_ibd = -9999.0
             clean_hist = hist['Volume'] 
             actual_vol_days = min(len(clean_hist), AVG_VOLUME_DAYS)
             avg_v = clean_hist.tail(actual_vol_days).mean()
@@ -729,10 +733,11 @@ def filter_and_process(stocks):
                 "Rolling": 0, 
                 "History": "New",
                 "RSI": rsi_val,
-                "ADX": adx_val,
-                "DI+": di_plus,
-                "DI-": di_minus,
-                "Raw_SCTR": raw_sctr
+                "Stoch_K": stoch_k,
+                "Stoch_D": stoch_d,
+                "Raw_SCTR": raw_sctr,
+                "Raw_IBD": raw_ibd,
+                "IBD_RS": 0.0
             })
             
         except Exception as e:
@@ -785,6 +790,13 @@ def filter_and_process(stocks):
             if valid_mask.any():
                 # Rank only the valid ones, scale to 99.9
                 df.loc[valid_mask, 'SCTR'] = (df.loc[valid_mask, 'Raw_SCTR'].rank(pct=True) * 99.9).round(1)
+
+        # --- RANK THE IBD RS UNIVERSE ---
+        df['IBD_RS'] = 0.0
+        if 'Raw_IBD' in df.columns:
+            valid_mask_ibd = df['Raw_IBD'] > -9000.0
+            if valid_mask_ibd.any():
+                df.loc[valid_mask_ibd, 'IBD_RS'] = (df.loc[valid_mask_ibd, 'Raw_IBD'].rank(pct=True) * 99.9).round(1)
 
         tracker.save(df)
 
@@ -1179,40 +1191,23 @@ def export_interactive_html(df):
             ment_hist = row.get('h_ment', '')
             export_df.at[index, 'MENT'] = with_hist(ment_val, ment_hist)
 
-            # --- ADX VISUALIZATION ---
-            adx_v = float(row.get('ADX', 0))
-            dip_v = float(row.get('DI+', 0))
-            dim_v = float(row.get('DI-', 0))
+            # --- STOCHASTIC VISUALIZATION ---
+            stoch_k_v = float(row.get('Stoch_K', 50.0))
+            stoch_d_v = float(row.get('Stoch_D', 50.0))
 
-            # Tooltip content: Shows the breakdown
-            adx_tooltip = f"ADX: {adx_v:.1f}&#10;DI+: {dip_v:.1f}&#10;DI-: {dim_v:.1f}"
+            stoch_tooltip = f"%K (5): {stoch_k_v:.1f}&#10;%D (1): {stoch_d_v:.1f}"
             
-            # --- ADX COLOR LOGIC (User Settings: 13 Period, 8 Threshold) ---
-            
-            # Tooltip: Vertical Stack
-            adx_tooltip = f"ADX: {adx_v:.1f}&#10;DI+: {dip_v:.1f}&#10;DI-: {dim_v:.1f}"
-            
-            # 1. Strong Trend (ADX > 25) - Standard "Very Strong" Level
-            if adx_v >= 25:
-                if dip_v > dim_v:
-                    adx_clr = "#00ff00" # Bright Green (Strong Bullish)
-                else:
-                    adx_clr = "#ff0000" # Bright Red (Strong Bearish)
-
-            # 2. Active Trend (ADX > 8) - Your Custom Threshold
-            elif adx_v >= 8:
-                if dip_v > dim_v:
-                    adx_clr = "#008000" # Standard Green (Trend Active)
-                else:
-                    adx_clr = "#cc0000" # Standard Red (Trend Active)
-
-            # 3. No Trend (ADX < 8)
+            # Color Logic: <= 20 Green, >= 80 Red
+            if stoch_k_v <= 20.0:
+                stoch_clr = "#00ff00" # Green (Oversold)
+            elif stoch_k_v >= 80.0:
+                stoch_clr = "#ff4444" # Red (Overbought)
             else:
-                adx_clr = "#666666" # Grey (Chop/Sideways)
+                stoch_clr = "#ffffff" # White (Neutral)
 
             # Create the HTML span with the tooltip
-            adx_str = f'<span class="d-tooltip" data-tooltip="{adx_tooltip}" tabindex="0" style="color:{adx_clr}; font-weight:bold;">{adx_v:.1f}</span>'
-            export_df.at[index, 'ADX'] = adx_str
+            stoch_str = f'<span class="d-tooltip" data-tooltip="{stoch_tooltip}" tabindex="0" style="color:{stoch_clr}; font-weight:bold;">{stoch_k_v:.0f}</span>'
+            export_df.at[index, 'STOCH'] = stoch_str
 
             # --- RSI COLOR LOGIC ---
             rsi_raw = float(row.get('RSI', 0))
@@ -1239,6 +1234,18 @@ def export_interactive_html(df):
             # We add data-global and data-raw attributes so JavaScript can read them
             sctr_str = f'<span class="sctr-val" data-global="{sctr_global:.1f}" data-raw="{sctr_raw_math:.1f}" style="color:{sctr_clr}; font-weight:bold;">{sctr_global:.1f}</span>'
             export_df.at[index, 'SCTR'] = sctr_str
+
+            # --- IBD RS COLOR LOGIC ---
+            ibd_global = float(row.get('IBD_RS', 0.0))
+            ibd_raw_math = float(row.get('Raw_IBD', -9999.0))
+            
+            if ibd_global >= 80: ibd_clr = "#00ff00"       
+            elif ibd_global >= 40: ibd_clr = "#ffff00"     
+            elif ibd_global > 0: ibd_clr = "#ff4444"       
+            else: ibd_clr = "#666666"                     
+            
+            ibd_str = f'<span class="ibd-val" data-global="{ibd_global:.1f}" data-raw="{ibd_raw_math:.1f}" style="color:{ibd_clr}; font-weight:bold;">{ibd_global:.1f}</span>'
+            export_df.at[index, 'IBD_RS'] = ibd_str
 
             # --- 15. Percent Change ---
             d_val = row.get('Day%', 0)
@@ -1280,7 +1287,7 @@ def export_interactive_html(df):
         cols = [
             'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Day%', 'Acc', 'Eff', 'Conv', 'Upvs', 
             'Upv+', 'VOL', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY',
-            'RSI', 'ADX', 'SCTR', 'Type_Tag', 'AvgVol', 'MCap'
+            'RSI', 'STOCH', 'SCTR', 'IBD_RS', 'Type_Tag', 'AvgVol', 'MCap'
         ]
         for c in cols:
             if c not in export_df.columns:
@@ -1313,10 +1320,10 @@ def export_interactive_html(df):
             '<th>Sqz</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Mentions * Surge / log(MCap)\nCyan: >1.5σ | White: Normal">&nbsp;SQZ</span></th>',
             '<th>INDUSTRY</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Industry category group.">INDUSTRY</span></th>',
             '<th>RSI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Relative Strength Index (14d).\nRed: Overbought | Green: Oversold">&nbsp;RSI</span></th>',
-            '<th>ADX</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Avg Directional Index.\nGreen: Bull Trend | Red: Bear Trend">&nbsp;ADX</span></th>',
-            '<th>SCTR</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="sctr-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleSCTRMode(event)" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Momentum ranking system that scores stocks from 0 to 99.9 based on their technical strength compared to their peers.\nScores relative technical strength." style="line-height:1;">SCTR</span></div></th>'
+            '<th>STOCH</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Slow Stochastic Oscillator (%K5, %D1) developed by George Lane.\nLogic: Measures momentum by comparing the closing price to the 5-day price range. It assumes prices tend to close near their highs in an uptrend and lows in a downtrend.\nZones: &le; 20 is Oversold (Buy Zone, Green) | &ge; 80 is Overbought (Sell Zone, Red).">&nbsp;STOCH</span></th>',
+            '<th>SCTR</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="sctr-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleSCTRMode(event)" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="StockCharts Technical Rank (SCTR) created by John Murphy.\nLogic: A percentile ranking (0-99.9) of a stock\'s technical strength versus its peers.\nFormula: Heavily weights long-term trends (200d EMA, 125d ROC), while factoring in medium-term (50d EMA, 20d ROC) and short-term (RSI, PPO slope) momentum." style="line-height:1;">SCTR</span></div></th>',
+            '<th>IBD_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="ibd-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleSCTRMode(event)" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength (RS) Rating developed by William O\'Neil (IBD).\nLogic: A percentile rank (0-99.9) of a stock\'s 52-week price performance.\nFormula: Emphasizes recent momentum by weighting the most recent quarter (3 months) at 40%, and the prior three quarters at 20% each." style="line-height:1;">IBD</span></div></th>'
         }
-        
         for old_tag, new_tag in header_map.items():
             raw_table = raw_table.replace(old_tag, new_tag)
 
@@ -1557,7 +1564,8 @@ def export_interactive_html(df):
 
             th:nth-child(22), td:nth-child(22) {{ width: 1%; text-align: center; font-weight: bold; }}
             th:nth-child(23), td:nth-child(23) {{ width: 1%; text-align: center; font-weight: bold; }}
-            th:nth-child(24), td:nth-child(24) {{ width: 1%; text-align: center; font-weight: bold; border-right: 1px solid #444 !important; }}
+            th:nth-child(24), td:nth-child(24) {{ width: 1%; text-align: center; font-weight: bold; }}
+            th:nth-child(25), td:nth-child(25) {{ width: 1%; text-align: center; font-weight: bold; border-right: 1px solid #444 !important; }}
             
             a {{ color:#4da6ff; text-decoration:none; }} a:hover {{ text-decoration:underline; }}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
@@ -2417,7 +2425,7 @@ def export_interactive_html(df):
         function getTopSectors(metricIdx) {{
             var sectorData = {{}};
             allData.each(function(row) {{
-                var rawType = row[24].toString().replace(/<[^>]+>/g, ''); 
+                var rawType = row[25].toString().replace(/<[^>]+>/g, ''); 
                 if (topSwitchIsETF && !rawType.includes('ETF')) return;
                 if (!topSwitchIsETF && rawType.includes('ETF')) return;
 
@@ -2612,25 +2620,24 @@ def export_interactive_html(df):
             event.preventDefault();
         }}
 
-        const toggleBtn = document.getElementById("sctr-toggle");
+        const sctrBtn = document.getElementById("sctr-toggle");
+        const ibdBtn = document.getElementById("ibd-toggle");
+
         if (sctrMode === "global") {{
             sctrMode = "dynamic";
-            toggleBtn.innerText = "DYNAMIC";
-            toggleBtn.style.color = "#ffff00"; 
-            toggleBtn.style.borderColor = "#ffff00"; // Turns border yellow
+            if(sctrBtn) {{ sctrBtn.innerText = "DYNAMIC"; sctrBtn.style.color = "#ffff00"; sctrBtn.style.borderColor = "#ffff00"; }}
+            if(ibdBtn) {{ ibdBtn.innerText = "DYNAMIC"; ibdBtn.style.color = "#ffff00"; ibdBtn.style.borderColor = "#ffff00"; }}
         }} else {{
             sctrMode = "global";
-            toggleBtn.innerText = "GLOBAL";
-            toggleBtn.style.color = "#00ff00"; 
-            toggleBtn.style.borderColor = "#00ff00"; // Turns border green
+            if(sctrBtn) {{ sctrBtn.innerText = "GLOBAL"; sctrBtn.style.color = "#00ff00"; sctrBtn.style.borderColor = "#00ff00"; }}
+            if(ibdBtn) {{ ibdBtn.innerText = "GLOBAL"; ibdBtn.style.color = "#00ff00"; ibdBtn.style.borderColor = "#00ff00"; }}
         }}
         
         recalculateSCTR();
         
-        // Automatically sort SCTR Highest to Lowest
+        // Automatically sort Highest to Lowest
         if ($.fn.DataTable.isDataTable('.table')) {{
-            var api = $('.table').DataTable();
-            api.draw(false);
+            $('.table').DataTable().draw(false);
         }}
     }}
 
@@ -2638,73 +2645,78 @@ def export_interactive_html(df):
         if (!$.fn.DataTable.isDataTable('.table')) return;
         var api = $('.table').DataTable();
         
-        if (sctrMode === "dynamic") {{
-            // Get all rows that survive the current filters
-            var validRows = api.rows({{ filter: 'applied' }}).indexes();
-            let visibleSpans = [];
+        // Target columns: 23 (SCTR), 24 (IBD RS)
+        [23, 24].forEach(function(colIdx) {{
+            let valClass = (colIdx === 23) ? 'sctr-val' : 'ibd-val';
+            
+            if (sctrMode === "dynamic") {{
+                // Get all rows that survive the current filters
+                var validRows = api.rows({{ filter: 'applied' }}).indexes();
+                let visibleSpans = [];
 
-            validRows.each(function(idx) {{
-                var cellHtml = api.cell(idx, 23).data(); 
-                if (!cellHtml) return;
-                var rawMatch = cellHtml.match(/data-raw="([^"]+)"/);
-                var globalMatch = cellHtml.match(/data-global="([^"]+)"/);
-                
-                if (rawMatch && globalMatch) {{
-                    var rawVal = parseFloat(rawMatch[1]);
-                    var globalVal = parseFloat(globalMatch[1]);
+                validRows.each(function(idx) {{
+                    var cellHtml = api.cell(idx, colIdx).data(); 
+                    if (!cellHtml) return;
+                    var rawMatch = cellHtml.match(/data-raw="([^"]+)"/);
+                    var globalMatch = cellHtml.match(/data-global="([^"]+)"/);
                     
-                    if (rawVal > -9000) {{
-                        visibleSpans.push({{ rowIdx: idx, raw: rawVal, global: globalVal }});
-                    }} else {{
-                        var newHtml = '<span class="sctr-val" data-global="' + globalVal + '" data-raw="' + rawVal + '" style="color:#666666; font-weight:bold;">0.0</span>';
-                        api.cell(idx, 23).data(newHtml); // Update Memory
-                        var node = api.cell(idx, 23).node();
-                        if (node) node.innerHTML = newHtml; // Update Visuals
+                    if (rawMatch && globalMatch) {{
+                        var rawVal = parseFloat(rawMatch[1]);
+                        var globalVal = parseFloat(globalMatch[1]);
+                        
+                        if (rawVal > -9000) {{
+                            visibleSpans.push({{ rowIdx: idx, raw: rawVal, global: globalVal }});
+                        }} else {{
+                            var newHtml = '<span class="' + valClass + '" data-global="' + globalVal + '" data-raw="' + rawVal + '" style="color:#666666; font-weight:bold;">0.0</span>';
+                            api.cell(idx, colIdx).data(newHtml); // Update Memory
+                            var node = api.cell(idx, colIdx).node();
+                            if (node) node.innerHTML = newHtml; // Update Visuals
+                        }}
                     }}
-                }}
-            }});
+                }});
 
-            if (visibleSpans.length > 0) {{
-                // Sort math lowest to highest
-                visibleSpans.sort(function(a, b) {{ return a.raw - b.raw; }});
-                
-                let total = visibleSpans.length;
-                visibleSpans.forEach(function(item, index) {{
-                    let newSctr = ((index + 1) / total) * 99.9;
-                    let clr = "#ff4444";
-                    if (newSctr >= 80) clr = "#00ff00";
-                    else if (newSctr >= 40) clr = "#ffff00";
+                if (visibleSpans.length > 0) {{
+                    // Sort math lowest to highest
+                    visibleSpans.sort(function(a, b) {{ return a.raw - b.raw; }});
                     
-                    var newHtml = '<span class="sctr-val" data-global="' + item.global + '" data-raw="' + item.raw + '" style="color:' + clr + '; font-weight:bold;">' + newSctr.toFixed(1) + '</span>';
-                    api.cell(item.rowIdx, 23).data(newHtml);
-                    var node = api.cell(item.rowIdx, 23).node();
-                    if (node) node.innerHTML = newHtml;
+                    let total = visibleSpans.length;
+                    visibleSpans.forEach(function(item, index) {{
+                        let newSctr = ((index + 1) / total) * 99.9;
+                        let clr = "#ff4444";
+                        if (newSctr >= 80) clr = "#00ff00";
+                        else if (newSctr >= 40) clr = "#ffff00";
+                        
+                        var newHtml = '<span class="' + valClass + '" data-global="' + item.global + '" data-raw="' + item.raw + '" style="color:' + clr + '; font-weight:bold;">' + newSctr.toFixed(1) + '</span>';
+                        api.cell(item.rowIdx, colIdx).data(newHtml);
+                        var node = api.cell(item.rowIdx, colIdx).node();
+                        if (node) node.innerHTML = newHtml;
+                    }});
+                }}
+            }} else {{
+                // Reset ALL rows back to Global
+                api.rows().indexes().each(function(idx) {{
+                    var cellHtml = api.cell(idx, colIdx).data(); 
+                    if (!cellHtml) return;
+                    var rawMatch = cellHtml.match(/data-raw="([^"]+)"/);
+                    var globalMatch = cellHtml.match(/data-global="([^"]+)"/);
+                    
+                    if (rawMatch && globalMatch) {{
+                        var rawVal = parseFloat(rawMatch[1]);
+                        var globalVal = parseFloat(globalMatch[1]);
+                        
+                        let clr = "#ff4444";
+                        if (rawVal <= -9000) clr = "#666666";
+                        else if (globalVal >= 80) clr = "#00ff00";
+                        else if (globalVal >= 40) clr = "#ffff00";
+
+                        var newHtml = '<span class="' + valClass + '" data-global="' + globalVal + '" data-raw="' + rawVal + '" style="color:' + clr + '; font-weight:bold;">' + globalVal.toFixed(1) + '</span>';
+                        api.cell(idx, colIdx).data(newHtml);
+                        var node = api.cell(idx, colIdx).node();
+                        if (node) node.innerHTML = newHtml;
+                    }}
                 }});
             }}
-        }} else {{
-            // Reset ALL rows back to Global
-            api.rows().indexes().each(function(idx) {{
-                var cellHtml = api.cell(idx, 23).data(); 
-                if (!cellHtml) return;
-                var rawMatch = cellHtml.match(/data-raw="([^"]+)"/);
-                var globalMatch = cellHtml.match(/data-global="([^"]+)"/);
-                
-                if (rawMatch && globalMatch) {{
-                    var rawVal = parseFloat(rawMatch[1]);
-                    var globalVal = parseFloat(globalMatch[1]);
-                    
-                    let clr = "#ff4444";
-                    if (rawVal <= -9000) clr = "#666666";
-                    else if (globalVal >= 80) clr = "#00ff00";
-                    else if (globalVal >= 40) clr = "#ffff00";
-
-                    var newHtml = '<span class="sctr-val" data-global="' + globalVal + '" data-raw="' + rawVal + '" style="color:' + clr + '; font-weight:bold;">' + globalVal.toFixed(1) + '</span>';
-                    api.cell(idx, 23).data(newHtml);
-                    var node = api.cell(idx, 23).node();
-                    if (node) node.innerHTML = newHtml;
-                }}
-            }});
-        }}
+        }});
     }}
 
     function toggleMcap(type) {{
@@ -2757,11 +2769,11 @@ def export_interactive_html(df):
             }},
 
             "columnDefs": [ 
-                // Metadata: Type_Tag (24), AvgVol (25), MCap (26) hidden
-                {{ "visible": false, "targets": [24, 25, 26] }}, 
+                // Metadata: Type_Tag (25), AvgVol (26), MCap (27) hidden
+                {{ "visible": false, "targets": [25, 26, 27] }}, 
                 
-                // Numeric sorting: Indices for all metric columns including RSI (20)
-                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23], 
+                // Numeric sorting: Indices for all metric columns including RSI (21)
+                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24], 
                    "type": "num", 
                    "render": function(data, type) {{ 
                        if (type === 'sort' || type === 'type') {{ return parseVal(data); }} 
@@ -2784,9 +2796,9 @@ def export_interactive_html(df):
         // --- CUSTOM FILTERING LOGIC ---
         $.fn.dataTable.ext.search.push(function(settings, data) {{
             // UPDATED INDICES:
-            var typeTag = data[24] || "";
-            var avgVol  = parseVal(data[25]);
-            var mcap    = parseVal(data[26]);
+            var typeTag = data[25] || "";
+            var avgVol  = parseVal(data[26]);
+            var mcap    = parseVal(data[27]);
             
             var viewMode = $('input[name="btnradio"]:checked').attr('id');
             var isETF = typeTag.includes("ETF");
