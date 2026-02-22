@@ -24,11 +24,6 @@
         "last_checked": "2026-02-20",
         "reason": "No Price Data"
     },
-    "SNP": {
-        "delisted": true,
-        "last_checked": "2026-02-20",
-        "reason": "No Price Data"
-    },
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-02-20",
@@ -145,6 +140,11 @@
         "reason": "No Price Data"
     },
     "JPN": {
+        "delisted": true,
+        "last_checked": "2026-02-22",
+        "reason": "No Price Data"
+    },
+    "SNP": {
         "delisted": true,
         "last_checked": "2026-02-22",
         "reason": "No Price Data"
