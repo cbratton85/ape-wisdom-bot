@@ -23208,5 +23208,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "MSEX": {
+        "ticker": "MSEX",
+        "name": "Middlesex Water Company",
+        "meta": "Utilities - Regulated Water",
+        "type": "EQUITY",
+        "mcap": 992626240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VOYG": {
+        "ticker": "VOYG",
+        "name": "Voyager Technologies, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 1632204672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HII": {
+        "ticker": "HII",
+        "name": "Huntington Ingalls Industries, ",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 17171423232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
