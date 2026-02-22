@@ -23258,5 +23258,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "DGRW": {
+        "ticker": "DGRW",
+        "name": "WisdomTree U.S. Quality Dividen",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "FDVV": {
+        "ticker": "FDVV",
+        "name": "Fidelity High Dividend ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
