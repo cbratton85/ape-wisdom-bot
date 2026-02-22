@@ -23328,5 +23328,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PXJ": {
+        "ticker": "PXJ",
+        "name": "Invesco Oil & Gas Services ETF",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 103632000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FLCA": {
+        "ticker": "FLCA",
+        "name": "Franklin FTSE Canada ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "MMM": {
+        "ticker": "MMM",
+        "name": "3M Company",
+        "meta": "Conglomerates",
+        "type": "EQUITY",
+        "mcap": 87990501376,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EFXT": {
+        "ticker": "EFXT",
+        "name": "Enerflex Ltd",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 2383960320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
