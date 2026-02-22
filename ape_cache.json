@@ -23278,5 +23278,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "MSGS": {
+        "ticker": "MSGS",
+        "name": "Madison Square Garden Sports Co",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 7828851200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GOOS": {
+        "ticker": "GOOS",
+        "name": "Canada Goose Holdings Inc. Subo",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 1209249152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RCI": {
+        "ticker": "RCI",
+        "name": "Rogers Communication, Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 20901963776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
