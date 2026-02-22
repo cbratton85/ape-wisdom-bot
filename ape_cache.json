@@ -23168,5 +23168,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PNK"
+    },
+    "FDN": {
+        "ticker": "FDN",
+        "name": "First Trust DJ Internet Index F",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "DINO": {
+        "ticker": "DINO",
+        "name": "HF Sinclair Corporation",
+        "meta": "Oil & Gas Refining & Marketing",
+        "type": "EQUITY",
+        "mcap": 9518659584,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EOG": {
+        "ticker": "EOG",
+        "name": "EOG Resources, Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 67200868352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
