@@ -23718,5 +23718,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VTWO": {
+        "ticker": "VTWO",
+        "name": "Vanguard Russell 2000 ETF",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
