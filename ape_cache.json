@@ -23558,5 +23558,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "VGLT": {
+        "ticker": "VGLT",
+        "name": "Vanguard Long-Term Treasury ETF",
+        "meta": "Long Government",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "MASS": {
+        "ticker": "MASS",
+        "name": "908 Devices Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 241407152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "PLTM": {
+        "ticker": "PLTM",
+        "name": "GraniteShares Platinum Shares E",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "IAG": {
+        "ticker": "IAG",
+        "name": "Iamgold Corporation",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 13165176832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LABU": {
+        "ticker": "LABU",
+        "name": "Direxion Daily S&P Biotech Bull",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
