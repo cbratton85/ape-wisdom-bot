@@ -23458,5 +23458,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FDT": {
+        "ticker": "FDT",
+        "name": "First Trust Developed Markets E",
+        "meta": "Foreign Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
