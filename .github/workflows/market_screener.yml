@@ -2,8 +2,6 @@ name: Total Market Screener
 
 on:
   schedule:
-    # Runs at 22:15 UTC (5:15 PM EST) Monday through Friday (after market close)
-    - cron: '15 22 * * 1-5'
   workflow_dispatch: 
 
 permissions:
