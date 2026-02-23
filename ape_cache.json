@@ -23488,5 +23488,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "LTC": {
+        "ticker": "LTC",
+        "name": "LTC Properties, Inc.",
+        "meta": "REIT - Healthcare Facilities",
+        "type": "EQUITY",
+        "mcap": 1853144320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
