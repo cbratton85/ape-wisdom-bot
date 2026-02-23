@@ -23608,5 +23608,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ALUR": {
+        "ticker": "ALUR",
+        "name": "Allurion Technologies, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 19295668,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PAYX": {
+        "ticker": "PAYX",
+        "name": "Paychex, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 31657375744,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ARES": {
+        "ticker": "ARES",
+        "name": "Ares Management Corporation",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 38368116736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GETY": {
+        "ticker": "GETY",
+        "name": "Getty Images Holdings, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 340173632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
