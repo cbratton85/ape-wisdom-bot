@@ -23478,5 +23478,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HMR": {
+        "ticker": "HMR",
+        "name": "Heidmar Maritime Holdings Corp.",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 54255936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
