@@ -23808,5 +23808,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "WNC": {
+        "ticker": "WNC",
+        "name": "Wabash National Corporation",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 441023584,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
