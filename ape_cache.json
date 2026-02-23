@@ -23418,5 +23418,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "XSW": {
+        "ticker": "XSW",
+        "name": "State Street SPDR S&P Software ",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SOHU": {
+        "ticker": "SOHU",
+        "name": "Sohu.com Limited",
+        "meta": "Electronic Gaming & Multimedia",
+        "type": "EQUITY",
+        "mcap": 541172224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "OGIG": {
+        "ticker": "OGIG",
+        "name": "ALPS O'Shares Global Internet G",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
