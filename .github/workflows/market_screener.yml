@@ -1,7 +1,6 @@
 name: Total Market Screener
 
 on:
-  schedule:
   workflow_dispatch: 
 
 permissions:
