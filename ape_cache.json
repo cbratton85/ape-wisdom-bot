@@ -23728,5 +23728,85 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ADUR": {
+        "ticker": "ADUR",
+        "name": "Aduro Clean Technologies Inc.",
+        "meta": "Pollution & Treatment Controls",
+        "type": "EQUITY",
+        "mcap": 355854368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "UCTT": {
+        "ticker": "UCTT",
+        "name": "Ultra Clean Holdings, Inc.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 2711878400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "XMTR": {
+        "ticker": "XMTR",
+        "name": "Xometry, Inc.",
+        "meta": "Industrial Distribution",
+        "type": "EQUITY",
+        "mcap": 2730054912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ARB": {
+        "ticker": "ARB",
+        "name": "AltShares Merger Arbitrage ETF",
+        "meta": "Event Driven",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SGHC": {
+        "ticker": "SGHC",
+        "name": "Super Group (SGHC) Limited",
+        "meta": "Gambling",
+        "type": "EQUITY",
+        "mcap": 4907212800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SMMT": {
+        "ticker": "SMMT",
+        "name": "Summit Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 11829192704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "PAHC": {
+        "ticker": "PAHC",
+        "name": "Phibro Animal Health Corporatio",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 2070107904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "KBE": {
+        "ticker": "KBE",
+        "name": "State Street SPDR S&P Bank ETF",
+        "meta": "Financial",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
