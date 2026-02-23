@@ -23648,5 +23648,75 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CETY": {
+        "ticker": "CETY",
+        "name": "Clean Energy Technologies, Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 8392749,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "IGF": {
+        "ticker": "IGF",
+        "name": "iShares Global Infrastructure E",
+        "meta": "Infrastructure",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "FBIO": {
+        "ticker": "FBIO",
+        "name": "Fortress Biotech, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 113288480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "RRGB": {
+        "ticker": "RRGB",
+        "name": "Red Robin Gourmet Burgers, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 66019388,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DEFN": {
+        "ticker": "DEFN",
+        "name": "Emles Trust Emles Protective Al",
+        "meta": "Unknown",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "SURG": {
+        "ticker": "SURG",
+        "name": "SurgePays, Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 17809108,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SAH": {
+        "ticker": "SAH",
+        "name": "Sonic Automotive, Inc.",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 2127591296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
