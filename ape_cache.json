@@ -23878,5 +23878,85 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "FSS": {
+        "ticker": "FSS",
+        "name": "Federal Signal Corporation",
+        "meta": "Pollution & Treatment Controls",
+        "type": "EQUITY",
+        "mcap": 7030687744,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "WBI": {
+        "ticker": "WBI",
+        "name": "WaterBridge Infrastructure LLC",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 1075564288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CAAP": {
+        "ticker": "CAAP",
+        "name": "Corporacion America Airports SA",
+        "meta": "Airports & Air Services",
+        "type": "EQUITY",
+        "mcap": 4626019840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NWPX": {
+        "ticker": "NWPX",
+        "name": "NWPX Infrastructure, Inc.",
+        "meta": "Steel",
+        "type": "EQUITY",
+        "mcap": 696334528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "XLC": {
+        "ticker": "XLC",
+        "name": "State Street Communication Serv",
+        "meta": "Communications",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "PPLT": {
+        "ticker": "PPLT",
+        "name": "abrdn Physical Platinum Shares ",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SYF": {
+        "ticker": "SYF",
+        "name": "Synchrony Financial",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 24808585216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VVX": {
+        "ticker": "VVX",
+        "name": "V2X, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 2117788032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
