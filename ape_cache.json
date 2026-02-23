@@ -23468,5 +23468,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "BRX": {
+        "ticker": "BRX",
+        "name": "Brixmor Property Group Inc.",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 9093451776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
