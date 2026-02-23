@@ -23398,5 +23398,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ADC": {
+        "ticker": "ADC",
+        "name": "Agree Realty Corporation",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 9418211328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PX": {
+        "ticker": "PX",
+        "name": "P10, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 1159559040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
