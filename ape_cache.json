@@ -23528,5 +23528,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "IHE": {
+        "ticker": "IHE",
+        "name": "iShares U.S. Pharmaceutical ETF",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ENR": {
+        "ticker": "ENR",
+        "name": "Energizer Holdings, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 1538038912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IQM": {
+        "ticker": "IQM",
+        "name": "Franklin Intelligent Machines E",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
