@@ -23858,5 +23858,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "PCG": {
+        "ticker": "PCG",
+        "name": "Pacific Gas & Electric Co.",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 40651419648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SPYV": {
+        "ticker": "SPYV",
+        "name": "State Street SPDR Portfolio S&P",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 5246544896,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
