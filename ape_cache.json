@@ -23498,5 +23498,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "EXK": {
+        "ticker": "EXK",
+        "name": "Endeavour Silver Corporation",
+        "meta": "Silver",
+        "type": "EQUITY",
+        "mcap": 3791948032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SPLV": {
+        "ticker": "SPLV",
+        "name": "Invesco S&P 500 Low Volatility ",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "KXI": {
+        "ticker": "KXI",
+        "name": "iShares Global Consumer Staples",
+        "meta": "Consumer Defensive",
+        "type": "ETF",
+        "mcap": 1055141952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
