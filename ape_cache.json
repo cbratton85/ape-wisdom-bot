@@ -23818,5 +23818,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TRC": {
+        "ticker": "TRC",
+        "name": "Tejon Ranch Co",
+        "meta": "Conglomerates",
+        "type": "EQUITY",
+        "mcap": 459079808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SPXC": {
+        "ticker": "SPXC",
+        "name": "SPX Technologies, Inc.",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 11647072256,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "OCGN": {
+        "ticker": "OCGN",
+        "name": "Ocugen, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 544988032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "IRMD": {
+        "ticker": "IRMD",
+        "name": "iRadimed Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 1288144256,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
