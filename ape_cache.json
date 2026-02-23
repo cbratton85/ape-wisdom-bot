@@ -23448,5 +23448,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "MGY": {
+        "ticker": "MGY",
+        "name": "Magnolia Oil & Gas Corporation",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 5115006976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
