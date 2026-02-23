@@ -23958,5 +23958,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VIR": {
+        "ticker": "VIR",
+        "name": "Vir Biotechnology, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1033698880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ACRE": {
+        "ticker": "ACRE",
+        "name": "Ares Commercial Real Estate Cor",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 274623648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VOD": {
+        "ticker": "VOD",
+        "name": "Vodafone Group Plc",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 36230148096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
