@@ -24528,5 +24528,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "FLTR": {
+        "ticker": "FLTR",
+        "name": "VanEck IG Floating Rate ETF",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "PEN": {
+        "ticker": "PEN",
+        "name": "Penumbra, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 13325927424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HOUR": {
+        "ticker": "HOUR",
+        "name": "Hour Loop, Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 67186768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "MAS": {
+        "ticker": "MAS",
+        "name": "Masco Corporation",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 15042491392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
