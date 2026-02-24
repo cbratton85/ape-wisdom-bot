@@ -24328,5 +24328,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SDIV": {
+        "ticker": "SDIV",
+        "name": "Global X SuperDividend ETF",
+        "meta": "Global Small/Mid Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "BLK": {
+        "ticker": "BLK",
+        "name": "BlackRock, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 166885752832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SLI": {
+        "ticker": "SLI",
+        "name": "Standard Lithium Ltd.",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 1152069376,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "OKE": {
+        "ticker": "OKE",
+        "name": "ONEOK, Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 51466805248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
