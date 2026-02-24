@@ -24438,5 +24438,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "GMED": {
+        "ticker": "GMED",
+        "name": "Globus Medical, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 12503600128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ACRV": {
+        "ticker": "ACRV",
+        "name": "Acrivon Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 48279340,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "GFF": {
+        "ticker": "GFF",
+        "name": "Griffon Corporation",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 4075677440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TCRX": {
+        "ticker": "TCRX",
+        "name": "TScan Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 61287832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ECON": {
+        "ticker": "ECON",
+        "name": "Columbia Research Enhanced Emer",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "GHC": {
+        "ticker": "GHC",
+        "name": "Graham Holdings Company",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 4723479040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
