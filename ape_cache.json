@@ -24188,5 +24188,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "EURL": {
+        "ticker": "EURL",
+        "name": "Direxion Daily FTSE Europe Bull",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FSV": {
+        "ticker": "FSV",
+        "name": "FirstService Corporation",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 6951952896,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
