@@ -24208,5 +24208,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "GIB": {
+        "ticker": "GIB",
+        "name": "CGI Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 15321568256,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
