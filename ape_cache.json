@@ -24498,5 +24498,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BFC": {
+        "ticker": "BFC",
+        "name": "Bank First Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 1555430528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "PGEN": {
+        "ticker": "PGEN",
+        "name": "Precigen, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1424143744,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "XSMO": {
+        "ticker": "XSMO",
+        "name": "Invesco S&P SmallCap Momentum E",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
