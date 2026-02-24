@@ -23988,5 +23988,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "NAT": {
+        "ticker": "NAT",
+        "name": "Nordic American Tankers Limited",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 1041813248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TTT": {
+        "ticker": "TTT",
+        "name": "ProShares UltraPro Short 20 Yea",
+        "meta": "Trading--Inverse Debt",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FMC": {
+        "ticker": "FMC",
+        "name": "FMC Corporation",
+        "meta": "Agricultural Inputs",
+        "type": "EQUITY",
+        "mcap": 1706408064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
