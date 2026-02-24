@@ -24278,5 +24278,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "THR": {
+        "ticker": "THR",
+        "name": "Thermon Group Holdings, Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 1634863488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
