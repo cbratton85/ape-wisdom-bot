@@ -24128,5 +24128,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "MBT": {
+        "ticker": "MBT",
+        "name": "MBT",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "TDW": {
+        "ticker": "TDW",
+        "name": "Tidewater Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 3911028736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SWIM": {
+        "ticker": "SWIM",
+        "name": "Latham Group, Inc.",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 775760896,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
