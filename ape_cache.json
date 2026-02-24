@@ -24168,5 +24168,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "UBT": {
+        "ticker": "UBT",
+        "name": "ProShares Ultra 20+ Year Treasu",
+        "meta": "Trading--Leveraged Debt",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "DBMF": {
+        "ticker": "DBMF",
+        "name": "iMGP DBi Managed Futures Strate",
+        "meta": "Systematic Trend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
