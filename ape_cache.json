@@ -24018,5 +24018,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "DUST": {
+        "ticker": "DUST",
+        "name": "Direxion Daily Gold Miners Inde",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 52601304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
