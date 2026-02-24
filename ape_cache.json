@@ -24638,5 +24638,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PSK": {
+        "ticker": "PSK",
+        "name": "State Street SPDR ICE Preferred",
+        "meta": "Preferred Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "RYLD": {
+        "ticker": "RYLD",
+        "name": "Global X Russell 2000 Covered C",
+        "meta": "Derivative Income",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
