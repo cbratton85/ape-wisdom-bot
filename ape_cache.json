@@ -24288,5 +24288,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PSX": {
+        "ticker": "PSX",
+        "name": "Phillips 66",
+        "meta": "Oil & Gas Refining & Marketing",
+        "type": "EQUITY",
+        "mcap": 61540085760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FM": {
+        "ticker": "FM",
+        "name": "iShares Frontier and Select EM ",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 469027520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "GHRS": {
+        "ticker": "GHRS",
+        "name": "GH Research PLC",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 955872960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SWAN": {
+        "ticker": "SWAN",
+        "name": "Amplify BlackSwan Growth & Trea",
+        "meta": "Equity Hedged",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
