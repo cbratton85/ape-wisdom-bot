@@ -24368,5 +24368,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PXH": {
+        "ticker": "PXH",
+        "name": "Invesco RAFI Emerging Markets E",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "HLX": {
+        "ticker": "HLX",
+        "name": "Helix Energy Solutions Group, I",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 1555380608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CEA": {
+        "ticker": "CEA",
+        "name": "CEA",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "HPQ": {
+        "ticker": "HPQ",
+        "name": "HP Inc.",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 17273288704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AWI": {
+        "ticker": "AWI",
+        "name": "Armstrong World Industries Inc",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 7597893632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
