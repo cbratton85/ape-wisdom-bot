@@ -24108,5 +24108,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "WTS": {
+        "ticker": "WTS",
+        "name": "Watts Water Technologies, Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 10806680576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CECO": {
+        "ticker": "CECO",
+        "name": "CECO Environmental Corp.",
+        "meta": "Pollution & Treatment Controls",
+        "type": "EQUITY",
+        "mcap": 2768595456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
