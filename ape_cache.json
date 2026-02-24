@@ -24418,5 +24418,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "DKL": {
+        "ticker": "DKL",
+        "name": "Delek Logistics Partners, L.P.",
+        "meta": "Oil & Gas Refining & Marketing",
+        "type": "EQUITY",
+        "mcap": 2864142848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LMFA": {
+        "ticker": "LMFA",
+        "name": "LM Funding America, Inc.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 4976355,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
