@@ -104,11 +104,6 @@
         "last_checked": "2026-02-23",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-02-23",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-02-23",
@@ -135,6 +130,11 @@
         "reason": "No Price Data"
     },
     "ZEV": {
+        "delisted": true,
+        "last_checked": "2026-02-24",
+        "reason": "No Price Data"
+    },
+    "AUD": {
         "delisted": true,
         "last_checked": "2026-02-24",
         "reason": "No Price Data"

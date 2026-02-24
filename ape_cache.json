@@ -24028,5 +24028,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "VTEB": {
+        "ticker": "VTEB",
+        "name": "Vanguard Tax-Exempt Bond ETF",
+        "meta": "Muni National Interm",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ILMN": {
+        "ticker": "ILMN",
+        "name": "Illumina, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 18430566400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
