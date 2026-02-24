@@ -24568,5 +24568,75 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "EXLS": {
+        "ticker": "EXLS",
+        "name": "ExlService Holdings, Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 4643503104,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SGOL": {
+        "ticker": "SGOL",
+        "name": "abrdn Physical Gold Shares ETF",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "HOWL": {
+        "ticker": "HOWL",
+        "name": "Werewolf Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 32114196,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "INGN": {
+        "ticker": "INGN",
+        "name": "Inogen, Inc",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 158547136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "MAMA": {
+        "ticker": "MAMA",
+        "name": "Mama's Creations, Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 706554944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "TREX": {
+        "ticker": "TREX",
+        "name": "Trex Company, Inc.",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 4445710848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CABA": {
+        "ticker": "CABA",
+        "name": "Cabaletta Bio, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 316712512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
