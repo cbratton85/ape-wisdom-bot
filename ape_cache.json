@@ -24218,5 +24218,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PCB": {
+        "ticker": "PCB",
+        "name": "PCB Bancorp",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 315305280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "MARK": {
+        "ticker": "MARK",
+        "name": "Remark Holdings, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 61902,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
+    },
+    "MYGN": {
+        "ticker": "MYGN",
+        "name": "Myriad Genetics, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 408276096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BKYI": {
+        "ticker": "BKYI",
+        "name": "BIO-key International, Inc.",
+        "meta": "Security & Protection Services",
+        "type": "EQUITY",
+        "mcap": 5859359,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CWT": {
+        "ticker": "CWT",
+        "name": "California Water Service Group",
+        "meta": "Utilities - Regulated Water",
+        "type": "EQUITY",
+        "mcap": 2765634048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GRCE": {
+        "ticker": "GRCE",
+        "name": "Grace Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 62205588,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
