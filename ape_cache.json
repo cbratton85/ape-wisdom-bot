@@ -24048,5 +24048,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "NSRGY": {
+        "ticker": "NSRGY",
+        "name": "Nestle S.A.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 269080248320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
+    },
+    "BMRN": {
+        "ticker": "BMRN",
+        "name": "BioMarin Pharmaceutical Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 12087833600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BNO": {
+        "ticker": "BNO",
+        "name": "United States Brent Oil Fund, L",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "GSL": {
+        "ticker": "GSL",
+        "name": "Global Ship Lease Inc New",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 1412225280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LAKE": {
+        "ticker": "LAKE",
+        "name": "Lakeland Industries, Inc.",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 92471792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "VSGX": {
+        "ticker": "VSGX",
+        "name": "Vanguard ESG International Stoc",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
