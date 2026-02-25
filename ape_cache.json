@@ -24968,5 +24968,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PNK"
+    },
+    "BRBR": {
+        "ticker": "BRBR",
+        "name": "BellRing Brands, Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 2171921920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "INVZ": {
+        "ticker": "INVZ",
+        "name": "Innoviz Technologies Ltd.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 190702864,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "TBLA": {
+        "ticker": "TBLA",
+        "name": "Taboola.com Ltd.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 931697344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
