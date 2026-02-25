@@ -24838,5 +24838,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ELV": {
+        "ticker": "ELV",
+        "name": "Elevance Health, Inc.",
+        "meta": "Healthcare Plans",
+        "type": "EQUITY",
+        "mcap": 72201330688,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
