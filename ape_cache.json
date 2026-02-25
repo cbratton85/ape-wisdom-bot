@@ -25018,5 +25018,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "MATX": {
+        "ticker": "MATX",
+        "name": "Matson, Inc.",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 5463897088,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TYGO": {
+        "ticker": "TYGO",
+        "name": "Tigo Energy, Inc.",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 230931264,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
