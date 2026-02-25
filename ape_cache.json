@@ -25078,5 +25078,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TDG": {
+        "ticker": "TDG",
+        "name": "Transdigm Group Incorporated",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 72223195136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "WGS": {
+        "ticker": "WGS",
+        "name": "GeneDx Holdings Corp.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 2274791168,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VPL": {
+        "ticker": "VPL",
+        "name": "Vanguard FTSE Pacific ETF",
+        "meta": "Diversified Pacific/Asia",
+        "type": "ETF",
+        "mcap": 1996750336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
