@@ -24778,5 +24778,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "GASS": {
+        "ticker": "GASS",
+        "name": "StealthGas, Inc.",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 316986496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "RXD": {
+        "ticker": "RXD",
+        "name": "ProShares UltraShort Health Car",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SCC": {
+        "ticker": "SCC",
+        "name": "ProShares UltraShort Consumer D",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
