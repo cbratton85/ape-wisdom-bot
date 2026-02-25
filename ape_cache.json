@@ -24848,5 +24848,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VGSH": {
+        "ticker": "VGSH",
+        "name": "Vanguard Short-Term Treasury ET",
+        "meta": "Short Government",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ETS": {
+        "ticker": "ETS",
+        "name": "Elite Express Holding Inc.",
+        "meta": "Trucking",
+        "type": "EQUITY",
+        "mcap": 8433561,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "UIS": {
+        "ticker": "UIS",
+        "name": "Unisys Corporation New",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 151882016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SPI": {
+        "ticker": "SPI",
+        "name": "SPI Energy Co., Ltd.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "RY": {
+        "ticker": "RY",
+        "name": "Royal Bank Of Canada",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 239752462336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
