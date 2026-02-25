@@ -1,9 +1,4 @@
 {
-    "OLD": {
-        "delisted": true,
-        "last_checked": "2026-02-18",
-        "reason": "No Price Data"
-    },
     "FI": {
         "delisted": true,
         "last_checked": "2026-02-20",
@@ -165,6 +160,11 @@
         "reason": "No Price Data"
     },
     "REV": {
+        "delisted": true,
+        "last_checked": "2026-02-25",
+        "reason": "No Price Data"
+    },
+    "OLD": {
         "delisted": true,
         "last_checked": "2026-02-25",
         "reason": "No Price Data"
