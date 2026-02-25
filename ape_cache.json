@@ -24678,5 +24678,85 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "BITO": {
+        "ticker": "BITO",
+        "name": "ProShares Bitcoin ETF",
+        "meta": "Digital Assets",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "HCM": {
+        "ticker": "HCM",
+        "name": "HUTCHMED (China) Limited",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 2723469824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "XRX": {
+        "ticker": "XRX",
+        "name": "Xerox Holdings Corporation",
+        "meta": "Business Equipment & Supplies",
+        "type": "EQUITY",
+        "mcap": 232762288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ARGT": {
+        "ticker": "ARGT",
+        "name": "Global X MSCI Argentina ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "JAGX": {
+        "ticker": "JAGX",
+        "name": "Jaguar Health, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3048361,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "RYN": {
+        "ticker": "RYN",
+        "name": "Rayonier Inc. REIT",
+        "meta": "REIT - Specialty",
+        "type": "EQUITY",
+        "mcap": 6540577280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FLYW": {
+        "ticker": "FLYW",
+        "name": "Flywire Corporation - Voting",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1374768128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LX": {
+        "ticker": "LX",
+        "name": "LexinFintech Holdings Ltd.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 506473152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
