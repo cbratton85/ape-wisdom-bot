@@ -24758,5 +24758,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "DLB": {
+        "ticker": "DLB",
+        "name": "Dolby Laboratories",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 6114548224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "OM": {
+        "ticker": "OM",
+        "name": "Outset Medical, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 61160828,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
