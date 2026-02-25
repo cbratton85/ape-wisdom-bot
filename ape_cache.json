@@ -24898,5 +24898,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MPWR": {
+        "ticker": "MPWR",
+        "name": "Monolithic Power Systems, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 59116654592,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GNTX": {
+        "ticker": "GNTX",
+        "name": "Gentex Corporation",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 5221651968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "OSW": {
+        "ticker": "OSW",
+        "name": "OneSpaWorld Holdings Limited",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 2245988608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
