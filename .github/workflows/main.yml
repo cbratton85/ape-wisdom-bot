@@ -16,17 +16,19 @@ jobs:
         with:
           fetch-depth: 0
 
+      # OPTIMIZATION 1: Native pip caching to speed up dependency installation
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip' # <--- This tells GitHub to cache your requirements.txt
 
-      # --- STEP 1: RESTORE LOGO CACHE ---
+      # OPTIMIZATION 2: Dynamic cache key to ensure new logos are always saved
       - name: Cache Logos
         uses: actions/cache@v4
         with:
           path: public/logos
-          key: ${{ runner.os }}-logos-v1
+          key: ${{ runner.os }}-logos-${{ github.run_id }}
           restore-keys: |
             ${{ runner.os }}-logos-
 
@@ -40,27 +42,27 @@ jobs:
           LOGO_DEV_TOKEN: ${{ secrets.LOGO_DEV_TOKEN }} 
         run: python ape_wisdom.py --auto
 
-      # --- STEP 2: COMMIT EVERYTHING ---
-      - name: Commit and Push History & Logos
+      # OPTIMIZATION 3: Stop committing logos to prevent repo bloat
+      - name: Commit and Push History Data
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Stage logos, history files, and HTML
-          git add public/logos/
+          # Stage all changes
           git add .
           
-          # Commit only if there are changes
-          git commit -m "Update Market Data & Cached Logos [skip ci]" || exit 0
+          # UNSTAGE the logos folder so they don't get saved to your Git history
+          git reset public/logos/
           
-          # Handle potential collisions with a rebase-pull and a retry loop
-          # This pulls down any new logos/scans that happened while this job was running
+          # Commit only if there are data/history changes
+          git commit -m "Update Market Data [skip ci]" || exit 0
+          
+          # Pull latest changes to avoid conflicts, then push
           git pull --rebase origin main
-          
-          # Push the final combined work
           git push origin main
 
-      # --- STEP 3: DEPLOY TO PAGES ---
+      # The logos are still sitting in the runner's public/ folder, 
+      # so this step will still successfully publish them to your website!
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
