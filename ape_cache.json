@@ -25038,5 +25038,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "SGML": {
+        "ticker": "SGML",
+        "name": "Sigma Lithium Corporation",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 1734248448,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "JAKK": {
+        "ticker": "JAKK",
+        "name": "JAKKS Pacific, Inc.",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 255818320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "IRWD": {
+        "ticker": "IRWD",
+        "name": "Ironwood Pharmaceuticals, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 536026144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "RERE": {
+        "ticker": "RERE",
+        "name": "ATRenew Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 1374475904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
