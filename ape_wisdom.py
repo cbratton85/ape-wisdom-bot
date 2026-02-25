@@ -342,28 +342,46 @@ def calculate_rsi(series, period=14):
 
 def calculate_stochastic(df, k_period=5, d_period=1, smooth_k=3):
     """
-    Calculates the Slow Stochastic Oscillator.
-    Standard Slow Stochastic smooths the fast %K with a 3-period SMA.
+    Calculates the Stochastic Oscillator accurately, preventing NaN warmup pollution.
     """
     try:
-        if df.empty or len(df) < (k_period + smooth_k):
-            return 50.0, 50.0 # Return neutral if not enough data
+        # 1. Ensure numeric data and drop bad rows to maintain calendar continuity
+        close = pd.to_numeric(df['Close'], errors='coerce')
+        high = pd.to_numeric(df['High'], errors='coerce')
+        low = pd.to_numeric(df['Low'], errors='coerce')
+        
+        # Make sure we have enough days to satisfy all rolling windows
+        required_periods = k_period + smooth_k + d_period - 2
+        if len(df) < required_periods:
+            return 50.0, 50.0
 
-        low_min = df['Low'].rolling(window=k_period).min()
-        high_max = df['High'].rolling(window=k_period).max()
+        # 2. Highest Highs & Lowest Lows (The Lookback)
+        low_min = low.rolling(window=k_period, min_periods=k_period).min()
+        high_max = high.rolling(window=k_period, min_periods=k_period).max()
         
-        # Fast %K
-        fast_k = 100 * (df['Close'] - low_min) / (high_max - low_min).replace(0, np.nan)
-        fast_k = fast_k.fillna(50.0)
+        # 3. Raw Fast %K
+        denom = high_max - low_min
         
-        # Slow %K (Smoothed Fast %K)
-        slow_k = fast_k.rolling(window=smooth_k).mean()
+        # Avoid divide-by-zero on flatline days. 
+        # Leave it as NaN so it doesn't skew the moving averages!
+        fast_k = 100 * (close - low_min) / denom.replace(0, np.nan)
         
-        # %D (Moving Average of Slow %K)
-        slow_d = slow_k.rolling(window=d_period).mean() if d_period > 1 else slow_k
+        # 4. Slow %K (Smooth the Fast %K)
+        slow_k = fast_k.rolling(window=smooth_k, min_periods=smooth_k).mean()
         
-        # Return the latest %K and %D
-        return float(slow_k.iloc[-1]), float(slow_d.iloc[-1])
+        # 5. %D (Smooth the Slow %K)
+        slow_d = slow_k.rolling(window=d_period, min_periods=d_period).mean() if d_period > 1 else slow_k
+        
+        # 6. Extract the final values
+        final_k = slow_k.iloc[-1]
+        final_d = slow_d.iloc[-1]
+        
+        # ONLY apply the 50.0 fallback at the very end if the stock completely flatlined
+        if pd.isna(final_k): final_k = 50.0
+        if pd.isna(final_d): final_d = 50.0
+        
+        return float(final_k), float(final_d)
+        
     except Exception:
         return 50.0, 50.0
 
@@ -446,6 +464,7 @@ def calculate_raw_ibd_rs(hist, ticker_name="Unknown"):
 def calculate_raw_spy_rs(hist, spy_hist, ticker_name="Unknown"):
     """
     Calculates the raw relative return compared to SPY, strictly time-aligned.
+    Strips timezones to prevent intersection failures between yf.Ticker and yf.download.
     """
     try:
         stock_close = pd.to_numeric(hist['Close'], errors='coerce').dropna()
@@ -454,17 +473,29 @@ def calculate_raw_spy_rs(hist, spy_hist, ticker_name="Unknown"):
         if stock_close.empty or spy_close.empty or len(stock_close) < 63:
             return -9999.0
         
-        # Time-align by intersection to prevent halting/holiday index drift
-        stock_idx = stock_close.index.normalize()
-        spy_idx = spy_close.index.normalize()
-        common_dates = stock_idx.intersection(spy_idx)
+        # --- TIMEZONE FIX ---
+        # Strip all timezone data so we are purely matching on YYYY-MM-DD
+        if stock_close.index.tz is not None:
+            stock_close.index = stock_close.index.tz_localize(None)
+        if spy_close.index.tz is not None:
+            spy_close.index = spy_close.index.tz_localize(None)
+            
+        stock_close.index = stock_close.index.normalize()
+        spy_close.index = spy_close.index.normalize()
+        
+        # Find the exact overlapping calendar days
+        common_dates = stock_close.index.intersection(spy_close.index)
         
         if len(common_dates) < 63:
             return -9999.0
         
-        # Lock both arrays to identical calendar trading days
-        stock_aligned = stock_close.loc[stock_close.index.normalize().isin(common_dates)]
-        spy_aligned = spy_close.loc[spy_close.index.normalize().isin(common_dates)]
+        # Lock both arrays to identical dates and sort them
+        # Note: using ~ .duplicated() prevents crashes if yfinance returns duplicate days
+        stock_aligned = stock_close.loc[common_dates]
+        stock_aligned = stock_aligned[~stock_aligned.index.duplicated(keep='first')].sort_index()
+        
+        spy_aligned = spy_close.loc[common_dates]
+        spy_aligned = spy_aligned[~spy_aligned.index.duplicated(keep='first')].sort_index()
         
         lookback = min(len(stock_aligned), 252)
         
@@ -1309,8 +1340,8 @@ def export_interactive_html(df):
             else:
                 stoch_clr = "#ffffff" # White (Neutral)
 
-            # Create the HTML span with the tooltip
-            stoch_str = f'<span class="d-tooltip" data-tooltip="{stoch_tooltip}" tabindex="0" style="color:{stoch_clr}; font-weight:bold;">{stoch_k_v:.0f}</span>'
+            # Create the HTML span WITHOUT the tooltip
+            stoch_str = f'<span style="color:{stoch_clr}; font-weight:bold;">{stoch_k_v:.0f}</span>'
             export_df.at[index, 'STOCH'] = stoch_str
 
             # --- RSI COLOR LOGIC ---
