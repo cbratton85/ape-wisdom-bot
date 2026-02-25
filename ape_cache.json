@@ -25208,5 +25208,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "DPW": {
+        "ticker": "DPW",
+        "name": "DPW",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
