@@ -99,11 +99,6 @@
         "last_checked": "2026-02-24",
         "reason": "No Price Data"
     },
-    "SQ": {
-        "delisted": true,
-        "last_checked": "2026-02-24",
-        "reason": "No Price Data"
-    },
     "DS": {
         "delisted": true,
         "last_checked": "2026-02-24",
@@ -145,6 +140,16 @@
         "reason": "No Price Data"
     },
     "RE": {
+        "delisted": true,
+        "last_checked": "2026-02-25",
+        "reason": "No Price Data"
+    },
+    "KIRK": {
+        "delisted": true,
+        "last_checked": "2026-02-25",
+        "reason": "No Price Data"
+    },
+    "SQ": {
         "delisted": true,
         "last_checked": "2026-02-25",
         "reason": "No Price Data"

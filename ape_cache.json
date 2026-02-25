@@ -24808,5 +24808,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "CDL": {
+        "ticker": "CDL",
+        "name": "VictoryShares US Large Cap High",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "KIRK": {
+        "ticker": "KIRK",
+        "name": "KIRK",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "LFT": {
+        "ticker": "LFT",
+        "name": "Lument Finance Trust, Inc.",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 69121704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
