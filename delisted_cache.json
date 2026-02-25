@@ -84,11 +84,6 @@
         "last_checked": "2026-02-25",
         "reason": "No Price Data"
     },
-    "LYFE": {
-        "delisted": true,
-        "last_checked": "2026-02-25",
-        "reason": "No Price Data"
-    },
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-02-25",
@@ -160,6 +155,16 @@
         "reason": "No Price Data"
     },
     "ZEV": {
+        "delisted": true,
+        "last_checked": "2026-02-25",
+        "reason": "No Price Data"
+    },
+    "LYFE": {
+        "delisted": true,
+        "last_checked": "2026-02-25",
+        "reason": "No Price Data"
+    },
+    "REV": {
         "delisted": true,
         "last_checked": "2026-02-25",
         "reason": "No Price Data"

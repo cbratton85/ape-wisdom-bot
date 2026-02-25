@@ -25368,5 +25368,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "NWL": {
+        "ticker": "NWL",
+        "name": "Newell Brands Inc.",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 1911552000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "EUFN": {
+        "ticker": "EUFN",
+        "name": "iShares MSCI Europe Financials ",
+        "meta": "Europe Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "CHYM": {
+        "ticker": "CHYM",
+        "name": "Chime Financial, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 7907341312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
