@@ -420,12 +420,19 @@ def calculate_raw_ibd_rs(hist, ticker_name="Unknown"):
         if close.empty or len(close) < 63:
             return -9999.0
         
-        # Pull prices at roughly 1Q, 2Q, 3Q, and 4Q ago (63 trading days per quarter)
         c_now = close.iloc[-1]
-        c_63 = close.iloc[-63] if len(close) >= 63 else close.iloc[0]
-        c_126 = close.iloc[-126] if len(close) >= 126 else close.iloc[0]
-        c_189 = close.iloc[-189] if len(close) >= 189 else close.iloc[0]
-        c_252 = close.iloc[-252] if len(close) >= 252 else close.iloc[0]
+        
+        # Helper to safely grab historical prices without crashing on newer stocks
+        def get_hist_price(days_back):
+            return close.iloc[-days_back - 1] if len(close) > days_back else close.iloc[0]
+
+        c_63 = get_hist_price(63)
+        c_126 = get_hist_price(126)
+        c_189 = get_hist_price(189)
+        c_252 = get_hist_price(252)
+
+        if 0 in [c_63, c_126, c_189, c_252]: 
+            return -9999.0
 
         # IBD Formula Approximation: 40% Q1, 20% Q2, 20% Q3, 20% Q4
         rs_raw = ((c_now - c_63) / c_63) * 0.4 + \
@@ -433,29 +440,42 @@ def calculate_raw_ibd_rs(hist, ticker_name="Unknown"):
                  ((c_126 - c_189) / c_189) * 0.2 + \
                  ((c_189 - c_252) / c_252) * 0.2
         return float(rs_raw * 100)
-    except Exception as e:
+    except Exception:
         return -9999.0
 
 def calculate_raw_spy_rs(hist, spy_hist, ticker_name="Unknown"):
     """
-    Calculates the raw relative return compared to SPY over the last ~252 trading days.
+    Calculates the raw relative return compared to SPY, strictly time-aligned.
     """
     try:
-        close = pd.to_numeric(hist['Close'], errors='coerce').dropna()
-        if close.empty or spy_hist.empty or len(close) < 63: # Require at least 1 quarter
+        stock_close = pd.to_numeric(hist['Close'], errors='coerce').dropna()
+        spy_close = pd.to_numeric(spy_hist, errors='coerce').dropna()
+
+        if stock_close.empty or spy_close.empty or len(stock_close) < 63:
             return -9999.0
         
-        lookback = min(len(close), len(spy_hist), 252)
+        # Time-align by intersection to prevent halting/holiday index drift
+        stock_idx = stock_close.index.normalize()
+        spy_idx = spy_close.index.normalize()
+        common_dates = stock_idx.intersection(spy_idx)
         
-        c_now = close.iloc[-1]
-        c_past = close.iloc[-lookback]
+        if len(common_dates) < 63:
+            return -9999.0
+        
+        # Lock both arrays to identical calendar trading days
+        stock_aligned = stock_close.loc[stock_close.index.normalize().isin(common_dates)]
+        spy_aligned = spy_close.loc[spy_close.index.normalize().isin(common_dates)]
+        
+        lookback = min(len(stock_aligned), 252)
+        
+        c_now = stock_aligned.iloc[-1]
+        c_past = stock_aligned.iloc[-lookback]
         stock_perf = (c_now - c_past) / c_past
         
-        spy_now = spy_hist.iloc[-1]
-        spy_past = spy_hist.iloc[-lookback]
+        spy_now = spy_aligned.iloc[-1]
+        spy_past = spy_aligned.iloc[-lookback]
         spy_perf = (spy_now - spy_past) / spy_past
         
-        # Excess return over SPY
         return float((stock_perf - spy_perf) * 100)
     except Exception:
         return -9999.0
@@ -853,29 +873,33 @@ def filter_and_process(stocks):
         df['z_Squeeze'] = 0 if std_sq == 0 else (log_sq - mean_sq) / std_sq
         df['Heat'] = df['Master_Score']
 
+        # --- TRUE PERCENTILE HELPER ---
+        def true_percentile(series):
+            ranks = series.rank(method='min')
+            n = len(ranks)
+            if n <= 1: return pd.Series(99.9, index=series.index)
+            return ((ranks - 1) / (n - 1) * 99.9).round(1)
+
         # --- RANK THE SCTR UNIVERSE (UPDATED) ---
         df['SCTR'] = 0.0
         if 'Raw_SCTR' in df.columns:
-            # Check for > -9000 to catch valid negative technical scores, 
-            # while safely ignoring our -9999.0 error flags.
             valid_mask = df['Raw_SCTR'] > -9000.0
             if valid_mask.any():
-                # Rank only the valid ones, scale to 99.9
-                df.loc[valid_mask, 'SCTR'] = (df.loc[valid_mask, 'Raw_SCTR'].rank(pct=True) * 99.9).round(1)
+                df.loc[valid_mask, 'SCTR'] = true_percentile(df.loc[valid_mask, 'Raw_SCTR'])
 
         # --- RANK THE IBD RS UNIVERSE ---
         df['IBD_RS'] = 0.0
         if 'Raw_IBD' in df.columns:
             valid_mask_ibd = df['Raw_IBD'] > -9000.0
             if valid_mask_ibd.any():
-                df.loc[valid_mask_ibd, 'IBD_RS'] = (df.loc[valid_mask_ibd, 'Raw_IBD'].rank(pct=True) * 99.9).round(1)
+                df.loc[valid_mask_ibd, 'IBD_RS'] = true_percentile(df.loc[valid_mask_ibd, 'Raw_IBD'])
 
         # --- RANK THE SPY RS UNIVERSE ---
         df['SPY_RS'] = 0.0
         if 'Raw_SPY' in df.columns:
             valid_mask_spy = df['Raw_SPY'] > -9000.0
             if valid_mask_spy.any():
-                df.loc[valid_mask_spy, 'SPY_RS'] = (df.loc[valid_mask_spy, 'Raw_SPY'].rank(pct=True) * 99.9).round(1)
+                df.loc[valid_mask_spy, 'SPY_RS'] = true_percentile(df.loc[valid_mask_spy, 'Raw_SPY'])
 
         tracker.save(df)
 
@@ -1413,9 +1437,9 @@ def export_interactive_html(df):
             '<th>INDUSTRY</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Industry category group.">INDUSTRY</span></th>',
             '<th>RSI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Relative Strength Index (14d).\nRed: Overbought | Green: Oversold">&nbsp;RSI</span></th>',
             '<th>STOCH</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Slow Stochastic Oscillator (%K5, %D1) developed by George Lane.\nLogic: Measures momentum by comparing the closing price to the 5-day price range. It assumes prices tend to close near their highs in an uptrend and lows in a downtrend.\nZones: &le; 20 is Oversold (Buy Zone, Green) | &ge; 80 is Overbought (Sell Zone, Red).">&nbsp;STOCH</span></th>',
-            '<th>SCTR</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="sctr-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleSCTRMode(event)" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="StockCharts Technical Rank (SCTR) created by John Murphy.\nLogic: A percentile ranking (0-99.9) of a stock\'s technical strength versus its peers.\nFormula: Heavily weights long-term trends (200d EMA, 125d ROC), while factoring in medium-term (50d EMA, 20d ROC) and short-term (RSI, PPO slope) momentum." style="line-height:1;">SCTR</span></div></th>',
-            '<th>IBD_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="ibd-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleSCTRMode(event)" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength (RS) Rating developed by William O\'Neil (IBD).\nLogic: A percentile rank (0-99.9) of a stock\'s 52-week price performance.\nFormula: Emphasizes recent momentum by weighting the most recent quarter (3 months) at 40%, and the prior three quarters at 20% each." style="line-height:1;">IBD</span></div></th>',
-            '<th>SPY_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="spy-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleSCTRMode(event)" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength against SPY (0-99.9).\nLogic: A percentile rank of the stock\'s 1-year performance compared to the SPY baseline." style="line-height:1;">vsSPY</span></div></th>'
+            '<th>SCTR</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="sctr-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 23, \'sctr-toggle\')" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="StockCharts Technical Rank (SCTR) created by John Murphy.\nLogic: A percentile ranking (0-99.9) of a stock\'s technical strength versus its peers.\nFormula: Heavily weights long-term trends (200d EMA, 125d ROC), while factoring in medium-term (50d EMA, 20d ROC) and short-term (RSI, PPO slope) momentum." style="line-height:1;">SCTR</span></div></th>',
+            '<th>IBD_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="ibd-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 24, \'ibd-toggle\')" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength (RS) Rating developed by William O\'Neil (IBD).\nLogic: A percentile rank (0-99.9) of a stock\'s 52-week price performance.\nFormula: Emphasizes recent momentum by weighting the most recent quarter (3 months) at 40%, and the prior three quarters at 20% each." style="line-height:1;">IBD</span></div></th>',
+            '<th>SPY_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="spy-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 25, \'spy-toggle\')" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength against SPY (0-99.9).\nLogic: A percentile rank of the stock\'s 1-year performance compared to the SPY baseline." style="line-height:1;">vsSPY</span></div></th>'
         }
         for old_tag, new_tag in header_map.items():
             raw_table = raw_table.replace(old_tag, new_tag)
@@ -1968,7 +1992,7 @@ def export_interactive_html(df):
                 color: #fff !important;
                 border: 1px solid #444 !important;
                 border-radius: 4px;
-                padding: 4px 10px !important; 
+                padding: 0 10px 0 4px !important;
                 height: 36px !important; 
                 font-size: 16px !important;
                 outline: none !important;
@@ -1978,9 +2002,9 @@ def export_interactive_html(df):
             .dataTables_filter label, .dataTables_length label {{
                 color: #ccc !important;
                 font-size: 16px !important;
-                line-height: 24px !important;
+                line-height: 32px !important;
                 display: flex;
-                align-items: center;
+                align-items: left !important;
                 gap: 5px;
             }}
 
@@ -2230,6 +2254,7 @@ def export_interactive_html(df):
                     </div>
                 </div>
 
+                <button class="btn btn-sm btn-reset" onclick="window.location.href='market_scanner.html'" title="Open Market Scanner" style="margin-left: 4px; background: linear-gradient(135deg, #0044ff, #00aaff); color: white; font-weight: bold; border: none;">SCAN</button>
                 <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('stock')" title="Stock Heatmap" style="margin-left: 4px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">STOCKS</button>
                 <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('etf')" title="ETF Heatmap" style="margin-left: 4px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">ETFs</button>
                 <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 2px;">.TXT</button>
@@ -2519,7 +2544,7 @@ def export_interactive_html(df):
         function getTopSectors(metricIdx) {{
             var sectorData = {{}};
             allData.each(function(row) {{
-                var rawType = row[25].toString().replace(/<[^>]+>/g, ''); 
+                var rawType = row[26].toString().replace(/<[^>]+>/g, ''); 
                 if (topSwitchIsETF && !rawType.includes('ETF')) return;
                 if (!topSwitchIsETF && rawType.includes('ETF')) return;
 
@@ -2586,8 +2611,8 @@ def export_interactive_html(df):
                 }});
         }});
 
-        // The dynamic trigger safely tucked inside
-        if (sctrMode === "dynamic") {{ recalculateSCTR(); }}
+        // Evaluate dynamic vs global columns on every draw
+        recalculateSCTR();
     }}
 
     function toggleColors() {{
@@ -2706,28 +2731,33 @@ def export_interactive_html(df):
         }}
     }});
 
-    let sctrMode = "global"; // Default state
+    // Track modes for columns 23 (SCTR), 24 (IBD), and 25 (SPY) independently
+    let columnModes = {{
+        23: "global",
+        24: "global",
+        25: "global"
+    }};
 
-    function toggleSCTRMode(event) {{
+    function toggleColumnMode(event, colIdx, btnId) {{
         if (event) {{
             event.stopPropagation();
             event.preventDefault();
         }}
 
-        const sctrBtn = document.getElementById("sctr-toggle");
-        const ibdBtn = document.getElementById("ibd-toggle");
-        const spyBtn = document.getElementById("spy-toggle");
+        const btn = document.getElementById(btnId);
+        if (!btn) return;
 
-        if (sctrMode === "global") {{
-            sctrMode = "dynamic";
-            if(sctrBtn) {{ sctrBtn.innerText = "DYNAMIC"; sctrBtn.style.color = "#ffff00"; sctrBtn.style.borderColor = "#ffff00"; }}
-            if(ibdBtn) {{ ibdBtn.innerText = "DYNAMIC"; ibdBtn.style.color = "#ffff00"; ibdBtn.style.borderColor = "#ffff00"; }}
-            if(spyBtn) {{ spyBtn.innerText = "DYNAMIC"; spyBtn.style.color = "#ffff00"; spyBtn.style.borderColor = "#ffff00"; }}
+        // Flip the mode for this specific column
+        if (columnModes[colIdx] === "global") {{
+            columnModes[colIdx] = "dynamic";
+            btn.innerText = "DYNAMIC";
+            btn.style.color = "#ffff00";
+            btn.style.borderColor = "#ffff00";
         }} else {{
-            sctrMode = "global";
-            if(sctrBtn) {{ sctrBtn.innerText = "GLOBAL"; sctrBtn.style.color = "#00ff00"; sctrBtn.style.borderColor = "#00ff00"; }}
-            if(ibdBtn) {{ ibdBtn.innerText = "GLOBAL"; ibdBtn.style.color = "#00ff00"; ibdBtn.style.borderColor = "#00ff00"; }}
-            if(spyBtn) {{ spyBtn.innerText = "GLOBAL"; spyBtn.style.color = "#00ff00"; spyBtn.style.borderColor = "#00ff00"; }}
+            columnModes[colIdx] = "global";
+            btn.innerText = "GLOBAL";
+            btn.style.color = "#00ff00";
+            btn.style.borderColor = "#00ff00";
         }}
         
         recalculateSCTR();
@@ -2745,7 +2775,10 @@ def export_interactive_html(df):
         [23, 24, 25].forEach(function(colIdx) {{
             let valClass = (colIdx === 23) ? 'sctr-val' : (colIdx === 24 ? 'ibd-val' : 'spy-val');
             
-            if (sctrMode === "dynamic") {{
+            // Look up the specific mode for this column
+            let currentMode = columnModes[colIdx];
+            
+            if (currentMode === "dynamic") {{
                 // Get all rows that survive the current filters
                 var validRows = api.rows({{ filter: 'applied' }}).indexes();
                 let visibleSpans = [];
@@ -2777,8 +2810,10 @@ def export_interactive_html(df):
                     
                     let total = visibleSpans.length;
                     visibleSpans.forEach(function(item, index) {{
-                        let newSctr = ((index + 1) / total) * 99.9;
+                        // True Percentile Formula in JS: (Rank - 1) / (N - 1)
+                        let newSctr = (total > 1) ? (index / (total - 1)) * 99.9 : 99.9;
                         let clr = "#ff4444";
+                        
                         if (newSctr >= 80) clr = "#00ff00";
                         else if (newSctr >= 40) clr = "#ffff00";
                         
@@ -2788,8 +2823,9 @@ def export_interactive_html(df):
                         if (node) node.innerHTML = newHtml;
                     }});
                 }}
+                
             }} else {{
-                // Reset ALL rows back to Global
+                // Reset ALL rows back to Global for this specific column
                 api.rows().indexes().each(function(idx) {{
                     var cellHtml = api.cell(idx, colIdx).data(); 
                     if (!cellHtml) return;
