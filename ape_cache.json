@@ -25278,5 +25278,95 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "DSGR": {
+        "ticker": "DSGR",
+        "name": "Distribution Solutions Group, I",
+        "meta": "Industrial Distribution",
+        "type": "EQUITY",
+        "mcap": 1378072448,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TIGO": {
+        "ticker": "TIGO",
+        "name": "Millicom International Cellular",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 11144568832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DBS": {
+        "ticker": "DBS",
+        "name": "Invesco DB Silver Fund",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 17206328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "NTNX": {
+        "ticker": "NTNX",
+        "name": "Nutanix, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 10394173440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ADAP": {
+        "ticker": "ADAP",
+        "name": "ADAP",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "PRMB": {
+        "ticker": "PRMB",
+        "name": "Primo Brands Corporation",
+        "meta": "Beverages - Non-Alcoholic",
+        "type": "EQUITY",
+        "mcap": 7268710400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PPSI": {
+        "ticker": "PPSI",
+        "name": "Pioneer Power Solutions, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 43937252,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "BSY": {
+        "ticker": "BSY",
+        "name": "Bentley Systems, Incorporated",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 9861933056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SLNO": {
+        "ticker": "SLNO",
+        "name": "Soleno Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2202648064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
