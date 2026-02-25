@@ -25108,5 +25108,105 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "DGII": {
+        "ticker": "DGII",
+        "name": "Digi International Inc.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 1878677504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VRRM": {
+        "ticker": "VRRM",
+        "name": "Verra Mobility Corporation",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 2543457280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SARO": {
+        "ticker": "SARO",
+        "name": "StandardAero, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 10452552704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CTSH": {
+        "ticker": "CTSH",
+        "name": "Cognizant Technology Solutions ",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 29436608512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "XZO": {
+        "ticker": "XZO",
+        "name": "Exzeo Group, Inc.",
+        "meta": "Insurance - Diversified",
+        "type": "EQUITY",
+        "mcap": 1454681984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NRDS": {
+        "ticker": "NRDS",
+        "name": "NerdWallet, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 756961024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ASNS": {
+        "ticker": "ASNS",
+        "name": "Actelis Networks, Inc.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 1594755,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "MYRG": {
+        "ticker": "MYRG",
+        "name": "MYR Group, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 4229972224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "URBN": {
+        "ticker": "URBN",
+        "name": "Urban Outfitters, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 5895844352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SDD": {
+        "ticker": "SDD",
+        "name": "ProShares UltraShort SmallCap60",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
