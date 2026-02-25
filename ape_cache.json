@@ -25218,5 +25218,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "CVI": {
+        "ticker": "CVI",
+        "name": "CVR Energy Inc.",
+        "meta": "Oil & Gas Refining & Marketing",
+        "type": "EQUITY",
+        "mcap": 2293102848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IDR": {
+        "ticker": "IDR",
+        "name": "Idaho Strategic Resources, Inc.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 645070528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "NSSC": {
+        "ticker": "NSSC",
+        "name": "NAPCO Security Technologies, In",
+        "meta": "Security & Protection Services",
+        "type": "EQUITY",
+        "mcap": 1671408640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PRCT": {
+        "ticker": "PRCT",
+        "name": "PROCEPT BioRobotics Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 1554542336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "TNGX": {
+        "ticker": "TNGX",
+        "name": "Tango Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1703665152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "KALV": {
+        "ticker": "KALV",
+        "name": "KalVista Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 798125952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
