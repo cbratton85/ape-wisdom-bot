@@ -90,13 +90,14 @@ class HistoryTracker:
             'z_rank_plus', 'z_surge', 'z_mnt_perc', 'z_upvotes', 'z_accel', 'z_upv_plus', 
             'z_ment', 'z_squeeze', 'type_tag', 'industry', 'heat', 'velocity', 'accel',
             'streak', 'upv_chg', 'day_perc', 'price', 'rsi', 'di_plus', 'di-', 'stoch_k',
-            'stoch_d', 'curvol', 'raw_sctr', 'raw_ibd', 'ibd_rs'] 
+            'stoch_d', 'curvol', 'raw_sctr', 'raw_ibd', 'ibd_rs', 'raw_spy', 'spy_rs'] 
 
         no_round_list = ['rank', 'rank_plus', 'ment', 'upvotes', 'upv_plus', 'streak']
 
         precision_map = {
             'price': 2, 'surge': 0, 'mnt_perc': 0, 'squeeze': 0, 
-            'conv': 1, 'eff': 1, 'accel': 0, 'velocity': 0, 'heat': 1
+            'conv': 1, 'eff': 1, 'accel': 0, 'velocity': 0, 'heat': 1,
+            'spy_rs': 1
         }
 
         # 3. Main Loop: Process each row in the DataFrame
@@ -197,7 +198,8 @@ class HistoryTracker:
         history_map = {
             'rank': [], 'rank_plus': [], 'price': [], 'ment': [], 'upvotes': [], 
             'accel': [], 'velocity': [], 'streak': [], 'upv_plus': [],
-            'eff': [], 'conv': [], 'surge': [], 'mnt_perc': [], 'squeeze': [], 'master_score': []
+            'eff': [], 'conv': [], 'surge': [], 'mnt_perc': [], 'squeeze': [], 'master_score': [],
+            'spy_rs': []
         }
 
         def get_val(entry, key, signed=False, is_perc=False, decimals=2):
@@ -225,6 +227,7 @@ class HistoryTracker:
             history_map['mnt_perc'].append(get_val(entry, 'mnt_perc', is_perc=True))
             history_map['squeeze'].append(get_val(entry, 'squeeze'))
             history_map['master_score'].append(get_val(entry, 'master_score', decimals=1))
+            history_map['spy_rs'].append(get_val(entry, 'spy_rs')) 
     
         final_histories = {k: " → ".join(v) for k, v in history_map.items()}
 
@@ -433,6 +436,30 @@ def calculate_raw_ibd_rs(hist, ticker_name="Unknown"):
     except Exception as e:
         return -9999.0
 
+def calculate_raw_spy_rs(hist, spy_hist, ticker_name="Unknown"):
+    """
+    Calculates the raw relative return compared to SPY over the last ~252 trading days.
+    """
+    try:
+        close = pd.to_numeric(hist['Close'], errors='coerce').dropna()
+        if close.empty or spy_hist.empty or len(close) < 63: # Require at least 1 quarter
+            return -9999.0
+        
+        lookback = min(len(close), len(spy_hist), 252)
+        
+        c_now = close.iloc[-1]
+        c_past = close.iloc[-lookback]
+        stock_perf = (c_now - c_past) / c_past
+        
+        spy_now = spy_hist.iloc[-1]
+        spy_past = spy_hist.iloc[-lookback]
+        spy_perf = (spy_now - spy_past) / spy_past
+        
+        # Excess return over SPY
+        return float((stock_perf - spy_perf) * 100)
+    except Exception:
+        return -9999.0
+
 def get_cached_logo(ticker):
     token = os.environ.get("LOGO_DEV_TOKEN")
     
@@ -536,6 +563,16 @@ def filter_and_process(stocks):
         save_cache(CACHE_FILE, local_cache)
 
     # -----------------------------------------------------
+    # Fetch SPY baseline for relative strength calculation
+    # -----------------------------------------------------
+    print(f"{C_CYAN}[#] Fetching SPY baseline...{C_RESET}")
+    try:
+        spy_hist = yf.Ticker("SPY").history(period="2y")['Close'].dropna()
+    except Exception as e:
+        print(f"{C_RED}[!] Error fetching SPY: {e}{C_RESET}")
+        spy_hist = pd.Series(dtype=float)
+
+    # -----------------------------------------------------
     # Step 4. MARKET DATA FETCHING (Batch Mode)
     # -----------------------------------------------------
     valid_tickers = [t for t in us_tickers if t not in delisted_cache]
@@ -634,11 +671,13 @@ def filter_and_process(stocks):
                 stoch_k, stoch_d = calculate_stochastic(hist, k_period=5, d_period=1)
                 raw_sctr = calculate_raw_sctr(hist, t)
                 raw_ibd = calculate_raw_ibd_rs(hist, t)
+                raw_spy = calculate_raw_spy_rs(hist, spy_hist, t)
             else:
                 rsi_val = 0
                 stoch_k, stoch_d = 50.0, 50.0
                 raw_sctr = -9999.0
                 raw_ibd = -9999.0
+                raw_spy = -9999.0
             clean_hist = hist['Volume'] 
             actual_vol_days = min(len(clean_hist), AVG_VOLUME_DAYS)
             avg_v = clean_hist.tail(actual_vol_days).mean()
@@ -737,7 +776,9 @@ def filter_and_process(stocks):
                 "Stoch_D": stoch_d,
                 "Raw_SCTR": raw_sctr,
                 "Raw_IBD": raw_ibd,
-                "IBD_RS": 0.0
+                "IBD_RS": 0.0,
+                "Raw_SPY": raw_spy,
+                "SPY_RS": 0.0
             })
             
         except Exception as e:
@@ -798,6 +839,13 @@ def filter_and_process(stocks):
             if valid_mask_ibd.any():
                 df.loc[valid_mask_ibd, 'IBD_RS'] = (df.loc[valid_mask_ibd, 'Raw_IBD'].rank(pct=True) * 99.9).round(1)
 
+        # --- RANK THE SPY RS UNIVERSE ---
+        df['SPY_RS'] = 0.0
+        if 'Raw_SPY' in df.columns:
+            valid_mask_spy = df['Raw_SPY'] > -9000.0
+            if valid_mask_spy.any():
+                df.loc[valid_mask_spy, 'SPY_RS'] = (df.loc[valid_mask_spy, 'Raw_SPY'].rank(pct=True) * 99.9).round(1)
+
         tracker.save(df)
 
         for index, row in df.iterrows():
@@ -832,6 +880,7 @@ def filter_and_process(stocks):
             df.at[index, 'h_mnt_perc'] = histories.get('mnt_perc', '')
             df.at[index, 'h_squeeze'] = histories.get('squeeze', '')
             df.at[index, 'h_heat'] = histories.get('master_score', '')
+            df.at[index, 'h_spy_rs'] = histories.get('spy_rs', '')
 
         # --- STEP 3: FLUSH TO DISK ---
         tracker.flush()
@@ -1247,6 +1296,18 @@ def export_interactive_html(df):
             ibd_str = f'<span class="ibd-val" data-global="{ibd_global:.1f}" data-raw="{ibd_raw_math:.1f}" style="color:{ibd_clr}; font-weight:bold;">{ibd_global:.1f}</span>'
             export_df.at[index, 'IBD_RS'] = ibd_str
 
+            # --- SPY RS COLOR LOGIC ---
+            spy_global = float(row.get('SPY_RS', 0.0))
+            spy_raw_math = float(row.get('Raw_SPY', -9999.0))
+            
+            if spy_global >= 80: spy_clr = "#00ff00"       
+            elif spy_global >= 40: spy_clr = "#ffff00"     
+            elif spy_global > 0: spy_clr = "#ff4444"       
+            else: spy_clr = "#666666"                      
+            
+            spy_str = f'<span class="spy-val" data-global="{spy_global:.1f}" data-raw="{spy_raw_math:.1f}" style="color:{spy_clr}; font-weight:bold;">{spy_global:.1f}</span>'
+            export_df.at[index, 'SPY_RS'] = with_hist(spy_str, row.get('h_spy_rs', ''))
+
             # --- 15. Percent Change ---
             d_val = row.get('Day%', 0)
             d_clr = "#00ff00" if d_val > 0 else ("#ff4444" if d_val < 0 else "#888")
@@ -1287,7 +1348,7 @@ def export_interactive_html(df):
         cols = [
             'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Day%', 'Acc', 'Eff', 'Conv', 'Upvs', 
             'Upv+', 'VOL', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY',
-            'RSI', 'STOCH', 'SCTR', 'IBD_RS', 'Type_Tag', 'AvgVol', 'MCap'
+            'RSI', 'STOCH', 'SCTR', 'IBD_RS', 'SPY_RS', 'Type_Tag', 'AvgVol', 'MCap'
         ]
         for c in cols:
             if c not in export_df.columns:
@@ -1322,7 +1383,8 @@ def export_interactive_html(df):
             '<th>RSI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Relative Strength Index (14d).\nRed: Overbought | Green: Oversold">&nbsp;RSI</span></th>',
             '<th>STOCH</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Slow Stochastic Oscillator (%K5, %D1) developed by George Lane.\nLogic: Measures momentum by comparing the closing price to the 5-day price range. It assumes prices tend to close near their highs in an uptrend and lows in a downtrend.\nZones: &le; 20 is Oversold (Buy Zone, Green) | &ge; 80 is Overbought (Sell Zone, Red).">&nbsp;STOCH</span></th>',
             '<th>SCTR</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="sctr-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleSCTRMode(event)" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="StockCharts Technical Rank (SCTR) created by John Murphy.\nLogic: A percentile ranking (0-99.9) of a stock\'s technical strength versus its peers.\nFormula: Heavily weights long-term trends (200d EMA, 125d ROC), while factoring in medium-term (50d EMA, 20d ROC) and short-term (RSI, PPO slope) momentum." style="line-height:1;">SCTR</span></div></th>',
-            '<th>IBD_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="ibd-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleSCTRMode(event)" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength (RS) Rating developed by William O\'Neil (IBD).\nLogic: A percentile rank (0-99.9) of a stock\'s 52-week price performance.\nFormula: Emphasizes recent momentum by weighting the most recent quarter (3 months) at 40%, and the prior three quarters at 20% each." style="line-height:1;">IBD</span></div></th>'
+            '<th>IBD_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="ibd-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleSCTRMode(event)" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength (RS) Rating developed by William O\'Neil (IBD).\nLogic: A percentile rank (0-99.9) of a stock\'s 52-week price performance.\nFormula: Emphasizes recent momentum by weighting the most recent quarter (3 months) at 40%, and the prior three quarters at 20% each." style="line-height:1;">IBD</span></div></th>',
+            '<th>SPY_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="spy-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleSCTRMode(event)" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength against SPY (0-99.9).\nLogic: A percentile rank of the stock\'s 1-year performance compared to the SPY baseline." style="line-height:1;">SPY_RS</span></div></th>'
         }
         for old_tag, new_tag in header_map.items():
             raw_table = raw_table.replace(old_tag, new_tag)
@@ -1565,7 +1627,8 @@ def export_interactive_html(df):
             th:nth-child(22), td:nth-child(22) {{ width: 1%; text-align: center; font-weight: bold; }}
             th:nth-child(23), td:nth-child(23) {{ width: 1%; text-align: center; font-weight: bold; }}
             th:nth-child(24), td:nth-child(24) {{ width: 1%; text-align: center; font-weight: bold; }}
-            th:nth-child(25), td:nth-child(25) {{ width: 1%; text-align: center; font-weight: bold; border-right: 1px solid #444 !important; }}
+            th:nth-child(25), td:nth-child(25) {{ width: 1%; text-align: center; font-weight: bold; }}
+            th:nth-child(26), td:nth-child(26) {{ width: 1%; text-align: center; font-weight: bold; border-right: 1px solid #444 !important; }}
             
             a {{ color:#4da6ff; text-decoration:none; }} a:hover {{ text-decoration:underline; }}
             table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
@@ -2622,20 +2685,22 @@ def export_interactive_html(df):
 
         const sctrBtn = document.getElementById("sctr-toggle");
         const ibdBtn = document.getElementById("ibd-toggle");
+        const spyBtn = document.getElementById("spy-toggle");
 
         if (sctrMode === "global") {{
             sctrMode = "dynamic";
             if(sctrBtn) {{ sctrBtn.innerText = "DYNAMIC"; sctrBtn.style.color = "#ffff00"; sctrBtn.style.borderColor = "#ffff00"; }}
             if(ibdBtn) {{ ibdBtn.innerText = "DYNAMIC"; ibdBtn.style.color = "#ffff00"; ibdBtn.style.borderColor = "#ffff00"; }}
+            if(spyBtn) {{ spyBtn.innerText = "DYNAMIC"; spyBtn.style.color = "#ffff00"; spyBtn.style.borderColor = "#ffff00"; }}
         }} else {{
             sctrMode = "global";
             if(sctrBtn) {{ sctrBtn.innerText = "GLOBAL"; sctrBtn.style.color = "#00ff00"; sctrBtn.style.borderColor = "#00ff00"; }}
             if(ibdBtn) {{ ibdBtn.innerText = "GLOBAL"; ibdBtn.style.color = "#00ff00"; ibdBtn.style.borderColor = "#00ff00"; }}
+            if(spyBtn) {{ spyBtn.innerText = "GLOBAL"; spyBtn.style.color = "#00ff00"; spyBtn.style.borderColor = "#00ff00"; }}
         }}
         
         recalculateSCTR();
         
-        // Automatically sort Highest to Lowest
         if ($.fn.DataTable.isDataTable('.table')) {{
             $('.table').DataTable().draw(false);
         }}
@@ -2645,9 +2710,9 @@ def export_interactive_html(df):
         if (!$.fn.DataTable.isDataTable('.table')) return;
         var api = $('.table').DataTable();
         
-        // Target columns: 23 (SCTR), 24 (IBD RS)
-        [23, 24].forEach(function(colIdx) {{
-            let valClass = (colIdx === 23) ? 'sctr-val' : 'ibd-val';
+        // Target columns: 23 (SCTR), 24 (IBD RS), 25 (SPY RS)
+        [23, 24, 25].forEach(function(colIdx) {
+            let valClass = (colIdx === 23) ? 'sctr-val' : (colIdx === 24 ? 'ibd-val' : 'spy-val');
             
             if (sctrMode === "dynamic") {{
                 // Get all rows that survive the current filters
@@ -2769,11 +2834,11 @@ def export_interactive_html(df):
             }},
 
             "columnDefs": [ 
-                // Metadata: Type_Tag (25), AvgVol (26), MCap (27) hidden
-                {{ "visible": false, "targets": [25, 26, 27] }}, 
+                // Metadata: Type_Tag (26), AvgVol (27), MCap (28) hidden
+                {{ "visible": false, "targets": [26, 27, 28] }}, 
                 
                 // Numeric sorting: Indices for all metric columns including RSI (21)
-                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24], 
+                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25], 
                    "type": "num", 
                    "render": function(data, type) {{ 
                        if (type === 'sort' || type === 'type') {{ return parseVal(data); }} 
@@ -2781,8 +2846,8 @@ def export_interactive_html(df):
                    }} 
                 }},
 
-                // Industry (19) as string
-                {{ "targets": [19], "type": "string", "render": function(data, type) {{ 
+                // Industry (20) as string
+                {{ "targets": [20], "type": "string", "render": function(data, type) {{ 
                     if (type === 'sort' || type === 'type') {{ return data.toString().replace(/<[^>]+>/g, '').trim(); }} 
                     return data; 
                 }} }}
@@ -2796,9 +2861,9 @@ def export_interactive_html(df):
         // --- CUSTOM FILTERING LOGIC ---
         $.fn.dataTable.ext.search.push(function(settings, data) {{
             // UPDATED INDICES:
-            var typeTag = data[25] || "";
-            var avgVol  = parseVal(data[26]);
-            var mcap    = parseVal(data[27]);
+            var typeTag = data[26] || "";
+            var avgVol  = parseVal(data[27]);
+            var mcap    = parseVal(data[28]);
             
             var viewMode = $('input[name="btnradio"]:checked').attr('id');
             var isETF = typeTag.includes("ETF");
