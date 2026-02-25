@@ -2711,7 +2711,7 @@ def export_interactive_html(df):
         var api = $('.table').DataTable();
         
         // Target columns: 23 (SCTR), 24 (IBD RS), 25 (SPY RS)
-        [23, 24, 25].forEach(function(colIdx) {
+        [23, 24, 25].forEach(function(colIdx) {{
             let valClass = (colIdx === 23) ? 'sctr-val' : (colIdx === 24 ? 'ibd-val' : 'spy-val');
             
             if (sctrMode === "dynamic") {{
