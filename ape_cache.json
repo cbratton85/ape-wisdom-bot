@@ -24928,5 +24928,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "TECX": {
+        "ticker": "TECX",
+        "name": "Tectonic Therapeutic, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 399592576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "CODI": {
+        "ticker": "CODI",
+        "name": "D/B/A Compass Diversified Holdi",
+        "meta": "Conglomerates",
+        "type": "EQUITY",
+        "mcap": 609411392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FENY": {
+        "ticker": "FENY",
+        "name": "Fidelity MSCI Energy Index ETF",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SIEGY": {
+        "ticker": "SIEGY",
+        "name": "Siemens AG",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 221922754560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
     }
 }
