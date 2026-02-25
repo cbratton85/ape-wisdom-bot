@@ -99,11 +99,6 @@
         "last_checked": "2026-02-24",
         "reason": "No Price Data"
     },
-    "FM": {
-        "delisted": true,
-        "last_checked": "2026-02-24",
-        "reason": "No Price Data"
-    },
     "DIDI": {
         "delisted": true,
         "last_checked": "2026-02-24",
@@ -132,6 +127,16 @@
     "QQC": {
         "delisted": true,
         "last_checked": "2026-02-24",
+        "reason": "No Price Data"
+    },
+    "FM": {
+        "delisted": true,
+        "last_checked": "2026-02-25",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
+        "delisted": true,
+        "last_checked": "2026-02-25",
         "reason": "No Price Data"
     }
 }

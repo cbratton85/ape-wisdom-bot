@@ -24658,5 +24658,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "KMT": {
+        "ticker": "KMT",
+        "name": "Kennametal Inc.",
+        "meta": "Tools & Accessories",
+        "type": "EQUITY",
+        "mcap": 3055571456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TWIN": {
+        "ticker": "TWIN",
+        "name": "Twin Disc, Incorporated",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 252955888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
