@@ -24998,5 +24998,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "KIDS": {
+        "ticker": "KIDS",
+        "name": "OrthoPediatrics Corp.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 403243456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SCWO": {
+        "ticker": "SCWO",
+        "name": "374Water Inc.",
+        "meta": "Pollution & Treatment Controls",
+        "type": "EQUITY",
+        "mcap": 44850932,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
