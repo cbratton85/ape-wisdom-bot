@@ -465,15 +465,46 @@ def get_cached_logo(ticker):
     
     file_name = f"{ticker.upper()}.png"
     local_path = os.path.join(LOGOS_DIR, file_name)
-    
-    # This is what the HTML will put in the <img src="..."> tag
     html_src_path = f"logos/{file_name}"
+    url = f"https://img.logo.dev/ticker/{ticker.lower()}?token={token}"
 
+    # --- TTL CONFIGURATION ---
+    # 30 days in seconds = 30 * 24 * 60 * 60
+    LOGO_TTL_SECONDS = 2592000 
+    
+    needs_download = True
+
+    # 1. Check if we have the file, and if it's old enough to re-verify
     if os.path.exists(local_path):
+        needs_download = False # Assume we are good by default
+        
+        file_age = time.time() - os.path.getmtime(local_path)
+        
+        # If the file is older than 30 days, check the server
+        if file_age > LOGO_TTL_SECONDS:
+            try:
+                local_size = os.path.getsize(local_path)
+                head_req = requests.head(url, timeout=5)
+                
+                if head_req.status_code == 200:
+                    remote_size = int(head_req.headers.get('Content-Length', 0))
+                    
+                    if remote_size > 0 and local_size != remote_size:
+                        needs_download = True
+                    else:
+                        # Sizes match. The logo hasn't changed.
+                        # Update the file's 'modified' timestamp to right now 
+                        # so we don't check again for another 30 days.
+                        os.utime(local_path, None)
+            except Exception:
+                # If the network check fails, stick with our cached version
+                pass
+
+    # 2. Return the cached path if no update is needed
+    if not needs_download:
         return html_src_path
 
-    url = f"https://img.logo.dev/ticker/{ticker.lower()}?token={token}"
-    
+    # 3. Download / Overwrite the file if it's new or the size changed
     try:
         r = requests.get(url, timeout=10)
         if r.status_code == 200:
@@ -481,10 +512,10 @@ def get_cached_logo(ticker):
                 f.write(r.content)
             return html_src_path
         else:
-            return "https://s3-symbol-logo.tradingview.com/indices/nasdaq-100.svg"
+            return html_src_path if os.path.exists(local_path) else "https://s3-symbol-logo.tradingview.com/indices/nasdaq-100.svg"
             
     except Exception:
-        return "https://s3-symbol-logo.tradingview.com/indices/nasdaq-100.svg"
+        return html_src_path if os.path.exists(local_path) else "https://s3-symbol-logo.tradingview.com/indices/nasdaq-100.svg"
 
 # ==============================================================================
 #                               SECTION 4: CORE ANALYSIS ENGINE
@@ -1384,7 +1415,7 @@ def export_interactive_html(df):
             '<th>STOCH</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Slow Stochastic Oscillator (%K5, %D1) developed by George Lane.\nLogic: Measures momentum by comparing the closing price to the 5-day price range. It assumes prices tend to close near their highs in an uptrend and lows in a downtrend.\nZones: &le; 20 is Oversold (Buy Zone, Green) | &ge; 80 is Overbought (Sell Zone, Red).">&nbsp;STOCH</span></th>',
             '<th>SCTR</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="sctr-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleSCTRMode(event)" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="StockCharts Technical Rank (SCTR) created by John Murphy.\nLogic: A percentile ranking (0-99.9) of a stock\'s technical strength versus its peers.\nFormula: Heavily weights long-term trends (200d EMA, 125d ROC), while factoring in medium-term (50d EMA, 20d ROC) and short-term (RSI, PPO slope) momentum." style="line-height:1;">SCTR</span></div></th>',
             '<th>IBD_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="ibd-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleSCTRMode(event)" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength (RS) Rating developed by William O\'Neil (IBD).\nLogic: A percentile rank (0-99.9) of a stock\'s 52-week price performance.\nFormula: Emphasizes recent momentum by weighting the most recent quarter (3 months) at 40%, and the prior three quarters at 20% each." style="line-height:1;">IBD</span></div></th>',
-            '<th>SPY_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="spy-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleSCTRMode(event)" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength against SPY (0-99.9).\nLogic: A percentile rank of the stock\'s 1-year performance compared to the SPY baseline." style="line-height:1;">SPY_RS</span></div></th>'
+            '<th>SPY_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="spy-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleSCTRMode(event)" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength against SPY (0-99.9).\nLogic: A percentile rank of the stock\'s 1-year performance compared to the SPY baseline." style="line-height:1;">vsSPY</span></div></th>'
         }
         for old_tag, new_tag in header_map.items():
             raw_table = raw_table.replace(old_tag, new_tag)
