@@ -29,11 +29,6 @@
         "last_checked": "2026-02-25",
         "reason": "No Price Data"
     },
-    "SQ": {
-        "delisted": true,
-        "last_checked": "2026-02-25",
-        "reason": "No Price Data"
-    },
     "K": {
         "delisted": true,
         "last_checked": "2026-02-25",
@@ -170,6 +165,16 @@
         "reason": "No Price Data"
     },
     "DPW": {
+        "delisted": true,
+        "last_checked": "2026-02-26",
+        "reason": "No Price Data"
+    },
+    "SQ": {
+        "delisted": true,
+        "last_checked": "2026-02-26",
+        "reason": "No Price Data"
+    },
+    "FFIE": {
         "delisted": true,
         "last_checked": "2026-02-26",
         "reason": "No Price Data"

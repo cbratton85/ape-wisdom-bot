@@ -25548,5 +25548,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ADT": {
+        "ticker": "ADT",
+        "name": "ADT Inc.",
+        "meta": "Security & Protection Services",
+        "type": "EQUITY",
+        "mcap": 6519641088,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FFIE": {
+        "ticker": "FFIE",
+        "name": "FFIE",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "THRY": {
+        "ticker": "THRY",
+        "name": "Thryv Holdings, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 172230256,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "BCRX": {
+        "ticker": "BCRX",
+        "name": "BioCryst Pharmaceuticals, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 1872694912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
