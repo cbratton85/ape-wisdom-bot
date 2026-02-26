@@ -11,9 +11,9 @@ from tqdm import tqdm
 # ==========================================
 # CONFIG
 # ==========================================
-DATA_FILE        = "historical_data.csv"
-CHART_DATA_FILE  = "chart_data.csv"        # Extended history for Z-score charts only
-VOLUME_DATA_FILE = "volume_data.csv"        # Average daily volume per ticker
+DATA_FILE        = "historical_data.csv.gz"
+CHART_DATA_FILE  = "chart_data.csv.gz"        # Extended history for Z-score charts only
+VOLUME_DATA_FILE = "volume_data.csv.gz"        # Average daily volume per ticker
 BATCH_SIZE = 25
 COOLDOWN = 1
 LOOKBACK_DAYS       = 650   # Days used for scoring / correlation / perf
@@ -636,6 +636,14 @@ if __name__ == "__main__":
         print(f"\n[!] Not enough history ({len(data)} days).")
         exit()
 
+    # Build extended chart history (~5 years, separate cache)
+    print("Building extended chart dataset...")
+    chart_data = build_chart_dataset(TICKERS)
+
+    # Build volume data (avg daily volume per ticker)
+    print("Building volume dataset...")
+    vol_avg = build_volume_dataset(TICKERS)
+
     valid = list(data.columns)
     print(f"Computing matrices for {len(valid)} symbols...")
 
@@ -666,7 +674,8 @@ if __name__ == "__main__":
     for r in tqdm(top_results):
         a, b = r["Pair"].split("/")
         try:
-            dates, z_vals = compute_z_history(a, b, data)
+            src = chart_data if (not chart_data.empty and a in chart_data.columns and b in chart_data.columns) else data
+            dates, z_vals = compute_z_history(a, b, src)
             r["ZDates"]   = dates
             r["ZHistory"] = z_vals
         except Exception:
