@@ -25678,5 +25678,105 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "IBTA": {
+        "ticker": "IBTA",
+        "name": "Ibotta, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 770486656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "OPY": {
+        "ticker": "OPY",
+        "name": "Oppenheimer Holdings, Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 958644288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TTRX": {
+        "ticker": "TTRX",
+        "name": "Turn Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 111891696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "PHO": {
+        "ticker": "PHO",
+        "name": "Invesco Water Resources ETF",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "FIGS": {
+        "ticker": "FIGS",
+        "name": "FIGS, Inc.",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 1962469632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "JPST": {
+        "ticker": "JPST",
+        "name": "JPMorgan Ultra-Short Income ETF",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 7532279296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "PACS": {
+        "ticker": "PACS",
+        "name": "PACS Group, Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 6349177856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "JEF": {
+        "ticker": "JEF",
+        "name": "Jefferies Financial Group Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 10725210112,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SLX": {
+        "ticker": "SLX",
+        "name": "VanEck Steel ETF",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "LTL": {
+        "ticker": "LTL",
+        "name": "ProShares Ultra Communication S",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
