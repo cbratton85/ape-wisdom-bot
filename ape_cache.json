@@ -25508,5 +25508,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "KW": {
+        "ticker": "KW",
+        "name": "Kennedy-Wilson Holdings Inc.",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 1496262784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
