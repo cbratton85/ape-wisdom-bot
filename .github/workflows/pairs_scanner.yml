@@ -1,61 +1,45 @@
-name: Pairs Scanner
+name: Market Pairs Scanner
 
 on:
-  workflow_dispatch: 
-
-permissions:
-  contents: write 
+  workflow_dispatch:
 
 jobs:
-  build:
+  run-scanner:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-
-      # (No logo cache needed here since we only pull text data)
+          python-version: '3.10'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install yfinance pandas numpy tqdm
 
-      - name: Run Total Market Scan
-        env:
-          ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }} 
-          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
-        run: python market_screener.py
-
-      # --- COMMIT EVERYTHING ---
-      - name: Commit and Push Meta Cache & HTML
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # Stage the metadata cache (saves Sector/Industry so it doesn't re-download daily)
-          git add meta_cache.json
-          git add public/market_hotlist.html
-          
-          # Commit only if there are changes
-          git commit -m "Update Total Market Hotlist [skip ci]" || exit 0
-          
-          # Rebase in case Ape Wisdom pushed something exactly while this was running
-          git pull --rebase origin main
-          git push origin main
-
-      # --- DEPLOY TO PAGES ---
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Cache Market Data
+        uses: actions/cache@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
-          keep_files: true
-          force_orphan: true
+          path: |
+            historical_data.csv
+            chart_data.csv
+            volume_data.csv
+          # Creates a new cache every run but restores from the most recent one
+          key: market-data-${{ github.run_id }}
+          restore-keys: |
+            market-data-
+
+      - name: Run Pairs Scanner
+        run: python pairs_scanner.py
+
+      - name: Upload Dashboards as Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: scanner-dashboards
+          path: |
+            market_scanner.html
+            symbols.html
