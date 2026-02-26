@@ -34,11 +34,6 @@
         "last_checked": "2026-02-25",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-02-25",
-        "reason": "No Price Data"
-    },
     "CO": {
         "delisted": true,
         "last_checked": "2026-02-25",
@@ -180,6 +175,11 @@
         "reason": "No Price Data"
     },
     "APE": {
+        "delisted": true,
+        "last_checked": "2026-02-26",
+        "reason": "No Price Data"
+    },
+    "AUD": {
         "delisted": true,
         "last_checked": "2026-02-26",
         "reason": "No Price Data"

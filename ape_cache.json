@@ -25788,5 +25788,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SRI": {
+        "ticker": "SRI",
+        "name": "Stoneridge, Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 216010544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CRGO": {
+        "ticker": "CRGO",
+        "name": "Freightos Limited",
+        "meta": "Integrated Freight & Logistics",
+        "type": "EQUITY",
+        "mcap": 68723040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "GRFS": {
+        "ticker": "GRFS",
+        "name": "Grifols, S.A.",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 7499638272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
