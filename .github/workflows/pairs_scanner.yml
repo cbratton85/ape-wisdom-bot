@@ -2,6 +2,8 @@ name: Market Pairs Scanner
 
 on:
   workflow_dispatch:
+  # Note: If you want this to run automatically every day, 
+  # you can paste the schedule back in here later!
 
 # Give the action permission to write back to the repository
 permissions:
@@ -44,6 +46,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add market_scanner.html symbols.html historical_data.csv.gz chart_data.csv.gz volume_data.csv.gz
+          git add pairs_scanner.html symbols.html historical_data.csv.gz chart_data.csv.gz volume_data.csv.gz
           git commit -m "Automated update of market scanner dashboards" || echo "No changes to commit"
+          git pull --rebase origin main
           git push
