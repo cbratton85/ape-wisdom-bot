@@ -59,11 +59,6 @@
         "last_checked": "2026-02-25",
         "reason": "No Price Data"
     },
-    "EBR": {
-        "delisted": true,
-        "last_checked": "2026-02-25",
-        "reason": "No Price Data"
-    },
     "YY": {
         "delisted": true,
         "last_checked": "2026-02-25",
@@ -175,6 +170,16 @@
         "reason": "No Price Data"
     },
     "KIRK": {
+        "delisted": true,
+        "last_checked": "2026-02-26",
+        "reason": "No Price Data"
+    },
+    "EBR": {
+        "delisted": true,
+        "last_checked": "2026-02-26",
+        "reason": "No Price Data"
+    },
+    "APE": {
         "delisted": true,
         "last_checked": "2026-02-26",
         "reason": "No Price Data"

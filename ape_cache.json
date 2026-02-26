@@ -25778,5 +25778,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "FLRN": {
+        "ticker": "FLRN",
+        "name": "State Street SPDR Bloomberg Inv",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
