@@ -44,11 +44,6 @@
         "last_checked": "2026-02-25",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-02-25",
-        "reason": "No Price Data"
-    },
     "AUD": {
         "delisted": true,
         "last_checked": "2026-02-25",
@@ -170,6 +165,11 @@
         "reason": "No Price Data"
     },
     "DTC": {
+        "delisted": true,
+        "last_checked": "2026-02-26",
+        "reason": "No Price Data"
+    },
+    "BABY": {
         "delisted": true,
         "last_checked": "2026-02-26",
         "reason": "No Price Data"

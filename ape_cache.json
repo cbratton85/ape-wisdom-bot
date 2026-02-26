@@ -25538,5 +25538,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TMO": {
+        "ticker": "TMO",
+        "name": "Thermo Fisher Scientific Inc",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 192993722368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
