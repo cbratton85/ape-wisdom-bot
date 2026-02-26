@@ -26068,5 +26068,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TZOO": {
+        "ticker": "TZOO",
+        "name": "Travelzoo",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 72474200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "URG": {
+        "ticker": "URG",
+        "name": "Ur Energy Inc",
+        "meta": "Uranium",
+        "type": "EQUITY",
+        "mcap": 632038912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "IMTE": {
+        "ticker": "IMTE",
+        "name": "Integrated Media Technology Lim",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 2272923,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
