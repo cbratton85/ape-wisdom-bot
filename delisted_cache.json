@@ -79,11 +79,6 @@
         "last_checked": "2026-02-25",
         "reason": "No Price Data"
     },
-    "DPW": {
-        "delisted": true,
-        "last_checked": "2026-02-25",
-        "reason": "No Price Data"
-    },
     "YY": {
         "delisted": true,
         "last_checked": "2026-02-25",
@@ -170,6 +165,11 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-02-26",
+        "reason": "No Price Data"
+    },
+    "DPW": {
         "delisted": true,
         "last_checked": "2026-02-26",
         "reason": "No Price Data"
