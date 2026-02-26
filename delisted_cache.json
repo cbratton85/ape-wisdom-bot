@@ -49,11 +49,6 @@
         "last_checked": "2026-02-25",
         "reason": "No Price Data"
     },
-    "CN": {
-        "delisted": true,
-        "last_checked": "2026-02-25",
-        "reason": "No Price Data"
-    },
     "DIDI": {
         "delisted": true,
         "last_checked": "2026-02-25",
@@ -175,6 +170,11 @@
         "reason": "No Price Data"
     },
     "FFIE": {
+        "delisted": true,
+        "last_checked": "2026-02-26",
+        "reason": "No Price Data"
+    },
+    "CN": {
         "delisted": true,
         "last_checked": "2026-02-26",
         "reason": "No Price Data"

@@ -25588,5 +25588,95 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ASC": {
+        "ticker": "ASC",
+        "name": "Ardmore Shipping Corporation",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 638363456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BRKR": {
+        "ticker": "BRKR",
+        "name": "Bruker Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 6142980608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GDXD": {
+        "ticker": "GDXD",
+        "name": "MicroSectors Gold Miners -3X In",
+        "meta": "Trading--Inverse Commodities",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "TROO": {
+        "ticker": "TROO",
+        "name": "TROOPS, Inc.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 404992544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "XPP": {
+        "ticker": "XPP",
+        "name": "ProShares Ultra FTSE China 50",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "WRBY": {
+        "ticker": "WRBY",
+        "name": "Warby Parker Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 3040071424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ECC": {
+        "ticker": "ECC",
+        "name": "Eagle Point Credit Company Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 527910880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BFLY": {
+        "ticker": "BFLY",
+        "name": "Butterfly Network, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 1194782720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "YINN": {
+        "ticker": "YINN",
+        "name": "Direxion Daily FTSE China Bull ",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
