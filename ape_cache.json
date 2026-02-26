@@ -25948,5 +25948,125 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PEGA": {
+        "ticker": "PEGA",
+        "name": "Pegasystems Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 7690139648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "WRB": {
+        "ticker": "WRB",
+        "name": "W.R. Berkley Corporation",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 27201916928,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BEPC": {
+        "ticker": "BEPC",
+        "name": "Brookfield Renewable Corporatio",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 7916056064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MTX": {
+        "ticker": "MTX",
+        "name": "Minerals Technologies Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 2230528000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LMAT": {
+        "ticker": "LMAT",
+        "name": "LeMaitre Vascular, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 2579170816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "WAT": {
+        "ticker": "WAT",
+        "name": "Waters Corporation",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 31666241536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CWEN": {
+        "ticker": "CWEN",
+        "name": "Clearway Energy, Inc.",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 7800456192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CRI": {
+        "ticker": "CRI",
+        "name": "Carter's, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 1533361792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BBD": {
+        "ticker": "BBD",
+        "name": "Banco Bradesco Sa",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 42836897792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BEAT": {
+        "ticker": "BEAT",
+        "name": "Heartbeam, Inc.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 62181976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "IBEX": {
+        "ticker": "IBEX",
+        "name": "IBEX Limited",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 392702816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "GLOB": {
+        "ticker": "GLOB",
+        "name": "Globant S.A.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 2064797184,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
