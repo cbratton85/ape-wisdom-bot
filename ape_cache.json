@@ -25398,5 +25398,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AOM": {
+        "ticker": "AOM",
+        "name": "iShares Core 40/60 Moderate All",
+        "meta": "Global Moderately Conservative Allocation",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "REI": {
+        "ticker": "REI",
+        "name": "Ring Energy, Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 267317904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "FLEX": {
+        "ticker": "FLEX",
+        "name": "Flex Ltd.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 24284131328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "KGEI": {
+        "ticker": "KGEI",
+        "name": "Kolibri Global Energy Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 137532608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
