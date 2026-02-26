@@ -25868,5 +25868,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "ADIL": {
+        "ticker": "ADIL",
+        "name": "Adial Pharmaceuticals, Inc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2722366,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "LTRX": {
+        "ticker": "LTRX",
+        "name": "Lantronix, Inc.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 242915184,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "RBA": {
+        "ticker": "RBA",
+        "name": "RB Global, Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 18819463168,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ARMP": {
+        "ticker": "ARMP",
+        "name": "Armata Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 373716896,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
