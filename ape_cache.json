@@ -25478,5 +25478,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FNGS": {
+        "ticker": "FNGS",
+        "name": "MicroSectors FANG  ETNs due Jan",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "AIT": {
+        "ticker": "AIT",
+        "name": "Applied Industrial Technologies",
+        "meta": "Industrial Distribution",
+        "type": "EQUITY",
+        "mcap": 10589681664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
