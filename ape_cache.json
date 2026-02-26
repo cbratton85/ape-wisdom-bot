@@ -25518,5 +25518,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TYO": {
+        "ticker": "TYO",
+        "name": "Direxion Daily 10-Yr Treasury B",
+        "meta": "Trading--Inverse Debt",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SMFG": {
+        "ticker": "SMFG",
+        "name": "Sumitomo Mitsui Financial Group",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 143047852032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
