@@ -1073,7 +1073,7 @@ def export_interactive_html(df):
                 return str(int(v))
             except: return "0"
 
-        C_GREEN, C_YELLOW, C_RED, C_CYAN, C_WHITE = "#00ff00", "#ffff00", "#ff4444", "#00ffff", "#ffffff"
+        C_GREEN, C_YELLOW, C_RED, C_CYAN, C_WHITE = "#00d97e", "#f5c518", "#ff4d5a", "#00c8d7", "#e8e8f0"
         
         if 'AvgVol' not in export_df.columns: export_df['AvgVol'] = 0
         if 'CurVol' not in export_df.columns: export_df['CurVol'] = 0
@@ -1159,16 +1159,16 @@ def export_interactive_html(df):
 
         for index, row in export_df.iterrows():
             v_raw = row.get('CurVol_Disp', '0')
-            export_df.at[index, 'CurVol_Disp'] = f'<div style="text-align: right; padding-right: 10px; color: #fff; font-weight:bold;">{v_raw}</div>'
+            export_df.at[index, 'CurVol_Disp'] = f'<div style="text-align: right; padding-right: 10px; color: #e8e8f0; font-weight:600;">{v_raw}</div>'
             
             avg_v_raw = row.get('Vol_Display', '0')
-            export_df.at[index, 'Vol_Display'] = f'<div style="text-align: right; padding-right: 10px; color: #ccc;">{avg_v_raw}</div>'
+            export_df.at[index, 'Vol_Display'] = f'<div style="text-align: right; padding-right: 10px; color: #8888a0;">{avg_v_raw}</div>'
             m_val = row.get('MENT', 0)
             z_score = row.get('z_MENT', 0)
             
-            if z_score >= 2.0: m_clr = "#ffff00"
-            elif z_score >= 1.0: m_clr = "#00ff00"
-            else: m_clr = "#ffffff"  
+            if z_score >= 2.0: m_clr = "#f5c518"
+            elif z_score >= 1.0: m_clr = "#00d97e"
+            else: m_clr = "#e8e8f0"  
             
             export_df.at[index, 'MENT'] = color_span(f"{int(m_val)}", m_clr)
 
@@ -1182,26 +1182,26 @@ def export_interactive_html(df):
             # --- 2. ACCELERATION (Acc) ---
             ac_val = row.get('Acc', 0)
             ac_hist = row.get('h_accel', '')
-            if ac_val >= 5: ac_clr = "#ff00ff"
-            elif ac_val > 0: ac_clr = "#00ffff"
-            elif ac_val < 0: ac_clr = "#ff4444"
-            else: ac_clr = "#ffffff"
+            if ac_val >= 5: ac_clr = "#c45cf6"
+            elif ac_val > 0: ac_clr = "#00c8d7"
+            elif ac_val < 0: ac_clr = "#ff4d5a"
+            else: ac_clr = "#555568"
             export_df.at[index, 'Acc'] = with_hist(color_span(f"{ac_val:+d}", ac_clr), ac_hist)
 
             # --- 3. EFFICIENCY (Eff) ---
             eff_val = float(row.get('Eff', 0)) 
             eff_hist = row.get('h_eff', '') 
-            if eff_val >= 1.0: eff_clr = "#00ff00"       # Strong Green
-            elif eff_val >= 0.5: eff_clr = "#ffff00"     # Yellow
-            elif eff_val >= 0.1: eff_clr = "#ffffff"     # White (Small Positive - THE FIX)
-            elif eff_val > -0.1: eff_clr = "#666666"     # Grey (Flat/Zero)
-            else: eff_clr = "#ff4444"                    # Red (Negative)
+            if eff_val >= 1.0: eff_clr = "#00d97e"       # Strong Green
+            elif eff_val >= 0.5: eff_clr = "#f5c518"     # Yellow
+            elif eff_val >= 0.1: eff_clr = "#e8e8f0"     # Neutral
+            elif eff_val > -0.1: eff_clr = "#555568"     # Grey (Flat/Zero)
+            else: eff_clr = "#ff4d5a"                    # Red (Negative)
             export_df.at[index, 'Eff'] = with_hist(color_span(f"{eff_val:.1f}", eff_clr), eff_hist)
 
             # --- 4. CONVICTION (Conv) ---
             conv_val = float(row.get('Conv', 0)) 
             conv_hist = row.get('h_conv', '') 
-            conv_clr = "#ffcc00" if conv_val > 1.0 else "#ffffff"
+            conv_clr = "#f5c518" if conv_val > 1.0 else "#e8e8f0"
             export_df.at[index, 'Conv'] = with_hist(color_span(f"{conv_val:.1f}x", conv_clr), conv_hist)
 
             # --- 5. UPVOTE CHANGE (Upv+) ---
@@ -1229,19 +1229,19 @@ def export_interactive_html(df):
             trend_val = int(new_streak)
             trend_hist = row.get('h_streak', '') 
             sig_text = f"{trend_val:+d}"
-            if trend_val >= 3: sig_color = "#00ff00"   
-            elif trend_val > 0: sig_color = "#99ff99"  
-            elif trend_val <= -2: sig_color = "#ff4444" 
-            else: sig_color = "#ffffff"              
+            if trend_val >= 3: sig_color = "#00d97e"   
+            elif trend_val > 0: sig_color = "#6eddb0"  
+            elif trend_val <= -2: sig_color = "#ff4d5a" 
+            else: sig_color = "#e8e8f0"              
             export_df.at[index, 'Strk'] = with_hist(color_span(sig_text, sig_color), trend_hist)
 
             # --- 7. HEAT SCORE ---
             score = float(row.get('Master_Score', 0))
             heat_hist = row.get('h_heat', '') 
-            if score > 10: h_clr = "#ff0000"
-            elif score > 5: h_clr = "#ff8800"
-            elif score > 2: h_clr = "#ffff00"
-            else: h_clr = "#888888"
+            if score > 10: h_clr = "#ff4d5a"
+            elif score > 5: h_clr = "#ff8840"
+            elif score > 2: h_clr = "#f5c518"
+            else: h_clr = "#555568"
             heat_span = f'<span style="color:{h_clr}; font-weight:bold;">{score:.1f}</span>'
             export_df.at[index, 'Heat'] = with_hist(heat_span, heat_hist)
 
@@ -1257,7 +1257,7 @@ def export_interactive_html(df):
                 f'<div class="symbol-container" style="display: flex; align-items: center; gap: 8px;" '
                 f'onmouseenter="loadSymbolProfile(\'{clean_ticker}\', \'profile-{index}\', \'{exchange_name}\', event)" '
                 f'onmouseleave="hideSymbolProfile(\'profile-{index}\')">' 
-                f'<img src="{logo_src}" style="width: 24px; height: 24px; border-radius: 50%; background: #2a2e39; flex-shrink: 0; object-fit: contain;" '
+                f'<img src="{logo_src}" style="width: 22px; height: 22px; border-radius: 50%; background: #1e1e2a; flex-shrink: 0; object-fit: contain;" '
                 f'onerror="this.src=\'https://s3-symbol-logo.tradingview.com/indices/nasdaq-100.svg\'">'
                 f'<span class="text-content"><b>{row.get("Name", clean_ticker)}</b></span>'
                 f'<div id="profile-{index}" class="chart-popup"></div>'
@@ -1275,7 +1275,7 @@ def export_interactive_html(df):
                 r_str = color_span(f"{r_val} {r_arrow}", r_color)
                 export_df.at[index, 'Rank+'] = with_hist(r_str, r_hist)
             else:
-                export_df.at[index, 'Rank+'] = with_hist('<span style="color:#888">0</span>', r_hist)
+                export_df.at[index, 'Rank+'] = with_hist('<span style="color:#555568">–</span>', r_hist)
 
             # --- 10. RANK ---
             rank_val = str(row.get('Rank', 0))
@@ -1289,13 +1289,13 @@ def export_interactive_html(df):
             
             # Linear thresholding: makes the dashboard much more intuitive
             if srg_raw >= 300:
-                srg_clr = "#ffff00"  # Yellow: Extreme Surge (3x+ average)
+                srg_clr = "#f5c518"  # Yellow: Extreme Surge (3x+ average)
             elif srg_raw >= 100:
-                srg_clr = "#00ff00"  # Green: Above Average (1x+ average)
+                srg_clr = "#00d97e"  # Green: Above Average (1x+ average)
             elif srg_raw >= 50:
-                srg_clr = "#ffffff"  # White: Significant Progress
+                srg_clr = "#e8e8f0"  # Neutral: Significant Progress
             else:
-                srg_clr = "#888888"  # Grey: Low relative volume
+                srg_clr = "#555568"  # Grey: Low relative volume
                 
             export_df.at[index, 'Srg'] = with_hist(color_span(srg_val_str, srg_clr), srg_hist)
 
@@ -1334,11 +1334,11 @@ def export_interactive_html(df):
             
             # Color Logic: <= 20 Green, >= 80 Red
             if stoch_k_v <= 20.0:
-                stoch_clr = "#00ff00" # Green (Oversold)
+                stoch_clr = "#00d97e" # Green (Oversold)
             elif stoch_k_v >= 80.0:
-                stoch_clr = "#ff4444" # Red (Overbought)
+                stoch_clr = "#ff4d5a" # Red (Overbought)
             else:
-                stoch_clr = "#ffffff" # White (Neutral)
+                stoch_clr = "#e8e8f0" # Neutral
 
             # Create the HTML span WITHOUT the tooltip
             stoch_str = f'<span style="color:{stoch_clr}; font-weight:bold;">{stoch_k_v:.0f}</span>'
@@ -1347,11 +1347,11 @@ def export_interactive_html(df):
             # --- RSI COLOR LOGIC ---
             rsi_raw = float(row.get('RSI', 0))
             if rsi_raw >= 70: 
-                rsi_clr = "#ff4444" # Red (Overbought)
+                rsi_clr = "#ff4d5a" # Red (Overbought)
             elif rsi_raw <= 30 and rsi_raw > 0: 
-                rsi_clr = "#00ff00" # Green (Oversold)
+                rsi_clr = "#00d97e" # Green (Oversold)
             else: 
-                rsi_clr = "#ffffff"
+                rsi_clr = "#e8e8f0"
             
             # Render RSI
             rsi_str = color_span(f"{rsi_raw:.1f}", rsi_clr)
@@ -1361,10 +1361,10 @@ def export_interactive_html(df):
             sctr_global = float(row.get('SCTR', 0.0))
             sctr_raw_math = float(row.get('Raw_SCTR', -9999.0)) # Grab the hidden raw math
             
-            if sctr_global >= 80: sctr_clr = "#00ff00"       
-            elif sctr_global >= 40: sctr_clr = "#ffff00"     
-            elif sctr_global > 0: sctr_clr = "#ff4444"       
-            else: sctr_clr = "#666666"                    
+            if sctr_global >= 80: sctr_clr = "#00d97e"       
+            elif sctr_global >= 40: sctr_clr = "#f5c518"     
+            elif sctr_global > 0: sctr_clr = "#ff4d5a"       
+            else: sctr_clr = "#555568"                    
             
             # We add data-global and data-raw attributes so JavaScript can read them
             sctr_str = f'<span class="sctr-val" data-global="{sctr_global:.1f}" data-raw="{sctr_raw_math:.1f}" style="color:{sctr_clr}; font-weight:bold;">{sctr_global:.1f}</span>'
@@ -1374,10 +1374,10 @@ def export_interactive_html(df):
             ibd_global = float(row.get('IBD_RS', 0.0))
             ibd_raw_math = float(row.get('Raw_IBD', -9999.0))
             
-            if ibd_global >= 80: ibd_clr = "#00ff00"       
-            elif ibd_global >= 40: ibd_clr = "#ffff00"     
-            elif ibd_global > 0: ibd_clr = "#ff4444"       
-            else: ibd_clr = "#666666"                     
+            if ibd_global >= 80: ibd_clr = "#00d97e"       
+            elif ibd_global >= 40: ibd_clr = "#f5c518"     
+            elif ibd_global > 0: ibd_clr = "#ff4d5a"       
+            else: ibd_clr = "#555568"                     
             
             ibd_str = f'<span class="ibd-val" data-global="{ibd_global:.1f}" data-raw="{ibd_raw_math:.1f}" style="color:{ibd_clr}; font-weight:bold;">{ibd_global:.1f}</span>'
             export_df.at[index, 'IBD_RS'] = ibd_str
@@ -1386,24 +1386,24 @@ def export_interactive_html(df):
             spy_global = float(row.get('SPY_RS', 0.0))
             spy_raw_math = float(row.get('Raw_SPY', -9999.0))
             
-            if spy_global >= 80: spy_clr = "#00ff00"       
-            elif spy_global >= 40: spy_clr = "#ffff00"     
-            elif spy_global > 0: spy_clr = "#ff4444"       
-            else: spy_clr = "#666666"                      
+            if spy_global >= 80: spy_clr = "#00d97e"       
+            elif spy_global >= 40: spy_clr = "#f5c518"     
+            elif spy_global > 0: spy_clr = "#ff4d5a"       
+            else: spy_clr = "#555568"                      
             
             spy_str = f'<span class="spy-val" data-global="{spy_global:.1f}" data-raw="{spy_raw_math:.1f}" style="color:{spy_clr}; font-weight:bold;">{spy_global:.1f}</span>'
             export_df.at[index, 'SPY_RS'] = with_hist(spy_str, row.get('h_spy_rs', ''))
 
             # --- 15. Percent Change ---
             d_val = row.get('Day%', 0)
-            d_clr = "#00ff00" if d_val > 0 else ("#ff4444" if d_val < 0 else "#888")
+            d_clr = "#00d97e" if d_val > 0 else ("#ff4d5a" if d_val < 0 else "#555568")
             export_df.at[index, 'Day%'] = color_span(f"{d_val:+.1f}%", d_clr)
 
             # --- 16. ETF BADGE & META ---
             is_fund = row.get('Type', 'EQUITY') == 'ETF' or 'Trust' in str(row['Name']) or 'Fund' in str(row['Name'])
             meta_val = row.get('Meta', '-')
             if is_fund:
-                badge = '<span style="background-color:#ff00ff; color:black; padding:2px 5px; border-radius:4px; font-size:11px; font-weight:bold; margin-right:6px; vertical-align:middle;">ETF</span>'
+                badge = '<span style="background:rgba(196,92,246,0.18); color:#c45cf6; border:1px solid rgba(196,92,246,0.4); padding:1px 5px; border-radius:4px; font-size:9px; font-weight:800; letter-spacing:0.08em; margin-right:5px; vertical-align:middle; font-family:\'Inter\',sans-serif;">ETF</span>'
             else:
                 badge = ""
             
@@ -1417,17 +1417,17 @@ def export_interactive_html(df):
                 f'<div class="symbol-container" '
                 f'onmouseenter="loadMiniChart(\'{tv_ticker}\', \'{index}\', \'{row.get("exchange", "")}\', event)" '
                 f'onmouseleave="hideSymbolProfile(\'chart-tooltip-{index}\')">' 
-                f'<a href="https://www.tradingview.com/chart/?symbol={tv_ticker}" target="_blank" style="color: #4da6ff; text-decoration: none;">{t}</a>'
+                f'<a href="https://www.tradingview.com/chart/?symbol={tv_ticker}" target="_blank" style="color: #3b9eff; text-decoration: none; font-weight:700;">{t}</a>'
                 f'<div id="chart-tooltip-{index}" class="chart-popup"></div>'
                 f'</div>'
             )
             
             p_clean = row.get('Price', 0)
             
-            export_df.at[index, 'Price'] = f'<div style="text-align: right; padding-right: 8px;">${p_clean:.2f}</div>'
+            export_df.at[index, 'Price'] = f'<div style="text-align: right; padding-right: 8px; color: #e8e8f0;">${p_clean:.2f}</div>'
 
             vol_raw = export_df.at[index, 'Vol_Display']
-            export_df.at[index, 'Vol_Display'] = f'<div style="text-align: right; color: #ccc;">{vol_raw}</div>'
+            export_df.at[index, 'Vol_Display'] = f'<div style="text-align: right; color: #8888a0;">{vol_raw}</div>'
 
         export_df.rename(columns={'Meta': 'INDUSTRY', 'Vol_Display': 'VOL(30)', 'CurVol_Disp': 'VOL'}, inplace=True)
 
@@ -1468,9 +1468,9 @@ def export_interactive_html(df):
             '<th>INDUSTRY</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Industry category group.">INDUSTRY</span></th>',
             '<th>RSI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Relative Strength Index (14d).\nRed: Overbought | Green: Oversold">&nbsp;RSI</span></th>',
             '<th>STOCH</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Slow Stochastic Oscillator (%K5, %D1) developed by George Lane.\nLogic: Measures momentum by comparing the closing price to the 5-day price range. It assumes prices tend to close near their highs in an uptrend and lows in a downtrend.\nZones: &le; 20 is Oversold (Buy Zone, Green) | &ge; 80 is Overbought (Sell Zone, Red).">&nbsp;STOCH</span></th>',
-            '<th>SCTR</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="sctr-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 23, \'sctr-toggle\')" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="StockCharts Technical Rank (SCTR) created by John Murphy.\nLogic: A percentile ranking (0-99.9) of a stock\'s technical strength versus its peers.\nFormula: Heavily weights long-term trends (200d EMA, 125d ROC), while factoring in medium-term (50d EMA, 20d ROC) and short-term (RSI, PPO slope) momentum." style="line-height:1;">SCTR</span></div></th>',
-            '<th>IBD_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="ibd-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 24, \'ibd-toggle\')" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength (RS) Rating developed by William O\'Neil (IBD).\nLogic: A percentile rank (0-99.9) of a stock\'s 52-week price performance.\nFormula: Emphasizes recent momentum by weighting the most recent quarter (3 months) at 40%, and the prior three quarters at 20% each." style="line-height:1;">IBD</span></div></th>',
-            '<th>SPY_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="spy-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 25, \'spy-toggle\')" style="background:#1a1a1a; border:1px solid #00ff00; border-radius:3px; padding:1px 4px; font-size:9px; cursor:pointer; color:#00ff00; line-height:1; transition:all 0.2s;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength against SPY (0-99.9).\nLogic: A percentile rank of the stock\'s 1-year performance compared to the SPY baseline." style="line-height:1;">vsSPY</span></div></th>'
+            '<th>SCTR</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="sctr-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 23, \'sctr-toggle\')" style="background:#111118; border:1px solid #00d97e; border-radius:4px; padding:1px 5px; font-size:9px; cursor:pointer; color:#00d97e; line-height:1; transition:all 0.2s; font-family:Inter,sans-serif; font-weight:700; letter-spacing:0.06em;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="StockCharts Technical Rank (SCTR) created by John Murphy.\nLogic: A percentile ranking (0-99.9) of a stock\'s technical strength versus its peers.\nFormula: Heavily weights long-term trends (200d EMA, 125d ROC), while factoring in medium-term (50d EMA, 20d ROC) and short-term (RSI, PPO slope) momentum." style="line-height:1;">SCTR</span></div></th>',
+            '<th>IBD_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="ibd-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 24, \'ibd-toggle\')" style="background:#111118; border:1px solid #00d97e; border-radius:4px; padding:1px 5px; font-size:9px; cursor:pointer; color:#00d97e; line-height:1; transition:all 0.2s; font-family:Inter,sans-serif; font-weight:700; letter-spacing:0.06em;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength (RS) Rating developed by William O\'Neil (IBD).\nLogic: A percentile rank (0-99.9) of a stock\'s 52-week price performance.\nFormula: Emphasizes recent momentum by weighting the most recent quarter (3 months) at 40%, and the prior three quarters at 20% each." style="line-height:1;">IBD</span></div></th>',
+            '<th>SPY_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="spy-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 25, \'spy-toggle\')" style="background:#111118; border:1px solid #00d97e; border-radius:4px; padding:1px 5px; font-size:9px; cursor:pointer; color:#00d97e; line-height:1; transition:all 0.2s; font-family:Inter,sans-serif; font-weight:700; letter-spacing:0.06em;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength against SPY (0-99.9).\nLogic: A percentile rank of the stock\'s 1-year performance compared to the SPY baseline." style="line-height:1;">vsSPY</span></div></th>'
         }
         for old_tag, new_tag in header_map.items():
             raw_table = raw_table.replace(old_tag, new_tag)
@@ -1492,11 +1492,41 @@ def export_interactive_html(df):
         <link rel="manifest" href="site.webmanifest">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
         <style>
+        :root {{
+            --bg-primary:    #0a0a0f;
+            --bg-secondary:  #111118;
+            --bg-card:       #16161f;
+            --bg-hover:      #1e1e2a;
+            --border-dim:    #252530;
+            --border-mid:    #333344;
+            --accent-green:  #00d97e;
+            --accent-blue:   #3b9eff;
+            --accent-yellow: #f5c518;
+            --accent-red:    #ff4d5a;
+            --accent-cyan:   #00c8d7;
+            --accent-purple: #c45cf6;
+            --text-primary:  #e8e8f0;
+            --text-muted:    #8888a0;
+            --text-dim:      #555568;
+            --font-ui:       'Inter', system-ui, sans-serif;
+            --font-mono:     'JetBrains Mono', 'Consolas', monospace;
+        }}
+
+        * {{ box-sizing: border-box; }}
+
+        ::-webkit-scrollbar {{ width: 6px; height: 6px; }}
+        ::-webkit-scrollbar-track {{ background: var(--bg-primary); }}
+        ::-webkit-scrollbar-thumb {{ background: var(--border-mid); border-radius: 3px; }}
+        ::-webkit-scrollbar-thumb:hover {{ background: #4a4a5a; }}
+
         .container-fluid {{
             visibility: hidden;
             opacity: 0;
-            transition: visibility 0s, opacity 0.3s ease-in-out;
+            transition: visibility 0s, opacity 0.4s ease-in-out;
         }}
 
         body.loaded .container-fluid {{
@@ -1504,239 +1534,226 @@ def export_interactive_html(df):
             opacity: 1;
         }}
 
+        /* ── PAGE LOADER ──────────────────────────────────────────── */
         #page-loader {{
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            font-weight: bold;
-            color: #00ff00;
-            visibility: visible !important;
-            opacity: 1 !important;
-           z-index: 9999;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-primary);
+            z-index: 99999;
+            gap: 20px;
         }}
 
-            table {{
-                table-layout: fixed; 
-                width: 100%;
-            }}
+        #page-loader::before {{
+            content: '';
+            width: 48px; height: 48px;
+            border: 3px solid var(--border-mid);
+            border-top-color: var(--accent-green);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }}
 
-            * {{ box-sizing: border-box; }}
-            body {{ background-color: #101010; color: #e0e0e0; font-family: 'Consolas', 'Monaco', monospace; padding: 0; margin: 0; overflow-x: hidden; }}
-            .table-dark {{ --bs-table-bg:#18181b; color:#ccc; }}
+        @keyframes spin {{ to {{ transform: rotate(360deg); }} }}
+
+        #page-loader-text {{
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--accent-green);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }}
+
+        /* ── BASE ─────────────────────────────────────────────────── */
+        body {{
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            padding: 0; margin: 0;
+            overflow-x: hidden;
+        }}
+
+        table {{ table-layout: fixed; width: 100%; }}
+        .table-dark {{ --bs-table-bg: var(--bg-secondary); color: var(--text-primary); }}
             
-            th, .d-tooltip {{
-                position: relative;
-                cursor: help;
-            }}
+        /* ── TOOLTIP SYSTEM ───────────────────────────────────────── */
+        th, .d-tooltip {{ position: relative; cursor: help; }}
 
-            th[data-tooltip]:not(.sorting):not(.sorting_asc):not(.sorting_desc)::after, .d-tooltip::after {{
-                content: attr(data-tooltip); 
-                position: absolute;
-                top: 130%; 
-                left: 50%;
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                font-size: 13px;        
-                line-height: 1.5;       
-                font-weight: 400;       
-                text-align: left;       
-                color: #e0e0e0;         
-                background-color: #1a1a1a; 
-                padding: 12px 16px;         
-                border-radius: 8px; 
-                border: 1px solid #444;
-                text-transform: none; 
-                white-space: normal; 
-                width: max-content; 
-                max-width: 800px;
-                z-index: 999999; 
-                opacity: 0; visibility: hidden; 
-                transition: opacity 0.15s ease-in-out; 
-                pointer-events: none; margin-top: 5px;
-                box-shadow: 0 8px 24px rgba(0,0,0,0.8);
-            }}
+        th[data-tooltip]:not(.sorting):not(.sorting_asc):not(.sorting_desc)::after, .d-tooltip::after {{
+            content: attr(data-tooltip);
+            position: absolute;
+            top: 130%; left: 50%;
+            font-family: var(--font-ui);
+            font-size: 12px;
+            line-height: 1.6;
+            font-weight: 400;
+            text-align: left;
+            color: var(--text-primary);
+            background-color: #0d0d15;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-mid);
+            text-transform: none;
+            white-space: normal;
+            width: max-content;
+            max-width: 800px;
+            z-index: 999999;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.15s ease-in-out;
+            pointer-events: none; margin-top: 5px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.03);
+        }}
 
-            th:hover::after, .d-tooltip:hover::after,
-            th:focus::after, .d-tooltip:focus::after {{ 
-                opacity: 1; visibility: visible; 
-            }}
-            
-            .tooltip-inner {{
-                max-width: none !important;
-                white-space: nowrap !important;
-                background-color: #000 !important;
-                color: #fff !important;
-                border: 1px solid #444;
-            }}
+        th:hover::after, .d-tooltip:hover::after,
+        th:focus::after, .d-tooltip:focus::after {{
+            opacity: 1; visibility: visible;
+        }}
 
-            .tooltip {{
-                z-index: 10000000 !important; 
-            }}
+        .tooltip-inner {{
+            max-width: 400px !important;
+            background-color: #0d0d15 !important;
+            color: var(--text-primary) !important;
+            border: 1px solid var(--border-mid);
+            font-family: var(--font-ui);
+            font-size: 12px;
+        }}
+        .tooltip {{ z-index: 10000000 !important; }}
 
-            .tooltip-inner {{
-                max-width: 400px !important;
-            }}
+        .table-responsive, .container-fluid {{ overflow: visible !important; }}
 
-            .table-responsive, .container-fluid {{
-                overflow: visible !important;
-            }}
+        /* ── TABLE HEADERS ────────────────────────────────────────── */
+        th {{
+            vertical-align: middle;
+            font-family: var(--font-ui);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 6px 4px !important;
+            background-color: var(--bg-card);
+            border-bottom: 2px solid var(--border-mid) !important;
+            border-top: none !important;
+            color: var(--text-muted);
+            z-index: 10;
+            white-space: nowrap;
+        }}
 
-            th {{
-                vertical-align: middle;
-                font-size: 15px;
-                font-weight: bold;
-                padding: 5px 3px !important;
-                background-color: #1a1a1a;
-                border-bottom: 2px solid #444;
-                z-index: 10;
-            }}
+        th:hover {{ color: var(--text-primary) !important; z-index: 100 !important; }}
 
-            td {{
-                vertical-align:middle;
-                white-space: nowrap;
-                border-bottom:1px solid #333;
-                padding: 1px 8px !important;
-                line-height: 1.4;
-                font-size: 15px;
-            }}
-            
-            table.dataTable {{ 
-                width: auto !important; 
-                margin: 0 auto;
-                border-right: 1px solid #444 !important;
-                border-left: 1px solid #444 !important;
-                border-collapse: separate !important;
-                border-spacing: 0;
-            }}
-            
-            .dataTables_wrapper > .row {{
-                --bs-gutter-y: 0 !important;
-            }}
-            
-            .dataTables_wrapper > div.row:first-child {{
-                margin-bottom: 0px !important;
-                padding-bottom: 0px !important;
-            }}
-            
-            .dataTables_wrapper > div.row:nth-child(2) > div {{
-                padding-top: 0px !important;
-                margin-top: 0px !important;
-            }}
+        /* ── TABLE CELLS ──────────────────────────────────────────── */
+        td {{
+            vertical-align: middle;
+            white-space: nowrap;
+            border-bottom: 1px solid var(--border-dim) !important;
+            padding: 2px 8px !important;
+            line-height: 1.5;
+            font-size: 13px;
+            font-family: var(--font-mono);
+        }}
 
-            th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; font-weight: bold; }}
-            th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }}
-            th:nth-child(3), td:nth-child(3) {{ width: 1%; text-align: center; font-weight: bold; }}
-            
-            th:nth-child(4), td:nth-child(4) {{
-                width: 1%;
-                min-width: 60px;
-                max-width: 12vw;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                text-align: left;
-                padding: 0 5px;
-                vertical-align: middle;
-            }}
+        table.dataTable {{
+            width: auto !important;
+            margin: 0 auto;
+            border-right: 1px solid var(--border-mid) !important;
+            border-left: 1px solid var(--border-mid) !important;
+            border-collapse: separate !important;
+            border-spacing: 0;
+        }}
 
-            td:nth-child(4) .d-tooltip {{
-                position: relative;
-                width: 100%;
-            }}
+        .dataTables_wrapper > .row {{ --bs-gutter-y: 0 !important; }}
+        .dataTables_wrapper > div.row:first-child {{ margin-bottom: 0 !important; padding-bottom: 0 !important; }}
+        .dataTables_wrapper > div.row:nth-child(2) > div {{ padding-top: 0 !important; margin-top: 0 !important; }}
 
-            td:nth-child(4) .d-tooltip .text-content {{
-                display: block;
-                width: 100%;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }}
 
-            td:nth-child(4) .d-tooltip::after {{
-                content: attr(data-tooltip);
-                position: absolute;
-                top: 100%;
-                left: 0;
-                margin-top: 5px;
-                background-color: #000;
-                color: #e0e0e0;
-                width: 600px;
-                max-width: 600px;
-                padding: 12px 14px;
-                border-radius: 6px;
-                border: 1px solid #444;
-                font-size: 14px;
-                font-weight: normal;
-                white-space: normal;
-                line-height: 1.4;
-                z-index: 999999;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.8);
-                opacity: 0;
-                visibility: hidden;
-                transition: opacity 0.2s ease-in-out;
-                pointer-events: none;
-            }}
+        /* ── COLUMN ALIGNMENTS ────────────────────────────────────── */
+        th:nth-child(1), td:nth-child(1) {{ width: 1%; text-align: center; font-weight: 700; color: var(--text-muted); }}
+        th:nth-child(2), td:nth-child(2) {{ width: 1%; text-align: center; }}
+        th:nth-child(3), td:nth-child(3) {{ width: 1%; text-align: center; font-weight: 700; }}
 
-            td:nth-child(4) .d-tooltip:hover::after {{
-                opacity: 1;
-                visibility: visible;
-            }}
+        th:nth-child(4), td:nth-child(4) {{
+            width: 1%; min-width: 60px; max-width: 12vw;
+            overflow: hidden; text-overflow: ellipsis;
+            white-space: nowrap; text-align: left;
+            padding: 0 5px; vertical-align: middle;
+        }}
 
-            th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }}
-            th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; font-weight: normal !important; }}
-            th:nth-child(7), td:nth-child(7) {{ width: 1%; text-align: right; font-weight: normal !important; }}
-            th:nth-child(8), td:nth-child(8) {{ width: 1%; text-align: center; }}
-            th:nth-child(9), td:nth-child(9) {{ width: 1%; text-align: center; }}
-            th:nth-child(10), td:nth-child(10) {{ width: 1%; text-align: center; }}
-            th:nth-child(11), td:nth-child(11) {{ width: 1%; text-align: center; }}
-            th:nth-child(12), td:nth-child(12) {{ width: 1%; text-align: center; }}
-            th:nth-child(13), td:nth-child(13) {{ width: 1%; text-align: right; font-weight: bold !important; color: #fff; }}
-            th:nth-child(14), td:nth-child(14) {{ width: 1%; text-align: right; font-weight: normal !important; letter-spacing: -0.5px; }}
-            th:nth-child(15), td:nth-child(15) {{ width: 1%; text-align: center; }}
-            th:nth-child(16), td:nth-child(16) {{ width: 1%; text-align: center; }}
-            th:nth-child(17), td:nth-child(17) {{ width: 1%; text-align: center; }}
-            th:nth-child(18), td:nth-child(18) {{ width: 1%; text-align: center; }}
-            th:nth-child(19), td:nth-child(19) {{ width: 1%; text-align: center; }}
-            th:nth-child(20), td:nth-child(20) {{ width: 1%; text-align: center; }}
+        td:nth-child(4) .d-tooltip {{ position: relative; width: 100%; }}
+        td:nth-child(4) .d-tooltip .text-content {{ display: block; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }}
 
-            th:nth-child(21), td:nth-child(21) {{
-                width: 60px;
-                min-width: 60px;
-                max-width: 60px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                text-align: left;
-            }}
+        td:nth-child(4) .d-tooltip::after {{
+            content: attr(data-tooltip);
+            position: absolute; top: 100%; left: 0; margin-top: 5px;
+            background-color: #0d0d15; color: var(--text-primary);
+            width: 600px; max-width: 600px;
+            padding: 12px 14px; border-radius: 8px;
+            border: 1px solid var(--border-mid);
+            font-size: 12px; font-weight: normal;
+            font-family: var(--font-ui);
+            white-space: normal; line-height: 1.5;
+            z-index: 999999; box-shadow: 0 12px 32px rgba(0,0,0,0.9);
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.2s ease-in-out; pointer-events: none;
+        }}
+        td:nth-child(4) .d-tooltip:hover::after {{ opacity: 1; visibility: visible; }}
 
-            th:nth-child(22), td:nth-child(22) {{ width: 1%; text-align: center; font-weight: bold; }}
-            th:nth-child(23), td:nth-child(23) {{ width: 1%; text-align: center; font-weight: bold; }}
-            th:nth-child(24), td:nth-child(24) {{ width: 1%; text-align: center; font-weight: bold; }}
-            th:nth-child(25), td:nth-child(25) {{ width: 1%; text-align: center; font-weight: bold; }}
-            th:nth-child(26), td:nth-child(26) {{ width: 1%; text-align: center; font-weight: bold; border-right: 1px solid #444 !important; }}
-            
-            a {{ color:#4da6ff; text-decoration:none; }} a:hover {{ text-decoration:underline; }}
-            table.no-colors span {{ color: #ddd !important; font-weight: normal !important; }}
-            table.no-colors a {{ color: #4da6ff !important; }}
-            
-            .filter-bar {{
-                display: flex;
-                gap: 8px;
-                align-items: center;
-                background: #2a2a2a;
-                padding: 2px 4px;
-                border-radius: 5px;
-                margin-bottom: 5px;
-                border: 1px solid #444;
-                font-size: 0.85rem;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                white-space: nowrap;
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-                z-index: 9998 !important;
-            }}
+        th:nth-child(5), td:nth-child(5) {{ width: 1%; text-align: left; }}
+        th:nth-child(6), td:nth-child(6) {{ width: 1%; text-align: right; }}
+        th:nth-child(7), td:nth-child(7) {{ width: 1%; text-align: right; }}
+        th:nth-child(8), td:nth-child(8) {{ width: 1%; text-align: center; }}
+        th:nth-child(9), td:nth-child(9) {{ width: 1%; text-align: center; }}
+        th:nth-child(10), td:nth-child(10) {{ width: 1%; text-align: center; }}
+        th:nth-child(11), td:nth-child(11) {{ width: 1%; text-align: center; }}
+        th:nth-child(12), td:nth-child(12) {{ width: 1%; text-align: center; }}
+        th:nth-child(13), td:nth-child(13) {{ width: 1%; text-align: right; font-weight: 600 !important; }}
+        th:nth-child(14), td:nth-child(14) {{ width: 1%; text-align: right; letter-spacing: -0.5px; }}
+        th:nth-child(15), td:nth-child(15) {{ width: 1%; text-align: center; }}
+        th:nth-child(16), td:nth-child(16) {{ width: 1%; text-align: center; }}
+        th:nth-child(17), td:nth-child(17) {{ width: 1%; text-align: center; }}
+        th:nth-child(18), td:nth-child(18) {{ width: 1%; text-align: center; }}
+        th:nth-child(19), td:nth-child(19) {{ width: 1%; text-align: center; }}
+        th:nth-child(20), td:nth-child(20) {{ width: 1%; text-align: center; }}
+
+        th:nth-child(21), td:nth-child(21) {{
+            width: 60px; min-width: 60px; max-width: 60px;
+            overflow: hidden; text-overflow: ellipsis;
+            white-space: nowrap; text-align: left;
+        }}
+
+        th:nth-child(22), td:nth-child(22) {{ width: 1%; text-align: center; font-weight: 600; }}
+        th:nth-child(23), td:nth-child(23) {{ width: 1%; text-align: center; font-weight: 600; }}
+        th:nth-child(24), td:nth-child(24) {{ width: 1%; text-align: center; font-weight: 600; }}
+        th:nth-child(25), td:nth-child(25) {{ width: 1%; text-align: center; font-weight: 600; }}
+        th:nth-child(26), td:nth-child(26) {{ width: 1%; text-align: center; font-weight: 600; border-right: 1px solid var(--border-mid) !important; }}
+
+        /* ── LINKS & COLORS ───────────────────────────────────────── */
+        a {{ color: var(--accent-blue); text-decoration: none; }}
+        a:hover {{ color: #6bb8ff; text-decoration: underline; }}
+        table.no-colors span {{ color: var(--text-muted) !important; font-weight: normal !important; }}
+        table.no-colors a {{ color: var(--accent-blue) !important; }}
+
+        /* ── FILTER BAR ───────────────────────────────────────────── */
+        .filter-bar {{
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            background: var(--bg-card);
+            padding: 4px 8px;
+            border-radius: 0;
+            margin-bottom: 0;
+            border-bottom: 1px solid var(--border-mid);
+            border-top: none;
+            font-size: 0.8rem;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            white-space: nowrap;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            z-index: 9998 !important;
+        }}
 
             .dataTables_wrapper > .row:first-child {{
                 margin-bottom: 0px !important; 
@@ -1762,546 +1779,513 @@ def export_interactive_html(df):
                 top: 1px;
             }}
 
-            .filter-bar::-webkit-scrollbar {{ display: none; }} 
-            .filter-group {{ display:flex; align-items:center; gap:4px; }}
-            .form-control-sm {{ background: #111; border: 1px solid #555; color: #fff !important; height: 28px; font-size: 0.85rem; padding: 2px 8px; outline: none; }}
+        .filter-bar::-webkit-scrollbar {{ display: none; }}
+        .filter-group {{ display: flex; align-items: center; gap: 4px; }}
 
-            .form-control-sm {{ background: #111; border: 1px solid #555; color: #fff !important; height: 28px; font-size: 0.85rem; padding: 2px 8px; outline: none; }}
-            .form-control-sm::placeholder {{ color: #ccc !important; opacity: 1; }}
-            .form-control-sm:focus {{ border-color: #00ffff; background: #1a1a1a; }}
-            
-            .form-control-sm:focus {{ border-color: #00ffff; background: #1a1a1a; }}
-            .btn-reset {{ border: 1px solid #555; color: #fff; font-size: 0.8rem; background: #333; }}
-            .btn-reset:hover {{ background: #444; color: #fff; }}
-            #stockCounter {{ color: #00ff00; font-weight: bold; margin-left: auto; border: 1px solid #00ff00; padding: 2px 8px; border-radius: 4px; }}
+        .form-control-sm {{
+            background: var(--bg-secondary) !important;
+            border: 1px solid var(--border-mid) !important;
+            color: var(--text-primary) !important;
+            height: 26px; font-size: 0.78rem;
+            padding: 2px 8px; outline: none;
+            border-radius: 6px !important;
+            font-family: var(--font-mono);
+        }}
+        .form-control-sm::placeholder {{ color: var(--text-dim) !important; opacity: 1; }}
+        .form-control-sm:focus {{ border-color: var(--accent-cyan) !important; background: var(--bg-card) !important; box-shadow: 0 0 0 2px rgba(0,200,215,0.12) !important; }}
 
-            .mode-toggle {{
-                position: relative;
-                z-index: 1 !important;
-                z-index: 1 !important;
-            }}
+        .btn-reset {{
+            border: 1px solid var(--border-mid);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            transition: all 0.15s;
+        }}
+        .btn-reset:hover {{ background: var(--bg-hover); color: var(--text-primary); border-color: #4a4a5a; }}
 
-            .header-flex {{
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                height: 45px; width: 100%;
-                padding: 0 15px;
-                background: #111;
-                margin-bottom: 0px;
-                box-sizing: border-box;
-                z-index: 2000;
-            }}
-            
-            .header-left {{ flex: 0 0 200px; display: flex; align-items: center; z-index: 1; }}
-            
-            .header-right {{
-                flex: 0 0 250px; 
-                display: flex; 
-                flex-direction: column;
-                justify-content: center; 
-                align-items: center;
-                z-index: 10; 
-                margin-left: auto;
-            }}
+        #stockCounter {{
+            color: var(--accent-green);
+            font-weight: 700;
+            margin-left: auto;
+            border: 1px solid rgba(0,217,126,0.35);
+            background: rgba(0,217,126,0.07);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            letter-spacing: 0.04em;
+            font-family: var(--font-ui);
+        }}
 
-            .update-label {{
-                font-size: 10px;
-                font-weight: bold;
-                color: #00ff00;
-                letter-spacing: 1px;
-                text-transform: uppercase;
-                margin-bottom: -2px;
-            }}
+        .mode-toggle {{ position: relative; z-index: 1 !important; }}
 
-            .header-center {{
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                gap: 1px;
-                width: auto;
-                white-space: nowrap;
-                z-index: 101;
-            }}
+        /* ── HEADER ───────────────────────────────────────────────── */
+        .header-flex {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 48px; width: 100%;
+            padding: 0 16px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-mid);
+            box-sizing: border-box;
+            z-index: 2000;
+            position: relative;
+        }}
 
-            .header-fix {{
-                display: inline-block;
-                max-width: 100%;
-                white-space: nowrap;
-            }}
+        .header-left {{ flex: 0 0 220px; display: flex; align-items: center; gap: 12px; z-index: 1; }}
 
-            .summary-row {{
-                display: flex;
-                align-items: center;
-                gap: 6px;
-                line-height: 1;
-                font-size: 11px;
-                height: 10px;
-            }}
+        .header-right {{
+            flex: 0 0 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            z-index: 10;
+        }}
 
-            .summary-row:nth-child(1) {{ z-index: 40; }}
-            .summary-row:nth-child(2) {{ z-index: 30; }}
-            .summary-row:nth-child(3) {{ z-index: 20; }}
-            .summary-row:nth-child(4) {{ z-index: 10; }}
+        .update-label {{
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--text-dim);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-family: var(--font-ui);
+        }}
 
-            .row-label {{
-                font-size: 11px;
-                font-weight: bold;
-                text-transform: uppercase;
-                text-align: right;
-                cursor: help;
-                border-bottom: none !important;
-                position: relative;
-                z-index: 50;
-                margin-right: 12px;
-            }}
+        .header-center {{
+            position: absolute;
+            left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2px;
+            width: auto;
+            white-space: nowrap;
+            z-index: 101;
+        }}
 
-            .row-content {{ font-size: 11px; font-weight: 600; color: #fff; }}
+        .header-fix {{ display: inline-block; max-width: 100%; white-space: nowrap; }}
 
-            .crumb-sep {{
-                color: #555; 
-                margin: 0 4px; 
-                font-weight: bold; 
-            }}
+        .summary-row {{
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            line-height: 1;
+            font-size: 10px;
+            height: 10px;
+        }}
+        .summary-row:nth-child(1) {{ z-index: 40; }}
+        .summary-row:nth-child(2) {{ z-index: 30; }}
+        .summary-row:nth-child(3) {{ z-index: 20; }}
+        .summary-row:nth-child(4) {{ z-index: 10; }}
 
-            .crumb-num {{
-                color: #666; 
-                margin-right: 4px; 
-                font-size: 11px; 
-            }}
+        .row-label {{
+            font-family: var(--font-ui);
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            text-align: right;
+            cursor: help;
+            border-bottom: none !important;
+            position: relative;
+            z-index: 50;
+            margin-right: 10px;
+            color: var(--text-dim);
+        }}
 
-            .clr-rank {{ color: #00ffff; }} .clr-surge {{ color: #ffcc00; }} .clr-buzz {{ color: #ff00ff; }}
+        .row-content {{ font-size: 10px; font-weight: 600; color: var(--text-primary); font-family: var(--font-ui); }}
 
-            .sector-tooltip {{
-                white-space: nowrap;
-            }}
-            
-            .row-label::after {{
-                content: attr(data-tooltip); 
-                position: absolute; 
-                top: 160%; 
-                left: 50%; 
-                transform: translateX(-50%);
-                background-color: #000; 
-                color: #ffffff; 
-                padding: 8px 12px; 
-                border-radius: 6px; 
-                border: 1px solid #444;
-                font-size: 11px; 
-                font-weight: normal; 
-                text-transform: none; 
-                white-space: nowrap; 
-                z-index: 999999 !important; 
-                opacity: 0; 
-                visibility: hidden; 
-                transition: opacity 0.1s; 
-                pointer-events: none; 
-                margin-top: 5px;
-                box-shadow: 0 4px 15px rgba(0,0,0,1);
-            }}
+        .crumb-sep {{ color: var(--text-dim); margin: 0 3px; font-weight: bold; }}
+        .crumb-num {{ color: var(--text-dim); margin-right: 3px; font-size: 10px; }}
 
-            .row-label:hover::after {{ opacity: 1; visibility: visible; }}
-            
-            .clr-rank:hover::after {{ color: #00ffff !important; border-color: #00ffff !important; }}
-            .clr-upv:hover::after {{ color: #00ff00 !important; border-color: #00ff00 !important; }}
-            .clr-surge:hover::after {{ color: #ffcc00 !important; border-color: #ffcc00 !important; }}
-            .clr-buzz:hover::after {{ color: #ff00ff !important; border-color: #ff00ff !important; }}
+        .clr-rank {{ color: var(--accent-cyan); }}
+        .clr-surge {{ color: var(--accent-yellow); }}
+        .clr-buzz {{ color: var(--accent-purple); }}
 
-            .dataTables_wrapper .data_tables_header {{
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 15px;
-            }}
+        .sector-tooltip {{ white-space: nowrap; }}
 
-            .dataTables_filter {{
-                position: fixed !important;
-                position: absolute !important;
-                left: 50vw !important;
-                transform: translateX(-50%) !important;
-                pointer-events: none !important;
-                width: max-content !important;
-                top: 0px !important;
-                z-index: 10 !important;
-                margin: 0 !important;
-                padding: 0 !important;
-            }}
+        .row-label::after {{
+            content: attr(data-tooltip);
+            position: absolute;
+            top: 160%; left: 50%;
+            transform: translateX(-50%);
+            background-color: #0d0d15;
+            color: var(--text-primary);
+            padding: 7px 11px;
+            border-radius: 7px;
+            border: 1px solid var(--border-mid);
+            font-family: var(--font-ui);
+            font-size: 11px;
+            font-weight: normal;
+            text-transform: none;
+            white-space: nowrap;
+            z-index: 999999 !important;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.1s;
+            pointer-events: none;
+            margin-top: 5px;
+            box-shadow: 0 8px 24px rgba(0,0,0,1);
+        }}
 
-            .d-tooltip::after,
-                th[data-tooltip]::after {{
-                z-index: 999999 !important;
-            }}
+        .row-label:hover::after {{ opacity: 1; visibility: visible; }}
+        .clr-rank:hover::after {{ color: var(--accent-cyan) !important; border-color: var(--accent-cyan) !important; }}
+        .clr-upv:hover::after {{ color: var(--accent-green) !important; border-color: var(--accent-green) !important; }}
+        .clr-surge:hover::after {{ color: var(--accent-yellow) !important; border-color: var(--accent-yellow) !important; }}
+        .clr-buzz:hover::after {{ color: var(--accent-purple) !important; border-color: var(--accent-purple) !important; }}
 
-            .dataTables_filter input {{
-                pointer-events: auto !important;
-                width: 25vw !important;
-                min-width: 150px !important;
-                max-width: 350px !important;
-                background: #181818 !important;
-                color: #fff !important;
-                border: 1px solid #333 !important;
-                border-radius: 20px !important;
-                padding: 0px 0px !important;
-                outline: none !important;
-                text-align: center !important;
-                font-size: 14px !important;
-                font-weight: 600 !important;
-                height: 14px !important;
-            }}
-            
-            .dataTables_filter input::placeholder {{ color: white !important; opacity: 1; }}
-            .dataTables_filter input:focus::placeholder {{ color: transparent !important; }}
-            .dataTables_filter input:focus {{ border-color: #00ffff !important; }}
-            .dataTables_filter label {{ color: transparent !important; font-size: 0 !important; display: flex !important; justify-content: center; width: 100%; }}
-            
-            /* PAGINATION */
-            .page-link {{ background-color: #222; border-color: #444; color: #00ff00; }}
-            .page-item.active .page-link {{ background-color: #00ff00; border-color: #00ff00; color: #000; }}
-            .page-item.disabled .page-link {{ background-color: #111; border-color: #333; color: #555; }}
-            
-            .mode-toggle label {{ margin-left: 15px; display: flex; align-items: center; background: #222; padding: 3px; border-radius: 4px; cursor: pointer; border: 1px solid #444; }}
-            #modeSwitch {{ display: none; }}
-            #modeSwitch:checked + label .e-label {{ color: #fff; background: #333; }}
-            #modeSwitch:not(:checked) + label .s-label {{ color: #fff; background: #333; }}
+        /* ── DATATABLE CONTROLS ───────────────────────────────────── */
+        .dataTables_wrapper .data_tables_header {{
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;
+        }}
 
-            tr:hover {{
-                position: relative;
-                z-index: 100;
-                background-color: #333333 !important;
-                cursor: pointer;
-                transition: background-color 0.1s ease-in-out;
-            }}
-            
-            tr:hover td {{
-                background-color: transparent !important;
-                color: #ffffff !important;
-            }}
+        .dataTables_filter {{
+            position: fixed !important;
+            left: 50vw !important;
+            transform: translateX(-50%) !important;
+            pointer-events: none !important;
+            width: max-content !important;
+            top: 0px !important;
+            z-index: 10 !important;
+            margin: 0 !important; padding: 0 !important;
+        }}
 
-            th:nth-child(-n+5) .d-tooltip::after, 
-            td:nth-child(-n+5) .d-tooltip::after {{
-                left: 0 !important;
-                right: auto !important;
-                transform: none !important;
-                text-align: left !important;
-            }}
+        .d-tooltip::after, th[data-tooltip]::after {{ z-index: 999999 !important; }}
 
-            th:nth-last-child(-n+7) .d-tooltip::after, 
-            td:nth-last-child(-n+7) .d-tooltip::after {{
-                right: 0 !important;
-                left: auto !important;
-                transform: none !important;
-                text-align: left !important;
-            }}
+        .dataTables_filter input {{
+            pointer-events: auto !important;
+            width: 25vw !important;
+            min-width: 150px !important;
+            max-width: 350px !important;
+            background: var(--bg-card) !important;
+            color: var(--text-primary) !important;
+            border: 1px solid var(--border-mid) !important;
+            border-radius: 20px !important;
+            padding: 0 12px !important;
+            outline: none !important;
+            text-align: center !important;
+            font-size: 12px !important;
+            font-weight: 600 !important;
+            height: 22px !important;
+            font-family: var(--font-ui) !important;
+            transition: border-color 0.15s, box-shadow 0.15s !important;
+        }}
 
-            #time {{
-                font-family: monospace; 
-                font-size: 14px !important; 
-                font-weight: bold; 
-                color: #ffffff;
-            }}
+        .dataTables_filter input::placeholder {{ color: var(--text-muted) !important; opacity: 1; }}
+        .dataTables_filter input:focus::placeholder {{ color: transparent !important; }}
+        .dataTables_filter input:focus {{ border-color: var(--accent-cyan) !important; box-shadow: 0 0 0 3px rgba(0,200,215,0.12) !important; }}
+        .dataTables_filter label {{ color: transparent !important; font-size: 0 !important; display: flex !important; justify-content: center; width: 100%; }}
 
-            table.dataTable thead > tr > th.sorting:before,
-            table.dataTable thead .sorting:after, 
-            table.dataTable thead .sorting_asc:after, 
-            table.dataTable thead .sorting_desc:after {{
-                display: inline-block !important;
-                visibility: visible !important;
-                opacity: 0.6 !important;
-                position: relative !important;
-                top: 0 !important;
-            }}
+        /* ── PAGINATION ───────────────────────────────────────────── */
+        .page-link {{
+            background-color: var(--bg-secondary);
+            border-color: var(--border-mid);
+            color: var(--accent-green);
+            font-family: var(--font-ui);
+            font-size: 12px;
+            transition: all 0.15s;
+        }}
+        .page-link:hover {{ background-color: var(--bg-hover); color: var(--accent-green); }}
+        .page-item.active .page-link {{ background-color: var(--accent-green); border-color: var(--accent-green); color: #000; font-weight: 700; }}
+        .page-item.disabled .page-link {{ background-color: var(--bg-primary); border-color: var(--border-dim); color: var(--text-dim); }}
 
-            th.sorting::after, th.sorting_asc::after, th.sorting_desc::after {{ content: none !important; }}
-            th.sorting::before, th.sorting_asc::before, th.sorting_desc::before {{ content: none !important; }}
+        .mode-toggle label {{
+            margin-left: 0;
+            display: flex; align-items: center;
+            background: var(--bg-secondary);
+            padding: 2px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1px solid var(--border-mid);
+        }}
+        #modeSwitch {{ display: none; }}
+        #modeSwitch:checked + label .e-label {{ color: var(--text-primary); background: var(--bg-hover); }}
+        #modeSwitch:not(:checked) + label .s-label {{ color: var(--text-primary); background: var(--bg-hover); }}
 
-            .dataTables_length select {{
-                background-color: #111 !important;
-                color: #fff !important;
-                border: 1px solid #444 !important;
-                border-radius: 4px;
-                padding: 0 10px 0 4px !important;
-                height: 36px !important; 
-                font-size: 16px !important;
-                outline: none !important;
-                box-shadow: none !important; 
-            }}
+        /* ── ROW HOVER ────────────────────────────────────────────── */
+        tr:hover {{
+            position: relative; z-index: 100;
+            background-color: var(--bg-hover) !important;
+            cursor: pointer;
+        }}
+        tr:hover td {{ background-color: transparent !important; color: #ffffff !important; }}
 
-            .dataTables_filter label, .dataTables_length label {{
-                color: #ccc !important;
-                font-size: 16px !important;
-                line-height: 32px !important;
-                display: flex;
-                align-items: left !important;
-                gap: 5px;
-            }}
+        /* ── TOOLTIP POSITIONING ──────────────────────────────────── */
+        th:nth-child(-n+5) .d-tooltip::after,
+        td:nth-child(-n+5) .d-tooltip::after {{
+            left: 0 !important; right: auto !important;
+            transform: none !important; text-align: left !important;
+        }}
+        th:nth-last-child(-n+7) .d-tooltip::after,
+        td:nth-last-child(-n+7) .d-tooltip::after {{
+            right: 0 !important; left: auto !important;
+            transform: none !important; text-align: left !important;
+        }}
 
-            .dataTables_filter input::placeholder {{
-                color: #cccccc !important;
-                opacity: 1 !important;
-            }}
+        /* ── TIME DISPLAY ─────────────────────────────────────────── */
+        #time {{
+            font-family: var(--font-mono);
+            font-size: 12px !important;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 0.02em;
+        }}
 
-            .dataTables_filter input::-webkit-input-placeholder {{
-                color: #cccccc !important;
-                opacity: 1 !important;
-            }}
-            .dataTables_filter input::-moz-placeholder {{
-                color: #cccccc !important;
-                opacity: 1 !important;
-            }}
+        /* ── SORTING ARROWS ───────────────────────────────────────── */
+        table.dataTable thead > tr > th.sorting:before,
+        table.dataTable thead .sorting:after,
+        table.dataTable thead .sorting_asc:after,
+        table.dataTable thead .sorting_desc:after {{
+            display: inline-block !important; visibility: visible !important;
+            opacity: 0.5 !important; position: relative !important; top: 0 !important;
+        }}
+        th.sorting::after, th.sorting_asc::after, th.sorting_desc::after {{ content: none !important; }}
+        th.sorting::before, th.sorting_asc::before, th.sorting_desc::before {{ content: none !important; }}
 
-            .dataTables_length select {{
-                min-width: 55px !important;
-                padding-right: 20px !important;
-                background-position: right 2px center !important;
-                text-align: center !important;
-                padding-left: 5px !important;
-            }}
+        /* ── DATATABLE LENGTH SELECT ──────────────────────────────── */
+        .dataTables_length select {{
+            background-color: var(--bg-secondary) !important;
+            color: var(--text-primary) !important;
+            border: 1px solid var(--border-mid) !important;
+            border-radius: 6px;
+            padding: 0 10px 0 4px !important;
+            height: 26px !important;
+            font-size: 12px !important;
+            outline: none !important;
+            box-shadow: none !important;
+            min-width: 55px !important;
+            font-family: var(--font-ui) !important;
+        }}
 
-            .symbol-container {{
-                position: relative;
-                display: flex !important;
-                align-items: center;
-                gap: 8px;
-                width: 100%;
-                overflow: visible !important;
-            }}
+        .dataTables_filter label, .dataTables_length label {{
+            color: var(--text-muted) !important;
+            font-size: 12px !important;
+            line-height: 28px !important;
+            display: flex;
+            align-items: center !important;
+            gap: 5px;
+            font-family: var(--font-ui) !important;
+        }}
 
-            .d-tooltip {{
-                position: relative;
-                cursor: help;
-            }}
+        .dataTables_wrapper > .row {{
+            padding-top: 2px !important;
+            padding-bottom: 2px !important;
+        }}
+        .dataTables_length label {{ margin: 0 !important; padding: 0 !important; line-height: 1 !important; }}
+        .dataTables_length {{ margin: 0 !important; }}
+        .dataTables_filter {{ top: 0px !important; }}
 
-            .d-tooltip::after {{
-                content: attr(data-tooltip); 
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                background-color: #000 !important; 
-                color: #ffffff !important;
-                display: block;
-                height: auto !important;
-                min-width: max-content;
-                padding: 6px 10px; 
-                border-radius: 3px; 
-                border: 1px solid #444;
-                font-family: 'Consolas', monospace;
-                font-size: 12px;
-                white-space: pre-wrap !important;
-                text-align: left !important;
-                line-height: 1.2;
-                width: max-content;
-                max-width: none;
-                opacity: 0; 
-                visibility: hidden; 
-                transition: opacity 0.1s ease-in-out;
-                pointer-events: none;
-                box-shadow: 0 10px 30px rgba(0,0,0,1);
-                z-index: 99999 !important;
-            }}
+        /* ── SYMBOL CONTAINER ─────────────────────────────────────── */
+        .symbol-container {{
+            position: relative;
+            display: flex !important;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            overflow: visible !important;
+        }}
 
-            .d-tooltip:hover::after, .d-tooltip:focus::after {{
-                opacity: 1;
-                visibility: visible;
-            }}
+        /* ── INLINE TOOLTIP (d-tooltip) ───────────────────────────── */
+        .d-tooltip {{ position: relative; cursor: help; }}
+        .d-tooltip::after {{
+            content: attr(data-tooltip);
+            position: absolute; left: 50%;
+            transform: translateX(-50%);
+            background-color: #0d0d15 !important;
+            color: var(--text-primary) !important;
+            display: block; height: auto !important;
+            min-width: max-content;
+            padding: 7px 11px;
+            border-radius: 8px;
+            border: 1px solid var(--border-mid);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            white-space: pre-wrap !important;
+            text-align: left !important;
+            line-height: 1.4;
+            width: max-content; max-width: none;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.1s ease-in-out;
+            pointer-events: none;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.95);
+            z-index: 99999 !important;
+        }}
+        .d-tooltip:hover::after, .d-tooltip:focus::after {{ opacity: 1; visibility: visible; }}
+        td .d-tooltip::after {{ top: 110%; bottom: auto; }}
+        th .d-tooltip::after {{ bottom: 110%; top: auto; }}
 
-            td .d-tooltip::after {{
-                top: 110%;
-                bottom: auto;
-            }}
+        /* ── CHART POPUP ──────────────────────────────────────────── */
+        .chart-popup {{
+            display: none;
+            position: fixed;
+            width: 400px; height: 400px;
+            background: #08080f;
+            border: 1px solid var(--border-mid);
+            border-radius: 10px;
+            z-index: 9999999 !important;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.95), 0 0 0 1px rgba(255,255,255,0.04);
+            padding: 0 !important;
+            pointer-events: auto;
+            overflow: hidden;
+            flex-direction: column;
+        }}
+        .chart-popup.large-chart {{ width: 75vw; height: 80vh; }}
+        .symbol-container:hover .chart-popup {{ display: flex; }}
 
-            th .d-tooltip::after {{
-                bottom: 110%;
-                top: auto;
-            }}
+        /* ── COLUMN OVERFLOW CONTROL ──────────────────────────────── */
+        th:nth-child(4), th:nth-child(21) {{ overflow: visible !important; z-index: 50 !important; }}
+        th:nth-child(4) span, th:nth-child(21) span {{ white-space: nowrap; }}
+        th:hover {{ z-index: 100 !important; }}
 
-            .header-flex {{
-                z-index: 10 !important;
-                position: relative;
-            }}
+        .header-flex {{ z-index: 10 !important; position: relative; }}
+        .table-scroll-container, .table-responsive, .container-fluid {{ overflow: visible !important; }}
 
-            .table-scroll-container, 
-            .table-responsive, 
-            .container-fluid {{
-                overflow: visible !important; 
-            }}
+        /* ── BTN-GROUP OVERRIDES ──────────────────────────────────── */
+        .btn-outline-light {{
+            border-color: var(--border-mid) !important;
+            color: var(--text-muted) !important;
+            background: var(--bg-secondary) !important;
+            font-family: var(--font-ui) !important;
+            font-size: 0.7rem !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.04em !important;
+            transition: all 0.15s !important;
+        }}
+        .btn-check:checked + .btn-outline-light {{
+            background: rgba(0,217,126,0.15) !important;
+            border-color: var(--accent-green) !important;
+            color: var(--accent-green) !important;
+        }}
+        .btn-outline-light:hover {{
+            background: var(--bg-hover) !important;
+            color: var(--text-primary) !important;
+        }}
 
-            .chart-popup {{
-                display: none;
-                position: fixed;
-                width: 400px;
-                height: 400px;
-                background: #0F0F0F;
-                border: 1px solid #444;
-                border-radius: 8px;
-                z-index: 9999999 !important;
-                box-shadow: 0 10px 50px rgba(0,0,0,0.9);
-                padding: 0 !important;
-                pointer-events: auto;
-                overflow: hidden;
-                flex-direction: column;
-            }}
-
-            .chart-popup.large-chart {{
-                width: 75vw;
-                height: 80vh;
-            }}
-
-            .symbol-container:hover .chart-popup {{
-                display: flex;
-            }}
-
-            th:nth-child(4), 
-            th:nth-child(21) {{
-                overflow: visible !important;
-                z-index: 50 !important;
-            }}
-
-            th:nth-child(4) span, 
-            th:nth-child(21) span {{
-                white-space: nowrap;
-            }}
-
-            th:hover {{
-                z-index: 100 !important; 
-            }}
-
-            .dataTables_wrapper .row {{
-                padding-top: 2px !important;
-                padding-bottom: 2px !important;
-            }}
-
-            .dataTables_length label {{
-                margin-top: 0 !important;
-                margin-bottom: 0 !important;
-                padding: 0 !important;
-                line-height: 1 !important;
-            }}
-
-            .dataTables_length select {{
-                height: 24px !important;
-                padding: 0 5px !important;
-                font-size: 13px !important;
-            }}
+        /* ── HEATMAP MODAL ────────────────────────────────────────── */
+        #heatmapModal {{ backdrop-filter: blur(4px); }}
 
         </style>
         </head>
         <body>
-        <div id="page-loader">Loading Market Data...</div>
+        <div id="page-loader"><span id="page-loader-text">LOADING MARKET DATA</span></div>
         <div class="container-fluid" style="width: auto; display: inline-block; min-width: 100%; margin: 0 auto;">
-            
+
             <div class="header-flex">
     <div class="header-left">
-        <a href="https://apewisdom.io" target="_blank">
-            <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" title="apewisdom.io" style="height: 40px;">
+        <a href="https://apewisdom.io" target="_blank" style="display:flex; align-items:center; opacity:0.9; transition:opacity 0.15s;">
+            <img src="https://apewisdom.io/apewisdom-logo.svg" alt="Ape Wisdom" title="apewisdom.io" style="height: 32px; filter: brightness(1.1);">
         </a>
         <div class="mode-toggle">
             <input type="checkbox" id="modeSwitch" onclick="updateSummary()">
             <label for="modeSwitch">
-                <span class="mode-label s-label" style="font-size:12px; font-weight:bold; padding:5px 8px; color:#666;">STOCKS</span>
-                <span class="mode-label e-label" style="font-size:12px; font-weight:bold; padding:5px 8px; color:#666;">ETFS</span>
+                <span class="mode-label s-label" style="font-family:var(--font-ui); font-size:10px; font-weight:700; letter-spacing:0.08em; padding:4px 8px; border-radius:4px; color:var(--text-dim); transition:all 0.15s;">STOCKS</span>
+                <span class="mode-label e-label" style="font-family:var(--font-ui); font-size:10px; font-weight:700; letter-spacing:0.08em; padding:4px 8px; border-radius:4px; color:var(--text-dim); transition:all 0.15s;">ETFs</span>
             </label>
         </div>
     </div>
 
     <div class="header-center">
         <div class="summary-row">
-            <span class="row-label clr-rank" data-tooltip="Total Rank Change by Industry.">RANK CLIMBERS:</span>
+            <span class="row-label clr-rank" data-tooltip="Total Rank Change by Industry.">RANK:</span>
             <span id="rankBreadcrumb" class="row-content">...</span>
         </div>
-        
         <div class="summary-row">
-            <span class="row-label clr-upv" style="color: #00ff00;" data-tooltip="Total New Upvotes by Industry.">UPVOTE GAIN:</span>
+            <span class="row-label clr-upv" style="color: var(--accent-green);" data-tooltip="Total New Upvotes by Industry.">UPVOTES:</span>
             <span id="upvBreadcrumb" class="row-content">...</span>
         </div>
-
         <div class="summary-row">
-            <span class="row-label clr-surge" data-tooltip="Total Volume Surge by Industry.">VOL SURGE:</span>
+            <span class="row-label clr-surge" data-tooltip="Total Volume Surge by Industry.">SURGE:</span>
             <span id="surgeBreadcrumb" class="row-content">...</span>
         </div>
-
         <div class="summary-row">
-            <span class="row-label clr-buzz" data-tooltip="Total Social Buzz (Mentions) by Industry.">SOCIAL BUZZ:</span>
+            <span class="row-label clr-buzz" data-tooltip="Total Social Buzz (Mentions) by Industry.">BUZZ:</span>
             <span id="mntBreadcrumb" class="row-content">...</span>
         </div>
     </div>
 
     <div class="header-right">
         <span class="update-label">LAST UPDATED</span>
-        <span id="time" data-utc="{utc_timestamp}">Loading...</span>
+        <span id="time" data-utc="{utc_timestamp}" style="font-size:11px;">Loading...</span>
     </div>
 </div>
 
             <div class="filter-bar">
-                <span style="color:#fff; font-weight:bold; margin-right:5px;">⚡ FILTERS:</span>
-                <button id="btnColors" class="btn btn-sm btn-reset" onclick="toggleColors()" title="Toggle Colors" style="margin-right: 5px;">🎨</button>
-                <button class="btn btn-sm btn-reset" onclick="resetFilters()" title="Reset Filters">🔄</button>
+                <span style="font-family:var(--font-ui); font-size:9px; font-weight:800; letter-spacing:0.12em; color:var(--text-dim); text-transform:uppercase; margin-right:4px;">FILTERS</span>
+                <div style="width:1px; height:16px; background:var(--border-mid); margin:0 4px;"></div>
+                <button id="btnColors" class="btn btn-sm btn-reset" onclick="toggleColors()" title="Toggle Colors">🎨</button>
+                <button class="btn btn-sm btn-reset" onclick="resetFilters()" title="Reset All Filters">↺ Reset</button>
 
-                <div class="filter-group" style="margin-left: 10px; margin-right: 10px;">
-                    <label>Price:</label>
-                    <input type="text" id="minPrice" class="form-control form-control-sm" placeholder="Min" style="width: 50px;">
-                    <span style="color:#666">-</span>
-                    <input type="text" id="maxPrice" class="form-control form-control-sm" placeholder="Max" style="width: 50px;">
-                </div>
-                
-                <div class="filter-group" style="margin-right: 10px;">
-                    <label>Vol(30):</label>
-                    <input type="text" id="minVol" class="form-control form-control-sm" placeholder="Min" style="width: 50px;">
-                    <span style="color:#666">-</span>
-                    <input type="text" id="maxVol" class="form-control form-control-sm" placeholder="Max" style="width: 50px;">
-                </div>
+                <div style="width:1px; height:16px; background:var(--border-mid); margin:0 4px;"></div>
 
                 <div class="filter-group">
-                    <div class="btn-group" role="group" style="margin-right: 10px;">
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio1" style="font-size: 0.8rem; padding: 4px 4px;">ALL</label>
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio2" style="font-size: 0.8rem; padding: 4px 4px;">STOCKS</label>
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" onclick="redraw()">
-                        <label class="btn btn-outline-light btn-sm" for="btnradio3" style="font-size: 0.8rem; padding: 4px 4px;">ETFs</label>
-                    </div>
+                    <label style="font-family:var(--font-ui); font-size:9px; font-weight:700; letter-spacing:0.06em; color:var(--text-dim); text-transform:uppercase;">Price</label>
+                    <input type="text" id="minPrice" class="form-control form-control-sm" placeholder="Min" style="width: 48px;">
+                    <span style="color:var(--text-dim); font-size:10px;">–</span>
+                    <input type="text" id="maxPrice" class="form-control form-control-sm" placeholder="Max" style="width: 48px;">
+                </div>
 
+                <div style="width:1px; height:16px; background:var(--border-mid); margin:0 4px;"></div>
+
+                <div class="filter-group">
+                    <label style="font-family:var(--font-ui); font-size:9px; font-weight:700; letter-spacing:0.06em; color:var(--text-dim); text-transform:uppercase;">Vol(30)</label>
+                    <input type="text" id="minVol" class="form-control form-control-sm" placeholder="Min" style="width: 48px;">
+                    <span style="color:var(--text-dim); font-size:10px;">–</span>
+                    <input type="text" id="maxVol" class="form-control form-control-sm" placeholder="Max" style="width: 48px;">
+                </div>
+
+                <div style="width:1px; height:16px; background:var(--border-mid); margin:0 4px;"></div>
+
+                <div class="filter-group">
                     <div class="btn-group" role="group">
-                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapAll" checked onclick="toggleMcap('all')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapAll" style="font-size: 0.8rem; padding: 4px 4px;" title="Show All Market Caps">ALL</label>
-                        
-                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMega" onclick="toggleMcap('mega')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMega" style="font-size: 0.8rem; padding: 4px 4px;" title="Mega Cap: > $200B">MEG</label>
-                        
-                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapLarge" onclick="toggleMcap('large')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" style="font-size: 0.8rem; padding: 4px 4px;" title="Large Cap: $10B - $200B">LRG</label>
-                        
-                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMid" onclick="toggleMcap('mid')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMid" style="font-size: 0.8rem; padding: 4px 4px;" title="Mid Cap: $2B - $10B">MID</label>
-                        
-                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapSmall" onclick="toggleMcap('small')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" style="font-size: 0.8rem; padding: 4px 4px;" title="Small Cap: $250M - $2B">SML</label>
-                        
-                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMicro" onclick="toggleMcap('micro')">
-                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" style="font-size: 0.8rem; padding: 4px 4px;" title="Micro Cap: < $250M">MIC</label>
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked onclick="redraw()">
+                        <label class="btn btn-outline-light btn-sm" for="btnradio1">ALL</label>
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" onclick="redraw()">
+                        <label class="btn btn-outline-light btn-sm" for="btnradio2">STOCKS</label>
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" onclick="redraw()">
+                        <label class="btn btn-outline-light btn-sm" for="btnradio3">ETFs</label>
                     </div>
                 </div>
 
-                <button class="btn btn-sm btn-reset" onclick="window.location.href='market_scanner.html'" title="Open Market Scanner" style="margin-left: 4px; background: linear-gradient(135deg, #0044ff, #00aaff); color: white; font-weight: bold; border: none;">SCAN</button>
-                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('stock')" title="Stock Heatmap" style="margin-left: 4px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">STOCKS</button>
-                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('etf')" title="ETF Heatmap" style="margin-left: 4px; background: linear-gradient(135deg, #ff6b00, #ff1744); color: white; font-weight: bold;">ETFs</button>
-                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="margin-left: 2px;">.TXT</button>
-                <button class="btn btn-sm btn-reset" onclick="copyTableToClipboard(event)" title="Copy Table" style="margin-left: 2px;">📋 Copy</button>
-                
+                <div style="width:1px; height:16px; background:var(--border-mid); margin:0 4px;"></div>
+
+                <div class="filter-group">
+                    <div class="btn-group" role="group">
+                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapAll" checked onclick="toggleMcap('all')">
+                        <label class="btn btn-outline-light btn-sm" for="mcapAll" title="Show All Market Caps">ALL</label>
+                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMega" onclick="toggleMcap('mega')">
+                        <label class="btn btn-outline-light btn-sm" for="mcapMega" title="Mega Cap: > $200B">MEGA</label>
+                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapLarge" onclick="toggleMcap('large')">
+                        <label class="btn btn-outline-light btn-sm" for="mcapLarge" title="Large Cap: $10B – $200B">LRG</label>
+                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMid" onclick="toggleMcap('mid')">
+                        <label class="btn btn-outline-light btn-sm" for="mcapMid" title="Mid Cap: $2B – $10B">MID</label>
+                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapSmall" onclick="toggleMcap('small')">
+                        <label class="btn btn-outline-light btn-sm" for="mcapSmall" title="Small Cap: $250M – $2B">SML</label>
+                        <input type="checkbox" class="btn-check" name="mcapFilter" id="mcapMicro" onclick="toggleMcap('micro')">
+                        <label class="btn btn-outline-light btn-sm" for="mcapMicro" title="Micro Cap: < $250M">MIC</label>
+                    </div>
+                </div>
+
+                <div style="width:1px; height:16px; background:var(--border-mid); margin:0 4px;"></div>
+
+                <button class="btn btn-sm btn-reset" onclick="window.location.href='pairs_scanner.html'" title="Open Pairs Scanner" style="background: linear-gradient(135deg, #0044cc, #0099ff); color: white; font-weight: 700; border: none; font-family:var(--font-ui); font-size:0.7rem; letter-spacing:0.06em;">⚡ PAIRS</button>
+                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('stock')" title="Stock Heatmap" style="background: linear-gradient(135deg, #c43000, #ff4422); color: white; font-weight: 700; border: none; font-family:var(--font-ui); font-size:0.7rem; letter-spacing:0.06em;">🔥 STOCKS</button>
+                <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('etf')" title="ETF Heatmap" style="background: linear-gradient(135deg, #c43000, #ff4422); color: white; font-weight: 700; border: none; font-family:var(--font-ui); font-size:0.7rem; letter-spacing:0.06em;">📈 ETFs</button>
+                <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="font-family:var(--font-ui); font-size:0.7rem;">.TXT</button>
+                <button class="btn btn-sm btn-reset" onclick="copyTableToClipboard(event)" title="Copy Table" style="font-family:var(--font-ui); font-size:0.7rem;">📋 Copy</button>
+
                 <span id="stockCounter">Loading...</span>
             </div>
 
             {table_html}
             
             <!-- Heatmap Modal -->
-            <div id="heatmapModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999;">
-            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 99vw; height: 96vh; background: #0F0F0F; display: flex; flex-direction: column; border: 1px solid #333; box-shadow: 0 0 50px rgba(0,0,0,0.9);">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 4px 10px; background: #1a1a1a; border-bottom: 1px solid #333; flex-shrink: 0;">
-                    <h2 id="heatmapTitle" style="color: #ff6b00; margin: 0; font-size: 16px; letter-spacing: -1px;">🔥 Stock Heatmap</h2>
-                    <button onclick="closeHeatmapModal()" style="background: #ff6b00; color: white; border: none; padding: 2px 8px; border-radius: 2px; cursor: pointer; font-weight: bold; font-size: 14px;">✕ Close</button>
+            <div id="heatmapModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); z-index: 9999; backdrop-filter: blur(4px);">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 99vw; height: 96vh; background: #08080f; display: flex; flex-direction: column; border: 1px solid #252530; box-shadow: 0 32px 80px rgba(0,0,0,0.95), 0 0 0 1px rgba(255,255,255,0.03); border-radius: 10px; overflow: hidden;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; background: #111118; border-bottom: 1px solid #252530; flex-shrink: 0;">
+                    <h2 id="heatmapTitle" style="color: #ff5533; margin: 0; font-size: 13px; font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;">🔥 Stock Heatmap</h2>
+                    <button onclick="closeHeatmapModal()" style="background: #252530; color: #8888a0; border: 1px solid #333344; padding: 3px 10px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px; font-family: 'Inter', sans-serif; transition: all 0.15s;" onmouseover="this.style.background='#333344'; this.style.color='#e8e8f0';" onmouseout="this.style.background='#252530'; this.style.color='#8888a0';">✕ Close</button>
                 </div>
                 <div id="heatmapContainer" style="flex: 1; width: 100%; height: 100%; position: relative;"></div>
             </div>
@@ -2612,7 +2596,7 @@ def export_interactive_html(df):
                 var tipRows = topStocks.map(function(st) {{
                     var val = Math.round(st.v);
                     var numStr = val > 0 ? '+' + val : val;
-                    var color = val > 0 ? '#00ff00' : (val < 0 ? '#ff4444' : '#cccccc');
+                    var color = val > 0 ? '#00d97e' : (val < 0 ? '#ff4d5a' : '#8888a0');
                     return "<div style='display:flex; justify-content:flex-start; align-items:center; font-size:11px; margin-bottom:1px;'>" +
                                 "<span style='min-width:45px; text-align:left; color:" + color + "; font-weight:bold;'>" + numStr + "</span>" +
                                 "<span style='color:#fff; white-space:nowrap;'><b>" + st.s + "</b>: " + st.n + "</span>" +
@@ -2677,9 +2661,9 @@ def export_interactive_html(df):
         
         // Set title based on type
         if (type === 'etf') {{
-            title.innerHTML = '📈 ETF Heatmap (Updated End of Day)';
+            title.innerHTML = '📈 ETF HEATMAP &nbsp;<span style="font-weight:400; color:#8888a0; font-size:11px;">(End of Day)</span>';
         }} else {{
-            title.innerHTML = '🔥 Stock Heatmap (Updated End of Day)';
+            title.innerHTML = '🔥 STOCK HEATMAP &nbsp;<span style="font-weight:400; color:#8888a0; font-size:11px;">(End of Day)</span>';
         }}
         
         // Clear previous content
@@ -2782,13 +2766,13 @@ def export_interactive_html(df):
         if (columnModes[colIdx] === "global") {{
             columnModes[colIdx] = "dynamic";
             btn.innerText = "DYNAMIC";
-            btn.style.color = "#ffff00";
-            btn.style.borderColor = "#ffff00";
+            btn.style.color = "#f5c518";
+            btn.style.borderColor = "#f5c518";
         }} else {{
             columnModes[colIdx] = "global";
             btn.innerText = "GLOBAL";
-            btn.style.color = "#00ff00";
-            btn.style.borderColor = "#00ff00";
+            btn.style.color = "#00d97e";
+            btn.style.borderColor = "#00d97e";
         }}
         
         recalculateSCTR();
@@ -2827,7 +2811,7 @@ def export_interactive_html(df):
                         if (rawVal > -9000) {{
                             visibleSpans.push({{ rowIdx: idx, raw: rawVal, global: globalVal }});
                         }} else {{
-                            var newHtml = '<span class="' + valClass + '" data-global="' + globalVal + '" data-raw="' + rawVal + '" style="color:#666666; font-weight:bold;">0.0</span>';
+                            var newHtml = '<span class="' + valClass + '" data-global="' + globalVal + '" data-raw="' + rawVal + '" style="color:#555568; font-weight:bold;">0.0</span>';
                             api.cell(idx, colIdx).data(newHtml); // Update Memory
                             var node = api.cell(idx, colIdx).node();
                             if (node) node.innerHTML = newHtml; // Update Visuals
@@ -2843,10 +2827,10 @@ def export_interactive_html(df):
                     visibleSpans.forEach(function(item, index) {{
                         // True Percentile Formula in JS: (Rank - 1) / (N - 1)
                         let newSctr = (total > 1) ? (index / (total - 1)) * 99.9 : 99.9;
-                        let clr = "#ff4444";
+                        let clr = "#ff4d5a";
                         
-                        if (newSctr >= 80) clr = "#00ff00";
-                        else if (newSctr >= 40) clr = "#ffff00";
+                        if (newSctr >= 80) clr = "#00d97e";
+                        else if (newSctr >= 40) clr = "#f5c518";
                         
                         var newHtml = '<span class="' + valClass + '" data-global="' + item.global + '" data-raw="' + item.raw + '" style="color:' + clr + '; font-weight:bold;">' + newSctr.toFixed(1) + '</span>';
                         api.cell(item.rowIdx, colIdx).data(newHtml);
@@ -2867,10 +2851,10 @@ def export_interactive_html(df):
                         var rawVal = parseFloat(rawMatch[1]);
                         var globalVal = parseFloat(globalMatch[1]);
                         
-                        let clr = "#ff4444";
-                        if (rawVal <= -9000) clr = "#666666";
-                        else if (globalVal >= 80) clr = "#00ff00";
-                        else if (globalVal >= 40) clr = "#ffff00";
+                        let clr = "#ff4d5a";
+                        if (rawVal <= -9000) clr = "#555568";
+                        else if (globalVal >= 80) clr = "#00d97e";
+                        else if (globalVal >= 40) clr = "#f5c518";
 
                         var newHtml = '<span class="' + valClass + '" data-global="' + globalVal + '" data-raw="' + rawVal + '" style="color:' + clr + '; font-weight:bold;">' + globalVal.toFixed(1) + '</span>';
                         api.cell(idx, colIdx).data(newHtml);
