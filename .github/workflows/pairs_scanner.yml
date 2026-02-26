@@ -3,6 +3,10 @@ name: Market Pairs Scanner
 on:
   workflow_dispatch:
 
+# Give the action permission to write back to the repository
+permissions:
+  contents: write
+
 jobs:
   run-scanner:
     runs-on: ubuntu-latest
@@ -28,7 +32,6 @@ jobs:
             historical_data.csv
             chart_data.csv
             volume_data.csv
-          # Creates a new cache every run but restores from the most recent one
           key: market-data-${{ github.run_id }}
           restore-keys: |
             market-data-
@@ -36,10 +39,11 @@ jobs:
       - name: Run Pairs Scanner
         run: python pairs_scanner.py
 
-      - name: Upload Dashboards as Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: scanner-dashboards
-          path: |
-            market_scanner.html
-            symbols.html
+      # This new step saves the generated HTML and data files back to your repo
+      - name: Commit and Push Dashboard to Repo
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add market_scanner.html symbols.html historical_data.csv chart_data.csv volume_data.csv
+          git commit -m "Automated update of market scanner dashboards" || echo "No changes to commit"
+          git push
