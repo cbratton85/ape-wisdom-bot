@@ -25908,5 +25908,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "RIGL": {
+        "ticker": "RIGL",
+        "name": "Rigel Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 648184448,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "JXI": {
+        "ticker": "JXI",
+        "name": "iShares Global Utilities ETF",
+        "meta": "Utilities",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FNDX": {
+        "ticker": "FNDX",
+        "name": "Schwab Fundamental U.S. Large C",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "TRIP": {
+        "ticker": "TRIP",
+        "name": "TripAdvisor, Inc.",
+        "meta": "Travel Services",
+        "type": "EQUITY",
+        "mcap": 1201817600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
