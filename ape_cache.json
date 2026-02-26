@@ -25818,5 +25818,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CDRE": {
+        "ticker": "CDRE",
+        "name": "Cadre Holdings, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 1751142272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FDD": {
+        "ticker": "FDD",
+        "name": "First Trust STOXX European Sele",
+        "meta": "Europe Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CRBP": {
+        "ticker": "CRBP",
+        "name": "Corbus Pharmaceuticals Holdings",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 143583840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "GNSS": {
+        "ticker": "GNSS",
+        "name": "Genasys Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 89977024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ATIP": {
+        "ticker": "ATIP",
+        "name": "ATIP",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
