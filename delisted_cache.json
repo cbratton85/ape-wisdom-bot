@@ -9,11 +9,6 @@
         "last_checked": "2026-02-22",
         "reason": "No Price Data"
     },
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-02-22",
-        "reason": "No Price Data"
-    },
     "NOVA": {
         "delisted": true,
         "last_checked": "2026-02-23",
@@ -162,6 +157,11 @@
     "OLD": {
         "delisted": true,
         "last_checked": "2026-02-25",
+        "reason": "No Price Data"
+    },
+    "TTM": {
+        "delisted": true,
+        "last_checked": "2026-02-26",
         "reason": "No Price Data"
     }
 }

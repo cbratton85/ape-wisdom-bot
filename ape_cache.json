@@ -25438,5 +25438,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ZTEK": {
+        "ticker": "ZTEK",
+        "name": "Zentek Ltd.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 61186172,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "FBK": {
+        "ticker": "FBK",
+        "name": "FB Financial Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 3110447360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
