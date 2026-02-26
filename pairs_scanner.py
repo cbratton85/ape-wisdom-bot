@@ -570,7 +570,7 @@ def build_symbols_page(valid_tickers):
 
 <div class="topbar">
   <h1>Symbol Reference</h1>
-  <a href="market_scanner.html">&#8592; Back to Dashboard</a>
+  <a href="pairs_scanner.html">&#8592; Back to Dashboard</a>
 </div>
 
 <div class="stats-bar">
@@ -695,7 +695,7 @@ if __name__ == "__main__":
     # ==========================================
     # GENERATE MAIN DASHBOARD
     # ==========================================
-    print("Generating market_scanner.html...")
+    print("Generating pairs_scanner.html...")
 
     rows_html = ""
     for i, r in enumerate(top_results):
@@ -1465,8 +1465,8 @@ window.addEventListener("DOMContentLoaded", () => {{
 </body>
 </html>"""
 
-    with open("market_scanner.html", "w", encoding="utf-8") as f:
+    with open("pairs_scanner.html", "w", encoding="utf-8") as f:
         f.write(html)
 
-    print(f"market_scanner.html created. ({len(top_results)} pairs rendered)")
-    print("\nDone. Open market_scanner.html in your browser.")
+    print(f"pairs_scanner.html created. ({len(top_results)} pairs rendered)")
+    print("\nDone. Open pairs_scanner.html in your browser.")
