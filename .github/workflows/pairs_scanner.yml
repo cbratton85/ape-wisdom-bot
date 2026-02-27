@@ -5,20 +5,13 @@ on:
   # Note: If you want this to run automatically every day, 
   # you can paste the schedule back in here later!
 
-# Grant the permissions needed to deploy directly to GitHub Pages
+# Grant the bot permission to push to the gh-pages branch
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 jobs:
   run-scanner-and-publish:
     runs-on: ubuntu-latest
-    
-    # Required environment for Pages deployment
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout repository
@@ -48,25 +41,18 @@ jobs:
       - name: Run Pairs Scanner
         run: python pairs_scanner.py
 
-      # --- NEW DEPLOYMENT STEPS ---
-
-      - name: Prepare files for publishing
+      # 1. Move the scanner files into a "public" folder just like your main page does
+      - name: Prepare Website Files
         run: |
-          # Create a folder to hold everything we want on the website
-          mkdir _site
-          
-          # Move your HTML files into the folder
-          mv pairs_scanner.html _site/index.html  # Rename to index.html so it loads by default
-          mv symbols.html _site/ || true          # || true prevents failure if the file is missing
-          
-          # Move data files if your HTML needs to read them dynamically
-          mv *.csv.gz _site/ || true
+          mkdir -p public
+          mv pairs_scanner.html public/
+          mv symbols.html public/ || true
+          mv *.csv.gz public/ || true
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: '_site/' # Uploads the folder we just created
-
+      # 2. Use the exact same bot as your main page, also with keep_files: true
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          keep_files: true
