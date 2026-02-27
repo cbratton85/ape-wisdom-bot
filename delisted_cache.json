@@ -164,11 +164,6 @@
         "last_checked": "2026-02-27",
         "reason": "No Price Data"
     },
-    "HUSA": {
-        "delisted": true,
-        "last_checked": "2026-02-27",
-        "reason": "No Price Data"
-    },
     "ATIP": {
         "delisted": true,
         "last_checked": "2026-02-27",
@@ -205,6 +200,11 @@
         "reason": "No Price Data"
     },
     "FNDX": {
+        "delisted": true,
+        "last_checked": "2026-02-27",
+        "reason": "No Price Data"
+    },
+    "HUSA": {
         "delisted": true,
         "last_checked": "2026-02-27",
         "reason": "No Price Data"
