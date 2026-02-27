@@ -26238,5 +26238,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "ALEC": {
+        "ticker": "ALEC",
+        "name": "Alector, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 279427776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
