@@ -26438,5 +26438,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ASTH": {
+        "ticker": "ASTH",
+        "name": "Astrana Health Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 1028440768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ERX": {
+        "ticker": "ERX",
+        "name": "Direxion Energy Bull 2X Shares",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
