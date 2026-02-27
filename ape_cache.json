@@ -26148,5 +26148,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "GRNT": {
+        "ticker": "GRNT",
+        "name": "Granite Ridge Resources, Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 668069056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GNR": {
+        "ticker": "GNR",
+        "name": "State Street SPDR S&P Global Na",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CSR": {
+        "ticker": "CSR",
+        "name": "D/B/A Centerspace",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 1119580672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
