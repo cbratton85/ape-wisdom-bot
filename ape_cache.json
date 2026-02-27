@@ -26278,5 +26278,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ARCC": {
+        "ticker": "ARCC",
+        "name": "Ares Capital Corporation",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 13843480576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LFWD": {
+        "ticker": "LFWD",
+        "name": "Lifeward Ltd.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 9863392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
