@@ -1,7 +1,10 @@
 name: Market Momentum Tracker
 
 on:
-  workflow_dispatch: 
+  workflow_dispatch:
+  schedule:
+    # Runs at minute 0 (the top of the hour) every hour of every day
+    - cron: '0 * * * *'
 
 permissions:
   contents: write 
