@@ -43,13 +43,13 @@ jobs:
       - name: Run Pairs Scanner
         run: python pairs_scanner.py
 
-      # 1. Move the scanner files into a "public" folder just like your main page does
+      # 1. Copy the scanner files into a "public" folder just like your main page does
       - name: Prepare Website Files
         run: |
           mkdir -p public
           mv pairs_scanner.html public/
           mv symbols.html public/ || true
-          mv *.csv.gz public/ || true
+          cp *.csv.gz public/ || true
 
       # 2. Use the exact same bot as your main page, also with keep_files: true
       - name: Deploy to GitHub Pages
