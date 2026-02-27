@@ -26398,5 +26398,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "GDYN": {
+        "ticker": "GDYN",
+        "name": "Grid Dynamics Holdings, Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 573707136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
