@@ -26178,5 +26178,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CCK": {
+        "ticker": "CCK",
+        "name": "Crown Holdings, Inc.",
+        "meta": "Packaging & Containers",
+        "type": "EQUITY",
+        "mcap": 13306532864,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FSK": {
+        "ticker": "FSK",
+        "name": "FS KKR Capital Corp.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 3161949952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "XCEM": {
+        "ticker": "XCEM",
+        "name": "Columbia EM Core ex-China ETF",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
