@@ -26248,5 +26248,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "EAST": {
+        "ticker": "EAST",
+        "name": "EAST",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
