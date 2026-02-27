@@ -26458,5 +26458,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "WTIU": {
+        "ticker": "WTIU",
+        "name": "MicroSectors Energy 3X Leverage",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
