@@ -2994,7 +2994,7 @@ def export_interactive_html(df):
         filename = f"scan_{timestamp}.html"
         filepath = os.path.join(PUBLIC_DIR, filename)
         with open(filepath, "w", encoding="utf-8") as f: f.write(html_content)
-        index_path = os.path.join(PUBLIC_DIR, "index.html")
+        index_path = os.path.join(PUBLIC_DIR, "momentum.html")
         shutil.copy(filepath, index_path)
         print(f"{C_GREEN}[+] Dashboard generated at: {filepath}{C_RESET}")
         return filename
