@@ -172,46 +172,7 @@
       margin: 0 auto 48px;
       animation: fadeUp 0.6s 0.2s ease both;
     }
-
-    /* ── TICKER TAPE ── */
-    .ticker-wrap {
-      overflow: hidden;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
-      padding: 9px 0;
-      animation: fadeUp 0.6s 0.3s ease both;
-    }
-
-    .ticker-inner {
-      display: flex;
-      gap: 0;
-      animation: ticker 28s linear infinite;
-      white-space: nowrap;
-    }
-
-    .ticker-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 0 32px;
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      border-right: 1px solid var(--border);
-      color: var(--muted);
-    }
-
-    .ticker-sym  { color: white; }
-    .ticker-up   { color: var(--green); }
-    .ticker-down { color: #f87171; }
-
-    @keyframes ticker {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
+    
     /* ── CARDS GRID ── */
     .cards {
       max-width: 1100px;
@@ -490,6 +451,11 @@
       .stats-row { grid-template-columns: repeat(2,1fr); padding: 0 24px; margin-bottom: 40px; }
       .site-footer { padding: 18px 24px; flex-direction: column; gap: 8px; text-align: center; }
     }
+  
+    .title-row {
+  display: block;
+  white-space: nowrap;
+}
   </style>
 </head>
 <body>
@@ -517,51 +483,19 @@
   <section class="hero">
     <p class="hero-eyebrow">Quantitative Analysis Tools</p>
     <h1 class="hero-title">
-      Market Intelligence,<br/>
-      <span class="accent-green">Momentum</span> &amp; <span class="accent-cyan">Pairs</span>
+      <span class="title-row">Market Intelligence,</span>
+      <span class="title-row"><span class="accent-green">Momentum</span> &amp; <span class="accent-cyan">Pairs</span></span>
     </h1>
     <p class="hero-sub">
       Two powerful tools for scanning the market — track retail sentiment &amp; technical strength, or identify divergent pairs setups ready to revert.
     </p>
   </section>
 
-  <!-- ── TICKER TAPE ── -->
-  <div class="ticker-wrap">
-    <div class="ticker-inner">
-      <!-- Items doubled for seamless loop -->
-      <span class="ticker-item"><span class="ticker-sym">SPY</span> <span class="ticker-up">▲ +0.84%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">QQQ</span> <span class="ticker-up">▲ +1.12%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">NVDA</span> <span class="ticker-up">▲ +2.47%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">AAPL</span> <span class="ticker-down">▼ −0.31%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">MSFT</span> <span class="ticker-up">▲ +0.68%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">TSLA</span> <span class="ticker-up">▲ +3.91%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">META</span> <span class="ticker-up">▲ +1.55%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">AMZN</span> <span class="ticker-down">▼ −0.42%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">GOOG</span> <span class="ticker-up">▲ +0.29%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">AMD</span> <span class="ticker-up">▲ +1.83%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">IWM</span> <span class="ticker-down">▼ −0.17%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">VIX</span> <span class="ticker-down">▼ −4.20%</span></span>
-      <!-- Duplicate for seamless loop -->
-      <span class="ticker-item"><span class="ticker-sym">SPY</span> <span class="ticker-up">▲ +0.84%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">QQQ</span> <span class="ticker-up">▲ +1.12%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">NVDA</span> <span class="ticker-up">▲ +2.47%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">AAPL</span> <span class="ticker-down">▼ −0.31%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">MSFT</span> <span class="ticker-up">▲ +0.68%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">TSLA</span> <span class="ticker-up">▲ +3.91%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">META</span> <span class="ticker-up">▲ +1.55%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">AMZN</span> <span class="ticker-down">▼ −0.42%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">GOOG</span> <span class="ticker-up">▲ +0.29%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">AMD</span> <span class="ticker-up">▲ +1.83%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">IWM</span> <span class="ticker-down">▼ −0.17%</span></span>
-      <span class="ticker-item"><span class="ticker-sym">VIX</span> <span class="ticker-down">▼ −4.20%</span></span>
-    </div>
-  </div>
-
   <!-- ── TOOL CARDS ── -->
   <div class="cards">
 
     <!-- Ape Wisdom Card -->
-    <a href="ape_wisdom.html" class="card card-green">
+    <a href="momentum.html" class="card card-green">
       <div class="card-header">
         <div class="card-icon">🦍</div>
         <span class="card-badge">SENTIMENT + MOMENTUM</span>
@@ -584,7 +518,7 @@
       </div>
       <div class="card-footer">
         <span class="card-cta">Open Dashboard <span class="cta-arrow">→</span></span>
-        <span class="card-meta">ape_wisdom.html</span>
+        <span class="card-meta">momentum.html</span>
       </div>
     </a>
 
