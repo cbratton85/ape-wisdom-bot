@@ -3,9 +3,9 @@ name: Market Pairs Scanner
 on:
   workflow_dispatch: # Keeps the manual button!
   schedule:
-    # Runs every 30 minutes between 13:00 and 21:00 UTC, Monday(1) - Friday(5)
-    # This safely covers 9:30 AM - 4:00 PM Eastern Time year-round.
-    - cron: '*/30 13-21 * * 1-5'
+    # Runs at exactly minute 30 past the hour, from 12:00 to 21:00 UTC, Mon-Fri.
+    # This covers 8:30 AM to 4:30 PM Eastern Time year-round.
+    - cron: '30 12-21 * * 1-5'
 
 # Grant the bot permission to push to the gh-pages branch
 permissions:
