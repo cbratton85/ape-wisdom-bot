@@ -26318,5 +26318,85 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PARK": {
+        "ticker": "PARK",
+        "name": "Park Dental Partners, Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 80175608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "LBRT": {
+        "ticker": "LBRT",
+        "name": "Liberty Energy Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 4539063296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "REAX": {
+        "ticker": "REAX",
+        "name": "The Real Brokerage, Inc.",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 561270016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CMBT": {
+        "ticker": "CMBT",
+        "name": "CMB.TECH NV",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 4345670144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AMCR": {
+        "ticker": "AMCR",
+        "name": "Amcor plc",
+        "meta": "Packaging & Containers",
+        "type": "EQUITY",
+        "mcap": 22427836416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MANH": {
+        "ticker": "MANH",
+        "name": "Manhattan Associates, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 8108047872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CHE": {
+        "ticker": "CHE",
+        "name": "Chemed Corp",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 5918476288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BKLN": {
+        "ticker": "BKLN",
+        "name": "Invesco Senior Loan ETF",
+        "meta": "Bank Loan",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
