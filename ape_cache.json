@@ -26108,5 +26108,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ORGO": {
+        "ticker": "ORGO",
+        "name": "Organogenesis Holdings Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 469574944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "GURU": {
+        "ticker": "GURU",
+        "name": "Global X Guru Index ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "BIS": {
+        "ticker": "BIS",
+        "name": "ProShares UltraShort Nasdaq Bio",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "PWB": {
+        "ticker": "PWB",
+        "name": "Invesco Large Cap Growth ETF",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 2152908032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
