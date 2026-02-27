@@ -20,7 +20,7 @@ COOLDOWN = 1
 LOOKBACK_DAYS       = 650   # Days used for scoring / correlation / perf
 CHART_LOOKBACK_DAYS = 1825  # ~5 years used for Z-score chart history
 VOL_AVG_DAYS        = 30    # Rolling window for average volume calculation
-CACHE_UPDATE_COOLDOWN_HOURS = 4
+CACHE_UPDATE_COOLDOWN_HOURS = 1
 
 CORR_SHORT = 35
 CORR_LONG = 100
@@ -40,6 +40,36 @@ W_REL_PERF = 0.25
 # ==========================================
 TICKER_TYPES = {}
 TICKER_NAMES = {}   # maps ticker -> human-readable name
+
+# ==========================================
+# LEVERAGED / INVERSE ETF CLASSIFICATION
+# Tickers added here are flagged in the UI so the user can filter them out.
+# Add new tickers to the appropriate set as you expand your ETF list.
+# ==========================================
+LEVERAGED_ETFS = {
+    # Broad market leveraged
+    "SSO","UPRO","SPXL","QLD","TQQQ","DDM","UDOW","TNA","URTY",
+    # Sector leveraged
+    "TECL","LABU","FAS","NUGT","JNUG","NAIL","ERX","GUSH","CURE","DPST","BNKU",
+    # Bond leveraged
+    "TMF","TYD","UBT","UST",
+    # Commodity leveraged
+    "UGL","AGQ",
+    # Vol leveraged
+    "UVXY",
+}
+INVERSE_ETFS = {
+    # Broad market inverse
+    "SDS","SPXU","SH","PSQ","QID","SQQQ","DXD","SDOW","SPXS","TZA","SRTY",
+    # Sector inverse
+    "TECS","LABD","FAZ","DUST","JDST","ERY","DRIP",
+    # Bond inverse
+    "TMV","TYO","TBT","PST",
+    # Commodity inverse
+    "GLL","ZSL",
+    # Vol inverse
+    "SVXY","SVOL","ZIVB",
+}
 
 def load_master_tickers():
     global TICKER_TYPES, TICKER_NAMES
@@ -325,9 +355,12 @@ def build_chart_dataset(master):
                 os.rename(tmp, CHART_DATA_FILE)
                 print("Chart cache updated and saved successfully.")
 
-    # Final cleanup before returning
+    # Final cleanup before returning.
+    # ffill(limit=5): bridges weekends/holidays (up to 5 trading-day gaps).
+    # NO bfill: a new ticker that only has 1 year of data must NOT have its
+    # first real price back-propagated into all earlier NaN rows.
     chart_data = chart_data[[c for c in chart_data.columns if c in master]]
-    chart_data = chart_data.ffill().bfill()
+    chart_data = chart_data.ffill(limit=5)
     print(f"Chart dataset ready: {len(chart_data.columns)} tickers, {len(chart_data)} days.")
     return chart_data
 
@@ -475,9 +508,10 @@ def analyze_pair(pair):
 
     # ── Estimated pairs trade return (gross spread return if fully reverts) ──
     est_ret = round(abs(z) * spread_std * 100, 2)   # in %
-    # Annualized: repeat once per half-life cycle over 252 trading days
+    # Annualized: one trade cycle = one half-life period, so trades/year = 252/hl.
+    # This gives ann_ret > est_ret whenever hl < 252 days (i.e. sub-year mean reversion).
     if not np.isnan(hl) and hl > 0:
-        ann_ret = round(est_ret * (252 / (2 * hl)), 1)
+        ann_ret = round(est_ret * (252 / hl), 1)
     else:
         ann_ret = None
 
@@ -1373,7 +1407,7 @@ if __name__ == "__main__":
                 r["EstRet"] = est_r
                 hl = r.get("HalfLife")
                 if hl and hl > 0:
-                    r["AnnRet"] = round(est_r * (252 / (2 * hl)), 1)
+                    r["AnnRet"] = round(est_r * (252 / hl), 1)
                 else:
                     r["AnnRet"] = None
             except Exception:
@@ -1430,6 +1464,14 @@ if __name__ == "__main__":
         est_ret    = r.get("EstRet") if r.get("EstRet") is not None else 0.0
         ann_ret    = r.get("AnnRet")
 
+        # Tag tickers as leveraged / inverse for JS filter
+        def _lev_tag(t):
+            if t in LEVERAGED_ETFS: return "leveraged"
+            if t in INVERSE_ETFS:   return "inverse"
+            return "normal"
+        lev_a = _lev_tag(a)
+        lev_b = _lev_tag(b)
+
         chart_payload = json.dumps({
             "pair":      r["Pair"],
             "nameA":     name_a,
@@ -1450,7 +1492,8 @@ if __name__ == "__main__":
         rows_html += f"""
         <tr class="data-row" data-category="{r['Category']}" data-z="{z}"
             data-price-a="{price_a}" data-price-b="{price_b}"
-            data-vol-a="{avgvol_a}" data-vol-b="{avgvol_b}">
+            data-vol-a="{avgvol_a}" data-vol-b="{avgvol_b}"
+            data-lev-a="{lev_a}" data-lev-b="{lev_b}">
           <td class="rank-cell">{i+1}</td>
           <td class="pair-cell">
             <div class="pair-names">
@@ -1594,15 +1637,15 @@ if __name__ == "__main__":
   /* CONTROLS */
   .controls {{
     background: var(--surface2); border-bottom: 1px solid var(--border);
-    padding: 14px 32px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+    padding: 9px 20px; display: flex; gap: 7px; align-items: center; flex-wrap: wrap;
   }}
   .control-group {{
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 5px;
     background: var(--surface); border: 1px solid var(--border);
-    border-radius: 6px; padding: 8px 14px;
+    border-radius: 6px; padding: 5px 9px;
   }}
   .control-group label {{
-    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
     text-transform: uppercase; color: var(--muted); white-space: nowrap;
   }}
   .control-group select,
@@ -1611,10 +1654,26 @@ if __name__ == "__main__":
     background: transparent; border: none; outline: none;
     color: white; font-family: var(--mono); font-size: 13px; min-width: 0;
   }}
+  /* Hide native spinner arrows — we use custom +/− buttons instead */
+  .control-group input[type="number"] {{
+    -moz-appearance: textfield; width: 64px; text-align: center;
+  }}
+  .control-group input[type="number"]::-webkit-outer-spin-button,
+  .control-group input[type="number"]::-webkit-inner-spin-button {{ -webkit-appearance: none; margin: 0; }}
+  .control-group input[type="text"]   {{ width: 90px; }}
   .control-group select {{ cursor: pointer; }}
   .control-group select option {{ background: #0d1117; }}
-  .control-group input[type="number"] {{ width: 90px; }}
-  .control-group input[type="text"]   {{ width: 110px; }}
+  /* Custom ± stepper buttons */
+  .step-btn {{
+    background: var(--surface2); border: 1px solid var(--border2); color: var(--text);
+    font-family: var(--mono); font-size: 15px; font-weight: 700;
+    width: 24px; height: 24px; border-radius: 4px;
+    cursor: pointer; line-height: 1; padding: 0; display: flex;
+    align-items: center; justify-content: center; flex-shrink: 0;
+    transition: background 0.12s, border-color 0.12s, color 0.12s;
+  }}
+  .step-btn:hover {{ background: var(--surface3); border-color: var(--cyan); color: var(--cyan); }}
+  .step-btn:active {{ transform: scale(0.93); }}
 
   /* TABLE */
   .table-wrapper {{ padding: 24px 32px; overflow-x: auto; }}
@@ -1875,7 +1934,9 @@ if __name__ == "__main__":
 <div class="controls">
   <div class="control-group">
     <label>Capital ($)</label>
+    <button class="step-btn" onclick="stepValue('capitalInput',-1000)">−</button>
     <input type="number" id="capitalInput" value="10000" min="0" step="1000" oninput="calcShares()">
+    <button class="step-btn" onclick="stepValue('capitalInput',1000)">+</button>
   </div>
   <div class="control-group">
     <label>Pair Type</label>
@@ -1887,8 +1948,22 @@ if __name__ == "__main__":
     </select>
   </div>
   <div class="control-group">
+    <label>Lev / Inv</label>
+    <select id="levFilter" onchange="applyFilters()">
+      <option value="all">All</option>
+      <option value="exclude_both">Exclude Lev &amp; Inv</option>
+      <option value="exclude_lev">Exclude Leveraged</option>
+      <option value="exclude_inv">Exclude Inverse</option>
+      <option value="only_lev">Only Leveraged</option>
+      <option value="only_inv">Only Inverse</option>
+      <option value="only_both">Only Lev &amp; Inv</option>
+    </select>
+  </div>
+  <div class="control-group">
     <label>Min |Z|</label>
-    <input type="number" id="minZ" value="0" min="0" max="5" step="0.5" oninput="applyFilters()" style="width:55px;">
+    <button class="step-btn" onclick="stepValue('minZ',-0.5)">−</button>
+    <input type="number" id="minZ" value="0" min="0" max="5" step="0.5" oninput="applyFilters()" style="width:42px;">
+    <button class="step-btn" onclick="stepValue('minZ',0.5)">+</button>
   </div>
   <div class="control-group">
     <label>Ticker</label>
@@ -1896,7 +1971,9 @@ if __name__ == "__main__":
   </div>
   <div class="control-group">
     <label>Min Price ($)</label>
-    <input type="number" id="minPrice" value="0" min="0" step="1" oninput="applyFilters()" style="width:70px;">
+    <button class="step-btn" onclick="stepValue('minPrice',-1)">−</button>
+    <input type="number" id="minPrice" value="0" min="0" step="1" oninput="applyFilters()" style="width:48px;">
+    <button class="step-btn" onclick="stepValue('minPrice',1)">+</button>
   </div>
   <div class="control-group">
     <label>Min Avg Vol</label>
@@ -1921,7 +1998,7 @@ if __name__ == "__main__":
     </select>
   </div>
   <div class="control-group" title="When on, each symbol can appear at most once — only the highest-scored pair for that symbol is shown">
-    <label>Unique Symbols</label>
+    <label>Unique Syms</label>
     <label class="toggle-switch">
       <input type="checkbox" id="uniqueSymFilter" onchange="applyFilters()">
       <span class="toggle-track"><span class="toggle-thumb"></span></span>
@@ -2307,6 +2384,16 @@ function closeChart() {{
 function closeOnBg(e) {{ if (e.target.id === "chartModal") closeChart(); }}
 document.addEventListener("keydown", e => {{ if (e.key === "Escape") closeChart(); }});
 
+// ─── STEP VALUE (custom ± stepper) ────────────────────────────────────────────
+function stepValue(id, delta) {{
+  const el  = document.getElementById(id);
+  const val = parseFloat(el.value) || 0;
+  const min = parseFloat(el.min) ?? 0;
+  const max = el.max !== "" ? parseFloat(el.max) : Infinity;
+  el.value  = Math.min(max, Math.max(min, val + delta));
+  el.dispatchEvent(new Event("input"));
+}}
+
 // ─── SHARE CALCULATOR ─────────────────────────────────────────────────────────
 function calcShares() {{
   const total = parseFloat(document.getElementById("capitalInput").value) || 0;
@@ -2327,6 +2414,7 @@ function calcShares() {{
 // ─── FILTERS ──────────────────────────────────────────────────────────────────
 function applyFilters() {{
   const catF      = document.getElementById("typeFilter").value;
+  const levF      = document.getElementById("levFilter").value;
   const minZv     = parseFloat(document.getElementById("minZ").value) || 0;
   const searchV   = document.getElementById("tickerSearch").value.toUpperCase().trim();
   const minPriceV = parseFloat(document.getElementById("minPrice").value) || 0;
@@ -2341,7 +2429,14 @@ function applyFilters() {{
     const priceB   = parseFloat(row.dataset.priceB);
     const volA     = parseFloat(row.dataset.volA);
     const volB     = parseFloat(row.dataset.volB);
+    const levA     = row.dataset.levA || "normal";
+    const levB     = row.dataset.levB || "normal";
     const pairText = row.querySelector(".pair-cell").textContent.toUpperCase();
+
+    // Lev/Inv classification: pair is "leveraged" if either leg is leveraged,
+    // "inverse" if either leg is inverse, "both" if pair includes both types.
+    const isLev = levA === "leveraged" || levB === "leveraged";
+    const isInv = levA === "inverse"   || levB === "inverse";
 
     let show = true;
     if (catF !== "All" && cat !== catF)          show = false;
@@ -2349,6 +2444,14 @@ function applyFilters() {{
     if (searchV && !pairText.includes(searchV))  show = false;
     if (minPriceV > 0 && (priceA < minPriceV || priceB < minPriceV)) show = false;
     if (minVolV > 0 && volA > 0 && volB > 0 && (volA < minVolV || volB < minVolV)) show = false;
+
+    // Leveraged / Inverse filter
+    if (levF === "exclude_both" && (isLev || isInv)) show = false;
+    else if (levF === "exclude_lev" && isLev)        show = false;
+    else if (levF === "exclude_inv" && isInv)        show = false;
+    else if (levF === "only_lev"  && !isLev)         show = false;
+    else if (levF === "only_inv"  && !isInv)         show = false;
+    else if (levF === "only_both" && !(isLev || isInv)) show = false;
 
     row.dataset.baseHidden = show ? "0" : "1";
     row.classList.toggle("row-hidden", !show);
