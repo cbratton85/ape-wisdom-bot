@@ -2269,7 +2269,6 @@ def export_interactive_html(df):
 
                 <div style="width:1px; height:16px; background:var(--border-mid); margin:0 4px;"></div>
 
-                <button class="btn btn-sm btn-reset" onclick="window.location.href='pairs_scanner.html'" title="Open Pairs Scanner" style="background: linear-gradient(135deg, #0044cc, #0099ff); color: white; font-weight: 700; border: none; font-family:var(--font-ui); font-size:0.7rem; letter-spacing:0.06em;">⚡ PAIRS</button>
                 <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('stock')" title="Stock Heatmap" style="background: linear-gradient(135deg, #c43000, #ff4422); color: white; font-weight: 700; border: none; font-family:var(--font-ui); font-size:0.7rem; letter-spacing:0.06em;">🔥 STOCKS</button>
                 <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('etf')" title="ETF Heatmap" style="background: linear-gradient(135deg, #c43000, #ff4422); color: white; font-weight: 700; border: none; font-family:var(--font-ui); font-size:0.7rem; letter-spacing:0.06em;">📈 ETFs</button>
                 <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="font-family:var(--font-ui); font-size:0.7rem;">.TXT</button>
@@ -2990,19 +2989,13 @@ def export_interactive_html(df):
     }});
 </script></body></html>"""
         
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
-        filename = f"scan_{timestamp}.html"
-        filepath = os.path.join(PUBLIC_DIR, filename)
+        filename = "momentum.html"
+        momentum_path = os.path.join(PUBLIC_DIR, filename)
         
-        # 1. Save the timestamped history file
-        with open(filepath, "w", encoding="utf-8") as f: 
+        # Save the HTML directly to momentum.html
+        with open(momentum_path, "w", encoding="utf-8") as f: 
             f.write(html_content)
             
-        # 2. Copy the latest scan to momentum.html for the GitHub Pages hub
-        momentum_path = os.path.join(PUBLIC_DIR, "momentum.html")
-        shutil.copy(filepath, momentum_path)
-        
-        print(f"{C_GREEN}[+] History file saved at: {filepath}{C_RESET}")
         print(f"{C_GREEN}[+] Main dashboard updated at: {momentum_path}{C_RESET}")
         
         return filename
