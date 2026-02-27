@@ -26468,5 +26468,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "HAIL": {
+        "ticker": "HAIL",
+        "name": "State Street SPDR S&P Kensho Sm",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
