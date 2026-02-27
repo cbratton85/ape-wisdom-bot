@@ -2994,15 +2994,23 @@ def export_interactive_html(df):
         filename = f"scan_{timestamp}.html"
         filepath = os.path.join(PUBLIC_DIR, filename)
         
+        # 1. Save the timestamped history file
         with open(filepath, "w", encoding="utf-8") as f: 
             f.write(html_content)
             
-        # Copy the latest scan to momentum.html for the GitHub Pages hub
+        # 2. Copy the latest scan to momentum.html for the GitHub Pages hub
         momentum_path = os.path.join(PUBLIC_DIR, "momentum.html")
         shutil.copy(filepath, momentum_path)
         
+        # 3. Create the auto-redirect index.html file so your main URL always works
+        index_path = os.path.join(PUBLIC_DIR, "index.html")
+        with open(index_path, "w", encoding="utf-8") as f:
+            f.write('<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=\'momentum.html\'" /></head><body></body></html>')
+        
         print(f"{C_GREEN}[+] History file saved at: {filepath}{C_RESET}")
         print(f"{C_GREEN}[+] Main dashboard updated at: {momentum_path}{C_RESET}")
+        print(f"{C_GREEN}[+] Redirect hub updated at: {index_path}{C_RESET}")
+        
         return filename
         
     except Exception as e:
