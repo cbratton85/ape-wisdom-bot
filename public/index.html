@@ -490,6 +490,11 @@
       .stats-row { grid-template-columns: repeat(2,1fr); padding: 0 24px; margin-bottom: 40px; }
       .site-footer { padding: 18px 24px; flex-direction: column; gap: 8px; text-align: center; }
     }
+  
+    .title-row {
+  display: block;
+  white-space: nowrap;
+}
   </style>
 </head>
 <body>
@@ -517,8 +522,8 @@
   <section class="hero">
     <p class="hero-eyebrow">Quantitative Analysis Tools</p>
     <h1 class="hero-title">
-      Market Intelligence,<br/>
-      <span class="accent-green">Momentum</span> &amp; <span class="accent-cyan">Pairs</span>
+      <span class="title-row">Market Intelligence,</span>
+      <span class="title-row"><span class="accent-green">Momentum</span> &amp; <span class="accent-cyan">Pairs</span></span>
     </h1>
     <p class="hero-sub">
       Two powerful tools for scanning the market — track retail sentiment &amp; technical strength, or identify divergent pairs setups ready to revert.
