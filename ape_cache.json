@@ -26258,5 +26258,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "KORE": {
+        "ticker": "KORE",
+        "name": "KORE Group Holdings, Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 87875080,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IIPR": {
+        "ticker": "IIPR",
+        "name": "Innovative Industrial Propertie",
+        "meta": "REIT - Industrial",
+        "type": "EQUITY",
+        "mcap": 1530614912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
