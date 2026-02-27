@@ -2993,11 +2993,18 @@ def export_interactive_html(df):
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
         filename = f"scan_{timestamp}.html"
         filepath = os.path.join(PUBLIC_DIR, filename)
-        with open(filepath, "w", encoding="utf-8") as f: f.write(html_content)
-        index_path = os.path.join(PUBLIC_DIR, "momentum.html")
-        shutil.copy(filepath, index_path)
-        print(f"{C_GREEN}[+] Dashboard generated at: {filepath}{C_RESET}")
+        
+        with open(filepath, "w", encoding="utf-8") as f: 
+            f.write(html_content)
+            
+        # Copy the latest scan to momentum.html for the GitHub Pages hub
+        momentum_path = os.path.join(PUBLIC_DIR, "momentum.html")
+        shutil.copy(filepath, momentum_path)
+        
+        print(f"{C_GREEN}[+] History file saved at: {filepath}{C_RESET}")
+        print(f"{C_GREEN}[+] Main dashboard updated at: {momentum_path}{C_RESET}")
         return filename
+        
     except Exception as e:
         print(f"{C_RED}[!] Error generating HTML: {e}{C_RESET}")
         return None
@@ -3024,7 +3031,6 @@ def cleanup_old_html_files(days_to_keep=14):
             try:
                 # Extract the date part from the filename
                 # format is: scan_2025-01-30_10-00.html
-                # We split by '_' and take the middle part (date) and last part (time)
                 parts = filename.replace("scan_", "").replace(".html", "").split("_")
                 
                 if len(parts) >= 2:
@@ -3040,7 +3046,6 @@ def cleanup_old_html_files(days_to_keep=14):
                         print(f"  > Deleted old file: {filename} ({age_days} days old)")
                         count += 1
             except Exception as e:
-                # If a file has a weird name, just skip it
                 print(f"  > Skipping check for {filename}: {e}")
                 continue
 
@@ -3048,7 +3053,6 @@ def cleanup_old_html_files(days_to_keep=14):
         print(f"{C_GREEN}  > No old files found to delete.{C_RESET}")
     else:
         print(f"{C_GREEN}  > Cleanup complete. Removed {count} files.{C_RESET}")
-
 
 # ==============================================================================
 #                               SECTION 8: MAIN EXECUTION FLOW
@@ -3082,14 +3086,12 @@ if __name__ == "__main__":
         
         if not raw: 
             print(f"{C_RED}[!] API returned no data.{C_RESET}")
-            # Only exit if we don't have a backup dataframe loaded
             if df.empty: 
                 sys.exit(1)
         
         else:
             new_df = filter_and_process(raw)
             
-            # --- CRITICAL FIX: Check for None before checking .empty ---
             if new_df is not None and not new_df.empty:
                 df = new_df
                 
@@ -3109,5 +3111,6 @@ if __name__ == "__main__":
     # 4. GENERATE HTML
     fname = export_interactive_html(df)
     
+    # 0.2 days = ~4.8 hours. This ensures your public folder doesn't get massive.
     cleanup_old_html_files(days_to_keep=0.2)
-    print(f"{C_GREEN}Done.{C_RESET}")
+    print(f"{C_GREEN}Script execution complete.{C_RESET}")
