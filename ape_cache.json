@@ -26098,5 +26098,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "BCO": {
+        "ticker": "BCO",
+        "name": "Brinks Company (The)",
+        "meta": "Security & Protection Services",
+        "type": "EQUITY",
+        "mcap": 5648572928,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
