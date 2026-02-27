@@ -26208,5 +26208,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ABL": {
+        "ticker": "ABL",
+        "name": "Abacus Global Management, Inc.",
+        "meta": "Insurance - Life",
+        "type": "EQUITY",
+        "mcap": 827966720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
