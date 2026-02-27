@@ -26218,5 +26218,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "LTRN": {
+        "ticker": "LTRN",
+        "name": "Lantern Pharma Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 31763760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
