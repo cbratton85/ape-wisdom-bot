@@ -109,11 +109,6 @@
         "last_checked": "2026-02-27",
         "reason": "No Price Data"
     },
-    "REV": {
-        "delisted": true,
-        "last_checked": "2026-02-27",
-        "reason": "No Price Data"
-    },
     "KIND": {
         "delisted": true,
         "last_checked": "2026-02-27",
@@ -200,6 +195,11 @@
         "reason": "No Price Data"
     },
     "ATIP": {
+        "delisted": true,
+        "last_checked": "2026-02-27",
+        "reason": "No Price Data"
+    },
+    "REV": {
         "delisted": true,
         "last_checked": "2026-02-27",
         "reason": "No Price Data"
