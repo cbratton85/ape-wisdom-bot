@@ -26298,5 +26298,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "KT": {
+        "ticker": "KT",
+        "name": "KT Corporation",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 11424856064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CMPO": {
+        "ticker": "CMPO",
+        "name": "CompoSecure, Inc.",
+        "meta": "Metal Fabrication",
+        "type": "EQUITY",
+        "mcap": 7278797824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

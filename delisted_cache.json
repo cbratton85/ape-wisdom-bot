@@ -94,11 +94,6 @@
         "last_checked": "2026-02-26",
         "reason": "No Price Data"
     },
-    "FFIE": {
-        "delisted": true,
-        "last_checked": "2026-02-26",
-        "reason": "No Price Data"
-    },
     "KIRK": {
         "delisted": true,
         "last_checked": "2026-02-26",
@@ -190,6 +185,11 @@
         "reason": "No Price Data"
     },
     "EAST": {
+        "delisted": true,
+        "last_checked": "2026-02-27",
+        "reason": "No Price Data"
+    },
+    "FFIE": {
         "delisted": true,
         "last_checked": "2026-02-27",
         "reason": "No Price Data"
