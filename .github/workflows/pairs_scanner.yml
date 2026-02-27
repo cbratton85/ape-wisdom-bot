@@ -5,13 +5,20 @@ on:
   # Note: If you want this to run automatically every day, 
   # you can paste the schedule back in here later!
 
-# Give the action permission to write back to the repository
+# Grant the permissions needed to deploy directly to GitHub Pages
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  run-scanner:
+  run-scanner-and-publish:
     runs-on: ubuntu-latest
+    
+    # Required environment for Pages deployment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout repository
@@ -41,12 +48,25 @@ jobs:
       - name: Run Pairs Scanner
         run: python pairs_scanner.py
 
-      # This new step saves the generated HTML and data files back to your repo
-      - name: Commit and Push Dashboard to Repo
+      # --- NEW DEPLOYMENT STEPS ---
+
+      - name: Prepare files for publishing
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add pairs_scanner.html symbols.html historical_data.csv.gz chart_data.csv.gz volume_data.csv.gz
-          git commit -m "Automated update of market scanner dashboards" || echo "No changes to commit"
-          git pull --rebase origin main
-          git push
+          # Create a folder to hold everything we want on the website
+          mkdir _site
+          
+          # Move your HTML files into the folder
+          mv pairs_scanner.html _site/index.html  # Rename to index.html so it loads by default
+          mv symbols.html _site/ || true          # || true prevents failure if the file is missing
+          
+          # Move data files if your HTML needs to read them dynamically
+          mv *.csv.gz _site/ || true
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site/' # Uploads the folder we just created
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
