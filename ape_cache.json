@@ -26558,5 +26558,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ZNOG": {
+        "ticker": "ZNOG",
+        "name": "Zion Oil & Gas, Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 468406400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OQX"
+    },
+    "EPP": {
+        "ticker": "EPP",
+        "name": "iShares MSCI Pacific Ex-Japan I",
+        "meta": "Pacific/Asia ex-Japan Stk",
+        "type": "ETF",
+        "mcap": 3016079872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
