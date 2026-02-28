@@ -26538,5 +26538,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "PRF": {
+        "ticker": "PRF",
+        "name": "Invesco RAFI US 1000 ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
