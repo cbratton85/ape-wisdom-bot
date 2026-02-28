@@ -26508,5 +26508,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "IPAC": {
+        "ticker": "IPAC",
+        "name": "iShares Core MSCI Pacific ETF",
+        "meta": "Diversified Pacific/Asia",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "TEL": {
+        "ticker": "TEL",
+        "name": "TE Connectivity plc",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 67557191680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
