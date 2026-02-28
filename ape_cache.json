@@ -26578,5 +26578,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "FTXL": {
+        "ticker": "FTXL",
+        "name": "First Trust Nasdaq Semiconducto",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "UGE": {
+        "ticker": "UGE",
+        "name": "ProShares Ultra Consumer Staple",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SGMO": {
+        "ticker": "SGMO",
+        "name": "Sangamo Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 160679328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "NVGS": {
+        "ticker": "NVGS",
+        "name": "Navigator Holdings Ltd.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 1408666880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
