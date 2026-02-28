@@ -1,4 +1,4 @@
-name: Market Pairs Scanner
+name: Pairs Scanner
 
 on:
   workflow_dispatch: # Keeps the manual button!
