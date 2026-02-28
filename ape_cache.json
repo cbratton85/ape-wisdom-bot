@@ -26688,5 +26688,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "AAON": {
+        "ticker": "AAON",
+        "name": "AAON, Inc.",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 8261366272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
