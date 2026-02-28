@@ -28,7 +28,7 @@ HISTORY_FILE = os.path.join(SCRIPT_DIR, "market_history.json")
 DELISTED_CACHE_FILE = os.path.join(SCRIPT_DIR, "delisted_cache.json")
 
 # Timeouts and Retention
-CACHE_EXPIRY_SECONDS = 43200 # 12 hours
+CACHE_EXPIRY_SECONDS = 43200  # 12 hours
 RETENTION_DAYS = 3
 DELISTED_RETRY_DAYS = 1
 TOOLTIP_HISTORY_DAYS = 12
@@ -44,7 +44,7 @@ LOTTERY_SIZE = 1
 REQUEST_DELAY_MIN = 1.5
 REQUEST_DELAY_MAX = 3.0
 TICKER_FIXES = {}
-PERMANENT_BLACKLIST = ['']
+PERMANENT_BLACKLIST = set()  # Use set for O(1) membership checking
 
 # ------------------------------------------------------------------------------
 # Console Presentation (ANSI Colors)
@@ -75,13 +75,17 @@ class HistoryTracker:
     def _load(self):
         if os.path.exists(self.filepath):
             try:
-                with open(self.filepath, 'r') as f: return json.load(f)
-            except: return {}
+                with open(self.filepath, 'r') as f:
+                    return json.load(f)
+            except (json.JSONDecodeError, IOError, ValueError) as e:
+                print(f"{C_YELLOW}[!] Warning: Could not load cache: {e}{C_RESET}")
+                return {}
         return {}
 
     def save(self, df):
-        now_ts = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%d %H:%M")
-        cutoff = datetime.datetime.now(datetime.UTC).replace(tzinfo=None) - datetime.timedelta(days=RETENTION_DAYS)
+        now = datetime.datetime.now(datetime.timezone.utc)
+        now_ts = now.strftime("%Y-%m-%d %H:%M")
+        cutoff = now.replace(tzinfo=None) - datetime.timedelta(days=RETENTION_DAYS)
         
         # --- EXCLUDE LIST ---
         # Keeps calculated fields safe from being overwritten by raw API data
@@ -107,8 +111,10 @@ class HistoryTracker:
                 self.data[ticker] = {}
 
             entry = {}
+            # Translate special characters: % → _perc, + → _plus
+            trans_table = str.maketrans({'%': '_perc', '+': '_plus'})
             for col, val in row.items():
-                col_clean = col.lower().replace('%', '_perc').replace('+', '_plus')
+                col_clean = col.lower().translate(trans_table)
                 
                 if col_clean in exclude_list:
                     continue
@@ -164,14 +170,18 @@ class HistoryTracker:
             current_entry['upvotes'] = int(current_upvotes)
             current_entry['price'] = float(current_price)
             current_entry['surge'] = int(current_surge)  # Syncs real-time SRG to history
-        except:
-            pass 
+        except (ValueError, TypeError) as e:
+            print(f"{C_YELLOW}[!] Warning: Could not sync live data for {ticker}: {e}{C_RESET}") 
 
         curr_rank = current_rank_plus 
         prev_rank = prev_entry.get('rank_plus', 0)
         velocity = int(curr_rank - prev_rank)
 
-        prev_upv = prev_entry.get('upvotes', prev_entry.get('Upvotes', 0))
+        prev_upv = prev_entry.get('upvotes', 0)
+        if prev_upv == 0 and 'Upvotes' in prev_entry:
+            # Data normalization issue - mixed case keys detected
+            prev_upv = prev_entry.get('Upvotes', 0)
+            print(f"{C_YELLOW}[!] Data quality: {ticker} has mixed-case keys{C_RESET}")
         upv_chg = int(current_upvotes - prev_upv)
 
         accel = 0
@@ -3009,10 +3019,13 @@ def export_interactive_html(df):
 # ==============================================================================
 #                               SECTION 7: MAINTENANCE
 # ==============================================================================
-def cleanup_old_html_files(days_to_keep=14):
+def cleanup_old_html_files(hours_to_keep=24):
     """
     Scans the PUBLIC_DIR for scan_*.html files.
-    Deletes any that are older than 'days_to_keep'.
+    Deletes any that are older than 'hours_to_keep'.
+    
+    Args:
+        hours_to_keep: Number of hours to retain files (default: 24)
     """
     print(f"{C_CYAN}--- Checking for old HTML files to clean up... ---{C_RESET}")
     
@@ -3021,6 +3034,7 @@ def cleanup_old_html_files(days_to_keep=14):
 
     now = datetime.datetime.now()
     count = 0
+    cutoff_seconds = hours_to_keep * 3600
     
     for filename in os.listdir(PUBLIC_DIR):
         # Only target files that match our specific pattern: scan_YYYY-MM-DD_HH-MM.html
@@ -3031,23 +3045,24 @@ def cleanup_old_html_files(days_to_keep=14):
                 parts = filename.replace("scan_", "").replace(".html", "").split("_")
                 
                 if len(parts) >= 2:
-                    date_str = parts[0] # "2025-01-30"
+                    date_str = parts[0]  # "2025-01-30"
                     file_date = datetime.datetime.strptime(date_str, "%Y-%m-%d")
                     
-                    # Calculate age
-                    age_days = (now - file_date).days
+                    # Calculate age in seconds for more precise control
+                    age_seconds = (now - file_date).total_seconds()
                     
-                    if age_days > days_to_keep:
+                    if age_seconds > cutoff_seconds:
                         file_path = os.path.join(PUBLIC_DIR, filename)
                         os.remove(file_path)
-                        print(f"  > Deleted old file: {filename} ({age_days} days old)")
+                        hours_old = age_seconds / 3600
+                        print(f"  > Deleted: {filename} ({hours_old:.1f} hours old)")
                         count += 1
             except Exception as e:
-                print(f"  > Skipping check for {filename}: {e}")
+                print(f"  > Skipping {filename}: {e}")
                 continue
 
     if count == 0:
-        print(f"{C_GREEN}  > No old files found to delete.{C_RESET}")
+        print(f"{C_GREEN}  > No old files to delete.{C_RESET}")
     else:
         print(f"{C_GREEN}  > Cleanup complete. Removed {count} files.{C_RESET}")
 
@@ -3108,6 +3123,6 @@ if __name__ == "__main__":
     # 4. GENERATE HTML
     fname = export_interactive_html(df)
     
-    # 0.2 days = ~4.8 hours. This ensures your public folder doesn't get massive.
-    cleanup_old_html_files(days_to_keep=0.2)
+    # Keep files for 5 hours (cleanup broken file every 5 hours instead of accumulating)
+    cleanup_old_html_files(hours_to_keep=5)
     print(f"{C_GREEN}Script execution complete.{C_RESET}")
