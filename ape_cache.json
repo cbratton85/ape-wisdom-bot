@@ -26548,5 +26548,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "UGA": {
+        "ticker": "UGA",
+        "name": "United States Gasoline Fund LP",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
