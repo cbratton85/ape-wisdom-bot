@@ -26488,5 +26488,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "AMLX": {
+        "ticker": "AMLX",
+        "name": "Amylyx Pharmaceuticals, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 1665962880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
