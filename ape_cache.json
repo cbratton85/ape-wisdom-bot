@@ -26618,5 +26618,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MEG": {
+        "ticker": "MEG",
+        "name": "Montrose Environmental Group, I",
+        "meta": "Waste Management",
+        "type": "EQUITY",
+        "mcap": 1032566656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NUVB": {
+        "ticker": "NUVB",
+        "name": "Nuvation Bio Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2026145536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
