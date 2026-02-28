@@ -15,8 +15,8 @@ DATA_FILE        = "historical_data.csv.gz"
 CHART_DATA_FILE  = "chart_data.csv.gz"        # Extended history for Z-score charts only
 VOLUME_DATA_FILE = "volume_data.csv.gz"        # Average daily volume per ticker
 ANALYSIS_CACHE = "analysis_results.json"
-BATCH_SIZE = 25
-COOLDOWN = 1
+BATCH_SIZE = 10
+COOLDOWN = 3
 LOOKBACK_DAYS       = 650   # Days used for scoring / correlation / perf
 CHART_LOOKBACK_DAYS = 1825  # ~5 years used for Z-score chart history
 VOL_AVG_DAYS        = 30    # Rolling window for average volume calculation
@@ -44,7 +44,7 @@ TICKER_INDUSTRY = {}   # ticker -> industry  (ETFs.csv col 3)
 TICKER_SUBIND   = {}   # ticker -> sub-industry (ETFs.csv col 4)
 ETF_LEV_TYPES   = {}   # ticker -> "normal"|"leveraged"|"inverse"|"lev_inv"
 
-# Maps ETFs.csv col-5 type strings -> internal 4-state tag (case-insensitive)
+# Maps ETFs.csv col-5 type-strings -> internal 4-state tag
 _ETF_TYPE_MAP = {
     "etf":                      "normal",
     "etf, leveraged":           "leveraged",
@@ -156,7 +156,7 @@ def download_batch(tickers, start_date, field="Close"):
                 progress=False,
                 group_by="ticker",
                 auto_adjust=True,
-                threads=True,
+                threads=False,
                 timeout=20
             )
 
@@ -169,13 +169,13 @@ def download_batch(tickers, start_date, field="Close"):
             result = pd.DataFrame()
             for t in clean:
                 try:
-                    if len(clean) > 1:
+                    if isinstance(df.columns, pd.MultiIndex):
                         if t in df.columns.levels[0]:
                             result[t] = df[t][field]
                     else:
                         if not df[field].empty:
                             result[t] = df[field]
-                except:
+                except Exception as e:
                     continue
 
             return result
@@ -559,8 +559,7 @@ def analyze_pair(pair):
         "AnnRetB":    ann_b if not np.isnan(ann_b) else None,
         "EstRet":     est_ret,
         "AnnRet":     ann_ret,
-        "SpreadMean": round(float(mean), 6),
-        "SpreadStd":  round(float(std),  6),
+        "SpreadStd":  round(float(std), 6),
     }
 
 
@@ -568,14 +567,23 @@ def analyze_pair(pair):
 # ROLLING Z-SCORE HISTORY FOR CHART
 # ==========================================
 def compute_z_history(a, b, price_data):
-    """Rolling Z-score over all available data using Z_LENGTH-day window."""
+    """Rolling Z-score over all available data.
+    Uses an adaptive window: Z_LENGTH when sufficient history exists,
+    falling back to half the available data (min 20 days) for shorter-
+    history tickers such as leveraged ETFs.
+    """
     log_a = np.log(price_data[a].dropna())
     log_b = np.log(price_data[b].dropna())
     combined = pd.DataFrame({"a": log_a, "b": log_b}).dropna()
     spread   = combined["a"] - combined["b"]
 
-    roll_mean = spread.rolling(Z_LENGTH).mean()
-    roll_std  = spread.rolling(Z_LENGTH).std()
+    n_pts  = len(spread)
+    window = Z_LENGTH if n_pts >= Z_LENGTH * 2 else max(20, n_pts // 2)
+    if n_pts < window + 5:
+        return [], []                # truly insufficient data
+
+    roll_mean = spread.rolling(window).mean()
+    roll_std  = spread.rolling(window).std()
     z_series  = (spread - roll_mean) / roll_std
     z_series  = z_series.dropna()
 
@@ -1238,14 +1246,14 @@ def build_symbols_page(valid_tickers):
   .ticker-grid {{ display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 12px; }}
   .ticker-card {{
     background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
-    padding: 9px 14px; display: flex; flex-direction: column; min-width: 95px;
+    padding: 9px 14px; display: flex; flex-direction: column; min-width: 160px; max-width: 240px;
     transition: border-color 0.15s, background 0.15s; cursor: default;
   }}
   .ticker-card:hover {{ border-color: #334155; background: #1e2535; }}
   .ticker-sym  {{ font-family: var(--mono); font-size: 15px; font-weight: 700; line-height: 1.2; }}
   .ticker-name {{
-    font-size: 12px; color: #4a5568; line-height: 1.4; margin-top: 4px;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px;
+    font-size: 12px; color: #94a3b8; line-height: 1.4; margin-top: 4px;
+    white-space: normal; overflow: visible;
   }}
 
   /* FLAT ALPHA LAYOUT (used when no sector data) */
@@ -1515,29 +1523,31 @@ if __name__ == "__main__":
         est_ret    = r.get("EstRet") if r.get("EstRet") is not None else 0.0
         ann_ret    = r.get("AnnRet")
 
-        # ── Exit price estimate when Z reverts to 0 (equal attribution) ─────
-        # spread = log(A) - log(B). Reversion to mean shifts spread by -Z*std.
-        # Each leg absorbs half the move in opposite directions.
-        spread_std  = r.get("SpreadStd") or 0.0
-        half_move   = z * spread_std / 2.0
-        exit_a      = round(price_a * np.exp(-half_move), 2)
-        exit_b      = round(price_b * np.exp(+half_move), 2)
-        exit_a_chg  = round((exit_a / price_a - 1) * 100, 1) if price_a > 0 else 0.0
-        exit_b_chg  = round((exit_b / price_b - 1) * 100, 1) if price_b > 0 else 0.0
+        # Exit price estimates when Z reverts to 0 (equal attribution)
+        spread_std = r.get("SpreadStd") or 0.0
+        half_move  = z * spread_std / 2.0
+        exit_a     = round(price_a * np.exp(-half_move), 2)
+        exit_b     = round(price_b * np.exp(+half_move), 2)
+        exit_a_chg = round((exit_a / price_a - 1) * 100, 1) if price_a > 0 else 0.0
+        exit_b_chg = round((exit_b / price_b - 1) * 100, 1) if price_b > 0 else 0.0
 
-        # Tag tickers using ETF_LEV_TYPES (from ETFs.csv col 5); stocks default to "normal"
+        # Tag tickers — ETF_LEV_TYPES from col 5; stocks default to "normal"
+        # Returns 4-state tag: "normal", "leveraged", "inverse", or "lev_inv"
         def _lev_tag(t):
             return ETF_LEV_TYPES.get(t, "normal")
+        
         lev_a = _lev_tag(a)
         lev_b = _lev_tag(b)
-
-        # Inline type badges (orange=LEV, red=INV, bright red=LEV+INV)
-        _badge_css   = {"leveraged": "type-lev", "inverse": "type-inv", "lev_inv": "type-levinv"}
-        _badge_label = {"leveraged": "LEV", "inverse": "INV", "lev_inv": "LEV+INV"}
-        badge_a = (f'<span class="type-badge {_badge_css[lev_a]}">{_badge_label[lev_a]}</span>'
-                   if lev_a != "normal" else "")
-        badge_b = (f'<span class="type-badge {_badge_css[lev_b]}">{_badge_label[lev_b]}</span>'
-                   if lev_b != "normal" else "")
+        
+        # Generate badges for leverage/inverse indicators
+        badge_map = {
+            "normal":    "",
+            "leveraged": '<span class="type-badge type-lev">LEV</span>',
+            "inverse":   '<span class="type-badge type-inv">INV</span>',
+            "lev_inv":   '<span class="type-badge type-levinv">LEV·INV</span>'
+        }
+        badge_a = badge_map.get(lev_a, "")
+        badge_b = badge_map.get(lev_b, "")
 
         chart_payload = json.dumps({
             "pair":      r["Pair"],
@@ -1600,11 +1610,13 @@ if __name__ == "__main__":
           <td class="est-cell">
             <span class="est-ret">{est_ret:+.1f}%</span>
             {f'<span class="ann-ret">{ann_ret:+.0f}%/yr</span>' if ann_ret is not None else ''}
-            <div class="exit-row">
-              <span class="exit-lbl">Exit&nbsp;at&nbsp;Z=0&nbsp;&#x2248;</span>
-              <span class="exit-val">${exit_a:,.2f}</span><span class="exit-chg">&nbsp;({exit_a_chg:+.1f}%)</span>
+            <div class="exit-row"
+                 title="Estimated exit prices if Z-score reverts to 0 (equal attribution)">
+              <span class="exit-val">${exit_a:,.2f}</span>
+              <span class="exit-chg">({exit_a_chg:+.1f}%)</span>
               <span class="exit-sep">/</span>
-              <span class="exit-val">${exit_b:,.2f}</span><span class="exit-chg">&nbsp;({exit_b_chg:+.1f}%)</span>
+              <span class="exit-val">${exit_b:,.2f}</span>
+              <span class="exit-chg">({exit_b_chg:+.1f}%)</span>
             </div>
           </td>
           <td class="perf-cell">
@@ -1638,6 +1650,10 @@ if __name__ == "__main__":
     if skipped_tickers:
         print(f"[!] Skipped {len(skipped_tickers)} tickers not in current data (stale cache): {sorted(skipped_tickers)}")
         print("    Delete analysis_results.json and re-run to rebuild the cache without them.")
+
+    if skipped_tickers:
+        print(f"[!] Skipped {len(skipped_tickers)} tickers missing from data (stale cache): {sorted(skipped_tickers)}")
+        print("    Delete analysis_results.json to rebuild.")
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -1788,8 +1804,8 @@ if __name__ == "__main__":
   .pair-sep  {{ color: var(--muted); margin: 0 2px; font-family: var(--mono); }}
   .ticker-b  {{ font-family: var(--mono); font-size: 14px; font-weight: 700; color: white; }}
   .pair-fullnames {{ display: flex; flex-direction: column; gap: 1px; margin-top: 2px; }}
-  .name-a  {{ font-size: 12px; color: #4a8aaa; white-space: normal; line-height: 1.35; }}
-  .name-b  {{ font-size: 12px; color: #6b7f9a; white-space: normal; line-height: 1.35; }}
+  .name-a  {{ font-size: 12px; color: #6ab0cc; white-space: normal; line-height: 1.35; }}
+  .name-b  {{ font-size: 12px; color: #8fa8be; white-space: normal; line-height: 1.35; }}
 
   /* BADGES */
   .cat-badge {{
@@ -1800,13 +1816,6 @@ if __name__ == "__main__":
   .cat-etf   {{ background: rgba(56,189,248,0.1);  color: var(--cyan);   border: 1px solid rgba(56,189,248,0.25); }}
   .cat-stock {{ background: rgba(245,158,11,0.1);  color: var(--amber);  border: 1px solid rgba(245,158,11,0.25); }}
   .cat-mixed {{ background: rgba(167,139,250,0.1); color: var(--purple); border: 1px solid rgba(167,139,250,0.25); }}
-
-  /* ETF TYPE BADGES */
-  .type-badge  {{ display: inline-block; font-size: 8px; font-weight: 700; letter-spacing: 0.07em;
-    padding: 1px 4px; border-radius: 3px; text-transform: uppercase; font-family: var(--mono); vertical-align: middle; }}
-  .type-lev    {{ background: rgba(249,115,22,0.12); color: #fb923c; border: 1px solid rgba(249,115,22,0.3); }}
-  .type-inv    {{ background: rgba(239,68,68,0.12);  color: #f87171; border: 1px solid rgba(239,68,68,0.3);  }}
-  .type-levinv {{ background: rgba(239,68,68,0.2);   color: #fca5a5; border: 1px solid rgba(239,68,68,0.5); }}
 
   /* Z-SCORE */
   .z-cell {{ min-width: 110px; }}
@@ -1833,14 +1842,22 @@ if __name__ == "__main__":
   .hl-na     {{ font-family: var(--mono); font-size: 13px; color: var(--muted); }}
 
   /* EST RETURN CELL */
-  .est-cell  {{ min-width: 120px; text-align: right; }}
+  .est-cell  {{ min-width: 130px; text-align: right; }}
   .est-ret   {{ font-family: var(--mono); font-size: 13px; font-weight: 600; color: #34d399; display: block; }}
   .ann-ret   {{ font-family: var(--mono); font-size: 10px; color: #059669; display: block; }}
-  .exit-row  {{ display: flex; flex-wrap: wrap; gap: 1px 5px; margin-top: 3px; justify-content: flex-end; }}
-  .exit-lbl  {{ font-family: var(--mono); font-size: 9px; color: #374151; letter-spacing: 0.04em; width: 100%; text-align: right; }}
-  .exit-val  {{ font-family: var(--mono); font-size: 9.5px; color: #6b7f9a; }}
-  .exit-chg  {{ font-family: var(--mono); font-size: 9px; color: #4a5568; }}
-  .exit-sep  {{ color: #2d3748; font-size: 9.5px; }}
+  /* EXIT PRICE TOOLTIP ROW */
+  .exit-row  {{ display: flex; flex-wrap: wrap; gap: 0 5px; margin-top: 4px;
+    justify-content: flex-end; cursor: help; }}
+  .exit-val  {{ font-family: var(--mono); font-size: 11px; color: #b8cedd; font-weight: 500; }}
+  .exit-chg  {{ font-family: var(--mono); font-size: 10px; color: #8fa8be; }}
+  .exit-sep  {{ color: #374151; font-size: 11px; }}
+  /* ETF TYPE BADGES */
+  .type-badge  {{ display: inline-block; font-size: 8px; font-weight: 700; letter-spacing: 0.07em;
+    padding: 1px 4px; border-radius: 3px; text-transform: uppercase;
+    font-family: var(--mono); vertical-align: middle; }}
+  .type-lev    {{ background: rgba(249,115,22,0.12); color: #fb923c; border: 1px solid rgba(249,115,22,0.3); }}
+  .type-inv    {{ background: rgba(239,68,68,0.12);  color: #f87171; border: 1px solid rgba(239,68,68,0.3);  }}
+  .type-levinv {{ background: rgba(239,68,68,0.2);   color: #fca5a5; border: 1px solid rgba(239,68,68,0.5); }}
 
   .score-cell {{ min-width: 100px; }}
   .score-bar-wrap {{ display: flex; flex-direction: column; gap: 3px; }}
@@ -2045,15 +2062,13 @@ if __name__ == "__main__":
   <div class="control-group">
     <label>ETF Type</label>
     <select id="levFilter" onchange="applyFilters()">
-      <option value="all">All Types</option>
-      <option value="standard_only">Standard Only</option>
-      <option value="exclude_special">Exclude Lev &amp; Inv</option>
-      <option value="exclude_lev">Exclude Leveraged</option>
-      <option value="exclude_inv">Exclude Inverse</option>
-      <option value="exclude_lev_inv">Exclude Lev+Inv</option>
-      <option value="only_lev">Only Leveraged</option>
-      <option value="only_inv">Only Inverse</option>
-      <option value="only_lev_inv">Only Lev+Inv</option>
+      <option value="all">All</option>
+      <option value="exclude_both">Excl Lev &amp; Inv</option>
+      <option value="exclude_lev">Excl Lev</option>
+      <option value="exclude_inv">Excl Inv</option>
+      <option value="only_lev">Only Lev</option>
+      <option value="only_inv">Only Inv</option>
+      <option value="only_both">Only Lev &amp; Inv</option>
     </select>
   </div>
   <div class="control-group">
@@ -2114,7 +2129,7 @@ if __name__ == "__main__":
   <th onclick="setSort('z_abs')">Z-Score &#8597;</th>
   <th onclick="setSort('corr')">Corr / &Delta; &#8597;</th>
   <th onclick="setSort('hl')">Half-Life &#8597;</th>
-  <th onclick="setSort('est_ret')">Est Return &#8597;</th>
+  <th onclick="setSort('est_ret')" style="text-align:right;">Est Return &#8597;</th>
   <th onclick="setSort('perf')">Perf Diff &#8597;</th>
   <th onclick="setSort('score')">Score &#8597;</th>
   <th>Signal</th>
@@ -2176,7 +2191,6 @@ if __name__ == "__main__":
         <div class="leg-item"><div class="leg-line" style="background:#38bdf8;height:2px;"></div>Z-Score</div>
         <div class="leg-item"><div class="leg-line" style="background:#22c55e;opacity:.8;"></div>&plusmn;1&sigma;</div>
         <div class="leg-item"><div class="leg-line" style="background:#f59e0b;opacity:.8;"></div>&plusmn;2&sigma;</div>
-        <div class="leg-item"><div class="leg-line" style="background:#94a3b8;opacity:.35;"></div>Zero</div>
         <div style="width:1px;background:#2d3748;margin:0 6px;"></div>
         <div class="leg-item"><div class="leg-line" style="background:#38bdf8;"></div><span id="legBLabelA" style="color:#38bdf8;">A</span></div>
         <div class="leg-item"><div class="leg-line" style="background:#a78bfa;"></div><span id="legBLabelB" style="color:#a78bfa;">B</span></div>
@@ -2278,16 +2292,16 @@ function openChart(btn, mode) {{
     `<span>Z window: <em>${{p.zWindow}} days</em></span>` +
     `<span>Data from: <em>${{footerDates[0] || "—"}}</em></span>` +
     `<span>Last: <em>${{footerDates[footerDates.length-1] || "—"}}</em></span>` +
-    `<span style="border-left:1px solid #1c2333;padding-left:16px;">Exit Z=0 &bull; <span style="color:#38bdf8;">${{a}}</span>&nbsp;&#x2248;&nbsp;<em style="color:#94a3b8;">${{exitAStr}}</em></span>` +
-    `<span><span style="color:#a78bfa;">${{b}}</span>&nbsp;&#x2248;&nbsp;<em style="color:#94a3b8;">${{exitBStr}}</em></span>` +
-    `<span style="margin-left:auto;font-size:10px;color:#2d3748;">Equal attribution — actual split may differ &middot; ESC to close</span>`;
+    `<span style="border-left:1px solid #1c2333;padding-left:16px;" title="Estimated exit prices if Z reverts to 0">Exit Z=0 &bull; <span style="color:#38bdf8;">${{a}}</span>&nbsp;&#x2248;&nbsp;<em style="color:#b8cedd;">${{exitAStr}}</em></span>` +
+    `<span><span style="color:#a78bfa;">${{b}}</span>&nbsp;&#x2248;&nbsp;<em style="color:#b8cedd;">${{exitBStr}}</em></span>` +
+    `<span style="margin-left:auto;font-size:10px;color:#2d3748;">Equal attribution &middot; ESC to close</span>`;
 
   // Destroy old charts
   if (activeChart)  {{ activeChart.destroy();  activeChart  = null; }}
   if (activePChart) {{ activePChart.destroy(); activePChart = null; }}
   if (activeBChart) {{ activeBChart.destroy(); activeBChart = null; }}
 
-  // Reset to Z tab, hide others
+  // Reset to Z tab
   document.getElementById("zChart").style.display = "block";
   document.getElementById("pChart").style.display = "none";
   document.getElementById("bChart").style.display = "none";
@@ -2499,143 +2513,100 @@ function buildPriceChart(p) {{
 }}
 
 
-// ─── BOTH CHART (dual Y-axis: price overlay + Z-score) ───────────────────────
+// ─── BOTH CHART (dual Y-axis: normalized price + Z-score) ────────────────────
 function buildBothChart(p) {{
   if (activeBChart) {{ activeBChart.destroy(); activeBChart = null; }}
   const {{ priceDates, priceA, priceB, dates: zDates, z: zVals }} = p;
   const a = p.pair.split("/")[0], b = p.pair.split("/")[1];
 
-  // Align on the longer of the two date arrays — use price dates as primary
   const labels = priceDates && priceDates.length ? priceDates : (zDates || []);
   if (!labels.length) return;
 
-  // Map Z-score values onto the price date axis (null where no data)
+  // Align Z onto price date axis
   const zDateSet = {{}};
   if (zDates) zDates.forEach((d,i) => {{ zDateSet[d] = zVals[i]; }});
-  const zAligned = labels.map(d => zDateSet[d] !== undefined ? zDateSet[d] : null);
-
-  // Map price values (already on priceDates axis)
-  const paAligned = labels.map((d,i) => (priceA && priceA[i] !== undefined) ? priceA[i] : null);
-  const pbAligned = labels.map((d,i) => (priceB && priceB[i] !== undefined) ? priceB[i] : null);
+  const zAligned  = labels.map(d => zDateSet[d] !== undefined ? zDateSet[d] : null);
+  const paAligned = labels.map((d,i) => priceA && priceA[i] !== undefined ? priceA[i] : null);
+  const pbAligned = labels.map((d,i) => priceB && priceB[i] !== undefined ? priceB[i] : null);
 
   const ctx = document.getElementById("bChart").getContext("2d");
-
-  const gradA = ctx.createLinearGradient(0, 0, 0, 400);
-  gradA.addColorStop(0,   "rgba(56,189,248,0.15)");
-  gradA.addColorStop(1,   "rgba(56,189,248,0.00)");
-  const gradB = ctx.createLinearGradient(0, 0, 0, 400);
-  gradB.addColorStop(0,   "rgba(167,139,250,0.12)");
-  gradB.addColorStop(1,   "rgba(167,139,250,0.00)");
+  const gradA = ctx.createLinearGradient(0,0,0,400);
+  gradA.addColorStop(0,"rgba(56,189,248,0.15)"); gradA.addColorStop(1,"rgba(56,189,248,0)");
+  const gradB = ctx.createLinearGradient(0,0,0,400);
+  gradB.addColorStop(0,"rgba(167,139,250,0.12)"); gradB.addColorStop(1,"rgba(167,139,250,0)");
 
   const zPtColors = zAligned.map(v => {{
     if (v === null) return "transparent";
     const av = Math.abs(v);
-    if (av >= 3) return "#ef4444";
-    if (av >= 2) return "#f59e0b";
-    if (av >= 1) return "#38bdf8";
-    return "rgba(148,163,184,0.35)";
+    return av >= 3 ? "#ef4444" : av >= 2 ? "#f59e0b" : av >= 1 ? "#38bdf8" : "rgba(148,163,184,0.35)";
   }});
 
-  const hLine = (y, color, width, dash) => ({{
-    type: "line", yMin: y, yMax: y, yScaleID: "yZ",
-    borderColor: color, borderWidth: width, borderDash: dash,
-  }});
+  const hLine = (y,color,w,dash) => ({{type:"line",yMin:y,yMax:y,yScaleID:"yZ",
+    borderColor:color,borderWidth:w,borderDash:dash}});
 
   activeBChart = new Chart(ctx, {{
     type: "line",
-    data: {{
-      labels,
-      datasets: [
-        {{
-          label: a + " (price)", data: paAligned,
-          yAxisID: "yP",
-          borderColor: "#38bdf8", borderWidth: 1.8,
-          pointRadius: 0, pointHoverRadius: 5,
-          pointBackgroundColor: "#38bdf8",
-          fill: true, backgroundColor: gradA,
-          tension: 0.25, spanGaps: true, order: 2,
-        }},
-        {{
-          label: b + " (price)", data: pbAligned,
-          yAxisID: "yP",
-          borderColor: "#a78bfa", borderWidth: 1.8,
-          pointRadius: 0, pointHoverRadius: 5,
-          pointBackgroundColor: "#a78bfa",
-          fill: true, backgroundColor: gradB,
-          tension: 0.25, spanGaps: true, order: 3,
-        }},
-        {{
-          label: "Z-Score", data: zAligned,
-          yAxisID: "yZ",
-          borderColor: "rgba(248,215,80,0.9)", borderWidth: 1.5,
-          pointRadius: labels.length > 300 ? 0 : 2,
-          pointHoverRadius: 6,
-          pointBackgroundColor: zPtColors, pointBorderWidth: 0,
-          fill: false, tension: 0.3, spanGaps: true, order: 1,
-          borderDash: [],
-        }},
-      ],
-    }},
+    data: {{ labels, datasets: [
+      {{ label: a+" price", data: paAligned, yAxisID:"yP",
+        borderColor:"#38bdf8", borderWidth:1.8, pointRadius:0, pointHoverRadius:5,
+        fill:true, backgroundColor:gradA, tension:0.25, spanGaps:true, order:2 }},
+      {{ label: b+" price", data: pbAligned, yAxisID:"yP",
+        borderColor:"#a78bfa", borderWidth:1.8, pointRadius:0, pointHoverRadius:5,
+        fill:true, backgroundColor:gradB, tension:0.25, spanGaps:true, order:3 }},
+      {{ label:"Z-Score", data: zAligned, yAxisID:"yZ",
+        borderColor:"rgba(248,215,80,0.9)", borderWidth:1.5,
+        pointRadius: labels.length>300?0:2, pointHoverRadius:6,
+        pointBackgroundColor:zPtColors, pointBorderWidth:0,
+        fill:false, tension:0.3, spanGaps:true, order:1 }},
+    ]}},
     options: {{
-      responsive: true, maintainAspectRatio: false,
-      interaction: {{ mode: "index", intersect: false }},
-      plugins: {{
-        legend: {{ display: false }},
-        tooltip: {{
-          backgroundColor: "#0d1520", borderColor: "#242d40", borderWidth: 1,
-          titleColor: "#64748b", bodyColor: "#e2e8f0",
-          titleFont: {{ family: "'JetBrains Mono',monospace", size: 11 }},
-          bodyFont:  {{ family: "'JetBrains Mono',monospace", size: 13 }},
-          padding: 14,
-          callbacks: {{
-            label: c => {{
-              if (c.datasetIndex < 2) {{
-                const pct = c.raw != null ? (c.raw - 100).toFixed(2) : null;
-                return ` ${{c.dataset.label.replace(" (price)","")}}: ${{c.raw?.toFixed(2) ?? "—"}}  (${{pct != null && pct >= 0 ? "+" : ""}}${{pct ?? "—"}}%)`;
-              }}
-              const v = c.raw;
-              if (v === null) return " Z = —";
-              const lv = Math.abs(v) >= 3 ? "EXTREME" : Math.abs(v) >= 2 ? "STRONG" : Math.abs(v) >= 1 ? "SIGNAL" : "neutral";
-              return ` Z = ${{v >= 0 ? "+" : ""}}${{v.toFixed(3)}}\u03C3  [${{lv}}]`;
-            }},
-          }},
+      responsive:true, maintainAspectRatio:false,
+      interaction:{{mode:"index",intersect:false}},
+      plugins:{{
+        legend:{{display:false}},
+        tooltip:{{
+          backgroundColor:"#0d1520", borderColor:"#242d40", borderWidth:1,
+          titleColor:"#64748b", bodyColor:"#e2e8f0",
+          titleFont:{{family:"'JetBrains Mono',monospace",size:11}},
+          bodyFont:{{family:"'JetBrains Mono',monospace",size:13}}, padding:14,
+          callbacks:{{ label: c => {{
+            if (c.datasetIndex < 2) {{
+              const pct = c.raw != null ? (c.raw-100).toFixed(2) : null;
+              return ` ${{c.dataset.label.replace(" price","")}}: ${{c.raw?.toFixed(2)??"—"}}  (${{pct!=null&&pct>=0?"+":""}}${{pct??"—"}}%)`;
+            }}
+            const v = c.raw;
+            if (v===null) return " Z = —";
+            const lv = Math.abs(v)>=3?"EXTREME":Math.abs(v)>=2?"STRONG":Math.abs(v)>=1?"SIGNAL":"neutral";
+            return ` Z = ${{v>=0?"+":""}}${{v.toFixed(3)}}\u03C3  [${{lv}}]`;
+          }} }},
         }},
-        annotation: {{
-          annotations: {{
-            z0:  hLine(0,  "rgba(148,163,184,0.25)", 1, [4,4]),
-            zp1: hLine(1,  "rgba(34,197,94,0.45)",   1, [5,4]),
-            zn1: hLine(-1, "rgba(34,197,94,0.45)",   1, [5,4]),
-            zp2: hLine(2,  "rgba(245,158,11,0.65)",  1, [5,3]),
-            zn2: hLine(-2, "rgba(245,158,11,0.65)",  1, [5,3]),
-            zp3: hLine(3,  "rgba(239,68,68,0.75)",   1, []),
-            zn3: hLine(-3, "rgba(239,68,68,0.75)",   1, []),
-            baseLine: {{ type: "line", yMin: 100, yMax: 100, yScaleID: "yP",
-              borderColor: "rgba(148,163,184,0.2)", borderWidth: 1, borderDash: [4,4] }},
-          }},
-        }},
+        annotation:{{ annotations:{{
+          z0:  hLine(0, "rgba(148,163,184,0.25)",1,[4,4]),
+          zp1: hLine(1, "rgba(34,197,94,0.45)",  1,[5,4]),
+          zn1: hLine(-1,"rgba(34,197,94,0.45)",  1,[5,4]),
+          zp2: hLine(2, "rgba(245,158,11,0.65)", 1,[5,3]),
+          zn2: hLine(-2,"rgba(245,158,11,0.65)", 1,[5,3]),
+          zp3: hLine(3, "rgba(239,68,68,0.75)",  1,[]),
+          zn3: hLine(-3,"rgba(239,68,68,0.75)",  1,[]),
+          base:{{type:"line",yMin:100,yMax:100,yScaleID:"yP",
+            borderColor:"rgba(148,163,184,0.2)",borderWidth:1,borderDash:[4,4]}},
+        }} }},
       }},
-      scales: {{
-        x: {{
-          ticks: {{ color: "#374151", font: {{ family: "'JetBrains Mono',monospace", size: 10 }},
-            maxRotation: 0, maxTicksLimit: 10, autoSkip: true }},
-          grid: {{ color: "rgba(28,35,51,0.7)" }}, border: {{ color: "#1c2333" }},
-        }},
-        yP: {{
-          position: "left",
-          ticks: {{ color: "#38bdf8", font: {{ family: "'JetBrains Mono',monospace", size: 10 }},
-            callback: v => v.toFixed(0) }},
-          grid: {{ color: "rgba(28,35,51,0.5)" }}, border: {{ color: "#1c2333" }},
-          title: {{ display: true, text: "Norm. Price (base 100)",
-            color: "rgba(56,189,248,0.5)", font: {{ family: "'JetBrains Mono',monospace", size: 10 }} }},
-        }},
-        yZ: {{
-          position: "right",
-          ticks: {{ color: "rgba(248,215,80,0.7)", font: {{ family: "'JetBrains Mono',monospace", size: 10 }},
-            callback: v => (v >= 0 ? "+" : "") + v.toFixed(1) + "\u03C3" }},
-          grid: {{ drawOnChartArea: false }}, border: {{ color: "#1c2333" }},
-          title: {{ display: true, text: "Z-Score",
-            color: "rgba(248,215,80,0.5)", font: {{ family: "'JetBrains Mono',monospace", size: 10 }} }},
-        }},
+      scales:{{
+        x:{{ ticks:{{color:"#374151",font:{{family:"'JetBrains Mono',monospace",size:10}},
+              maxRotation:0,maxTicksLimit:10,autoSkip:true}},
+             grid:{{color:"rgba(28,35,51,0.7)"}},border:{{color:"#1c2333"}} }},
+        yP:{{ position:"left",
+             ticks:{{color:"#38bdf8",font:{{family:"'JetBrains Mono',monospace",size:10}},callback:v=>v.toFixed(0)}},
+             grid:{{color:"rgba(28,35,51,0.5)"}},border:{{color:"#1c2333"}},
+             title:{{display:true,text:"Norm. Price (base 100)",color:"rgba(56,189,248,0.5)",
+               font:{{family:"'JetBrains Mono',monospace",size:10}}}} }},
+        yZ:{{ position:"right",
+             ticks:{{color:"rgba(248,215,80,0.7)",font:{{family:"'JetBrains Mono',monospace",size:10}},
+               callback:v=>(v>=0?"+":"")+v.toFixed(1)+"\u03C3"}},
+             grid:{{drawOnChartArea:false}},border:{{color:"#1c2333"}},
+             title:{{display:true,text:"Z-Score",color:"rgba(248,215,80,0.5)",
+               font:{{family:"'JetBrains Mono',monospace",size:10}}}} }},
       }},
     }},
   }});
@@ -2702,13 +2673,11 @@ function applyFilters() {{
     const levB     = row.dataset.levB || "normal";
     const pairText = row.querySelector(".pair-cell").textContent.toUpperCase();
 
-    // 4-state ETF type tags from ETFs.csv col 5:
-    // "normal" | "leveraged" | "inverse" | "lev_inv" (leveraged AND inverse)
-    const isLev      = levA === "leveraged" || levB === "leveraged";
-    const isInv      = levA === "inverse"   || levB === "inverse";
-    const isLevInv   = levA === "lev_inv"   || levB === "lev_inv";
-    const isSpecial  = isLev || isInv || isLevInv;
-    const isStandard = !isSpecial;
+    // 4-state ETF type tags: "normal"|"leveraged"|"inverse"|"lev_inv"
+    const isLev     = levA === "leveraged" || levB === "leveraged";
+    const isInv     = levA === "inverse"   || levB === "inverse";
+    const isLevInv  = levA === "lev_inv"   || levB === "lev_inv";
+    const isSpecial = isLev || isInv || isLevInv;
 
     let show = true;
     if (catF !== "All" && cat !== catF)          show = false;
@@ -2717,15 +2686,13 @@ function applyFilters() {{
     if (minPriceV > 0 && (priceA < minPriceV || priceB < minPriceV)) show = false;
     if (minVolV > 0 && volA > 0 && volB > 0 && (volA < minVolV || volB < minVolV)) show = false;
 
-    // ETF Type filter (reads from ETFs.csv col 5 via data-lev-a/b attributes)
-    if      (levF === "standard_only"  && !isStandard)           show = false;
-    else if (levF === "exclude_special" && isSpecial)             show = false;
-    else if (levF === "exclude_lev"    && (isLev || isLevInv))   show = false;
-    else if (levF === "exclude_inv"    && (isInv || isLevInv))   show = false;
-    else if (levF === "exclude_lev_inv" && isLevInv)             show = false;
-    else if (levF === "only_lev"       && !isLev)                show = false;
-    else if (levF === "only_inv"       && !isInv)                show = false;
-    else if (levF === "only_lev_inv"   && !isLevInv)             show = false;
+    // ETF Type filter — driven by ETFs.csv col 5 via data-lev-a/b attributes
+    if      (levF === "exclude_both" && isSpecial)              show = false;
+    else if (levF === "exclude_lev"  && (isLev || isLevInv))   show = false;
+    else if (levF === "exclude_inv"  && (isInv || isLevInv))   show = false;
+    else if (levF === "only_lev"     && !isLev)                 show = false;
+    else if (levF === "only_inv"     && !isInv)                 show = false;
+    else if (levF === "only_both"    && !(isLev || isInv || isLevInv)) show = false;
 
     row.dataset.baseHidden = show ? "0" : "1";
     row.classList.toggle("row-hidden", !show);
