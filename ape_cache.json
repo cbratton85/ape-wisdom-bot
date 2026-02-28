@@ -26648,5 +26648,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "SOPA": {
+        "ticker": "SOPA",
+        "name": "Society Pass Incorporated",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 9362279,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "BOUT": {
+        "ticker": "BOUT",
+        "name": "Innovator IBD Breakout Opportun",
+        "meta": "Mid-Cap Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "TRMD": {
+        "ticker": "TRMD",
+        "name": "TORM plc",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 3104500992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BBY": {
+        "ticker": "BBY",
+        "name": "Best Buy Co., Inc.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 13019975680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
