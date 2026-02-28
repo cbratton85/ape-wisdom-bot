@@ -132,7 +132,7 @@
   <div>Total Active: <span>4371</span></div>
   <div>ETFs: <span>954</span></div>
   <div>Stocks: <span>3418</span></div>
-  <div>Generated: <span>2026-02-27 23:28</span></div>
+  <div>Generated: <span id="gen-time"></span></div>
 </div>
 
 <div class="search-bar">
@@ -155,6 +155,7 @@
 </div>
 
 <script>
+document.getElementById("gen-time").textContent = new Date(1772239661618).toLocaleString();
 function filterSymbols() {
   const q = document.getElementById("searchBox").value.toUpperCase().trim();
   document.querySelectorAll(".ticker-card").forEach(card => {
