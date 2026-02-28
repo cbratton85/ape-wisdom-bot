@@ -26498,5 +26498,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ALNY": {
+        "ticker": "ALNY",
+        "name": "Alnylam Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 44152897536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
