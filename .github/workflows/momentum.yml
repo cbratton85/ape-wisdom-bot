@@ -1,4 +1,4 @@
-name: Market Momentum Tracker
+name: Momentum Scanner
 
 on:
   workflow_dispatch:
