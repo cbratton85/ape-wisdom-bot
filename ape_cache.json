@@ -26528,5 +26528,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "XOP": {
+        "ticker": "XOP",
+        "name": "State Street SPDR S&P Oil & Gas",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 10837260288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
