@@ -1120,12 +1120,19 @@ def build_symbols_page(valid_tickers):
     etf_html   = build_section_html(df_etf,   "#38bdf8")
     stock_html = build_section_html(df_stock, "#f59e0b")
 
-    page = f"""<!DOCTYPE html>
+page = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Symbol Reference | Pairs Scanner</title>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico?v=1">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=1">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=1">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=1">
+<link rel="manifest" href="site.webmanifest">
+
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root {{
@@ -1450,9 +1457,19 @@ if __name__ == "__main__":
     print("Generating pairs_scanner.html...")
 
     rows_html = ""
+    skipped_tickers = set()
     for i, r in enumerate(top_results):
         z = r["Z"]
         a, b = r["Pair"].split("/")
+
+        # Skip pairs where either ticker was dropped from the current dataset
+        # (e.g. delisted, insufficient history, or removed from ETFs/STOCKS.csv).
+        # These linger in analysis_results.json until the cache is rebuilt.
+        if a not in data.columns or b not in data.columns:
+            for m in (a, b):
+                if m not in data.columns:
+                    skipped_tickers.add(m)
+            continue
 
         if any(np.isnan(v) for v in [z, r["Score"], r["Corr"], r["PerfDiff"]]):
             continue
@@ -1575,6 +1592,10 @@ if __name__ == "__main__":
             <div class="share-vol">{fmt_vol(avgvol_b)}</div>
           </td>
         </tr>"""
+
+    if skipped_tickers:
+        print(f"[!] Skipped {len(skipped_tickers)} tickers not in current data (stale cache): {sorted(skipped_tickers)}")
+        print("    Delete analysis_results.json and re-run to rebuild the cache without them.")
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
