@@ -366,52 +366,71 @@ def build_chart_dataset(master):
 
 
 # ==========================================
-# BUILD VOLUME DATASET
-# Downloads Volume field, computes VOL_AVG_DAYS rolling mean.
+# BUILD VOLUME DATASET (UPDATED)
 # ==========================================
 def build_volume_dataset(master):
     """Returns a dict {ticker: avg_volume} using a VOL_AVG_DAYS rolling average."""
     vol_avg = {}
+    all_vol = pd.DataFrame()
 
+    # 1. Load existing cache if it exists
     if os.path.exists(VOLUME_DATA_FILE):
         try:
-            vol_df    = pd.read_csv(VOLUME_DATA_FILE, index_col=0, parse_dates=True)
-            vol_df    = vol_df.loc[:, ~vol_df.columns.duplicated()]
+            all_vol = pd.read_csv(VOLUME_DATA_FILE, index_col=0, parse_dates=True)
+            all_vol = all_vol.loc[:, ~all_vol.columns.duplicated()]
+            
+            # If the file is less than 12 hours old, just use it and skip updating
             file_time = os.path.getmtime(VOLUME_DATA_FILE)
             hours_old = (datetime.now() - datetime.fromtimestamp(file_time)).total_seconds() / 3600
-            if hours_old < CACHE_UPDATE_COOLDOWN_HOURS:
+            
+            if hours_old < 12:  # Extended cooldown for volume to prevent rate limits
                 print(f"--- Volume cache fresh ({round(hours_old,2)}h). Using cached volume. ---")
-                for col in vol_df.columns:
-                    series = vol_df[col].dropna()
+                for col in all_vol.columns:
+                    series = all_vol[col].dropna()
                     if len(series) > 0:
                         vol_avg[col] = float(series.rolling(VOL_AVG_DAYS, min_periods=1).mean().iloc[-1])
                 return vol_avg
-        except:
-            pass
+        except Exception as e:
+            print(f"Could not read volume cache: {e}")
+            all_vol = pd.DataFrame()
 
-    start = (datetime.now() - timedelta(days=90)).strftime("%Y-%m-%d")
-    total_batches = (len(master) + BATCH_SIZE - 1) // BATCH_SIZE
-    print(f"Downloading volume data for {len(master)} tickers ({total_batches} batches)...")
+    # 2. Find missing tickers that aren't in the cache at all
+    existing = all_vol.columns.tolist() if not all_vol.empty else []
+    missing  = [t for t in master if t not in existing]
+    start    = (datetime.now() - timedelta(days=90)).strftime("%Y-%m-%d")
 
-    all_vol = pd.DataFrame()
-    for i, idx in enumerate(range(0, len(master), BATCH_SIZE)):
-        batch    = master[idx: idx + BATCH_SIZE]
-        print(f"  [{i+1}/{total_batches}] Downloading Volume: {batch[0]}...")
-        batch_df = download_batch(batch, start, field="Volume")
-        if not batch_df.empty:
-            all_vol = pd.concat([all_vol, batch_df], axis=1)
-        time.sleep(COOLDOWN)
+    # 3. Only download the missing tickers
+    if missing:
+        total_batches = (len(missing) + BATCH_SIZE - 1) // BATCH_SIZE
+        print(f"Downloading volume data for {len(missing)} missing tickers ({total_batches} batches)...")
+        
+        new_vol_data = []
+        for i, idx in enumerate(range(0, len(missing), BATCH_SIZE)):
+            batch = missing[idx: idx + BATCH_SIZE]
+            print(f"  [{i+1}/{total_batches}] Downloading Volume: {batch[0]}...")
+            batch_df = download_batch(batch, start, field="Volume")
+            if not batch_df.empty:
+                new_vol_data.append(batch_df)
+            time.sleep(COOLDOWN)
+            
+        if new_vol_data:
+            new_df = pd.concat(new_vol_data, axis=1)
+            all_vol = pd.concat([all_vol, new_df], axis=1)
 
+    # 4. Save and calculate averages
     if not all_vol.empty:
         all_vol = all_vol.loc[:, ~all_vol.columns.duplicated()]
         tmp = VOLUME_DATA_FILE + ".tmp"
         all_vol.to_csv(tmp, compression='gzip')
-        if os.path.exists(VOLUME_DATA_FILE): os.remove(VOLUME_DATA_FILE)
+        if os.path.exists(VOLUME_DATA_FILE): 
+            os.remove(VOLUME_DATA_FILE)
         os.rename(tmp, VOLUME_DATA_FILE)
+        
         for col in all_vol.columns:
-            series = all_vol[col].dropna()
-            if len(series) > 0:
-                vol_avg[col] = float(series.rolling(VOL_AVG_DAYS, min_periods=1).mean().iloc[-1])
+            if col in master:
+                series = all_vol[col].dropna()
+                if len(series) > 0:
+                    vol_avg[col] = float(series.rolling(VOL_AVG_DAYS, min_periods=1).mean().iloc[-1])
 
     print(f"Volume data ready for {len(vol_avg)} tickers.")
     return vol_avg
@@ -1235,7 +1254,7 @@ def build_symbols_page(valid_tickers):
   <div>Total Active: <span>{len(valid_tickers)}</span></div>
   <div>ETFs: <span>{len(df_etf)}</span></div>
   <div>Stocks: <span>{len(df_stock)}</span></div>
-  <div>Generated: <span>{datetime.now().strftime('%Y-%m-%d %H:%M')}</span></div>
+  <div>Generated: <span id="gen-time"></span></div>
 </div>
 
 <div class="search-bar">
@@ -1258,6 +1277,7 @@ def build_symbols_page(valid_tickers):
 </div>
 
 <script>
+document.getElementById("gen-time").textContent = new Date({int(time.time() * 1000)}).toLocaleString();
 function filterSymbols() {{
   const q = document.getElementById("searchBox").value.toUpperCase().trim();
   document.querySelectorAll(".ticker-card").forEach(card => {{
@@ -1359,7 +1379,7 @@ if __name__ == "__main__":
         print(f"Analysis saved to {ANALYSIS_CACHE}")
 
     # The code below runs EVERY time, regardless of whether calculations were cached
-    top_results = results[:200]
+    top_results = results[:500]
 
     # Compute rolling Z-score histories for top pairs
     print("Computing Z-score chart histories for top pairs...")
@@ -1910,7 +1930,7 @@ if __name__ == "__main__":
     <div class="brand">PAIRS <span>SCANNER</span></div>
   </div>
   <div class="topbar-meta">
-    <span>Updated: <em>{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</em></span>
+    <span>Updated: <em id="update-time"></em></span>
     <span>Scanned: <em>{n_combos:,} pairs</em></span>
     <span>Setups: <em>{len(results):,}</em></span>
     <span>Showing: <em>Top {len(top_results)}</em></span>
@@ -2538,6 +2558,7 @@ function updateSortIndicators(key, asc) {{
 }}
 
 window.addEventListener("DOMContentLoaded", () => {{
+  document.getElementById("update-time").textContent = new Date({int(time.time() * 1000)}).toLocaleString();
   calcShares();
   document.getElementById("sortBy").addEventListener("change", () => {{
     currentSort.key = document.getElementById("sortBy").value;
