@@ -26478,5 +26478,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "CDP": {
+        "ticker": "CDP",
+        "name": "COPT Defense Properties",
+        "meta": "REIT - Office",
+        "type": "EQUITY",
+        "mcap": 3674041088,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
