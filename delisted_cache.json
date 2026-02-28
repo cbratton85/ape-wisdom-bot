@@ -169,17 +169,17 @@
         "last_checked": "2026-02-28",
         "reason": "No Price Data"
     },
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-02-28",
-        "reason": "No Price Data"
-    },
     "SQ": {
         "delisted": true,
         "last_checked": "2026-02-28",
         "reason": "No Price Data"
     },
     "HUSA": {
+        "delisted": true,
+        "last_checked": "2026-02-28",
+        "reason": "No Price Data"
+    },
+    "SOL": {
         "delisted": true,
         "last_checked": "2026-02-28",
         "reason": "No Price Data"
