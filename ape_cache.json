@@ -26698,5 +26698,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "KSA": {
+        "ticker": "KSA",
+        "name": "iShares MSCI Saudi Arabia ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
