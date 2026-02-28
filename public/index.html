@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trading Suite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #08090d;
+      --surface:  #0e1117;
+      --surface2: #151821;
+      --border:   #1c2233;
+      --text:     #e2e8f0;
+      --muted:    #4a5e72;
+      --green:    #00d97e;
+      --cyan:     #38bdf8;
+      --mono:     'JetBrains Mono', monospace;
+      --sans:     'Syne', sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(56,189,248,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56,189,248,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .wrapper {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      width: 100%;
+      max-width: 860px;
+    }
+
+    .card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+
+    .card:hover { transform: translateY(-4px); }
+
+    .card-green { --accent: var(--green); }
+    .card-cyan  { --accent: var(--cyan);  }
+
+    .card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 40px -8px var(--accent);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .card:hover::before { opacity: 1; }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.35s;
+      pointer-events: none;
+    }
+    .card:hover::after { opacity: 0.07; }
+
+    .card-header {
+      padding: 32px 32px 20px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .card-icon {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+      transition: border-color 0.25s;
+    }
+    .card:hover .card-icon { border-color: var(--accent); }
+
+    .card-badge {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 4px 9px;
+      border-radius: 4px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .card-body {
+      padding: 0 32px;
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .card-desc {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .card-features {
+      padding: 20px 32px 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .feat-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--muted);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .card:hover .feat-tag { color: var(--text); border-color: #2a3245; }
+
+    .card-footer {
+      padding: 16px 32px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface2);
+    }
+
+    .card-cta {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap 0.2s;
+    }
+    .card:hover .card-cta { gap: 14px; }
+
+    .cta-arrow { transition: transform 0.2s; }
+    .card:hover .cta-arrow { transform: translateX(4px); }
+
+    .card-meta {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 640px) {
+      .cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="cards">
+
+    <a href="ape_wisdom.html" class="card card-green">
+      <div class="card-header">
+        <div class="card-icon">🦍</div>
+        <span class="card-badge">SENTIMENT + MOMENTUM</span>
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">Ape Wisdom Analysis</h2>
+        <p class="card-desc">
+          Aggregates retail sentiment from Reddit and cross-references it with technical momentum indicators to surface high-conviction setups.
+        </p>
+      </div>
+      <div class="card-features">
+        <span class="feat-tag">HEAT SCORE</span>
+        <span class="feat-tag">RSI</span>
+        <span class="feat-tag">STOCH</span>
+        <span class="feat-tag">SCTR</span>
+        <span class="feat-tag">IBD RS</span>
+        <span class="feat-tag">EMA</span>
+        <span class="feat-tag">REDDIT FLOW</span>
+        <span class="feat-tag">MCAP FILTER</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-cta">Open Dashboard <span class="cta-arrow">→</span></span>
+        <span class="card-meta">ape_wisdom.html</span>
+      </div>
+    </a>
+
+    <a href="pairs_scanner.html" class="card card-cyan">
+      <div class="card-header">
+        <div class="card-icon">⚡</div>
+        <span class="card-badge">STATISTICAL ARBITRAGE</span>
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">Pairs Trading Scanner</h2>
+        <p class="card-desc">
+          Identifies cointegrated pairs with divergent Z-scores primed for mean reversion across ETFs and equities by sector.
+        </p>
+      </div>
+      <div class="card-features">
+        <span class="feat-tag">Z-SCORE</span>
+        <span class="feat-tag">COINTEGRATION</span>
+        <span class="feat-tag">SPREAD</span>
+        <span class="feat-tag">CORRELATION</span>
+        <span class="feat-tag">SECTOR VIEW</span>
+        <span class="feat-tag">ETF PAIRS</span>
+        <span class="feat-tag">MEAN REVERSION</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-cta">Open Scanner <span class="cta-arrow">→</span></span>
+        <span class="card-meta">pairs_scanner.html</span>
+      </div>
+    </a>
+
+  </div>
+</div>
+</body>
+</html>
