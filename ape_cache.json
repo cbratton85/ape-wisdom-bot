@@ -26888,5 +26888,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "IAS": {
+        "ticker": "IAS",
+        "name": "Integral Ad Science Holding Cor",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 1735615872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ASH": {
+        "ticker": "ASH",
+        "name": "Ashland Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 2853742848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
