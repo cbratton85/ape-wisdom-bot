@@ -26758,5 +26758,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "JNK": {
+        "ticker": "JNK",
+        "name": "State Street SPDR Bloomberg Hig",
+        "meta": "High Yield Bond",
+        "type": "ETF",
+        "mcap": 8681955328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "JPXN": {
+        "ticker": "JPXN",
+        "name": "iShares JPX-Nikkei 400 ETF",
+        "meta": "Japan Stock",
+        "type": "ETF",
+        "mcap": 194629488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FIZZ": {
+        "ticker": "FIZZ",
+        "name": "National Beverage Corp.",
+        "meta": "Beverages - Non-Alcoholic",
+        "type": "EQUITY",
+        "mcap": 3403526912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
