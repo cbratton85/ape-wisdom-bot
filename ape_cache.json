@@ -26808,5 +26808,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "AIA": {
+        "ticker": "AIA",
+        "name": "iShares Asia 50 ETF",
+        "meta": "Pacific/Asia ex-Japan Stk",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
