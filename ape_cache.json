@@ -26828,5 +26828,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "BHB": {
+        "ticker": "BHB",
+        "name": "Bar Harbor Bankshares, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 538806464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
