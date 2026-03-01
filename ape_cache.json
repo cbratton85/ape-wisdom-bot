@@ -26878,5 +26878,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "MXCT": {
+        "ticker": "MXCT",
+        "name": "MaxCyte, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 86544624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
