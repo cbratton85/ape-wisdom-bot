@@ -26868,5 +26868,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PAA": {
+        "ticker": "PAA",
+        "name": "Plains All American Pipeline, L",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 14751959040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
