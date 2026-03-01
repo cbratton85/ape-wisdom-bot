@@ -26708,5 +26708,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "CCEP": {
+        "ticker": "CCEP",
+        "name": "Coca-Cola Europacific Partners ",
+        "meta": "Beverages - Non-Alcoholic",
+        "type": "EQUITY",
+        "mcap": 49676181504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SGU": {
+        "ticker": "SGU",
+        "name": "Star Group L.P.",
+        "meta": "Oil & Gas Refining & Marketing",
+        "type": "EQUITY",
+        "mcap": 422495872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TXT": {
+        "ticker": "TXT",
+        "name": "Textron Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 17181124608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "INR": {
+        "ticker": "INR",
+        "name": "Infinity Natural Resources, Inc",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 259452240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "OP": {
+        "ticker": "OP",
+        "name": "OP",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
