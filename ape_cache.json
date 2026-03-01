@@ -26908,5 +26908,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VSNT": {
+        "ticker": "VSNT",
+        "name": "Versant Media Group, Inc.",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 4815666176,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "MTW": {
+        "ticker": "MTW",
+        "name": "Manitowoc Company, Inc. (The)",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 523232896,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "YELL": {
+        "ticker": "YELL",
+        "name": "YELL",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "SST": {
+        "ticker": "SST",
+        "name": "System1, Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 33093142,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
