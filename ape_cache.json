@@ -26788,5 +26788,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "TPOR": {
+        "ticker": "TPOR",
+        "name": "Direxion Daily Transportation B",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "LABD": {
+        "ticker": "LABD",
+        "name": "Direxion Daily S&P Biotech Bear",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
