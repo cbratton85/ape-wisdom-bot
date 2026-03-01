@@ -26818,5 +26818,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "VIXM": {
+        "ticker": "VIXM",
+        "name": "VIX Mid-Term Futures ETF",
+        "meta": "Trading--Miscellaneous",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
