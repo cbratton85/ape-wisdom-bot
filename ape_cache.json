@@ -26858,5 +26858,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "KN": {
+        "ticker": "KN",
+        "name": "Knowles Corporation",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 2313576704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
