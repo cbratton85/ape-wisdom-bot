@@ -26848,5 +26848,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "BILI": {
+        "ticker": "BILI",
+        "name": "Bilibili Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 11370841088,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
