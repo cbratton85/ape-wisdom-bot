@@ -27168,5 +27168,95 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "IEO": {
+        "ticker": "IEO",
+        "name": "iShares U.S. Oil & Gas Explorat",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "WHF": {
+        "ticker": "WHF",
+        "name": "WhiteHorse Finance, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 152474656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ZK": {
+        "ticker": "ZK",
+        "name": "ZK",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "TURB": {
+        "ticker": "TURB",
+        "name": "Turbo Energy, S.A.",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 17296910,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CORZ": {
+        "ticker": "CORZ",
+        "name": "Core Scientific, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 5182674944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SBLK": {
+        "ticker": "SBLK",
+        "name": "Star Bulk Carriers Corp.",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 3007561216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GLNG": {
+        "ticker": "GLNG",
+        "name": "Golar LNG Limited",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 4673500160,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "HAFN": {
+        "ticker": "HAFN",
+        "name": "Hafnia Limited",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 3845254144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DDC": {
+        "ticker": "DDC",
+        "name": "DDC Enterprise Limited",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 68073520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
