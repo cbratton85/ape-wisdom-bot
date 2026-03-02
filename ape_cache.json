@@ -27408,5 +27408,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "HDB": {
+        "ticker": "HDB",
+        "name": "HDFC Bank Limited",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 162266628096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IPWR": {
+        "ticker": "IPWR",
+        "name": "Ideal Power Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 29799770,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
