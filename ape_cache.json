@@ -27448,5 +27448,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "CEL": {
+        "ticker": "CEL",
+        "name": "CEL",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "USGO": {
+        "ticker": "USGO",
+        "name": "U.S. GoldMining Inc.",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 191664928,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
