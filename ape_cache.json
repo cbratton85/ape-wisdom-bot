@@ -27258,5 +27258,85 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "SNTI": {
+        "ticker": "SNTI",
+        "name": "Senti Biosciences, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 24184942,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "IFRX": {
+        "ticker": "IFRX",
+        "name": "InflaRx N.V.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 61019836,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CEI": {
+        "ticker": "CEI",
+        "name": "CEI",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "RYDE": {
+        "ticker": "RYDE",
+        "name": "Ryde Group Ltd.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 38986204,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "IEV": {
+        "ticker": "IEV",
+        "name": "iShares Europe ETF",
+        "meta": "Europe Stock",
+        "type": "ETF",
+        "mcap": 2902841856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SKYE": {
+        "ticker": "SKYE",
+        "name": "Skye Bioscience, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 24539986,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "GTE": {
+        "ticker": "GTE",
+        "name": "Gran Tierra Energy Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 230481264,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "FTS": {
+        "ticker": "FTS",
+        "name": "Fortis Inc.",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 28967467008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
