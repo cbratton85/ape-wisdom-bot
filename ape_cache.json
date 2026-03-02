@@ -27338,5 +27338,75 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FORTY": {
+        "ticker": "FORTY",
+        "name": "Formula Systems (1985) Ltd.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 1764638208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TOPS": {
+        "ticker": "TOPS",
+        "name": "TOP Ships, Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 22899680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "AIRI": {
+        "ticker": "AIRI",
+        "name": "Air Industries Group",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 16121714,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "CIG": {
+        "ticker": "CIG",
+        "name": "Comp En De Mn Cemig",
+        "meta": "Utilities - Diversified",
+        "type": "EQUITY",
+        "mcap": 7249288192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FBLG": {
+        "ticker": "FBLG",
+        "name": "FibroBiologics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 25284148,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "GWH": {
+        "ticker": "GWH",
+        "name": "ESS Tech, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 47813308,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BEEM": {
+        "ticker": "BEEM",
+        "name": "Beam Global",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 30827540,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
