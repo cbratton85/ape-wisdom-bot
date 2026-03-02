@@ -27148,5 +27148,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ICF": {
+        "ticker": "ICF",
+        "name": "iShares Select U.S. REIT ETF",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 1319293440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
