@@ -27508,5 +27508,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AARD": {
+        "ticker": "AARD",
+        "name": "Aardvark Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 119099792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "MPTI": {
+        "ticker": "MPTI",
+        "name": "M-tron Industries, Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 193366672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
