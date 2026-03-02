@@ -27068,5 +27068,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "TORO": {
+        "ticker": "TORO",
+        "name": "Toro Corp.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 115985376,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
