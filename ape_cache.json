@@ -26988,5 +26988,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "VFF": {
+        "ticker": "VFF",
+        "name": "Village Farms International, In",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 413553600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SDS": {
+        "ticker": "SDS",
+        "name": "ProShares UltraShort S&P500",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ESLT": {
+        "ticker": "ESLT",
+        "name": "Elbit Systems Ltd.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 36132298752,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "UTI": {
+        "ticker": "UTI",
+        "name": "Universal Technical Institute I",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 1991742336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
