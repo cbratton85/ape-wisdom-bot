@@ -27528,5 +27528,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "EMXC": {
+        "ticker": "EMXC",
+        "name": "iShares MSCI Emerging Markets e",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "HST": {
+        "ticker": "HST",
+        "name": "Host Hotels & Resorts, Inc.",
+        "meta": "REIT - Hotel & Motel",
+        "type": "EQUITY",
+        "mcap": 13724776448,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
