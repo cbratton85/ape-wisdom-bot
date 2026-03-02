@@ -94,11 +94,6 @@
         "last_checked": "2026-03-01",
         "reason": "No Price Data"
     },
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-03-01",
-        "reason": "No Price Data"
-    },
     "CBD": {
         "delisted": true,
         "last_checked": "2026-03-01",
@@ -170,6 +165,11 @@
         "reason": "No Price Data"
     },
     "YELL": {
+        "delisted": true,
+        "last_checked": "2026-03-02",
+        "reason": "No Price Data"
+    },
+    "TTM": {
         "delisted": true,
         "last_checked": "2026-03-02",
         "reason": "No Price Data"
