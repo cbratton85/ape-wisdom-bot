@@ -27078,5 +27078,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "AOS": {
+        "ticker": "AOS",
+        "name": "A.O. Smith Corporation",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 10786613248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
