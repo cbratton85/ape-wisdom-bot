@@ -27428,5 +27428,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "MTA": {
+        "ticker": "MTA",
+        "name": "Metalla Royalty & Streaming Ltd",
+        "meta": "Other Precious Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 823361280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "ALMU": {
+        "ticker": "ALMU",
+        "name": "Aeluma, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 349073568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
