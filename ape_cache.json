@@ -27088,5 +27088,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "GEN": {
+        "ticker": "GEN",
+        "name": "Gen Digital Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 13919282176,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "XNET": {
+        "ticker": "XNET",
+        "name": "Xunlei Limited",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 357835968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "WIT": {
+        "ticker": "WIT",
+        "name": "Wipro Limited",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 23470567424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KMLM": {
+        "ticker": "KMLM",
+        "name": "KraneShares Mount Lucas Managed",
+        "meta": "Systematic Trend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FNGU": {
+        "ticker": "FNGU",
+        "name": "MicroSectors FANG+ 3X Leveraged",
+        "meta": "Unknown",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "IEI": {
+        "ticker": "IEI",
+        "name": "iShares 3-7 Year Treasury Bond ",
+        "meta": "Intermediate Government",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
