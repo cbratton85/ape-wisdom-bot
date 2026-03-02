@@ -4,11 +4,6 @@
         "last_checked": "2026-02-22",
         "reason": "No Price Data"
     },
-    "OLD": {
-        "delisted": true,
-        "last_checked": "2026-02-25",
-        "reason": "No Price Data"
-    },
     "CEA": {
         "delisted": true,
         "last_checked": "2026-02-26",
@@ -165,6 +160,16 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-03-02",
+        "reason": "No Price Data"
+    },
+    "OLD": {
+        "delisted": true,
+        "last_checked": "2026-03-02",
+        "reason": "No Price Data"
+    },
+    "DBS": {
         "delisted": true,
         "last_checked": "2026-03-02",
         "reason": "No Price Data"

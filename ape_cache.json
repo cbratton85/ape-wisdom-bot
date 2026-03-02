@@ -27028,5 +27028,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BBVA": {
+        "ticker": "BBVA",
+        "name": "Banco Bilbao Vizcaya Argentaria",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 132444880896,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "INBX": {
+        "ticker": "INBX",
+        "name": "Inhibrx Biosciences, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1078127232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BIZD": {
+        "ticker": "BIZD",
+        "name": "VanEck BDC Income ETF",
+        "meta": "Financial",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "XRT": {
+        "ticker": "XRT",
+        "name": "State Street SPDR S&P Retail ET",
+        "meta": "Consumer Cyclical",
+        "type": "ETF",
+        "mcap": 1052475456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
