@@ -27468,5 +27468,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "OUNZ": {
+        "ticker": "OUNZ",
+        "name": "VanEck Merk Gold ETF",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "AMRC": {
+        "ticker": "AMRC",
+        "name": "Ameresco, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 1634081280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DOO": {
+        "ticker": "DOO",
+        "name": "BRP Inc.",
+        "meta": "Recreational Vehicles",
+        "type": "EQUITY",
+        "mcap": 5302841856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CLNE": {
+        "ticker": "CLNE",
+        "name": "Clean Energy Fuels Corp.",
+        "meta": "Oil & Gas Refining & Marketing",
+        "type": "EQUITY",
+        "mcap": 502496864,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
