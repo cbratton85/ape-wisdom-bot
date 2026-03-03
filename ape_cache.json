@@ -27708,5 +27708,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ZURA": {
+        "ticker": "ZURA",
+        "name": "Zura Bio Limited",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 626212672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SPLG": {
+        "ticker": "SPLG",
+        "name": "SPDR Portfolio S&P 500 ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "OVID": {
+        "ticker": "OVID",
+        "name": "Ovid Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 113583704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ICU": {
+        "ticker": "ICU",
+        "name": "SeaStar Medical Holding Corpora",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 9709000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
