@@ -27548,5 +27548,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ELDN": {
+        "ticker": "ELDN",
+        "name": "Eledon Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 211816592,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "WBTN": {
+        "ticker": "WBTN",
+        "name": "WEBTOON Entertainment Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 1517126784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ALDX": {
+        "ticker": "ALDX",
+        "name": "Aldeyra Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 338114784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "EVGO": {
+        "ticker": "EVGO",
+        "name": "EVgo Inc.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 871591104,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
