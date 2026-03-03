@@ -27618,5 +27618,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "GLAD": {
+        "ticker": "GLAD",
+        "name": "Gladstone Capital Corporation",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 417068000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
