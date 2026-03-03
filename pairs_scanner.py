@@ -22,7 +22,7 @@ LOOKBACK_DAYS       = 650   # Days used for scoring / correlation / perf
 CHART_LOOKBACK_DAYS = 1825  # ~5 years used for Z-score chart history
 VOL_AVG_DAYS        = 30    # Rolling window for average volume calculation
 CACHE_UPDATE_COOLDOWN_HOURS = 4
-NUM_WORKERS = max(1, (mp.cpu_count() or 2) - 1)  # CPU cores for parallel pair analysis
+NUM_WORKERS = max(1, (mp.cpu_count() or 2) - 0)  # CPU cores for parallel pair analysis
 
 CORR_SHORT = 35
 CORR_LONG = 100
@@ -2403,3 +2403,4 @@ window.addEventListener("DOMContentLoaded", () => {{
 
     print(f"pairs_scanner.html created. ({len(top_results)} pairs rendered)")
     print("\nDone. Open pairs_scanner.html in your browser.")
+
