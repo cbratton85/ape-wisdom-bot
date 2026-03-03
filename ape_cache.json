@@ -27628,5 +27628,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "VOX": {
+        "ticker": "VOX",
+        "name": "Vanguard Communication Services",
+        "meta": "Communications",
+        "type": "ETF",
+        "mcap": 3509995520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
