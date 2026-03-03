@@ -27588,5 +27588,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "MPLX": {
+        "ticker": "MPLX",
+        "name": "MPLX LP",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 60149231616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BKH": {
+        "ticker": "BKH",
+        "name": "Black Hills Corporation",
+        "meta": "Utilities - Regulated Gas",
+        "type": "EQUITY",
+        "mcap": 5546646528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EARN": {
+        "ticker": "EARN",
+        "name": "Ellington Credit Company",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 185974480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
