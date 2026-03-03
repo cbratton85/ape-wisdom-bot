@@ -27808,5 +27808,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "ITRM": {
+        "ticker": "ITRM",
+        "name": "Iterum Therapeutics plc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 8004394,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "BGS": {
+        "ticker": "BGS",
+        "name": "B&G Foods, Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 404018976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
