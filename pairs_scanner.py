@@ -16,6 +16,7 @@ DATA_FILE        = "historical_data.csv.gz"
 CHART_DATA_FILE  = "chart_data.csv.gz"        # Extended history for Z-score charts only
 VOLUME_DATA_FILE = "volume_data.csv.gz"        # Average daily volume per ticker
 MCAP_CACHE_FILE  = "market_cap.json"           # Market cap per ticker
+TRADES_FILE      = "active_trades.json"        # Active trade tracker
 BATCH_SIZE = 40
 COOLDOWN = 3
 LOOKBACK_DAYS       = 650   # Days used for scoring / correlation / perf
@@ -1027,6 +1028,795 @@ def _compute_chart_for_pair(r):
 
 
 # ==========================================
+# TRADE TRACKER
+# ==========================================
+def update_active_trades(data, chart_data=None):
+    """Read active_trades.json, update current Z-scores/prices and chart history from latest data."""
+    if not os.path.exists(TRADES_FILE):
+        return []
+    try:
+        with open(TRADES_FILE, "r") as f:
+            trades = json.load(f)
+    except Exception:
+        return []
+
+    updated = []
+    for t in trades:
+        if t.get("status") != "open":
+            updated.append(t)
+            continue
+        pair = t.get("pair", "")
+        if "/" not in pair:
+            updated.append(t)
+            continue
+        a, b = pair.split("/")
+        if a not in data.columns or b not in data.columns:
+            updated.append(t)
+            continue
+
+        # Update current prices
+        t["currentPriceA"] = round(float(data[a].iloc[-1]), 2)
+        t["currentPriceB"] = round(float(data[b].iloc[-1]), 2)
+
+        # Recalculate current Z-score (100d window)
+        log_r = np.log(data[[a, b]].dropna().tail(Z_LENGTH))
+        if len(log_r) >= 20:
+            ratio = log_r[a] - log_r[b]
+            std = ratio.std()
+            if std > 0:
+                t["currentZ"] = round(float((ratio.iloc[-1] - ratio.mean()) / std), 2)
+
+        # Update days held
+        try:
+            entry = datetime.strptime(t["entryDate"], "%Y-%m-%d")
+            t["daysHeld"] = (datetime.now() - entry).days
+        except Exception:
+            pass
+
+        # Estimate P&L (simple: price change on each leg relative to entry)
+        try:
+            dir = t.get("direction", "")
+            pa_entry, pb_entry = t["entryPriceA"], t["entryPriceB"]
+            pa_now, pb_now = t["currentPriceA"], t["currentPriceB"]
+            if dir == "short_a_long_b":
+                pnl_a = (pa_entry - pa_now) / pa_entry * 100  # short A gains when price drops
+                pnl_b = (pb_now - pb_entry) / pb_entry * 100  # long B gains when price rises
+            else:
+                pnl_a = (pa_now - pa_entry) / pa_entry * 100  # long A
+                pnl_b = (pb_entry - pb_now) / pb_entry * 100  # short B
+            t["pnlPct"] = round((pnl_a + pnl_b) / 2, 2)
+        except Exception:
+            t["pnlPct"] = 0.0
+
+        # Compute Z-score chart history for this trade
+        try:
+            src = chart_data if (chart_data is not None and not chart_data.empty and a in chart_data.columns and b in chart_data.columns) else data
+            z_dates, z_vals = compute_z_history(a, b, src)
+            t["chartDates"] = z_dates
+            t["chartZ"] = z_vals
+        except Exception:
+            t["chartDates"] = []
+            t["chartZ"] = []
+
+        updated.append(t)
+
+    # Save updated trades back
+    with open(TRADES_FILE, "w") as f:
+        json.dump(updated, f, indent=2)
+
+    return updated
+
+
+def generate_trades_page(trades):
+    """Generate active_trades.html with current trade status."""
+    open_trades = [t for t in trades if t.get("status") == "open"]
+    closed_trades = [t for t in trades if t.get("status") == "closed"]
+
+    def trade_card(t):
+        pair = t.get("pair", "?")
+        a, b = pair.split("/") if "/" in pair else (pair, "?")
+        direction = t.get("direction", "")
+        if direction == "short_a_long_b":
+            dir_label = f"Short {a} / Long {b}"
+            dir_class = "dir-short"
+        elif direction == "long_a_short_b":
+            dir_label = f"Long {a} / Short {b}"
+            dir_class = "dir-long"
+        else:
+            dir_label = "Neutral"
+            dir_class = "dir-neutral"
+
+        entry_z = t.get("entryZ", 0)
+        cur_z   = t.get("currentZ", 0)
+        days    = t.get("daysHeld", 0)
+        pnl     = t.get("pnlPct", 0)
+        pnl_class = "pnl-pos" if pnl >= 0 else "pnl-neg"
+
+        # Z progress toward 0 (target)
+        if abs(entry_z) > 0:
+            progress = max(0, min(100, (1 - abs(cur_z) / abs(entry_z)) * 100))
+        else:
+            progress = 0
+
+        entry_pa = t.get("entryPriceA", 0)
+        entry_pb = t.get("entryPriceB", 0)
+        cur_pa   = t.get("currentPriceA", 0)
+        cur_pb   = t.get("currentPriceB", 0)
+        shares_a = t.get("sharesA", 0)
+        shares_b = t.get("sharesB", 0)
+
+        # Dollar P&L calculation
+        dollar_pnl = 0
+        if shares_a > 0 and shares_b > 0:
+            if direction == "short_a_long_b":
+                dollar_pnl = (entry_pa - cur_pa) * shares_a + (cur_pb - entry_pb) * shares_b
+            else:
+                dollar_pnl = (cur_pa - entry_pa) * shares_a + (entry_pb - cur_pb) * shares_b
+        dollar_class = "pnl-pos" if dollar_pnl >= 0 else "pnl-neg"
+
+        pbar_style = f"width:{progress:.0f}%;" if progress > 0 else "background:var(--muted);width:2px;"
+
+        # Chart payload
+        chart_dates = t.get("chartDates", [])
+        chart_z = t.get("chartZ", [])
+        has_chart = len(chart_dates) > 0
+        chart_payload = json.dumps({"pair": pair, "dates": chart_dates, "z": chart_z, "currentZ": cur_z, "entryZ": entry_z, "zWindow": Z_LENGTH})
+        chart_payload_esc = chart_payload.replace("&", "&amp;").replace("'", "&#39;")
+        chart_btn = f"""<button class="tc-chart" onclick="openTradeChart(this)" data-chart='{chart_payload_esc}'>&#9657; Z-Chart</button>""" if has_chart else ""
+
+        return f"""
+        <div class="trade-card">
+          <div class="tc-header">
+            <span class="tc-pair">{pair}</span>
+            <span class="tc-dir {dir_class}">{dir_label}</span>
+            <span class="tc-days">{days}d held</span>
+            {chart_btn}
+            <button class="tc-edit" onclick="openEditModal('{t.get('id', '')}')">&#9998; Edit</button>
+            <button class="tc-close" onclick="closeTrade('{t.get('id', '')}')">&#10005; Close</button>
+          </div>
+          <div class="tc-body">
+            <div class="tc-stat">
+              <div class="tc-label">Entry Z</div>
+              <div class="tc-val">{entry_z:+.2f}&sigma;</div>
+            </div>
+            <div class="tc-stat">
+              <div class="tc-label">Current Z</div>
+              <div class="tc-val" style="color:{'#34d399' if abs(cur_z) < abs(entry_z) else '#ef4444'}">{cur_z:+.2f}&sigma;</div>
+            </div>
+            <div class="tc-stat">
+              <div class="tc-label">Est P&L</div>
+              <div class="tc-val {pnl_class}">{pnl:+.1f}%</div>
+            </div>
+            <div class="tc-stat tc-prices">
+              <div class="tc-label">{a} <span style="color:var(--cyan);font-size:9px;">{shares_a} shr</span></div>
+              <div class="tc-val">${entry_pa:.2f} &rarr; ${cur_pa:.2f}</div>
+            </div>
+            <div class="tc-stat tc-prices">
+              <div class="tc-label">{b} <span style="color:var(--cyan);font-size:9px;">{shares_b} shr</span></div>
+              <div class="tc-val">${entry_pb:.2f} &rarr; ${cur_pb:.2f}</div>
+            </div>
+            <div class="tc-stat">
+              <div class="tc-label">$ P&L</div>
+              <div class="tc-val {dollar_class}">{'+' if dollar_pnl >= 0 else ''}${abs(dollar_pnl):.0f}</div>
+            </div>
+          </div>
+          <div class="tc-progress">
+            <div class="tc-pbar-track">
+              <div class="tc-pbar-fill" style="{pbar_style}"></div>
+            </div>
+            <span class="tc-pbar-label">{progress:.0f}% to Z=0</span>
+          </div>
+        </div>"""
+
+    open_cards = "\n".join(trade_card(t) for t in open_trades) if open_trades else '<div class="no-trades">No open trades. Track a pair from the scanner to get started.</div>'
+    closed_cards = "\n".join(trade_card(t) for t in closed_trades) if closed_trades else '<div class="no-trades">No closed trades yet.</div>'
+
+    page = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Active Trades</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {{
+    --bg: #060a10; --surface: #0a0e17; --border: #1a2233;
+    --cyan: #38bdf8; --green: #22c55e; --red: #ef4444; --amber: #f59e0b;
+    --muted: #64748b; --mono: 'JetBrains Mono', monospace; --sans: 'Syne', sans-serif;
+  }}
+  * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+  body {{ background: var(--bg); color: #e2e8f0; font-family: var(--mono); }}
+
+  .topbar {{
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 10px 28px; display: flex; align-items: center; justify-content: space-between;
+  }}
+  .topbar .brand {{ font-family: var(--sans); font-size: 20px; font-weight: 800; color: white; letter-spacing: 0.08em; }}
+  .topbar .brand span {{ color: var(--cyan); }}
+  .nav-links {{ display: flex; gap: 16px; }}
+  .nav-links a {{ color: var(--cyan); text-decoration: none; font-size: 13px; font-weight: 600; }}
+  .nav-links a:hover {{ text-decoration: underline; }}
+
+  .content {{ max-width: 1200px; margin: 20px auto; padding: 0 20px; }}
+  h2 {{ font-family: var(--sans); font-size: 18px; font-weight: 700; color: white; margin: 20px 0 12px; letter-spacing: 0.05em; }}
+  .section-label {{ font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }}
+
+  .trade-cards {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 14px; }}
+
+  .trade-card {{
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 18px; transition: border-color 0.2s;
+  }}
+  .trade-card:hover {{ border-color: var(--cyan); }}
+
+  .tc-header {{ display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }}
+  .tc-pair {{ font-size: 16px; font-weight: 700; color: white; }}
+  .tc-dir {{ font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }}
+  .dir-short {{ background: rgba(239,68,68,0.12); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }}
+  .dir-long  {{ background: rgba(34,197,94,0.12); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }}
+  .dir-neutral {{ background: rgba(100,116,139,0.15); color: var(--muted); border: 1px solid var(--border); }}
+  .tc-days {{ font-size: 11px; color: var(--muted); margin-left: auto; }}
+  .tc-close {{
+    background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: var(--red);
+    font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
+  }}
+  .tc-close:hover {{ background: rgba(239,68,68,0.25); }}
+  .tc-edit {{
+    background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); color: var(--cyan);
+    font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
+  }}
+  .tc-edit:hover {{ background: rgba(56,189,248,0.25); }}
+  .tc-chart {{
+    background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.3); color: #a855f7;
+    font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
+  }}
+  .tc-chart:hover {{ background: rgba(168,85,247,0.25); }}
+
+  /* CHART MODAL */
+  .chart-overlay {{
+    display: none; position: fixed; inset: 0; z-index: 1100;
+    background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+  }}
+  .chart-overlay.open {{ display: flex; }}
+  .chart-modal {{
+    background: #0a0e17; border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; width: min(800px, 95vw); max-height: 90vh;
+  }}
+  .chart-modal-header {{
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;
+  }}
+  .chart-modal-title {{ font-family: var(--sans); font-size: 15px; font-weight: 700; color: white; }}
+  .chart-modal-title .cm-pair {{ color: var(--cyan); }}
+  .chart-modal-stats {{
+    display: flex; gap: 16px; font-size: 11px; color: var(--muted);
+  }}
+  .chart-modal-stats .cm-stat {{ display: flex; flex-direction: column; align-items: center; }}
+  .chart-modal-stats .cm-val {{ font-weight: 600; font-size: 13px; }}
+  .chart-modal-close {{
+    background: none; border: 1px solid var(--border); color: var(--muted);
+    font-size: 16px; padding: 4px 10px; border-radius: 6px; cursor: pointer;
+  }}
+  .chart-modal-close:hover {{ color: white; border-color: var(--muted); }}
+  .chart-canvas-wrap {{ position: relative; height: 380px; }}
+
+  /* EDIT MODAL */
+  .edit-overlay {{
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.7); backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+  }}
+  .edit-overlay.open {{ display: flex; }}
+  .edit-modal {{
+    background: #0a0e17; border: 1px solid var(--border); border-radius: 12px;
+    padding: 24px; width: min(420px, 95vw);
+  }}
+  .edit-modal h3 {{ font-family: var(--sans); font-size: 16px; color: white; margin-bottom: 16px; }}
+  .edit-field {{ margin-bottom: 12px; }}
+  .edit-field label {{ display: block; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }}
+  .edit-field input {{
+    width: 100%; background: #0d1520; border: 1px solid var(--border); color: #e2e8f0;
+    font-family: var(--mono); font-size: 13px; padding: 8px 10px; border-radius: 6px;
+  }}
+  .edit-field input:focus {{ border-color: var(--cyan); outline: none; }}
+  .edit-actions {{ display: flex; gap: 10px; margin-top: 18px; }}
+  .edit-actions button {{
+    flex: 1; padding: 8px; border-radius: 6px; font-family: var(--mono); font-size: 12px;
+    font-weight: 600; cursor: pointer; border: 1px solid var(--border);
+  }}
+  .edit-save {{ background: rgba(34,197,94,0.15); color: var(--green); border-color: rgba(34,197,94,0.3) !important; }}
+  .edit-save:hover {{ background: rgba(34,197,94,0.3); }}
+  .edit-cancel {{ background: transparent; color: var(--muted); }}
+  .edit-cancel:hover {{ background: rgba(100,116,139,0.15); }}
+
+  .tc-body {{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }}
+  .tc-stat {{ }}
+  .tc-label {{ font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }}
+  .tc-val {{ font-size: 14px; font-weight: 600; color: #e2e8f0; }}
+  .tc-prices .tc-val {{ font-size: 11px; }}
+  .pnl-pos {{ color: var(--green) !important; }}
+  .pnl-neg {{ color: var(--red) !important; }}
+
+  .tc-progress {{ display: flex; align-items: center; gap: 10px; }}
+  .tc-pbar-track {{ flex: 1; height: 4px; background: #1a2233; border-radius: 2px; overflow: hidden; }}
+  .tc-pbar-fill {{ height: 100%; background: var(--cyan); border-radius: 2px; transition: width 0.3s; }}
+  .tc-pbar-label {{ font-size: 10px; color: var(--muted); white-space: nowrap; }}
+
+  .no-trades {{ color: var(--muted); font-size: 13px; padding: 30px; text-align: center; }}
+
+  .actions {{ display: flex; gap: 10px; margin: 14px 0; }}
+  .action-btn {{
+    background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.25);
+    color: var(--cyan); font-family: var(--mono); font-size: 12px; font-weight: 600;
+    padding: 6px 14px; border-radius: 6px; cursor: pointer; transition: all 0.15s;
+  }}
+  .action-btn:hover {{ background: rgba(56,189,248,0.2); border-color: var(--cyan); }}
+  .action-btn.red {{ color: var(--red); border-color: rgba(239,68,68,0.25); background: rgba(239,68,68,0.08); }}
+  .action-btn.red:hover {{ background: rgba(239,68,68,0.2); border-color: var(--red); }}
+
+  .footer {{ text-align: center; padding: 20px; font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 30px; }}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">ACTIVE <span>TRADES</span></div>
+  <div class="nav-links">
+    <a href="pairs_scanner.html">&larr; Scanner</a>
+    <a href="symbols.html">Symbols</a>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="actions">
+    <button class="action-btn" onclick="exportTrades()">&#8681; Export Trades JSON</button>
+    <label class="action-btn" style="cursor:pointer;">&#8679; Import Trades
+      <input type="file" accept=".json" onchange="importTrades(event)" style="display:none;">
+    </label>
+    <button class="action-btn red" onclick="if(confirm('Close ALL open trades?'))closeAllTrades()">Close All</button>
+    <span style="margin-left:auto;font-size:11px;color:var(--muted);">Last updated: <span id="update-time"></span></span>
+  </div>
+
+  <div class="section-label">Open Trades ({len(open_trades)})</div>
+  <div class="trade-cards" id="openTrades">
+    {open_cards}
+  </div>
+
+  <h2 style="margin-top:30px;">Closed Trades</h2>
+  <div class="section-label">History ({len(closed_trades)})</div>
+  <div class="trade-cards" id="closedTrades">
+    {closed_cards}
+  </div>
+</div>
+
+<div class="footer">
+  Trades are stored in localStorage and active_trades.json &middot;
+  Re-run scanner to refresh Z-scores and prices
+</div>
+
+<!-- EDIT MODAL -->
+<div class="edit-overlay" id="editModal" onclick="if(event.target===this)closeEditModal()">
+  <div class="edit-modal">
+    <h3 id="editTitle">Edit Trade</h3>
+    <input type="hidden" id="editTradeId">
+    <div class="edit-field">
+      <label>Entry Date</label>
+      <input type="date" id="editDate">
+    </div>
+    <div class="edit-field">
+      <label id="editLabelA">Entry Price A</label>
+      <input type="number" id="editPriceA" step="0.01" min="0">
+    </div>
+    <div class="edit-field">
+      <label id="editLabelB">Entry Price B</label>
+      <input type="number" id="editPriceB" step="0.01" min="0">
+    </div>
+    <div class="edit-field">
+      <label id="editLabelSharesA">Shares A</label>
+      <input type="number" id="editSharesA" step="1" min="0">
+    </div>
+    <div class="edit-field">
+      <label id="editLabelSharesB">Shares B</label>
+      <input type="number" id="editSharesB" step="1" min="0">
+    </div>
+    <div class="edit-actions">
+      <button class="edit-cancel" onclick="closeEditModal()">Cancel</button>
+      <button class="edit-save" onclick="saveTradeEdit()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHART MODAL -->
+<div class="chart-overlay" id="chartModal" onclick="if(event.target===this)closeTradeChart()">
+  <div class="chart-modal">
+    <div class="chart-modal-header">
+      <div>
+        <div class="chart-modal-title" id="chartTitle"></div>
+        <div class="chart-modal-stats" id="chartStats"></div>
+      </div>
+      <button class="chart-modal-close" onclick="closeTradeChart()">&#x2715;</button>
+    </div>
+    <div class="chart-canvas-wrap">
+      <canvas id="tradeZChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+// Load annotation plugin
+(function() {{
+  const s = document.createElement("script");
+  s.src = "https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js";
+  s.onload = () => {{ Chart.register(window["chartjs-plugin-annotation"]); }};
+  document.head.appendChild(s);
+}})();
+
+let activeTradeChart = null;
+
+function openTradeChart(btn) {{
+  const raw = btn.getAttribute("data-chart").replace(/&amp;/g, "&").replace(/&#39;/g, "'");
+  const p = JSON.parse(raw);
+  if (!p.dates || p.dates.length === 0) {{
+    alert("No chart data available for this pair.");
+    return;
+  }}
+  const [a, b] = p.pair.split("/");
+  document.getElementById("chartTitle").innerHTML = `<span class="cm-pair">${{a}}</span><span style="color:#4a5568;margin:0 6px;">/</span><span class="cm-pair">${{b}}</span> Z-Score History`;
+  const zAbs = Math.abs(p.currentZ);
+  const zColor = zAbs >= 3 ? "#ef4444" : zAbs >= 2 ? "#f59e0b" : zAbs >= 1 ? "#38bdf8" : "#94a3b8";
+  const eAbs = Math.abs(p.entryZ);
+  const eColor = eAbs >= 3 ? "#ef4444" : eAbs >= 2 ? "#f59e0b" : eAbs >= 1 ? "#38bdf8" : "#94a3b8";
+  document.getElementById("chartStats").innerHTML = `
+    <div class="cm-stat"><span style="color:var(--muted);">Entry Z</span><span class="cm-val" style="color:${{eColor}}">${{p.entryZ >= 0 ? "+" : ""}}${{p.entryZ.toFixed(2)}}&sigma;</span></div>
+    <div class="cm-stat"><span style="color:var(--muted);">Current Z</span><span class="cm-val" style="color:${{zColor}}">${{p.currentZ >= 0 ? "+" : ""}}${{p.currentZ.toFixed(2)}}&sigma;</span></div>
+    <div class="cm-stat"><span style="color:var(--muted);">Window</span><span class="cm-val" style="color:#94a3b8;">${{p.zWindow}}d</span></div>`;
+  document.getElementById("chartModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+  setTimeout(() => buildTradeZChart(p.dates, p.z, p.entryZ), 40);
+}}
+
+function closeTradeChart() {{
+  document.getElementById("chartModal").classList.remove("open");
+  document.body.style.overflow = "";
+  if (activeTradeChart) {{ activeTradeChart.destroy(); activeTradeChart = null; }}
+}}
+
+function buildTradeZChart(dates, z, entryZ) {{
+  if (activeTradeChart) {{ activeTradeChart.destroy(); activeTradeChart = null; }}
+  const ctx = document.getElementById("tradeZChart").getContext("2d");
+  const grad = ctx.createLinearGradient(0, 0, 0, 380);
+  grad.addColorStop(0,   "rgba(56,189,248,0.20)");
+  grad.addColorStop(0.45,"rgba(56,189,248,0.06)");
+  grad.addColorStop(1,   "rgba(56,189,248,0.00)");
+
+  const hLine = (y, color, width, dash, lbl) => ({{
+    type: "line", yMin: y, yMax: y,
+    borderColor: color, borderWidth: width, borderDash: dash,
+    label: {{ display: !!lbl, content: lbl, color, position: "end",
+            font: {{ size: 10, family: "'JetBrains Mono',monospace", weight: "600" }},
+            xAdjust: -10, yAdjust: y > 0 ? -10 : 8, backgroundColor: "transparent", borderWidth: 0 }},
+  }});
+
+  const annotations = {{
+    zero: hLine(0,  "rgba(148,163,184,0.30)", 1,   [4,4], "0"),
+    p1:   hLine(1,  "rgba(34,197,94,0.55)",   1,   [5,4], "+1\u03c3"),
+    n1:   hLine(-1, "rgba(34,197,94,0.55)",   1,   [5,4], "-1\u03c3"),
+    p2:   hLine(2,  "rgba(245,158,11,0.75)",  1.5, [5,3], "+2\u03c3"),
+    n2:   hLine(-2, "rgba(245,158,11,0.75)",  1.5, [5,3], "-2\u03c3"),
+    p3:   hLine(3,  "rgba(239,68,68,0.85)",   1.5, [],    "+3\u03c3"),
+    n3:   hLine(-3, "rgba(239,68,68,0.85)",   1.5, [],    "-3\u03c3"),
+  }};
+
+  // Add entry Z horizontal line
+  if (entryZ != null && Math.abs(entryZ) > 0.1) {{
+    annotations.entryLine = {{
+      type: "line", yMin: entryZ, yMax: entryZ,
+      borderColor: "rgba(168,85,247,0.7)", borderWidth: 1.5, borderDash: [3, 3],
+      label: {{ display: true, content: "Entry " + (entryZ >= 0 ? "+" : "") + entryZ.toFixed(2) + "\u03c3",
+              color: "#a855f7", position: "start",
+              font: {{ size: 9, family: "'JetBrains Mono',monospace", weight: "600" }},
+              xAdjust: 10, yAdjust: -10, backgroundColor: "rgba(10,14,23,0.8)", borderWidth: 0,
+              padding: 3 }},
+    }};
+  }}
+
+  activeTradeChart = new Chart(ctx, {{
+    type: "line",
+    data: {{
+      labels: dates,
+      datasets: [{{
+        label: "Z-Score",
+        data: z,
+        borderColor: "#38bdf8",
+        borderWidth: 1.8,
+        pointRadius: 0,
+        pointHoverRadius: 3,
+        pointBorderWidth: 0,
+        fill: true,
+        backgroundColor: grad,
+        tension: 0.3,
+        spanGaps: true,
+      }}],
+    }},
+    options: {{
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {{ mode: "index", intersect: false }},
+      plugins: {{
+        legend: {{ display: false }},
+        tooltip: {{
+          backgroundColor: "#0d1520", borderColor: "#242d40", borderWidth: 1,
+          titleColor: "#64748b", bodyColor: "#e2e8f0",
+          titleFont: {{ family: "'JetBrains Mono',monospace", size: 10 }},
+          bodyFont: {{ family: "'JetBrains Mono',monospace", size: 12 }},
+          callbacks: {{
+            label: c => {{
+              const v = c.raw;
+              if (v === null) return "";
+              const lv = Math.abs(v) >= 3 ? "EXTREME" : Math.abs(v) >= 2 ? "STRONG" : Math.abs(v) >= 1 ? "SIGNAL" : "neutral";
+              return ` Z = ${{v >= 0 ? "+" : ""}}${{v.toFixed(3)}}\u03c3   [${{lv}}]`;
+            }},
+          }},
+        }},
+        annotation: {{ annotations }},
+      }},
+      scales: {{
+        x: {{
+          ticks: {{ color: "#374151", font: {{ family: "'JetBrains Mono',monospace", size: 10 }}, maxRotation: 0, maxTicksLimit: 10, autoSkip: true }},
+          grid: {{ color: "rgba(28,35,51,0.7)" }}, border: {{ color: "#1c2333" }},
+        }},
+        y: {{
+          ticks: {{ color: "#374151", font: {{ family: "'JetBrains Mono',monospace", size: 10 }},
+            callback: v => (v >= 0 ? "+" : "") + v.toFixed(1) + "\u03c3" }},
+          grid: {{ color: "rgba(28,35,51,0.6)" }}, border: {{ color: "#1c2333" }},
+        }},
+      }},
+    }},
+  }});
+}}
+
+document.addEventListener("keydown", e => {{ if (e.key === "Escape") closeTradeChart(); }});
+</script>
+
+<script>
+const TRADES_INIT = {json.dumps(trades, default=str)};
+
+function loadTrades() {{
+  const local = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  // Merge: localStorage entry data is authoritative (user may have edited prices/dates)
+  // TRADES_INIT only provides fresh currentZ and currentPrices from last Python run
+  const initMap = {{}};
+  TRADES_INIT.forEach(t => {{ initMap[t.id] = t; }});
+  const merged = local.map(t => {{
+    if (initMap[t.id]) {{
+      // Only take live market data from Python — NOT entry fields the user may have edited
+      t.currentZ      = initMap[t.id].currentZ;
+      t.currentPriceA = initMap[t.id].currentPriceA;
+      t.currentPriceB = initMap[t.id].currentPriceB;
+      // Chart data always comes from Python
+      t.chartDates    = initMap[t.id].chartDates || [];
+      t.chartZ        = initMap[t.id].chartZ || [];
+    }}
+    // Always recalculate days held and P&L from localStorage entry data
+    try {{
+      const entry = new Date(t.entryDate);
+      t.daysHeld = Math.max(0, Math.floor((Date.now() - entry.getTime()) / 86400000));
+    }} catch(e) {{}}
+    const dir = t.direction || "";
+    if (t.entryPriceA > 0 && t.entryPriceB > 0 && t.currentPriceA > 0 && t.currentPriceB > 0) {{
+      let pnlA, pnlB;
+      if (dir === "short_a_long_b") {{
+        pnlA = (t.entryPriceA - t.currentPriceA) / t.entryPriceA * 100;
+        pnlB = (t.currentPriceB - t.entryPriceB) / t.entryPriceB * 100;
+      }} else {{
+        pnlA = (t.currentPriceA - t.entryPriceA) / t.entryPriceA * 100;
+        pnlB = (t.entryPriceB - t.currentPriceB) / t.entryPriceB * 100;
+      }}
+      t.pnlPct = Math.round((pnlA + pnlB) / 2 * 100) / 100;
+    }}
+    return t;
+  }});
+  // Add any TRADES_INIT entries not in local
+  TRADES_INIT.forEach(t => {{
+    if (!merged.some(m => m.id === t.id)) merged.push(t);
+  }});
+  localStorage.setItem("activeTrades", JSON.stringify(merged));
+  return merged;
+}}
+
+function renderTrades() {{
+  const trades = loadTrades();
+  const open = trades.filter(t => t.status === "open");
+  const closed = trades.filter(t => t.status === "closed");
+
+  const makeCard = (t) => {{
+    const [a, b] = t.pair.split("/");
+    const dir = t.direction === "short_a_long_b" ? `Short ${{a}} / Long ${{b}}` : `Long ${{a}} / Short ${{b}}`;
+    const dirClass = t.direction === "short_a_long_b" ? "dir-short" : "dir-long";
+    const progress = Math.abs(t.entryZ) > 0 ? Math.max(0, Math.min(100, (1 - Math.abs(t.currentZ) / Math.abs(t.entryZ)) * 100)) : 0;
+    const pnl = t.pnlPct || 0;
+    const pnlClass = pnl >= 0 ? "pnl-pos" : "pnl-neg";
+    const zColor = Math.abs(t.currentZ) < Math.abs(t.entryZ) ? "#34d399" : "#ef4444";
+    const sA = t.sharesA || 0;
+    const sB = t.sharesB || 0;
+    // Dollar P&L per leg
+    let dollarPnl = 0;
+    if (sA > 0 && sB > 0) {{
+      if (t.direction === "short_a_long_b") {{
+        dollarPnl = (t.entryPriceA - t.currentPriceA) * sA + (t.currentPriceB - t.entryPriceB) * sB;
+      }} else {{
+        dollarPnl = (t.currentPriceA - t.entryPriceA) * sA + (t.entryPriceB - t.currentPriceB) * sB;
+      }}
+    }}
+    const dollarClass = dollarPnl >= 0 ? "pnl-pos" : "pnl-neg";
+    const cDates = t.chartDates || [];
+    const cZ = t.chartZ || [];
+    const hasChart = cDates.length > 0;
+    const chartPayload = hasChart ? JSON.stringify({{pair: t.pair, dates: cDates, z: cZ, currentZ: t.currentZ, entryZ: t.entryZ, zWindow: {Z_LENGTH}}}).replace(/&/g, "&amp;").replace(/'/g, "&#39;") : "";
+    const chartBtn = hasChart ? `<button class="tc-chart" onclick="openTradeChart(this)" data-chart='${{chartPayload}}'>&#9657; Z-Chart</button>` : "";
+    return `<div class="trade-card">
+      <div class="tc-header">
+        <span class="tc-pair">${{t.pair}}</span>
+        <span class="tc-dir ${{dirClass}}">${{dir}}</span>
+        <span class="tc-days">${{t.daysHeld || 0}}d held</span>
+        ${{hasChart ? chartBtn : ""}}
+        ${{t.status === "open" ? `<button class="tc-edit" onclick="openEditModal('${{t.id}}')">&#9998; Edit</button><button class="tc-close" onclick="closeTrade('${{t.id}}')">&#10005; Close</button>` : `<span style="color:var(--muted);font-size:10px;">CLOSED</span>`}}
+      </div>
+      <div class="tc-body">
+        <div class="tc-stat"><div class="tc-label">Entry Z</div><div class="tc-val">${{t.entryZ >= 0 ? "+" : ""}}${{t.entryZ.toFixed(2)}}&sigma;</div></div>
+        <div class="tc-stat"><div class="tc-label">Current Z</div><div class="tc-val" style="color:${{zColor}}">${{t.currentZ >= 0 ? "+" : ""}}${{t.currentZ.toFixed(2)}}&sigma;</div></div>
+        <div class="tc-stat"><div class="tc-label">Est P&L</div><div class="tc-val ${{pnlClass}}">${{pnl >= 0 ? "+" : ""}}${{pnl.toFixed(1)}}%</div></div>
+        <div class="tc-stat tc-prices"><div class="tc-label">${{a}} <span style="color:var(--cyan);font-size:9px;">${{sA}} shr</span></div><div class="tc-val">$${{t.entryPriceA.toFixed(2)}} &rarr; $${{t.currentPriceA.toFixed(2)}}</div></div>
+        <div class="tc-stat tc-prices"><div class="tc-label">${{b}} <span style="color:var(--cyan);font-size:9px;">${{sB}} shr</span></div><div class="tc-val">$${{t.entryPriceB.toFixed(2)}} &rarr; $${{t.currentPriceB.toFixed(2)}}</div></div>
+        <div class="tc-stat"><div class="tc-label">$ P&L</div><div class="tc-val ${{dollarClass}}">${{dollarPnl >= 0 ? "+":""}}$${{Math.abs(dollarPnl).toFixed(0)}}</div></div>
+      </div>
+      <div class="tc-progress">
+        <div class="tc-pbar-track"><div class="tc-pbar-fill" style="width:${{progress.toFixed(0)}}%;${{progress > 0 ? '' : 'background:var(--muted);width:2px;'}}"></div></div>
+        <span class="tc-pbar-label">${{progress.toFixed(0)}}% to Z=0</span>
+      </div>
+    </div>`;
+  }};
+
+  document.getElementById("openTrades").innerHTML = open.length
+    ? open.map(makeCard).join("") : '<div class="no-trades">No open trades.</div>';
+  document.getElementById("closedTrades").innerHTML = closed.length
+    ? closed.map(makeCard).join("") : '<div class="no-trades">No closed trades yet.</div>';
+}}
+
+function closeTrade(id) {{
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  const t = trades.find(t => t.id === id);
+  if (t) {{
+    t.status = "closed";
+    t.closeDate = new Date().toISOString().slice(0,10);
+  }}
+  localStorage.setItem("activeTrades", JSON.stringify(trades));
+  renderTrades();
+}}
+
+function closeAllTrades() {{
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  trades.forEach(t => {{
+    if (t.status === "open") {{
+      t.status = "closed";
+      t.closeDate = new Date().toISOString().slice(0,10);
+    }}
+  }});
+  localStorage.setItem("activeTrades", JSON.stringify(trades));
+  renderTrades();
+}}
+
+function exportTrades() {{
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  if (trades.length === 0) {{ alert("No trades to export."); return; }}
+  const blob = new Blob([JSON.stringify(trades, null, 2)], {{ type: "application/json" }});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "active_trades.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+}}
+
+function importTrades(e) {{
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {{
+    try {{
+      const imported = JSON.parse(reader.result);
+      if (!Array.isArray(imported)) {{ alert("Invalid file format."); return; }}
+      const existing = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+      const ids = new Set(existing.map(t => t.id));
+      imported.forEach(t => {{ if (!ids.has(t.id)) existing.push(t); }});
+      localStorage.setItem("activeTrades", JSON.stringify(existing));
+      renderTrades();
+    }} catch(err) {{ alert("Error reading file: " + err.message); }}
+  }};
+  reader.readAsText(file);
+}}
+
+function openEditModal(id) {{
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  const t = trades.find(x => x.id === id);
+  if (!t) return;
+  const [a, b] = t.pair.split("/");
+  document.getElementById("editTradeId").value = id;
+  document.getElementById("editTitle").textContent = "Edit Trade: " + t.pair;
+  document.getElementById("editDate").value = t.entryDate || "";
+  document.getElementById("editPriceA").value = t.entryPriceA || "";
+  document.getElementById("editPriceB").value = t.entryPriceB || "";
+  document.getElementById("editLabelA").textContent = "Entry Price " + a;
+  document.getElementById("editLabelB").textContent = "Entry Price " + b;
+  document.getElementById("editSharesA").value = t.sharesA || 0;
+  document.getElementById("editSharesB").value = t.sharesB || 0;
+  document.getElementById("editLabelSharesA").textContent = "Shares " + a;
+  document.getElementById("editLabelSharesB").textContent = "Shares " + b;
+  document.getElementById("editModal").classList.add("open");
+}}
+
+function closeEditModal() {{
+  document.getElementById("editModal").classList.remove("open");
+}}
+
+function saveTradeEdit() {{
+  const id = document.getElementById("editTradeId").value;
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  const t = trades.find(x => x.id === id);
+  if (!t) return;
+
+  const newDate = document.getElementById("editDate").value;
+  const newPriceA = parseFloat(document.getElementById("editPriceA").value);
+  const newPriceB = parseFloat(document.getElementById("editPriceB").value);
+  const newSharesA = parseInt(document.getElementById("editSharesA").value);
+  const newSharesB = parseInt(document.getElementById("editSharesB").value);
+
+  if (newDate) t.entryDate = newDate;
+  if (!isNaN(newPriceA) && newPriceA > 0) t.entryPriceA = newPriceA;
+  if (!isNaN(newPriceB) && newPriceB > 0) t.entryPriceB = newPriceB;
+  if (!isNaN(newSharesA) && newSharesA >= 0) t.sharesA = newSharesA;
+  if (!isNaN(newSharesB) && newSharesB >= 0) t.sharesB = newSharesB;
+
+  // Recalculate days held
+  try {{
+    const entry = new Date(t.entryDate);
+    t.daysHeld = Math.floor((Date.now() - entry.getTime()) / 86400000);
+  }} catch(e) {{}}
+
+  // Recalculate P&L with new entry prices
+  const dir = t.direction || "";
+  if (dir === "short_a_long_b") {{
+    const pnlA = (t.entryPriceA - t.currentPriceA) / t.entryPriceA * 100;
+    const pnlB = (t.currentPriceB - t.entryPriceB) / t.entryPriceB * 100;
+    t.pnlPct = Math.round((pnlA + pnlB) / 2 * 100) / 100;
+  }} else {{
+    const pnlA = (t.currentPriceA - t.entryPriceA) / t.entryPriceA * 100;
+    const pnlB = (t.entryPriceB - t.currentPriceB) / t.entryPriceB * 100;
+    t.pnlPct = Math.round((pnlA + pnlB) / 2 * 100) / 100;
+  }}
+
+  localStorage.setItem("activeTrades", JSON.stringify(trades));
+  closeEditModal();
+  renderTrades();
+}}
+
+document.addEventListener("keydown", e => {{ if (e.key === "Escape") closeEditModal(); }});
+
+window.addEventListener("DOMContentLoaded", () => {{
+  document.getElementById("update-time").textContent = new Date({int(time.time() * 1000)}).toLocaleString();
+  renderTrades();
+}});
+</script>
+</body>
+</html>"""
+
+    with open("active_trades.html", "w", encoding="utf-8") as f:
+        f.write(page)
+    print(f"active_trades.html created. ({len(open_trades)} open, {len(closed_trades)} closed)")
+
+
+# ==========================================
 # MAIN EXECUTION
 # ==========================================
 if __name__ == "__main__":
@@ -1096,21 +1886,27 @@ if __name__ == "__main__":
     results = sorted(results, key=lambda x: x["Score"], reverse=True)
 
     # The code below runs EVERY time, regardless of whether calculations were cached
-    top_results = results[:500]
+    top_results = results[:2000]
+    chart_results = results[:500]  # only compute charts for top 500
 
-    # Compute rolling Z-score histories for top pairs (parallel)
-    print(f"Computing Z-score chart histories for top pairs using {NUM_WORKERS} CPU cores...")
-    chart_chunksize = max(1, len(top_results) // (NUM_WORKERS * 2))
+    # Compute rolling Z-score histories for top 500 pairs (parallel)
+    print(f"Computing Z-score chart histories for top {len(chart_results)} pairs using {NUM_WORKERS} CPU cores...")
+    chart_chunksize = max(1, len(chart_results) // (NUM_WORKERS * 2))
     with mp.Pool(
         processes=NUM_WORKERS,
         initializer=_init_chart_worker,
         initargs=(chart_data, data)
     ) as pool:
-        top_results = list(tqdm(
-            pool.imap(_compute_chart_for_pair, top_results, chunksize=chart_chunksize),
-            total=len(top_results),
+        chart_results = list(tqdm(
+            pool.imap(_compute_chart_for_pair, chart_results, chunksize=chart_chunksize),
+            total=len(chart_results),
             desc="Computing Charts"
         ))
+    # Merge chart data back: first 500 have charts, rest don't
+    chart_map = {r["Pair"]: r for r in chart_results}
+    for r in top_results:
+        if r["Pair"] in chart_map:
+            r.update(chart_map[r["Pair"]])
 
     # Helper: format volume as human-readable string
     def fmt_vol(v):
@@ -1283,9 +2079,11 @@ if __name__ == "__main__":
               <div class="z-sub-row">
                 <span class="z-sub" title="30-day Z-score">30d:{f'{z30:+.1f}' if z30 is not None else '\u2014'}</span>
                 <span class="z-sub" title="250-day Z-score">250d:{f'{z250:+.1f}' if z250 is not None else '\u2014'}</span>
-                <span class="z-sub z-adaptive" title="Adaptive Z ({adapt_win}d window based on half-life)">A{adapt_win}d:{f'{z_adaptive:+.1f}' if z_adaptive is not None else '\u2014'}</span>
-                <span class="align-badge {align_class}">{align_label}</span>
                 <span class="conf-badge {conf_class}">{confidence}</span>
+                <span class="align-badge {align_class}">{align_label}</span>
+              </div>
+              <div class="z-sub-row">
+                <span class="z-sub z-adaptive" title="Adaptive Z ({adapt_win}d window based on half-life)">A{adapt_win}d:{f'{z_adaptive:+.1f}' if z_adaptive is not None else '\u2014'}</span>
               </div>
             </div>
           </td>
@@ -1320,6 +2118,12 @@ if __name__ == "__main__":
           <td class="chart-cell">
             <button class="chart-btn" onclick="openChart(this,'z')" data-chart='{chart_payload_esc}'>&#9657; Z-Chart</button>
             <button class="chart-btn price-btn" onclick="openChart(this,'price')" data-chart='{chart_payload_esc}'>&#9724; Price</button>
+          </td>
+          <td class="track-cell">
+            <button class="track-btn" onclick="trackTrade(this)"
+              data-pair="{r['Pair']}" data-z="{z}" data-price-a="{price_a}" data-price-b="{price_b}"
+              data-direction="{'short_a_long_b' if z > 0 else 'long_a_short_b' if z < 0 else 'neutral'}"
+              data-sig="{sig_line1} / {sig_line2 if sig_line2 else ''}">&#9733; Track</button>
           </td>
         </tr>"""
 
@@ -1386,17 +2190,17 @@ if __name__ == "__main__":
       /* STATS ROW */
       .stats-row {{
         background: var(--surface); border-bottom: 1px solid var(--border);
-        padding: 12px 32px; display: flex; flex-wrap: wrap;
+        padding: 6px 20px; display: flex; flex-wrap: wrap;
         overflow: visible;
         position: relative; z-index: 50;
       }}
       .stat-item {{
-        padding: 6px 28px 6px 0; margin-right: 28px;
+        padding: 4px 14px 4px 0; margin-right: 14px;
         border-right: 1px solid var(--border); white-space: nowrap; flex-shrink: 0;
       }}
       .stat-item:last-child {{ border-right: none; }}
-      .stat-label {{ font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }}
-      .stat-value {{ font-family: var(--mono); font-size: 18px; font-weight: 600; color: white; }}
+      .stat-label {{ font-size: 9px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--muted); margin-bottom: 1px; }}
+      .stat-value {{ font-family: var(--mono); font-size: 14px; font-weight: 600; color: white; }}
       .stat-value.cyan {{ color: var(--cyan); }}
       .stat-value.green {{ color: var(--green); }}
       .stat-value.amber {{ color: var(--amber); }}
@@ -1495,7 +2299,7 @@ if __name__ == "__main__":
       .z-bar-fill  {{ height: 100%; border-radius: 2px; }}
       .z-bar-pos {{ background: var(--red); }}
       .z-bar-neg {{ background: var(--green); }}
-      .z-sub-row {{ display: flex; gap: 6px; align-items: center; margin-top: 1px; }}
+      .z-sub-row {{ display: flex; gap: 6px; align-items: center; margin-top: 1px; flex-wrap: wrap; }}
       .z-sub {{ font-family: var(--mono); font-size: 9px; color: #cbd5e1; }}
       .z-adaptive {{ color: #f59e0b; }}
       .align-badge {{ display: inline-flex; padding: 1px 5px; border-radius: 3px; font-size: 7px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }}
@@ -1561,6 +2365,15 @@ if __name__ == "__main__":
         transition: background 0.15s, border-color 0.15s; white-space: nowrap;
       }}
       .chart-btn:hover {{ background: rgba(56,189,248,0.18); border-color: var(--cyan); }}
+      .track-cell {{ text-align: center; }}
+      .track-btn {{
+        background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.25);
+        color: var(--green); font-family: var(--mono); font-size: 10px; font-weight: 600;
+        padding: 4px 8px; border-radius: 4px; cursor: pointer; letter-spacing: 0.05em;
+        transition: background 0.15s, border-color 0.15s; white-space: nowrap;
+      }}
+      .track-btn:hover {{ background: rgba(34,197,94,0.2); border-color: var(--green); }}
+      .track-btn.tracked {{ background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.4); color: var(--amber); }}
       .price-btn {{
         background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.25);
         color: var(--purple);
@@ -1588,6 +2401,22 @@ if __name__ == "__main__":
 
       /* SHARES (inline in signal) */
       .share-count {{ font-size: 10px; color: #ffffff; margin-left: 3px; }}
+
+      /* PAGINATION */
+      .pagination-bar {{
+        display: flex; justify-content: center; align-items: center; gap: 4px;
+        padding: 10px 20px; background: var(--surface); border-top: 1px solid var(--border);
+      }}
+      .pagination-bar .pg-btn {{
+        background: transparent; border: 1px solid var(--border); color: var(--muted);
+        font-family: var(--mono); font-size: 12px; padding: 4px 10px; border-radius: 4px;
+        cursor: pointer; transition: all 0.15s; min-width: 32px; text-align: center;
+      }}
+      .pagination-bar .pg-btn:hover {{ background: rgba(56,189,248,0.1); color: var(--cyan); border-color: var(--cyan); }}
+      .pagination-bar .pg-btn.active {{ background: rgba(56,189,248,0.2); color: var(--cyan); border-color: var(--cyan); font-weight: 700; }}
+      .pagination-bar .pg-btn:disabled {{ opacity: 0.3; cursor: default; }}
+      .pagination-bar .pg-info {{ font-family: var(--mono); font-size: 11px; color: var(--muted); margin: 0 12px; }}
+      tbody tr.page-hidden {{ display: none; }}
 
       /* MODAL */
       .modal-overlay {{
@@ -1699,7 +2528,11 @@ if __name__ == "__main__":
         <span>Setups: <em>{len(results):,}</em></span>
         <span>Showing: <em>Top {len(top_results)}</em></span>
       </div>
-      <div><a href="symbols.html" class="nav-link">Symbol Reference &#8594;</a></div>
+      <div style="display:flex;gap:16px;align-items:center;">
+        <a href="active_trades.html" class="nav-link" style="color:var(--green);">&#9733; My Trades</a>
+        <a href="symbols.html" class="nav-link">Symbols &#8594;</a>
+        <button class="nav-link" onclick="exportTrades()" style="background:none;border:none;cursor:pointer;font:inherit;color:var(--amber);">&#8681; Export</button>
+      </div>
     </div>
 
     <!-- STATS ROW -->
@@ -1830,6 +2663,16 @@ if __name__ == "__main__":
           <span class="toggle-track"><span class="toggle-thumb"></span></span>
         </label>
       </div>
+      <div class="control-group">
+        <label>Per Page</label>
+        <select id="perPage" onchange="changePerPage()">
+          <option value="25">25</option>
+          <option value="50" selected>50</option>
+          <option value="100">100</option>
+          <option value="200">200</option>
+          <option value="0">All</option>
+        </select>
+      </div>
     </div>
 
     <!-- TABLE -->
@@ -1847,6 +2690,7 @@ if __name__ == "__main__":
       <th onclick="setSort('score')">Score &#8597;</th>
       <th>Signal/Shares</th>
       <th style="text-align:center;">Charts</th>
+      <th style="text-align:center;">Track</th>
     </tr>
     </thead>
     <tbody id="tableBody">
@@ -1854,6 +2698,9 @@ if __name__ == "__main__":
     </tbody>
     </table>
     </div>
+
+    <!-- PAGINATION -->
+    <div id="pagination" class="pagination-bar"></div>
 
     <!-- FOOTER -->
     <div class="footer">
@@ -1975,6 +2822,7 @@ if __name__ == "__main__":
         .replace(/&amp;/g, "&").replace(/&#39;/g, "'")
         .replace(/&lt;/g, "<").replace(/&gt;/g, ">");
       const p = JSON.parse(raw);
+      if (!p.dates || p.dates.length === 0) {{ alert("No chart data for this pair (outside top 500 by score)."); return; }}
       currentChartData = p;
       const a = p.pair.split("/")[0], b = p.pair.split("/")[1];
 
@@ -2138,7 +2986,16 @@ if __name__ == "__main__":
           interaction: {{ mode: "index", intersect: false }},
           plugins: {{
             legend: {{ display: hasAdaptive, position: "top",
-              labels: {{ color: "#94a3b8", font: {{ family: "'JetBrains Mono',monospace", size: 10 }}, boxWidth: 20, padding: 12 }} }},
+              labels: {{ color: "#e2e8f0", font: {{ family: "'JetBrains Mono',monospace", size: 10 }}, padding: 12,
+                usePointStyle: true, pointStyle: "rectRounded", pointStyleWidth: 20,
+                generateLabels: (chart) => chart.data.datasets.map((ds, i) => ({{
+                  text: ds.label, fontColor: "#e2e8f0",
+                  fillStyle: ds.borderColor, strokeStyle: ds.borderColor,
+                  pointStyle: "rectRounded", lineWidth: 0,
+                  lineDash: ds.borderDash || [], datasetIndex: i,
+                  hidden: !chart.isDatasetVisible(i),
+                }})),
+              }} }},
             tooltip: {{
               backgroundColor: "#0d1520", borderColor: "#242d40", borderWidth: 1,
               titleColor: "#64748b", bodyColor: "#e2e8f0",
@@ -2526,6 +3383,8 @@ if __name__ == "__main__":
       }}
 
       calcShares();
+      currentPage = 1;
+      paginateTable();
     }}
 
     // ─── SORT ─────────────────────────────────────────────────────────────────────
@@ -2577,6 +3436,7 @@ if __name__ == "__main__":
       rows.forEach((r, i) => {{ r.querySelector(".rank-cell").textContent = i + 1; tbody.appendChild(r); }});
       updateSortIndicators(key, asc);
       calcShares();
+      paginateTable();
     }}
 
     function updateSortIndicators(key, asc) {{
@@ -2594,9 +3454,156 @@ if __name__ == "__main__":
       }});
     }}
 
+    // ─── TRADE TRACKER ─────────────────────────────────────────────────────────
+    function trackTrade(btn) {{
+      const pair = btn.dataset.pair;
+      const id   = pair + "_" + new Date().toISOString().slice(0,10);
+      const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+      // Check if already tracked
+      if (trades.some(t => t.pair === pair && t.status === "open")) {{
+        btn.textContent = "Already tracked";
+        setTimeout(() => {{ btn.textContent = "\u2733 Track"; }}, 1500);
+        return;
+      }}
+      const priceA = parseFloat(btn.dataset.priceA);
+      const priceB = parseFloat(btn.dataset.priceB);
+      // Calculate shares from current capital setting (50/50 split)
+      const capital = parseFloat(document.getElementById("capitalInput").value) || 0;
+      const leg = capital / 2;
+      const sharesA = priceA > 0 ? Math.round(leg / priceA) : 0;
+      const sharesB = priceB > 0 ? Math.round((sharesA * priceA) / priceB) : 0;
+      const trade = {{
+        id: id,
+        pair: pair,
+        direction: btn.dataset.direction,
+        signal: btn.dataset.sig,
+        entryDate: new Date().toISOString().slice(0,10),
+        entryZ: parseFloat(btn.dataset.z),
+        entryPriceA: priceA,
+        entryPriceB: priceB,
+        currentZ: parseFloat(btn.dataset.z),
+        currentPriceA: priceA,
+        currentPriceB: priceB,
+        sharesA: sharesA,
+        sharesB: sharesB,
+        capital: capital,
+        daysHeld: 0,
+        status: "open",
+      }};
+      trades.push(trade);
+      localStorage.setItem("activeTrades", JSON.stringify(trades));
+      btn.classList.add("tracked");
+      btn.textContent = "\u2713 Tracked";
+      // Show toast
+      showToast("Trade tracked: " + pair + " (" + sharesA + " / " + sharesB + " shares, $" + capital + ")");
+    }}
+
+    function exportTrades() {{
+      const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+      if (trades.length === 0) {{ showToast("No trades to export"); return; }}
+      const blob = new Blob([JSON.stringify(trades, null, 2)], {{ type: "application/json" }});
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "active_trades.json";
+      a.click();
+      URL.revokeObjectURL(a.href);
+      showToast("Exported " + trades.length + " trade(s)");
+    }}
+
+    function showToast(msg) {{
+      let t = document.getElementById("toast");
+      if (!t) {{
+        t = document.createElement("div");
+        t.id = "toast";
+        t.style.cssText = "position:fixed;bottom:20px;right:20px;background:#0d1520;border:1px solid var(--cyan);color:#e2e8f0;padding:10px 20px;border-radius:8px;font-family:var(--mono);font-size:12px;z-index:9999;opacity:0;transition:opacity 0.3s;";
+        document.body.appendChild(t);
+      }}
+      t.textContent = msg;
+      t.style.opacity = "1";
+      setTimeout(() => {{ t.style.opacity = "0"; }}, 2500);
+    }}
+
+    // Mark already-tracked pairs on load
+    function markTrackedPairs() {{
+      const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+      const openPairs = new Set(trades.filter(t => t.status === "open").map(t => t.pair));
+      document.querySelectorAll(".track-btn").forEach(btn => {{
+        if (openPairs.has(btn.dataset.pair)) {{
+          btn.classList.add("tracked");
+          btn.textContent = "\u2713 Tracked";
+        }}
+      }});
+    }}
+
+    // ─── PAGINATION ──────────────────────────────────────────────────────────────
+    let currentPage = 1;
+    let rowsPerPage = 50;
+
+    function changePerPage() {{
+      rowsPerPage = parseInt(document.getElementById("perPage").value) || 0;
+      currentPage = 1;
+      paginateTable();
+    }}
+
+    function goToPage(p) {{
+      currentPage = p;
+      paginateTable();
+      document.querySelector(".table-wrapper").scrollIntoView({{ behavior: "smooth", block: "start" }});
+    }}
+
+    function paginateTable() {{
+      const allRows = [...document.querySelectorAll("tr.data-row")];
+      // Get rows that pass filters (baseHidden === "0" or not set)
+      const visible = allRows.filter(r => r.dataset.baseHidden !== "1");
+      const total   = visible.length;
+
+      if (rowsPerPage === 0 || rowsPerPage >= total) {{
+        // Show all
+        visible.forEach(r => r.classList.remove("page-hidden"));
+        currentPage = 1;
+        document.getElementById("pagination").innerHTML =
+          `<span class="pg-info">Showing all ${{total}} pairs</span>`;
+        return;
+      }}
+
+      const totalPages = Math.ceil(total / rowsPerPage);
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+      const start = (currentPage - 1) * rowsPerPage;
+      const end   = start + rowsPerPage;
+
+      visible.forEach((r, i) => {{
+        r.classList.toggle("page-hidden", i < start || i >= end);
+      }});
+
+      // Build page bar
+      let html = `<button class="pg-btn" onclick="goToPage(1)" ${{currentPage === 1 ? 'disabled' : ''}}>&laquo;</button>`;
+      html += `<button class="pg-btn" onclick="goToPage(${{currentPage - 1}})" ${{currentPage === 1 ? 'disabled' : ''}}>&lsaquo;</button>`;
+
+      // Show pages around current
+      const maxShow = 7;
+      let pStart = Math.max(1, currentPage - Math.floor(maxShow / 2));
+      let pEnd   = Math.min(totalPages, pStart + maxShow - 1);
+      if (pEnd - pStart < maxShow - 1) pStart = Math.max(1, pEnd - maxShow + 1);
+
+      if (pStart > 1) html += `<button class="pg-btn" onclick="goToPage(1)">1</button><span class="pg-info">&hellip;</span>`;
+      for (let p = pStart; p <= pEnd; p++) {{
+        html += `<button class="pg-btn ${{p === currentPage ? 'active' : ''}}" onclick="goToPage(${{p}})">${{p}}</button>`;
+      }}
+      if (pEnd < totalPages) html += `<span class="pg-info">&hellip;</span><button class="pg-btn" onclick="goToPage(${{totalPages}})">${{totalPages}}</button>`;
+
+      html += `<button class="pg-btn" onclick="goToPage(${{currentPage + 1}})" ${{currentPage === totalPages ? 'disabled' : ''}}>&rsaquo;</button>`;
+      html += `<button class="pg-btn" onclick="goToPage(${{totalPages}})" ${{currentPage === totalPages ? 'disabled' : ''}}>&raquo;</button>`;
+      html += `<span class="pg-info">${{start + 1}}&ndash;${{Math.min(end, total)}} of ${{total}}</span>`;
+
+      document.getElementById("pagination").innerHTML = html;
+    }}
+
     window.addEventListener("DOMContentLoaded", () => {{
       document.getElementById("update-time").textContent = new Date({int(time.time() * 1000)}).toLocaleString();
       calcShares();
+      paginateTable();
+      markTrackedPairs();
       document.getElementById("sortBy").addEventListener("change", () => {{
         currentSort.key = document.getElementById("sortBy").value;
         currentSort.asc = (currentSort.key === "hl");
@@ -2611,4 +3618,10 @@ if __name__ == "__main__":
             f.write(html)
 
     print(f"pairs_scanner.html created. ({len(top_results)} pairs rendered)")
+
+    # ── Active Trades ──
+    print("Updating active trades...")
+    active_trades = update_active_trades(data, chart_data)
+    generate_trades_page(active_trades)
+
     print("\nDone. Open pairs_scanner.html in your browser.")
