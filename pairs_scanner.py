@@ -7,6 +7,7 @@ import os
 import time
 from datetime import datetime, timedelta
 from tqdm import tqdm
+import multiprocessing as mp
 
 # ==========================================
 # CONFIG
@@ -15,12 +16,13 @@ DATA_FILE        = "historical_data.csv.gz"
 CHART_DATA_FILE  = "chart_data.csv.gz"        # Extended history for Z-score charts only
 VOLUME_DATA_FILE = "volume_data.csv.gz"        # Average daily volume per ticker
 ANALYSIS_CACHE = "analysis_results.json"
-BATCH_SIZE = 10
+BATCH_SIZE = 40
 COOLDOWN = 3
 LOOKBACK_DAYS       = 650   # Days used for scoring / correlation / perf
 CHART_LOOKBACK_DAYS = 1825  # ~5 years used for Z-score chart history
 VOL_AVG_DAYS        = 30    # Rolling window for average volume calculation
-CACHE_UPDATE_COOLDOWN_HOURS = 1
+CACHE_UPDATE_COOLDOWN_HOURS = 4
+NUM_WORKERS = max(1, (mp.cpu_count() or 2) - 1)  # CPU cores for parallel pair analysis
 
 CORR_SHORT = 35
 CORR_LONG = 100
@@ -40,26 +42,19 @@ W_REL_PERF = 0.25
 # ==========================================
 TICKER_TYPES    = {}   # ticker -> "Pure ETF" | "Pure Stock"
 TICKER_NAMES    = {}   # ticker -> human-readable name
-TICKER_INDUSTRY = {}   # ticker -> industry  (ETFs.csv col 3)
-TICKER_SUBIND   = {}   # ticker -> sub-industry (ETFs.csv col 4)
-ETF_LEV_TYPES   = {}   # ticker -> "normal"|"leveraged"|"inverse"|"lev_inv"
+TICKER_INDUSTRY = {}   # ticker -> sector  (col 3)
+TICKER_SUBIND   = {}   # ticker -> industry (col 4)
+ETF_LEV_TYPES   = {}   # ticker -> type tag (see _ETF_TYPE_MAP values)
 
-# Maps ETFs.csv col-5 type-strings -> internal 4-state tag
+# Maps ETFs.csv col-5 type-strings -> internal tag
 _ETF_TYPE_MAP = {
     "etf":                      "normal",
     "etf, leveraged":           "leveraged",
-    "etf leveraged":            "leveraged",
-    "etf,leveraged":            "leveraged",
-    "leveraged":                "leveraged",
     "etf, inverse":             "inverse",
-    "etf inverse":              "inverse",
-    "etf,inverse":              "inverse",
-    "inverse":                  "inverse",
     "etf, leveraged, inverse":  "lev_inv",
-    "etf leveraged inverse":    "lev_inv",
-    "etf,leveraged,inverse":    "lev_inv",
-    "leveraged, inverse":       "lev_inv",
-    "leveraged inverse":        "lev_inv",
+    "etn":                      "etn",
+    "etn, leveraged":           "etn_lev",
+    "etn, leveraged, inverse":  "etn_lev_inv",
 }
 
 def load_master_tickers():
@@ -90,7 +85,8 @@ def load_master_tickers():
         n_lev    = sum(1 for v in ETF_LEV_TYPES.values() if v == "leveraged")
         n_inv    = sum(1 for v in ETF_LEV_TYPES.values() if v == "inverse")
         n_levinv = sum(1 for v in ETF_LEV_TYPES.values() if v == "lev_inv")
-        print(f"ETFs.csv: {len(etfs)} tickers  |  leveraged={n_lev}  inverse={n_inv}  lev+inv={n_levinv}")
+        n_etn    = sum(1 for v in ETF_LEV_TYPES.values() if v.startswith("etn"))
+        print(f"ETFs.csv: {len(etfs)} tickers  |  leveraged={n_lev}  inverse={n_inv}  lev+inv={n_levinv}  etn={n_etn}")
 
     if os.path.exists("STOCKS.csv"):
         df_stock = pd.read_csv("STOCKS.csv", header=None)
@@ -523,11 +519,15 @@ def analyze_pair(pair):
         return None
 
     # ── Half-life of mean reversion (using full log-price spread in prices_raw) ──
+    # Pairs without detectable mean-reversion are not viable pairs trades.
     try:
         full_spread = np.log(prices_raw[a]) - np.log(prices_raw[b])
         hl = compute_half_life(full_spread)
     except Exception:
         hl = float('nan')
+
+    if np.isnan(hl):
+        return None
 
     # ── Annualized returns ──
     try:
@@ -615,452 +615,9 @@ def compute_price_history(a, b, price_data):
 # ==========================================
 def build_symbols_page(valid_tickers):
 
-    # ── Built-in ETF category lookup ─────────────────────────────────────────
-    # Provides Sector / Industry / Subindustry for well-known ETFs so that
-    # even a 2-column ETFs.csv (Ticker, Name) gets a proper hierarchy.
-    ETF_CATEGORIES = {
-        # ── US EQUITY – BROAD MARKET ──────────────────────────────────────────
-        "SPY":  ("US Equity", "Broad Market", "Large Cap Blend"),
-        "IVV":  ("US Equity", "Broad Market", "Large Cap Blend"),
-        "VOO":  ("US Equity", "Broad Market", "Large Cap Blend"),
-        "VTI":  ("US Equity", "Broad Market", "Total Market"),
-        "ITOT": ("US Equity", "Broad Market", "Total Market"),
-        "SCHB": ("US Equity", "Broad Market", "Total Market"),
-        "IWB":  ("US Equity", "Broad Market", "Large Cap Blend"),
-        "RSP":  ("US Equity", "Broad Market", "Equal Weight"),
-        "OEF":  ("US Equity", "Broad Market", "Large Cap 100"),
-        "FXAIX":("US Equity", "Broad Market", "Large Cap Blend"),
-        # Large Cap Growth / Value
-        "IVW":  ("US Equity", "Broad Market", "Large Cap Growth"),
-        "VUG":  ("US Equity", "Broad Market", "Large Cap Growth"),
-        "VOOG": ("US Equity", "Broad Market", "Large Cap Growth"),
-        "SCHG": ("US Equity", "Broad Market", "Large Cap Growth"),
-        "QQQ":  ("US Equity", "Broad Market", "Large Cap Growth"),
-        "QQQM": ("US Equity", "Broad Market", "Large Cap Growth"),
-        "IWF":  ("US Equity", "Broad Market", "Large Cap Growth"),
-        "IVE":  ("US Equity", "Broad Market", "Large Cap Value"),
-        "VTV":  ("US Equity", "Broad Market", "Large Cap Value"),
-        "VOOV": ("US Equity", "Broad Market", "Large Cap Value"),
-        "SCHV": ("US Equity", "Broad Market", "Large Cap Value"),
-        "IWD":  ("US Equity", "Broad Market", "Large Cap Value"),
-        # Mid Cap
-        "IJH":  ("US Equity", "Broad Market", "Mid Cap Blend"),
-        "VO":   ("US Equity", "Broad Market", "Mid Cap Blend"),
-        "MDY":  ("US Equity", "Broad Market", "Mid Cap Blend"),
-        "IJJ":  ("US Equity", "Broad Market", "Mid Cap Value"),
-        "IJK":  ("US Equity", "Broad Market", "Mid Cap Growth"),
-        "VOE":  ("US Equity", "Broad Market", "Mid Cap Value"),
-        "VOT":  ("US Equity", "Broad Market", "Mid Cap Growth"),
-        "IWR":  ("US Equity", "Broad Market", "Mid Cap Blend"),
-        # Small Cap
-        "IJR":  ("US Equity", "Broad Market", "Small Cap Blend"),
-        "VB":   ("US Equity", "Broad Market", "Small Cap Blend"),
-        "IWM":  ("US Equity", "Broad Market", "Small Cap Blend"),
-        "SLY":  ("US Equity", "Broad Market", "Small Cap Blend"),
-        "IJS":  ("US Equity", "Broad Market", "Small Cap Value"),
-        "VBR":  ("US Equity", "Broad Market", "Small Cap Value"),
-        "IWN":  ("US Equity", "Broad Market", "Small Cap Value"),
-        "IJT":  ("US Equity", "Broad Market", "Small Cap Growth"),
-        "VBK":  ("US Equity", "Broad Market", "Small Cap Growth"),
-        "IWO":  ("US Equity", "Broad Market", "Small Cap Growth"),
-        # Dividend / Income
-        "VYM":  ("US Equity", "Dividend & Income", "High Dividend"),
-        "DVY":  ("US Equity", "Dividend & Income", "High Dividend"),
-        "HDV":  ("US Equity", "Dividend & Income", "High Dividend"),
-        "SCHD": ("US Equity", "Dividend & Income", "Dividend Growth"),
-        "DGRO": ("US Equity", "Dividend & Income", "Dividend Growth"),
-        "SDY":  ("US Equity", "Dividend & Income", "Dividend Growth"),
-        "VIG":  ("US Equity", "Dividend & Income", "Dividend Growth"),
-        "NOBL": ("US Equity", "Dividend & Income", "Dividend Aristocrats"),
-        "SPYD": ("US Equity", "Dividend & Income", "High Dividend"),
-        # Factor / Smart Beta
-        "MTUM": ("US Equity", "Factor / Smart Beta", "Momentum"),
-        "QUAL": ("US Equity", "Factor / Smart Beta", "Quality"),
-        "VLUE": ("US Equity", "Factor / Smart Beta", "Value"),
-        "USMV": ("US Equity", "Factor / Smart Beta", "Min Volatility"),
-        "SIZE": ("US Equity", "Factor / Smart Beta", "Size"),
-        "EFAV": ("US Equity", "Factor / Smart Beta", "Min Volatility"),
-        "SPLV": ("US Equity", "Factor / Smart Beta", "Min Volatility"),
-        "SPHQ": ("US Equity", "Factor / Smart Beta", "Quality"),
-        "SPHB": ("US Equity", "Factor / Smart Beta", "High Beta"),
-        "FDVV": ("US Equity", "Dividend & Income", "Dividend Growth"),
-
-        # ── US EQUITY – SECTORS ───────────────────────────────────────────────
-        # Technology
-        "XLK":  ("US Equity", "Sector – Technology", "Broad Tech"),
-        "VGT":  ("US Equity", "Sector – Technology", "Broad Tech"),
-        "IYW":  ("US Equity", "Sector – Technology", "Broad Tech"),
-        "FTEC": ("US Equity", "Sector – Technology", "Broad Tech"),
-        "IGV":  ("US Equity", "Sector – Technology", "Software"),
-        "WCLD": ("US Equity", "Sector – Technology", "Cloud / Software"),
-        "BUG":  ("US Equity", "Sector – Technology", "Cybersecurity"),
-        "CIBR": ("US Equity", "Sector – Technology", "Cybersecurity"),
-        "HACK": ("US Equity", "Sector – Technology", "Cybersecurity"),
-        "SOXX": ("US Equity", "Sector – Technology", "Semiconductors"),
-        "SMH":  ("US Equity", "Sector – Technology", "Semiconductors"),
-        "USD":  ("US Equity", "Sector – Technology", "Semiconductors"),
-        "QTUM": ("US Equity", "Sector – Technology", "Quantum / AI"),
-        "BOTZ": ("US Equity", "Sector – Technology", "Robotics / AI"),
-        "ROBT": ("US Equity", "Sector – Technology", "Robotics / AI"),
-        "IRBO": ("US Equity", "Sector – Technology", "Robotics / AI"),
-        "ARKK": ("US Equity", "Sector – Technology", "Disruptive Innovation"),
-        "ARKG": ("US Equity", "Sector – Technology", "Disruptive Innovation"),
-        "ARKW": ("US Equity", "Sector – Technology", "Disruptive Innovation"),
-        "ARKQ": ("US Equity", "Sector – Technology", "Robotics / AI"),
-        "ARKF": ("US Equity", "Sector – Technology", "Fintech"),
-        "FINX": ("US Equity", "Sector – Technology", "Fintech"),
-        "IPAY": ("US Equity", "Sector – Technology", "Fintech"),
-        "SKYY": ("US Equity", "Sector – Technology", "Cloud / Software"),
-        # Healthcare
-        "XLV":  ("US Equity", "Sector – Healthcare", "Broad Healthcare"),
-        "VHT":  ("US Equity", "Sector – Healthcare", "Broad Healthcare"),
-        "IYH":  ("US Equity", "Sector – Healthcare", "Broad Healthcare"),
-        "FHLC": ("US Equity", "Sector – Healthcare", "Broad Healthcare"),
-        "IBB":  ("US Equity", "Sector – Healthcare", "Biotech"),
-        "XBI":  ("US Equity", "Sector – Healthcare", "Biotech"),
-        "BBH":  ("US Equity", "Sector – Healthcare", "Biotech"),
-        "IHI":  ("US Equity", "Sector – Healthcare", "Medical Devices"),
-        "IHF":  ("US Equity", "Sector – Healthcare", "Managed Care / Insurance"),
-        "PPH":  ("US Equity", "Sector – Healthcare", "Pharmaceuticals"),
-        "PJP":  ("US Equity", "Sector – Healthcare", "Pharmaceuticals"),
-        # Financials
-        "XLF":  ("US Equity", "Sector – Financials", "Broad Financials"),
-        "VFH":  ("US Equity", "Sector – Financials", "Broad Financials"),
-        "IYF":  ("US Equity", "Sector – Financials", "Broad Financials"),
-        "FNCL": ("US Equity", "Sector – Financials", "Broad Financials"),
-        "KBE":  ("US Equity", "Sector – Financials", "Banks"),
-        "KRE":  ("US Equity", "Sector – Financials", "Regional Banks"),
-        "IAT":  ("US Equity", "Sector – Financials", "Regional Banks"),
-        "KIE":  ("US Equity", "Sector – Financials", "Insurance"),
-        "IAK":  ("US Equity", "Sector – Financials", "Insurance"),
-        "KBWB": ("US Equity", "Sector – Financials", "Banks"),
-        # Energy
-        "XLE":  ("US Equity", "Sector – Energy", "Broad Energy"),
-        "VDE":  ("US Equity", "Sector – Energy", "Broad Energy"),
-        "IYE":  ("US Equity", "Sector – Energy", "Broad Energy"),
-        "FENY": ("US Equity", "Sector – Energy", "Broad Energy"),
-        "OIH":  ("US Equity", "Sector – Energy", "Oil Services"),
-        "XES":  ("US Equity", "Sector – Energy", "Oil Services"),
-        "FCG":  ("US Equity", "Sector – Energy", "Natural Gas"),
-        "ICLN": ("US Equity", "Sector – Energy", "Clean Energy"),
-        "QCLN": ("US Equity", "Sector – Energy", "Clean Energy"),
-        "FAN":  ("US Equity", "Sector – Energy", "Wind"),
-        "TAN":  ("US Equity", "Sector – Energy", "Solar"),
-        "CNRG": ("US Equity", "Sector – Energy", "Clean Energy"),
-        # Consumer Discretionary
-        "XLY":  ("US Equity", "Sector – Consumer Disc.", "Broad Consumer Disc."),
-        "VCR":  ("US Equity", "Sector – Consumer Disc.", "Broad Consumer Disc."),
-        "IYC":  ("US Equity", "Sector – Consumer Disc.", "Broad Consumer Disc."),
-        "FDIS": ("US Equity", "Sector – Consumer Disc.", "Broad Consumer Disc."),
-        "RTH":  ("US Equity", "Sector – Consumer Disc.", "Retail"),
-        "XRT":  ("US Equity", "Sector – Consumer Disc.", "Retail"),
-        "ONLN": ("US Equity", "Sector – Consumer Disc.", "E-Commerce"),
-        "IBUY": ("US Equity", "Sector – Consumer Disc.", "E-Commerce"),
-        # Consumer Staples
-        "XLP":  ("US Equity", "Sector – Consumer Staples", "Broad Staples"),
-        "VDC":  ("US Equity", "Sector – Consumer Staples", "Broad Staples"),
-        "IYK":  ("US Equity", "Sector – Consumer Staples", "Broad Staples"),
-        "FSTA": ("US Equity", "Sector – Consumer Staples", "Broad Staples"),
-        "PBJ":  ("US Equity", "Sector – Consumer Staples", "Food & Beverage"),
-        # Industrials
-        "XLI":  ("US Equity", "Sector – Industrials", "Broad Industrials"),
-        "VIS":  ("US Equity", "Sector – Industrials", "Broad Industrials"),
-        "IYJ":  ("US Equity", "Sector – Industrials", "Broad Industrials"),
-        "FIDU": ("US Equity", "Sector – Industrials", "Broad Industrials"),
-        "ITA":  ("US Equity", "Sector – Industrials", "Aerospace & Defense"),
-        "PPA":  ("US Equity", "Sector – Industrials", "Aerospace & Defense"),
-        "XAR":  ("US Equity", "Sector – Industrials", "Aerospace & Defense"),
-        "JETS": ("US Equity", "Sector – Industrials", "Airlines"),
-        "XTN":  ("US Equity", "Sector – Industrials", "Transportation"),
-        # Materials
-        "XLB":  ("US Equity", "Sector – Materials", "Broad Materials"),
-        "VAW":  ("US Equity", "Sector – Materials", "Broad Materials"),
-        "IYM":  ("US Equity", "Sector – Materials", "Broad Materials"),
-        "FMAT": ("US Equity", "Sector – Materials", "Broad Materials"),
-        # Utilities
-        "XLU":  ("US Equity", "Sector – Utilities", "Broad Utilities"),
-        "VPU":  ("US Equity", "Sector – Utilities", "Broad Utilities"),
-        "IDU":  ("US Equity", "Sector – Utilities", "Broad Utilities"),
-        "FUTY": ("US Equity", "Sector – Utilities", "Broad Utilities"),
-        # Real Estate
-        "XLRE": ("US Equity", "Sector – Real Estate", "Broad REIT"),
-        "VNQ":  ("US Equity", "Sector – Real Estate", "Broad REIT"),
-        "IYR":  ("US Equity", "Sector – Real Estate", "Broad REIT"),
-        "FREL": ("US Equity", "Sector – Real Estate", "Broad REIT"),
-        "REM":  ("US Equity", "Sector – Real Estate", "Mortgage REIT"),
-        "MORT": ("US Equity", "Sector – Real Estate", "Mortgage REIT"),
-        "KBWR": ("US Equity", "Sector – Real Estate", "Regional Banks"),
-        # Communication Services
-        "XLC":  ("US Equity", "Sector – Communication", "Broad Communication"),
-        "VOX":  ("US Equity", "Sector – Communication", "Broad Communication"),
-        "IYZ":  ("US Equity", "Sector – Communication", "Telecom"),
-        "FCOM": ("US Equity", "Sector – Communication", "Broad Communication"),
-
-        # ── INTERNATIONAL EQUITY ─────────────────────────────────────────────
-        "EFA":  ("Intl Equity", "Developed Markets", "Broad Developed ex-US"),
-        "VEA":  ("Intl Equity", "Developed Markets", "Broad Developed ex-US"),
-        "SCHF": ("Intl Equity", "Developed Markets", "Broad Developed ex-US"),
-        "IDEV": ("Intl Equity", "Developed Markets", "Broad Developed ex-US"),
-        "VEU":  ("Intl Equity", "Developed Markets", "All-World ex-US"),
-        "VXUS": ("Intl Equity", "Developed Markets", "All-World ex-US"),
-        "IXUS": ("Intl Equity", "Developed Markets", "All-World ex-US"),
-        "EWJ":  ("Intl Equity", "Developed Markets", "Japan"),
-        "DXJ":  ("Intl Equity", "Developed Markets", "Japan"),
-        "EWG":  ("Intl Equity", "Developed Markets", "Germany"),
-        "EWU":  ("Intl Equity", "Developed Markets", "United Kingdom"),
-        "EWC":  ("Intl Equity", "Developed Markets", "Canada"),
-        "EWA":  ("Intl Equity", "Developed Markets", "Australia"),
-        "EWL":  ("Intl Equity", "Developed Markets", "Switzerland"),
-        "EWQ":  ("Intl Equity", "Developed Markets", "France"),
-        "EWI":  ("Intl Equity", "Developed Markets", "Italy"),
-        "EWP":  ("Intl Equity", "Developed Markets", "Spain"),
-        "EWD":  ("Intl Equity", "Developed Markets", "Sweden"),
-        "EWN":  ("Intl Equity", "Developed Markets", "Netherlands"),
-        "EWH":  ("Intl Equity", "Developed Markets", "Hong Kong"),
-        "EWS":  ("Intl Equity", "Developed Markets", "Singapore"),
-        "EWK":  ("Intl Equity", "Developed Markets", "Belgium"),
-        "EWO":  ("Intl Equity", "Developed Markets", "Austria"),
-        # Emerging Markets
-        "EEM":  ("Intl Equity", "Emerging Markets", "Broad EM"),
-        "VWO":  ("Intl Equity", "Emerging Markets", "Broad EM"),
-        "IEMG": ("Intl Equity", "Emerging Markets", "Broad EM"),
-        "SCHE": ("Intl Equity", "Emerging Markets", "Broad EM"),
-        "EWZ":  ("Intl Equity", "Emerging Markets", "Brazil"),
-        "EWW":  ("Intl Equity", "Emerging Markets", "Mexico"),
-        "EWT":  ("Intl Equity", "Emerging Markets", "Taiwan"),
-        "EWY":  ("Intl Equity", "Emerging Markets", "South Korea"),
-        "MCHI": ("Intl Equity", "Emerging Markets", "China"),
-        "FXI":  ("Intl Equity", "Emerging Markets", "China Large Cap"),
-        "KWEB": ("Intl Equity", "Emerging Markets", "China Internet"),
-        "CQQQ": ("Intl Equity", "Emerging Markets", "China Tech"),
-        "INDA": ("Intl Equity", "Emerging Markets", "India"),
-        "PIN":  ("Intl Equity", "Emerging Markets", "India"),
-        "EPI":  ("Intl Equity", "Emerging Markets", "India"),
-        "GXC":  ("Intl Equity", "Emerging Markets", "China Broad"),
-        "ERUS": ("Intl Equity", "Emerging Markets", "Russia"),
-        "RSX":  ("Intl Equity", "Emerging Markets", "Russia"),
-        "TUR":  ("Intl Equity", "Emerging Markets", "Turkey"),
-        "ECH":  ("Intl Equity", "Emerging Markets", "Chile"),
-        "EWX":  ("Intl Equity", "Emerging Markets", "EM Small Cap"),
-        # Intl thematic
-        "ACWI": ("Intl Equity", "Developed Markets", "All-Country World"),
-        "VT":   ("Intl Equity", "Developed Markets", "All-Country World"),
-
-        # ── FIXED INCOME ─────────────────────────────────────────────────────
-        "AGG":  ("Fixed Income", "US Aggregate", "Broad Bond Market"),
-        "BND":  ("Fixed Income", "US Aggregate", "Broad Bond Market"),
-        "SCHZ": ("Fixed Income", "US Aggregate", "Broad Bond Market"),
-        "IUSB": ("Fixed Income", "US Aggregate", "Broad Bond Market"),
-        "FBND": ("Fixed Income", "US Aggregate", "Broad Bond Market"),
-        # Treasury
-        "IEF":  ("Fixed Income", "US Treasuries", "7-10 Year"),
-        "TLT":  ("Fixed Income", "US Treasuries", "20+ Year"),
-        "VGLT": ("Fixed Income", "US Treasuries", "20+ Year"),
-        "TLH":  ("Fixed Income", "US Treasuries", "10-20 Year"),
-        "IEI":  ("Fixed Income", "US Treasuries", "3-7 Year"),
-        "SHY":  ("Fixed Income", "US Treasuries", "1-3 Year"),
-        "VGSH": ("Fixed Income", "US Treasuries", "1-3 Year"),
-        "VGIT": ("Fixed Income", "US Treasuries", "3-10 Year"),
-        "SCHO": ("Fixed Income", "US Treasuries", "1-3 Year"),
-        "SCHR": ("Fixed Income", "US Treasuries", "3-10 Year"),
-        "SCHQ": ("Fixed Income", "US Treasuries", "20+ Year"),
-        "GOVT": ("Fixed Income", "US Treasuries", "Broad Treasury"),
-        "EDV":  ("Fixed Income", "US Treasuries", "Extended Duration"),
-        "ZROZ": ("Fixed Income", "US Treasuries", "Zero Coupon"),
-        "BIL":  ("Fixed Income", "US Treasuries", "1-3 Month T-Bill"),
-        "SHV":  ("Fixed Income", "US Treasuries", "Short-Term"),
-        "CLTL": ("Fixed Income", "US Treasuries", "Short-Term"),
-        # TIPS
-        "TIP":  ("Fixed Income", "Inflation-Protected", "TIPS Broad"),
-        "SCHP": ("Fixed Income", "Inflation-Protected", "TIPS Broad"),
-        "STIP": ("Fixed Income", "Inflation-Protected", "Short TIPS"),
-        "VTIP": ("Fixed Income", "Inflation-Protected", "Short TIPS"),
-        # Corporate
-        "LQD":  ("Fixed Income", "Corporate Bonds", "Investment Grade"),
-        "VCIT": ("Fixed Income", "Corporate Bonds", "Intermediate IG"),
-        "VCSH": ("Fixed Income", "Corporate Bonds", "Short-Term IG"),
-        "SPSB": ("Fixed Income", "Corporate Bonds", "Short-Term IG"),
-        "SPIB": ("Fixed Income", "Corporate Bonds", "Intermediate IG"),
-        "SPLB": ("Fixed Income", "Corporate Bonds", "Long-Term IG"),
-        "IGIB": ("Fixed Income", "Corporate Bonds", "Intermediate IG"),
-        "IGSB": ("Fixed Income", "Corporate Bonds", "Short-Term IG"),
-        "IGLB": ("Fixed Income", "Corporate Bonds", "Long-Term IG"),
-        "VCLT": ("Fixed Income", "Corporate Bonds", "Long-Term IG"),
-        # High Yield
-        "HYG":  ("Fixed Income", "High Yield", "Broad High Yield"),
-        "JNK":  ("Fixed Income", "High Yield", "Broad High Yield"),
-        "USHY": ("Fixed Income", "High Yield", "Broad High Yield"),
-        "SHYG": ("Fixed Income", "High Yield", "Short-Term HY"),
-        "SJNK": ("Fixed Income", "High Yield", "Short-Term HY"),
-        "FALN": ("Fixed Income", "High Yield", "Fallen Angels"),
-        "ANGL": ("Fixed Income", "High Yield", "Fallen Angels"),
-        "BKLN": ("Fixed Income", "High Yield", "Bank Loans"),
-        "SRLN": ("Fixed Income", "High Yield", "Bank Loans"),
-        # Muni
-        "MUB":  ("Fixed Income", "Municipal Bonds", "Broad Muni"),
-        "VTEB": ("Fixed Income", "Municipal Bonds", "Broad Muni"),
-        "SUB":  ("Fixed Income", "Municipal Bonds", "Short Muni"),
-        "SCMB": ("Fixed Income", "Municipal Bonds", "Short Muni"),
-        "TFI":  ("Fixed Income", "Municipal Bonds", "Broad Muni"),
-        "SHM":  ("Fixed Income", "Municipal Bonds", "Short Muni"),
-        "HYD":  ("Fixed Income", "Municipal Bonds", "High Yield Muni"),
-        # International / EM
-        "EMB":  ("Fixed Income", "Emerging Market Bonds", "USD EM Sovereign"),
-        "PCY":  ("Fixed Income", "Emerging Market Bonds", "USD EM Sovereign"),
-        "LEMB": ("Fixed Income", "Emerging Market Bonds", "Local Currency EM"),
-        "EMLC": ("Fixed Income", "Emerging Market Bonds", "Local Currency EM"),
-        "IAGG": ("Fixed Income", "International Bonds", "Global ex-US Aggregate"),
-        "BNDX": ("Fixed Income", "International Bonds", "Global ex-US Aggregate"),
-        # Multi-Sector / Other
-        "BIV":  ("Fixed Income", "US Aggregate", "Intermediate Bond"),
-        "BSV":  ("Fixed Income", "US Aggregate", "Short-Term Bond"),
-        "BLV":  ("Fixed Income", "US Aggregate", "Long-Term Bond"),
-        "VMBS": ("Fixed Income", "Mortgage-Backed", "MBS Broad"),
-        "MBB":  ("Fixed Income", "Mortgage-Backed", "MBS Broad"),
-        "CMBS": ("Fixed Income", "Mortgage-Backed", "CMBS"),
-
-        # ── COMMODITIES ───────────────────────────────────────────────────────
-        "GLD":  ("Commodities", "Precious Metals", "Gold"),
-        "IAU":  ("Commodities", "Precious Metals", "Gold"),
-        "GLDM": ("Commodities", "Precious Metals", "Gold"),
-        "SGOL": ("Commodities", "Precious Metals", "Gold"),
-        "BAR":  ("Commodities", "Precious Metals", "Gold"),
-        "SLV":  ("Commodities", "Precious Metals", "Silver"),
-        "SIVR": ("Commodities", "Precious Metals", "Silver"),
-        "PPLT": ("Commodities", "Precious Metals", "Platinum"),
-        "PALL": ("Commodities", "Precious Metals", "Palladium"),
-        "DBP":  ("Commodities", "Precious Metals", "Gold + Silver"),
-        # Energy Commodities
-        "USO":  ("Commodities", "Energy Commodities", "Crude Oil"),
-        "BNO":  ("Commodities", "Energy Commodities", "Brent Crude"),
-        "UCO":  ("Commodities", "Energy Commodities", "Crude Oil 2x"),
-        "SCO":  ("Commodities", "Energy Commodities", "Crude Oil -2x"),
-        "UNG":  ("Commodities", "Energy Commodities", "Natural Gas"),
-        "KOLD": ("Commodities", "Energy Commodities", "Natural Gas -2x"),
-        "BOIL": ("Commodities", "Energy Commodities", "Natural Gas 2x"),
-        "DBO":  ("Commodities", "Energy Commodities", "Oil Fund"),
-        "DBE":  ("Commodities", "Energy Commodities", "Energy Basket"),
-        # Agriculture
-        "CORN": ("Commodities", "Agriculture", "Corn"),
-        "WEAT": ("Commodities", "Agriculture", "Wheat"),
-        "SOYB": ("Commodities", "Agriculture", "Soybeans"),
-        "CANE": ("Commodities", "Agriculture", "Sugar"),
-        "NIB":  ("Commodities", "Agriculture", "Cocoa"),
-        "CAFE": ("Commodities", "Agriculture", "Coffee"),
-        "DBA":  ("Commodities", "Agriculture", "Broad Agriculture"),
-        "MOO":  ("Commodities", "Agriculture", "Agribusiness"),
-        # Metals / Industrial
-        "COPX": ("Commodities", "Industrial Metals", "Copper Miners"),
-        "JJC":  ("Commodities", "Industrial Metals", "Copper"),
-        "CPER": ("Commodities", "Industrial Metals", "Copper"),
-        "DBB":  ("Commodities", "Industrial Metals", "Base Metals Basket"),
-        "PDBC": ("Commodities", "Diversified Commodities", "Broad Commodity"),
-        "DJP":  ("Commodities", "Diversified Commodities", "Broad Commodity"),
-        "GSG":  ("Commodities", "Diversified Commodities", "Broad Commodity"),
-        "BCI":  ("Commodities", "Diversified Commodities", "Broad Commodity"),
-        # Miners
-        "GDX":  ("Commodities", "Precious Metals", "Gold Miners"),
-        "GDXJ": ("Commodities", "Precious Metals", "Junior Gold Miners"),
-        "GOEX": ("Commodities", "Precious Metals", "Gold Miners"),
-        "SIL":  ("Commodities", "Precious Metals", "Silver Miners"),
-        "SILJ": ("Commodities", "Precious Metals", "Junior Silver Miners"),
-        "RING": ("Commodities", "Precious Metals", "Gold Miners"),
-        "PICK": ("Commodities", "Industrial Metals", "Diversified Miners"),
-        "REMX": ("Commodities", "Industrial Metals", "Rare Earth & Strategic Metals"),
-
-        # ── VOLATILITY & DERIVATIVES ──────────────────────────────────────────
-        "VXX":  ("Volatility", "VIX Products", "Short-Term VIX"),
-        "VIXY": ("Volatility", "VIX Products", "Short-Term VIX"),
-        "UVXY": ("Volatility", "VIX Products", "Short-Term VIX 1.5x"),
-        "SVXY": ("Volatility", "VIX Products", "Short VIX"),
-        "VIXM": ("Volatility", "VIX Products", "Mid-Term VIX"),
-        "VXZ":  ("Volatility", "VIX Products", "Mid-Term VIX"),
-        "SVOL": ("Volatility", "VIX Products", "Short VIX"),
-        "ZIVB": ("Volatility", "VIX Products", "Short VIX"),
-        "PUTW": ("Volatility", "Options Strategy", "Put Write"),
-        "BXMX": ("Volatility", "Options Strategy", "Buy-Write"),
-        "CEFS": ("Volatility", "Options Strategy", "CEF Income"),
-
-        # ── LEVERAGED / INVERSE – EQUITY ─────────────────────────────────────
-        "SSO":  ("Leveraged / Inverse", "US Equity Leveraged", "S&P 500 2x"),
-        "UPRO": ("Leveraged / Inverse", "US Equity Leveraged", "S&P 500 3x"),
-        "SDS":  ("Leveraged / Inverse", "US Equity Inverse", "S&P 500 -2x"),
-        "SPXU": ("Leveraged / Inverse", "US Equity Inverse", "S&P 500 -3x"),
-        "SH":   ("Leveraged / Inverse", "US Equity Inverse", "S&P 500 -1x"),
-        "PSQ":  ("Leveraged / Inverse", "US Equity Inverse", "Nasdaq -1x"),
-        "QID":  ("Leveraged / Inverse", "US Equity Inverse", "Nasdaq -2x"),
-        "SQQQ": ("Leveraged / Inverse", "US Equity Inverse", "Nasdaq -3x"),
-        "QLD":  ("Leveraged / Inverse", "US Equity Leveraged", "Nasdaq 2x"),
-        "TQQQ": ("Leveraged / Inverse", "US Equity Leveraged", "Nasdaq 3x"),
-        "TNA":  ("Leveraged / Inverse", "US Equity Leveraged", "Small Cap 3x"),
-        "TZA":  ("Leveraged / Inverse", "US Equity Inverse", "Small Cap -3x"),
-        "URTY": ("Leveraged / Inverse", "US Equity Leveraged", "Small Cap 3x"),
-        "SRTY": ("Leveraged / Inverse", "US Equity Inverse", "Small Cap -3x"),
-        "DDM":  ("Leveraged / Inverse", "US Equity Leveraged", "Dow 2x"),
-        "UDOW": ("Leveraged / Inverse", "US Equity Leveraged", "Dow 3x"),
-        "DXD":  ("Leveraged / Inverse", "US Equity Inverse", "Dow -2x"),
-        "SDOW": ("Leveraged / Inverse", "US Equity Inverse", "Dow -3x"),
-        "SPXL": ("Leveraged / Inverse", "US Equity Leveraged", "S&P 500 3x"),
-        "SPXS": ("Leveraged / Inverse", "US Equity Inverse", "S&P 500 -3x"),
-        # Sector Leveraged / Inverse
-        "TECL": ("Leveraged / Inverse", "Sector Leveraged", "Tech 3x"),
-        "TECS": ("Leveraged / Inverse", "Sector Inverse", "Tech -3x"),
-        "LABU": ("Leveraged / Inverse", "Sector Leveraged", "Biotech 3x"),
-        "LABD": ("Leveraged / Inverse", "Sector Inverse", "Biotech -3x"),
-        "FAS":  ("Leveraged / Inverse", "Sector Leveraged", "Financials 3x"),
-        "FAZ":  ("Leveraged / Inverse", "Sector Inverse", "Financials -3x"),
-        "NUGT": ("Leveraged / Inverse", "Sector Leveraged", "Gold Miners 2x"),
-        "DUST": ("Leveraged / Inverse", "Sector Inverse", "Gold Miners -2x"),
-        "JNUG": ("Leveraged / Inverse", "Sector Leveraged", "Junior Gold Miners 2x"),
-        "JDST": ("Leveraged / Inverse", "Sector Inverse", "Junior Gold Miners -2x"),
-        "NAIL": ("Leveraged / Inverse", "Sector Leveraged", "Homebuilders 3x"),
-        "ERX":  ("Leveraged / Inverse", "Sector Leveraged", "Energy 2x"),
-        "ERY":  ("Leveraged / Inverse", "Sector Inverse", "Energy -2x"),
-        "GUSH": ("Leveraged / Inverse", "Sector Leveraged", "Oil & Gas 2x"),
-        "DRIP": ("Leveraged / Inverse", "Sector Inverse", "Oil & Gas -2x"),
-        "CURE": ("Leveraged / Inverse", "Sector Leveraged", "Healthcare 3x"),
-        "DPST": ("Leveraged / Inverse", "Sector Leveraged", "Regional Banks 3x"),
-        "BNKU": ("Leveraged / Inverse", "Sector Leveraged", "Banks 3x"),
-        # Leveraged Bonds
-        "TMF":  ("Leveraged / Inverse", "Bond Leveraged", "20yr Treasury 3x"),
-        "TMV":  ("Leveraged / Inverse", "Bond Inverse", "20yr Treasury -3x"),
-        "TYD":  ("Leveraged / Inverse", "Bond Leveraged", "10yr Treasury 3x"),
-        "TYO":  ("Leveraged / Inverse", "Bond Inverse", "10yr Treasury -3x"),
-        "UBT":  ("Leveraged / Inverse", "Bond Leveraged", "20yr Treasury 2x"),
-        "TBT":  ("Leveraged / Inverse", "Bond Inverse", "20yr Treasury -2x"),
-        "PST":  ("Leveraged / Inverse", "Bond Inverse", "7-10yr Treasury -2x"),
-        "UST":  ("Leveraged / Inverse", "Bond Leveraged", "7-10yr Treasury 2x"),
-        # Leveraged Commodities
-        "UGL":  ("Leveraged / Inverse", "Commodity Leveraged", "Gold 2x"),
-        "GLL":  ("Leveraged / Inverse", "Commodity Inverse", "Gold -2x"),
-        "AGQ":  ("Leveraged / Inverse", "Commodity Leveraged", "Silver 2x"),
-        "ZSL":  ("Leveraged / Inverse", "Commodity Inverse", "Silver -2x"),
-
-        # ── CURRENCIES / FOREX ────────────────────────────────────────────────
-        "UUP":  ("Currencies", "US Dollar", "Dollar Bullish"),
-        "UDN":  ("Currencies", "US Dollar", "Dollar Bearish"),
-        "FXE":  ("Currencies", "Major Currencies", "Euro"),
-        "FXB":  ("Currencies", "Major Currencies", "British Pound"),
-        "FXY":  ("Currencies", "Major Currencies", "Japanese Yen"),
-        "FXF":  ("Currencies", "Major Currencies", "Swiss Franc"),
-        "FXC":  ("Currencies", "Major Currencies", "Canadian Dollar"),
-        "FXA":  ("Currencies", "Major Currencies", "Australian Dollar"),
-        "CYB":  ("Currencies", "Emerging Currencies", "Chinese Yuan"),
-        "FXCH": ("Currencies", "Emerging Currencies", "Chinese Yuan"),
-
-        # ── MULTI-ASSET / ALLOCATION ──────────────────────────────────────────
-        "AOM":  ("Multi-Asset", "Asset Allocation", "Conservative"),
-        "AOR":  ("Multi-Asset", "Asset Allocation", "Moderate"),
-        "AOA":  ("Multi-Asset", "Asset Allocation", "Aggressive"),
-        "AOK":  ("Multi-Asset", "Asset Allocation", "Conservative"),
-        "GAL":  ("Multi-Asset", "Asset Allocation", "Moderate"),
-        "NTSX": ("Multi-Asset", "Asset Allocation", "90/60 Leveraged"),
-        "GDE":  ("Multi-Asset", "Asset Allocation", "Gold + Equity"),
-        "RPAR": ("Multi-Asset", "Asset Allocation", "Risk Parity"),
-        "UPAR": ("Multi-Asset", "Asset Allocation", "Risk Parity"),
-        "SWAN": ("Multi-Asset", "Asset Allocation", "Defined Outcome"),
-    }
-    # ─────────────────────────────────────────────────────────────────────────
+    # ── CSV column layouts ────────────────────────────────────────────────────
+    # ETFs.csv:   Ticker, Name, Sector, Industry, Type
+    # STOCKS.csv: Ticker, Name, Sector, Industry, Subindustry
     def read_csv_meta(path, is_etf=False):
         if not os.path.exists(path):
             return pd.DataFrame()
@@ -1068,10 +625,10 @@ def build_symbols_page(valid_tickers):
         n_cols = min(df.shape[1], 5)
         df = df.iloc[:, :n_cols]
 
-        # ETFs.csv has 4 cols: Ticker, Name, Industry, SubIndustry
-        # Stocks.csv may have 5 cols: Ticker, Name, Sector, Industry, SubIndustry
+        # ETFs.csv:   Ticker, Name, Sector, Industry, Type
+        # STOCKS.csv: Ticker, Name, Sector, Industry, Subindustry
         if is_etf:
-            col_names = ["Ticker", "Name", "Industry", "Subindustry", "Extra"][:n_cols]
+            col_names = ["Ticker", "Name", "Sector", "Industry", "Type"][:n_cols]
         else:
             col_names = ["Ticker", "Name", "Sector", "Industry", "Subindustry"][:n_cols]
         df.columns = col_names
@@ -1093,21 +650,6 @@ def build_symbols_page(valid_tickers):
             df[col] = df[col].astype(str).str.strip()
             df[col] = df[col].where(~df[col].str.match(r'^[\d\.\-]+$'), "")
 
-        if is_etf:
-            # For ETFs: Sector always comes from the built-in lookup dict.
-            # Industry/Subindustry from CSV used only when dict has no entry.
-            for idx, row in df.iterrows():
-                t = row["Ticker"]
-                if t in ETF_CATEGORIES:
-                    sec, ind, sub = ETF_CATEGORIES[t]
-                    df.at[idx, "Sector"]      = sec
-                    df.at[idx, "Industry"]    = ind
-                    df.at[idx, "Subindustry"] = sub
-                else:
-                    # Not in dict: use CSV Industry/Subindustry, group under "Other"
-                    df.at[idx, "Sector"] = "Other"
-                    # Industry and Subindustry already read from CSV columns
-
         # Fill remaining blanks
         df["Sector"]      = df["Sector"].replace("", "Other")
         df["Industry"]    = df["Industry"].replace("", "Other")
@@ -1126,7 +668,9 @@ def build_symbols_page(valid_tickers):
             for industry, ig in sg.groupby("Industry"):
                 html += f'<div class="industry-block"><div class="industry-label">{industry}</div>'
                 for subindustry, sub_ig in ig.groupby("Subindustry"):
-                    html += f'<div class="subindustry-block"><div class="subindustry-label">&#8627; {subindustry}</div><div class="ticker-grid">'
+                    if subindustry != "Other":
+                        html += f'<div class="subindustry-block"><div class="subindustry-label">&#8627; {subindustry}</div>'
+                    html += '<div class="ticker-grid">'
                     for _, row in sub_ig.sort_values("Ticker").iterrows():
                         html += (
                             f'<div class="ticker-card">'
@@ -1134,7 +678,9 @@ def build_symbols_page(valid_tickers):
                             f'<span class="ticker-name">{row.get("Name","")}</span>'
                             f'</div>'
                         )
-                    html += "</div></div>"
+                    html += "</div>"
+                    if subindustry != "Other":
+                        html += "</div>"
                 html += "</div>"
             html += "</div>"
         return html
@@ -1330,6 +876,85 @@ function filterSymbols() {{
 
 
 # ==========================================
+# MULTIPROCESSING WORKER INITIALIZERS
+# ==========================================
+def _init_analyze_worker(cl, cs, lp, pr, pf, tt, elt):
+    """Set shared read-only data as globals in each worker process."""
+    global corr_long, corr_short, log_prices, prices_raw, perf
+    global TICKER_TYPES, ETF_LEV_TYPES
+    corr_long  = cl
+    corr_short = cs
+    log_prices = lp
+    prices_raw = pr
+    perf       = pf
+    TICKER_TYPES  = tt
+    ETF_LEV_TYPES = elt
+
+
+def _init_chart_worker(cd, sd, pr, lp):
+    """Set shared read-only data as globals in each chart worker process."""
+    global _w_chart_data, _w_scoring_data, _w_prices_raw, _w_log_prices
+    _w_chart_data    = cd
+    _w_scoring_data  = sd
+    _w_prices_raw    = pr
+    _w_log_prices    = lp
+
+
+def _compute_chart_for_pair(r):
+    """Worker: compute Z-score/price chart history + back-fill fields for one pair."""
+    a, b = r["Pair"].split("/")
+    try:
+        src = _w_chart_data if (not _w_chart_data.empty and a in _w_chart_data.columns and b in _w_chart_data.columns) else _w_scoring_data
+        dates, z_vals = compute_z_history(a, b, src)
+        r["ZDates"]   = dates
+        r["ZHistory"] = z_vals
+        pdates, pa, pb = compute_price_history(a, b, src)
+        r["PriceDates"] = pdates
+        r["PriceA"]     = pa
+        r["PriceB"]     = pb
+    except Exception:
+        r["ZDates"]     = []
+        r["ZHistory"]   = []
+        r["PriceDates"] = []
+        r["PriceA"]     = []
+        r["PriceB"]     = []
+
+    # Back-fill half-life / annualized returns for cache-loaded results
+    if r.get("HalfLife") is None and "HalfLife" not in r:
+        try:
+            full_spread = np.log(_w_prices_raw[a]) - np.log(_w_prices_raw[b])
+            r["HalfLife"] = compute_half_life(full_spread)
+            if isinstance(r["HalfLife"], float) and np.isnan(r["HalfLife"]):
+                r["HalfLife"] = None
+        except Exception:
+            r["HalfLife"] = None
+    if r.get("AnnRetA") is None and "AnnRetA" not in r:
+        try:
+            nd = len(_w_prices_raw)
+            r["AnnRetA"] = round(((_w_prices_raw[a].iloc[-1] / _w_prices_raw[a].iloc[0]) ** (252/nd) - 1)*100, 1)
+            r["AnnRetB"] = round(((_w_prices_raw[b].iloc[-1] / _w_prices_raw[b].iloc[0]) ** (252/nd) - 1)*100, 1)
+        except Exception:
+            r["AnnRetA"] = r["AnnRetB"] = None
+    # Back-fill EstRet / AnnRet (pairs trade est. return) for cache-loaded results
+    if "EstRet" not in r or r.get("EstRet") is None:
+        try:
+            spread     = _w_log_prices[a] - _w_log_prices[b]
+            spread_std = spread.std()
+            est_r      = round(abs(r["Z"]) * float(spread_std) * 100, 2)
+            r["EstRet"] = est_r
+            hl = r.get("HalfLife")
+            if hl and hl > 0:
+                r["AnnRet"] = round(est_r * (252 / hl), 1)
+            else:
+                r["AnnRet"] = None
+        except Exception:
+            r["EstRet"] = None
+            r["AnnRet"] = None
+
+    return r
+
+
+# ==========================================
 # MAIN EXECUTION
 # ==========================================
 if __name__ == "__main__":
@@ -1393,12 +1018,23 @@ if __name__ == "__main__":
 
         print("Building combinations...")
         combos = list(itertools.combinations(valid, 2))
-        
-        results = []
-        for pair in tqdm(combos, desc="Analyzing Pairs"):
-            r = analyze_pair(pair)
-            if r:
-                results.append(r)
+
+        print(f"Analyzing pairs using {NUM_WORKERS} CPU cores...")
+        chunksize = max(1, len(combos) // (NUM_WORKERS * 4))
+        with mp.Pool(
+            processes=NUM_WORKERS,
+            initializer=_init_analyze_worker,
+            initargs=(corr_long, corr_short, log_prices, prices_raw, perf,
+                      dict(TICKER_TYPES), dict(ETF_LEV_TYPES))
+        ) as pool:
+            results = [
+                r for r in tqdm(
+                    pool.imap_unordered(analyze_pair, combos, chunksize=chunksize),
+                    total=len(combos),
+                    desc="Analyzing Pairs"
+                )
+                if r is not None
+            ]
 
         results = sorted(results, key=lambda x: x["Score"], reverse=True)
         
@@ -1410,58 +1046,19 @@ if __name__ == "__main__":
     # The code below runs EVERY time, regardless of whether calculations were cached
     top_results = results[:500]
 
-    # Compute rolling Z-score histories for top pairs
-    print("Computing Z-score chart histories for top pairs...")
-    for r in tqdm(top_results):
-        a, b = r["Pair"].split("/")
-        try:
-            src = chart_data if (not chart_data.empty and a in chart_data.columns and b in chart_data.columns) else data
-            dates, z_vals = compute_z_history(a, b, src)
-            r["ZDates"]   = dates
-            r["ZHistory"] = z_vals
-            # Normalized price comparison series (rebased to 100)
-            pdates, pa, pb = compute_price_history(a, b, src)
-            r["PriceDates"] = pdates
-            r["PriceA"]     = pa
-            r["PriceB"]     = pb
-        except Exception:
-            r["ZDates"]     = []
-            r["ZHistory"]   = []
-            r["PriceDates"] = []
-            r["PriceA"]     = []
-            r["PriceB"]     = []
-
-        # Back-fill half-life / annualized returns for cache-loaded results
-        if r.get("HalfLife") is None and "HalfLife" not in r:
-            try:
-                full_spread = np.log(prices_raw[a]) - np.log(prices_raw[b])
-                r["HalfLife"] = compute_half_life(full_spread)
-                if isinstance(r["HalfLife"], float) and np.isnan(r["HalfLife"]):
-                    r["HalfLife"] = None
-            except Exception:
-                r["HalfLife"] = None
-        if r.get("AnnRetA") is None and "AnnRetA" not in r:
-            try:
-                nd = len(prices_raw)
-                r["AnnRetA"] = round(((prices_raw[a].iloc[-1] / prices_raw[a].iloc[0]) ** (252/nd) - 1)*100, 1)
-                r["AnnRetB"] = round(((prices_raw[b].iloc[-1] / prices_raw[b].iloc[0]) ** (252/nd) - 1)*100, 1)
-            except Exception:
-                r["AnnRetA"] = r["AnnRetB"] = None
-        # Back-fill EstRet / AnnRet (pairs trade est. return) for cache-loaded results
-        if "EstRet" not in r or r.get("EstRet") is None:
-            try:
-                spread     = log_prices[a] - log_prices[b]
-                spread_std = spread.std()
-                est_r      = round(abs(r["Z"]) * float(spread_std) * 100, 2)
-                r["EstRet"] = est_r
-                hl = r.get("HalfLife")
-                if hl and hl > 0:
-                    r["AnnRet"] = round(est_r * (252 / hl), 1)
-                else:
-                    r["AnnRet"] = None
-            except Exception:
-                r["EstRet"] = None
-                r["AnnRet"] = None
+    # Compute rolling Z-score histories for top pairs (parallel)
+    print(f"Computing Z-score chart histories for top pairs using {NUM_WORKERS} CPU cores...")
+    chart_chunksize = max(1, len(top_results) // (NUM_WORKERS * 2))
+    with mp.Pool(
+        processes=NUM_WORKERS,
+        initializer=_init_chart_worker,
+        initargs=(chart_data, data, prices_raw, log_prices)
+    ) as pool:
+        top_results = list(tqdm(
+            pool.imap(_compute_chart_for_pair, top_results, chunksize=chart_chunksize),
+            total=len(top_results),
+            desc="Computing Charts"
+        ))
 
     # Helper: format volume as human-readable string
     def fmt_vol(v):
@@ -1541,10 +1138,13 @@ if __name__ == "__main__":
         
         # Generate badges for leverage/inverse indicators
         badge_map = {
-            "normal":    "",
-            "leveraged": '<span class="type-badge type-lev">LEV</span>',
-            "inverse":   '<span class="type-badge type-inv">INV</span>',
-            "lev_inv":   '<span class="type-badge type-levinv">LEV·INV</span>'
+            "normal":      "",
+            "leveraged":   '<span class="type-badge type-lev">LEV</span>',
+            "inverse":     '<span class="type-badge type-inv">INV</span>',
+            "lev_inv":     '<span class="type-badge type-levinv">LEV·INV</span>',
+            "etn":         '<span class="type-badge type-etn">ETN</span>',
+            "etn_lev":     '<span class="type-badge type-etn type-lev">ETN·LEV</span>',
+            "etn_lev_inv": '<span class="type-badge type-etn type-levinv">ETN·LEV·INV</span>',
         }
         badge_a = badge_map.get(lev_a, "")
         badge_b = badge_map.get(lev_b, "")
@@ -1858,6 +1458,7 @@ if __name__ == "__main__":
   .type-lev    {{ background: rgba(249,115,22,0.12); color: #fb923c; border: 1px solid rgba(249,115,22,0.3); }}
   .type-inv    {{ background: rgba(239,68,68,0.12);  color: #f87171; border: 1px solid rgba(239,68,68,0.3);  }}
   .type-levinv {{ background: rgba(239,68,68,0.2);   color: #fca5a5; border: 1px solid rgba(239,68,68,0.5); }}
+  .type-etn    {{ background: rgba(167,139,250,0.12); color: #c4b5fd; border: 1px solid rgba(167,139,250,0.3); }}
 
   .score-cell {{ min-width: 100px; }}
   .score-bar-wrap {{ display: flex; flex-direction: column; gap: 3px; }}
@@ -2047,7 +1648,7 @@ if __name__ == "__main__":
   <div class="control-group">
     <label>Capital ($)</label>
     <button class="step-btn" onclick="stepValue('capitalInput',-1000)">−</button>
-    <input type="number" id="capitalInput" value="10000" min="0" step="1000" oninput="calcShares()">
+    <input type="number" id="capitalInput" value="5000" min="0" step="1000" oninput="calcShares()">
     <button class="step-btn" onclick="stepValue('capitalInput',1000)">+</button>
   </div>
   <div class="control-group">
@@ -2066,9 +1667,11 @@ if __name__ == "__main__":
       <option value="exclude_both">Excl Lev &amp; Inv</option>
       <option value="exclude_lev">Excl Lev</option>
       <option value="exclude_inv">Excl Inv</option>
+      <option value="exclude_etn">Excl ETN</option>
       <option value="only_lev">Only Lev</option>
       <option value="only_inv">Only Inv</option>
       <option value="only_both">Only Lev &amp; Inv</option>
+      <option value="only_etn">Only ETN</option>
     </select>
   </div>
   <div class="control-group">
@@ -2673,11 +2276,12 @@ function applyFilters() {{
     const levB     = row.dataset.levB || "normal";
     const pairText = row.querySelector(".pair-cell").textContent.toUpperCase();
 
-    // 4-state ETF type tags: "normal"|"leveraged"|"inverse"|"lev_inv"
-    const isLev     = levA === "leveraged" || levB === "leveraged";
+    // ETF/ETN type tags
+    const isLev     = levA === "leveraged" || levB === "leveraged" || levA === "etn_lev" || levB === "etn_lev";
     const isInv     = levA === "inverse"   || levB === "inverse";
-    const isLevInv  = levA === "lev_inv"   || levB === "lev_inv";
-    const isSpecial = isLev || isInv || isLevInv;
+    const isLevInv  = levA === "lev_inv"   || levB === "lev_inv"  || levA === "etn_lev_inv" || levB === "etn_lev_inv";
+    const isEtn     = levA.startsWith("etn") || levB.startsWith("etn");
+    const isSpecial = isLev || isInv || isLevInv || isEtn;
 
     let show = true;
     if (catF !== "All" && cat !== catF)          show = false;
@@ -2690,9 +2294,11 @@ function applyFilters() {{
     if      (levF === "exclude_both" && isSpecial)              show = false;
     else if (levF === "exclude_lev"  && (isLev || isLevInv))   show = false;
     else if (levF === "exclude_inv"  && (isInv || isLevInv))   show = false;
+    else if (levF === "exclude_etn"  && isEtn)                  show = false;
     else if (levF === "only_lev"     && !isLev)                 show = false;
     else if (levF === "only_inv"     && !isInv)                 show = false;
     else if (levF === "only_both"    && !(isLev || isInv || isLevInv)) show = false;
+    else if (levF === "only_etn"     && !isEtn)                 show = false;
 
     row.dataset.baseHidden = show ? "0" : "1";
     row.classList.toggle("row-hidden", !show);
