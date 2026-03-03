@@ -27748,5 +27748,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "MTDR": {
+        "ticker": "MTDR",
+        "name": "Matador Resources Company",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 6792013312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
