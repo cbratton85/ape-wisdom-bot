@@ -27658,5 +27658,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "LIV": {
+        "ticker": "LIV",
+        "name": "Emles @Home ETF",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "EYE": {
+        "ticker": "EYE",
+        "name": "National Vision Holdings, Inc.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 2058083200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SVXY": {
+        "ticker": "SVXY",
+        "name": "ProShares Short VIX Short Term ",
+        "meta": "Trading--Miscellaneous",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "EMN": {
+        "ticker": "EMN",
+        "name": "Eastman Chemical Company",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 8197398016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FAZ": {
+        "ticker": "FAZ",
+        "name": "Direxion Financial Bear 3X Shar",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
