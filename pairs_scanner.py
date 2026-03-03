@@ -15,7 +15,7 @@ import multiprocessing as mp
 DATA_FILE        = "historical_data.csv.gz"
 CHART_DATA_FILE  = "chart_data.csv.gz"        # Extended history for Z-score charts only
 VOLUME_DATA_FILE = "volume_data.csv.gz"        # Average daily volume per ticker
-ANALYSIS_CACHE = "analysis_results.json"
+MCAP_CACHE_FILE  = "market_cap.json"           # Market cap per ticker
 BATCH_SIZE = 40
 COOLDOWN = 3
 LOOKBACK_DAYS       = 650   # Days used for scoring / correlation / perf
@@ -27,10 +27,12 @@ NUM_WORKERS = max(1, (mp.cpu_count() or 2) - 0)  # CPU cores for parallel pair a
 CORR_SHORT = 35
 CORR_LONG = 100
 Z_LENGTH = 100
+Z_LENGTH_SHORT = 30
+Z_LENGTH_LONG  = 250
 PERF_LENGTH = 300
 
 MIN_CORR_FILTER = 0.60
-Z_THRESHOLD = 1.0
+Z_THRESHOLD = 2.0
 Z_STRONG = 2.0
 
 W_ZSCORE = 0.50
@@ -44,6 +46,7 @@ TICKER_TYPES    = {}   # ticker -> "Pure ETF" | "Pure Stock"
 TICKER_NAMES    = {}   # ticker -> human-readable name
 TICKER_INDUSTRY = {}   # ticker -> sector  (col 3)
 TICKER_SUBIND   = {}   # ticker -> industry (col 4)
+TICKER_SUBIND2  = {}   # ticker -> sub-industry (col 5, stocks only)
 ETF_LEV_TYPES   = {}   # ticker -> type tag (see _ETF_TYPE_MAP values)
 
 # Maps ETFs.csv col-5 type-strings -> internal tag
@@ -58,7 +61,7 @@ _ETF_TYPE_MAP = {
 }
 
 def load_master_tickers():
-    global TICKER_TYPES, TICKER_NAMES, TICKER_INDUSTRY, TICKER_SUBIND, ETF_LEV_TYPES
+    global TICKER_TYPES, TICKER_NAMES, TICKER_INDUSTRY, TICKER_SUBIND, TICKER_SUBIND2, ETF_LEV_TYPES
     tickers = []
 
     if os.path.exists("ETFs.csv"):
@@ -104,6 +107,8 @@ def load_master_tickers():
                 TICKER_INDUSTRY[t] = str(row.iloc[2]).strip()
             if ncols >= 4 and pd.notna(row.iloc[3]):
                 TICKER_SUBIND[t] = str(row.iloc[3]).strip()
+            if ncols >= 5 and pd.notna(row.iloc[4]):
+                TICKER_SUBIND2[t] = str(row.iloc[4]).strip()
 
     tickers = list(set(tickers))
     tickers = [t for t in tickers if t not in ["", "NONE", "NAN", "SYMBOL", "TICKER"]]
@@ -444,6 +449,45 @@ def build_volume_dataset(master):
     return vol_avg
 
 
+def build_market_cap(master):
+    """Returns a dict {ticker: market_cap} using yfinance .info, with JSON cache."""
+    mcap = {}
+
+    # Load cache
+    if os.path.exists(MCAP_CACHE_FILE):
+        try:
+            with open(MCAP_CACHE_FILE, "r") as f:
+                mcap = json.load(f)
+            file_time = os.path.getmtime(MCAP_CACHE_FILE)
+            hours_old = (datetime.now() - datetime.fromtimestamp(file_time)).total_seconds() / 3600
+            if hours_old < 72:
+                print(f"--- Market-cap cache fresh ({round(hours_old,1)}h). Using cached data. ---")
+                return mcap
+        except Exception:
+            mcap = {}
+
+    # Find tickers missing from cache
+    missing = [t for t in master if t not in mcap]
+    if missing:
+        print(f"Fetching market cap for {len(missing)} tickers...")
+        for i, t in enumerate(tqdm(missing, desc="Market Cap")):
+            try:
+                info = yf.Ticker(t).info
+                mc = info.get("marketCap")
+                if mc and mc > 0:
+                    mcap[t] = mc
+            except Exception:
+                pass
+            if (i + 1) % 100 == 0:
+                time.sleep(1)
+
+    # Save cache
+    with open(MCAP_CACHE_FILE, "w") as f:
+        json.dump(mcap, f)
+    print(f"Market cap data ready for {len(mcap)} tickers.")
+    return mcap
+
+
 # ==========================================
 # ANALYZE PAIR
 # ==========================================
@@ -537,6 +581,24 @@ def analyze_pair(pair):
     except Exception:
         ann_a = ann_b = float('nan')
 
+    # ── Multi-timeframe Z-scores (30d short, 250d long) ──
+    ratio_s = log_prices_short[a] - log_prices_short[b]
+    std_s   = ratio_s.std()
+    z30     = round((ratio_s.iloc[-1] - ratio_s.mean()) / std_s, 2) if std_s > 0 else 0.0
+
+    ratio_l = log_prices_long[a] - log_prices_long[b]
+    std_l   = ratio_l.std()
+    z250    = round((ratio_l.iloc[-1] - ratio_l.mean()) / std_l, 2) if std_l > 0 else 0.0
+
+    # ── Timeframe alignment ──
+    signs = (z30 > 0, z > 0, z250 > 0)
+    if (all(signs) or not any(signs)) and abs(z) >= Z_THRESHOLD:
+        alignment = "Aligned"
+    elif (z30 > 0) != (z250 > 0):
+        alignment = "Conflicting"
+    else:
+        alignment = "Mixed"
+
     # ── Estimated pairs trade return (gross spread return if fully reverts) ──
     est_ret = round(abs(z) * spread_std * 100, 2)   # in %
     # Annualized: one trade cycle = one half-life period, so trades/year = 252/hl.
@@ -560,6 +622,9 @@ def analyze_pair(pair):
         "EstRet":     est_ret,
         "AnnRet":     ann_ret,
         "SpreadStd":  round(float(std), 6),
+        "Z30":        z30,
+        "Z250":       z250,
+        "Alignment":  alignment,
     }
 
 
@@ -878,30 +943,30 @@ function filterSymbols() {{
 # ==========================================
 # MULTIPROCESSING WORKER INITIALIZERS
 # ==========================================
-def _init_analyze_worker(cl, cs, lp, pr, pf, tt, elt):
+def _init_analyze_worker(cl, cs, lp, lp_short, lp_long, pr, pf, tt, elt):
     """Set shared read-only data as globals in each worker process."""
-    global corr_long, corr_short, log_prices, prices_raw, perf
-    global TICKER_TYPES, ETF_LEV_TYPES
-    corr_long  = cl
-    corr_short = cs
-    log_prices = lp
-    prices_raw = pr
-    perf       = pf
-    TICKER_TYPES  = tt
-    ETF_LEV_TYPES = elt
+    global corr_long, corr_short, log_prices, log_prices_short, log_prices_long
+    global prices_raw, perf, TICKER_TYPES, ETF_LEV_TYPES
+    corr_long        = cl
+    corr_short       = cs
+    log_prices       = lp
+    log_prices_short = lp_short
+    log_prices_long  = lp_long
+    prices_raw       = pr
+    perf             = pf
+    TICKER_TYPES     = tt
+    ETF_LEV_TYPES    = elt
 
 
-def _init_chart_worker(cd, sd, pr, lp):
+def _init_chart_worker(cd, sd):
     """Set shared read-only data as globals in each chart worker process."""
-    global _w_chart_data, _w_scoring_data, _w_prices_raw, _w_log_prices
+    global _w_chart_data, _w_scoring_data
     _w_chart_data    = cd
     _w_scoring_data  = sd
-    _w_prices_raw    = pr
-    _w_log_prices    = lp
 
 
 def _compute_chart_for_pair(r):
-    """Worker: compute Z-score/price chart history + back-fill fields for one pair."""
+    """Worker: compute Z-score/price chart history for one pair."""
     a, b = r["Pair"].split("/")
     try:
         src = _w_chart_data if (not _w_chart_data.empty and a in _w_chart_data.columns and b in _w_chart_data.columns) else _w_scoring_data
@@ -918,38 +983,6 @@ def _compute_chart_for_pair(r):
         r["PriceDates"] = []
         r["PriceA"]     = []
         r["PriceB"]     = []
-
-    # Back-fill half-life / annualized returns for cache-loaded results
-    if r.get("HalfLife") is None and "HalfLife" not in r:
-        try:
-            full_spread = np.log(_w_prices_raw[a]) - np.log(_w_prices_raw[b])
-            r["HalfLife"] = compute_half_life(full_spread)
-            if isinstance(r["HalfLife"], float) and np.isnan(r["HalfLife"]):
-                r["HalfLife"] = None
-        except Exception:
-            r["HalfLife"] = None
-    if r.get("AnnRetA") is None and "AnnRetA" not in r:
-        try:
-            nd = len(_w_prices_raw)
-            r["AnnRetA"] = round(((_w_prices_raw[a].iloc[-1] / _w_prices_raw[a].iloc[0]) ** (252/nd) - 1)*100, 1)
-            r["AnnRetB"] = round(((_w_prices_raw[b].iloc[-1] / _w_prices_raw[b].iloc[0]) ** (252/nd) - 1)*100, 1)
-        except Exception:
-            r["AnnRetA"] = r["AnnRetB"] = None
-    # Back-fill EstRet / AnnRet (pairs trade est. return) for cache-loaded results
-    if "EstRet" not in r or r.get("EstRet") is None:
-        try:
-            spread     = _w_log_prices[a] - _w_log_prices[b]
-            spread_std = spread.std()
-            est_r      = round(abs(r["Z"]) * float(spread_std) * 100, 2)
-            r["EstRet"] = est_r
-            hl = r.get("HalfLife")
-            if hl and hl > 0:
-                r["AnnRet"] = round(est_r * (252 / hl), 1)
-            else:
-                r["AnnRet"] = None
-        except Exception:
-            r["EstRet"] = None
-            r["AnnRet"] = None
 
     return r
 
@@ -976,72 +1009,51 @@ if __name__ == "__main__":
     print("Building volume dataset...")
     vol_avg = build_volume_dataset(TICKERS)
 
+    # Build market cap data
+    print("Building market cap dataset...")
+    mcap_data = build_market_cap(TICKERS)
+
     valid = list(data.columns)
     print(f"Computing matrices for {len(valid)} symbols...")
 
     # Pre-compute number of pairs (used in HTML template regardless of cache)
     n_combos = len(valid) * (len(valid) - 1) // 2
 
-    # 1. Check if analysis cache is newer than the actual data file
-    data_file = DATA_FILE # Use the variable from your CONFIG
-    cache_exists = os.path.exists(ANALYSIS_CACHE)
-    
-    # Get the actual last-modified times
-    data_time = os.path.getmtime(data_file) if os.path.exists(data_file) else 0
-    cache_time = os.path.getmtime(ANALYSIS_CACHE) if cache_exists else 0
+    print(f"--- Computing matrices and analyzing {len(valid)} symbols... ---")
+    returns    = data.pct_change().dropna(how="all")
+    log_prices       = np.log(data.tail(Z_LENGTH))
+    log_prices_short = np.log(data.tail(Z_LENGTH_SHORT))
+    log_prices_long  = np.log(data.tail(Z_LENGTH_LONG))
+    prices_raw = data
 
-    if cache_exists and cache_time > data_time:
-        print(f"--- Loading analyzed pairs from cache ({ANALYSIS_CACHE}) ---")
-        with open(ANALYSIS_CACHE, "r") as f:
-            results = json.load(f)
-        # Still need these globals for price history / re-score in HTML generation
-        returns    = data.pct_change().dropna(how="all")
-        log_prices = np.log(data.tail(Z_LENGTH))
-        prices_raw = data
-        corr_short = returns.tail(CORR_SHORT).corr()
-        corr_long  = returns.tail(CORR_LONG).corr()
-        perf_len   = min(PERF_LENGTH, len(data) - 1)
-        perf       = (data.iloc[-1] / data.iloc[-(perf_len + 1)] - 1) * 100
-    else:
-        # This only runs if data_file was updated or cache is missing
-        print(f"--- Computing matrices and analyzing {len(valid)} symbols... ---")
-        returns    = data.pct_change().dropna(how="all")
-        log_prices = np.log(data.tail(Z_LENGTH))
-        prices_raw = data                      # full price series for half-life & ann returns
-        all_returns_for_hl = np.log(data)      # kept for reference
+    corr_short = returns.tail(CORR_SHORT).corr()
+    corr_long  = returns.tail(CORR_LONG).corr()
 
-        corr_short = returns.tail(CORR_SHORT).corr()
-        corr_long  = returns.tail(CORR_LONG).corr()
+    perf_len = min(PERF_LENGTH, len(data) - 1)
+    perf = (data.iloc[-1] / data.iloc[-(perf_len + 1)] - 1) * 100
 
-        perf_len = min(PERF_LENGTH, len(data) - 1)
-        perf = (data.iloc[-1] / data.iloc[-(perf_len + 1)] - 1) * 100
+    print("Building combinations...")
+    combos = list(itertools.combinations(valid, 2))
 
-        print("Building combinations...")
-        combos = list(itertools.combinations(valid, 2))
+    print(f"Analyzing pairs using {NUM_WORKERS} CPU cores...")
+    chunksize = max(1, len(combos) // (NUM_WORKERS * 4))
+    with mp.Pool(
+        processes=NUM_WORKERS,
+        initializer=_init_analyze_worker,
+        initargs=(corr_long, corr_short, log_prices, log_prices_short,
+                  log_prices_long, prices_raw, perf,
+                  dict(TICKER_TYPES), dict(ETF_LEV_TYPES))
+    ) as pool:
+        results = [
+            r for r in tqdm(
+                pool.imap_unordered(analyze_pair, combos, chunksize=chunksize),
+                total=len(combos),
+                desc="Analyzing Pairs"
+            )
+            if r is not None
+        ]
 
-        print(f"Analyzing pairs using {NUM_WORKERS} CPU cores...")
-        chunksize = max(1, len(combos) // (NUM_WORKERS * 4))
-        with mp.Pool(
-            processes=NUM_WORKERS,
-            initializer=_init_analyze_worker,
-            initargs=(corr_long, corr_short, log_prices, prices_raw, perf,
-                      dict(TICKER_TYPES), dict(ETF_LEV_TYPES))
-        ) as pool:
-            results = [
-                r for r in tqdm(
-                    pool.imap_unordered(analyze_pair, combos, chunksize=chunksize),
-                    total=len(combos),
-                    desc="Analyzing Pairs"
-                )
-                if r is not None
-            ]
-
-        results = sorted(results, key=lambda x: x["Score"], reverse=True)
-        
-        # Save to cache
-        with open(ANALYSIS_CACHE, "w") as f:
-            json.dump(results, f)
-        print(f"Analysis saved to {ANALYSIS_CACHE}")
+    results = sorted(results, key=lambda x: x["Score"], reverse=True)
 
     # The code below runs EVERY time, regardless of whether calculations were cached
     top_results = results[:500]
@@ -1052,7 +1064,7 @@ if __name__ == "__main__":
     with mp.Pool(
         processes=NUM_WORKERS,
         initializer=_init_chart_worker,
-        initargs=(chart_data, data, prices_raw, log_prices)
+        initargs=(chart_data, data)
     ) as pool:
         top_results = list(tqdm(
             pool.imap(_compute_chart_for_pair, top_results, chunksize=chart_chunksize),
@@ -1075,20 +1087,15 @@ if __name__ == "__main__":
     # ==========================================
     print("Generating pairs_scanner.html...")
 
+    # Count alignment categories for stats row
+    n_aligned     = sum(1 for r in top_results if r.get("Alignment") == "Aligned")
+    n_mixed       = sum(1 for r in top_results if r.get("Alignment") == "Mixed")
+    n_conflicting = sum(1 for r in top_results if r.get("Alignment") == "Conflicting")
+
     rows_html = ""
-    skipped_tickers = set()
     for i, r in enumerate(top_results):
         z = r["Z"]
         a, b = r["Pair"].split("/")
-
-        # Skip pairs where either ticker was dropped from the current dataset
-        # (e.g. delisted, insufficient history, or removed from ETFs/STOCKS.csv).
-        # These linger in analysis_results.json until the cache is rebuilt.
-        if a not in data.columns or b not in data.columns:
-            for m in (a, b):
-                if m not in data.columns:
-                    skipped_tickers.add(m)
-            continue
 
         if any(np.isnan(v) for v in [z, r["Score"], r["Corr"], r["PerfDiff"]]):
             continue
@@ -1097,28 +1104,49 @@ if __name__ == "__main__":
         name_b = TICKER_NAMES.get(b, "")
 
         if z > Z_STRONG:
-            sig_label, sig_class, sig_arrow = f"SHORT {a} \u00b7 LONG {b}",  "sig-strong-short", "\u25bc\u25bc"
+            sig_line1, sig_line2, sig_class = f"\u25bc\u25bc SHORT {a}", f"\u25b2\u25b2 LONG {b}", "sig-strong-short"
         elif z > Z_THRESHOLD:
-            sig_label, sig_class, sig_arrow = f"SHORT {a} \u00b7 LONG {b}",  "sig-short",        "\u25bc"
+            sig_line1, sig_line2, sig_class = f"\u25bc SHORT {a}", f"\u25b2 LONG {b}", "sig-short"
         elif z < -Z_STRONG:
-            sig_label, sig_class, sig_arrow = f"LONG {a} \u00b7 SHORT {b}",  "sig-strong-long",  "\u25b2\u25b2"
+            sig_line1, sig_line2, sig_class = f"\u25b2\u25b2 LONG {a}", f"\u25bc\u25bc SHORT {b}", "sig-strong-long"
         elif z < -Z_THRESHOLD:
-            sig_label, sig_class, sig_arrow = f"LONG {a} \u00b7 SHORT {b}",  "sig-long",         "\u25b2"
+            sig_line1, sig_line2, sig_class = f"\u25b2 LONG {a}", f"\u25bc SHORT {b}", "sig-long"
         else:
-            sig_label, sig_class, sig_arrow = "NEUTRAL", "sig-neutral", "\u2014"
+            sig_line1, sig_line2, sig_class = "NEUTRAL", "", "sig-neutral"
 
         cat_class = {"Pure ETF": "cat-etf", "Pure Stock": "cat-stock"}.get(r["Category"], "cat-mixed")
+
+        # Build sector/industry/subindustry tooltip text for each ticker
+        def _info_tip(t):
+            parts = []
+            sec = TICKER_INDUSTRY.get(t, "")
+            ind = TICKER_SUBIND.get(t, "")
+            sub = TICKER_SUBIND2.get(t, "")
+            if sec: parts.append(f"Sector: {sec}")
+            if ind: parts.append(f"Industry: {ind}")
+            if sub: parts.append(f"Sub-industry: {sub}")
+            return " &#10;".join(parts) if parts else t
+        tip_a = _info_tip(a)
+        tip_b = _info_tip(b)
 
         price_a    = round(data[a].iloc[-1], 2)
         price_b    = round(data[b].iloc[-1], 2)
         avgvol_a   = round(vol_avg.get(a, 0))
         avgvol_b   = round(vol_avg.get(b, 0))
+        mcap_a     = mcap_data.get(a, 0)
+        mcap_b     = mcap_data.get(b, 0)
+        mcap_min   = min(mcap_a, mcap_b) if mcap_a > 0 and mcap_b > 0 else max(mcap_a, mcap_b)
         z_bar_pct  = min(max((abs(z) / 3.0) * 100, 0), 100)
         z_pos      = z >= 0
         score_pct  = round(min(max(r["Score"] * 100, 0), 100))
         hl         = r.get("HalfLife")
         est_ret    = r.get("EstRet") if r.get("EstRet") is not None else 0.0
         ann_ret    = r.get("AnnRet")
+        z30        = r.get("Z30")
+        z250       = r.get("Z250")
+        alignment  = r.get("Alignment", "Mixed")
+        align_class = {"Aligned": "align-yes", "Mixed": "align-mix", "Conflicting": "align-conf"}.get(alignment, "align-mix")
+        align_label = alignment
 
         # Exit price estimates when Z reverts to 0 (equal attribution)
         spread_std = r.get("SpreadStd") or 0.0
@@ -1176,19 +1204,21 @@ if __name__ == "__main__":
         <tr class="data-row" data-category="{r['Category']}" data-z="{z}"
             data-price-a="{price_a}" data-price-b="{price_b}"
             data-vol-a="{avgvol_a}" data-vol-b="{avgvol_b}"
-            data-lev-a="{lev_a}" data-lev-b="{lev_b}">
+            data-lev-a="{lev_a}" data-lev-b="{lev_b}"
+            data-mcap="{mcap_min}"
+            data-alignment="{alignment}">
           <td class="rank-cell">{i+1}</td>
           <td class="pair-cell">
             <div class="pair-names">
               <div class="pair-ticker-row">
-                <span class="ticker-a">{a}</span>{badge_a}
+                <span class="ticker-a" title="{tip_a}">{a}</span>{badge_a}
                 <span class="pair-sep">/</span>
-                <span class="ticker-b">{b}</span>{badge_b}
+                <span class="ticker-b" title="{tip_b}">{b}</span>{badge_b}
                 <span class="{cat_class} cat-badge">{r['Category'].replace('Pure ', '')}</span>
               </div>
               <div class="pair-fullnames">
-                <div class="name-a">{name_a}</div>
-                <div class="name-b">{name_b}</div>
+                <div class="name-a" title="{tip_a}">{name_a}</div>
+                <div class="name-b" title="{tip_b}">{name_b}</div>
               </div>
             </div>
           </td>
@@ -1197,6 +1227,11 @@ if __name__ == "__main__":
               <span class="z-value {'z-pos' if z_pos else 'z-neg'}">{z:+.2f}&sigma;</span>
               <div class="z-bar-track">
                 <div class="z-bar-fill {'z-bar-pos' if z_pos else 'z-bar-neg'}" style="width:{z_bar_pct}%;"></div>
+              </div>
+              <div class="z-sub-row">
+                <span class="z-sub" title="30-day Z-score">30d:{f'{z30:+.1f}' if z30 is not None else '\u2014'}</span>
+                <span class="z-sub" title="250-day Z-score">250d:{f'{z250:+.1f}' if z250 is not None else '\u2014'}</span>
+                <span class="align-badge {align_class}">{align_label}</span>
               </div>
             </div>
           </td>
@@ -1210,14 +1245,6 @@ if __name__ == "__main__":
           <td class="est-cell">
             <span class="est-ret">{est_ret:+.1f}%</span>
             {f'<span class="ann-ret">{ann_ret:+.0f}%/yr</span>' if ann_ret is not None else ''}
-            <div class="exit-row"
-                 title="Estimated exit prices if Z-score reverts to 0 (equal attribution)">
-              <span class="exit-val">${exit_a:,.2f}</span>
-              <span class="exit-chg">({exit_a_chg:+.1f}%)</span>
-              <span class="exit-sep">/</span>
-              <span class="exit-val">${exit_b:,.2f}</span>
-              <span class="exit-chg">({exit_b_chg:+.1f}%)</span>
-            </div>
           </td>
           <td class="perf-cell">
             <span class="{'perf-pos' if r['PerfDiff'] >= 0 else 'perf-neg'}">{r['PerfDiff']:+.1f}%</span>
@@ -1231,7 +1258,10 @@ if __name__ == "__main__":
             </div>
           </td>
           <td class="sig-cell">
-            <span class="signal-badge {sig_class}">{sig_arrow} {sig_label}</span>
+            <div class="signal-badge {sig_class}">
+              <div>{sig_line1}</div>
+              {'<div>' + sig_line2 + '</div>' if sig_line2 else ''}
+            </div>
           </td>
           <td class="chart-cell">
             <button class="chart-btn" onclick="openChart(this,'z')" data-chart='{chart_payload_esc}'>&#9657; Z-Chart</button>
@@ -1246,14 +1276,6 @@ if __name__ == "__main__":
             <div class="share-vol">{fmt_vol(avgvol_b)}</div>
           </td>
         </tr>"""
-
-    if skipped_tickers:
-        print(f"[!] Skipped {len(skipped_tickers)} tickers not in current data (stale cache): {sorted(skipped_tickers)}")
-        print("    Delete analysis_results.json and re-run to rebuild the cache without them.")
-
-    if skipped_tickers:
-        print(f"[!] Skipped {len(skipped_tickers)} tickers missing from data (stale cache): {sorted(skipped_tickers)}")
-        print("    Delete analysis_results.json to rebuild.")
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -1400,12 +1422,12 @@ if __name__ == "__main__":
   .pair-cell {{ min-width: 260px; }}
   .pair-names {{ display: flex; flex-direction: column; gap: 3px; }}
   .pair-ticker-row {{ display: flex; align-items: center; gap: 4px; }}
-  .ticker-a {{ font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--cyan); }}
+  .ticker-a {{ font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--cyan); cursor: help; }}
   .pair-sep  {{ color: var(--muted); margin: 0 2px; font-family: var(--mono); }}
-  .ticker-b  {{ font-family: var(--mono); font-size: 14px; font-weight: 700; color: white; }}
+  .ticker-b  {{ font-family: var(--mono); font-size: 14px; font-weight: 700; color: white; cursor: help; }}
   .pair-fullnames {{ display: flex; flex-direction: column; gap: 1px; margin-top: 2px; }}
-  .name-a  {{ font-size: 12px; color: #6ab0cc; white-space: normal; line-height: 1.35; }}
-  .name-b  {{ font-size: 12px; color: #8fa8be; white-space: normal; line-height: 1.35; }}
+  .name-a  {{ font-size: 12px; color: #6ab0cc; white-space: normal; line-height: 1.35; cursor: help; }}
+  .name-b  {{ font-size: 12px; color: #8fa8be; white-space: normal; line-height: 1.35; cursor: help; }}
 
   /* BADGES */
   .cat-badge {{
@@ -1427,11 +1449,17 @@ if __name__ == "__main__":
   .z-bar-fill  {{ height: 100%; border-radius: 2px; }}
   .z-bar-pos {{ background: var(--red); }}
   .z-bar-neg {{ background: var(--green); }}
+  .z-sub-row {{ display: flex; gap: 6px; align-items: center; margin-top: 1px; }}
+  .z-sub {{ font-family: var(--mono); font-size: 9px; color: #cbd5e1; }}
+  .align-badge {{ display: inline-flex; padding: 1px 5px; border-radius: 3px; font-size: 7px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }}
+  .align-yes  {{ background: rgba(56,189,248,0.18);  color: #7dd3fc; }}
+  .align-mix  {{ background: rgba(245,158,11,0.15);  color: #fcd34d; }}
+  .align-conf {{ background: rgba(239,68,68,0.15);   color: #fca5a5; }}
 
   /* CORR / PERF / SCORE */
   .corr-cell  {{ min-width: 90px; }}
   .corr-value {{ font-family: var(--mono); font-size: 13px; color: white; display: block; }}
-  .corr-brk   {{ font-family: var(--mono); font-size: 10px; color: var(--muted); }}
+  .corr-brk   {{ font-family: var(--mono); font-size: 10px; color: #cbd5e1; }}
   .perf-cell  {{ min-width: 75px; }}
   .perf-pos {{ font-family: var(--mono); font-size: 13px; color: var(--green); font-weight: 500; }}
   .perf-neg {{ font-family: var(--mono); font-size: 13px; color: var(--red);   font-weight: 500; }}
@@ -1442,16 +1470,10 @@ if __name__ == "__main__":
   .hl-na     {{ font-family: var(--mono); font-size: 13px; color: var(--muted); }}
 
   /* EST RETURN CELL */
-  .est-cell  {{ min-width: 130px; text-align: right; }}
+  .est-cell  {{ min-width: 0; text-align: right; white-space: nowrap; }}
   .est-ret   {{ font-family: var(--mono); font-size: 13px; font-weight: 600; color: #34d399; display: block; }}
   .ann-ret   {{ font-family: var(--mono); font-size: 10px; color: #059669; display: block; }}
-  /* EXIT PRICE TOOLTIP ROW */
-  .exit-row  {{ display: flex; flex-wrap: wrap; gap: 0 5px; margin-top: 4px;
-    justify-content: flex-end; cursor: help; }}
-  .exit-val  {{ font-family: var(--mono); font-size: 11px; color: #b8cedd; font-weight: 500; }}
-  .exit-chg  {{ font-family: var(--mono); font-size: 10px; color: #8fa8be; }}
-  .exit-sep  {{ color: #374151; font-size: 11px; }}
-  /* ETF TYPE BADGES */
+/* ETF TYPE BADGES */
   .type-badge  {{ display: inline-block; font-size: 8px; font-weight: 700; letter-spacing: 0.07em;
     padding: 1px 4px; border-radius: 3px; text-transform: uppercase;
     font-family: var(--mono); vertical-align: middle; }}
@@ -1460,18 +1482,18 @@ if __name__ == "__main__":
   .type-levinv {{ background: rgba(239,68,68,0.2);   color: #fca5a5; border: 1px solid rgba(239,68,68,0.5); }}
   .type-etn    {{ background: rgba(167,139,250,0.12); color: #c4b5fd; border: 1px solid rgba(167,139,250,0.3); }}
 
-  .score-cell {{ min-width: 100px; }}
+  .score-cell {{ min-width: 0; white-space: nowrap; }}
   .score-bar-wrap {{ display: flex; flex-direction: column; gap: 3px; }}
   .score-num  {{ font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--amber); }}
   .score-bar-track {{ height: 3px; background: var(--faint); border-radius: 2px; width: 70px; overflow: hidden; }}
   .score-bar-fill  {{ height: 100%; background: linear-gradient(90deg, var(--amber), var(--orange)); border-radius: 2px; }}
 
   /* SIGNAL */
-  .sig-cell {{ min-width: 220px; }}
+  .sig-cell {{ min-width: 0; white-space: nowrap; }}
   .signal-badge {{
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 4px 10px; border-radius: 4px; font-size: 11px;
-    font-weight: 700; letter-spacing: 0.05em; white-space: nowrap; font-family: var(--mono);
+    display: inline-flex; flex-direction: column; align-items: flex-start; gap: 1px;
+    padding: 3px 7px; border-radius: 4px; font-size: 10px;
+    font-weight: 700; letter-spacing: 0.04em; white-space: nowrap; font-family: var(--mono);
   }}
   .sig-strong-short {{ background: var(--red-dim);          color: var(--red);    border: 1px solid rgba(239,68,68,0.4); }}
   .sig-short        {{ background: rgba(249,115,22,0.1);    color: var(--orange); border: 1px solid rgba(249,115,22,0.4); }}
@@ -1480,12 +1502,12 @@ if __name__ == "__main__":
   .sig-neutral      {{ background: rgba(71,85,105,0.2);     color: var(--muted);  border: 1px solid var(--border); }}
 
   /* CHART BUTTON */
-  .chart-cell {{ min-width: 100px; text-align: center; display: flex; flex-direction: column; gap: 5px; align-items: center; justify-content: center; }}
+  .chart-cell {{ min-width: 0; text-align: center; display: flex; flex-direction: column; gap: 3px; align-items: center; justify-content: center; }}
   .chart-btn {{
     background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.25);
     color: var(--cyan); font-family: var(--mono); font-size: 11px; font-weight: 600;
-    padding: 5px 11px; border-radius: 4px; cursor: pointer; letter-spacing: 0.05em;
-    transition: background 0.15s, border-color 0.15s; white-space: nowrap; width: 88px;
+    padding: 4px 8px; border-radius: 4px; cursor: pointer; letter-spacing: 0.05em;
+    transition: background 0.15s, border-color 0.15s; white-space: nowrap;
   }}
   .chart-btn:hover {{ background: rgba(56,189,248,0.18); border-color: var(--cyan); }}
   .price-btn {{
@@ -1514,7 +1536,7 @@ if __name__ == "__main__":
   .sort-indicator {{ color: var(--cyan); font-size: 11px; margin-left: 3px; }}
 
   /* SHARES */
-  .shares-cell {{ font-family: var(--mono); font-size: 12px; color: var(--text); min-width: 90px; text-align: right; vertical-align: middle; }}
+  .shares-cell {{ font-family: var(--mono); font-size: 12px; color: var(--text); min-width: 0; text-align: right; vertical-align: middle; white-space: nowrap; }}
   .share-price {{ font-size: 11px; color: #64748b; }}
   .share-vol   {{ font-size: 10px; color: #3d4f62; letter-spacing: 0.03em; }}
 
@@ -1641,6 +1663,9 @@ if __name__ == "__main__":
   <div class="stat-item"><div class="stat-label">Corr Window</div><div class="stat-value">{CORR_SHORT}d / {CORR_LONG}d</div></div>
   <div class="stat-item"><div class="stat-label">Z Window</div><div class="stat-value">{Z_LENGTH}d</div></div>
   <div class="stat-item"><div class="stat-label">Perf Window</div><div class="stat-value amber">{PERF_LENGTH}d</div></div>
+  <div class="stat-item"><div class="stat-label">Aligned</div><div class="stat-value cyan">{n_aligned}</div></div>
+  <div class="stat-item"><div class="stat-label">Mixed</div><div class="stat-value amber">{n_mixed}</div></div>
+  <div class="stat-item"><div class="stat-label">Conflicting</div><div class="stat-value" style="color:var(--red)">{n_conflicting}</div></div>
 </div>
 
 <!-- CONTROLS -->
@@ -1675,6 +1700,16 @@ if __name__ == "__main__":
     </select>
   </div>
   <div class="control-group">
+    <label>Z Align</label>
+    <select id="alignFilter" onchange="applyFilters()">
+      <option value="all">All</option>
+      <option value="Aligned">Aligned</option>
+      <option value="Mixed">Mixed</option>
+      <option value="Conflicting">Conflicting</option>
+      <option value="not_conflicting">Excl Conflicting</option>
+    </select>
+  </div>
+  <div class="control-group">
     <label>Min |Z|</label>
     <button class="step-btn" onclick="stepValue('minZ',-0.5)">−</button>
     <input type="number" id="minZ" value="0" min="0" max="5" step="0.5" oninput="applyFilters()" style="width:42px;">
@@ -1702,6 +1737,18 @@ if __name__ == "__main__":
     </select>
   </div>
   <div class="control-group">
+    <label>Min Mkt Cap</label>
+    <select id="minMcap" onchange="applyFilters()">
+      <option value="0">Any</option>
+      <option value="100000000">&gt; 100M</option>
+      <option value="500000000">&gt; 500M</option>
+      <option value="1000000000">&gt; 1B</option>
+      <option value="5000000000">&gt; 5B</option>
+      <option value="10000000000">&gt; 10B</option>
+      <option value="50000000000">&gt; 50B</option>
+    </select>
+  </div>
+  <div class="control-group">
     <label>Sort</label>
     <select id="sortBy" onchange="sortTable()">
       <option value="score">Score</option>
@@ -1711,6 +1758,7 @@ if __name__ == "__main__":
       <option value="ann_ret">Ann Return</option>
       <option value="corr">Correlation</option>
       <option value="perf">Perf Diff</option>
+      <option value="alignment">Alignment</option>
     </select>
   </div>
   <div class="control-group" title="When on, each symbol can appear at most once — only the highest-scored pair for that symbol is shown">
@@ -1737,8 +1785,8 @@ if __name__ == "__main__":
   <th onclick="setSort('score')">Score &#8597;</th>
   <th>Signal</th>
   <th style="text-align:center;">Charts</th>
-  <th style="text-align:right;">Leg A &nbsp;Shares</th>
-  <th style="text-align:right;">Leg B &nbsp;Shares</th>
+  <th style="text-align:right;">Shares</th>
+  <th style="text-align:right;">Shares</th>
 </tr>
 </thead>
 <tbody id="tableBody">
@@ -1824,6 +1872,27 @@ let currentChartData = null;
   document.head.appendChild(s);
 }})();
 
+// Vertical crosshair line plugin
+const crosshairPlugin = {{
+  id: "crosshairLine",
+  afterDraw(chart) {{
+    const active = chart.tooltip?.getActiveElements?.();
+    if (!active || !active.length) return;
+    const {{ ctx, chartArea: {{ top, bottom }} }} = chart;
+    const x = active[0].element.x;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(x, top);
+    ctx.lineTo(x, bottom);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(148,163,184,0.4)";
+    ctx.setLineDash([4, 3]);
+    ctx.stroke();
+    ctx.restore();
+  }},
+}};
+Chart.register(crosshairPlugin);
+
 // ─── TAB SWITCH ──────────────────────────────────────────────────────────────
 function switchTab(mode) {{
   const isZ = mode === 'z', isP = mode === 'price', isB = mode === 'both';
@@ -1895,8 +1964,8 @@ function openChart(btn, mode) {{
     `<span>Z window: <em>${{p.zWindow}} days</em></span>` +
     `<span>Data from: <em>${{footerDates[0] || "—"}}</em></span>` +
     `<span>Last: <em>${{footerDates[footerDates.length-1] || "—"}}</em></span>` +
-    `<span style="border-left:1px solid #1c2333;padding-left:16px;" title="Estimated exit prices if Z reverts to 0">Exit Z=0 &bull; <span style="color:#38bdf8;">${{a}}</span>&nbsp;&#x2248;&nbsp;<em style="color:#b8cedd;">${{exitAStr}}</em></span>` +
-    `<span><span style="color:#a78bfa;">${{b}}</span>&nbsp;&#x2248;&nbsp;<em style="color:#b8cedd;">${{exitBStr}}</em></span>` +
+    `<span style="border-left:1px solid #1c2333;padding-left:16px;font-size:13px;" title="Estimated exit prices if Z reverts to 0">Exit Z=0 &bull; <span style="color:#38bdf8;">${{a}}</span>&nbsp;&#x2248;&nbsp;<em style="color:#b8cedd;font-size:13px;">${{exitAStr}}</em></span>` +
+    `<span style="font-size:13px;"><span style="color:#a78bfa;">${{b}}</span>&nbsp;&#x2248;&nbsp;<em style="color:#b8cedd;font-size:13px;">${{exitBStr}}</em></span>` +
     `<span style="margin-left:auto;font-size:10px;color:#2d3748;">Equal attribution &middot; ESC to close</span>`;
 
   // Destroy old charts
@@ -1962,9 +2031,8 @@ function buildZChart(dates, z, zWindow) {{
         data: z,
         borderColor: "#38bdf8",
         borderWidth: 1.8,
-        pointRadius: dates.length > 250 ? 0 : 2.5,
-        pointHoverRadius: 6,
-        pointBackgroundColor: ptColors,
+        pointRadius: 0,
+        pointHoverRadius: 0,
         pointBorderWidth: 0,
         fill: true,
         backgroundColor: grad,
@@ -1983,11 +2051,12 @@ function buildZChart(dates, z, zWindow) {{
           titleColor: "#64748b", bodyColor: "#e2e8f0",
           titleFont: {{ family: "'JetBrains Mono',monospace", size: 11 }},
           bodyFont:  {{ family: "'JetBrains Mono',monospace", size: 14 }},
-          padding: 14, caretSize: 5,
+          padding: 14, caretSize: 5, caretPadding: 20,
+          usePointStyle: false, displayColors: false,
           callbacks: {{
             label: c => {{
               const v = c.raw;
-              if (v === null) return " Z = —";
+              if (v === null) return " Z = \u2014";
               const lv = Math.abs(v) >= 3 ? "EXTREME" : Math.abs(v) >= 2 ? "STRONG" : Math.abs(v) >= 1 ? "SIGNAL" : "neutral";
               return ` Z = ${{v >= 0 ? "+" : ""}}${{v.toFixed(3)}}\u03C3   [${{lv}}]`;
             }},
@@ -2058,15 +2127,15 @@ function buildPriceChart(p) {{
         {{
           label: a, data: priceA,
           borderColor: "#38bdf8", borderWidth: 2,
-          pointRadius: priceDates.length > 300 ? 0 : 2, pointHoverRadius: 5,
-          pointBackgroundColor: "#38bdf8", fill: true, backgroundColor: gradA,
+          pointRadius: 0, pointHoverRadius: 0,
+          fill: true, backgroundColor: gradA,
           tension: 0.25, spanGaps: true,
         }},
         {{
           label: b, data: priceB,
           borderColor: "#a78bfa", borderWidth: 2,
-          pointRadius: priceDates.length > 300 ? 0 : 2, pointHoverRadius: 5,
-          pointBackgroundColor: "#a78bfa", fill: true, backgroundColor: gradB,
+          pointRadius: 0, pointHoverRadius: 0,
+          fill: true, backgroundColor: gradB,
           tension: 0.25, spanGaps: true,
         }},
       ],
@@ -2081,12 +2150,14 @@ function buildPriceChart(p) {{
           titleColor: "#64748b", bodyColor: "#e2e8f0",
           titleFont: {{ family: "'JetBrains Mono',monospace", size: 11 }},
           bodyFont:  {{ family: "'JetBrains Mono',monospace", size: 13 }},
-          padding: 14, caretSize: 5,
+          padding: 14, caretSize: 5, caretPadding: 20,
+          usePointStyle: false,
           callbacks: {{
             label: c => {{
               const pct = (c.raw - 100).toFixed(2);
               return ` ${{c.dataset.label}}: ${{c.raw.toFixed(2)}}  (${{pct >= 0 ? "+" : ""}}${{pct}}%)`;
             }},
+            labelColor: c => ({{ borderColor: c.dataset.borderColor, backgroundColor: c.dataset.borderColor }}),
           }},
         }},
         annotation: {{
@@ -2151,15 +2222,15 @@ function buildBothChart(p) {{
     type: "line",
     data: {{ labels, datasets: [
       {{ label: a+" price", data: paAligned, yAxisID:"yP",
-        borderColor:"#38bdf8", borderWidth:1.8, pointRadius:0, pointHoverRadius:5,
+        borderColor:"#38bdf8", borderWidth:1.8, pointRadius:0, pointHoverRadius:0,
         fill:true, backgroundColor:gradA, tension:0.25, spanGaps:true, order:2 }},
       {{ label: b+" price", data: pbAligned, yAxisID:"yP",
-        borderColor:"#a78bfa", borderWidth:1.8, pointRadius:0, pointHoverRadius:5,
+        borderColor:"#a78bfa", borderWidth:1.8, pointRadius:0, pointHoverRadius:0,
         fill:true, backgroundColor:gradB, tension:0.25, spanGaps:true, order:3 }},
       {{ label:"Z-Score", data: zAligned, yAxisID:"yZ",
         borderColor:"rgba(248,215,80,0.9)", borderWidth:1.5,
-        pointRadius: labels.length>300?0:2, pointHoverRadius:6,
-        pointBackgroundColor:zPtColors, pointBorderWidth:0,
+        pointRadius:0, pointHoverRadius:0,
+        pointBorderWidth:0,
         fill:false, tension:0.3, spanGaps:true, order:1 }},
     ]}},
     options: {{
@@ -2171,17 +2242,21 @@ function buildBothChart(p) {{
           backgroundColor:"#0d1520", borderColor:"#242d40", borderWidth:1,
           titleColor:"#64748b", bodyColor:"#e2e8f0",
           titleFont:{{family:"'JetBrains Mono',monospace",size:11}},
-          bodyFont:{{family:"'JetBrains Mono',monospace",size:13}}, padding:14,
-          callbacks:{{ label: c => {{
-            if (c.datasetIndex < 2) {{
-              const pct = c.raw != null ? (c.raw-100).toFixed(2) : null;
-              return ` ${{c.dataset.label.replace(" price","")}}: ${{c.raw?.toFixed(2)??"—"}}  (${{pct!=null&&pct>=0?"+":""}}${{pct??"—"}}%)`;
-            }}
-            const v = c.raw;
-            if (v===null) return " Z = —";
-            const lv = Math.abs(v)>=3?"EXTREME":Math.abs(v)>=2?"STRONG":Math.abs(v)>=1?"SIGNAL":"neutral";
-            return ` Z = ${{v>=0?"+":""}}${{v.toFixed(3)}}\u03C3  [${{lv}}]`;
-          }} }},
+          bodyFont:{{family:"'JetBrains Mono',monospace",size:13}}, padding:14, caretPadding:20,
+          usePointStyle:false,
+          callbacks:{{
+            label: c => {{
+              if (c.datasetIndex < 2) {{
+                const pct = c.raw != null ? (c.raw-100).toFixed(2) : null;
+                return ` ${{c.dataset.label.replace(" price","")}}: ${{c.raw?.toFixed(2)??"—"}}  (${{pct!=null&&pct>=0?"+":""}}${{pct??"—"}}%)`;
+              }}
+              const v = c.raw;
+              if (v===null) return " Z = \u2014";
+              const lv = Math.abs(v)>=3?"EXTREME":Math.abs(v)>=2?"STRONG":Math.abs(v)>=1?"SIGNAL":"neutral";
+              return ` Z = ${{v>=0?"+":""}}${{v.toFixed(3)}}\u03C3  [${{lv}}]`;
+            }},
+            labelColor: c => ({{ borderColor: c.dataset.borderColor, backgroundColor: c.dataset.borderColor }}),
+          }},
         }},
         annotation:{{ annotations:{{
           z0:  hLine(0, "rgba(148,163,184,0.25)",1,[4,4]),
@@ -2258,10 +2333,12 @@ function calcShares() {{
 function applyFilters() {{
   const catF      = document.getElementById("typeFilter").value;
   const levF      = document.getElementById("levFilter").value;
+  const alignF    = document.getElementById("alignFilter").value;
   const minZv     = parseFloat(document.getElementById("minZ").value) || 0;
   const searchV   = document.getElementById("tickerSearch").value.toUpperCase().trim();
   const minPriceV = parseFloat(document.getElementById("minPrice").value) || 0;
   const minVolV   = parseFloat(document.getElementById("minVol").value) || 0;
+  const minMcapV  = parseFloat(document.getElementById("minMcap").value) || 0;
   const uniqueSym = document.getElementById("uniqueSymFilter").checked;
 
   // First pass: standard filters
@@ -2289,6 +2366,10 @@ function applyFilters() {{
     if (searchV && !pairText.includes(searchV))  show = false;
     if (minPriceV > 0 && (priceA < minPriceV || priceB < minPriceV)) show = false;
     if (minVolV > 0 && volA > 0 && volB > 0 && (volA < minVolV || volB < minVolV)) show = false;
+    if (minMcapV > 0) {{
+      const mcap = parseFloat(row.dataset.mcap) || 0;
+      if (mcap < minMcapV) show = false;
+    }}
 
     // ETF Type filter — driven by ETFs.csv col 5 via data-lev-a/b attributes
     if      (levF === "exclude_both" && isSpecial)              show = false;
@@ -2299,6 +2380,16 @@ function applyFilters() {{
     else if (levF === "only_inv"     && !isInv)                 show = false;
     else if (levF === "only_both"    && !(isLev || isInv || isLevInv)) show = false;
     else if (levF === "only_etn"     && !isEtn)                 show = false;
+
+    // Alignment filter
+    if (alignF !== "all") {{
+      const align = row.dataset.alignment || "Mixed";
+      if (alignF === "not_conflicting") {{
+        if (align === "Conflicting") show = false;
+      }} else {{
+        if (align !== alignF) show = false;
+      }}
+    }}
 
     row.dataset.baseHidden = show ? "0" : "1";
     row.classList.toggle("row-hidden", !show);
@@ -2361,6 +2452,11 @@ function sortTable() {{
     else if (key === "hl")      {{ va = numOf(a,".hl-value") || 99999;       vb = numOf(b,".hl-value") || 99999; }}
     else if (key === "est_ret") {{ va = numOf(a,".est-ret");                 vb = numOf(b,".est-ret"); }}
     else if (key === "ann_ret") {{ va = numOf(a,".ann-ret") || 0;            vb = numOf(b,".ann-ret") || 0; }}
+    else if (key === "alignment") {{
+      const alignRank = {{"Aligned": 3, "Mixed": 2, "Conflicting": 1}};
+      va = alignRank[a.dataset.alignment] || 2;
+      vb = alignRank[b.dataset.alignment] || 2;
+    }}
     else return 0;
     return asc ? (va - vb) : (vb - va);
   }});
@@ -2403,4 +2499,3 @@ window.addEventListener("DOMContentLoaded", () => {{
 
     print(f"pairs_scanner.html created. ({len(top_results)} pairs rendered)")
     print("\nDone. Open pairs_scanner.html in your browser.")
-
