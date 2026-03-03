@@ -27788,5 +27788,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ATEN": {
+        "ticker": "ATEN",
+        "name": "A10 Networks, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1463220352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "OZON": {
+        "ticker": "OZON",
+        "name": "OZON",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
