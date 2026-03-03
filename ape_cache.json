@@ -27828,5 +27828,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "RSVR": {
+        "ticker": "RSVR",
+        "name": "Reservoir Media, Inc..",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 590401984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SPUS": {
+        "ticker": "SPUS",
+        "name": "SP Funds S&P 500 Sharia Industr",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "DWM": {
+        "ticker": "DWM",
+        "name": "WisdomTree International Equity",
+        "meta": "Foreign Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
