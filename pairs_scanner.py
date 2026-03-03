@@ -531,7 +531,7 @@ def analyze_pair(pair):
     cs = corr_short.loc[a, b]
     corr_brk = cl - cs
 
-    # Z-score on last Z_LENGTH days for scoring
+    # Z-score on last Z_LENGTH days for scoring (standard fixed window)
     ratio = log_prices[a] - log_prices[b]
     mean  = ratio.mean()
     std   = ratio.std()
@@ -572,6 +572,16 @@ def analyze_pair(pair):
 
     if np.isnan(hl):
         return None
+
+    # ── Adaptive Z-score window based on half-life ──
+    adaptive_window = int(max(50, min(250, hl * 5)))
+    lp_full = log_prices_full
+    ratio_adapt = lp_full[a].iloc[-adaptive_window:] - lp_full[b].iloc[-adaptive_window:]
+    std_adapt   = ratio_adapt.std()
+    if std_adapt > 0:
+        z_adaptive = round((ratio_adapt.iloc[-1] - ratio_adapt.mean()) / std_adapt, 2)
+    else:
+        z_adaptive = round(z, 2)
 
     # ── Annualized returns ──
     try:
@@ -636,17 +646,20 @@ def analyze_pair(pair):
         "Z250":       z250,
         "Alignment":  alignment,
         "Confidence": confidence,
+        "AdaptiveWindow": adaptive_window,
+        "ZAdaptive":      z_adaptive,
     }
 
 
 # ==========================================
 # ROLLING Z-SCORE HISTORY FOR CHART
 # ==========================================
-def compute_z_history(a, b, price_data):
+def compute_z_history(a, b, price_data, window_override=None):
     """Rolling Z-score over all available data.
     Uses an adaptive window: Z_LENGTH when sufficient history exists,
     falling back to half the available data (min 20 days) for shorter-
     history tickers such as leveraged ETFs.
+    If window_override is given, uses that window length instead.
     """
     log_a = np.log(price_data[a].dropna())
     log_b = np.log(price_data[b].dropna())
@@ -654,7 +667,10 @@ def compute_z_history(a, b, price_data):
     spread   = combined["a"] - combined["b"]
 
     n_pts  = len(spread)
-    window = Z_LENGTH if n_pts >= Z_LENGTH * 2 else max(20, n_pts // 2)
+    if window_override:
+        window = min(window_override, max(20, n_pts // 2))
+    else:
+        window = Z_LENGTH if n_pts >= Z_LENGTH * 2 else max(20, n_pts // 2)
     if n_pts < window + 5:
         return [], []                # truly insufficient data
 
@@ -954,15 +970,16 @@ function filterSymbols() {{
 # ==========================================
 # MULTIPROCESSING WORKER INITIALIZERS
 # ==========================================
-def _init_analyze_worker(cl, cs, lp, lp_short, lp_long, pr, pf, tt, elt):
+def _init_analyze_worker(cl, cs, lp, lp_short, lp_long, lp_full, pr, pf, tt, elt):
     """Set shared read-only data as globals in each worker process."""
     global corr_long, corr_short, log_prices, log_prices_short, log_prices_long
-    global prices_raw, perf, TICKER_TYPES, ETF_LEV_TYPES
+    global log_prices_full, prices_raw, perf, TICKER_TYPES, ETF_LEV_TYPES
     corr_long        = cl
     corr_short       = cs
     log_prices       = lp
     log_prices_short = lp_short
     log_prices_long  = lp_long
+    log_prices_full  = lp_full
     prices_raw       = pr
     perf             = pf
     TICKER_TYPES     = tt
@@ -984,6 +1001,15 @@ def _compute_chart_for_pair(r):
         dates, z_vals = compute_z_history(a, b, src)
         r["ZDates"]   = dates
         r["ZHistory"] = z_vals
+        # Adaptive Z-score history using half-life-based window
+        adapt_win = r.get("AdaptiveWindow")
+        if adapt_win and adapt_win != Z_LENGTH:
+            adapt_dates, adapt_vals = compute_z_history(a, b, src, window_override=adapt_win)
+            r["ZDatesAdaptive"]   = adapt_dates
+            r["ZHistoryAdaptive"] = adapt_vals
+        else:
+            r["ZDatesAdaptive"]   = dates
+            r["ZHistoryAdaptive"] = z_vals
         pdates, pa, pb = compute_price_history(a, b, src)
         r["PriceDates"] = pdates
         r["PriceA"]     = pa
@@ -991,6 +1017,8 @@ def _compute_chart_for_pair(r):
     except Exception:
         r["ZDates"]     = []
         r["ZHistory"]   = []
+        r["ZDatesAdaptive"]   = []
+        r["ZHistoryAdaptive"] = []
         r["PriceDates"] = []
         r["PriceA"]     = []
         r["PriceB"]     = []
@@ -1035,6 +1063,7 @@ if __name__ == "__main__":
     log_prices       = np.log(data.tail(Z_LENGTH))
     log_prices_short = np.log(data.tail(Z_LENGTH_SHORT))
     log_prices_long  = np.log(data.tail(Z_LENGTH_LONG))
+    log_prices_full  = np.log(data)              # full history for adaptive windowing
     prices_raw = data
 
     corr_short = returns.tail(CORR_SHORT).corr()
@@ -1052,7 +1081,7 @@ if __name__ == "__main__":
         processes=NUM_WORKERS,
         initializer=_init_analyze_worker,
         initargs=(corr_long, corr_short, log_prices, log_prices_short,
-                  log_prices_long, prices_raw, perf,
+                  log_prices_long, log_prices_full, prices_raw, perf,
                   dict(TICKER_TYPES), dict(ETF_LEV_TYPES))
     ) as pool:
         results = [
@@ -1163,6 +1192,8 @@ if __name__ == "__main__":
         align_label = alignment
         confidence  = r.get("Confidence", "Low")
         conf_class  = {"High": "conf-high", "Med": "conf-med", "Low": "conf-low"}.get(confidence, "conf-low")
+        adapt_win   = r.get("AdaptiveWindow", Z_LENGTH)
+        z_adaptive  = r.get("ZAdaptive")
 
         # Exit price estimates when Z reverts to 0 (equal attribution)
         spread_std = r.get("SpreadStd") or 0.0
@@ -1200,6 +1231,10 @@ if __name__ == "__main__":
             "dates":     r.get("ZDates",     []),
             "z":         r.get("ZHistory",   []),
             "zWindow":   Z_LENGTH,
+            "datesAdaptive":  r.get("ZDatesAdaptive",   []),
+            "zAdaptive":      r.get("ZHistoryAdaptive", []),
+            "adaptiveWindow": r.get("AdaptiveWindow", Z_LENGTH),
+            "zAdaptiveCurrent": r.get("ZAdaptive"),
             "currentZ":  r["Z"],
             "halfLife":  r.get("HalfLife"),
             "estRet":    r.get("EstRet"),
@@ -1248,6 +1283,7 @@ if __name__ == "__main__":
               <div class="z-sub-row">
                 <span class="z-sub" title="30-day Z-score">30d:{f'{z30:+.1f}' if z30 is not None else '\u2014'}</span>
                 <span class="z-sub" title="250-day Z-score">250d:{f'{z250:+.1f}' if z250 is not None else '\u2014'}</span>
+                <span class="z-sub z-adaptive" title="Adaptive Z ({adapt_win}d window based on half-life)">A{adapt_win}d:{f'{z_adaptive:+.1f}' if z_adaptive is not None else '\u2014'}</span>
                 <span class="align-badge {align_class}">{align_label}</span>
                 <span class="conf-badge {conf_class}">{confidence}</span>
               </div>
@@ -1461,6 +1497,7 @@ if __name__ == "__main__":
       .z-bar-neg {{ background: var(--green); }}
       .z-sub-row {{ display: flex; gap: 6px; align-items: center; margin-top: 1px; }}
       .z-sub {{ font-family: var(--mono); font-size: 9px; color: #cbd5e1; }}
+      .z-adaptive {{ color: #f59e0b; }}
       .align-badge {{ display: inline-flex; padding: 1px 5px; border-radius: 3px; font-size: 7px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }}
       .align-yes  {{ background: rgba(56,189,248,0.18);  color: #7dd3fc; }}
       .align-mix  {{ background: rgba(245,158,11,0.15);  color: #fcd34d; }}
@@ -1952,13 +1989,21 @@ if __name__ == "__main__":
       // Stats
       const zAbs = Math.abs(p.currentZ);
       const zColor = zAbs >= 3 ? "#ef4444" : zAbs >= 2 ? "#f59e0b" : zAbs >= 1 ? "#38bdf8" : "#94a3b8";
+      const zaVal = p.zAdaptiveCurrent;
+      const zaAbs = zaVal != null ? Math.abs(zaVal) : 0;
+      const zaColor = zaAbs >= 3 ? "#ef4444" : zaAbs >= 2 ? "#f59e0b" : zaAbs >= 1 ? "#38bdf8" : "#94a3b8";
+      const zaStr = zaVal != null ? (zaVal >= 0 ? "+" : "") + zaVal.toFixed(2) + "\u03c3" : "\u2014";
       const hlStr  = p.halfLife != null ? Math.round(p.halfLife) + "d" : "—";
       const estStr = p.estRet  != null ? (p.estRet  >= 0 ? "+" : "") + p.estRet.toFixed(1)  + "%" : "—";
       const annStr = p.annRet  != null ? (p.annRet  >= 0 ? "+" : "") + p.annRet.toFixed(0)  + "%/yr" : "—";
       document.getElementById("modalStats").innerHTML = `
         <div class="mstat">
-          <div class="mstat-label">Current Z</div>
+          <div class="mstat-label">Standard Z <span style="font-size:9px;color:#4a6080;">${{p.zWindow}}d</span></div>
           <div class="mstat-value" style="color:${{zColor}};">${{p.currentZ >= 0 ? "+" : ""}}${{p.currentZ.toFixed(2)}}&sigma;</div>
+        </div>
+        <div class="mstat">
+          <div class="mstat-label">Adaptive Z <span style="font-size:9px;color:#4a6080;">${{p.adaptiveWindow}}d</span></div>
+          <div class="mstat-value" style="color:${{zaColor}};">${{zaStr}}</div>
         </div>
         <div class="mstat">
           <div class="mstat-label">Half-Life</div>
@@ -1984,7 +2029,7 @@ if __name__ == "__main__":
       const exitAStr = p.exitA != null ? `${{fmtPx(p.exitA)}} (${{fmtChg(p.exitAChg)}})` : "—";
       const exitBStr = p.exitB != null ? `${{fmtPx(p.exitB)}} (${{fmtChg(p.exitBChg)}})` : "—";
       document.getElementById("modalFooter").innerHTML =
-        `<span>Z window: <em>${{p.zWindow}} days</em></span>` +
+        `<span>Z window: <em>${{p.zWindow}}d (std)</em> / <em>${{p.adaptiveWindow}}d (adapt)</em></span>` +
         `<span>Data from: <em>${{footerDates[0] || "—"}}</em></span>` +
         `<span>Last: <em>${{footerDates[footerDates.length-1] || "—"}}</em></span>` +
         `<span style="border-left:1px solid #1c2333;padding-left:16px;font-size:13px;" title="Estimated exit prices if Z reverts to 0">Exit Z=0 &bull; <span style="color:#38bdf8;">${{a}}</span>&nbsp;&#x2248;&nbsp;<em style="color:#b8cedd;font-size:13px;">${{exitAStr}}</em></span>` +
@@ -2014,12 +2059,12 @@ if __name__ == "__main__":
       document.body.style.overflow = "hidden";
 
       setTimeout(() => {{
-        buildZChart(p.dates, p.z, p.zWindow);
+        buildZChart(p.dates, p.z, p.zWindow, p.datesAdaptive, p.zAdaptive, p.adaptiveWindow);
         if (mode === 'price') switchTab('price');
       }}, 40);
     }}
 
-    function buildZChart(dates, z, zWindow) {{
+    function buildZChart(dates, z, zWindow, datesAdapt, zAdapt, adaptWin) {{
       if (activeChart) {{ activeChart.destroy(); activeChart = null; }}
       const ctx = document.getElementById("zChart").getContext("2d");
 
@@ -2028,14 +2073,21 @@ if __name__ == "__main__":
       grad.addColorStop(0.45,"rgba(56,189,248,0.06)");
       grad.addColorStop(1,   "rgba(56,189,248,0.00)");
 
-      const ptColors = z.map(v => {{
-        if (v === null) return "transparent";
-        const av = Math.abs(v);
-        if (av >= 3) return "#ef4444";
-        if (av >= 2) return "#f59e0b";
-        if (av >= 1) return "#38bdf8";
-        return "rgba(148,163,184,0.5)";
-      }});
+      // Merge dates from both series into a common axis
+      const allDatesSet = new Set([...dates, ...(datesAdapt || [])]);
+      const allDates = [...allDatesSet].sort();
+
+      // Map standard Z onto common axis
+      const stdMap = {{}};
+      if (dates) dates.forEach((d,i) => {{ stdMap[d] = z[i]; }});
+      const zStdAligned = allDates.map(d => stdMap[d] !== undefined ? stdMap[d] : null);
+
+      // Map adaptive Z onto common axis
+      const adaptMap = {{}};
+      if (datesAdapt) datesAdapt.forEach((d,i) => {{ adaptMap[d] = zAdapt[i]; }});
+      const zAdaptAligned = allDates.map(d => adaptMap[d] !== undefined ? adaptMap[d] : null);
+
+      const hasAdaptive = adaptWin && adaptWin !== zWindow && datesAdapt && datesAdapt.length > 0;
 
       const hLine = (y, color, width, dash, lbl) => ({{
         type: "line", yMin: y, yMax: y,
@@ -2045,43 +2097,62 @@ if __name__ == "__main__":
                   xAdjust: -10, yAdjust: y > 0 ? -10 : 8, backgroundColor: "transparent", borderWidth: 0 }},
       }});
 
+      const datasets = [{{
+        label: "Standard Z (" + zWindow + "d)",
+        data: zStdAligned,
+        borderColor: "#38bdf8",
+        borderWidth: 1.8,
+        pointRadius: 0,
+        pointHoverRadius: 0,
+        pointBorderWidth: 0,
+        fill: true,
+        backgroundColor: grad,
+        tension: 0.3,
+        spanGaps: true,
+      }}];
+      if (hasAdaptive) {{
+        datasets.push({{
+          label: "Adaptive Z (" + adaptWin + "d)",
+          data: zAdaptAligned,
+          borderColor: "#f59e0b",
+          borderWidth: 1.5,
+          borderDash: [5, 3],
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          pointBorderWidth: 0,
+          fill: false,
+          tension: 0.3,
+          spanGaps: true,
+        }});
+      }}
+
       activeChart = new Chart(ctx, {{
         type: "line",
         data: {{
-          labels: dates,
-          datasets: [{{
-            label: "Z-Score",
-            data: z,
-            borderColor: "#38bdf8",
-            borderWidth: 1.8,
-            pointRadius: 0,
-            pointHoverRadius: 0,
-            pointBorderWidth: 0,
-            fill: true,
-            backgroundColor: grad,
-            tension: 0.3,
-            spanGaps: true,
-          }}],
+          labels: allDates,
+          datasets: datasets,
         }},
         options: {{
           responsive: true,
           maintainAspectRatio: false,
           interaction: {{ mode: "index", intersect: false }},
           plugins: {{
-            legend: {{ display: false }},
+            legend: {{ display: hasAdaptive, position: "top",
+              labels: {{ color: "#94a3b8", font: {{ family: "'JetBrains Mono',monospace", size: 10 }}, boxWidth: 20, padding: 12 }} }},
             tooltip: {{
               backgroundColor: "#0d1520", borderColor: "#242d40", borderWidth: 1,
               titleColor: "#64748b", bodyColor: "#e2e8f0",
               titleFont: {{ family: "'JetBrains Mono',monospace", size: 11 }},
               bodyFont:  {{ family: "'JetBrains Mono',monospace", size: 14 }},
               padding: 14, caretSize: 5, caretPadding: 20,
-              usePointStyle: false, displayColors: false,
+              usePointStyle: false, displayColors: true,
               callbacks: {{
                 label: c => {{
                   const v = c.raw;
-                  if (v === null) return " Z = \u2014";
+                  if (v === null) return "";
                   const lv = Math.abs(v) >= 3 ? "EXTREME" : Math.abs(v) >= 2 ? "STRONG" : Math.abs(v) >= 1 ? "SIGNAL" : "neutral";
-                  return ` Z = ${{v >= 0 ? "+" : ""}}${{v.toFixed(3)}}\u03C3   [${{lv}}]`;
+                  const prefix = c.datasetIndex === 0 ? "Std" : "Adpt";
+                  return ` ${{prefix}} Z = ${{v >= 0 ? "+" : ""}}${{v.toFixed(3)}}\u03C3   [${{lv}}]`;
                 }},
               }},
             }},
