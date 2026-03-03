@@ -27638,5 +27638,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "MRX": {
+        "ticker": "MRX",
+        "name": "Marex Group plc",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 3193708800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "XAIR": {
+        "ticker": "XAIR",
+        "name": "Beyond Air, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 9378487,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
