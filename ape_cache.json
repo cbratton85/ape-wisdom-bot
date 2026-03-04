@@ -28088,5 +28088,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "DIDIY": {
+        "ticker": "DIDIY",
+        "name": "DiDi Global Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 20337252352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
+    },
+    "AMPH": {
+        "ticker": "AMPH",
+        "name": "Amphastar Pharmaceuticals, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 932923776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
