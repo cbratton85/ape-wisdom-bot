@@ -34,6 +34,7 @@ PERF_LENGTH = 300
 
 MIN_CORR_FILTER = 0.60
 Z_THRESHOLD = 1.5
+Z_MAX       = 5.0      # Max |Z| — above this is likely a structural break, not mean-reversion
 Z_STRONG = 2.0
 
 ADF_CONFIDENCE  = 0.95   # Min cointegration confidence (0.90=90%, 0.95=95%, 0.99=99%)
@@ -1258,6 +1259,9 @@ def update_active_trades(data, chart_data=None):
         try:
             src = chart_data if (chart_data is not None and not chart_data.empty and a in chart_data.columns and b in chart_data.columns) else data
             z_dates, z_vals = compute_z_history(a, b, src)
+            # Snap last chart point to match authoritative currentZ
+            if z_vals and t.get("currentZ") is not None:
+                z_vals[-1] = round(float(t["currentZ"]), 4)
             t["chartDates"] = z_dates
             t["chartZ"] = z_vals
         except Exception:
@@ -1319,6 +1323,10 @@ def generate_trades_page(trades):
             else:
                 dollar_pnl = (cur_pa - entry_pa) * shares_a + (entry_pb - cur_pb) * shares_b
         dollar_class = "pnl-pos" if dollar_pnl >= 0 else "pnl-neg"
+        chg_a = (cur_pa - entry_pa) / entry_pa * 100 if entry_pa > 0 else 0
+        chg_b = (cur_pb - entry_pb) / entry_pb * 100 if entry_pb > 0 else 0
+        chg_a_class = "pnl-pos" if chg_a >= 0 else "pnl-neg"
+        chg_b_class = "pnl-pos" if chg_b >= 0 else "pnl-neg"
 
         pbar_style = f"width:{progress:.0f}%;" if progress > 0 else "background:var(--muted);width:2px;"
 
@@ -1333,7 +1341,7 @@ def generate_trades_page(trades):
         if t.get('status') == 'open':
             action_btns = f'<button class="tc-edit" onclick="openEditModal(\'{tid}\')">&#9998; Edit</button><button class="tc-close" onclick="closeTrade(\'{tid}\')">&#10005; Close</button>'
         else:
-            action_btns = f'<button class="tc-reopen" onclick="reopenTrade(\'{tid}\')">&#8634; Reopen</button><button class="tc-delete" onclick="deleteTrade(\'{tid}\')">&#128465; Delete</button>'
+            action_btns = f'<button class="tc-reopen" onclick="reopenTrade(\'{tid}\')">&#8634; Reopen</button><button class="tc-delete" onclick="deleteTrade(\'{tid}\')">&#10005;</button>'
 
         return f"""
         <div class="trade-card">
@@ -1359,11 +1367,11 @@ def generate_trades_page(trades):
             </div>
             <div class="tc-stat tc-prices">
               <div class="tc-label">{a} <span style="color:var(--cyan);font-size:9px;">{shares_a} shr</span></div>
-              <div class="tc-val">${entry_pa:.2f} &rarr; ${cur_pa:.2f}</div>
+              <div class="tc-val">${entry_pa:.2f} &rarr; ${cur_pa:.2f} <span class="{chg_a_class}">{chg_a:+.1f}%</span></div>
             </div>
             <div class="tc-stat tc-prices">
               <div class="tc-label">{b} <span style="color:var(--cyan);font-size:9px;">{shares_b} shr</span></div>
-              <div class="tc-val">${entry_pb:.2f} &rarr; ${cur_pb:.2f}</div>
+              <div class="tc-val">${entry_pb:.2f} &rarr; ${cur_pb:.2f} <span class="{chg_b_class}">{chg_b:+.1f}%</span></div>
             </div>
             <div class="tc-stat">
               <div class="tc-label">$ P&L</div>
@@ -1423,13 +1431,14 @@ def generate_trades_page(trades):
   }}
   .trade-card:hover {{ border-color: var(--cyan); }}
 
-  .tc-header {{ display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }}
+  .tc-header {{ display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: nowrap; }}
   .tc-pair {{ font-size: 16px; font-weight: 700; color: white; }}
   .tc-dir {{ font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }}
   .dir-short {{ background: rgba(239,68,68,0.12); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }}
   .dir-long  {{ background: rgba(34,197,94,0.12); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }}
   .dir-neutral {{ background: rgba(100,116,139,0.15); color: var(--muted); border: 1px solid var(--border); }}
-  .tc-days {{ font-size: 11px; color: var(--muted); margin-left: auto; }}
+  .tc-days {{ font-size: 11px; color: var(--muted); margin-left: auto; white-space: nowrap; }}
+  .tc-header button {{ flex-shrink: 0; }}
   .tc-close {{
     background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: var(--red);
     font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
@@ -1441,10 +1450,10 @@ def generate_trades_page(trades):
   }}
   .tc-reopen:hover {{ background: rgba(251,191,36,0.25); }}
   .tc-delete {{
-    background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #ef4444;
-    font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
+    background: none; border: none; color: #ef4444; opacity: 0.4;
+    font-size: 13px; padding: 2px 4px; cursor: pointer; line-height: 1;
   }}
-  .tc-delete:hover {{ background: rgba(239,68,68,0.25); }}
+  .tc-delete:hover {{ opacity: 1; }}
   .tc-edit {{
     background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); color: var(--cyan);
     font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
@@ -1721,6 +1730,26 @@ const currentValueMarkerPlugin = {{
 }};
 Chart.register(currentValueMarkerPlugin);
 
+const crosshairPlugin = {{
+  id: "crosshairLine",
+  afterDraw(chart) {{
+    const active = chart.tooltip?.getActiveElements?.();
+    if (!active || !active.length) return;
+    const {{ ctx, chartArea: {{ top, bottom }} }} = chart;
+    const x = active[0].element.x;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(x, top);
+    ctx.lineTo(x, bottom);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(148,163,184,0.85)";
+    ctx.setLineDash([]);
+    ctx.stroke();
+    ctx.restore();
+  }},
+}};
+Chart.register(crosshairPlugin);
+
 let activeTradeChart = null;
 
 function openTradeChart(btn) {{
@@ -1819,10 +1848,16 @@ function buildTradeZChart(dates, z, entryZ, currentZ) {{
         tooltip: {{
           backgroundColor: "#0d1520", borderColor: "#242d40", borderWidth: 1,
           titleColor: "#64748b", bodyColor: "#e2e8f0",
-          titleFont: {{ family: "'JetBrains Mono',monospace", size: 10 }},
-          bodyFont: {{ family: "'JetBrains Mono',monospace", size: 12 }},
+          titleFont: {{ family: "'JetBrains Mono',monospace", size: 11 }},
+          bodyFont:  {{ family: "'JetBrains Mono',monospace", size: 14 }},
           padding: 14, caretSize: 5, caretPadding: 50,
+          usePointStyle: true, pointStyle: "rectRounded", displayColors: true,
           callbacks: {{
+            labelColor: c => ({{
+              borderColor: c.dataset.borderColor,
+              backgroundColor: c.dataset.borderColor,
+              borderWidth: 0, borderRadius: 2,
+            }}),
             label: c => {{
               const v = c.raw;
               if (v === null) return "";
@@ -1893,9 +1928,10 @@ function loadTrades() {{
     }}
     return t;
   }});
-  // Add any TRADES_INIT entries not in local
+  // Add any TRADES_INIT entries not in local (skip deleted ones)
+  const deleted = JSON.parse(localStorage.getItem("deletedTrades") || "[]");
   TRADES_INIT.forEach(t => {{
-    if (!merged.some(m => m.id === t.id)) merged.push(t);
+    if (!merged.some(m => String(m.id) === String(t.id)) && !deleted.includes(String(t.id))) merged.push(t);
   }});
   localStorage.setItem("activeTrades", JSON.stringify(merged));
   return merged;
@@ -1926,6 +1962,10 @@ function renderTrades() {{
       }}
     }}
     const dollarClass = dollarPnl >= 0 ? "pnl-pos" : "pnl-neg";
+    const chgA = t.entryPriceA > 0 ? (t.currentPriceA - t.entryPriceA) / t.entryPriceA * 100 : 0;
+    const chgB = t.entryPriceB > 0 ? (t.currentPriceB - t.entryPriceB) / t.entryPriceB * 100 : 0;
+    const chgAClass = chgA >= 0 ? "pnl-pos" : "pnl-neg";
+    const chgBClass = chgB >= 0 ? "pnl-pos" : "pnl-neg";
     const cDates = t.chartDates || [];
     const cZ = t.chartZ || [];
     const hasChart = cDates.length > 0;
@@ -1937,14 +1977,14 @@ function renderTrades() {{
         <span class="tc-dir ${{dirClass}}">${{dir}}</span>
         <span class="tc-days">${{t.daysHeld || 0}}d held</span>
         ${{hasChart ? chartBtn : ""}}
-        ${{t.status === "open" ? `<button class="tc-edit" onclick="openEditModal('${{t.id}}')">&#9998; Edit</button><button class="tc-close" onclick="closeTrade('${{t.id}}')">&#10005; Close</button>` : `<button class="tc-reopen" onclick="reopenTrade('${{t.id}}')">&#8634; Reopen</button><button class="tc-delete" onclick="deleteTrade('${{t.id}}')">&#128465; Delete</button>`}}
+        ${{t.status === "open" ? `<button class="tc-edit" onclick="openEditModal('${{t.id}}')">&#9998; Edit</button><button class="tc-close" onclick="closeTrade('${{t.id}}')">&#10005; Close</button>` : `<button class="tc-reopen" onclick="reopenTrade('${{t.id}}')">&#8634; Reopen</button><button class="tc-delete" onclick="deleteTrade('${{t.id}}')">&#10005;</button>`}}
       </div>
       <div class="tc-body">
         <div class="tc-stat"><div class="tc-label">Entry Z</div><div class="tc-val">${{t.entryZ >= 0 ? "+" : ""}}${{t.entryZ.toFixed(2)}}&sigma;</div></div>
         <div class="tc-stat"><div class="tc-label">Current Z</div><div class="tc-val" style="color:${{zColor}}">${{t.currentZ >= 0 ? "+" : ""}}${{t.currentZ.toFixed(2)}}&sigma;</div></div>
         <div class="tc-stat"><div class="tc-label">Est P&L</div><div class="tc-val ${{pnlClass}}">${{pnl >= 0 ? "+" : ""}}${{pnl.toFixed(1)}}%</div></div>
-        <div class="tc-stat tc-prices"><div class="tc-label">${{a}} <span style="color:var(--cyan);font-size:9px;">${{sA}} shr</span></div><div class="tc-val">$${{t.entryPriceA.toFixed(2)}} &rarr; $${{t.currentPriceA.toFixed(2)}}</div></div>
-        <div class="tc-stat tc-prices"><div class="tc-label">${{b}} <span style="color:var(--cyan);font-size:9px;">${{sB}} shr</span></div><div class="tc-val">$${{t.entryPriceB.toFixed(2)}} &rarr; $${{t.currentPriceB.toFixed(2)}}</div></div>
+        <div class="tc-stat tc-prices"><div class="tc-label">${{a}} <span style="color:var(--cyan);font-size:9px;">${{sA}} shr</span></div><div class="tc-val">$${{t.entryPriceA.toFixed(2)}} &rarr; $${{t.currentPriceA.toFixed(2)}} <span class="${{chgAClass}}">${{chgA >= 0 ? "+" : ""}}${{chgA.toFixed(1)}}%</span></div></div>
+        <div class="tc-stat tc-prices"><div class="tc-label">${{b}} <span style="color:var(--cyan);font-size:9px;">${{sB}} shr</span></div><div class="tc-val">$${{t.entryPriceB.toFixed(2)}} &rarr; $${{t.currentPriceB.toFixed(2)}} <span class="${{chgBClass}}">${{chgB >= 0 ? "+" : ""}}${{chgB.toFixed(1)}}%</span></div></div>
         <div class="tc-stat"><div class="tc-label">$ P&L</div><div class="tc-val ${{dollarClass}}">${{dollarPnl >= 0 ? "+":""}}$${{Math.abs(dollarPnl).toFixed(0)}}</div></div>
       </div>
       <div class="tc-progress">
@@ -1985,8 +2025,12 @@ function reopenTrade(id) {{
 function deleteTrade(id) {{
   if (!confirm("Delete this trade permanently?")) return;
   let trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
-  trades = trades.filter(t => t.id !== id);
+  trades = trades.filter(t => String(t.id) !== String(id));
   localStorage.setItem("activeTrades", JSON.stringify(trades));
+  // Track deleted IDs so loadTrades() won't re-add from TRADES_INIT
+  const deleted = JSON.parse(localStorage.getItem("deletedTrades") || "[]");
+  if (!deleted.includes(String(id))) deleted.push(String(id));
+  localStorage.setItem("deletedTrades", JSON.stringify(deleted));
   renderTrades();
 }}
 
@@ -2077,6 +2121,27 @@ function saveTradeEdit() {{
     const entry = new Date(t.entryDate);
     t.daysHeld = Math.floor((Date.now() - entry.getTime()) / 86400000);
   }} catch(e) {{}}
+
+  // Recalculate entry Z from chart data if entry date or prices changed
+  if (t.chartDates && t.chartDates.length && t.chartZ && t.chartZ.length) {{
+    // Find the Z value closest to the entry date
+    const idx = t.chartDates.indexOf(t.entryDate);
+    if (idx >= 0 && t.chartZ[idx] != null) {{
+      t.entryZ = Math.round(t.chartZ[idx] * 100) / 100;
+    }} else {{
+      // Find nearest date if exact match not found
+      let closest = 0;
+      let minDiff = Infinity;
+      const entryTime = new Date(t.entryDate).getTime();
+      for (let i = 0; i < t.chartDates.length; i++) {{
+        const diff = Math.abs(new Date(t.chartDates[i]).getTime() - entryTime);
+        if (diff < minDiff) {{ minDiff = diff; closest = i; }}
+      }}
+      if (t.chartZ[closest] != null) {{
+        t.entryZ = Math.round(t.chartZ[closest] * 100) / 100;
+      }}
+    }}
+  }}
 
   // Recalculate P&L with new entry prices
   const dir = t.direction || "";
@@ -2286,6 +2351,8 @@ if __name__ == "__main__":
             continue
         if abs(z) < Z_THRESHOLD:
             continue  # skip pairs without a tradeable signal
+        if Z_MAX > 0 and abs(z) > Z_MAX:
+            continue  # likely a structural break, not mean-reversion
 
         name_a = TICKER_NAMES.get(a, "")
         name_b = TICKER_NAMES.get(b, "")
@@ -2819,6 +2886,9 @@ if __name__ == "__main__":
       }}
       .modal-tab:hover {{ color: var(--text); border-color: #3a4a66; }}
       .modal-tab.active {{ background: rgba(56,189,248,0.12); border-color: rgba(56,189,248,0.4); color: var(--cyan); }}
+      .modal-track-btn {{ color: #f59e0b !important; border-color: rgba(245,158,11,0.3) !important; margin-left: 6px; }}
+      .modal-track-btn:hover {{ background: rgba(245,158,11,0.12) !important; border-color: rgba(245,158,11,0.5) !important; }}
+      .modal-track-btn.tracked {{ background: rgba(34,197,94,0.12) !important; border-color: rgba(34,197,94,0.4) !important; color: #22c55e !important; }}
 
       .chart-legend {{ display: flex; gap: 22px; margin-bottom: 14px; flex-shrink: 0; flex-wrap: wrap; }}
       .leg-item {{ display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); font-family: var(--mono); }}
@@ -3063,6 +3133,7 @@ if __name__ == "__main__":
             <button class="modal-tab" id="tabP" onclick="switchTab('price')">&#9724; Price Overlay</button>
             <button class="modal-tab" id="tabB" onclick="switchTab('both')">&#9670; Both</button>
           </div>
+          <button class="modal-tab modal-track-btn" id="modalTrackBtn" onclick="trackFromChart()">&#9733; Track</button>
           <button class="modal-close" onclick="closeChart()">&#x2715;</button>
         </div>
         <div class="modal-body">
@@ -3233,8 +3304,16 @@ if __name__ == "__main__":
         .replace(/&amp;/g, "&").replace(/&#39;/g, "'")
         .replace(/&lt;/g, "<").replace(/&gt;/g, ">");
       const p = JSON.parse(raw);
-      if (!p.dates || p.dates.length === 0) {{ alert("No chart data for this pair (outside top {MAX_CHARTS} by score)."); return; }}
+      if (!p.dates || p.dates.length === 0) {{ alert("No chart data available for this pair."); return; }}
       currentChartData = p;
+      // Update modal Track button state
+      const trk = document.getElementById("modalTrackBtn");
+      const _trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+      if (_trades.some(t => t.pair === p.pair && t.status === "open")) {{
+        trk.classList.add("tracked"); trk.innerHTML = "&#10003; Tracked";
+      }} else {{
+        trk.classList.remove("tracked"); trk.innerHTML = "&#9733; Track";
+      }}
       const a = p.pair.split("/")[0], b = p.pair.split("/")[1];
 
       // Header
@@ -3930,6 +4009,55 @@ if __name__ == "__main__":
       btn.classList.add("tracked");
       btn.textContent = "\u2713 Tracked";
       // Show toast
+      showToast("Trade tracked: " + pair + " (" + sharesA + " / " + sharesB + " shares, $" + capital + ")");
+    }}
+
+    function trackFromChart() {{
+      if (!currentChartData) return;
+      const p = currentChartData;
+      const pair = p.pair;
+      const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+      const btn = document.getElementById("modalTrackBtn");
+      // Toggle: if already tracked, untrack it
+      const existingIdx = trades.findIndex(t => t.pair === pair && t.status === "open");
+      if (existingIdx !== -1) {{
+        trades.splice(existingIdx, 1);
+        localStorage.setItem("activeTrades", JSON.stringify(trades));
+        btn.classList.remove("tracked");
+        btn.innerHTML = "&#9733; Track";
+        // Also update the table row Track button
+        document.querySelectorAll(".track-btn").forEach(tb => {{
+          if (tb.dataset.pair === pair) {{ tb.classList.remove("tracked"); tb.textContent = "\u2733 Track"; }}
+        }});
+        showToast("Trade untracked: " + pair);
+        return;
+      }}
+      const priceA = p.priceANow;
+      const priceB = p.priceBNow;
+      const z = p.currentZ;
+      const direction = z > 0 ? "short_a_long_b" : z < 0 ? "long_a_short_b" : "neutral";
+      const capital = parseFloat(document.getElementById("capitalInput").value) || 0;
+      const leg = capital / 2;
+      const sharesA = priceA > 0 ? Math.round(leg / priceA) : 0;
+      const sharesB = priceB > 0 ? Math.round((sharesA * priceA) / priceB) : 0;
+      const id = pair + "_" + new Date().toISOString().slice(0,10);
+      const trade = {{
+        id: id, pair: pair, direction: direction,
+        signal: "",
+        entryDate: new Date().toISOString().slice(0,10),
+        entryZ: z, entryPriceA: priceA, entryPriceB: priceB,
+        currentZ: z, currentPriceA: priceA, currentPriceB: priceB,
+        sharesA: sharesA, sharesB: sharesB, capital: capital,
+        daysHeld: 0, status: "open",
+      }};
+      trades.push(trade);
+      localStorage.setItem("activeTrades", JSON.stringify(trades));
+      btn.classList.add("tracked");
+      btn.innerHTML = "&#10003; Tracked";
+      // Also update the table row Track button
+      document.querySelectorAll(".track-btn").forEach(tb => {{
+        if (tb.dataset.pair === pair) {{ tb.classList.add("tracked"); tb.textContent = "\u2713 Tracked"; }}
+      }});
       showToast("Trade tracked: " + pair + " (" + sharesA + " / " + sharesB + " shares, $" + capital + ")");
     }}
 
