@@ -28068,5 +28068,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PLOW": {
+        "ticker": "PLOW",
+        "name": "Douglas Dynamics, Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 1054976000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BOC": {
+        "ticker": "BOC",
+        "name": "Boston Omaha Corporation",
+        "meta": "Conglomerates",
+        "type": "EQUITY",
+        "mcap": 409209184,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
