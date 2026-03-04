@@ -36,6 +36,14 @@ MIN_CORR_FILTER = 0.60
 Z_THRESHOLD = 2.0
 Z_STRONG = 2.0
 
+MIN_PRICE      = 5.00    # Exclude pairs where either ticker is below this price
+MIN_AVG_VOLUME = 500000  # Exclude pairs where either ticker avg daily volume is below this
+MIN_MCAP_STOCK = 250000000      # Min market cap for stocks (0 = no filter)
+MIN_MCAP_ETF   = 50000000       # Min market cap (AUM) for ETFs (0 = no filter)
+
+MAX_RESULTS    = 100     # Max pairs to show in HTML (0 = show all)
+MAX_CHARTS     = 100     # Max pairs to compute Z-score charts for (reduces build time)
+
 W_ZSCORE = 0.50
 W_CORR_BRK = 0.25
 W_REL_PERF = 0.25
@@ -809,99 +817,99 @@ def build_symbols_page(valid_tickers):
     --sans: 'Syne', sans-serif;
   }}
   * {{ box-sizing: border-box; margin: 0; padding: 0; }}
-  body {{ background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; font-size: 16px; }}
+  body {{ background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; font-size: 14px; }}
 
   /* TOPBAR */
   .topbar {{
     background: var(--surface); border-bottom: 1px solid var(--border);
-    padding: 20px 40px; display: flex; align-items: center;
+    padding: 14px 32px; display: flex; align-items: center;
     justify-content: space-between; position: sticky; top: 0; z-index: 100;
   }}
-  .topbar h1 {{ font-size: 24px; font-weight: 800; letter-spacing: 0.04em; color: white; }}
+  .topbar h1 {{ font-size: 18px; font-weight: 800; letter-spacing: 0.04em; color: white; }}
   .topbar a {{
-    color: var(--cyan); text-decoration: none; font-size: 15px; font-weight: 600;
-    border: 1px solid var(--cyan); padding: 9px 20px; border-radius: 5px;
-    transition: background 0.2s;
+    color: var(--cyan); text-decoration: none; font-size: 12px; font-weight: 600;
+    border: 1px solid rgba(56,189,248,0.3); padding: 6px 12px; border-radius: 4px;
+    transition: all 0.15s; letter-spacing: 0.05em;
   }}
-  .topbar a:hover {{ background: rgba(56,189,248,0.1); }}
+  .topbar a:hover {{ background: rgba(56,189,248,0.08); border-color: var(--cyan); }}
 
   /* STATS BAR */
   .stats-bar {{
     background: var(--surface2); border-bottom: 1px solid var(--border);
-    padding: 13px 40px; font-family: var(--mono); font-size: 14px;
-    color: var(--muted); display: flex; gap: 40px; flex-wrap: wrap;
+    padding: 8px 32px; font-family: var(--mono); font-size: 11px;
+    color: var(--muted); display: flex; gap: 30px; flex-wrap: wrap;
   }}
   .stats-bar span {{ color: var(--text); font-weight: 600; }}
 
   /* SEARCH */
   .search-bar {{
-    padding: 22px 40px; background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 14px 32px; background: var(--surface); border-bottom: 1px solid var(--border);
   }}
   .search-bar input {{
     background: var(--surface2); border: 1px solid var(--border); color: white;
-    padding: 13px 20px; border-radius: 7px; font-family: var(--mono);
-    font-size: 15px; width: 400px; outline: none; transition: border 0.2s;
+    padding: 8px 14px; border-radius: 5px; font-family: var(--mono);
+    font-size: 12px; width: 360px; outline: none; transition: border 0.2s;
   }}
   .search-bar input:focus {{ border-color: var(--cyan); }}
   .search-bar input::placeholder {{ color: var(--muted); }}
 
   /* COLUMNS */
   .columns {{ display: grid; grid-template-columns: 1fr 1fr; gap: 0; }}
-  .column {{ padding: 30px 40px; border-right: 1px solid var(--border); }}
+  .column {{ padding: 20px 32px; border-right: 1px solid var(--border); }}
   .column:last-child {{ border-right: none; }}
 
   .col-header {{
-    font-size: 14px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
-    margin-bottom: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; gap: 12px;
+    font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
+    margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
   }}
-  .col-header .dot {{ width: 11px; height: 11px; border-radius: 50%; display: inline-block; }}
+  .col-header .dot {{ width: 8px; height: 8px; border-radius: 50%; display: inline-block; }}
 
   /* SECTOR */
-  .sector-block {{ margin-bottom: 34px; }}
+  .sector-block {{ margin-bottom: 22px; }}
   .sector-header {{
-    font-size: 16px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
-    margin-bottom: 14px; padding: 10px 16px; border-radius: 6px; border-left: 4px solid;
+    font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 10px; padding: 7px 12px; border-radius: 5px; border-left: 3px solid;
   }}
   .sector-header[style*="38bdf8"] {{ border-left-color: #38bdf8; background: rgba(56,189,248,0.06); }}
   .sector-header[style*="f59e0b"] {{ border-left-color: #f59e0b; background: rgba(245,158,11,0.06); }}
 
   /* INDUSTRY */
-  .industry-block {{ margin: 16px 0 16px 18px; }}
+  .industry-block {{ margin: 10px 0 10px 14px; }}
   .industry-label {{
-    font-size: 13px; font-weight: 700; color: #6b7f9a; letter-spacing: 0.08em;
-    text-transform: uppercase; margin-bottom: 10px; padding-bottom: 6px;
+    font-size: 11px; font-weight: 700; color: #6b7f9a; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 6px; padding-bottom: 4px;
     border-bottom: 1px solid rgba(255,255,255,0.05);
   }}
 
   /* SUBINDUSTRY */
-  .subindustry-block {{ margin: 12px 0 12px 16px; }}
+  .subindustry-block {{ margin: 8px 0 8px 12px; }}
   .subindustry-label {{
-    font-size: 12px; color: #4a5e72; font-family: var(--mono);
-    margin-bottom: 10px; letter-spacing: 0.04em;
+    font-size: 10px; color: #4a5e72; font-family: var(--mono);
+    margin-bottom: 6px; letter-spacing: 0.04em;
   }}
 
   /* TICKER CARDS */
-  .ticker-grid {{ display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 12px; }}
+  .ticker-grid {{ display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }}
   .ticker-card {{
-    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
-    padding: 9px 14px; display: flex; flex-direction: column; min-width: 160px; max-width: 240px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 5px;
+    padding: 6px 10px; display: flex; flex-direction: column; min-width: 140px; max-width: 210px;
     transition: border-color 0.15s, background 0.15s; cursor: default;
   }}
   .ticker-card:hover {{ border-color: #334155; background: #1e2535; }}
-  .ticker-sym  {{ font-family: var(--mono); font-size: 15px; font-weight: 700; line-height: 1.2; }}
+  .ticker-sym  {{ font-family: var(--mono); font-size: 12px; font-weight: 700; line-height: 1.2; }}
   .ticker-name {{
-    font-size: 12px; color: #94a3b8; line-height: 1.4; margin-top: 4px;
+    font-size: 10px; color: #94a3b8; line-height: 1.3; margin-top: 2px;
     white-space: normal; overflow: visible;
   }}
 
   /* FLAT ALPHA LAYOUT (used when no sector data) */
   .flat-grid {{ padding: 0; }}
-  .alpha-block {{ margin-bottom: 28px; }}
+  .alpha-block {{ margin-bottom: 18px; }}
   .alpha-label {{
-    font-family: var(--mono); font-size: 13px; font-weight: 700;
+    font-family: var(--mono); font-size: 11px; font-weight: 700;
     color: #3a4f66; letter-spacing: 0.18em; text-transform: uppercase;
-    margin-bottom: 10px; padding-bottom: 6px;
+    margin-bottom: 6px; padding-bottom: 4px;
     border-bottom: 1px solid rgba(255,255,255,0.04);
   }}
 
@@ -1163,6 +1171,11 @@ def generate_trades_page(trades):
         chart_payload = json.dumps({"pair": pair, "dates": chart_dates, "z": chart_z, "currentZ": cur_z, "entryZ": entry_z, "zWindow": Z_LENGTH})
         chart_payload_esc = chart_payload.replace("&", "&amp;").replace("'", "&#39;")
         chart_btn = f"""<button class="tc-chart" onclick="openTradeChart(this)" data-chart='{chart_payload_esc}'>&#9657; Z-Chart</button>""" if has_chart else ""
+        tid = t.get('id', '')
+        if t.get('status') == 'open':
+            action_btns = f'<button class="tc-edit" onclick="openEditModal(\'{tid}\')">&#9998; Edit</button><button class="tc-close" onclick="closeTrade(\'{tid}\')">&#10005; Close</button>'
+        else:
+            action_btns = f'<button class="tc-reopen" onclick="reopenTrade(\'{tid}\')">&#8634; Reopen</button>'
 
         return f"""
         <div class="trade-card">
@@ -1171,8 +1184,7 @@ def generate_trades_page(trades):
             <span class="tc-dir {dir_class}">{dir_label}</span>
             <span class="tc-days">{days}d held</span>
             {chart_btn}
-            <button class="tc-edit" onclick="openEditModal('{t.get('id', '')}')">&#9998; Edit</button>
-            <button class="tc-close" onclick="closeTrade('{t.get('id', '')}')">&#10005; Close</button>
+            {action_btns}
           </div>
           <div class="tc-body">
             <div class="tc-stat">
@@ -1233,9 +1245,13 @@ def generate_trades_page(trades):
   }}
   .topbar .brand {{ font-family: var(--sans); font-size: 20px; font-weight: 800; color: white; letter-spacing: 0.08em; }}
   .topbar .brand span {{ color: var(--cyan); }}
-  .nav-links {{ display: flex; gap: 16px; }}
-  .nav-links a {{ color: var(--cyan); text-decoration: none; font-size: 13px; font-weight: 600; }}
-  .nav-links a:hover {{ text-decoration: underline; }}
+  .nav-links {{ display: flex; gap: 10px; }}
+  .nav-links a {{
+    font-size: 12px; font-weight: 600; color: var(--cyan); text-decoration: none;
+    letter-spacing: 0.05em; padding: 6px 12px; border: 1px solid rgba(56,189,248,0.3);
+    border-radius: 4px; transition: all 0.15s; white-space: nowrap;
+  }}
+  .nav-links a:hover {{ background: rgba(56,189,248,0.08); border-color: var(--cyan); }}
 
   .content {{ max-width: 1200px; margin: 20px auto; padding: 0 20px; }}
   h2 {{ font-family: var(--sans); font-size: 18px; font-weight: 700; color: white; margin: 20px 0 12px; letter-spacing: 0.05em; }}
@@ -1261,6 +1277,11 @@ def generate_trades_page(trades):
     font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
   }}
   .tc-close:hover {{ background: rgba(239,68,68,0.25); }}
+  .tc-reopen {{
+    background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); color: #fbbf24;
+    font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
+  }}
+  .tc-reopen:hover {{ background: rgba(251,191,36,0.25); }}
   .tc-edit {{
     background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); color: var(--cyan);
     font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
@@ -1280,8 +1301,9 @@ def generate_trades_page(trades):
   }}
   .chart-overlay.open {{ display: flex; }}
   .chart-modal {{
-    background: #0a0e17; border: 1px solid var(--border); border-radius: 12px;
-    padding: 20px; width: min(800px, 95vw); max-height: 90vh;
+    background: #0a0e17; border: 1px solid var(--border); border-radius: 14px;
+    padding: 22px 28px; width: min(1500px, 99vw); max-height: 95vh;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(56,189,248,0.06);
   }}
   .chart-modal-header {{
     display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;
@@ -1298,7 +1320,7 @@ def generate_trades_page(trades):
     font-size: 16px; padding: 4px 10px; border-radius: 6px; cursor: pointer;
   }}
   .chart-modal-close:hover {{ color: white; border-color: var(--muted); }}
-  .chart-canvas-wrap {{ position: relative; height: 380px; }}
+  .chart-canvas-wrap {{ position: relative; height: 500px; }}
 
   /* EDIT MODAL */
   .edit-overlay {{
@@ -1445,13 +1467,99 @@ def generate_trades_page(trades):
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
-// Load annotation plugin
+// Load annotation + zoom plugins
 (function() {{
   const s = document.createElement("script");
   s.src = "https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js";
   s.onload = () => {{ Chart.register(window["chartjs-plugin-annotation"]); }};
   document.head.appendChild(s);
+  const h = document.createElement("script");
+  h.src = "https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js";
+  h.onload = () => {{
+    const z = document.createElement("script");
+    z.src = "https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js";
+    document.head.appendChild(z);
+  }};
+  document.head.appendChild(h);
 }})();
+
+// Current-value marker plugin — draws a price tag on the right edge of the chart
+const currentValueMarkerPlugin = {{
+  id: "currentValueMarker",
+  afterDraw(chart) {{
+    const ctx = chart.ctx;
+    const chartArea = chart.chartArea;
+    chart.data.datasets.forEach((ds, i) => {{
+      if (!chart.isDatasetVisible(i)) return;
+      // Use authoritative _currentValue if set, else last non-null data point
+      let lastVal = ds._currentValue !== undefined ? ds._currentValue : null;
+      if (lastVal === null) {{
+        for (let j = ds.data.length - 1; j >= 0; j--) {{
+          if (ds.data[j] !== null && ds.data[j] !== undefined) {{ lastVal = ds.data[j]; break; }}
+        }}
+      }}
+      if (lastVal === null) return;
+      const yAxisID = ds.yAxisID || "y";
+      const scale = chart.scales[yAxisID];
+      if (!scale) return;
+      const yPx = scale.getPixelForValue(lastVal);
+      if (yPx < chartArea.top - 5 || yPx > chartArea.bottom + 5) return;
+
+      // Format label based on axis type
+      let label;
+      const ticks = chart.options.scales[yAxisID]?.ticks;
+      if (ticks && ticks.callback) {{
+        label = ticks.callback(lastVal, 0, []);
+      }} else {{
+        label = lastVal.toFixed(2);
+      }}
+
+      const color = ds.borderColor || "#38bdf8";
+      const x = chartArea.right + 4;
+      const font = "bold 10px 'JetBrains Mono', monospace";
+      ctx.save();
+      ctx.font = font;
+      const textW = ctx.measureText(label).width;
+      const padX = 5, padY = 3;
+      const boxW = textW + padX * 2;
+      const boxH = 14 + padY * 2;
+
+      // Draw connector line from chart edge to marker
+      ctx.beginPath();
+      ctx.setLineDash([2, 2]);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1;
+      ctx.moveTo(chartArea.right, yPx);
+      ctx.lineTo(x, yPx);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Draw marker background
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      const r = 3;
+      const bx = x, by = yPx - boxH / 2;
+      ctx.roundRect(bx, by, boxW, boxH, [0, r, r, 0]);
+      ctx.fill();
+
+      // Arrow notch on left side
+      ctx.beginPath();
+      ctx.moveTo(bx, yPx - 5);
+      ctx.lineTo(bx - 4, yPx);
+      ctx.lineTo(bx, yPx + 5);
+      ctx.closePath();
+      ctx.fill();
+
+      // Draw text
+      ctx.fillStyle = "#0a0e17";
+      ctx.textBaseline = "middle";
+      ctx.textAlign = "left";
+      ctx.fillText(label, bx + padX, yPx);
+      ctx.restore();
+    }});
+  }}
+}};
+Chart.register(currentValueMarkerPlugin);
 
 let activeTradeChart = null;
 
@@ -1474,7 +1582,7 @@ function openTradeChart(btn) {{
     <div class="cm-stat"><span style="color:var(--muted);">Window</span><span class="cm-val" style="color:#94a3b8;">${{p.zWindow}}d</span></div>`;
   document.getElementById("chartModal").classList.add("open");
   document.body.style.overflow = "hidden";
-  setTimeout(() => buildTradeZChart(p.dates, p.z, p.entryZ), 40);
+  setTimeout(() => buildTradeZChart(p.dates, p.z, p.entryZ, p.currentZ), 40);
 }}
 
 function closeTradeChart() {{
@@ -1483,7 +1591,7 @@ function closeTradeChart() {{
   if (activeTradeChart) {{ activeTradeChart.destroy(); activeTradeChart = null; }}
 }}
 
-function buildTradeZChart(dates, z, entryZ) {{
+function buildTradeZChart(dates, z, entryZ, currentZ) {{
   if (activeTradeChart) {{ activeTradeChart.destroy(); activeTradeChart = null; }}
   const ctx = document.getElementById("tradeZChart").getContext("2d");
   const grad = ctx.createLinearGradient(0, 0, 0, 380);
@@ -1538,11 +1646,13 @@ function buildTradeZChart(dates, z, entryZ) {{
         backgroundColor: grad,
         tension: 0.3,
         spanGaps: true,
+        _currentValue: currentZ,
       }}],
     }},
     options: {{
       responsive: true,
       maintainAspectRatio: false,
+      layout: {{ padding: {{ right: 60 }} }},
       interaction: {{ mode: "index", intersect: false }},
       plugins: {{
         legend: {{ display: false }},
@@ -1551,6 +1661,7 @@ function buildTradeZChart(dates, z, entryZ) {{
           titleColor: "#64748b", bodyColor: "#e2e8f0",
           titleFont: {{ family: "'JetBrains Mono',monospace", size: 10 }},
           bodyFont: {{ family: "'JetBrains Mono',monospace", size: 12 }},
+          padding: 14, caretSize: 5, caretPadding: 50,
           callbacks: {{
             label: c => {{
               const v = c.raw;
@@ -1561,6 +1672,10 @@ function buildTradeZChart(dates, z, entryZ) {{
           }},
         }},
         annotation: {{ annotations }},
+        zoom: {{
+          pan: {{ enabled: true, mode: "x" }},
+          zoom: {{ wheel: {{ enabled: true, speed: 0.1 }}, pinch: {{ enabled: true }}, mode: "x" }},
+        }},
       }},
       scales: {{
         x: {{
@@ -1569,7 +1684,7 @@ function buildTradeZChart(dates, z, entryZ) {{
         }},
         y: {{
           ticks: {{ color: "#374151", font: {{ family: "'JetBrains Mono',monospace", size: 10 }},
-            callback: v => (v >= 0 ? "+" : "") + v.toFixed(1) + "\u03c3" }},
+            callback: v => (v >= 0 ? "+" : "") + v.toFixed(2) + "\u03c3" }},
           grid: {{ color: "rgba(28,35,51,0.6)" }}, border: {{ color: "#1c2333" }},
         }},
       }},
@@ -1662,7 +1777,7 @@ function renderTrades() {{
         <span class="tc-dir ${{dirClass}}">${{dir}}</span>
         <span class="tc-days">${{t.daysHeld || 0}}d held</span>
         ${{hasChart ? chartBtn : ""}}
-        ${{t.status === "open" ? `<button class="tc-edit" onclick="openEditModal('${{t.id}}')">&#9998; Edit</button><button class="tc-close" onclick="closeTrade('${{t.id}}')">&#10005; Close</button>` : `<span style="color:var(--muted);font-size:10px;">CLOSED</span>`}}
+        ${{t.status === "open" ? `<button class="tc-edit" onclick="openEditModal('${{t.id}}')">&#9998; Edit</button><button class="tc-close" onclick="closeTrade('${{t.id}}')">&#10005; Close</button>` : `<button class="tc-reopen" onclick="reopenTrade('${{t.id}}')">&#8634; Reopen</button>`}}
       </div>
       <div class="tc-body">
         <div class="tc-stat"><div class="tc-label">Entry Z</div><div class="tc-val">${{t.entryZ >= 0 ? "+" : ""}}${{t.entryZ.toFixed(2)}}&sigma;</div></div>
@@ -1691,6 +1806,17 @@ function closeTrade(id) {{
   if (t) {{
     t.status = "closed";
     t.closeDate = new Date().toISOString().slice(0,10);
+  }}
+  localStorage.setItem("activeTrades", JSON.stringify(trades));
+  renderTrades();
+}}
+
+function reopenTrade(id) {{
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  const t = trades.find(t => t.id === id);
+  if (t) {{
+    t.status = "open";
+    delete t.closeDate;
   }}
   localStorage.setItem("activeTrades", JSON.stringify(trades));
   renderTrades();
@@ -1843,6 +1969,25 @@ if __name__ == "__main__":
     mcap_data = build_market_cap(TICKERS)
 
     valid = list(data.columns)
+    pre_filter_count = len(valid)
+
+    # Pre-filter tickers by price, volume, market cap BEFORE building combinations
+    if MIN_PRICE > 0:
+        valid = [t for t in valid if data[t].iloc[-1] >= MIN_PRICE]
+    if MIN_AVG_VOLUME > 0:
+        valid = [t for t in valid if vol_avg.get(t, 0) >= MIN_AVG_VOLUME]
+    if MIN_MCAP_STOCK > 0 or MIN_MCAP_ETF > 0:
+        def _mcap_ok(t):
+            mc = mcap_data.get(t, 0)
+            tt = TICKER_TYPES.get(t, "Unknown")
+            if tt == "Pure Stock" and MIN_MCAP_STOCK > 0:
+                return mc >= MIN_MCAP_STOCK
+            if tt == "Pure ETF" and MIN_MCAP_ETF > 0:
+                return mc >= MIN_MCAP_ETF
+            return True
+        valid = [t for t in valid if _mcap_ok(t)]
+
+    print(f"Tickers: {pre_filter_count} → {len(valid)} after filters (price>=${MIN_PRICE}, vol>={MIN_AVG_VOLUME:,}, stock mcap>={MIN_MCAP_STOCK:,}, etf mcap>={MIN_MCAP_ETF:,})")
     print(f"Computing matrices for {len(valid)} symbols...")
 
     # Pre-compute number of pairs (used in HTML template regardless of cache)
@@ -1886,8 +2031,8 @@ if __name__ == "__main__":
     results = sorted(results, key=lambda x: x["Score"], reverse=True)
 
     # The code below runs EVERY time, regardless of whether calculations were cached
-    top_results = results[:2000]
-    chart_results = results[:500]  # only compute charts for top 500
+    top_results = results[:MAX_RESULTS] if MAX_RESULTS > 0 else results
+    chart_results = top_results[:MAX_CHARTS] if MAX_CHARTS > 0 else top_results
 
     # Compute rolling Z-score histories for top 500 pairs (parallel)
     print(f"Computing Z-score chart histories for top {len(chart_results)} pairs using {NUM_WORKERS} CPU cores...")
@@ -1932,12 +2077,14 @@ if __name__ == "__main__":
     n_conf_low    = sum(1 for r in top_results if r.get("Confidence") == "Low")
 
     rows_html = ""
-    for i, r in enumerate(top_results):
+    for i, r in enumerate(tqdm(top_results, desc="Generating HTML")):
         z = r["Z"]
         a, b = r["Pair"].split("/")
 
         if any(np.isnan(v) for v in [z, r["Score"], r["Corr"], r["PerfDiff"]]):
             continue
+        if abs(z) < Z_THRESHOLD:
+            continue  # skip pairs without a tradeable signal
 
         name_a = TICKER_NAMES.get(a, "")
         name_b = TICKER_NAMES.get(b, "")
@@ -2079,11 +2226,11 @@ if __name__ == "__main__":
               <div class="z-sub-row">
                 <span class="z-sub" title="30-day Z-score">30d:{f'{z30:+.1f}' if z30 is not None else '\u2014'}</span>
                 <span class="z-sub" title="250-day Z-score">250d:{f'{z250:+.1f}' if z250 is not None else '\u2014'}</span>
+                <span class="z-sub z-adaptive" title="Adaptive Z ({adapt_win}d window based on half-life)">A{adapt_win}d:{f'{z_adaptive:+.1f}' if z_adaptive is not None else '\u2014'}</span>
+              </div>
+              <div class="z-badge-row">
                 <span class="conf-badge {conf_class}">{confidence}</span>
                 <span class="align-badge {align_class}">{align_label}</span>
-              </div>
-              <div class="z-sub-row">
-                <span class="z-sub z-adaptive" title="Adaptive Z ({adapt_win}d window based on half-life)">A{adapt_win}d:{f'{z_adaptive:+.1f}' if z_adaptive is not None else '\u2014'}</span>
               </div>
             </div>
           </td>
@@ -2299,9 +2446,10 @@ if __name__ == "__main__":
       .z-bar-fill  {{ height: 100%; border-radius: 2px; }}
       .z-bar-pos {{ background: var(--red); }}
       .z-bar-neg {{ background: var(--green); }}
-      .z-sub-row {{ display: flex; gap: 6px; align-items: center; margin-top: 1px; flex-wrap: wrap; }}
+      .z-sub-row {{ display: flex; gap: 6px; align-items: center; margin-top: 1px; }}
       .z-sub {{ font-family: var(--mono); font-size: 9px; color: #cbd5e1; }}
-      .z-adaptive {{ color: #f59e0b; }}
+      .z-adaptive {{ color: #2dd4bf; }}
+      .z-badge-row {{ display: flex; gap: 4px; align-items: center; margin-top: 2px; }}
       .align-badge {{ display: inline-flex; padding: 1px 5px; border-radius: 3px; font-size: 7px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }}
       .align-yes  {{ background: rgba(56,189,248,0.18);  color: #7dd3fc; }}
       .align-mix  {{ background: rgba(245,158,11,0.15);  color: #fcd34d; }}
@@ -2402,21 +2550,6 @@ if __name__ == "__main__":
       /* SHARES (inline in signal) */
       .share-count {{ font-size: 10px; color: #ffffff; margin-left: 3px; }}
 
-      /* PAGINATION */
-      .pagination-bar {{
-        display: flex; justify-content: center; align-items: center; gap: 4px;
-        padding: 10px 20px; background: var(--surface); border-top: 1px solid var(--border);
-      }}
-      .pagination-bar .pg-btn {{
-        background: transparent; border: 1px solid var(--border); color: var(--muted);
-        font-family: var(--mono); font-size: 12px; padding: 4px 10px; border-radius: 4px;
-        cursor: pointer; transition: all 0.15s; min-width: 32px; text-align: center;
-      }}
-      .pagination-bar .pg-btn:hover {{ background: rgba(56,189,248,0.1); color: var(--cyan); border-color: var(--cyan); }}
-      .pagination-bar .pg-btn.active {{ background: rgba(56,189,248,0.2); color: var(--cyan); border-color: var(--cyan); font-weight: 700; }}
-      .pagination-bar .pg-btn:disabled {{ opacity: 0.3; cursor: default; }}
-      .pagination-bar .pg-info {{ font-family: var(--mono); font-size: 11px; color: var(--muted); margin: 0 12px; }}
-      tbody tr.page-hidden {{ display: none; }}
 
       /* MODAL */
       .modal-overlay {{
@@ -2526,7 +2659,7 @@ if __name__ == "__main__":
         <span>Updated: <em id="update-time"></em></span>
         <span>Scanned: <em>{n_combos:,} pairs</em></span>
         <span>Setups: <em>{len(results):,}</em></span>
-        <span>Showing: <em>Top {len(top_results)}</em></span>
+        <span>Showing: <em>{'All ' + str(len(top_results)) if len(top_results) == len(results) else 'Top ' + str(len(top_results))}</em></span>
       </div>
       <div style="display:flex;gap:16px;align-items:center;">
         <a href="active_trades.html" class="nav-link" style="color:var(--green);">&#9733; My Trades</a>
@@ -2663,16 +2796,6 @@ if __name__ == "__main__":
           <span class="toggle-track"><span class="toggle-thumb"></span></span>
         </label>
       </div>
-      <div class="control-group">
-        <label>Per Page</label>
-        <select id="perPage" onchange="changePerPage()">
-          <option value="25">25</option>
-          <option value="50" selected>50</option>
-          <option value="100">100</option>
-          <option value="200">200</option>
-          <option value="0">All</option>
-        </select>
-      </div>
     </div>
 
     <!-- TABLE -->
@@ -2700,7 +2823,6 @@ if __name__ == "__main__":
     </div>
 
     <!-- PAGINATION -->
-    <div id="pagination" class="pagination-bar"></div>
 
     <!-- FOOTER -->
     <div class="footer">
@@ -2771,12 +2893,20 @@ if __name__ == "__main__":
     let activeBChart    = null;
     let currentChartData = null;
 
-    // Load annotation plugin async
+    // Load annotation + zoom plugins async
     (function() {{
       const s = document.createElement("script");
       s.src = "https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js";
       s.onload = () => {{ Chart.register(window["chartjs-plugin-annotation"]); }};
       document.head.appendChild(s);
+      const h = document.createElement("script");
+      h.src = "https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js";
+      h.onload = () => {{
+        const z = document.createElement("script");
+        z.src = "https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js";
+        document.head.appendChild(z);
+      }};
+      document.head.appendChild(h);
     }})();
 
     // Vertical crosshair line plugin
@@ -2792,13 +2922,85 @@ if __name__ == "__main__":
         ctx.moveTo(x, top);
         ctx.lineTo(x, bottom);
         ctx.lineWidth = 1;
-        ctx.strokeStyle = "rgba(148,163,184,0.4)";
-        ctx.setLineDash([4, 3]);
+        ctx.strokeStyle = "rgba(148,163,184,0.85)";
+        ctx.setLineDash([]);
         ctx.stroke();
         ctx.restore();
       }},
     }};
     Chart.register(crosshairPlugin);
+
+    // Current-value marker plugin — draws a price tag on the right edge
+    const currentValueMarkerPlugin = {{
+      id: "currentValueMarker",
+      afterDraw(chart) {{
+        const ctx = chart.ctx;
+        const chartArea = chart.chartArea;
+        chart.data.datasets.forEach((ds, i) => {{
+          if (!chart.isDatasetVisible(i)) return;
+          let lastVal = ds._currentValue !== undefined ? ds._currentValue : null;
+          if (lastVal === null) {{
+            for (let j = ds.data.length - 1; j >= 0; j--) {{
+              if (ds.data[j] !== null && ds.data[j] !== undefined) {{ lastVal = ds.data[j]; break; }}
+            }}
+          }}
+          if (lastVal === null) return;
+          const yAxisID = ds.yAxisID || "y";
+          const scale = chart.scales[yAxisID];
+          if (!scale) return;
+          const yPx = scale.getPixelForValue(lastVal);
+          if (yPx < chartArea.top - 5 || yPx > chartArea.bottom + 5) return;
+
+          let label;
+          const ticks = chart.options.scales[yAxisID]?.ticks;
+          if (ticks && ticks.callback) {{
+            label = ticks.callback(lastVal, 0, []);
+          }} else {{
+            label = lastVal.toFixed(2);
+          }}
+
+          const color = ds.borderColor || "#38bdf8";
+          const x = chartArea.right + 4;
+          const font = "bold 10px 'JetBrains Mono', monospace";
+          ctx.save();
+          ctx.font = font;
+          const textW = ctx.measureText(label).width;
+          const padX = 5, padY = 3;
+          const boxW = textW + padX * 2;
+          const boxH = 14 + padY * 2;
+
+          ctx.beginPath();
+          ctx.setLineDash([2, 2]);
+          ctx.strokeStyle = color;
+          ctx.lineWidth = 1;
+          ctx.moveTo(chartArea.right, yPx);
+          ctx.lineTo(x, yPx);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          ctx.fillStyle = color;
+          ctx.beginPath();
+          const r = 3;
+          const bx = x, by = yPx - boxH / 2;
+          ctx.roundRect(bx, by, boxW, boxH, [0, r, r, 0]);
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.moveTo(bx, yPx - 5);
+          ctx.lineTo(bx - 4, yPx);
+          ctx.lineTo(bx, yPx + 5);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.fillStyle = "#0a0e17";
+          ctx.textBaseline = "middle";
+          ctx.textAlign = "left";
+          ctx.fillText(label, bx + padX, yPx);
+          ctx.restore();
+        }});
+      }}
+    }};
+    Chart.register(currentValueMarkerPlugin);
 
     // ─── TAB SWITCH ──────────────────────────────────────────────────────────────
     function switchTab(mode) {{
@@ -2822,7 +3024,7 @@ if __name__ == "__main__":
         .replace(/&amp;/g, "&").replace(/&#39;/g, "'")
         .replace(/&lt;/g, "<").replace(/&gt;/g, ">");
       const p = JSON.parse(raw);
-      if (!p.dates || p.dates.length === 0) {{ alert("No chart data for this pair (outside top 500 by score)."); return; }}
+      if (!p.dates || p.dates.length === 0) {{ alert("No chart data for this pair (outside top {MAX_CHARTS} by score)."); return; }}
       currentChartData = p;
       const a = p.pair.split("/")[0], b = p.pair.split("/")[1];
 
@@ -2907,12 +3109,12 @@ if __name__ == "__main__":
       document.body.style.overflow = "hidden";
 
       setTimeout(() => {{
-        buildZChart(p.dates, p.z, p.zWindow, p.datesAdaptive, p.zAdaptive, p.adaptiveWindow);
+        buildZChart(p.dates, p.z, p.zWindow, p.datesAdaptive, p.zAdaptive, p.adaptiveWindow, p.currentZ, p.zAdaptiveCurrent);
         if (mode === 'price') switchTab('price');
       }}, 40);
     }}
 
-    function buildZChart(dates, z, zWindow, datesAdapt, zAdapt, adaptWin) {{
+    function buildZChart(dates, z, zWindow, datesAdapt, zAdapt, adaptWin, currentZ, zAdaptiveCurrent) {{
       if (activeChart) {{ activeChart.destroy(); activeChart = null; }}
       const ctx = document.getElementById("zChart").getContext("2d");
 
@@ -2957,12 +3159,13 @@ if __name__ == "__main__":
         backgroundColor: grad,
         tension: 0.3,
         spanGaps: true,
+        _currentValue: currentZ,
       }}];
       if (hasAdaptive) {{
         datasets.push({{
           label: "Adaptive Z (" + adaptWin + "d)",
           data: zAdaptAligned,
-          borderColor: "#f59e0b",
+          borderColor: "#2dd4bf",
           borderWidth: 1.5,
           borderDash: [5, 3],
           pointRadius: 0,
@@ -2971,6 +3174,7 @@ if __name__ == "__main__":
           fill: false,
           tension: 0.3,
           spanGaps: true,
+          _currentValue: zAdaptiveCurrent,
         }});
       }}
 
@@ -2983,6 +3187,7 @@ if __name__ == "__main__":
         options: {{
           responsive: true,
           maintainAspectRatio: false,
+          layout: {{ padding: {{ right: 60 }} }},
           interaction: {{ mode: "index", intersect: false }},
           plugins: {{
             legend: {{ display: hasAdaptive, position: "top",
@@ -3001,9 +3206,15 @@ if __name__ == "__main__":
               titleColor: "#64748b", bodyColor: "#e2e8f0",
               titleFont: {{ family: "'JetBrains Mono',monospace", size: 11 }},
               bodyFont:  {{ family: "'JetBrains Mono',monospace", size: 14 }},
-              padding: 14, caretSize: 5, caretPadding: 20,
-              usePointStyle: false, displayColors: true,
+              padding: 14, caretSize: 5, caretPadding: 50,
+              usePointStyle: true, pointStyle: "rectRounded", displayColors: true,
               callbacks: {{
+                labelColor: c => ({{
+                  borderColor: c.dataset.borderColor,
+                  backgroundColor: c.dataset.borderColor,
+                  borderWidth: 0,
+                  borderRadius: 2,
+                }}),
                 label: c => {{
                   const v = c.raw;
                   if (v === null) return "";
@@ -3024,6 +3235,10 @@ if __name__ == "__main__":
                 n3:   hLine(-3, "rgba(239,68,68,0.85)",   1.5, [],    "-3\u03C3"),
               }},
             }},
+            zoom: {{
+              pan: {{ enabled: true, mode: "x" }},
+              zoom: {{ wheel: {{ enabled: true, speed: 0.1 }}, pinch: {{ enabled: true }}, mode: "x" }},
+            }},
           }},
           scales: {{
             x: {{
@@ -3032,7 +3247,7 @@ if __name__ == "__main__":
             }},
             y: {{
               ticks: {{ color: "#374151", font: {{ family: "'JetBrains Mono',monospace", size: 10 }},
-                callback: v => (v >= 0 ? "+" : "") + v.toFixed(1) + "\u03C3" }},
+                callback: v => (v >= 0 ? "+" : "") + v.toFixed(2) + "\u03C3" }},
               grid: {{ color: "rgba(28,35,51,0.6)" }}, border: {{ color: "#1c2333" }},
             }},
           }},
@@ -3093,6 +3308,7 @@ if __name__ == "__main__":
         }},
         options: {{
           responsive: true, maintainAspectRatio: false,
+          layout: {{ padding: {{ right: 60 }} }},
           interaction: {{ mode: "index", intersect: false }},
           plugins: {{
             legend: {{ display: false }},
@@ -3101,14 +3317,14 @@ if __name__ == "__main__":
               titleColor: "#64748b", bodyColor: "#e2e8f0",
               titleFont: {{ family: "'JetBrains Mono',monospace", size: 11 }},
               bodyFont:  {{ family: "'JetBrains Mono',monospace", size: 13 }},
-              padding: 14, caretSize: 5, caretPadding: 20,
-              usePointStyle: false,
+              padding: 14, caretSize: 5, caretPadding: 50,
+              usePointStyle: true, pointStyle: "rectRounded",
               callbacks: {{
                 label: c => {{
                   const pct = (c.raw - 100).toFixed(2);
                   return ` ${{c.dataset.label}}: ${{c.raw.toFixed(2)}}  (${{pct >= 0 ? "+" : ""}}${{pct}}%)`;
                 }},
-                labelColor: c => ({{ borderColor: c.dataset.borderColor, backgroundColor: c.dataset.borderColor }}),
+                labelColor: c => ({{ borderColor: c.dataset.borderColor, backgroundColor: c.dataset.borderColor, borderWidth: 0, borderRadius: 2 }}),
               }},
             }},
             annotation: {{
@@ -3117,6 +3333,10 @@ if __name__ == "__main__":
                   borderColor: "rgba(148,163,184,0.25)", borderWidth: 1, borderDash: [4,4] }},
               }},
             }},
+            zoom: {{
+              pan: {{ enabled: true, mode: "x" }},
+              zoom: {{ wheel: {{ enabled: true, speed: 0.1 }}, pinch: {{ enabled: true }}, mode: "x" }},
+            }},
           }},
           scales: {{
             x: {{
@@ -3124,7 +3344,7 @@ if __name__ == "__main__":
               grid: {{ color: "rgba(28,35,51,0.7)" }}, border: {{ color: "#1c2333" }},
             }},
             y: {{
-              ticks: {{ color: "#374151", font: {{ family: "'JetBrains Mono',monospace", size: 10 }}, callback: v => v.toFixed(0) }},
+              ticks: {{ color: "#374151", font: {{ family: "'JetBrains Mono',monospace", size: 10 }}, callback: v => v.toFixed(2) }},
               grid: {{ color: "rgba(28,35,51,0.6)" }}, border: {{ color: "#1c2333" }},
               title: {{
                 display: true,
@@ -3182,10 +3402,12 @@ if __name__ == "__main__":
             borderColor:"rgba(248,215,80,0.9)", borderWidth:1.5,
             pointRadius:0, pointHoverRadius:0,
             pointBorderWidth:0,
-            fill:false, tension:0.3, spanGaps:true, order:1 }},
+            fill:false, tension:0.3, spanGaps:true, order:1,
+            _currentValue: p.currentZ }},
         ]}},
         options: {{
           responsive:true, maintainAspectRatio:false,
+          layout:{{padding:{{right:60}}}},
           interaction:{{mode:"index",intersect:false}},
           plugins:{{
             legend:{{display:false}},
@@ -3194,7 +3416,7 @@ if __name__ == "__main__":
               titleColor:"#64748b", bodyColor:"#e2e8f0",
               titleFont:{{family:"'JetBrains Mono',monospace",size:11}},
               bodyFont:{{family:"'JetBrains Mono',monospace",size:13}}, padding:14, caretPadding:20,
-              usePointStyle:false,
+              usePointStyle:true, pointStyle:"rectRounded",
               callbacks:{{
                 label: c => {{
                   if (c.datasetIndex < 2) {{
@@ -3206,7 +3428,7 @@ if __name__ == "__main__":
                   const lv = Math.abs(v)>=3?"EXTREME":Math.abs(v)>=2?"STRONG":Math.abs(v)>=1?"SIGNAL":"neutral";
                   return ` Z = ${{v>=0?"+":""}}${{v.toFixed(3)}}\u03C3  [${{lv}}]`;
                 }},
-                labelColor: c => ({{ borderColor: c.dataset.borderColor, backgroundColor: c.dataset.borderColor }}),
+                labelColor: c => ({{ borderColor: c.dataset.borderColor, backgroundColor: c.dataset.borderColor, borderWidth: 0, borderRadius: 2 }}),
               }},
             }},
             annotation:{{ annotations:{{
@@ -3220,19 +3442,23 @@ if __name__ == "__main__":
               base:{{type:"line",yMin:100,yMax:100,yScaleID:"yP",
                 borderColor:"rgba(148,163,184,0.2)",borderWidth:1,borderDash:[4,4]}},
             }} }},
+            zoom: {{
+              pan: {{ enabled: true, mode: "x" }},
+              zoom: {{ wheel: {{ enabled: true, speed: 0.1 }}, pinch: {{ enabled: true }}, mode: "x" }},
+            }},
           }},
           scales:{{
             x:{{ ticks:{{color:"#374151",font:{{family:"'JetBrains Mono',monospace",size:10}},
                   maxRotation:0,maxTicksLimit:10,autoSkip:true}},
                  grid:{{color:"rgba(28,35,51,0.7)"}},border:{{color:"#1c2333"}} }},
             yP:{{ position:"left",
-                 ticks:{{color:"#38bdf8",font:{{family:"'JetBrains Mono',monospace",size:10}},callback:v=>v.toFixed(0)}},
+                 ticks:{{color:"#38bdf8",font:{{family:"'JetBrains Mono',monospace",size:10}},callback:v=>v.toFixed(2)}},
                  grid:{{color:"rgba(28,35,51,0.5)"}},border:{{color:"#1c2333"}},
                  title:{{display:true,text:"Norm. Price (base 100)",color:"rgba(56,189,248,0.5)",
                    font:{{family:"'JetBrains Mono',monospace",size:10}}}} }},
             yZ:{{ position:"right",
                  ticks:{{color:"rgba(248,215,80,0.7)",font:{{family:"'JetBrains Mono',monospace",size:10}},
-                   callback:v=>(v>=0?"+":"")+v.toFixed(1)+"\u03C3"}},
+                   callback:v=>(v>=0?"+":"")+v.toFixed(2)+"\u03C3"}},
                  grid:{{drawOnChartArea:false}},border:{{color:"#1c2333"}},
                  title:{{display:true,text:"Z-Score",color:"rgba(248,215,80,0.5)",
                    font:{{family:"'JetBrains Mono',monospace",size:10}}}} }},
@@ -3383,8 +3609,6 @@ if __name__ == "__main__":
       }}
 
       calcShares();
-      currentPage = 1;
-      paginateTable();
     }}
 
     // ─── SORT ─────────────────────────────────────────────────────────────────────
@@ -3436,7 +3660,6 @@ if __name__ == "__main__":
       rows.forEach((r, i) => {{ r.querySelector(".rank-cell").textContent = i + 1; tbody.appendChild(r); }});
       updateSortIndicators(key, asc);
       calcShares();
-      paginateTable();
     }}
 
     function updateSortIndicators(key, asc) {{
@@ -3459,10 +3682,14 @@ if __name__ == "__main__":
       const pair = btn.dataset.pair;
       const id   = pair + "_" + new Date().toISOString().slice(0,10);
       const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
-      // Check if already tracked
-      if (trades.some(t => t.pair === pair && t.status === "open")) {{
-        btn.textContent = "Already tracked";
-        setTimeout(() => {{ btn.textContent = "\u2733 Track"; }}, 1500);
+      // Toggle: if already tracked, untrack it
+      const existingIdx = trades.findIndex(t => t.pair === pair && t.status === "open");
+      if (existingIdx !== -1) {{
+        trades.splice(existingIdx, 1);
+        localStorage.setItem("activeTrades", JSON.stringify(trades));
+        btn.classList.remove("tracked");
+        btn.textContent = "\u2733 Track";
+        showToast("Trade untracked: " + pair);
         return;
       }}
       const priceA = parseFloat(btn.dataset.priceA);
@@ -3535,74 +3762,9 @@ if __name__ == "__main__":
       }});
     }}
 
-    // ─── PAGINATION ──────────────────────────────────────────────────────────────
-    let currentPage = 1;
-    let rowsPerPage = 50;
-
-    function changePerPage() {{
-      rowsPerPage = parseInt(document.getElementById("perPage").value) || 0;
-      currentPage = 1;
-      paginateTable();
-    }}
-
-    function goToPage(p) {{
-      currentPage = p;
-      paginateTable();
-      document.querySelector(".table-wrapper").scrollIntoView({{ behavior: "smooth", block: "start" }});
-    }}
-
-    function paginateTable() {{
-      const allRows = [...document.querySelectorAll("tr.data-row")];
-      // Get rows that pass filters (baseHidden === "0" or not set)
-      const visible = allRows.filter(r => r.dataset.baseHidden !== "1");
-      const total   = visible.length;
-
-      if (rowsPerPage === 0 || rowsPerPage >= total) {{
-        // Show all
-        visible.forEach(r => r.classList.remove("page-hidden"));
-        currentPage = 1;
-        document.getElementById("pagination").innerHTML =
-          `<span class="pg-info">Showing all ${{total}} pairs</span>`;
-        return;
-      }}
-
-      const totalPages = Math.ceil(total / rowsPerPage);
-      if (currentPage > totalPages) currentPage = totalPages;
-      if (currentPage < 1) currentPage = 1;
-      const start = (currentPage - 1) * rowsPerPage;
-      const end   = start + rowsPerPage;
-
-      visible.forEach((r, i) => {{
-        r.classList.toggle("page-hidden", i < start || i >= end);
-      }});
-
-      // Build page bar
-      let html = `<button class="pg-btn" onclick="goToPage(1)" ${{currentPage === 1 ? 'disabled' : ''}}>&laquo;</button>`;
-      html += `<button class="pg-btn" onclick="goToPage(${{currentPage - 1}})" ${{currentPage === 1 ? 'disabled' : ''}}>&lsaquo;</button>`;
-
-      // Show pages around current
-      const maxShow = 7;
-      let pStart = Math.max(1, currentPage - Math.floor(maxShow / 2));
-      let pEnd   = Math.min(totalPages, pStart + maxShow - 1);
-      if (pEnd - pStart < maxShow - 1) pStart = Math.max(1, pEnd - maxShow + 1);
-
-      if (pStart > 1) html += `<button class="pg-btn" onclick="goToPage(1)">1</button><span class="pg-info">&hellip;</span>`;
-      for (let p = pStart; p <= pEnd; p++) {{
-        html += `<button class="pg-btn ${{p === currentPage ? 'active' : ''}}" onclick="goToPage(${{p}})">${{p}}</button>`;
-      }}
-      if (pEnd < totalPages) html += `<span class="pg-info">&hellip;</span><button class="pg-btn" onclick="goToPage(${{totalPages}})">${{totalPages}}</button>`;
-
-      html += `<button class="pg-btn" onclick="goToPage(${{currentPage + 1}})" ${{currentPage === totalPages ? 'disabled' : ''}}>&rsaquo;</button>`;
-      html += `<button class="pg-btn" onclick="goToPage(${{totalPages}})" ${{currentPage === totalPages ? 'disabled' : ''}}>&raquo;</button>`;
-      html += `<span class="pg-info">${{start + 1}}&ndash;${{Math.min(end, total)}} of ${{total}}</span>`;
-
-      document.getElementById("pagination").innerHTML = html;
-    }}
-
     window.addEventListener("DOMContentLoaded", () => {{
       document.getElementById("update-time").textContent = new Date({int(time.time() * 1000)}).toLocaleString();
       calcShares();
-      paginateTable();
       markTrackedPairs();
       document.getElementById("sortBy").addEventListener("change", () => {{
         currentSort.key = document.getElementById("sortBy").value;
