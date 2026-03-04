@@ -27988,5 +27988,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SRTA": {
+        "ticker": "SRTA",
+        "name": "Strata Critical Medical, Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 414559360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
