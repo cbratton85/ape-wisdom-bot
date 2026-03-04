@@ -28128,5 +28128,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "QAI": {
+        "ticker": "QAI",
+        "name": "NYLI Hedge Multi-Strategy Track",
+        "meta": "Multistrategy",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "TSLX": {
+        "ticker": "TSLX",
+        "name": "Sixth Street Specialty Lending,",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 1750151168,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
