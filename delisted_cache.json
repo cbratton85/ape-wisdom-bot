@@ -144,11 +144,6 @@
         "last_checked": "2026-03-03",
         "reason": "No Price Data"
     },
-    "KIND": {
-        "delisted": true,
-        "last_checked": "2026-03-03",
-        "reason": "No Price Data"
-    },
     "OZON": {
         "delisted": true,
         "last_checked": "2026-03-03",
@@ -167,6 +162,16 @@
     "FI": {
         "delisted": true,
         "last_checked": "2026-03-03",
+        "reason": "No Price Data"
+    },
+    "BLL": {
+        "delisted": true,
+        "last_checked": "2026-03-04",
+        "reason": "No Price Data"
+    },
+    "KIND": {
+        "delisted": true,
+        "last_checked": "2026-03-04",
         "reason": "No Price Data"
     }
 }

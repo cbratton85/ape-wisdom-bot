@@ -27858,5 +27858,115 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "BLL": {
+        "ticker": "BLL",
+        "name": "BLL",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "ABUS": {
+        "ticker": "ABUS",
+        "name": "Arbutus Biopharma Corporation",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 901999616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TOK": {
+        "ticker": "TOK",
+        "name": "iShares MSCI Kokusai ETF",
+        "meta": "Global Large-Stock Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "PRM": {
+        "ticker": "PRM",
+        "name": "Perimeter Solutions, SA",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 3603421696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SOBR": {
+        "ticker": "SOBR",
+        "name": "SOBR Safe, Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 1318481,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SPGM": {
+        "ticker": "SPGM",
+        "name": "State Street SPDR Portfolio MSC",
+        "meta": "Global Large-Stock Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "BTAL": {
+        "ticker": "BTAL",
+        "name": "AGF U.S. Market Neutral Anti-Be",
+        "meta": "Equity Market Neutral",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "TUYA": {
+        "ticker": "TUYA",
+        "name": "Tuya Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1525790848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "OHI": {
+        "ticker": "OHI",
+        "name": "Omega Healthcare Investors, Inc",
+        "meta": "REIT - Healthcare Facilities",
+        "type": "EQUITY",
+        "mcap": 14417398784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GOLF": {
+        "ticker": "GOLF",
+        "name": "Acushnet Holdings Corp.",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 5832695808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EVEX": {
+        "ticker": "EVEX",
+        "name": "Eve Holding, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 1051879808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
