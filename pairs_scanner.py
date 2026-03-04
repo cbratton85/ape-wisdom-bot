@@ -23,6 +23,7 @@ LOOKBACK_DAYS       = 650   # Days used for scoring / correlation / perf
 CHART_LOOKBACK_DAYS = 1825  # ~5 years used for Z-score chart history
 VOL_AVG_DAYS        = 30    # Rolling window for average volume calculation
 CACHE_UPDATE_COOLDOWN_HOURS = 1
+VOL_MCAP_COOLDOWN_HOURS    = 168   # Volume & market cap refresh interval (168h = 1 week)
 NUM_WORKERS = max(1, (mp.cpu_count() or 2) - 0)  # CPU cores for parallel pair analysis
 
 CORR_SHORT = 35
@@ -472,8 +473,8 @@ def build_volume_dataset(master):
             file_time = os.path.getmtime(VOLUME_DATA_FILE)
             hours_old = (datetime.now() - datetime.fromtimestamp(file_time)).total_seconds() / 3600
             
-            if hours_old < 12:  # Extended cooldown for volume to prevent rate limits
-                print(f"--- Volume cache fresh ({round(hours_old,2)}h). Using cached volume. ---")
+            if hours_old < VOL_MCAP_COOLDOWN_HOURS:
+                print(f"--- Volume cache fresh ({round(hours_old,1)}h / {VOL_MCAP_COOLDOWN_HOURS}h cooldown). Using cached volume. ---")
                 for col in all_vol.columns:
                     series = all_vol[col].dropna()
                     if len(series) > 0:
@@ -536,8 +537,8 @@ def build_market_cap(master):
                 mcap = json.load(f)
             file_time = os.path.getmtime(MCAP_CACHE_FILE)
             hours_old = (datetime.now() - datetime.fromtimestamp(file_time)).total_seconds() / 3600
-            if hours_old < 72:
-                print(f"--- Market-cap cache fresh ({round(hours_old,1)}h). Using cached data. ---")
+            if hours_old < VOL_MCAP_COOLDOWN_HOURS:
+                print(f"--- Market-cap cache fresh ({round(hours_old,1)}h / {VOL_MCAP_COOLDOWN_HOURS}h cooldown). Using cached data. ---")
                 return mcap
         except Exception:
             mcap = {}
@@ -1371,13 +1372,16 @@ def generate_trades_page(trades):
             else:
                 dollar_pnl = (cur_pa - entry_pa) * shares_a + (entry_pb - cur_pb) * shares_b
         dollar_class = "pnl-pos" if dollar_pnl >= 0 else "pnl-neg"
-        chg_a = (cur_pa - entry_pa) / entry_pa * 100 if entry_pa > 0 else 0
-        chg_b = (cur_pb - entry_pb) / entry_pb * 100 if entry_pb > 0 else 0
+        # P&L % per leg — flip sign for short leg so positive = profitable
+        raw_chg_a = (cur_pa - entry_pa) / entry_pa * 100 if entry_pa > 0 else 0
+        raw_chg_b = (cur_pb - entry_pb) / entry_pb * 100 if entry_pb > 0 else 0
+        chg_a = -raw_chg_a if direction == "short_a_long_b" else raw_chg_a
+        chg_b = raw_chg_b if direction == "short_a_long_b" else -raw_chg_b
         chg_a_class = "pnl-pos" if chg_a >= 0 else "pnl-neg"
         chg_b_class = "pnl-pos" if chg_b >= 0 else "pnl-neg"
 
         if progress > 0:
-            pbar_style = f"width:{progress:.0f}%;background:var(--cyan);"
+            pbar_style = f"width:{progress:.0f}%;background:var(--green);"
         elif progress < 0:
             pbar_style = f"width:{min(abs(progress), 100):.0f}%;background:var(--red);"
         else:
@@ -1435,7 +1439,7 @@ def generate_trades_page(trades):
             <div class="tc-pbar-track">
               <div class="tc-pbar-fill" style="{pbar_style}"></div>
             </div>
-            <span class="tc-pbar-label" style="color:{'var(--red)' if progress < 0 else 'var(--muted)'}">{progress:+.0f}% to Z=0</span>
+            <span class="tc-pbar-label" style="color:{'var(--red)' if progress < 0 else 'var(--green)' if progress > 0 else 'var(--muted)'}">{progress:+.0f}% to Z=0</span>
           </div>
         </div>"""
 
@@ -1617,7 +1621,7 @@ def generate_trades_page(trades):
 <div class="content">
 
   <div class="actions">
-    <button class="action-btn" onclick="exportTrades()">&#8681; Export Trades JSON</button>
+    <button class="action-btn" onclick="exportTrades()">&#8681; Export Trades</button>
     <label class="action-btn" style="cursor:pointer;">&#8679; Import Trades
       <input type="file" accept=".json" onchange="importTrades(event)" style="display:none;">
     </label>
@@ -2015,8 +2019,10 @@ function renderTrades() {{
       }}
     }}
     const dollarClass = dollarPnl >= 0 ? "pnl-pos" : "pnl-neg";
-    const chgA = t.entryPriceA > 0 ? (t.currentPriceA - t.entryPriceA) / t.entryPriceA * 100 : 0;
-    const chgB = t.entryPriceB > 0 ? (t.currentPriceB - t.entryPriceB) / t.entryPriceB * 100 : 0;
+    const rawChgA = t.entryPriceA > 0 ? (t.currentPriceA - t.entryPriceA) / t.entryPriceA * 100 : 0;
+    const rawChgB = t.entryPriceB > 0 ? (t.currentPriceB - t.entryPriceB) / t.entryPriceB * 100 : 0;
+    const chgA = t.direction === "short_a_long_b" ? -rawChgA : rawChgA;
+    const chgB = t.direction === "short_a_long_b" ? rawChgB : -rawChgB;
     const chgAClass = chgA >= 0 ? "pnl-pos" : "pnl-neg";
     const chgBClass = chgB >= 0 ? "pnl-pos" : "pnl-neg";
     const cDates = t.chartDates || [];
@@ -2041,8 +2047,8 @@ function renderTrades() {{
         <div class="tc-stat"><div class="tc-label">$ P&L</div><div class="tc-val ${{dollarClass}}">${{dollarPnl >= 0 ? "+":""}}$${{Math.abs(dollarPnl).toFixed(0)}}</div></div>
       </div>
       <div class="tc-progress">
-        <div class="tc-pbar-track"><div class="tc-pbar-fill" style="width:${{progress > 0 ? progress.toFixed(0) : progress < 0 ? Math.min(Math.abs(progress), 100).toFixed(0) : 0}}%;${{progress > 0 ? 'background:var(--cyan);' : progress < 0 ? 'background:var(--red);' : 'background:var(--muted);width:2px;'}}"></div></div>
-        <span class="tc-pbar-label" style="color:${{progress < 0 ? 'var(--red)' : 'var(--muted)'}}">${{(progress >= 0 ? "+" : "") + progress.toFixed(0)}}% to Z=0</span>
+        <div class="tc-pbar-track"><div class="tc-pbar-fill" style="width:${{progress > 0 ? progress.toFixed(0) : progress < 0 ? Math.min(Math.abs(progress), 100).toFixed(0) : 0}}%;${{progress > 0 ? 'background:var(--green);' : progress < 0 ? 'background:var(--red);' : 'background:var(--muted);width:2px;'}}"></div></div>
+        <span class="tc-pbar-label" style="color:${{progress < 0 ? 'var(--red)' : progress > 0 ? 'var(--green)' : 'var(--muted)'}}">${{(progress >= 0 ? "+" : "") + progress.toFixed(0)}}% to Z=0</span>
       </div>
     </div>`;
   }};
@@ -2347,10 +2353,6 @@ if __name__ == "__main__":
               f"Mixed={cat_counts['Mixed']}"
               f"{'/' + str(MAX_RESULTS_MIXED) if MAX_RESULTS_MIXED > 0 else ''}")
     top_results = results[:MAX_RESULTS] if MAX_RESULTS > 0 else results
-    # Count shown per category
-    shown_by_cat = {"Pure ETF": 0, "Pure Stock": 0, "Mixed": 0}
-    for r in top_results:
-        shown_by_cat[r.get("Category", "Mixed")] += 1
     chart_results = top_results[:MAX_CHARTS] if MAX_CHARTS > 0 else top_results
 
     # Compute rolling Z-score histories for top 500 pairs (parallel)
@@ -2376,6 +2378,18 @@ if __name__ == "__main__":
     dropped = before_chart_filter - len(top_results)
     if dropped:
         print(f"Removed {dropped} pairs with insufficient data for Z-chart.")
+
+    # Count shown per category (after all filtering, matching HTML generation skips)
+    shown_by_cat = {"Pure ETF": 0, "Pure Stock": 0, "Mixed": 0}
+    for r in top_results:
+        z = r["Z"]
+        if any(np.isnan(v) for v in [z, r["Score"], r["Corr"]]):
+            continue
+        if abs(z) < Z_THRESHOLD:
+            continue
+        if Z_MAX > 0 and abs(z) > Z_MAX:
+            continue
+        shown_by_cat[r.get("Category", "Mixed")] += 1
 
     # Helper: format volume as human-readable string
     def fmt_vol(v):
@@ -2545,7 +2559,7 @@ if __name__ == "__main__":
           </td>
           <td class="z-cell">
             <div class="z-wrapper">
-              <span class="z-value {'z-pos' if z_pos else 'z-neg'}">{z:+.2f}&sigma;</span>
+              <span class="z-value {'z-pos' if z_pos else 'z-neg'}"><span class="z-sub" style="font-size:9px;vertical-align:baseline;margin-right:2px;">100d:</span>{z:+.2f}&sigma;</span>
               <div class="z-bar-track">
                 <div class="z-bar-fill {'z-bar-pos' if z_pos else 'z-bar-neg'}" style="width:{z_bar_pct}%;"></div>
               </div>
@@ -2562,7 +2576,7 @@ if __name__ == "__main__":
           </td>
           <td class="corr-cell">
             <span class="corr-value">{r['Corr']:.2f}</span>
-            <span class="adf-value" title="ADF p-value (lower = more cointegrated)">ADF:{r['ADF_p']:.2f}</span>
+            <span class="adf-value" title="Cointegration confidence ({(1-r['ADF_p'])*100:.1f}%, p={r['ADF_p']:.3f})">{(1-r['ADF_p'])*100:.0f}% Coint</span>
           </td>
           <td class="hl-cell">
             {f'<span class="hl-value">{hl:.0f}d</span>' if hl else '<span class="hl-na">—</span>'}
@@ -2586,8 +2600,8 @@ if __name__ == "__main__":
             </div>
           </td>
           <td class="chart-cell">
-            <button class="chart-btn" onclick="openChart(this,'z')" data-chart='{chart_payload_esc}'>&#9657; Z-Chart</button>
             <button class="chart-btn price-btn" onclick="openChart(this,'price')" data-chart='{chart_payload_esc}'>&#9724; Price</button>
+            <button class="chart-btn" onclick="openChart(this,'z')" data-chart='{chart_payload_esc}'>&#9657; Z-Chart</button>
           </td>
           <td class="track-cell">
             <button class="track-btn" onclick="trackTrade(this)"
@@ -3013,7 +3027,6 @@ if __name__ == "__main__":
       <div style="display:flex;gap:16px;align-items:center;">
         <a href="active_trades.html" class="nav-link" style="color:var(--green);">&#9733; My Trades</a>
         <a href="symbols.html" class="nav-link">Symbols &#8594;</a>
-        <button class="nav-link" onclick="exportTrades()" style="background:none;border:none;cursor:pointer;font:inherit;color:var(--amber);">&#8681; Export</button>
       </div>
     </div>
 
@@ -3027,7 +3040,7 @@ if __name__ == "__main__":
       <div class="stat-item"><div class="stat-label">Z Windows</div><div class="stat-value">{Z_LENGTH_SHORT}d / {Z_LENGTH}d / {Z_LENGTH_LONG}d</div></div>
       <div class="stat-item"><div class="stat-label">Corr Windows</div><div class="stat-value">{CORR_SHORT}d / {CORR_LONG}d</div></div>
       <div class="stat-item"><div class="stat-label">Min Corr</div><div class="stat-value">{MIN_CORR_FILTER:.2f}</div></div>
-      <div class="stat-item"><div class="stat-label">ADF</div><div class="stat-value">{int(ADF_CONFIDENCE*100)}% / {ADF_LOOKBACK_YRS}yr</div></div>
+      <div class="stat-item"><div class="stat-label">Cointegration</div><div class="stat-value">{int(ADF_CONFIDENCE*100)}% / {ADF_LOOKBACK_YRS}yr</div></div>
       <div class="stat-item"><div class="stat-label">Alignment</div><div class="stat-value"><span style="color:var(--cyan)">{n_aligned}</span> / <span style="color:var(--amber)">{n_mixed}</span> / <span style="color:var(--red)">{n_conflicting}</span></div></div>
       <div class="stat-item"><div class="stat-label">Confidence</div><div class="stat-value"><span style="color:var(--green)">{n_conf_high}</span> / <span style="color:var(--amber)">{n_conf_med}</span> / <span style="color:var(--red)">{n_conf_low}</span></div></div>
     </div>
@@ -3132,7 +3145,7 @@ if __name__ == "__main__":
             <option value="score">Score</option>
             <option value="z_abs">|Z-Score|</option>
             <option value="hl">Half-Life</option>
-            <option value="adf">ADF (Stationarity)</option>
+            <option value="adf">Cointegration</option>
             <option value="est_ret">Est Return</option>
             <option value="ann_ret">Ann Return</option>
             <option value="corr">Correlation</option>
@@ -3174,7 +3187,7 @@ if __name__ == "__main__":
       <th>#</th>
       <th>Pair / Name</th>
       <th onclick="setSort('z_abs')">Z-Score &#8597;</th>
-      <th onclick="setSort('corr')">Corr / ADF &#8597;</th>
+      <th onclick="setSort('corr')">Corr / Coint &#8597;</th>
       <th onclick="setSort('hl')">Half-Life &#8597;</th>
       <th onclick="setSort('est_ret')" style="text-align:right;">Est Return &#8597;</th>
       <th onclick="setSort('score')">Score &#8597;</th>
@@ -3200,7 +3213,7 @@ if __name__ == "__main__":
         <span class="leg-dot" style="background:var(--muted)"></span>Neutral
       </div>
       <div>
-        Score = {int(W_ZSCORE*100)}% |Z| + {int(W_HALFLIFE*100)}% HL Speed + {int(W_CONFIRM*100)}% Confirm + {int(W_ANNRET*100)}% AnnRet + {int(W_STATIONARY*100)}% ADF + {int(W_CORR*100)}% Corr
+        Score = {int(W_ZSCORE*100)}% |Z| + {int(W_HALFLIFE*100)}% HL Speed + {int(W_CONFIRM*100)}% Confirm + {int(W_ANNRET*100)}% AnnRet + {int(W_STATIONARY*100)}% Coint + {int(W_CORR*100)}% Corr
         &nbsp;&middot;&nbsp; 50/50 capital sizing
         &nbsp;&middot;&nbsp; <a href="symbols.html">Symbol Reference</a>
       </div>
@@ -4062,7 +4075,7 @@ if __name__ == "__main__":
 
     function setSort(key) {{
       currentSort.asc = (currentSort.key === key) ? !currentSort.asc : false;
-      if ((key === "hl" || key === "adf") && currentSort.key !== key) currentSort.asc = true;
+      if (key === "hl" && currentSort.key !== key) currentSort.asc = true;
       currentSort.key = key;
       const dd = document.getElementById("sortBy");
       if (dd) dd.value = key;
@@ -4085,7 +4098,7 @@ if __name__ == "__main__":
         if      (key === "score")   {{ va = numOf(a,".score-num");               vb = numOf(b,".score-num"); }}
         else if (key === "z_abs")   {{ va = Math.abs(parseFloat(a.dataset.z));   vb = Math.abs(parseFloat(b.dataset.z)); }}
         else if (key === "corr")    {{ va = numOf(a,".corr-value");              vb = numOf(b,".corr-value"); }}
-        else if (key === "adf")     {{ va = numOf(a,".adf-value") || 1;            vb = numOf(b,".adf-value") || 1; }}
+        else if (key === "adf")     {{ va = numOf(a,".adf-value") || 0;            vb = numOf(b,".adf-value") || 0; }}
         else if (key === "hl")      {{ va = numOf(a,".hl-value") || 99999;       vb = numOf(b,".hl-value") || 99999; }}
         else if (key === "est_ret") {{ va = numOf(a,".est-ret");                 vb = numOf(b,".est-ret"); }}
         else if (key === "ann_ret") {{ va = numOf(a,".ann-ret") || 0;            vb = numOf(b,".ann-ret") || 0; }}
