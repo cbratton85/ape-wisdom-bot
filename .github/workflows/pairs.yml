@@ -1,13 +1,11 @@
 name: Pairs Scanner
 
 on:
-  workflow_dispatch: # Keeps the manual button!
+  workflow_dispatch: # Allows manual trigger from the Actions tab
   schedule:
-    # Runs at exactly minute 30 past the hour, from 12:00 to 21:00 UTC, Mon-Fri.
-    # This covers 8:30 AM to 4:30 PM Eastern Time year-round.
+    # Runs at minute 30 past the hour, 12:00 to 21:00 UTC, Mon-Fri (Market Hours)
     - cron: '30 12-21 * * 1-5'
 
-# Grant the bot permission to push to the gh-pages branch
 permissions:
   contents: write
 
@@ -27,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install yfinance pandas numpy tqdm
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install yfinance pandas numpy tqdm lxml; fi
 
       - name: Cache Market Data
         uses: actions/cache@v4
@@ -43,15 +41,20 @@ jobs:
             market-data-
 
       - name: Run Pairs Scanner
+        env:
+          PYTHONUNBUFFERED: "1"
         run: python pairs_scanner.py
 
-      # Move all generated HTML files and compressed data to the public folder
       - name: Prepare Website Files
         run: |
           mkdir -p public
+          # Move scanner results
           mv pairs_scanner.html public/
-          mv symbols.html public/ || true
+          # Move active trades tracker (if generated)
           mv active_trades.html public/ || true
+          # Move symbols list (if generated)
+          mv symbols.html public/ || true
+          # Copy data files so the site can load charts
           cp *.csv.gz public/ || true
 
       - name: Deploy to GitHub Pages
