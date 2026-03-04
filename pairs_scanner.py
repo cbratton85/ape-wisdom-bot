@@ -36,7 +36,7 @@ MIN_CORR_FILTER = 0.60
 Z_THRESHOLD = 1.5
 Z_STRONG = 2.0
 
-ADF_CONFIDENCE  = 0.90   # Min cointegration confidence (0.90=90%, 0.95=95%, 0.99=99%)
+ADF_CONFIDENCE  = 0.95   # Min cointegration confidence (0.90=90%, 0.95=95%, 0.99=99%)
 ADF_LOOKBACK_YRS = 3     # Years of data for cointegration test (1, 2, 3, 5, etc.)
 
 MIN_PRICE      = 1.00    # Exclude pairs where either ticker is below this price
@@ -1132,12 +1132,20 @@ def _compute_chart_for_pair(r):
     try:
         src = _w_chart_data if (not _w_chart_data.empty and a in _w_chart_data.columns and b in _w_chart_data.columns) else _w_scoring_data
         dates, z_vals = compute_z_history(a, b, src)
+        # Snap the last chart point to match the authoritative stats Z value
+        stats_z = r.get("Z")
+        if z_vals and stats_z is not None:
+            z_vals[-1] = round(float(stats_z), 4)
         r["ZDates"]   = dates
         r["ZHistory"] = z_vals
         # Adaptive Z-score history using half-life-based window
         adapt_win = r.get("AdaptiveWindow")
         if adapt_win and adapt_win != Z_LENGTH:
             adapt_dates, adapt_vals = compute_z_history(a, b, src, window_override=adapt_win)
+            # Snap adaptive chart endpoint to match stats adaptive Z
+            stats_za = r.get("ZAdaptive")
+            if adapt_vals and stats_za is not None:
+                adapt_vals[-1] = round(float(stats_za), 4)
             r["ZDatesAdaptive"]   = adapt_dates
             r["ZHistoryAdaptive"] = adapt_vals
         else:
@@ -2793,18 +2801,14 @@ if __name__ == "__main__":
       <div class="stat-item"><div class="stat-label">Pairs Scanned</div><div class="stat-value cyan">{n_combos:,}</div></div>
       <div class="stat-item"><div class="stat-label">Valid Setups</div><div class="stat-value green">{len(results):,}</div></div>
       <div class="stat-item"><div class="stat-label">Active Symbols</div><div class="stat-value">{len(valid)}</div></div>
+      <div class="stat-item"><div class="stat-label">Lookback</div><div class="stat-value">{LOOKBACK_DAYS}d</div></div>
       <div class="stat-item"><div class="stat-label">Z Threshold</div><div class="stat-value">&plusmn;{Z_THRESHOLD:.1f}&sigma;</div></div>
-      <div class="stat-item"><div class="stat-label">Min Correlation</div><div class="stat-value">{MIN_CORR_FILTER:.2f}</div></div>
-      <div class="stat-item"><div class="stat-label">Corr Window</div><div class="stat-value">{CORR_SHORT}d / {CORR_LONG}d</div></div>
-      <div class="stat-item"><div class="stat-label">Z Window</div><div class="stat-value">{Z_LENGTH}d</div></div>
-      <div class="stat-item"><div class="stat-label">ADF Conf</div><div class="stat-value">{int(ADF_CONFIDENCE*100)}%</div></div>
-      <div class="stat-item"><div class="stat-label">ADF Lookback</div><div class="stat-value">{ADF_LOOKBACK_YRS}yr</div></div>
-      <div class="stat-item"><div class="stat-label">Aligned</div><div class="stat-value cyan">{n_aligned}</div></div>
-      <div class="stat-item"><div class="stat-label">Mixed</div><div class="stat-value amber">{n_mixed}</div></div>
-      <div class="stat-item"><div class="stat-label">Conflicting</div><div class="stat-value" style="color:var(--red)">{n_conflicting}</div></div>
-      <div class="stat-item"><div class="stat-label">High Conf</div><div class="stat-value green">{n_conf_high}</div></div>
-      <div class="stat-item"><div class="stat-label">Med Conf</div><div class="stat-value amber">{n_conf_med}</div></div>
-      <div class="stat-item"><div class="stat-label">Low Conf</div><div class="stat-value" style="color:var(--red)">{n_conf_low}</div></div>
+      <div class="stat-item"><div class="stat-label">Z Windows</div><div class="stat-value">{Z_LENGTH_SHORT}d / {Z_LENGTH}d / {Z_LENGTH_LONG}d</div></div>
+      <div class="stat-item"><div class="stat-label">Corr Windows</div><div class="stat-value">{CORR_SHORT}d / {CORR_LONG}d</div></div>
+      <div class="stat-item"><div class="stat-label">Min Corr</div><div class="stat-value">{MIN_CORR_FILTER:.2f}</div></div>
+      <div class="stat-item"><div class="stat-label">ADF</div><div class="stat-value">{int(ADF_CONFIDENCE*100)}% / {ADF_LOOKBACK_YRS}yr</div></div>
+      <div class="stat-item"><div class="stat-label">Alignment</div><div class="stat-value"><span style="color:var(--cyan)">{n_aligned}</span> / <span style="color:var(--amber)">{n_mixed}</span> / <span style="color:var(--red)">{n_conflicting}</span></div></div>
+      <div class="stat-item"><div class="stat-label">Confidence</div><div class="stat-value"><span style="color:var(--green)">{n_conf_high}</span> / <span style="color:var(--amber)">{n_conf_med}</span> / <span style="color:var(--red)">{n_conf_low}</span></div></div>
     </div>
 
     <!-- CONTROLS -->
