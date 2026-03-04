@@ -27998,5 +27998,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "AAU": {
+        "ticker": "AAU",
+        "name": "AAU",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
