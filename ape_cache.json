@@ -28148,5 +28148,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "AVA": {
+        "ticker": "AVA",
+        "name": "Avista Corporation",
+        "meta": "Utilities - Diversified",
+        "type": "EQUITY",
+        "mcap": 3318015232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "REX": {
+        "ticker": "REX",
+        "name": "REX American Resources Corporat",
+        "meta": "Chemicals",
+        "type": "EQUITY",
+        "mcap": 1240981376,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BLLN": {
+        "ticker": "BLLN",
+        "name": "BillionToOne, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 3699489024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
