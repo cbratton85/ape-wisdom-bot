@@ -18,11 +18,11 @@ VOLUME_DATA_FILE = "volume_data.csv.gz"        # Average daily volume per ticker
 MCAP_CACHE_FILE  = "market_cap.json"           # Market cap per ticker
 TRADES_FILE      = "active_trades.json"        # Active trade tracker
 BATCH_SIZE = 40
-COOLDOWN = 3
+COOLDOWN = 1.5
 LOOKBACK_DAYS       = 650   # Days used for scoring / correlation / perf
 CHART_LOOKBACK_DAYS = 1825  # ~5 years used for Z-score chart history
 VOL_AVG_DAYS        = 30    # Rolling window for average volume calculation
-CACHE_UPDATE_COOLDOWN_HOURS = 4
+CACHE_UPDATE_COOLDOWN_HOURS = 1
 NUM_WORKERS = max(1, (mp.cpu_count() or 2) - 0)  # CPU cores for parallel pair analysis
 
 CORR_SHORT = 35
@@ -217,6 +217,45 @@ def download_batch(tickers, start_date, field="Close"):
 
 
 # ==========================================
+# ACTIVE TRADE SYMBOLS
+# ==========================================
+def get_active_trade_symbols():
+    """Return set of ticker symbols from open trades in active_trades.json."""
+    if not os.path.exists(TRADES_FILE):
+        return set()
+    try:
+        with open(TRADES_FILE, "r") as f:
+            trades = json.load(f)
+        syms = set()
+        for t in trades:
+            if t.get("status") == "open" and "/" in t.get("pair", ""):
+                a, b = t["pair"].split("/")
+                syms.add(a)
+                syms.add(b)
+        return syms
+    except Exception:
+        return set()
+
+
+def _refresh_tickers(data, tickers):
+    """Force-download latest prices for specific tickers and merge into data."""
+    if not tickers:
+        return data
+    # Use the last cached date (not +1) to re-fetch today's data without going into the future
+    today_str = data.index.max().strftime("%Y-%m-%d") if not data.empty else (datetime.now() - timedelta(days=5)).strftime("%Y-%m-%d")
+    print(f"  Refreshing {len(tickers)} trade tickers: {', '.join(sorted(tickers)[:10])}{'...' if len(tickers) > 10 else ''}")
+    fresh = download_batch(list(tickers), today_str)
+    if not fresh.empty:
+        for col in fresh.columns:
+            if col in data.columns:
+                data.loc[fresh.index, col] = fresh[col]
+            else:
+                data[col] = fresh[col]
+        safe_save(data)
+    return data
+
+
+# ==========================================
 # BUILD DATASET
 # ==========================================
 def build_dataset(master):
@@ -229,6 +268,11 @@ def build_dataset(master):
 
         if hours_since_update < CACHE_UPDATE_COOLDOWN_HOURS:
             print(f"--- Cache is fresh ({round(hours_since_update, 2)}h old). Skipping download. ---")
+            # Force-refresh active trade symbols even when cache is fresh
+            trade_syms = get_active_trade_symbols()
+            trade_syms = trade_syms & set(data.columns)  # only refresh tickers we already have
+            if trade_syms:
+                data = _refresh_tickers(data, trade_syms)
             data = data[[c for c in data.columns if c in master]]
             data = data.tail(LOOKBACK_DAYS)
             data = data.ffill().bfill()
@@ -1302,9 +1346,9 @@ def generate_trades_page(trades):
         pnl     = t.get("pnlPct", 0)
         pnl_class = "pnl-pos" if pnl >= 0 else "pnl-neg"
 
-        # Z progress toward 0 (target)
+        # Z progress toward 0 (target) — negative means Z moved further away
         if abs(entry_z) > 0:
-            progress = max(0, min(100, (1 - abs(cur_z) / abs(entry_z)) * 100))
+            progress = min(100, (1 - abs(cur_z) / abs(entry_z)) * 100)
         else:
             progress = 0
 
@@ -1328,7 +1372,12 @@ def generate_trades_page(trades):
         chg_a_class = "pnl-pos" if chg_a >= 0 else "pnl-neg"
         chg_b_class = "pnl-pos" if chg_b >= 0 else "pnl-neg"
 
-        pbar_style = f"width:{progress:.0f}%;" if progress > 0 else "background:var(--muted);width:2px;"
+        if progress > 0:
+            pbar_style = f"width:{progress:.0f}%;background:var(--cyan);"
+        elif progress < 0:
+            pbar_style = f"width:{min(abs(progress), 100):.0f}%;background:var(--red);"
+        else:
+            pbar_style = "background:var(--muted);width:2px;"
 
         # Chart payload
         chart_dates = t.get("chartDates", [])
@@ -1366,11 +1415,11 @@ def generate_trades_page(trades):
               <div class="tc-val {pnl_class}">{pnl:+.1f}%</div>
             </div>
             <div class="tc-stat tc-prices">
-              <div class="tc-label">{a} <span style="color:var(--cyan);font-size:9px;">{shares_a} shr</span></div>
+              <div class="tc-label">{a} <span style="color:var(--cyan);font-size:9px;">{'-' if direction == 'short_a_long_b' else '+'}{shares_a} shr</span></div>
               <div class="tc-val">${entry_pa:.2f} &rarr; ${cur_pa:.2f} <span class="{chg_a_class}">{chg_a:+.1f}%</span></div>
             </div>
             <div class="tc-stat tc-prices">
-              <div class="tc-label">{b} <span style="color:var(--cyan);font-size:9px;">{shares_b} shr</span></div>
+              <div class="tc-label">{b} <span style="color:var(--cyan);font-size:9px;">{'+' if direction == 'short_a_long_b' else '-'}{shares_b} shr</span></div>
               <div class="tc-val">${entry_pb:.2f} &rarr; ${cur_pb:.2f} <span class="{chg_b_class}">{chg_b:+.1f}%</span></div>
             </div>
             <div class="tc-stat">
@@ -1382,7 +1431,7 @@ def generate_trades_page(trades):
             <div class="tc-pbar-track">
               <div class="tc-pbar-fill" style="{pbar_style}"></div>
             </div>
-            <span class="tc-pbar-label">{progress:.0f}% to Z=0</span>
+            <span class="tc-pbar-label" style="color:{'var(--red)' if progress < 0 else 'var(--muted)'}">{progress:+.0f}% to Z=0</span>
           </div>
         </div>"""
 
@@ -1946,7 +1995,7 @@ function renderTrades() {{
     const [a, b] = t.pair.split("/");
     const dir = t.direction === "short_a_long_b" ? `Short ${{a}} / Long ${{b}}` : `Long ${{a}} / Short ${{b}}`;
     const dirClass = t.direction === "short_a_long_b" ? "dir-short" : "dir-long";
-    const progress = Math.abs(t.entryZ) > 0 ? Math.max(0, Math.min(100, (1 - Math.abs(t.currentZ) / Math.abs(t.entryZ)) * 100)) : 0;
+    const progress = Math.abs(t.entryZ) > 0 ? Math.min(100, (1 - Math.abs(t.currentZ) / Math.abs(t.entryZ)) * 100) : 0;
     const pnl = t.pnlPct || 0;
     const pnlClass = pnl >= 0 ? "pnl-pos" : "pnl-neg";
     const zColor = Math.abs(t.currentZ) < Math.abs(t.entryZ) ? "#34d399" : "#ef4444";
@@ -1983,13 +2032,13 @@ function renderTrades() {{
         <div class="tc-stat"><div class="tc-label">Entry Z</div><div class="tc-val">${{t.entryZ >= 0 ? "+" : ""}}${{t.entryZ.toFixed(2)}}&sigma;</div></div>
         <div class="tc-stat"><div class="tc-label">Current Z</div><div class="tc-val" style="color:${{zColor}}">${{t.currentZ >= 0 ? "+" : ""}}${{t.currentZ.toFixed(2)}}&sigma;</div></div>
         <div class="tc-stat"><div class="tc-label">Est P&L</div><div class="tc-val ${{pnlClass}}">${{pnl >= 0 ? "+" : ""}}${{pnl.toFixed(1)}}%</div></div>
-        <div class="tc-stat tc-prices"><div class="tc-label">${{a}} <span style="color:var(--cyan);font-size:9px;">${{sA}} shr</span></div><div class="tc-val">$${{t.entryPriceA.toFixed(2)}} &rarr; $${{t.currentPriceA.toFixed(2)}} <span class="${{chgAClass}}">${{chgA >= 0 ? "+" : ""}}${{chgA.toFixed(1)}}%</span></div></div>
-        <div class="tc-stat tc-prices"><div class="tc-label">${{b}} <span style="color:var(--cyan);font-size:9px;">${{sB}} shr</span></div><div class="tc-val">$${{t.entryPriceB.toFixed(2)}} &rarr; $${{t.currentPriceB.toFixed(2)}} <span class="${{chgBClass}}">${{chgB >= 0 ? "+" : ""}}${{chgB.toFixed(1)}}%</span></div></div>
+        <div class="tc-stat tc-prices"><div class="tc-label">${{a}} <span style="color:var(--cyan);font-size:9px;">${{t.direction === "short_a_long_b" ? "-" : "+"}}${{sA}} shr</span></div><div class="tc-val">$${{t.entryPriceA.toFixed(2)}} &rarr; $${{t.currentPriceA.toFixed(2)}} <span class="${{chgAClass}}">${{chgA >= 0 ? "+" : ""}}${{chgA.toFixed(1)}}%</span></div></div>
+        <div class="tc-stat tc-prices"><div class="tc-label">${{b}} <span style="color:var(--cyan);font-size:9px;">${{t.direction === "short_a_long_b" ? "+" : "-"}}${{sB}} shr</span></div><div class="tc-val">$${{t.entryPriceB.toFixed(2)}} &rarr; $${{t.currentPriceB.toFixed(2)}} <span class="${{chgBClass}}">${{chgB >= 0 ? "+" : ""}}${{chgB.toFixed(1)}}%</span></div></div>
         <div class="tc-stat"><div class="tc-label">$ P&L</div><div class="tc-val ${{dollarClass}}">${{dollarPnl >= 0 ? "+":""}}$${{Math.abs(dollarPnl).toFixed(0)}}</div></div>
       </div>
       <div class="tc-progress">
-        <div class="tc-pbar-track"><div class="tc-pbar-fill" style="width:${{progress.toFixed(0)}}%;${{progress > 0 ? '' : 'background:var(--muted);width:2px;'}}"></div></div>
-        <span class="tc-pbar-label">${{progress.toFixed(0)}}% to Z=0</span>
+        <div class="tc-pbar-track"><div class="tc-pbar-fill" style="width:${{progress > 0 ? progress.toFixed(0) : progress < 0 ? Math.min(Math.abs(progress), 100).toFixed(0) : 0}}%;${{progress > 0 ? 'background:var(--cyan);' : progress < 0 ? 'background:var(--red);' : 'background:var(--muted);width:2px;'}}"></div></div>
+        <span class="tc-pbar-label" style="color:${{progress < 0 ? 'var(--red)' : 'var(--muted)'}}">${{(progress >= 0 ? "+" : "") + progress.toFixed(0)}}% to Z=0</span>
       </div>
     </div>`;
   }};
@@ -2313,11 +2362,16 @@ if __name__ == "__main__":
             total=len(chart_results),
             desc="Computing Charts"
         ))
-    # Merge chart data back: first 500 have charts, rest don't
+    # Merge chart data back and remove pairs with no chart data
     chart_map = {r["Pair"]: r for r in chart_results}
     for r in top_results:
         if r["Pair"] in chart_map:
             r.update(chart_map[r["Pair"]])
+    before_chart_filter = len(top_results)
+    top_results = [r for r in top_results if r.get("ZDates") and len(r["ZDates"]) > 0]
+    dropped = before_chart_filter - len(top_results)
+    if dropped:
+        print(f"Removed {dropped} pairs with insufficient data for Z-chart.")
 
     # Helper: format volume as human-readable string
     def fmt_vol(v):
@@ -2886,9 +2940,9 @@ if __name__ == "__main__":
       }}
       .modal-tab:hover {{ color: var(--text); border-color: #3a4a66; }}
       .modal-tab.active {{ background: rgba(56,189,248,0.12); border-color: rgba(56,189,248,0.4); color: var(--cyan); }}
-      .modal-track-btn {{ color: #f59e0b !important; border-color: rgba(245,158,11,0.3) !important; margin-left: 6px; }}
-      .modal-track-btn:hover {{ background: rgba(245,158,11,0.12) !important; border-color: rgba(245,158,11,0.5) !important; }}
-      .modal-track-btn.tracked {{ background: rgba(34,197,94,0.12) !important; border-color: rgba(34,197,94,0.4) !important; color: #22c55e !important; }}
+      .modal-track-btn {{ color: var(--green) !important; background: rgba(34,197,94,0.08) !important; border-color: rgba(34,197,94,0.25) !important; margin-left: 6px; }}
+      .modal-track-btn:hover {{ background: rgba(34,197,94,0.2) !important; border-color: var(--green) !important; }}
+      .modal-track-btn.tracked {{ background: rgba(245,158,11,0.15) !important; border-color: rgba(245,158,11,0.4) !important; color: var(--amber) !important; }}
 
       .chart-legend {{ display: flex; gap: 22px; margin-bottom: 14px; flex-shrink: 0; flex-wrap: wrap; }}
       .leg-item {{ display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); font-family: var(--mono); }}
@@ -2904,6 +2958,24 @@ if __name__ == "__main__":
         background: #080c14;
       }}
       .modal-footer em {{ color: #64748b; font-style: normal; }}
+
+      /* PAGINATION */
+      .pagination-bar {{
+        display: flex; align-items: center; justify-content: center; gap: 4px;
+        padding: 10px 20px; background: var(--surface); border-top: 1px solid var(--border);
+        font-family: var(--mono); font-size: 12px;
+      }}
+      .pagination-bar:empty {{ display: none; }}
+      .pg-btn {{
+        background: rgba(30,37,53,0.8); border: 1px solid var(--border2);
+        color: var(--muted); padding: 4px 10px; border-radius: 4px; cursor: pointer;
+        font-family: var(--mono); font-size: 11px; transition: all 0.15s;
+      }}
+      .pg-btn:hover {{ color: var(--text); border-color: #3a4a66; }}
+      .pg-btn.active {{ background: rgba(56,189,248,0.12); border-color: rgba(56,189,248,0.4); color: var(--cyan); font-weight: 700; }}
+      .pg-btn:disabled {{ opacity: 0.3; cursor: default; }}
+      .pg-info {{ color: var(--muted); font-size: 11px; margin: 0 8px; }}
+      tr.pg-hidden {{ display: none; }}
 
       /* FOOTER */
       .footer {{
@@ -2932,7 +3004,7 @@ if __name__ == "__main__":
         <span>Updated: <em id="update-time"></em></span>
         <span>Scanned: <em>{n_combos:,} pairs</em></span>
         <span>Valid Setups: <em>{total_valid:,}</em></span>
-        <span>Showing: <em>{len(top_results):,} &mdash; {shown_by_cat['Pure Stock']} Stock, {shown_by_cat['Pure ETF']} ETF, {shown_by_cat['Mixed']} Mixed</em></span>
+        <span>Showing: <em>{shown_by_cat['Pure Stock']} Stock, {shown_by_cat['Pure ETF']} ETF, {shown_by_cat['Mixed']} Mixed</em></span>
       </div>
       <div style="display:flex;gap:16px;align-items:center;">
         <a href="active_trades.html" class="nav-link" style="color:var(--green);">&#9733; My Trades</a>
@@ -3011,7 +3083,7 @@ if __name__ == "__main__":
           <label>ETF Type</label>
           <select id="levFilter" onchange="applyFilters()">
             <option value="all">All</option>
-            <option value="exclude_both">Excl Lev &amp; Inv</option>
+            <option value="exclude_both" selected>Excl Lev &amp; Inv</option>
             <option value="exclude_lev">Excl Lev</option>
             <option value="exclude_inv">Excl Inv</option>
             <option value="exclude_etn">Excl ETN</option>
@@ -3067,14 +3139,24 @@ if __name__ == "__main__":
         <div class="control-group" title="When on, each symbol can appear at most once — only the highest-scored pair for that symbol is shown">
           <label>Unique Syms</label>
           <label class="toggle-switch">
-            <input type="checkbox" id="uniqueSymFilter" onchange="applyFilters()">
+            <input type="checkbox" id="uniqueSymFilter" onchange="applyFilters()" checked>
             <span class="toggle-track"><span class="toggle-thumb"></span></span>
           </label>
         </div>
         <div class="control-group">
+          <label>Per Page</label>
+          <select id="perPage" onchange="changePerPage()">
+            <option value="25">25</option>
+            <option value="50" selected>50</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="0">All</option>
+          </select>
+        </div>
+        <div class="control-group">
           <label>Capital ($)</label>
           <button class="step-btn" onclick="stepValue('capitalInput',-1000)">−</button>
-          <input type="number" id="capitalInput" value="5000" min="0" step="1000" oninput="calcShares()">
+          <input type="number" id="capitalInput" value="10000" min="0" step="1000" oninput="calcShares()">
           <button class="step-btn" onclick="stepValue('capitalInput',1000)">+</button>
         </div>
       </div>
@@ -3104,6 +3186,7 @@ if __name__ == "__main__":
     </div>
 
     <!-- PAGINATION -->
+    <div id="pagination" class="pagination-bar"></div>
 
     <!-- FOOTER -->
     <div class="footer">
@@ -3895,10 +3978,82 @@ if __name__ == "__main__":
         }});
       }}
 
-      calcShares();
+      currentPage = 1;
+      paginateTable();
     }}
 
     // ─── SORT ─────────────────────────────────────────────────────────────────────
+    // ─── PAGINATION ────────────────────────────────────────────────────────────
+    let currentPage = 1;
+    let rowsPerPage = 50;
+
+    function changePerPage() {{
+      rowsPerPage = parseInt(document.getElementById("perPage").value) || 0;
+      currentPage = 1;
+      paginateTable();
+    }}
+
+    function paginateTable() {{
+      const rows = [...document.querySelectorAll("tr.data-row")].filter(r => !r.classList.contains("row-hidden"));
+      const total = rows.length;
+      const pgBar = document.getElementById("pagination");
+
+      // Show all mode
+      if (rowsPerPage === 0 || total === 0) {{
+        rows.forEach(r => r.classList.remove("pg-hidden"));
+        pgBar.innerHTML = total > 0 ? `<span class="pg-info">Showing all ${{total}} pairs</span>` : "";
+        calcShares();
+        return;
+      }}
+
+      const totalPages = Math.ceil(total / rowsPerPage);
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+      const start = (currentPage - 1) * rowsPerPage;
+      const end = start + rowsPerPage;
+
+      rows.forEach((r, i) => {{
+        r.classList.toggle("pg-hidden", i < start || i >= end);
+      }});
+
+      // Build page bar
+      let html = `<button class="pg-btn" onclick="goPage(${{currentPage - 1}})" ${{currentPage === 1 ? "disabled" : ""}}>&laquo; Prev</button>`;
+
+      // Smart page range: show first, last, and nearby pages
+      const maxBtns = 7;
+      let pages = [];
+      if (totalPages <= maxBtns) {{
+        for (let i = 1; i <= totalPages; i++) pages.push(i);
+      }} else {{
+        pages.push(1);
+        let lo = Math.max(2, currentPage - 2);
+        let hi = Math.min(totalPages - 1, currentPage + 2);
+        if (lo > 2) pages.push(-1); // ellipsis
+        for (let i = lo; i <= hi; i++) pages.push(i);
+        if (hi < totalPages - 1) pages.push(-1); // ellipsis
+        pages.push(totalPages);
+      }}
+
+      pages.forEach(p => {{
+        if (p === -1) {{
+          html += `<span class="pg-info">&hellip;</span>`;
+        }} else {{
+          html += `<button class="pg-btn ${{p === currentPage ? "active" : ""}}" onclick="goPage(${{p}})">${{p}}</button>`;
+        }}
+      }});
+
+      html += `<button class="pg-btn" onclick="goPage(${{currentPage + 1}})" ${{currentPage === totalPages ? "disabled" : ""}}">Next &raquo;</button>`;
+      html += `<span class="pg-info">${{start + 1}}&ndash;${{Math.min(end, total)}} of ${{total}}</span>`;
+      pgBar.innerHTML = html;
+      calcShares();
+    }}
+
+    function goPage(p) {{
+      currentPage = p;
+      paginateTable();
+      document.querySelector(".table-wrapper").scrollIntoView({{ behavior: "smooth", block: "start" }});
+    }}
+
     let currentSort = {{ key: "score", asc: false }};
 
     function setSort(key) {{
@@ -3946,7 +4101,7 @@ if __name__ == "__main__":
 
       rows.forEach((r, i) => {{ r.querySelector(".rank-cell").textContent = i + 1; tbody.appendChild(r); }});
       updateSortIndicators(key, asc);
-      calcShares();
+      paginateTable();
     }}
 
     function updateSortIndicators(key, asc) {{
@@ -4100,7 +4255,7 @@ if __name__ == "__main__":
 
     window.addEventListener("DOMContentLoaded", () => {{
       document.getElementById("update-time").textContent = new Date({int(time.time() * 1000)}).toLocaleString();
-      calcShares();
+      paginateTable();
       markTrackedPairs();
       document.getElementById("sortBy").addEventListener("change", () => {{
         currentSort.key = document.getElementById("sortBy").value;
