@@ -32,21 +32,31 @@ Z_LENGTH_SHORT = 30
 Z_LENGTH_LONG  = 250
 PERF_LENGTH = 300
 
-MIN_CORR_FILTER = 0.60
-Z_THRESHOLD = 2.0
+MIN_CORR_FILTER = 0.50
+Z_THRESHOLD = 1.5
 Z_STRONG = 2.0
 
-MIN_PRICE      = 5.00    # Exclude pairs where either ticker is below this price
-MIN_AVG_VOLUME = 500000  # Exclude pairs where either ticker avg daily volume is below this
-MIN_MCAP_STOCK = 250000000      # Min market cap for stocks (0 = no filter)
-MIN_MCAP_ETF   = 50000000       # Min market cap (AUM) for ETFs (0 = no filter)
+ADF_CONFIDENCE  = 0.90   # Min cointegration confidence (0.90=90%, 0.95=95%, 0.99=99%)
+ADF_LOOKBACK_YRS = 3     # Years of data for cointegration test (1, 2, 3, 5, etc.)
 
-MAX_RESULTS    = 100     # Max pairs to show in HTML (0 = show all)
-MAX_CHARTS     = 100     # Max pairs to compute Z-score charts for (reduces build time)
+MIN_PRICE      = 1.00    # Exclude pairs where either ticker is below this price
+MIN_AVG_VOLUME = 0       # Exclude pairs where either ticker avg daily volume is below this
+# Market cap tiers: "mega", "large", "mid", "small", "micro", "nano", "none"
+# mega=200B+  large=10B+  mid=2B+  small=300M+  micro=50M+  nano=1M+  none=no filter
+MCAP_TIERS = {"mega": 200_000_000_000, "large": 10_000_000_000, "mid": 2_000_000_000,
+              "small": 300_000_000, "micro": 50_000_000, "nano": 1_000_000, "none": 0}
+MIN_MCAP_STOCK = "none"   # Min market cap tier for stocks (see tiers above)
+MIN_MCAP_ETF   = "none"   # Min market cap tier for ETFs (see tiers above)
 
-W_ZSCORE = 0.50
-W_CORR_BRK = 0.25
-W_REL_PERF = 0.25
+MAX_RESULTS    = 5000     # Max pairs to show in HTML (0 = show all)
+MAX_CHARTS     = 0     # Max pairs to compute Z-score charts for (0 = show all)
+
+W_ZSCORE    = 0.25   # Z-score magnitude (how far from mean)
+W_HALFLIFE  = 0.20   # Half-life speed (faster reversion = higher score)
+W_STATIONARY = 0.20  # Spread stationarity (ADF test — more cointegrated = higher)
+W_ANNRET    = 0.15   # Annualized return potential (higher = more profitable)
+W_ALIGNMENT = 0.10   # Timeframe alignment (30d/100d/250d agree on direction)
+W_CORR      = 0.10   # Base correlation level
 
 # ==========================================
 # LOAD MASTER TICKERS
@@ -498,6 +508,70 @@ def build_market_cap(master):
 
 
 # ==========================================
+# ADF TEST (lightweight, no statsmodels needed)
+# ==========================================
+def adf_pvalue(series, max_lag=None):
+    """
+    Lightweight Augmented Dickey-Fuller test.
+    Returns approximate p-value (0-1). Lower = more stationary/cointegrated.
+    Uses MacKinnon (1994) critical value interpolation for 'c' (constant) case.
+    """
+    try:
+        y = np.asarray(series.dropna(), dtype=float)
+        n = len(y)
+        if n < 30:
+            return 1.0
+        if max_lag is None:
+            max_lag = int(np.floor(12 * (n / 100) ** 0.25))
+            max_lag = min(max_lag, n // 3)
+        dy = np.diff(y)
+        y_lag = y[:-1]
+        # Build regression: dy_t = alpha + gamma * y_{t-1} + sum(beta_k * dy_{t-k}) + e
+        nobs = len(dy) - max_lag
+        if nobs < 10:
+            return 1.0
+        X_cols = [np.ones(nobs), y_lag[max_lag:]]
+        for k in range(1, max_lag + 1):
+            X_cols.append(dy[max_lag - k: -k if k < len(dy) else None][:nobs])
+        X = np.column_stack(X_cols)
+        Y = dy[max_lag:]
+        try:
+            coef, residuals, _, _ = np.linalg.lstsq(X, Y, rcond=None)
+        except np.linalg.LinAlgError:
+            return 1.0
+        gamma = coef[1]
+        # Compute t-statistic for gamma
+        Y_hat = X @ coef
+        sse = np.sum((Y - Y_hat) ** 2)
+        mse = sse / (nobs - X.shape[1])
+        try:
+            var_coef = mse * np.linalg.inv(X.T @ X)
+            se_gamma = np.sqrt(var_coef[1, 1])
+        except (np.linalg.LinAlgError, ValueError):
+            return 1.0
+        if se_gamma <= 0:
+            return 1.0
+        t_stat = gamma / se_gamma
+        # MacKinnon critical values for ADF with constant (approximate)
+        # p-value approximation using critical value table
+        # cv: 1%=-3.43, 5%=-2.86, 10%=-2.57 (for n>250, 'c' case)
+        if t_stat <= -3.43:
+            return 0.01
+        elif t_stat <= -2.86:
+            return 0.01 + (t_stat - (-3.43)) / ((-2.86) - (-3.43)) * (0.05 - 0.01)
+        elif t_stat <= -2.57:
+            return 0.05 + (t_stat - (-2.86)) / ((-2.57) - (-2.86)) * (0.10 - 0.05)
+        elif t_stat <= -1.94:
+            return 0.10 + (t_stat - (-2.57)) / ((-1.94) - (-2.57)) * (0.50 - 0.10)
+        elif t_stat <= -0.7:
+            return 0.50 + (t_stat - (-1.94)) / ((-0.7) - (-1.94)) * (0.90 - 0.50)
+        else:
+            return 0.99
+    except Exception:
+        return 1.0
+
+
+# ==========================================
 # ANALYZE PAIR
 # ==========================================
 def compute_half_life(spread_series):
@@ -552,12 +626,6 @@ def analyze_pair(pair):
     rp = perf[a] - perf[b]
     spread_std = std  # store for EstRet calculation
 
-    z_norm    = min(abs(z) / 3.0, 1.0)
-    corr_norm = min(max(corr_brk, 0) / 0.5, 1.0)
-    perf_norm = min(abs(rp) / 10.0, 1.0)
-
-    score = W_ZSCORE * z_norm + W_CORR_BRK * corr_norm + W_REL_PERF * perf_norm
-
     type_a = TICKER_TYPES.get(a, "Unknown")
     type_b = TICKER_TYPES.get(b, "Unknown")
 
@@ -568,11 +636,10 @@ def analyze_pair(pair):
     else:
         pair_category = "Mixed"
 
-    if any(np.isnan(v) for v in [z, cl, corr_brk, rp, score]):
+    if any(np.isnan(v) for v in [z, cl, corr_brk, rp]):
         return None
 
     # ── Half-life of mean reversion (using full log-price spread in prices_raw) ──
-    # Pairs without detectable mean-reversion are not viable pairs trades.
     try:
         full_spread = np.log(prices_raw[a]) - np.log(prices_raw[b])
         hl = compute_half_life(full_spread)
@@ -580,6 +647,20 @@ def analyze_pair(pair):
         hl = float('nan')
 
     if np.isnan(hl):
+        return None
+
+    # ── ADF cointegration test on the spread ──
+    # Use ADF_LOOKBACK_YRS of data (252 trading days/yr) if available
+    adf_days = int(ADF_LOOKBACK_YRS * 252)
+    try:
+        adf_spread = full_spread.iloc[-adf_days:] if len(full_spread) > adf_days else full_spread
+        adf_p = adf_pvalue(adf_spread)
+    except Exception:
+        adf_p = 1.0
+
+    # Filter: reject pairs that don't meet cointegration confidence threshold
+    max_p = 1.0 - ADF_CONFIDENCE   # e.g. 0.95 confidence → p must be ≤ 0.05
+    if adf_p > max_p:
         return None
 
     # ── Adaptive Z-score window based on half-life ──
@@ -628,14 +709,31 @@ def analyze_pair(pair):
     else:
         confidence = "Low"
 
+    # ── NEW 5-FACTOR SCORING ──
+    # 1) Z-score magnitude: higher |Z| = stronger signal
+    z_norm = min(abs(z) / 3.0, 1.0)
+    # 2) Half-life speed: faster reversion = better trade (15d scores 1.0, 200d+ scores 0)
+    hl_norm = max(0.0, 1.0 - min(hl / 200.0, 1.0))
+    # 3) Stationarity: lower ADF p-value = more cointegrated spread
+    #    p<=0.01 → 1.0, p=0.10 → 0.5, p>=0.50 → 0.0
+    stat_norm = max(0.0, min(1.0, (0.50 - adf_p) / 0.50))
+    # 4) Alignment: all timeframes agree = 1.0, mixed = 0.5, conflicting = 0.0
+    align_norm = {"Aligned": 1.0, "Mixed": 0.5, "Conflicting": 0.0}.get(alignment, 0.5)
+    # 5) Base correlation level
+    corr_norm = min(cl / 1.0, 1.0)
+
     # ── Estimated pairs trade return (gross spread return if fully reverts) ──
     est_ret = round(abs(z) * spread_std * 100, 2)   # in %
-    # Annualized: one trade cycle = one half-life period, so trades/year = 252/hl.
-    # This gives ann_ret > est_ret whenever hl < 252 days (i.e. sub-year mean reversion).
     if not np.isnan(hl) and hl > 0:
         ann_ret = round(est_ret * (252 / hl), 1)
     else:
         ann_ret = None
+
+    # 6) Annualized return potential: 0%/yr → 0.0, 100%+/yr → 1.0
+    ann_ret_norm = min((ann_ret or 0.0) / 100.0, 1.0) if ann_ret is not None and ann_ret > 0 else 0.0
+
+    score = (W_ZSCORE * z_norm + W_HALFLIFE * hl_norm + W_STATIONARY * stat_norm
+             + W_ANNRET * ann_ret_norm + W_ALIGNMENT * align_norm + W_CORR * corr_norm)
 
     return {
         "Pair":       f"{a}/{b}",
@@ -646,6 +744,7 @@ def analyze_pair(pair):
         "PerfDiff":   round(rp, 2),
         "Score":      round(score, 3),
         "HalfLife":   hl if not np.isnan(hl) else None,
+        "ADF_p":      round(adf_p, 4),
         "AnnRetA":    ann_a if not np.isnan(ann_a) else None,
         "AnnRetB":    ann_b if not np.isnan(ann_b) else None,
         "EstRet":     est_ret,
@@ -1491,12 +1590,9 @@ const currentValueMarkerPlugin = {{
     const chartArea = chart.chartArea;
     chart.data.datasets.forEach((ds, i) => {{
       if (!chart.isDatasetVisible(i)) return;
-      // Use authoritative _currentValue if set, else last non-null data point
-      let lastVal = ds._currentValue !== undefined ? ds._currentValue : null;
-      if (lastVal === null) {{
-        for (let j = ds.data.length - 1; j >= 0; j--) {{
-          if (ds.data[j] !== null && ds.data[j] !== undefined) {{ lastVal = ds.data[j]; break; }}
-        }}
+      let lastVal = null;
+      for (let j = ds.data.length - 1; j >= 0; j--) {{
+        if (ds.data[j] !== null && ds.data[j] !== undefined) {{ lastVal = ds.data[j]; break; }}
       }}
       if (lastVal === null) return;
       const yAxisID = ds.yAxisID || "y";
@@ -1646,7 +1742,7 @@ function buildTradeZChart(dates, z, entryZ, currentZ) {{
         backgroundColor: grad,
         tension: 0.3,
         spanGaps: true,
-        _currentValue: currentZ,
+
       }}],
     }},
     options: {{
@@ -1976,18 +2072,23 @@ if __name__ == "__main__":
         valid = [t for t in valid if data[t].iloc[-1] >= MIN_PRICE]
     if MIN_AVG_VOLUME > 0:
         valid = [t for t in valid if vol_avg.get(t, 0) >= MIN_AVG_VOLUME]
-    if MIN_MCAP_STOCK > 0 or MIN_MCAP_ETF > 0:
+    mcap_stock_min = MCAP_TIERS.get(MIN_MCAP_STOCK.lower(), 0) if isinstance(MIN_MCAP_STOCK, str) else MIN_MCAP_STOCK
+    mcap_etf_min   = MCAP_TIERS.get(MIN_MCAP_ETF.lower(), 0)   if isinstance(MIN_MCAP_ETF, str)   else MIN_MCAP_ETF
+    if mcap_stock_min > 0 or mcap_etf_min > 0:
         def _mcap_ok(t):
             mc = mcap_data.get(t, 0)
             tt = TICKER_TYPES.get(t, "Unknown")
-            if tt == "Pure Stock" and MIN_MCAP_STOCK > 0:
-                return mc >= MIN_MCAP_STOCK
-            if tt == "Pure ETF" and MIN_MCAP_ETF > 0:
-                return mc >= MIN_MCAP_ETF
+            if tt == "Pure Stock" and mcap_stock_min > 0:
+                return mc >= mcap_stock_min
+            if tt == "Pure ETF" and mcap_etf_min > 0:
+                return mc >= mcap_etf_min
             return True
         valid = [t for t in valid if _mcap_ok(t)]
 
-    print(f"Tickers: {pre_filter_count} → {len(valid)} after filters (price>=${MIN_PRICE}, vol>={MIN_AVG_VOLUME:,}, stock mcap>={MIN_MCAP_STOCK:,}, etf mcap>={MIN_MCAP_ETF:,})")
+    stock_label = MIN_MCAP_STOCK if isinstance(MIN_MCAP_STOCK, str) else f"${MIN_MCAP_STOCK:,}"
+    etf_label   = MIN_MCAP_ETF   if isinstance(MIN_MCAP_ETF, str)   else f"${MIN_MCAP_ETF:,}"
+    print(f"Tickers: {pre_filter_count} → {len(valid)} after filters (price>=${MIN_PRICE}, vol>={MIN_AVG_VOLUME:,}, stock mcap>={stock_label}, etf mcap>={etf_label})")
+    print(f"Cointegration: ADF {int(ADF_CONFIDENCE*100)}% confidence over {ADF_LOOKBACK_YRS}yr lookback")
     print(f"Computing matrices for {len(valid)} symbols...")
 
     # Pre-compute number of pairs (used in HTML template regardless of cache)
@@ -2081,7 +2182,7 @@ if __name__ == "__main__":
         z = r["Z"]
         a, b = r["Pair"].split("/")
 
-        if any(np.isnan(v) for v in [z, r["Score"], r["Corr"], r["PerfDiff"]]):
+        if any(np.isnan(v) for v in [z, r["Score"], r["Corr"]]):
             continue
         if abs(z) < Z_THRESHOLD:
             continue  # skip pairs without a tradeable signal
@@ -2236,7 +2337,7 @@ if __name__ == "__main__":
           </td>
           <td class="corr-cell">
             <span class="corr-value">{r['Corr']:.2f}</span>
-            <span class="corr-brk">&Delta;{r['CorrBrk']:+.3f}</span>
+            <span class="adf-value" title="ADF p-value (lower = more cointegrated)">ADF:{r['ADF_p']:.2f}</span>
           </td>
           <td class="hl-cell">
             {f'<span class="hl-value">{hl:.0f}d</span>' if hl else '<span class="hl-na">—</span>'}
@@ -2244,9 +2345,6 @@ if __name__ == "__main__":
           <td class="est-cell">
             <span class="est-ret">{est_ret:+.1f}%</span>
             {f'<span class="ann-ret">{ann_ret:+.0f}%/yr</span>' if ann_ret is not None else ''}
-          </td>
-          <td class="perf-cell">
-            <span class="{'perf-pos' if r['PerfDiff'] >= 0 else 'perf-neg'}">{r['PerfDiff']:+.1f}%</span>
           </td>
           <td class="score-cell">
             <div class="score-bar-wrap">
@@ -2462,10 +2560,7 @@ if __name__ == "__main__":
       /* CORR / PERF / SCORE */
       .corr-cell  {{ min-width: 90px; }}
       .corr-value {{ font-family: var(--mono); font-size: 13px; color: white; display: block; }}
-      .corr-brk   {{ font-family: var(--mono); font-size: 10px; color: #cbd5e1; }}
-      .perf-cell  {{ min-width: 75px; }}
-      .perf-pos {{ font-family: var(--mono); font-size: 13px; color: var(--green); font-weight: 500; }}
-      .perf-neg {{ font-family: var(--mono); font-size: 13px; color: var(--red);   font-weight: 500; }}
+      .adf-value  {{ font-family: var(--mono); font-size: 10px; color: #94a3b8; }}
 
       /* HALF-LIFE */
       .hl-cell   {{ min-width: 70px; text-align: center; }}
@@ -2677,7 +2772,8 @@ if __name__ == "__main__":
       <div class="stat-item"><div class="stat-label">Min Correlation</div><div class="stat-value">{MIN_CORR_FILTER:.2f}</div></div>
       <div class="stat-item"><div class="stat-label">Corr Window</div><div class="stat-value">{CORR_SHORT}d / {CORR_LONG}d</div></div>
       <div class="stat-item"><div class="stat-label">Z Window</div><div class="stat-value">{Z_LENGTH}d</div></div>
-      <div class="stat-item"><div class="stat-label">Perf Window</div><div class="stat-value amber">{PERF_LENGTH}d</div></div>
+      <div class="stat-item"><div class="stat-label">ADF Conf</div><div class="stat-value">{int(ADF_CONFIDENCE*100)}%</div></div>
+      <div class="stat-item"><div class="stat-label">ADF Lookback</div><div class="stat-value">{ADF_LOOKBACK_YRS}yr</div></div>
       <div class="stat-item"><div class="stat-label">Aligned</div><div class="stat-value cyan">{n_aligned}</div></div>
       <div class="stat-item"><div class="stat-label">Mixed</div><div class="stat-value amber">{n_mixed}</div></div>
       <div class="stat-item"><div class="stat-label">Conflicting</div><div class="stat-value" style="color:var(--red)">{n_conflicting}</div></div>
@@ -2781,10 +2877,10 @@ if __name__ == "__main__":
           <option value="score">Score</option>
           <option value="z_abs">|Z-Score|</option>
           <option value="hl">Half-Life</option>
+          <option value="adf">ADF (Stationarity)</option>
           <option value="est_ret">Est Return</option>
           <option value="ann_ret">Ann Return</option>
           <option value="corr">Correlation</option>
-          <option value="perf">Perf Diff</option>
           <option value="alignment">Alignment</option>
           <option value="confidence">Confidence</option>
         </select>
@@ -2806,10 +2902,9 @@ if __name__ == "__main__":
       <th>#</th>
       <th>Pair / Name</th>
       <th onclick="setSort('z_abs')">Z-Score &#8597;</th>
-      <th onclick="setSort('corr')">Corr / &Delta; &#8597;</th>
+      <th onclick="setSort('corr')">Corr / ADF &#8597;</th>
       <th onclick="setSort('hl')">Half-Life &#8597;</th>
       <th onclick="setSort('est_ret')" style="text-align:right;">Est Return &#8597;</th>
-      <th onclick="setSort('perf')">Perf Diff &#8597;</th>
       <th onclick="setSort('score')">Score &#8597;</th>
       <th>Signal/Shares</th>
       <th style="text-align:center;">Charts</th>
@@ -2832,7 +2927,7 @@ if __name__ == "__main__":
         <span class="leg-dot" style="background:var(--muted)"></span>Neutral
       </div>
       <div>
-        Score = {int(W_ZSCORE*100)}% |Z| + {int(W_CORR_BRK*100)}% Corr Break + {int(W_REL_PERF*100)}% Rel Perf
+        Score = {int(W_ZSCORE*100)}% |Z| + {int(W_HALFLIFE*100)}% HL Speed + {int(W_STATIONARY*100)}% ADF + {int(W_ANNRET*100)}% AnnRet + {int(W_ALIGNMENT*100)}% Align + {int(W_CORR*100)}% Corr
         &nbsp;&middot;&nbsp; 50/50 capital sizing
         &nbsp;&middot;&nbsp; <a href="symbols.html">Symbol Reference</a>
       </div>
@@ -2938,11 +3033,9 @@ if __name__ == "__main__":
         const chartArea = chart.chartArea;
         chart.data.datasets.forEach((ds, i) => {{
           if (!chart.isDatasetVisible(i)) return;
-          let lastVal = ds._currentValue !== undefined ? ds._currentValue : null;
-          if (lastVal === null) {{
-            for (let j = ds.data.length - 1; j >= 0; j--) {{
-              if (ds.data[j] !== null && ds.data[j] !== undefined) {{ lastVal = ds.data[j]; break; }}
-            }}
+          let lastVal = null;
+          for (let j = ds.data.length - 1; j >= 0; j--) {{
+            if (ds.data[j] !== null && ds.data[j] !== undefined) {{ lastVal = ds.data[j]; break; }}
           }}
           if (lastVal === null) return;
           const yAxisID = ds.yAxisID || "y";
@@ -3159,7 +3252,7 @@ if __name__ == "__main__":
         backgroundColor: grad,
         tension: 0.3,
         spanGaps: true,
-        _currentValue: currentZ,
+
       }}];
       if (hasAdaptive) {{
         datasets.push({{
@@ -3174,7 +3267,7 @@ if __name__ == "__main__":
           fill: false,
           tension: 0.3,
           spanGaps: true,
-          _currentValue: zAdaptiveCurrent,
+
         }});
       }}
 
@@ -3402,8 +3495,7 @@ if __name__ == "__main__":
             borderColor:"rgba(248,215,80,0.9)", borderWidth:1.5,
             pointRadius:0, pointHoverRadius:0,
             pointBorderWidth:0,
-            fill:false, tension:0.3, spanGaps:true, order:1,
-            _currentValue: p.currentZ }},
+            fill:false, tension:0.3, spanGaps:true, order:1 }},
         ]}},
         options: {{
           responsive:true, maintainAspectRatio:false,
@@ -3616,7 +3708,7 @@ if __name__ == "__main__":
 
     function setSort(key) {{
       currentSort.asc = (currentSort.key === key) ? !currentSort.asc : false;
-      if (key === "hl" && currentSort.key !== "hl") currentSort.asc = true;
+      if ((key === "hl" || key === "adf") && currentSort.key !== key) currentSort.asc = true;
       currentSort.key = key;
       const dd = document.getElementById("sortBy");
       if (dd) dd.value = key;
@@ -3639,7 +3731,7 @@ if __name__ == "__main__":
         if      (key === "score")   {{ va = numOf(a,".score-num");               vb = numOf(b,".score-num"); }}
         else if (key === "z_abs")   {{ va = Math.abs(parseFloat(a.dataset.z));   vb = Math.abs(parseFloat(b.dataset.z)); }}
         else if (key === "corr")    {{ va = numOf(a,".corr-value");              vb = numOf(b,".corr-value"); }}
-        else if (key === "perf")    {{ va = Math.abs(numOf(a,".perf-cell span")); vb = Math.abs(numOf(b,".perf-cell span")); }}
+        else if (key === "adf")     {{ va = numOf(a,".adf-value") || 1;            vb = numOf(b,".adf-value") || 1; }}
         else if (key === "hl")      {{ va = numOf(a,".hl-value") || 99999;       vb = numOf(b,".hl-value") || 99999; }}
         else if (key === "est_ret") {{ va = numOf(a,".est-ret");                 vb = numOf(b,".est-ret"); }}
         else if (key === "ann_ret") {{ va = numOf(a,".ann-ret") || 0;            vb = numOf(b,".ann-ret") || 0; }}
