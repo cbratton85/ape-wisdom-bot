@@ -27978,5 +27978,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "EWT": {
+        "ticker": "EWT",
+        "name": "iShares MSCI Taiwan ETF",
+        "meta": "China Region",
+        "type": "ETF",
+        "mcap": 6059650048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
