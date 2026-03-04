@@ -28108,5 +28108,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AQN": {
+        "ticker": "AQN",
+        "name": "Algonquin Power & Utilities Cor",
+        "meta": "Utilities - Diversified",
+        "type": "EQUITY",
+        "mcap": 5346118144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BLND": {
+        "ticker": "BLND",
+        "name": "Blend Labs, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 448063424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
