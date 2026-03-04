@@ -28048,5 +28048,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "SHMD": {
+        "ticker": "SHMD",
+        "name": "SCHMID Group N.V.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 505987040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "HLI": {
+        "ticker": "HLI",
+        "name": "Houlihan Lokey, Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 11355335680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
