@@ -244,6 +244,8 @@ def _refresh_tickers(data, tickers):
     # Use the last cached date (not +1) to re-fetch today's data without going into the future
     today_str = data.index.max().strftime("%Y-%m-%d") if not data.empty else (datetime.now() - timedelta(days=5)).strftime("%Y-%m-%d")
     print(f"  Refreshing {len(tickers)} trade tickers: {', '.join(sorted(tickers)[:10])}{'...' if len(tickers) > 10 else ''}")
+    # Preserve the cache file timestamp so trade refresh doesn't reset the cooldown
+    original_mtime = os.path.getmtime(DATA_FILE) if os.path.exists(DATA_FILE) else None
     fresh = download_batch(list(tickers), today_str)
     if not fresh.empty:
         for col in fresh.columns:
@@ -252,6 +254,8 @@ def _refresh_tickers(data, tickers):
             else:
                 data[col] = fresh[col]
         safe_save(data)
+        if original_mtime is not None:
+            os.utime(DATA_FILE, (original_mtime, original_mtime))
     return data
 
 
@@ -4255,7 +4259,7 @@ if __name__ == "__main__":
 
     window.addEventListener("DOMContentLoaded", () => {{
       document.getElementById("update-time").textContent = new Date({int(time.time() * 1000)}).toLocaleString();
-      paginateTable();
+      applyFilters();
       markTrackedPairs();
       document.getElementById("sortBy").addEventListener("change", () => {{
         currentSort.key = document.getElementById("sortBy").value;
