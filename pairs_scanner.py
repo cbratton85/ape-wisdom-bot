@@ -53,8 +53,8 @@ MIN_MCAP_ETF   = "none"   # Min market cap tier for ETFs (see tiers above)
 
 MAX_RESULTS    = 0        # Max total pairs to show in HTML (0 = show all)
 MAX_RESULTS_ETF   = 100   # Max Pure ETF pairs (0 = no per-category limit)
-MAX_RESULTS_STOCK = 100   # Max Pure Stock pairs (0 = no per-category limit)
-MAX_RESULTS_MIXED = 100   # Max Mixed pairs (0 = no per-category limit)
+MAX_RESULTS_STOCK = 350   # Max Pure Stock pairs (0 = no per-category limit)
+MAX_RESULTS_MIXED = 50   # Max Mixed pairs (0 = no per-category limit)
 MAX_CHARTS     = 0        # Max pairs to compute Z-score charts for (0 = show all)
 
 W_ZSCORE    = 0.25   # Z-score magnitude (how far from mean)
@@ -1419,11 +1419,11 @@ def generate_trades_page(trades):
               <div class="tc-val {pnl_class}">{pnl:+.1f}%</div>
             </div>
             <div class="tc-stat tc-prices">
-              <div class="tc-label">{a} <span style="color:var(--cyan);font-size:9px;">{'-' if direction == 'short_a_long_b' else '+'}{shares_a} shr</span></div>
+              <div class="tc-label">{a} <span style="color:var(--cyan);font-size:9px;">{'-' if direction == 'short_a_long_b' else '+'}{shares_a} shares</span></div>
               <div class="tc-val">${entry_pa:.2f} &rarr; ${cur_pa:.2f} <span class="{chg_a_class}">{chg_a:+.1f}%</span></div>
             </div>
             <div class="tc-stat tc-prices">
-              <div class="tc-label">{b} <span style="color:var(--cyan);font-size:9px;">{'+' if direction == 'short_a_long_b' else '-'}{shares_b} shr</span></div>
+              <div class="tc-label">{b} <span style="color:var(--cyan);font-size:9px;">{'+' if direction == 'short_a_long_b' else '-'}{shares_b} shares</span></div>
               <div class="tc-val">${entry_pb:.2f} &rarr; ${cur_pb:.2f} <span class="{chg_b_class}">{chg_b:+.1f}%</span></div>
             </div>
             <div class="tc-stat">
@@ -2036,8 +2036,8 @@ function renderTrades() {{
         <div class="tc-stat"><div class="tc-label">Entry Z</div><div class="tc-val">${{t.entryZ >= 0 ? "+" : ""}}${{t.entryZ.toFixed(2)}}&sigma;</div></div>
         <div class="tc-stat"><div class="tc-label">Current Z</div><div class="tc-val" style="color:${{zColor}}">${{t.currentZ >= 0 ? "+" : ""}}${{t.currentZ.toFixed(2)}}&sigma;</div></div>
         <div class="tc-stat"><div class="tc-label">Est P&L</div><div class="tc-val ${{pnlClass}}">${{pnl >= 0 ? "+" : ""}}${{pnl.toFixed(1)}}%</div></div>
-        <div class="tc-stat tc-prices"><div class="tc-label">${{a}} <span style="color:var(--cyan);font-size:9px;">${{t.direction === "short_a_long_b" ? "-" : "+"}}${{sA}} shr</span></div><div class="tc-val">$${{t.entryPriceA.toFixed(2)}} &rarr; $${{t.currentPriceA.toFixed(2)}} <span class="${{chgAClass}}">${{chgA >= 0 ? "+" : ""}}${{chgA.toFixed(1)}}%</span></div></div>
-        <div class="tc-stat tc-prices"><div class="tc-label">${{b}} <span style="color:var(--cyan);font-size:9px;">${{t.direction === "short_a_long_b" ? "+" : "-"}}${{sB}} shr</span></div><div class="tc-val">$${{t.entryPriceB.toFixed(2)}} &rarr; $${{t.currentPriceB.toFixed(2)}} <span class="${{chgBClass}}">${{chgB >= 0 ? "+" : ""}}${{chgB.toFixed(1)}}%</span></div></div>
+        <div class="tc-stat tc-prices"><div class="tc-label">${{a}} <span style="color:var(--cyan);font-size:9px;">${{t.direction === "short_a_long_b" ? "-" : "+"}}${{sA}} shares</span></div><div class="tc-val">$${{t.entryPriceA.toFixed(2)}} &rarr; $${{t.currentPriceA.toFixed(2)}} <span class="${{chgAClass}}">${{chgA >= 0 ? "+" : ""}}${{chgA.toFixed(1)}}%</span></div></div>
+        <div class="tc-stat tc-prices"><div class="tc-label">${{b}} <span style="color:var(--cyan);font-size:9px;">${{t.direction === "short_a_long_b" ? "+" : "-"}}${{sB}} shares</span></div><div class="tc-val">$${{t.entryPriceB.toFixed(2)}} &rarr; $${{t.currentPriceB.toFixed(2)}} <span class="${{chgBClass}}">${{chgB >= 0 ? "+" : ""}}${{chgB.toFixed(1)}}%</span></div></div>
         <div class="tc-stat"><div class="tc-label">$ P&L</div><div class="tc-val ${{dollarClass}}">${{dollarPnl >= 0 ? "+":""}}$${{Math.abs(dollarPnl).toFixed(0)}}</div></div>
       </div>
       <div class="tc-progress">
