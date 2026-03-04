@@ -27968,5 +27968,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "AREN": {
+        "ticker": "AREN",
+        "name": "The Arena Group Holdings, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 140498608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
