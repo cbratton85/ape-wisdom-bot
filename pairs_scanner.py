@@ -48,15 +48,15 @@ MCAP_TIERS = {"mega": 200_000_000_000, "large": 10_000_000_000, "mid": 2_000_000
 MIN_MCAP_STOCK = "none"   # Min market cap tier for stocks (see tiers above)
 MIN_MCAP_ETF   = "none"   # Min market cap tier for ETFs (see tiers above)
 
-MAX_RESULTS    = 5000     # Max pairs to show in HTML (0 = show all)
+MAX_RESULTS    = 1000     # Max pairs to show in HTML (0 = show all)
 MAX_CHARTS     = 0     # Max pairs to compute Z-score charts for (0 = show all)
 
 W_ZSCORE    = 0.25   # Z-score magnitude (how far from mean)
 W_HALFLIFE  = 0.20   # Half-life speed (faster reversion = higher score)
 W_STATIONARY = 0.20  # Spread stationarity (ADF test — more cointegrated = higher)
 W_ANNRET    = 0.15   # Annualized return potential (higher = more profitable)
-W_ALIGNMENT = 0.10   # Timeframe alignment (30d/100d/250d agree on direction)
-W_CORR      = 0.10   # Base correlation level
+W_CONFIRM   = 0.15   # Timeframe confirmation (alignment + confidence combined)
+W_CORR      = 0.05   # Base correlation level
 
 # ==========================================
 # LOAD MASTER TICKERS
@@ -690,21 +690,46 @@ def analyze_pair(pair):
     std_l   = ratio_l.std()
     z250    = round((ratio_l.iloc[-1] - ratio_l.mean()) / std_l, 2) if std_l > 0 else 0.0
 
-    # ── Timeframe alignment ──
+    # ── Timeframe alignment (continuous 0-1 score) ──
+    # Measures how tightly the 3 Z-scores agree in direction AND magnitude.
+    zs = [z30, z, z250]
+    abs_zs = [abs(v) for v in zs]
     signs = (z30 > 0, z > 0, z250 > 0)
-    if (all(signs) or not any(signs)) and abs(z) >= Z_THRESHOLD:
-        alignment = "Aligned"
-    elif (z30 > 0) != (z250 > 0):
-        alignment = "Conflicting"
-    else:
-        alignment = "Mixed"
-
-    # ── Confidence level (how many timeframes confirm at threshold) ──
-    above = sum(1 for v in (abs(z30), abs(z), abs(z250)) if v >= Z_THRESHOLD)
     same_dir = all(signs) or not any(signs)
-    if above == 3 and same_dir:
+
+    if same_dir:
+        # All same direction — score based on how close they are to each other
+        # Spread = 0 → perfect alignment (1.0); spread >= 2σ apart → weak (0.0)
+        z_spread = max(abs_zs) - min(abs_zs)
+        closeness = max(0.0, 1.0 - z_spread / 2.0)
+        # Also factor in whether the weakest timeframe is meaningful (above half the threshold)
+        weakest_strength = min(abs_zs) / max(Z_THRESHOLD, 1.0)
+        weakest_factor = min(weakest_strength, 1.0)
+        align_score = 0.5 + 0.5 * closeness * weakest_factor  # range 0.5-1.0 when same dir
+    else:
+        # Different directions — penalize based on how many disagree
+        n_pos = sum(1 for s in signs if s)
+        align_score = 0.25 if n_pos == 1 or n_pos == 2 else 0.0  # 2v1 split = 0.25
+
+    # Bucket labels for display
+    if align_score >= 0.75:
+        alignment = "Aligned"
+    elif align_score >= 0.40:
+        alignment = "Mixed"
+    else:
+        alignment = "Conflicting"
+
+    # ── Confidence level (continuous, based on magnitude agreement) ──
+    # Considers: avg magnitude relative to threshold + how tightly grouped
+    avg_z = sum(abs_zs) / 3.0
+    strength = min(avg_z / max(Z_THRESHOLD, 1.0), 2.0) / 2.0  # 0-1: how far above threshold on avg
+    z_spread = max(abs_zs) - min(abs_zs)
+    consistency = max(0.0, 1.0 - z_spread / 3.0)  # 0-1: how tightly grouped
+    conf_score = strength * 0.6 + consistency * 0.2 + (1.0 if same_dir else 0.0) * 0.2
+
+    if conf_score >= 0.70:
         confidence = "High"
-    elif above >= 2 and same_dir:
+    elif conf_score >= 0.40:
         confidence = "Med"
     else:
         confidence = "Low"
@@ -717,8 +742,8 @@ def analyze_pair(pair):
     # 3) Stationarity: lower ADF p-value = more cointegrated spread
     #    p<=0.01 → 1.0, p=0.10 → 0.5, p>=0.50 → 0.0
     stat_norm = max(0.0, min(1.0, (0.50 - adf_p) / 0.50))
-    # 4) Alignment: all timeframes agree = 1.0, mixed = 0.5, conflicting = 0.0
-    align_norm = {"Aligned": 1.0, "Mixed": 0.5, "Conflicting": 0.0}.get(alignment, 0.5)
+    # 4) Timeframe confirmation: blend alignment (direction+closeness) with confidence (magnitude+consistency)
+    confirm_norm = align_score * 0.5 + conf_score * 0.5
     # 5) Base correlation level
     corr_norm = min(cl / 1.0, 1.0)
 
@@ -733,7 +758,7 @@ def analyze_pair(pair):
     ann_ret_norm = min((ann_ret or 0.0) / 100.0, 1.0) if ann_ret is not None and ann_ret > 0 else 0.0
 
     score = (W_ZSCORE * z_norm + W_HALFLIFE * hl_norm + W_STATIONARY * stat_norm
-             + W_ANNRET * ann_ret_norm + W_ALIGNMENT * align_norm + W_CORR * corr_norm)
+             + W_ANNRET * ann_ret_norm + W_CONFIRM * confirm_norm + W_CORR * corr_norm)
 
     return {
         "Pair":       f"{a}/{b}",
@@ -2927,7 +2952,7 @@ if __name__ == "__main__":
         <span class="leg-dot" style="background:var(--muted)"></span>Neutral
       </div>
       <div>
-        Score = {int(W_ZSCORE*100)}% |Z| + {int(W_HALFLIFE*100)}% HL Speed + {int(W_STATIONARY*100)}% ADF + {int(W_ANNRET*100)}% AnnRet + {int(W_ALIGNMENT*100)}% Align + {int(W_CORR*100)}% Corr
+        Score = {int(W_ZSCORE*100)}% |Z| + {int(W_HALFLIFE*100)}% HL Speed + {int(W_STATIONARY*100)}% ADF + {int(W_ANNRET*100)}% AnnRet + {int(W_CONFIRM*100)}% Confirm + {int(W_CORR*100)}% Corr
         &nbsp;&middot;&nbsp; 50/50 capital sizing
         &nbsp;&middot;&nbsp; <a href="symbols.html">Symbol Reference</a>
       </div>
