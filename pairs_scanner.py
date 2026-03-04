@@ -38,6 +38,7 @@ Z_STRONG = 2.0
 
 ADF_CONFIDENCE  = 0.95   # Min cointegration confidence (0.90=90%, 0.95=95%, 0.99=99%)
 ADF_LOOKBACK_YRS = 3     # Years of data for cointegration test (1, 2, 3, 5, etc.)
+ADF_MIN_DAYS    = 504    # Min trading days of spread data required for ADF (504 ≈ 2yr)
 
 MIN_EST_RETURN = 1       # Min estimated return % to include pair (0 = no filter)
 MIN_PRICE      = 1.00    # Exclude pairs where either ticker is below this price
@@ -656,6 +657,9 @@ def analyze_pair(pair):
         return None
 
     # ── ADF cointegration test on the spread ──
+    # Require minimum data length for reliable results
+    if len(full_spread.dropna()) < ADF_MIN_DAYS:
+        return None
     # Use ADF_LOOKBACK_YRS of data (252 trading days/yr) if available
     adf_days = int(ADF_LOOKBACK_YRS * 252)
     try:
@@ -2182,6 +2186,11 @@ if __name__ == "__main__":
         ]
 
     results = sorted(results, key=lambda x: x["Score"], reverse=True)
+    total_valid = len(results)
+    # Count totals per category before any capping
+    total_by_cat = {"Pure ETF": 0, "Pure Stock": 0, "Mixed": 0}
+    for r in results:
+        total_by_cat[r.get("Category", "Mixed")] += 1
 
     # The code below runs EVERY time, regardless of whether calculations were cached
     # Apply per-category limits first, then overall limit
@@ -2204,6 +2213,10 @@ if __name__ == "__main__":
               f"Mixed={cat_counts['Mixed']}"
               f"{'/' + str(MAX_RESULTS_MIXED) if MAX_RESULTS_MIXED > 0 else ''}")
     top_results = results[:MAX_RESULTS] if MAX_RESULTS > 0 else results
+    # Count shown per category
+    shown_by_cat = {"Pure ETF": 0, "Pure Stock": 0, "Mixed": 0}
+    for r in top_results:
+        shown_by_cat[r.get("Category", "Mixed")] += 1
     chart_results = top_results[:MAX_CHARTS] if MAX_CHARTS > 0 else top_results
 
     # Compute rolling Z-score histories for top 500 pairs (parallel)
@@ -2524,12 +2537,20 @@ if __name__ == "__main__":
       /* CONTROLS */
       .controls {{
         background: var(--surface2); border-bottom: 1px solid var(--border);
-        padding: 9px 20px; display: flex; gap: 7px; align-items: center; flex-wrap: wrap;
+        padding: 6px 16px; display: flex; flex-direction: column; gap: 3px;
+      }}
+      .filter-row {{
+        display: flex; gap: 4px; align-items: center; flex-wrap: wrap;
+      }}
+      .filter-row-label {{
+        font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
+        text-transform: uppercase; color: var(--muted); opacity: 0.5;
+        min-width: 42px; white-space: nowrap;
       }}
       .control-group {{
-        display: flex; align-items: center; gap: 5px;
+        display: flex; align-items: center; gap: 4px;
         background: var(--surface); border: 1px solid var(--border);
-        border-radius: 6px; padding: 5px 9px;
+        border-radius: 5px; padding: 4px 7px;
       }}
       .control-group label {{
         font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
@@ -2824,8 +2845,8 @@ if __name__ == "__main__":
       <div class="topbar-meta">
         <span>Updated: <em id="update-time"></em></span>
         <span>Scanned: <em>{n_combos:,} pairs</em></span>
-        <span>Setups: <em>{len(results):,}</em></span>
-        <span>Showing: <em>{'All ' + str(len(top_results)) if len(top_results) == len(results) else 'Top ' + str(len(top_results))}</em></span>
+        <span>Valid Setups: <em>{total_valid:,}</em></span>
+        <span>Showing: <em>{len(top_results):,} &mdash; {shown_by_cat['Pure Stock']} Stock, {shown_by_cat['Pure ETF']} ETF, {shown_by_cat['Mixed']} Mixed</em></span>
       </div>
       <div style="display:flex;gap:16px;align-items:center;">
         <a href="active_trades.html" class="nav-link" style="color:var(--green);">&#9733; My Trades</a>
@@ -2837,7 +2858,7 @@ if __name__ == "__main__":
     <!-- STATS ROW -->
     <div class="stats-row">
       <div class="stat-item"><div class="stat-label">Pairs Scanned</div><div class="stat-value cyan">{n_combos:,}</div></div>
-      <div class="stat-item"><div class="stat-label">Valid Setups</div><div class="stat-value green">{len(results):,}</div></div>
+      <div class="stat-item"><div class="stat-label">Valid Setups</div><div class="stat-value green">{total_valid:,}</div></div>
       <div class="stat-item"><div class="stat-label">Active Symbols</div><div class="stat-value">{len(valid)}</div></div>
       <div class="stat-item"><div class="stat-label">Lookback</div><div class="stat-value">{LOOKBACK_DAYS}d</div></div>
       <div class="stat-item"><div class="stat-label">Z Threshold</div><div class="stat-value">&plusmn;{Z_THRESHOLD:.1f}&sigma;</div></div>
@@ -2851,113 +2872,125 @@ if __name__ == "__main__":
 
     <!-- CONTROLS -->
     <div class="controls">
-      <div class="control-group">
-        <label>Capital ($)</label>
-        <button class="step-btn" onclick="stepValue('capitalInput',-1000)">−</button>
-        <input type="number" id="capitalInput" value="5000" min="0" step="1000" oninput="calcShares()">
-        <button class="step-btn" onclick="stepValue('capitalInput',1000)">+</button>
+      <!-- Row 1: Ticker search & market filters -->
+      <div class="filter-row">
+        <span class="filter-row-label">Search</span>
+        <div class="control-group">
+          <label>Ticker</label>
+          <input type="text" id="tickerSearch" placeholder="SPY, AAPL&hellip;" oninput="applyFilters()">
+        </div>
+        <div class="control-group">
+          <label>Min Price ($)</label>
+          <button class="step-btn" onclick="stepValue('minPrice',-1)">−</button>
+          <input type="number" id="minPrice" value="0" min="0" step="1" oninput="applyFilters()" style="width:48px;">
+          <button class="step-btn" onclick="stepValue('minPrice',1)">+</button>
+        </div>
+        <div class="control-group">
+          <label>Min Avg Vol</label>
+          <select id="minVol" onchange="applyFilters()">
+            <option value="0">Any</option>
+            <option value="100000">&gt; 100K</option>
+            <option value="500000">&gt; 500K</option>
+            <option value="1000000">&gt; 1M</option>
+            <option value="5000000">&gt; 5M</option>
+            <option value="10000000">&gt; 10M</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>Min Mkt Cap</label>
+          <select id="minMcap" onchange="applyFilters()">
+            <option value="0">Any</option>
+            <option value="1000000">Nano (1M+)</option>
+            <option value="50000000">Micro (50M+)</option>
+            <option value="300000000">Small (300M+)</option>
+            <option value="2000000000">Mid (2B+)</option>
+            <option value="10000000000">Large (10B+)</option>
+            <option value="200000000000">Mega (200B+)</option>
+          </select>
+        </div>
       </div>
-      <div class="control-group">
-        <label>Pair Type</label>
-        <select id="typeFilter" onchange="applyFilters()">
-          <option value="All">All</option>
-          <option value="Pure ETF">ETF / ETF</option>
-          <option value="Pure Stock">Stock / Stock</option>
-          <option value="Mixed">Mixed</option>
-        </select>
+      <!-- Row 2: Pair type & signal quality filters -->
+      <div class="filter-row">
+        <span class="filter-row-label">Signal</span>
+        <div class="control-group">
+          <label>Pair Type</label>
+          <select id="typeFilter" onchange="applyFilters()">
+            <option value="All">All</option>
+            <option value="Pure ETF">ETF / ETF</option>
+            <option value="Pure Stock">Stock / Stock</option>
+            <option value="Mixed">Mixed</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>ETF Type</label>
+          <select id="levFilter" onchange="applyFilters()">
+            <option value="all">All</option>
+            <option value="exclude_both">Excl Lev &amp; Inv</option>
+            <option value="exclude_lev">Excl Lev</option>
+            <option value="exclude_inv">Excl Inv</option>
+            <option value="exclude_etn">Excl ETN</option>
+            <option value="only_lev">Only Lev</option>
+            <option value="only_inv">Only Inv</option>
+            <option value="only_both">Only Lev &amp; Inv</option>
+            <option value="only_etn">Only ETN</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>Z Align</label>
+          <select id="alignFilter" onchange="applyFilters()">
+            <option value="all">All</option>
+            <option value="Aligned">Aligned</option>
+            <option value="Mixed">Mixed</option>
+            <option value="Conflicting">Conflicting</option>
+            <option value="not_conflicting">Excl Conflicting</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>Confidence</label>
+          <select id="confFilter" onchange="applyFilters()">
+            <option value="all">All</option>
+            <option value="High">High</option>
+            <option value="Med">Med+</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>Min |Z|</label>
+          <button class="step-btn" onclick="stepValue('minZ',-0.5)">−</button>
+          <input type="number" id="minZ" value="0" min="0" max="5" step="0.5" oninput="applyFilters()" style="width:42px;">
+          <button class="step-btn" onclick="stepValue('minZ',0.5)">+</button>
+        </div>
       </div>
-      <div class="control-group">
-        <label>ETF Type</label>
-        <select id="levFilter" onchange="applyFilters()">
-          <option value="all">All</option>
-          <option value="exclude_both">Excl Lev &amp; Inv</option>
-          <option value="exclude_lev">Excl Lev</option>
-          <option value="exclude_inv">Excl Inv</option>
-          <option value="exclude_etn">Excl ETN</option>
-          <option value="only_lev">Only Lev</option>
-          <option value="only_inv">Only Inv</option>
-          <option value="only_both">Only Lev &amp; Inv</option>
-          <option value="only_etn">Only ETN</option>
-        </select>
-      </div>
-      <div class="control-group">
-        <label>Z Align</label>
-        <select id="alignFilter" onchange="applyFilters()">
-          <option value="all">All</option>
-          <option value="Aligned">Aligned</option>
-          <option value="Mixed">Mixed</option>
-          <option value="Conflicting">Conflicting</option>
-          <option value="not_conflicting">Excl Conflicting</option>
-        </select>
-      </div>
-      <div class="control-group">
-        <label>Confidence</label>
-        <select id="confFilter" onchange="applyFilters()">
-          <option value="all">All</option>
-          <option value="High">High</option>
-          <option value="Med">Med+</option>
-          <option value="Low">Low</option>
-        </select>
-      </div>
-      <div class="control-group">
-        <label>Min |Z|</label>
-        <button class="step-btn" onclick="stepValue('minZ',-0.5)">−</button>
-        <input type="number" id="minZ" value="0" min="0" max="5" step="0.5" oninput="applyFilters()" style="width:42px;">
-        <button class="step-btn" onclick="stepValue('minZ',0.5)">+</button>
-      </div>
-      <div class="control-group">
-        <label>Ticker</label>
-        <input type="text" id="tickerSearch" placeholder="SPY, AAPL&hellip;" oninput="applyFilters()">
-      </div>
-      <div class="control-group">
-        <label>Min Price ($)</label>
-        <button class="step-btn" onclick="stepValue('minPrice',-1)">−</button>
-        <input type="number" id="minPrice" value="0" min="0" step="1" oninput="applyFilters()" style="width:48px;">
-        <button class="step-btn" onclick="stepValue('minPrice',1)">+</button>
-      </div>
-      <div class="control-group">
-        <label>Min Avg Vol</label>
-        <select id="minVol" onchange="applyFilters()">
-          <option value="0">Any</option>
-          <option value="100000">&gt; 100K</option>
-          <option value="500000">&gt; 500K</option>
-          <option value="1000000">&gt; 1M</option>
-          <option value="5000000">&gt; 5M</option>
-          <option value="10000000">&gt; 10M</option>
-        </select>
-      </div>
-      <div class="control-group">
-        <label>Min Mkt Cap</label>
-        <select id="minMcap" onchange="applyFilters()">
-          <option value="0">Any</option>
-          <option value="1000000">Nano (1M+)</option>
-          <option value="50000000">Micro (50M+)</option>
-          <option value="300000000">Small (300M+)</option>
-          <option value="2000000000">Mid (2B+)</option>
-          <option value="10000000000">Large (10B+)</option>
-          <option value="200000000000">Mega (200B+)</option>
-        </select>
-      </div>
-      <div class="control-group">
-        <label>Sort</label>
-        <select id="sortBy" onchange="sortTable()">
-          <option value="score">Score</option>
-          <option value="z_abs">|Z-Score|</option>
-          <option value="hl">Half-Life</option>
-          <option value="adf">ADF (Stationarity)</option>
-          <option value="est_ret">Est Return</option>
-          <option value="ann_ret">Ann Return</option>
-          <option value="corr">Correlation</option>
-          <option value="alignment">Alignment</option>
-          <option value="confidence">Confidence</option>
-        </select>
-      </div>
-      <div class="control-group" title="When on, each symbol can appear at most once — only the highest-scored pair for that symbol is shown">
-        <label>Unique Syms</label>
-        <label class="toggle-switch">
-          <input type="checkbox" id="uniqueSymFilter" onchange="applyFilters()">
-          <span class="toggle-track"><span class="toggle-thumb"></span></span>
-        </label>
+      <!-- Row 3: Sort, display & trade sizing -->
+      <div class="filter-row">
+        <span class="filter-row-label">Display</span>
+        <div class="control-group">
+          <label>Sort</label>
+          <select id="sortBy" onchange="sortTable()">
+            <option value="score">Score</option>
+            <option value="z_abs">|Z-Score|</option>
+            <option value="hl">Half-Life</option>
+            <option value="adf">ADF (Stationarity)</option>
+            <option value="est_ret">Est Return</option>
+            <option value="ann_ret">Ann Return</option>
+            <option value="corr">Correlation</option>
+            <option value="alignment">Alignment</option>
+            <option value="confidence">Confidence</option>
+          </select>
+        </div>
+        <div class="control-group" title="When on, each symbol can appear at most once — only the highest-scored pair for that symbol is shown">
+          <label>Unique Syms</label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="uniqueSymFilter" onchange="applyFilters()">
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          </label>
+        </div>
+        <div class="control-group">
+          <label>Capital ($)</label>
+          <button class="step-btn" onclick="stepValue('capitalInput',-1000)">−</button>
+          <input type="number" id="capitalInput" value="5000" min="0" step="1000" oninput="calcShares()">
+          <button class="step-btn" onclick="stepValue('capitalInput',1000)">+</button>
+        </div>
       </div>
     </div>
 
