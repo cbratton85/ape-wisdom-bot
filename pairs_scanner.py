@@ -38,7 +38,7 @@ Z_STRONG = 2.0
 
 ADF_CONFIDENCE  = 0.95   # Min cointegration confidence (0.90=90%, 0.95=95%, 0.99=99%)
 ADF_LOOKBACK_YRS = 3     # Years of data for cointegration test (1, 2, 3, 5, etc.)
-ADF_MIN_DAYS    = 504    # Min trading days of spread data required for ADF (504 ≈ 2yr)
+ADF_MIN_DAYS    = 252    # Min trading days of spread data required for ADF (252 ≈ 1yr)
 
 MIN_EST_RETURN = 1       # Min estimated return % to include pair (0 = no filter)
 MIN_PRICE      = 1.00    # Exclude pairs where either ticker is below this price
@@ -229,6 +229,9 @@ def build_dataset(master):
         if hours_since_update < CACHE_UPDATE_COOLDOWN_HOURS:
             print(f"--- Cache is fresh ({round(hours_since_update, 2)}h old). Skipping download. ---")
             data = data[[c for c in data.columns if c in master]]
+            data = data.tail(LOOKBACK_DAYS)
+            data = data.ffill().bfill()
+            data = data.dropna(axis=1, thresh=len(data) * 0.2)
             return data
 
     existing = data.columns.tolist() if not data.empty else []
@@ -657,8 +660,8 @@ def analyze_pair(pair):
         return None
 
     # ── ADF cointegration test on the spread ──
-    # Require minimum data length for reliable results
-    if len(full_spread.dropna()) < ADF_MIN_DAYS:
+    # Require minimum spread length for reliable ADF results
+    if len(full_spread) < ADF_MIN_DAYS:
         return None
     # Use ADF_LOOKBACK_YRS of data (252 trading days/yr) if available
     adf_days = int(ADF_LOOKBACK_YRS * 252)
@@ -1330,7 +1333,7 @@ def generate_trades_page(trades):
         if t.get('status') == 'open':
             action_btns = f'<button class="tc-edit" onclick="openEditModal(\'{tid}\')">&#9998; Edit</button><button class="tc-close" onclick="closeTrade(\'{tid}\')">&#10005; Close</button>'
         else:
-            action_btns = f'<button class="tc-reopen" onclick="reopenTrade(\'{tid}\')">&#8634; Reopen</button>'
+            action_btns = f'<button class="tc-reopen" onclick="reopenTrade(\'{tid}\')">&#8634; Reopen</button><button class="tc-delete" onclick="deleteTrade(\'{tid}\')">&#128465; Delete</button>'
 
         return f"""
         <div class="trade-card">
@@ -1437,6 +1440,11 @@ def generate_trades_page(trades):
     font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
   }}
   .tc-reopen:hover {{ background: rgba(251,191,36,0.25); }}
+  .tc-delete {{
+    background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #ef4444;
+    font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
+  }}
+  .tc-delete:hover {{ background: rgba(239,68,68,0.25); }}
   .tc-edit {{
     background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); color: var(--cyan);
     font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
@@ -1929,7 +1937,7 @@ function renderTrades() {{
         <span class="tc-dir ${{dirClass}}">${{dir}}</span>
         <span class="tc-days">${{t.daysHeld || 0}}d held</span>
         ${{hasChart ? chartBtn : ""}}
-        ${{t.status === "open" ? `<button class="tc-edit" onclick="openEditModal('${{t.id}}')">&#9998; Edit</button><button class="tc-close" onclick="closeTrade('${{t.id}}')">&#10005; Close</button>` : `<button class="tc-reopen" onclick="reopenTrade('${{t.id}}')">&#8634; Reopen</button>`}}
+        ${{t.status === "open" ? `<button class="tc-edit" onclick="openEditModal('${{t.id}}')">&#9998; Edit</button><button class="tc-close" onclick="closeTrade('${{t.id}}')">&#10005; Close</button>` : `<button class="tc-reopen" onclick="reopenTrade('${{t.id}}')">&#8634; Reopen</button><button class="tc-delete" onclick="deleteTrade('${{t.id}}')">&#128465; Delete</button>`}}
       </div>
       <div class="tc-body">
         <div class="tc-stat"><div class="tc-label">Entry Z</div><div class="tc-val">${{t.entryZ >= 0 ? "+" : ""}}${{t.entryZ.toFixed(2)}}&sigma;</div></div>
@@ -1970,6 +1978,14 @@ function reopenTrade(id) {{
     t.status = "open";
     delete t.closeDate;
   }}
+  localStorage.setItem("activeTrades", JSON.stringify(trades));
+  renderTrades();
+}}
+
+function deleteTrade(id) {{
+  if (!confirm("Delete this trade permanently?")) return;
+  let trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  trades = trades.filter(t => t.id !== id);
   localStorage.setItem("activeTrades", JSON.stringify(trades));
   renderTrades();
 }}
