@@ -36,6 +36,7 @@ jobs:
             historical_data.csv.gz
             chart_data.csv.gz
             volume_data.csv.gz
+            market_cap.json
           key: market-data-${{ github.run_id }}
           restore-keys: |
             market-data-
