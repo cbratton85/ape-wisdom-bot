@@ -28008,5 +28008,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "HYD": {
+        "ticker": "HYD",
+        "name": "VanEck High Yield Muni ETF",
+        "meta": "High Yield Muni",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "AVT": {
+        "ticker": "AVT",
+        "name": "Avnet, Inc.",
+        "meta": "Electronics & Computer Distribution",
+        "type": "EQUITY",
+        "mcap": 5220401664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
