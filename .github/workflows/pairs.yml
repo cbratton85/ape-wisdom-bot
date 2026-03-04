@@ -30,13 +30,14 @@ jobs:
           pip install yfinance pandas numpy tqdm
 
       - name: Cache Market Data
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             historical_data.csv.gz
             chart_data.csv.gz
             volume_data.csv.gz
             market_cap.json
+            active_trades.json
           key: market-data-${{ github.run_id }}
           restore-keys: |
             market-data-
@@ -44,15 +45,15 @@ jobs:
       - name: Run Pairs Scanner
         run: python pairs_scanner.py
 
-      # 1. Copy the scanner files into a "public" folder just like your main page does
+      # Move all generated HTML files and compressed data to the public folder
       - name: Prepare Website Files
         run: |
           mkdir -p public
           mv pairs_scanner.html public/
           mv symbols.html public/ || true
+          mv active_trades.html public/ || true
           cp *.csv.gz public/ || true
 
-      # 2. Use the exact same bot as your main page, also with keep_files: true
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
