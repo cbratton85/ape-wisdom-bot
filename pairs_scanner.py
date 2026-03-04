@@ -34,12 +34,12 @@ Z_LENGTH_LONG  = 250
 PERF_LENGTH = 300
 
 MIN_CORR_FILTER = 0.60
-Z_THRESHOLD = 1.5
+Z_THRESHOLD = 2.0
 Z_MAX       = 5.0      # Max |Z| — above this is likely a structural break, not mean-reversion
 Z_STRONG = 2.0
 
 ADF_CONFIDENCE  = 0.95   # Min cointegration confidence (0.90=90%, 0.95=95%, 0.99=99%)
-ADF_LOOKBACK_YRS = 3     # Years of data for cointegration test (1, 2, 3, 5, etc.)
+ADF_LOOKBACK_YRS = 1     # Years of data for cointegration test (1, 2, 3, 5, etc.)
 ADF_MIN_DAYS    = 252    # Min trading days of spread data required for ADF (252 ≈ 1yr)
 
 MIN_EST_RETURN = 1       # Min estimated return % to include pair (0 = no filter)
@@ -1195,6 +1195,78 @@ def _init_analyze_worker(cl, cs, lp, lp_short, lp_long, lp_full, pr, pf, tt, elt
     ETF_LEV_TYPES    = elt
 
 
+def compute_backtest(dates, z_vals, half_life, threshold):
+    """Simulate historical trades on a Z-score series.
+    Entry: |Z| crosses above threshold.  Exit: Z reverts within ±0.3 of 0, or timeout at 3×HL."""
+    EXIT_BAND = 0.3
+    timeout = int((half_life or 50) * 3)
+    trades = []
+    in_trade = False
+    entry_idx = entry_z = 0
+
+    for i, z in enumerate(z_vals):
+        if z is None:
+            continue
+        if not in_trade:
+            if abs(z) >= threshold:
+                in_trade = True
+                entry_idx = i
+                entry_z = z
+        else:
+            days_held = i - entry_idx
+            reverted = abs(z) <= EXIT_BAND
+            timed_out = days_held >= timeout
+            if reverted or timed_out:
+                ret_pct = (abs(entry_z) - abs(z)) / abs(entry_z) * 100 if abs(entry_z) > 0 else 0
+                trades.append({
+                    "eI": entry_idx, "xI": i,
+                    "eZ": round(entry_z, 2), "xZ": round(z, 2),
+                    "ret": round(ret_pct, 1),
+                    "win": 1 if reverted else 0,
+                    "days": days_held,
+                })
+                in_trade = False
+
+    # Second pass: no-timeout reversion tracking
+    revert_days = []
+    in_trade2 = False
+    entry_idx2 = 0
+    for i, z in enumerate(z_vals):
+        if z is None:
+            continue
+        if not in_trade2:
+            if abs(z) >= threshold:
+                in_trade2 = True
+                entry_idx2 = i
+        else:
+            if abs(z) <= EXIT_BAND:
+                revert_days.append(i - entry_idx2)
+                in_trade2 = False
+
+    n = len(trades)
+    nr = len(revert_days)
+    # Total signal crossings = reverted + timed-out + still-open
+    total_crossings = nr + (1 if in_trade2 else 0) + sum(1 for t in trades if not t["win"])
+    revert_pct = round(nr / total_crossings * 100, 1) if total_crossings > 0 else None
+    sorted_rd = sorted(revert_days)
+    median_rd = sorted_rd[len(sorted_rd) // 2] if sorted_rd else None
+
+    if n == 0:
+        return {"trades": [], "winRate": None, "avgRet": None, "avgDays": None, "numTrades": 0,
+                "revertPct": revert_pct, "medianDays": median_rd, "revertCount": nr}
+    wins = sum(t["win"] for t in trades)
+    return {
+        "trades": trades,
+        "winRate": round(wins / n * 100, 1),
+        "avgRet": round(sum(t["ret"] for t in trades) / n, 1),
+        "avgDays": round(sum(t["days"] for t in trades) / n, 0),
+        "numTrades": n,
+        "revertPct": revert_pct,
+        "medianDays": median_rd,
+        "revertCount": nr,
+    }
+
+
 def _init_chart_worker(cd, sd):
     """Set shared read-only data as globals in each chart worker process."""
     global _w_chart_data, _w_scoring_data
@@ -1231,6 +1303,16 @@ def _compute_chart_for_pair(r):
         r["PriceDates"] = pdates
         r["PriceA"]     = pa
         r["PriceB"]     = pb
+        # Backtest on the Z history
+        bt = compute_backtest(dates, z_vals, r.get("HalfLife") or 50, Z_THRESHOLD)
+        r["BtWinRate"]    = bt["winRate"]
+        r["BtAvgRet"]     = bt["avgRet"]
+        r["BtAvgDays"]    = bt["avgDays"]
+        r["BtNumTrades"]  = bt["numTrades"]
+        r["BtTrades"]     = bt["trades"]
+        r["BtRevertPct"]  = bt["revertPct"]
+        r["BtMedianDays"] = bt["medianDays"]
+        r["BtRevertCount"]= bt["revertCount"]
     except Exception:
         r["ZDates"]     = []
         r["ZHistory"]   = []
@@ -1239,6 +1321,11 @@ def _compute_chart_for_pair(r):
         r["PriceDates"] = []
         r["PriceA"]     = []
         r["PriceB"]     = []
+        r["BtWinRate"] = r["BtAvgRet"] = r["BtAvgDays"] = None
+        r["BtNumTrades"] = 0
+        r["BtTrades"]    = []
+        r["BtRevertPct"] = r["BtMedianDays"] = None
+        r["BtRevertCount"] = 0
 
     return r
 
@@ -2531,8 +2618,35 @@ if __name__ == "__main__":
             "exitB":     exit_b,
             "exitAChg":  exit_a_chg,
             "exitBChg":  exit_b_chg,
+            "btWinRate":   r.get("BtWinRate"),
+            "btAvgRet":    r.get("BtAvgRet"),
+            "btAvgDays":   r.get("BtAvgDays"),
+            "btNumTrades": r.get("BtNumTrades", 0),
+            "btTrades":    r.get("BtTrades", []),
+            "btRevertPct":  r.get("BtRevertPct"),
+            "btMedianDays": r.get("BtMedianDays"),
+            "btRevertCount":r.get("BtRevertCount", 0),
         })
         chart_payload_esc = chart_payload.replace("&", "&amp;").replace("'", "&#39;")
+
+        # Backtest display
+        bt_wr = r.get("BtWinRate")
+        bt_n  = r.get("BtNumTrades", 0)
+        bt_avg_d = r.get("BtAvgDays")
+        bt_avg_r = r.get("BtAvgRet")
+        bt_rv = r.get("BtRevertPct")
+        bt_md = r.get("BtMedianDays")
+        if bt_wr is not None and bt_n > 0:
+            bt_color = "var(--green)" if bt_wr >= 70 else "var(--amber)" if bt_wr >= 50 else "var(--red)"
+            bt_html = f'<div class="bt-winrate" style="color:{bt_color}">{bt_wr:.0f}%</div><div class="bt-detail">{bt_n} trades &middot; {bt_avg_d:.0f}d avg</div>'
+            if bt_avg_r is not None:
+                bt_html += f'<div class="bt-detail" style="color:{bt_color}">{bt_avg_r:+.1f}% avg ret</div>'
+            if bt_rv is not None:
+                rv_color = "var(--green)" if bt_rv >= 90 else "var(--amber)" if bt_rv >= 70 else "var(--red)"
+                md_str = f' &middot; {bt_md:.0f}d med' if bt_md is not None else ''
+                bt_html += f'<div class="bt-detail" style="color:{rv_color}">{bt_rv:.0f}% revert{md_str}</div>'
+        else:
+            bt_html = '<div class="bt-winrate" style="color:var(--muted)">N/A</div><div class="bt-detail">no trades</div>'
 
         rows_html += f"""
         <tr class="data-row" data-category="{r['Category']}" data-z="{z}"
@@ -2600,9 +2714,13 @@ if __name__ == "__main__":
             </div>
           </td>
           <td class="chart-cell">
-            <button class="chart-btn price-btn" onclick="openChart(this,'price')" data-chart='{chart_payload_esc}'>&#9724; Price</button>
-            <button class="chart-btn" onclick="openChart(this,'z')" data-chart='{chart_payload_esc}'>&#9657; Z-Chart</button>
+            <div class="chart-cell-left">
+              <button class="chart-btn price-btn" onclick="openChart(this,'price')" data-chart='{chart_payload_esc}'>&#9724; Price</button>
+              <button class="chart-btn" onclick="openChart(this,'z')" data-chart='{chart_payload_esc}'>&#9657; Z-Chart</button>
+            </div>
+            <button class="chart-btn-bt" onclick="openChart(this,'bt')" data-chart='{chart_payload_esc}'>BT</button>
           </td>
+          <td class="bt-cell">{bt_html}</td>
           <td class="track-cell">
             <button class="track-btn" onclick="trackTrade(this)"
               data-pair="{r['Pair']}" data-z="{z}" data-price-a="{price_a}" data-price-b="{price_b}"
@@ -2847,7 +2965,8 @@ if __name__ == "__main__":
       .sig-neutral      {{ background: rgba(71,85,105,0.2);     color: var(--muted);  border: 1px solid var(--border); }}
 
       /* CHART BUTTON */
-      .chart-cell {{ min-width: 0; text-align: center; display: flex; flex-direction: column; gap: 3px; align-items: center; justify-content: center; }}
+      .chart-cell {{ min-width: 0; text-align: center; display: flex; flex-direction: row; gap: 3px; align-items: stretch; justify-content: center; }}
+      .chart-cell-left {{ display: flex; flex-direction: column; gap: 3px; }}
       .chart-btn {{
         background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.25);
         color: var(--cyan); font-family: var(--mono); font-size: 11px; font-weight: 600;
@@ -2855,6 +2974,17 @@ if __name__ == "__main__":
         transition: background 0.15s, border-color 0.15s; white-space: nowrap;
       }}
       .chart-btn:hover {{ background: rgba(56,189,248,0.18); border-color: var(--cyan); }}
+      .chart-btn-bt {{
+        background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25);
+        color: var(--amber); font-family: var(--mono); font-size: 9px; font-weight: 600;
+        padding: 2px 4px; border-radius: 4px; cursor: pointer; writing-mode: vertical-rl;
+        text-orientation: mixed; letter-spacing: 0.08em;
+        transition: background 0.15s, border-color 0.15s; white-space: nowrap;
+      }}
+      .chart-btn-bt:hover {{ background: rgba(245,158,11,0.18); border-color: var(--amber); }}
+      .bt-cell {{ text-align: center; min-width: 80px; padding: 4px 8px; }}
+      .bt-winrate {{ font-family: var(--mono); font-size: 14px; font-weight: 700; }}
+      .bt-detail {{ font-size: 9px; color: var(--muted); white-space: nowrap; }}
       .track-cell {{ text-align: center; }}
       .track-btn {{
         background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.25);
@@ -2953,7 +3083,7 @@ if __name__ == "__main__":
       .modal-tab {{
         background: rgba(30,37,53,0.8); border: 1px solid var(--border2);
         color: var(--muted); font-family: var(--mono); font-size: 11px; font-weight: 600;
-        padding: 6px 14px; border-radius: 5px; cursor: pointer; letter-spacing: 0.05em;
+        padding: 6px 8px; border-radius: 5px; cursor: pointer; letter-spacing: 0.05em;
         transition: all 0.15s; white-space: nowrap;
       }}
       .modal-tab:hover {{ color: var(--text); border-color: #3a4a66; }}
@@ -3151,6 +3281,7 @@ if __name__ == "__main__":
             <option value="corr">Correlation</option>
             <option value="alignment">Alignment</option>
             <option value="confidence">Confidence</option>
+            <option value="winrate">Win Rate</option>
           </select>
         </div>
         <div class="control-group" title="When on, each symbol can appear at most once — only the highest-scored pair for that symbol is shown">
@@ -3193,6 +3324,7 @@ if __name__ == "__main__":
       <th onclick="setSort('score')">Score &#8597;</th>
       <th>Signal/Shares</th>
       <th style="text-align:center;">Charts</th>
+      <th onclick="setSort('winrate')">Backtest &#8597;</th>
       <th style="text-align:center;">Track</th>
     </tr>
     </thead>
@@ -3232,6 +3364,7 @@ if __name__ == "__main__":
             <button class="modal-tab active" id="tabZ" onclick="switchTab('z')">&#9657; Z-Score</button>
             <button class="modal-tab" id="tabP" onclick="switchTab('price')">&#9724; Price Overlay</button>
             <button class="modal-tab" id="tabB" onclick="switchTab('both')">&#9670; Both</button>
+            <button class="modal-tab" id="tabBT" onclick="switchTab('bt')">&#9881; Backtest</button>
           </div>
           <button class="modal-tab modal-track-btn" id="modalTrackBtn" onclick="trackFromChart()">&#9733; Track</button>
           <button class="modal-close" onclick="closeChart()">&#x2715;</button>
@@ -3262,6 +3395,7 @@ if __name__ == "__main__":
             <canvas id="zChart" style="display:block;"></canvas>
             <canvas id="pChart" style="display:none;position:absolute;inset:0;width:100%;height:100%;"></canvas>
             <canvas id="bChart" style="display:none;position:absolute;inset:0;width:100%;height:100%;"></canvas>
+            <canvas id="btChart" style="display:none;position:absolute;inset:0;width:100%;height:100%;"></canvas>
           </div>
         </div>
         <div class="modal-footer" id="modalFooter"></div>
@@ -3273,6 +3407,7 @@ if __name__ == "__main__":
     let activeChart     = null;
     let activePChart    = null;
     let activeBChart    = null;
+    let activeBTChart   = null;
     let currentChartData = null;
 
     // Load annotation + zoom plugins async
@@ -3384,18 +3519,21 @@ if __name__ == "__main__":
 
     // ─── TAB SWITCH ──────────────────────────────────────────────────────────────
     function switchTab(mode) {{
-      const isZ = mode === 'z', isP = mode === 'price', isB = mode === 'both';
+      const isZ = mode === 'z', isP = mode === 'price', isB = mode === 'both', isBT = mode === 'bt';
       document.getElementById("tabZ").classList.toggle("active", isZ);
       document.getElementById("tabP").classList.toggle("active", isP);
       document.getElementById("tabB").classList.toggle("active", isB);
+      document.getElementById("tabBT").classList.toggle("active", isBT);
       document.getElementById("legendZ").style.display = isZ ? "" : "none";
       document.getElementById("legendP").style.display = isP ? "" : "none";
       document.getElementById("legendB").style.display = isB ? "" : "none";
       document.getElementById("zChart").style.display  = isZ ? "block" : "none";
       document.getElementById("pChart").style.display  = isP ? "block" : "none";
       document.getElementById("bChart").style.display  = isB ? "block" : "none";
+      document.getElementById("btChart").style.display = isBT ? "block" : "none";
       if (isP && currentChartData && !activePChart) buildPriceChart(currentChartData);
       if (isB && currentChartData && !activeBChart) buildBothChart(currentChartData);
+      if (isBT && currentChartData && !activeBTChart) buildBacktestChart(currentChartData);
     }}
 
     // ─── OPEN CHART MODAL ────────────────────────────────────────────────────────
@@ -3478,14 +3616,17 @@ if __name__ == "__main__":
       if (activeChart)  {{ activeChart.destroy();  activeChart  = null; }}
       if (activePChart) {{ activePChart.destroy(); activePChart = null; }}
       if (activeBChart) {{ activeBChart.destroy(); activeBChart = null; }}
+      if (activeBTChart) {{ activeBTChart.destroy(); activeBTChart = null; }}
 
       // Reset to Z tab
       document.getElementById("zChart").style.display = "block";
+      document.getElementById("btChart").style.display = "none";
       document.getElementById("pChart").style.display = "none";
       document.getElementById("bChart").style.display = "none";
       document.getElementById("tabZ").classList.add("active");
       document.getElementById("tabP").classList.remove("active");
       document.getElementById("tabB").classList.remove("active");
+      document.getElementById("tabBT").classList.remove("active");
       document.getElementById("legendZ").style.display = "";
       document.getElementById("legendP").style.display = "none";
       document.getElementById("legendB").style.display = "none";
@@ -3499,6 +3640,7 @@ if __name__ == "__main__":
       setTimeout(() => {{
         buildZChart(p.dates, p.z, p.zWindow, p.datesAdaptive, p.zAdaptive, p.adaptiveWindow, p.currentZ, p.zAdaptiveCurrent);
         if (mode === 'price') switchTab('price');
+        else if (mode === 'bt') switchTab('bt');
       }}, 40);
     }}
 
@@ -3673,20 +3815,24 @@ if __name__ == "__main__":
         corr = da2&&db2 ? (num/Math.sqrt(da2*db2)).toFixed(3) : null;
       }}
 
+      // Convert normalized (base 100) to percentage change
+      const pctA = priceA.map(v => v != null ? +(v - 100).toFixed(2) : null);
+      const pctB = priceB.map(v => v != null ? +(v - 100).toFixed(2) : null);
+
       activePChart = new Chart(ctx, {{
         type: "line",
         data: {{
           labels: priceDates,
           datasets: [
             {{
-              label: a, data: priceA,
+              label: a, data: pctA,
               borderColor: "#38bdf8", borderWidth: 2,
               pointRadius: 0, pointHoverRadius: 0,
               fill: true, backgroundColor: gradA,
               tension: 0.25, spanGaps: true,
             }},
             {{
-              label: b, data: priceB,
+              label: b, data: pctB,
               borderColor: "#a78bfa", borderWidth: 2,
               pointRadius: 0, pointHoverRadius: 0,
               fill: true, backgroundColor: gradB,
@@ -3709,15 +3855,15 @@ if __name__ == "__main__":
               usePointStyle: true, pointStyle: "rectRounded",
               callbacks: {{
                 label: c => {{
-                  const pct = (c.raw - 100).toFixed(2);
-                  return ` ${{c.dataset.label}}: ${{c.raw.toFixed(2)}}  (${{pct >= 0 ? "+" : ""}}${{pct}}%)`;
+                  const v = c.raw;
+                  return ` ${{c.dataset.label}}: ${{v >= 0 ? "+" : ""}}${{v.toFixed(2)}}%`;
                 }},
                 labelColor: c => ({{ borderColor: c.dataset.borderColor, backgroundColor: c.dataset.borderColor, borderWidth: 0, borderRadius: 2 }}),
               }},
             }},
             annotation: {{
               annotations: {{
-                baseline: {{ type: "line", yMin: 100, yMax: 100,
+                baseline: {{ type: "line", yMin: 0, yMax: 0,
                   borderColor: "rgba(148,163,184,0.25)", borderWidth: 1, borderDash: [4,4] }},
               }},
             }},
@@ -3732,11 +3878,11 @@ if __name__ == "__main__":
               grid: {{ color: "rgba(28,35,51,0.7)" }}, border: {{ color: "#1c2333" }},
             }},
             y: {{
-              ticks: {{ color: "#374151", font: {{ family: "'JetBrains Mono',monospace", size: 10 }}, callback: v => v.toFixed(2) }},
+              ticks: {{ color: "#374151", font: {{ family: "'JetBrains Mono',monospace", size: 10 }}, callback: v => (v >= 0 ? "+" : "") + v.toFixed(1) + "%" }},
               grid: {{ color: "rgba(28,35,51,0.6)" }}, border: {{ color: "#1c2333" }},
               title: {{
                 display: true,
-                text: corr ? `Normalized Price (base 100)  |  Corr: ${{corr}}` : "Normalized Price (base 100)",
+                text: corr ? `Price Change %  |  Corr: ${{corr}}` : "Price Change %",
                 color: "#374151", font: {{ family: "'JetBrains Mono',monospace", size: 10 }},
               }},
             }},
@@ -3759,8 +3905,8 @@ if __name__ == "__main__":
       const zDateSet = {{}};
       if (zDates) zDates.forEach((d,i) => {{ zDateSet[d] = zVals[i]; }});
       const zAligned  = labels.map(d => zDateSet[d] !== undefined ? zDateSet[d] : null);
-      const paAligned = labels.map((d,i) => priceA && priceA[i] !== undefined ? priceA[i] : null);
-      const pbAligned = labels.map((d,i) => priceB && priceB[i] !== undefined ? priceB[i] : null);
+      const paAligned = labels.map((d,i) => priceA && priceA[i] != null ? +(priceA[i] - 100).toFixed(2) : null);
+      const pbAligned = labels.map((d,i) => priceB && priceB[i] != null ? +(priceB[i] - 100).toFixed(2) : null);
 
       const ctx = document.getElementById("bChart").getContext("2d");
       const gradA = ctx.createLinearGradient(0,0,0,400);
@@ -3807,8 +3953,8 @@ if __name__ == "__main__":
               callbacks:{{
                 label: c => {{
                   if (c.datasetIndex < 2) {{
-                    const pct = c.raw != null ? (c.raw-100).toFixed(2) : null;
-                    return ` ${{c.dataset.label.replace(" price","")}}: ${{c.raw?.toFixed(2)??"—"}}  (${{pct!=null&&pct>=0?"+":""}}${{pct??"—"}}%)`;
+                    const v = c.raw;
+                    return ` ${{c.dataset.label.replace(" price","")}}: ${{v!=null&&v>=0?"+":""}}${{v!=null?v.toFixed(2):"—"}}%`;
                   }}
                   const v = c.raw;
                   if (v===null) return " Z = \u2014";
@@ -3826,7 +3972,7 @@ if __name__ == "__main__":
               zn2: hLine(-2,"rgba(245,158,11,0.65)", 1,[5,3]),
               zp3: hLine(3, "rgba(239,68,68,0.75)",  1,[]),
               zn3: hLine(-3,"rgba(239,68,68,0.75)",  1,[]),
-              base:{{type:"line",yMin:100,yMax:100,yScaleID:"yP",
+              base:{{type:"line",yMin:0,yMax:0,yScaleID:"yP",
                 borderColor:"rgba(148,163,184,0.2)",borderWidth:1,borderDash:[4,4]}},
             }} }},
             zoom: {{
@@ -3839,9 +3985,9 @@ if __name__ == "__main__":
                   maxRotation:0,maxTicksLimit:10,autoSkip:true}},
                  grid:{{color:"rgba(28,35,51,0.7)"}},border:{{color:"#1c2333"}} }},
             yP:{{ position:"left",
-                 ticks:{{color:"#38bdf8",font:{{family:"'JetBrains Mono',monospace",size:10}},callback:v=>v.toFixed(2)}},
+                 ticks:{{color:"#38bdf8",font:{{family:"'JetBrains Mono',monospace",size:10}},callback:v=>(v>=0?"+":"")+v.toFixed(1)+"%"}},
                  grid:{{color:"rgba(28,35,51,0.5)"}},border:{{color:"#1c2333"}},
-                 title:{{display:true,text:"Norm. Price (base 100)",color:"rgba(56,189,248,0.5)",
+                 title:{{display:true,text:"Price Change %",color:"rgba(56,189,248,0.5)",
                    font:{{family:"'JetBrains Mono',monospace",size:10}}}} }},
             yZ:{{ position:"right",
                  ticks:{{color:"rgba(248,215,80,0.7)",font:{{family:"'JetBrains Mono',monospace",size:10}},
@@ -3854,6 +4000,137 @@ if __name__ == "__main__":
       }});
     }}
 
+    // ─── BACKTEST CHART ──────────────────────────────────────────────────────────
+    function buildBacktestChart(p) {{
+      const trades = p.btTrades || [];
+      const dates = p.dates || [];
+      const zVals = p.z || [];
+      if (!dates.length) return;
+
+      // Fully replace canvas to avoid stale Chart.js state
+      if (activeBTChart) {{ activeBTChart.destroy(); activeBTChart = null; }}
+      const oldC = document.getElementById("btChart");
+      const newC = document.createElement("canvas");
+      newC.id = "btChart";
+      newC.style.cssText = oldC.style.cssText;
+      oldC.parentNode.replaceChild(newC, oldC);
+      const ctx = newC.getContext("2d");
+
+      // Build shaded box annotations for each trade
+      const annotations = {{}};
+      // ±threshold lines
+      const th = {Z_THRESHOLD};
+      annotations.thPos  = {{type:"line",yMin:th,yMax:th,borderColor:"rgba(245,158,11,0.3)",borderWidth:1,borderDash:[4,4]}};
+      annotations.thNeg  = {{type:"line",yMin:-th,yMax:-th,borderColor:"rgba(245,158,11,0.3)",borderWidth:1,borderDash:[4,4]}};
+      annotations.zero   = {{type:"line",yMin:0,yMax:0,borderColor:"rgba(148,163,184,0.25)",borderWidth:1}};
+
+      trades.forEach((t, idx) => {{
+        const col = t.win ? "rgba(34,197,94,0.12)" : "rgba(239,68,68,0.12)";
+        const border = t.win ? "rgba(34,197,94,0.4)" : "rgba(239,68,68,0.4)";
+        annotations["trade" + idx] = {{
+          type: "box",
+          xMin: dates[t.eI], xMax: dates[t.xI],
+          backgroundColor: col,
+          borderColor: border,
+          borderWidth: 1,
+        }};
+      }});
+
+      // Entry/exit point datasets
+      const winEntries = [], winExits = [], lossEntries = [], lossExits = [];
+      trades.forEach(t => {{
+        const entry = {{x: dates[t.eI], y: t.eZ}};
+        const exit  = {{x: dates[t.xI], y: t.xZ}};
+        if (t.win) {{ winEntries.push(entry); winExits.push(exit); }}
+        else {{ lossEntries.push(entry); lossExits.push(exit); }}
+      }});
+
+      // Summary text
+      const wr = p.btWinRate != null ? p.btWinRate.toFixed(0) + "%" : "N/A";
+      const nt = p.btNumTrades || 0;
+      const ar = p.btAvgRet != null ? (p.btAvgRet >= 0 ? "+" : "") + p.btAvgRet.toFixed(1) + "%" : "";
+      const ad = p.btAvgDays != null ? Math.round(p.btAvgDays) + "d" : "";
+      const wins = trades.filter(t => t.win).length;
+      const losses = nt - wins;
+      const rv = p.btRevertPct != null ? p.btRevertPct.toFixed(0) + "% revert" : "";
+      const md = p.btMedianDays != null ? Math.round(p.btMedianDays) + "d median" : "";
+
+      activeBTChart = new Chart(ctx, {{
+        type: "line",
+        data: {{
+          labels: dates,
+          datasets: [
+            {{
+              label: "Z-Score", data: zVals, borderColor: "#64748b", backgroundColor: "transparent",
+              borderWidth: 1.5, pointRadius: 0, tension: 0.1, order: 5,
+            }},
+            {{
+              label: "Win Entry", data: winEntries, type: "scatter",
+              pointStyle: "triangle", pointRadius: 7, pointBackgroundColor: "#22c55e",
+              pointBorderColor: "#166534", pointBorderWidth: 1, order: 1,
+            }},
+            {{
+              label: "Win Exit", data: winExits, type: "scatter",
+              pointStyle: "trianglePerp", pointRadius: 6, pointBackgroundColor: "#22c55e",
+              pointBorderColor: "#166534", pointBorderWidth: 1, order: 2, pointRotation: 180,
+            }},
+            {{
+              label: "Loss Entry", data: lossEntries, type: "scatter",
+              pointStyle: "triangle", pointRadius: 7, pointBackgroundColor: "#ef4444",
+              pointBorderColor: "#7f1d1d", pointBorderWidth: 1, order: 3,
+            }},
+            {{
+              label: "Loss Exit", data: lossExits, type: "scatter",
+              pointStyle: "trianglePerp", pointRadius: 6, pointBackgroundColor: "#ef4444",
+              pointBorderColor: "#7f1d1d", pointBorderWidth: 1, order: 4, pointRotation: 180,
+            }},
+          ],
+        }},
+        options: {{
+          responsive: true, maintainAspectRatio: false, animation: false,
+          interaction: {{ mode: "nearest", intersect: false }},
+          plugins: {{
+            legend: {{
+              display: true, position: "top",
+              labels: {{
+                color: "#94a3b8", font: {{ family: "'JetBrains Mono',monospace", size: 10 }},
+                boxWidth: 14, padding: 10, usePointStyle: true,
+                filter: item => item.text !== "Z-Score",
+              }},
+            }},
+            annotation: {{ annotations: annotations }},
+            tooltip: {{
+              backgroundColor: "rgba(15,23,42,0.95)", borderColor: "#334155", borderWidth: 1,
+              titleFont: {{ family: "'JetBrains Mono',monospace", size: 11 }},
+              bodyFont: {{ family: "'JetBrains Mono',monospace", size: 12 }},
+              titleColor: "#94a3b8", bodyColor: "#e2e8f0", padding: 10,
+            }},
+            // Summary stats title plugin
+            title: {{
+              display: true, position: "top", align: "start",
+              color: "#94a3b8", font: {{ family: "'JetBrains Mono',monospace", size: 11, weight: "normal" }},
+              text: `Win Rate: ${{wr}}  |  ${{wins}}W / ${{losses}}L (${{nt}} trades)  |  Avg ${{ar}} in ${{ad}}` + (rv ? `  |  ${{rv}}${{md ? " · " + md : ""}}` : ""),
+              padding: {{ bottom: 8 }},
+            }},
+          }},
+          scales: {{
+            x: {{
+              type: "category",
+              ticks: {{ color: "#475569", font: {{ family: "'JetBrains Mono',monospace", size: 9 }},
+                maxRotation: 0, autoSkip: true, maxTicksLimit: 12 }},
+              grid: {{ color: "rgba(28,35,51,0.5)" }}, border: {{ color: "#1c2333" }},
+            }},
+            y: {{
+              ticks: {{ color: "#94a3b8", font: {{ family: "'JetBrains Mono',monospace", size: 10 }},
+                callback: v => (v >= 0 ? "+" : "") + v.toFixed(1) + "\u03C3" }},
+              grid: {{ color: "rgba(28,35,51,0.5)" }}, border: {{ color: "#1c2333" }},
+            }},
+          }},
+        }},
+        plugins: [crosshairPlugin],
+      }});
+    }}
+
     // ─── CLOSE MODAL ─────────────────────────────────────────────────────────────
     function closeChart() {{
       document.getElementById("chartModal").classList.remove("open");
@@ -3861,6 +4138,7 @@ if __name__ == "__main__":
       if (activeChart)  {{ activeChart.destroy();  activeChart  = null; }}
       if (activePChart) {{ activePChart.destroy(); activePChart = null; }}
       if (activeBChart) {{ activeBChart.destroy(); activeBChart = null; }}
+      if (activeBTChart) {{ activeBTChart.destroy(); activeBTChart = null; }}
       currentChartData = null;
     }}
     function closeOnBg(e) {{ if (e.target.id === "chartModal") closeChart(); }}
@@ -4112,6 +4390,7 @@ if __name__ == "__main__":
           va = confRank[a.dataset.confidence] || 1;
           vb = confRank[b.dataset.confidence] || 1;
         }}
+        else if (key === "winrate") {{ va = numOf(a,".bt-winrate") || 0; vb = numOf(b,".bt-winrate") || 0; }}
         else return 0;
         return asc ? (va - vb) : (vb - va);
       }});
