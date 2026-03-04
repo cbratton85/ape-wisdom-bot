@@ -39,6 +39,7 @@ Z_STRONG = 2.0
 ADF_CONFIDENCE  = 0.95   # Min cointegration confidence (0.90=90%, 0.95=95%, 0.99=99%)
 ADF_LOOKBACK_YRS = 3     # Years of data for cointegration test (1, 2, 3, 5, etc.)
 
+MIN_EST_RETURN = 1       # Min estimated return % to include pair (0 = no filter)
 MIN_PRICE      = 1.00    # Exclude pairs where either ticker is below this price
 MIN_AVG_VOLUME = 0       # Exclude pairs where either ticker avg daily volume is below this
 # Market cap tiers: "mega", "large", "mid", "small", "micro", "nano", "none"
@@ -48,14 +49,17 @@ MCAP_TIERS = {"mega": 200_000_000_000, "large": 10_000_000_000, "mid": 2_000_000
 MIN_MCAP_STOCK = "none"   # Min market cap tier for stocks (see tiers above)
 MIN_MCAP_ETF   = "none"   # Min market cap tier for ETFs (see tiers above)
 
-MAX_RESULTS    = 1000     # Max pairs to show in HTML (0 = show all)
-MAX_CHARTS     = 0     # Max pairs to compute Z-score charts for (0 = show all)
+MAX_RESULTS    = 0        # Max total pairs to show in HTML (0 = show all)
+MAX_RESULTS_ETF   = 100   # Max Pure ETF pairs (0 = no per-category limit)
+MAX_RESULTS_STOCK = 100   # Max Pure Stock pairs (0 = no per-category limit)
+MAX_RESULTS_MIXED = 100   # Max Mixed pairs (0 = no per-category limit)
+MAX_CHARTS     = 0        # Max pairs to compute Z-score charts for (0 = show all)
 
 W_ZSCORE    = 0.25   # Z-score magnitude (how far from mean)
-W_HALFLIFE  = 0.20   # Half-life speed (faster reversion = higher score)
-W_STATIONARY = 0.20  # Spread stationarity (ADF test — more cointegrated = higher)
+W_HALFLIFE  = 0.25   # Half-life speed (faster reversion = more tradeable)
+W_CONFIRM   = 0.20   # Timeframe confirmation (alignment + confidence combined)
 W_ANNRET    = 0.15   # Annualized return potential (higher = more profitable)
-W_CONFIRM   = 0.15   # Timeframe confirmation (alignment + confidence combined)
+W_STATIONARY = 0.10  # Spread stationarity (ADF tiebreaker — already filtered)
 W_CORR      = 0.05   # Base correlation level
 
 # ==========================================
@@ -553,10 +557,12 @@ def adf_pvalue(series, max_lag=None):
             return 1.0
         t_stat = gamma / se_gamma
         # MacKinnon critical values for ADF with constant (approximate)
-        # p-value approximation using critical value table
-        # cv: 1%=-3.43, 5%=-2.86, 10%=-2.57 (for n>250, 'c' case)
-        if t_stat <= -3.43:
-            return 0.01
+        # p-value approximation using critical value table with sub-1% granularity
+        # cv: 0.1%=-4.32, 1%=-3.43, 5%=-2.86, 10%=-2.57 (for n>250, 'c' case)
+        if t_stat <= -4.32:
+            return 0.001
+        elif t_stat <= -3.43:
+            return 0.001 + (t_stat - (-4.32)) / ((-3.43) - (-4.32)) * (0.01 - 0.001)
         elif t_stat <= -2.86:
             return 0.01 + (t_stat - (-3.43)) / ((-2.86) - (-3.43)) * (0.05 - 0.01)
         elif t_stat <= -2.57:
@@ -692,24 +698,31 @@ def analyze_pair(pair):
 
     # ── Timeframe alignment (continuous 0-1 score) ──
     # Measures how tightly the 3 Z-scores agree in direction AND magnitude.
+    # Z-scores near zero (< 0.3σ) are treated as neutral — they don't vote on direction.
     zs = [z30, z, z250]
     abs_zs = [abs(v) for v in zs]
-    signs = (z30 > 0, z > 0, z250 > 0)
-    same_dir = all(signs) or not any(signs)
+    NEUTRAL_ZONE = 0.3
+    directional = [(v > NEUTRAL_ZONE, v < -NEUTRAL_ZONE) for v in zs]  # (is_pos, is_neg)
+    n_pos = sum(1 for p, _ in directional if p)
+    n_neg = sum(1 for _, n in directional if n)
+    n_neutral = sum(1 for p, n in directional if not p and not n)
+    same_dir = (n_pos > 0 and n_neg == 0) or (n_neg > 0 and n_pos == 0)
 
     if same_dir:
-        # All same direction — score based on how close they are to each other
-        # Spread = 0 → perfect alignment (1.0); spread >= 2σ apart → weak (0.0)
+        # All directional Z-scores point the same way
         z_spread = max(abs_zs) - min(abs_zs)
         closeness = max(0.0, 1.0 - z_spread / 2.0)
-        # Also factor in whether the weakest timeframe is meaningful (above half the threshold)
         weakest_strength = min(abs_zs) / max(Z_THRESHOLD, 1.0)
         weakest_factor = min(weakest_strength, 1.0)
-        align_score = 0.5 + 0.5 * closeness * weakest_factor  # range 0.5-1.0 when same dir
+        # Neutral Z-scores reduce alignment proportionally (3/3 strong > 2/3 + 1 neutral)
+        dir_ratio = (3 - n_neutral) / 3.0
+        align_score = 0.5 + 0.5 * closeness * weakest_factor * dir_ratio
+    elif n_pos > 0 and n_neg > 0:
+        # Genuine conflict — some positive, some negative
+        align_score = 0.15
     else:
-        # Different directions — penalize based on how many disagree
-        n_pos = sum(1 for s in signs if s)
-        align_score = 0.25 if n_pos == 1 or n_pos == 2 else 0.0  # 2v1 split = 0.25
+        # All neutral (very rare — all Z near zero)
+        align_score = 0.25
 
     # Bucket labels for display
     if align_score >= 0.75:
@@ -720,12 +733,13 @@ def analyze_pair(pair):
         alignment = "Conflicting"
 
     # ── Confidence level (continuous, based on magnitude agreement) ──
-    # Considers: avg magnitude relative to threshold + how tightly grouped
+    # Considers: avg magnitude relative to threshold + how tightly grouped + direction agreement
     avg_z = sum(abs_zs) / 3.0
     strength = min(avg_z / max(Z_THRESHOLD, 1.0), 2.0) / 2.0  # 0-1: how far above threshold on avg
     z_spread = max(abs_zs) - min(abs_zs)
     consistency = max(0.0, 1.0 - z_spread / 3.0)  # 0-1: how tightly grouped
-    conf_score = strength * 0.6 + consistency * 0.2 + (1.0 if same_dir else 0.0) * 0.2
+    dir_agreement = 1.0 if same_dir else (0.5 if n_neutral == 3 else 0.0)
+    conf_score = strength * 0.6 + consistency * 0.2 + dir_agreement * 0.2
 
     if conf_score >= 0.70:
         confidence = "High"
@@ -737,11 +751,11 @@ def analyze_pair(pair):
     # ── NEW 5-FACTOR SCORING ──
     # 1) Z-score magnitude: higher |Z| = stronger signal
     z_norm = min(abs(z) / 3.0, 1.0)
-    # 2) Half-life speed: faster reversion = better trade (15d scores 1.0, 200d+ scores 0)
-    hl_norm = max(0.0, 1.0 - min(hl / 200.0, 1.0))
+    # 2) Half-life speed: faster reversion = better trade (log decay: 1d→1.0, 15d→0.49, 200d→0.0)
+    hl_norm = max(0.0, 1.0 - np.log(max(hl, 1.0)) / np.log(200.0))
     # 3) Stationarity: lower ADF p-value = more cointegrated spread
-    #    p<=0.01 → 1.0, p=0.10 → 0.5, p>=0.50 → 0.0
-    stat_norm = max(0.0, min(1.0, (0.50 - adf_p) / 0.50))
+    #    Scaled to the post-filter range: p=0.001 → 1.0, p=max_p → 0.0
+    stat_norm = max(0.0, min(1.0, (max_p - adf_p) / max(max_p, 0.01)))
     # 4) Timeframe confirmation: blend alignment (direction+closeness) with confidence (magnitude+consistency)
     confirm_norm = align_score * 0.5 + conf_score * 0.5
     # 5) Base correlation level
@@ -749,8 +763,13 @@ def analyze_pair(pair):
 
     # ── Estimated pairs trade return (gross spread return if fully reverts) ──
     est_ret = round(abs(z) * spread_std * 100, 2)   # in %
+    if MIN_EST_RETURN > 0 and est_ret < MIN_EST_RETURN:
+        return None
     if not np.isnan(hl) and hl > 0:
-        ann_ret = round(est_ret * (252 / hl), 1)
+        # Full reversion cycle ≈ 3x half-life; assume 70% capture rate
+        cycle_days = hl * 3.0
+        trades_per_year = 252.0 / cycle_days
+        ann_ret = round(est_ret * trades_per_year * 0.70, 1)
     else:
         ann_ret = None
 
@@ -2165,6 +2184,25 @@ if __name__ == "__main__":
     results = sorted(results, key=lambda x: x["Score"], reverse=True)
 
     # The code below runs EVERY time, regardless of whether calculations were cached
+    # Apply per-category limits first, then overall limit
+    cat_limits = {"Pure ETF": MAX_RESULTS_ETF, "Pure Stock": MAX_RESULTS_STOCK, "Mixed": MAX_RESULTS_MIXED}
+    if any(v > 0 for v in cat_limits.values()):
+        cat_counts = {"Pure ETF": 0, "Pure Stock": 0, "Mixed": 0}
+        capped_results = []
+        for r in results:
+            cat = r.get("Category", "Mixed")
+            limit = cat_limits.get(cat, 0)
+            if limit > 0 and cat_counts[cat] >= limit:
+                continue
+            cat_counts[cat] += 1
+            capped_results.append(r)
+        results = capped_results
+        print(f"Per-category caps applied: ETF={cat_counts['Pure ETF']}"
+              f"{'/' + str(MAX_RESULTS_ETF) if MAX_RESULTS_ETF > 0 else ''}, "
+              f"Stock={cat_counts['Pure Stock']}"
+              f"{'/' + str(MAX_RESULTS_STOCK) if MAX_RESULTS_STOCK > 0 else ''}, "
+              f"Mixed={cat_counts['Mixed']}"
+              f"{'/' + str(MAX_RESULTS_MIXED) if MAX_RESULTS_MIXED > 0 else ''}")
     top_results = results[:MAX_RESULTS] if MAX_RESULTS > 0 else results
     chart_results = top_results[:MAX_CHARTS] if MAX_CHARTS > 0 else top_results
 
@@ -2892,12 +2930,12 @@ if __name__ == "__main__":
         <label>Min Mkt Cap</label>
         <select id="minMcap" onchange="applyFilters()">
           <option value="0">Any</option>
-          <option value="100000000">&gt; 100M</option>
-          <option value="500000000">&gt; 500M</option>
-          <option value="1000000000">&gt; 1B</option>
-          <option value="5000000000">&gt; 5B</option>
-          <option value="10000000000">&gt; 10B</option>
-          <option value="50000000000">&gt; 50B</option>
+          <option value="1000000">Nano (1M+)</option>
+          <option value="50000000">Micro (50M+)</option>
+          <option value="300000000">Small (300M+)</option>
+          <option value="2000000000">Mid (2B+)</option>
+          <option value="10000000000">Large (10B+)</option>
+          <option value="200000000000">Mega (200B+)</option>
         </select>
       </div>
       <div class="control-group">
@@ -2956,7 +2994,7 @@ if __name__ == "__main__":
         <span class="leg-dot" style="background:var(--muted)"></span>Neutral
       </div>
       <div>
-        Score = {int(W_ZSCORE*100)}% |Z| + {int(W_HALFLIFE*100)}% HL Speed + {int(W_STATIONARY*100)}% ADF + {int(W_ANNRET*100)}% AnnRet + {int(W_CONFIRM*100)}% Confirm + {int(W_CORR*100)}% Corr
+        Score = {int(W_ZSCORE*100)}% |Z| + {int(W_HALFLIFE*100)}% HL Speed + {int(W_CONFIRM*100)}% Confirm + {int(W_ANNRET*100)}% AnnRet + {int(W_STATIONARY*100)}% ADF + {int(W_CORR*100)}% Corr
         &nbsp;&middot;&nbsp; 50/50 capital sizing
         &nbsp;&middot;&nbsp; <a href="symbols.html">Symbol Reference</a>
       </div>
