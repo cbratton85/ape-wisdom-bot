@@ -28178,5 +28178,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "FWRD": {
+        "ticker": "FWRD",
+        "name": "Forward Air Corporation",
+        "meta": "Integrated Freight & Logistics",
+        "type": "EQUITY",
+        "mcap": 769019072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BFS": {
+        "ticker": "BFS",
+        "name": "Saul Centers, Inc.",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 1206913024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CURLF": {
+        "ticker": "CURLF",
+        "name": "Curaleaf Holdings, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 1793438848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OQX"
+    },
+    "ESGV": {
+        "ticker": "ESGV",
+        "name": "Vanguard ESG U.S. Stock ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
