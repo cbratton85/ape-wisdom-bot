@@ -1,9 +1,4 @@
 {
-    "NH": {
-        "delisted": true,
-        "last_checked": "2026-02-22",
-        "reason": "No Price Data"
-    },
     "EBR": {
         "delisted": true,
         "last_checked": "2026-02-28",
@@ -185,6 +180,16 @@
         "reason": "No Price Data"
     },
     "KIND": {
+        "delisted": true,
+        "last_checked": "2026-03-05",
+        "reason": "No Price Data"
+    },
+    "LAZR": {
+        "delisted": true,
+        "last_checked": "2026-03-05",
+        "reason": "No Price Data"
+    },
+    "NH": {
         "delisted": true,
         "last_checked": "2026-03-05",
         "reason": "No Price Data"

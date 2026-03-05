@@ -28318,5 +28318,95 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "PM": {
+        "ticker": "PM",
+        "name": "Philip Morris International Inc",
+        "meta": "Tobacco",
+        "type": "EQUITY",
+        "mcap": 278707896320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LAZR": {
+        "ticker": "LAZR",
+        "name": "LAZR",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "XSD": {
+        "ticker": "XSD",
+        "name": "State Street SPDR S&P Semicondu",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 1169411968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CWS": {
+        "ticker": "CWS",
+        "name": "AdvisorShares Focused Equity ET",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "PRI": {
+        "ticker": "PRI",
+        "name": "Primerica, Inc.",
+        "meta": "Insurance - Life",
+        "type": "EQUITY",
+        "mcap": 8376050688,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SPYX": {
+        "ticker": "SPYX",
+        "name": "State Street SPDR S&P 500 Fossi",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CPRX": {
+        "ticker": "CPRX",
+        "name": "Catalyst Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3034706944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "TBI": {
+        "ticker": "TBI",
+        "name": "TrueBlue, Inc.",
+        "meta": "Staffing & Employment Services",
+        "type": "EQUITY",
+        "mcap": 128367472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "URTY": {
+        "ticker": "URTY",
+        "name": "ProShares UltraPro Russell2000",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
