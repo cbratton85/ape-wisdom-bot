@@ -28218,5 +28218,105 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "AQST": {
+        "ticker": "AQST",
+        "name": "Aquestive Therapeutics, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 533153600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "CLVT": {
+        "ticker": "CLVT",
+        "name": "Clarivate Plc",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 1614560384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SMSI": {
+        "ticker": "SMSI",
+        "name": "Smith Micro Software, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 13789560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "FLRT": {
+        "ticker": "FLRT",
+        "name": "Pacer Aristotle Pacific Floatin",
+        "meta": "Bank Loan",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FNGD": {
+        "ticker": "FNGD",
+        "name": "MicroSectors FANG  Index -3X In",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 40182398976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "NAUT": {
+        "ticker": "NAUT",
+        "name": "Nautilus Biotechnology, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 330919392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "FLGB": {
+        "ticker": "FLGB",
+        "name": "Franklin FTSE",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CENN": {
+        "ticker": "CENN",
+        "name": "Cenntro Inc.",
+        "meta": "Auto Manufacturers",
+        "type": "EQUITY",
+        "mcap": 10461627,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "POWW": {
+        "ticker": "POWW",
+        "name": "Outdoor Holding Company",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 246306304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ALTO": {
+        "ticker": "ALTO",
+        "name": "Alto Ingredients, Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 201234016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
