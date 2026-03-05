@@ -28408,5 +28408,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "OCN": {
+        "ticker": "OCN",
+        "name": "OCN",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "RITM": {
+        "ticker": "RITM",
+        "name": "Rithm Capital Corp.",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 5425398272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
