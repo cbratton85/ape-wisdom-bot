@@ -28448,5 +28448,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "NRGU": {
+        "ticker": "NRGU",
+        "name": "MicroSectors U.S. Big Oil 3 Lev",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "PRU": {
+        "ticker": "PRU",
+        "name": "Prudential Financial, Inc.",
+        "meta": "Insurance - Life",
+        "type": "EQUITY",
+        "mcap": 34253639680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PRTS": {
+        "ticker": "PRTS",
+        "name": "CarParts.com, Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 54760436,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "AVNT": {
+        "ticker": "AVNT",
+        "name": "Avient Corporation",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 3640708608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ITRN": {
+        "ticker": "ITRN",
+        "name": "Ituran Location and Control Ltd",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 963048192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "HONE": {
+        "ticker": "HONE",
+        "name": "HONE",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
