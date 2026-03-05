@@ -28508,5 +28508,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "XELA": {
+        "ticker": "XELA",
+        "name": "Exela Technologies, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 305261,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
+    },
+    "IVES": {
+        "ticker": "IVES",
+        "name": "Dan IVES Wedbush AI Revolution ",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "GSG": {
+        "ticker": "GSG",
+        "name": "iShares GSCI Commodity-Indexed ",
+        "meta": "Commodities Broad Basket",
+        "type": "ETF",
+        "mcap": 1771415936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
