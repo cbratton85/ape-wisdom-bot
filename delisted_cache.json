@@ -29,11 +29,6 @@
         "last_checked": "2026-03-03",
         "reason": "No Price Data"
     },
-    "OLD": {
-        "delisted": true,
-        "last_checked": "2026-03-03",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-03-03",
@@ -180,6 +175,11 @@
         "reason": "No Price Data"
     },
     "CEI": {
+        "delisted": true,
+        "last_checked": "2026-03-05",
+        "reason": "No Price Data"
+    },
+    "OLD": {
         "delisted": true,
         "last_checked": "2026-03-05",
         "reason": "No Price Data"
