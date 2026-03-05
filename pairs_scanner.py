@@ -58,12 +58,13 @@ MAX_RESULTS_STOCK = 350   # Max Pure Stock pairs (0 = no per-category limit)
 MAX_RESULTS_MIXED = 50   # Max Mixed pairs (0 = no per-category limit)
 MAX_CHARTS     = 0        # Max pairs to compute Z-score charts for (0 = show all)
 
-W_ZSCORE    = 0.25   # Z-score magnitude (how far from mean)
-W_HALFLIFE  = 0.25   # Half-life speed (faster reversion = more tradeable)
+W_ZSCORE    = 0.20   # Z-score magnitude (how far from mean)
+W_HALFLIFE  = 0.20   # Half-life speed (faster reversion = more tradeable)
 W_CONFIRM   = 0.20   # Timeframe confirmation (alignment + confidence combined)
 W_ANNRET    = 0.15   # Annualized return potential (higher = more profitable)
 W_STATIONARY = 0.10  # Spread stationarity (ADF tiebreaker — already filtered)
 W_CORR      = 0.05   # Base correlation level
+W_BACKTEST  = 0.10   # Backtest win rate (historical performance, confidence-weighted)
 
 # ==========================================
 # LOAD MASTER TICKERS
@@ -823,9 +824,8 @@ def analyze_pair(pair):
     if MIN_EST_RETURN > 0 and est_ret < MIN_EST_RETURN:
         return None
     if not np.isnan(hl) and hl > 0:
-        # Full reversion cycle ≈ 3x half-life; assume 70% capture rate
-        cycle_days = hl * 3.0
-        trades_per_year = 252.0 / cycle_days
+        # Trades per year based on half-life; assume 70% capture rate
+        trades_per_year = 252.0 / hl
         ann_ret = round(est_ret * trades_per_year * 0.70, 1)
     else:
         ann_ret = None
@@ -1195,11 +1195,11 @@ def _init_analyze_worker(cl, cs, lp, lp_short, lp_long, lp_full, pr, pf, tt, elt
     ETF_LEV_TYPES    = elt
 
 
-def compute_backtest(dates, z_vals, half_life, threshold):
+def compute_backtest(dates, z_vals, half_life, threshold, max_days=None):
     """Simulate historical trades on a Z-score series.
-    Entry: |Z| crosses above threshold.  Exit: Z reverts within ±0.3 of 0, or timeout at 3×HL."""
+    Entry: |Z| crosses above threshold.  Exit: Z reverts within ±0.3 of 0, or timeout."""
     EXIT_BAND = 0.3
-    timeout = int((half_life or 50) * 3)
+    timeout = int(max_days) if max_days else int((half_life or 50) * 3)
     trades = []
     in_trade = False
     entry_idx = entry_z = 0
@@ -1245,8 +1245,8 @@ def compute_backtest(dates, z_vals, half_life, threshold):
 
     n = len(trades)
     nr = len(revert_days)
-    # Total signal crossings = reverted + timed-out + still-open
-    total_crossings = nr + (1 if in_trade2 else 0) + sum(1 for t in trades if not t["win"])
+    # Total signal crossings = only completed (reverted) trades, exclude current open
+    total_crossings = nr
     revert_pct = round(nr / total_crossings * 100, 1) if total_crossings > 0 else None
     sorted_rd = sorted(revert_days)
     median_rd = sorted_rd[len(sorted_rd) // 2] if sorted_rd else None
@@ -1303,8 +1303,43 @@ def _compute_chart_for_pair(r):
         r["PriceDates"] = pdates
         r["PriceA"]     = pa
         r["PriceB"]     = pb
-        # Backtest on the Z history
-        bt = compute_backtest(dates, z_vals, r.get("HalfLife") or 50, Z_THRESHOLD)
+        # Backtest at multiple thresholds
+        BT_THRESHOLDS = [1.5, 2.0, 2.5, 3.0]
+        BT_HOLD_DAYS  = [10, 15, 20, 30, 45, 60, 90, 120, 180]
+        hl = r.get("HalfLife") or 50
+
+        # Single-threshold results (for table column display)
+        bt_multi = {}
+        for th in BT_THRESHOLDS:
+            bt_multi[th] = compute_backtest(dates, z_vals, hl, th)
+        r["BtMulti"] = bt_multi
+
+        # Full grid: threshold × holding period
+        bt_grid = []
+        best_th = None
+        best_hd = None
+        best_score = (-1, -1)
+        for th in BT_THRESHOLDS:
+            for hd in BT_HOLD_DAYS:
+                b = compute_backtest(dates, z_vals, hl, th, max_days=hd)
+                bt_grid.append({
+                    "th": th, "hd": hd,
+                    "wr": b["winRate"], "n": b["numTrades"],
+                    "avgRet": b["avgRet"], "avgD": b["avgDays"],
+                })
+                if b["winRate"] is not None and b["numTrades"] >= 2:
+                    score = (b["winRate"], b["numTrades"])
+                    if score > best_score:
+                        best_score = score
+                        best_th = th
+                        best_hd = hd
+        r["BtGrid"] = bt_grid
+        r["BtBestTh"] = best_th
+        r["BtBestHD"] = best_hd
+        r["BtBestWR"] = best_score[0] if best_th else None
+
+        # Primary backtest uses the scanner's Z_THRESHOLD (default timeout)
+        bt = bt_multi.get(Z_THRESHOLD) or compute_backtest(dates, z_vals, hl, Z_THRESHOLD)
         r["BtWinRate"]    = bt["winRate"]
         r["BtAvgRet"]     = bt["avgRet"]
         r["BtAvgDays"]    = bt["avgDays"]
@@ -1326,6 +1361,11 @@ def _compute_chart_for_pair(r):
         r["BtTrades"]    = []
         r["BtRevertPct"] = r["BtMedianDays"] = None
         r["BtRevertCount"] = 0
+        r["BtMulti"] = {}
+        r["BtGrid"] = []
+        r["BtBestTh"] = None
+        r["BtBestHD"] = None
+        r["BtBestWR"] = None
 
     return r
 
@@ -2466,6 +2506,22 @@ if __name__ == "__main__":
     if dropped:
         print(f"Removed {dropped} pairs with insufficient data for Z-chart.")
 
+    # Adjust scores with backtest win rate (post-hoc since backtest runs after initial scoring)
+    for r in top_results:
+        bt_wr = r.get("BtBestWR")    # best threshold win rate
+        bt_n  = r.get("BtNumTrades", 0)
+        if bt_wr is not None and bt_n >= 2:
+            # Confidence discount: full weight at n>=10, scales down linearly
+            confidence = min(bt_n / 10.0, 1.0)
+            # Normalize: 0% win rate → 0.0, 100% → 1.0
+            bt_norm = (bt_wr / 100.0) * confidence
+            # Blend into existing score: rescale original from (1-W_BACKTEST) and add backtest component
+            old_score = r["Score"]
+            r["Score"] = round(old_score * (1.0 - W_BACKTEST) + W_BACKTEST * bt_norm, 4)
+
+    # Re-sort by adjusted score
+    top_results.sort(key=lambda r: r["Score"], reverse=True)
+
     # Count shown per category (after all filtering, matching HTML generation skips)
     shown_by_cat = {"Pure ETF": 0, "Pure Stock": 0, "Mixed": 0}
     for r in top_results:
@@ -2516,13 +2572,13 @@ if __name__ == "__main__":
         name_a = TICKER_NAMES.get(a, "")
         name_b = TICKER_NAMES.get(b, "")
 
-        if z > Z_STRONG:
+        if z >= Z_STRONG:
             sig_line1, sig_line2, sig_class = f"\u25bc\u25bc SHORT {a}", f"\u25b2\u25b2 LONG {b}", "sig-strong-short"
-        elif z > Z_THRESHOLD:
+        elif z >= Z_THRESHOLD:
             sig_line1, sig_line2, sig_class = f"\u25bc SHORT {a}", f"\u25b2 LONG {b}", "sig-short"
-        elif z < -Z_STRONG:
+        elif z <= -Z_STRONG:
             sig_line1, sig_line2, sig_class = f"\u25b2\u25b2 LONG {a}", f"\u25bc\u25bc SHORT {b}", "sig-strong-long"
-        elif z < -Z_THRESHOLD:
+        elif z <= -Z_THRESHOLD:
             sig_line1, sig_line2, sig_class = f"\u25b2 LONG {a}", f"\u25bc SHORT {b}", "sig-long"
         else:
             sig_line1, sig_line2, sig_class = "NEUTRAL", "", "sig-neutral"
@@ -2626,6 +2682,14 @@ if __name__ == "__main__":
             "btRevertPct":  r.get("BtRevertPct"),
             "btMedianDays": r.get("BtMedianDays"),
             "btRevertCount":r.get("BtRevertCount", 0),
+            "btBestTh":  r.get("BtBestTh"),
+            "btBestHD":  r.get("BtBestHD"),
+            "btBestWR":  r.get("BtBestWR"),
+            "btMulti": [{"th": th, "wr": bt_m["winRate"], "n": bt_m["numTrades"],
+                         "avgRet": bt_m["avgRet"], "avgD": bt_m["avgDays"],
+                         "rvPct": bt_m["revertPct"], "medD": bt_m["medianDays"]}
+                        for th, bt_m in r.get("BtMulti", {}).items()],
+            "btGrid": r.get("BtGrid", []),
         })
         chart_payload_esc = chart_payload.replace("&", "&amp;").replace("'", "&#39;")
 
@@ -2638,15 +2702,26 @@ if __name__ == "__main__":
         bt_md = r.get("BtMedianDays")
         if bt_wr is not None and bt_n > 0:
             bt_color = "var(--green)" if bt_wr >= 70 else "var(--amber)" if bt_wr >= 50 else "var(--red)"
-            bt_html = f'<div class="bt-winrate" style="color:{bt_color}">{bt_wr:.0f}%</div><div class="bt-detail">{bt_n} trades &middot; {bt_avg_d:.0f}d avg</div>'
-            if bt_avg_r is not None:
-                bt_html += f'<div class="bt-detail" style="color:{bt_color}">{bt_avg_r:+.1f}% avg ret</div>'
+            ret_color = "#22c55e" if bt_avg_r is not None and bt_avg_r > 0 else "#ef4444" if bt_avg_r is not None and bt_avg_r < 0 else "#cbd5e1"
+            ret_str = f' &middot; <span style="color:{ret_color}">{bt_avg_r:+.1f}% ret</span>' if bt_avg_r is not None else ''
+            bt_html = f'<div class="bt-row"><span class="bt-winrate" style="color:{bt_color}">{bt_wr:.0f}%</span><span class="bt-detail" style="color:#cbd5e1">{bt_n} trades &middot; {bt_avg_d:.0f}d avg{ret_str}</span></div>'
+            rv_parts = []
             if bt_rv is not None:
-                rv_color = "var(--green)" if bt_rv >= 90 else "var(--amber)" if bt_rv >= 70 else "var(--red)"
-                md_str = f' &middot; {bt_md:.0f}d med' if bt_md is not None else ''
-                bt_html += f'<div class="bt-detail" style="color:{rv_color}">{bt_rv:.0f}% revert{md_str}</div>'
+                rv_color = "#22c55e" if bt_rv >= 95 else "#4ade80" if bt_rv >= 85 else "#facc15" if bt_rv >= 70 else "#fb923c" if bt_rv >= 50 else "#ef4444"
+                md_color = "#38bdf8" if bt_md is not None and bt_md <= 20 else "#a78bfa" if bt_md is not None and bt_md <= 40 else "#f59e0b"
+                md_str = f' &middot; <span style="color:{md_color}">{bt_md:.0f}d median</span>' if bt_md is not None else ''
+                rv_parts.append(f'<span style="color:{rv_color}">{bt_rv:.0f}% revert</span>{md_str}')
+            bt_best_th = r.get("BtBestTh")
+            bt_best_hd = r.get("BtBestHD")
+            bt_best_wr = r.get("BtBestWR")
+            if bt_best_th is not None and bt_best_wr is not None:
+                best_wr_color = "#22c55e" if bt_best_wr >= 85 else "#4ade80" if bt_best_wr >= 70 else "#facc15" if bt_best_wr >= 50 else "#ef4444"
+                hd_str = f'/{bt_best_hd}d' if bt_best_hd else ''
+                rv_parts.append(f'<span style="color:#38bdf8">Best:</span> <span style="color:#e2e8f0">{bt_best_th}\u03C3{hd_str}</span>')
+            if rv_parts:
+                bt_html += f'<div class="bt-detail">{" &middot; ".join(rv_parts)}</div>'
         else:
-            bt_html = '<div class="bt-winrate" style="color:var(--muted)">N/A</div><div class="bt-detail">no trades</div>'
+            bt_html = '<div class="bt-row"><span class="bt-winrate" style="color:var(--muted)">N/A</span><span class="bt-detail">no trades</span></div>'
 
         rows_html += f"""
         <tr class="data-row" data-category="{r['Category']}" data-z="{z}"
@@ -2955,7 +3030,7 @@ if __name__ == "__main__":
       .sig-cell {{ min-width: 0; white-space: nowrap; }}
       .signal-badge {{
         display: inline-flex; flex-direction: column; align-items: flex-start; gap: 1px;
-        padding: 3px 7px; border-radius: 4px; font-size: 10px;
+        padding: 3px 7px; border-radius: 4px; font-size: 11px;
         font-weight: 700; letter-spacing: 0.04em; white-space: nowrap; font-family: var(--mono);
       }}
       .sig-strong-short {{ background: var(--red-dim);          color: var(--red);    border: 1px solid rgba(239,68,68,0.4); }}
@@ -2976,15 +3051,16 @@ if __name__ == "__main__":
       .chart-btn:hover {{ background: rgba(56,189,248,0.18); border-color: var(--cyan); }}
       .chart-btn-bt {{
         background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25);
-        color: var(--amber); font-family: var(--mono); font-size: 9px; font-weight: 600;
+        color: var(--amber); font-family: var(--mono); font-size: 11px; font-weight: 600;
         padding: 2px 4px; border-radius: 4px; cursor: pointer; writing-mode: vertical-rl;
         text-orientation: mixed; letter-spacing: 0.08em;
         transition: background 0.15s, border-color 0.15s; white-space: nowrap;
       }}
       .chart-btn-bt:hover {{ background: rgba(245,158,11,0.18); border-color: var(--amber); }}
-      .bt-cell {{ text-align: center; min-width: 80px; padding: 4px 8px; }}
-      .bt-winrate {{ font-family: var(--mono); font-size: 14px; font-weight: 700; }}
-      .bt-detail {{ font-size: 9px; color: var(--muted); white-space: nowrap; }}
+      .bt-cell {{ text-align: left; min-width: 200px; padding: 6px 12px; }}
+      .bt-row {{ display: flex; align-items: baseline; gap: 8px; white-space: nowrap; }}
+      .bt-winrate {{ font-family: var(--mono); font-size: 17px; font-weight: 700; }}
+      .bt-detail {{ font-size: 12px; color: var(--muted); white-space: nowrap; letter-spacing: 0.02em; }}
       .track-cell {{ text-align: center; }}
       .track-btn {{
         background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.25);
@@ -3020,7 +3096,7 @@ if __name__ == "__main__":
       .sort-indicator {{ color: var(--cyan); font-size: 11px; margin-left: 3px; }}
 
       /* SHARES (inline in signal) */
-      .share-count {{ font-size: 10px; color: #ffffff; margin-left: 3px; }}
+      .share-count {{ font-size: 11px; color: #ffffff; margin-left: 3px; }}
 
 
       /* MODAL */
@@ -3345,7 +3421,7 @@ if __name__ == "__main__":
         <span class="leg-dot" style="background:var(--muted)"></span>Neutral
       </div>
       <div>
-        Score = {int(W_ZSCORE*100)}% |Z| + {int(W_HALFLIFE*100)}% HL Speed + {int(W_CONFIRM*100)}% Confirm + {int(W_ANNRET*100)}% AnnRet + {int(W_STATIONARY*100)}% Coint + {int(W_CORR*100)}% Corr
+        Score = {int(W_ZSCORE*100)}% |Z| + {int(W_HALFLIFE*100)}% HL Speed + {int(W_CONFIRM*100)}% Confirm + {int(W_ANNRET*100)}% AnnRet + {int(W_STATIONARY*100)}% Coint + {int(W_CORR*100)}% Corr + {int(W_BACKTEST*100)}% Backtest
         &nbsp;&middot;&nbsp; 50/50 capital sizing
         &nbsp;&middot;&nbsp; <a href="symbols.html">Symbol Reference</a>
       </div>
@@ -3397,6 +3473,7 @@ if __name__ == "__main__":
             <canvas id="bChart" style="display:none;position:absolute;inset:0;width:100%;height:100%;"></canvas>
             <canvas id="btChart" style="display:none;position:absolute;inset:0;width:100%;height:100%;"></canvas>
           </div>
+          <div id="btMultiTable" style="display:none;padding:8px 12px;border-top:1px solid var(--border2);background:rgba(13,21,32,0.95);"></div>
         </div>
         <div class="modal-footer" id="modalFooter"></div>
       </div>
@@ -3531,6 +3608,7 @@ if __name__ == "__main__":
       document.getElementById("pChart").style.display  = isP ? "block" : "none";
       document.getElementById("bChart").style.display  = isB ? "block" : "none";
       document.getElementById("btChart").style.display = isBT ? "block" : "none";
+      document.getElementById("btMultiTable").style.display = isBT ? "block" : "none";
       if (isP && currentChartData && !activePChart) buildPriceChart(currentChartData);
       if (isB && currentChartData && !activeBChart) buildBothChart(currentChartData);
       if (isBT && currentChartData && !activeBTChart) buildBacktestChart(currentChartData);
@@ -3621,6 +3699,7 @@ if __name__ == "__main__":
       // Reset to Z tab
       document.getElementById("zChart").style.display = "block";
       document.getElementById("btChart").style.display = "none";
+      document.getElementById("btMultiTable").style.display = "none";
       document.getElementById("pChart").style.display = "none";
       document.getElementById("bChart").style.display = "none";
       document.getElementById("tabZ").classList.add("active");
@@ -4055,6 +4134,50 @@ if __name__ == "__main__":
       const rv = p.btRevertPct != null ? p.btRevertPct.toFixed(0) + "% revert" : "";
       const md = p.btMedianDays != null ? Math.round(p.btMedianDays) + "d median" : "";
 
+      // Build threshold × holding period grid table
+      const grid = p.btGrid || [];
+      const bestTh = p.btBestTh;
+      const bestHD = p.btBestHD;
+      const mtDiv = document.getElementById("btMultiTable");
+      if (grid.length > 0) {{
+        const thresholds = [...new Set(grid.map(g => g.th))].sort((a,b) => a-b);
+        const holdDays   = [...new Set(grid.map(g => g.hd))].sort((a,b) => a-b);
+        const lookup = {{}};
+        grid.forEach(g => {{ lookup[g.th + "_" + g.hd] = g; }});
+
+        let html = '<table style="width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11px;">';
+        // Header row
+        html += '<tr style="color:#cbd5e1;border-bottom:1px solid var(--border2);">'
+          + '<th style="padding:3px 6px;text-align:left;">Entry \\ Hold</th>';
+        holdDays.forEach(hd => {{
+          html += `<th style="padding:3px 6px;text-align:center;">${{hd}}d</th>`;
+        }});
+        html += '</tr>';
+        // Data rows
+        thresholds.forEach(th => {{
+          html += '<tr>';
+          html += `<td style="padding:3px 6px;color:var(--text);font-weight:600">${{th.toFixed(1)}}\u03C3</td>`;
+          holdDays.forEach(hd => {{
+            const g = lookup[th + "_" + hd];
+            const isBest = th === bestTh && hd === bestHD;
+            const wr = g && g.wr != null ? g.wr : null;
+            const n = g ? g.n || 0 : 0;
+            const wrColor = wr == null ? "#64748b" : wr >= 70 ? "var(--green)" : wr >= 50 ? "var(--amber)" : "var(--red)";
+            const bg = isBest ? "rgba(56,189,248,0.12)" : "transparent";
+            const star = isBest ? " \u2605" : "";
+            const wrText = wr != null ? wr.toFixed(0) + "%" : "—";
+            const nText = n > 0 ? `<div style="font-size:9px;color:#94a3b8">n=${{n}}</div>` : "";
+            html += `<td style="padding:3px 6px;text-align:center;background:${{bg}};border:1px solid var(--border2);">`
+              + `<div style="color:${{wrColor}};font-weight:700">${{wrText}}${{star}}</div>${{nText}}</td>`;
+          }});
+          html += '</tr>';
+        }});
+        html += '</table>';
+        mtDiv.innerHTML = html;
+      }} else {{
+        mtDiv.innerHTML = '';
+      }}
+
       activeBTChart = new Chart(ctx, {{
         type: "line",
         data: {{
@@ -4100,17 +4223,24 @@ if __name__ == "__main__":
             }},
             annotation: {{ annotations: annotations }},
             tooltip: {{
-              backgroundColor: "rgba(15,23,42,0.95)", borderColor: "#334155", borderWidth: 1,
+              backgroundColor: "#0d1520", borderColor: "#242d40", borderWidth: 1,
               titleFont: {{ family: "'JetBrains Mono',monospace", size: 11 }},
-              bodyFont: {{ family: "'JetBrains Mono',monospace", size: 12 }},
-              titleColor: "#94a3b8", bodyColor: "#e2e8f0", padding: 10,
+              bodyFont: {{ family: "'JetBrains Mono',monospace", size: 13 }},
+              titleColor: "#64748b", bodyColor: "#e2e8f0",
+              padding: 14, caretSize: 5, caretPadding: 50,
             }},
-            // Summary stats title plugin
+            // Summary stats title + rules subtitle
+            subtitle: {{
+              display: true, color: "#64748b",
+              font: {{ family: "'JetBrains Mono',monospace", size: 10, weight: "normal" }},
+              text: `Entry: |Z| \u2265 ${{th}}\u03C3  |  Exit: |Z| \u2264 0.3\u03C3 (win) or timeout (loss)  |  Green = win, Red = loss`,
+              padding: {{ bottom: 6 }},
+            }},
             title: {{
               display: true, position: "top", align: "start",
               color: "#94a3b8", font: {{ family: "'JetBrains Mono',monospace", size: 11, weight: "normal" }},
-              text: `Win Rate: ${{wr}}  |  ${{wins}}W / ${{losses}}L (${{nt}} trades)  |  Avg ${{ar}} in ${{ad}}` + (rv ? `  |  ${{rv}}${{md ? " · " + md : ""}}` : ""),
-              padding: {{ bottom: 8 }},
+              text: `Win Rate: ${{wr}}  |  ${{wins}}W / ${{losses}}L (${{nt}} trades)  |  Avg ${{ar}} in ${{ad}}` + (rv ? `  |  ${{rv}}${{md ? " \u00B7 " + md : ""}}` : ""),
+              padding: {{ bottom: 2 }},
             }},
           }},
           scales: {{
