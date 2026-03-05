@@ -28428,5 +28428,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "STT": {
+        "ticker": "STT",
+        "name": "State Street Corporation",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 35344195584,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
