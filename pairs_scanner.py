@@ -24,7 +24,7 @@ CHART_LOOKBACK_DAYS = 1825  # ~5 years used for Z-score chart history
 VOL_AVG_DAYS        = 30    # Rolling window for average volume calculation
 CACHE_UPDATE_COOLDOWN_HOURS = 1
 VOL_MCAP_COOLDOWN_HOURS    = 168   # Volume & market cap refresh interval (168h = 1 week)
-NUM_WORKERS = max(1, (mp.cpu_count() or 2) - 0)  # CPU cores for parallel pair analysis
+NUM_WORKERS = max(1, (mp.cpu_count() or 2) - 1)  # CPU cores for parallel pair analysis (leave 1 free)
 
 CORR_SHORT = 35
 CORR_LONG = 100
@@ -36,7 +36,7 @@ PERF_LENGTH = 300
 MIN_CORR_FILTER = 0.60
 Z_THRESHOLD = 2.0
 Z_MAX       = 5.0      # Max |Z| — above this is likely a structural break, not mean-reversion
-Z_STRONG = 2.0
+Z_STRONG = 3.0      # Z-score threshold for "strong" signal (double arrows)
 
 ADF_CONFIDENCE  = 0.95   # Min cointegration confidence (0.90=90%, 0.95=95%, 0.99=99%)
 ADF_LOOKBACK_YRS = 1     # Years of data for cointegration test (1, 2, 3, 5, etc.)
@@ -58,13 +58,14 @@ MAX_RESULTS_STOCK = 350   # Max Pure Stock pairs (0 = no per-category limit)
 MAX_RESULTS_MIXED = 50   # Max Mixed pairs (0 = no per-category limit)
 MAX_CHARTS     = 0        # Max pairs to compute Z-score charts for (0 = show all)
 
-W_ZSCORE    = 0.20   # Z-score magnitude (how far from mean)
-W_HALFLIFE  = 0.20   # Half-life speed (faster reversion = more tradeable)
-W_CONFIRM   = 0.20   # Timeframe confirmation (alignment + confidence combined)
-W_ANNRET    = 0.15   # Annualized return potential (higher = more profitable)
-W_STATIONARY = 0.10  # Spread stationarity (ADF tiebreaker — already filtered)
-W_CORR      = 0.05   # Base correlation level
 W_BACKTEST  = 0.10   # Backtest win rate (historical performance, confidence-weighted)
+# Pre-backtest weights (must sum to 1.0 for correct normalization)
+W_ZSCORE    = 0.22   # Z-score magnitude (how far from mean)
+W_HALFLIFE  = 0.22   # Half-life speed (faster reversion = more tradeable)
+W_CONFIRM   = 0.22   # Timeframe confirmation (alignment + confidence combined)
+W_ANNRET    = 0.17   # Annualized return potential (higher = more profitable)
+W_STATIONARY = 0.11  # Spread stationarity (ADF tiebreaker — already filtered)
+W_CORR      = 0.06   # Base correlation level
 
 # ==========================================
 # LOAD MASTER TICKERS
@@ -149,9 +150,7 @@ def load_master_tickers():
 def safe_save(df):
     tmp = DATA_FILE + ".tmp"
     df.to_csv(tmp, compression='gzip')
-    if os.path.exists(DATA_FILE):
-        os.remove(DATA_FILE)
-    os.rename(tmp, DATA_FILE)
+    os.replace(tmp, DATA_FILE)
 
 
 # ==========================================
@@ -348,12 +347,11 @@ def build_dataset(master):
                 safe_save(data)
                 print("Historical data updated and saved.")
 
-    # Final filtering and cleanup
+    # Final filtering and cleanup (do NOT save truncated data back to cache)
     data = data[[c for c in data.columns if c in master]]
     data = data.tail(LOOKBACK_DAYS)
-    data = data.ffill().bfill()
+    data = data.ffill(limit=5).bfill(limit=5)
     data = data.dropna(axis=1, thresh=len(data) * 0.2)
-    safe_save(data)
 
     print(f"Final dataset ready: {len(data.columns)} tickers.")
     return data
@@ -394,11 +392,14 @@ def build_chart_dataset(master):
             if not batch_df.empty:
                 chart_data = pd.concat([chart_data, batch_df], axis=1)
                 chart_data = chart_data.loc[:, ~chart_data.columns.duplicated()]
-                tmp = CHART_DATA_FILE + ".tmp"
-                chart_data.to_csv(tmp, compression='gzip')
-                if os.path.exists(CHART_DATA_FILE): os.remove(CHART_DATA_FILE)
-                os.rename(tmp, CHART_DATA_FILE)
             time.sleep(COOLDOWN)
+
+    # Save once after all batches (moved out of loop for performance)
+    if not chart_data.empty:
+        chart_data = chart_data.loc[:, ~chart_data.columns.duplicated()]
+        tmp = CHART_DATA_FILE + ".tmp"
+        chart_data.to_csv(tmp, compression='gzip')
+        os.replace(tmp, CHART_DATA_FILE)
 
     if not chart_data.empty:
         last_date = chart_data.index.max()
@@ -441,9 +442,7 @@ def build_chart_dataset(master):
                 # Save compressed file once
                 tmp = CHART_DATA_FILE + ".tmp"
                 chart_data.to_csv(tmp, compression='gzip')
-                if os.path.exists(CHART_DATA_FILE): 
-                    os.remove(CHART_DATA_FILE)
-                os.rename(tmp, CHART_DATA_FILE)
+                os.replace(tmp, CHART_DATA_FILE)
                 print("Chart cache updated and saved successfully.")
 
     # Final cleanup before returning.
@@ -513,9 +512,7 @@ def build_volume_dataset(master):
         all_vol = all_vol.loc[:, ~all_vol.columns.duplicated()]
         tmp = VOLUME_DATA_FILE + ".tmp"
         all_vol.to_csv(tmp, compression='gzip')
-        if os.path.exists(VOLUME_DATA_FILE): 
-            os.remove(VOLUME_DATA_FILE)
-        os.rename(tmp, VOLUME_DATA_FILE)
+        os.replace(tmp, VOLUME_DATA_FILE)
         
         for col in all_vol.columns:
             if col in master:
@@ -768,9 +765,13 @@ def analyze_pair(pair):
 
     if same_dir:
         # All directional Z-scores point the same way
-        z_spread = max(abs_zs) - min(abs_zs)
+        # Only use directional (non-neutral) Z-scores for spread/strength
+        dir_zs = [az for az, (p, n) in zip(abs_zs, directional) if p or n]
+        if not dir_zs:
+            dir_zs = abs_zs  # fallback (shouldn't happen in same_dir)
+        z_spread = max(dir_zs) - min(dir_zs)
         closeness = max(0.0, 1.0 - z_spread / 2.0)
-        weakest_strength = min(abs_zs) / max(Z_THRESHOLD, 1.0)
+        weakest_strength = min(dir_zs) / max(Z_THRESHOLD, 1.0)
         weakest_factor = min(weakest_strength, 1.0)
         # Neutral Z-scores reduce alignment proportionally (3/3 strong > 2/3 + 1 neutral)
         dir_ratio = (3 - n_neutral) / 3.0
@@ -905,6 +906,8 @@ def compute_price_history(a, b, price_data):
         return [], [], []
     base_a = combined["a"].iloc[0]
     base_b = combined["b"].iloc[0]
+    if base_a == 0 or base_b == 0:
+        return [], [], []
     norm_a = [round(float(v / base_a * 100), 4) for v in combined["a"]]
     norm_b = [round(float(v / base_b * 100), 4) for v in combined["b"]]
     dates  = [d.strftime("%Y-%m-%d") for d in combined.index]
@@ -1231,6 +1234,7 @@ def compute_backtest(dates, z_vals, half_life, threshold, max_days=None):
     revert_days = []
     in_trade2 = False
     entry_idx2 = 0
+    total_crossings2 = 0
     for i, z in enumerate(z_vals):
         if z is None:
             continue
@@ -1238,6 +1242,7 @@ def compute_backtest(dates, z_vals, half_life, threshold, max_days=None):
             if abs(z) >= threshold:
                 in_trade2 = True
                 entry_idx2 = i
+                total_crossings2 += 1
         else:
             if abs(z) <= EXIT_BAND:
                 revert_days.append(i - entry_idx2)
@@ -1245,9 +1250,9 @@ def compute_backtest(dates, z_vals, half_life, threshold, max_days=None):
 
     n = len(trades)
     nr = len(revert_days)
-    # Total signal crossings = only completed (reverted) trades, exclude current open
-    total_crossings = nr
-    revert_pct = round(nr / total_crossings * 100, 1) if total_crossings > 0 else None
+    # Exclude the current open crossing (still in progress)
+    completed_crossings = total_crossings2 - (1 if in_trade2 else 0)
+    revert_pct = round(nr / completed_crossings * 100, 1) if completed_crossings > 0 else None
     sorted_rd = sorted(revert_days)
     median_rd = sorted_rd[len(sorted_rd) // 2] if sorted_rd else None
 
@@ -1321,14 +1326,14 @@ def _compute_chart_for_pair(r):
         best_score = (-1, -1)
         for th in BT_THRESHOLDS:
             for hd in BT_HOLD_DAYS:
-                b = compute_backtest(dates, z_vals, hl, th, max_days=hd)
+                bt_r = compute_backtest(dates, z_vals, hl, th, max_days=hd)
                 bt_grid.append({
                     "th": th, "hd": hd,
-                    "wr": b["winRate"], "n": b["numTrades"],
-                    "avgRet": b["avgRet"], "avgD": b["avgDays"],
+                    "wr": bt_r["winRate"], "n": bt_r["numTrades"],
+                    "avgRet": bt_r["avgRet"], "avgD": bt_r["avgDays"],
                 })
-                if b["winRate"] is not None and b["numTrades"] >= 2:
-                    score = (b["winRate"], b["numTrades"])
+                if bt_r["winRate"] is not None and bt_r["numTrades"] >= 2:
+                    score = (bt_r["winRate"], bt_r["numTrades"])
                     if score > best_score:
                         best_score = score
                         best_th = th
@@ -2419,10 +2424,11 @@ if __name__ == "__main__":
 
     print(f"--- Computing matrices and analyzing {len(valid)} symbols... ---")
     returns    = data.pct_change().dropna(how="all")
-    log_prices       = np.log(data.tail(Z_LENGTH))
-    log_prices_short = np.log(data.tail(Z_LENGTH_SHORT))
-    log_prices_long  = np.log(data.tail(Z_LENGTH_LONG))
-    log_prices_full  = np.log(data)              # full history for adaptive windowing
+    data_safe  = data.clip(lower=1e-10)           # guard against log(0) or log(negative)
+    log_prices       = np.log(data_safe.tail(Z_LENGTH))
+    log_prices_short = np.log(data_safe.tail(Z_LENGTH_SHORT))
+    log_prices_long  = np.log(data_safe.tail(Z_LENGTH_LONG))
+    log_prices_full  = np.log(data_safe)          # full history for adaptive windowing
     prices_raw = data
 
     corr_short = returns.tail(CORR_SHORT).corr()
@@ -2453,13 +2459,15 @@ if __name__ == "__main__":
         ]
 
     results = sorted(results, key=lambda x: x["Score"], reverse=True)
+    # Filter out pairs that won't display (Z below threshold or above max) before capping
+    results = [r for r in results if not any(np.isnan(v) for v in [r["Z"], r["Score"], r["Corr"]])
+               and abs(r["Z"]) >= Z_THRESHOLD and (Z_MAX <= 0 or abs(r["Z"]) <= Z_MAX)]
     total_valid = len(results)
     # Count totals per category before any capping
     total_by_cat = {"Pure ETF": 0, "Pure Stock": 0, "Mixed": 0}
     for r in results:
         total_by_cat[r.get("Category", "Mixed")] += 1
 
-    # The code below runs EVERY time, regardless of whether calculations were cached
     # Apply per-category limits first, then overall limit
     cat_limits = {"Pure ETF": MAX_RESULTS_ETF, "Pure Stock": MAX_RESULTS_STOCK, "Mixed": MAX_RESULTS_MIXED}
     if any(v > 0 for v in cat_limits.values()):
@@ -2604,7 +2612,7 @@ if __name__ == "__main__":
         avgvol_b   = round(vol_avg.get(b, 0))
         mcap_a     = mcap_data.get(a, 0)
         mcap_b     = mcap_data.get(b, 0)
-        mcap_min   = min(mcap_a, mcap_b) if mcap_a > 0 and mcap_b > 0 else max(mcap_a, mcap_b)
+        mcap_min   = min(mcap_a, mcap_b) if mcap_a > 0 and mcap_b > 0 else 0  # unknown if either is missing
         z_bar_pct  = min(max((abs(z) / 3.0) * 100, 0), 100)
         z_pos      = z >= 0
         score_pct  = round(min(max(r["Score"] * 100, 0), 100))
@@ -2795,7 +2803,7 @@ if __name__ == "__main__":
             </div>
             <button class="chart-btn-bt" onclick="openChart(this,'bt')" data-chart='{chart_payload_esc}'>BT</button>
           </td>
-          <td class="bt-cell">{bt_html}</td>
+          <td class="bt-cell" data-median-days="{bt_md if bt_md is not None else 9999}">{bt_html}</td>
           <td class="track-cell">
             <button class="track-btn" onclick="trackTrade(this)"
               data-pair="{r['Pair']}" data-z="{z}" data-price-a="{price_a}" data-price-b="{price_b}"
@@ -3347,7 +3355,7 @@ if __name__ == "__main__":
         <span class="filter-row-label">Display</span>
         <div class="control-group">
           <label>Sort</label>
-          <select id="sortBy" onchange="sortTable()">
+          <select id="sortBy" onchange="setSort(this.value)">
             <option value="score">Score</option>
             <option value="z_abs">|Z-Score|</option>
             <option value="hl">Half-Life</option>
@@ -3358,6 +3366,7 @@ if __name__ == "__main__":
             <option value="alignment">Alignment</option>
             <option value="confidence">Confidence</option>
             <option value="winrate">Win Rate</option>
+            <option value="mediandays">Median Days</option>
           </select>
         </div>
         <div class="control-group" title="When on, each symbol can appear at most once — only the highest-scored pair for that symbol is shown">
@@ -4483,7 +4492,7 @@ if __name__ == "__main__":
 
     function setSort(key) {{
       currentSort.asc = (currentSort.key === key) ? !currentSort.asc : false;
-      if (key === "hl" && currentSort.key !== key) currentSort.asc = true;
+      if ((key === "hl" || key === "mediandays") && currentSort.key !== key) currentSort.asc = true;
       currentSort.key = key;
       const dd = document.getElementById("sortBy");
       if (dd) dd.value = key;
@@ -4521,6 +4530,7 @@ if __name__ == "__main__":
           vb = confRank[b.dataset.confidence] || 1;
         }}
         else if (key === "winrate") {{ va = numOf(a,".bt-winrate") || 0; vb = numOf(b,".bt-winrate") || 0; }}
+        else if (key === "mediandays") {{ va = parseFloat(a.querySelector(".bt-cell")?.dataset.medianDays) || 9999; vb = parseFloat(b.querySelector(".bt-cell")?.dataset.medianDays) || 9999; }}
         else return 0;
         return asc ? (va - vb) : (vb - va);
       }});
