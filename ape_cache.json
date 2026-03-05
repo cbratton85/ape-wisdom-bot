@@ -28538,5 +28538,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "UAN": {
+        "ticker": "UAN",
+        "name": "CVR Partners, LP",
+        "meta": "Agricultural Inputs",
+        "type": "EQUITY",
+        "mcap": 1257364096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SGBX": {
+        "ticker": "SGBX",
+        "name": "Safe & Green Holdings Corp.",
+        "meta": "Metal Fabrication",
+        "type": "EQUITY",
+        "mcap": 9272643,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "IPI": {
+        "ticker": "IPI",
+        "name": "Intrepid Potash, Inc",
+        "meta": "Agricultural Inputs",
+        "type": "EQUITY",
+        "mcap": 543589376,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
