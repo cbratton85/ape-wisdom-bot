@@ -28568,5 +28568,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SPDN": {
+        "ticker": "SPDN",
+        "name": "Direxion Daily S&P 500 Bear 1X ",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ELD": {
+        "ticker": "ELD",
+        "name": "WisdomTree Emerging Markets Loc",
+        "meta": "Emerging-Markets Local-Currency Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SSTK": {
+        "ticker": "SSTK",
+        "name": "Shutterstock, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 619224512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MEI": {
+        "ticker": "MEI",
+        "name": "Methode Electronics, Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 267332272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
