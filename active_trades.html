@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Active Trades</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060a10; --surface: #0a0e17; --border: #1a2233;
+    --cyan: #38bdf8; --green: #22c55e; --red: #ef4444; --amber: #f59e0b;
+    --muted: #64748b; --mono: 'JetBrains Mono', monospace; --sans: 'Syne', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: #e2e8f0; font-family: var(--mono); }
+
+  .topbar {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 10px 28px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .topbar .brand { font-family: var(--sans); font-size: 20px; font-weight: 800; color: white; letter-spacing: 0.08em; }
+  .topbar .brand span { color: var(--cyan); }
+  .nav-links { display: flex; gap: 10px; }
+  .nav-links a {
+    font-size: 12px; font-weight: 600; color: var(--cyan); text-decoration: none;
+    letter-spacing: 0.05em; padding: 6px 12px; border: 1px solid rgba(56,189,248,0.3);
+    border-radius: 4px; transition: all 0.15s; white-space: nowrap;
+  }
+  .nav-links a:hover { background: rgba(56,189,248,0.08); border-color: var(--cyan); }
+
+  .content { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
+  h2 { font-family: var(--sans); font-size: 18px; font-weight: 700; color: white; margin: 20px 0 12px; letter-spacing: 0.05em; }
+  .section-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+
+  .trade-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 14px; }
+
+  .trade-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 18px; transition: border-color 0.2s;
+  }
+  .trade-card:hover { border-color: var(--cyan); }
+
+  .tc-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: nowrap; }
+  .tc-pair { font-size: 16px; font-weight: 700; color: white; }
+  .tc-dir { font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  .dir-short { background: rgba(239,68,68,0.12); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+  .dir-long  { background: rgba(34,197,94,0.12); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+  .dir-neutral { background: rgba(100,116,139,0.15); color: var(--muted); border: 1px solid var(--border); }
+  .tc-days { font-size: 11px; color: var(--muted); margin-left: auto; white-space: nowrap; }
+  .tc-header button { flex-shrink: 0; }
+  .tc-close {
+    background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: var(--red);
+    font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
+  }
+  .tc-close:hover { background: rgba(239,68,68,0.25); }
+  .tc-reopen {
+    background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); color: #fbbf24;
+    font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
+  }
+  .tc-reopen:hover { background: rgba(251,191,36,0.25); }
+  .tc-delete {
+    background: none; border: none; color: #ef4444; opacity: 0.4;
+    font-size: 13px; padding: 2px 4px; cursor: pointer; line-height: 1;
+  }
+  .tc-delete:hover { opacity: 1; }
+  .tc-edit {
+    background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); color: var(--cyan);
+    font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
+  }
+  .tc-edit:hover { background: rgba(56,189,248,0.25); }
+  .tc-chart {
+    background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.3); color: #a855f7;
+    font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
+  }
+  .tc-chart:hover { background: rgba(168,85,247,0.25); }
+
+  /* CHART MODAL */
+  .chart-overlay {
+    display: none; position: fixed; inset: 0; z-index: 1100;
+    background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+  }
+  .chart-overlay.open { display: flex; }
+  .chart-modal {
+    background: #0a0e17; border: 1px solid var(--border); border-radius: 14px;
+    padding: 22px 28px; width: min(1500px, 99vw); max-height: 95vh;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(56,189,248,0.06);
+  }
+  .chart-modal-header {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;
+  }
+  .chart-modal-title { font-family: var(--sans); font-size: 15px; font-weight: 700; color: white; }
+  .chart-modal-title .cm-pair { color: var(--cyan); }
+  .chart-modal-stats {
+    display: flex; gap: 16px; font-size: 11px; color: var(--muted);
+  }
+  .chart-modal-stats .cm-stat { display: flex; flex-direction: column; align-items: center; }
+  .chart-modal-stats .cm-val { font-weight: 600; font-size: 13px; }
+  .chart-modal-close {
+    background: none; border: 1px solid var(--border); color: var(--muted);
+    font-size: 16px; padding: 4px 10px; border-radius: 6px; cursor: pointer;
+  }
+  .chart-modal-close:hover { color: white; border-color: var(--muted); }
+  .chart-canvas-wrap { position: relative; height: 500px; }
+
+  /* EDIT MODAL */
+  .edit-overlay {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.7); backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+  }
+  .edit-overlay.open { display: flex; }
+  .edit-modal {
+    background: #0a0e17; border: 1px solid var(--border); border-radius: 12px;
+    padding: 24px; width: min(420px, 95vw);
+  }
+  .edit-modal h3 { font-family: var(--sans); font-size: 16px; color: white; margin-bottom: 16px; }
+  .edit-field { margin-bottom: 12px; }
+  .edit-field label { display: block; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .edit-field input {
+    width: 100%; background: #0d1520; border: 1px solid var(--border); color: #e2e8f0;
+    font-family: var(--mono); font-size: 13px; padding: 8px 10px; border-radius: 6px;
+  }
+  .edit-field input:focus { border-color: var(--cyan); outline: none; }
+  .edit-actions { display: flex; gap: 10px; margin-top: 18px; }
+  .edit-actions button {
+    flex: 1; padding: 8px; border-radius: 6px; font-family: var(--mono); font-size: 12px;
+    font-weight: 600; cursor: pointer; border: 1px solid var(--border);
+  }
+  .edit-save { background: rgba(34,197,94,0.15); color: var(--green); border-color: rgba(34,197,94,0.3) !important; }
+  .edit-save:hover { background: rgba(34,197,94,0.3); }
+  .edit-cancel { background: transparent; color: var(--muted); }
+  .edit-cancel:hover { background: rgba(100,116,139,0.15); }
+
+  .tc-body { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
+  .tc-stat { }
+  .tc-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .tc-val { font-size: 14px; font-weight: 600; color: #e2e8f0; }
+  .tc-prices .tc-val { font-size: 11px; }
+  .pnl-pos { color: var(--green) !important; }
+  .pnl-neg { color: var(--red) !important; }
+
+  .tc-progress { display: flex; align-items: center; gap: 10px; }
+  .tc-pbar-track { flex: 1; height: 4px; background: #1a2233; border-radius: 2px; overflow: hidden; }
+  .tc-pbar-fill { height: 100%; background: var(--cyan); border-radius: 2px; transition: width 0.3s; }
+  .tc-pbar-label { font-size: 10px; color: var(--muted); white-space: nowrap; }
+
+  .no-trades { color: var(--muted); font-size: 13px; padding: 30px; text-align: center; }
+
+  .actions { display: flex; gap: 10px; margin: 14px 0; }
+  .action-btn {
+    background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.25);
+    color: var(--cyan); font-family: var(--mono); font-size: 12px; font-weight: 600;
+    padding: 6px 14px; border-radius: 6px; cursor: pointer; transition: all 0.15s;
+  }
+  .action-btn:hover { background: rgba(56,189,248,0.2); border-color: var(--cyan); }
+  .action-btn.red { color: var(--red); border-color: rgba(239,68,68,0.25); background: rgba(239,68,68,0.08); }
+  .action-btn.red:hover { background: rgba(239,68,68,0.2); border-color: var(--red); }
+
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 30px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">ACTIVE <span>TRADES</span></div>
+  <div class="nav-links">
+    <a href="pairs_scanner.html">&larr; Scanner</a>
+    <a href="symbols.html">Symbols</a>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="actions">
+    <button class="action-btn" onclick="exportTrades()">&#8681; Export Trades</button>
+    <label class="action-btn" style="cursor:pointer;">&#8679; Import Trades
+      <input type="file" accept=".json" onchange="importTrades(event)" style="display:none;">
+    </label>
+    <button class="action-btn red" onclick="if(confirm('Close ALL open trades?'))closeAllTrades()">Close All</button>
+    <span style="margin-left:auto;font-size:11px;color:var(--muted);">Last updated: <span id="update-time"></span></span>
+  </div>
+
+  <div class="section-label">Open Trades (0)</div>
+  <div class="trade-cards" id="openTrades">
+    <div class="no-trades">No open trades. Track a pair from the scanner to get started.</div>
+  </div>
+
+  <h2 style="margin-top:30px;">Closed Trades</h2>
+  <div class="section-label">History (0)</div>
+  <div class="trade-cards" id="closedTrades">
+    <div class="no-trades">No closed trades yet.</div>
+  </div>
+</div>
+
+<div class="footer">
+  Trades are stored in localStorage and active_trades.json &middot;
+  Re-run scanner to refresh Z-scores and prices
+</div>
+
+<!-- EDIT MODAL -->
+<div class="edit-overlay" id="editModal" onclick="if(event.target===this)closeEditModal()">
+  <div class="edit-modal">
+    <h3 id="editTitle">Edit Trade</h3>
+    <input type="hidden" id="editTradeId">
+    <div class="edit-field">
+      <label>Entry Date</label>
+      <input type="date" id="editDate">
+    </div>
+    <div class="edit-field">
+      <label id="editLabelA">Entry Price A</label>
+      <input type="number" id="editPriceA" step="0.01" min="0">
+    </div>
+    <div class="edit-field">
+      <label id="editLabelB">Entry Price B</label>
+      <input type="number" id="editPriceB" step="0.01" min="0">
+    </div>
+    <div class="edit-field">
+      <label id="editLabelSharesA">Shares A</label>
+      <input type="number" id="editSharesA" step="1" min="0">
+    </div>
+    <div class="edit-field">
+      <label id="editLabelSharesB">Shares B</label>
+      <input type="number" id="editSharesB" step="1" min="0">
+    </div>
+    <div class="edit-actions">
+      <button class="edit-cancel" onclick="closeEditModal()">Cancel</button>
+      <button class="edit-save" onclick="saveTradeEdit()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHART MODAL -->
+<div class="chart-overlay" id="chartModal" onclick="if(event.target===this)closeTradeChart()">
+  <div class="chart-modal">
+    <div class="chart-modal-header">
+      <div>
+        <div class="chart-modal-title" id="chartTitle"></div>
+        <div class="chart-modal-stats" id="chartStats"></div>
+      </div>
+      <button class="chart-modal-close" onclick="closeTradeChart()">&#x2715;</button>
+    </div>
+    <div class="chart-canvas-wrap">
+      <canvas id="tradeZChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+// Load annotation + zoom plugins
+(function() {
+  const s = document.createElement("script");
+  s.src = "https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js";
+  s.onload = () => { Chart.register(window["chartjs-plugin-annotation"]); };
+  document.head.appendChild(s);
+  const h = document.createElement("script");
+  h.src = "https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js";
+  h.onload = () => {
+    const z = document.createElement("script");
+    z.src = "https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js";
+    document.head.appendChild(z);
+  };
+  document.head.appendChild(h);
+})();
+
+// Current-value marker plugin — draws a price tag on the right edge of the chart
+const currentValueMarkerPlugin = {
+  id: "currentValueMarker",
+  afterDraw(chart) {
+    const ctx = chart.ctx;
+    const chartArea = chart.chartArea;
+    chart.data.datasets.forEach((ds, i) => {
+      if (!chart.isDatasetVisible(i)) return;
+      let lastVal = null;
+      for (let j = ds.data.length - 1; j >= 0; j--) {
+        if (ds.data[j] !== null && ds.data[j] !== undefined) { lastVal = ds.data[j]; break; }
+      }
+      if (lastVal === null) return;
+      const yAxisID = ds.yAxisID || "y";
+      const scale = chart.scales[yAxisID];
+      if (!scale) return;
+      const yPx = scale.getPixelForValue(lastVal);
+      if (yPx < chartArea.top - 5 || yPx > chartArea.bottom + 5) return;
+
+      // Format label based on axis type
+      let label;
+      const ticks = chart.options.scales[yAxisID]?.ticks;
+      if (ticks && ticks.callback) {
+        label = ticks.callback(lastVal, 0, []);
+      } else {
+        label = lastVal.toFixed(2);
+      }
+
+      const color = ds.borderColor || "#38bdf8";
+      const x = chartArea.right + 4;
+      const font = "bold 10px 'JetBrains Mono', monospace";
+      ctx.save();
+      ctx.font = font;
+      const textW = ctx.measureText(label).width;
+      const padX = 5, padY = 3;
+      const boxW = textW + padX * 2;
+      const boxH = 14 + padY * 2;
+
+      // Draw connector line from chart edge to marker
+      ctx.beginPath();
+      ctx.setLineDash([2, 2]);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1;
+      ctx.moveTo(chartArea.right, yPx);
+      ctx.lineTo(x, yPx);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Draw marker background
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      const r = 3;
+      const bx = x, by = yPx - boxH / 2;
+      ctx.roundRect(bx, by, boxW, boxH, [0, r, r, 0]);
+      ctx.fill();
+
+      // Arrow notch on left side
+      ctx.beginPath();
+      ctx.moveTo(bx, yPx - 5);
+      ctx.lineTo(bx - 4, yPx);
+      ctx.lineTo(bx, yPx + 5);
+      ctx.closePath();
+      ctx.fill();
+
+      // Draw text
+      ctx.fillStyle = "#0a0e17";
+      ctx.textBaseline = "middle";
+      ctx.textAlign = "left";
+      ctx.fillText(label, bx + padX, yPx);
+      ctx.restore();
+    });
+  }
+};
+Chart.register(currentValueMarkerPlugin);
+
+const crosshairPlugin = {
+  id: "crosshairLine",
+  afterDraw(chart) {
+    const active = chart.tooltip?.getActiveElements?.();
+    if (!active || !active.length) return;
+    const { ctx, chartArea: { top, bottom } } = chart;
+    const x = active[0].element.x;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(x, top);
+    ctx.lineTo(x, bottom);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(148,163,184,0.85)";
+    ctx.setLineDash([]);
+    ctx.stroke();
+    ctx.restore();
+  },
+};
+Chart.register(crosshairPlugin);
+
+let activeTradeChart = null;
+
+function openTradeChart(btn) {
+  const raw = btn.getAttribute("data-chart").replace(/&amp;/g, "&").replace(/&#39;/g, "'");
+  const p = JSON.parse(raw);
+  if (!p.dates || p.dates.length === 0) {
+    alert("No chart data available for this pair.");
+    return;
+  }
+  const [a, b] = p.pair.split("/");
+  document.getElementById("chartTitle").innerHTML = `<span class="cm-pair">${a}</span><span style="color:#4a5568;margin:0 6px;">/</span><span class="cm-pair">${b}</span> Z-Score History`;
+  const zAbs = Math.abs(p.currentZ);
+  const zColor = zAbs >= 3 ? "#ef4444" : zAbs >= 2 ? "#f59e0b" : zAbs >= 1 ? "#38bdf8" : "#94a3b8";
+  const eAbs = Math.abs(p.entryZ);
+  const eColor = eAbs >= 3 ? "#ef4444" : eAbs >= 2 ? "#f59e0b" : eAbs >= 1 ? "#38bdf8" : "#94a3b8";
+  document.getElementById("chartStats").innerHTML = `
+    <div class="cm-stat"><span style="color:var(--muted);">Entry Z</span><span class="cm-val" style="color:${eColor}">${p.entryZ >= 0 ? "+" : ""}${p.entryZ.toFixed(2)}&sigma;</span></div>
+    <div class="cm-stat"><span style="color:var(--muted);">Current Z</span><span class="cm-val" style="color:${zColor}">${p.currentZ >= 0 ? "+" : ""}${p.currentZ.toFixed(2)}&sigma;</span></div>
+    <div class="cm-stat"><span style="color:var(--muted);">Window</span><span class="cm-val" style="color:#94a3b8;">${p.zWindow}d</span></div>`;
+  document.getElementById("chartModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+  setTimeout(() => buildTradeZChart(p.dates, p.z, p.entryZ, p.currentZ), 40);
+}
+
+function closeTradeChart() {
+  document.getElementById("chartModal").classList.remove("open");
+  document.body.style.overflow = "";
+  if (activeTradeChart) { activeTradeChart.destroy(); activeTradeChart = null; }
+}
+
+function buildTradeZChart(dates, z, entryZ, currentZ) {
+  if (activeTradeChart) { activeTradeChart.destroy(); activeTradeChart = null; }
+  const ctx = document.getElementById("tradeZChart").getContext("2d");
+  const grad = ctx.createLinearGradient(0, 0, 0, 380);
+  grad.addColorStop(0,   "rgba(56,189,248,0.20)");
+  grad.addColorStop(0.45,"rgba(56,189,248,0.06)");
+  grad.addColorStop(1,   "rgba(56,189,248,0.00)");
+
+  const hLine = (y, color, width, dash, lbl) => ({
+    type: "line", yMin: y, yMax: y,
+    borderColor: color, borderWidth: width, borderDash: dash,
+    label: { display: !!lbl, content: lbl, color, position: "end",
+            font: { size: 10, family: "'JetBrains Mono',monospace", weight: "600" },
+            xAdjust: -10, yAdjust: y > 0 ? -10 : 8, backgroundColor: "transparent", borderWidth: 0 },
+  });
+
+  const annotations = {
+    zero: hLine(0,  "rgba(148,163,184,0.30)", 1,   [4,4], "0"),
+    p1:   hLine(1,  "rgba(34,197,94,0.55)",   1,   [5,4], "+1σ"),
+    n1:   hLine(-1, "rgba(34,197,94,0.55)",   1,   [5,4], "-1σ"),
+    p2:   hLine(2,  "rgba(245,158,11,0.75)",  1.5, [5,3], "+2σ"),
+    n2:   hLine(-2, "rgba(245,158,11,0.75)",  1.5, [5,3], "-2σ"),
+    p3:   hLine(3,  "rgba(239,68,68,0.85)",   1.5, [],    "+3σ"),
+    n3:   hLine(-3, "rgba(239,68,68,0.85)",   1.5, [],    "-3σ"),
+  };
+
+  // Add entry Z horizontal line
+  if (entryZ != null && Math.abs(entryZ) > 0.1) {
+    annotations.entryLine = {
+      type: "line", yMin: entryZ, yMax: entryZ,
+      borderColor: "rgba(168,85,247,0.7)", borderWidth: 1.5, borderDash: [3, 3],
+      label: { display: true, content: "Entry " + (entryZ >= 0 ? "+" : "") + entryZ.toFixed(2) + "σ",
+              color: "#a855f7", position: "start",
+              font: { size: 9, family: "'JetBrains Mono',monospace", weight: "600" },
+              xAdjust: 10, yAdjust: -10, backgroundColor: "rgba(10,14,23,0.8)", borderWidth: 0,
+              padding: 3 },
+    };
+  }
+
+  activeTradeChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: dates,
+      datasets: [{
+        label: "Z-Score",
+        data: z,
+        borderColor: "#38bdf8",
+        borderWidth: 1.8,
+        pointRadius: 0,
+        pointHoverRadius: 3,
+        pointBorderWidth: 0,
+        fill: true,
+        backgroundColor: grad,
+        tension: 0.3,
+        spanGaps: true,
+
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: { right: 60 } },
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: "#0d1520", borderColor: "#242d40", borderWidth: 1,
+          titleColor: "#64748b", bodyColor: "#e2e8f0",
+          titleFont: { family: "'JetBrains Mono',monospace", size: 11 },
+          bodyFont:  { family: "'JetBrains Mono',monospace", size: 14 },
+          padding: 14, caretSize: 5, caretPadding: 50,
+          usePointStyle: true, pointStyle: "rectRounded", displayColors: true,
+          callbacks: {
+            labelColor: c => ({
+              borderColor: c.dataset.borderColor,
+              backgroundColor: c.dataset.borderColor,
+              borderWidth: 0, borderRadius: 2,
+            }),
+            label: c => {
+              const v = c.raw;
+              if (v === null) return "";
+              const lv = Math.abs(v) >= 3 ? "EXTREME" : Math.abs(v) >= 2 ? "STRONG" : Math.abs(v) >= 1 ? "SIGNAL" : "neutral";
+              return ` Z = ${v >= 0 ? "+" : ""}${v.toFixed(3)}σ   [${lv}]`;
+            },
+          },
+        },
+        annotation: { annotations },
+        zoom: {
+          pan: { enabled: true, mode: "x" },
+          zoom: { wheel: { enabled: true, speed: 0.1 }, pinch: { enabled: true }, mode: "x" },
+        },
+      },
+      scales: {
+        x: {
+          ticks: { color: "#374151", font: { family: "'JetBrains Mono',monospace", size: 10 }, maxRotation: 0, maxTicksLimit: 10, autoSkip: true },
+          grid: { color: "rgba(28,35,51,0.7)" }, border: { color: "#1c2333" },
+        },
+        y: {
+          ticks: { color: "#374151", font: { family: "'JetBrains Mono',monospace", size: 10 },
+            callback: v => (v >= 0 ? "+" : "") + v.toFixed(2) + "σ" },
+          grid: { color: "rgba(28,35,51,0.6)" }, border: { color: "#1c2333" },
+        },
+      },
+    },
+  });
+}
+
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeTradeChart(); });
+</script>
+
+<script>
+const TRADES_INIT = [];
+
+function loadTrades() {
+  const local = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  // Merge: localStorage entry data is authoritative (user may have edited prices/dates)
+  // TRADES_INIT only provides fresh currentZ and currentPrices from last Python run
+  const initMap = {};
+  TRADES_INIT.forEach(t => { initMap[t.id] = t; });
+  const merged = local.map(t => {
+    if (initMap[t.id]) {
+      // Only take live market data from Python — NOT entry fields the user may have edited
+      t.currentZ      = initMap[t.id].currentZ;
+      t.currentPriceA = initMap[t.id].currentPriceA;
+      t.currentPriceB = initMap[t.id].currentPriceB;
+      // Chart data always comes from Python
+      t.chartDates    = initMap[t.id].chartDates || [];
+      t.chartZ        = initMap[t.id].chartZ || [];
+    }
+    // Always recalculate days held and P&L from localStorage entry data
+    try {
+      const entry = new Date(t.entryDate);
+      t.daysHeld = Math.max(0, Math.floor((Date.now() - entry.getTime()) / 86400000));
+    } catch(e) {}
+    const dir = t.direction || "";
+    if (t.entryPriceA > 0 && t.entryPriceB > 0 && t.currentPriceA > 0 && t.currentPriceB > 0) {
+      let pnlA, pnlB;
+      if (dir === "short_a_long_b") {
+        pnlA = (t.entryPriceA - t.currentPriceA) / t.entryPriceA * 100;
+        pnlB = (t.currentPriceB - t.entryPriceB) / t.entryPriceB * 100;
+      } else {
+        pnlA = (t.currentPriceA - t.entryPriceA) / t.entryPriceA * 100;
+        pnlB = (t.entryPriceB - t.currentPriceB) / t.entryPriceB * 100;
+      }
+      t.pnlPct = Math.round((pnlA + pnlB) / 2 * 100) / 100;
+    }
+    return t;
+  });
+  // Add any TRADES_INIT entries not in local (skip deleted ones)
+  const deleted = JSON.parse(localStorage.getItem("deletedTrades") || "[]");
+  TRADES_INIT.forEach(t => {
+    if (!merged.some(m => String(m.id) === String(t.id)) && !deleted.includes(String(t.id))) merged.push(t);
+  });
+  localStorage.setItem("activeTrades", JSON.stringify(merged));
+  return merged;
+}
+
+function renderTrades() {
+  const trades = loadTrades();
+  const open = trades.filter(t => t.status === "open");
+  const closed = trades.filter(t => t.status === "closed");
+
+  const makeCard = (t) => {
+    const [a, b] = t.pair.split("/");
+    const dir = t.direction === "short_a_long_b" ? `Short ${a} / Long ${b}` : `Long ${a} / Short ${b}`;
+    const dirClass = t.direction === "short_a_long_b" ? "dir-short" : "dir-long";
+    const progress = Math.abs(t.entryZ) > 0 ? Math.min(100, (1 - Math.abs(t.currentZ) / Math.abs(t.entryZ)) * 100) : 0;
+    const pnl = t.pnlPct || 0;
+    const pnlClass = pnl >= 0 ? "pnl-pos" : "pnl-neg";
+    const zColor = Math.abs(t.currentZ) < Math.abs(t.entryZ) ? "#34d399" : "#ef4444";
+    const sA = t.sharesA || 0;
+    const sB = t.sharesB || 0;
+    // Dollar P&L per leg
+    let dollarPnl = 0;
+    if (sA > 0 && sB > 0) {
+      if (t.direction === "short_a_long_b") {
+        dollarPnl = (t.entryPriceA - t.currentPriceA) * sA + (t.currentPriceB - t.entryPriceB) * sB;
+      } else {
+        dollarPnl = (t.currentPriceA - t.entryPriceA) * sA + (t.entryPriceB - t.currentPriceB) * sB;
+      }
+    }
+    const dollarClass = dollarPnl >= 0 ? "pnl-pos" : "pnl-neg";
+    const rawChgA = t.entryPriceA > 0 ? (t.currentPriceA - t.entryPriceA) / t.entryPriceA * 100 : 0;
+    const rawChgB = t.entryPriceB > 0 ? (t.currentPriceB - t.entryPriceB) / t.entryPriceB * 100 : 0;
+    const chgA = t.direction === "short_a_long_b" ? -rawChgA : rawChgA;
+    const chgB = t.direction === "short_a_long_b" ? rawChgB : -rawChgB;
+    const chgAClass = chgA >= 0 ? "pnl-pos" : "pnl-neg";
+    const chgBClass = chgB >= 0 ? "pnl-pos" : "pnl-neg";
+    const cDates = t.chartDates || [];
+    const cZ = t.chartZ || [];
+    const hasChart = cDates.length > 0;
+    const chartPayload = hasChart ? JSON.stringify({pair: t.pair, dates: cDates, z: cZ, currentZ: t.currentZ, entryZ: t.entryZ, zWindow: 100}).replace(/&/g, "&amp;").replace(/'/g, "&#39;") : "";
+    const chartBtn = hasChart ? `<button class="tc-chart" onclick="openTradeChart(this)" data-chart='${chartPayload}'>&#9657; Z-Chart</button>` : "";
+    return `<div class="trade-card">
+      <div class="tc-header">
+        <span class="tc-pair">${t.pair}</span>
+        <span class="tc-dir ${dirClass}">${dir}</span>
+        <span class="tc-days">${t.daysHeld || 0}d held</span>
+        ${hasChart ? chartBtn : ""}
+        ${t.status === "open" ? `<button class="tc-edit" onclick="openEditModal('${t.id}')">&#9998; Edit</button><button class="tc-close" onclick="closeTrade('${t.id}')">&#10005; Close</button>` : `<button class="tc-reopen" onclick="reopenTrade('${t.id}')">&#8634; Reopen</button><button class="tc-delete" onclick="deleteTrade('${t.id}')">&#10005;</button>`}
+      </div>
+      <div class="tc-body">
+        <div class="tc-stat"><div class="tc-label">Entry Z</div><div class="tc-val">${t.entryZ >= 0 ? "+" : ""}${t.entryZ.toFixed(2)}&sigma;</div></div>
+        <div class="tc-stat"><div class="tc-label">Current Z</div><div class="tc-val" style="color:${zColor}">${t.currentZ >= 0 ? "+" : ""}${t.currentZ.toFixed(2)}&sigma;</div></div>
+        <div class="tc-stat"><div class="tc-label">Est P&L</div><div class="tc-val ${pnlClass}">${pnl >= 0 ? "+" : ""}${pnl.toFixed(1)}%</div></div>
+        <div class="tc-stat tc-prices"><div class="tc-label">${a} <span style="color:var(--cyan);font-size:9px;">${t.direction === "short_a_long_b" ? "-" : "+"}${sA} shares</span></div><div class="tc-val">$${t.entryPriceA.toFixed(2)} &rarr; $${t.currentPriceA.toFixed(2)} <span class="${chgAClass}">${chgA >= 0 ? "+" : ""}${chgA.toFixed(1)}%</span></div></div>
+        <div class="tc-stat tc-prices"><div class="tc-label">${b} <span style="color:var(--cyan);font-size:9px;">${t.direction === "short_a_long_b" ? "+" : "-"}${sB} shares</span></div><div class="tc-val">$${t.entryPriceB.toFixed(2)} &rarr; $${t.currentPriceB.toFixed(2)} <span class="${chgBClass}">${chgB >= 0 ? "+" : ""}${chgB.toFixed(1)}%</span></div></div>
+        <div class="tc-stat"><div class="tc-label">$ P&L</div><div class="tc-val ${dollarClass}">${dollarPnl >= 0 ? "+":""}$${Math.abs(dollarPnl).toFixed(0)}</div></div>
+      </div>
+      <div class="tc-progress">
+        <div class="tc-pbar-track"><div class="tc-pbar-fill" style="width:${progress > 0 ? progress.toFixed(0) : progress < 0 ? Math.min(Math.abs(progress), 100).toFixed(0) : 0}%;${progress > 0 ? 'background:var(--green);' : progress < 0 ? 'background:var(--red);' : 'background:var(--muted);width:2px;'}"></div></div>
+        <span class="tc-pbar-label" style="color:${progress < 0 ? 'var(--red)' : progress > 0 ? 'var(--green)' : 'var(--muted)'}">${(progress >= 0 ? "+" : "") + progress.toFixed(0)}% to Z=0</span>
+      </div>
+    </div>`;
+  };
+
+  document.getElementById("openTrades").innerHTML = open.length
+    ? open.map(makeCard).join("") : '<div class="no-trades">No open trades.</div>';
+  document.getElementById("closedTrades").innerHTML = closed.length
+    ? closed.map(makeCard).join("") : '<div class="no-trades">No closed trades yet.</div>';
+}
+
+function closeTrade(id) {
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  const t = trades.find(t => t.id === id);
+  if (t) {
+    t.status = "closed";
+    t.closeDate = new Date().toISOString().slice(0,10);
+  }
+  localStorage.setItem("activeTrades", JSON.stringify(trades));
+  renderTrades();
+}
+
+function reopenTrade(id) {
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  const t = trades.find(t => t.id === id);
+  if (t) {
+    t.status = "open";
+    delete t.closeDate;
+  }
+  localStorage.setItem("activeTrades", JSON.stringify(trades));
+  renderTrades();
+}
+
+function deleteTrade(id) {
+  if (!confirm("Delete this trade permanently?")) return;
+  let trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  trades = trades.filter(t => String(t.id) !== String(id));
+  localStorage.setItem("activeTrades", JSON.stringify(trades));
+  // Track deleted IDs so loadTrades() won't re-add from TRADES_INIT
+  const deleted = JSON.parse(localStorage.getItem("deletedTrades") || "[]");
+  if (!deleted.includes(String(id))) deleted.push(String(id));
+  localStorage.setItem("deletedTrades", JSON.stringify(deleted));
+  renderTrades();
+}
+
+function closeAllTrades() {
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  trades.forEach(t => {
+    if (t.status === "open") {
+      t.status = "closed";
+      t.closeDate = new Date().toISOString().slice(0,10);
+    }
+  });
+  localStorage.setItem("activeTrades", JSON.stringify(trades));
+  renderTrades();
+}
+
+function exportTrades() {
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  if (trades.length === 0) { alert("No trades to export."); return; }
+  const blob = new Blob([JSON.stringify(trades, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "active_trades.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function importTrades(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const imported = JSON.parse(reader.result);
+      if (!Array.isArray(imported)) { alert("Invalid file format."); return; }
+      const existing = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+      const ids = new Set(existing.map(t => t.id));
+      imported.forEach(t => { if (!ids.has(t.id)) existing.push(t); });
+      localStorage.setItem("activeTrades", JSON.stringify(existing));
+      renderTrades();
+    } catch(err) { alert("Error reading file: " + err.message); }
+  };
+  reader.readAsText(file);
+}
+
+function openEditModal(id) {
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  const t = trades.find(x => x.id === id);
+  if (!t) return;
+  const [a, b] = t.pair.split("/");
+  document.getElementById("editTradeId").value = id;
+  document.getElementById("editTitle").textContent = "Edit Trade: " + t.pair;
+  document.getElementById("editDate").value = t.entryDate || "";
+  document.getElementById("editPriceA").value = t.entryPriceA || "";
+  document.getElementById("editPriceB").value = t.entryPriceB || "";
+  document.getElementById("editLabelA").textContent = "Entry Price " + a;
+  document.getElementById("editLabelB").textContent = "Entry Price " + b;
+  document.getElementById("editSharesA").value = t.sharesA || 0;
+  document.getElementById("editSharesB").value = t.sharesB || 0;
+  document.getElementById("editLabelSharesA").textContent = "Shares " + a;
+  document.getElementById("editLabelSharesB").textContent = "Shares " + b;
+  document.getElementById("editModal").classList.add("open");
+}
+
+function closeEditModal() {
+  document.getElementById("editModal").classList.remove("open");
+}
+
+function saveTradeEdit() {
+  const id = document.getElementById("editTradeId").value;
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  const t = trades.find(x => x.id === id);
+  if (!t) return;
+
+  const newDate = document.getElementById("editDate").value;
+  const newPriceA = parseFloat(document.getElementById("editPriceA").value);
+  const newPriceB = parseFloat(document.getElementById("editPriceB").value);
+  const newSharesA = parseInt(document.getElementById("editSharesA").value);
+  const newSharesB = parseInt(document.getElementById("editSharesB").value);
+
+  if (newDate) t.entryDate = newDate;
+  if (!isNaN(newPriceA) && newPriceA > 0) t.entryPriceA = newPriceA;
+  if (!isNaN(newPriceB) && newPriceB > 0) t.entryPriceB = newPriceB;
+  if (!isNaN(newSharesA) && newSharesA >= 0) t.sharesA = newSharesA;
+  if (!isNaN(newSharesB) && newSharesB >= 0) t.sharesB = newSharesB;
+
+  // Recalculate days held
+  try {
+    const entry = new Date(t.entryDate);
+    t.daysHeld = Math.floor((Date.now() - entry.getTime()) / 86400000);
+  } catch(e) {}
+
+  // Recalculate entry Z from chart data if entry date or prices changed
+  if (t.chartDates && t.chartDates.length && t.chartZ && t.chartZ.length) {
+    // Find the Z value closest to the entry date
+    const idx = t.chartDates.indexOf(t.entryDate);
+    if (idx >= 0 && t.chartZ[idx] != null) {
+      t.entryZ = Math.round(t.chartZ[idx] * 100) / 100;
+    } else {
+      // Find nearest date if exact match not found
+      let closest = 0;
+      let minDiff = Infinity;
+      const entryTime = new Date(t.entryDate).getTime();
+      for (let i = 0; i < t.chartDates.length; i++) {
+        const diff = Math.abs(new Date(t.chartDates[i]).getTime() - entryTime);
+        if (diff < minDiff) { minDiff = diff; closest = i; }
+      }
+      if (t.chartZ[closest] != null) {
+        t.entryZ = Math.round(t.chartZ[closest] * 100) / 100;
+      }
+    }
+  }
+
+  // Recalculate P&L with new entry prices
+  const dir = t.direction || "";
+  if (dir === "short_a_long_b") {
+    const pnlA = (t.entryPriceA - t.currentPriceA) / t.entryPriceA * 100;
+    const pnlB = (t.currentPriceB - t.entryPriceB) / t.entryPriceB * 100;
+    t.pnlPct = Math.round((pnlA + pnlB) / 2 * 100) / 100;
+  } else {
+    const pnlA = (t.currentPriceA - t.entryPriceA) / t.entryPriceA * 100;
+    const pnlB = (t.entryPriceB - t.currentPriceB) / t.entryPriceB * 100;
+    t.pnlPct = Math.round((pnlA + pnlB) / 2 * 100) / 100;
+  }
+
+  localStorage.setItem("activeTrades", JSON.stringify(trades));
+  closeEditModal();
+  renderTrades();
+}
+
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeEditModal(); });
+
+window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("update-time").textContent = new Date(1772669897850).toLocaleString();
+  renderTrades();
+});
+</script>
+</body>
+</html>
