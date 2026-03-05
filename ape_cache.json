@@ -28438,5 +28438,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BIO": {
+        "ticker": "BIO",
+        "name": "Bio-Rad Laboratories, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 7683624960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
