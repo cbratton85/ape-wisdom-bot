@@ -28688,5 +28688,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BHE": {
+        "ticker": "BHE",
+        "name": "Benchmark Electronics, Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 1963411840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
