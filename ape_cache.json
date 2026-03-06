@@ -28978,5 +28978,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TACT": {
+        "ticker": "TACT",
+        "name": "TransAct Technologies Incorpora",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 34989544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "IFF": {
+        "ticker": "IFF",
+        "name": "International Flavors & Fragran",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 18906298368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
