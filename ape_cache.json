@@ -28758,5 +28758,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "INDS": {
+        "ticker": "INDS",
+        "name": "Pacer Industrial Real Estate ET",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "VNRX": {
+        "ticker": "VNRX",
+        "name": "VolitionRX Limited",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 27262188,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "IEF": {
+        "ticker": "IEF",
+        "name": "iShares 7-10 Year Treasury Bond",
+        "meta": "Long Government",
+        "type": "ETF",
+        "mcap": 14051039232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "EDV": {
+        "ticker": "EDV",
+        "name": "Vanguard Extended Duration Trea",
+        "meta": "Long Government",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "KRUZ": {
+        "ticker": "KRUZ",
+        "name": "Unusual Whales Subversive Repub",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "SHW": {
+        "ticker": "SHW",
+        "name": "Sherwin-Williams Company (The)",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 81156153344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
