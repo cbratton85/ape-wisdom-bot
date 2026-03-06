@@ -28608,5 +28608,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SGA": {
+        "ticker": "SGA",
+        "name": "Saga Communications, Inc.",
+        "meta": "Broadcasting",
+        "type": "EQUITY",
+        "mcap": 73608312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "MTSI": {
+        "ticker": "MTSI",
+        "name": "MACOM Technology Solutions Hold",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 17176240128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SRE": {
+        "ticker": "SRE",
+        "name": "DBA Sempra",
+        "meta": "Utilities - Diversified",
+        "type": "EQUITY",
+        "mcap": 61312905216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EFOI": {
+        "ticker": "EFOI",
+        "name": "Energy Focus, Inc.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 11249828,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "LYG": {
+        "ticker": "LYG",
+        "name": "Lloyds Banking Group Plc",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 77099016192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
