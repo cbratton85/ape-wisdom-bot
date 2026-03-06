@@ -28878,5 +28878,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ASTL": {
+        "ticker": "ASTL",
+        "name": "Algoma Steel Group Inc.",
+        "meta": "Steel",
+        "type": "EQUITY",
+        "mcap": 449641312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
