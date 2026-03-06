@@ -28718,5 +28718,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "HNI": {
+        "ticker": "HNI",
+        "name": "HNI Corporation",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 3020838912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "JAMF": {
+        "ticker": "JAMF",
+        "name": "Jamf Holding Corp.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 1749694592,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PDP": {
+        "ticker": "PDP",
+        "name": "Invesco Dorsey Wright Momentum ",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ZOM": {
+        "ticker": "ZOM",
+        "name": "ZOM",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
