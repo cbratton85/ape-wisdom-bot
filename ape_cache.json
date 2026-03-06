@@ -28968,5 +28968,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "PAYC": {
+        "ticker": "PAYC",
+        "name": "Paycom Software, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 7577593344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
