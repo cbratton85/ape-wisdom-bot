@@ -28898,5 +28898,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "BIB": {
+        "ticker": "BIB",
+        "name": "ProShares Ultra Nasdaq Biotechn",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "IOO": {
+        "ticker": "IOO",
+        "name": "iShares Global 100 ETF",
+        "meta": "Global Large-Stock Blend",
+        "type": "ETF",
+        "mcap": 5285609984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "WLFC": {
+        "ticker": "WLFC",
+        "name": "Willis Lease Finance Corporatio",
+        "meta": "Rental & Leasing Services",
+        "type": "EQUITY",
+        "mcap": 1375925888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "TFLO": {
+        "ticker": "TFLO",
+        "name": "iShares Treasury Floating Rate ",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "QD": {
+        "ticker": "QD",
+        "name": "QD",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
