@@ -28948,5 +28948,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "LPA": {
+        "ticker": "LPA",
+        "name": "Logistic Properties of the Amer",
+        "meta": "Real Estate - Development",
+        "type": "EQUITY",
+        "mcap": 84735752,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "WEAT": {
+        "ticker": "WEAT",
+        "name": "Teucrium Wheat Fund ETV",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }

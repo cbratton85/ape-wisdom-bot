@@ -94,11 +94,6 @@
         "last_checked": "2026-03-05",
         "reason": "No Price Data"
     },
-    "LAZR": {
-        "delisted": true,
-        "last_checked": "2026-03-05",
-        "reason": "No Price Data"
-    },
     "MOM": {
         "delisted": true,
         "last_checked": "2026-03-05",
@@ -185,6 +180,11 @@
         "reason": "No Price Data"
     },
     "GAN": {
+        "delisted": true,
+        "last_checked": "2026-03-06",
+        "reason": "No Price Data"
+    },
+    "LAZR": {
         "delisted": true,
         "last_checked": "2026-03-06",
         "reason": "No Price Data"
