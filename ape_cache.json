@@ -28658,5 +28658,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CURB": {
+        "ticker": "CURB",
+        "name": "Curbline Properties Corp.",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 2953468416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "JKS": {
+        "ticker": "JKS",
+        "name": "JinkoSolar Holding Company Limi",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 1229328000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ELAN": {
+        "ticker": "ELAN",
+        "name": "Elanco Animal Health Incorporat",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 11892259840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
