@@ -28828,5 +28828,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SGI": {
+        "ticker": "SGI",
+        "name": "Somnigroup International Inc.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 16986056704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SPHQ": {
+        "ticker": "SPHQ",
+        "name": "Invesco S&P 500 Quality ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SKIN": {
+        "ticker": "SKIN",
+        "name": "The Beauty Health Company",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 143440944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "TPG": {
+        "ticker": "TPG",
+        "name": "TPG Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 16786949120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "OSK": {
+        "ticker": "OSK",
+        "name": "Oshkosh Corporation (Holding Co",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 9853757440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
