@@ -28698,5 +28698,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "RGF": {
+        "ticker": "RGF",
+        "name": "The Real Good Food Company, Inc",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
