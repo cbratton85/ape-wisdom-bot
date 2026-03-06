@@ -28888,5 +28888,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CSF": {
+        "ticker": "CSF",
+        "name": "VictoryShares US Discovery Enha",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
