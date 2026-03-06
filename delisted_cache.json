@@ -79,11 +79,6 @@
         "last_checked": "2026-03-04",
         "reason": "No Price Data"
     },
-    "CBD": {
-        "delisted": true,
-        "last_checked": "2026-03-04",
-        "reason": "No Price Data"
-    },
     "DDG": {
         "delisted": true,
         "last_checked": "2026-03-04",
@@ -180,6 +175,11 @@
         "reason": "No Price Data"
     },
     "QED": {
+        "delisted": true,
+        "last_checked": "2026-03-06",
+        "reason": "No Price Data"
+    },
+    "CBD": {
         "delisted": true,
         "last_checked": "2026-03-06",
         "reason": "No Price Data"

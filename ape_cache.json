@@ -28818,5 +28818,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HNST": {
+        "ticker": "HNST",
+        "name": "The Honest Company, Inc.",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 316614912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
