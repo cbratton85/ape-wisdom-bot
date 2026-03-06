@@ -28708,5 +28708,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "MNTK": {
+        "ticker": "MNTK",
+        "name": "Montauk Renewables, Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 219075200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
