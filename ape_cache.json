@@ -29018,5 +29018,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "WDS": {
+        "ticker": "WDS",
+        "name": "Woodside Energy Group Limited",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 42470576128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "XIACF": {
+        "ticker": "XIACF",
+        "name": "Xiaomi Corp.",
+        "meta": "Consumer Electronics",
+        "type": "EQUITY",
+        "mcap": 110905483264,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
     }
 }
