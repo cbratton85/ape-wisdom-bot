@@ -29038,5 +29038,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PNK"
+    },
+    "EAOA": {
+        "ticker": "EAOA",
+        "name": "iShares ESG Aware 80/20 Aggress",
+        "meta": "Global Aggressive Allocation",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "PWC": {
+        "ticker": "PWC",
+        "name": "Invesco Dynamic Market ETF",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 58720664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
