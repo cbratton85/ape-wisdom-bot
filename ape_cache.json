@@ -29088,5 +29088,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CSL": {
+        "ticker": "CSL",
+        "name": "Carlisle Companies Incorporated",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 14815564800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AME": {
+        "ticker": "AME",
+        "name": "AMETEK, Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 51100655616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
