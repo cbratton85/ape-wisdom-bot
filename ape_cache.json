@@ -29078,5 +29078,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "IDXX": {
+        "ticker": "IDXX",
+        "name": "IDEXX Laboratories, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 48582344704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
