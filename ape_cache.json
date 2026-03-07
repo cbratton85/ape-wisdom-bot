@@ -28998,5 +28998,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MSGM": {
+        "ticker": "MSGM",
+        "name": "Motorsport Games Inc.",
+        "meta": "Electronic Gaming & Multimedia",
+        "type": "EQUITY",
+        "mcap": 23513228,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
