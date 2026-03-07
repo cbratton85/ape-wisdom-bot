@@ -29068,5 +29068,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "CRH": {
+        "ticker": "CRH",
+        "name": "CRH PLC",
+        "meta": "Building Materials",
+        "type": "EQUITY",
+        "mcap": 71289233408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
