@@ -29108,5 +29108,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "EFAS": {
+        "ticker": "EFAS",
+        "name": "Global X MSCI SuperDividend EAF",
+        "meta": "Foreign Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
