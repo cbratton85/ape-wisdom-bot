@@ -29008,5 +29008,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ARCO": {
+        "ticker": "ARCO",
+        "name": "Arcos Dorados Holdings Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 1672664704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

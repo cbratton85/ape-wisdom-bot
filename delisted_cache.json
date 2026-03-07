@@ -139,11 +139,6 @@
         "last_checked": "2026-03-06",
         "reason": "No Price Data"
     },
-    "CBD": {
-        "delisted": true,
-        "last_checked": "2026-03-06",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-03-06",
@@ -185,6 +180,16 @@
         "reason": "No Price Data"
     },
     "ZOM": {
+        "delisted": true,
+        "last_checked": "2026-03-07",
+        "reason": "No Price Data"
+    },
+    "CBD": {
+        "delisted": true,
+        "last_checked": "2026-03-07",
+        "reason": "No Price Data"
+    },
+    "SQ": {
         "delisted": true,
         "last_checked": "2026-03-07",
         "reason": "No Price Data"
