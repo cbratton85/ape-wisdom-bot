@@ -29118,5 +29118,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "SVRN": {
+        "ticker": "SVRN",
+        "name": "OceanPal Inc.",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 17287302,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "PSHG": {
+        "ticker": "PSHG",
+        "name": "Performance Shipping Inc.",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 28469642,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
