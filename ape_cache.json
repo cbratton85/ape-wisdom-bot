@@ -29058,5 +29058,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ALE": {
+        "ticker": "ALE",
+        "name": "ALE",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
