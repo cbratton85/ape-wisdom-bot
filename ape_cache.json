@@ -29308,5 +29308,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FCA": {
+        "ticker": "FCA",
+        "name": "First Trust China AlphaDEX Fund",
+        "meta": "China Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
