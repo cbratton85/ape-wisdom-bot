@@ -29138,5 +29138,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "GOVZ": {
+        "ticker": "GOVZ",
+        "name": "iShares 25  Year Treasury STRIP",
+        "meta": "Long Government",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "TVGN": {
+        "ticker": "TVGN",
+        "name": "Tevogen Bio Holdings Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 29593300,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "IYE": {
+        "ticker": "IYE",
+        "name": "iShares U.S. Energy ETF",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 1245787520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "OPRX": {
+        "ticker": "OPRX",
+        "name": "OptimizeRx Corporation",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 125637992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "STPZ": {
+        "ticker": "STPZ",
+        "name": "PIMCO 1-5 Year U.S. TIPS Index ",
+        "meta": "Short-Term Inflation-Protected Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FRD": {
+        "ticker": "FRD",
+        "name": "Friedman Industries Inc.",
+        "meta": "Steel",
+        "type": "EQUITY",
+        "mcap": 130721920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
