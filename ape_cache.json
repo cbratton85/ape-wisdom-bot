@@ -29208,5 +29208,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "OILD": {
+        "ticker": "OILD",
+        "name": "MicroSectors Oil & Gas Exp. & P",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
