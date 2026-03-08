@@ -29368,5 +29368,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FLNG": {
+        "ticker": "FLNG",
+        "name": "FLEX LNG Ltd.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 1635212544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EVLV": {
+        "ticker": "EVLV",
+        "name": "Evolv Technologies Holdings, In",
+        "meta": "Security & Protection Services",
+        "type": "EQUITY",
+        "mcap": 887057344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CRAK": {
+        "ticker": "CRAK",
+        "name": "VanEck Oil Refiners ETF",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "NGE": {
+        "ticker": "NGE",
+        "name": "Global X MSCI Nigeria ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CTRA": {
+        "ticker": "CTRA",
+        "name": "Coterra Energy Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 23560232960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SLNG": {
+        "ticker": "SLNG",
+        "name": "Stabilis Solutions, Inc.",
+        "meta": "Oil & Gas Integrated",
+        "type": "EQUITY",
+        "mcap": 69922096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
