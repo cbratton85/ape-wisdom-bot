@@ -29258,5 +29258,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ALV": {
+        "ticker": "ALV",
+        "name": "Autoliv, Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 8432154112,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
