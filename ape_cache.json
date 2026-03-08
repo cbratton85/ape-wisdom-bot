@@ -29198,5 +29198,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SIGA": {
+        "ticker": "SIGA",
+        "name": "SIGA Technologies Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 415345568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
