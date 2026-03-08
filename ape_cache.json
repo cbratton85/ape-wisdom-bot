@@ -29218,5 +29218,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "GXO": {
+        "ticker": "GXO",
+        "name": "GXO Logistics, Inc.",
+        "meta": "Integrated Freight & Logistics",
+        "type": "EQUITY",
+        "mcap": 6396428800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
