@@ -29328,5 +29328,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "LFUS": {
+        "ticker": "LFUS",
+        "name": "Littelfuse, Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 7589547008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "IWC": {
+        "ticker": "IWC",
+        "name": "iShares Microcap ETF",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "RES": {
+        "ticker": "RES",
+        "name": "RPC, Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 1350175232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
