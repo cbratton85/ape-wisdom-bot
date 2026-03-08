@@ -29298,5 +29298,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SITC": {
+        "ticker": "SITC",
+        "name": "SITE Centers Corp.",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 322456224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
