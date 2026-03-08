@@ -29228,5 +29228,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "XLO": {
+        "ticker": "XLO",
+        "name": "Xilio Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 38932312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
