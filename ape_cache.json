@@ -29278,5 +29278,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SAIA": {
+        "ticker": "SAIA",
+        "name": "Saia, Inc.",
+        "meta": "Trucking",
+        "type": "EQUITY",
+        "mcap": 9595160576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
