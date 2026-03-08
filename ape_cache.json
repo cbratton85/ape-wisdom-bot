@@ -29318,5 +29318,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "SPTL": {
+        "ticker": "SPTL",
+        "name": "State Street SPDR Portfolio Lon",
+        "meta": "Long Government",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
