@@ -29268,5 +29268,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FIW": {
+        "ticker": "FIW",
+        "name": "First Trust Water ETF",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
