@@ -29238,5 +29238,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "UTHR": {
+        "ticker": "UTHR",
+        "name": "United Therapeutics Corporation",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 20956647424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ALGN": {
+        "ticker": "ALGN",
+        "name": "Align Technology, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 12484500480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
