@@ -29288,5 +29288,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "TGS": {
+        "ticker": "TGS",
+        "name": "Transportadora de Gas del Sur S",
+        "meta": "Oil & Gas Integrated",
+        "type": "EQUITY",
+        "mcap": 4952363520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
