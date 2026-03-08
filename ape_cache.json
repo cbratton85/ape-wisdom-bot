@@ -29358,5 +29358,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "KBR": {
+        "ticker": "KBR",
+        "name": "KBR, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 5079585280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
