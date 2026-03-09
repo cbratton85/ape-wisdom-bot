@@ -29648,5 +29648,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "SAVA": {
+        "ticker": "SAVA",
+        "name": "Cassava Sciences, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 98306576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "FIDU": {
+        "ticker": "FIDU",
+        "name": "Fidelity MSCI Industrials Index",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ZVRA": {
+        "ticker": "ZVRA",
+        "name": "Zevra Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 501048064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "MGNX": {
+        "ticker": "MGNX",
+        "name": "MacroGenics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 148973840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "EDBL": {
+        "ticker": "EDBL",
+        "name": "Edible Garden AG Incorporated",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 1484424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
