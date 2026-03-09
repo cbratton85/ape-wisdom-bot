@@ -29828,5 +29828,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "HMY": {
+        "ticker": "HMY",
+        "name": "Harmony Gold Mining Company Lim",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 11867084800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RNAC": {
+        "ticker": "RNAC",
+        "name": "Cartesian Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 234552544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ATOS": {
+        "ticker": "ATOS",
+        "name": "Atossa Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 39354232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
