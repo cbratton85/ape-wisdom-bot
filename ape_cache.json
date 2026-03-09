@@ -29558,5 +29558,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "KLXE": {
+        "ticker": "KLXE",
+        "name": "KLX Energy Services Holdings, I",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 44779544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
