@@ -59,11 +59,6 @@
         "last_checked": "2026-03-07",
         "reason": "No Price Data"
     },
-    "FI": {
-        "delisted": true,
-        "last_checked": "2026-03-07",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-03-07",
@@ -145,6 +140,11 @@
         "reason": "No Price Data"
     },
     "SAVE": {
+        "delisted": true,
+        "last_checked": "2026-03-09",
+        "reason": "No Price Data"
+    },
+    "FI": {
         "delisted": true,
         "last_checked": "2026-03-09",
         "reason": "No Price Data"

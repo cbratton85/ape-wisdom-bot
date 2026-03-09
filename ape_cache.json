@@ -29608,5 +29608,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MUSA": {
+        "ticker": "MUSA",
+        "name": "Murphy USA Inc.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 8126452736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
