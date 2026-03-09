@@ -29428,5 +29428,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "CANE": {
+        "ticker": "CANE",
+        "name": "Teucrium Sugar Fund ETV",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "QMJ": {
+        "ticker": "QMJ",
+        "name": "Direxion S&P 500 High minus Low",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ENOR": {
+        "ticker": "ENOR",
+        "name": "iShares MSCI Norway ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "BAR": {
+        "ticker": "BAR",
+        "name": "GraniteShares Gold Trust Shares",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "USMC": {
+        "ticker": "USMC",
+        "name": "Principal U.S. Mega-Cap ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
