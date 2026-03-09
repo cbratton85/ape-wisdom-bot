@@ -29618,5 +29618,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FLJP": {
+        "ticker": "FLJP",
+        "name": "Franklin FTSE Japan ETF",
+        "meta": "Japan Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "UHS": {
+        "ticker": "UHS",
+        "name": "Universal Health Services, Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 11768340480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RLMD": {
+        "ticker": "RLMD",
+        "name": "Relmada Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 326334624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
