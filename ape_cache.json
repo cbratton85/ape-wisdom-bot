@@ -29478,5 +29478,85 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "WDFC": {
+        "ticker": "WDFC",
+        "name": "WD-40 Company",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 3196898304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CPT": {
+        "ticker": "CPT",
+        "name": "Camden Property Trust",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 11334294528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "USL": {
+        "ticker": "USL",
+        "name": "United States 12 Month Oil",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "HCA": {
+        "ticker": "HCA",
+        "name": "HCA Healthcare, Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 119148150784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RRC": {
+        "ticker": "RRC",
+        "name": "Range Resources Corporation",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 9830466560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "WCN": {
+        "ticker": "WCN",
+        "name": "Waste Connections, Inc.",
+        "meta": "Waste Management",
+        "type": "EQUITY",
+        "mcap": 43493384192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TLS": {
+        "ticker": "TLS",
+        "name": "Telos Corporation",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 317143616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "BERZ": {
+        "ticker": "BERZ",
+        "name": "MicroSectors FANG & Innovation ",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
