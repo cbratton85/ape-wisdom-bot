@@ -29698,5 +29698,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "OSTX": {
+        "ticker": "OSTX",
+        "name": "OS Therapies Incorporated",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 61801188,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "BHR": {
+        "ticker": "BHR",
+        "name": "Braemar Hotels & Resorts Inc.",
+        "meta": "REIT - Hotel & Motel",
+        "type": "EQUITY",
+        "mcap": 180857248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
