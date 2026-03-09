@@ -29788,5 +29788,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "GREE": {
+        "ticker": "GREE",
+        "name": "Greenidge Generation Holdings I",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 25278396,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
