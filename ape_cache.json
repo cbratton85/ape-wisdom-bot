@@ -29778,5 +29778,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "MRT": {
+        "ticker": "MRT",
+        "name": "Marti Technologies, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 170010304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
