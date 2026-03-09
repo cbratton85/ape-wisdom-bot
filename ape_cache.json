@@ -29798,5 +29798,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "MTRN": {
+        "ticker": "MTRN",
+        "name": "Materion Corporation",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 3011520000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NDSN": {
+        "ticker": "NDSN",
+        "name": "Nordson Corporation",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 15144688640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "KLIC": {
+        "ticker": "KLIC",
+        "name": "Kulicke and Soffa Industries, I",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 3425169664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
