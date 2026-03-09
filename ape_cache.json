@@ -29718,5 +29718,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "USAC": {
+        "ticker": "USAC",
+        "name": "USA Compression Partners, LP",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 3961558016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ANTX": {
+        "ticker": "ANTX",
+        "name": "AN2 Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 158175440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DBC": {
+        "ticker": "DBC",
+        "name": "Invesco DB Commodity Index Trac",
+        "meta": "Commodities Broad Basket",
+        "type": "ETF",
+        "mcap": 3118085888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "BLDP": {
+        "ticker": "BLDP",
+        "name": "Ballard Power Systems, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 586440384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "LEVI": {
+        "ticker": "LEVI",
+        "name": "Levi Strauss & Co",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 7187355648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GRPN": {
+        "ticker": "GRPN",
+        "name": "Groupon, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 475404800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
