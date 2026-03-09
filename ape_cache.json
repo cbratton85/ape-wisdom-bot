@@ -29598,5 +29598,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CWH": {
+        "ticker": "CWH",
+        "name": "Camping World Holdings, Inc.",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 466896320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
