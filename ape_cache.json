@@ -29568,5 +29568,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AMPY": {
+        "ticker": "AMPY",
+        "name": "Amplify Energy Corp.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 246903568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BTE": {
+        "ticker": "BTE",
+        "name": "Baytex Energy Corp",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 3039740672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GPRK": {
+        "ticker": "GPRK",
+        "name": "Geopark Ltd",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 445343584,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
