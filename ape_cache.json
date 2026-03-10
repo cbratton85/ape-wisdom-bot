@@ -30168,5 +30168,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AHCO": {
+        "ticker": "AHCO",
+        "name": "AdaptHealth Corp.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 1318373632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CMBM": {
+        "ticker": "CMBM",
+        "name": "Cambium Networks Corporation",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 33327692,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SVCO": {
+        "ticker": "SVCO",
+        "name": "Silvaco Group, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 101721064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
