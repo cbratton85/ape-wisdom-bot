@@ -30068,5 +30068,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CHH": {
+        "ticker": "CHH",
+        "name": "Choice Hotels International, In",
+        "meta": "Lodging",
+        "type": "EQUITY",
+        "mcap": 4533791232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
