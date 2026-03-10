@@ -30118,5 +30118,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CACC": {
+        "ticker": "CACC",
+        "name": "Credit Acceptance Corporation",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 5508271104,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
