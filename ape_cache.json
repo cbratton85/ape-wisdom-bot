@@ -29908,5 +29908,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ZENV": {
+        "ticker": "ZENV",
+        "name": "Zenvia Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 23655278,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "FDIS": {
+        "ticker": "FDIS",
+        "name": "Fidelity MSCI Consumer Discreti",
+        "meta": "Consumer Cyclical",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
