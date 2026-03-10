@@ -29988,5 +29988,85 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "WAL": {
+        "ticker": "WAL",
+        "name": "Western Alliance Bancorporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 8141770240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LGVN": {
+        "ticker": "LGVN",
+        "name": "Longeveron Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 20692894,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "POLA": {
+        "ticker": "POLA",
+        "name": "Polar Power, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 4097087,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "MBB": {
+        "ticker": "MBB",
+        "name": "iShares MBS ETF",
+        "meta": "Government Mortgage-Backed Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "IPX": {
+        "ticker": "IPX",
+        "name": "IperionX Limited",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 1682577664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "DDS": {
+        "ticker": "DDS",
+        "name": "Dillard's, Inc.",
+        "meta": "Department Stores",
+        "type": "EQUITY",
+        "mcap": 9474659328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CELU": {
+        "ticker": "CELU",
+        "name": "Celularity Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 37200744,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "RGNX": {
+        "ticker": "RGNX",
+        "name": "REGENXBIO Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 520658464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
