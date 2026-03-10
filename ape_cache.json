@@ -29928,5 +29928,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "BNTX": {
+        "ticker": "BNTX",
+        "name": "BioNTech SE",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 25635084288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "INKT": {
+        "ticker": "INKT",
+        "name": "MiNK Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 49053920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
