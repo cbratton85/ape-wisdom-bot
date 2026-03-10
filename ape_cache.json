@@ -30078,5 +30078,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "THO": {
+        "ticker": "THO",
+        "name": "Thor Industries, Inc.",
+        "meta": "Recreational Vehicles",
+        "type": "EQUITY",
+        "mcap": 4581111808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IJS": {
+        "ticker": "IJS",
+        "name": "iShares S&P SmallCap 600 Value ",
+        "meta": "Small Value",
+        "type": "ETF",
+        "mcap": 4927312384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ENTX": {
+        "ticker": "ENTX",
+        "name": "Entera Bio Ltd.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 64658708,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ONC": {
+        "ticker": "ONC",
+        "name": "BeOne Medicines Ltd.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 35445952512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
