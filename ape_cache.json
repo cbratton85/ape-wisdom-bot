@@ -29888,5 +29888,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ATNF": {
+        "ticker": "ATNF",
+        "name": "ATNF",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "AERO": {
+        "ticker": "AERO",
+        "name": "Grupo Aeromexico, S.A.B. de C.V",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 2302355712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
