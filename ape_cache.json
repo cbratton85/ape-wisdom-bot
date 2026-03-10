@@ -30128,5 +30128,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SBS": {
+        "ticker": "SBS",
+        "name": "Companhia de saneamento Basico ",
+        "meta": "Utilities - Regulated Water",
+        "type": "EQUITY",
+        "mcap": 20061286400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
