@@ -30138,5 +30138,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CODGF": {
+        "ticker": "CODGF",
+        "name": "Compagnie de Saint-Gobain",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 43798921216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
+    },
+    "DOMO": {
+        "ticker": "DOMO",
+        "name": "Domo, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 183077392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SSYS": {
+        "ticker": "SSYS",
+        "name": "Stratasys, Ltd.",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 708264448,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
