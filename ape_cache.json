@@ -29948,5 +29948,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "NBN": {
+        "ticker": "NBN",
+        "name": "Northeast Bank",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 915209152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "BIAF": {
+        "ticker": "BIAF",
+        "name": "bioAffinity Technologies, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 4768631,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "WRLD": {
+        "ticker": "WRLD",
+        "name": "World Acceptance Corporation",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 693541824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "NTB": {
+        "ticker": "NTB",
+        "name": "Bank of N.T. Butterfield & Son ",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 2050994432,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
