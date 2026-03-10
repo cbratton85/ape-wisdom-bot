@@ -29858,5 +29858,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "IYT": {
+        "ticker": "IYT",
+        "name": "iShares U.S. Transportation ETF",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 214900000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "HYPR": {
+        "ticker": "HYPR",
+        "name": "Hyperfine, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 112715640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SMBC": {
+        "ticker": "SMBC",
+        "name": "Southern Missouri Bancorp, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 684825472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }

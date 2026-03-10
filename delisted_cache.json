@@ -79,11 +79,6 @@
         "last_checked": "2026-03-08",
         "reason": "No Price Data"
     },
-    "NGE": {
-        "delisted": true,
-        "last_checked": "2026-03-08",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-03-09",
@@ -157,6 +152,11 @@
     "QLS": {
         "delisted": true,
         "last_checked": "2026-03-09",
+        "reason": "No Price Data"
+    },
+    "NGE": {
+        "delisted": true,
+        "last_checked": "2026-03-10",
         "reason": "No Price Data"
     }
 }
