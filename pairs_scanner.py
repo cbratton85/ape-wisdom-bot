@@ -322,7 +322,8 @@ def build_dataset(master):
         today = datetime.now().date()
 
         if last_date.date() < today:
-            start = (last_date + timedelta(days=1)).strftime("%Y-%m-%d")
+            # Re-fetch from last_date (not +1) to avoid start>end in UTC-ahead timezones
+            start = last_date.strftime("%Y-%m-%d")
             tickers_to_update = data.columns.tolist()
             total_update_batches = (len(tickers_to_update) + BATCH_SIZE - 1) // BATCH_SIZE
 
@@ -409,7 +410,8 @@ def build_chart_dataset(master):
     if not chart_data.empty:
         last_date = chart_data.index.max()
         if last_date.date() < datetime.now().date():
-            upd_start = (last_date + timedelta(days=1)).strftime("%Y-%m-%d")
+            # Re-fetch from last_date (not +1) to avoid start>end in UTC-ahead timezones
+            upd_start = last_date.strftime("%Y-%m-%d")
             tickers_to_upd = chart_data.columns.tolist()
             total_upd = (len(tickers_to_upd) + BATCH_SIZE - 1) // BATCH_SIZE
 
