@@ -30318,5 +30318,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "CODX": {
+        "ticker": "CODX",
+        "name": "Co-Diagnostics, Inc. Common Stock",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 9218137,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NAS"
     }
 }
