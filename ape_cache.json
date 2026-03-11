@@ -30448,5 +30448,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "OTEX": {
+        "ticker": "OTEX",
+        "name": "Open Text Corporation",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 6128977920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DUAL": {
+        "ticker": "DUAL",
+        "name": "North Shore Dual Share Class ET",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "OVV": {
+        "ticker": "OVV",
+        "name": "Ovintiv Inc. (DE)",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 15470115840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
