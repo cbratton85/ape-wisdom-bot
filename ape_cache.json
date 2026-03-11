@@ -30478,5 +30478,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "LOCO": {
+        "ticker": "LOCO",
+        "name": "El Pollo Loco Holdings, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 334149344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PENN": {
+        "ticker": "PENN",
+        "name": "PENN Entertainment, Inc.",
+        "meta": "Resorts & Casinos",
+        "type": "EQUITY",
+        "mcap": 1892350720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BCAB": {
+        "ticker": "BCAB",
+        "name": "BioAtla, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 12290650,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "RVSN": {
+        "ticker": "RVSN",
+        "name": "Rail Vision Ltd.",
+        "meta": "Railroads",
+        "type": "EQUITY",
+        "mcap": 17965300,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
