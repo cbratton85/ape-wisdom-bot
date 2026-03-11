@@ -30198,5 +30198,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "TMFC": {
+        "ticker": "TMFC",
+        "name": "Motley Fool 100 Index ETF ETF",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "MANE": {
+        "ticker": "MANE",
+        "name": "Veradermics, Incorporated",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1776654336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
