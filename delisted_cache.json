@@ -24,11 +24,6 @@
         "last_checked": "2026-03-07",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-03-08",
-        "reason": "No Price Data"
-    },
     "MOM": {
         "delisted": true,
         "last_checked": "2026-03-08",
@@ -130,6 +125,11 @@
         "reason": "No Price Data"
     },
     "VSL": {
+        "delisted": true,
+        "last_checked": "2026-03-11",
+        "reason": "No Price Data"
+    },
+    "AUD": {
         "delisted": true,
         "last_checked": "2026-03-11",
         "reason": "No Price Data"

@@ -30358,5 +30358,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ACTG": {
+        "ticker": "ACTG",
+        "name": "Acacia Research Corporation",
+        "meta": "Business Equipment & Supplies",
+        "type": "EQUITY",
+        "mcap": 400310560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
