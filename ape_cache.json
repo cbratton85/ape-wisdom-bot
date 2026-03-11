@@ -30298,5 +30298,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "LZB": {
+        "ticker": "LZB",
+        "name": "La-Z-Boy Incorporated",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 1382665600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SPT": {
+        "ticker": "SPT",
+        "name": "Sprout Social, Inc",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 353192544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
