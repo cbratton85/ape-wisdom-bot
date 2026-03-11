@@ -30538,5 +30538,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "HIMX": {
+        "ticker": "HIMX",
+        "name": "Himax Technologies, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 1600457600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CDXS": {
+        "ticker": "CDXS",
+        "name": "Codexis, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 114711968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FTK": {
+        "ticker": "FTK",
+        "name": "Flotek Industries, Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 519699808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ELUT": {
+        "ticker": "ELUT",
+        "name": "Elutia, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 46544292,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
