@@ -168,6 +168,70 @@ def safe_save(df):
     os.replace(tmp, DATA_FILE)
 
 
+def trim_caches(master):
+    """Trim all cache files to only the data that's needed, removing old rows and stale tickers."""
+    master_set = set(master)
+
+    # ── Price cache: keep LOOKBACK_DAYS + 20% buffer ──
+    if os.path.exists(DATA_FILE):
+        try:
+            df = pd.read_csv(DATA_FILE, index_col=0, parse_dates=True)
+            before = (df.shape[0], df.shape[1])
+            keep_days = int(LOOKBACK_DAYS * 1.2)
+            df = df[[c for c in df.columns if c in master_set]]
+            df = df.tail(keep_days)
+            if (df.shape[0], df.shape[1]) != before:
+                safe_save(df)
+                print(f"  Trimmed prices: {before[0]}x{before[1]} → {df.shape[0]}x{df.shape[1]}")
+        except Exception:
+            pass
+
+    # ── Chart cache: keep CHART_LOOKBACK_DAYS + 10% buffer ──
+    if os.path.exists(CHART_DATA_FILE):
+        try:
+            df = pd.read_csv(CHART_DATA_FILE, index_col=0, parse_dates=True)
+            before = (df.shape[0], df.shape[1])
+            keep_days = int(CHART_LOOKBACK_DAYS * 1.1)
+            df = df[[c for c in df.columns if c in master_set]]
+            df = df.tail(keep_days)
+            if (df.shape[0], df.shape[1]) != before:
+                tmp = CHART_DATA_FILE + ".tmp"
+                df.to_csv(tmp, compression='gzip')
+                os.replace(tmp, CHART_DATA_FILE)
+                print(f"  Trimmed chart data: {before[0]}x{before[1]} → {df.shape[0]}x{df.shape[1]}")
+        except Exception:
+            pass
+
+    # ── Volume cache: keep last 120 days ──
+    if os.path.exists(VOLUME_DATA_FILE):
+        try:
+            df = pd.read_csv(VOLUME_DATA_FILE, index_col=0, parse_dates=True)
+            before = (df.shape[0], df.shape[1])
+            df = df[[c for c in df.columns if c in master_set]]
+            df = df.tail(120)
+            if (df.shape[0], df.shape[1]) != before:
+                tmp = VOLUME_DATA_FILE + ".tmp"
+                df.to_csv(tmp, compression='gzip')
+                os.replace(tmp, VOLUME_DATA_FILE)
+                print(f"  Trimmed volume data: {before[0]}x{before[1]} → {df.shape[0]}x{df.shape[1]}")
+        except Exception:
+            pass
+
+    # ── Market cap cache: remove tickers no longer in master list ──
+    if os.path.exists(MCAP_CACHE_FILE):
+        try:
+            with open(MCAP_CACHE_FILE, "r") as f:
+                mcap = json.load(f)
+            before = len(mcap)
+            mcap = {k: v for k, v in mcap.items() if k in master_set}
+            if len(mcap) < before:
+                with open(MCAP_CACHE_FILE, "w") as f:
+                    json.dump(mcap, f)
+                print(f"  Trimmed market cap: {before} → {len(mcap)} tickers")
+        except Exception:
+            pass
+
+
 # ==========================================
 # LOAD CACHE
 # ==========================================
@@ -276,6 +340,44 @@ def _refresh_tickers(data, tickers):
 
 
 # ==========================================
+# DATA INTEGRITY CHECK
+# ==========================================
+def validate_and_repair(df, label="data"):
+    """Ensure continuous trading-day index, fill gaps, and drop bad tickers."""
+    if df.empty:
+        return df
+
+    # 1. Build a proper trading-day calendar (business days, Mon-Fri)
+    full_idx = pd.bdate_range(start=df.index.min(), end=df.index.max())
+
+    # 2. Reindex to include any missing trading days
+    missing_days = full_idx.difference(df.index)
+    if len(missing_days) > 0:
+        print(f"  [{label}] Filling {len(missing_days)} missing trading days in index.")
+        df = df.reindex(full_idx)
+
+    # 3. Forward-fill gaps (carries last known price — standard for market data)
+    #    limit=10 covers holidays + long weekends; beyond that it's truly missing
+    df = df.ffill(limit=10)
+
+    # 4. Back-fill leading NaNs for tickers that started mid-dataset (limit=5)
+    df = df.bfill(limit=5)
+
+    # 5. Drop tickers that still have >20% NaN (too much missing data)
+    thresh = len(df) * 0.20
+    before = df.shape[1]
+    df = df.dropna(axis=1, thresh=int(len(df) - thresh))
+    dropped = before - df.shape[1]
+    if dropped > 0:
+        print(f"  [{label}] Dropped {dropped} tickers with >80% missing data.")
+
+    # 6. Drop any fully-empty rows that might remain
+    df = df.dropna(how="all")
+
+    return df
+
+
+# ==========================================
 # BUILD DATASET
 # ==========================================
 def build_dataset(master):
@@ -356,10 +458,9 @@ def build_dataset(master):
     # Final filtering and cleanup (do NOT save truncated data back to cache)
     data = data[[c for c in data.columns if c in master]]
     data = data.tail(LOOKBACK_DAYS)
-    data = data.ffill(limit=5).bfill(limit=5)
-    data = data.dropna(axis=1, thresh=len(data) * 0.2)
+    data = validate_and_repair(data, label="prices")
 
-    print(f"  Price data: {len(data.columns)} tickers ready.")
+    print(f"  Price data: {len(data.columns)} tickers, {len(data)} days ready.")
     return data
 
 
@@ -448,7 +549,7 @@ def build_chart_dataset(master):
     # NO bfill: a new ticker that only has 1 year of data must NOT have its
     # first real price back-propagated into all earlier NaN rows.
     chart_data = chart_data[[c for c in chart_data.columns if c in master]]
-    chart_data = chart_data.ffill(limit=5)
+    chart_data = validate_and_repair(chart_data, label="chart")
     print(f"  Chart data: {len(chart_data.columns)} tickers, {len(chart_data)} days.")
     return chart_data
 
@@ -588,9 +689,11 @@ def adf_pvalue(series, max_lag=None):
             X_cols.append(dy[max_lag - k: -k if k < len(dy) else None][:nobs])
         X = np.column_stack(X_cols)
         Y = dy[max_lag:]
+        if not np.all(np.isfinite(X)) or not np.all(np.isfinite(Y)):
+            return 1.0
         try:
             coef, residuals, _, _ = np.linalg.lstsq(X, Y, rcond=None)
-        except np.linalg.LinAlgError:
+        except (np.linalg.LinAlgError, ValueError):
             return 1.0
         gamma = coef[1]
         # Compute t-statistic for gamma
@@ -647,7 +750,10 @@ def compute_half_life(spread_series):
         if len(lagged) < 10:
             return float('nan')
         X = np.column_stack([lagged.values, np.ones(len(lagged))])
-        coef, _, _, _ = np.linalg.lstsq(X, delta.values, rcond=None)
+        Y = delta.values
+        if not np.all(np.isfinite(X)) or not np.all(np.isfinite(Y)):
+            return float('nan')
+        coef, _, _, _ = np.linalg.lstsq(X, Y, rcond=None)
         lam = coef[0]
         if lam >= 0:          # not mean-reverting
             return float('nan')
@@ -686,8 +792,11 @@ def analyze_pair(pair):
     try:
         y_reg = log_prices[a].values
         x_reg = np.column_stack([log_prices[b].values, np.ones(len(log_prices[b]))])
-        coef, _, _, _ = np.linalg.lstsq(x_reg, y_reg, rcond=None)
-        hedge_ratio = round(float(coef[0]), 4)
+        if not np.all(np.isfinite(x_reg)) or not np.all(np.isfinite(y_reg)):
+            hedge_ratio = 1.0
+        else:
+            coef, _, _, _ = np.linalg.lstsq(x_reg, y_reg, rcond=None)
+            hedge_ratio = round(float(coef[0]), 4)
     except Exception:
         hedge_ratio = 1.0
 
@@ -2429,6 +2538,9 @@ if __name__ == "__main__":
     print("Building market cap dataset...")
     mcap_data = build_market_cap(TICKERS)
 
+    # Trim caches to prevent unbounded growth
+    trim_caches(TICKERS)
+
     valid = list(data.columns)
     pre_filter_count = len(valid)
 
@@ -2632,6 +2744,23 @@ if __name__ == "__main__":
         az = abs(z)
         sig_strength = "strong" if az >= Z_STRONG else "high" if az >= Z_HIGH else "medium" if az >= Z_MEDIUM else "low"
 
+        # Sector/industry match level for grouping filter
+        sec_a, sec_b = TICKER_INDUSTRY.get(a, ""), TICKER_INDUSTRY.get(b, "")
+        ind_a, ind_b = TICKER_SUBIND.get(a, ""), TICKER_SUBIND.get(b, "")
+        sub_a, sub_b = TICKER_SUBIND2.get(a, ""), TICKER_SUBIND2.get(b, "")
+        if sub_a and sub_b and sub_a == sub_b:
+            sector_match = "subindustry"
+        elif ind_a and ind_b and ind_a == ind_b:
+            sector_match = "industry"
+        elif sec_a and sec_b and sec_a == sec_b:
+            sector_match = "sector"
+        else:
+            sector_match = "none"
+
+        # Backtest win rate for filter attribute
+        bt_wr_val = r.get("BtWinRate")
+        bt_wr_attr = f"{bt_wr_val:.0f}" if bt_wr_val is not None else ""
+
         cat_class = {"Pure ETF": "cat-etf", "Pure Stock": "cat-stock"}.get(r["Category"], "cat-mixed")
 
         # Build sector/industry/subindustry tooltip text for each ticker
@@ -2783,7 +2912,9 @@ if __name__ == "__main__":
             data-mcap="{mcap_min}"
             data-alignment="{alignment}"
             data-confidence="{confidence}"
-            data-strength="{sig_strength}">
+            data-strength="{sig_strength}"
+            data-sector-match="{sector_match}"
+            data-winrate="{bt_wr_attr}">
           <td class="rank-cell">{i+1}</td>
           <td class="pair-cell">
             <div class="pair-names">
@@ -3364,8 +3495,8 @@ if __name__ == "__main__":
         <div class="control-group">
           <label>ETF Type</label>
           <select id="levFilter" onchange="applyFilters()">
-            <option value="all">All</option>
-            <option value="exclude_both" selected>Excl Lev &amp; Inv</option>
+            <option value="all" selected>All</option>
+            <option value="exclude_both">Excl Lev &amp; Inv</option>
             <option value="exclude_lev">Excl Lev</option>
             <option value="exclude_inv">Excl Inv</option>
             <option value="exclude_etn">Excl ETN</option>
@@ -3410,6 +3541,21 @@ if __name__ == "__main__":
           <input type="number" id="minZ" value="0" min="0" max="5" step="0.5" oninput="applyFilters()" style="width:42px;">
           <button class="step-btn" onclick="stepValue('minZ',0.5)">+</button>
         </div>
+        <div class="control-group">
+          <label>Sector</label>
+          <select id="sectorFilter" onchange="applyFilters()">
+            <option value="all" selected>All</option>
+            <option value="sector">Same Sector+</option>
+            <option value="industry">Same Industry+</option>
+            <option value="subindustry">Same Sub-industry</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>Min WR%</label>
+          <button class="step-btn" onclick="stepValue('minWR',-5)">−</button>
+          <input type="number" id="minWR" value="0" min="0" max="100" step="5" oninput="applyFilters()" style="width:42px;">
+          <button class="step-btn" onclick="stepValue('minWR',5)">+</button>
+        </div>
       </div>
       <!-- Row 3: Sort, display & trade sizing -->
       <div class="filter-row">
@@ -3433,7 +3579,7 @@ if __name__ == "__main__":
         <div class="control-group" title="When on, each symbol can appear at most once — only the highest-scored pair for that symbol is shown">
           <label>Unique Syms</label>
           <label class="toggle-switch">
-            <input type="checkbox" id="uniqueSymFilter" onchange="applyFilters()" checked>
+            <input type="checkbox" id="uniqueSymFilter" onchange="applyFilters()">
             <span class="toggle-track"><span class="toggle-thumb"></span></span>
           </label>
         </div>
@@ -4383,7 +4529,9 @@ if __name__ == "__main__":
       const alignF    = document.getElementById("alignFilter").value;
       const confF     = document.getElementById("confFilter").value;
       const strF      = document.getElementById("strengthFilter").value;
+      const secF      = document.getElementById("sectorFilter").value;
       const minZv     = parseFloat(document.getElementById("minZ").value) || 0;
+      const minWRv    = parseFloat(document.getElementById("minWR").value) || 0;
       const searchV   = document.getElementById("tickerSearch").value.toUpperCase().trim();
       const minPriceV = parseFloat(document.getElementById("minPrice").value) || 0;
       const minVolV   = parseFloat(document.getElementById("minVol").value) || 0;
@@ -4457,6 +4605,21 @@ if __name__ == "__main__":
           if (strF === "strong") {{
             if (str !== "strong") show = false;
           }} else if (rowTier < minTier) show = false;
+        }}
+
+        // Sector match filter
+        if (secF !== "all") {{
+          const sm = row.dataset.sectorMatch || "none";
+          const levels = ["subindustry", "industry", "sector"];
+          const reqIdx = levels.indexOf(secF);
+          const rowIdx = levels.indexOf(sm);
+          if (rowIdx < 0 || rowIdx > reqIdx) show = false;
+        }}
+
+        // Min win rate filter
+        if (minWRv > 0) {{
+          const wr = parseFloat(row.dataset.winrate);
+          if (isNaN(wr) || wr < minWRv) show = false;
         }}
 
         row.dataset.baseHidden = show ? "0" : "1";
