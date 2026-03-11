@@ -30388,5 +30388,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TWI": {
+        "ticker": "TWI",
+        "name": "Titan International, Inc. (DE)",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 540363008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GSUN": {
+        "ticker": "GSUN",
+        "name": "Golden Sun Technology Group Lim",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 8526545,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "OEC": {
+        "ticker": "OEC",
+        "name": "Orion S.A.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 274052928,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
