@@ -30278,5 +30278,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PLX": {
+        "ticker": "PLX",
+        "name": "Protalix BioTherapeutics, Inc. ",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 233221440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "DRD": {
+        "ticker": "DRD",
+        "name": "DRDGOLD Limited",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 2996094464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
