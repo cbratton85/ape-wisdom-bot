@@ -30218,5 +30218,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SMTC": {
+        "ticker": "SMTC",
+        "name": "Semtech Corporation",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 8104658432,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "UPLD": {
+        "ticker": "UPLD",
+        "name": "Upland Software, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 15141452,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
