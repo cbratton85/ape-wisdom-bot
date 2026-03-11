@@ -30328,5 +30328,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NAS"
+    },
+    "KALA": {
+        "ticker": "KALA",
+        "name": "KALA BIO, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 267839968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "BDRY": {
+        "ticker": "BDRY",
+        "name": "Breakwave Dry Bulk Shipping ETF",
+        "meta": "Miscellaneous Sector",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "VSL": {
+        "ticker": "VSL",
+        "name": "Volshares Large Cap ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
