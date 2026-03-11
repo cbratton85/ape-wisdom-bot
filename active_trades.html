@@ -525,15 +525,11 @@ function loadTrades() {
     } catch(e) {}
     const dir = t.direction || "";
     if (t.entryPriceA > 0 && t.entryPriceB > 0 && t.currentPriceA > 0 && t.currentPriceB > 0) {
-      let pnlA, pnlB;
-      if (dir === "short_a_long_b") {
-        pnlA = (t.entryPriceA - t.currentPriceA) / t.entryPriceA * 100;
-        pnlB = (t.currentPriceB - t.entryPriceB) / t.entryPriceB * 100;
-      } else {
-        pnlA = (t.currentPriceA - t.entryPriceA) / t.entryPriceA * 100;
-        pnlB = (t.entryPriceB - t.currentPriceB) / t.entryPriceB * 100;
-      }
-      t.pnlPct = Math.round((pnlA + pnlB) / 2 * 100) / 100;
+      const hr = t.hedgeRatio || 1.0;
+      const spreadEntry = Math.log(t.entryPriceA) - hr * Math.log(t.entryPriceB);
+      const spreadNow   = Math.log(t.currentPriceA) - hr * Math.log(t.currentPriceB);
+      const spreadChg   = spreadNow - spreadEntry;
+      t.pnlPct = Math.round((dir === "short_a_long_b" ? -spreadChg : spreadChg) * 100 * 100) / 100;
     }
     return t;
   });
@@ -774,7 +770,7 @@ function saveTradeEdit() {
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeEditModal(); });
 
 window.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("update-time").textContent = new Date(1773179691168).toLocaleString();
+  document.getElementById("update-time").textContent = new Date(1773202681426).toLocaleString();
   renderTrades();
 });
 </script>
