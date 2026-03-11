@@ -12,60 +12,75 @@ import multiprocessing as mp
 # ==========================================
 # CONFIG
 # ==========================================
+
+# ── File Paths ──
 DATA_FILE        = "historical_data.csv.gz"
 CHART_DATA_FILE  = "chart_data.csv.gz"        # Extended history for Z-score charts only
 VOLUME_DATA_FILE = "volume_data.csv.gz"        # Average daily volume per ticker
 MCAP_CACHE_FILE  = "market_cap.json"           # Market cap per ticker
 TRADES_FILE      = "active_trades.json"        # Active trade tracker
-BATCH_SIZE = 40
-COOLDOWN = 1.5
-LOOKBACK_DAYS       = 650   # Days used for scoring / correlation / perf
-CHART_LOOKBACK_DAYS = 1825  # ~5 years used for Z-score chart history
-VOL_AVG_DAYS        = 30    # Rolling window for average volume calculation
-CACHE_UPDATE_COOLDOWN_HOURS = 1
-VOL_MCAP_COOLDOWN_HOURS    = 168   # Volume & market cap refresh interval (168h = 1 week)
+
+# ── Data & Download ──
+BATCH_SIZE  = 40
+COOLDOWN    = 1.5
 NUM_WORKERS = max(1, (mp.cpu_count() or 2) - 1)  # CPU cores for parallel pair analysis (leave 1 free)
+CACHE_UPDATE_COOLDOWN_HOURS = 1
+VOL_MCAP_COOLDOWN_HOURS     = 168              # Volume & market cap refresh interval (168h = 1 week)
 
-CORR_SHORT = 35
-CORR_LONG = 100
-Z_LENGTH = 100
-Z_LENGTH_SHORT = 30
-Z_LENGTH_LONG  = 250
-PERF_LENGTH = 300
+# ── Lookback Windows ──
+LOOKBACK_DAYS       = 650                      # Days used for scoring / correlation / perf
+CHART_LOOKBACK_DAYS = 1825                     # ~5 years used for Z-score chart history
+VOL_AVG_DAYS        = 30                       # Rolling window for average volume calculation
+CORR_SHORT          = 35
+CORR_LONG           = 100
+Z_LENGTH            = 100
+Z_LENGTH_SHORT      = 30
+Z_LENGTH_LONG       = 250
+PERF_LENGTH         = 300
 
-MIN_CORR_FILTER = 0.60
-Z_THRESHOLD = 2.0
-Z_MAX       = 5.0      # Max |Z| — above this is likely a structural break, not mean-reversion
-Z_STRONG = 3.0      # Z-score threshold for "strong" signal (double arrows)
+# ── Z-Score Thresholds ──
+Z_LOW       = 1.0                              # |Z| for "low" signal strength
+Z_MEDIUM    = 1.5                              # |Z| for "medium" signal strength
+Z_HIGH      = 2.0                              # |Z| for "high" signal strength
+Z_STRONG    = 3.0                              # |Z| for "strong" signal strength
+Z_THRESHOLD = Z_LOW                            # Min |Z| to include pair in results
+Z_MAX       = 5.0                              # Max |Z| — above is likely structural break
 
-ADF_CONFIDENCE  = 0.95   # Min cointegration confidence (0.90=90%, 0.95=95%, 0.99=99%)
-ADF_LOOKBACK_YRS = 1     # Years of data for cointegration test (1, 2, 3, 5, etc.)
-ADF_MIN_DAYS    = 252    # Min trading days of spread data required for ADF (252 ≈ 1yr)
+# ── Cointegration (ADF) ──
+ADF_CONFIDENCE   = 0.95                        # Min confidence (0.90=90%, 0.95=95%, 0.99=99%)
+ADF_LOOKBACK_YRS = 1                           # Years of data for primary ADF test (1, 2, 3, 5…)
+ADF_MIN_DAYS     = 252                         # Min trading days of spread data for ADF (252 ≈ 1yr)
+MIN_COINT_YEARS  = 1                           # Min years the pair must pass ADF (tested at 1yr, 2yr, …)
 
-MIN_EST_RETURN = 1       # Min estimated return % to include pair (0 = no filter)
-MIN_PRICE      = 1.00    # Exclude pairs where either ticker is below this price
-MIN_AVG_VOLUME = 0       # Exclude pairs where either ticker avg daily volume is below this
-# Market cap tiers: "mega", "large", "mid", "small", "micro", "nano", "none"
-# mega=200B+  large=10B+  mid=2B+  small=300M+  micro=50M+  nano=1M+  none=no filter
+# ── Pair Filters ──
+MIN_CORR_FILTER = 0.60                         # Min correlation to consider pair
+MIN_EST_RETURN  = 1                            # Min estimated return % (0 = no filter)
+MIN_PRICE       = 1.00                         # Exclude tickers priced below this
+MIN_AVG_VOLUME  = 0                            # Exclude tickers with avg daily volume below this
+
+# ── Market Cap Filters ──
+# Tiers: mega=200B+  large=10B+  mid=2B+  small=300M+  micro=50M+  nano=1M+  none=no filter
 MCAP_TIERS = {"mega": 200_000_000_000, "large": 10_000_000_000, "mid": 2_000_000_000,
               "small": 300_000_000, "micro": 50_000_000, "nano": 1_000_000, "none": 0}
-MIN_MCAP_STOCK = "none"   # Min market cap tier for stocks (see tiers above)
-MIN_MCAP_ETF   = "none"   # Min market cap tier for ETFs (see tiers above)
+MIN_MCAP_STOCK = "none"                        # Min market cap tier for stocks
+MIN_MCAP_ETF   = "none"                        # Min market cap tier for ETFs
 
-MAX_RESULTS    = 0        # Max total pairs to show in HTML (0 = show all)
-MAX_RESULTS_ETF   = 100   # Max Pure ETF pairs (0 = no per-category limit)
-MAX_RESULTS_STOCK = 350   # Max Pure Stock pairs (0 = no per-category limit)
-MAX_RESULTS_MIXED = 50   # Max Mixed pairs (0 = no per-category limit)
-MAX_CHARTS     = 0        # Max pairs to compute Z-score charts for (0 = show all)
+# ── Result Limits ──
+MAX_RESULTS       = 0                          # Max total pairs in HTML (0 = show all)
+MAX_RESULTS_ETF   = 100                        # Max Pure ETF pairs (0 = no limit)
+MAX_RESULTS_STOCK = 350                        # Max Pure Stock pairs (0 = no limit)
+MAX_RESULTS_MIXED = 50                         # Max Mixed pairs (0 = no limit)
+MAX_CHARTS        = 0                          # Max pairs with Z-score charts (0 = all)
 
-W_BACKTEST  = 0.10   # Backtest win rate (historical performance, confidence-weighted)
+# ── Scoring Weights ──
+W_BACKTEST   = 0.10                            # Backtest win rate
 # Pre-backtest weights (must sum to 1.0 for correct normalization)
-W_ZSCORE    = 0.22   # Z-score magnitude (how far from mean)
-W_HALFLIFE  = 0.22   # Half-life speed (faster reversion = more tradeable)
-W_CONFIRM   = 0.22   # Timeframe confirmation (alignment + confidence combined)
-W_ANNRET    = 0.17   # Annualized return potential (higher = more profitable)
-W_STATIONARY = 0.11  # Spread stationarity (ADF tiebreaker — already filtered)
-W_CORR      = 0.06   # Base correlation level
+W_ZSCORE     = 0.22                            # Z-score magnitude (how far from mean)
+W_HALFLIFE   = 0.22                            # Half-life speed (faster reversion = better)
+W_CONFIRM    = 0.22                            # Timeframe confirmation (alignment + confidence)
+W_ANNRET     = 0.17                            # Annualized return potential
+W_STATIONARY = 0.11                            # Spread stationarity (ADF tiebreaker)
+W_CORR       = 0.06                            # Base correlation level
 
 # ==========================================
 # LOAD MASTER TICKERS
@@ -289,13 +304,12 @@ def build_dataset(master):
 
     if missing:
         total_batches = (len(missing) + BATCH_SIZE - 1) // BATCH_SIZE
-        print(f"Backfilling {len(missing)} tickers in {total_batches} batches...")
         start = (datetime.now() - timedelta(days=LOOKBACK_DAYS)).strftime("%Y-%m-%d")
 
-        for i, idx in enumerate(range(0, len(missing), BATCH_SIZE)):
-            batch_num = i + 1
+        pbar = tqdm(range(0, len(missing), BATCH_SIZE), total=total_batches, desc="Backfilling prices")
+        for idx in pbar:
             batch = missing[idx: idx + BATCH_SIZE]
-            print(f"[{batch_num}/{total_batches}] Downloading: {batch[0]}...{batch[-1] if len(batch) > 1 else ''}")
+            pbar.set_postfix_str(batch[0], refresh=False)
             batch_df = download_batch(batch, start)
             if not batch_df.empty:
                 data = pd.concat([data, batch_df], axis=1)
@@ -311,41 +325,32 @@ def build_dataset(master):
             start = (last_date + timedelta(days=1)).strftime("%Y-%m-%d")
             tickers_to_update = data.columns.tolist()
             total_update_batches = (len(tickers_to_update) + BATCH_SIZE - 1) // BATCH_SIZE
-            print(f"Updating {len(tickers_to_update)} tickers ({total_update_batches} batches) starting from {start}...")
 
             new_rows = []
-            for i, idx in enumerate(range(0, len(tickers_to_update), BATCH_SIZE)):
+            pbar = tqdm(range(0, len(tickers_to_update), BATCH_SIZE), total=total_update_batches, desc="Updating prices")
+            for i, idx in enumerate(pbar):
                 batch = tickers_to_update[idx: idx + BATCH_SIZE]
-                print(f"  [{i+1}/{total_update_batches}] Updating: {batch[0]}...")
-                
+                pbar.set_postfix_str(batch[0], refresh=False)
+
                 batch_df = download_batch(batch, start)
-                
-                # Market Closed Optimization: If the first batch is empty, 
+
+                # Market Closed Optimization: If the first batch is empty,
                 # no new data exists for today. Stop immediately.
                 if i == 0 and (batch_df is None or batch_df.empty):
-                    print(">>> No new data available today (Market likely closed). Skipping.")
+                    pbar.set_description("Updating prices (market closed)")
                     break
-                
+
                 if not batch_df.empty:
                     new_rows.append(batch_df)
-                
-                time.sleep(COOLDOWN)
 
-            # --- SAVE ONLY ONCE AFTER THE LOOP ---
+                time.sleep(COOLDOWN)
+            pbar.close()
+
             if new_rows:
-                print("Merging updates and saving to disk...")
-                # Combine batches side-by-side
                 update_df = pd.concat(new_rows, axis=1)
-                
-                # Append to bottom of main data
                 data = pd.concat([data, update_df], axis=0)
-                
-                # Deduplicate and Sort
                 data = data[~data.index.duplicated(keep="last")].sort_index()
-                
-                # Save once using your safe_save (which now has compression='gzip')
                 safe_save(data)
-                print("Historical data updated and saved.")
 
     # Final filtering and cleanup (do NOT save truncated data back to cache)
     data = data[[c for c in data.columns if c in master]]
@@ -353,7 +358,7 @@ def build_dataset(master):
     data = data.ffill(limit=5).bfill(limit=5)
     data = data.dropna(axis=1, thresh=len(data) * 0.2)
 
-    print(f"Final dataset ready: {len(data.columns)} tickers.")
+    print(f"  Price data: {len(data.columns)} tickers ready.")
     return data
 
 
@@ -384,10 +389,10 @@ def build_chart_dataset(master):
 
     if missing:
         total_batches = (len(missing) + BATCH_SIZE - 1) // BATCH_SIZE
-        print(f"Downloading {CHART_LOOKBACK_DAYS}-day chart history for {len(missing)} tickers ({total_batches} batches)...")
-        for i, idx in enumerate(range(0, len(missing), BATCH_SIZE)):
+        pbar = tqdm(range(0, len(missing), BATCH_SIZE), total=total_batches, desc="Backfilling chart data")
+        for idx in pbar:
             batch = missing[idx: idx + BATCH_SIZE]
-            print(f"  [{i+1}/{total_batches}] {batch[0]}...")
+            pbar.set_postfix_str(batch[0], refresh=False)
             batch_df = download_batch(batch, start, field="Close")
             if not batch_df.empty:
                 chart_data = pd.concat([chart_data, batch_df], axis=1)
@@ -407,43 +412,34 @@ def build_chart_dataset(master):
             upd_start = (last_date + timedelta(days=1)).strftime("%Y-%m-%d")
             tickers_to_upd = chart_data.columns.tolist()
             total_upd = (len(tickers_to_upd) + BATCH_SIZE - 1) // BATCH_SIZE
-            print(f"Updating chart cache ({total_upd} batches) from {upd_start}...")
-            
+
             new_batches = []
-            for i, idx in enumerate(range(0, len(tickers_to_upd), BATCH_SIZE)):
+            pbar = tqdm(range(0, len(tickers_to_upd), BATCH_SIZE), total=total_upd, desc="Updating chart data")
+            for i, idx in enumerate(pbar):
                 batch = tickers_to_upd[idx: idx + BATCH_SIZE]
-                print(f"  [{i+1}/{total_upd}] Updating: {batch[0]}...")
-                
+                pbar.set_postfix_str(batch[0], refresh=False)
+
                 batch_df = download_batch(batch, upd_start, field="Close")
-                
-                # Market Closed Optimization: If the first batch returns nothing, 
+
+                # Market Closed Optimization: If the first batch returns nothing,
                 # it's likely a weekend or holiday. Stop immediately.
                 if i == 0 and (batch_df is None or batch_df.empty):
-                    print(">>> No new data available (Market likely closed). Skipping update.")
+                    pbar.set_description("Updating chart data (market closed)")
                     break
-                
+
                 if not batch_df.empty:
                     new_batches.append(batch_df)
-                
-                time.sleep(COOLDOWN)
 
-            # --- SAVE ONLY ONCE AFTER THE LOOP FINISHES ---
+                time.sleep(COOLDOWN)
+            pbar.close()
+
             if new_batches:
-                print("Combining batches and saving to disk...")
-                # Join all batches side-by-side (axis=1)
                 combined_new_data = pd.concat(new_batches, axis=1)
-                
-                # Append the new rows to the master dataframe (axis=0)
                 chart_data = pd.concat([chart_data, combined_new_data], axis=0)
-                
-                # Clean up and sort
                 chart_data = chart_data[~chart_data.index.duplicated(keep="last")].sort_index()
-                
-                # Save compressed file once
                 tmp = CHART_DATA_FILE + ".tmp"
                 chart_data.to_csv(tmp, compression='gzip')
                 os.replace(tmp, CHART_DATA_FILE)
-                print("Chart cache updated and saved successfully.")
 
     # Final cleanup before returning.
     # ffill(limit=5): bridges weekends/holidays (up to 5 trading-day gaps).
@@ -451,7 +447,7 @@ def build_chart_dataset(master):
     # first real price back-propagated into all earlier NaN rows.
     chart_data = chart_data[[c for c in chart_data.columns if c in master]]
     chart_data = chart_data.ffill(limit=5)
-    print(f"Chart dataset ready: {len(chart_data.columns)} tickers, {len(chart_data)} days.")
+    print(f"  Chart data: {len(chart_data.columns)} tickers, {len(chart_data)} days.")
     return chart_data
 
 
@@ -492,17 +488,17 @@ def build_volume_dataset(master):
     # 3. Only download the missing tickers
     if missing:
         total_batches = (len(missing) + BATCH_SIZE - 1) // BATCH_SIZE
-        print(f"Downloading volume data for {len(missing)} missing tickers ({total_batches} batches)...")
-        
+
         new_vol_data = []
-        for i, idx in enumerate(range(0, len(missing), BATCH_SIZE)):
+        pbar = tqdm(range(0, len(missing), BATCH_SIZE), total=total_batches, desc="Downloading volume")
+        for idx in pbar:
             batch = missing[idx: idx + BATCH_SIZE]
-            print(f"  [{i+1}/{total_batches}] Downloading Volume: {batch[0]}...")
+            pbar.set_postfix_str(batch[0], refresh=False)
             batch_df = download_batch(batch, start, field="Volume")
             if not batch_df.empty:
                 new_vol_data.append(batch_df)
             time.sleep(COOLDOWN)
-            
+
         if new_vol_data:
             new_df = pd.concat(new_vol_data, axis=1)
             all_vol = pd.concat([all_vol, new_df], axis=1)
@@ -520,7 +516,7 @@ def build_volume_dataset(master):
                 if len(series) > 0:
                     vol_avg[col] = float(series.rolling(VOL_AVG_DAYS, min_periods=1).mean().iloc[-1])
 
-    print(f"Volume data ready for {len(vol_avg)} tickers.")
+    print(f"  Volume: {len(vol_avg)} tickers ready.")
     return vol_avg
 
 
@@ -544,8 +540,7 @@ def build_market_cap(master):
     # Find tickers missing from cache
     missing = [t for t in master if t not in mcap]
     if missing:
-        print(f"Fetching market cap for {len(missing)} tickers...")
-        for i, t in enumerate(tqdm(missing, desc="Market Cap")):
+        for i, t in enumerate(tqdm(missing, desc="Fetching market cap")):
             try:
                 info = yf.Ticker(t).info
                 mc = info.get("marketCap")
@@ -559,7 +554,7 @@ def build_market_cap(master):
     # Save cache
     with open(MCAP_CACHE_FILE, "w") as f:
         json.dump(mcap, f)
-    print(f"Market cap data ready for {len(mcap)} tickers.")
+    print(f"  Market cap: {len(mcap)} tickers ready.")
     return mcap
 
 
@@ -684,6 +679,16 @@ def analyze_pair(pair):
     rp = perf[a] - perf[b]
     spread_std = std  # store for EstRet calculation
 
+    # OLS hedge ratio: regress log(A) = beta * log(B) + alpha
+    # beta tells us how many $ of B to hold per $1 of A
+    try:
+        y_reg = log_prices[a].values
+        x_reg = np.column_stack([log_prices[b].values, np.ones(len(log_prices[b]))])
+        coef, _, _, _ = np.linalg.lstsq(x_reg, y_reg, rcond=None)
+        hedge_ratio = round(float(coef[0]), 4)
+    except Exception:
+        hedge_ratio = 1.0
+
     type_a = TICKER_TYPES.get(a, "Unknown")
     type_b = TICKER_TYPES.get(b, "Unknown")
 
@@ -711,17 +716,38 @@ def analyze_pair(pair):
     # Require minimum spread length for reliable ADF results
     if len(full_spread) < ADF_MIN_DAYS:
         return None
-    # Use ADF_LOOKBACK_YRS of data (252 trading days/yr) if available
-    adf_days = int(ADF_LOOKBACK_YRS * 252)
-    try:
-        adf_spread = full_spread.iloc[-adf_days:] if len(full_spread) > adf_days else full_spread
-        adf_p = adf_pvalue(adf_spread)
-    except Exception:
-        adf_p = 1.0
+    max_p = 1.0 - ADF_CONFIDENCE   # e.g. 0.95 confidence → p must be ≤ 0.05
+
+    # Test cointegration at each year window (1yr, 2yr, …) and count passing years
+    max_years_available = len(full_spread) // 252
+    coint_years = 0
+    adf_p = 1.0  # will be set to primary lookback result
+    for yr in range(1, max(max_years_available, 1) + 1):
+        yr_days = yr * 252
+        if len(full_spread) < yr_days:
+            break
+        try:
+            p = adf_pvalue(full_spread.iloc[-yr_days:])
+        except Exception:
+            p = 1.0
+        if p <= max_p:
+            coint_years += 1
+        if yr == ADF_LOOKBACK_YRS:
+            adf_p = p
+
+    # If primary lookback wasn't tested (not enough data), use all available
+    if ADF_LOOKBACK_YRS > max_years_available:
+        try:
+            adf_p = adf_pvalue(full_spread)
+        except Exception:
+            adf_p = 1.0
 
     # Filter: reject pairs that don't meet cointegration confidence threshold
-    max_p = 1.0 - ADF_CONFIDENCE   # e.g. 0.95 confidence → p must be ≤ 0.05
     if adf_p > max_p:
+        return None
+
+    # Filter: reject pairs with fewer cointegrated years than required
+    if coint_years < MIN_COINT_YEARS:
         return None
 
     # ── Adaptive Z-score window based on half-life ──
@@ -847,11 +873,14 @@ def analyze_pair(pair):
         "Score":      round(score, 3),
         "HalfLife":   hl if not np.isnan(hl) else None,
         "ADF_p":      round(adf_p, 4),
+        "CointYears": coint_years,
         "AnnRetA":    ann_a if not np.isnan(ann_a) else None,
         "AnnRetB":    ann_b if not np.isnan(ann_b) else None,
         "EstRet":     est_ret,
         "AnnRet":     ann_ret,
         "SpreadStd":  round(float(std), 6),
+        "SpreadMean": round(float(mean), 6),
+        "HedgeRatio": hedge_ratio,
         "Z30":        z30,
         "Z250":       z250,
         "Alignment":  alignment,
@@ -1421,18 +1450,28 @@ def update_active_trades(data, chart_data=None):
         except Exception:
             pass
 
-        # Estimate P&L (simple: price change on each leg relative to entry)
+        # P&L from frozen entry-time spread: measures actual spread move since entry
+        # Uses hedge-ratio-weighted legs so P&L tracks the Z-score properly
         try:
-            dir = t.get("direction", "")
+            direction = t.get("direction", "")
             pa_entry, pb_entry = t["entryPriceA"], t["entryPriceB"]
             pa_now, pb_now = t["currentPriceA"], t["currentPriceB"]
-            if dir == "short_a_long_b":
-                pnl_a = (pa_entry - pa_now) / pa_entry * 100  # short A gains when price drops
-                pnl_b = (pb_now - pb_entry) / pb_entry * 100  # long B gains when price rises
+            hr = t.get("hedgeRatio", 1.0)
+
+            if pa_entry > 0 and pb_entry > 0 and pa_now > 0 and pb_now > 0:
+                # Log-spread at entry and now
+                spread_entry = np.log(pa_entry) - hr * np.log(pb_entry)
+                spread_now   = np.log(pa_now)   - hr * np.log(pb_now)
+                spread_change = spread_now - spread_entry
+
+                # P&L: short spread profits when spread drops, long spread when it rises
+                if direction == "short_a_long_b":
+                    pnl_pct = -spread_change * 100  # short the spread
+                else:
+                    pnl_pct = spread_change * 100   # long the spread
+                t["pnlPct"] = round(pnl_pct, 2)
             else:
-                pnl_a = (pa_now - pa_entry) / pa_entry * 100  # long A
-                pnl_b = (pb_entry - pb_now) / pb_entry * 100  # short B
-            t["pnlPct"] = round((pnl_a + pnl_b) / 2, 2)
+                t["pnlPct"] = 0.0
         except Exception:
             t["pnlPct"] = 0.0
 
@@ -2105,15 +2144,11 @@ function loadTrades() {{
     }} catch(e) {{}}
     const dir = t.direction || "";
     if (t.entryPriceA > 0 && t.entryPriceB > 0 && t.currentPriceA > 0 && t.currentPriceB > 0) {{
-      let pnlA, pnlB;
-      if (dir === "short_a_long_b") {{
-        pnlA = (t.entryPriceA - t.currentPriceA) / t.entryPriceA * 100;
-        pnlB = (t.currentPriceB - t.entryPriceB) / t.entryPriceB * 100;
-      }} else {{
-        pnlA = (t.currentPriceA - t.entryPriceA) / t.entryPriceA * 100;
-        pnlB = (t.entryPriceB - t.currentPriceB) / t.entryPriceB * 100;
-      }}
-      t.pnlPct = Math.round((pnlA + pnlB) / 2 * 100) / 100;
+      const hr = t.hedgeRatio || 1.0;
+      const spreadEntry = Math.log(t.entryPriceA) - hr * Math.log(t.entryPriceB);
+      const spreadNow   = Math.log(t.currentPriceA) - hr * Math.log(t.currentPriceB);
+      const spreadChg   = spreadNow - spreadEntry;
+      t.pnlPct = Math.round((dir === "short_a_long_b" ? -spreadChg : spreadChg) * 100 * 100) / 100;
     }}
     return t;
   }});
@@ -2415,14 +2450,10 @@ if __name__ == "__main__":
 
     stock_label = MIN_MCAP_STOCK if isinstance(MIN_MCAP_STOCK, str) else f"${MIN_MCAP_STOCK:,}"
     etf_label   = MIN_MCAP_ETF   if isinstance(MIN_MCAP_ETF, str)   else f"${MIN_MCAP_ETF:,}"
-    print(f"Tickers: {pre_filter_count} → {len(valid)} after filters (price>=${MIN_PRICE}, vol>={MIN_AVG_VOLUME:,}, stock mcap>={stock_label}, etf mcap>={etf_label})")
-    print(f"Cointegration: ADF {int(ADF_CONFIDENCE*100)}% confidence over {ADF_LOOKBACK_YRS}yr lookback")
-    print(f"Computing matrices for {len(valid)} symbols...")
+    print(f"Tickers: {pre_filter_count} → {len(valid)} after filters  |  ADF {int(ADF_CONFIDENCE*100)}% / {ADF_LOOKBACK_YRS}yr (min {MIN_COINT_YEARS}yr)")
 
     # Pre-compute number of pairs (used in HTML template regardless of cache)
     n_combos = len(valid) * (len(valid) - 1) // 2
-
-    print(f"--- Computing matrices and analyzing {len(valid)} symbols... ---")
     returns    = data.pct_change().dropna(how="all")
     data_safe  = data.clip(lower=1e-10)           # guard against log(0) or log(negative)
     log_prices       = np.log(data_safe.tail(Z_LENGTH))
@@ -2440,7 +2471,6 @@ if __name__ == "__main__":
     print("Building combinations...")
     combos = list(itertools.combinations(valid, 2))
 
-    print(f"Analyzing pairs using {NUM_WORKERS} CPU cores...")
     chunksize = max(1, len(combos) // (NUM_WORKERS * 4))
     with mp.Pool(
         processes=NUM_WORKERS,
@@ -2490,8 +2520,7 @@ if __name__ == "__main__":
     top_results = results[:MAX_RESULTS] if MAX_RESULTS > 0 else results
     chart_results = top_results[:MAX_CHARTS] if MAX_CHARTS > 0 else top_results
 
-    # Compute rolling Z-score histories for top 500 pairs (parallel)
-    print(f"Computing Z-score chart histories for top {len(chart_results)} pairs using {NUM_WORKERS} CPU cores...")
+    # Compute rolling Z-score histories for top pairs (parallel)
     chart_chunksize = max(1, len(chart_results) // (NUM_WORKERS * 2))
     with mp.Pool(
         processes=NUM_WORKERS,
@@ -2549,13 +2578,11 @@ if __name__ == "__main__":
         if v >= 1_000:     return f"{v/1_000:.0f}K"
         return str(int(v))
 
-    print("Generating symbols.html...")
     build_symbols_page(valid)
 
     # ==========================================
     # GENERATE MAIN DASHBOARD
     # ==========================================
-    print("Generating pairs_scanner.html...")
 
     # Count alignment categories for stats row
     n_aligned     = sum(1 for r in top_results if r.get("Alignment") == "Aligned")
@@ -2582,14 +2609,26 @@ if __name__ == "__main__":
 
         if z >= Z_STRONG:
             sig_line1, sig_line2, sig_class = f"\u25bc\u25bc SHORT {a}", f"\u25b2\u25b2 LONG {b}", "sig-strong-short"
-        elif z >= Z_THRESHOLD:
-            sig_line1, sig_line2, sig_class = f"\u25bc SHORT {a}", f"\u25b2 LONG {b}", "sig-short"
+        elif z >= Z_HIGH:
+            sig_line1, sig_line2, sig_class = f"\u25bc SHORT {a}", f"\u25b2 LONG {b}", "sig-high-short"
+        elif z >= Z_MEDIUM:
+            sig_line1, sig_line2, sig_class = f"\u25bc SHORT {a}", f"\u25b2 LONG {b}", "sig-med-short"
+        elif z >= Z_LOW:
+            sig_line1, sig_line2, sig_class = f"\u25bd short {a}", f"\u25b3 long {b}", "sig-low-short"
         elif z <= -Z_STRONG:
             sig_line1, sig_line2, sig_class = f"\u25b2\u25b2 LONG {a}", f"\u25bc\u25bc SHORT {b}", "sig-strong-long"
-        elif z <= -Z_THRESHOLD:
-            sig_line1, sig_line2, sig_class = f"\u25b2 LONG {a}", f"\u25bc SHORT {b}", "sig-long"
+        elif z <= -Z_HIGH:
+            sig_line1, sig_line2, sig_class = f"\u25b2 LONG {a}", f"\u25bc SHORT {b}", "sig-high-long"
+        elif z <= -Z_MEDIUM:
+            sig_line1, sig_line2, sig_class = f"\u25b2 LONG {a}", f"\u25bc SHORT {b}", "sig-med-long"
+        elif z <= -Z_LOW:
+            sig_line1, sig_line2, sig_class = f"\u25b3 long {a}", f"\u25bd short {b}", "sig-low-long"
         else:
             sig_line1, sig_line2, sig_class = "NEUTRAL", "", "sig-neutral"
+
+        # Signal strength tier for filtering
+        az = abs(z)
+        sig_strength = "strong" if az >= Z_STRONG else "high" if az >= Z_HIGH else "medium" if az >= Z_MEDIUM else "low"
 
         cat_class = {"Pure ETF": "cat-etf", "Pure Stock": "cat-stock"}.get(r["Category"], "cat-mixed")
 
@@ -2678,6 +2717,9 @@ if __name__ == "__main__":
             "priceB":    r.get("PriceB",     []),
             "priceANow": price_a,
             "priceBNow": price_b,
+            "hedgeRatio": r.get("HedgeRatio", 1.0),
+            "spreadMean": r.get("SpreadMean", 0),
+            "spreadStd":  r.get("SpreadStd", 0),
             "exitA":     exit_a,
             "exitB":     exit_b,
             "exitAChg":  exit_a_chg,
@@ -2738,7 +2780,8 @@ if __name__ == "__main__":
             data-lev-a="{lev_a}" data-lev-b="{lev_b}"
             data-mcap="{mcap_min}"
             data-alignment="{alignment}"
-            data-confidence="{confidence}">
+            data-confidence="{confidence}"
+            data-strength="{sig_strength}">
           <td class="rank-cell">{i+1}</td>
           <td class="pair-cell">
             <div class="pair-names">
@@ -2773,7 +2816,7 @@ if __name__ == "__main__":
           </td>
           <td class="corr-cell">
             <span class="corr-value">{r['Corr']:.2f}</span>
-            <span class="adf-value" title="Cointegration confidence ({(1-r['ADF_p'])*100:.1f}%, p={r['ADF_p']:.3f})">{(1-r['ADF_p'])*100:.0f}% Coint</span>
+            <span class="adf-value" title="Cointegration confidence ({(1-r['ADF_p'])*100:.1f}%, p={r['ADF_p']:.3f}) — passes {r.get('CointYears',0)}yr">{(1-r['ADF_p'])*100:.0f}% Coint · {r.get('CointYears',0)}yr</span>
           </td>
           <td class="hl-cell">
             {f'<span class="hl-value">{hl:.0f}d</span>' if hl else '<span class="hl-na">—</span>'}
@@ -2808,6 +2851,8 @@ if __name__ == "__main__":
             <button class="track-btn" onclick="trackTrade(this)"
               data-pair="{r['Pair']}" data-z="{z}" data-price-a="{price_a}" data-price-b="{price_b}"
               data-direction="{'short_a_long_b' if z > 0 else 'long_a_short_b' if z < 0 else 'neutral'}"
+              data-hedge-ratio="{r.get('HedgeRatio', 1.0)}"
+              data-spread-mean="{r.get('SpreadMean', 0)}" data-spread-std="{r.get('SpreadStd', 0)}"
               data-sig="{sig_line1} / {sig_line2 if sig_line2 else ''}">&#9733; Track</button>
           </td>
         </tr>"""
@@ -3042,9 +3087,13 @@ if __name__ == "__main__":
         font-weight: 700; letter-spacing: 0.04em; white-space: nowrap; font-family: var(--mono);
       }}
       .sig-strong-short {{ background: var(--red-dim);          color: var(--red);    border: 1px solid rgba(239,68,68,0.4); }}
-      .sig-short        {{ background: rgba(249,115,22,0.1);    color: var(--orange); border: 1px solid rgba(249,115,22,0.4); }}
+      .sig-high-short   {{ background: rgba(249,115,22,0.1);    color: var(--orange); border: 1px solid rgba(249,115,22,0.4); }}
+      .sig-med-short    {{ background: rgba(234,179,8,0.1);     color: var(--amber);  border: 1px solid rgba(234,179,8,0.3); }}
+      .sig-low-short    {{ background: rgba(148,163,184,0.08);  color: var(--muted);  border: 1px solid rgba(148,163,184,0.25); }}
       .sig-strong-long  {{ background: var(--green-dim);        color: var(--green);  border: 1px solid rgba(34,197,94,0.4); }}
-      .sig-long         {{ background: rgba(132,204,22,0.1);    color: #84cc16;       border: 1px solid rgba(132,204,22,0.4); }}
+      .sig-high-long    {{ background: rgba(132,204,22,0.1);    color: #84cc16;       border: 1px solid rgba(132,204,22,0.4); }}
+      .sig-med-long     {{ background: rgba(34,211,238,0.08);   color: var(--cyan);   border: 1px solid rgba(34,211,238,0.3); }}
+      .sig-low-long     {{ background: rgba(148,163,184,0.08);  color: var(--muted);  border: 1px solid rgba(148,163,184,0.25); }}
       .sig-neutral      {{ background: rgba(71,85,105,0.2);     color: var(--muted);  border: 1px solid var(--border); }}
 
       /* CHART BUTTON */
@@ -3250,11 +3299,11 @@ if __name__ == "__main__":
       <div class="stat-item"><div class="stat-label">Valid Setups</div><div class="stat-value green">{total_valid:,}</div></div>
       <div class="stat-item"><div class="stat-label">Active Symbols</div><div class="stat-value">{len(valid)}</div></div>
       <div class="stat-item"><div class="stat-label">Lookback</div><div class="stat-value">{LOOKBACK_DAYS}d</div></div>
-      <div class="stat-item"><div class="stat-label">Z Threshold</div><div class="stat-value">&plusmn;{Z_THRESHOLD:.1f}&sigma;</div></div>
+      <div class="stat-item"><div class="stat-label">Z Tiers</div><div class="stat-value">{Z_LOW:.1f} / {Z_MEDIUM:.1f} / {Z_HIGH:.1f} / {Z_STRONG:.1f}&sigma;</div></div>
       <div class="stat-item"><div class="stat-label">Z Windows</div><div class="stat-value">{Z_LENGTH_SHORT}d / {Z_LENGTH}d / {Z_LENGTH_LONG}d</div></div>
       <div class="stat-item"><div class="stat-label">Corr Windows</div><div class="stat-value">{CORR_SHORT}d / {CORR_LONG}d</div></div>
       <div class="stat-item"><div class="stat-label">Min Corr</div><div class="stat-value">{MIN_CORR_FILTER:.2f}</div></div>
-      <div class="stat-item"><div class="stat-label">Cointegration</div><div class="stat-value">{int(ADF_CONFIDENCE*100)}% / {ADF_LOOKBACK_YRS}yr</div></div>
+      <div class="stat-item"><div class="stat-label">Cointegration</div><div class="stat-value">{int(ADF_CONFIDENCE*100)}% / {ADF_LOOKBACK_YRS}yr (min {MIN_COINT_YEARS}yr)</div></div>
       <div class="stat-item"><div class="stat-label">Alignment</div><div class="stat-value"><span style="color:var(--cyan)">{n_aligned}</span> / <span style="color:var(--amber)">{n_mixed}</span> / <span style="color:var(--red)">{n_conflicting}</span></div></div>
       <div class="stat-item"><div class="stat-label">Confidence</div><div class="stat-value"><span style="color:var(--green)">{n_conf_high}</span> / <span style="color:var(--amber)">{n_conf_med}</span> / <span style="color:var(--red)">{n_conf_low}</span></div></div>
     </div>
@@ -3341,6 +3390,16 @@ if __name__ == "__main__":
             <option value="High">High</option>
             <option value="Med">Med+</option>
             <option value="Low">Low</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>Strength</label>
+          <select id="strengthFilter" onchange="applyFilters()">
+            <option value="all">All</option>
+            <option value="low">Low+</option>
+            <option value="medium">Medium+</option>
+            <option value="high">High+</option>
+            <option value="strong">Strong</option>
           </select>
         </div>
         <div class="control-group">
@@ -4321,6 +4380,7 @@ if __name__ == "__main__":
       const levF      = document.getElementById("levFilter").value;
       const alignF    = document.getElementById("alignFilter").value;
       const confF     = document.getElementById("confFilter").value;
+      const strF      = document.getElementById("strengthFilter").value;
       const minZv     = parseFloat(document.getElementById("minZ").value) || 0;
       const searchV   = document.getElementById("tickerSearch").value.toUpperCase().trim();
       const minPriceV = parseFloat(document.getElementById("minPrice").value) || 0;
@@ -4384,6 +4444,17 @@ if __name__ == "__main__":
           if (confF === "High" && conf !== "High") show = false;
           else if (confF === "Med" && conf === "Low") show = false;
           else if (confF === "Low" && conf !== "Low") show = false;
+        }}
+
+        // Signal strength filter
+        if (strF !== "all") {{
+          const str = row.dataset.strength || "low";
+          const tiers = ["low", "medium", "high", "strong"];
+          const minTier = tiers.indexOf(strF);
+          const rowTier = tiers.indexOf(str);
+          if (strF === "strong") {{
+            if (str !== "strong") show = false;
+          }} else if (rowTier < minTier) show = false;
         }}
 
         row.dataset.baseHidden = show ? "0" : "1";
@@ -4572,11 +4643,15 @@ if __name__ == "__main__":
       }}
       const priceA = parseFloat(btn.dataset.priceA);
       const priceB = parseFloat(btn.dataset.priceB);
-      // Calculate shares from current capital setting (50/50 split)
+      const hedgeRatio = parseFloat(btn.dataset.hedgeRatio) || 1.0;
+      const spreadMean = parseFloat(btn.dataset.spreadMean) || 0;
+      const spreadStd  = parseFloat(btn.dataset.spreadStd) || 0;
+      // Calculate shares using hedge ratio: $A leg, then $B = hedgeRatio * $A
       const capital = parseFloat(document.getElementById("capitalInput").value) || 0;
-      const leg = capital / 2;
-      const sharesA = priceA > 0 ? Math.round(leg / priceA) : 0;
-      const sharesB = priceB > 0 ? Math.round((sharesA * priceA) / priceB) : 0;
+      const legA = capital / (1 + hedgeRatio);
+      const legB = capital - legA;
+      const sharesA = priceA > 0 ? Math.round(legA / priceA) : 0;
+      const sharesB = priceB > 0 ? Math.round(legB / priceB) : 0;
       const trade = {{
         id: id,
         pair: pair,
@@ -4592,6 +4667,9 @@ if __name__ == "__main__":
         sharesA: sharesA,
         sharesB: sharesB,
         capital: capital,
+        hedgeRatio: hedgeRatio,
+        spreadMean: spreadMean,
+        spreadStd: spreadStd,
         daysHeld: 0,
         status: "open",
       }};
@@ -4626,11 +4704,13 @@ if __name__ == "__main__":
       const priceA = p.priceANow;
       const priceB = p.priceBNow;
       const z = p.currentZ;
+      const hr = p.hedgeRatio || 1.0;
       const direction = z > 0 ? "short_a_long_b" : z < 0 ? "long_a_short_b" : "neutral";
       const capital = parseFloat(document.getElementById("capitalInput").value) || 0;
-      const leg = capital / 2;
-      const sharesA = priceA > 0 ? Math.round(leg / priceA) : 0;
-      const sharesB = priceB > 0 ? Math.round((sharesA * priceA) / priceB) : 0;
+      const legA = capital / (1 + hr);
+      const legB = capital - legA;
+      const sharesA = priceA > 0 ? Math.round(legA / priceA) : 0;
+      const sharesB = priceB > 0 ? Math.round(legB / priceB) : 0;
       const id = pair + "_" + new Date().toISOString().slice(0,10);
       const trade = {{
         id: id, pair: pair, direction: direction,
@@ -4639,6 +4719,7 @@ if __name__ == "__main__":
         entryZ: z, entryPriceA: priceA, entryPriceB: priceB,
         currentZ: z, currentPriceA: priceA, currentPriceB: priceB,
         sharesA: sharesA, sharesB: sharesB, capital: capital,
+        hedgeRatio: hr, spreadMean: p.spreadMean || 0, spreadStd: p.spreadStd || 0,
         daysHeld: 0, status: "open",
       }};
       trades.push(trade);
