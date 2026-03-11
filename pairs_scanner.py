@@ -23,7 +23,7 @@ TRADES_FILE      = "active_trades.json"        # Active trade tracker
 # ── Data & Download ──
 BATCH_SIZE  = 40
 COOLDOWN    = 1.5
-NUM_WORKERS = max(1, (mp.cpu_count() or 2) - 1)  # CPU cores for parallel pair analysis (leave 1 free)
+NUM_WORKERS = max(1, (mp.cpu_count() or 2) - 0)  # CPU cores for parallel pair analysis (leave 1 free)
 CACHE_UPDATE_COOLDOWN_HOURS = 1
 VOL_MCAP_COOLDOWN_HOURS     = 168              # Volume & market cap refresh interval (168h = 1 week)
 
@@ -67,9 +67,9 @@ MIN_MCAP_ETF   = "none"                        # Min market cap tier for ETFs
 
 # ── Result Limits ──
 MAX_RESULTS       = 0                          # Max total pairs in HTML (0 = show all)
-MAX_RESULTS_ETF   = 250                        # Max Pure ETF pairs (0 = no limit)
-MAX_RESULTS_STOCK = 500                        # Max Pure Stock pairs (0 = no limit)
-MAX_RESULTS_MIXED = 100                        # Max Mixed pairs (0 = no limit)
+MAX_RESULTS_ETF   = 100                        # Max Pure ETF pairs (0 = no limit)
+MAX_RESULTS_STOCK = 100                        # Max Pure Stock pairs (0 = no limit)
+MAX_RESULTS_MIXED = 25                        # Max Mixed pairs (0 = no limit)
 MAX_CHARTS        = 0                          # Max pairs with Z-score charts (0 = all)
 
 # ── Scoring Weights ──
@@ -5045,3 +5045,4 @@ if __name__ == "__main__":
     generate_trades_page(active_trades)
 
     print("\nDone. Open pairs_scanner.html in your browser.")
+
