@@ -30368,5 +30368,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "BORR": {
+        "ticker": "BORR",
+        "name": "Borr Drilling Limited",
+        "meta": "Oil & Gas Drilling",
+        "type": "EQUITY",
+        "mcap": 1681662976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PSO": {
+        "ticker": "PSO",
+        "name": "Pearson, Plc",
+        "meta": "Publishing",
+        "type": "EQUITY",
+        "mcap": 8236474368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
