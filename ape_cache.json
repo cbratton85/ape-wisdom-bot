@@ -30238,5 +30238,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CAL": {
+        "ticker": "CAL",
+        "name": "Caleres, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 342006208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ARAI": {
+        "ticker": "ARAI",
+        "name": "Arrive AI Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 38256248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "DH": {
+        "ticker": "DH",
+        "name": "Definitive Healthcare Corp.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 125366848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "NABL": {
+        "ticker": "NABL",
+        "name": "N-able, Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 898555072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
