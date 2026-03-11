@@ -30518,5 +30518,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "TLYS": {
+        "ticker": "TLYS",
+        "name": "Tilly's, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 49672084,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SPEU": {
+        "ticker": "SPEU",
+        "name": "State Street SPDR Portfolio Eur",
+        "meta": "Europe Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
