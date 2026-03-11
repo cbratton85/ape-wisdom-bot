@@ -67,20 +67,19 @@ MIN_MCAP_ETF   = "none"                        # Min market cap tier for ETFs
 
 # ── Result Limits ──
 MAX_RESULTS       = 0                          # Max total pairs in HTML (0 = show all)
-MAX_RESULTS_ETF   = 100                        # Max Pure ETF pairs (0 = no limit)
-MAX_RESULTS_STOCK = 350                        # Max Pure Stock pairs (0 = no limit)
-MAX_RESULTS_MIXED = 50                         # Max Mixed pairs (0 = no limit)
+MAX_RESULTS_ETF   = 250                        # Max Pure ETF pairs (0 = no limit)
+MAX_RESULTS_STOCK = 500                        # Max Pure Stock pairs (0 = no limit)
+MAX_RESULTS_MIXED = 100                        # Max Mixed pairs (0 = no limit)
 MAX_CHARTS        = 0                          # Max pairs with Z-score charts (0 = all)
 
 # ── Scoring Weights ──
 W_BACKTEST   = 0.10                            # Backtest win rate
 # Pre-backtest weights (must sum to 1.0 for correct normalization)
-W_ZSCORE     = 0.22                            # Z-score magnitude (how far from mean)
-W_HALFLIFE   = 0.22                            # Half-life speed (faster reversion = better)
-W_CONFIRM    = 0.22                            # Timeframe confirmation (alignment + confidence)
-W_ANNRET     = 0.17                            # Annualized return potential
+W_ZSCORE     = 0.24                            # Z-score magnitude (how far from mean)
+W_HALFLIFE   = 0.24                            # Half-life speed (faster reversion = better)
+W_CONFIRM    = 0.23                            # Timeframe confirmation (alignment + confidence)
+W_ANNRET     = 0.18                            # Annualized return potential
 W_STATIONARY = 0.11                            # Spread stationarity (ADF tiebreaker)
-W_CORR       = 0.06                            # Base correlation level
 
 # ==========================================
 # LOAD MASTER TICKERS
@@ -342,8 +341,11 @@ def _refresh_tickers(data, tickers):
 # ==========================================
 # DATA INTEGRITY CHECK
 # ==========================================
+_dropped_tickers = set()   # Tracks tickers dropped by validate_and_repair
+
 def validate_and_repair(df, label="data"):
     """Ensure continuous trading-day index, fill gaps, and drop bad tickers."""
+    global _dropped_tickers
     if df.empty:
         return df
 
@@ -365,11 +367,12 @@ def validate_and_repair(df, label="data"):
 
     # 5. Drop tickers that still have >20% NaN (too much missing data)
     thresh = len(df) * 0.20
-    before = df.shape[1]
+    before_cols = set(df.columns)
     df = df.dropna(axis=1, thresh=int(len(df) - thresh))
-    dropped = before - df.shape[1]
-    if dropped > 0:
-        print(f"  [{label}] Dropped {dropped} tickers with >80% missing data.")
+    dropped_cols = before_cols - set(df.columns)
+    if dropped_cols:
+        _dropped_tickers |= dropped_cols
+        print(f"  [{label}] Dropped {len(dropped_cols)} tickers with >80% missing data.")
 
     # 6. Drop any fully-empty rows that might remain
     df = df.dropna(how="all")
@@ -954,9 +957,6 @@ def analyze_pair(pair):
     stat_norm = max(0.0, min(1.0, (max_p - adf_p) / max(max_p, 0.01)))
     # 4) Timeframe confirmation: blend alignment (direction+closeness) with confidence (magnitude+consistency)
     confirm_norm = align_score * 0.5 + conf_score * 0.5
-    # 5) Base correlation level
-    corr_norm = min(cl / 1.0, 1.0)
-
     # ── Estimated pairs trade return (gross spread return if fully reverts) ──
     est_ret = round(abs(z) * spread_std * 100, 2)   # in %
     if MIN_EST_RETURN > 0 and est_ret < MIN_EST_RETURN:
@@ -972,7 +972,7 @@ def analyze_pair(pair):
     ann_ret_norm = min((ann_ret or 0.0) / 100.0, 1.0) if ann_ret is not None and ann_ret > 0 else 0.0
 
     score = (W_ZSCORE * z_norm + W_HALFLIFE * hl_norm + W_STATIONARY * stat_norm
-             + W_ANNRET * ann_ret_norm + W_CONFIRM * confirm_norm + W_CORR * corr_norm)
+             + W_ANNRET * ann_ret_norm + W_CONFIRM * confirm_norm)
 
     return {
         "Pair":       f"{a}/{b}",
@@ -1037,6 +1037,30 @@ def compute_z_history(a, b, price_data, window_override=None):
 # ==========================================
 # NORMALIZED PRICE HISTORY FOR COMPARISON CHART
 # ==========================================
+def compute_rolling_coint(a, b, price_data, window=252, step=5):
+    """Compute rolling ADF cointegration confidence over time.
+    Returns dates and confidence values (0-100%) sampled every `step` days."""
+    p_a = price_data[a].dropna()
+    p_b = price_data[b].dropna()
+    combined = pd.DataFrame({"a": p_a, "b": p_b}).dropna()
+    if len(combined) < window:
+        return [], []
+    log_a = np.log(combined["a"].clip(lower=1e-10))
+    log_b = np.log(combined["b"].clip(lower=1e-10))
+    spread = log_a - log_b
+    dates = []
+    confs = []
+    for i in range(window, len(spread), step):
+        seg = spread.iloc[i - window:i].values
+        if len(seg) < 50 or not np.all(np.isfinite(seg)):
+            continue
+        p = adf_pvalue(seg)
+        conf = round(max(0.0, min(100.0, (1.0 - p) * 100)), 1)
+        dates.append(combined.index[i - 1].strftime("%Y-%m-%d"))
+        confs.append(conf)
+    return dates, confs
+
+
 def compute_price_history(a, b, price_data):
     """Returns aligned dates + normalized price series (rebased to 100) for both symbols."""
     p_a = price_data[a].dropna()
@@ -1057,7 +1081,10 @@ def compute_price_history(a, b, price_data):
 # ==========================================
 # BUILD SYMBOLS PAGE
 # ==========================================
-def build_symbols_page(valid_tickers):
+def build_symbols_page(valid_tickers, dropped_tickers=None):
+    if dropped_tickers is None:
+        dropped_tickers = set()
+    all_tickers = set(valid_tickers) | dropped_tickers
 
     # ── CSV column layouts ────────────────────────────────────────────────────
     # ETFs.csv:   Ticker, Name, Sector, Industry, Type
@@ -1069,32 +1096,25 @@ def build_symbols_page(valid_tickers):
         n_cols = min(df.shape[1], 5)
         df = df.iloc[:, :n_cols]
 
-        # ETFs.csv:   Ticker, Name, Sector, Industry, Type
-        # STOCKS.csv: Ticker, Name, Sector, Industry, Subindustry
         if is_etf:
             col_names = ["Ticker", "Name", "Sector", "Industry", "Type"][:n_cols]
         else:
             col_names = ["Ticker", "Name", "Sector", "Industry", "Subindustry"][:n_cols]
         df.columns = col_names
 
-        # Ensure all hierarchy columns exist
         for col in ["Sector", "Industry", "Subindustry"]:
             if col not in df.columns:
                 df[col] = ""
 
         df["Ticker"] = df["Ticker"].astype(str).str.strip().str.upper()
-
-        # Drop rows with non-ticker values (e.g. numeric garbage, header rows)
         df = df[df["Ticker"].str.match(r'^[A-Z]{1,6}$', na=False)]
-        df = df[df["Ticker"].isin(valid_tickers)]
+        df = df[df["Ticker"].isin(all_tickers)]
         df = df.fillna("")
 
-        # Sanitize: drop obviously numeric sector/industry values
         for col in ["Sector", "Industry", "Subindustry"]:
             df[col] = df[col].astype(str).str.strip()
             df[col] = df[col].where(~df[col].str.match(r'^[\d\.\-]+$'), "")
 
-        # Fill remaining blanks
         df["Sector"]      = df["Sector"].replace("", "Other")
         df["Industry"]    = df["Industry"].replace("", "Other")
         df["Subindustry"] = df["Subindustry"].replace("", "Other")
@@ -1116,10 +1136,16 @@ def build_symbols_page(valid_tickers):
                         html += f'<div class="subindustry-block"><div class="subindustry-label">&#8627; {subindustry}</div>'
                     html += '<div class="ticker-grid">'
                     for _, row in sub_ig.sort_values("Ticker").iterrows():
+                        t = row["Ticker"]
+                        is_dropped = t in dropped_tickers
+                        card_class = "ticker-card ticker-dropped" if is_dropped else "ticker-card"
+                        sym_color = "#ef4444" if is_dropped else accent_color
+                        drop_tag = '<span class="ticker-drop-tag">NO DATA</span>' if is_dropped else ''
                         html += (
-                            f'<div class="ticker-card">'
-                            f'<span class="ticker-sym" style="color:{accent_color};">{row["Ticker"]}</span>'
+                            f'<div class="{card_class}">'
+                            f'<span class="ticker-sym" style="color:{sym_color};">{t}</span>'
                             f'<span class="ticker-name">{row.get("Name","")}</span>'
+                            f'{drop_tag}'
                             f'</div>'
                         )
                     html += "</div>"
@@ -1240,6 +1266,15 @@ def build_symbols_page(valid_tickers):
     transition: border-color 0.15s, background 0.15s; cursor: default;
   }}
   .ticker-card:hover {{ border-color: #334155; background: #1e2535; }}
+  .ticker-dropped {{
+    background: rgba(239,68,68,0.06); border-color: rgba(239,68,68,0.25); opacity: 0.7;
+  }}
+  .ticker-dropped:hover {{ background: rgba(239,68,68,0.10); border-color: rgba(239,68,68,0.4); }}
+  .ticker-drop-tag {{
+    font-size: 8px; font-weight: 700; color: #ef4444; background: rgba(239,68,68,0.15);
+    border-radius: 3px; padding: 1px 4px; margin-top: 2px; align-self: flex-start;
+    letter-spacing: 0.5px;
+  }}
   .ticker-sym  {{ font-family: var(--mono); font-size: 12px; font-weight: 700; line-height: 1.2; }}
   .ticker-name {{
     font-size: 10px; color: #94a3b8; line-height: 1.3; margin-top: 2px;
@@ -1276,8 +1311,9 @@ def build_symbols_page(valid_tickers):
   <div>Generated: <span id="gen-time"></span></div>
 </div>
 
-<div class="search-bar">
+<div class="search-bar" style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
   <input type="text" id="searchBox" placeholder="Search ticker or name..." oninput="filterSymbols()" />
+  <span style="color:var(--muted); font-size:12px;">{len(valid_tickers)} active{f' &middot; <span style="color:#ef4444;">{len(dropped_tickers)} no data</span>' if dropped_tickers else ''}</span>
 </div>
 
 <div class="columns">
@@ -1448,9 +1484,13 @@ def _compute_chart_for_pair(r):
         r["PriceDates"] = pdates
         r["PriceA"]     = pa
         r["PriceB"]     = pb
+        # Rolling cointegration confidence for price chart overlay
+        coint_dates, coint_vals = compute_rolling_coint(a, b, src)
+        r["CointDates"] = coint_dates
+        r["CointVals"]  = coint_vals
         # Backtest at multiple thresholds
         BT_THRESHOLDS = [1.5, 2.0, 2.5, 3.0]
-        BT_HOLD_DAYS  = [10, 15, 20, 30, 45, 60, 90, 120, 180]
+        BT_HOLD_DAYS  = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 90, 120, 180]
         hl = r.get("HalfLife") or 50
 
         # Single-threshold results (for table column display)
@@ -2692,7 +2732,7 @@ if __name__ == "__main__":
         if v >= 1_000:     return f"{v/1_000:.0f}K"
         return str(int(v))
 
-    build_symbols_page(valid)
+    build_symbols_page(valid, _dropped_tickers)
 
     # ==========================================
     # GENERATE MAIN DASHBOARD
@@ -2848,6 +2888,8 @@ if __name__ == "__main__":
             "priceB":    r.get("PriceB",     []),
             "priceANow": price_a,
             "priceBNow": price_b,
+            "cointDates": r.get("CointDates", []),
+            "cointVals":  r.get("CointVals",  []),
             "hedgeRatio": r.get("HedgeRatio", 1.0),
             "spreadMean": r.get("SpreadMean", 0),
             "spreadStd":  r.get("SpreadStd", 0),
@@ -3637,7 +3679,7 @@ if __name__ == "__main__":
         <span class="leg-dot" style="background:var(--muted)"></span>Neutral
       </div>
       <div>
-        Score = {int(W_ZSCORE*100)}% |Z| + {int(W_HALFLIFE*100)}% HL Speed + {int(W_CONFIRM*100)}% Confirm + {int(W_ANNRET*100)}% AnnRet + {int(W_STATIONARY*100)}% Coint + {int(W_CORR*100)}% Corr + {int(W_BACKTEST*100)}% Backtest
+        Score = {int(W_ZSCORE*100)}% |Z| + {int(W_HALFLIFE*100)}% HL Speed + {int(W_CONFIRM*100)}% Confirm + {int(W_ANNRET*100)}% AnnRet + {int(W_STATIONARY*100)}% Coint + {int(W_BACKTEST*100)}% Backtest
         &nbsp;&middot;&nbsp; 50/50 capital sizing
         &nbsp;&middot;&nbsp; <a href="symbols.html">Symbol Reference</a>
       </div>
@@ -4114,27 +4156,51 @@ if __name__ == "__main__":
       const pctA = priceA.map(v => v != null ? +(v - 100).toFixed(2) : null);
       const pctB = priceB.map(v => v != null ? +(v - 100).toFixed(2) : null);
 
+      // Align rolling cointegration data to price dates
+      const cointDates = p.cointDates || [];
+      const cointVals  = p.cointVals  || [];
+      const cointMap = {{}};
+      cointDates.forEach((d, i) => {{ cointMap[d] = cointVals[i]; }});
+      // Forward-fill: carry last known coint value across gaps
+      let lastCoint = null;
+      const cointAligned = priceDates.map(d => {{
+        if (cointMap[d] !== undefined) lastCoint = cointMap[d];
+        return lastCoint;
+      }});
+      // Color each bar: green if >=95%, amber if >=90%, red otherwise
+      const cointColors = cointAligned.map(v => {{
+        if (v == null) return "rgba(100,116,139,0.08)";
+        if (v >= 95) return "rgba(34,197,94,0.12)";
+        if (v >= 90) return "rgba(245,158,11,0.10)";
+        return "rgba(239,68,68,0.10)";
+      }});
+
+      const datasets = [
+        {{
+          label: "Coint %", data: cointAligned, type: "bar",
+          yAxisID: "yCoint", order: 10,
+          backgroundColor: cointColors,
+          borderWidth: 0, barPercentage: 1.0, categoryPercentage: 1.0,
+        }},
+        {{
+          label: a, data: pctA, yAxisID: "y", order: 1,
+          borderColor: "#38bdf8", borderWidth: 2,
+          pointRadius: 0, pointHoverRadius: 0,
+          fill: true, backgroundColor: gradA,
+          tension: 0.25, spanGaps: true,
+        }},
+        {{
+          label: b, data: pctB, yAxisID: "y", order: 2,
+          borderColor: "#a78bfa", borderWidth: 2,
+          pointRadius: 0, pointHoverRadius: 0,
+          fill: true, backgroundColor: gradB,
+          tension: 0.25, spanGaps: true,
+        }},
+      ];
+
       activePChart = new Chart(ctx, {{
         type: "line",
-        data: {{
-          labels: priceDates,
-          datasets: [
-            {{
-              label: a, data: pctA,
-              borderColor: "#38bdf8", borderWidth: 2,
-              pointRadius: 0, pointHoverRadius: 0,
-              fill: true, backgroundColor: gradA,
-              tension: 0.25, spanGaps: true,
-            }},
-            {{
-              label: b, data: pctB,
-              borderColor: "#a78bfa", borderWidth: 2,
-              pointRadius: 0, pointHoverRadius: 0,
-              fill: true, backgroundColor: gradB,
-              tension: 0.25, spanGaps: true,
-            }},
-          ],
-        }},
+        data: {{ labels: priceDates, datasets }},
         options: {{
           responsive: true, maintainAspectRatio: false,
           layout: {{ padding: {{ right: 60 }} }},
@@ -4150,15 +4216,27 @@ if __name__ == "__main__":
               usePointStyle: true, pointStyle: "rectRounded",
               callbacks: {{
                 label: c => {{
+                  if (c.dataset.label === "Coint %") {{
+                    const v = c.raw;
+                    if (v == null) return null;
+                    return ` Coint: ${{v.toFixed(0)}}%`;
+                  }}
                   const v = c.raw;
                   return ` ${{c.dataset.label}}: ${{v >= 0 ? "+" : ""}}${{v.toFixed(2)}}%`;
                 }},
-                labelColor: c => ({{ borderColor: c.dataset.borderColor, backgroundColor: c.dataset.borderColor, borderWidth: 0, borderRadius: 2 }}),
+                labelColor: c => {{
+                  if (c.dataset.label === "Coint %") {{
+                    const v = c.raw;
+                    const col = v >= 95 ? "#22c55e" : v >= 90 ? "#f59e0b" : "#ef4444";
+                    return {{ borderColor: col, backgroundColor: col, borderWidth: 0, borderRadius: 2 }};
+                  }}
+                  return {{ borderColor: c.dataset.borderColor, backgroundColor: c.dataset.borderColor, borderWidth: 0, borderRadius: 2 }};
+                }},
               }},
             }},
             annotation: {{
               annotations: {{
-                baseline: {{ type: "line", yMin: 0, yMax: 0,
+                baseline: {{ type: "line", yMin: 0, yMax: 0, yScaleID: "y",
                   borderColor: "rgba(148,163,184,0.25)", borderWidth: 1, borderDash: [4,4] }},
               }},
             }},
@@ -4180,6 +4258,13 @@ if __name__ == "__main__":
                 text: corr ? `Price Change %  |  Corr: ${{corr}}` : "Price Change %",
                 color: "#374151", font: {{ family: "'JetBrains Mono',monospace", size: 10 }},
               }},
+            }},
+            yCoint: {{
+              display: true, position: "right",
+              min: 0, max: 100,
+              ticks: {{ color: "#374151", font: {{ family: "'JetBrains Mono',monospace", size: 9 }}, callback: v => v + "%", stepSize: 25 }},
+              grid: {{ drawOnChartArea: false }}, border: {{ color: "#1c2333" }},
+              title: {{ display: true, text: "Coint (1yr rolling)", color: "#374151", font: {{ family: "'JetBrains Mono',monospace", size: 9 }} }},
             }},
           }},
         }},
@@ -4361,18 +4446,18 @@ if __name__ == "__main__":
         const lookup = {{}};
         grid.forEach(g => {{ lookup[g.th + "_" + g.hd] = g; }});
 
-        let html = '<table style="width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11px;">';
+        let html = '<table style="width:100%;border-collapse:collapse;font-family:var(--mono);font-size:10px;">';
         // Header row
         html += '<tr style="color:#cbd5e1;border-bottom:1px solid var(--border2);">'
-          + '<th style="padding:3px 6px;text-align:left;">Entry \\ Hold</th>';
+          + '<th style="padding:2px 3px;text-align:left;white-space:nowrap;">Z \\ Hold</th>';
         holdDays.forEach(hd => {{
-          html += `<th style="padding:3px 6px;text-align:center;">${{hd}}d</th>`;
+          html += `<th style="padding:2px 3px;text-align:center;">${{hd}}d</th>`;
         }});
         html += '</tr>';
         // Data rows
         thresholds.forEach(th => {{
           html += '<tr>';
-          html += `<td style="padding:3px 6px;color:var(--text);font-weight:600">${{th.toFixed(1)}}\u03C3</td>`;
+          html += `<td style="padding:2px 3px;color:var(--text);font-weight:600;white-space:nowrap;">${{th.toFixed(1)}}\u03C3</td>`;
           holdDays.forEach(hd => {{
             const g = lookup[th + "_" + hd];
             const isBest = th === bestTh && hd === bestHD;
@@ -4382,8 +4467,8 @@ if __name__ == "__main__":
             const bg = isBest ? "rgba(56,189,248,0.12)" : "transparent";
             const star = isBest ? " \u2605" : "";
             const wrText = wr != null ? wr.toFixed(0) + "%" : "—";
-            const nText = n > 0 ? `<div style="font-size:9px;color:#94a3b8">n=${{n}}</div>` : "";
-            html += `<td style="padding:3px 6px;text-align:center;background:${{bg}};border:1px solid var(--border2);">`
+            const nText = n > 0 ? `<div style="font-size:8px;color:#94a3b8">n=${{n}}</div>` : "";
+            html += `<td style="padding:2px 3px;text-align:center;background:${{bg}};border:1px solid var(--border2);">`
               + `<div style="color:${{wrColor}};font-weight:700">${{wrText}}${{star}}</div>${{nText}}</td>`;
           }});
           html += '</tr>';
