@@ -30418,5 +30418,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MKC": {
+        "ticker": "MKC",
+        "name": "McCormick & Company, Incorporat",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 16208301056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SJM": {
+        "ticker": "SJM",
+        "name": "The J.M. Smucker Company",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 11521920000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SENEA": {
+        "ticker": "SENEA",
+        "name": "Seneca Foods Corp.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 981891328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
