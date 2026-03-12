@@ -6,6 +6,9 @@ on:
     # Runs at minute 30 past the hour, 12:00 to 21:00 UTC, Mon-Fri (Market Hours)
     #- cron: '30 12-21 * * 1-5'
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 permissions:
   contents: write
 
