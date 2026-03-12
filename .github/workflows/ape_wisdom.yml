@@ -6,6 +6,9 @@ on:
     # Runs at minute 0 (the top of the hour) every hour of every day
     - cron: '0 * * * *'
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 permissions:
   contents: write 
 
