@@ -30828,5 +30828,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "DUG": {
+        "ticker": "DUG",
+        "name": "ProShares UltraShort Energy",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "DUOT": {
+        "ticker": "DUOT",
+        "name": "Duos Technologies Group, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 218016544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
