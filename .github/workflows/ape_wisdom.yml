@@ -20,7 +20,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       # OPTIMIZATION 1: Native pip caching to speed up dependency installation
       - name: Set up Python
