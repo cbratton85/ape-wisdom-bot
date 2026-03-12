@@ -23,6 +23,9 @@
       --muted:    #4a5e72;
       --green:    #00d97e;
       --cyan:     #38bdf8;
+      --red:      #ef4444;
+      --amber:    #f59e0b;
+      --purple:   #a78bfa;
       --mono:     'JetBrains Mono', monospace;
       --sans:     'Syne', sans-serif;
     }
@@ -49,9 +52,30 @@
       position: relative;
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 40px 24px;
+      gap: 32px;
+    }
+
+    .suite-header {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .suite-header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: 0.06em;
+    }
+    .suite-header h1 span { color: var(--cyan); }
+    .suite-header p {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 6px;
+      letter-spacing: 0.04em;
     }
 
     .cards {
@@ -59,7 +83,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 28px;
       width: 100%;
-      max-width: 860px;
+      max-width: 900px;
     }
 
     .card {
@@ -76,8 +100,10 @@
 
     .card:hover { transform: translateY(-4px); }
 
-    .card-green { --accent: var(--green); }
-    .card-cyan  { --accent: var(--cyan);  }
+    .card-green  { --accent: var(--green);  }
+    .card-cyan   { --accent: var(--cyan);   }
+    .card-purple { --accent: var(--purple); }
+    .card-amber  { --accent: var(--amber);  }
 
     .card:hover {
       border-color: var(--accent);
@@ -223,11 +249,100 @@
 </head>
 <body>
 <div class="wrapper">
+
+  <div class="suite-header">
+    <h1><span>TRADING</span> SUITE</h1>
+    <p>Technical analysis, pairs trading, and breakout scanning</p>
+  </div>
+
   <div class="cards">
 
-    <a href="momentum.html" class="card card-green">
+    <!-- 1. BREAKOUT SCANNER -->
+    <a href="stock_dashboard.html" class="card card-green">
       <div class="card-header">
-        <div class="card-icon">🦍</div>
+        <div class="card-icon">&#9650;</div>
+        <span class="card-badge">BREAKOUT + MOMENTUM</span>
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">Breakout Scanner</h2>
+        <p class="card-desc">
+          Scores every ticker on breakout vs breakdown probability using RSI, MACD, Bollinger Bands, stochastic, moving averages, squeeze detection, and price structure.
+        </p>
+      </div>
+      <div class="card-features">
+        <span class="feat-tag">BREAKOUT SCORE</span>
+        <span class="feat-tag">RSI</span>
+        <span class="feat-tag">MACD</span>
+        <span class="feat-tag">BOLLINGER</span>
+        <span class="feat-tag">SQUEEZE</span>
+        <span class="feat-tag">ADX</span>
+        <span class="feat-tag">STOCH</span>
+        <span class="feat-tag">STRUCTURE</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-cta">Open Scanner <span class="cta-arrow">&rarr;</span></span>
+        <span class="card-meta">stock_dashboard.html</span>
+      </div>
+    </a>
+
+    <!-- 2. PAIRS SCANNER (Z-Score) -->
+    <a href="pairs_scanner.html" class="card card-cyan">
+      <div class="card-header">
+        <div class="card-icon">&#9889;</div>
+        <span class="card-badge">STATISTICAL ARBITRAGE</span>
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">Pairs Trading Scanner</h2>
+        <p class="card-desc">
+          Identifies cointegrated pairs with divergent Z-scores primed for mean reversion across ETFs and equities by sector.
+        </p>
+      </div>
+      <div class="card-features">
+        <span class="feat-tag">Z-SCORE</span>
+        <span class="feat-tag">COINTEGRATION</span>
+        <span class="feat-tag">SPREAD</span>
+        <span class="feat-tag">CORRELATION</span>
+        <span class="feat-tag">SECTOR VIEW</span>
+        <span class="feat-tag">ETF PAIRS</span>
+        <span class="feat-tag">MEAN REVERSION</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-cta">Open Scanner <span class="cta-arrow">&rarr;</span></span>
+        <span class="card-meta">pairs_scanner.html</span>
+      </div>
+    </a>
+
+    <!-- 3. PAIRS WATCHLIST (Cointegration) -->
+    <a href="pairs_watchlist.html" class="card card-purple">
+      <div class="card-header">
+        <div class="card-icon">&#9878;</div>
+        <span class="card-badge">COINTEGRATION WATCHLIST</span>
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">Pairs Watchlist</h2>
+        <p class="card-desc">
+          Tracks long-term cointegrated pairs across 1yr, 2yr, and 3yr ADF windows with confidence scoring, correlation analysis, and sector matching.
+        </p>
+      </div>
+      <div class="card-features">
+        <span class="feat-tag">ADF TEST</span>
+        <span class="feat-tag">1YR / 2YR / 3YR</span>
+        <span class="feat-tag">CONFIDENCE</span>
+        <span class="feat-tag">CORRELATION</span>
+        <span class="feat-tag">VOLUME</span>
+        <span class="feat-tag">MCAP</span>
+        <span class="feat-tag">SECTOR MATCH</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-cta">Open Watchlist <span class="cta-arrow">&rarr;</span></span>
+        <span class="card-meta">pairs_watchlist.html</span>
+      </div>
+    </a>
+
+    <!-- 4. APE WISDOM -->
+    <a href="momentum.html" class="card card-amber">
+      <div class="card-header">
+        <div class="card-icon">&#129421;</div>
         <span class="card-badge">SENTIMENT + MOMENTUM</span>
       </div>
       <div class="card-body">
@@ -247,34 +362,8 @@
         <span class="feat-tag">MCAP FILTER</span>
       </div>
       <div class="card-footer">
-        <span class="card-cta">Open Dashboard <span class="cta-arrow">→</span></span>
+        <span class="card-cta">Open Dashboard <span class="cta-arrow">&rarr;</span></span>
         <span class="card-meta">momentum.html</span>
-      </div>
-    </a>
-
-    <a href="pairs_scanner.html" class="card card-cyan">
-      <div class="card-header">
-        <div class="card-icon">⚡</div>
-        <span class="card-badge">STATISTICAL ARBITRAGE</span>
-      </div>
-      <div class="card-body">
-        <h2 class="card-title">Pairs Trading Scanner</h2>
-        <p class="card-desc">
-          Identifies cointegrated pairs with divergent Z-scores primed for mean reversion across ETFs and equities by sector.
-        </p>
-      </div>
-      <div class="card-features">
-        <span class="feat-tag">Z-SCORE</span>
-        <span class="feat-tag">COINTEGRATION</span>
-        <span class="feat-tag">SPREAD</span>
-        <span class="feat-tag">CORRELATION</span>
-        <span class="feat-tag">SECTOR VIEW</span>
-        <span class="feat-tag">ETF PAIRS</span>
-        <span class="feat-tag">MEAN REVERSION</span>
-      </div>
-      <div class="card-footer">
-        <span class="card-cta">Open Scanner <span class="cta-arrow">→</span></span>
-        <span class="card-meta">pairs_scanner.html</span>
       </div>
     </a>
 
