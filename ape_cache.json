@@ -30798,5 +30798,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "LXU": {
+        "ticker": "LXU",
+        "name": "LSB Industries, Inc.",
+        "meta": "Chemicals",
+        "type": "EQUITY",
+        "mcap": 1091764992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
