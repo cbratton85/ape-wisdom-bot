@@ -30918,5 +30918,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "BNL": {
+        "ticker": "BNL",
+        "name": "Broadstone Net Lease, Inc.",
+        "meta": "REIT - Diversified",
+        "type": "EQUITY",
+        "mcap": 3844964864,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CSIQ": {
+        "ticker": "CSIQ",
+        "name": "Canadian Solar Inc.",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 1207509632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CGEN": {
+        "ticker": "CGEN",
+        "name": "Compugen Ltd.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 209884016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "AMTX": {
+        "ticker": "AMTX",
+        "name": "Aemetis, Inc",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 127104000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
