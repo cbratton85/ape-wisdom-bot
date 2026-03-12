@@ -30738,5 +30738,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ICVT": {
+        "ticker": "ICVT",
+        "name": "iShares Convertible Bond ETF",
+        "meta": "Convertibles",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "TBCH": {
+        "ticker": "TBCH",
+        "name": "Turtle Beach Corporation",
+        "meta": "Consumer Electronics",
+        "type": "EQUITY",
+        "mcap": 267983776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "LVHI": {
+        "ticker": "LVHI",
+        "name": "Franklin International Low Vola",
+        "meta": "Foreign Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "DSGX": {
+        "ticker": "DSGX",
+        "name": "The Descartes Systems Group Inc",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 6252102144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GCOW": {
+        "ticker": "GCOW",
+        "name": "Pacer Global Cash Cows Dividend",
+        "meta": "Global Large-Stock Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
