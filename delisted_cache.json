@@ -129,14 +129,24 @@
         "last_checked": "2026-03-11",
         "reason": "No Price Data"
     },
-    "BABY": {
+    "MBT": {
         "delisted": true,
         "last_checked": "2026-03-11",
         "reason": "No Price Data"
     },
-    "MBT": {
+    "ROLL": {
         "delisted": true,
-        "last_checked": "2026-03-11",
+        "last_checked": "2026-03-12",
+        "reason": "No Price Data"
+    },
+    "FUT": {
+        "delisted": true,
+        "last_checked": "2026-03-12",
+        "reason": "No Price Data"
+    },
+    "BABY": {
+        "delisted": true,
+        "last_checked": "2026-03-12",
         "reason": "No Price Data"
     }
 }

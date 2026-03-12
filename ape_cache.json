@@ -30578,5 +30578,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "RLYB": {
+        "ticker": "RLYB",
+        "name": "Rallybio Corporation",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 52790956,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "E": {
+        "ticker": "E",
+        "name": "ENI S.p.A.",
+        "meta": "Oil & Gas Integrated",
+        "type": "EQUITY",
+        "mcap": 73207627776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AAXJ": {
+        "ticker": "AAXJ",
+        "name": "iShares MSCI All Country Asia e",
+        "meta": "Pacific/Asia ex-Japan Stk",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "FUT": {
+        "ticker": "FUT",
+        "name": "ProShares Managed Futures Strat",
+        "meta": "Systematic Trend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
