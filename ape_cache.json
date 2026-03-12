@@ -30698,5 +30698,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "FIDI": {
+        "ticker": "FIDI",
+        "name": "Fidelity International High Div",
+        "meta": "Foreign Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
