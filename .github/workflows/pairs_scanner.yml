@@ -34,7 +34,8 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            historical_data.csv.gz
+            stock_data.csv.gz
+            etf_data.csv.gz
             chart_data.csv.gz
             active_trades.json
           key: market-data-${{ github.run_id }}
@@ -50,13 +51,15 @@ jobs:
         run: |
           mkdir -p public
           # Move scanner results
-          mv pairs_scanner.html public/
+          mv pairs_scanner.html.gz public/ || true
           # Move active trades tracker (if generated)
           mv active_trades.html public/ || true
           # Move symbols list (if generated)
           mv symbols.html public/ || true
           # Copy data files so the site can load charts
-          cp *.csv.gz public/ || true
+          cp stock_data.csv.gz public/ || true
+          cp etf_data.csv.gz public/ || true
+          cp chart_data.csv.gz public/ || true
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
