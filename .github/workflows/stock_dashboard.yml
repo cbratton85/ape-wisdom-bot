@@ -1,4 +1,4 @@
-name: Stock Dashboard Update
+name: Stock Dashboard
 
 on:
   schedule:
