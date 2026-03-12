@@ -30618,5 +30618,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "ICL": {
+        "ticker": "ICL",
+        "name": "ICL Group Ltd.",
+        "meta": "Agricultural Inputs",
+        "type": "EQUITY",
+        "mcap": 6737311744,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SRTY": {
+        "ticker": "SRTY",
+        "name": "ProShares UltraPro Short Russel",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "TALO": {
+        "ticker": "TALO",
+        "name": "Talos Energy, Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 2282949120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LSB": {
+        "ticker": "LSB",
+        "name": "LakeShore Biopharma Co., Ltd",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
