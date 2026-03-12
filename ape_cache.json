@@ -30668,5 +30668,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "INVH": {
+        "ticker": "INVH",
+        "name": "Invitation Homes Inc.",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 15454248960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AMH": {
+        "ticker": "AMH",
+        "name": "American Homes 4 Rent",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 12197081088,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RLY": {
+        "ticker": "RLY",
+        "name": "State Street Multi-Asset Real R",
+        "meta": "Global Moderate Allocation",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
