@@ -30788,5 +30788,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "GPCR": {
+        "ticker": "GPCR",
+        "name": "Structure Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3916135168,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }

@@ -134,17 +134,22 @@
         "last_checked": "2026-03-12",
         "reason": "No Price Data"
     },
-    "ZEV": {
-        "delisted": true,
-        "last_checked": "2026-03-12",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-03-12",
         "reason": "No Price Data"
     },
     "WOW": {
+        "delisted": true,
+        "last_checked": "2026-03-12",
+        "reason": "No Price Data"
+    },
+    "JW": {
+        "delisted": true,
+        "last_checked": "2026-03-12",
+        "reason": "No Price Data"
+    },
+    "ZEV": {
         "delisted": true,
         "last_checked": "2026-03-12",
         "reason": "No Price Data"
