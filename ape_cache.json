@@ -30818,5 +30818,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "PN": {
+        "ticker": "PN",
+        "name": "Skycorp Solar Group Limited",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 13502700,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
