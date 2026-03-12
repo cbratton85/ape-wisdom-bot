@@ -30658,5 +30658,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "COUR": {
+        "ticker": "COUR",
+        "name": "Coursera, Inc.",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 1029078528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
