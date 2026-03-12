@@ -3,7 +3,7 @@ name: Stock Dashboard
 on:
   schedule:
     # Runs at 45 minutes past the hour during US Market hours (UTC)
-    - cron: '45 13-20 * * 1-5'
+    - cron: '15 13-20 * * 1-5'
   workflow_dispatch:
 
 env:
@@ -36,6 +36,7 @@ jobs:
       - name: Prepare Public Folder
         run: |
           mkdir -p public
+          cp index.html public/index.html || true  # This ensures your 4-box page is used as the home page
           mv stock_dashboard.html public/stock_dashboard.html
           cp -r *.csv public/ 2>/dev/null || true
 
