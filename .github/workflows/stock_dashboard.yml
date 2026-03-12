@@ -1,16 +1,17 @@
-name: Stock Dashboard
+name: Stock Dashboard Update
 
 on:
   schedule:
-    # Runs at minute 45, every hour from 13:00 to 20:00 UTC, Monday-Friday.
-    # 13:45 UTC is 9:45 AM ET (Market Open)
-    # 20:45 UTC is 4:45 PM ET (Post-Market Close)
+    # Runs at 45 minutes past the hour during US Market hours (UTC)
     - cron: '45 13-20 * * 1-5'
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
 
     steps:
       - name: Checkout repository
@@ -29,8 +30,30 @@ jobs:
       - name: Run Dashboard Script
         run: python stock_dashboard.py
 
-      - name: Upload HTML Dashboard
-        uses: actions/upload-artifact@v4
+      - name: Prepare Public Folder
+        run: |
+          mkdir -p public
+          # Move the generated file to public/index.html for hosting
+          mv stock_dashboard.html public/index.html
+          # Ensure data files are also in public if the script needs them
+          cp -r *.csv public/ 2>/dev/null || true
+
+      - name: Commit and Push Data Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          # Prevent logo bloat by resetting the logos folder
+          if [ -d "public/logos" ]; then
+            git reset public/logos/
+          fi
+          git commit -m "Update Dashboard Data [skip ci]" || echo "No changes"
+          git pull --rebase origin main
+          git push origin main
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          name: stock-dashboard
-          path: stock_dashboard.html
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          keep_files: true
