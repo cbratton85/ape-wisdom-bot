@@ -37,7 +37,7 @@ jobs:
       - name: Prepare Public Folder
         run: |
           mkdir -p public
-          mv stock_dashboard.html public/index.html
+          mv stock_dashboard.html public/stock_dashboard.html
           cp -r *.csv public/ 2>/dev/null || true
 
       - name: Commit and Push Data Changes
