@@ -6,6 +6,10 @@ on:
     - cron: '45 13-20 * * 1-5'
   workflow_dispatch:
 
+# OPT-IN TO NODE 24: This clears the deprecation warning for all actions
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -33,9 +37,7 @@ jobs:
       - name: Prepare Public Folder
         run: |
           mkdir -p public
-          # Move the generated file to public/index.html for hosting
           mv stock_dashboard.html public/index.html
-          # Ensure data files are also in public if the script needs them
           cp -r *.csv public/ 2>/dev/null || true
 
       - name: Commit and Push Data Changes
@@ -43,7 +45,6 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          # Prevent logo bloat by resetting the logos folder
           if [ -d "public/logos" ]; then
             git reset public/logos/
           fi
