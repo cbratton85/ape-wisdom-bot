@@ -30848,5 +30848,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "WMK": {
+        "ticker": "WMK",
+        "name": "Weis Markets, Inc.",
+        "meta": "Grocery Stores",
+        "type": "EQUITY",
+        "mcap": 1557425024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VMI": {
+        "ticker": "VMI",
+        "name": "Valmont Industries, Inc.",
+        "meta": "Conglomerates",
+        "type": "EQUITY",
+        "mcap": 8276803584,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GENK": {
+        "ticker": "GENK",
+        "name": "GEN Restaurant Group, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 50401692,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "QUS": {
+        "ticker": "QUS",
+        "name": "State Street SPDR MSCI USA Stra",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "BOX": {
+        "ticker": "BOX",
+        "name": "Box, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 3537727488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CTVA": {
+        "ticker": "CTVA",
+        "name": "Corteva, Inc.",
+        "meta": "Agricultural Inputs",
+        "type": "EQUITY",
+        "mcap": 53889626112,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
