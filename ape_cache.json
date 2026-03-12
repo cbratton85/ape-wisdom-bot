@@ -30958,5 +30958,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "INMD": {
+        "ticker": "INMD",
+        "name": "InMode Ltd.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 808457664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "NPK": {
+        "ticker": "NPK",
+        "name": "National Presto Industries, Inc",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 948061312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DSI": {
+        "ticker": "DSI",
+        "name": "iShares ESG MSCI KLD 400 ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }

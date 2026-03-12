@@ -89,11 +89,6 @@
         "last_checked": "2026-03-12",
         "reason": "No Price Data"
     },
-    "DS": {
-        "delisted": true,
-        "last_checked": "2026-03-12",
-        "reason": "No Price Data"
-    },
     "VSL": {
         "delisted": true,
         "last_checked": "2026-03-12",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "CEA": {
+        "delisted": true,
+        "last_checked": "2026-03-12",
+        "reason": "No Price Data"
+    },
+    "DS": {
         "delisted": true,
         "last_checked": "2026-03-12",
         "reason": "No Price Data"
