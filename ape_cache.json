@@ -30708,5 +30708,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "EWZS": {
+        "ticker": "EWZS",
+        "name": "iShares MSCI Brazil Small-Cap E",
+        "meta": "Latin America Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "LEAD": {
+        "ticker": "LEAD",
+        "name": "Siren DIVCON Leaders Dividend E",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "LCUT": {
+        "ticker": "LCUT",
+        "name": "Lifetime Brands, Inc.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 77490696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
