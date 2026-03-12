@@ -37,7 +37,7 @@ TOOLTIP_HISTORY_DAYS = 12
 # Filters & Algorithm Tuning
 # ------------------------------------------------------------------------------
 MIN_PRICE = 1.00
-MIN_AVG_VOLUME = 100000
+MIN_AVG_VOLUME = 50000
 AVG_VOLUME_DAYS = 30
 NAME_MAX_WIDTH = 50
 LOTTERY_SIZE = 1
@@ -698,7 +698,7 @@ def filter_and_process(stocks):
                     else: market_data = pd.concat([market_data, batch_data], axis=1)
                 
                 # Increased sleep to prevent rate-limit "misses"
-                if i + CHUNK_SIZE < len(valid_tickers): time.sleep(5.0) 
+                if i + CHUNK_SIZE < len(valid_tickers): time.sleep(1.5) 
             except Exception as e:
                 print(f"{C_RED}[!] Batch Error: {e}{C_RESET}")
                 continue
