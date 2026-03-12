@@ -26,7 +26,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.14'
+          python-version: '3.12'
           cache: 'pip' # <--- This tells GitHub to cache your requirements.txt
 
       # OPTIMIZATION 2: Dynamic cache key to ensure new logos are always saved
