@@ -30808,5 +30808,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "DBO": {
+        "ticker": "DBO",
+        "name": "Invesco DB Oil Fund",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 577720000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
