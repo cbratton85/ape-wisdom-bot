@@ -30908,5 +30908,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BTBT": {
+        "ticker": "BTBT",
+        "name": "Bit Digital, Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 524353216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
