@@ -31,7 +31,7 @@ jobs:
 
       # OPTIMIZATION 2: Dynamic cache key to ensure new logos are always saved
       - name: Cache Logos
-        uses: actions/cache@v6
+        uses: actions/cache@v4
         with:
           path: public/logos
           key: ${{ runner.os }}-logos-${{ github.run_id }}
