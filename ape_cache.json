@@ -31128,5 +31128,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "GGG": {
+        "ticker": "GGG",
+        "name": "Graco Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 14326269952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
