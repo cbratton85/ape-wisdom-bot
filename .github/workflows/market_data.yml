@@ -35,18 +35,6 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install yfinance pandas numpy tqdm lxml; fi
 
-      - name: Randomize run time (5-15 min jitter)
-        if: github.event_name != 'schedule' || github.event.schedule == '0 * * * 1-5'
-        run: |
-          python - <<'PY'
-          import random
-          import time
-
-          delay = random.randint(300, 900)
-          print(f"Random delay: {delay} seconds")
-          time.sleep(delay)
-          PY
-
       - name: Check US market-hours window (ET)
         id: market_window
         env:
