@@ -31288,5 +31288,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "MCHP": {
+        "ticker": "MCHP",
+        "name": "Microchip Technology Incorporat",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 33517930496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
