@@ -31248,5 +31248,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PEX": {
+        "ticker": "PEX",
+        "name": "ProShares Global Listed Private",
+        "meta": "Unknown",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "SOWG": {
+        "ticker": "SOWG",
+        "name": "Sow Good Inc.",
+        "meta": "Confectioners",
+        "type": "EQUITY",
+        "mcap": 5346049,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
