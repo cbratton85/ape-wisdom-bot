@@ -1158,78 +1158,113 @@ def _init_analyze_worker(cl, cs, lp, lp_short, lp_long, lp_full, pr, pf, tt, elt
     ETF_LEV_TYPES    = elt
 
 
-def compute_backtest(dates, z_vals, half_life, threshold, max_days=None):
-    """Simulate historical trades on a Z-score series.
-    Entry: |Z| crosses above threshold.  Exit: Z reverts within ±0.3 of 0, or timeout."""
-    EXIT_BAND = 0.3
-    timeout = int(max_days) if max_days else int((half_life or 50) * 3)
-    trades = []
-    in_trade = False
-    entry_idx = entry_z = 0
+def compute_backtest(dates, z_vals, half_life, threshold, max_days=None, prices_a=None, prices_b=None, hedge_ratio=1.0):
+  """Simulate historical trades on a Z-score series.
+  Entry signal fires when |Z| >= threshold at bar i, execution occurs at bar i+1.
+  Exit occurs on first |Z| <= 0.3, or timeout. Return is spread PnL from prices when available."""
+  EXIT_BAND = 0.3
+  timeout = int(max_days) if max_days else int((half_life or 50) * 3)
+  trades = []
+  in_trade = False
+  entry_idx = 0
+  entry_z = 0.0
 
-    for i, z in enumerate(z_vals):
-        if z is None:
-            continue
-        if not in_trade:
-            if abs(z) >= threshold:
-                in_trade = True
-                entry_idx = i
-                entry_z = z
+  n_bars = min(len(dates), len(z_vals))
+  pa_series = list(prices_a) if prices_a is not None else []
+  pb_series = list(prices_b) if prices_b is not None else []
+  use_prices = len(pa_series) > 0 and len(pb_series) > 0
+  if use_prices:
+    n_bars = min(n_bars, len(pa_series), len(pb_series))
+
+  def _valid_price(v):
+    return v is not None and np.isfinite(v) and v > 0
+
+  def _spread_log(idx):
+    return np.log(float(pa_series[idx])) - float(hedge_ratio) * np.log(float(pb_series[idx]))
+
+  for i in range(n_bars):
+    z = z_vals[i]
+    if z is None or not np.isfinite(z):
+      continue
+    if not in_trade:
+      if abs(z) >= threshold:
+        entry_exec_idx = i + 1
+        if entry_exec_idx >= n_bars:
+          continue
+        if use_prices and (not _valid_price(pa_series[entry_exec_idx]) or not _valid_price(pb_series[entry_exec_idx])):
+          continue
+        in_trade = True
+        entry_idx = entry_exec_idx
+        entry_z = float(z)
+    else:
+      days_held = i - entry_idx
+      reverted = abs(z) <= EXIT_BAND
+      timed_out = days_held >= timeout
+      if reverted or timed_out:
+        if use_prices and _valid_price(pa_series[i]) and _valid_price(pb_series[i]):
+          spread_entry = _spread_log(entry_idx)
+          spread_exit = _spread_log(i)
+          direction = -1.0 if entry_z >= 0 else 1.0
+          ret_pct = (spread_exit - spread_entry) * direction * 100.0
         else:
-            days_held = i - entry_idx
-            reverted = abs(z) <= EXIT_BAND
-            timed_out = days_held >= timeout
-            if reverted or timed_out:
-                ret_pct = (abs(entry_z) - abs(z)) / abs(entry_z) * 100 if abs(entry_z) > 0 else 0
-                trades.append({
-                    "eI": entry_idx, "xI": i,
-                    "eZ": round(entry_z, 2), "xZ": round(z, 2),
-                    "ret": round(ret_pct, 1),
-                    "win": 1 if reverted else 0,
-                    "days": days_held,
-                })
-                in_trade = False
+          ret_pct = (abs(entry_z) - abs(z)) / abs(entry_z) * 100 if abs(entry_z) > 0 else 0
+        trades.append({
+          "eI": entry_idx, "xI": i,
+          "eZ": round(entry_z, 2), "xZ": round(z, 2),
+          "ret": round(ret_pct, 1),
+          "win": 1 if reverted else 0,
+          "days": days_held,
+        })
+        in_trade = False
 
-    # Second pass: no-timeout reversion tracking
-    revert_days = []
-    in_trade2 = False
-    entry_idx2 = 0
-    total_crossings2 = 0
-    for i, z in enumerate(z_vals):
-        if z is None:
-            continue
-        if not in_trade2:
-            if abs(z) >= threshold:
-                in_trade2 = True
-                entry_idx2 = i
-                total_crossings2 += 1
-        else:
-            if abs(z) <= EXIT_BAND:
-                revert_days.append(i - entry_idx2)
-                in_trade2 = False
+  # Second pass: no-timeout reversion tracking
+  revert_days = []
+  in_trade2 = False
+  entry_idx2 = 0
+  total_crossings2 = 0
+  for i in range(n_bars):
+    z = z_vals[i]
+    if z is None or not np.isfinite(z):
+      continue
+    if not in_trade2:
+      if abs(z) >= threshold:
+        entry_exec_idx2 = i + 1
+        if entry_exec_idx2 >= n_bars:
+          continue
+        if use_prices and (not _valid_price(pa_series[entry_exec_idx2]) or not _valid_price(pb_series[entry_exec_idx2])):
+          continue
+        in_trade2 = True
+        entry_idx2 = entry_exec_idx2
+        total_crossings2 += 1
+    else:
+      if abs(z) <= EXIT_BAND:
+        revert_days.append(i - entry_idx2)
+        in_trade2 = False
 
-    n = len(trades)
-    nr = len(revert_days)
-    # Exclude the current open crossing (still in progress)
-    completed_crossings = total_crossings2 - (1 if in_trade2 else 0)
-    revert_pct = round(nr / completed_crossings * 100, 1) if completed_crossings > 0 else None
-    sorted_rd = sorted(revert_days)
-    median_rd = sorted_rd[len(sorted_rd) // 2] if sorted_rd else None
+  n = len(trades)
+  nr = len(revert_days)
+  # Exclude the current open crossing (still in progress)
+  completed_crossings = total_crossings2 - (1 if in_trade2 else 0)
+  revert_pct = round(nr / completed_crossings * 100, 1) if completed_crossings > 0 else None
+  sorted_rd = sorted(revert_days)
+  median_rd = sorted_rd[len(sorted_rd) // 2] if sorted_rd else None
 
-    if n == 0:
-      return {"trades": [], "winRate": None, "avgRet": None, "avgDays": None, "numTrades": 0,
-          "revertPct": revert_pct, "medianDays": median_rd, "revertCount": nr}
-    wins = sum(t["win"] for t in trades)
+  if n == 0:
     return {
-      "trades": trades,
-      "winRate": round(wins / n * 100, 1),
-      "avgRet": round(sum(t["ret"] for t in trades) / n, 1),
-      "avgDays": round(sum(t["days"] for t in trades) / n, 0),
-      "numTrades": n,
-      "revertPct": revert_pct,
-      "medianDays": median_rd,
-      "revertCount": nr,
+      "trades": [], "winRate": None, "avgRet": None, "avgDays": None, "numTrades": 0,
+      "revertPct": revert_pct, "medianDays": median_rd, "revertCount": nr,
     }
+  wins = sum(t["win"] for t in trades)
+  return {
+    "trades": trades,
+    "winRate": round(wins / n * 100, 1),
+    "avgRet": round(sum(t["ret"] for t in trades) / n, 1),
+    "avgDays": round(sum(t["days"] for t in trades) / n, 0),
+    "numTrades": n,
+    "revertPct": revert_pct,
+    "medianDays": median_rd,
+    "revertCount": nr,
+  }
 
 
 def _init_chart_worker(cd, sd):
@@ -1257,6 +1292,16 @@ def _compute_chart_for_pair(r):
         src = _select_pair_chart_source(a, b, src, r)
         hr = r.get("HedgeRatio", 1.0)
         dates, z_vals = compute_z_history(a, b, src, hedge_ratio=hr)
+        prices_a_bt = []
+        prices_b_bt = []
+        if dates:
+          p_a = src[a].dropna().clip(lower=1e-10)
+          p_b = src[b].dropna().clip(lower=1e-10)
+          paired = pd.DataFrame({"a": p_a, "b": p_b}).dropna()
+          if not paired.empty:
+            aligned = paired.reindex(pd.to_datetime(dates))
+            prices_a_bt = [float(v) if pd.notna(v) else None for v in aligned["a"].values]
+            prices_b_bt = [float(v) if pd.notna(v) else None for v in aligned["b"].values]
         # Snap the last chart point to match the authoritative stats Z value
         stats_z = r.get("Z")
         if z_vals and stats_z is not None:
@@ -1292,7 +1337,10 @@ def _compute_chart_for_pair(r):
         # Single-threshold results (for table column display)
         bt_multi = {}
         for th in BT_THRESHOLDS:
-            bt_multi[th] = compute_backtest(dates, z_vals, hl, th)
+          bt_multi[th] = compute_backtest(
+            dates, z_vals, hl, th,
+            prices_a=prices_a_bt, prices_b=prices_b_bt, hedge_ratio=hr,
+          )
         r["BtMulti"] = bt_multi
 
         # Full grid: threshold × holding period
@@ -1301,26 +1349,41 @@ def _compute_chart_for_pair(r):
         best_hd = None
         best_score = (-1, -1)
         for th in BT_THRESHOLDS:
-            for hd in BT_HOLD_DAYS:
-                bt_r = compute_backtest(dates, z_vals, hl, th, max_days=hd)
-                bt_grid.append({
-                    "th": th, "hd": hd,
-                    "wr": bt_r["winRate"], "n": bt_r["numTrades"],
-                    "avgRet": bt_r["avgRet"], "avgD": bt_r["avgDays"],
-                })
-                if bt_r["winRate"] is not None and bt_r["numTrades"] >= 2:
-                    score = (bt_r["winRate"], bt_r["numTrades"])
-                    if score > best_score:
-                        best_score = score
-                        best_th = th
-                        best_hd = hd
+          for hd in BT_HOLD_DAYS:
+            bt_r = compute_backtest(
+              dates,
+              z_vals,
+              hl,
+              th,
+              max_days=hd,
+              prices_a=prices_a_bt,
+              prices_b=prices_b_bt,
+              hedge_ratio=hr,
+            )
+            bt_grid.append({
+              "th": th,
+              "hd": hd,
+              "wr": bt_r["winRate"],
+              "n": bt_r["numTrades"],
+              "avgRet": bt_r["avgRet"],
+              "avgD": bt_r["avgDays"],
+            })
+            if bt_r["winRate"] is not None and bt_r["numTrades"] >= 2:
+              score = (bt_r["winRate"], bt_r["numTrades"])
+              if score > best_score:
+                best_score = score
+                best_th = th
+                best_hd = hd
         r["BtGrid"] = bt_grid
         r["BtBestTh"] = best_th
         r["BtBestHD"] = best_hd
         r["BtBestWR"] = best_score[0] if best_th else None
 
         # Primary backtest uses the scanner's Z_THRESHOLD (default timeout)
-        bt = bt_multi.get(Z_THRESHOLD) or compute_backtest(dates, z_vals, hl, Z_THRESHOLD)
+        bt = bt_multi.get(Z_THRESHOLD) or compute_backtest(
+          dates, z_vals, hl, Z_THRESHOLD,
+          prices_a=prices_a_bt, prices_b=prices_b_bt, hedge_ratio=hr,
+        )
         r["BtWinRate"]    = bt["winRate"]
         r["BtAvgRet"]     = bt["avgRet"]
         r["BtAvgDays"]    = bt["avgDays"]
@@ -3293,7 +3356,6 @@ if __name__ == "__main__":
       <div class="stat-item"><div class="stat-label">Valid Setups</div><div class="stat-value green">{total_valid:,}</div></div>
       <div class="stat-item"><div class="stat-label">Active Symbols</div><div class="stat-value">{len(valid)}</div></div>
       <div class="stat-item"><div class="stat-label">Lookback</div><div class="stat-value">{LOOKBACK_DAYS}d</div></div>
-      <div class="stat-item"><div class="stat-label">Z Tiers</div><div class="stat-value">{Z_LOW:.1f} / {Z_MEDIUM:.1f} / {Z_HIGH:.1f} / {Z_STRONG:.1f}&sigma;</div></div>
       <div class="stat-item"><div class="stat-label">Z Windows</div><div class="stat-value">{Z_LENGTH_SHORT}d / {Z_LENGTH}d / {Z_LENGTH_LONG}d</div></div>
       <div class="stat-item"><div class="stat-label">Corr Windows</div><div class="stat-value">{CORR_SHORT}d / {CORR_LONG}d</div></div>
       <div class="stat-item"><div class="stat-label">Min Corr</div><div class="stat-value">{MIN_CORR_FILTER:.2f}</div></div>
@@ -4257,7 +4319,7 @@ if __name__ == "__main__":
         + (md ? ` &middot; ${{md}}` : "")
         + '</div>';
       html += '<div style="font-family:var(--mono);font-size:10px;color:#64748b;margin-bottom:12px;">'
-        + `Grid uses fixed hold windows (10d-120d): entry |Z| ≥ threshold, exit on first |Z| ≤ 0.3σ (win) or forced exit at that window (loss); ★ = best threshold/hold combo`
+        + `Grid uses fixed hold windows (10d-120d): signal on |Z| ≥ threshold, execute next bar, exit on first |Z| ≤ 0.3σ (win) or forced exit at that window (loss); AvgRet uses hedge-ratio spread price move (%); ★ = best threshold/hold combo`
         + '</div>';
 
       html += '<table style="width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px;">';
@@ -4281,9 +4343,9 @@ if __name__ == "__main__":
           const star = isBest ? " ★" : "";
           const wrText = wrVal != null ? wrVal.toFixed(0) + "%" : "—";
           const avgR = g && g.avgRet != null ? (g.avgRet >= 0 ? "+" : "") + g.avgRet.toFixed(1) + "%" : "";
-          const nText = n > 0 ? `<div style="font-size:9px;color:#94a3b8">n=${{n}}${{avgR ? " " + avgR : ""}}</div>` : "";
+          const nText = n > 0 ? `<div style="font-size:10px;color:#d1d9e6">n=${{n}}${{avgR ? " " + avgR : ""}}</div>` : "";
           html += `<td style="padding:5px 4px;text-align:center;background:${{bg}};border:1px solid var(--border2);">`
-            + `<div style="color:${{wrColor}};font-weight:700;font-size:13px;">${{wrText}}${{star}}</div>${{nText}}</td>`;
+            + `<div style="color:${{wrColor}};font-weight:700;font-size:14px;">${{wrText}}${{star}}</div>${{nText}}</td>`;
         }});
         html += '</tr>';
       }});
