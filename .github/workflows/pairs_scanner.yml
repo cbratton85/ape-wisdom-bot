@@ -12,6 +12,10 @@ env:
 permissions:
   contents: write
 
+concurrency:
+  group: pairs-scanner-${{ github.workflow }}
+  cancel-in-progress: false
+
 jobs:
   run-scanner-and-publish:
     runs-on: ubuntu-latest
