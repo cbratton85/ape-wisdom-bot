@@ -12,10 +12,6 @@ env:
 permissions:
   contents: write
 
-concurrency:
-  group: main-publish-lock
-  cancel-in-progress: false
-
 jobs:
   run-scanner-and-publish:
     runs-on: ubuntu-latest
