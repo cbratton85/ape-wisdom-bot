@@ -9,6 +9,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: pairs-finder-${{ github.workflow }}
+  cancel-in-progress: false
+
 jobs:
   run-pairs-finder:
     runs-on: ubuntu-latest
@@ -145,3 +149,4 @@ jobs:
           publish_dir: ./.pages-publish
           keep_files: true
           commit_message: "chore: publish pairs_finder.html"
+
