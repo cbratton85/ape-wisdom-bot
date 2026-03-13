@@ -31298,5 +31298,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "FPS": {
+        "ticker": "FPS",
+        "name": "Forgent Power Solutions, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 9505215488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
