@@ -304,7 +304,11 @@ def load_gekko_scores(path=GEKKO_SCREENER_FILE):
             continue
         if np.isnan(gi_val):
             continue
-        out[ticker] = max(0.0, min(100.0, gi_val))
+        gi_clamped = max(0.0, min(100.0, gi_val))
+        # Store aliases so BRK.B/BRK-B style symbols match regardless of source format.
+        out[ticker] = gi_clamped
+        out[ticker.replace('.', '-')] = gi_clamped
+        out[ticker.replace('-', '.')] = gi_clamped
     return out
 
 def fetch_meta_data_robust(ticker):
@@ -629,6 +633,7 @@ def filter_and_process(stocks):
     if not stocks: return pd.DataFrame()
 
     gi_map = load_gekko_scores()
+    print(f"{C_CYAN}[#] Loaded {len(gi_map):,} GI ticker mappings from CSV.{C_RESET}")
 
     # --- LOAD CACHES SEPARATELY ---
     local_cache = load_cache(CACHE_FILE)            
@@ -657,8 +662,9 @@ def filter_and_process(stocks):
     # -----------------------------------------------------
     us_tickers = []
     for s in stocks:
-        raw_ticker = s['ticker']
+        raw_ticker = str(s.get('ticker', '')).strip().upper()
         t = TICKER_FIXES.get(raw_ticker, raw_ticker.replace('.', '-'))
+        t = str(t).strip().upper().replace('.', '-')
         if t in PERMANENT_BLACKLIST: continue
         if t in delisted_cache: continue
         us_tickers.append(t)
@@ -751,7 +757,9 @@ def filter_and_process(stocks):
     final_list = []
 
     for stock in stocks:
-        t = TICKER_FIXES.get(stock['ticker'], stock['ticker'].replace('.', '-'))
+        raw_ticker = str(stock.get('ticker', '')).strip().upper()
+        t = TICKER_FIXES.get(raw_ticker, raw_ticker.replace('.', '-'))
+        t = str(t).strip().upper().replace('.', '-')
         if t in PERMANENT_BLACKLIST or t in delisted_cache: continue
         
         try:
@@ -760,8 +768,11 @@ def filter_and_process(stocks):
             # 1. EXTRACT FROM BATCH DATA
             if isinstance(market_data.columns, pd.MultiIndex):
                 if t in market_data.columns.get_level_values(0):
-                    # Only drop rows where the specific columns we need are missing
-                    hist = market_data[t][['High', 'Low', 'Close', 'Volume']].dropna(subset=['Close'])
+                    selected = market_data[t]
+                    if isinstance(selected, pd.DataFrame):
+                        # Only keep rows with complete OHLCV data for indicator calculations.
+                        selected_df = pd.DataFrame(selected)
+                        hist = selected_df[['High', 'Low', 'Close', 'Volume']].dropna()
             else:
                 if t in market_data.columns:
                     hist = market_data[[t]].dropna() # Fallback for single-column DF
@@ -914,7 +925,7 @@ def filter_and_process(stocks):
                 "IBD_RS": 0.0,
                 "Raw_SPY": raw_spy,
                 "SPY_RS": 0.0,
-                "GI": gi_map.get(t)
+                "GI": gi_map.get(t) if gi_map.get(t) is not None else gi_map.get(t.replace('-', '.'))
             })
             
         except Exception as e:
@@ -931,6 +942,10 @@ def filter_and_process(stocks):
     df = pd.DataFrame(final_list)
     if not df.empty and 'Sym' in df.columns:
         df = df.drop_duplicates(subset=['Sym'], keep='first')
+
+    if not df.empty and 'GI' in df.columns:
+        gi_hits = int(df['GI'].notna().sum())
+        print(f"{C_CYAN}[#] GI coverage in output: {gi_hits}/{len(df)} tickers.{C_RESET}")
 
     if not df.empty:
         cols = ['Rank+', 'Surge', 'Mnt%', 'Upvotes', 'Accel', 'Upv+', 'MENT']
@@ -1544,7 +1559,7 @@ def export_interactive_html(df):
             '<th>Mnt%</th>': '<th><span class="d-tooltip header-fix" data-tooltip="% change in mentions (24h).\nYel: >2σ | Green: >1σ">&nbsp;MNT%</span></th>',
             '<th>Sqz</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Mentions * Surge / log(MCap)\nCyan: >1.5σ | White: Normal">&nbsp;SQZ</span></th>',
             '<th>INDUSTRY</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Industry category group.">INDUSTRY</span></th>',
-            '<th>GI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Gekko GI score (0-100).\nGreen: strong accumulation | Red: heavy distribution" style="display:inline-block; min-width:28px;">GI</span></th>',
+            '<th>GI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Gekko GI score (0-100).\nGreen: strong accumulation | Red: heavy distribution">GI</span></th>',
             '<th>RSI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Relative Strength Index (14d).\nRed: Overbought | Green: Oversold">&nbsp;RSI</span></th>',
             '<th>STOCH</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Slow Stochastic Oscillator (%K5, %D1) developed by George Lane.\nLogic: Measures momentum by comparing the closing price to the 5-day price range. It assumes prices tend to close near their highs in an uptrend and lows in a downtrend.\nZones: &le; 20 is Oversold (Buy Zone, Green) | &ge; 80 is Overbought (Sell Zone, Red).">&nbsp;STOCH</span></th>',
             '<th>SCTR</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="sctr-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 24, \'sctr-toggle\')" style="background:#111118; border:1px solid #00d97e; border-radius:4px; padding:1px 5px; font-size:9px; cursor:pointer; color:#00d97e; line-height:1; transition:all 0.2s; font-family:Inter,sans-serif; font-weight:700; letter-spacing:0.06em;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="StockCharts Technical Rank (SCTR) created by John Murphy.\nLogic: A percentile ranking (0-99.9) of a stock\'s technical strength versus its peers.\nFormula: Heavily weights long-term trends (200d EMA, 125d ROC), while factoring in medium-term (50d EMA, 20d ROC) and short-term (RSI, PPO slope) momentum." style="line-height:1;">SCTR</span></div></th>',
@@ -1804,7 +1819,7 @@ def export_interactive_html(df):
             white-space: nowrap; text-align: left;
         }}
 
-        th:nth-child(22), td:nth-child(22) {{ width: 44px; min-width: 44px; max-width: 44px; text-align: center; font-weight: 700; padding-left: 2px !important; padding-right: 2px !important; }}
+        th:nth-child(22), td:nth-child(22) {{ width: 1%; text-align: center; font-weight: 700; }}
         th:nth-child(23), td:nth-child(23) {{ width: 1%; text-align: center; font-weight: 600; }}
         th:nth-child(24), td:nth-child(24) {{ width: 1%; text-align: center; font-weight: 600; }}
         th:nth-child(25), td:nth-child(25) {{ width: 1%; text-align: center; font-weight: 600; }}
