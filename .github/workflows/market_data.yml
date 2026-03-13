@@ -72,7 +72,7 @@ jobs:
               f.write(f"run_now={'true' if should_run else 'false'}\n")
           PY
 
-      - name: Run market data maintainer
+      - name: Run market price maintainer
         if: steps.market_window.outputs.run_now == 'true' || github.event_name == 'workflow_dispatch'
         run: |
           python - <<'PY'
@@ -82,16 +82,24 @@ jobs:
 
           repo_root = pathlib.Path.cwd()
           candidates = [
+              repo_root / "market_price_maintainer.py",
               repo_root / "market_data_maintainer.py",
+              repo_root / "pairs_scanner" / "market_price_maintainer.py",
               repo_root / "pairs_scanner" / "market_data_maintainer.py",
           ]
-          script = next((p for p in candidates if p.exists()), None)
+          script = next((p for p in candidates if p.exists() and p.name == "market_price_maintainer.py"), None)
           if script is None:
-              found = sorted(repo_root.rglob("market_data_maintainer.py"))
+              script = next((p for p in candidates if p.exists() and p.name == "market_data_maintainer.py"), None)
+          if script is None:
+              found = sorted(repo_root.rglob("market_price_maintainer.py"))
               if len(found) == 1:
                   script = found[0]
               else:
-                  print(f"Could not find unique market_data_maintainer.py. Found: {[str(p) for p in found]}")
+                  found = sorted(repo_root.rglob("market_data_maintainer.py"))
+                  if len(found) == 1:
+                      script = found[0]
+                  else:
+                      print(f"Could not find unique market maintainer script. Found: {[str(p) for p in found]}")
                   raise SystemExit(1)
 
           print(f"Using maintainer script: {script}")
@@ -200,3 +208,75 @@ jobs:
       - name: Skip notice
         if: steps.market_window.outputs.run_now != 'true' && github.event_name != 'workflow_dispatch'
         run: echo "Outside US market hours; skipped."
+
+  run-chart-refresh:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '10 20 * * 1-5' || github.event.schedule == '10 21 * * 1-5'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install yfinance pandas numpy tqdm lxml; fi
+
+      - name: Check chart refresh window (ET)
+        id: chart_window
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          python - <<'PY'
+          from datetime import datetime, time
+          from zoneinfo import ZoneInfo
+          import os
+
+          event_name = os.getenv("EVENT_NAME", "")
+          now = datetime.now(ZoneInfo("America/New_York"))
+          is_close_window = time(16, 5) <= now.time() <= time(16, 25)
+          should_run = (event_name == "workflow_dispatch") or is_close_window
+
+          print(f"Now (ET): {now.isoformat()}")
+          print(f"In close window: {is_close_window}")
+          print(f"Should run chart refresh: {should_run}")
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+              f.write(f"run_chart={'true' if should_run else 'false'}\n")
+          PY
+
+      - name: Run chart data maintainer
+        if: steps.chart_window.outputs.run_chart == 'true'
+        run: |
+          python - <<'PY'
+          import pathlib
+          import subprocess
+          import sys
+
+          repo_root = pathlib.Path.cwd()
+          candidates = [
+              repo_root / "chart_data_maintainer.py",
+              repo_root / "pairs_scanner" / "chart_data_maintainer.py",
+          ]
+          script = next((p for p in candidates if p.exists()), None)
+          if script is None:
+              found = sorted(repo_root.rglob("chart_data_maintainer.py"))
+              if len(found) == 1:
+                  script = found[0]
+              else:
+                  print(f"Could not find unique chart_data_maintainer.py. Found: {[str(p) for p in found]}")
+                  raise SystemExit(1)
+
+          print(f"Using chart maintainer script: {script}")
+          subprocess.run([sys.executable, str(script)], check=True, cwd=str(script.parent))
+          PY
+
+      - name: Skip chart refresh notice
+        if: steps.chart_window.outputs.run_chart != 'true'
+        run: echo "Outside ET close window; chart refresh skipped."
