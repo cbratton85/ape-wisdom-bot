@@ -31028,5 +31028,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SJIM": {
+        "ticker": "SJIM",
+        "name": "Northern Lights Fund Trust IV I",
+        "meta": "Long-Short Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "IMMP": {
+        "ticker": "IMMP",
+        "name": "Immutep Limited",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 406250016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
