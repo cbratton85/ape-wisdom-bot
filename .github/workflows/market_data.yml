@@ -9,6 +9,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: market-hours-runner
+  cancel-in-progress: false   # queue the new run; don't abort the one already writing data
+
 jobs:
   run-market-task:
     runs-on: ubuntu-latest
