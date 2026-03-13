@@ -20,8 +20,8 @@ ETF_CSV_FILE = "etfs.csv"
 STOCK_CSV_FILE = "stocks.csv"
 OUTPUT_FILE = "pairs_watchlist.html"
 
-LOOKBACK_DAYS = 907
-CHART_LOOKBACK_DAYS = 252
+LOOKBACK_DAYS = 504
+CHART_LOOKBACK_DAYS = 504
 MAX_CHART_PAIRS = 800
 
 # Candidate prefilter mode:

@@ -1,5 +1,4 @@
-import yfinance as yf
-import pandas as pd
+﻿import pandas as pd
 import numpy as np
 import os
 import sys
@@ -7,6 +6,7 @@ import time
 import json
 import webbrowser
 from datetime import datetime, timedelta
+from market_data_maintainer import ensure_shared_data
 
 # ==========================================
 # CONFIG
@@ -126,41 +126,27 @@ def safe_save(df, path):
     df.to_csv(tmp, compression='gzip')
     os.replace(tmp, path)
 
-def download_batch(tickers, start_date, field="Close"):
-    clean = [t.replace("/", "-") for t in tickers]
-    for attempt in range(3):
-        try:
-            df = yf.download(clean, start=start_date, progress=False,
-                             group_by="ticker", auto_adjust=True, threads=False, timeout=20)
-            if df is None or df.empty:
-                if attempt < 2: time.sleep(5); continue
-                return pd.DataFrame()
-            result = pd.DataFrame()
-            for t in clean:
-                try:
-                    if isinstance(df.columns, pd.MultiIndex):
-                        if t in df.columns.levels[0]: result[t] = df[t][field]
-                    else:
-                        if not df[field].empty: result[t] = df[field]
-                except Exception: continue
-            return result
-        except Exception as e:
-            if attempt < 2: time.sleep(5)
-            else: return pd.DataFrame()
-    return pd.DataFrame()
 
-def get_ohlcv_data(symbol):
-    symbol = symbol.upper().strip()
-    start = (datetime.now() - timedelta(days=LOOKBACK_DAYS + 50)).strftime("%Y-%m-%d")
-    try:
-        df = yf.download(symbol, start=start, progress=False, auto_adjust=True, timeout=20)
-        if df is not None and not df.empty:
-            if isinstance(df.columns, pd.MultiIndex):
-                df.columns = df.columns.get_level_values(0)
-            return df.tail(LOOKBACK_DAYS)
-    except Exception as e:
-        print(f"Error downloading {symbol}: {e}")
-    return None
+def trim_caches(master):
+  """Trim cache files to only the data that's needed."""
+  master_set = set(master)
+
+  # â”€â”€ Price caches: keep LOOKBACK_DAYS + 20% buffer â”€â”€
+  for cache_file in [STOCK_DATA_FILE, ETF_DATA_FILE]:
+    if os.path.exists(cache_file):
+      try:
+        df = pd.read_csv(cache_file, index_col=0, parse_dates=True)
+        before = (df.shape[0], df.shape[1])
+        keep_days = int(LOOKBACK_DAYS * 1.2)
+        df = df[[c for c in df.columns if c in master_set]]
+        df = df.tail(keep_days)
+        if (df.shape[0], df.shape[1]) != before:
+          safe_save(df, cache_file)
+          print(f"  Trimmed {cache_file}: {before[0]}x{before[1]} â†’ {df.shape[0]}x{df.shape[1]}")
+      except Exception:
+        pass
+
+
 
 
 # ==========================================
@@ -337,10 +323,10 @@ def fast_scan_symbol(symbol, close_series):
     breakdown = min(100, breakdown)
     net_bias = breakout - breakdown
 
-    sector = TICKER_INDUSTRY.get(symbol, "—")
+    sector = TICKER_INDUSTRY.get(symbol, "â€”")
     name = TICKER_NAMES.get(symbol, symbol)
     mcap = TICKER_CSV_MCAP.get(symbol, 0)
-    ttype = TICKER_TYPES.get(symbol, "—")
+    ttype = TICKER_TYPES.get(symbol, "â€”")
 
     return {
         "symbol": symbol,
@@ -374,178 +360,6 @@ def fast_scan_symbol(symbol, close_series):
 
 
 # ==========================================
-# FULL DETAIL ANALYSIS (needs OHLCV)
-# ==========================================
-
-def analyze_symbol(symbol):
-    """Run full technical analysis on a symbol (downloads OHLCV)."""
-    print(f"Analyzing {symbol}...")
-    ohlcv = get_ohlcv_data(symbol)
-    if ohlcv is None or len(ohlcv) < 200:
-        print(f"Not enough data for {symbol}")
-        return None
-
-    close = ohlcv["Close"].astype(float)
-    high = ohlcv["High"].astype(float)
-    low = ohlcv["Low"].astype(float)
-    volume = ohlcv["Volume"].astype(float)
-    today_open = float(ohlcv["Open"].iloc[-1])
-
-    price = float(close.iloc[-1])
-    prev_close = float(close.iloc[-2])
-    pct_change = ((price - prev_close) / prev_close) * 100
-    gap_pct = ((today_open - prev_close) / prev_close) * 100
-
-    ma20 = close.rolling(20).mean()
-    ma50 = close.rolling(50).mean()
-    ma200 = close.rolling(200).mean()
-    rsi = calc_rsi(close)
-    rsi_val = round(float(rsi.iloc[-1]), 1)
-    macd_line, signal_line, macd_hist = calc_macd(close)
-    macd_hist_val = round(float(macd_hist.iloc[-1]), 4)
-    macd_hist_rising = bool(macd_hist.iloc[-1] > macd_hist.iloc[-2])
-    stoch_k, stoch_d = calc_stochastic(high, low, close)
-    stoch_k_val = round(float(stoch_k.iloc[-1]))
-    bb_mid, bb_upper, bb_lower, bb_width = calc_bollinger(close)
-    bb_width_val = round(float(bb_width.iloc[-1]), 1)
-    bb_width_avg = round(float(bb_width.tail(20).mean()), 1)
-    bb_pct = round(float((price - bb_lower.iloc[-1]) / (bb_upper.iloc[-1] - bb_lower.iloc[-1]) * 100), 1) if (bb_upper.iloc[-1] - bb_lower.iloc[-1]) > 0 else 50.0
-    atr = calc_atr(high, low, close)
-    atr_val = round(float(atr.iloc[-1]), 2)
-    atr_pct = round((atr_val / price) * 100, 2)
-    atr_expanding = bool(atr.iloc[-1] > atr.iloc[-5]) if len(atr) > 5 else False
-    adx, plus_di, minus_di = calc_adx(high, low, close)
-    adx_val = int(round(float(adx.iloc[-1])))
-    plus_di_val = int(round(float(plus_di.iloc[-1])))
-    minus_di_val = int(round(float(minus_di.iloc[-1])))
-    obv = calc_obv(close, volume)
-    obv_trend = round(float(((obv.iloc[-1] - obv.iloc[-20]) / abs(obv.iloc[-20]) * 100) if obv.iloc[-20] != 0 else 0), 1)
-    obv_surging = obv_trend > 15
-    vol_avg_20 = float(volume.tail(20).mean())
-    rvol = round(float(volume.iloc[-1]) / vol_avg_20, 2) if vol_avg_20 > 0 else 1.0
-
-    close_252 = close.tail(252)
-    high_52w = float(close_252.max())
-    low_52w = float(close_252.min())
-    pct_from_52h = round(((price - high_52w) / high_52w) * 100, 1)
-
-    above_ma20 = bool(price > ma20.iloc[-1])
-    above_ma50 = bool(price > ma50.iloc[-1])
-    above_ma200 = bool(price > ma200.iloc[-1])
-    golden_cross, death_cross = detect_golden_death_cross(ma50.dropna(), ma200.dropna())
-    higher_lows, lower_highs = detect_higher_lows(close)
-    consolidating = is_consolidating(close)
-
-    # Accumulation
-    changes = close.diff().tail(20)
-    vols = volume.tail(20)
-    up_vol = float(vols[changes > 0].sum())
-    down_vol = float(vols[changes <= 0].sum())
-    if down_vol == 0: acc_dist = "Accumulating"
-    elif up_vol / down_vol > 1.3: acc_dist = "Accumulating"
-    elif up_vol / down_vol < 0.7: acc_dist = "Distributing"
-    else: acc_dist = "—"
-    acc_dist_pct = round(((up_vol - down_vol) / float(vols.sum())) * 100, 1) if float(vols.sum()) > 0 else 0
-    acc_days = sum(1 for i in range(min(20, len(close)-1)) if close.iloc[-(i+1)] > close.iloc[-(i+2)] and volume.iloc[-(i+1)] > vol_avg_20)
-
-    # Squeeze
-    in_squeeze = bb_width_val < bb_width_avg
-    squeeze_firing = in_squeeze and macd_hist.iloc[-1] > macd_hist.iloc[-2] and macd_hist.iloc[-2] > macd_hist.iloc[-3]
-    was_in_squeeze = float(bb_width.tail(5).mean()) < bb_width_avg
-    squeeze_fired = was_in_squeeze and bb_width_val > bb_width_avg and macd_hist_val > 0
-
-    range_high = float(high.tail(20).max())
-    range_low = float(low.tail(20).min())
-    range_pct = round(((range_high - range_low) / float(close.tail(20).mean())) * 100, 1)
-    price_in_range = int(round(((price - range_low) / (range_high - range_low)) * 100)) if (range_high - range_low) > 0 else 50
-
-    # Scores
-    breakout = 0; breakdown = 0
-    if rsi_val > 60: breakout += 15
-    if rsi_val > 70: breakout += 10
-    if rsi_val < 40: breakdown += 15
-    if rsi_val < 30: breakdown += 10
-    if macd_hist_val > 0: breakout += 15
-    if macd_hist_val > 0 and macd_hist_rising: breakout += 5
-    if macd_hist_val < 0: breakdown += 15
-    if macd_hist_val < 0 and not macd_hist_rising: breakdown += 5
-    if stoch_k_val > 70: breakout += 10
-    if stoch_k_val < 30: breakdown += 10
-    if above_ma20: breakout += 8
-    else: breakdown += 8
-    if above_ma50: breakout += 8
-    else: breakdown += 8
-    if above_ma200: breakout += 8
-    else: breakdown += 8
-    if bb_pct > 95: breakout += 10
-    if bb_pct < 5: breakdown += 10
-    if rvol > 2.0 and pct_change > 0: breakout += 6
-    if rvol > 2.0 and pct_change < 0: breakdown += 6
-    if rvol > 1.5 and pct_change > 0: breakout += 4
-    if higher_lows: breakout += 8
-    if lower_highs: breakdown += 8
-    if golden_cross == "YES": breakout += 8
-    if death_cross == "YES": breakdown += 8
-    breakout = min(100, breakout); breakdown = min(100, breakdown)
-    net_bias = breakout - breakdown
-    bias_score = round((breakout - breakdown) / 2 + 50)
-
-    if in_squeeze or squeeze_fired:
-        coil_type = "BULLISH COIL" if net_bias > 0 else "BEARISH COIL" if net_bias < 0 else "NEUTRAL COIL"
-    else:
-        coil_type = "BULLISH EXPANSION" if net_bias > 0 else "BEARISH EXPANSION"
-
-    # Chart data
-    chart_close = close.tail(252)
-    chart_ma20 = ma20.tail(252); chart_ma50 = ma50.tail(252); chart_ma200 = ma200.tail(252)
-    chart_bb_upper = bb_upper.tail(252); chart_bb_lower = bb_lower.tail(252); chart_vol = volume.tail(252)
-    chart_data = []
-    for i in range(len(chart_close)):
-        chart_data.append({
-            "date": chart_close.index[i].strftime("%Y-%m-%d"),
-            "close": round(float(chart_close.iloc[i]), 2),
-            "ma20": round(float(chart_ma20.iloc[i]), 2) if not np.isnan(chart_ma20.iloc[i]) else None,
-            "ma50": round(float(chart_ma50.iloc[i]), 2) if not np.isnan(chart_ma50.iloc[i]) else None,
-            "ma200": round(float(chart_ma200.iloc[i]), 2) if not np.isnan(chart_ma200.iloc[i]) else None,
-            "bb_upper": round(float(chart_bb_upper.iloc[i]), 2) if not np.isnan(chart_bb_upper.iloc[i]) else None,
-            "bb_lower": round(float(chart_bb_lower.iloc[i]), 2) if not np.isnan(chart_bb_lower.iloc[i]) else None,
-            "volume": int(chart_vol.iloc[i]) if not np.isnan(chart_vol.iloc[i]) else 0,
-        })
-
-    ma_tags = []
-    if above_ma20 and above_ma50 and above_ma200: ma_tags.append(">MA20+50+200")
-    elif above_ma20 and above_ma50: ma_tags.append(">MA20+50")
-    elif above_ma20: ma_tags.append(">MA20")
-    elif not above_ma20 and not above_ma50 and not above_ma200: ma_tags.append("<MA20+50+200")
-
-    return {
-        "symbol": symbol, "name": TICKER_NAMES.get(symbol, symbol),
-        "sector": TICKER_INDUSTRY.get(symbol, "—"),
-        "index": "S&P500" if TICKER_CSV_MCAP.get(symbol, 0) > 10e9 else "Mid-Cap" if TICKER_CSV_MCAP.get(symbol, 0) > 2e9 else "Small-Cap",
-        "price": round(price, 2), "pct_change": round(pct_change, 2), "gap_pct": round(gap_pct, 2),
-        "rsi": rsi_val, "rvol": rvol,
-        "macd_hist": macd_hist_val, "macd_trend": "Bullish" if macd_hist_val > 0 else "Bearish",
-        "macd_hist_rising": macd_hist_rising, "stoch_k": stoch_k_val,
-        "bb_width": bb_width_val, "bb_width_avg": bb_width_avg, "bb_pct": bb_pct,
-        "atr": atr_val, "atr_pct": atr_pct, "atr_expanding": atr_expanding,
-        "adx": adx_val, "plus_di": plus_di_val, "minus_di": minus_di_val,
-        "obv_trend": obv_trend, "obv_surging": obv_surging,
-        "high_52w": round(high_52w, 2), "low_52w": round(low_52w, 2), "pct_from_52h": pct_from_52h,
-        "golden_cross": golden_cross, "death_cross": death_cross,
-        "higher_lows": higher_lows, "lower_highs": lower_highs,
-        "consolidating": consolidating, "acc_dist": acc_dist, "acc_dist_pct": acc_dist_pct,
-        "above_ma20": above_ma20, "above_ma50": above_ma50, "above_ma200": above_ma200,
-        "breakout_score": breakout, "breakdown_score": breakdown, "net_bias": net_bias,
-        "bias_score": bias_score, "in_squeeze": in_squeeze,
-        "squeeze_firing": bool(squeeze_firing or squeeze_fired), "coil_type": coil_type,
-        "range_pct": range_pct, "price_in_range": price_in_range, "acc_days": acc_days,
-        "ma20_val": round(float(ma20.iloc[-1]), 2), "ma50_val": round(float(ma50.iloc[-1]), 2),
-        "ma200_val": round(float(ma200.iloc[-1]), 2), "daily_volatility": atr_pct,
-        "ma_tags": ma_tags, "chart_data": chart_data,
-    }
-
-
-# ==========================================
 # HTML: MAIN TABLE + DETAIL OVERLAY
 # ==========================================
 
@@ -571,7 +385,7 @@ def build_full_html(scan_results):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stock Dashboard — Breakout Scanner</title>
+<title>Stock Dashboard â€” Breakout Scanner</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {{
@@ -600,7 +414,7 @@ def build_full_html(scan_results):
   html {{ scroll-behavior: smooth; }}
   body {{ background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; font-size: 14px; }}
 
-  /* ── TOPBAR ── */
+  /* â”€â”€ TOPBAR â”€â”€ */
   .topbar {{
     position: sticky; top: 0; z-index: 100;
     background: rgba(8,9,13,0.92); backdrop-filter: blur(16px);
@@ -619,7 +433,7 @@ def build_full_html(scan_results):
   .topbar-meta {{ font-family: var(--mono); font-size: 11px; color: var(--muted); display: flex; gap: 20px; }}
   .topbar-meta em {{ color: var(--text); font-style: normal; }}
 
-  /* ── STATS ROW ── */
+  /* â”€â”€ STATS ROW â”€â”€ */
   .stats-row {{
     background: var(--surface); border-bottom: 1px solid var(--border);
     padding: 6px 20px; display: flex; flex-wrap: wrap;
@@ -636,7 +450,7 @@ def build_full_html(scan_results):
   .stat-value.red {{ color: var(--red); }}
   .stat-value.amber {{ color: var(--amber); }}
 
-  /* ── CONTROLS ── */
+  /* â”€â”€ CONTROLS â”€â”€ */
   .controls {{
     background: var(--surface2); border-bottom: 1px solid var(--border);
     padding: 8px 16px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
@@ -653,7 +467,7 @@ def build_full_html(scan_results):
     background-repeat: no-repeat; background-position: right 8px center; }}
   .ctrl-label {{ font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }}
 
-  /* ── TABLE ── */
+  /* â”€â”€ TABLE â”€â”€ */
   .table-wrap {{ padding: 0 16px 16px; }}
   table {{ width: 100%; border-collapse: collapse; }}
   thead th {{
@@ -664,8 +478,8 @@ def build_full_html(scan_results):
     text-transform: uppercase; color: var(--muted); white-space: nowrap;
   }}
   thead th:hover {{ color: var(--cyan); }}
-  thead th.sort-asc::after {{ content: ' ▲'; color: var(--cyan); }}
-  thead th.sort-desc::after {{ content: ' ▼'; color: var(--cyan); }}
+  thead th.sort-asc::after {{ content: ' â–²'; color: var(--cyan); }}
+  thead th.sort-desc::after {{ content: ' â–¼'; color: var(--cyan); }}
   tbody tr {{
     border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.1s;
   }}
@@ -691,7 +505,7 @@ def build_full_html(scan_results):
   .tag-sm.amber {{ background: rgba(245,158,11,0.12); color: var(--amber); }}
   .tag-sm.muted {{ background: rgba(74,85,104,0.12); color: var(--muted); }}
 
-  /* ── PAGINATION ── */
+  /* â”€â”€ PAGINATION â”€â”€ */
   .pagination {{
     display: flex; align-items: center; justify-content: center; gap: 8px;
     padding: 12px; font-family: var(--mono); font-size: 12px;
@@ -704,9 +518,9 @@ def build_full_html(scan_results):
   .pagination button:disabled {{ opacity: 0.3; cursor: default; }}
   .pagination .page-info {{ color: var(--muted); }}
 
-  /* ═══════════════════════════════════════
+  /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
      DETAIL OVERLAY
-     ═══════════════════════════════════════ */
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
   .overlay {{
     display: none; position: fixed; inset: 0; z-index: 500;
     background: var(--bg); overflow-y: auto;
@@ -937,12 +751,12 @@ let sortCol = 'net_bias', sortDir = 'desc';
 let page = 0;
 const PER_PAGE = 50;
 
-// ── Populate sectors ──
-const sectors = [...new Set(ALL_DATA.map(r => r.sector).filter(s => s && s !== '—'))].sort();
+// â”€â”€ Populate sectors â”€â”€
+const sectors = [...new Set(ALL_DATA.map(r => r.sector).filter(s => s && s !== 'â€”'))].sort();
 const sf = document.getElementById('sectorFilter');
 sectors.forEach(s => {{ const o = document.createElement('option'); o.value = s; o.textContent = s; sf.appendChild(o); }});
 
-// ── Filter + Sort ──
+// â”€â”€ Filter + Sort â”€â”€
 function applyFilters() {{
   const q = document.getElementById('searchBox').value.toLowerCase();
   const typ = document.getElementById('typeFilter').value;
@@ -1001,8 +815,8 @@ function render() {{
       <td><span class="tag-sm ${{r.stoch_k >= 70 ? 'green' : r.stoch_k <= 30 ? 'red' : 'muted'}}">${{r.stoch_k}}</span></td>
       <td><span class="tag-sm ${{r.bb_pct > 90 ? 'cyan' : r.bb_pct < 10 ? 'red' : 'muted'}}">${{r.bb_pct.toFixed(0)}}%</span></td>
       <td style="color:${{r.pct_from_52h > -5 ? 'var(--green)' : r.pct_from_52h > -15 ? 'var(--amber)' : 'var(--red)'}}">${{r.pct_from_52h}}%</td>
-      <td><span class="tag-sm ${{r.in_squeeze ? 'amber' : 'muted'}}">${{r.in_squeeze ? 'YES' : '—'}}</span></td>
-      <td><span class="tag-sm ${{r.higher_lows ? 'green' : r.lower_highs ? 'red' : 'muted'}}">${{r.higher_lows ? 'HL ↗' : r.lower_highs ? 'LH ↘' : '—'}}</span></td>
+      <td><span class="tag-sm ${{r.in_squeeze ? 'amber' : 'muted'}}">${{r.in_squeeze ? 'YES' : 'â€”'}}</span></td>
+      <td><span class="tag-sm ${{r.higher_lows ? 'green' : r.lower_highs ? 'red' : 'muted'}}">${{r.higher_lows ? 'HL â†—' : r.lower_highs ? 'LH â†˜' : 'â€”'}}</span></td>
     </tr>
   `).join('');
 
@@ -1024,7 +838,7 @@ function render() {{
   }});
 }}
 
-// ── Column sorting ──
+// â”€â”€ Column sorting â”€â”€
 document.querySelectorAll('thead th').forEach(th => {{
   th.addEventListener('click', () => {{
     const col = th.dataset.col;
@@ -1035,21 +849,21 @@ document.querySelectorAll('thead th').forEach(th => {{
   }});
 }});
 
-// ── Filter listeners ──
+// â”€â”€ Filter listeners â”€â”€
 document.getElementById('searchBox').addEventListener('input', applyFilters);
 document.getElementById('typeFilter').addEventListener('change', applyFilters);
 document.getElementById('sectorFilter').addEventListener('change', applyFilters);
 document.getElementById('biasFilter').addEventListener('change', applyFilters);
 document.getElementById('minPrice').addEventListener('change', applyFilters);
 
-// ── Initial render ──
+// â”€â”€ Initial render â”€â”€
 doSort();
 render();
 
 
-// ═══════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // DETAIL OVERLAY
-// ═══════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 function openDetail(symbol) {{
   const overlay = document.getElementById('detailOverlay');
   const loading = document.getElementById('loadingOverlay');
@@ -1117,7 +931,7 @@ function renderDetailFromScan(d) {{
 
     <div class="ind-grid">
       <div class="ind-box"><div class="ind-label">Momentum</div><div class="tags">
-        <span class="tag ${{rsiHot ? 'tag-green' : d.rsi < 35 ? 'tag-red' : 'tag-muted'}}">RSI ${{d.rsi}} ${{rsiHot ? '— hot' : d.rsi < 35 ? '— cold' : ''}}</span>
+        <span class="tag ${{rsiHot ? 'tag-green' : d.rsi < 35 ? 'tag-red' : 'tag-muted'}}">RSI ${{d.rsi}} ${{rsiHot ? 'â€” hot' : d.rsi < 35 ? 'â€” cold' : ''}}</span>
         <span class="tag ${{d.macd_trend === 'Bullish' ? 'tag-green' : 'tag-red'}}">MACD ${{macdLabel}}</span>
         <span class="tag ${{d.stoch_k >= 50 ? 'tag-green' : 'tag-red'}}">Stoch ${{d.stoch_k}} ${{stochLabel}}</span>
       </div></div>
@@ -1140,7 +954,7 @@ function renderDetailFromScan(d) {{
 
     <div class="ind-grid">
       <div class="ind-box"><div class="ind-label">Structure</div><div class="tags">
-        <span class="tag ${{d.higher_lows ? 'tag-green' : d.lower_highs ? 'tag-red' : 'tag-muted'}}">${{d.higher_lows ? 'Higher lows ↗' : d.lower_highs ? 'Lower highs ↘' : 'Neutral'}}</span>
+        <span class="tag ${{d.higher_lows ? 'tag-green' : d.lower_highs ? 'tag-red' : 'tag-muted'}}">${{d.higher_lows ? 'Higher lows â†—' : d.lower_highs ? 'Lower highs â†˜' : 'Neutral'}}</span>
       </div></div>
       <div class="ind-box"><div class="ind-label">Price Action</div><div class="tags">
         <span class="tag ${{d.pct_change > 0 ? 'tag-green' : 'tag-red'}}">${{d.pct_change > 0 ? '+' : ''}}${{d.pct_change.toFixed(1)}}% today</span>
@@ -1150,15 +964,15 @@ function renderDetailFromScan(d) {{
     <div class="compression">
       <div class="comp-hdr"><div class="comp-icon"></div><div class="comp-title">Compression Analysis</div></div>
       <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
-        <span class="squeeze-badge ${{inSqueeze ? 'sq-on' : 'sq-off'}}">${{inSqueeze ? '⚠ IN SQUEEZE' : '✓ NO SQUEEZE'}}</span>
-        <span class="coil-label">▲ ${{coilType}}</span>
+        <span class="squeeze-badge ${{inSqueeze ? 'sq-on' : 'sq-off'}}">${{inSqueeze ? 'âš  IN SQUEEZE' : 'âœ“ NO SQUEEZE'}}</span>
+        <span class="coil-label">â–² ${{coilType}}</span>
         <span class="bias-label">Bias score: <span class="bias-val">+${{biasScore}}</span> / 100</span>
       </div>
       <div class="comp-metrics">
         <div class="cm"><div class="cm-label">BB Width</div><div class="cm-val">${{d.bb_width}}%</div><div class="cm-sub">${{d.bb_width < d.bb_width_avg ? 'Tight' : 'Stable'}}</div></div>
         <div class="cm"><div class="cm-label">BB Width Avg</div><div class="cm-val">${{d.bb_width_avg}}%</div><div class="cm-sub">20-day avg</div></div>
-        <div class="cm"><div class="cm-label">Stoch K</div><div class="cm-val">${{d.stoch_k}}</div><div class="cm-sub">${{d.stoch_k > 80 ? 'Overbought' : d.stoch_k < 20 ? 'Oversold' : '—'}}</div></div>
-        <div class="cm"><div class="cm-label">RSI</div><div class="cm-val">${{d.rsi}}</div><div class="cm-sub">${{d.rsi > 70 ? 'Overbought' : d.rsi < 30 ? 'Oversold' : '—'}}</div></div>
+        <div class="cm"><div class="cm-label">Stoch K</div><div class="cm-val">${{d.stoch_k}}</div><div class="cm-sub">${{d.stoch_k > 80 ? 'Overbought' : d.stoch_k < 20 ? 'Oversold' : 'â€”'}}</div></div>
+        <div class="cm"><div class="cm-label">RSI</div><div class="cm-val">${{d.rsi}}</div><div class="cm-sub">${{d.rsi > 70 ? 'Overbought' : d.rsi < 30 ? 'Oversold' : 'â€”'}}</div></div>
         <div class="cm"><div class="cm-label">52H %</div><div class="cm-val">${{d.pct_from_52h}}%</div><div class="cm-sub">From 52w high</div></div>
         <div class="cm"><div class="cm-label">MACD</div><div class="cm-val">${{d.macd_hist}}</div><div class="cm-sub">${{d.macd_trend}}</div></div>
       </div>
@@ -1166,8 +980,8 @@ function renderDetailFromScan(d) {{
         <span class="tag ${{d.above_ma20 ? 'tag-green' : 'tag-red'}}">${{d.above_ma20 ? 'Above' : 'Below'}} MA20</span>
         <span class="tag ${{d.above_ma50 ? 'tag-green' : 'tag-red'}}">${{d.above_ma50 ? 'Above' : 'Below'}} MA50</span>
         <span class="tag ${{d.above_ma200 ? 'tag-green' : 'tag-red'}}">${{d.above_ma200 ? 'Above' : 'Below'}} MA200</span>
-        <span class="tag ${{d.higher_lows ? 'tag-green' : 'tag-muted'}}">${{d.higher_lows ? 'Higher lows in range ↗' : 'No structure'}}</span>
-        <span class="tag ${{d.golden_cross === 'YES' ? 'tag-green' : 'tag-muted'}}">${{d.golden_cross === 'YES' ? 'Golden Cross ☀' : 'No golden cross'}}</span>
+        <span class="tag ${{d.higher_lows ? 'tag-green' : 'tag-muted'}}">${{d.higher_lows ? 'Higher lows in range â†—' : 'No structure'}}</span>
+        <span class="tag ${{d.golden_cross === 'YES' ? 'tag-green' : 'tag-muted'}}">${{d.golden_cross === 'YES' ? 'Golden Cross â˜€' : 'No golden cross'}}</span>
         <span class="tag ${{inSqueeze ? 'tag-amber' : 'tag-muted'}}">${{inSqueeze ? 'BB in squeeze' : 'No squeeze'}}</span>
       </div>
     </div>
@@ -1177,12 +991,12 @@ function renderDetailFromScan(d) {{
       <div class="ai-grid">
         <div class="ai-cell">RSI (14) &nbsp; <span class="val">${{d.rsi}}</span> &nbsp; <span class="dot" style="background:${{d.rsi >= 70 ? 'var(--red)' : d.rsi <= 30 ? 'var(--green)' : 'var(--muted)'}}"></span> <span class="st" style="color:${{d.rsi >= 70 ? 'var(--red)' : d.rsi <= 30 ? 'var(--green)' : 'var(--muted)'}}">${{rsiLabel}}</span></div>
         <div class="ai-cell">MACD Hist &nbsp; <span class="val">${{d.macd_hist}}</span> &nbsp; <span class="dot" style="background:${{d.macd_hist > 0 ? 'var(--green)' : 'var(--red)'}}"></span> <span class="st" style="color:${{d.macd_hist > 0 ? 'var(--green)' : 'var(--red)'}}">${{d.macd_trend}}</span></div>
-        <div class="ai-cell">Stoch K &nbsp; <span class="val">${{d.stoch_k}}</span> &nbsp; <span class="st" style="color:${{d.stoch_k > 80 ? 'var(--red)' : d.stoch_k < 20 ? 'var(--green)' : 'var(--muted)'}}">${{d.stoch_k > 80 ? 'Overbought' : d.stoch_k < 20 ? 'Oversold' : '—'}}</span></div>
+        <div class="ai-cell">Stoch K &nbsp; <span class="val">${{d.stoch_k}}</span> &nbsp; <span class="st" style="color:${{d.stoch_k > 80 ? 'var(--red)' : d.stoch_k < 20 ? 'var(--green)' : 'var(--muted)'}}">${{d.stoch_k > 80 ? 'Overbought' : d.stoch_k < 20 ? 'Oversold' : 'â€”'}}</span></div>
         <div class="ai-cell">BB %B &nbsp; <span class="val">${{d.bb_pct.toFixed(1)}}</span> &nbsp; <span class="st" style="color:${{d.bb_pct > 80 ? 'var(--cyan)' : 'var(--muted)'}}">${{d.bb_pct > 95 ? 'Upper break' : d.bb_pct > 80 ? 'Upper' : d.bb_pct < 20 ? 'Lower' : 'Mid'}}</span></div>
 
         <div class="ai-cell">BB Width &nbsp; <span class="val">${{d.bb_width}}%</span> &nbsp; <span class="st" style="color:var(--muted)">${{d.bb_width < d.bb_width_avg ? 'Tight' : 'Normal'}}</span></div>
-        <div class="ai-cell">Golden Cross &nbsp; <span class="val">${{d.golden_cross}}</span> &nbsp; <span class="dot" style="background:${{d.golden_cross === 'YES' ? 'var(--green)' : 'var(--muted)'}}"></span> <span class="st" style="color:${{d.golden_cross === 'YES' ? 'var(--green)' : 'var(--muted)'}}">${{d.golden_cross === 'YES' ? '☀ Bullish' : '—'}}</span></div>
-        <div class="ai-cell">Death Cross &nbsp; <span class="val">${{d.death_cross}}</span> &nbsp; <span class="st" style="color:var(--muted)">—</span></div>
+        <div class="ai-cell">Golden Cross &nbsp; <span class="val">${{d.golden_cross}}</span> &nbsp; <span class="dot" style="background:${{d.golden_cross === 'YES' ? 'var(--green)' : 'var(--muted)'}}"></span> <span class="st" style="color:${{d.golden_cross === 'YES' ? 'var(--green)' : 'var(--muted)'}}">${{d.golden_cross === 'YES' ? 'â˜€ Bullish' : 'â€”'}}</span></div>
+        <div class="ai-cell">Death Cross &nbsp; <span class="val">${{d.death_cross}}</span> &nbsp; <span class="st" style="color:var(--muted)">â€”</span></div>
         <div class="ai-cell">52H % &nbsp; <span class="val">${{d.pct_from_52h}}%</span> &nbsp; <span class="st" style="color:${{d.pct_from_52h > -5 ? 'var(--green)' : 'var(--amber)'}}">${{d.pct_from_52h > -5 ? 'Near high' : 'Off high'}}</span></div>
 
         <div class="ai-cell">Higher Lows &nbsp; <span class="val">${{d.higher_lows ? 'YES' : 'NO'}}</span> &nbsp; <span class="dot" style="background:${{d.higher_lows ? 'var(--green)' : 'var(--muted)'}}"></span></div>
@@ -1218,6 +1032,12 @@ document.addEventListener('keydown', e => {{ if (e.key === 'Escape') closeDetail
 def main():
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     load_master_tickers()
+    ensure_shared_data(
+        lookback_days=LOOKBACK_DAYS,
+        chart_years=3,
+        batch_size=BATCH_SIZE,
+        cooldown=COOLDOWN,
+    )
 
     mode = "table"
     symbol = None
@@ -1231,36 +1051,40 @@ def main():
             symbol = arg
 
     if mode == "single":
-        # Single symbol detail (same as before, downloads OHLCV)
-        data = analyze_symbol(symbol)
-        if data is None:
-            print("Analysis failed.")
+        # Single symbol detail from shared close cache only
+        print("\n=== Loading price caches ===")
+        stock_data = load_cache(STOCK_DATA_FILE)
+        etf_data = load_cache(ETF_DATA_FILE)
+
+        if not stock_data.empty and not etf_data.empty:
+            all_data = pd.concat([stock_data, etf_data], axis=1)
+            all_data = all_data.loc[:, ~all_data.columns.duplicated()]
+        elif not stock_data.empty:
+            all_data = stock_data
+        elif not etf_data.empty:
+            all_data = etf_data
+        else:
+            print("No cache data found. Run market_data_maintainer.py first.")
             return
-        # Wrap in a minimal page that auto-opens detail
-        scan_row = {
-            "symbol": data["symbol"], "name": data["name"], "sector": data["sector"],
-            "type": TICKER_TYPES.get(symbol, "—"), "price": data["price"],
-            "pct_change": data["pct_change"], "rsi": data["rsi"],
-            "macd_hist": data["macd_hist"], "macd_trend": data["macd_trend"],
-            "macd_rising": data["macd_hist_rising"], "stoch_k": data["stoch_k"],
-            "bb_width": data["bb_width"], "bb_width_avg": data["bb_width_avg"],
-            "bb_pct": data["bb_pct"], "pct_from_52h": data["pct_from_52h"],
-            "above_ma20": data["above_ma20"], "above_ma50": data["above_ma50"],
-            "above_ma200": data["above_ma200"], "golden_cross": data["golden_cross"],
-            "death_cross": data["death_cross"], "higher_lows": data["higher_lows"],
-            "lower_highs": data["lower_highs"], "in_squeeze": data["in_squeeze"],
-            "breakout": data["breakout_score"], "breakdown": data["breakdown_score"],
-            "net_bias": data["net_bias"], "mcap": TICKER_CSV_MCAP.get(symbol, 0),
-        }
-        html = build_full_html([scan_row])
+
+        symbol = (symbol or "").upper().strip()
+        if symbol not in all_data.columns:
+            print(f"{symbol} not found in cache.")
+            return
+
+        row = fast_scan_symbol(symbol, all_data[symbol].tail(LOOKBACK_DAYS))
+        if row is None:
+            print("Not enough cached history for this symbol.")
+            return
+
+        html = build_full_html([row])
         out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"stock_dashboard_{symbol}.html")
         with open(out_path, "w", encoding="utf-8") as f:
             f.write(html)
         print(f"\nDashboard: {out_path}")
         webbrowser.open(f"file:///{out_path.replace(os.sep, '/')}")
         return
-
-    # ── TABLE MODE: Batch scan all tickers from cache ──
+    # â”€â”€ TABLE MODE: Batch scan all tickers from cache â”€â”€
     print("\n=== Loading price caches ===")
     stock_data = load_cache(STOCK_DATA_FILE)
     etf_data = load_cache(ETF_DATA_FILE)
@@ -1274,7 +1098,7 @@ def main():
     elif not etf_data.empty:
         all_data = etf_data
     else:
-        print("No cache data found. Run pairs_watchlist.py first to build caches.")
+        print("No cache data found. Run pairs_finder.py first to build caches.")
         return
 
     all_data = all_data.tail(LOOKBACK_DAYS)

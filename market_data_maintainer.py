@@ -4,6 +4,7 @@ import sys
 import time
 from datetime import datetime, timedelta
 import pandas as pd
+import numpy as np
 import yfinance as yf
 from tqdm import tqdm
 
@@ -21,10 +22,18 @@ ETF_CSV_FILE = "ETFs.csv"
 STOCK_CSV_FILE = "STOCKS.csv"
 
 # Defaults
-DEFAULT_LOOKBACK_DAYS = 907
-DEFAULT_CHART_YEARS = 3
+DEFAULT_LOOKBACK_DAYS = 504
+DEFAULT_CHART_YEARS = 2
 DEFAULT_BATCH_SIZE = 40
 DEFAULT_COOLDOWN_SECONDS = 1.5
+
+# Universe prefilter (set to 0 to disable)
+MIN_PRICE_FILTER = 1.0
+MIN_AVG_VOLUME_FILTER = 100000
+PREFILTER_LOOKBACK_DAYS = 45
+PREFILTER_VOL_DAYS = 30
+PREFILTER_BATCH_SIZE = 120
+PREFILTER_COOLDOWN_SECONDS = 0.0
 
 # Internal tuning
 MIN_HISTORY_COVERAGE = 0.8
@@ -133,24 +142,77 @@ def _download_batch(tickers, start_date, field="Close", retries=DOWNLOAD_RETRIES
                     continue
                 return pd.DataFrame()
 
-            out = pd.DataFrame()
+            out_cols = {}
             for t in clean:
                 try:
                     if isinstance(df.columns, pd.MultiIndex):
                         if t in df.columns.levels[0]:
-                            out[t] = df[t][field]
+                            out_cols[t] = df[t][field]
                     else:
-                        if field in df.columns:
-                            out[t] = df[field]
+                        if field in df.columns and len(clean) == 1:
+                            out_cols[t] = df[field]
                 except Exception:
                     continue
-            return out
+            return pd.DataFrame(out_cols) if out_cols else pd.DataFrame()
         except Exception:
             if attempt < retries - 1:
                 time.sleep(RETRY_SLEEP_SECONDS)
             else:
                 return pd.DataFrame()
     return pd.DataFrame()
+
+
+def _download_prefilter_snapshot(tickers, start_date, retries=DOWNLOAD_RETRIES):
+    """Download Close+Volume snapshot in one request for prefiltering."""
+    clean = [t.replace("/", "-") for t in tickers]
+    for attempt in range(retries):
+        try:
+            df = yf.download(
+                clean,
+                start=start_date,
+                progress=False,
+                group_by="ticker",
+                auto_adjust=True,
+                threads=True,
+                timeout=YF_TIMEOUT_SECONDS,
+            )
+            if df is None or df.empty:
+                if attempt < retries - 1:
+                    time.sleep(RETRY_SLEEP_SECONDS)
+                    continue
+                return pd.DataFrame(), pd.DataFrame()
+
+            close_cols = {}
+            vol_cols = {}
+
+            if isinstance(df.columns, pd.MultiIndex):
+                lvl0 = set(df.columns.get_level_values(0))
+                for t in clean:
+                    if t not in lvl0:
+                        continue
+                    tdf = df[t]
+                    if "Close" in tdf.columns:
+                        close_cols[t] = tdf["Close"]
+                    if "Volume" in tdf.columns:
+                        vol_cols[t] = tdf["Volume"]
+            else:
+                # Single-ticker fallback
+                if len(clean) == 1:
+                    t = clean[0]
+                    if "Close" in df.columns:
+                        close_cols[t] = df["Close"]
+                    if "Volume" in df.columns:
+                        vol_cols[t] = df["Volume"]
+
+            close_out = pd.DataFrame(close_cols) if close_cols else pd.DataFrame()
+            vol_out = pd.DataFrame(vol_cols) if vol_cols else pd.DataFrame()
+            return close_out, vol_out
+        except Exception:
+            if attempt < retries - 1:
+                time.sleep(RETRY_SLEEP_SECONDS)
+            else:
+                return pd.DataFrame(), pd.DataFrame()
+    return pd.DataFrame(), pd.DataFrame()
 
 
 def _backfill_missing(df, missing, start_date, save_path, batch_size=DEFAULT_BATCH_SIZE, cooldown=DEFAULT_COOLDOWN_SECONDS, label=""):
@@ -206,6 +268,63 @@ def _update_latest(df, save_path, batch_size=DEFAULT_BATCH_SIZE, cooldown=DEFAUL
     return df
 
 
+def _prefilter_by_price_and_volume(tickers, label, batch_size=PREFILTER_BATCH_SIZE, cooldown=PREFILTER_COOLDOWN_SECONDS):
+    if not tickers:
+        return []
+    if MIN_PRICE_FILTER <= 0 and MIN_AVG_VOLUME_FILTER <= 0:
+        return tickers
+
+    start = (datetime.now() - timedelta(days=PREFILTER_LOOKBACK_DAYS)).strftime("%Y-%m-%d")
+    batches = [tickers[i : i + batch_size] for i in range(0, len(tickers), batch_size)]
+
+    kept = []
+    dropped_price = 0
+    dropped_volume = 0
+    unresolved = 0
+
+    desc = f"  Prefilter {label}"
+    with tqdm(total=len(tickers), desc=desc, unit="ticker", ncols=80, file=sys.stdout) as bar:
+        for batch in batches:
+            close_df, vol_df = _download_prefilter_snapshot(batch, start)
+
+            for t in batch:
+                key = t.replace("/", "-")
+
+                close_s = close_df[key] if not close_df.empty and key in close_df.columns else pd.Series(dtype=float)
+                vol_s = vol_df[key] if not vol_df.empty and key in vol_df.columns else pd.Series(dtype=float)
+
+                close_clean = close_s.dropna()
+                vol_clean = vol_s.dropna()
+                last_close = float(close_clean.tail(1).mean()) if not close_clean.empty else float("nan")
+                avg_vol = float(vol_clean.tail(max(1, PREFILTER_VOL_DAYS)).mean()) if not vol_clean.empty else float("nan")
+
+                # If snapshot data is unavailable, keep ticker (avoid over-pruning on transient API gaps).
+                if not np.isfinite(last_close) and not np.isfinite(avg_vol):
+                    kept.append(t)
+                    unresolved += 1
+                    continue
+
+                if MIN_PRICE_FILTER > 0 and np.isfinite(last_close) and last_close < MIN_PRICE_FILTER:
+                    dropped_price += 1
+                    continue
+
+                if MIN_AVG_VOLUME_FILTER > 0 and np.isfinite(avg_vol) and avg_vol < MIN_AVG_VOLUME_FILTER:
+                    dropped_volume += 1
+                    continue
+
+                kept.append(t)
+
+            bar.update(len(batch))
+            if cooldown > 0:
+                time.sleep(cooldown)
+
+    print(
+        f"  [{label}] Prefilter kept {len(kept)}/{len(tickers)} "
+        f"(dropped price={dropped_price}, dropped volume={dropped_volume}, unresolved-kept={unresolved})"
+    )
+    return kept
+
+
 def _trim_cache(path, allowed_cols, keep_days):
     if not os.path.exists(path):
         return
@@ -225,8 +344,6 @@ def ensure_shared_data(
     cooldown=DEFAULT_COOLDOWN_SECONDS,
 ):
     stocks, etfs = load_master_tickers_by_type()
-    all_tickers = sorted(set(stocks + etfs))
-
     stock_df = load_cache(STOCK_DATA_FILE)
     etf_df = load_cache(ETF_DATA_FILE)
 
@@ -234,6 +351,19 @@ def ensure_shared_data(
     # the requested lookback days of actual data (truncated / corrupted columns).
     min_rows = int(lookback_days * MIN_HISTORY_COVERAGE)
     start = (datetime.now() - timedelta(days=lookback_days)).strftime("%Y-%m-%d")
+
+    def _is_well_covered(df, ticker):
+        return ticker in df.columns and int(df[ticker].notna().sum()) >= min_rows
+
+    # Fast path: skip prefilter checks for symbols that already have healthy cache coverage.
+    stock_ready = [t for t in stocks if _is_well_covered(stock_df, t)]
+    etf_ready = [t for t in etfs if _is_well_covered(etf_df, t)]
+    stock_candidates = [t for t in stocks if t not in set(stock_ready)]
+    etf_candidates = [t for t in etfs if t not in set(etf_ready)]
+
+    stocks = sorted(set(stock_ready + _prefilter_by_price_and_volume(stock_candidates, "Stocks")))
+    etfs = sorted(set(etf_ready + _prefilter_by_price_and_volume(etf_candidates, "ETFs  ")))
+    all_tickers = sorted(set(stocks + etfs))
 
     def _needs_backfill(df, ticker):
         return ticker not in df.columns or int(df[ticker].notna().sum()) < min_rows

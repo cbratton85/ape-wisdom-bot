@@ -30,7 +30,7 @@ NUM_WORKERS = max(1, (mp.cpu_count() or 2) - 0)  # CPU cores for parallel pair a
 VOL_MCAP_COOLDOWN_HOURS     = 168              # Volume & market cap refresh interval (168h = 1 week)
 
 # ── Lookback Windows ──
-LOOKBACK_DAYS       = 907                      # Days used for scoring / correlation / perf
+LOOKBACK_DAYS       = 504                      # Trading days used for scoring / correlation / perf (~2y)
 VOL_AVG_DAYS        = 30                       # Rolling window for average volume calculation
 CORR_SHORT          = 35
 CORR_LONG           = 100
@@ -49,7 +49,7 @@ Z_MAX       = 5.0                              # Max |Z| — above is likely str
 
 # ── Cointegration (ADF) ──
 ADF_CONFIDENCE   = 0.90                        # Min confidence (0.90=90%, 0.95=95%, 0.99=99%)
-ADF_LOOKBACK_YRS = 3                           # Years of data for primary ADF test (1, 2, 3, 5…)
+ADF_LOOKBACK_YRS = 2                           # Years of data for primary ADF test (recommended: 2)
 ADF_MIN_DAYS     = 252                         # Min trading days of spread data for ADF (252 ≈ 1yr)
 MIN_COINT_YEARS  = 1                           # Min years the pair must pass ADF (tested at 1yr, 2yr, …)
 MIN_TRADING_DAYS = 252                         # Keep any symbol with at least 1 year of trading days
@@ -2491,31 +2491,40 @@ if __name__ == "__main__":
     perf = (data.iloc[-1] / data.iloc[-(perf_len + 1)] - 1) * 100
 
     print("Building combinations...")
-    combos = list(itertools.combinations(valid, 2))
+    combos = itertools.combinations(valid, 2)
 
-    chunksize = max(1, len(combos) // (NUM_WORKERS * 4))
+    chunksize = max(1, n_combos // (NUM_WORKERS * 4))
     with mp.Pool(
-        processes=NUM_WORKERS,
-        initializer=_init_analyze_worker,
-        initargs=(corr_long, corr_short, log_prices, log_prices_short,
-                  log_prices_long, log_prices_full, prices_raw, perf,
-                  dict(TICKER_TYPES), dict(ETF_LEV_TYPES))
+      processes=NUM_WORKERS,
+      initializer=_init_analyze_worker,
+      initargs=(
+        corr_long,
+        corr_short,
+        log_prices,
+        log_prices_short,
+        log_prices_long,
+        log_prices_full,
+        prices_raw,
+        perf,
+        dict(TICKER_TYPES),
+        dict(ETF_LEV_TYPES),
+      ),
     ) as pool:
-        results = []
-        pbar_chunk = 500
-        
-        with tqdm(total=len(combos), desc="Analyzing Pairs") as pbar:
-            for i, r in enumerate(pool.imap_unordered(analyze_pair, combos, chunksize=chunksize), 1):
-                if r is not None:
-                    results.append(r)
-                
-                # Update the progress bar every 500 items
-                if i % pbar_chunk == 0:
-                    pbar.update(pbar_chunk)
-            
-            # Ensure the progress bar reaches 100% at the very end
-            if len(combos) % pbar_chunk != 0:
-                pbar.update(len(combos) % pbar_chunk)
+      results = []
+      pbar_chunk = 500
+
+      with tqdm(total=n_combos, desc="Analyzing Pairs") as pbar:
+        for i, r in enumerate(pool.imap_unordered(analyze_pair, combos, chunksize=chunksize), 1):
+          if r is not None:
+            results.append(r)
+
+          # Update the progress bar every 500 items
+          if i % pbar_chunk == 0:
+            pbar.update(pbar_chunk)
+
+        # Ensure the progress bar reaches 100% at the very end
+        if n_combos % pbar_chunk != 0:
+          pbar.update(n_combos % pbar_chunk)
 
     results = sorted(results, key=lambda x: x["Score"], reverse=True)
     # Filter out pairs that won't display (Z below threshold or above max) before capping
@@ -3466,7 +3475,6 @@ if __name__ == "__main__":
             <option value="0" selected>All</option>
             <option value="1">1 Year+</option>
             <option value="2">2 Year+</option>
-            <option value="3">3 Year+</option>
           </select>
         </div>
         <div class="control-group">
