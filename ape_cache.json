@@ -31048,5 +31048,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "LFC": {
+        "ticker": "LFC",
+        "name": "LFC",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "MBC": {
+        "ticker": "MBC",
+        "name": "MasterBrand, Inc.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 1030501952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "UCB": {
+        "ticker": "UCB",
+        "name": "United Community Banks, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 3609925632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
