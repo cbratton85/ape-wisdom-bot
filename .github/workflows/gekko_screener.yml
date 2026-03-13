@@ -1,0 +1,89 @@
+name: Run Gekko Screener
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 22 * * 1-5"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gekko-screener-runner
+  cancel-in-progress: false
+
+jobs:
+  run-gekko:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          else
+            pip install pandas requests
+          fi
+
+      - name: Run Gekko screener
+        run: |
+          python - <<'PY'
+          import pathlib
+          import subprocess
+          import sys
+
+          repo_root = pathlib.Path.cwd()
+          candidates = [
+              repo_root / "gekko_screener.py",
+              repo_root / "pairs_scanner" / "gekko_screener.py",
+          ]
+          script = next((p for p in candidates if p.exists()), None)
+          if script is None:
+              found = sorted(repo_root.rglob("gekko_screener.py"))
+              if len(found) == 1:
+                  script = found[0]
+              else:
+                  print(f"Could not find unique gekko_screener.py. Found: {[str(p) for p in found]}")
+                  raise SystemExit(1)
+
+          print(f"Using screener script: {script}")
+          subprocess.run([sys.executable, str(script)], check=True, cwd=str(script.parent))
+          PY
+
+      - name: Commit and push outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add gekko_screener.html 2>/dev/null || true
+          git add gekko_screener.csv 2>/dev/null || true
+
+          if git diff --staged --quiet; then
+            echo "No Gekko screener output changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore: update gekko screener outputs"
+
+          branch="${GITHUB_REF_NAME:-main}"
+          for i in 1 2 3; do
+            git pull --rebase origin "$branch"
+            if git push origin HEAD:"$branch"; then
+              exit 0
+            fi
+            echo "Push failed (attempt $i). Retrying..."
+            sleep 2
+          done
+
+          echo "Failed to push after retries."
+          exit 1
