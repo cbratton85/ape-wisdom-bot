@@ -32,8 +32,8 @@ MIN_PRICE_FILTER = 1.0
 MIN_AVG_VOLUME_FILTER = 100000
 PREFILTER_LOOKBACK_DAYS = 45
 PREFILTER_VOL_DAYS = 30
-PREFILTER_BATCH_SIZE = 120
-PREFILTER_COOLDOWN_SECONDS = 0.0
+PREFILTER_BATCH_SIZE = 80
+PREFILTER_COOLDOWN_SECONDS = 0.25
 
 # Internal tuning
 MIN_HISTORY_COVERAGE = 0.8
@@ -42,6 +42,9 @@ CHART_TRIM_BUFFER = 1.1
 YF_TIMEOUT_SECONDS = 20
 DOWNLOAD_RETRIES = 3
 RETRY_SLEEP_SECONDS = 5
+PARTIAL_RETRY_BATCH_SIZE = 8
+PARTIAL_RETRY_SLEEP_SECONDS = 8
+FULL_BATCH_RECOVERY_SLEEP_SECONDS = 15
 SAVE_RETRIES = 10
 SAVE_RETRY_SECONDS = 0.8
 
@@ -118,6 +121,93 @@ def _status_tag(label, fallback):
     return f"  [{label}]" if label else f"  [{fallback}]"
 
 
+def _chunked(seq, size):
+    size = max(1, int(size))
+    for i in range(0, len(seq), size):
+        yield seq[i : i + size]
+
+
+def _merge_frames(frames):
+    valid = [frame for frame in frames if frame is not None and not frame.empty]
+    if not valid:
+        return pd.DataFrame()
+    merged = pd.concat(valid, axis=1)
+    return merged.loc[:, ~merged.columns.duplicated(keep="last")]
+
+
+def _missing_symbols(requested, available_cols):
+    available = set(available_cols)
+    return [ticker for ticker in requested if ticker not in available]
+
+
+def _fallback_chunk_size(missing_count):
+    if missing_count <= 4:
+        return 1
+    return min(PARTIAL_RETRY_BATCH_SIZE, max(1, missing_count // 2))
+
+
+def _download_raw(clean_tickers, start_date, threads):
+    return yf.download(
+        clean_tickers,
+        start=start_date,
+        progress=False,
+        group_by="ticker",
+        auto_adjust=True,
+        threads=threads,
+        timeout=YF_TIMEOUT_SECONDS,
+    )
+
+
+def _extract_field_frame(df, clean_tickers, field):
+    if df is None or df.empty:
+        return pd.DataFrame()
+
+    out_cols = {}
+    for ticker in clean_tickers:
+        try:
+            if isinstance(df.columns, pd.MultiIndex):
+                if ticker in df.columns.get_level_values(0):
+                    ticker_df = df[ticker]
+                    if field in ticker_df.columns:
+                        out_cols[ticker] = ticker_df[field]
+            else:
+                if field in df.columns and len(clean_tickers) == 1:
+                    out_cols[ticker] = df[field]
+        except Exception:
+            continue
+
+    return pd.DataFrame(out_cols) if out_cols else pd.DataFrame()
+
+
+def _extract_snapshot_frames(df, clean_tickers):
+    if df is None or df.empty:
+        return pd.DataFrame(), pd.DataFrame()
+
+    close_cols = {}
+    vol_cols = {}
+
+    if isinstance(df.columns, pd.MultiIndex):
+        lvl0 = set(df.columns.get_level_values(0))
+        for ticker in clean_tickers:
+            if ticker not in lvl0:
+                continue
+            ticker_df = df[ticker]
+            if "Close" in ticker_df.columns:
+                close_cols[ticker] = ticker_df["Close"]
+            if "Volume" in ticker_df.columns:
+                vol_cols[ticker] = ticker_df["Volume"]
+    elif len(clean_tickers) == 1:
+        ticker = clean_tickers[0]
+        if "Close" in df.columns:
+            close_cols[ticker] = df["Close"]
+        if "Volume" in df.columns:
+            vol_cols[ticker] = df["Volume"]
+
+    close_out = pd.DataFrame(close_cols) if close_cols else pd.DataFrame()
+    vol_out = pd.DataFrame(vol_cols) if vol_cols else pd.DataFrame()
+    return close_out, vol_out
+
+
 # ==========================================
 # DOWNLOAD / UPDATE PIPELINE
 # ==========================================
@@ -125,94 +215,79 @@ def _status_tag(label, fallback):
 
 def _download_batch(tickers, start_date, field="Close", retries=DOWNLOAD_RETRIES):
     clean = [t.replace("/", "-") for t in tickers]
+    result = pd.DataFrame()
+
     for attempt in range(retries):
         try:
-            df = yf.download(
-                clean,
-                start=start_date,
-                progress=False,
-                group_by="ticker",
-                auto_adjust=True,
-                threads=False,
-                timeout=YF_TIMEOUT_SECONDS,
-            )
+            df = _download_raw(clean, start_date, threads=False)
             if df is None or df.empty:
                 if attempt < retries - 1:
                     time.sleep(RETRY_SLEEP_SECONDS)
                     continue
-                return pd.DataFrame()
+                break
 
-            out_cols = {}
-            for t in clean:
-                try:
-                    if isinstance(df.columns, pd.MultiIndex):
-                        if t in df.columns.levels[0]:
-                            out_cols[t] = df[t][field]
-                    else:
-                        if field in df.columns and len(clean) == 1:
-                            out_cols[t] = df[field]
-                except Exception:
-                    continue
-            return pd.DataFrame(out_cols) if out_cols else pd.DataFrame()
+            result = _extract_field_frame(df, clean, field)
+            missing = _missing_symbols(clean, result.columns)
+            if not missing:
+                return result
+            break
         except Exception:
             if attempt < retries - 1:
                 time.sleep(RETRY_SLEEP_SECONDS)
             else:
-                return pd.DataFrame()
-    return pd.DataFrame()
+                break
+
+    missing = _missing_symbols(clean, result.columns)
+    if missing and len(clean) > 1:
+        time.sleep(PARTIAL_RETRY_SLEEP_SECONDS if not result.empty else FULL_BATCH_RECOVERY_SLEEP_SECONDS)
+        retry_frames = [result] if not result.empty else []
+        for chunk in _chunked(missing, _fallback_chunk_size(len(missing))):
+            retry_frames.append(_download_batch(chunk, start_date, field=field, retries=max(1, retries - 1)))
+        return _merge_frames(retry_frames)
+
+    return result
 
 
 def _download_prefilter_snapshot(tickers, start_date, retries=DOWNLOAD_RETRIES):
     """Download Close+Volume snapshot in one request for prefiltering."""
     clean = [t.replace("/", "-") for t in tickers]
+    close_out = pd.DataFrame()
+    vol_out = pd.DataFrame()
+
     for attempt in range(retries):
         try:
-            df = yf.download(
-                clean,
-                start=start_date,
-                progress=False,
-                group_by="ticker",
-                auto_adjust=True,
-                threads=True,
-                timeout=YF_TIMEOUT_SECONDS,
-            )
+            df = _download_raw(clean, start_date, threads=False)
             if df is None or df.empty:
                 if attempt < retries - 1:
                     time.sleep(RETRY_SLEEP_SECONDS)
                     continue
-                return pd.DataFrame(), pd.DataFrame()
-
-            close_cols = {}
-            vol_cols = {}
-
-            if isinstance(df.columns, pd.MultiIndex):
-                lvl0 = set(df.columns.get_level_values(0))
-                for t in clean:
-                    if t not in lvl0:
-                        continue
-                    tdf = df[t]
-                    if "Close" in tdf.columns:
-                        close_cols[t] = tdf["Close"]
-                    if "Volume" in tdf.columns:
-                        vol_cols[t] = tdf["Volume"]
-            else:
-                # Single-ticker fallback
-                if len(clean) == 1:
-                    t = clean[0]
-                    if "Close" in df.columns:
-                        close_cols[t] = df["Close"]
-                    if "Volume" in df.columns:
-                        vol_cols[t] = df["Volume"]
-
-            close_out = pd.DataFrame(close_cols) if close_cols else pd.DataFrame()
-            vol_out = pd.DataFrame(vol_cols) if vol_cols else pd.DataFrame()
-            return close_out, vol_out
+                break
+            close_out, vol_out = _extract_snapshot_frames(df, clean)
+            resolved = set(close_out.columns).union(vol_out.columns)
+            if not _missing_symbols(clean, resolved):
+                return close_out, vol_out
+            break
         except Exception:
             if attempt < retries - 1:
                 time.sleep(RETRY_SLEEP_SECONDS)
             else:
-                return pd.DataFrame(), pd.DataFrame()
-    return pd.DataFrame(), pd.DataFrame()
+                break
+
+    resolved = set(close_out.columns).union(vol_out.columns)
+    missing = _missing_symbols(clean, resolved)
+    if missing and len(clean) > 1:
+        time.sleep(PARTIAL_RETRY_SLEEP_SECONDS if resolved else FULL_BATCH_RECOVERY_SLEEP_SECONDS)
+        close_frames = [close_out] if not close_out.empty else []
+        vol_frames = [vol_out] if not vol_out.empty else []
+        for chunk in _chunked(missing, _fallback_chunk_size(len(missing))):
+            retry_close, retry_vol = _download_prefilter_snapshot(chunk, start_date, retries=max(1, retries - 1))
+            if not retry_close.empty:
+                close_frames.append(retry_close)
+            if not retry_vol.empty:
+                vol_frames.append(retry_vol)
+        return _merge_frames(close_frames), _merge_frames(vol_frames)
+
+    return close_out, vol_out
 
 
 def _backfill_missing(df, missing, start_date, save_path, batch_size=DEFAULT_BATCH_SIZE, cooldown=DEFAULT_COOLDOWN_SECONDS, label=""):
