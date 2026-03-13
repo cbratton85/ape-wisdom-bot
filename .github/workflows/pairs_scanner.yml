@@ -12,6 +12,10 @@ env:
 permissions:
   contents: write
 
+concurrency:
+  group: pairs-scanner
+  cancel-in-progress: false   # queue the new run; don't abort the one already writing data
+
 jobs:
   run-scanner-and-publish:
     runs-on: ubuntu-latest
