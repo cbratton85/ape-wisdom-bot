@@ -5,11 +5,12 @@ import sys
 import time
 import json
 import webbrowser
+import importlib
 from datetime import datetime, timedelta
 from market_data_maintainer import ensure_shared_data
 
 try:
-  from tqdm import tqdm
+  _tqdm = importlib.import_module("tqdm").tqdm
 except Exception:
   class _NoOpTqdm:
     def __init__(self, iterable=None, total=None, **kwargs):
@@ -26,8 +27,10 @@ except Exception:
       return self
     def __exit__(self, exc_type, exc, tb):
       return False
-  def tqdm(iterable=None, total=None, **kwargs):
+  def _tqdm(iterable=None, total=None, **kwargs):
     return _NoOpTqdm(iterable=iterable, total=total, **kwargs)
+
+tqdm = _tqdm
 
 # ==========================================
 # CONFIG
@@ -69,6 +72,15 @@ TICKER_CSV_MCAP  = {}
 TICKER_CSV_VOL   = {}
 ETF_LEV_TYPES   = {}
 GEKKO_SCORE_MAP = {}
+
+
+def _ticker_aliases(ticker):
+  t = str(ticker or "").strip().upper()
+  if not t:
+    return []
+  a = t.replace('.', '-')
+  b = t.replace('-', '.')
+  return [t, a, b]
 
 
 def _gekko_label(gi_score):
@@ -216,13 +228,18 @@ def load_gekko_scores(path=GEKKO_SCREENER_FILE):
     t = str(row.get("ticker", "")).strip().upper()
     if not t:
       continue
+    raw_g = row.get("gi_score")
+    if raw_g is None:
+      continue
     try:
-      g = float(row.get("gi_score"))
+      g = float(raw_g)
     except (TypeError, ValueError):
       continue
     if np.isnan(g):
       continue
-    out[t] = max(0.0, min(100.0, g))
+    g = max(0.0, min(100.0, g))
+    for alias in _ticker_aliases(t):
+      out[alias] = g
 
   print(f"Loaded {len(out)} Gekko GI scores from {path}")
   return out
@@ -488,7 +505,11 @@ def fast_scan_symbol(symbol, close_series, open_series=None, high_series=None, l
     breakdown = min(100, breakdown)
     net_bias_raw = breakout - breakdown
 
-    gi_score = GEKKO_SCORE_MAP.get(symbol)
+    gi_score = None
+    for alias in _ticker_aliases(symbol):
+      gi_score = GEKKO_SCORE_MAP.get(alias)
+      if gi_score is not None:
+        break
     gi_bias = ((gi_score - 50.0) * 2.0) if gi_score is not None else None
 
     if INCLUDE_GEKKO_IN_SCORE and gi_bias is not None:
@@ -1660,6 +1681,8 @@ def main():
     # Filter to tickers with enough data
     valid_cols = [c for c in all_data.columns if all_data[c].notna().sum() >= MIN_HISTORY_DAYS_FOR_SCAN]
     print(f"Valid tickers with {MIN_HISTORY_DAYS_FOR_SCAN}+ days: {len(valid_cols)}")
+    gi_hits = sum(1 for c in valid_cols if any(a in GEKKO_SCORE_MAP for a in _ticker_aliases(c)))
+    print(f"GI coverage in scan universe: {gi_hits}/{len(valid_cols)}")
 
     # Scan all
     print(f"\n=== Scanning {len(valid_cols)} tickers ===")
