@@ -1,4 +1,4 @@
-name: Pairs Finder Weekly
+name: Pairs Finder
 
 on:
   workflow_dispatch:
@@ -90,3 +90,4 @@ jobs:
       - name: Skip notice
         if: steps.sunday_window.outputs.run_now != 'true' && github.event_name != 'workflow_dispatch'
         run: echo "Outside Sunday evening ET window; skipped."
+
