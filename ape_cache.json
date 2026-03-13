@@ -31238,5 +31238,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "BIRD": {
+        "ticker": "BIRD",
+        "name": "Allbirds, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 26025646,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
