@@ -13,12 +13,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: pairs-scanner-${{ github.workflow }}
+  group: main-publish-lock
   cancel-in-progress: false
 
 jobs:
   run-scanner-and-publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
 
     steps:
       - name: Checkout repository
@@ -75,6 +76,12 @@ jobs:
           cp stock_data.csv.gz public/ || true
           cp etf_data.csv.gz public/ || true
           cp chart_data.csv.gz public/ || true
+
+      - name: Protect public/index.html
+        run: |
+          if git ls-files --error-unmatch public/index.html >/dev/null 2>&1; then
+            git checkout -- public/index.html
+          fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

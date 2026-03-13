@@ -9,26 +9,30 @@ on:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
+concurrency:
+  group: main-publish-lock
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       contents: write
-      pages: write
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install yfinance pandas numpy
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install yfinance pandas numpy tqdm lxml; fi
 
       - name: Run Dashboard Script
         run: python stock_dashboard.py
@@ -39,6 +43,12 @@ jobs:
           mv stock_dashboard.html public/stock_dashboard.html
           cp -r *.csv public/ 2>/dev/null || true
 
+      - name: Protect public/index.html
+        run: |
+          if git ls-files --error-unmatch public/index.html >/dev/null 2>&1; then
+            git checkout -- public/index.html
+          fi
+
       - name: Commit and Push Data Changes
         run: |
           git config --global user.name "github-actions[bot]"
@@ -47,9 +57,22 @@ jobs:
           if [ -d "public/logos" ]; then
             git reset public/logos/
           fi
-          git commit -m "Update Dashboard Data [skip ci]" || echo "No changes"
-          git pull --rebase origin main
-          git push origin main
+          if git diff --staged --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git commit -m "Update Dashboard Data [skip ci]"
+          branch="${GITHUB_REF_NAME:-main}"
+          for i in 1 2 3; do
+            git pull --rebase origin "$branch"
+            if git push origin HEAD:"$branch"; then
+              exit 0
+            fi
+            echo "Push failed (attempt $i). Retrying..."
+            sleep 2
+          done
+          echo "Failed to push after retries."
+          exit 1
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

@@ -10,12 +10,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: pairs-finder-${{ github.workflow }}
+  group: main-publish-lock
   cancel-in-progress: false
 
 jobs:
   run-pairs-finder:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
 
     steps:
       - name: Checkout
@@ -24,12 +25,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pandas numpy tqdm yfinance
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install yfinance pandas numpy tqdm lxml; fi
 
       - name: Run pairs finder
         run: |
@@ -62,17 +63,6 @@ jobs:
           print(f"Using finder script: {script_path}")
           script_dir = script_path.parent
 
-          maintainer_candidates = [
-            script_dir / "market_data_maintainer.py",
-            repo_root / "market_data_maintainer.py",
-            repo_root / "pairs_scanner" / "market_data_maintainer.py",
-          ]
-          maintainer_path = next((p for p in maintainer_candidates if p.exists()), None)
-          if maintainer_path is None:
-            print("market_data_maintainer.py not found; cannot build fresh cache.")
-            raise SystemExit(1)
-          print(f"Using maintainer script: {maintainer_path}")
-
           def sha256(p: pathlib.Path):
             if not p.exists():
               return None
@@ -91,8 +81,6 @@ jobs:
             shutil.copy2(index_path, backup_path)
 
           try:
-            # Build/update cache first so finder has data in CI.
-            subprocess.run([sys.executable, str(maintainer_path)], check=True, cwd=str(maintainer_path.parent))
             subprocess.run([sys.executable, str(script_path)], check=True, cwd=str(script_path.parent))
 
             # Publish target for GitHub Pages project URL:
@@ -125,6 +113,9 @@ jobs:
 
       - name: Commit and push published HTML
         run: |
+          if git ls-files --error-unmatch public/index.html >/dev/null 2>&1; then
+            git checkout -- public/index.html
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add pairs_finder.html
@@ -134,7 +125,17 @@ jobs:
             exit 0
           fi
           git commit -m "chore: update weekly pairs finder html"
-          git push
+          branch="${GITHUB_REF_NAME:-main}"
+          for i in 1 2 3; do
+            git pull --rebase origin "$branch"; 
+            if git push origin HEAD:"$branch"; then
+              exit 0
+            fi
+            echo "Push failed (attempt $i). Retrying..."
+            sleep 2
+          done
+          echo "Failed to push after retries."
+          exit 1
 
       - name: Prepare gh-pages payload
         run: |
@@ -149,4 +150,3 @@ jobs:
           publish_dir: ./.pages-publish
           keep_files: true
           commit_message: "chore: publish pairs_finder.html"
-
