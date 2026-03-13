@@ -27,13 +27,8 @@ DEFAULT_CHART_YEARS = 2
 DEFAULT_BATCH_SIZE = 40
 DEFAULT_COOLDOWN_SECONDS = 1.5
 
-# Universe prefilter (set to 0 to disable)
-MIN_PRICE_FILTER = 1.0
+# Universe prefilter (CSV-based; set volume to 0 to disable)
 MIN_AVG_VOLUME_FILTER = 100000
-PREFILTER_LOOKBACK_DAYS = 45
-PREFILTER_VOL_DAYS = 30
-PREFILTER_BATCH_SIZE = 80
-PREFILTER_COOLDOWN_SECONDS = 0.25
 
 # Internal tuning
 MIN_HISTORY_COVERAGE = 0.8
@@ -74,6 +69,38 @@ def load_master_tickers_by_type():
     stocks = sorted(set(_read_tickers(STOCK_CSV_FILE)))
     etfs = sorted(set(_read_tickers(ETF_CSV_FILE)))
     return stocks, etfs
+
+
+def _read_csv_volume_map(path, volume_col_idx):
+    """Read avg-volume values from a ticker CSV (per-row schema)."""
+    out = {}
+    if not os.path.exists(path):
+        return out
+    try:
+        df = pd.read_csv(path, header=None)
+    except Exception:
+        return out
+    if df.empty:
+        return out
+
+    ncols = df.shape[1]
+    if volume_col_idx >= ncols:
+        return out
+
+    for _, row in df.iterrows():
+        t = str(row.iloc[0]).strip().upper()
+        if not _is_ticker(t) or t in {"SYMBOL", "TICKER", "NAN", "NONE", "NULL"}:
+            continue
+        try:
+            raw = row.iloc[volume_col_idx]
+            if pd.isna(raw):
+                continue
+            v = int(float(str(raw).replace(",", "").strip()))
+            if v > 0:
+                out[t] = v
+        except Exception:
+            continue
+    return out
 
 
 # ==========================================
@@ -343,59 +370,31 @@ def _update_latest(df, save_path, batch_size=DEFAULT_BATCH_SIZE, cooldown=DEFAUL
     return df
 
 
-def _prefilter_by_price_and_volume(tickers, label, batch_size=PREFILTER_BATCH_SIZE, cooldown=PREFILTER_COOLDOWN_SECONDS):
+def _prefilter_by_csv_volume(tickers, label, volume_map):
     if not tickers:
         return []
-    if MIN_PRICE_FILTER <= 0 and MIN_AVG_VOLUME_FILTER <= 0:
+    if MIN_AVG_VOLUME_FILTER <= 0:
         return tickers
 
-    start = (datetime.now() - timedelta(days=PREFILTER_LOOKBACK_DAYS)).strftime("%Y-%m-%d")
-    batches = [tickers[i : i + batch_size] for i in range(0, len(tickers), batch_size)]
-
     kept = []
-    dropped_price = 0
     dropped_volume = 0
-    unresolved = 0
+    unresolved_kept = 0
 
-    desc = f"  Prefilter {label}"
-    with tqdm(total=len(tickers), desc=desc, unit="ticker", ncols=80, file=sys.stdout) as bar:
-        for batch in batches:
-            close_df, vol_df = _download_prefilter_snapshot(batch, start)
-
-            for t in batch:
-                key = t.replace("/", "-")
-
-                close_s = close_df[key] if not close_df.empty and key in close_df.columns else pd.Series(dtype=float)
-                vol_s = vol_df[key] if not vol_df.empty and key in vol_df.columns else pd.Series(dtype=float)
-
-                close_clean = close_s.dropna()
-                vol_clean = vol_s.dropna()
-                last_close = float(close_clean.tail(1).mean()) if not close_clean.empty else float("nan")
-                avg_vol = float(vol_clean.tail(max(1, PREFILTER_VOL_DAYS)).mean()) if not vol_clean.empty else float("nan")
-
-                # If snapshot data is unavailable, keep ticker (avoid over-pruning on transient API gaps).
-                if not np.isfinite(last_close) and not np.isfinite(avg_vol):
-                    kept.append(t)
-                    unresolved += 1
-                    continue
-
-                if MIN_PRICE_FILTER > 0 and np.isfinite(last_close) and last_close < MIN_PRICE_FILTER:
-                    dropped_price += 1
-                    continue
-
-                if MIN_AVG_VOLUME_FILTER > 0 and np.isfinite(avg_vol) and avg_vol < MIN_AVG_VOLUME_FILTER:
-                    dropped_volume += 1
-                    continue
-
-                kept.append(t)
-
-            bar.update(len(batch))
-            if cooldown > 0:
-                time.sleep(cooldown)
+    for t in tickers:
+        v = int(volume_map.get(t, 0) or 0)
+        if v <= 0:
+            # Missing CSV volume: keep to avoid accidental over-pruning.
+            kept.append(t)
+            unresolved_kept += 1
+            continue
+        if v < MIN_AVG_VOLUME_FILTER:
+            dropped_volume += 1
+            continue
+        kept.append(t)
 
     print(
         f"  [{label}] Prefilter kept {len(kept)}/{len(tickers)} "
-        f"(dropped price={dropped_price}, dropped volume={dropped_volume}, unresolved-kept={unresolved})"
+        f"(dropped volume={dropped_volume}, missing-volume-kept={unresolved_kept})"
     )
     return kept
 
@@ -419,6 +418,8 @@ def ensure_shared_data(
     cooldown=DEFAULT_COOLDOWN_SECONDS,
 ):
     stocks, etfs = load_master_tickers_by_type()
+    stock_csv_vol = _read_csv_volume_map(STOCK_CSV_FILE, volume_col_idx=7)
+    etf_csv_vol = _read_csv_volume_map(ETF_CSV_FILE, volume_col_idx=6)
     stock_df = load_cache(STOCK_DATA_FILE)
     etf_df = load_cache(ETF_DATA_FILE)
 
@@ -436,8 +437,8 @@ def ensure_shared_data(
     stock_candidates = [t for t in stocks if t not in set(stock_ready)]
     etf_candidates = [t for t in etfs if t not in set(etf_ready)]
 
-    stocks = sorted(set(stock_ready + _prefilter_by_price_and_volume(stock_candidates, "Stocks")))
-    etfs = sorted(set(etf_ready + _prefilter_by_price_and_volume(etf_candidates, "ETFs  ")))
+    stocks = sorted(set(stock_ready + _prefilter_by_csv_volume(stock_candidates, "Stocks", stock_csv_vol)))
+    etfs = sorted(set(etf_ready + _prefilter_by_csv_volume(etf_candidates, "ETFs  ", etf_csv_vol)))
     all_tickers = sorted(set(stocks + etfs))
 
     def _needs_backfill(df, ticker):

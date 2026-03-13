@@ -24,10 +24,13 @@ COMPRESS_HTML    = True                        # Write .html.gz (recommended for
 WRITE_PLAIN_HTML = False                       # Write uncompressed HTML too
 
 # ── Runtime / Processing ──
-BATCH_SIZE  = 40
-COOLDOWN    = 1.5
 NUM_WORKERS = max(1, (mp.cpu_count() or 2) - 0)  # CPU cores for parallel pair analysis (leave 1 free)
 VOL_MCAP_COOLDOWN_HOURS     = 168              # Volume & market cap refresh interval (168h = 1 week)
+PAIR_CHUNKS_PER_WORKER = 200                   # More chunks = smoother progress updates
+PAIR_CHUNKSIZE_MIN = 100                       # Lower bound to keep IPC overhead reasonable
+PAIR_CHUNKSIZE_MAX = 1000                      # Upper bound to avoid long "stalled" chunks
+PAIR_PROGRESS_UPDATE_EVERY = 500               # Progress bar update cadence
+PAIR_HEARTBEAT_SECONDS = 60                    # Emit heartbeat when no result arrives for this long
 
 # ── Lookback Windows ──
 LOOKBACK_DAYS       = 504                      # Trading days used for scoring / correlation / perf (~2y)
@@ -48,7 +51,7 @@ Z_THRESHOLD = Z_LOW                            # Min |Z| to include pair in resu
 Z_MAX       = 5.0                              # Max |Z| — above is likely structural break
 
 # ── Cointegration (ADF) ──
-ADF_CONFIDENCE   = 0.90                        # Min confidence (0.90=90%, 0.95=95%, 0.99=99%)
+ADF_CONFIDENCE   = 0.95                        # Min confidence (0.95=95%, 0.99=99%)
 ADF_LOOKBACK_YRS = 2                           # Years of data for primary ADF test (recommended: 2)
 ADF_MIN_DAYS     = 252                         # Min trading days of spread data for ADF (252 ≈ 1yr)
 MIN_COINT_YEARS  = 1                           # Min years the pair must pass ADF (tested at 1yr, 2yr, …)
@@ -2493,7 +2496,10 @@ if __name__ == "__main__":
     print("Building combinations...")
     combos = itertools.combinations(valid, 2)
 
-    chunksize = max(1, n_combos // (NUM_WORKERS * 4))
+    chunk_target = max(1, NUM_WORKERS * PAIR_CHUNKS_PER_WORKER)
+    chunksize = max(PAIR_CHUNKSIZE_MIN, n_combos // chunk_target)
+    chunksize = min(PAIR_CHUNKSIZE_MAX, chunksize)
+    print(f"Analyzing {n_combos:,} pairs with {NUM_WORKERS} workers (chunksize={chunksize:,})")
     with mp.Pool(
       processes=NUM_WORKERS,
       initializer=_init_analyze_worker,
@@ -2511,20 +2517,33 @@ if __name__ == "__main__":
       ),
     ) as pool:
       results = []
-      pbar_chunk = 500
+      pbar_chunk = max(1, int(PAIR_PROGRESS_UPDATE_EVERY))
+      hb_seconds = max(5, int(PAIR_HEARTBEAT_SECONDS))
+      result_iter = pool.imap_unordered(analyze_pair, combos, chunksize=chunksize)
 
       with tqdm(total=n_combos, desc="Analyzing Pairs") as pbar:
-        for i, r in enumerate(pool.imap_unordered(analyze_pair, combos, chunksize=chunksize), 1):
-          if r is not None:
-            results.append(r)
+        i = 0
+        last_heartbeat = time.time()
+        while i < n_combos:
+          try:
+            # Timeout polling lets us print heartbeat lines even when workers are on slow chunks.
+            r = result_iter.next(timeout=hb_seconds)
+            i += 1
+            if r is not None:
+              results.append(r)
 
-          # Update the progress bar every 500 items
-          if i % pbar_chunk == 0:
-            pbar.update(pbar_chunk)
+            if i % pbar_chunk == 0:
+              pbar.update(pbar_chunk)
+          except mp.TimeoutError:
+            remaining = n_combos - i
+            tqdm.write(
+              f"[heartbeat] analyzed={i:,}/{n_combos:,} remaining={remaining:,} "
+              f"results={len(results):,} workers={NUM_WORKERS} chunksize={chunksize:,}"
+            )
+            last_heartbeat = time.time()
 
-        # Ensure the progress bar reaches 100% at the very end
-        if n_combos % pbar_chunk != 0:
-          pbar.update(n_combos % pbar_chunk)
+        if i % pbar_chunk != 0:
+          pbar.update(i % pbar_chunk)
 
     results = sorted(results, key=lambda x: x["Score"], reverse=True)
     # Filter out pairs that won't display (Z below threshold or above max) before capping
@@ -3460,9 +3479,7 @@ if __name__ == "__main__":
         <div class="control-group">
           <label>Coint Conf</label>
           <select id="cointConfFilter" onchange="applyFilters()">
-            <option value="all" selected>All</option>
-            <option value="90">90%+</option>
-            <option value="95">95%+</option>
+            <option value="all" selected>All (95%+ base)</option>
             <option value="99">99%+</option>
           </select>
         </div>
