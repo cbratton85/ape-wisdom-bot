@@ -18,7 +18,7 @@ STOCK_DATA_FILE = "stock_data.csv.gz"
 ETF_DATA_FILE = "etf_data.csv.gz"
 ETF_CSV_FILE = "etfs.csv"
 STOCK_CSV_FILE = "stocks.csv"
-OUTPUT_FILE = "pairs_watchlist.html"
+OUTPUT_FILE = "pairs_finder.html"
 
 LOOKBACK_DAYS = 504
 CHART_LOOKBACK_DAYS = 504
