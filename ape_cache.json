@@ -31118,5 +31118,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FRSX": {
+        "ticker": "FRSX",
+        "name": "Foresight Autonomous Holdings L",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 4008708,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
