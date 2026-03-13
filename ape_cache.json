@@ -31198,5 +31198,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "BBH": {
+        "ticker": "BBH",
+        "name": "VanEck Biotech ETF",
+        "meta": "Unknown",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "IFV": {
+        "ticker": "IFV",
+        "name": "First Trust Dorsey Wright Inter",
+        "meta": "Unknown",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "NEXA": {
+        "ticker": "NEXA",
+        "name": "Nexa Resources S.A.",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 1440932096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CHRS": {
+        "ticker": "CHRS",
+        "name": "Coherus Oncology, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 247844400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
