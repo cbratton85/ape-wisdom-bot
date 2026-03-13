@@ -1,4 +1,4 @@
-name: Market Hours Runner
+name: Market Data
 
 on:
   workflow_dispatch:
@@ -64,3 +64,4 @@ jobs:
       - name: Skip notice
         if: steps.market_window.outputs.run_now != 'true'
         run: echo "Outside US market hours; skipped."
+
