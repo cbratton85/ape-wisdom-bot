@@ -9,6 +9,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: pairs-finder-weekly
+  cancel-in-progress: false   # queue the new run; don't abort the one already writing data
+
 jobs:
   run-pairs-finder:
     runs-on: ubuntu-latest
