@@ -1,4 +1,3 @@
-import yfinance as yf
 import pandas as pd
 import numpy as np
 import itertools
@@ -9,25 +8,25 @@ import gzip
 from datetime import datetime, timedelta
 from tqdm import tqdm
 import multiprocessing as mp
+from market_data_maintainer import validate_and_repair, _dropped_tickers
 
 # ==========================================
 # CONFIG
 # ==========================================
 
-# ── File Paths ──
+# ── Output & File Paths ──
 STOCK_DATA_FILE = "stock_data.csv.gz"          # Stock price cache (shared with stock_dashboard)
 ETF_DATA_FILE   = "etf_data.csv.gz"            # ETF price cache (shared with stock_dashboard)
 CHART_DATA_FILE = "chart_data.csv.gz"          # Extended history for Z-score charts only
 TRADES_FILE      = "active_trades.json"        # Active trade tracker
 OUTPUT_FILE      = "pairs_scanner.html"
 COMPRESS_HTML    = True                        # Write .html.gz (recommended for GitHub size limits)
-WRITE_PLAIN_HTML = True                        # Write uncompressed HTML too
+WRITE_PLAIN_HTML = False                       # Write uncompressed HTML too
 
-# ── Data & Download ──
+# ── Runtime / Processing ──
 BATCH_SIZE  = 40
 COOLDOWN    = 1.5
-NUM_WORKERS = max(1, (mp.cpu_count() or 2) - 1)  # CPU cores for parallel pair analysis (leave 1 free)
-CACHE_UPDATE_COOLDOWN_HOURS = 1
+NUM_WORKERS = max(1, (mp.cpu_count() or 2) - 0)  # CPU cores for parallel pair analysis (leave 1 free)
 VOL_MCAP_COOLDOWN_HOURS     = 168              # Volume & market cap refresh interval (168h = 1 week)
 
 # ── Lookback Windows ──
@@ -58,6 +57,13 @@ MIN_TRADING_DAYS = 252                         # Keep any symbol with at least 1
 TRADING_DAYS_PER_YEAR = 252
 CALENDAR_DAYS_PER_YEAR = 365
 
+# Chart history selection:
+# - coint_years: use pair-specific CointYears window (N * 252 days)
+# - rolling_confidence: trim to most recent continuous regime where rolling confidence stays >= ADF_CONFIDENCE
+CHART_HISTORY_MODE = "rolling_confidence"
+CHART_CONF_STEP_DAYS = 5
+CHART_CONF_MIN_RUN_DAYS = 63
+
 
 def _chart_display_days():
   """Trading-day window shown on charts, tied to ADF_LOOKBACK_YRS."""
@@ -70,11 +76,11 @@ def _chart_download_days():
   yrs = max(1, int(ADF_LOOKBACK_YRS))
   return yrs * CALENDAR_DAYS_PER_YEAR
 
-# ── Pair Filters ──
+# ── Pair Filters (0 = show all where noted) ──
 MIN_CORR_FILTER = 0.50                         # Min correlation to consider pair
-MIN_EST_RETURN  = 5                            # Min estimated return % (0 = no filter)
-MIN_PRICE       = 1.00                         # Exclude tickers priced below this
-MIN_AVG_VOLUME  = 50000                        # Exclude tickers with avg daily volume below this
+MIN_EST_RETURN  = 1                            # Min estimated return % (0 = no filter)
+MIN_PRICE       = 1.00                         # Exclude tickers priced below this (0 = show all)
+MIN_AVG_VOLUME  = 50000                        # Exclude tickers with avg daily volume below this (0 = show all)
 
 # ── Market Cap Filters ──
 # Tiers: mega=200B+  large=10B+  mid=2B+  small=300M+  micro=50M+  nano=1M+  none=no filter
@@ -99,8 +105,9 @@ W_CONFIRM    = 0.10                            # Timeframe confirmation (alignme
 W_ANNRET     = 0.15                            # Annualized return potential
 W_STATIONARY = 0.10                            # Spread stationarity (ADF tiebreaker)
 
+
 # ==========================================
-# LOAD MASTER TICKERS
+# TICKER METADATA
 # ==========================================
 TICKER_TYPES    = {}   # ticker -> "Pure ETF" | "Pure Stock"
 TICKER_NAMES    = {}   # ticker -> human-readable name
@@ -221,80 +228,6 @@ def load_master_tickers():
     return tickers
 
 
-# ==========================================
-# SAFE SAVE
-# ==========================================
-def safe_save(df, path):
-    tmp = path + ".tmp"
-    df.to_csv(tmp, compression='gzip')
-    os.replace(tmp, path)
-
-
-def _cache_mtime(path):
-    return os.path.getmtime(path) if os.path.exists(path) else None
-
-
-def _split_cache_cols(df):
-    stock_cols = [c for c in df.columns if TICKER_TYPES.get(c) == "Pure Stock"]
-    etf_cols = [c for c in df.columns if TICKER_TYPES.get(c) == "Pure ETF"]
-    return stock_cols, etf_cols
-
-
-def save_split_cache(df):
-    stock_cols, etf_cols = _split_cache_cols(df)
-    if stock_cols:
-        safe_save(df[stock_cols], STOCK_DATA_FILE)
-    if etf_cols:
-        safe_save(df[etf_cols], ETF_DATA_FILE)
-
-
-def trim_caches(master):
-    """Trim all cache files to only the data that's needed, removing old rows and stale tickers."""
-    master_set = set(master)
-
-    # ── Price cache: keep LOOKBACK_DAYS + 20% buffer ──
-    keep_days = int(LOOKBACK_DAYS * 1.2)
-    stock_set = {t for t in master_set if TICKER_TYPES.get(t) == "Pure Stock"}
-    etf_set   = {t for t in master_set if TICKER_TYPES.get(t) == "Pure ETF"}
-
-    def _trim_price_cache(path, allowed, label):
-        if not os.path.exists(path):
-            return
-        try:
-            df = pd.read_csv(path, index_col=0, parse_dates=True)
-            before = (df.shape[0], df.shape[1])
-            df = df[[c for c in df.columns if c in allowed]]
-            df = df.tail(keep_days)
-            if (df.shape[0], df.shape[1]) != before:
-                safe_save(df, path)
-                print(f"  Trimmed {label} prices: {before[0]}x{before[1]} → {df.shape[0]}x{df.shape[1]}")
-        except Exception:
-            pass
-
-    _trim_price_cache(STOCK_DATA_FILE, stock_set, "stock")
-    _trim_price_cache(ETF_DATA_FILE, etf_set, "etf")
-
-    # ── Chart cache: keep ADF_LOOKBACK_YRS window + 10% buffer ──
-    if os.path.exists(CHART_DATA_FILE):
-      try:
-        df = pd.read_csv(CHART_DATA_FILE, index_col=0, parse_dates=True)
-        before = (df.shape[0], df.shape[1])
-        keep_days = int(_chart_download_days() * 1.1)
-        df = df[[c for c in df.columns if c in master_set]]
-        df = df.tail(keep_days)
-        if (df.shape[0], df.shape[1]) != before:
-          tmp = CHART_DATA_FILE + ".tmp"
-          df.to_csv(tmp, compression='gzip')
-          os.replace(tmp, CHART_DATA_FILE)
-          print(f"  Trimmed chart data: {before[0]}x{before[1]} → {df.shape[0]}x{df.shape[1]}")
-      except Exception:
-        pass
-
-    # ── Volume cache: keep last 120 days ──
-    # Volume/market-cap caches removed (now sourced from CSV)
-
-    # ── Market cap cache: remove tickers no longer in master list ──
-    # (legacy cache cleanup removed)
 
 # ==========================================
 # LOAD CACHE
@@ -327,54 +260,6 @@ def load_combined_cache():
     return data
 
 
-# ==========================================
-# DOWNLOAD BATCH  (Close prices, or Volume)
-# ==========================================
-def download_batch(tickers, start_date, field="Close"):
-    clean = [t.replace("/", "-") for t in tickers]
-    max_retries = 3
-
-    for attempt in range(max_retries):
-        try:
-            df = yf.download(
-                clean,
-                start=start_date,
-                progress=False,
-                group_by="ticker",
-                auto_adjust=True,
-                threads=False,
-                timeout=20
-            )
-
-            if df is None or df.empty:
-                if attempt < max_retries - 1:
-                    time.sleep(5)
-                    continue
-                return pd.DataFrame()
-
-            result = pd.DataFrame()
-            for t in clean:
-                try:
-                    if isinstance(df.columns, pd.MultiIndex):
-                        if t in df.columns.levels[0]:
-                            result[t] = df[t][field]
-                    else:
-                        if not df[field].empty:
-                            result[t] = df[field]
-                except Exception as e:
-                    continue
-
-            return result
-
-        except Exception as e:
-            if attempt < max_retries - 1:
-                print(f"  Attempt {attempt+1} failed, retrying...")
-                time.sleep(5)
-            else:
-                print(f"  Batch failed after {max_retries} attempts: {e}")
-                return pd.DataFrame()
-    return pd.DataFrame()
-
 
 # ==========================================
 # ACTIVE TRADE SYMBOLS
@@ -397,184 +282,14 @@ def get_active_trade_symbols():
         return set()
 
 
-def _refresh_tickers(df, tickers, path):
-    """Force-download latest prices for specific tickers and merge into a cache file."""
-    if not tickers:
-        return df
-    # Use the last cached date (not +1) to re-fetch today's data without going into the future
-    today_str = df.index.max().strftime("%Y-%m-%d") if not df.empty else (datetime.now() - timedelta(days=5)).strftime("%Y-%m-%d")
-    print(f"  Refreshing {len(tickers)} trade tickers: {', '.join(sorted(tickers)[:10])}{'...' if len(tickers) > 10 else ''}")
-    # Preserve the cache file timestamp so trade refresh doesn't reset the cooldown
-    original_mtime = os.path.getmtime(path) if os.path.exists(path) else None
-    fresh = download_batch(list(tickers), today_str)
-    if not fresh.empty:
-        if df.empty:
-            df = fresh
-        else:
-            for col in fresh.columns:
-                if col in df.columns:
-                    df.loc[fresh.index, col] = fresh[col]
-                else:
-                    df[col] = fresh[col]
-        safe_save(df, path)
-        if original_mtime is not None:
-            os.utime(path, (original_mtime, original_mtime))
-    return df
-
-
-# ==========================================
-# DATA INTEGRITY CHECK
-# ==========================================
-_dropped_tickers = set()   # Tracks tickers dropped by validate_and_repair
-
-def validate_and_repair(df, label="data"):
-    """Ensure continuous trading-day index, fill gaps, and drop bad tickers."""
-    global _dropped_tickers
-    if df.empty:
-        return df
-
-    # 1. Build a proper trading-day calendar (business days, Mon-Fri)
-    full_idx = pd.bdate_range(start=df.index.min(), end=df.index.max())
-
-    # 2. Reindex to include any missing trading days
-    missing_days = full_idx.difference(df.index)
-    if len(missing_days) > 0:
-        print(f"  [{label}] Filling {len(missing_days)} missing trading days in index.")
-        df = df.reindex(full_idx)
-
-    # Snapshot actual available data (before filling) to enforce min trading days
-    non_na_counts = df.notna().sum()
-
-    # 3. Forward-fill gaps (carries last known price — standard for market data)
-    #    limit=10 covers holidays + long weekends; beyond that it's truly missing
-    df = df.ffill(limit=10)
-
-    # 4. Back-fill leading NaNs for tickers that started mid-dataset (limit=5)
-    df = df.bfill(limit=5)
-
-    # 5. Drop tickers with fewer than MIN_TRADING_DAYS actual data points
-    before_cols = set(df.columns)
-    keep_cols = [c for c in df.columns if non_na_counts.get(c, 0) >= MIN_TRADING_DAYS]
-    df = df[keep_cols]
-    dropped_cols = before_cols - set(df.columns)
-    if dropped_cols:
-        _dropped_tickers |= dropped_cols
-        print(f"  [{label}] Dropped {len(dropped_cols)} tickers with <{MIN_TRADING_DAYS} trading days.")
-
-    # 6. Drop any fully-empty rows that might remain
-    df = df.dropna(how="all")
-
-    return df
 
 
 # ==========================================
 # BUILD DATASET
 # ==========================================
 def build_dataset(master):
-    stock_master = [t for t in master if TICKER_TYPES.get(t) == "Pure Stock"]
-    etf_master   = [t for t in master if TICKER_TYPES.get(t) == "Pure ETF"]
-
     stock_df = load_cache(STOCK_DATA_FILE, label="Stock")
-    etf_df   = load_cache(ETF_DATA_FILE, label="ETF")
-
-    def _cache_age_hours(path):
-        mtime = _cache_mtime(path)
-        if mtime is None:
-            return None
-        return (datetime.now() - datetime.fromtimestamp(mtime)).total_seconds() / 3600
-
-    stock_age = _cache_age_hours(STOCK_DATA_FILE)
-    etf_age   = _cache_age_hours(ETF_DATA_FILE)
-
-    stock_fresh = (not stock_master) or (stock_age is not None and stock_age < CACHE_UPDATE_COOLDOWN_HOURS)
-    etf_fresh   = (not etf_master)   or (etf_age is not None and etf_age < CACHE_UPDATE_COOLDOWN_HOURS)
-
-    if (stock_fresh and etf_fresh) and (not stock_df.empty or not etf_df.empty):
-        ages = [a for a in [stock_age, etf_age] if a is not None]
-        max_age = max(ages) if ages else 0
-        print(f"--- Cache is fresh ({round(max_age, 2)}h old). Skipping download. ---")
-        # Force-refresh active trade symbols even when cache is fresh
-        trade_syms = get_active_trade_symbols()
-        if trade_syms:
-            stock_syms = [t for t in trade_syms if t in stock_df.columns]
-            etf_syms   = [t for t in trade_syms if t in etf_df.columns]
-            if stock_syms:
-                stock_df = _refresh_tickers(stock_df, stock_syms, STOCK_DATA_FILE)
-            if etf_syms:
-                etf_df = _refresh_tickers(etf_df, etf_syms, ETF_DATA_FILE)
-        data = pd.concat([df for df in (stock_df, etf_df) if not df.empty], axis=1)
-        data = data.loc[:, ~data.columns.duplicated()]
-        data = data[[c for c in data.columns if c in master]]
-        data = data.tail(LOOKBACK_DAYS)
-        data = validate_and_repair(data, label="prices")
-        return data
-
-    def _backfill_missing(df, missing, start, desc, path):
-        if not missing:
-            return df
-        total_batches = (len(missing) + BATCH_SIZE - 1) // BATCH_SIZE
-        pbar = tqdm(range(0, len(missing), BATCH_SIZE), total=total_batches, desc=desc)
-        for idx in pbar:
-            batch = missing[idx: idx + BATCH_SIZE]
-            pbar.set_postfix_str(batch[0], refresh=False)
-            batch_df = download_batch(batch, start)
-            if not batch_df.empty:
-                df = pd.concat([df, batch_df], axis=1)
-                df = df.loc[:, ~df.columns.duplicated()]
-                safe_save(df, path)
-            time.sleep(COOLDOWN)
-        return df
-
-    def _update_latest(df, desc, path):
-        if df.empty:
-            return df
-        last_date = df.index.max()
-        today = datetime.now().date()
-        if last_date.date() < today:
-            # Re-fetch from last_date (not +1) to avoid start>end in UTC-ahead timezones
-            start = last_date.strftime("%Y-%m-%d")
-            tickers_to_update = df.columns.tolist()
-            total_update_batches = (len(tickers_to_update) + BATCH_SIZE - 1) // BATCH_SIZE
-
-            new_rows = []
-            pbar = tqdm(range(0, len(tickers_to_update), BATCH_SIZE), total=total_update_batches, desc=desc)
-            for i, idx in enumerate(pbar):
-                batch = tickers_to_update[idx: idx + BATCH_SIZE]
-                pbar.set_postfix_str(batch[0], refresh=False)
-
-                batch_df = download_batch(batch, start)
-
-                # Market Closed Optimization: If the first batch is empty,
-                # no new data exists for today. Stop immediately.
-                if i == 0 and (batch_df is None or batch_df.empty):
-                    pbar.set_description(f"{desc} (market closed)")
-                    break
-
-                if not batch_df.empty:
-                    new_rows.append(batch_df)
-
-                time.sleep(COOLDOWN)
-            pbar.close()
-
-            if new_rows:
-                update_df = pd.concat(new_rows, axis=1)
-                df = pd.concat([df, update_df], axis=0)
-                df = df[~df.index.duplicated(keep="last")].sort_index()
-                safe_save(df, path)
-        return df
-
-    start = (datetime.now() - timedelta(days=LOOKBACK_DAYS)).strftime("%Y-%m-%d")
-    missing_stock = [t for t in stock_master if t not in stock_df.columns]
-    missing_etf   = [t for t in etf_master   if t not in etf_df.columns]
-
-    if missing_stock:
-        stock_df = _backfill_missing(stock_df, missing_stock, start, "Backfilling stock prices", STOCK_DATA_FILE)
-    if missing_etf:
-        etf_df = _backfill_missing(etf_df, missing_etf, start, "Backfilling ETF prices", ETF_DATA_FILE)
-
-    stock_df = _update_latest(stock_df, "Updating stock prices", STOCK_DATA_FILE)
-    etf_df   = _update_latest(etf_df,   "Updating ETF prices",   ETF_DATA_FILE)
-
+    etf_df = load_cache(ETF_DATA_FILE, label="ETF")
     data_frames = [df for df in (stock_df, etf_df) if not df.empty]
     data = pd.concat(data_frames, axis=1) if data_frames else pd.DataFrame()
     data = data.loc[:, ~data.columns.duplicated()]
@@ -592,86 +307,8 @@ def build_dataset(master):
 # BUILD EXTENDED CHART DATASET  (ADF_LOOKBACK_YRS-driven)
 # ==========================================
 def build_chart_dataset(master):
-    """Downloads chart Close data using an ADF_LOOKBACK_YRS-driven window.
-    Uses its own cache file so it does not interfere with scoring data."""
-    if os.path.exists(CHART_DATA_FILE):
-        try:
-            chart_data = pd.read_csv(CHART_DATA_FILE, index_col=0, parse_dates=True)
-            chart_data = chart_data.loc[:, ~chart_data.columns.duplicated()]
-            file_time  = os.path.getmtime(CHART_DATA_FILE)
-            hours_old  = (datetime.now() - datetime.fromtimestamp(file_time)).total_seconds() / 3600
-            if hours_old < CACHE_UPDATE_COOLDOWN_HOURS:
-                print(f"--- Chart cache fresh ({round(hours_old,2)}h). Skipping chart download. ---")
-                chart_data = chart_data[[c for c in chart_data.columns if c in master]]
-                return chart_data
-        except:
-            chart_data = pd.DataFrame()
-    else:
-        chart_data = pd.DataFrame()
-
-    existing = chart_data.columns.tolist() if not chart_data.empty else []
-    missing  = [t for t in master if t not in existing]
-    start    = (datetime.now() - timedelta(days=_chart_download_days())).strftime("%Y-%m-%d")
-
-    if missing:
-        total_batches = (len(missing) + BATCH_SIZE - 1) // BATCH_SIZE
-        pbar = tqdm(range(0, len(missing), BATCH_SIZE), total=total_batches, desc="Backfilling chart data")
-        for idx in pbar:
-            batch = missing[idx: idx + BATCH_SIZE]
-            pbar.set_postfix_str(batch[0], refresh=False)
-            batch_df = download_batch(batch, start, field="Close")
-            if not batch_df.empty:
-                chart_data = pd.concat([chart_data, batch_df], axis=1)
-                chart_data = chart_data.loc[:, ~chart_data.columns.duplicated()]
-            time.sleep(COOLDOWN)
-
-    # Save once after all batches (moved out of loop for performance)
-    if not chart_data.empty:
-        chart_data = chart_data.loc[:, ~chart_data.columns.duplicated()]
-        tmp = CHART_DATA_FILE + ".tmp"
-        chart_data.to_csv(tmp, compression='gzip')
-        os.replace(tmp, CHART_DATA_FILE)
-
-    if not chart_data.empty:
-        last_date = chart_data.index.max()
-        if last_date.date() < datetime.now().date():
-            # Re-fetch from last_date (not +1) to avoid start>end in UTC-ahead timezones
-            upd_start = last_date.strftime("%Y-%m-%d")
-            tickers_to_upd = chart_data.columns.tolist()
-            total_upd = (len(tickers_to_upd) + BATCH_SIZE - 1) // BATCH_SIZE
-
-            new_batches = []
-            pbar = tqdm(range(0, len(tickers_to_upd), BATCH_SIZE), total=total_upd, desc="Updating chart data")
-            for i, idx in enumerate(pbar):
-                batch = tickers_to_upd[idx: idx + BATCH_SIZE]
-                pbar.set_postfix_str(batch[0], refresh=False)
-
-                batch_df = download_batch(batch, upd_start, field="Close")
-
-                # Market Closed Optimization: If the first batch returns nothing,
-                # it's likely a weekend or holiday. Stop immediately.
-                if i == 0 and (batch_df is None or batch_df.empty):
-                    pbar.set_description("Updating chart data (market closed)")
-                    break
-
-                if not batch_df.empty:
-                    new_batches.append(batch_df)
-
-                time.sleep(COOLDOWN)
-            pbar.close()
-
-            if new_batches:
-                combined_new_data = pd.concat(new_batches, axis=1)
-                chart_data = pd.concat([chart_data, combined_new_data], axis=0)
-                chart_data = chart_data[~chart_data.index.duplicated(keep="last")].sort_index()
-                tmp = CHART_DATA_FILE + ".tmp"
-                chart_data.to_csv(tmp, compression='gzip')
-                os.replace(tmp, CHART_DATA_FILE)
-
-    # Final cleanup before returning.
-    # ffill(limit=5): bridges weekends/holidays (up to 5 trading-day gaps).
-    # NO bfill: a new ticker that only has 1 year of data must NOT have its
-    # first real price back-propagated into all earlier NaN rows.
+    """Load chart Close data from shared cache maintained by market_data_maintainer."""
+    chart_data = load_cache(CHART_DATA_FILE)
     chart_data = chart_data[[c for c in chart_data.columns if c in master]]
     chart_data = chart_data.tail(int(_chart_download_days() * 1.1))
     chart_data = validate_and_repair(chart_data, label="chart")
@@ -817,11 +454,11 @@ def compute_half_life(spread_series):
 def analyze_pair(pair):
     a, b = pair
 
-    cl = corr_long.loc[a, b]
+    cl = float(corr_long.loc[a, b])   # type: ignore[arg-type]
     if cl < MIN_CORR_FILTER:
         return None
 
-    cs = corr_short.loc[a, b]
+    cs = float(corr_short.loc[a, b])  # type: ignore[arg-type]
     corr_brk = cl - cs
 
     rp = perf[a] - perf[b]
@@ -870,8 +507,12 @@ def analyze_pair(pair):
         return None
 
     # ── Half-life of mean reversion (raw spread — tests the relationship itself) ──
+    full_spread = pd.Series(dtype=float)
     try:
-        full_spread = np.log(prices_raw[a].clip(lower=1e-10)) - np.log(prices_raw[b].clip(lower=1e-10))
+        full_spread = pd.Series(
+            np.log(prices_raw[a].clip(lower=1e-10).values) - np.log(prices_raw[b].clip(lower=1e-10).values),
+            index=prices_raw.index,
+        )
         hl = compute_half_life(full_spread)
     except Exception:
         hl = float('nan')
@@ -930,8 +571,16 @@ def analyze_pair(pair):
     # ── Annualized returns ──
     try:
         n_days = len(prices_raw)
-        ann_a  = round(((prices_raw[a].iloc[-1] / prices_raw[a].iloc[0]) ** (252 / n_days) - 1) * 100, 1)
-        ann_b  = round(((prices_raw[b].iloc[-1] / prices_raw[b].iloc[0]) ** (252 / n_days) - 1) * 100, 1)
+
+        def _ann_return(series):
+            start = float(series.iloc[0])
+            end = float(series.iloc[-1])
+            if n_days <= 0 or start <= 0 or not np.isfinite(start) or not np.isfinite(end):
+                return float('nan')
+            return round(((end / start) ** (252 / n_days) - 1) * 100, 1)
+
+        ann_a = _ann_return(prices_raw[a])
+        ann_b = _ann_return(prices_raw[b])
     except Exception:
         ann_a = ann_b = float('nan')
 
@@ -1104,15 +753,60 @@ def compute_rolling_coint(a, b, price_data, window=252, step=5):
     combined = pd.DataFrame({"a": p_a, "b": p_b}).dropna()
     if len(combined) < window:
         return [], []
-    log_a = np.log(combined["a"].clip(lower=1e-10)).values
-    log_b = np.log(combined["b"].clip(lower=1e-10)).values
+    log_a = np.log(combined["a"].clip(lower=1e-10).values)
+    log_b = np.log(combined["b"].clip(lower=1e-10).values)
     n = len(log_a)
     dates = []
     confs = []
-    for i in range(window, n, step):
+    min_obs = 50
+    for i in range(min_obs, n + 1, step):
+        start_idx = max(0, i - window)
+        la = log_a[start_idx:i]
+        lb = log_b[start_idx:i]
+        # OLS hedge ratio for this window
+        x_reg = np.column_stack([lb, np.ones(len(lb))])
+        if not np.all(np.isfinite(x_reg)) or not np.all(np.isfinite(la)):
+            continue
+        coef, _, _, _ = np.linalg.lstsq(x_reg, la, rcond=None)
+        spread = la - coef[0] * lb
+        if len(spread) < min_obs or not np.all(np.isfinite(spread)):
+            continue
+        p = adf_pvalue(spread)
+        conf = round(max(0.0, min(100.0, (1.0 - p) * 100)), 1)
+        dates.append(combined.index[i - 1].strftime("%Y-%m-%d"))
+        confs.append(conf)
+    return dates, confs
+
+
+def _select_pair_chart_source(a, b, src, pair_stats):
+    """Select chart window for a pair using configured chart-history mode."""
+    if src.empty:
+        return src
+
+    coint_years = max(1, int(pair_stats.get("CointYears", 1) or 1))
+    base_days = max(TRADING_DAYS_PER_YEAR, coint_years * TRADING_DAYS_PER_YEAR)
+    base_src = src.tail(base_days)
+
+    if CHART_HISTORY_MODE != "rolling_confidence":
+        return base_src
+
+    p_a = src[a].dropna()
+    p_b = src[b].dropna()
+    combined = pd.DataFrame({a: p_a, b: p_b}).dropna()
+    if len(combined) < TRADING_DAYS_PER_YEAR:
+        return base_src
+
+    log_a = np.log(combined[a].clip(lower=1e-10).values)
+    log_b = np.log(combined[b].clip(lower=1e-10).values)
+    n = len(log_a)
+    window = TRADING_DAYS_PER_YEAR
+    step = max(1, int(CHART_CONF_STEP_DAYS))
+
+    endpoints = []
+    flags = []
+    for i in range(window, n + 1, step):
         la = log_a[i - window:i]
         lb = log_b[i - window:i]
-        # OLS hedge ratio for this window
         x_reg = np.column_stack([lb, np.ones(len(lb))])
         if not np.all(np.isfinite(x_reg)) or not np.all(np.isfinite(la)):
             continue
@@ -1121,10 +815,31 @@ def compute_rolling_coint(a, b, price_data, window=252, step=5):
         if len(spread) < 50 or not np.all(np.isfinite(spread)):
             continue
         p = adf_pvalue(spread)
-        conf = round(max(0.0, min(100.0, (1.0 - p) * 100)), 1)
-        dates.append(combined.index[i - 1].strftime("%Y-%m-%d"))
-        confs.append(conf)
-    return dates, confs
+        conf = (1.0 - p)
+        endpoints.append(i - 1)
+        flags.append(conf >= ADF_CONFIDENCE)
+
+    if not flags:
+        return base_src
+
+    run_steps = 0
+    for ok in reversed(flags):
+        if ok:
+            run_steps += 1
+        else:
+            break
+
+    run_days = run_steps * step
+    if run_days < CHART_CONF_MIN_RUN_DAYS:
+        return base_src
+
+    start_ep_idx = len(endpoints) - run_steps
+    start_pos = endpoints[start_ep_idx]
+    conf_src = combined.iloc[start_pos:]
+    if len(conf_src) < 20:
+        return base_src
+
+    return conf_src
 
 
 def compute_price_history(a, b, price_data):
@@ -1502,18 +1217,18 @@ def compute_backtest(dates, z_vals, half_life, threshold, max_days=None):
     median_rd = sorted_rd[len(sorted_rd) // 2] if sorted_rd else None
 
     if n == 0:
-        return {"trades": [], "winRate": None, "avgRet": None, "avgDays": None, "numTrades": 0,
-                "revertPct": revert_pct, "medianDays": median_rd, "revertCount": nr}
+      return {"trades": [], "winRate": None, "avgRet": None, "avgDays": None, "numTrades": 0,
+          "revertPct": revert_pct, "medianDays": median_rd, "revertCount": nr}
     wins = sum(t["win"] for t in trades)
     return {
-        "trades": trades,
-        "winRate": round(wins / n * 100, 1),
-        "avgRet": round(sum(t["ret"] for t in trades) / n, 1),
-        "avgDays": round(sum(t["days"] for t in trades) / n, 0),
-        "numTrades": n,
-        "revertPct": revert_pct,
-        "medianDays": median_rd,
-        "revertCount": nr,
+      "trades": trades,
+      "winRate": round(wins / n * 100, 1),
+      "avgRet": round(sum(t["ret"] for t in trades) / n, 1),
+      "avgDays": round(sum(t["days"] for t in trades) / n, 0),
+      "numTrades": n,
+      "revertPct": revert_pct,
+      "medianDays": median_rd,
+      "revertCount": nr,
     }
 
 
@@ -1528,8 +1243,18 @@ def _compute_chart_for_pair(r):
     """Worker: compute Z-score/price chart history for one pair."""
     a, b = r["Pair"].split("/")
     try:
-        src = _w_chart_data if (not _w_chart_data.empty and a in _w_chart_data.columns and b in _w_chart_data.columns) else _w_scoring_data
-        src = src.tail(_chart_display_days())
+        src_chart = pd.DataFrame()
+        src_score = pd.DataFrame()
+        if not _w_chart_data.empty and a in _w_chart_data.columns and b in _w_chart_data.columns:
+          src_chart = _w_chart_data[[a, b]].dropna(how="all")
+        if not _w_scoring_data.empty and a in _w_scoring_data.columns and b in _w_scoring_data.columns:
+          src_score = _w_scoring_data[[a, b]].dropna(how="all")
+
+        # Use the source with the longer shared history so chart confidence matches stated cointegration years.
+        src = src_chart if len(src_chart) >= len(src_score) else src_score
+        if src.empty:
+          src = _w_scoring_data if not _w_scoring_data.empty else _w_chart_data
+        src = _select_pair_chart_source(a, b, src, r)
         hr = r.get("HedgeRatio", 1.0)
         dates, z_vals = compute_z_history(a, b, src, hedge_ratio=hr)
         # Snap the last chart point to match the authoritative stats Z value
@@ -1560,7 +1285,7 @@ def _compute_chart_for_pair(r):
         r["CointDates"] = coint_dates
         r["CointVals"]  = coint_vals
         # Backtest at multiple thresholds
-        BT_THRESHOLDS = [1.0, 1.5, 2.0, 2.5, 3.0]
+        BT_THRESHOLDS = [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5]
         BT_HOLD_DAYS  = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 90, 120]
         hl = r.get("HalfLife") or 50
 
@@ -2659,8 +2384,7 @@ if __name__ == "__main__":
     print("Building market cap dataset...")
     mcap_data = build_market_cap(TICKERS)
 
-    # Trim caches to prevent unbounded growth
-    trim_caches(TICKERS)
+    # Cache trimming is handled by market_data_maintainer.ensure_shared_data()
 
     valid = list(data.columns)
     pre_filter_count = len(valid)
@@ -2691,10 +2415,10 @@ if __name__ == "__main__":
     n_combos = len(valid) * (len(valid) - 1) // 2
     returns    = data.pct_change().dropna(how="all")
     data_safe  = data.clip(lower=1e-10)           # guard against log(0) or log(negative)
-    log_prices       = np.log(data_safe.tail(Z_LENGTH))
-    log_prices_short = np.log(data_safe.tail(Z_LENGTH_SHORT))
-    log_prices_long  = np.log(data_safe.tail(Z_LENGTH_LONG))
-    log_prices_full  = np.log(data_safe)          # full history for adaptive windowing
+    log_prices       = pd.DataFrame(np.log(data_safe.tail(Z_LENGTH)))
+    log_prices_short = pd.DataFrame(np.log(data_safe.tail(Z_LENGTH_SHORT)))
+    log_prices_long  = pd.DataFrame(np.log(data_safe.tail(Z_LENGTH_LONG)))
+    log_prices_full  = pd.DataFrame(np.log(data_safe))          # full history for adaptive windowing
     prices_raw = data
 
     corr_short = returns.tail(CORR_SHORT).corr()
@@ -3215,6 +2939,9 @@ if __name__ == "__main__":
         text-transform: uppercase; color: var(--muted); opacity: 0.5;
         min-width: 42px; white-space: nowrap;
       }}
+      .filter-row-label-spacer {{
+        opacity: 0;
+      }}
       .control-group {{
         display: flex; align-items: center; gap: 4px;
         background: var(--surface); border: 1px solid var(--border);
@@ -3662,18 +3389,21 @@ if __name__ == "__main__":
         <div class="control-group">
           <label>Coint Conf</label>
           <select id="cointConfFilter" onchange="applyFilters()">
-            <option value="0">All</option>
+            <option value="all" selected>All</option>
             <option value="90">90%+</option>
-            <option value="95" selected>95%+</option>
+            <option value="95">95%+</option>
             <option value="99">99%+</option>
           </select>
         </div>
+      </div>
+      <div class="filter-row">
+        <span class="filter-row-label filter-row-label-spacer">Signal</span>
         <div class="control-group">
           <label>Coint Years</label>
           <select id="cointYearsFilter" onchange="applyFilters()">
-            <option value="0">All</option>
+            <option value="0" selected>All</option>
             <option value="1">1 Year+</option>
-            <option value="2" selected>2 Year+</option>
+            <option value="2">2 Year+</option>
             <option value="3">3 Year+</option>
           </select>
         </div>
@@ -3738,8 +3468,8 @@ if __name__ == "__main__":
         <div class="control-group">
           <label>Per Page</label>
           <select id="perPage" onchange="changePerPage()">
-            <option value="25">25</option>
-            <option value="50" selected>50</option>
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
             <option value="100">100</option>
             <option value="200">200</option>
             <option value="0">All</option>
@@ -4527,7 +4257,7 @@ if __name__ == "__main__":
         + (md ? ` &middot; ${{md}}` : "")
         + '</div>';
       html += '<div style="font-family:var(--mono);font-size:10px;color:#64748b;margin-bottom:12px;">'
-        + `Entry: |Z| ≥ ${{th}}σ &nbsp;|&nbsp; Exit: |Z| ≤ 0.3σ (win) or timeout (loss) &nbsp;|&nbsp; ★ = best combo`
+        + `Grid uses fixed hold windows (10d-120d): entry |Z| ≥ threshold, exit on first |Z| ≤ 0.3σ (win) or forced exit at that window (loss); ★ = best threshold/hold combo`
         + '</div>';
 
       html += '<table style="width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px;">';
@@ -4748,7 +4478,7 @@ if __name__ == "__main__":
     // ─── SORT ─────────────────────────────────────────────────────────────────────
     // ─── PAGINATION ────────────────────────────────────────────────────────────
     let currentPage = 1;
-    let rowsPerPage = 50;
+    let rowsPerPage = 25;
 
     function changePerPage() {{
       rowsPerPage = parseInt(document.getElementById("perPage").value) || 0;
