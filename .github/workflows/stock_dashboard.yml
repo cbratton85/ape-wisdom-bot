@@ -7,7 +7,7 @@ on:
     - cron: '15 13-20 * * 1-5'
   
 concurrency:
-  group: market-hours-runner
+  group: stock-dashboard
   cancel-in-progress: false   # queue the new run; don't abort the one already writing data
   
 env:
