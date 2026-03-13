@@ -18,6 +18,10 @@ ETF_DATA_FILE = "etf_data.csv.gz"
 # ==========================================
 # Cache files
 CHART_DATA_FILE = "chart_data.csv.gz"
+CHART_OPEN_FILE = "chart_open_data.csv.gz"
+CHART_HIGH_FILE = "chart_high_data.csv.gz"
+CHART_LOW_FILE = "chart_low_data.csv.gz"
+CHART_VOLUME_FILE = "chart_volume_data.csv.gz"
 ETF_CSV_FILE = "ETFs.csv"
 STOCK_CSV_FILE = "STOCKS.csv"
 
@@ -334,6 +338,7 @@ def _backfill_missing(
     cooldown=DEFAULT_COOLDOWN_SECONDS,
     label="",
     use_threads=False,
+    field="Close",
 ):
     if not missing:
         tag = _status_tag(label, "backfill")
@@ -343,7 +348,7 @@ def _backfill_missing(
     desc = f"  Backfill {label}" if label else "  Backfill"
     with tqdm(total=len(missing), desc=desc, unit="ticker", ncols=80, file=sys.stdout) as bar:
         for batch in batches:
-            batch_df = _download_batch(batch, start_date, field="Close", use_threads=use_threads)
+            batch_df = _download_batch(batch, start_date, field=field, use_threads=use_threads)
             if not batch_df.empty:
                 df = pd.concat([df, batch_df], axis=1)
                 df = df.loc[:, ~df.columns.duplicated(keep="last")]  # fresh data wins
@@ -360,6 +365,7 @@ def _update_latest(
     cooldown=DEFAULT_COOLDOWN_SECONDS,
     label="",
     use_threads=False,
+    field="Close",
 ):
     if df.empty:
         return df
@@ -377,7 +383,7 @@ def _update_latest(
     desc = f"  Update  {label}" if label else "  Update"
     with tqdm(total=len(tickers), desc=desc, unit="ticker", ncols=80, file=sys.stdout) as bar:
         for i, batch in enumerate(batches):
-            batch_df = _download_batch(batch, start, field="Close", use_threads=use_threads)
+            batch_df = _download_batch(batch, start, field=field, use_threads=use_threads)
             if i == 0 and (batch_df is None or batch_df.empty):
                 bar.update(len(tickers))
                 break
@@ -484,19 +490,44 @@ def ensure_shared_data(
         _trim_cache(ETF_DATA_FILE, set(etfs), int(lookback_days * TRIM_BUFFER))
 
     if run_charts:
-        chart_df = load_cache(CHART_DATA_FILE)
         chart_days = max(1, int(chart_years)) * 365
         chart_min_rows = int(chart_days * MIN_HISTORY_COVERAGE)
         start_chart = (datetime.now() - timedelta(days=chart_days)).strftime("%Y-%m-%d")
+        chart_fields = [
+            ("Close", CHART_DATA_FILE, "Charts-Close"),
+            ("Open", CHART_OPEN_FILE, "Charts-Open "),
+            ("High", CHART_HIGH_FILE, "Charts-High "),
+            ("Low", CHART_LOW_FILE, "Charts-Low  "),
+            ("Volume", CHART_VOLUME_FILE, "Charts-Vol  "),
+        ]
 
-        def _needs_chart_backfill(ticker):
-            return ticker not in chart_df.columns or int(chart_df[ticker].notna().sum()) < chart_min_rows
+        for field_name, cache_path, cache_label in chart_fields:
+            chart_df = load_cache(cache_path)
 
-        missing = [t for t in all_tickers if _needs_chart_backfill(t)]
-        chart_df = _backfill_missing(chart_df, missing, start_chart, CHART_DATA_FILE, batch_size, cooldown, label="Charts")
-        chart_df = _update_latest(chart_df, CHART_DATA_FILE, batch_size, cooldown, label="Charts")
+            def _needs_chart_backfill(ticker):
+                return ticker not in chart_df.columns or int(chart_df[ticker].notna().sum()) < chart_min_rows
 
-        _trim_cache(CHART_DATA_FILE, set(all_tickers), int(chart_days * CHART_TRIM_BUFFER))
+            missing = [t for t in all_tickers if _needs_chart_backfill(t)]
+            chart_df = _backfill_missing(
+                chart_df,
+                missing,
+                start_chart,
+                cache_path,
+                field=field_name,
+                batch_size=batch_size,
+                cooldown=cooldown,
+                label=cache_label,
+            )
+            chart_df = _update_latest(
+                chart_df,
+                cache_path,
+                field=field_name,
+                batch_size=batch_size,
+                cooldown=cooldown,
+                label=cache_label,
+            )
+
+            _trim_cache(cache_path, set(all_tickers), int(chart_days * CHART_TRIM_BUFFER))
 
 
 # ==========================================
@@ -590,7 +621,14 @@ if __name__ == "__main__":
     )
 
     # Report final cache sizes
-    for label, path in [("Stocks", STOCK_DATA_FILE), ("ETFs", ETF_DATA_FILE), ("Charts", CHART_DATA_FILE)]:
+    chart_outputs = [
+        ("Charts-Close", CHART_DATA_FILE),
+        ("Charts-Open", CHART_OPEN_FILE),
+        ("Charts-High", CHART_HIGH_FILE),
+        ("Charts-Low", CHART_LOW_FILE),
+        ("Charts-Vol", CHART_VOLUME_FILE),
+    ]
+    for label, path in [("Stocks", STOCK_DATA_FILE), ("ETFs", ETF_DATA_FILE), *chart_outputs]:
         df = load_cache(path)
         if df.empty:
             print(f"  {label}: (empty)")

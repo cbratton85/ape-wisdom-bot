@@ -2,7 +2,11 @@ import argparse
 import os
 
 from market_data_maintainer import (
+    CHART_HIGH_FILE,
+    CHART_LOW_FILE,
+    CHART_OPEN_FILE,
     CHART_DATA_FILE,
+    CHART_VOLUME_FILE,
     DEFAULT_BATCH_SIZE,
     DEFAULT_CHART_YEARS,
     DEFAULT_COOLDOWN_SECONDS,
@@ -49,11 +53,19 @@ if __name__ == "__main__":
         run_charts=True,
     )
 
-    df = load_cache(CHART_DATA_FILE)
-    if df.empty:
-        print("  Charts: (empty)")
-    else:
-        size_mb = os.path.getsize(CHART_DATA_FILE) / 1_048_576 if os.path.exists(CHART_DATA_FILE) else 0
-        print(f"  Charts: {len(df.columns)} tickers, {len(df)} rows  ({size_mb:.1f} MB)")
+    outputs = [
+        ("Charts-Close", CHART_DATA_FILE),
+        ("Charts-Open", CHART_OPEN_FILE),
+        ("Charts-High", CHART_HIGH_FILE),
+        ("Charts-Low", CHART_LOW_FILE),
+        ("Charts-Vol", CHART_VOLUME_FILE),
+    ]
+    for label, path in outputs:
+        df = load_cache(path)
+        if df.empty:
+            print(f"  {label}: (empty)")
+        else:
+            size_mb = os.path.getsize(path) / 1_048_576 if os.path.exists(path) else 0
+            print(f"  {label}: {len(df.columns)} tickers, {len(df)} rows  ({size_mb:.1f} MB)")
 
     print("\nChart cache refresh done.")
