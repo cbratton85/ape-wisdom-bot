@@ -31138,5 +31138,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SOYB": {
+        "ticker": "SOYB",
+        "name": "Teucrium Soybean Fund ETV",
+        "meta": "Unknown",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FXLV": {
+        "ticker": "FXLV",
+        "name": "F45 Training Holdings Inc.",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 7801344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
+    },
+    "TITN": {
+        "ticker": "TITN",
+        "name": "Titan Machinery Inc.",
+        "meta": "Industrial Distribution",
+        "type": "EQUITY",
+        "mcap": 392432288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SIBN": {
+        "ticker": "SIBN",
+        "name": "SI-BONE, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 584748416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
