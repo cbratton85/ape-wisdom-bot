@@ -31178,5 +31178,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "RYTM": {
+        "ticker": "RYTM",
+        "name": "Rhythm Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 5983135232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "TCX": {
+        "ticker": "TCX",
+        "name": "Tucows Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 176885440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
