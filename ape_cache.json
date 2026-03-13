@@ -31098,5 +31098,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ASPN": {
+        "ticker": "ASPN",
+        "name": "Aspen Aerogels, Inc.",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 296703008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RLX": {
+        "ticker": "RLX",
+        "name": "RLX Technology Inc.",
+        "meta": "Tobacco",
+        "type": "EQUITY",
+        "mcap": 2886535936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
