@@ -106,8 +106,8 @@ jobs:
           subprocess.run([sys.executable, str(script)], check=True, cwd=str(script.parent))
           PY
 
-      - name: Run pairs scanner and prepare html
-        if: steps.market_window.outputs.run_now == 'true' || github.event_name == 'workflow_dispatch'
+      - name: Run pairs scanner and prepare html (manual only)
+        if: github.event_name == 'workflow_dispatch'
         run: |
           python - <<'PY'
           import gzip
@@ -162,7 +162,7 @@ jobs:
           PY
 
       - name: Commit and push scanner html
-        if: steps.market_window.outputs.run_now == 'true' || github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch'
         run: |
           if git ls-files --error-unmatch public/index.html >/dev/null 2>&1; then
             git checkout -- public/index.html
@@ -190,13 +190,13 @@ jobs:
           exit 1
 
       - name: Prepare gh-pages payload (scanner)
-        if: steps.market_window.outputs.run_now == 'true' || github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch'
         run: |
           mkdir -p .pages-publish
           cp pairs_scanner.html .pages-publish/pairs_scanner.html
 
       - name: Deploy scanner to gh-pages
-        if: steps.market_window.outputs.run_now == 'true' || github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
