@@ -6,6 +6,9 @@ on:
     # Every hour on weekdays (UTC). A random delay below spreads it within the hour.
     - cron: "0 * * * 1-5"
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   run-market-task:
     runs-on: ubuntu-latest
@@ -64,4 +67,5 @@ jobs:
       - name: Skip notice
         if: steps.market_window.outputs.run_now != 'true'
         run: echo "Outside US market hours; skipped."
+
 
