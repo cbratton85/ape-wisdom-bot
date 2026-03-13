@@ -4,6 +4,7 @@ import os
 import sys
 import time
 import json
+import gzip
 import webbrowser
 import importlib
 from datetime import datetime, timedelta
@@ -45,6 +46,7 @@ BATCH_SIZE      = 40
 COOLDOWN        = 1.5
 LOOKBACK_DAYS   = 400
 OUTPUT_FILE     = "stock_dashboard.html"
+COMPRESS_HTML_OUTPUT = True
 REFRESH_DATA_BEFORE_SCAN = False  # Keep dashboard read-only unless explicitly enabled.
 
 # Scan/filter tuning
@@ -204,6 +206,17 @@ def safe_save(df, path):
     tmp = path + ".tmp"
     df.to_csv(tmp, compression='gzip')
     os.replace(tmp, path)
+
+def write_dashboard_output(html, out_path):
+  with open(out_path, "w", encoding="utf-8") as f:
+    f.write(html)
+
+  gz_path = None
+  if COMPRESS_HTML_OUTPUT:
+    gz_path = out_path + ".gz"
+    with gzip.open(gz_path, "wb") as f:
+      f.write(html.encode("utf-8"))
+  return gz_path
 
 
 def load_gekko_scores(path=GEKKO_SCREENER_FILE):
@@ -1640,12 +1653,13 @@ def main():
           html = build_full_html([row])
           p.update(1)
           out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"stock_dashboard_{symbol}.html")
-          with open(out_path, "w", encoding="utf-8") as f:
-            f.write(html)
+          gz_path = write_dashboard_output(html, out_path)
           p.update(1)
           webbrowser.open(f"file:///{out_path.replace(os.sep, '/')}")
           p.update(1)
         print(f"\nDashboard: {out_path}")
+        if gz_path:
+            print(f"Compressed dashboard: {gz_path}")
         return
     # â”€â”€ TABLE MODE: Batch scan all tickers from cache â”€â”€
     print("\n=== Loading price caches ===")
@@ -1710,14 +1724,16 @@ def main():
       html = build_full_html(results)
       p.update(1)
       out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), OUTPUT_FILE)
-      with open(out_path, "w", encoding="utf-8") as f:
-        f.write(html)
+      gz_path = write_dashboard_output(html, out_path)
       p.update(1)
       webbrowser.open(f"file:///{out_path.replace(os.sep, '/')}")
       p.update(1)
 
     size_mb = os.path.getsize(out_path) / 1e6
     print(f"Dashboard saved: {out_path} ({size_mb:.1f}MB)")
+    if gz_path:
+      size_gz_mb = os.path.getsize(gz_path) / 1e6
+      print(f"Compressed: {gz_path} ({size_gz_mb:.1f}MB)")
 
 
 if __name__ == "__main__":

@@ -22,6 +22,7 @@ TRADES_FILE      = "active_trades.json"        # Active trade tracker
 OUTPUT_FILE      = "pairs_scanner.html"
 COMPRESS_HTML    = True                        # Write .html.gz (recommended for GitHub size limits)
 WRITE_PLAIN_HTML = False                       # Write uncompressed HTML too
+GEKKO_SCREENER_FILE = "gekko_screener.csv"    # Optional GI source for per-symbol score display
 
 # ── Runtime / Processing ──
 NUM_WORKERS = max(1, (mp.cpu_count() or 2) - 0)  # CPU cores for parallel pair analysis (leave 1 free)
@@ -120,6 +121,7 @@ TICKER_SUBIND2  = {}   # ticker -> sub-industry (col 5, stocks only)
 TICKER_CSV_MCAP = {}   # ticker -> market cap / AUM from CSV
 TICKER_CSV_VOL  = {}   # ticker -> avg 10-day volume from CSV
 ETF_LEV_TYPES   = {}   # ticker -> type tag (see _ETF_TYPE_MAP values)
+GEKKO_SCORE_MAP = {}   # ticker -> GI score (0-100), optional
 
 def _parse_mcap_str(s):
     import re
@@ -261,6 +263,46 @@ def load_combined_cache():
     data = data.loc[:, ~data.columns.duplicated()]
     print("Combined cache ready.")
     return data
+
+
+def load_gekko_scores(path=GEKKO_SCREENER_FILE):
+  """Load ticker -> GI score from local Gekko screener export CSV."""
+  if not os.path.exists(path):
+    print(f"Gekko GI file not found: {path} (continuing without GI badges)")
+    return {}
+
+  try:
+    df = pd.read_csv(path)
+  except Exception as e:
+    print(f"Failed to read {path}: {e} (continuing without GI badges)")
+    return {}
+
+  if "ticker" not in df.columns or "gi_score" not in df.columns:
+    print(f"{path} missing columns ticker/gi_score (continuing without GI badges)")
+    return {}
+
+  out = {}
+  for _, row in df.iterrows():
+    t = str(row.get("ticker", "")).strip().upper()
+    if not t:
+      continue
+
+    raw_gi = row.get("gi_score")
+    if raw_gi is None:
+      continue
+
+    try:
+      g = float(raw_gi)
+    except (TypeError, ValueError):
+      continue
+
+    if np.isnan(g):
+      continue
+
+    out[t] = max(0.0, min(100.0, g))
+
+  print(f"Loaded {len(out)} Gekko GI scores from {path}")
+  return out
 
 
 
@@ -1528,6 +1570,30 @@ def generate_trades_page(trades):
     def trade_card(t):
         pair = t.get("pair", "?")
         a, b = pair.split("/") if "/" in pair else (pair, "?")
+        gi_a = t.get("giA")
+        gi_b = t.get("giB")
+        if gi_a is None:
+            gi_a = GEKKO_SCORE_MAP.get(a)
+        if gi_b is None:
+            gi_b = GEKKO_SCORE_MAP.get(b)
+
+        def _gi_chip(v):
+            if v is None:
+                return '<span class="tc-gi tc-gi-na">GI —</span>'
+            if v >= 75:
+                cls = "tc-gi-strong"
+            elif v >= 60:
+                cls = "tc-gi-accum"
+            elif v >= 43:
+                cls = "tc-gi-neutral"
+            elif v >= 28:
+                cls = "tc-gi-dist"
+            else:
+                cls = "tc-gi-heavy"
+            return f'<span class="tc-gi {cls}">GI {v:.1f}</span>'
+
+        gi_badge_a = _gi_chip(gi_a)
+        gi_badge_b = _gi_chip(gi_b)
         direction = t.get("direction", "")
         if direction == "short_a_long_b":
             dir_label = f"Short {a} / Long {b}"
@@ -1617,11 +1683,11 @@ def generate_trades_page(trades):
               <div class="tc-val {pnl_class}">{pnl:+.1f}%</div>
             </div>
             <div class="tc-stat tc-prices">
-              <div class="tc-label">{a} <span style="color:var(--cyan);font-size:9px;">{'-' if direction == 'short_a_long_b' else '+'}{shares_a} shares</span></div>
+              <div class="tc-label">{a} {gi_badge_a} <span style="color:var(--cyan);font-size:9px;">{'-' if direction == 'short_a_long_b' else '+'}{shares_a} shares</span></div>
               <div class="tc-val">${entry_pa:.2f} &rarr; ${cur_pa:.2f} <span class="{chg_a_class}">{chg_a:+.1f}%</span></div>
             </div>
             <div class="tc-stat tc-prices">
-              <div class="tc-label">{b} <span style="color:var(--cyan);font-size:9px;">{'+' if direction == 'short_a_long_b' else '-'}{shares_b} shares</span></div>
+              <div class="tc-label">{b} {gi_badge_b} <span style="color:var(--cyan);font-size:9px;">{'+' if direction == 'short_a_long_b' else '-'}{shares_b} shares</span></div>
               <div class="tc-val">${entry_pb:.2f} &rarr; ${cur_pb:.2f} <span class="{chg_b_class}">{chg_b:+.1f}%</span></div>
             </div>
             <div class="tc-stat">
@@ -1777,6 +1843,13 @@ def generate_trades_page(trades):
   .tc-body {{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }}
   .tc-stat {{ }}
   .tc-label {{ font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }}
+  .tc-gi {{ display:inline-block; margin:0 4px 0 6px; padding:1px 5px; border-radius:4px; font-size:9px; font-weight:700; letter-spacing:0.04em; text-transform:none; }}
+  .tc-gi-strong {{ background: rgba(34,197,94,0.18); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }}
+  .tc-gi-accum {{ background: rgba(74,222,128,0.18); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }}
+  .tc-gi-neutral {{ background: rgba(245,158,11,0.16); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }}
+  .tc-gi-dist {{ background: rgba(249,115,22,0.16); color: #f97316; border: 1px solid rgba(249,115,22,0.3); }}
+  .tc-gi-heavy {{ background: rgba(239,68,68,0.16); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }}
+  .tc-gi-na {{ background: rgba(100,116,139,0.16); color: var(--muted); border: 1px solid rgba(100,116,139,0.28); }}
   .tc-val {{ font-size: 14px; font-weight: 600; color: #e2e8f0; }}
   .tc-prices .tc-val {{ font-size: 11px; }}
   .pnl-pos {{ color: var(--green) !important; }}
@@ -1798,6 +1871,11 @@ def generate_trades_page(trades):
   .action-btn:hover {{ background: rgba(56,189,248,0.2); border-color: var(--cyan); }}
   .action-btn.red {{ color: var(--red); border-color: rgba(239,68,68,0.25); background: rgba(239,68,68,0.08); }}
   .action-btn.red:hover {{ background: rgba(239,68,68,0.2); border-color: var(--red); }}
+  .gi-legend {{
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+    margin: 8px 0 14px; font-size: 10px; color: var(--muted);
+  }}
+  .gi-legend .gi-label {{ letter-spacing: 0.08em; text-transform: uppercase; margin-right: 2px; }}
 
   .footer {{ text-align: center; padding: 20px; font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 30px; }}
 </style>
@@ -1821,6 +1899,16 @@ def generate_trades_page(trades):
     </label>
     <button class="action-btn red" onclick="if(confirm('Close ALL open trades?'))closeAllTrades()">Close All</button>
     <span style="margin-left:auto;font-size:11px;color:var(--muted);">Last updated: <span id="update-time"></span></span>
+  </div>
+
+  <div class="gi-legend">
+    <span class="gi-label">GI Legend</span>
+    <span class="tc-gi tc-gi-strong">75+ Strong</span>
+    <span class="tc-gi tc-gi-accum">60-74 Accum</span>
+    <span class="tc-gi tc-gi-neutral">43-59 Neutral</span>
+    <span class="tc-gi tc-gi-dist">28-42 Dist</span>
+    <span class="tc-gi tc-gi-heavy">&lt;28 Heavy</span>
+    <span class="tc-gi tc-gi-na">No GI</span>
   </div>
 
   <div class="section-label">Open Trades ({len(open_trades)})</div>
@@ -2143,6 +2231,7 @@ document.addEventListener("keydown", e => {{ if (e.key === "Escape") closeTradeC
 
 <script>
 const TRADES_INIT = {json.dumps(trades, default=str)};
+const GI_MAP = {json.dumps(GEKKO_SCORE_MAP)};
 
 function loadTrades() {{
   const local = JSON.parse(localStorage.getItem("activeTrades") || "[]");
@@ -2191,6 +2280,16 @@ function renderTrades() {{
 
   const makeCard = (t) => {{
     const [a, b] = t.pair.split("/");
+    const giA = (t.giA !== undefined && t.giA !== null) ? Number(t.giA) : (GI_MAP[a] ?? null);
+    const giB = (t.giB !== undefined && t.giB !== null) ? Number(t.giB) : (GI_MAP[b] ?? null);
+    const giChip = (v) => {{
+      if (v === null || Number.isNaN(v)) return '<span class="tc-gi tc-gi-na">GI —</span>';
+      if (v >= 75) return `<span class="tc-gi tc-gi-strong">GI ${{v.toFixed(1)}}</span>`;
+      if (v >= 60) return `<span class="tc-gi tc-gi-accum">GI ${{v.toFixed(1)}}</span>`;
+      if (v >= 43) return `<span class="tc-gi tc-gi-neutral">GI ${{v.toFixed(1)}}</span>`;
+      if (v >= 28) return `<span class="tc-gi tc-gi-dist">GI ${{v.toFixed(1)}}</span>`;
+      return `<span class="tc-gi tc-gi-heavy">GI ${{v.toFixed(1)}}</span>`;
+    }};
     const dir = t.direction === "short_a_long_b" ? `Short ${{a}} / Long ${{b}}` : `Long ${{a}} / Short ${{b}}`;
     const dirClass = t.direction === "short_a_long_b" ? "dir-short" : "dir-long";
     const progress = Math.abs(t.entryZ) > 0 ? Math.min(100, (1 - Math.abs(t.currentZ) / Math.abs(t.entryZ)) * 100) : 0;
@@ -2232,8 +2331,8 @@ function renderTrades() {{
         <div class="tc-stat"><div class="tc-label">Entry Z</div><div class="tc-val">${{t.entryZ >= 0 ? "+" : ""}}${{t.entryZ.toFixed(2)}}&sigma;</div></div>
         <div class="tc-stat"><div class="tc-label">Current Z</div><div class="tc-val" style="color:${{zColor}}">${{t.currentZ >= 0 ? "+" : ""}}${{t.currentZ.toFixed(2)}}&sigma;</div></div>
         <div class="tc-stat"><div class="tc-label">Est P&L</div><div class="tc-val ${{pnlClass}}">${{pnl >= 0 ? "+" : ""}}${{pnl.toFixed(1)}}%</div></div>
-        <div class="tc-stat tc-prices"><div class="tc-label">${{a}} <span style="color:var(--cyan);font-size:9px;">${{t.direction === "short_a_long_b" ? "-" : "+"}}${{sA}} shares</span></div><div class="tc-val">$${{t.entryPriceA.toFixed(2)}} &rarr; $${{t.currentPriceA.toFixed(2)}} <span class="${{chgAClass}}">${{chgA >= 0 ? "+" : ""}}${{chgA.toFixed(1)}}%</span></div></div>
-        <div class="tc-stat tc-prices"><div class="tc-label">${{b}} <span style="color:var(--cyan);font-size:9px;">${{t.direction === "short_a_long_b" ? "+" : "-"}}${{sB}} shares</span></div><div class="tc-val">$${{t.entryPriceB.toFixed(2)}} &rarr; $${{t.currentPriceB.toFixed(2)}} <span class="${{chgBClass}}">${{chgB >= 0 ? "+" : ""}}${{chgB.toFixed(1)}}%</span></div></div>
+        <div class="tc-stat tc-prices"><div class="tc-label">${{a}} ${{giChip(giA)}} <span style="color:var(--cyan);font-size:9px;">${{t.direction === "short_a_long_b" ? "-" : "+"}}${{sA}} shares</span></div><div class="tc-val">$${{t.entryPriceA.toFixed(2)}} &rarr; $${{t.currentPriceA.toFixed(2)}} <span class="${{chgAClass}}">${{chgA >= 0 ? "+" : ""}}${{chgA.toFixed(1)}}%</span></div></div>
+        <div class="tc-stat tc-prices"><div class="tc-label">${{b}} ${{giChip(giB)}} <span style="color:var(--cyan);font-size:9px;">${{t.direction === "short_a_long_b" ? "+" : "-"}}${{sB}} shares</span></div><div class="tc-val">$${{t.entryPriceB.toFixed(2)}} &rarr; $${{t.currentPriceB.toFixed(2)}} <span class="${{chgBClass}}">${{chgB >= 0 ? "+" : ""}}${{chgB.toFixed(1)}}%</span></div></div>
         <div class="tc-stat"><div class="tc-label">$ P&L</div><div class="tc-val ${{dollarClass}}">${{dollarPnl >= 0 ? "+":""}}$${{Math.abs(dollarPnl).toFixed(0)}}</div></div>
       </div>
       <div class="tc-progress">
@@ -2428,6 +2527,7 @@ window.addEventListener("DOMContentLoaded", () => {{
 # MAIN EXECUTION
 # ==========================================
 if __name__ == "__main__":
+    GEKKO_SCORE_MAP = load_gekko_scores(GEKKO_SCREENER_FILE)
     TICKERS = load_master_tickers()
     data = build_dataset(TICKERS)
 
@@ -2728,6 +2828,27 @@ if __name__ == "__main__":
         tip_a = _info_tip(a)
         tip_b = _info_tip(b)
 
+        gi_a = GEKKO_SCORE_MAP.get(a)
+        gi_b = GEKKO_SCORE_MAP.get(b)
+
+        def _gi_badge(v):
+          if v is None:
+            return '<span class="gi-pill gi-na" title="GI unavailable">GI —</span>'
+          if v >= 75:
+            cls = "gi-strong"
+          elif v >= 60:
+            cls = "gi-accum"
+          elif v >= 43:
+            cls = "gi-neutral"
+          elif v >= 28:
+            cls = "gi-dist"
+          else:
+            cls = "gi-heavy"
+          return f'<span class="gi-pill {cls}" title="Gekko GI {v:.1f}">GI {v:.1f}</span>'
+
+        gi_badge_a = _gi_badge(gi_a)
+        gi_badge_b = _gi_badge(gi_b)
+
         price_a    = round(data[a].iloc[-1], 2)
         price_b    = round(data[b].iloc[-1], 2)
         avgvol_a   = round(vol_avg.get(a, 0))
@@ -2875,9 +2996,9 @@ if __name__ == "__main__":
           <td class="pair-cell">
             <div class="pair-names">
               <div class="pair-ticker-row">
-                <span class="ticker-a" title="{tip_a}">{a}</span>{badge_a}
+                <span class="ticker-a" title="{tip_a}">{a}</span>{gi_badge_a}{badge_a}
                 <span class="pair-sep">/</span>
-                <span class="ticker-b" title="{tip_b}">{b}</span>{badge_b}
+                <span class="ticker-b" title="{tip_b}">{b}</span>{gi_badge_b}{badge_b}
                 <span class="{cat_class} cat-badge">{r['Category'].replace('Pure ', '')}</span>
               </div>
               <div class="pair-fullnames">
@@ -2939,6 +3060,7 @@ if __name__ == "__main__":
           <td class="track-cell">
             <button class="track-btn" onclick="trackTrade(this)"
               data-pair="{r['Pair']}" data-z="{z}" data-price-a="{price_a}" data-price-b="{price_b}"
+              data-gi-a="{'' if gi_a is None else f'{gi_a:.1f}'}" data-gi-b="{'' if gi_b is None else f'{gi_b:.1f}'}"
               data-direction="{'short_a_long_b' if z > 0 else 'long_a_short_b' if z < 0 else 'neutral'}"
               data-hedge-ratio="{r.get('HedgeRatio', 1.0)}"
               data-spread-mean="{r.get('SpreadMean', 0)}" data-spread-std="{r.get('SpreadStd', 0)}"
@@ -3164,6 +3286,14 @@ if __name__ == "__main__":
       .type-inv    {{ background: rgba(239,68,68,0.12);  color: #f87171; border: 1px solid rgba(239,68,68,0.3);  }}
       .type-levinv {{ background: rgba(239,68,68,0.2);   color: #fca5a5; border: 1px solid rgba(239,68,68,0.5); }}
       .type-etn    {{ background: rgba(167,139,250,0.12); color: #c4b5fd; border: 1px solid rgba(167,139,250,0.3); }}
+      .gi-pill {{ display: inline-block; font-family: var(--mono); font-size: 8px; font-weight: 700;
+        letter-spacing: 0.04em; padding: 1px 4px; border-radius: 3px; vertical-align: middle; }}
+      .gi-strong {{ background: rgba(34,197,94,0.18); color: #22c55e; border: 1px solid rgba(34,197,94,0.32); }}
+      .gi-accum {{ background: rgba(74,222,128,0.16); color: #4ade80; border: 1px solid rgba(74,222,128,0.30); }}
+      .gi-neutral {{ background: rgba(245,158,11,0.16); color: #f59e0b; border: 1px solid rgba(245,158,11,0.30); }}
+      .gi-dist {{ background: rgba(249,115,22,0.16); color: #f97316; border: 1px solid rgba(249,115,22,0.30); }}
+      .gi-heavy {{ background: rgba(239,68,68,0.16); color: #ef4444; border: 1px solid rgba(239,68,68,0.30); }}
+      .gi-na {{ background: rgba(100,116,139,0.16); color: #94a3b8; border: 1px solid rgba(100,116,139,0.30); }}
 
       .score-cell {{ min-width: 0; white-space: nowrap; }}
       .score-bar-wrap {{ display: flex; flex-direction: column; gap: 3px; }}
@@ -3611,6 +3741,13 @@ if __name__ == "__main__":
         <span class="leg-dot" style="background:var(--red)"></span>Short A / Long B &nbsp;
         <span class="leg-dot" style="background:var(--green)"></span>Long A / Short B &nbsp;
         <span class="leg-dot" style="background:var(--muted)"></span>Neutral
+        &nbsp;&middot;&nbsp;
+        <span class="gi-pill gi-strong">GI 75+</span>
+        <span class="gi-pill gi-accum">GI 60+</span>
+        <span class="gi-pill gi-neutral">GI 43+</span>
+        <span class="gi-pill gi-dist">GI 28+</span>
+        <span class="gi-pill gi-heavy">GI &lt;28</span>
+        <span class="gi-pill gi-na">GI —</span>
       </div>
       <div>
         Score = {int(W_ZSCORE*100)}% |Z| + {int(W_HALFLIFE*100)}% HL Speed + {int(W_CONFIRM*100)}% Confirm + {int(W_ANNRET*100)}% AnnRet + {int(W_STATIONARY*100)}% Coint + {int(W_BACKTEST*100)}% Backtest
@@ -4728,6 +4865,10 @@ if __name__ == "__main__":
       const hedgeRatio = parseFloat(btn.dataset.hedgeRatio) || 1.0;
       const spreadMean = parseFloat(btn.dataset.spreadMean) || 0;
       const spreadStd  = parseFloat(btn.dataset.spreadStd) || 0;
+      const giAData = btn.dataset.giA;
+      const giBData = btn.dataset.giB;
+      const giA = giAData === "" || giAData === undefined ? null : parseFloat(giAData);
+      const giB = giBData === "" || giBData === undefined ? null : parseFloat(giBData);
       // Calculate shares using hedge ratio: $A leg, then $B = hedgeRatio * $A
       const capital = parseFloat(document.getElementById("capitalInput").value) || 0;
       const legA = capital / (1 + hedgeRatio);
@@ -4752,6 +4893,8 @@ if __name__ == "__main__":
         hedgeRatio: hedgeRatio,
         spreadMean: spreadMean,
         spreadStd: spreadStd,
+        giA: (Number.isFinite(giA) ? giA : null),
+        giB: (Number.isFinite(giB) ? giB : null),
         daysHeld: 0,
         status: "open",
       }};
