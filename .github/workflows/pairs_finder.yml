@@ -1,4 +1,4 @@
-name: Pairs Finder
+name: Pairs Finder Weekly
 
 on:
   workflow_dispatch:
@@ -136,13 +136,28 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add pairs_finder.html
           git add public/pairs_finder.html
-          git add pairs_watchlist.html 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "No HTML changes to commit."
             exit 0
           fi
           git commit -m "chore: update weekly pairs finder html"
           git push
+
+      - name: Prepare gh-pages payload
+        if: steps.sunday_window.outputs.run_now == 'true' || github.event_name == 'workflow_dispatch'
+        run: |
+          mkdir -p .pages-publish
+          cp pairs_finder.html .pages-publish/pairs_finder.html
+
+      - name: Deploy pairs finder to gh-pages
+        if: steps.sunday_window.outputs.run_now == 'true' || github.event_name == 'workflow_dispatch'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./.pages-publish
+          keep_files: true
+          commit_message: "chore: publish pairs_finder.html"
 
       - name: Skip notice
         if: steps.sunday_window.outputs.run_now != 'true' && github.event_name != 'workflow_dispatch'
