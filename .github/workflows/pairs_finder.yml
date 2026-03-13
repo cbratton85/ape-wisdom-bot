@@ -6,6 +6,9 @@ on:
     # Weekly Sunday evening window (UTC). 23:00 UTC is Sunday evening in ET during DST.
     - cron: "0 23 * * 0"
 
+permissions:
+  contents: write
+
 jobs:
   run-pairs-finder:
     runs-on: ubuntu-latest
@@ -76,6 +79,7 @@ jobs:
               raise SystemExit(1)
 
           print(f"Using finder script: {script_path}")
+          script_dir = script_path.parent
 
           def sha256(p: pathlib.Path):
             if not p.exists():
@@ -96,6 +100,26 @@ jobs:
 
           try:
             subprocess.run([sys.executable, str(script_path)], check=True, cwd=str(script_path.parent))
+
+            # Publish target for GitHub Pages project URL:
+            # https://cbratton85.github.io/ape-wisdom-bot/pairs_finder.html
+            finder_out = script_dir / "pairs_watchlist.html"
+            if not finder_out.exists():
+              finder_out = script_dir / "pairs_finder.html"
+            if not finder_out.exists():
+              print("Finder output HTML not found after run.")
+              raise SystemExit(1)
+
+            publish_target_root = repo_root / "pairs_finder.html"
+            shutil.copy2(finder_out, publish_target_root)
+            print(f"Published finder HTML to {publish_target_root}")
+
+            # Keep a mirrored copy in /public for repos that deploy that directory.
+            public_dir = repo_root / "public"
+            if public_dir.exists():
+              publish_target_public = public_dir / "pairs_finder.html"
+              shutil.copy2(finder_out, publish_target_public)
+              print(f"Mirrored finder HTML to {publish_target_public}")
           finally:
             after = sha256(index_path)
             if before != after and backup_path.exists():
@@ -104,6 +128,21 @@ jobs:
             if backup_path.exists():
               backup_path.unlink()
           PY
+
+      - name: Commit and push published HTML
+        if: steps.sunday_window.outputs.run_now == 'true' || github.event_name == 'workflow_dispatch'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pairs_finder.html
+          git add public/pairs_finder.html
+          git add pairs_watchlist.html 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No HTML changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: update weekly pairs finder html"
+          git push
 
       - name: Skip notice
         if: steps.sunday_window.outputs.run_now != 'true' && github.event_name != 'workflow_dispatch'
