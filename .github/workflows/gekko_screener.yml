@@ -3,7 +3,8 @@ name: Run Gekko Screener
 on:
   workflow_dispatch:
   schedule:
-    - cron: "30 22 * * 1-5"
+    # Every 30 minutes on weekdays (UTC). Runtime gate below enforces ET window.
+    - cron: "5,35 * * * 1-5"
 
 permissions:
   contents: write
@@ -35,7 +36,35 @@ jobs:
             pip install pandas requests
           fi
 
+      - name: Check ET market-hours window
+        id: market_window
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          python - <<'PY'
+          from datetime import datetime, time
+          from zoneinfo import ZoneInfo
+          import os
+
+          now = datetime.now(ZoneInfo("America/New_York"))
+          is_weekday = now.weekday() < 5
+          # Market session + one hour after close.
+          in_window = time(9, 30) <= now.time() <= time(17, 0)
+
+          event_name = os.getenv("EVENT_NAME", "")
+          should_run = (event_name == "workflow_dispatch") or (is_weekday and in_window)
+
+          print(f"Now (ET): {now.isoformat()}")
+          print(f"Weekday: {is_weekday}")
+          print(f"In run window (09:30-17:00 ET): {in_window}")
+          print(f"Should run: {should_run}")
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+              f.write(f"run_now={'true' if should_run else 'false'}\n")
+          PY
+
       - name: Run Gekko screener
+        if: steps.market_window.outputs.run_now == 'true'
         run: |
           python - <<'PY'
           import pathlib
@@ -61,11 +90,13 @@ jobs:
           PY
 
       - name: Commit and push outputs
+        if: steps.market_window.outputs.run_now == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add gekko_screener.html 2>/dev/null || true
+          rm -f gekko_screener.html
+          git rm -f --ignore-unmatch gekko_screener.html
           git add gekko_screener.csv 2>/dev/null || true
 
           if git diff --staged --quiet; then
@@ -73,7 +104,7 @@ jobs:
             exit 0
           fi
 
-          git commit -m "chore: update gekko screener outputs"
+          git commit -m "chore: update gekko screener csv"
 
           branch="${GITHUB_REF_NAME:-main}"
           for i in 1 2 3; do
@@ -87,3 +118,7 @@ jobs:
 
           echo "Failed to push after retries."
           exit 1
+
+      - name: Skip notice
+        if: steps.market_window.outputs.run_now != 'true'
+        run: echo "Outside ET market-hours window; skipped."
