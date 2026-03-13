@@ -21,7 +21,7 @@ CHART_DATA_FILE = "chart_data.csv.gz"          # Extended history for Z-score ch
 TRADES_FILE      = "active_trades.json"        # Active trade tracker
 OUTPUT_FILE      = "pairs_scanner.html"
 COMPRESS_HTML    = True                        # Write .html.gz (recommended for GitHub size limits)
-WRITE_PLAIN_HTML = False                       # Write uncompressed HTML too
+WRITE_PLAIN_HTML = True                        # Write uncompressed HTML too
 
 # ── Data & Download ──
 BATCH_SIZE  = 40
@@ -31,8 +31,7 @@ CACHE_UPDATE_COOLDOWN_HOURS = 1
 VOL_MCAP_COOLDOWN_HOURS     = 168              # Volume & market cap refresh interval (168h = 1 week)
 
 # ── Lookback Windows ──
-LOOKBACK_DAYS       = 650                      # Days used for scoring / correlation / perf
-CHART_LOOKBACK_DAYS = 1825                     # ~5 years used for Z-score chart history
+LOOKBACK_DAYS       = 907                      # Days used for scoring / correlation / perf
 VOL_AVG_DAYS        = 30                       # Rolling window for average volume calculation
 CORR_SHORT          = 35
 CORR_LONG           = 100
@@ -51,16 +50,31 @@ Z_MAX       = 5.0                              # Max |Z| — above is likely str
 
 # ── Cointegration (ADF) ──
 ADF_CONFIDENCE   = 0.90                        # Min confidence (0.90=90%, 0.95=95%, 0.99=99%)
-ADF_LOOKBACK_YRS = 2                           # Years of data for primary ADF test (1, 2, 3, 5…)
-ADF_MIN_DAYS     = 504                         # Min trading days of spread data for ADF (252 ≈ 1yr)
-MIN_COINT_YEARS  = 2                           # Min years the pair must pass ADF (tested at 1yr, 2yr, …)
+ADF_LOOKBACK_YRS = 3                           # Years of data for primary ADF test (1, 2, 3, 5…)
+ADF_MIN_DAYS     = 252                         # Min trading days of spread data for ADF (252 ≈ 1yr)
+MIN_COINT_YEARS  = 1                           # Min years the pair must pass ADF (tested at 1yr, 2yr, …)
 MIN_TRADING_DAYS = 252                         # Keep any symbol with at least 1 year of trading days
+
+TRADING_DAYS_PER_YEAR = 252
+CALENDAR_DAYS_PER_YEAR = 365
+
+
+def _chart_display_days():
+  """Trading-day window shown on charts, tied to ADF_LOOKBACK_YRS."""
+  yrs = max(1, int(ADF_LOOKBACK_YRS))
+  return yrs * TRADING_DAYS_PER_YEAR
+
+
+def _chart_download_days():
+  """Calendar-day history fetched for chart cache, tied to ADF_LOOKBACK_YRS."""
+  yrs = max(1, int(ADF_LOOKBACK_YRS))
+  return yrs * CALENDAR_DAYS_PER_YEAR
 
 # ── Pair Filters ──
 MIN_CORR_FILTER = 0.50                         # Min correlation to consider pair
-MIN_EST_RETURN  = 1                            # Min estimated return % (0 = no filter)
+MIN_EST_RETURN  = 5                            # Min estimated return % (0 = no filter)
 MIN_PRICE       = 1.00                         # Exclude tickers priced below this
-MIN_AVG_VOLUME  = 0                            # Exclude tickers with avg daily volume below this
+MIN_AVG_VOLUME  = 50000                        # Exclude tickers with avg daily volume below this
 
 # ── Market Cap Filters ──
 # Tiers: mega=200B+  large=10B+  mid=2B+  small=300M+  micro=50M+  nano=1M+  none=no filter
@@ -71,7 +85,7 @@ MIN_MCAP_ETF   = "none"                        # Min market cap tier for ETFs
 
 # ── Result Limits ──
 MAX_RESULTS       = 0                          # Max total pairs in HTML (0 = show all)
-MAX_RESULTS_ETF   = 250                        # Max Pure ETF pairs (0 = no limit)
+MAX_RESULTS_ETF   = 200                        # Max Pure ETF pairs (0 = no limit)
 MAX_RESULTS_STOCK = 500                        # Max Pure Stock pairs (0 = no limit)
 MAX_RESULTS_MIXED = 100                        # Max Mixed pairs (0 = no limit)
 MAX_CHARTS        = 0                          # Max pairs with Z-score charts (0 = all)
@@ -260,21 +274,21 @@ def trim_caches(master):
     _trim_price_cache(STOCK_DATA_FILE, stock_set, "stock")
     _trim_price_cache(ETF_DATA_FILE, etf_set, "etf")
 
-    # ── Chart cache: keep CHART_LOOKBACK_DAYS + 10% buffer ──
+    # ── Chart cache: keep ADF_LOOKBACK_YRS window + 10% buffer ──
     if os.path.exists(CHART_DATA_FILE):
-        try:
-            df = pd.read_csv(CHART_DATA_FILE, index_col=0, parse_dates=True)
-            before = (df.shape[0], df.shape[1])
-            keep_days = int(CHART_LOOKBACK_DAYS * 1.1)
-            df = df[[c for c in df.columns if c in master_set]]
-            df = df.tail(keep_days)
-            if (df.shape[0], df.shape[1]) != before:
-                tmp = CHART_DATA_FILE + ".tmp"
-                df.to_csv(tmp, compression='gzip')
-                os.replace(tmp, CHART_DATA_FILE)
-                print(f"  Trimmed chart data: {before[0]}x{before[1]} → {df.shape[0]}x{df.shape[1]}")
-        except Exception:
-            pass
+      try:
+        df = pd.read_csv(CHART_DATA_FILE, index_col=0, parse_dates=True)
+        before = (df.shape[0], df.shape[1])
+        keep_days = int(_chart_download_days() * 1.1)
+        df = df[[c for c in df.columns if c in master_set]]
+        df = df.tail(keep_days)
+        if (df.shape[0], df.shape[1]) != before:
+          tmp = CHART_DATA_FILE + ".tmp"
+          df.to_csv(tmp, compression='gzip')
+          os.replace(tmp, CHART_DATA_FILE)
+          print(f"  Trimmed chart data: {before[0]}x{before[1]} → {df.shape[0]}x{df.shape[1]}")
+      except Exception:
+        pass
 
     # ── Volume cache: keep last 120 days ──
     # Volume/market-cap caches removed (now sourced from CSV)
@@ -575,10 +589,10 @@ def build_dataset(master):
 
 
 # ==========================================
-# BUILD EXTENDED CHART DATASET  (~5 years)
+# BUILD EXTENDED CHART DATASET  (ADF_LOOKBACK_YRS-driven)
 # ==========================================
 def build_chart_dataset(master):
-    """Downloads ~5 years of Close data for Z-score chart history.
+    """Downloads chart Close data using an ADF_LOOKBACK_YRS-driven window.
     Uses its own cache file so it does not interfere with scoring data."""
     if os.path.exists(CHART_DATA_FILE):
         try:
@@ -597,7 +611,7 @@ def build_chart_dataset(master):
 
     existing = chart_data.columns.tolist() if not chart_data.empty else []
     missing  = [t for t in master if t not in existing]
-    start    = (datetime.now() - timedelta(days=CHART_LOOKBACK_DAYS)).strftime("%Y-%m-%d")
+    start    = (datetime.now() - timedelta(days=_chart_download_days())).strftime("%Y-%m-%d")
 
     if missing:
         total_batches = (len(missing) + BATCH_SIZE - 1) // BATCH_SIZE
@@ -659,6 +673,7 @@ def build_chart_dataset(master):
     # NO bfill: a new ticker that only has 1 year of data must NOT have its
     # first real price back-propagated into all earlier NaN rows.
     chart_data = chart_data[[c for c in chart_data.columns if c in master]]
+    chart_data = chart_data.tail(int(_chart_download_days() * 1.1))
     chart_data = validate_and_repair(chart_data, label="chart")
     print(f"  Chart data: {len(chart_data.columns)} tickers, {len(chart_data)} days.")
     return chart_data
@@ -1514,6 +1529,7 @@ def _compute_chart_for_pair(r):
     a, b = r["Pair"].split("/")
     try:
         src = _w_chart_data if (not _w_chart_data.empty and a in _w_chart_data.columns and b in _w_chart_data.columns) else _w_scoring_data
+        src = src.tail(_chart_display_days())
         hr = r.get("HedgeRatio", 1.0)
         dates, z_vals = compute_z_history(a, b, src, hedge_ratio=hr)
         # Snap the last chart point to match the authoritative stats Z value
@@ -2631,7 +2647,7 @@ if __name__ == "__main__":
         print(f"\n[!] Not enough history ({len(data)} days).")
         exit()
 
-    # Build extended chart history (~5 years, separate cache)
+    # Build chart history window driven by ADF_LOOKBACK_YRS (separate cache)
     print("Building extended chart dataset...")
     chart_data = build_chart_dataset(TICKERS)
 
@@ -2698,14 +2714,21 @@ if __name__ == "__main__":
                   log_prices_long, log_prices_full, prices_raw, perf,
                   dict(TICKER_TYPES), dict(ETF_LEV_TYPES))
     ) as pool:
-        results = [
-            r for r in tqdm(
-                pool.imap_unordered(analyze_pair, combos, chunksize=chunksize),
-                total=len(combos),
-                desc="Analyzing Pairs"
-            )
-            if r is not None
-        ]
+        results = []
+        pbar_chunk = 500
+        
+        with tqdm(total=len(combos), desc="Analyzing Pairs") as pbar:
+            for i, r in enumerate(pool.imap_unordered(analyze_pair, combos, chunksize=chunksize), 1):
+                if r is not None:
+                    results.append(r)
+                
+                # Update the progress bar every 500 items
+                if i % pbar_chunk == 0:
+                    pbar.update(pbar_chunk)
+            
+            # Ensure the progress bar reaches 100% at the very end
+            if len(combos) % pbar_chunk != 0:
+                pbar.update(len(combos) % pbar_chunk)
 
     results = sorted(results, key=lambda x: x["Score"], reverse=True)
     # Filter out pairs that won't display (Z below threshold or above max) before capping
@@ -2865,6 +2888,8 @@ if __name__ == "__main__":
         # Backtest win rate for filter attribute
         bt_wr_val = r.get("BtWinRate")
         bt_wr_attr = f"{bt_wr_val:.0f}" if bt_wr_val is not None else ""
+        coint_pct = (1 - r["ADF_p"]) * 100
+        coint_years = int(r.get("CointYears", 0) or 0)
 
         cat_class = {"Pure ETF": "cat-etf", "Pure Stock": "cat-stock"}.get(r["Category"], "cat-mixed")
 
@@ -3019,6 +3044,8 @@ if __name__ == "__main__":
             data-mcap="{mcap_min}"
             data-alignment="{alignment}"
             data-confidence="{confidence}"
+          data-coint-pct="{coint_pct:.1f}"
+          data-coint-years="{coint_years}"
             data-strength="{sig_strength}"
             data-sector-match="{sector_match}"
             data-winrate="{bt_wr_attr}">
@@ -3630,6 +3657,24 @@ if __name__ == "__main__":
             <option value="High">High</option>
             <option value="Med">Med+</option>
             <option value="Low">Low</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>Coint Conf</label>
+          <select id="cointConfFilter" onchange="applyFilters()">
+            <option value="0">All</option>
+            <option value="90">90%+</option>
+            <option value="95" selected>95%+</option>
+            <option value="99">99%+</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>Coint Years</label>
+          <select id="cointYearsFilter" onchange="applyFilters()">
+            <option value="0">All</option>
+            <option value="1">1 Year+</option>
+            <option value="2" selected>2 Year+</option>
+            <option value="3">3 Year+</option>
           </select>
         </div>
         <div class="control-group">
@@ -4566,6 +4611,8 @@ if __name__ == "__main__":
       const levF      = document.getElementById("levFilter").value;
       const alignF    = document.getElementById("alignFilter").value;
       const confF     = document.getElementById("confFilter").value;
+      const cointConfF = parseFloat(document.getElementById("cointConfFilter").value) || 0;
+      const cointYearsF = parseInt(document.getElementById("cointYearsFilter").value || "0", 10) || 0;
       const strF      = document.getElementById("strengthFilter").value;
       const secF      = document.getElementById("sectorFilter").value;
       const minZv     = parseFloat(document.getElementById("minZ").value) || 0;
@@ -4586,6 +4633,8 @@ if __name__ == "__main__":
         const volB     = parseFloat(row.dataset.volB);
         const levA     = row.dataset.levA || "normal";
         const levB     = row.dataset.levB || "normal";
+        const cointPct = parseFloat(row.dataset.cointPct) || 0;
+        const cointYears = parseInt(row.dataset.cointYears || "0", 10) || 0;
         const pairText = row.querySelector(".pair-cell").textContent.toUpperCase();
 
         // ETF/ETN type tags
@@ -4633,6 +4682,12 @@ if __name__ == "__main__":
           else if (confF === "Med" && conf === "Low") show = false;
           else if (confF === "Low" && conf !== "Low") show = false;
         }}
+
+        // Cointegration confidence (%) filter
+        if (cointConfF > 0 && cointPct < cointConfF) show = false;
+
+        // Cointegration years filter
+        if (cointYearsF > 0 && cointYears < cointYearsF) show = false;
 
         // Signal strength filter
         if (strF !== "all") {{
