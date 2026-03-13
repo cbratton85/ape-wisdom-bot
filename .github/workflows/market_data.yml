@@ -9,10 +9,6 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: main-publish-lock
-  cancel-in-progress: false
-
 jobs:
   run-market-task:
     runs-on: ubuntu-latest
@@ -193,3 +189,4 @@ jobs:
       - name: Skip notice
         if: steps.market_window.outputs.run_now != 'true' && github.event_name != 'workflow_dispatch'
         run: echo "Outside US market hours; skipped."
+
