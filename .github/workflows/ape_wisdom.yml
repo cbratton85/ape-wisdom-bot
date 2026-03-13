@@ -12,6 +12,10 @@ env:
 permissions:
   contents: write 
 
+concurrency:
+  group: momentum-scanner
+  cancel-in-progress: false   # queue the new run; don't abort the one already writing data
+
 jobs:
   build:
     runs-on: ubuntu-latest
