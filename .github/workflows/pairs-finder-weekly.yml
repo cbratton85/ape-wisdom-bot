@@ -1,0 +1,215 @@
+name: Pairs Finder Weekly
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Weekly Sunday evening window (UTC). 23:00 UTC is Sunday evening in ET during DST.
+    - cron: "0 23 * * 0"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: main-publish-lock
+  cancel-in-progress: false
+
+jobs:
+  run-pairs-finder:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install yfinance pandas numpy tqdm lxml; fi
+
+      - name: Inspect cache inputs
+        run: |
+          python - <<'PY'
+          import pathlib
+          import pandas as pd
+
+          repo_root = pathlib.Path.cwd()
+          candidates = [
+            repo_root,
+            repo_root / "pairs_scanner",
+          ]
+
+          def first_existing(name: str):
+            for base in candidates:
+              p = base / name
+              if p.exists():
+                return p
+            return None
+
+          stock = first_existing("stock_data.csv.gz")
+          etf = first_existing("etf_data.csv.gz")
+
+          if stock is None and etf is None:
+            print("Warning: Missing stock_data.csv.gz and etf_data.csv.gz cache files.")
+            print("Continuing finder run anyway (it may generate no-data output).")
+
+          def non_empty_cols(path):
+            if path is None:
+              return 0
+            try:
+              df = pd.read_csv(path, index_col=0)
+              return len(df.columns)
+            except Exception:
+              return 0
+
+          stock_cols = non_empty_cols(stock)
+          etf_cols = non_empty_cols(etf)
+          total_cols = stock_cols + etf_cols
+          print(f"Cache columns: stocks={stock_cols}, etfs={etf_cols}, total={total_cols}")
+
+          if total_cols < 2:
+            print("Warning: Cache files may be insufficient for pair building.")
+            print("Continuing finder run anyway.")
+          PY
+
+      - name: Run pairs finder
+        run: |
+          python - <<'PY'
+          import hashlib
+          import pathlib
+          import shutil
+          import subprocess
+          import sys
+
+          repo_root = pathlib.Path.cwd()
+          index_path = repo_root / "public/index.html"
+          backup_path = repo_root / "public/index.html.workflow.bak"
+
+          # Support either root-level or nested project layouts on GitHub Actions checkout.
+          candidates = [
+            repo_root / "pairs_finder.py",
+            repo_root / "pairs_scanner" / "pairs_finder.py",
+          ]
+          script_path = next((p for p in candidates if p.exists()), None)
+          if script_path is None:
+            found = sorted(str(p) for p in repo_root.rglob("pairs_finder.py"))
+            if len(found) == 1:
+              script_path = pathlib.Path(found[0])
+            else:
+              print("Could not find a unique pairs_finder.py in repository.")
+              print(f"Found candidates: {found}")
+              raise SystemExit(1)
+
+          print(f"Using finder script: {script_path}")
+          script_dir = script_path.parent
+
+          def sha256(p: pathlib.Path):
+            if not p.exists():
+              return None
+            h = hashlib.sha256()
+            with p.open("rb") as f:
+              while True:
+                chunk = f.read(65536)
+                if not chunk:
+                  break
+                h.update(chunk)
+            return h.hexdigest()
+
+          before = sha256(index_path)
+          if index_path.exists():
+            backup_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(index_path, backup_path)
+
+          try:
+            subprocess.run([sys.executable, str(script_path)], check=True, cwd=str(script_path.parent))
+
+            # Publish target for GitHub Pages project URL:
+            # https://cbratton85.github.io/ape-wisdom-bot/pairs_finder.html
+            finder_out = script_dir / "pairs_watchlist.html"
+            if not finder_out.exists():
+              finder_out = script_dir / "pairs_finder.html"
+            if not finder_out.exists():
+              print("Finder output HTML not found after run.")
+              raise SystemExit(1)
+
+            publish_target_root = repo_root / "pairs_finder.html"
+            shutil.copy2(finder_out, publish_target_root)
+            print(f"Published finder HTML to {publish_target_root}")
+
+            # Keep a mirrored copy in /public for repos that deploy that directory.
+            public_dir = repo_root / "public"
+            if public_dir.exists():
+              publish_target_public = public_dir / "pairs_finder.html"
+              shutil.copy2(finder_out, publish_target_public)
+              print(f"Mirrored finder HTML to {publish_target_public}")
+          finally:
+            after = sha256(index_path)
+            if before != after and backup_path.exists():
+              shutil.copy2(backup_path, index_path)
+              print("Restored public/index.html to prevent overwrite.")
+            if backup_path.exists():
+              backup_path.unlink()
+
+          out_hash = sha256(repo_root / "pairs_finder.html")
+          print(f"pairs_finder.html sha256: {out_hash}")
+          PY
+
+      - name: Enforce cache read-only policy
+        run: |
+          if ! git diff --quiet -- stock_data.csv.gz etf_data.csv.gz chart_data.csv.gz public/stock_data.csv.gz public/etf_data.csv.gz public/chart_data.csv.gz 2>/dev/null; then
+            echo "Cache files were modified during finder run."
+            echo "Only maintainer workflows are allowed to update cache files."
+            git status --short -- stock_data.csv.gz etf_data.csv.gz chart_data.csv.gz public/stock_data.csv.gz public/etf_data.csv.gz public/chart_data.csv.gz || true
+            exit 1
+          fi
+
+      - name: Commit and push published HTML
+        run: |
+          # Finder should not publish cache updates; only maintainer workflows do that.
+          git checkout -- stock_data.csv.gz etf_data.csv.gz chart_data.csv.gz 2>/dev/null || true
+          git checkout -- public/stock_data.csv.gz public/etf_data.csv.gz public/chart_data.csv.gz 2>/dev/null || true
+          if git ls-files --error-unmatch public/index.html >/dev/null 2>&1; then
+            git checkout -- public/index.html
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pairs_finder.html
+          git add public/pairs_finder.html 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No HTML changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: update weekly pairs finder html"
+          branch="${GITHUB_REF_NAME:-main}"
+          for i in 1 2 3; do
+            git pull --rebase origin "$branch"; 
+            if git push origin HEAD:"$branch"; then
+              exit 0
+            fi
+            echo "Push failed (attempt $i). Retrying..."
+            sleep 2
+          done
+          echo "Failed to push after retries."
+          exit 1
+
+      - name: Prepare gh-pages payload
+        run: |
+          mkdir -p .pages-publish
+          cp pairs_finder.html .pages-publish/pairs_finder.html
+          if command -v sha256sum >/dev/null 2>&1; then
+            sha256sum pairs_finder.html .pages-publish/pairs_finder.html
+          fi
+
+      - name: Deploy pairs finder to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./.pages-publish
+          keep_files: true
+          commit_message: "chore: publish pairs_finder.html"
