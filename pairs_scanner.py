@@ -2520,27 +2520,34 @@ if __name__ == "__main__":
       pbar_chunk = max(1, int(PAIR_PROGRESS_UPDATE_EVERY))
       hb_seconds = max(5, int(PAIR_HEARTBEAT_SECONDS))
       result_iter = pool.imap_unordered(analyze_pair, combos, chunksize=chunksize)
+      next_with_timeout = getattr(result_iter, "next", None)
 
       with tqdm(total=n_combos, desc="Analyzing Pairs") as pbar:
         i = 0
-        last_heartbeat = time.time()
-        while i < n_combos:
-          try:
-            # Timeout polling lets us print heartbeat lines even when workers are on slow chunks.
-            r = result_iter.next(timeout=hb_seconds)
-            i += 1
+        if callable(next_with_timeout):
+          # Some multiprocessing iterators support timeout-aware next(timeout=...)
+          while i < n_combos:
+            try:
+              r = next_with_timeout(timeout=hb_seconds)
+              i += 1
+              if r is not None:
+                results.append(r)
+
+              if i % pbar_chunk == 0:
+                pbar.update(pbar_chunk)
+            except mp.TimeoutError:
+              remaining = n_combos - i
+              tqdm.write(
+                f"[heartbeat] analyzed={i:,}/{n_combos:,} remaining={remaining:,} "
+                f"results={len(results):,} workers={NUM_WORKERS} chunksize={chunksize:,}"
+              )
+        else:
+          # Fallback for runtimes where imap_unordered returns a plain generator.
+          for i, r in enumerate(result_iter, 1):
             if r is not None:
               results.append(r)
-
             if i % pbar_chunk == 0:
               pbar.update(pbar_chunk)
-          except mp.TimeoutError:
-            remaining = n_combos - i
-            tqdm.write(
-              f"[heartbeat] analyzed={i:,}/{n_combos:,} remaining={remaining:,} "
-              f"results={len(results):,} workers={NUM_WORKERS} chunksize={chunksize:,}"
-            )
-            last_heartbeat = time.time()
 
         if i % pbar_chunk != 0:
           pbar.update(i % pbar_chunk)
