@@ -2,7 +2,7 @@
 gekko_screener.py
 -----------------
 Fetches the full Gekko screener_latest table from Supabase and generates
-an interactive HTML dashboard (gekko_screener.html).
+a CSV dataset for downstream scanners (gekko_screener.csv).
 
 Usage:
     python gekko_screener.py
@@ -26,6 +26,8 @@ HEADERS = {
 }
 
 OUTPUT_FILE = "gekko_screener.html"
+OUTPUT_CSV_FILE = "gekko_screener.csv"
+GENERATE_HTML = False
 PAGE_SIZE   = 1000
 
 
@@ -601,6 +603,13 @@ def main():
     df["change_pct"] = pd.to_numeric(df["change_pct"], errors="coerce")
     df["market_cap"] = pd.to_numeric(df["market_cap"], errors="coerce")
     df["volume"]   = pd.to_numeric(df["volume"],   errors="coerce")
+
+    # Persist machine-readable output used by other scripts.
+    df.to_csv(OUTPUT_CSV_FILE, index=False)
+    print(f"Saved to {OUTPUT_CSV_FILE}  ({len(df):,} rows)")
+
+    if not GENERATE_HTML:
+      return
 
     print("Generating HTML...")
     html = build_html(df)
