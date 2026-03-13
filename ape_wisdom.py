@@ -12,6 +12,7 @@ import re
 from bs4 import BeautifulSoup
 import shutil
 import numpy as np
+from typing import Any
 
 # ==============================================================================
 #                               SECTION 1: CONFIGURATION
@@ -26,6 +27,7 @@ CACHE_FILE = os.path.join(SCRIPT_DIR, "ape_cache.json")
 MARKET_DATA_CACHE_FILE = os.path.join(SCRIPT_DIR, "market_data.pkl")
 HISTORY_FILE = os.path.join(SCRIPT_DIR, "market_history.json")
 DELISTED_CACHE_FILE = os.path.join(SCRIPT_DIR, "delisted_cache.json")
+GEKKO_SCREENER_FILE = os.path.join(SCRIPT_DIR, "gekko_screener.csv")
 
 # Timeouts and Retention
 CACHE_EXPIRY_SECONDS = 43200  # 12 hours
@@ -271,6 +273,39 @@ def save_cache(filepath, cache_data):
     try:
         with open(filepath, 'w') as f: json.dump(cache_data, f, indent=4)
     except: pass
+
+def load_gekko_scores(path=GEKKO_SCREENER_FILE):
+    """Loads ticker -> GI score map from the local Gekko CSV export."""
+    if not os.path.exists(path):
+        return {}
+
+    try:
+        df = pd.read_csv(path)
+    except Exception as e:
+        print(f"{C_YELLOW}[!] Warning: Could not read GI CSV ({path}): {e}{C_RESET}")
+        return {}
+
+    required = {"ticker", "gi_score"}
+    if not required.issubset(set(df.columns)):
+        print(f"{C_YELLOW}[!] Warning: GI CSV missing required columns {required}{C_RESET}")
+        return {}
+
+    out = {}
+    for _, row in df.iterrows():
+        ticker = str(row.get("ticker", "")).upper().strip()
+        if not ticker:
+            continue
+        raw_gi = row.get("gi_score")
+        if raw_gi is None:
+            continue
+        try:
+            gi_val = float(raw_gi)
+        except (TypeError, ValueError):
+            continue
+        if np.isnan(gi_val):
+            continue
+        out[ticker] = max(0.0, min(100.0, gi_val))
+    return out
 
 def fetch_meta_data_robust(ticker):
     """Fetches descriptive metadata and exchange info from yfinance."""
@@ -593,6 +628,8 @@ def filter_and_process(stocks):
     """
     if not stocks: return pd.DataFrame()
 
+    gi_map = load_gekko_scores()
+
     # --- LOAD CACHES SEPARATELY ---
     local_cache = load_cache(CACHE_FILE)            
     delisted_cache = load_cache(DELISTED_CACHE_FILE) 
@@ -664,16 +701,19 @@ def filter_and_process(stocks):
         print(f"{C_RED}[!] Error fetching SPY: {e}{C_RESET}")
         spy_hist = pd.Series(dtype=float)
 
+    def _as_dataframe(obj: Any) -> pd.DataFrame:
+        return obj if isinstance(obj, pd.DataFrame) else pd.DataFrame()
+
     # -----------------------------------------------------
     # Step 4. MARKET DATA FETCHING (Batch Mode)
     # -----------------------------------------------------
     valid_tickers = [t for t in us_tickers if t not in delisted_cache]
-    market_data = pd.DataFrame()
+    market_data: pd.DataFrame = pd.DataFrame()
     use_cache = os.path.exists(MARKET_DATA_CACHE_FILE) and (time.time() - os.path.getmtime(MARKET_DATA_CACHE_FILE)) < CACHE_EXPIRY_SECONDS
     
     if use_cache:
         print(f"{C_CYAN}[#] Loading market data from cache...{C_RESET}")
-        try: market_data = pd.read_pickle(MARKET_DATA_CACHE_FILE)
+        try: market_data = _as_dataframe(pd.read_pickle(MARKET_DATA_CACHE_FILE))
         except: use_cache = False
 
     if not use_cache:
@@ -685,13 +725,13 @@ def filter_and_process(stocks):
             try:
                 if len(batch) == 1:
                     # Single ticker handling
-                    batch_data = yf.download(batch[0], period="2y", interval="1d", progress=False)
+                    batch_data: pd.DataFrame = _as_dataframe(yf.download(batch[0], period="2y", interval="1d", progress=False))
                     if not batch_data.empty:
                         # Normalize format to match multi-index batch
                         batch_data.columns = pd.MultiIndex.from_product([[batch[0]], batch_data.columns])
                 else:
                     # Multi ticker handling
-                    batch_data = yf.download(batch, period="2y", interval="1d", group_by='ticker', progress=False, threads=True)
+                    batch_data: pd.DataFrame = _as_dataframe(yf.download(batch, period="2y", interval="1d", group_by='ticker', progress=False, threads=True))
 
                 if not batch_data.empty:
                     if market_data.empty: market_data = batch_data
@@ -715,7 +755,7 @@ def filter_and_process(stocks):
         if t in PERMANENT_BLACKLIST or t in delisted_cache: continue
         
         try:
-            hist = pd.DataFrame()
+            hist: pd.DataFrame = pd.DataFrame()
             
             # 1. EXTRACT FROM BATCH DATA
             if isinstance(market_data.columns, pd.MultiIndex):
@@ -730,7 +770,7 @@ def filter_and_process(stocks):
             if hist.empty or len(hist) < 2:
                 try:
                     # If batch failed, we need 20 days for a healthy 14-period RSI
-                    retry_data = yf.download(t, period="1y", interval="1d", progress=False)
+                    retry_data: pd.DataFrame = _as_dataframe(yf.download(t, period="1y", interval="1d", progress=False))
                     if not retry_data.empty:
                         hist = retry_data
                         if isinstance(hist.columns, pd.MultiIndex):
@@ -783,8 +823,11 @@ def filter_and_process(stocks):
             cur_m = int(stock.get('mentions') or 0)
             old_m = int(stock.get('mentions_24h_ago') or 0)
             
-            v_now = float(hist['Volume'].iloc[-1].item() if hasattr(hist['Volume'].iloc[-1], 'item') else hist['Volume'].iloc[-1])
-            v_avg = float(avg_v.item() if hasattr(avg_v, 'item') else avg_v)
+            v_now_raw = hist['Volume'].iloc[-1]
+            if isinstance(v_now_raw, pd.Series):
+                v_now_raw = v_now_raw.iloc[0]
+            v_now = float(v_now_raw)
+            v_avg = float(avg_v)
 
             m_perc = int(((cur_m - old_m) / (old_m if old_m > 0 else 1) * 100))
             s_perc = int((v_now / v_avg * 100)) if v_avg > 0 else 0
@@ -870,7 +913,8 @@ def filter_and_process(stocks):
                 "Raw_IBD": raw_ibd,
                 "IBD_RS": 0.0,
                 "Raw_SPY": raw_spy,
-                "SPY_RS": 0.0
+                "SPY_RS": 0.0,
+                "GI": gi_map.get(t)
             })
             
         except Exception as e:
@@ -1047,6 +1091,8 @@ def get_all_trending_stocks():
 #                        SECTION 6: FRONTEND GENERATION (HTML/CSS/JS)
 # ==============================================================================
 def export_interactive_html(df):
+    # Prebind so exception logging is always safe even if setup fails early.
+    C_RED = "#ff4d5a"
     try:
         export_df = df.copy()
         if not os.path.exists(PUBLIC_DIR): os.makedirs(PUBLIC_DIR)
@@ -1354,6 +1400,28 @@ def export_interactive_html(df):
             stoch_str = f'<span style="color:{stoch_clr}; font-weight:bold;">{stoch_k_v:.0f}</span>'
             export_df.at[index, 'STOCH'] = stoch_str
 
+            # --- GI SCORE LOGIC ---
+            gi_raw = row.get('GI', None)
+            try:
+                gi_val = float(gi_raw)
+            except (TypeError, ValueError):
+                gi_val = None
+
+            if gi_val is None or np.isnan(gi_val):
+                export_df.at[index, 'GI'] = '<span style="color:#666; font-weight:600;">--</span>'
+            else:
+                if gi_val >= 75:
+                    gi_clr = "#00d97e"
+                elif gi_val >= 60:
+                    gi_clr = "#6eddb0"
+                elif gi_val >= 43:
+                    gi_clr = "#f5c518"
+                elif gi_val >= 28:
+                    gi_clr = "#ff9f4f"
+                else:
+                    gi_clr = "#ff4d5a"
+                export_df.at[index, 'GI'] = color_span(f"{gi_val:.1f}", gi_clr)
+
             # --- RSI COLOR LOGIC ---
             rsi_raw = float(row.get('RSI', 0))
             if rsi_raw >= 70: 
@@ -1444,7 +1512,7 @@ def export_interactive_html(df):
         cols = [
             'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Day%', 'Acc', 'Eff', 'Conv', 'Upvs', 
             'Upv+', 'VOL', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY',
-            'RSI', 'STOCH', 'SCTR', 'IBD_RS', 'SPY_RS', 'Type_Tag', 'AvgVol', 'MCap'
+            'GI', 'RSI', 'STOCH', 'SCTR', 'IBD_RS', 'SPY_RS', 'Type_Tag', 'AvgVol', 'MCap'
         ]
         for c in cols:
             if c not in export_df.columns:
@@ -1476,11 +1544,12 @@ def export_interactive_html(df):
             '<th>Mnt%</th>': '<th><span class="d-tooltip header-fix" data-tooltip="% change in mentions (24h).\nYel: >2σ | Green: >1σ">&nbsp;MNT%</span></th>',
             '<th>Sqz</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Mentions * Surge / log(MCap)\nCyan: >1.5σ | White: Normal">&nbsp;SQZ</span></th>',
             '<th>INDUSTRY</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Industry category group.">INDUSTRY</span></th>',
+            '<th>GI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Gekko GI score (0-100).\nGreen: strong accumulation | Red: heavy distribution" style="display:inline-block; min-width:28px;">GI</span></th>',
             '<th>RSI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Relative Strength Index (14d).\nRed: Overbought | Green: Oversold">&nbsp;RSI</span></th>',
             '<th>STOCH</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Slow Stochastic Oscillator (%K5, %D1) developed by George Lane.\nLogic: Measures momentum by comparing the closing price to the 5-day price range. It assumes prices tend to close near their highs in an uptrend and lows in a downtrend.\nZones: &le; 20 is Oversold (Buy Zone, Green) | &ge; 80 is Overbought (Sell Zone, Red).">&nbsp;STOCH</span></th>',
-            '<th>SCTR</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="sctr-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 23, \'sctr-toggle\')" style="background:#111118; border:1px solid #00d97e; border-radius:4px; padding:1px 5px; font-size:9px; cursor:pointer; color:#00d97e; line-height:1; transition:all 0.2s; font-family:Inter,sans-serif; font-weight:700; letter-spacing:0.06em;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="StockCharts Technical Rank (SCTR) created by John Murphy.\nLogic: A percentile ranking (0-99.9) of a stock\'s technical strength versus its peers.\nFormula: Heavily weights long-term trends (200d EMA, 125d ROC), while factoring in medium-term (50d EMA, 20d ROC) and short-term (RSI, PPO slope) momentum." style="line-height:1;">SCTR</span></div></th>',
-            '<th>IBD_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="ibd-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 24, \'ibd-toggle\')" style="background:#111118; border:1px solid #00d97e; border-radius:4px; padding:1px 5px; font-size:9px; cursor:pointer; color:#00d97e; line-height:1; transition:all 0.2s; font-family:Inter,sans-serif; font-weight:700; letter-spacing:0.06em;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength (RS) Rating developed by William O\'Neil (IBD).\nLogic: A percentile rank (0-99.9) of a stock\'s 52-week price performance.\nFormula: Emphasizes recent momentum by weighting the most recent quarter (3 months) at 40%, and the prior three quarters at 20% each." style="line-height:1;">IBD</span></div></th>',
-            '<th>SPY_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="spy-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 25, \'spy-toggle\')" style="background:#111118; border:1px solid #00d97e; border-radius:4px; padding:1px 5px; font-size:9px; cursor:pointer; color:#00d97e; line-height:1; transition:all 0.2s; font-family:Inter,sans-serif; font-weight:700; letter-spacing:0.06em;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength against SPY (0-99.9).\nLogic: A percentile rank of the stock\'s 1-year performance compared to the SPY baseline." style="line-height:1;">vsSPY</span></div></th>'
+            '<th>SCTR</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="sctr-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 24, \'sctr-toggle\')" style="background:#111118; border:1px solid #00d97e; border-radius:4px; padding:1px 5px; font-size:9px; cursor:pointer; color:#00d97e; line-height:1; transition:all 0.2s; font-family:Inter,sans-serif; font-weight:700; letter-spacing:0.06em;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="StockCharts Technical Rank (SCTR) created by John Murphy.\nLogic: A percentile ranking (0-99.9) of a stock\'s technical strength versus its peers.\nFormula: Heavily weights long-term trends (200d EMA, 125d ROC), while factoring in medium-term (50d EMA, 20d ROC) and short-term (RSI, PPO slope) momentum." style="line-height:1;">SCTR</span></div></th>',
+            '<th>IBD_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="ibd-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 25, \'ibd-toggle\')" style="background:#111118; border:1px solid #00d97e; border-radius:4px; padding:1px 5px; font-size:9px; cursor:pointer; color:#00d97e; line-height:1; transition:all 0.2s; font-family:Inter,sans-serif; font-weight:700; letter-spacing:0.06em;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength (RS) Rating developed by William O\'Neil (IBD).\nLogic: A percentile rank (0-99.9) of a stock\'s 52-week price performance.\nFormula: Emphasizes recent momentum by weighting the most recent quarter (3 months) at 40%, and the prior three quarters at 20% each." style="line-height:1;">IBD</span></div></th>',
+            '<th>SPY_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="spy-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 26, \'spy-toggle\')" style="background:#111118; border:1px solid #00d97e; border-radius:4px; padding:1px 5px; font-size:9px; cursor:pointer; color:#00d97e; line-height:1; transition:all 0.2s; font-family:Inter,sans-serif; font-weight:700; letter-spacing:0.06em;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength against SPY (0-99.9).\nLogic: A percentile rank of the stock\'s 1-year performance compared to the SPY baseline." style="line-height:1;">vsSPY</span></div></th>'
         }
         for old_tag, new_tag in header_map.items():
             raw_table = raw_table.replace(old_tag, new_tag)
@@ -1735,11 +1804,12 @@ def export_interactive_html(df):
             white-space: nowrap; text-align: left;
         }}
 
-        th:nth-child(22), td:nth-child(22) {{ width: 1%; text-align: center; font-weight: 600; }}
+        th:nth-child(22), td:nth-child(22) {{ width: 44px; min-width: 44px; max-width: 44px; text-align: center; font-weight: 700; padding-left: 2px !important; padding-right: 2px !important; }}
         th:nth-child(23), td:nth-child(23) {{ width: 1%; text-align: center; font-weight: 600; }}
         th:nth-child(24), td:nth-child(24) {{ width: 1%; text-align: center; font-weight: 600; }}
         th:nth-child(25), td:nth-child(25) {{ width: 1%; text-align: center; font-weight: 600; }}
-        th:nth-child(26), td:nth-child(26) {{ width: 1%; text-align: center; font-weight: 600; border-right: 1px solid var(--border-mid) !important; }}
+        th:nth-child(26), td:nth-child(26) {{ width: 1%; text-align: center; font-weight: 600; }}
+        th:nth-child(27), td:nth-child(27) {{ width: 1%; text-align: center; font-weight: 600; border-right: 1px solid var(--border-mid) !important; }}
 
         /* ── LINKS & COLORS ───────────────────────────────────────── */
         a {{ color: var(--accent-blue); text-decoration: none; }}
@@ -2570,7 +2640,7 @@ def export_interactive_html(df):
         function getTopSectors(metricIdx) {{
             var sectorData = {{}};
             allData.each(function(row) {{
-                var rawType = row[26].toString().replace(/<[^>]+>/g, ''); 
+                var rawType = row[27].toString().replace(/<[^>]+>/g, ''); 
                 if (topSwitchIsETF && !rawType.includes('ETF')) return;
                 if (!topSwitchIsETF && rawType.includes('ETF')) return;
 
@@ -2757,11 +2827,11 @@ def export_interactive_html(df):
         }}
     }});
 
-    // Track modes for columns 23 (SCTR), 24 (IBD), and 25 (SPY) independently
+    // Track modes for columns 24 (SCTR), 25 (IBD), and 26 (SPY) independently
     let columnModes = {{
-        23: "global",
         24: "global",
-        25: "global"
+        25: "global",
+        26: "global"
     }};
 
     function toggleColumnMode(event, colIdx, btnId) {{
@@ -2797,9 +2867,9 @@ def export_interactive_html(df):
         if (!$.fn.DataTable.isDataTable('.table')) return;
         var api = $('.table').DataTable();
         
-        // Target columns: 23 (SCTR), 24 (IBD RS), 25 (SPY RS)
-        [23, 24, 25].forEach(function(colIdx) {{
-            let valClass = (colIdx === 23) ? 'sctr-val' : (colIdx === 24 ? 'ibd-val' : 'spy-val');
+        // Target columns: 24 (SCTR), 25 (IBD RS), 26 (SPY RS)
+        [24, 25, 26].forEach(function(colIdx) {{
+            let valClass = (colIdx === 24) ? 'sctr-val' : (colIdx === 25 ? 'ibd-val' : 'spy-val');
             
             // Look up the specific mode for this column
             let currentMode = columnModes[colIdx];
@@ -2927,11 +2997,11 @@ def export_interactive_html(df):
             }},
 
             "columnDefs": [ 
-                // Metadata: Type_Tag (26), AvgVol (27), MCap (28) hidden
-                {{ "visible": false, "targets": [26, 27, 28] }}, 
+                // Metadata: Type_Tag (27), AvgVol (28), MCap (29) hidden
+                {{ "visible": false, "targets": [27, 28, 29] }}, 
                 
-                // Numeric sorting: Indices for all metric columns including RSI (21)
-                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25], 
+                // Numeric sorting: Includes GI and shifted technical columns
+                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26], 
                    "type": "num", 
                    "render": function(data, type) {{ 
                        if (type === 'sort' || type === 'type') {{ return parseVal(data); }} 
@@ -2954,9 +3024,9 @@ def export_interactive_html(df):
         // --- CUSTOM FILTERING LOGIC ---
         $.fn.dataTable.ext.search.push(function(settings, data) {{
             // UPDATED INDICES:
-            var typeTag = data[26] || "";
-            var avgVol  = parseVal(data[27]);
-            var mcap    = parseVal(data[28]);
+            var typeTag = data[27] || "";
+            var avgVol  = parseVal(data[28]);
+            var mcap    = parseVal(data[29]);
             
             var viewMode = $('input[name="btnradio"]:checked').attr('id');
             var isETF = typeTag.includes("ETF");
