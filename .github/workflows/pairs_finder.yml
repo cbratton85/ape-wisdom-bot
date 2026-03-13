@@ -27,30 +27,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pandas numpy tqdm yfinance
 
-      - name: Check Sunday evening window (ET)
-        id: sunday_window
-        run: |
-          python - <<'PY'
-          from datetime import datetime, time
-          from zoneinfo import ZoneInfo
-          import os
-
-          now = datetime.now(ZoneInfo("America/New_York"))
-          is_sunday = now.weekday() == 6
-          is_evening = time(18, 0) <= now.time() <= time(23, 59, 59)
-          should_run = is_sunday and is_evening
-
-          print(f"Now (ET): {now.isoformat()}")
-          print(f"Sunday: {is_sunday}")
-          print(f"Evening window: {is_evening}")
-          print(f"Should run: {should_run}")
-
-          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
-              f.write(f"run_now={'true' if should_run else 'false'}\n")
-          PY
-
       - name: Run pairs finder
-        if: steps.sunday_window.outputs.run_now == 'true' || github.event_name == 'workflow_dispatch'
         run: |
           python - <<'PY'
           import hashlib
@@ -81,6 +58,17 @@ jobs:
           print(f"Using finder script: {script_path}")
           script_dir = script_path.parent
 
+          maintainer_candidates = [
+            script_dir / "market_data_maintainer.py",
+            repo_root / "market_data_maintainer.py",
+            repo_root / "pairs_scanner" / "market_data_maintainer.py",
+          ]
+          maintainer_path = next((p for p in maintainer_candidates if p.exists()), None)
+          if maintainer_path is None:
+            print("market_data_maintainer.py not found; cannot build fresh cache.")
+            raise SystemExit(1)
+          print(f"Using maintainer script: {maintainer_path}")
+
           def sha256(p: pathlib.Path):
             if not p.exists():
               return None
@@ -99,6 +87,8 @@ jobs:
             shutil.copy2(index_path, backup_path)
 
           try:
+            # Build/update cache first so finder has data in CI.
+            subprocess.run([sys.executable, str(maintainer_path)], check=True, cwd=str(maintainer_path.parent))
             subprocess.run([sys.executable, str(script_path)], check=True, cwd=str(script_path.parent))
 
             # Publish target for GitHub Pages project URL:
@@ -130,12 +120,11 @@ jobs:
           PY
 
       - name: Commit and push published HTML
-        if: steps.sunday_window.outputs.run_now == 'true' || github.event_name == 'workflow_dispatch'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add pairs_finder.html
-          git add public/pairs_finder.html
+          git add public/pairs_finder.html 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "No HTML changes to commit."
             exit 0
@@ -144,13 +133,11 @@ jobs:
           git push
 
       - name: Prepare gh-pages payload
-        if: steps.sunday_window.outputs.run_now == 'true' || github.event_name == 'workflow_dispatch'
         run: |
           mkdir -p .pages-publish
           cp pairs_finder.html .pages-publish/pairs_finder.html
 
       - name: Deploy pairs finder to gh-pages
-        if: steps.sunday_window.outputs.run_now == 'true' || github.event_name == 'workflow_dispatch'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -158,7 +145,3 @@ jobs:
           publish_dir: ./.pages-publish
           keep_files: true
           commit_message: "chore: publish pairs_finder.html"
-
-      - name: Skip notice
-        if: steps.sunday_window.outputs.run_now != 'true' && github.event_name != 'workflow_dispatch'
-        run: echo "Outside Sunday evening ET window; skipped."
