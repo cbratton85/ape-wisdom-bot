@@ -50,8 +50,19 @@ jobs:
       - name: Prepare Website Files
         run: |
           mkdir -p public
-          # Move scanner results
-          mv pairs_scanner.html.gz public/ || true
+          # Prefer plain HTML for Pages route; derive from .gz when needed.
+          if [ -f pairs_scanner.html ]; then
+            mv pairs_scanner.html public/
+          elif [ -f pairs_scanner.html.gz ]; then
+            python - <<'PY'
+            import gzip
+            import shutil
+
+            with gzip.open("pairs_scanner.html.gz", "rb") as src, open("public/pairs_scanner.html", "wb") as dst:
+                shutil.copyfileobj(src, dst)
+            PY
+            mv pairs_scanner.html.gz public/ || true
+          fi
           # Move active trades tracker (if generated)
           mv active_trades.html public/ || true
           # Move symbols list (if generated)
