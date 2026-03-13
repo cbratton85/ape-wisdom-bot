@@ -1,11 +1,15 @@
 name: Stock Dashboard
 
 on:
+  workflow_dispatch:
   schedule:
     # Runs at 45 minutes past the hour during US Market hours (UTC)
     - cron: '15 13-20 * * 1-5'
-  workflow_dispatch:
-
+  
+concurrency:
+  group: market-hours-runner
+  cancel-in-progress: false   # queue the new run; don't abort the one already writing data
+  
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
