@@ -32,32 +32,6 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install yfinance pandas numpy tqdm lxml; fi
 
-      - name: Refresh market cache files
-        run: |
-          python - <<'PY'
-          import pathlib
-          import subprocess
-          import sys
-
-          repo_root = pathlib.Path.cwd()
-          candidates = [
-            repo_root / "market_data_maintainer.py",
-            repo_root / "pairs_scanner" / "market_data_maintainer.py",
-          ]
-          script_path = next((p for p in candidates if p.exists()), None)
-          if script_path is None:
-            found = sorted(str(p) for p in repo_root.rglob("market_data_maintainer.py"))
-            if len(found) == 1:
-              script_path = pathlib.Path(found[0])
-            else:
-              print("Could not find a unique market_data_maintainer.py in repository.")
-              print(f"Found candidates: {found}")
-              raise SystemExit(1)
-
-          print(f"Using maintainer script: {script_path}")
-          subprocess.run([sys.executable, str(script_path)], check=True, cwd=str(script_path.parent))
-          PY
-
       - name: Run pairs finder
         run: |
           python - <<'PY'
@@ -137,8 +111,20 @@ jobs:
               backup_path.unlink()
           PY
 
+      - name: Enforce cache read-only policy
+        run: |
+          if ! git diff --quiet -- stock_data.csv.gz etf_data.csv.gz chart_data.csv.gz public/stock_data.csv.gz public/etf_data.csv.gz public/chart_data.csv.gz 2>/dev/null; then
+            echo "Cache files were modified during finder run."
+            echo "Only maintainer workflows are allowed to update cache files."
+            git status --short -- stock_data.csv.gz etf_data.csv.gz chart_data.csv.gz public/stock_data.csv.gz public/etf_data.csv.gz public/chart_data.csv.gz || true
+            exit 1
+          fi
+
       - name: Commit and push published HTML
         run: |
+          # Finder should not publish cache updates; only maintainer workflows do that.
+          git checkout -- stock_data.csv.gz etf_data.csv.gz chart_data.csv.gz 2>/dev/null || true
+          git checkout -- public/stock_data.csv.gz public/etf_data.csv.gz public/chart_data.csv.gz 2>/dev/null || true
           if git ls-files --error-unmatch public/index.html >/dev/null 2>&1; then
             git checkout -- public/index.html
           fi
