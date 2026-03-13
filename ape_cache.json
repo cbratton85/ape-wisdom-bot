@@ -30988,5 +30988,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NMG": {
+        "ticker": "NMG",
+        "name": "Nouveau Monde Graphite Inc.",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 358454976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IDRV": {
+        "ticker": "IDRV",
+        "name": "iShares Self-Driving EV and Tec",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ULCC": {
+        "ticker": "ULCC",
+        "name": "Frontier Group Holdings, Inc.",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 780673024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BMA": {
+        "ticker": "BMA",
+        "name": "Banco Macro S.A.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 4552748032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

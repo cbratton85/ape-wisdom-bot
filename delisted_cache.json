@@ -29,11 +29,6 @@
         "last_checked": "2026-03-10",
         "reason": "No Price Data"
     },
-    "NH": {
-        "delisted": true,
-        "last_checked": "2026-03-10",
-        "reason": "No Price Data"
-    },
     "ATNF": {
         "delisted": true,
         "last_checked": "2026-03-11",
@@ -152,6 +147,11 @@
     "DS": {
         "delisted": true,
         "last_checked": "2026-03-12",
+        "reason": "No Price Data"
+    },
+    "NH": {
+        "delisted": true,
+        "last_checked": "2026-03-13",
         "reason": "No Price Data"
     }
 }
