@@ -104,11 +104,6 @@
         "last_checked": "2026-03-13",
         "reason": "No Price Data"
     },
-    "FM": {
-        "delisted": true,
-        "last_checked": "2026-03-13",
-        "reason": "No Price Data"
-    },
     "KIND": {
         "delisted": true,
         "last_checked": "2026-03-13",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "SOL": {
+        "delisted": true,
+        "last_checked": "2026-03-13",
+        "reason": "No Price Data"
+    },
+    "FM": {
         "delisted": true,
         "last_checked": "2026-03-13",
         "reason": "No Price Data"

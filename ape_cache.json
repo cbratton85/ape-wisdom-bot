@@ -31278,5 +31278,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "PSQ": {
+        "ticker": "PSQ",
+        "name": "ProShares Short QQQ",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
