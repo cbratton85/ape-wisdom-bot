@@ -611,9 +611,17 @@ def _analyze_pair(pair):
     if max_years < 1:
         return None
 
-    coint_years = 0
-    pass_years = []
-    for yr in range(1, max_years + 1):
+    # Strict tradeability gate: if 1Y cointegration fails, skip the pair entirely.
+    try:
+        p1 = adf_pvalue(spread.iloc[-252:])
+    except Exception:
+        p1 = 1.0
+    if p1 > max_p:
+        return None
+
+    coint_years = 1
+    pass_years = [1]
+    for yr in range(2, max_years + 1):
         days = yr * 252
         try:
             p = adf_pvalue(spread.iloc[-days:])
