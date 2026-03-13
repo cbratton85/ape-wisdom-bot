@@ -17,6 +17,14 @@ BATCH_SIZE      = 40
 COOLDOWN        = 1.5
 LOOKBACK_DAYS   = 400
 OUTPUT_FILE     = "stock_dashboard.html"
+REFRESH_DATA_BEFORE_SCAN = False  # Keep dashboard read-only unless explicitly enabled.
+
+# Scan/filter tuning
+MIN_HISTORY_DAYS_FOR_SCAN = 210
+DEFAULT_MIN_PRICE_FILTER = 5
+BIAS_BULL_THRESHOLD = 30
+BIAS_STRONG_BULL_THRESHOLD = 60
+BIAS_BEAR_THRESHOLD = -30
 
 # ==========================================
 # DATA HELPERS (same pattern as pairs_watchlist)
@@ -376,8 +384,8 @@ def build_full_html(scan_results):
 
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M")
     total = len(scan_results)
-    bullish = sum(1 for r in scan_results if r["net_bias"] > 30)
-    bearish = sum(1 for r in scan_results if r["net_bias"] < -30)
+    bullish = sum(1 for r in scan_results if r["net_bias"] >= BIAS_BULL_THRESHOLD)
+    bearish = sum(1 for r in scan_results if r["net_bias"] <= BIAS_BEAR_THRESHOLD)
     squeeze_count = sum(1 for r in scan_results if r["in_squeeze"])
 
     html = f"""<!DOCTYPE html>
@@ -673,8 +681,8 @@ def build_full_html(scan_results):
 <!-- STATS ROW -->
 <div class="stats-row">
   <div class="stat-item"><div class="stat-label">Tickers</div><div class="stat-value cyan">{total}</div></div>
-  <div class="stat-item"><div class="stat-label">Bullish (30+)</div><div class="stat-value green">{bullish}</div></div>
-  <div class="stat-item"><div class="stat-label">Bearish (-30)</div><div class="stat-value red">{bearish}</div></div>
+  <div class="stat-item"><div class="stat-label">Bullish ({BIAS_BULL_THRESHOLD}+)</div><div class="stat-value green">{bullish}</div></div>
+  <div class="stat-item"><div class="stat-label">Bearish ({BIAS_BEAR_THRESHOLD})</div><div class="stat-value red">{bearish}</div></div>
   <div class="stat-item"><div class="stat-label">In Squeeze</div><div class="stat-value amber">{squeeze_count}</div></div>
 </div>
 
@@ -693,14 +701,14 @@ def build_full_html(scan_results):
   <span class="ctrl-label">Bias</span>
   <select class="ctrl-input" id="biasFilter">
     <option value="">All</option>
-    <option value="bull">Bullish (30+)</option>
-    <option value="strong_bull">Strong Bull (60+)</option>
-    <option value="bear">Bearish (-30)</option>
+    <option value="bull">Bullish ({BIAS_BULL_THRESHOLD}+)</option>
+    <option value="strong_bull">Strong Bull ({BIAS_STRONG_BULL_THRESHOLD}+)</option>
+    <option value="bear">Bearish ({BIAS_BEAR_THRESHOLD})</option>
     <option value="neutral">Neutral</option>
     <option value="squeeze">In Squeeze</option>
   </select>
   <span class="ctrl-label">Min Price</span>
-  <input class="ctrl-input" id="minPrice" type="number" value="5" style="width:70px;" min="0">
+  <input class="ctrl-input" id="minPrice" type="number" value="{DEFAULT_MIN_PRICE_FILTER}" style="width:70px;" min="0">
 </div>
 
 <!-- TABLE -->
@@ -750,6 +758,9 @@ let filtered = [...ALL_DATA];
 let sortCol = 'net_bias', sortDir = 'desc';
 let page = 0;
 const PER_PAGE = 50;
+const BIAS_BULL_THRESHOLD = {BIAS_BULL_THRESHOLD};
+const BIAS_STRONG_BULL_THRESHOLD = {BIAS_STRONG_BULL_THRESHOLD};
+const BIAS_BEAR_THRESHOLD = {BIAS_BEAR_THRESHOLD};
 
 // â”€â”€ Populate sectors â”€â”€
 const sectors = [...new Set(ALL_DATA.map(r => r.sector).filter(s => s && s !== 'â€”'))].sort();
@@ -769,10 +780,10 @@ function applyFilters() {{
     if (typ && r.type !== typ) return false;
     if (sec && r.sector !== sec) return false;
     if (r.price < minP) return false;
-    if (bias === 'bull' && r.net_bias < 30) return false;
-    if (bias === 'strong_bull' && r.net_bias < 60) return false;
-    if (bias === 'bear' && r.net_bias > -30) return false;
-    if (bias === 'neutral' && (r.net_bias > 30 || r.net_bias < -30)) return false;
+    if (bias === 'bull' && r.net_bias < BIAS_BULL_THRESHOLD) return false;
+    if (bias === 'strong_bull' && r.net_bias < BIAS_STRONG_BULL_THRESHOLD) return false;
+    if (bias === 'bear' && r.net_bias > BIAS_BEAR_THRESHOLD) return false;
+    if (bias === 'neutral' && (r.net_bias >= BIAS_BULL_THRESHOLD || r.net_bias <= BIAS_BEAR_THRESHOLD)) return false;
     if (bias === 'squeeze' && !r.in_squeeze) return false;
     return true;
   }});
@@ -1032,12 +1043,15 @@ document.addEventListener('keydown', e => {{ if (e.key === 'Escape') closeDetail
 def main():
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     load_master_tickers()
-    ensure_shared_data(
-        lookback_days=LOOKBACK_DAYS,
-        chart_years=3,
-        batch_size=BATCH_SIZE,
-        cooldown=COOLDOWN,
-    )
+    if REFRESH_DATA_BEFORE_SCAN:
+        ensure_shared_data(
+            lookback_days=LOOKBACK_DAYS,
+            chart_years=3,
+            batch_size=BATCH_SIZE,
+            cooldown=COOLDOWN,
+        )
+    else:
+        print("Shared-data refresh disabled (read-only dashboard mode).")
 
     mode = "table"
     symbol = None
@@ -1105,8 +1119,8 @@ def main():
     all_data = all_data.ffill().bfill()
 
     # Filter to tickers with enough data
-    valid_cols = [c for c in all_data.columns if all_data[c].notna().sum() >= 210]
-    print(f"Valid tickers with 210+ days: {len(valid_cols)}")
+    valid_cols = [c for c in all_data.columns if all_data[c].notna().sum() >= MIN_HISTORY_DAYS_FOR_SCAN]
+    print(f"Valid tickers with {MIN_HISTORY_DAYS_FOR_SCAN}+ days: {len(valid_cols)}")
 
     # Scan all
     print(f"\n=== Scanning {len(valid_cols)} tickers ===")
