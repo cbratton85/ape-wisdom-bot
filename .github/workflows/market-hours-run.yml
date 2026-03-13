@@ -1,0 +1,66 @@
+name: Market Hours Runner
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every hour on weekdays (UTC). A random delay below spreads it within the hour.
+    - cron: "0 * * * 1-5"
+
+jobs:
+  run-market-task:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas numpy tqdm yfinance
+
+      - name: Randomize run time within the hour
+        run: |
+          python - <<'PY'
+          import random
+          import time
+
+          delay = random.randint(0, 3599)
+          print(f"Random delay: {delay} seconds")
+          time.sleep(delay)
+          PY
+
+      - name: Check US market-hours window (ET)
+        id: market_window
+        run: |
+          python - <<'PY'
+          from datetime import datetime, time
+          from zoneinfo import ZoneInfo
+          import os
+
+          now = datetime.now(ZoneInfo("America/New_York"))
+          is_weekday = now.weekday() < 5
+          is_market_hours = time(9, 30) <= now.time() <= time(16, 0)
+          should_run = is_weekday and is_market_hours
+
+          print(f"Now (ET): {now.isoformat()}")
+          print(f"Weekday: {is_weekday}")
+          print(f"In market hours: {is_market_hours}")
+          print(f"Should run: {should_run}")
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+              f.write(f"run_now={'true' if should_run else 'false'}\n")
+          PY
+
+      - name: Run market data maintainer
+        if: steps.market_window.outputs.run_now == 'true'
+        run: python market_data_maintainer.py
+
+      - name: Skip notice
+        if: steps.market_window.outputs.run_now != 'true'
+        run: echo "Outside US market hours; skipped."
