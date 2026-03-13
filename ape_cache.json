@@ -31088,5 +31088,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "CNBS": {
+        "ticker": "CNBS",
+        "name": "Amplify Seymour Cannabis ETF",
+        "meta": "Unknown",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
