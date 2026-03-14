@@ -31348,5 +31348,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SDG": {
+        "ticker": "SDG",
+        "name": "iShares MSCI Global Sustainable",
+        "meta": "Global Large-Stock Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "DRI": {
+        "ticker": "DRI",
+        "name": "Darden Restaurants, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 23538415616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
