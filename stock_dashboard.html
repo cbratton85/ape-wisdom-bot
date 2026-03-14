@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Loading…</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
+<script>
+fetch('stock_dashboard.html.gz?_='+Date.now())
+  .then(function(r){return r.arrayBuffer();})
+  .then(function(b){
+    var html=new TextDecoder().decode(pako.inflate(new Uint8Array(b)));
+    document.open();document.write(html);document.close();
+  }).catch(function(e){
+    document.body.innerHTML='<p style="font-family:sans-serif;padding:2rem;color:#ef4444">Failed to load page: '+e+'</p>';
+  });
+</script></head>
+<body><p style="font-family:sans-serif;padding:2rem;color:#94a3b8">⏳ Loading…</p></body></html>
