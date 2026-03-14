@@ -31318,5 +31318,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SCHL": {
+        "ticker": "SCHL",
+        "name": "Scholastic Corporation",
+        "meta": "Publishing",
+        "type": "EQUITY",
+        "mcap": 859929152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TGIF": {
+        "ticker": "TGIF",
+        "name": "SoFi Weekly Income ETF",
+        "meta": "Multisector Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "YSS": {
+        "ticker": "YSS",
+        "name": "York Space Systems Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 2514768128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
