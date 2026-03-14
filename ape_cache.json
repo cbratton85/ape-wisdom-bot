@@ -31368,5 +31368,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PHM": {
+        "ticker": "PHM",
+        "name": "PulteGroup, Inc.",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 22923560960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
