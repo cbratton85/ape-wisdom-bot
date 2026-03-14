@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
   schedule:
     # Every hour on weekdays (UTC). A random delay below spreads it within the hour.
-    - cron: "0 * * * 1-5"
+    # - cron: "0 * * * 1-5"
     # Close-run safety trigger at 16:10 ET (both DST variants).
-    - cron: "10 20 * * 1-5" # EDT (UTC-4)
-    - cron: "10 21 * * 1-5" # EST (UTC-5)
+    # - cron: "10 20 * * 1-5" # EDT (UTC-4)
+    # - cron: "10 21 * * 1-5" # EST (UTC-5)
 
 permissions:
   contents: write
