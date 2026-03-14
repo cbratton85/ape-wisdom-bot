@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stock Dashboard - Breakout Scanner</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg:        #08090d;
+    --surface:   #0d1117;
+    --surface2:  #131720;
+    --surface3:  #181f2e;
+    --border:    #1c2333;
+    --border2:   #242d40;
+    --text:      #c9d1d9;
+    --muted:     #4a5568;
+    --faint:     #2d3748;
+    --cyan:      #38bdf8;
+    --cyan-dim:  rgba(56,189,248,0.12);
+    --green:     #22c55e;
+    --green-dim: rgba(34,197,94,0.12);
+    --red:       #ef4444;
+    --red-dim:   rgba(239,68,68,0.12);
+    --amber:     #f59e0b;
+    --orange:    #f97316;
+    --purple:    #a78bfa;
+    --detail-ink:   #e6edf5;
+    --detail-soft:  #93a8ba;
+    --detail-card:  #0f1622;
+    --detail-card2: #121b29;
+    --detail-line:  #253247;
+    --detail-chip:  #111a28;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; font-size: 14px; }
+
+  /* â”€â”€ TOPBAR â”€â”€ */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(8,9,13,0.92); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px; height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .brand { font-size: 16px; font-weight: 800; color: white; letter-spacing: 0.04em; }
+  .brand span { color: var(--cyan); }
+  .live-dot {
+    width: 7px; height: 7px; background: var(--green); border-radius: 50%;
+    box-shadow: 0 0 6px var(--green); animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.5;transform:scale(.8);} }
+  .topbar-meta { font-family: var(--mono); font-size: 11px; color: var(--muted); display: flex; gap: 20px; }
+  .topbar-meta em { color: var(--text); font-style: normal; }
+
+  /* â”€â”€ STATS ROW â”€â”€ */
+  .stats-row {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 6px 20px; display: flex; flex-wrap: wrap;
+  }
+  .stat-item {
+    padding: 4px 14px 4px 0; margin-right: 14px;
+    border-right: 1px solid var(--border); white-space: nowrap;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-label { font-size: 9px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--muted); margin-bottom: 1px; }
+  .stat-value { font-family: var(--mono); font-size: 14px; font-weight: 600; color: white; }
+  .stat-value.cyan { color: var(--cyan); }
+  .stat-value.green { color: var(--green); }
+  .stat-value.red { color: var(--red); }
+  .stat-value.amber { color: var(--amber); }
+
+  /* â”€â”€ CONTROLS â”€â”€ */
+  .controls {
+    background: var(--surface2); border-bottom: 1px solid var(--border);
+    padding: 8px 16px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+  }
+  .ctrl-input {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 5px;
+    color: var(--text); font-family: var(--mono); font-size: 12px;
+    padding: 6px 12px; outline: none; transition: border-color 0.15s;
+  }
+  .ctrl-input:focus { border-color: var(--cyan); }
+  .ctrl-input::placeholder { color: var(--muted); }
+  select.ctrl-input { cursor: pointer; -webkit-appearance: none; padding-right: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%234a5568'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 8px center; }
+  .ctrl-label { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+  .mode-toggle {
+    background: var(--surface3); border: 1px solid var(--border2); border-radius: 5px;
+    color: var(--text); font-family: var(--mono); font-size: 11px; font-weight: 600;
+    padding: 6px 10px; cursor: pointer; letter-spacing: 0.04em;
+  }
+  .mode-toggle:hover { border-color: var(--cyan); color: var(--cyan); }
+  .mode-toggle.active-tech { border-color: rgba(245,158,11,0.55); color: var(--amber); }
+
+  /* â”€â”€ TABLE â”€â”€ */
+  .table-wrap { padding: 0 16px 16px; }
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    position: sticky; top: 56px; z-index: 50;
+    background: var(--surface2); border-bottom: 2px solid var(--border);
+    padding: 8px 10px; text-align: left; cursor: pointer; user-select: none;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted); white-space: nowrap;
+  }
+  thead th:hover { color: var(--cyan); }
+  thead th.sort-asc::after { content: ' â–²'; color: var(--cyan); }
+  thead th.sort-desc::after { content: ' â–¼'; color: var(--cyan); }
+  tbody tr {
+    border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.1s;
+  }
+  tbody tr:hover { background: var(--surface2); }
+  tbody td {
+    padding: 7px 10px; font-family: var(--mono); font-size: 12px; white-space: nowrap;
+  }
+  .rank-cell { color: var(--muted); font-size: 11px; text-align: center; width: 40px; }
+  .sym-cell { font-weight: 700; color: white; }
+  .name-cell { color: var(--muted); font-size: 11px; max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
+  .sector-cell { color: var(--muted); font-size: 11px; max-width: 140px; overflow: hidden; text-overflow: ellipsis; }
+  .price-cell { color: var(--text); }
+  .chg-pos { color: var(--green); }
+  .chg-neg { color: var(--red); }
+  .score-cell { font-weight: 700; text-align: center; }
+  .tag-sm {
+    font-family: var(--mono); font-size: 10px; padding: 2px 7px; border-radius: 3px;
+    display: inline-block;
+  }
+  .tag-sm.green { background: var(--green-dim); color: var(--green); }
+  .tag-sm.red { background: var(--red-dim); color: var(--red); }
+  .tag-sm.cyan { background: var(--cyan-dim); color: var(--cyan); }
+  .tag-sm.amber { background: rgba(245,158,11,0.12); color: var(--amber); }
+  .tag-sm.muted { background: rgba(74,85,104,0.12); color: var(--muted); }
+  .tag-sm.gi-strong { background: rgba(34,197,94,0.16); color: #22c55e; }
+  .tag-sm.gi-accum { background: rgba(74,222,128,0.16); color: #4ade80; }
+  .tag-sm.gi-neutral { background: rgba(245,158,11,0.16); color: #f59e0b; }
+  .tag-sm.gi-dist { background: rgba(249,115,22,0.16); color: #f97316; }
+  .tag-sm.gi-heavy { background: rgba(239,68,68,0.16); color: #ef4444; }
+
+  /* â”€â”€ PAGINATION â”€â”€ */
+  .pagination {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 12px; font-family: var(--mono); font-size: 12px;
+  }
+  .pagination button {
+    background: var(--surface); border: 1px solid var(--border); color: var(--text);
+    padding: 6px 12px; border-radius: 4px; cursor: pointer; font-family: var(--mono); font-size: 12px;
+  }
+  .pagination button:hover { border-color: var(--cyan); color: var(--cyan); }
+  .pagination button:disabled { opacity: 0.3; cursor: default; }
+  .pagination .page-info { color: var(--muted); }
+
+  /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     DETAIL OVERLAY
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+  .overlay {
+    display: none; position: fixed; inset: 0; z-index: 500;
+    background:
+      radial-gradient(140% 120% at 50% -20%, rgba(56,189,248,0.14) 0%, rgba(56,189,248,0) 45%),
+      var(--bg);
+    overflow-y: auto;
+  }
+  .overlay.open { display: block; }
+  .overlay-inner { max-width: 1160px; margin: 0 auto; padding: 20px 24px 40px; }
+
+  .detail-header {
+    display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;
+  }
+  .detail-header h1 { font-size: 38px; line-height: 1.05; font-weight: 800; color: var(--detail-ink); letter-spacing: 0.01em; }
+  .detail-meta {
+    font-family: var(--mono); font-size: 11px; color: var(--detail-soft); margin-top: 8px;
+  }
+  .detail-meta .v { color: var(--text); }
+  .detail-meta .g { color: var(--green); }
+  .detail-meta .r { color: var(--red); }
+  .detail-meta .c { color: var(--cyan); }
+  .close-btn {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em;
+    color: var(--muted); background: var(--surface2);
+    border: 1px solid var(--border); padding: 9px 14px; border-radius: 6px; cursor: pointer;
+  }
+  .close-btn:hover { color: var(--text); border-color: var(--border2); }
+
+  .scores { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+  .score-box {
+    background: linear-gradient(180deg, rgba(18,27,41,0.88) 0%, rgba(15,22,34,0.78) 100%);
+    border: 1px solid var(--detail-line); border-radius: 10px;
+    padding: 14px 16px; text-align: center;
+  }
+  .score-label {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+  }
+  .score-val { font-family: var(--mono); font-size: 42px; line-height: 1; font-weight: 700; color: var(--detail-ink); }
+
+  .chart-section {
+    background:
+      radial-gradient(120% 90% at 0% 0%, rgba(56,189,248,0.12) 0%, rgba(56,189,248,0) 58%),
+      var(--detail-card);
+    border: 1px solid var(--detail-line); border-radius: 10px;
+    padding: 16px; margin-bottom: 16px; position: relative;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+  }
+  .chart-hdr {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
+  }
+  .chart-title { font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #a7bed3; }
+  .chart-legend { display: flex; gap: 12px; font-family: var(--mono); font-size: 9px; color: var(--muted); flex-wrap: wrap; }
+  .chart-legend span { display: flex; align-items: center; gap: 4px; }
+  .legend-line { width: 16px; height: 2px; border-radius: 1px; }
+  .chart-stats { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+  .chart-stat {
+    font-family: var(--mono); font-size: 9px; color: #b8ccdc;
+    border: 1px solid var(--detail-line); background: var(--detail-chip);
+    padding: 4px 8px; border-radius: 999px;
+  }
+  .chart-stat .v { color: #f8fafc; font-weight: 600; }
+  .legend-dash { width: 16px; height: 0; border-top: 2px dashed; }
+  .ma-labels {
+    position: absolute; left: 24px; top: 60px; font-family: var(--mono); font-size: 11px;
+  }
+  .ma-labels div { margin-bottom: 4px; }
+  canvas#priceChart { width: 100% !important; height: 340px !important; }
+
+  @media (max-width: 980px) {
+    .scores { grid-template-columns: 1fr; }
+    .ind-grid { grid-template-columns: 1fr; }
+    .comp-metrics { grid-template-columns: repeat(3, 1fr); }
+    .ai-grid { grid-template-columns: repeat(2, 1fr); }
+    .detail-header { flex-direction: column; gap: 8px; }
+    .close-btn { width: 100%; }
+    canvas#priceChart { height: 280px !important; }
+    .ai-cell:nth-child(4n) { border-right: 1px solid rgba(51,65,85,0.35); }
+    .ai-cell:nth-child(2n) { border-right: 0; }
+  }
+
+  @media (max-width: 640px) {
+    .overlay-inner { padding: 16px; }
+    .detail-header h1 { font-size: 30px; }
+    .comp-metrics { grid-template-columns: repeat(2, 1fr); }
+    .ai-grid { grid-template-columns: 1fr; }
+    .chart-legend { gap: 8px; }
+    canvas#priceChart { height: 240px !important; }
+    .ai-cell { border-right: 0; }
+  }
+
+  .ind-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+  .ind-box { background: var(--detail-card); border: 1px solid var(--detail-line); border-radius: 8px; padding: 12px 14px; }
+  .ind-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    padding: 4px 10px; border-radius: 5px; white-space: nowrap;
+  }
+  .tag-green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,197,94,0.25); }
+  .tag-red { background: var(--red-dim); color: var(--red); border: 1px solid rgba(239,68,68,0.25); }
+  .tag-cyan { background: var(--cyan-dim); color: var(--cyan); border: 1px solid rgba(56,189,248,0.25); }
+  .tag-amber { background: rgba(245,158,11,0.12); color: var(--amber); border: 1px solid rgba(245,158,11,0.25); }
+  .tag-muted { background: rgba(74,85,104,0.12); color: var(--muted); border: 1px solid rgba(74,85,104,0.25); }
+
+  .compression {
+    background: var(--detail-card); border: 1px solid var(--detail-line); border-radius: 8px;
+    padding: 16px; margin-bottom: 16px;
+  }
+  .comp-hdr { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .comp-icon {
+    width: 24px; height: 24px; background: var(--cyan-dim); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .comp-icon::after { content: ''; width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; }
+  .comp-title { font-family: var(--mono); font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--muted); }
+  .squeeze-badge { font-family: var(--mono); font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 4px; }
+  .sq-fire { background: var(--red-dim); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+  .sq-on { background: rgba(245,158,11,0.15); color: var(--amber); border: 1px solid rgba(245,158,11,0.3); }
+  .sq-off { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+  .coil-label { font-size: 15px; font-weight: 700; color: white; }
+  .bias-label { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .bias-val { color: var(--text); }
+
+  .comp-metrics {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px;
+    background: var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 16px;
+  }
+  .cm { background: var(--surface2); padding: 10px 8px; }
+  .cm-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .cm-val { font-family: var(--mono); font-size: 16px; font-weight: 600; color: white; }
+  .cm-sub { font-family: var(--mono); font-size: 9px; color: var(--muted); margin-top: 2px; }
+
+  .range-box {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    padding: 12px 16px; display: inline-block; margin-bottom: 16px;
+  }
+  .range-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+  .range-value { font-family: var(--mono); font-size: 20px; font-weight: 600; color: white; }
+  .range-sub { font-family: var(--mono); font-size: 10px; color: var(--muted); }
+
+  .all-indicators {
+    background: var(--detail-card); border: 1px solid var(--detail-line); border-radius: 8px;
+    padding: 16px; margin-top: 16px;
+  }
+  .all-ind-title { font-family: var(--mono); font-size: 10px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; font-weight: 600; }
+  .ai-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .ai-cell {
+    padding: 8px 10px; border-bottom: 1px solid var(--border);
+    border-right: 1px solid rgba(51,65,85,0.35);
+    font-family: var(--mono); font-size: 10px; display: flex; align-items: center; gap: 6px;
+    line-height: 1.35;
+  }
+  .ai-cell:nth-child(4n) { border-right: 0; }
+  .ai-cell .val { color: white; font-weight: 600; }
+  .ai-cell .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+  .ai-cell .st { font-size: 10px; padding: 2px 8px; border-radius: 3px; }
+
+  /* Loading overlay */
+  .loading {
+    display: none; position: fixed; inset: 0; z-index: 600;
+    background: rgba(8,9,13,0.85); backdrop-filter: blur(8px);
+    justify-content: center; align-items: center; flex-direction: column; gap: 16px;
+  }
+  .loading.active { display: flex; }
+  .spinner {
+    width: 40px; height: 40px; border: 3px solid var(--border);
+    border-top-color: var(--cyan); border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="brand"><span>BREAKOUT</span> SCANNER</div>
+    <div class="live-dot"></div>
+    <div class="topbar-meta">
+      <span>Updated <em>2026-03-13 16:45</em></span>
+    </div>
+  </div>
+  <div style="display:flex;gap:16px;align-items:center;">
+    <a href="index.html" style="color:var(--cyan);text-decoration:none;font-size:12px;font-weight:600;font-family:var(--mono);border:1px solid rgba(56,189,248,0.3);padding:6px 14px;border-radius:5px;letter-spacing:0.05em;transition:all 0.15s;">&#8962; Home</a>
+  </div>
+</div>
+
+<!-- STATS ROW -->
+<div class="stats-row">
+  <div class="stat-item"><div class="stat-label">Tickers</div><div class="stat-value cyan">1</div></div>
+  <div class="stat-item"><div class="stat-label">Bullish (30+)</div><div class="stat-value green">0</div></div>
+  <div class="stat-item"><div class="stat-label">Bearish (-30)</div><div class="stat-value red">1</div></div>
+  <div class="stat-item"><div class="stat-label">Gekko Avg GI</div><div class="stat-value amber">61.2</div></div>
+  <div class="stat-item"><div class="stat-label">GI Coverage</div><div class="stat-value cyan">1/1</div></div>
+  <div class="stat-item"><div class="stat-label">In Squeeze</div><div class="stat-value amber">1</div></div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <span class="ctrl-label">Search</span>
+  <input class="ctrl-input" id="searchBox" type="text" placeholder="Symbol or name..." style="width:180px;">
+  <span class="ctrl-label">Type</span>
+  <select class="ctrl-input" id="typeFilter">
+    <option value="">All</option>
+    <option value="Pure Stock">Stocks</option>
+    <option value="Pure ETF">ETFs</option>
+  </select>
+  <span class="ctrl-label">Sector</span>
+  <select class="ctrl-input" id="sectorFilter"><option value="">All</option></select>
+  <span class="ctrl-label">Bias</span>
+  <select class="ctrl-input" id="biasFilter">
+    <option value="">All</option>
+    <option value="bull">Bullish (30+)</option>
+    <option value="strong_bull">Strong Bull (60+)</option>
+    <option value="bear">Bearish (-30)</option>
+    <option value="neutral">Neutral</option>
+    <option value="squeeze">In Squeeze</option>
+  </select>
+  <span class="ctrl-label">Min Price</span>
+  <input class="ctrl-input" id="minPrice" type="number" value="5" style="width:70px;" min="0">
+  <span class="ctrl-label">Min GI</span>
+  <input class="ctrl-input" id="minGI" type="number" value="0" style="width:70px;" min="0" max="100">
+  <button class="mode-toggle" id="scoreModeBtn" type="button" onclick="toggleScoreMode()">Mode: Blended</button>
+</div>
+
+<!-- TABLE -->
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th data-col="rank">#</th>
+        <th data-col="symbol">Symbol</th>
+        <th data-col="name">Name</th>
+        <th data-col="sector">Sector</th>
+        <th data-col="price">Price</th>
+        <th data-col="pct_change">Chg%</th>
+        <th data-col="breakout">Breakout</th>
+        <th data-col="breakdown">Breakdown</th>
+        <th data-col="net_bias_raw">Tech Bias</th>
+        <th data-col="gi_score">GI</th>
+        <th data-col="net_bias" id="netBiasHeader">Net Bias (Blend)</th>
+        <th data-col="rsi">RSI</th>
+        <th data-col="macd_trend">MACD</th>
+        <th data-col="stoch_k">Stoch</th>
+        <th data-col="bb_pct">BB%</th>
+        <th data-col="pct_from_52h">52H%</th>
+        <th data-col="in_squeeze">Squeeze</th>
+        <th data-col="higher_lows">Structure</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+</div>
+<div class="pagination" id="pagination"></div>
+
+<!-- DETAIL OVERLAY -->
+<div class="overlay" id="detailOverlay">
+  <div class="overlay-inner" id="detailContent">
+    <!-- Populated by JS -->
+  </div>
+</div>
+
+<!-- LOADING -->
+<div class="loading" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text" id="loadingText">Loading detail...</div>
+</div>
+
+<script>
+const ALL_DATA = [{"symbol": "AAPL", "name": "Apple Inc", "sector": "Information Technology", "type": "Pure Stock", "price": 250.12, "pct_change": -2.21, "rsi": 34.6, "macd_hist": -1.4619, "macd_trend": "Bearish", "macd_rising": false, "stoch_k": 0, "bb_width": 9.0, "bb_width_avg": 11.0, "bb_pct": -3.5, "atr_proxy": 2.8557, "atr_proxy_pct": 1.14, "atr_proxy_avg20": 3.696, "atr_expanding": false, "gap_up_proxy": false, "gap_down_proxy": true, "gap_pct": -2.21, "gap_proxy_thresh": 1.89, "atr_is_proxy": true, "gap_is_proxy": true, "volume_is_proxy": true, "rvol20": 0.0, "vol_now": 0, "vol_avg20": 0, "obv_up": false, "pct_from_52h": -12.5, "above_ma20": false, "above_ma50": false, "above_ma200": true, "golden_cross": "YES", "death_cross": "NO", "higher_lows": false, "lower_highs": false, "in_squeeze": true, "breakout": 16, "breakdown": 77, "net_bias_raw": -61, "net_bias": -32, "gi_score": 61.2, "gi_label": "Accumulation", "mcap": 4000000000000, "chart_dates": ["2025-03-13", "2025-03-14", "2025-03-17", "2025-03-18", "2025-03-19", "2025-03-20", "2025-03-21", "2025-03-24", "2025-03-25", "2025-03-26", "2025-03-27", "2025-03-28", "2025-03-31", "2025-04-01", "2025-04-02", "2025-04-03", "2025-04-04", "2025-04-07", "2025-04-08", "2025-04-09", "2025-04-10", "2025-04-11", "2025-04-14", "2025-04-15", "2025-04-16", "2025-04-17", "2025-04-21", "2025-04-22", "2025-04-23", "2025-04-24", "2025-04-25", "2025-04-28", "2025-04-29", "2025-04-30", "2025-05-01", "2025-05-02", "2025-05-05", "2025-05-06", "2025-05-07", "2025-05-08", "2025-05-09", "2025-05-12", "2025-05-13", "2025-05-14", "2025-05-15", "2025-05-16", "2025-05-19", "2025-05-20", "2025-05-21", "2025-05-22", "2025-05-23", "2025-05-27", "2025-05-28", "2025-05-29", "2025-05-30", "2025-06-02", "2025-06-03", "2025-06-04", "2025-06-05", "2025-06-06", "2025-06-09", "2025-06-10", "2025-06-11", "2025-06-12", "2025-06-13", "2025-06-16", "2025-06-17", "2025-06-18", "2025-06-20", "2025-06-23", "2025-06-24", "2025-06-25", "2025-06-26", "2025-06-27", "2025-06-30", "2025-07-01", "2025-07-02", "2025-07-03", "2025-07-07", "2025-07-08", "2025-07-09", "2025-07-10", "2025-07-11", "2025-07-14", "2025-07-15", "2025-07-16", "2025-07-17", "2025-07-18", "2025-07-21", "2025-07-22", "2025-07-23", "2025-07-24", "2025-07-25", "2025-07-28", "2025-07-29", "2025-07-30", "2025-07-31", "2025-08-01", "2025-08-04", "2025-08-05", "2025-08-06", "2025-08-07", "2025-08-08", "2025-08-11", "2025-08-12", "2025-08-13", "2025-08-14", "2025-08-15", "2025-08-18", "2025-08-19", "2025-08-20", "2025-08-21", "2025-08-22", "2025-08-25", "2025-08-26", "2025-08-27", "2025-08-28", "2025-08-29", "2025-09-02", "2025-09-03", "2025-09-04", "2025-09-05", "2025-09-08", "2025-09-09", "2025-09-10", "2025-09-11", "2025-09-12", "2025-09-15", "2025-09-16", "2025-09-17", "2025-09-18", "2025-09-19", "2025-09-22", "2025-09-23", "2025-09-24", "2025-09-25", "2025-09-26", "2025-09-29", "2025-09-30", "2025-10-01", "2025-10-02", "2025-10-03", "2025-10-06", "2025-10-07", "2025-10-08", "2025-10-09", "2025-10-10", "2025-10-13", "2025-10-14", "2025-10-15", "2025-10-16", "2025-10-17", "2025-10-20", "2025-10-21", "2025-10-22", "2025-10-23", "2025-10-24", "2025-10-27", "2025-10-28", "2025-10-29", "2025-10-30", "2025-10-31", "2025-11-03", "2025-11-04", "2025-11-05", "2025-11-06", "2025-11-07", "2025-11-10", "2025-11-11", "2025-11-12", "2025-11-13", "2025-11-14", "2025-11-17", "2025-11-18", "2025-11-19", "2025-11-20", "2025-11-21", "2025-11-24", "2025-11-25", "2025-11-26", "2025-11-28", "2025-12-01", "2025-12-02", "2025-12-03", "2025-12-04", "2025-12-05", "2025-12-08", "2025-12-09", "2025-12-10", "2025-12-11", "2025-12-12", "2025-12-15", "2025-12-16", "2025-12-17", "2025-12-18", "2025-12-19", "2025-12-22", "2025-12-23", "2025-12-24", "2025-12-26", "2025-12-29", "2025-12-30", "2025-12-31", "2026-01-02", "2026-01-05", "2026-01-06", "2026-01-07", "2026-01-08", "2026-01-09", "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-26", "2026-01-27", "2026-01-28", "2026-01-29", "2026-01-30", "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27", "2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-12", "2026-03-13"], "chart_close": [208.77, 212.56, 213.07, 211.77, 214.31, 213.17, 217.32, 219.77, 222.78, 220.57, 222.88, 216.95, 221.17, 222.22, 222.92, 202.31, 187.56, 180.67, 171.67, 197.99, 189.59, 197.29, 201.64, 201.26, 193.43, 196.13, 192.32, 198.87, 203.71, 207.47, 208.37, 209.23, 210.29, 211.58, 212.39, 204.46, 198.03, 197.65, 195.4, 196.63, 197.67, 210.15, 212.28, 211.69, 210.81, 210.62, 208.15, 206.23, 201.48, 200.75, 194.68, 199.6, 199.81, 199.34, 200.24, 201.09, 202.65, 202.2, 200.02, 203.3, 200.84, 202.06, 198.18, 198.6, 195.85, 197.82, 195.05, 195.98, 200.39, 200.89, 199.69, 200.95, 200.39, 200.47, 204.55, 207.19, 211.8, 212.9, 209.31, 209.37, 210.5, 211.77, 210.52, 207.99, 208.48, 209.52, 209.38, 210.54, 211.84, 213.75, 213.5, 213.11, 213.23, 213.4, 210.63, 208.42, 206.94, 201.77, 202.73, 202.3, 212.6, 219.36, 228.65, 226.75, 229.21, 232.89, 232.34, 231.15, 230.45, 230.12, 225.58, 224.47, 227.33, 226.73, 228.87, 230.05, 232.12, 231.7, 229.28, 238.02, 239.32, 239.23, 237.43, 233.9, 226.36, 229.59, 233.62, 236.25, 237.7, 238.54, 237.43, 245.03, 255.59, 253.95, 251.83, 256.38, 254.97, 253.95, 254.15, 254.96, 256.64, 257.53, 256.2, 255.99, 257.57, 253.56, 244.8, 247.19, 247.3, 248.87, 246.98, 251.81, 261.74, 262.27, 257.96, 259.09, 262.32, 268.3, 268.49, 269.19, 270.88, 269.86, 268.54, 269.53, 269.63, 269.26, 267.96, 269.18, 274.99, 273.21, 272.69, 272.16, 267.21, 267.19, 268.31, 266.0, 271.24, 275.66, 276.71, 277.29, 278.59, 282.84, 285.92, 283.88, 280.44, 278.52, 277.63, 276.92, 278.52, 277.77, 278.02, 273.85, 274.35, 271.59, 271.94, 273.41, 270.72, 272.11, 273.55, 273.14, 273.5, 272.82, 271.61, 270.76, 267.01, 262.11, 260.09, 258.8, 259.13, 260.01, 260.81, 259.72, 257.97, 255.29, 246.47, 247.42, 248.12, 247.81, 255.17, 258.03, 256.2, 258.04, 259.24, 269.76, 269.23, 276.23, 275.65, 277.86, 274.62, 273.68, 275.5, 261.73, 255.78, 263.88, 264.35, 260.58, 264.58, 266.18, 272.14, 274.23, 272.95, 264.18, 264.72, 263.75, 262.52, 260.29, 257.46, 259.88, 260.83, 260.81, 255.76, 250.12], "chart_ma20": [235.95, 234.55, 233.03, 231.45, 229.97, 228.39, 227.04, 225.72, 224.56, 223.63, 222.96, 221.76, 220.97, 220.34, 219.75, 218.15, 215.63, 213.33, 210.92, 210.02, 209.06, 208.3, 207.73, 207.2, 206.16, 205.31, 204.06, 203.01, 202.06, 201.4, 200.68, 200.29, 199.75, 199.22, 198.69, 198.8, 199.32, 200.17, 201.35, 201.29, 201.69, 202.33, 202.87, 203.39, 204.26, 204.98, 205.77, 206.14, 206.03, 205.69, 205.01, 204.53, 204.0, 203.39, 202.78, 202.61, 202.85, 203.07, 203.3, 203.64, 203.8, 203.39, 202.69, 202.03, 201.28, 200.64, 199.99, 199.48, 199.42, 199.43, 199.68, 199.75, 199.78, 199.83, 200.05, 200.35, 200.81, 201.35, 201.81, 202.11, 202.6, 203.08, 203.7, 204.17, 204.8, 205.38, 206.1, 206.83, 207.4, 208.04, 208.74, 209.34, 209.99, 210.63, 210.94, 211.0, 210.75, 210.2, 209.87, 209.52, 209.62, 210.0, 210.91, 211.85, 212.88, 214.05, 215.2, 216.23, 217.16, 217.98, 218.58, 219.15, 219.85, 220.52, 221.43, 222.52, 223.77, 225.27, 226.6, 228.38, 229.72, 230.71, 231.15, 231.51, 231.37, 231.2, 231.27, 231.52, 231.88, 232.3, 232.9, 233.93, 235.34, 236.7, 237.85, 239.16, 240.31, 241.42, 242.66, 243.51, 244.38, 245.29, 246.23, 247.33, 248.89, 250.09, 250.65, 251.2, 251.68, 252.19, 252.67, 253.01, 253.32, 253.73, 254.04, 254.18, 254.54, 255.26, 255.98, 256.69, 257.4, 258.02, 258.63, 259.31, 259.91, 260.7, 261.86, 262.96, 264.34, 265.56, 266.84, 267.86, 268.13, 268.38, 268.9, 269.24, 269.69, 270.06, 270.47, 270.87, 271.26, 271.91, 272.78, 273.5, 274.04, 274.5, 274.98, 275.37, 275.55, 275.77, 276.04, 276.13, 276.48, 276.7, 276.88, 277.25, 277.23, 277.05, 276.89, 276.69, 276.43, 275.93, 275.21, 274.56, 273.89, 273.07, 272.19, 271.28, 270.31, 269.43, 268.57, 267.86, 267.04, 266.22, 264.95, 263.65, 262.52, 261.31, 260.39, 259.63, 258.77, 258.03, 257.41, 257.36, 257.47, 258.18, 258.95, 259.91, 260.68, 261.37, 262.1, 262.2, 262.09, 262.52, 263.41, 264.07, 264.9, 265.81, 266.66, 267.47, 268.31, 268.62, 268.89, 268.59, 268.26, 267.46, 266.55, 265.65, 264.96, 264.32, 263.33, 262.75], "chart_ma50": [234.54, 233.78, 233.06, 232.44, 231.89, 231.28, 230.81, 230.37, 230.12, 229.87, 229.68, 229.29, 229.17, 229.04, 229.07, 228.67, 227.97, 227.15, 226.01, 225.23, 224.27, 223.48, 222.82, 222.31, 221.55, 220.85, 220.06, 219.51, 219.05, 218.56, 218.01, 217.39, 216.73, 216.09, 215.46, 214.65, 213.72, 212.76, 211.75, 210.89, 210.12, 209.51, 209.01, 208.55, 208.07, 207.6, 207.0, 206.59, 206.23, 205.92, 205.64, 205.38, 205.11, 204.87, 204.58, 204.34, 204.05, 203.7, 203.24, 202.9, 202.46, 202.16, 201.7, 201.23, 200.68, 200.59, 200.74, 201.05, 201.63, 201.68, 201.89, 201.96, 201.93, 201.92, 202.14, 202.36, 202.75, 203.03, 203.14, 203.18, 203.22, 203.27, 203.28, 203.21, 203.13, 203.23, 203.46, 203.72, 204.04, 204.39, 204.7, 204.76, 204.78, 204.82, 204.81, 204.77, 204.74, 204.65, 204.68, 204.71, 205.07, 205.46, 206.04, 206.59, 207.17, 207.8, 208.4, 208.98, 209.59, 210.12, 210.62, 211.07, 211.65, 212.21, 212.87, 213.52, 214.26, 214.97, 215.55, 216.29, 217.08, 217.85, 218.59, 219.26, 219.7, 220.14, 220.58, 221.05, 221.62, 222.2, 222.74, 223.4, 224.3, 225.22, 226.09, 227.03, 227.94, 228.81, 229.65, 230.48, 231.34, 232.23, 233.09, 233.94, 234.88, 235.78, 236.54, 237.45, 238.34, 239.27, 239.96, 240.61, 241.27, 241.98, 242.55, 243.08, 243.68, 244.42, 245.18, 245.96, 246.87, 247.78, 248.6, 249.46, 250.27, 251.06, 251.77, 252.52, 253.44, 254.14, 254.81, 255.47, 256.06, 256.73, 257.57, 258.29, 259.05, 259.83, 260.62, 261.39, 262.21, 262.97, 263.58, 264.17, 264.75, 265.19, 265.64, 266.1, 266.59, 267.05, 267.47, 267.8, 268.16, 268.48, 268.76, 269.16, 269.68, 270.18, 270.7, 271.19, 271.72, 272.14, 272.33, 272.5, 272.69, 272.75, 272.7, 272.51, 272.32, 272.14, 271.94, 271.74, 271.53, 271.24, 270.78, 270.34, 269.94, 269.52, 269.12, 268.82, 268.49, 268.2, 268.04, 268.1, 268.11, 268.32, 268.41, 268.45, 268.41, 268.34, 268.28, 267.85, 267.25, 266.85, 266.53, 266.17, 265.91, 265.69, 265.57, 265.5, 265.39, 265.2, 265.01, 264.85, 264.66, 264.4, 264.14, 263.89, 263.64, 263.39, 263.03, 262.58], "chart_ma200": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 220.08, 220.09, 220.08, 220.07, 220.06, 220.06, 220.08, 220.12, 220.15, 220.19, 220.22, 220.25, 220.29, 220.36, 220.44, 220.5, 220.57, 220.6, 220.6, 220.61, 220.64, 220.68, 220.71, 220.73, 220.75, 220.8, 220.88, 220.95, 221.0, 221.07, 221.14, 221.18, 221.22, 221.27, 221.32, 221.37, 221.4, 221.42, 221.48, 221.5, 221.46, 221.43, 221.38, 221.34, 221.3, 221.31, 221.37, 221.47, 221.55, 221.63, 221.73, 221.87, 222.03, 222.21, 222.41, 222.57, 222.78, 222.98, 223.23, 223.46, 223.69, 223.92, 224.16, 224.34, 224.51, 224.69, 224.85, 225.05, 225.24, 225.41, 225.61, 225.86, 226.11, 226.33, 226.55, 226.76, 226.97, 227.17, 227.36, 227.53, 227.69, 227.85, 228.01, 228.2, 228.41, 228.57, 228.76, 228.94, 229.13, 229.33, 229.49, 229.72, 229.99, 230.27, 230.6, 230.9, 231.19, 231.48, 231.75, 231.99, 232.21, 232.4, 232.58, 232.78, 232.97, 233.18, 233.37, 233.53, 233.65, 233.88, 234.18, 234.52, 234.93, 235.23, 235.57, 235.87, 236.16, 236.5, 236.88, 237.28, 237.7, 238.09, 238.45, 238.78, 239.11, 239.37, 239.6, 239.86, 240.12, 240.4, 240.74, 241.08, 241.46, 241.85, 242.23, 242.5, 242.76, 243.02, 243.28, 243.53, 243.77, 244.04, 244.34, 244.64, 244.94, 245.2], "chart_bb_upper": [256.86, 257.79, 257.73, 257.37, 256.29, 254.77, 252.71, 249.95, 246.85, 244.86, 243.34, 240.47, 238.25, 236.35, 234.33, 233.03, 233.18, 236.11, 240.09, 239.63, 240.05, 239.68, 239.16, 238.7, 238.04, 237.31, 236.04, 234.19, 231.82, 230.01, 227.68, 226.52, 224.57, 222.41, 220.03, 220.23, 220.1, 219.04, 214.92, 214.94, 214.33, 215.33, 216.6, 217.64, 218.07, 218.51, 217.97, 217.9, 217.93, 217.8, 217.99, 217.57, 216.91, 215.94, 214.65, 214.48, 214.51, 214.49, 214.24, 214.12, 213.99, 213.16, 211.76, 210.22, 208.8, 206.88, 205.63, 204.57, 204.45, 204.46, 204.19, 204.29, 204.33, 204.39, 205.07, 206.3, 208.61, 210.84, 211.92, 212.76, 213.86, 215.06, 215.88, 216.25, 216.36, 216.64, 216.36, 216.08, 216.39, 216.91, 216.99, 216.95, 216.5, 215.54, 214.92, 214.78, 214.92, 215.86, 216.44, 216.91, 217.13, 218.65, 222.93, 225.7, 228.65, 232.07, 234.82, 236.95, 238.71, 240.21, 240.96, 241.52, 242.33, 242.98, 243.68, 244.19, 244.55, 243.53, 241.51, 238.98, 238.52, 239.07, 239.96, 240.15, 240.25, 240.09, 240.21, 240.74, 241.49, 242.31, 242.62, 244.23, 249.03, 252.09, 254.18, 257.02, 259.16, 260.76, 261.91, 263.38, 264.97, 266.54, 267.68, 268.38, 267.92, 266.89, 265.81, 264.89, 263.97, 262.94, 261.29, 260.86, 262.03, 263.32, 263.76, 264.11, 265.12, 267.49, 269.54, 271.46, 273.48, 275.04, 276.26, 277.54, 278.69, 279.67, 279.52, 279.48, 279.95, 279.83, 278.45, 277.28, 277.11, 276.94, 275.92, 274.75, 274.18, 275.23, 276.37, 277.47, 278.71, 280.94, 283.61, 285.28, 286.06, 286.46, 286.61, 286.69, 286.96, 287.17, 287.38, 287.37, 286.96, 286.52, 286.17, 285.21, 285.27, 285.39, 285.38, 285.33, 285.14, 284.23, 282.26, 280.57, 280.13, 280.87, 281.61, 282.16, 281.91, 281.33, 280.34, 279.99, 279.53, 279.57, 280.65, 280.65, 280.52, 279.85, 278.18, 276.4, 274.26, 272.04, 269.9, 269.63, 270.15, 273.28, 275.96, 278.9, 280.77, 282.27, 283.93, 284.01, 284.01, 284.21, 283.75, 283.04, 282.31, 281.26, 281.5, 282.09, 282.11, 281.71, 281.37, 281.27, 281.21, 280.31, 279.53, 277.8, 276.52, 275.25, 273.55, 274.55], "chart_bb_lower": [215.04, 211.32, 208.33, 205.52, 203.66, 202.02, 201.36, 201.49, 202.27, 202.4, 202.58, 203.06, 203.7, 204.33, 205.16, 203.27, 198.07, 190.56, 181.76, 180.41, 178.07, 176.92, 176.3, 175.71, 174.27, 173.3, 172.07, 171.83, 172.29, 172.8, 173.67, 174.06, 174.92, 176.02, 177.35, 177.36, 178.54, 181.29, 187.79, 187.63, 189.05, 189.34, 189.14, 189.13, 190.45, 191.45, 193.57, 194.38, 194.13, 193.59, 192.02, 191.49, 191.1, 190.84, 190.91, 190.75, 191.18, 191.66, 192.37, 193.16, 193.6, 193.63, 193.61, 193.85, 193.77, 194.41, 194.35, 194.39, 194.4, 194.4, 195.17, 195.21, 195.22, 195.28, 195.03, 194.41, 193.01, 191.85, 191.7, 191.47, 191.33, 191.1, 191.52, 192.09, 193.24, 194.13, 195.84, 197.58, 198.41, 199.18, 200.48, 201.74, 203.47, 205.72, 206.95, 207.22, 206.59, 204.53, 203.3, 202.12, 202.11, 201.35, 198.88, 197.99, 197.12, 196.03, 195.58, 195.51, 195.61, 195.74, 196.2, 196.78, 197.38, 198.06, 199.19, 200.84, 203.0, 207.01, 211.68, 217.79, 220.92, 222.36, 222.34, 222.87, 222.48, 222.31, 222.32, 222.31, 222.28, 222.3, 223.17, 223.62, 221.65, 221.31, 221.51, 221.3, 221.45, 222.08, 223.41, 223.64, 223.78, 224.04, 224.78, 226.29, 229.86, 233.29, 235.49, 237.51, 239.38, 241.45, 244.06, 245.16, 244.61, 244.15, 244.32, 244.24, 243.96, 243.03, 242.42, 241.91, 241.32, 241.0, 241.01, 241.08, 241.14, 241.73, 244.19, 246.44, 248.73, 251.29, 255.24, 258.44, 259.16, 259.82, 261.88, 263.74, 265.2, 264.89, 264.57, 264.28, 263.81, 262.88, 261.95, 261.71, 262.01, 262.54, 263.36, 264.05, 264.14, 264.38, 264.7, 264.88, 266.0, 266.88, 267.6, 269.3, 269.19, 268.71, 268.41, 268.04, 267.72, 267.63, 268.17, 268.54, 267.64, 265.27, 262.77, 260.41, 258.72, 257.52, 256.79, 255.73, 254.55, 252.88, 249.25, 246.65, 244.52, 242.76, 242.59, 242.86, 243.27, 244.02, 244.91, 245.08, 244.79, 243.07, 241.95, 240.92, 240.59, 240.46, 240.27, 240.39, 240.17, 240.83, 243.08, 245.11, 247.48, 250.37, 251.83, 252.85, 254.51, 255.53, 256.42, 255.91, 255.3, 254.61, 253.56, 253.5, 253.4, 253.39, 253.11, 250.95], "breakout_level": 274.23, "breakdown_level": 250.12, "rank": 1}];
+let filtered = [...ALL_DATA];
+let sortCol = 'net_bias', sortDir = 'desc';
+let scoreMode = 'blended'; // 'blended' | 'technical'
+let page = 0;
+const PER_PAGE = 50;
+const BIAS_BULL_THRESHOLD = 30;
+const BIAS_STRONG_BULL_THRESHOLD = 60;
+const BIAS_BEAR_THRESHOLD = -30;
+
+function modeBiasValue(r) {
+  return scoreMode === 'technical' ? r.net_bias_raw : r.net_bias;
+}
+
+function updateScoreModeUI() {
+  const btn = document.getElementById('scoreModeBtn');
+  const hdr = document.getElementById('netBiasHeader');
+  if (scoreMode === 'technical') {
+    btn.textContent = 'Mode: Technical';
+    btn.classList.add('active-tech');
+    hdr.textContent = 'Net Bias (Tech)';
+  } else {
+    btn.textContent = 'Mode: Blended';
+    btn.classList.remove('active-tech');
+    hdr.textContent = 'Net Bias (Blend)';
+  }
+}
+
+function toggleScoreMode() {
+  scoreMode = scoreMode === 'blended' ? 'technical' : 'blended';
+  if (sortCol === 'net_bias') sortDir = 'desc';
+  updateScoreModeUI();
+  applyFilters();
+}
+
+// â”€â”€ Populate sectors â”€â”€
+const sectors = [...new Set(ALL_DATA.map(r => r.sector).filter(s => s && s !== 'â€”'))].sort();
+const sf = document.getElementById('sectorFilter');
+sectors.forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s; sf.appendChild(o); });
+
+// â”€â”€ Filter + Sort â”€â”€
+function applyFilters() {
+  const q = document.getElementById('searchBox').value.toLowerCase();
+  const typ = document.getElementById('typeFilter').value;
+  const sec = document.getElementById('sectorFilter').value;
+  const bias = document.getElementById('biasFilter').value;
+  const minP = parseFloat(document.getElementById('minPrice').value) || 0;
+  const minGI = parseFloat(document.getElementById('minGI').value) || 0;
+
+  filtered = ALL_DATA.filter(r => {
+    const activeBias = modeBiasValue(r);
+    if (q && !r.symbol.toLowerCase().includes(q) && !r.name.toLowerCase().includes(q)) return false;
+    if (typ && r.type !== typ) return false;
+    if (sec && r.sector !== sec) return false;
+    if (r.price < minP) return false;
+    if (minGI > 0 && (r.gi_score === null || r.gi_score < minGI)) return false;
+    if (bias === 'bull' && activeBias < BIAS_BULL_THRESHOLD) return false;
+    if (bias === 'strong_bull' && activeBias < BIAS_STRONG_BULL_THRESHOLD) return false;
+    if (bias === 'bear' && activeBias > BIAS_BEAR_THRESHOLD) return false;
+    if (bias === 'neutral' && (activeBias >= BIAS_BULL_THRESHOLD || activeBias <= BIAS_BEAR_THRESHOLD)) return false;
+    if (bias === 'squeeze' && !r.in_squeeze) return false;
+    return true;
+  });
+  doSort();
+  page = 0;
+  render();
+}
+
+function doSort() {
+  filtered.sort((a, b) => {
+    let va = (sortCol === 'net_bias') ? modeBiasValue(a) : a[sortCol];
+    let vb = (sortCol === 'net_bias') ? modeBiasValue(b) : b[sortCol];
+    if (va === null || va === undefined) va = -Infinity;
+    if (vb === null || vb === undefined) vb = -Infinity;
+    if (typeof va === 'string') { va = va.toLowerCase(); vb = vb.toLowerCase(); }
+    if (typeof va === 'boolean') { va = va ? 1 : 0; vb = vb ? 1 : 0; }
+    if (va < vb) return sortDir === 'asc' ? -1 : 1;
+    if (va > vb) return sortDir === 'asc' ? 1 : -1;
+    return 0;
+  });
+  // Re-rank
+  filtered.forEach((r, i) => r._fRank = i + 1);
+}
+
+function render() {
+  const tbody = document.getElementById('tableBody');
+  const start = page * PER_PAGE;
+  const slice = filtered.slice(start, start + PER_PAGE);
+
+  tbody.innerHTML = slice.map(r => `
+    <tr onclick="openDetail('${r.symbol}')">
+      <td class="rank-cell">${r._fRank}</td>
+      <td class="sym-cell">${r.symbol}</td>
+      <td class="name-cell">${r.name}</td>
+      <td class="sector-cell">${r.sector}</td>
+      <td class="price-cell">${r.price.toFixed(2)}</td>
+      <td class="${r.pct_change >= 0 ? 'chg-pos' : 'chg-neg'}">${r.pct_change >= 0 ? '+' : ''}${r.pct_change.toFixed(2)}%</td>
+      <td class="score-cell" style="color:var(--green)">${r.breakout}</td>
+      <td class="score-cell" style="color:${r.breakdown > 0 ? 'var(--red)' : 'var(--muted)'}">${r.breakdown}</td>
+      <td class="score-cell" style="color:${r.net_bias_raw > 0 ? 'var(--green)' : r.net_bias_raw < 0 ? 'var(--red)' : 'var(--muted)'}">${r.net_bias_raw > 0 ? '+' : ''}${r.net_bias_raw}</td>
+      <td>${r.gi_score === null ? '<span class="tag-sm muted">N/A</span>' : `<span class="tag-sm ${r.gi_score >= 75 ? 'gi-strong' : r.gi_score >= 60 ? 'gi-accum' : r.gi_score >= 43 ? 'gi-neutral' : r.gi_score >= 28 ? 'gi-dist' : 'gi-heavy'}">${r.gi_score.toFixed(1)}</span>`}</td>
+      <td class="score-cell" style="color:${modeBiasValue(r) > 0 ? 'var(--green)' : modeBiasValue(r) < 0 ? 'var(--red)' : 'var(--muted)'}">${modeBiasValue(r) > 0 ? '+' : ''}${modeBiasValue(r)}</td>
+      <td><span class="tag-sm ${r.rsi >= 70 ? 'red' : r.rsi >= 60 ? 'green' : r.rsi <= 30 ? 'red' : 'muted'}">${r.rsi}</span></td>
+      <td><span class="tag-sm ${r.macd_trend === 'Bullish' ? 'green' : 'red'}">${r.macd_trend === 'Bullish' ? 'Bull' : 'Bear'}</span></td>
+      <td><span class="tag-sm ${r.stoch_k >= 70 ? 'green' : r.stoch_k <= 30 ? 'red' : 'muted'}">${r.stoch_k}</span></td>
+      <td><span class="tag-sm ${r.bb_pct > 90 ? 'cyan' : r.bb_pct < 10 ? 'red' : 'muted'}">${r.bb_pct.toFixed(0)}%</span></td>
+      <td style="color:${r.pct_from_52h > -5 ? 'var(--green)' : r.pct_from_52h > -15 ? 'var(--amber)' : 'var(--red)'}">${r.pct_from_52h}%</td>
+      <td><span class="tag-sm ${r.in_squeeze ? 'amber' : 'muted'}">${r.in_squeeze ? 'YES' : 'â€”'}</span></td>
+      <td><span class="tag-sm ${r.higher_lows ? 'green' : r.lower_highs ? 'red' : 'muted'}">${r.higher_lows ? 'HL â†—' : r.lower_highs ? 'LH â†˜' : 'â€”'}</span></td>
+    </tr>
+  `).join('');
+
+  // Pagination
+  const totalPages = Math.ceil(filtered.length / PER_PAGE);
+  const pg = document.getElementById('pagination');
+  pg.innerHTML = `
+    <button onclick="page=0;render();" ${page===0?'disabled':''}>&#171;</button>
+    <button onclick="page--;render();" ${page===0?'disabled':''}>&#8249; Prev</button>
+    <span class="page-info">Page ${page+1} of ${totalPages} &middot; ${filtered.length} results</span>
+    <button onclick="page++;render();" ${page>=totalPages-1?'disabled':''}>Next &#8250;</button>
+    <button onclick="page=${totalPages-1};render();" ${page>=totalPages-1?'disabled':''}>&#187;</button>
+  `;
+
+  // Update header sort indicators
+  document.querySelectorAll('thead th').forEach(th => {
+    th.classList.remove('sort-asc', 'sort-desc');
+    if (th.dataset.col === sortCol) th.classList.add(sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+  });
+}
+
+// â”€â”€ Column sorting â”€â”€
+document.querySelectorAll('thead th').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.col;
+    if (sortCol === col) sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+    else { sortCol = col; sortDir = 'desc'; }
+    doSort();
+    render();
+  });
+});
+
+// â”€â”€ Filter listeners â”€â”€
+document.getElementById('searchBox').addEventListener('input', applyFilters);
+document.getElementById('typeFilter').addEventListener('change', applyFilters);
+document.getElementById('sectorFilter').addEventListener('change', applyFilters);
+document.getElementById('biasFilter').addEventListener('change', applyFilters);
+document.getElementById('minPrice').addEventListener('change', applyFilters);
+document.getElementById('minGI').addEventListener('change', applyFilters);
+
+// â”€â”€ Initial render â”€â”€
+updateScoreModeUI();
+doSort();
+render();
+
+
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// DETAIL OVERLAY
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+let _detailChart = null;
+
+function openDetail(symbol) {
+  const overlay = document.getElementById('detailOverlay');
+  const loading = document.getElementById('loadingOverlay');
+  const loadingText = document.getElementById('loadingText');
+
+  // Check if we have pre-computed detail data embedded
+  if (window._detailCache && window._detailCache[symbol]) {
+    renderDetail(window._detailCache[symbol]);
+    return;
+  }
+
+  // Show loading, fetch via yfinance proxy... but since this is static HTML,
+  // we render from the scan data we already have (cache-backed indicators)
+  const row = ALL_DATA.find(r => r.symbol === symbol);
+  if (!row) return;
+
+  // Render from cached scan payload (ATR/gap may be proxy if OHLC missing)
+  renderDetailFromScan(row);
+}
+
+function renderDetailFromScan(d) {
+  const overlay = document.getElementById('detailOverlay');
+  const content = document.getElementById('detailContent');
+
+  const rsiLabel = d.rsi >= 70 ? 'overbought' : d.rsi <= 30 ? 'oversold' : 'neutral';
+  const rsiHot = d.rsi >= 65;
+  const stochLabel = d.stoch_k >= 50 ? 'bull' : 'bear';
+  const macdLabel = (d.macd_trend === 'Bullish' ? 'bull' : 'bear') + (d.macd_rising ? ' +hist' : ' -hist');
+  const bbStatus = d.bb_pct > 95 ? 'upper break' : d.bb_pct < 5 ? 'lower break' : 'mid range';
+
+  const maTags = [];
+  if (d.above_ma20 && d.above_ma50 && d.above_ma200) maTags.push('>MA20+50+200');
+  else if (d.above_ma20 && d.above_ma50) maTags.push('>MA20+50');
+  else if (d.above_ma20) maTags.push('>MA20');
+  else if (!d.above_ma20 && !d.above_ma50 && !d.above_ma200) maTags.push('<MA20+50+200');
+
+  const biasScore = Math.round(d.net_bias / 2 + 50);
+  const inSqueeze = d.in_squeeze;
+  const netBias = d.net_bias;
+  const coilType = inSqueeze ? (netBias > 0 ? 'BULLISH COIL' : netBias < 0 ? 'BEARISH COIL' : 'NEUTRAL COIL') : (netBias > 0 ? 'BULLISH EXPANSION' : 'BEARISH EXPANSION');
+
+  const indexLabel = d.mcap > 10e9 ? 'S&P500' : d.mcap > 2e9 ? 'Mid-Cap' : 'Small-Cap';
+
+  content.innerHTML = `
+    <div class="detail-header">
+      <div>
+        <h1>${d.symbol}</h1>
+        <div class="detail-meta">
+          <span class="v">${d.name}</span> &middot;
+          <span>${d.sector}</span> &middot;
+          <span>${indexLabel}</span> &middot;
+          <span class="v">${d.price.toFixed(2)}</span> &middot;
+          <span class="${d.pct_change >= 0 ? 'g' : 'r'}">${d.pct_change >= 0 ? '+' : ''}${d.pct_change.toFixed(2)}%</span> &middot;
+          <span>RSI <span class="c">${d.rsi}</span></span> &middot;
+          <span>GI <span class="c">${d.gi_score === null ? 'N/A' : d.gi_score.toFixed(1)}</span></span>
+        </div>
+      </div>
+      <button class="close-btn" onclick="closeDetail()">&#10005; Close</button>
+    </div>
+
+    <div class="scores">
+      <div class="score-box"><div class="score-label">&#9650; Breakout</div><div class="score-val" style="color:var(--green)">${d.breakout}</div></div>
+      <div class="score-box"><div class="score-label">&#9660; Breakdown</div><div class="score-val" style="color:${d.breakdown > 0 ? 'var(--red)' : 'var(--muted)'}">${d.breakdown}</div></div>
+      <div class="score-box"><div class="score-label">Tech Bias</div><div class="score-val" style="color:${d.net_bias_raw > 0 ? 'var(--green)' : d.net_bias_raw < 0 ? 'var(--red)' : 'var(--muted)'}">${d.net_bias_raw > 0 ? '+' : ''}${d.net_bias_raw}</div></div>
+      <div class="score-box"><div class="score-label">&#9830; Net Bias</div><div class="score-val" style="color:${d.net_bias > 0 ? 'var(--green)' : d.net_bias < 0 ? 'var(--red)' : 'var(--muted)'}">${d.net_bias > 0 ? '+' : ''}${d.net_bias}</div></div>
+    </div>
+
+    <div class="chart-section">
+      <div class="chart-hdr">
+        <div class="chart-title">Price Chart · Daily · 52 Weeks</div>
+        <div class="chart-legend">
+          <span><i class="legend-line" style="background:#38bdf8"></i>Close</span>
+          <span><i class="legend-line" style="background:#22d3ee"></i>MA20</span>
+          <span><i class="legend-line" style="background:#facc15"></i>MA50</span>
+          <span><i class="legend-line" style="background:#a78bfa"></i>MA200</span>
+          <span><i class="legend-line" style="background:rgba(56,189,248,0.35)"></i>BBands</span>
+        </div>
+      </div>
+      <div class="chart-stats">
+        <span class="chart-stat">Price <span class="v">${d.price.toFixed(2)}</span></span>
+        <span class="chart-stat">52W High Dist <span class="v">${d.pct_from_52h.toFixed(1)}%</span></span>
+        <span class="chart-stat">Breakout <span class="v">${Number.isFinite(d.breakout_level) ? d.breakout_level.toFixed(2) : 'n/a'}</span></span>
+        <span class="chart-stat">Breakdown <span class="v">${Number.isFinite(d.breakdown_level) ? d.breakdown_level.toFixed(2) : 'n/a'}</span></span>
+      </div>
+      <canvas id="priceChart"></canvas>
+    </div>
+
+    <div class="ind-grid">
+      <div class="ind-box"><div class="ind-label">Momentum</div><div class="tags">
+        <span class="tag ${rsiHot ? 'tag-green' : d.rsi < 35 ? 'tag-red' : 'tag-muted'}">RSI ${d.rsi} ${rsiHot ? '&mdash; hot' : d.rsi < 35 ? '&mdash; cold' : ''}</span>
+        <span class="tag ${d.macd_trend === 'Bullish' ? 'tag-green' : 'tag-red'}">MACD ${macdLabel}</span>
+        <span class="tag ${d.stoch_k >= 50 ? 'tag-green' : 'tag-red'}">Stoch ${d.stoch_k} ${stochLabel}</span>
+      </div></div>
+      <div class="ind-box"><div class="ind-label">Volume</div><div class="tags">
+        <span class="tag ${d.volume_is_proxy ? 'tag-muted' : 'tag-cyan'}">${d.volume_is_proxy ? 'Volume unavailable' : ('RVOL ' + d.rvol20.toFixed(2) + 'x')}</span>
+        <span class="tag ${d.volume_is_proxy ? 'tag-muted' : d.obv_up ? 'tag-green' : 'tag-red'}">${d.volume_is_proxy ? 'OBV n/a' : d.obv_up ? 'OBV rising' : 'OBV falling'}</span>
+      </div></div>
+    </div>
+
+    <div class="ind-grid">
+      <div class="ind-box"><div class="ind-label">Technical</div><div class="tags">
+        <span class="tag ${d.pct_from_52h > -5 ? 'tag-green' : d.pct_from_52h > -15 ? 'tag-amber' : 'tag-red'}">${d.pct_from_52h}% 52H</span>
+        <span class="tag ${d.above_ma20 && d.above_ma50 && d.above_ma200 ? 'tag-green' : 'tag-red'}">${maTags.join(' ') || '>MA20'}</span>
+        <span class="tag ${d.golden_cross === 'YES' ? 'tag-green' : 'tag-muted'}">${d.golden_cross === 'YES' ? 'Golden Cross' : 'No Cross'}</span>
+      </div></div>
+      <div class="ind-box"><div class="ind-label">Volatility</div><div class="tags">
+        <span class="tag ${d.bb_pct > 90 ? 'tag-cyan' : d.bb_pct < 10 ? 'tag-red' : 'tag-muted'}">BB ${bbStatus}</span>
+        <span class="tag ${d.bb_width < d.bb_width_avg ? 'tag-amber' : 'tag-muted'}">BB ${d.bb_width < d.bb_width_avg ? 'contracting' : 'normal'}</span>
+        <span class="tag ${d.atr_expanding ? 'tag-cyan' : 'tag-muted'}">ATR ${d.atr_is_proxy ? 'proxy ' : ''}${d.atr_expanding ? 'expanding' : 'stable'}</span>
+      </div></div>
+    </div>
+
+    <div class="ind-grid">
+      <div class="ind-box"><div class="ind-label">Structure</div><div class="tags">
+        <span class="tag ${d.higher_lows ? 'tag-green' : d.lower_highs ? 'tag-red' : 'tag-muted'}">${d.higher_lows ? 'Higher lows &#8599;' : d.lower_highs ? 'Lower highs &#8600;' : 'Neutral'}</span>
+      </div></div>
+      <div class="ind-box"><div class="ind-label">Price Action</div><div class="tags">
+        <span class="tag ${d.pct_change > 0 ? 'tag-green' : 'tag-red'}">${d.pct_change > 0 ? '+' : ''}${d.pct_change.toFixed(1)}% today</span>
+        <span class="tag ${d.gap_up_proxy ? 'tag-green' : d.gap_down_proxy ? 'tag-red' : 'tag-muted'}">${d.gap_up_proxy ? 'Gap-up' : d.gap_down_proxy ? 'Gap-down' : 'No gap'}${d.gap_is_proxy ? ' (proxy)' : ''}</span>
+      </div></div>
+    </div>
+
+    <div class="compression">
+      <div class="comp-hdr"><div class="comp-icon"></div><div class="comp-title">Compression Analysis</div></div>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
+        <span class="squeeze-badge ${inSqueeze ? 'sq-on' : 'sq-off'}">${inSqueeze ? '&#9888; IN SQUEEZE' : '&#10003; NO SQUEEZE'}</span>
+        <span class="coil-label">&#9650; ${coilType}</span>
+        <span class="bias-label">Bias score: <span class="bias-val">+${biasScore}</span> / 100</span>
+      </div>
+      <div class="comp-metrics">
+        <div class="cm"><div class="cm-label">BB Width</div><div class="cm-val">${d.bb_width}%</div><div class="cm-sub">${d.bb_width < d.bb_width_avg ? 'Tight' : 'Stable'}</div></div>
+        <div class="cm"><div class="cm-label">BB Width Avg</div><div class="cm-val">${d.bb_width_avg}%</div><div class="cm-sub">20-day avg</div></div>
+        <div class="cm"><div class="cm-label">Stoch K</div><div class="cm-val">${d.stoch_k}</div><div class="cm-sub">${d.stoch_k > 80 ? 'Overbought' : d.stoch_k < 20 ? 'Oversold' : '&mdash;'}</div></div>
+        <div class="cm"><div class="cm-label">RSI</div><div class="cm-val">${d.rsi}</div><div class="cm-sub">${d.rsi > 70 ? 'Overbought' : d.rsi < 30 ? 'Oversold' : '&mdash;'}</div></div>
+        <div class="cm"><div class="cm-label">52H %</div><div class="cm-val">${d.pct_from_52h}%</div><div class="cm-sub">From 52w high</div></div>
+        <div class="cm"><div class="cm-label">ATR %</div><div class="cm-val">${d.atr_proxy_pct.toFixed(2)}%</div><div class="cm-sub">${d.atr_expanding ? 'Expanding' : 'Stable'}${d.atr_is_proxy ? ' (proxy)' : ''}</div></div>
+      </div>
+      <div class="tags" style="margin-top:16px;">
+        <span class="tag ${d.above_ma20 ? 'tag-green' : 'tag-red'}">${d.above_ma20 ? 'Above' : 'Below'} MA20</span>
+        <span class="tag ${d.above_ma50 ? 'tag-green' : 'tag-red'}">${d.above_ma50 ? 'Above' : 'Below'} MA50</span>
+        <span class="tag ${d.above_ma200 ? 'tag-green' : 'tag-red'}">${d.above_ma200 ? 'Above' : 'Below'} MA200</span>
+        <span class="tag ${d.higher_lows ? 'tag-green' : 'tag-muted'}">${d.higher_lows ? 'Higher lows in range &#8599;' : 'No structure'}</span>
+        <span class="tag ${d.golden_cross === 'YES' ? 'tag-green' : 'tag-muted'}">${d.golden_cross === 'YES' ? 'Golden Cross' : 'No golden cross'}</span>
+        <span class="tag ${inSqueeze ? 'tag-amber' : 'tag-muted'}">${inSqueeze ? 'BB in squeeze' : 'No squeeze'}</span>
+        <span class="tag ${d.gap_up_proxy ? 'tag-green' : d.gap_down_proxy ? 'tag-red' : 'tag-muted'}">Gap ${d.gap_is_proxy ? 'proxy ' : ''}threshold ${d.gap_proxy_thresh.toFixed(2)}%</span>
+      </div>
+    </div>
+
+    <div class="all-indicators">
+      <div class="all-ind-title">All Indicators</div>
+      <div class="ai-grid">
+        <div class="ai-cell">RSI (14) &nbsp; <span class="val">${d.rsi}</span> &nbsp; <span class="dot" style="background:${d.rsi >= 70 ? 'var(--red)' : d.rsi <= 30 ? 'var(--green)' : 'var(--muted)'}"></span> <span class="st" style="color:${d.rsi >= 70 ? 'var(--red)' : d.rsi <= 30 ? 'var(--green)' : 'var(--muted)'}">${rsiLabel}</span></div>
+        <div class="ai-cell">MACD Hist &nbsp; <span class="val">${d.macd_hist}</span> &nbsp; <span class="dot" style="background:${d.macd_hist > 0 ? 'var(--green)' : 'var(--red)'}"></span> <span class="st" style="color:${d.macd_hist > 0 ? 'var(--green)' : 'var(--red)'}">${d.macd_trend}</span></div>
+        <div class="ai-cell">Stoch K &nbsp; <span class="val">${d.stoch_k}</span> &nbsp; <span class="st" style="color:${d.stoch_k > 80 ? 'var(--red)' : d.stoch_k < 20 ? 'var(--green)' : 'var(--muted)'}">${d.stoch_k > 80 ? 'Overbought' : d.stoch_k < 20 ? 'Oversold' : '&mdash;'}</span></div>
+        <div class="ai-cell">BB %B &nbsp; <span class="val">${d.bb_pct.toFixed(1)}</span> &nbsp; <span class="st" style="color:${d.bb_pct > 80 ? 'var(--cyan)' : 'var(--muted)'}">${d.bb_pct > 95 ? 'Upper break' : d.bb_pct > 80 ? 'Upper' : d.bb_pct < 20 ? 'Lower' : 'Mid'}</span></div>
+
+        <div class="ai-cell">BB Width &nbsp; <span class="val">${d.bb_width}%</span> &nbsp; <span class="st" style="color:var(--muted)">${d.bb_width < d.bb_width_avg ? 'Tight' : 'Normal'}</span></div>
+        <div class="ai-cell">Golden Cross &nbsp; <span class="val">${d.golden_cross}</span> &nbsp; <span class="dot" style="background:${d.golden_cross === 'YES' ? 'var(--green)' : 'var(--muted)'}"></span> <span class="st" style="color:${d.golden_cross === 'YES' ? 'var(--green)' : 'var(--muted)'}">${d.golden_cross === 'YES' ? 'Bullish' : '&mdash;'}</span></div>
+        <div class="ai-cell">Death Cross &nbsp; <span class="val">${d.death_cross}</span> &nbsp; <span class="st" style="color:${d.death_cross === 'YES' ? 'var(--red)' : 'var(--muted)'}">${d.death_cross === 'YES' ? 'Bearish' : '&mdash;'}</span></div>
+        <div class="ai-cell">52H % &nbsp; <span class="val">${d.pct_from_52h}%</span> &nbsp; <span class="st" style="color:${d.pct_from_52h > -5 ? 'var(--green)' : 'var(--amber)'}">${d.pct_from_52h > -5 ? 'Near high' : 'Off high'}</span></div>
+
+        <div class="ai-cell">Higher Lows &nbsp; <span class="val">${d.higher_lows ? 'YES' : 'NO'}</span> &nbsp; <span class="dot" style="background:${d.higher_lows ? 'var(--green)' : 'var(--muted)'}"></span></div>
+        <div class="ai-cell">Lower Highs &nbsp; <span class="val">${d.lower_highs ? 'YES' : 'NO'}</span> &nbsp; <span class="dot" style="background:${d.lower_highs ? 'var(--red)' : 'var(--muted)'}"></span></div>
+        <div class="ai-cell">Squeeze &nbsp; <span class="val">${inSqueeze ? 'ON' : 'OFF'}</span> &nbsp; <span class="dot" style="background:${inSqueeze ? 'var(--amber)' : 'var(--muted)'}"></span></div>
+        <div class="ai-cell">Net Bias &nbsp; <span class="val" style="color:${d.net_bias > 0 ? 'var(--green)' : d.net_bias < 0 ? 'var(--red)' : 'var(--muted)'}">${d.net_bias > 0 ? '+' : ''}${d.net_bias}</span></div>
+        <div class="ai-cell">Gekko GI &nbsp; <span class="val">${d.gi_score === null ? 'N/A' : d.gi_score.toFixed(1)}</span> &nbsp; <span class="st" style="color:var(--muted)">${d.gi_label || 'N/A'}</span></div>
+
+        <div class="ai-cell">ATR (14) &nbsp; <span class="val">${d.atr_proxy_pct.toFixed(2)}%</span> &nbsp; <span class="st" style="color:${d.atr_expanding ? 'var(--cyan)' : 'var(--muted)'}">${d.atr_expanding ? 'Expanding' : 'Stable'}${d.atr_is_proxy ? ' proxy' : ''}</span></div>
+        <div class="ai-cell">Gap-Up &nbsp; <span class="val">${d.gap_up_proxy ? 'YES' : 'NO'}</span> &nbsp; <span class="dot" style="background:${d.gap_up_proxy ? 'var(--green)' : 'var(--muted)'}"></span></div>
+        <div class="ai-cell">Gap-Down &nbsp; <span class="val">${d.gap_down_proxy ? 'YES' : 'NO'}</span> &nbsp; <span class="dot" style="background:${d.gap_down_proxy ? 'var(--red)' : 'var(--muted)'}"></span></div>
+        <div class="ai-cell">Gap Threshold &nbsp; <span class="val">${d.gap_proxy_thresh.toFixed(2)}%</span> &nbsp; <span class="st" style="color:var(--muted)">20D vol-adjusted</span></div>
+        <div class="ai-cell">Gap % &nbsp; <span class="val">${d.gap_pct > 0 ? '+' : ''}${d.gap_pct.toFixed(2)}%</span> &nbsp; <span class="st" style="color:${d.gap_pct >= 0 ? 'var(--green)' : 'var(--red)'}">${d.gap_is_proxy ? 'proxy' : 'open vs prev close'}</span></div>
+        <div class="ai-cell">RVOL (20) &nbsp; <span class="val">${d.rvol20.toFixed(2)}x</span> &nbsp; <span class="st" style="color:${d.volume_is_proxy ? 'var(--muted)' : d.rvol20 >= 1.5 ? 'var(--cyan)' : 'var(--muted)'}">${d.volume_is_proxy ? 'n/a' : d.rvol20 >= 1.5 ? 'High' : 'Normal'}</span></div>
+        <div class="ai-cell">OBV Trend &nbsp; <span class="val">${d.volume_is_proxy ? 'N/A' : (d.obv_up ? 'UP' : 'DOWN')}</span> &nbsp; <span class="dot" style="background:${d.volume_is_proxy ? 'var(--muted)' : d.obv_up ? 'var(--green)' : 'var(--red)'}"></span></div>
+        <div class="ai-cell">Vol Today &nbsp; <span class="val">${d.vol_now.toLocaleString()}</span> &nbsp; <span class="st" style="color:var(--muted)">Avg20 ${d.vol_avg20.toLocaleString()}</span></div>
+      </div>
+    </div>
+  `;
+
+  renderPriceChart(d);
+
+  overlay.classList.add('open');
+  overlay.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function renderPriceChart(d) {
+  const canvas = document.getElementById('priceChart');
+  if (!canvas || !window.Chart) return;
+  const ctx = canvas.getContext('2d');
+
+  const labels = Array.isArray(d.chart_dates) ? d.chart_dates : [];
+  const close = Array.isArray(d.chart_close) ? d.chart_close : [];
+  const ma20 = Array.isArray(d.chart_ma20) ? d.chart_ma20 : [];
+  const ma50 = Array.isArray(d.chart_ma50) ? d.chart_ma50 : [];
+  const ma200 = Array.isArray(d.chart_ma200) ? d.chart_ma200 : [];
+  const bbUpper = Array.isArray(d.chart_bb_upper) ? d.chart_bb_upper : [];
+  const bbLower = Array.isArray(d.chart_bb_lower) ? d.chart_bb_lower : [];
+
+  if (!labels.length || !close.length) return;
+
+  if (_detailChart) {
+    _detailChart.destroy();
+    _detailChart = null;
+  }
+
+  const hasBreakout = typeof d.breakout_level === 'number' && Number.isFinite(d.breakout_level);
+  const hasBreakdown = typeof d.breakdown_level === 'number' && Number.isFinite(d.breakdown_level);
+  const breakoutLine = hasBreakout ? labels.map(() => d.breakout_level) : [];
+  const breakdownLine = hasBreakdown ? labels.map(() => d.breakdown_level) : [];
+
+  const lineLabelPlugin = {
+    id: 'lineLabelPlugin',
+    afterDatasetsDraw(chart) {
+      const chartArea = chart.chartArea;
+      const yScale = chart.scales.y;
+      if (!chartArea || !yScale) return;
+
+      const c = chart.ctx;
+      c.save();
+      c.font = '10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
+      c.textBaseline = 'middle';
+
+      const drawLineTag = (label, value, bg, fg, offsetY = 0) => {
+        if (!Number.isFinite(value)) return;
+        const y = yScale.getPixelForValue(value) + offsetY;
+        if (y < chartArea.top + 8 || y > chartArea.bottom - 8) return;
+
+        const text = `${label} $${value.toFixed(2)}`;
+        const tw = c.measureText(text).width;
+        const padX = 6;
+        const h = 16;
+        const w = tw + padX * 2;
+        const x = chartArea.right - w - 6;
+
+        c.fillStyle = bg;
+        c.fillRect(x, y - h / 2, w, h);
+        c.strokeStyle = 'rgba(15,23,42,0.65)';
+        c.strokeRect(x, y - h / 2, w, h);
+
+        c.fillStyle = fg;
+        c.fillText(text, x + padX, y);
+      };
+
+      if (hasBreakout) drawLineTag('BO', d.breakout_level, 'rgba(34,197,94,0.20)', '#86efac', -10);
+      if (hasBreakdown) drawLineTag('BD', d.breakdown_level, 'rgba(239,68,68,0.20)', '#fca5a5', 10);
+
+      c.restore();
+    }
+  };
+
+  const closeFill = ctx.createLinearGradient(0, 0, 0, canvas.height || 340);
+  closeFill.addColorStop(0, 'rgba(56, 189, 248, 0.22)');
+  closeFill.addColorStop(1, 'rgba(56, 189, 248, 0.01)');
+
+  _detailChart = new Chart(ctx, {
+    type: 'line',
+    plugins: [lineLabelPlugin],
+    data: {
+      labels,
+      datasets: [
+        { label: 'BB Upper', data: bbUpper, borderColor: 'rgba(56, 189, 248, 0.20)', borderWidth: 1, pointRadius: 0, tension: 0.18 },
+        { label: 'BB Lower', data: bbLower, borderColor: 'rgba(56, 189, 248, 0.20)', backgroundColor: 'rgba(56, 189, 248, 0.07)', borderWidth: 1, pointRadius: 0, fill: '-1', tension: 0.18 },
+        {
+          label: 'Close',
+          data: close,
+          borderColor: '#38bdf8',
+          backgroundColor: closeFill,
+          borderWidth: 2.2,
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          fill: true,
+          tension: 0.2
+        },
+        { label: 'MA20', data: ma20, borderColor: '#22d3ee', borderWidth: 1.35, pointRadius: 0, pointHoverRadius: 0, tension: 0.18 },
+        { label: 'MA50', data: ma50, borderColor: '#facc15', borderWidth: 1.25, pointRadius: 0, pointHoverRadius: 0, tension: 0.18 },
+        { label: 'MA200', data: ma200, borderColor: '#a78bfa', borderWidth: 1.2, pointRadius: 0, pointHoverRadius: 0, tension: 0.18 },
+        { label: 'Breakout', data: breakoutLine, borderColor: 'rgba(34, 197, 94, 0.62)', borderDash: [5, 4], borderWidth: 1, pointRadius: 0, pointHoverRadius: 0, hidden: !hasBreakout },
+        { label: 'Breakdown', data: breakdownLine, borderColor: 'rgba(239, 68, 68, 0.62)', borderDash: [5, 4], borderWidth: 1, pointRadius: 0, pointHoverRadius: 0, hidden: !hasBreakdown }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 260 },
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#0b1220',
+          borderColor: '#334155',
+          borderWidth: 1,
+          titleColor: '#f8fafc',
+          bodyColor: '#e2e8f0',
+          padding: 10,
+          cornerRadius: 8,
+          displayColors: false,
+          callbacks: {
+            title: (items) => items.length ? `Date: ${items[0].label}` : '',
+            label: (tipCtx) => `${tipCtx.dataset.label}: $${Number(tipCtx.parsed.y).toFixed(2)}`
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: '#94a3b8',
+            maxTicksLimit: 8,
+            callback: (val, idx) => {
+              const lbl = labels[idx] || '';
+              return lbl.length >= 7 ? lbl.slice(2, 7) : lbl;
+            }
+          },
+          border: { color: 'rgba(148, 163, 184, 0.18)' },
+          grid: { color: 'rgba(148, 163, 184, 0.06)', drawTicks: false }
+        },
+        y: {
+          position: 'right',
+          ticks: { color: '#94a3b8', padding: 6, callback: (v) => `$${Number(v).toFixed(0)}` },
+          border: { color: 'rgba(148, 163, 184, 0.18)' },
+          grid: { color: 'rgba(148, 163, 184, 0.06)' }
+        }
+      }
+    }
+  });
+}
+
+function closeDetail() {
+  if (_detailChart) {
+    _detailChart.destroy();
+    _detailChart = null;
+  }
+  document.getElementById('detailOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ESC to close
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+</script>
+</body>
+</html>
