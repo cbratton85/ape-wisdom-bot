@@ -3089,10 +3089,12 @@ def export_interactive_html(df):
         filename = "momentum.html"
         momentum_path = os.path.join(PUBLIC_DIR, filename)
         
-        # Save the HTML directly to momentum.html
-        with open(momentum_path, "w", encoding="utf-8") as f: 
+        with open(momentum_path, "w", encoding="utf-8") as f:
             f.write(html_content)
-            
+        stale_gz = momentum_path + ".gz"
+        if os.path.exists(stale_gz):
+            os.remove(stale_gz)
+
         print(f"{C_GREEN}[+] Main dashboard updated at: {momentum_path}{C_RESET}")
         
         return filename

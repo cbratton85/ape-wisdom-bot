@@ -4,7 +4,6 @@ import os
 import sys
 import time
 import json
-import gzip
 import webbrowser
 import importlib
 from datetime import datetime, timedelta
@@ -46,7 +45,7 @@ BATCH_SIZE      = 40
 COOLDOWN        = 1.5
 LOOKBACK_DAYS   = 400
 OUTPUT_FILE     = "stock_dashboard.html"
-COMPRESS_HTML_OUTPUT = True
+COMPRESS_HTML_OUTPUT = False
 REFRESH_DATA_BEFORE_SCAN = False  # Keep dashboard read-only unless explicitly enabled.
 
 # Scan/filter tuning
@@ -210,13 +209,10 @@ def safe_save(df, path):
 def write_dashboard_output(html, out_path):
   with open(out_path, "w", encoding="utf-8") as f:
     f.write(html)
-
-  gz_path = None
-  if COMPRESS_HTML_OUTPUT:
-    gz_path = out_path + ".gz"
-    with gzip.open(gz_path, "wb") as f:
-      f.write(html.encode("utf-8"))
-  return gz_path
+  stale_gz = out_path + ".gz"
+  if os.path.exists(stale_gz):
+    os.remove(stale_gz)
+  return out_path
 
 
 def load_gekko_scores(path=GEKKO_SCREENER_FILE):
@@ -630,7 +626,7 @@ def build_full_html(scan_results):
 
     rows_json = json.dumps(scan_results)
 
-    now_str = datetime.now().strftime("%Y-%m-%d %H:%M")
+    build_ts_ms = int(time.time() * 1000)
     total = len(scan_results)
     bullish = sum(1 for r in scan_results if r["net_bias"] >= BIAS_BULL_THRESHOLD)
     bearish = sum(1 for r in scan_results if r["net_bias"] <= BIAS_BEAR_THRESHOLD)
@@ -981,7 +977,7 @@ def build_full_html(scan_results):
     <div class="brand"><span>STOCK</span> DASHBOARD</div>
     <div class="live-dot"></div>
     <div class="topbar-meta">
-      <span>Updated <em>{now_str}</em></span>
+      <span>Updated <em id="updatedAt"></em></span>
     </div>
   </div>
   <div style="display:flex;gap:16px;align-items:center;">
@@ -1072,6 +1068,7 @@ def build_full_html(scan_results):
 
 <script>
 const ALL_DATA = {rows_json};
+const BUILD_TS_MS = {build_ts_ms};
 let filtered = [...ALL_DATA];
 let sortCol = 'net_bias', sortDir = 'desc';
 let scoreMode = 'blended'; // 'blended' | 'technical'
@@ -1080,6 +1077,8 @@ const PER_PAGE = 50;
 const BIAS_BULL_THRESHOLD = {BIAS_BULL_THRESHOLD};
 const BIAS_STRONG_BULL_THRESHOLD = {BIAS_STRONG_BULL_THRESHOLD};
 const BIAS_BEAR_THRESHOLD = {BIAS_BEAR_THRESHOLD};
+
+document.getElementById('updatedAt').textContent = new Date(BUILD_TS_MS).toLocaleString();
 
 function modeBiasValue(r) {{
   return scoreMode === 'technical' ? r.net_bias_raw : r.net_bias;
@@ -1724,16 +1723,13 @@ def main():
       html = build_full_html(results)
       p.update(1)
       out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), OUTPUT_FILE)
-      gz_path = write_dashboard_output(html, out_path)
+      saved_path = write_dashboard_output(html, out_path)
       p.update(1)
-      webbrowser.open(f"file:///{out_path.replace(os.sep, '/')}")
+      webbrowser.open(f"file:///{saved_path.replace(os.sep, '/')}")
       p.update(1)
 
-    size_mb = os.path.getsize(out_path) / 1e6
-    print(f"Dashboard saved: {out_path} ({size_mb:.1f}MB)")
-    if gz_path:
-      size_gz_mb = os.path.getsize(gz_path) / 1e6
-      print(f"Compressed: {gz_path} ({size_gz_mb:.1f}MB)")
+    size_mb = os.path.getsize(saved_path) / 1e6
+    print(f"Dashboard saved: {saved_path} ({size_mb:.1f}MB)")
 
 
 if __name__ == "__main__":

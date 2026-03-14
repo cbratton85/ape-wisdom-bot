@@ -10,6 +10,7 @@ Usage:
 
 import json
 import math
+import time
 import requests
 import pandas as pd
 from datetime import datetime
@@ -164,7 +165,7 @@ def build_rows_json(df: pd.DataFrame) -> str:
 
 
 def build_html(df: pd.DataFrame) -> str:
-    now_str = datetime.now().strftime("%Y-%m-%d %H:%M")
+    build_ts_ms = int(time.time() * 1000)
     total   = len(df)
 
     scores = df["gi_score"].dropna().astype(float)
@@ -357,7 +358,7 @@ def build_html(df: pd.DataFrame) -> str:
     <div class="live-dot"></div>
   </div>
   <div class="topbar-meta">
-    <span>Updated <em id="updatedAt">{now_str}</em></span>
+    <span>Updated <em id="updatedAt"></em></span>
     <span>Stocks <em>{total:,}</em></span>
     <span>Avg GI <em id="avgGI">{avg_score:.1f}</em></span>
   </div>
@@ -444,6 +445,9 @@ def build_html(df: pd.DataFrame) -> str:
 
 <script>
 const ALL_ROWS = {rows_json};
+const BUILD_TS_MS = {build_ts_ms};
+
+document.getElementById('updatedAt').textContent = new Date(BUILD_TS_MS).toLocaleString();
 
 // Add rank
 ALL_ROWS.forEach((r, i) => r.rank = i + 1);
