@@ -31388,5 +31388,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "PPH": {
+        "ticker": "PPH",
+        "name": "VanEck Pharmaceutical ETF",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 1205044864,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ONB": {
+        "ticker": "ONB",
+        "name": "Old National Bancorp",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 8405527040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
