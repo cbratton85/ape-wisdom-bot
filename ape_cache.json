@@ -31378,5 +31378,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "IYK": {
+        "ticker": "IYK",
+        "name": "iShares U.S. Consumer Staples E",
+        "meta": "Consumer Defensive",
+        "type": "ETF",
+        "mcap": 272887488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
