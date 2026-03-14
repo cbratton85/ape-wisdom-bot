@@ -31418,5 +31418,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "KNF": {
+        "ticker": "KNF",
+        "name": "Knife Riv Holding Co.",
+        "meta": "Building Materials",
+        "type": "EQUITY",
+        "mcap": 4446437376,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TDUP": {
+        "ticker": "TDUP",
+        "name": "ThredUp Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 434466112,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LPSN": {
+        "ticker": "LPSN",
+        "name": "LivePerson, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 31524988,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
