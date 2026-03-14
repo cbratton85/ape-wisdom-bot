@@ -31308,5 +31308,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CNP": {
+        "ticker": "CNP",
+        "name": "CenterPoint Energy, Inc (Holdin",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 28789723136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
