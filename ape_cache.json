@@ -31448,5 +31448,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "GTLS": {
+        "ticker": "GTLS",
+        "name": "Chart Industries, Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 9898604544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NEON": {
+        "ticker": "NEON",
+        "name": "Neonode Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 25677870,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
