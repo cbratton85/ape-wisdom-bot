@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Active Trades</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060a10; --surface: #0a0e17; --border: #1a2233;
+    --cyan: #38bdf8; --green: #22c55e; --red: #ef4444; --amber: #f59e0b;
+    --muted: #64748b; --mono: 'JetBrains Mono', monospace; --sans: 'Syne', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: #e2e8f0; font-family: var(--mono); }
+
+  .topbar {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 10px 28px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .topbar .brand { font-family: var(--sans); font-size: 20px; font-weight: 800; color: white; letter-spacing: 0.08em; }
+  .topbar .brand span { color: var(--cyan); }
+  .nav-links { display: flex; gap: 10px; }
+  .nav-links a {
+    font-size: 12px; font-weight: 600; color: var(--cyan); text-decoration: none;
+    letter-spacing: 0.05em; padding: 6px 12px; border: 1px solid rgba(56,189,248,0.3);
+    border-radius: 4px; transition: all 0.15s; white-space: nowrap;
+  }
+  .nav-links a:hover { background: rgba(56,189,248,0.08); border-color: var(--cyan); }
+
+  .content { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
+  h2 { font-family: var(--sans); font-size: 18px; font-weight: 700; color: white; margin: 20px 0 12px; letter-spacing: 0.05em; }
+  .section-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+
+  .trade-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 14px; }
+
+  .trade-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 18px; transition: border-color 0.2s;
+  }
+  .trade-card:hover { border-color: var(--cyan); }
+
+  .tc-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: nowrap; }
+  .tc-pair { font-size: 16px; font-weight: 700; color: white; }
+  .tc-dir { font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  .dir-short { background: rgba(239,68,68,0.12); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+  .dir-long  { background: rgba(34,197,94,0.12); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+  .dir-neutral { background: rgba(100,116,139,0.15); color: var(--muted); border: 1px solid var(--border); }
+  .tc-days { font-size: 11px; color: var(--muted); margin-left: auto; white-space: nowrap; }
+  .tc-header button { flex-shrink: 0; }
+  .tc-close {
+    background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: var(--red);
+    font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
+  }
+  .tc-close:hover { background: rgba(239,68,68,0.25); }
+  .tc-reopen {
+    background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); color: #fbbf24;
+    font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
+  }
+  .tc-reopen:hover { background: rgba(251,191,36,0.25); }
+  .tc-delete {
+    background: none; border: none; color: #ef4444; opacity: 0.4;
+    font-size: 13px; padding: 2px 4px; cursor: pointer; line-height: 1;
+  }
+  .tc-delete:hover { opacity: 1; }
+  .tc-edit {
+    background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); color: var(--cyan);
+    font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
+  }
+  .tc-edit:hover { background: rgba(56,189,248,0.25); }
+  .tc-chart {
+    background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.3); color: #a855f7;
+    font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: var(--mono);
+  }
+  .tc-chart:hover { background: rgba(168,85,247,0.25); }
+
+  /* CHART MODAL */
+  .chart-overlay {
+    display: none; position: fixed; inset: 0; z-index: 1100;
+    background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+  }
+  .chart-overlay.open { display: flex; }
+  .chart-modal {
+    background: #0a0e17; border: 1px solid var(--border); border-radius: 14px;
+    padding: 22px 28px; width: min(1500px, 99vw); max-height: 95vh;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(56,189,248,0.06);
+  }
+  .chart-modal-header {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;
+  }
+  .chart-modal-title { font-family: var(--sans); font-size: 15px; font-weight: 700; color: white; }
+  .chart-modal-title .cm-pair { color: var(--cyan); }
+  .chart-modal-stats {
+    display: flex; gap: 16px; font-size: 11px; color: var(--muted);
+  }
+  .chart-modal-stats .cm-stat { display: flex; flex-direction: column; align-items: center; }
+  .chart-modal-stats .cm-val { font-weight: 600; font-size: 13px; }
+  .chart-modal-close {
+    background: none; border: 1px solid var(--border); color: var(--muted);
+    font-size: 16px; padding: 4px 10px; border-radius: 6px; cursor: pointer;
+  }
+  .chart-modal-close:hover { color: white; border-color: var(--muted); }
+  .chart-canvas-wrap { position: relative; height: 500px; }
+
+  /* EDIT MODAL */
+  .edit-overlay {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.7); backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+  }
+  .edit-overlay.open { display: flex; }
+  .edit-modal {
+    background: #0a0e17; border: 1px solid var(--border); border-radius: 12px;
+    padding: 24px; width: min(420px, 95vw);
+  }
+  .edit-modal h3 { font-family: var(--sans); font-size: 16px; color: white; margin-bottom: 16px; }
+  .edit-field { margin-bottom: 12px; }
+  .edit-field label { display: block; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .edit-field input {
+    width: 100%; background: #0d1520; border: 1px solid var(--border); color: #e2e8f0;
+    font-family: var(--mono); font-size: 13px; padding: 8px 10px; border-radius: 6px;
+  }
+  .edit-field input:focus { border-color: var(--cyan); outline: none; }
+  .edit-actions { display: flex; gap: 10px; margin-top: 18px; }
+  .edit-actions button {
+    flex: 1; padding: 8px; border-radius: 6px; font-family: var(--mono); font-size: 12px;
+    font-weight: 600; cursor: pointer; border: 1px solid var(--border);
+  }
+  .edit-save { background: rgba(34,197,94,0.15); color: var(--green); border-color: rgba(34,197,94,0.3) !important; }
+  .edit-save:hover { background: rgba(34,197,94,0.3); }
+  .edit-cancel { background: transparent; color: var(--muted); }
+  .edit-cancel:hover { background: rgba(100,116,139,0.15); }
+
+  .tc-body { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
+  .tc-stat { }
+  .tc-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .tc-gi { display:inline-block; margin:0 4px 0 6px; padding:1px 5px; border-radius:4px; font-size:9px; font-weight:700; letter-spacing:0.04em; text-transform:none; }
+  .tc-gi-strong { background: rgba(34,197,94,0.18); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+  .tc-gi-accum { background: rgba(74,222,128,0.18); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+  .tc-gi-neutral { background: rgba(245,158,11,0.16); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+  .tc-gi-dist { background: rgba(249,115,22,0.16); color: #f97316; border: 1px solid rgba(249,115,22,0.3); }
+  .tc-gi-heavy { background: rgba(239,68,68,0.16); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+  .tc-gi-na { background: rgba(100,116,139,0.16); color: var(--muted); border: 1px solid rgba(100,116,139,0.28); }
+  .tc-val { font-size: 14px; font-weight: 600; color: #e2e8f0; }
+  .tc-prices .tc-val { font-size: 11px; }
+  .pnl-pos { color: var(--green) !important; }
+  .pnl-neg { color: var(--red) !important; }
+
+  .tc-progress { display: flex; align-items: center; gap: 10px; }
+  .tc-pbar-track { flex: 1; height: 4px; background: #1a2233; border-radius: 2px; overflow: hidden; }
+  .tc-pbar-fill { height: 100%; background: var(--cyan); border-radius: 2px; transition: width 0.3s; }
+  .tc-pbar-label { font-size: 10px; color: var(--muted); white-space: nowrap; }
+
+  .no-trades { color: var(--muted); font-size: 13px; padding: 30px; text-align: center; }
+
+  .actions { display: flex; gap: 10px; margin: 14px 0; }
+  .action-btn {
+    background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.25);
+    color: var(--cyan); font-family: var(--mono); font-size: 12px; font-weight: 600;
+    padding: 6px 14px; border-radius: 6px; cursor: pointer; transition: all 0.15s;
+  }
+  .action-btn:hover { background: rgba(56,189,248,0.2); border-color: var(--cyan); }
+  .action-btn.red { color: var(--red); border-color: rgba(239,68,68,0.25); background: rgba(239,68,68,0.08); }
+  .action-btn.red:hover { background: rgba(239,68,68,0.2); border-color: var(--red); }
+  .gi-legend {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+    margin: 8px 0 14px; font-size: 10px; color: var(--muted);
+  }
+  .gi-legend .gi-label { letter-spacing: 0.08em; text-transform: uppercase; margin-right: 2px; }
+
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 30px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">ACTIVE <span>TRADES</span></div>
+  <div class="nav-links">
+    <a href="pairs_scanner.html">&larr; Scanner</a>
+    <a href="symbols.html">Symbols</a>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="actions">
+    <button class="action-btn" onclick="exportTrades()">&#8681; Export Trades</button>
+    <label class="action-btn" style="cursor:pointer;">&#8679; Import Trades
+      <input type="file" accept=".json" onchange="importTrades(event)" style="display:none;">
+    </label>
+    <button class="action-btn red" onclick="if(confirm('Close ALL open trades?'))closeAllTrades()">Close All</button>
+    <span style="margin-left:auto;font-size:11px;color:var(--muted);">Last updated: <span id="update-time"></span></span>
+  </div>
+
+  <div class="gi-legend">
+    <span class="gi-label">GI Legend</span>
+    <span class="tc-gi tc-gi-strong">75+ Strong</span>
+    <span class="tc-gi tc-gi-accum">60-74 Accum</span>
+    <span class="tc-gi tc-gi-neutral">43-59 Neutral</span>
+    <span class="tc-gi tc-gi-dist">28-42 Dist</span>
+    <span class="tc-gi tc-gi-heavy">&lt;28 Heavy</span>
+    <span class="tc-gi tc-gi-na">No GI</span>
+  </div>
+
+  <div class="section-label">Open Trades (0)</div>
+  <div class="trade-cards" id="openTrades">
+    <div class="no-trades">No open trades. Track a pair from the scanner to get started.</div>
+  </div>
+
+  <h2 style="margin-top:30px;">Closed Trades</h2>
+  <div class="section-label">History (0)</div>
+  <div class="trade-cards" id="closedTrades">
+    <div class="no-trades">No closed trades yet.</div>
+  </div>
+</div>
+
+<div class="footer">
+  Trades are stored in localStorage and active_trades.json &middot;
+  Re-run scanner to refresh Z-scores and prices
+</div>
+
+<!-- EDIT MODAL -->
+<div class="edit-overlay" id="editModal" onclick="if(event.target===this)closeEditModal()">
+  <div class="edit-modal">
+    <h3 id="editTitle">Edit Trade</h3>
+    <input type="hidden" id="editTradeId">
+    <div class="edit-field">
+      <label>Entry Date</label>
+      <input type="date" id="editDate">
+    </div>
+    <div class="edit-field">
+      <label id="editLabelA">Entry Price A</label>
+      <input type="number" id="editPriceA" step="0.01" min="0">
+    </div>
+    <div class="edit-field">
+      <label id="editLabelB">Entry Price B</label>
+      <input type="number" id="editPriceB" step="0.01" min="0">
+    </div>
+    <div class="edit-field">
+      <label id="editLabelSharesA">Shares A</label>
+      <input type="number" id="editSharesA" step="1" min="0">
+    </div>
+    <div class="edit-field">
+      <label id="editLabelSharesB">Shares B</label>
+      <input type="number" id="editSharesB" step="1" min="0">
+    </div>
+    <div class="edit-actions">
+      <button class="edit-cancel" onclick="closeEditModal()">Cancel</button>
+      <button class="edit-save" onclick="saveTradeEdit()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHART MODAL -->
+<div class="chart-overlay" id="chartModal" onclick="if(event.target===this)closeTradeChart()">
+  <div class="chart-modal">
+    <div class="chart-modal-header">
+      <div>
+        <div class="chart-modal-title" id="chartTitle"></div>
+        <div class="chart-modal-stats" id="chartStats"></div>
+      </div>
+      <button class="chart-modal-close" onclick="closeTradeChart()">&#x2715;</button>
+    </div>
+    <div class="chart-canvas-wrap">
+      <canvas id="tradeZChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+// Load annotation + zoom plugins
+(function() {
+  const s = document.createElement("script");
+  s.src = "https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js";
+  s.onload = () => { Chart.register(window["chartjs-plugin-annotation"]); };
+  document.head.appendChild(s);
+  const h = document.createElement("script");
+  h.src = "https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js";
+  h.onload = () => {
+    const z = document.createElement("script");
+    z.src = "https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js";
+    document.head.appendChild(z);
+  };
+  document.head.appendChild(h);
+})();
+
+// Current-value marker plugin — draws a price tag on the right edge of the chart
+const currentValueMarkerPlugin = {
+  id: "currentValueMarker",
+  afterDraw(chart) {
+    const ctx = chart.ctx;
+    const chartArea = chart.chartArea;
+    chart.data.datasets.forEach((ds, i) => {
+      if (!chart.isDatasetVisible(i)) return;
+      let lastVal = null;
+      for (let j = ds.data.length - 1; j >= 0; j--) {
+        if (ds.data[j] !== null && ds.data[j] !== undefined) { lastVal = ds.data[j]; break; }
+      }
+      if (lastVal === null) return;
+      const yAxisID = ds.yAxisID || "y";
+      const scale = chart.scales[yAxisID];
+      if (!scale) return;
+      const yPx = scale.getPixelForValue(lastVal);
+      if (yPx < chartArea.top - 5 || yPx > chartArea.bottom + 5) return;
+
+      // Format label based on axis type
+      let label;
+      const ticks = chart.options.scales[yAxisID]?.ticks;
+      if (ticks && ticks.callback) {
+        label = ticks.callback(lastVal, 0, []);
+      } else {
+        label = lastVal.toFixed(2);
+      }
+
+      const color = ds.borderColor || "#38bdf8";
+      const x = chartArea.right + 4;
+      const font = "bold 10px 'JetBrains Mono', monospace";
+      ctx.save();
+      ctx.font = font;
+      const textW = ctx.measureText(label).width;
+      const padX = 5, padY = 3;
+      const boxW = textW + padX * 2;
+      const boxH = 14 + padY * 2;
+
+      // Draw connector line from chart edge to marker
+      ctx.beginPath();
+      ctx.setLineDash([2, 2]);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1;
+      ctx.moveTo(chartArea.right, yPx);
+      ctx.lineTo(x, yPx);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Draw marker background
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      const r = 3;
+      const bx = x, by = yPx - boxH / 2;
+      ctx.roundRect(bx, by, boxW, boxH, [0, r, r, 0]);
+      ctx.fill();
+
+      // Arrow notch on left side
+      ctx.beginPath();
+      ctx.moveTo(bx, yPx - 5);
+      ctx.lineTo(bx - 4, yPx);
+      ctx.lineTo(bx, yPx + 5);
+      ctx.closePath();
+      ctx.fill();
+
+      // Draw text
+      ctx.fillStyle = "#0a0e17";
+      ctx.textBaseline = "middle";
+      ctx.textAlign = "left";
+      ctx.fillText(label, bx + padX, yPx);
+      ctx.restore();
+    });
+  }
+};
+Chart.register(currentValueMarkerPlugin);
+
+const crosshairPlugin = {
+  id: "crosshairLine",
+  afterDraw(chart) {
+    const active = chart.tooltip?.getActiveElements?.();
+    if (!active || !active.length) return;
+    const { ctx, chartArea: { top, bottom } } = chart;
+    const x = active[0].element.x;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(x, top);
+    ctx.lineTo(x, bottom);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(148,163,184,0.85)";
+    ctx.setLineDash([]);
+    ctx.stroke();
+    ctx.restore();
+  },
+};
+Chart.register(crosshairPlugin);
+
+let activeTradeChart = null;
+
+function openTradeChart(btn) {
+  const raw = btn.getAttribute("data-chart").replace(/&amp;/g, "&").replace(/&#39;/g, "'");
+  const p = JSON.parse(raw);
+  if (!p.dates || p.dates.length === 0) {
+    alert("No chart data available for this pair.");
+    return;
+  }
+  const [a, b] = p.pair.split("/");
+  document.getElementById("chartTitle").innerHTML = `<span class="cm-pair">${a}</span><span style="color:#4a5568;margin:0 6px;">/</span><span class="cm-pair">${b}</span> Z-Score History`;
+  const zAbs = Math.abs(p.currentZ);
+  const zColor = zAbs >= 3 ? "#ef4444" : zAbs >= 2 ? "#f59e0b" : zAbs >= 1 ? "#38bdf8" : "#94a3b8";
+  const eAbs = Math.abs(p.entryZ);
+  const eColor = eAbs >= 3 ? "#ef4444" : eAbs >= 2 ? "#f59e0b" : eAbs >= 1 ? "#38bdf8" : "#94a3b8";
+  document.getElementById("chartStats").innerHTML = `
+    <div class="cm-stat"><span style="color:var(--muted);">Entry Z</span><span class="cm-val" style="color:${eColor}">${p.entryZ >= 0 ? "+" : ""}${p.entryZ.toFixed(2)}&sigma;</span></div>
+    <div class="cm-stat"><span style="color:var(--muted);">Current Z</span><span class="cm-val" style="color:${zColor}">${p.currentZ >= 0 ? "+" : ""}${p.currentZ.toFixed(2)}&sigma;</span></div>
+    <div class="cm-stat"><span style="color:var(--muted);">Window</span><span class="cm-val" style="color:#94a3b8;">${p.zWindow}d</span></div>`;
+  document.getElementById("chartModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+  setTimeout(() => buildTradeZChart(p.dates, p.z, p.entryZ, p.currentZ), 40);
+}
+
+function closeTradeChart() {
+  document.getElementById("chartModal").classList.remove("open");
+  document.body.style.overflow = "";
+  if (activeTradeChart) { activeTradeChart.destroy(); activeTradeChart = null; }
+}
+
+function buildTradeZChart(dates, z, entryZ, currentZ) {
+  if (activeTradeChart) { activeTradeChart.destroy(); activeTradeChart = null; }
+  const ctx = document.getElementById("tradeZChart").getContext("2d");
+  const grad = ctx.createLinearGradient(0, 0, 0, 380);
+  grad.addColorStop(0,   "rgba(56,189,248,0.20)");
+  grad.addColorStop(0.45,"rgba(56,189,248,0.06)");
+  grad.addColorStop(1,   "rgba(56,189,248,0.00)");
+
+  const hLine = (y, color, width, dash, lbl) => ({
+    type: "line", yMin: y, yMax: y,
+    borderColor: color, borderWidth: width, borderDash: dash,
+    label: { display: !!lbl, content: lbl, color, position: "end",
+            font: { size: 10, family: "'JetBrains Mono',monospace", weight: "600" },
+            xAdjust: -10, yAdjust: y > 0 ? -10 : 8, backgroundColor: "transparent", borderWidth: 0 },
+  });
+
+  const annotations = {
+    zero: hLine(0,  "rgba(148,163,184,0.30)", 1,   [4,4], "0"),
+    p1:   hLine(1,  "rgba(34,197,94,0.55)",   1,   [5,4], "+1σ"),
+    n1:   hLine(-1, "rgba(34,197,94,0.55)",   1,   [5,4], "-1σ"),
+    p2:   hLine(2,  "rgba(245,158,11,0.75)",  1.5, [5,3], "+2σ"),
+    n2:   hLine(-2, "rgba(245,158,11,0.75)",  1.5, [5,3], "-2σ"),
+    p3:   hLine(3,  "rgba(239,68,68,0.85)",   1.5, [],    "+3σ"),
+    n3:   hLine(-3, "rgba(239,68,68,0.85)",   1.5, [],    "-3σ"),
+  };
+
+  // Add entry Z horizontal line
+  if (entryZ != null && Math.abs(entryZ) > 0.1) {
+    annotations.entryLine = {
+      type: "line", yMin: entryZ, yMax: entryZ,
+      borderColor: "rgba(168,85,247,0.7)", borderWidth: 1.5, borderDash: [3, 3],
+      label: { display: true, content: "Entry " + (entryZ >= 0 ? "+" : "") + entryZ.toFixed(2) + "σ",
+              color: "#a855f7", position: "start",
+              font: { size: 9, family: "'JetBrains Mono',monospace", weight: "600" },
+              xAdjust: 10, yAdjust: -10, backgroundColor: "rgba(10,14,23,0.8)", borderWidth: 0,
+              padding: 3 },
+    };
+  }
+
+  activeTradeChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: dates,
+      datasets: [{
+        label: "Z-Score",
+        data: z,
+        borderColor: "#38bdf8",
+        borderWidth: 1.8,
+        pointRadius: 0,
+        pointHoverRadius: 3,
+        pointBorderWidth: 0,
+        fill: true,
+        backgroundColor: grad,
+        tension: 0.3,
+        spanGaps: true,
+
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: { right: 60 } },
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: "#0d1520", borderColor: "#242d40", borderWidth: 1,
+          titleColor: "#64748b", bodyColor: "#e2e8f0",
+          titleFont: { family: "'JetBrains Mono',monospace", size: 11 },
+          bodyFont:  { family: "'JetBrains Mono',monospace", size: 14 },
+          padding: 14, caretSize: 5, caretPadding: 50,
+          usePointStyle: true, pointStyle: "rectRounded", displayColors: true,
+          callbacks: {
+            labelColor: c => ({
+              borderColor: c.dataset.borderColor,
+              backgroundColor: c.dataset.borderColor,
+              borderWidth: 0, borderRadius: 2,
+            }),
+            label: c => {
+              const v = c.raw;
+              if (v === null) return "";
+              const lv = Math.abs(v) >= 3 ? "EXTREME" : Math.abs(v) >= 2 ? "STRONG" : Math.abs(v) >= 1 ? "SIGNAL" : "neutral";
+              return ` Z = ${v >= 0 ? "+" : ""}${v.toFixed(3)}σ   [${lv}]`;
+            },
+          },
+        },
+        annotation: { annotations },
+        zoom: {
+          pan: { enabled: true, mode: "x" },
+          zoom: { wheel: { enabled: true, speed: 0.1 }, pinch: { enabled: true }, mode: "x" },
+        },
+      },
+      scales: {
+        x: {
+          ticks: { color: "#374151", font: { family: "'JetBrains Mono',monospace", size: 10 }, maxRotation: 0, maxTicksLimit: 10, autoSkip: true },
+          grid: { color: "rgba(28,35,51,0.7)" }, border: { color: "#1c2333" },
+        },
+        y: {
+          ticks: { color: "#374151", font: { family: "'JetBrains Mono',monospace", size: 10 },
+            callback: v => (v >= 0 ? "+" : "") + v.toFixed(2) + "σ" },
+          grid: { color: "rgba(28,35,51,0.6)" }, border: { color: "#1c2333" },
+        },
+      },
+    },
+  });
+}
+
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeTradeChart(); });
+</script>
+
+<script>
+const TRADES_INIT = [];
+const GI_MAP = {"BACQ": 100.0, "DSGR": 99.1, "ARQ": 94.9, "OWLT": 92.9, "OLMA": 90.8, "ACNT": 89.8, "BCIC": 89.4, "GO": 88.4, "SDHC": 88.4, "SCO": 87.0, "HHH": 86.8, "HDSN": 86.5, "MEI": 86.4, "ORBS": 85.9, "SHC": 85.3, "ENGN": 85.2, "VENU": 84.7, "ASLE": 84.7, "LAZ": 84.3, "JBI": 84.1, "NAIL": 83.7, "WGO": 83.6, "KSS": 82.9, "HGTY": 82.8, "PACK": 82.7, "SSYS": 82.3, "COLL": 82.1, "YETI": 82.1, "EIDO": 81.8, "SIGA": 81.6, "HVT": 81.4, "KROS": 81.4, "AMWD": 81.3, "FTCI": 81.3, "VNM": 81.2, "EVGO": 81.2, "AARD": 81.0, "AEO": 81.0, "ROCK": 80.9, "QGEN": 80.8, "DFH": 80.8, "THO": 80.7, "COO": 80.5, "CARS": 80.2, "AXTA": 80.2, "FC": 80.1, "APOG": 80.1, "FLGT": 80.1, "PROF": 80.1, "OFLX": 80.1, "JETS": 79.9, "IOSP": 79.9, "CWH": 79.8, "MVIS": 79.8, "YYY": 79.7, "PRGO": 79.7, "ORGO": 79.7, "FLIN": 79.5, "ENR": 79.3, "VEL": 79.3, "FOA": 79.3, "BLD": 79.3, "MNKD": 79.2, "BLK": 79.2, "LAB": 79.1, "STUB": 79.1, "VREX": 79.0, "RH": 79.0, "JEF": 78.9, "INDI": 78.8, "CRH": 78.8, "FPEI": 78.8, "MGIC": 78.8, "AAL": 78.7, "JACK": 78.7, "ALV": 78.7, "TBPH": 78.6, "CANG": 78.6, "APAM": 78.5, "HNI": 78.3, "RIGL": 78.3, "MNRO": 78.3, "LEN": 78.3, "MMSI": 78.3, "HLLY": 78.2, "MAGN": 78.2, "OC": 78.1, "JELD": 78.1, "PAX": 78.1, "CRNX": 78.1, "PII": 78.0, "ALK": 78.0, "GAP": 78.0, "WHR": 77.9, "ACCO": 77.8, "LOVE": 77.8, "RNA": 77.8, "BXC": 77.7, "ITB": 77.6, "EVSD": 77.5, "DORM": 77.5, "VITL": 77.4, "HROW": 77.4, "NOMD": 77.4, "KRT": 77.4, "CTOS": 77.3, "AMPH": 77.3, "IFLN": 77.3, "OI": 77.3, "LGIH": 77.1, "MRCC": 77.0, "RMAX": 77.0, "SPSK": 77.0, "GNTX": 77.0, "IMVP": 76.9, "INDY": 76.9, "FBK": 76.9, "CLMB": 76.8, "TTGT": 76.8, "WAL": 76.8, "SNBR": 76.7, "UAE": 76.7, "VSCO": 76.7, "JBLU": 76.6, "ADT": 76.6, "INDA": 76.6, "WEST": 76.5, "EPAC": 76.5, "FUL": 76.4, "INVZ": 76.4, "WOR": 76.4, "RPC": 76.4, "UHS": 76.4, "ARHS": 76.4, "SFBS": 76.4, "MLAB": 76.3, "CHAC": 76.3, "RPM": 76.3, "AVY": 76.3, "ABG": 76.3, "MCHP": 76.3, "NFTY": 76.3, "EXPI": 76.2, "SIGI": 76.2, "TGEN": 76.2, "UPS": 76.2, "MHK": 76.1, "SGHT": 76.1, "DRVN": 76.1, "EFSI": 76.0, "RAIL": 76.0, "BABX": 76.0, "SIHY": 76.0, "VFC": 75.9, "UAL": 75.9, "MATV": 75.9, "HLI": 75.9, "FLRT": 75.8, "PYLD": 75.8, "ULCC": 75.8, "MGPI": 75.8, "JBTM": 75.8, "UTZ": 75.7, "XPEL": 75.7, "IART": 75.7, "BANC": 75.7, "DAL": 75.7, "MDT": 75.7, "BCC": 75.6, "TREX": 75.6, "CLOX": 75.6, "INCO": 75.5, "MBC": 75.5, "GT": 75.5, "KWR": 75.5, "WMK": 75.4, "AZTA": 75.4, "PCEF": 75.4, "MCFT": 75.4, "TPB": 75.4, "VINP": 75.3, "PWP": 75.3, "BLDR": 75.3, "TGLS": 75.3, "EWG": 75.2, "XERS": 75.2, "TILE": 75.2, "ONEW": 75.2, "JFLX": 75.1, "PFFV": 75.1, "BWMN": 75.1, "GRPN": 75.1, "HRI": 75.1, "WLDN": 75.0, "TCPC": 75.0, "OPCH": 75.0, "CCS": 74.9, "DB": 74.9, "CAL": 74.9, "SOLV": 74.8, "EWL": 74.8, "GBFH": 74.8, "EWQ": 74.8, "CMCO": 74.8, "ALKS": 74.7, "RTAC": 74.7, "MBUU": 74.7, "CMC": 74.7, "PSIX": 74.7, "SHYM": 74.7, "BC": 74.7, "BBW": 74.7, "NVR": 74.7, "VNLA": 74.6, "STLA": 74.6, "PNR": 74.6, "SDSI": 74.6, "MOAT": 74.6, "DPST": 74.6, "NAVI": 74.5, "BYRN": 74.5, "ESPR": 74.5, "PPG": 74.5, "LAD": 74.5, "STE": 74.4, "BHB": 74.4, "SANA": 74.4, "NKE": 74.4, "RDTE": 74.3, "CXT": 74.3, "PEY": 74.3, "UFPI": 74.3, "ALG": 74.3, "RUN": 74.3, "CERS": 74.3, "SF": 74.3, "EMBC": 74.2, "AWI": 74.2, "FEZ": 74.2, "UCB": 74.2, "EXP": 74.2, "ABM": 74.2, "PI": 74.2, "BAER": 74.2, "CATY": 74.1, "AVTR": 74.1, "XHB": 74.1, "JMHI": 74.1, "VMC": 74.1, "BSMU": 74.0, "UBS": 74.0, "MTD": 74.0, "WOOF": 74.0, "USNA": 74.0, "MC": 73.9, "EPI": 73.9, "CCL": 73.9, "FBIN": 73.9, "FERG": 73.9, "HTZ": 73.8, "GFF": 73.8, "ALCO": 73.8, "SAFT": 73.8, "LEVI": 73.8, "GIL": 73.8, "SHYL": 73.7, "CNM": 73.7, "BLFS": 73.7, "CION": 73.7, "GEF": 73.7, "ANGL": 73.7, "KBH": 73.7, "FFAI": 73.7, "PATK": 73.7, "TNC": 73.7, "BINC": 73.7, "SENS": 73.6, "QTRX": 73.6, "WBTN": 73.6, "MDYV": 73.6, "ERII": 73.6, "GENI": 73.6, "EBS": 73.6, "ARRY": 73.5, "AMCR": 73.5, "BZH": 73.5, "COTY": 73.5, "BBDC": 73.5, "GEHC": 73.5, "AYI": 73.5, "BCSF": 73.5, "CHDN": 73.4, "LXFR": 73.4, "TWI": 73.4, "MRX": 73.4, "QDEL": 73.4, "WS": 73.4, "DOO": 73.4, "GPK": 73.4, "PCT": 73.3, "LOB": 73.3, "PHO": 73.3, "OPRX": 73.3, "CHCO": 73.3, "HYBL": 73.3, "FNF": 73.2, "MTH": 73.2, "CEMB": 73.2, "WFC": 73.2, "HYDB": 73.2, "KBE": 73.2, "HWC": 73.2, "EAF": 73.1, "FSK": 73.1, "CWCO": 73.1, "AMBA": 73.1, "FIW": 73.1, "FPE": 73.1, "ONON": 73.1, "ESAB": 73.1, "BRHY": 73.0, "NXPI": 73.0, "FRBA": 73.0, "SIBN": 72.9, "AUB": 72.9, "KFS": 72.9, "ERIE": 72.9, "BKU": 72.8, "EU": 72.8, "EUHY": 72.8, "PAL": 72.8, "PHYD": 72.8, "REYN": 72.8, "BV": 72.8, "AOS": 72.7, "WSHP": 72.7, "CRMT": 72.7, "SKY": 72.7, "HRTX": 72.7, "VYX": 72.7, "XRT": 72.7, "WMS": 72.6, "ASH": 72.6, "FBP": 72.6, "EPHE": 72.6, "KLC": 72.6, "SVV": 72.6, "IJJ": 72.6, "CSL": 72.6, "NX": 72.5, "BOOM": 72.5, "OLED": 72.5, "NEO": 72.5, "PSCI": 72.5, "M": 72.5, "PLAY": 72.4, "FOR": 72.4, "HOMB": 72.4, "COLB": 72.4, "SYFI": 72.4, "IP": 72.4, "TMCI": 72.4, "EDEN": 72.4, "ALLE": 72.4, "OGN": 72.4, "SKYW": 72.4, "ODD": 72.4, "POOL": 72.3, "SHW": 72.3, "JSI": 72.3, "NUS": 72.3, "KBR": 72.3, "PCRB": 72.3, "TFC": 72.3, "ATKR": 72.3, "PFIG": 72.2, "FXE": 72.2, "MKL": 72.2, "HFSI": 72.2, "SWKS": 72.2, "RFV": 72.1, "CBU": 72.1, "JPIB": 72.1, "SWK": 72.1, "RWAY": 72.1, "ACNB": 72.1, "BMRC": 72.1, "JPST": 72.1, "MTUS": 72.0, "CNMD": 72.0, "HLMN": 72.0, "ITIC": 71.9, "CRCT": 71.9, "BCAL": 71.9, "FALN": 71.9, "AVD": 71.9, "WD": 71.9, "BBNX": 71.9, "ICUI": 71.9, "FUBO": 71.9, "EXFY": 71.9, "SGRY": 71.8, "FTRE": 71.8, "BLND": 71.8, "FOXF": 71.8, "NEAR": 71.8, "ALLT": 71.8, "ENVX": 71.8, "ASB": 71.7, "SUPX": 71.7, "BWB": 71.7, "FRME": 71.7, "ADPT": 71.7, "FND": 71.7, "SMPL": 71.7, "BH": 71.7, "WKC": 71.7, "PLNT": 71.7, "CLW": 71.7, "DUOT": 71.7, "PACB": 71.7, "ROOT": 71.7, "BBSI": 71.6, "GPC": 71.6, "GRAB": 71.6, "NSP": 71.6, "PSK": 71.6, "UNTY": 71.6, "SCM": 71.6, "GPI": 71.5, "SLGN": 71.5, "FBCV": 71.5, "EZU": 71.5, "IRTC": 71.5, "IQDG": 71.5, "BJRI": 71.5, "HBNC": 71.5, "GPGI": 71.5, "MGEE": 71.4, "IAT": 71.4, "CSTL": 71.4, "VBNK": 71.4, "HOV": 71.4, "YINN": 71.4, "BLDP": 71.4, "CBSH": 71.4, "CNC": 71.4, "TPVG": 71.4, "FLO": 71.4, "GTLB": 71.4, "MLM": 71.3, "SBAR": 71.3, "VFH": 71.3, "BOOT": 71.3, "CEFS": 71.3, "EMHY": 71.3, "IEP": 71.3, "STOT": 71.3, "APLS": 71.3, "CLAR": 71.3, "FNX": 71.3, "ELV": 71.3, "FPAG": 71.3, "JNK": 71.3, "URI": 71.3, "OZK": 71.3, "AMC": 71.2, "CHPT": 71.2, "SPSB": 71.2, "RF": 71.2, "CI": 71.2, "BKHY": 71.2, "HYD": 71.2, "BAX": 71.2, "HAYW": 71.2, "RS": 71.2, "JHX": 71.2, "ALIT": 71.2, "KCCA": 71.2, "HOPE": 71.2, "IYG": 71.2, "UMBF": 71.1, "SMP": 71.1, "TEQI": 71.1, "BHC": 71.1, "MBX": 71.1, "IHI": 71.1, "PJT": 71.1, "BKMS": 71.1, "TMHC": 71.1, "KRE": 71.1, "VCEB": 71.1, "EL": 71.1, "F": 71.1, "SVOL": 71.0, "JMSI": 71.0, "DBI": 71.0, "FAS": 71.0, "FBIZ": 71.0, "IJS": 71.0, "AMRC": 71.0, "III": 71.0, "MAS": 71.0, "DAX": 70.9, "WTFC": 70.9, "VRTS": 70.9, "BKUI": 70.9, "XDTE": 70.9, "SND": 70.9, "GRBK": 70.9, "FCF": 70.9, "CLOI": 70.9, "FSBC": 70.9, "JSMD": 70.9, "LKQ": 70.9, "VWOB": 70.9, "FWRD": 70.8, "FITB": 70.8, "EMB": 70.8, "MUSI": 70.8, "OFIX": 70.8, "PRM": 70.8, "CLOZ": 70.8, "CBT": 70.8, "SNWV": 70.8, "BN": 70.8, "MDXG": 70.8, "ETD": 70.7, "ONB": 70.7, "DUSA": 70.7, "KBWB": 70.7, "DDM": 70.7, "LIVN": 70.7, "TSME": 70.7, "EOSE": 70.7, "NXDR": 70.7, "IBHF": 70.7, "AVBH": 70.6, "IXG": 70.6, "RDDT": 70.6, "CYRX": 70.6, "SBSI": 70.6, "CG": 70.6, "GXO": 70.6, "MSBI": 70.6, "ONIT": 70.6, "RWJ": 70.6, "THRM": 70.6, "LZB": 70.6, "NODK": 70.6, "FHB": 70.6, "ZBRA": 70.6, "MBLY": 70.6, "TBRG": 70.6, "MET": 70.6, "DHI": 70.6, "IEUR": 70.6, "PHM": 70.5, "SLVM": 70.5, "MCB": 70.5, "SUUN": 70.5, "LOW": 70.5, "LEA": 70.5, "LFCR": 70.5, "ATRC": 70.5, "IIIN": 70.5, "MRAM": 70.5, "EBC": 70.5, "SANM": 70.5, "REAX": 70.5, "MGRC": 70.5, "CTS": 70.5, "CLF": 70.5, "SES": 70.4, "EMQQ": 70.4, "CPB": 70.4, "DFNL": 70.4, "AMSF": 70.4, "GDYN": 70.4, "TDUP": 70.4, "FLXR": 70.4, "RDNT": 70.4, "IUSV": 70.3, "LCII": 70.3, "JPIE": 70.3, "CFR": 70.3, "BCO": 70.3, "AXP": 70.3, "BKFI": 70.3, "ONCH": 70.3, "MVST": 70.3, "MVBF": 70.3, "FER": 70.3, "USB": 70.3, "ZWS": 70.3, "UBSI": 70.3, "FMNB": 70.3, "ZENA": 70.3, "SMDV": 70.3, "ITM": 70.2, "UDOW": 70.2, "RSPH": 70.2, "PIPR": 70.2, "NOVT": 70.2, "KEY": 70.2, "PRU": 70.2, "ALGT": 70.2, "JOUT": 70.2, "SHLS": 70.2, "PNFP": 70.2, "BBEU": 70.2, "CHH": 70.2, "ADNT": 70.2, "RVTY": 70.2, "UPB": 70.2, "PSP": 70.2, "DBND": 70.2, "GKOS": 70.2, "VRRM": 70.1, "ALHC": 70.1, "DH": 70.1, "IYF": 70.1, "DCI": 70.1, "SNAP": 70.1, "PTON": 70.1, "TROW": 70.1, "TIC": 70.1, "KE": 70.1, "SGI": 70.1, "KFRC": 70.1, "VCYT": 70.1, "WTV": 70.1, "DGICA": 70.1, "GRAL": 70.0, "HBAN": 70.0, "UP": 70.0, "NRIM": 70.0, "FRPH": 70.0, "EVR": 70.0, "BAC": 70.0, "PB": 70.0, "KRUS": 70.0, "SLYV": 70.0, "IYT": 70.0, "GH": 70.0, "IBDU": 70.0, "CHE": 70.0, "ANF": 70.0, "GPZ": 70.0, "JMUB": 70.0, "PPC": 69.9, "VBR": 69.9, "AVNT": 69.9, "DFAT": 69.9, "SCIO": 69.9, "ASGN": 69.9, "SNDR": 69.9, "CAAP": 69.9, "QCRH": 69.9, "EZM": 69.9, "SKOR": 69.9, "ATEC": 69.9, "BULL": 69.9, "SFST": 69.9, "SVIX": 69.9, "RWK": 69.9, "PAG": 69.9, "AEBI": 69.9, "GRNB": 69.8, "MLKN": 69.8, "CRMD": 69.8, "HBT": 69.8, "LUV": 69.8, "LEG": 69.8, "DFSV": 69.8, "JPM": 69.8, "GREK": 69.8, "SPT": 69.8, "DUOL": 69.8, "ESGD": 69.8, "REGL": 69.7, "REAL": 69.7, "HELE": 69.7, "TPSC": 69.7, "NUVB": 69.7, "VRP": 69.7, "ALT": 69.7, "IBMR": 69.7, "CLB": 69.7, "UYG": 69.7, "HLNE": 69.7, "WNC": 69.7, "SMIG": 69.7, "LW": 69.7, "CVLT": 69.7, "BAM": 69.6, "LQDW": 69.6, "UHAL": 69.6, "CPA": 69.6, "FSTR": 69.6, "VGK": 69.6, "MMM": 69.6, "FULC": 69.6, "OWL": 69.6, "SLQT": 69.6, "QRVO": 69.6, "CGSD": 69.6, "PNC": 69.6, "RXST": 69.5, "IE": 69.5, "RPD": 69.5, "KMTS": 69.5, "KNG": 69.5, "DNOW": 69.5, "TUSB": 69.5, "CRNC": 69.5, "QHY": 69.5, "KMPR": 69.5, "BTDR": 69.5, "FNB": 69.5, "COF": 69.5, "XSVM": 69.5, "NBSD": 69.4, "CDNA": 69.4, "DY": 69.4, "SYNA": 69.4, "SPSM": 69.4, "ALLY": 69.4, "KORP": 69.4, "PVH": 69.4, "DGNX": 69.4, "ROL": 69.4, "FLUT": 69.4, "CRBG": 69.4, "AGOX": 69.3, "BSX": 69.3, "EMLC": 69.3, "PULT": 69.3, "GBCI": 69.3, "MFIN": 69.3, "PSN": 69.3, "BRKR": 69.3, "OLPX": 69.3, "XLF": 69.3, "WSM": 69.3, "BRSL": 69.3, "VIOV": 69.3, "TSPY": 69.3, "DNA": 69.3, "GS": 69.3, "LULU": 69.2, "DHR": 69.2, "XMVM": 69.2, "CVCO": 69.2, "JAVA": 69.2, "UDN": 69.2, "BSRR": 69.2, "FNCL": 69.2, "CLOA": 69.2, "INMD": 69.2, "ORN": 69.2, "KIE": 69.2, "PFFD": 69.2, "BSMV": 69.2, "PFGC": 69.2, "SSB": 69.2, "IJR": 69.2, "HIPO": 69.2, "WLAC": 69.1, "EFSC": 69.1, "LEGH": 69.1, "TECH": 69.1, "ICFI": 69.1, "SMOT": 69.1, "PFSI": 69.1, "FXD": 69.1, "UCON": 69.1, "DIAL": 69.1, "BALY": 69.1, "BNDX": 69.1, "PGNY": 69.1, "VUSB": 69.1, "NUTX": 69.0, "EMN": 69.0, "FID": 69.0, "XCCC": 69.0, "AQN": 69.0, "XYL": 69.0, "PHYL": 69.0, "LQDH": 69.0, "TLSI": 69.0, "GABC": 69.0, "COMP": 69.0, "USIG": 69.0, "QLTY": 69.0, "A": 69.0, "CGXU": 69.0, "EVUS": 69.0, "NU": 69.0, "TNA": 69.0, "GPRO": 69.0, "DON": 68.9, "FHN": 68.9, "TSYY": 68.9, "GHYG": 68.9, "HYGV": 68.9, "EWI": 68.9, "PAR": 68.9, "MTBA": 68.9, "MAT": 68.9, "CPF": 68.9, "BNS": 68.9, "RYZ": 68.9, "LENZ": 68.9, "ISHG": 68.9, "FIBK": 68.9, "FWRG": 68.9, "XTN": 68.9, "IHF": 68.9, "GIS": 68.9, "IVOV": 68.9, "CURI": 68.9, "CRWG": 68.9, "SPIB": 68.8, "DIA": 68.8, "HYBB": 68.8, "RBLX": 68.8, "MDB": 68.8, "CBRL": 68.8, "VTEB": 68.8, "VIOO": 68.8, "PRIM": 68.8, "VCR": 68.8, "LEMB": 68.8, "SNCY": 68.8, "APTV": 68.8, "BHVN": 68.8, "NOBL": 68.8, "AS": 68.8, "BNT": 68.8, "HUBG": 68.8, "FG": 68.8, "LYTS": 68.8, "LPRO": 68.8, "CVBF": 68.8, "OCFC": 68.8, "CPRI": 68.7, "URTY": 68.7, "SMIN": 68.7, "VCEL": 68.7, "CMG": 68.7, "RKT": 68.7, "DFE": 68.7, "TOWN": 68.7, "BMOP": 68.7, "TIPT": 68.7, "IGIC": 68.7, "VCSH": 68.7, "SSD": 68.7, "SHOO": 68.7, "FXR": 68.7, "BLLN": 68.6, "XPOF": 68.6, "DAKT": 68.6, "BSMS": 68.6, "HD": 68.6, "IGSB": 68.6, "CMF": 68.6, "CGW": 68.6, "BX": 68.6, "ARBE": 68.6, "FDVV": 68.6, "SLQD": 68.6, "FXI": 68.6, "EBND": 68.6, "XRX": 68.6, "NFE": 68.6, "RPV": 68.5, "FMBH": 68.5, "IGBH": 68.5, "EFAX": 68.5, "STNE": 68.5, "CBZ": 68.5, "SN": 68.5, "DCH": 68.5, "SONO": 68.5, "CGIB": 68.5, "PLTK": 68.5, "MMYT": 68.5, "BWX": 68.5, "SXC": 68.5, "KINS": 68.5, "WFRD": 68.5, "CECO": 68.5, "UGI": 68.5, "IONS": 68.5, "TRUP": 68.5, "DFAS": 68.4, "SMR": 68.4, "SPGP": 68.4, "NYF": 68.4, "BUR": 68.4, "PLUS": 68.4, "SCMB": 68.4, "TEL": 68.4, "USVM": 68.4, "GAMB": 68.4, "KODK": 68.4, "VWAV": 68.4, "IEV": 68.4, "IVE": 68.4, "SCZ": 68.4, "CGMS": 68.4, "FNDA": 68.4, "SCL": 68.4, "GATX": 68.4, "ZION": 68.4, "IHDG": 68.4, "AMBP": 68.4, "CSW": 68.4, "BFST": 68.4, "EIG": 68.4, "PSBD": 68.4, "PRFZ": 68.4, "AVMV": 68.3, "BOW": 68.3, "OKLL": 68.3, "IXJ": 68.3, "MUNI": 68.3, "FFBC": 68.3, "KLAR": 68.3, "WLFC": 68.3, "JSCP": 68.3, "DFUV": 68.3, "IDXX": 68.3, "CGMU": 68.3, "SBND": 68.3, "BRBS": 68.3, "EQPT": 68.3, "PRG": 68.3, "IBDT": 68.3, "HBDC": 68.3, "EDGI": 68.3, "AORT": 68.3, "USHY": 68.3, "PHIN": 68.3, "ARES": 68.3, "CIVB": 68.3, "NBTB": 68.3, "HTAB": 68.3, "WH": 68.3, "CBRE": 68.3, "BANR": 68.3, "BBBS": 68.3, "KBWD": 68.3, "WFG": 68.3, "NWBI": 68.3, "SUB": 68.3, "AMG": 68.2, "BUSA": 68.2, "BAFE": 68.2, "YLDE": 68.2, "IEUS": 68.2, "HTBK": 68.2, "MS": 68.2, "SJNK": 68.2, "BELFA": 68.2, "ATNI": 68.2, "ESTC": 68.2, "OSEA": 68.2, "EWBC": 68.2, "TTAM": 68.2, "MFC": 68.2, "TCBK": 68.2, "AN": 68.2, "Z": 68.2, "DIVB": 68.1, "ESTA": 68.1, "LNC": 68.1, "FDHY": 68.1, "IVZ": 68.1, "HYLB": 68.1, "SYM": 68.1, "LUMN": 68.1, "FFIN": 68.1, "STXS": 68.1, "ANPA": 68.1, "LPX": 68.1, "TNET": 68.1, "VIGI": 68.1, "SUSB": 68.1, "TRAK": 68.0, "OEC": 68.0, "LKFN": 68.0, "SARO": 68.0, "CSPF": 68.0, "BLKB": 68.0, "WAT": 68.0, "FVAL": 68.0, "PRK": 68.0, "UWMC": 68.0, "PFFR": 68.0, "CCK": 68.0, "HFWA": 68.0, "TTI": 68.0, "TAFI": 68.0, "VTES": 68.0, "WSO": 68.0, "TCBX": 68.0, "MELI": 68.0, "WSBC": 68.0, "BRBR": 68.0, "KRMD": 68.0, "SRET": 68.0, "QCOM": 68.0, "KNSL": 67.9, "FXH": 67.9, "TAP": 67.9, "SPLB": 67.9, "RBCAA": 67.9, "WOOD": 67.9, "UPST": 67.9, "SLM": 67.9, "TSLW": 67.9, "QVAL": 67.9, "WNEB": 67.9, "ZG": 67.9, "IBEX": 67.9, "PCYO": 67.9, "SPYV": 67.9, "SVXY": 67.9, "SPWR": 67.9, "BLZE": 67.9, "AIOT": 67.9, "SW": 67.9, "TXRH": 67.9, "CTKB": 67.9, "VNQI": 67.9, "VLN": 67.9, "UFPT": 67.8, "NUSC": 67.8, "RSMC": 67.8, "ZM": 67.8, "ARQQ": 67.8, "DIS": 67.8, "DECK": 67.8, "PICB": 67.8, "MLP": 67.8, "NAMS": 67.8, "HAUZ": 67.8, "REM": 67.8, "EQH": 67.8, "FLQM": 67.8, "NIHI": 67.8, "FSS": 67.8, "GETY": 67.8, "SLDP": 67.8, "SCYB": 67.8, "VFVA": 67.8, "MTB": 67.8, "SYF": 67.8, "HSCZ": 67.8, "ROBO": 67.8, "EPOL": 67.8, "ESNT": 67.8, "CWK": 67.7, "PFRL": 67.7, "AX": 67.7, "BKMI": 67.7, "SPHY": 67.7, "BPRN": 67.7, "OAKM": 67.7, "VHUB": 67.7, "TFI": 67.7, "GVIP": 67.7, "HAFC": 67.7, "XXRP": 67.7, "ON": 67.7, "TDG": 67.7, "UPWK": 67.7, "SHBI": 67.7, "RXI": 67.7, "DGRW": 67.7, "PLYX": 67.7, "FBNC": 67.7, "MHO": 67.7, "RGP": 67.7, "RRR": 67.7, "EFA": 67.7, "SHM": 67.7, "XEMD": 67.6, "MORT": 67.6, "KRNY": 67.6, "IWMY": 67.6, "AFIF": 67.6, "STBA": 67.6, "ACA": 67.6, "CSB": 67.6, "IGIB": 67.6, "ALH": 67.6, "JHSC": 67.6, "GIGB": 67.6, "ISCV": 67.6, "FISI": 67.6, "IEFA": 67.6, "INDB": 67.6, "TCBI": 67.6, "MBCN": 67.6, "FTMS": 67.6, "BHRB": 67.5, "SYBT": 67.5, "OACP": 67.5, "INMU": 67.5, "SPMD": 67.5, "PRF": 67.5, "EFAA": 67.5, "IBND": 67.5, "HY": 67.5, "VIG": 67.5, "PSH": 67.5, "EVTR": 67.5, "KELYA": 67.5, "MTRX": 67.5, "HYG": 67.5, "GSIE": 67.5, "SVAL": 67.5, "TPG": 67.5, "SHYG": 67.5, "OCSL": 67.5, "PBDC": 67.4, "RWX": 67.4, "SPOK": 67.4, "UPBD": 67.4, "ISBA": 67.4, "IGEB": 67.4, "BINV": 67.4, "MDY": 67.4, "EVSM": 67.4, "EEMV": 67.4, "ULTY": 67.4, "JGLO": 67.4, "BBUC": 67.4, "PFF": 67.4, "MKC": 67.4, "ULST": 67.4, "SMBK": 67.4, "SPYT": 67.4, "IGLB": 67.4, "HGV": 67.4, "TVA": 67.4, "FV": 67.4, "IBDS": 67.4, "CNNE": 67.4, "SFNC": 67.4, "EUFN": 67.4, "PKG": 67.4, "TNXP": 67.4, "AOK": 67.4, "ARCC": 67.4, "CGCP": 67.3, "SVAC": 67.3, "IR": 67.3, "RUSHB": 67.3, "SPRY": 67.3, "CWEB": 67.3, "PGEN": 67.3, "SITE": 67.3, "DLTR": 67.3, "RHI": 67.3, "W": 67.3, "RUNN": 67.3, "DIN": 67.3, "FICS": 67.3, "IJH": 67.3, "AVSF": 67.3, "WAFD": 67.3, "FTXO": 67.3, "AVSE": 67.3, "TXN": 67.3, "ST": 67.3, "PAAA": 67.3, "NBCR": 67.3, "AIT": 67.3, "YSEP": 67.3, "HYGW": 67.3, "QS": 67.3, "LIF": 67.3, "AOSL": 67.3, "LTBR": 67.3, "ARWR": 67.3, "EVI": 67.3, "FDIS": 67.3, "DGRS": 67.3, "HRMY": 67.3, "MEC": 67.3, "EWS": 67.2, "CORZ": 67.2, "JHPI": 67.2, "RZV": 67.2, "APO": 67.2, "RGEN": 67.2, "NNE": 67.2, "IHRT": 67.2, "FSLR": 67.2, "MUB": 67.2, "RYAN": 67.2, "FEMB": 67.2, "BSJQ": 67.2, "NUE": 67.2, "MNST": 67.2, "YORW": 67.2, "CFG": 67.2, "FIIG": 67.2, "TAXX": 67.2, "ALVO": 67.2, "VMI": 67.2, "FFIC": 67.2, "HLIT": 67.2, "BA": 67.2, "PODD": 67.1, "ORCX": 67.1, "IBOC": 67.1, "RJF": 67.1, "EMHC": 67.1, "DOLE": 67.1, "PFLT": 67.1, "FRST": 67.1, "NUMV": 67.1, "TLTD": 67.1, "STRT": 67.1, "FTNJ": 67.1, "SMG": 67.1, "TAFM": 67.1, "RNST": 67.1, "PY": 67.1, "MTX": 67.1, "TBBB": 67.1, "KWEB": 67.1, "SOFI": 67.1, "ASAN": 67.0, "IVVW": 67.0, "HUM": 67.0, "MZTI": 67.0, "AVUV": 67.0, "CWBC": 67.0, "EFG": 67.0, "RSPD": 67.0, "BGRN": 67.0, "OPPE": 67.0, "CGBD": 67.0, "AES": 67.0, "JSML": 67.0, "SPYU": 67.0, "CARR": 67.0, "FLG": 67.0, "TMO": 67.0, "FLV": 67.0, "FLHY": 67.0, "ORRF": 67.0, "CDW": 67.0, "IYH": 67.0, "SCHJ": 67.0, "DFNM": 67.0, "JMEE": 66.9, "DLS": 66.9, "PULS": 66.9, "PFLD": 66.9, "EWO": 66.9, "XMTR": 66.9, "PREF": 66.9, "RUM": 66.9, "BBU": 66.9, "BKDV": 66.9, "CBLL": 66.9, "FTCS": 66.9, "CAI": 66.9, "BOTZ": 66.9, "VLY": 66.9, "HALO": 66.9, "DKS": 66.9, "IBCP": 66.9, "ROK": 66.9, "FSMD": 66.9, "EQBK": 66.9, "TMP": 66.9, "SFIX": 66.9, "PGY": 66.9, "CNOB": 66.9, "QLTA": 66.9, "WEAV": 66.9, "FXY": 66.9, "CNH": 66.9, "ISCG": 66.9, "IWM": 66.8, "AGIG": 66.8, "APLY": 66.8, "LDI": 66.8, "CPS": 66.8, "GM": 66.8, "MXL": 66.8, "SRFM": 66.8, "PVAL": 66.8, "GLIN": 66.8, "ISTB": 66.8, "WSC": 66.8, "HEI": 66.8, "ICSH": 66.8, "IWN": 66.8, "VTWO": 66.8, "CORT": 66.8, "LZ": 66.8, "FTSM": 66.8, "SCHO": 66.8, "BEDY": 66.8, "GSHD": 66.8, "UWM": 66.8, "CWST": 66.7, "BOND": 66.7, "THIR": 66.7, "XSHQ": 66.7, "IBHI": 66.7, "CTBI": 66.7, "RCL": 66.7, "RDVI": 66.7, "AJG": 66.7, "ZUMZ": 66.7, "IBDY": 66.7, "IWMI": 66.7, "PKW": 66.7, "CBK": 66.7, "ACMR": 66.7, "CAE": 66.7, "AVIG": 66.7, "MYCH": 66.7, "NMRK": 66.7, "SDVY": 66.7, "VOE": 66.7, "APPS": 66.7, "PSC": 66.7, "KRO": 66.6, "FMDE": 66.6, "FSIG": 66.6, "PFFA": 66.6, "SHMD": 66.6, "DFSI": 66.6, "QLYS": 66.6, "JAAA": 66.6, "ABCB": 66.6, "OTIS": 66.6, "USCB": 66.6, "DJT": 66.6, "CNDT": 66.6, "AVSD": 66.6, "COLM": 66.6, "SMWB": 66.6, "VCIT": 66.6, "FTNY": 66.6, "RECS": 66.6, "PFS": 66.6, "SNEX": 66.6, "FCCO": 66.6, "FLMI": 66.6, "VSDA": 66.6, "ANGI": 66.5, "DSCO": 66.5, "VNT": 66.5, "BKKT": 66.5, "FMB": 66.5, "NCLH": 66.5, "WWJD": 66.5, "DFIC": 66.5, "TOTL": 66.5, "WMG": 66.5, "VCTR": 66.5, "WING": 66.5, "TDV": 66.5, "ECX": 66.5, "IYC": 66.5, "CALF": 66.5, "LONZ": 66.5, "PAYO": 66.5, "FIVA": 66.5, "EPAM": 66.5, "NEOG": 66.5, "OMF": 66.5, "CAIE": 66.5, "FFWM": 66.5, "IWS": 66.5, "DXCM": 66.5, "DOV": 66.5, "PTLO": 66.5, "MVV": 66.4, "DSAC": 66.4, "CLPT": 66.4, "THYF": 66.4, "SBCF": 66.4, "RDCM": 66.4, "HYS": 66.4, "NSC": 66.4, "ACN": 66.4, "RR": 66.4, "PBEU": 66.4, "PPIH": 66.4, "WHD": 66.4, "IWD": 66.4, "NBN": 66.4, "ECH": 66.4, "STEP": 66.4, "GCAL": 66.4, "EVLN": 66.4, "MDLN": 66.4, "AVNS": 66.4, "IRE": 66.4, "ISTR": 66.4, "LQD": 66.4, "DOCS": 66.4, "BSCS": 66.4, "RDVY": 66.4, "HTLD": 66.4, "PCY": 66.4, "NGVT": 66.4, "BIO": 66.4, "PFXF": 66.4, "HEDJ": 66.4, "BDX": 66.3, "RHLD": 66.3, "TSLT": 66.3, "TSLL": 66.3, "HMOP": 66.3, "ISCF": 66.3, "RSPA": 66.3, "SKYX": 66.3, "CAR": 66.3, "MBWM": 66.3, "GTO": 66.3, "SLNZ": 66.3, "FNDC": 66.3, "STAA": 66.3, "GGG": 66.3, "JRVR": 66.3, "TSN": 66.3, "PGX": 66.3, "DMXF": 66.3, "YSS": 66.3, "EVTL": 66.3, "USTB": 66.3, "WST": 66.3, "IWR": 66.3, "AOA": 66.3, "LNKB": 66.3, "TPC": 66.3, "SPEM": 66.3, "SCHA": 66.3, "VOYA": 66.3, "AVA": 66.3, "OTF": 66.3, "LMNR": 66.3, "DFSU": 66.2, "IWO": 66.2, "SPBO": 66.2, "DFLV": 66.2, "BKE": 66.2, "CORP": 66.2, "STC": 66.2, "SPEU": 66.2, "INSP": 66.2, "AVEE": 66.2, "BIZD": 66.2, "ONEV": 66.2, "IMTM": 66.2, "VIOG": 66.2, "BILZ": 66.2, "OPRT": 66.2, "BSJT": 66.2, "GTES": 66.2, "RWL": 66.2, "BBBY": 66.2, "VGSH": 66.2, "AMRX": 66.2, "IBHG": 66.2, "AMTM": 66.2, "FXO": 66.2, "NRDY": 66.2, "CSMD": 66.2, "TRIP": 66.2, "TAXF": 66.2, "ZVIA": 66.2, "TPLC": 66.2, "BBBI": 66.2, "SCEC": 66.2, "ECL": 66.2, "ESQ": 66.2, "BZAI": 66.2, "CCB": 66.1, "CRWV": 66.1, "VTC": 66.1, "VMSB": 66.1, "XMHQ": 66.1, "BHF": 66.1, "XZO": 66.1, "BDC": 66.1, "NEWT": 66.1, "CTSH": 66.1, "DES": 66.1, "VACI": 66.1, "ALGN": 66.1, "FGD": 66.1, "VOOV": 66.1, "BYLD": 66.1, "SPTS": 66.1, "FLTR": 66.1, "ACHR": 66.1, "ACVA": 66.1, "QUBT": 66.1, "USPH": 66.1, "NB": 66.1, "FEP": 66.0, "NFLT": 66.0, "FDRR": 66.0, "CBNK": 66.0, "SMMD": 66.0, "XLY": 66.0, "XONE": 66.0, "TBBK": 66.0, "DFCA": 66.0, "JVAL": 66.0, "GLAD": 66.0, "DIM": 66.0, "FVRR": 66.0, "JLL": 66.0, "MLI": 66.0, "PHR": 66.0, "BRNY": 66.0, "CSWC": 66.0, "ITW": 66.0, "FTCA": 66.0, "IVOO": 66.0, "THFF": 66.0, "IBMQ": 66.0, "MERC": 66.0, "DFAC": 66.0, "AVSC": 66.0, "TCAL": 66.0, "CUBI": 66.0, "EEMS": 66.0, "NULV": 66.0, "UVV": 66.0, "HEZU": 66.0, "PAVE": 65.9, "BIPC": 65.9, "BKMC": 65.9, "SLX": 65.9, "WERN": 65.9, "PPIE": 65.9, "FTRB": 65.9, "EAT": 65.9, "CNS": 65.9, "WRB": 65.9, "DFAW": 65.9, "BPOP": 65.9, "LNN": 65.9, "ELM": 65.9, "AGYS": 65.9, "CGUI": 65.9, "BANF": 65.9, "AVAV": 65.9, "EQWL": 65.9, "AVAH": 65.9, "NMIH": 65.9, "WCC": 65.9, "DSTL": 65.9, "PSTG": 65.9, "TEM": 65.9, "FSCC": 65.9, "FELE": 65.9, "CTEV": 65.9, "LIND": 65.9, "BNDW": 65.8, "DCOM": 65.8, "YDEC": 65.8, "TLRY": 65.8, "QDPL": 65.8, "PTMC": 65.8, "CRON": 65.8, "FEGE": 65.8, "ETHT": 65.8, "BBJP": 65.8, "TFSL": 65.8, "ENVA": 65.8, "URTH": 65.8, "HTH": 65.8, "ILCV": 65.8, "AI": 65.8, "FSV": 65.8, "CTNM": 65.8, "DIVI": 65.8, "TUA": 65.8, "LITX": 65.8, "VB": 65.8, "AVMC": 65.8, "ISRG": 65.8, "LVS": 65.8, "QXO": 65.8, "FULT": 65.8, "SPSC": 65.7, "ULTA": 65.7, "OFG": 65.7, "BLFY": 65.7, "TRMK": 65.7, "ADUS": 65.7, "AOR": 65.7, "IBDV": 65.7, "VSGX": 65.7, "GOOS": 65.7, "GEN": 65.7, "FPH": 65.7, "NTRA": 65.7, "XPAY": 65.7, "PINK": 65.7, "NTRS": 65.7, "JBSS": 65.7, "IDLV": 65.7, "ERO": 65.7, "IGHG": 65.7, "AFK": 65.7, "RUSHA": 65.7, "MPAA": 65.7, "KKR": 65.7, "RAFE": 65.7, "FSUN": 65.7, "KLIP": 65.7, "JIRE": 65.7, "FLWS": 65.7, "LC": 65.7, "DISV": 65.7, "IBP": 65.7, "PZA": 65.7, "NABL": 65.7, "PACS": 65.7, "METC": 65.7, "LWAY": 65.6, "IQLT": 65.6, "BSCV": 65.6, "EDIV": 65.6, "SIZE": 65.6, "WYNN": 65.6, "TECK": 65.6, "TBI": 65.6, "UTWO": 65.6, "IFF": 65.6, "FISR": 65.6, "NPCE": 65.6, "BBHY": 65.6, "FLS": 65.6, "BDYN": 65.6, "PFM": 65.6, "BOKF": 65.6, "VPLS": 65.6, "ASLV": 65.6, "VSH": 65.6, "FSYD": 65.6, "CSGP": 65.6, "INBK": 65.6, "BEN": 65.6, "HYFI": 65.6, "GVA": 65.6, "WWR": 65.6, "AXGN": 65.6, "XLSR": 65.6, "TSLR": 65.6, "RXRX": 65.6, "FCRS": 65.6, "CMCL": 65.5, "AVIV": 65.5, "BL": 65.5, "SCHC": 65.5, "SPXL": 65.5, "MEAR": 65.5, "XSD": 65.5, "XJH": 65.5, "SPUU": 65.5, "CALI": 65.5, "IBTH": 65.5, "TOL": 65.5, "ZTS": 65.5, "CSIQ": 65.5, "ABSI": 65.5, "LMB": 65.5, "STT": 65.5, "FBT": 65.5, "IGOV": 65.5, "VAW": 65.5, "EMBX": 65.4, "CELH": 65.4, "EQTY": 65.4, "UBND": 65.4, "CGCV": 65.4, "IDEV": 65.4, "EVER": 65.4, "XLB": 65.4, "RMBS": 65.4, "LECO": 65.4, "FHLC": 65.4, "APMU": 65.4, "GTM": 65.4, "AVSU": 65.4, "SECT": 65.4, "SCHI": 65.4, "DPRO": 65.4, "DJIA": 65.4, "VTV": 65.4, "BRTR": 65.4, "MMIT": 65.4, "NPWR": 65.4, "ROBT": 65.4, "PM": 65.4, "RSPF": 65.4, "BBWI": 65.4, "INCY": 65.4, "SHY": 65.4, "ACES": 65.4, "GLUE": 65.4, "NCNO": 65.4, "MINO": 65.4, "HYEM": 65.4, "TOUS": 65.3, "JPHY": 65.3, "FLR": 65.3, "UBER": 65.3, "MSA": 65.3, "BSCU": 65.3, "FMHI": 65.3, "AB": 65.3, "TEAM": 65.3, "AGCO": 65.3, "LII": 65.3, "MTW": 65.3, "BRO": 65.3, "GSST": 65.3, "MICC": 65.3, "CRI": 65.3, "SNPE": 65.3, "ORI": 65.3, "APG": 65.3, "SPXT": 65.3, "VWO": 65.3, "VT": 65.3, "BBMC": 65.3, "DFGX": 65.3, "GAIN": 65.3, "DLO": 65.3, "WTBA": 65.3, "VIA": 65.3, "CIGI": 65.3, "LMND": 65.3, "XLV": 65.3, "FLEE": 65.3, "MMIN": 65.2, "AVNM": 65.2, "PH": 65.2, "HIVE": 65.2, "AAON": 65.2, "GSSC": 65.2, "CARE": 65.2, "ETHU": 65.2, "PDN": 65.2, "HTFL": 65.2, "EELV": 65.2, "RYLD": 65.2, "GMUB": 65.2, "BMI": 65.2, "IJT": 65.2, "INSM": 65.2, "JPIN": 65.2, "IVLU": 65.2, "FRMI": 65.2, "PRCT": 65.2, "VLTO": 65.2, "QEFA": 65.2, "YMAG": 65.2, "FMAT": 65.2, "SCHE": 65.2, "MIDD": 65.2, "HTGC": 65.2, "BSV": 65.2, "DFIS": 65.2, "ACAD": 65.2, "NTSI": 65.2, "DIVZ": 65.2, "EDOW": 65.2, "AOM": 65.2, "SMLF": 65.2, "NUDM": 65.2, "MRTN": 65.2, "GVAL": 65.2, "RICK": 65.2, "BSJR": 65.2, "CGNG": 65.2, "KMB": 65.2, "SCJ": 65.2, "ESGV": 65.2, "ESML": 65.2, "TILT": 65.2, "RMOP": 65.2, "OKLO": 65.2, "DBEF": 65.1, "MIRM": 65.1, "VC": 65.1, "FFLC": 65.1, "ZECP": 65.1, "EFV": 65.1, "OMAH": 65.1, "UPRO": 65.1, "BELFB": 65.1, "WWW": 65.1, "CMPX": 65.1, "FNDX": 65.1, "EQIN": 65.1, "HYLS": 65.1, "FDD": 65.1, "MODL": 65.1, "FCNCA": 65.1, "CLOV": 65.1, "IBDW": 65.1, "NAVN": 65.1, "CLFD": 65.1, "MCHI": 65.1, "URBN": 65.1, "IBMO": 65.1, "FCOR": 65.1, "BYD": 65.1, "IAGG": 65.1, "EVIM": 65.1, "SCHV": 65.1, "ALAB": 65.1, "NRGV": 65.1, "BRC": 65.1, "AMP": 65.1, "TRIN": 65.1, "DFGP": 65.1, "YEAR": 65.1, "HEFA": 65.1, "MRSH": 65.1, "FMAO": 65.1, "IEX": 65.1, "JJSF": 65.1, "YEXT": 65.0, "EVEX": 65.0, "AVES": 65.0, "CENTA": 65.0, "VFS": 65.0, "FLTB": 65.0, "ALGM": 65.0, "NKLR": 65.0, "PRKS": 65.0, "JPLD": 65.0, "AVDE": 65.0, "JHML": 65.0, "ALNY": 65.0, "JHMM": 65.0, "HCC": 65.0, "BDTX": 65.0, "VHT": 65.0, "GRNJ": 65.0, "DWLD": 65.0, "COPY": 65.0, "WDIV": 65.0, "OSCV": 65.0, "FYX": 65.0, "TMSL": 65.0, "DBEU": 65.0, "UROY": 65.0, "OBT": 65.0, "DFUS": 65.0, "CURE": 65.0, "CNO": 65.0, "DFIV": 65.0, "SYK": 65.0, "IBTI": 64.9, "RYTM": 64.9, "XHLF": 64.9, "WEN": 64.9, "QDTE": 64.9, "BLUX": 64.9, "BGSI": 64.9, "PWZ": 64.9, "QINT": 64.9, "CGHM": 64.9, "PTRB": 64.9, "FCEL": 64.9, "VTWV": 64.9, "GDXY": 64.9, "IBDX": 64.9, "FNDB": 64.9, "DXC": 64.9, "DGT": 64.9, "EUSB": 64.9, "SPTM": 64.9, "INGR": 64.9, "GOOY": 64.9, "VXF": 64.9, "HIFS": 64.9, "SCHM": 64.9, "OSK": 64.9, "DRSK": 64.9, "LYFT": 64.9, "NP": 64.9, "EAGL": 64.9, "TTEK": 64.9, "PHAT": 64.9, "BLOX": 64.9, "WTW": 64.9, "ISCB": 64.8, "BLV": 64.8, "MDLZ": 64.8, "MLN": 64.8, "DGS": 64.8, "IFV": 64.8, "AFMC": 64.8, "NDSN": 64.8, "AGGH": 64.8, "OSG": 64.8, "FLCO": 64.8, "JOET": 64.8, "DDS": 64.8, "COFS": 64.8, "BMBL": 64.8, "GSLC": 64.8, "SUSA": 64.8, "VFMF": 64.8, "PAPI": 64.8, "SLYG": 64.8, "RXO": 64.8, "XMPT": 64.8, "WTS": 64.8, "IOCT": 64.8, "BIDD": 64.8, "CGC": 64.7, "CGMM": 64.7, "IGRO": 64.7, "BKIE": 64.7, "CGGE": 64.7, "SAIA": 64.7, "MMS": 64.7, "DCOR": 64.7, "SLP": 64.7, "HTRB": 64.7, "XSMO": 64.7, "BSMR": 64.7, "GLIBK": 64.7, "NNNN": 64.7, "MILN": 64.7, "IBKR": 64.7, "EWJ": 64.7, "FESM": 64.7, "BSJU": 64.7, "TG": 64.7, "XJR": 64.7, "WGMI": 64.7, "WK": 64.7, "HTB": 64.6, "AIZ": 64.6, "JEPI": 64.6, "OPTU": 64.6, "BUFC": 64.6, "GPIX": 64.6, "ARDX": 64.6, "TXT": 64.6, "HELO": 64.6, "GTX": 64.6, "BLMN": 64.6, "FLCH": 64.6, "BSCT": 64.6, "ARKG": 64.6, "IWX": 64.6, "MAIN": 64.6, "LST": 64.6, "IYJ": 64.6, "HEGD": 64.6, "LDUR": 64.6, "NUEM": 64.6, "EMR": 64.6, "JOBY": 64.6, "KCE": 64.6, "FYT": 64.6, "DFEV": 64.6, "GOLF": 64.6, "RAVI": 64.6, "YLD": 64.5, "MENS": 64.5, "VTIX": 64.5, "KD": 64.5, "GMF": 64.5, "EVSB": 64.5, "WASH": 64.5, "H": 64.5, "IDRV": 64.5, "RSP": 64.5, "MOS": 64.5, "HRL": 64.5, "SXT": 64.5, "IPAR": 64.5, "SEIV": 64.5, "VTWG": 64.5, "BBIN": 64.4, "SSO": 64.4, "XTWO": 64.4, "DRIV": 64.4, "HE": 64.4, "NTB": 64.4, "VRNS": 64.4, "ITOT": 64.4, "EFIV": 64.4, "SCSC": 64.4, "NTNX": 64.4, "FICO": 64.4, "RMD": 64.4, "PCB": 64.4, "CCAP": 64.4, "PLBC": 64.4, "SCUS": 64.4, "PFG": 64.4, "CVLG": 64.4, "SOUN": 64.4, "FFOX": 64.3, "IBDR": 64.3, "DASH": 64.3, "HOOW": 64.3, "NEU": 64.3, "U": 64.3, "CQQQ": 64.3, "AER": 64.3, "BSJS": 64.3, "TSLA": 64.3, "OMCL": 64.3, "CGCB": 64.3, "ICLO": 64.3, "SYLD": 64.3, "OBIL": 64.3, "FLNC": 64.3, "EWP": 64.3, "PELI": 64.3, "DSI": 64.3, "BSVO": 64.3, "KDP": 64.3, "SPYI": 64.3, "PRTH": 64.3, "RACE": 64.3, "VSS": 64.3, "REVS": 64.3, "HLIO": 64.3, "VFQY": 64.3, "IUSB": 64.3, "TCPB": 64.3, "UVSP": 64.3, "VYM": 64.3, "APIE": 64.3, "FDLO": 64.3, "RY": 64.3, "HCKT": 64.3, "PBUS": 64.3, "ATMU": 64.3, "EWX": 64.3, "NAK": 64.3, "CPRT": 64.3, "PLDR": 64.3, "BLBD": 64.2, "LRGC": 64.2, "MPB": 64.2, "CFA": 64.2, "NVST": 64.2, "HRB": 64.2, "BWFG": 64.2, "FLIA": 64.2, "DWM": 64.2, "ACWI": 64.2, "FTMH": 64.2, "GHC": 64.2, "CLIP": 64.2, "FDLS": 64.2, "NRG": 64.2, "FRTY": 64.2, "NECB": 64.2, "EES": 64.2, "MSGE": 64.2, "DFAX": 64.2, "ACI": 64.2, "ELD": 64.2, "FFSM": 64.2, "VTS": 64.2, "GMED": 64.2, "DFAI": 64.2, "DHS": 64.2, "NGVC": 64.2, "EXPD": 64.2, "RSPM": 64.2, "SHYD": 64.2, "MINT": 64.2, "PTRN": 64.2, "HMN": 64.2, "AXSM": 64.2, "MFDX": 64.2, "LEU": 64.2, "PRLB": 64.2, "EWN": 64.2, "ESGE": 64.2, "BILS": 64.1, "INTF": 64.1, "DRI": 64.1, "NUBD": 64.1, "JPEM": 64.1, "MGV": 64.1, "TLN": 64.1, "VTI": 64.1, "EXLS": 64.1, "XTRE": 64.1, "ARTNA": 64.1, "CFFN": 64.1, "SCHK": 64.1, "V": 64.1, "CATH": 64.1, "IMCB": 64.1, "FNY": 64.1, "GLOF": 64.1, "HUBB": 64.1, "EWM": 64.1, "CGIE": 64.1, "ABT": 64.1, "TDVG": 64.1, "PSKY": 64.1, "VONV": 64.1, "AZ": 64.1, "ARGT": 64.1, "ACLC": 64.1, "USSG": 64.1, "BSCW": 64.1, "KOPN": 64.1, "MCHB": 64.1, "AFL": 64.1, "IDV": 64.1, "RM": 64.1, "CGDG": 64.1, "LPLA": 64.1, "GXC": 64.1, "GTLS": 64.0, "FLXS": 64.0, "PCGG": 64.0, "CNRG": 64.0, "TSCO": 64.0, "FJP": 64.0, "IONX": 64.0, "XRPC": 64.0, "CPK": 64.0, "DEFT": 64.0, "FIHL": 64.0, "SCHZ": 64.0, "DTD": 64.0, "CWI": 64.0, "EDC": 64.0, "PCAR": 64.0, "CHEF": 64.0, "RBB": 64.0, "ARCO": 64.0, "FLOT": 64.0, "RL": 64.0, "DDWM": 64.0, "IBDZ": 64.0, "JILL": 64.0, "VEU": 64.0, "HBM": 64.0, "SCCR": 64.0, "MA": 64.0, "EUSA": 64.0, "SBH": 64.0, "ONEY": 64.0, "EWW": 64.0, "CGSM": 64.0, "DNL": 64.0, "ACM": 63.9, "ACWX": 63.9, "HYMB": 63.9, "CVIE": 63.9, "CVNA": 63.9, "DFAU": 63.9, "GBIL": 63.9, "C": 63.9, "SCHX": 63.9, "IPKW": 63.9, "ICLR": 63.9, "IYLD": 63.9, "ILCB": 63.9, "VEA": 63.9, "BSCX": 63.9, "BCPL": 63.9, "AVDS": 63.9, "PESI": 63.9, "FTSD": 63.9, "WCPB": 63.9, "IREN": 63.9, "AUSF": 63.9, "SPGM": 63.9, "GLOB": 63.9, "TVAL": 63.9, "CVLC": 63.9, "XRPI": 63.9, "SIG": 63.9, "EEMA": 63.9, "HZO": 63.9, "NEGG": 63.9, "GBDC": 63.9, "MUST": 63.9, "HURN": 63.9, "PFIX": 63.9, "DFJ": 63.9, "RVLV": 63.9, "SCHB": 63.9, "IXUS": 63.9, "BCML": 63.9, "EVLV": 63.9, "GDOT": 63.9, "SOXL": 63.8, "ARCB": 63.8, "ISVL": 63.8, "CCNE": 63.8, "SCHF": 63.8, "PEBO": 63.8, "FROG": 63.8, "TSLY": 63.8, "CPLB": 63.8, "EWJV": 63.8, "ORA": 63.8, "CEVA": 63.8, "SSTK": 63.8, "ELMD": 63.8, "OMFL": 63.8, "FXG": 63.8, "AVUS": 63.8, "NWL": 63.8, "IBM": 63.8, "UYLD": 63.8, "TROO": 63.8, "UEC": 63.8, "THRY": 63.8, "DFVX": 63.8, "ATR": 63.8, "VCRB": 63.8, "SHV": 63.8, "LQTI": 63.7, "ATS": 63.7, "DOX": 63.7, "MSFU": 63.7, "DXUV": 63.7, "IWV": 63.7, "CHKP": 63.7, "DIHP": 63.7, "ELAN": 63.7, "FUN": 63.7, "GNW": 63.7, "PHVS": 63.7, "PGF": 63.7, "CERT": 63.7, "NWFL": 63.7, "HYHG": 63.7, "YJUN": 63.7, "HLT": 63.7, "BIRK": 63.7, "CLNE": 63.7, "BOH": 63.7, "IWB": 63.7, "NAKA": 63.7, "SEIC": 63.7, "IAI": 63.7, "ARQT": 63.7, "GBTG": 63.7, "J": 63.7, "ZS": 63.7, "TITN": 63.7, "AMKR": 63.7, "GSUS": 63.7, "FENC": 63.7, "STLD": 63.7, "ASST": 63.7, "THRO": 63.7, "WABC": 63.7, "SPUS": 63.6, "IBTJ": 63.6, "AAPU": 63.6, "IQDF": 63.6, "ALRS": 63.6, "XVV": 63.6, "SPDW": 63.6, "DCRE": 63.6, "VLU": 63.6, "FNGD": 63.6, "VIDI": 63.6, "BNDP": 63.6, "TUR": 63.6, "SITM": 63.6, "DGCB": 63.6, "JIVE": 63.6, "VBND": 63.6, "HECA": 63.6, "INOD": 63.6, "BAMD": 63.6, "VO": 63.6, "HBCP": 63.6, "EXEL": 63.6, "BXSL": 63.6, "DOL": 63.6, "CR": 63.6, "EXTR": 63.6, "MOV": 63.6, "DTH": 63.6, "SMMU": 63.6, "BY": 63.6, "SPYM": 63.5, "VXUS": 63.5, "FIP": 63.5, "GOLY": 63.5, "CHWY": 63.5, "COLO": 63.5, "FLY": 63.5, "ZBH": 63.5, "HOG": 63.5, "COPP": 63.5, "OEF": 63.5, "QDF": 63.5, "NUMG": 63.5, "SUSL": 63.5, "FCAL": 63.5, "RSPN": 63.5, "QQQY": 63.5, "FMUB": 63.5, "MRBK": 63.5, "IT": 63.5, "JXN": 63.5, "TLS": 63.5, "MDGL": 63.5, "UNH": 63.5, "IAK": 63.5, "EG": 63.5, "BSCY": 63.5, "XME": 63.5, "URG": 63.5, "MOH": 63.5, "GPOR": 63.5, "DVAL": 63.5, "FRAF": 63.4, "VOO": 63.4, "UITB": 63.4, "AVO": 63.4, "PFIS": 63.4, "FTHI": 63.4, "FDUS": 63.4, "SDIV": 63.4, "AZZ": 63.4, "PEJ": 63.4, "TSEM": 63.4, "FIXD": 63.4, "SNA": 63.4, "SPY": 63.4, "BSCZ": 63.4, "PICS": 63.4, "CGUS": 63.4, "IYY": 63.4, "SLB": 63.4, "TXUE": 63.4, "FBOT": 63.4, "BSCR": 63.4, "ISEP": 63.4, "AMZY": 63.4, "FLJP": 63.4, "PAGS": 63.4, "SSNC": 63.4, "GIII": 63.4, "CHPY": 63.4, "CLX": 63.4, "IDMO": 63.4, "PRIV": 63.4, "FDEM": 63.4, "FLGB": 63.4, "BALL": 63.4, "TPHD": 63.4, "GRPM": 63.4, "BOBS": 63.4, "AFLG": 63.4, "GCOR": 63.4, "MIR": 63.4, "KOID": 63.3, "OBDC": 63.3, "HOLA": 63.3, "SYSB": 63.3, "NSIT": 63.3, "SATS": 63.3, "AVLC": 63.3, "MNDY": 63.3, "BSMT": 63.3, "LGH": 63.3, "DWX": 63.3, "ORCL": 63.3, "IBUY": 63.3, "CXM": 63.3, "ACB": 63.3, "HDEF": 63.3, "AMSC": 63.3, "ILOW": 63.3, "SPBU": 63.3, "RSSB": 63.3, "DINT": 63.3, "DFSB": 63.3, "JCPB": 63.3, "FWONA": 63.3, "PBYI": 63.3, "KOLD": 63.3, "CYD": 63.3, "IMVT": 63.3, "SMIZ": 63.3, "FELV": 63.3, "VEXC": 63.3, "IMCV": 63.3, "JPXN": 63.2, "CGDV": 63.2, "GOLD": 63.2, "BKCH": 63.2, "LIEN": 63.2, "IFS": 63.2, "CAPE": 63.2, "NFGC": 63.2, "RGA": 63.2, "VONE": 63.2, "CRVL": 63.2, "SPAB": 63.2, "EWD": 63.2, "SPCE": 63.2, "CAC": 63.2, "HAE": 63.2, "MIST": 63.2, "CSV": 63.2, "BITU": 63.2, "CON": 63.2, "INBX": 63.2, "CIFR": 63.2, "AGM": 63.2, "WOLF": 63.2, "QBTS": 63.1, "QDEF": 63.1, "ITT": 63.1, "BBSC": 63.1, "KRYS": 63.1, "DIVO": 63.1, "NESR": 63.1, "LFUS": 63.1, "VV": 63.1, "CMPR": 63.1, "CRL": 63.1, "ESGU": 63.1, "TCAF": 63.1, "ARDT": 63.1, "GLIBA": 63.1, "ENS": 63.1, "SUSC": 63.1, "STZ": 63.1, "OBK": 63.1, "TOGA": 63.1, "LH": 63.1, "IPAY": 63.1, "GSY": 63.1, "BUYW": 63.1, "BIL": 63.1, "QTWO": 63.1, "FLRN": 63.1, "CZNC": 63.1, "ADI": 63.1, "PXH": 63.1, "TDC": 63.1, "APUE": 63.1, "PPH": 63.1, "MBVI": 63.1, "DD": 63.1, "SERV": 63.1, "FNDE": 63.1, "PENG": 63.1, "EA": 63.1, "RDN": 63.1, "SIDU": 63.1, "PBH": 63.1, "NVRI": 63.1, "BND": 63.0, "COSO": 63.0, "FRSH": 63.0, "TFII": 63.0, "MTSI": 63.0, "ILTB": 63.0, "LE": 63.0, "RKLX": 63.0, "QTUM": 63.0, "DLN": 63.0, "BVAL": 63.0, "OSPN": 63.0, "BK": 63.0, "CGIC": 63.0, "WYFI": 63.0, "EAGG": 63.0, "HLAL": 63.0, "TGB": 63.0, "FDEV": 63.0, "WES": 63.0, "TFIN": 63.0, "VUZI": 63.0, "AXG": 63.0, "MAN": 63.0, "LRGF": 63.0, "ACGL": 63.0, "CXSE": 63.0, "COUR": 62.9, "JMBS": 62.9, "NTSX": 62.9, "GCO": 62.9, "INTL": 62.9, "VGUS": 62.9, "OSBC": 62.9, "SNTH": 62.9, "IMTB": 62.9, "PBPH": 62.9, "VBK": 62.9, "GIB": 62.9, "MAR": 62.9, "MAGY": 62.9, "DXIV": 62.9, "CADL": 62.9, "INFQ": 62.9, "AGGY": 62.9, "ILMN": 62.9, "SMTH": 62.9, "AGG": 62.9, "FENI": 62.9, "MGC": 62.9, "AVDV": 62.9, "CAIQ": 62.9, "COPX": 62.9, "ONTO": 62.9, "XRP": 62.9, "QCLN": 62.9, "IWP": 62.9, "BBT": 62.9, "NANC": 62.9, "GHI": 62.9, "WDFC": 62.8, "AMDY": 62.8, "WCMI": 62.8, "JBBB": 62.8, "LFST": 62.8, "SDY": 62.8, "BWZ": 62.8, "ENTG": 62.8, "QUAL": 62.8, "ORR": 62.8, "BTBT": 62.8, "TBG": 62.8, "ELF": 62.8, "PTLC": 62.8, "MPWR": 62.8, "VLUE": 62.8, "FYC": 62.8, "SCHY": 62.8, "AVGV": 62.8, "AON": 62.8, "QDVO": 62.8, "SPFI": 62.8, "BITX": 62.8, "TARA": 62.8, "GEM": 62.8, "CGGO": 62.8, "SEIQ": 62.8, "KOMP": 62.8, "JHMB": 62.8, "BCHP": 62.8, "PRGS": 62.8, "FISV": 62.8, "JMST": 62.8, "DFEM": 62.8, "HYBI": 62.8, "CWS": 62.8, "IDHQ": 62.8, "ICOP": 62.8, "MGA": 62.8, "FEOE": 62.7, "IWL": 62.7, "BKAG": 62.7, "ASTL": 62.7, "KBWP": 62.7, "HLF": 62.7, "IESC": 62.7, "HG": 62.7, "HAVA": 62.7, "EMOP": 62.7, "IBHH": 62.7, "GVI": 62.7, "IQV": 62.7, "THNQ": 62.7, "BILL": 62.7, "IEI": 62.7, "BEPC": 62.7, "TSPA": 62.7, "IVV": 62.7, "DVY": 62.7, "IEMG": 62.7, "NBHC": 62.7, "HYTR": 62.7, "AIRR": 62.7, "ARX": 62.7, "DUHP": 62.7, "BIV": 62.7, "TSLX": 62.7, "MASS": 62.7, "SDFI": 62.7, "BBUS": 62.6, "SRLN": 62.6, "FBND": 62.6, "IMNM": 62.6, "BNC": 62.6, "FCPI": 62.6, "STVN": 62.6, "DOUG": 62.6, "FVD": 62.6, "VYMI": 62.6, "PXED": 62.6, "STRV": 62.6, "FEMS": 62.6, "DMBS": 62.6, "PDLB": 62.6, "IRWD": 62.6, "RELL": 62.6, "DVLT": 62.6, "ITRG": 62.6, "CODI": 62.6, "SCVL": 62.6, "REZI": 62.6, "AMDL": 62.6, "TPIF": 62.6, "KALU": 62.6, "IMSR": 62.6, "SIO": 62.6, "ADP": 62.6, "MXI": 62.6, "PIZ": 62.5, "ACHV": 62.5, "XBIL": 62.5, "TNL": 62.5, "DDLS": 62.5, "AVLV": 62.5, "COPJ": 62.5, "RPAY": 62.5, "ETHW": 62.5, "AAXJ": 62.5, "APLD": 62.5, "TASK": 62.5, "VVV": 62.5, "CARL": 62.5, "SMBC": 62.5, "FMAG": 62.5, "ONOF": 62.5, "SMTI": 62.5, "ETHV": 62.5, "SPWO": 62.5, "UIS": 62.5, "VTHR": 62.5, "PRCH": 62.5, "ROAD": 62.5, "HAWX": 62.4, "BAH": 62.4, "CALX": 62.4, "SIXO": 62.4, "XT": 62.4, "UDMY": 62.4, "QNST": 62.4, "CRBN": 62.4, "MJ": 62.4, "JUST": 62.4, "IBCA": 62.4, "JUCY": 62.4, "CAML": 62.4, "HFXI": 62.4, "KN": 62.4, "SCI": 62.4, "FWONK": 62.4, "FNDF": 62.4, "IWLG": 62.4, "IMOM": 62.4, "FETH": 62.4, "EBMT": 62.4, "WDAY": 62.4, "IDVO": 62.4, "QUS": 62.4, "SDGR": 62.4, "COWZ": 62.4, "TXNM": 62.4, "IUS": 62.4, "COHU": 62.4, "HSIC": 62.4, "HPQ": 62.3, "AGZ": 62.3, "IBTG": 62.3, "DFSE": 62.3, "SWIM": 62.3, "SRPT": 62.3, "NIQ": 62.3, "FOX": 62.3, "EMAT": 62.3, "TVTX": 62.3, "LLY": 62.3, "OAIM": 62.3, "CGBL": 62.3, "GQI": 62.3, "BBAG": 62.3, "VTRS": 62.3, "SPYX": 62.3, "ETHE": 62.3, "TSMX": 62.3, "PLBY": 62.3, "MWA": 62.3, "EEM": 62.3, "BKLC": 62.3, "FAD": 62.3, "HEQT": 62.3, "FDEC": 62.3, "CVSB": 62.3, "CTMX": 62.3, "FOXA": 62.3, "FOCT": 62.3, "BBAI": 62.3, "TAC": 62.3, "CNEQ": 62.2, "RNW": 62.2, "BCAR": 62.2, "LCTU": 62.2, "ARKO": 62.2, "WPAY": 62.2, "BWA": 62.2, "DEUS": 62.2, "OALC": 62.2, "ANIP": 62.2, "VSLU": 62.2, "FDM": 62.2, "EXPO": 62.2, "VERA": 62.2, "XCEM": 62.2, "TMDX": 62.2, "IDUB": 62.2, "CV": 62.2, "KXI": 62.2, "NTAP": 62.2, "KULR": 62.2, "PRAX": 62.2, "SPHQ": 62.2, "BEAM": 62.2, "BLOK": 62.2, "CLS": 62.2, "MTN": 62.2, "EPS": 62.2, "NBJP": 62.2, "OTEX": 62.1, "EXI": 62.1, "DEM": 62.1, "FLCB": 62.1, "VISN": 62.1, "FELC": 62.1, "URGN": 62.1, "MBCC": 62.1, "XSW": 62.1, "ETHA": 62.1, "OPK": 62.1, "FIZZ": 62.1, "LVHI": 62.1, "AXS": 62.1, "NBBK": 62.1, "SPHB": 62.1, "ABAT": 62.1, "RDIV": 62.1, "AVT": 62.1, "NUAI": 62.1, "EME": 62.1, "GDXU": 62.1, "NATR": 62.1, "FTV": 62.1, "KGC": 62.1, "LRCX": 62.1, "BSOL": 62.1, "HYGH": 62.1, "FIDI": 62.1, "SGVT": 62.1, "DNOV": 62.1, "FEX": 62.1, "VGIT": 62.1, "KFY": 62.1, "PSNL": 62.1, "SPGI": 62.1, "TREE": 62.1, "BUCK": 62.1, "PALL": 62.0, "SLF": 62.0, "DUBS": 62.0, "FSMB": 62.0, "CLOB": 62.0, "PLG": 62.0, "VIS": 62.0, "DG": 62.0, "BTCI": 62.0, "MAGS": 62.0, "SAH": 62.0, "CRSP": 62.0, "NVT": 62.0, "ETH": 62.0, "PJAN": 62.0, "XLG": 62.0, "XPH": 62.0, "BKH": 62.0, "HCAT": 62.0, "IOO": 62.0, "ISPY": 62.0, "JGRO": 62.0, "CRVS": 62.0, "AROW": 62.0, "LZM": 62.0, "BJAN": 62.0, "INFO": 62.0, "PD": 62.0, "RDAG": 62.0, "EE": 62.0, "SMB": 62.0, "BLCO": 62.0, "SPMB": 62.0, "NMFC": 62.0, "TWIN": 62.0, "AMTB": 62.0, "KMX": 62.0, "VZLA": 62.0, "BUSE": 62.0, "AIP": 61.9, "HVII": 61.9, "RSPS": 61.9, "AGO": 61.9, "CWT": 61.9, "CTGO": 61.9, "GSM": 61.9, "CENT": 61.9, "FLEX": 61.9, "LTH": 61.9, "KNX": 61.9, "IBTK": 61.9, "SCHR": 61.9, "PXF": 61.9, "CDX": 61.9, "FQAL": 61.9, "SKYY": 61.9, "MSFT": 61.9, "AVGE": 61.9, "XSOE": 61.9, "AUNA": 61.9, "COR": 61.9, "ROE": 61.9, "MSEX": 61.9, "GSEW": 61.9, "DJAN": 61.9, "GGLL": 61.9, "PZT": 61.9, "ESUM": 61.9, "FDMO": 61.9, "QQQJ": 61.9, "DFAE": 61.9, "TLH": 61.8, "FLDR": 61.8, "CFBK": 61.8, "CLSK": 61.8, "SNX": 61.8, "SOPH": 61.8, "HEEM": 61.8, "VOT": 61.8, "WBD": 61.8, "UA": 61.8, "GOOG": 61.8, "AIR": 61.8, "USMF": 61.8, "TBIL": 61.8, "DEXC": 61.8, "CNXC": 61.8, "MSM": 61.8, "CALY": 61.8, "EZA": 61.8, "GPN": 61.8, "BITO": 61.8, "ALTS": 61.8, "AVPT": 61.8, "TDIV": 61.8, "DMAC": 61.8, "STCE": 61.8, "MEDP": 61.8, "TFLO": 61.8, "AIN": 61.8, "TMQ": 61.8, "G": 61.8, "FDS": 61.8, "PGHY": 61.8, "AVEM": 61.7, "IBD": 61.7, "FTCB": 61.7, "LSGR": 61.7, "LTPZ": 61.7, "VFLO": 61.7, "GSOL": 61.7, "BCRX": 61.7, "SPTI": 61.7, "NBIX": 61.7, "ICOW": 61.7, "BEBE": 61.7, "EWU": 61.7, "BALI": 61.7, "JPSE": 61.7, "WIP": 61.7, "OFRM": 61.7, "TLTW": 61.7, "TRN": 61.7, "WINA": 61.7, "JPME": 61.7, "FMC": 61.7, "MG": 61.7, "EMKT": 61.7, "JBS": 61.7, "SPHD": 61.7, "HUT": 61.7, "R": 61.7, "IDOG": 61.7, "ITRI": 61.7, "KJAN": 61.6, "DYNF": 61.6, "APH": 61.6, "STN": 61.6, "PLAB": 61.6, "JBND": 61.6, "BBEM": 61.6, "RIOT": 61.6, "GSWO": 61.6, "TAN": 61.6, "AVXC": 61.6, "TECL": 61.6, "RAL": 61.6, "TRU": 61.6, "SEIX": 61.6, "PNQI": 61.6, "PFBC": 61.6, "BCPC": 61.6, "BDBT": 61.6, "USPX": 61.6, "DOMO": 61.6, "UFCS": 61.6, "LGLV": 61.6, "PICK": 61.6, "UNFI": 61.6, "JQUA": 61.6, "JFB": 61.6, "PYPL": 61.6, "ELA": 61.6, "YMAX": 61.6, "IMCG": 61.6, "MD": 61.6, "SBGI": 61.6, "SMHX": 61.6, "IDEQ": 61.5, "ATRO": 61.5, "EMNT": 61.5, "CRML": 61.5, "FBCG": 61.5, "MATX": 61.5, "ICL": 61.5, "MSOS": 61.5, "BLUC": 61.5, "TGTX": 61.5, "MSTX": 61.5, "LRGG": 61.5, "METV": 61.5, "NZAC": 61.5, "GJAN": 61.5, "VIK": 61.5, "UNP": 61.5, "CMI": 61.5, "GRRR": 61.5, "SCZM": 61.5, "VOTE": 61.5, "FIGB": 61.5, "DOCT": 61.5, "B": 61.5, "PTCT": 61.5, "LSPD": 61.5, "GDLC": 61.5, "AHCO": 61.5, "XOVR": 61.5, "ARW": 61.5, "CGGR": 61.5, "KRNT": 61.5, "ACIO": 61.5, "RGC": 61.5, "PEBK": 61.5, "MTG": 61.5, "JTEK": 61.5, "GOOGL": 61.5, "KBWY": 61.5, "XMAG": 61.4, "INCE": 61.4, "VERX": 61.4, "PJP": 61.4, "HOOD": 61.4, "BINT": 61.4, "PRI": 61.4, "MCO": 61.4, "BBOT": 61.4, "CPAI": 61.4, "CRM": 61.4, "FAUG": 61.4, "PEN": 61.4, "BOIL": 61.4, "BLX": 61.4, "FVCB": 61.4, "LDRX": 61.4, "MBI": 61.4, "FTA": 61.4, "TGRT": 61.4, "GOVT": 61.4, "SOCA": 61.4, "SGP": 61.4, "AAMI": 61.4, "CRAI": 61.4, "VGZ": 61.4, "FIS": 61.4, "AUR": 61.4, "ASM": 61.4, "GSBC": 61.4, "PRSD": 61.4, "APPN": 61.4, "YBTC": 61.3, "DJCO": 61.3, "CAFX": 61.3, "FJUL": 61.3, "MBB": 61.3, "TWFG": 61.3, "PIE": 61.3, "TMFG": 61.3, "PZZA": 61.3, "EGBN": 61.3, "THD": 61.3, "EMGF": 61.3, "THR": 61.3, "LOWV": 61.3, "VRIG": 61.3, "FLQL": 61.3, "QGRO": 61.3, "LOUP": 61.3, "TT": 61.3, "LDOS": 61.3, "GSAT": 61.3, "QLC": 61.3, "HQY": 61.3, "UAA": 61.3, "UDEC": 61.3, "SCHG": 61.3, "TCHP": 61.3, "SYY": 61.3, "IBTL": 61.3, "KNF": 61.3, "FCX": 61.3, "XFIV": 61.3, "BOCT": 61.3, "BAMG": 61.3, "FLGV": 61.3, "BACC": 61.3, "IPAC": 61.2, "MSTU": 61.2, "PANL": 61.2, "AAPL": 61.2, "FBY": 61.2, "WAY": 61.2, "LAC": 61.2, "FLUD": 61.2, "ABTC": 61.2, "WULF": 61.2, "EVH": 61.2, "IJK": 61.2, "ARKB": 61.2, "BFAM": 61.2, "SAIC": 61.2, "CHTR": 61.2, "CCBG": 61.2, "KEMX": 61.2, "PNOV": 61.2, "INCM": 61.2, "FLBL": 61.2, "VPG": 61.2, "WBS": 61.2, "COGT": 61.2, "CRUS": 61.2, "NVDX": 61.2, "BFC": 61.2, "BBLU": 61.1, "MFUS": 61.1, "CMRC": 61.1, "AKTS": 61.1, "SFLR": 61.1, "HIG": 61.1, "SEB": 61.1, "IYRI": 61.1, "EMXC": 61.1, "FLJH": 61.1, "NPO": 61.1, "USXF": 61.1, "ASPN": 61.1, "FELG": 61.1, "FRDM": 61.1, "BTU": 61.1, "ISMCF": 61.1, "PBW": 61.1, "IWY": 61.1, "GBTC": 61.1, "BEP": 61.1, "ALC": 61.1, "NRIX": 61.1, "BRZE": 61.0, "KARO": 61.0, "CYTK": 61.0, "NAGE": 61.0, "HCMT": 61.0, "AZN": 61.0, "IUSG": 61.0, "FXL": 61.0, "SFTX": 61.0, "SSUS": 61.0, "BNDI": 61.0, "LBRDA": 61.0, "IBTO": 61.0, "SCHQ": 61.0, "LBRDK": 61.0, "BB": 61.0, "LRGE": 61.0, "VEGN": 61.0, "ALNT": 61.0, "MSIF": 61.0, "WRN": 61.0, "CRDO": 61.0, "CHRW": 61.0, "RSKD": 61.0, "PFUT": 61.0, "DIOD": 61.0, "TUSI": 61.0, "DVS": 61.0, "BITB": 61.0, "FTLS": 61.0, "BASG": 61.0, "JHEM": 61.0, "RODM": 61.0, "FNOV": 60.9, "VGLT": 60.9, "GIC": 60.9, "GROY": 60.9, "KYIV": 60.9, "ALAI": 60.9, "TBUX": 60.9, "IEF": 60.9, "IFRA": 60.9, "IPO": 60.9, "RKLB": 60.9, "SGMT": 60.9, "GDEC": 60.9, "VBIL": 60.9, "BBH": 60.9, "WSFS": 60.9, "CAG": 60.9, "ECVT": 60.9, "DFCF": 60.9, "GCOW": 60.9, "EXK": 60.9, "RLGT": 60.9, "IRON": 60.9, "NMG": 60.9, "AAP": 60.9, "INTA": 60.9, "PDEC": 60.9, "TSHA": 60.9, "HPE": 60.9, "IBTQ": 60.9, "FSEP": 60.9, "SOXX": 60.9, "IDR": 60.9, "IWF": 60.9, "MTUM": 60.9, "QURE": 60.9, "RBBN": 60.9, "PBP": 60.9, "STEL": 60.9, "SLSR": 60.8, "MIAX": 60.8, "CD": 60.8, "BUFG": 60.8, "IVW": 60.8, "IBTM": 60.8, "EQL": 60.8, "XYLD": 60.8, "NVDY": 60.8, "FLTW": 60.8, "WTPI": 60.8, "LILA": 60.8, "PWV": 60.8, "SNPS": 60.8, "FBTC": 60.8, "OXSQ": 60.8, "AESR": 60.8, "GGUS": 60.8, "UTMD": 60.8, "GNOV": 60.8, "HTLM": 60.8, "VMBS": 60.8, "EFX": 60.8, "MED": 60.8, "MKSI": 60.8, "MGK": 60.8, "AMR": 60.8, "TRNS": 60.8, "BUFR": 60.8, "BHE": 60.8, "VONG": 60.8, "FIVN": 60.8, "RARE": 60.8, "FTC": 60.8, "TOI": 60.8, "MLYS": 60.8, "OLLI": 60.8, "ARTY": 60.8, "CNA": 60.8, "BGIG": 60.7, "BWXT": 60.7, "IBIT": 60.7, "JPEF": 60.7, "EPC": 60.7, "BUFD": 60.7, "BTC": 60.7, "SRI": 60.7, "IONQ": 60.7, "FIDU": 60.7, "PFDE": 60.7, "GFEB": 60.7, "BROS": 60.7, "IVAL": 60.7, "CDRE": 60.7, "COWG": 60.7, "EWT": 60.7, "KHC": 60.7, "DXJ": 60.7, "VCOB": 60.7, "FBRX": 60.7, "DWAS": 60.7, "XRAY": 60.7, "BRRR": 60.7, "RGTI": 60.7, "UMMA": 60.7, "IVOL": 60.7, "GSEP": 60.7, "SLRC": 60.7, "GDDY": 60.7, "DSGN": 60.7, "KORU": 60.7, "NUGT": 60.7, "LILAK": 60.7, "XTEN": 60.7, "AMAL": 60.7, "NRDS": 60.7, "SPTL": 60.6, "GWX": 60.6, "MTRN": 60.6, "TMFC": 60.6, "AD": 60.6, "PAYS": 60.6, "AMPY": 60.6, "CSCO": 60.6, "VUG": 60.6, "EYLD": 60.6, "EFAV": 60.6, "OSW": 60.6, "INTR": 60.6, "IRMD": 60.6, "DBD": 60.6, "HCSG": 60.6, "CWAN": 60.6, "SATL": 60.6, "UUUU": 60.6, "AKRE": 60.6, "JBHT": 60.6, "CRK": 60.6, "MRSK": 60.6, "SFY": 60.6, "TEX": 60.6, "LCAP": 60.6, "TBLA": 60.6, "BUFZ": 60.6, "XLI": 60.6, "CNXN": 60.6, "POCT": 60.6, "BUXX": 60.6, "PFEB": 60.6, "PYZ": 60.6, "VRDN": 60.6, "SMCY": 60.6, "OXM": 60.6, "FXNC": 60.6, "TLT": 60.6, "UNOV": 60.6, "FLCG": 60.6, "HODL": 60.6, "GMOI": 60.6, "AEXA": 60.6, "EUAD": 60.6, "BKV": 60.6, "CDNS": 60.6, "FCVT": 60.6, "OPFI": 60.6, "RSHO": 60.5, "BUFP": 60.5, "CDZI": 60.5, "TNDM": 60.5, "TLTE": 60.5, "BITF": 60.5, "BYND": 60.5, "SPYD": 60.5, "SGLC": 60.5, "ROUS": 60.5, "HL": 60.5, "BWMX": 60.5, "UDIV": 60.5, "ECOW": 60.5, "FDMT": 60.5, "ACT": 60.5, "ONEQ": 60.5, "RVMD": 60.5, "DAAQ": 60.5, "UFEB": 60.5, "EMMF": 60.5, "TDAQ": 60.5, "NGEN": 60.5, "FJAN": 60.5, "ANGO": 60.4, "PLMR": 60.4, "KVUE": 60.4, "GOCT": 60.4, "DCTH": 60.4, "ADMA": 60.4, "CMTL": 60.4, "SPYG": 60.4, "CMDB": 60.4, "ILDR": 60.4, "SEPZ": 60.4, "EZBC": 60.4, "BKD": 60.4, "BTCW": 60.4, "AFG": 60.4, "QQQI": 60.4, "TRFM": 60.4, "ITGR": 60.4, "JANW": 60.4, "TRST": 60.4, "IVOG": 60.4, "RMR": 60.4, "OSCR": 60.4, "POWI": 60.4, "SRCE": 60.4, "EGAN": 60.4, "TOPT": 60.4, "MFEM": 60.4, "AMBQ": 60.3, "KLIC": 60.3, "ESN": 60.3, "BMNR": 60.3, "BITW": 60.3, "IMMR": 60.3, "PABU": 60.3, "MQQQ": 60.3, "BTCO": 60.3, "FDG": 60.3, "NCMI": 60.3, "CLSE": 60.3, "ESPO": 60.3, "VPL": 60.3, "GQRE": 60.3, "FTQI": 60.3, "PERI": 60.3, "SOXQ": 60.3, "JIG": 60.3, "MTCH": 60.3, "SFLO": 60.3, "NULG": 60.3, "JMTG": 60.3, "TGRW": 60.3, "RBA": 60.3, "FDT": 60.3, "TDS": 60.3, "VOOG": 60.3, "FDV": 60.3, "THG": 60.3, "IMFL": 60.3, "WAB": 60.3, "GBX": 60.3, "QQQH": 60.2, "AMZU": 60.2, "ROP": 60.2, "TMF": 60.2, "MDYG": 60.2, "WINN": 60.2, "FTSL": 60.2, "BCBP": 60.2, "HXL": 60.2, "JEMA": 60.2, "IYW": 60.2, "JEPQ": 60.2, "KSTR": 60.2, "NEM": 60.2, "DBJP": 60.2, "MSTY": 60.2, "ECON": 60.2, "NWE": 60.2, "SMH": 60.2, "IYK": 60.2, "BJ": 60.2, "SFD": 60.2, "AME": 60.2, "METU": 60.2, "BGC": 60.2, "ACWV": 60.2, "HAS": 60.2, "CWEN": 60.2, "NVDU": 60.1, "ILCG": 60.1, "GWW": 60.1, "GRNY": 60.1, "MDWD": 60.1, "GPIQ": 60.1, "SELV": 60.1, "FBL": 60.1, "PSI": 60.1, "QTEC": 60.1, "OPAL": 60.1, "URNJ": 60.1, "ILF": 60.1, "RMNI": 60.1, "BFEB": 60.1, "RZLT": 60.1, "ALTG": 60.1, "CARK": 60.1, "QAI": 60.1, "GLXY": 60.1, "AMD": 60.1, "TQQQ": 60.1, "ZGN": 60.0, "JBL": 60.0, "BARK": 60.0, "POST": 60.0, "SPRX": 60.0, "HCI": 60.0, "NUVL": 60.0, "GARP": 60.0, "KNOP": 60.0, "UTEN": 60.0, "FSEC": 60.0, "CDC": 60.0, "XLK": 60.0, "GOVZ": 60.0, "AGIO": 60.0, "KBA": 60.0, "QQEW": 60.0, "BITI": 60.0, "BUFF": 60.0, "FTEC": 60.0, "BFH": 60.0, "CAH": 60.0, "PAUG": 60.0, "VERI": 60.0, "ARKQ": 60.0, "ELVA": 60.0, "FFLG": 60.0, "HUN": 60.0, "AIQ": 59.9, "ITHA": 59.9, "QQQE": 59.9, "IHE": 59.9, "IGPT": 59.9, "IVES": 59.9, "XSVN": 59.9, "DKNG": 59.9, "RPG": 59.9, "GSEE": 59.9, "ETN": 59.9, "ROM": 59.9, "OCTW": 59.9, "SGOV": 59.9, "DEHP": 59.9, "AURA": 59.9, "GRDN": 59.9, "SEIM": 59.9, "TFLR": 59.9, "SBIT": 59.9, "NOV": 59.9, "AMRZ": 59.9, "XLP": 59.9, "ONDS": 59.9, "TAGG": 59.9, "ALDX": 59.9, "SPTE": 59.9, "KTOS": 59.9, "HEWJ": 59.9, "GOVI": 59.9, "LGOV": 59.9, "CEPT": 59.8, "FFOG": 59.8, "CWB": 59.8, "CMBS": 59.8, "IYM": 59.8, "PG": 59.8, "TKO": 59.8, "METL": 59.8, "RDVT": 59.8, "BIBL": 59.8, "EQAL": 59.8, "GLBE": 59.8, "AMPL": 59.8, "FTAI": 59.8, "SDOG": 59.8, "PBD": 59.8, "PJUL": 59.8, "XMLV": 59.8, "PAYX": 59.8, "GUSE": 59.7, "PSFF": 59.7, "EGO": 59.7, "AIPI": 59.7, "UNIY": 59.7, "APCB": 59.7, "PRN": 59.7, "PKOH": 59.7, "CBAN": 59.7, "BUG": 59.7, "NLR": 59.7, "OPEN": 59.7, "MSCI": 59.7, "SEPW": 59.7, "ZALT": 59.7, "JULW": 59.7, "PCTY": 59.6, "USAU": 59.6, "SPNT": 59.6, "JNUG": 59.6, "QLD": 59.6, "BATT": 59.6, "DRUG": 59.6, "MYGN": 59.6, "INV": 59.6, "QGRW": 59.6, "DFSD": 59.6, "YUM": 59.6, "EYPT": 59.6, "FSTA": 59.6, "XIFR": 59.6, "EDV": 59.6, "KOYN": 59.6, "WAGN": 59.6, "PATH": 59.6, "NEXA": 59.6, "NVTS": 59.6, "CVS": 59.6, "PRVA": 59.5, "NRP": 59.5, "AMZN": 59.5, "NVDL": 59.5, "XNCR": 59.5, "UNM": 59.5, "GNK": 59.5, "CSD": 59.5, "DFIN": 59.5, "SLDE": 59.5, "VFMO": 59.5, "APPF": 59.5, "FJUN": 59.5, "MCY": 59.5, "MGNR": 59.5, "FORR": 59.5, "GLDG": 59.5, "DRTS": 59.5, "JCAP": 59.5, "BKLN": 59.5, "EWZS": 59.5, "URNM": 59.5, "IZRL": 59.5, "CCOI": 59.5, "SBET": 59.5, "PSCT": 59.5, "CVGW": 59.5, "FOSL": 59.4, "QUAD": 59.4, "SVRA": 59.4, "SOFR": 59.4, "VDC": 59.4, "EPRX": 59.4, "GEME": 59.4, "PEGA": 59.4, "SNOW": 59.4, "NPKI": 59.4, "NGL": 59.4, "WTAI": 59.4, "QMOM": 59.4, "ABBV": 59.4, "SPRE": 59.4, "SMCX": 59.4, "TJUL": 59.4, "MARA": 59.4, "VUSE": 59.4, "TDI": 59.4, "SI": 59.4, "ORMP": 59.4, "FCN": 59.4, "TFX": 59.4, "QYLG": 59.4, "HASI": 59.4, "NFBK": 59.4, "VGSR": 59.4, "DFEB": 59.4, "HITI": 59.3, "MBSF": 59.3, "NNI": 59.3, "BAI": 59.3, "HYLN": 59.3, "QQQ": 59.3, "EWH": 59.3, "WCN": 59.3, "ENTA": 59.3, "FMAY": 59.3, "RSPT": 59.3, "FXZ": 59.3, "PDP": 59.3, "IXN": 59.3, "DLB": 59.3, "DAPP": 59.3, "TENB": 59.3, "FDIG": 59.3, "IPGP": 59.3, "ALMU": 59.3, "PWB": 59.3, "SRRK": 59.2, "MYE": 59.2, "DJD": 59.2, "CPNG": 59.2, "SCCO": 59.2, "IBB": 59.2, "TTMI": 59.2, "LOGI": 59.2, "INDV": 59.2, "FCOM": 59.2, "IGM": 59.2, "OPLN": 59.2, "MGM": 59.2, "IAPR": 59.2, "WSBF": 59.2, "FTXL": 59.2, "XP": 59.2, "CB": 59.2, "MRK": 59.2, "RLI": 59.2, "ASTS": 59.2, "GOAU": 59.2, "OMER": 59.2, "TTWO": 59.2, "EPU": 59.2, "VGT": 59.2, "D": 59.2, "MANU": 59.2, "EXE": 59.1, "FBIO": 59.1, "ALSN": 59.1, "ALB": 59.1, "GRID": 59.1, "LAR": 59.1, "AGQ": 59.1, "TKR": 59.1, "ARCT": 59.1, "JCI": 59.1, "SAMT": 59.1, "EVC": 59.1, "MCBS": 59.1, "REET": 59.1, "BDVL": 59.1, "AFYA": 59.1, "LSTR": 59.1, "PTL": 59.1, "TCMD": 59.1, "TD": 59.1, "OGI": 59.1, "SLVP": 59.0, "LOAR": 59.0, "ARKX": 59.0, "OKTA": 59.0, "PEG": 59.0, "USD": 59.0, "KOD": 59.0, "GRC": 59.0, "ADUR": 59.0, "CHAU": 59.0, "BBY": 59.0, "QQQM": 59.0, "BIP": 59.0, "TII": 59.0, "NVMI": 59.0, "GLRY": 59.0, "EPP": 59.0, "QQA": 59.0, "TOST": 58.9, "CIBR": 58.9, "FA": 58.9, "BAB": 58.9, "DXPE": 58.9, "BOC": 58.9, "DMAY": 58.9, "QQH": 58.9, "OVBC": 58.9, "BKR": 58.9, "QTOP": 58.9, "MBIN": 58.9, "CMP": 58.9, "TYL": 58.9, "ICE": 58.9, "SKYT": 58.9, "WW": 58.9, "ENPH": 58.9, "ZROZ": 58.9, "ZSL": 58.9, "VOX": 58.9, "TRMB": 58.9, "SRTA": 58.9, "SKYH": 58.9, "NSSC": 58.9, "KAI": 58.8, "CL": 58.8, "MRCY": 58.8, "DSGX": 58.8, "BFRZ": 58.8, "AIRS": 58.8, "AVRE": 58.8, "SG": 58.8, "URA": 58.8, "GAUG": 58.8, "RSST": 58.8, "ICLN": 58.8, "GSBD": 58.8, "SBLK": 58.8, "EMEQ": 58.8, "CCC": 58.8, "BKNG": 58.8, "RAA": 58.8, "FWD": 58.8, "TWST": 58.8, "SOUL": 58.7, "TROX": 58.7, "CPAY": 58.7, "FLSP": 58.7, "FJET": 58.7, "DFGR": 58.7, "CE": 58.7, "QQXT": 58.7, "LAES": 58.7, "KELYB": 58.7, "AIA": 58.7, "GTEK": 58.7, "WLTH": 58.7, "NUKZ": 58.7, "GJUL": 58.7, "JPUS": 58.7, "MOO": 58.7, "NTSK": 58.7, "SKWD": 58.7, "JMOM": 58.7, "FATE": 58.7, "PINS": 58.7, "OLN": 58.7, "FFEB": 58.7, "SPMO": 58.7, "AMCX": 58.7, "RPAR": 58.6, "GOGO": 58.6, "RTH": 58.6, "PKBK": 58.6, "CINF": 58.6, "PGR": 58.6, "VEEV": 58.6, "NVDA": 58.6, "USFD": 58.6, "MATW": 58.6, "FUMB": 58.6, "BAP": 58.6, "LPTH": 58.6, "GJUN": 58.6, "MULL": 58.6, "MANH": 58.6, "BBAX": 58.6, "AISP": 58.5, "JACS": 58.5, "SETM": 58.5, "KPTI": 58.5, "LOPE": 58.5, "FWDI": 58.5, "TOYO": 58.5, "EYE": 58.5, "ARMK": 58.5, "ALXO": 58.5, "FEPI": 58.5, "KVYO": 58.5, "EIKN": 58.5, "SJM": 58.5, "LMRI": 58.5, "BTG": 58.5, "RSPR": 58.5, "GNMA": 58.5, "DJUN": 58.5, "TECB": 58.5, "KLAC": 58.5, "HFGO": 58.5, "FXF": 58.5, "QQMG": 58.5, "BNED": 58.4, "STX": 58.4, "CACI": 58.4, "VNOM": 58.4, "SBIL": 58.4, "GERN": 58.4, "NWS": 58.4, "RWO": 58.4, "JBIO": 58.4, "FDX": 58.4, "IWC": 58.4, "MOD": 58.4, "PSMT": 58.4, "FAF": 58.4, "AFOS": 58.4, "ARKK": 58.4, "ET": 58.4, "CASS": 58.3, "FDN": 58.3, "USDX": 58.3, "NAMM": 58.3, "IAUX": 58.3, "META": 58.3, "AGL": 58.3, "BSCQ": 58.3, "PTNQ": 58.3, "PLXS": 58.3, "ACU": 58.3, "SMTC": 58.3, "NXTG": 58.3, "CNI": 58.3, "ASHR": 58.3, "EEFT": 58.3, "PLTW": 58.3, "RBRK": 58.3, "ICVT": 58.3, "SGML": 58.3, "AGIX": 58.3, "NDAQ": 58.3, "WVE": 58.3, "SAC": 58.2, "UNG": 58.2, "ACLS": 58.2, "LMBS": 58.2, "SAIL": 58.2, "NVCR": 58.2, "MDIV": 58.2, "MMI": 58.2, "NN": 58.2, "FINX": 58.2, "GOEX": 58.2, "OPPJ": 58.2, "VFMV": 58.2, "LSCC": 58.2, "GCMG": 58.2, "FDTX": 58.2, "ASIC": 58.1, "DVYE": 58.1, "GORO": 58.1, "ROG": 58.1, "DERM": 58.1, "FTGS": 58.1, "AIG": 58.1, "TMC": 58.1, "KMT": 58.1, "CPAG": 58.1, "GYRE": 58.1, "HII": 58.1, "ASYS": 58.1, "LIT": 58.1, "MGNI": 58.1, "REGN": 58.1, "ARKW": 58.1, "HDV": 58.1, "PLSE": 58.0, "DAN": 58.0, "RING": 58.0, "PJUN": 58.0, "PMAR": 58.0, "JENA": 58.0, "KLRS": 58.0, "CAT": 58.0, "SGDJ": 58.0, "NWSA": 58.0, "PEPG": 58.0, "CYH": 58.0, "OPY": 58.0, "STRA": 58.0, "KEX": 58.0, "IHAK": 58.0, "NJAN": 57.9, "VTVT": 57.9, "CLOU": 57.9, "CMBT": 57.9, "DOCU": 57.9, "CONL": 57.9, "SEPN": 57.9, "MNPR": 57.9, "PLTM": 57.9, "ALKT": 57.9, "USFR": 57.9, "LAW": 57.9, "USMC": 57.9, "WCLD": 57.9, "LGN": 57.9, "AUPH": 57.9, "OCUL": 57.8, "ABEQ": 57.8, "IETC": 57.8, "DC": 57.8, "CARY": 57.8, "CONY": 57.8, "GDX": 57.8, "SLI": 57.8, "BALT": 57.8, "BR": 57.8, "PEP": 57.8, "OVLY": 57.8, "QDEC": 57.8, "SON": 57.8, "CNL": 57.8, "PBI": 57.7, "TTD": 57.7, "ETOR": 57.7, "WMT": 57.7, "AMAT": 57.7, "MISL": 57.7, "IBTA": 57.7, "SQQQ": 57.7, "BRZU": 57.7, "COCO": 57.7, "CDE": 57.7, "IGV": 57.7, "NVEC": 57.7, "FEM": 57.7, "GDEN": 57.7, "GE": 57.7, "SRAD": 57.7, "SLNO": 57.7, "ABFL": 57.7, "HUBS": 57.7, "AA": 57.7, "EVMN": 57.7, "MGTX": 57.7, "DFDV": 57.7, "GL": 57.7, "FPX": 57.7, "SGMO": 57.7, "ISRWF": 57.7, "XNTK": 57.7, "OSIS": 57.6, "NHC": 57.6, "SIL": 57.6, "ADBE": 57.6, "VST": 57.6, "ABEO": 57.6, "FSM": 57.6, "LIFE": 57.6, "INTW": 57.6, "GMAY": 57.6, "CTAS": 57.6, "WENN": 57.6, "TTEQ": 57.6, "AII": 57.6, "NGD": 57.6, "FBLA": 57.6, "ODFL": 57.6, "QFLR": 57.5, "IXP": 57.5, "BWIN": 57.5, "BETA": 57.5, "HEDG": 57.5, "TPR": 57.5, "ACH": 57.5, "PCRX": 57.5, "DE": 57.5, "MQ": 57.5, "GNE": 57.5, "MNTN": 57.5, "TRFK": 57.5, "ENOV": 57.5, "NTGR": 57.5, "REKR": 57.5, "CRSR": 57.5, "TU": 57.5, "EWZ": 57.5, "NIC": 57.5, "QID": 57.4, "BIIB": 57.4, "RDW": 57.4, "PPLT": 57.4, "IGF": 57.4, "BMAR": 57.4, "PWRD": 57.4, "ESI": 57.4, "GEOS": 57.4, "CPER": 57.4, "GII": 57.4, "SUIG": 57.4, "CRD.A": 57.4, "EWTX": 57.4, "SEDG": 57.4, "MH": 57.4, "SHOC": 57.4, "LUNR": 57.4, "FIGR": 57.4, "USAR": 57.3, "SCHD": 57.3, "TECS": 57.3, "BORR": 57.3, "IBRX": 57.3, "AZO": 57.3, "FTW": 57.3, "ALL": 57.3, "EGHT": 57.3, "DINO": 57.3, "EXPE": 57.3, "MSTR": 57.3, "CRNT": 57.3, "SMCI": 57.3, "SKIN": 57.3, "LIN": 57.3, "APD": 57.3, "MNSB": 57.3, "ELCV": 57.3, "BITQ": 57.3, "NBIS": 57.2, "CSX": 57.2, "AWR": 57.2, "TXO": 57.2, "BMO": 57.2, "SION": 57.2, "BCTK": 57.2, "RSBT": 57.2, "IAC": 57.2, "SGDM": 57.2, "SIXA": 57.2, "IQQQ": 57.2, "CC": 57.2, "PAYC": 57.2, "GBUG": 57.2, "DIBS": 57.2, "NFRA": 57.2, "CASH": 57.2, "LCID": 57.2, "BSMQ": 57.2, "CLBT": 57.2, "PSQ": 57.1, "JAJL": 57.1, "DMRC": 57.1, "GDXJ": 57.1, "WT": 57.1, "SLVR": 57.1, "PLTY": 57.1, "TSEL": 57.1, "LCTX": 57.1, "HSY": 57.1, "DSP": 57.1, "TXG": 57.1, "BE": 57.1, "USMV": 57.1, "WGS": 57.1, "XXI": 57.0, "ACIW": 57.0, "FREL": 57.0, "FTRI": 57.0, "KDK": 57.0, "QSI": 57.0, "BULZ": 57.0, "EWA": 57.0, "PTF": 57.0, "BOX": 57.0, "HNDL": 57.0, "IYR": 57.0, "VOYG": 57.0, "MYRG": 57.0, "UCTT": 57.0, "MAX": 57.0, "BTGO": 57.0, "CTRI": 57.0, "VECO": 57.0, "KO": 57.0, "MNA": 57.0, "VNQ": 57.0, "ORLA": 56.9, "RSG": 56.9, "WRBY": 56.9, "RRX": 56.9, "DFEN": 56.9, "QVMT": 56.9, "YUMC": 56.9, "RNR": 56.9, "SILJ": 56.9, "CNYA": 56.9, "DCBO": 56.9, "SHOP": 56.9, "GNRC": 56.9, "SILC": 56.9, "MUR": 56.9, "CNTN": 56.8, "OTTR": 56.8, "PTC": 56.8, "XMMO": 56.8, "SEZL": 56.8, "EQX": 56.8, "GLTO": 56.8, "RDWR": 56.8, "FLKR": 56.8, "BUFQ": 56.8, "INVA": 56.8, "FIG": 56.8, "PAY": 56.8, "EWY": 56.8, "MUX": 56.8, "GTOP": 56.8, "BFLY": 56.8, "ASTE": 56.8, "ONCY": 56.8, "TBT": 56.8, "OPER": 56.7, "ICHR": 56.7, "MCD": 56.7, "ACIU": 56.7, "INTU": 56.7, "ADTN": 56.7, "LVHD": 56.7, "XPO": 56.7, "FHI": 56.7, "USSE": 56.7, "DKL": 56.7, "STRL": 56.7, "PAHC": 56.7, "TRVI": 56.7, "ATLO": 56.7, "CHEC": 56.7, "HRTG": 56.7, "FYLD": 56.7, "ESP": 56.7, "SA": 56.6, "ABCL": 56.6, "CAKE": 56.6, "ELFY": 56.6, "L": 56.6, "GD": 56.6, "ETSY": 56.6, "FITE": 56.6, "WU": 56.6, "ACOG": 56.6, "TDY": 56.6, "VOLT": 56.6, "CCEP": 56.6, "DGX": 56.6, "GRNT": 56.6, "PDFS": 56.6, "KYMR": 56.6, "RNGR": 56.5, "HNRG": 56.5, "CGNX": 56.5, "ARKF": 56.5, "PLPC": 56.5, "IMKTA": 56.5, "INSG": 56.5, "DT": 56.5, "BBCA": 56.5, "SPLV": 56.5, "CLBK": 56.5, "ASMB": 56.5, "SNXX": 56.5, "TER": 56.4, "FLCA": 56.4, "VSAT": 56.4, "TBLL": 56.4, "INO": 56.4, "FORM": 56.4, "AMLX": 56.4, "FONR": 56.4, "RISR": 56.4, "CAMT": 56.4, "CABO": 56.4, "CBC": 56.4, "CHYM": 56.3, "XLRE": 56.3, "FDL": 56.3, "SIVR": 56.3, "LABU": 56.3, "NXT": 56.3, "FLBR": 56.3, "POR": 56.3, "MPRO": 56.3, "MCK": 56.3, "DDOG": 56.3, "XAR": 56.3, "ARIS": 56.3, "TMV": 56.3, "NAUT": 56.2, "PCOR": 56.2, "NWPX": 56.2, "QYLD": 56.2, "MAPS": 56.2, "NEOV": 56.2, "VICR": 56.2, "TDSC": 56.2, "GDRX": 56.2, "BTAL": 56.2, "EVTC": 56.1, "RRBI": 56.1, "CCNR": 56.1, "ORKA": 56.1, "WEEK": 56.1, "PPI": 56.1, "MU": 56.1, "JCPI": 56.1, "INTC": 56.1, "GDMN": 56.1, "RGLD": 56.1, "WDC": 56.1, "HYMC": 56.1, "CNR": 56.1, "IIIV": 56.1, "VELO": 56.0, "GLSI": 56.0, "AL": 56.0, "MP": 56.0, "RGNX": 56.0, "SNDL": 56.0, "TACO": 56.0, "IGLD": 56.0, "PMAY": 56.0, "GFL": 56.0, "PAAS": 56.0, "BRR": 56.0, "PRSU": 56.0, "EWC": 56.0, "CCJ": 55.9, "WBI": 55.9, "VRSK": 55.9, "WEX": 55.9, "T": 55.9, "GDE": 55.9, "KRRO": 55.9, "JANX": 55.9, "ZBIO": 55.9, "NJUL": 55.9, "YELP": 55.9, "USLM": 55.9, "OR": 55.8, "EDGF": 55.8, "FCA": 55.8, "NNOX": 55.8, "NOW": 55.8, "GALT": 55.8, "MCRP": 55.8, "BURL": 55.8, "LXEO": 55.8, "DNN": 55.8, "VSTM": 55.8, "WPM": 55.7, "CTVA": 55.7, "SVM": 55.7, "TARS": 55.7, "SLV": 55.7, "PTIR": 55.7, "CZWI": 55.7, "HAP": 55.7, "Q": 55.7, "PANW": 55.7, "APP": 55.7, "OSS": 55.7, "DOCN": 55.7, "CMCSA": 55.7, "SHNY": 55.7, "HLX": 55.7, "CP": 55.6, "UTES": 55.6, "AIS": 55.6, "SEI": 55.6, "PLOW": 55.6, "INNV": 55.6, "USAS": 55.6, "ORLY": 55.6, "CME": 55.6, "ACEL": 55.6, "AIRJ": 55.6, "AKBA": 55.6, "MSMR": 55.6, "SD": 55.6, "BWLP": 55.6, "XPRO": 55.6, "BMY": 55.5, "POLE": 55.5, "CSTM": 55.5, "GLTR": 55.5, "SCHL": 55.5, "SRBK": 55.5, "CMRE": 55.5, "TAYD": 55.5, "FNGU": 55.5, "SIRI": 55.5, "IDNA": 55.5, "INVX": 55.5, "ODC": 55.5, "BIOA": 55.5, "INGM": 55.5, "CGAU": 55.4, "LBRX": 55.4, "DIV": 55.4, "GAU": 55.4, "DSX": 55.4, "AG": 55.4, "GNR": 55.4, "AMN": 55.4, "DHX": 55.4, "ARLO": 55.4, "TSBK": 55.3, "EHC": 55.3, "LGO": 55.3, "EIS": 55.3, "ASTH": 55.3, "DNUT": 55.3, "ZETA": 55.3, "GLW": 55.3, "INGN": 55.3, "DGXX": 55.2, "LPG": 55.2, "VEGI": 55.2, "TBN": 55.2, "ATLC": 55.2, "GFS": 55.2, "SIXG": 55.2, "NTLA": 55.2, "RANI": 55.2, "ISOU": 55.2, "FN": 55.2, "UFO": 55.2, "SHAK": 55.2, "DPZ": 55.1, "NMM": 55.1, "KTB": 55.1, "ITA": 55.1, "BBIO": 55.1, "PLUG": 55.1, "SKE": 55.1, "MO": 55.1, "POWL": 55.1, "AXON": 55.1, "KSA": 55.0, "IAG": 55.0, "MAMB": 55.0, "CTAP": 55.0, "IDCC": 55.0, "LRN": 55.0, "ORIC": 55.0, "ATOM": 55.0, "CRDF": 55.0, "PCVX": 55.0, "ANET": 55.0, "NPB": 54.9, "ALMS": 54.9, "HSTM": 54.9, "BMRN": 54.9, "SAM": 54.9, "RWR": 54.9, "IMTX": 54.9, "PFE": 54.9, "NEE": 54.9, "SEG": 54.9, "AEM": 54.9, "TRI": 54.9, "COIN": 54.9, "MORN": 54.9, "GILD": 54.9, "XBI": 54.8, "SOLS": 54.8, "SMHI": 54.8, "TRPA": 54.8, "RIG": 54.8, "THM": 54.8, "SMMT": 54.8, "SLVO": 54.8, "OCGN": 54.8, "PMMF": 54.8, "BKGI": 54.8, "IEZ": 54.8, "GLP": 54.8, "AEIS": 54.7, "SWX": 54.7, "GHRS": 54.7, "PLX": 54.7, "BBCP": 54.7, "CVRX": 54.7, "ETON": 54.7, "SABS": 54.7, "ESE": 54.7, "HP": 54.7, "CNX": 54.7, "VSEC": 54.7, "HWKN": 54.7, "BBRE": 54.7, "TNK": 54.7, "CMT": 54.6, "JPRE": 54.6, "RFIL": 54.6, "IDT": 54.6, "NEXT": 54.6, "XLC": 54.6, "JAKK": 54.5, "RCMT": 54.5, "GILT": 54.5, "ESOA": 54.5, "DUSB": 54.5, "RJET": 54.5, "PZG": 54.5, "PRME": 54.5, "ASIX": 54.5, "CNK": 54.5, "PPA": 54.5, "VFF": 54.5, "FNKO": 54.5, "TRV": 54.4, "EMPD": 54.4, "FAPR": 54.4, "SPIP": 54.4, "AQST": 54.4, "UGL": 54.4, "MPTI": 54.4, "MEOH": 54.4, "VTOL": 54.4, "KMDA": 54.4, "MCS": 54.4, "XOM": 54.4, "ENLV": 54.4, "ALRM": 54.4, "SBIO": 54.3, "POWR": 54.3, "ES": 54.3, "PPTA": 54.3, "SRE": 54.3, "CM": 54.3, "PENN": 54.3, "MAMA": 54.3, "CART": 54.3, "ADM": 54.3, "TTAN": 54.2, "LAUR": 54.2, "AVTX": 54.2, "GTN": 54.2, "WLKP": 54.2, "WEC": 54.1, "ADSK": 54.1, "CEPO": 54.1, "MRVI": 54.1, "VSTS": 54.1, "PLTR": 54.1, "NANR": 54.1, "JKHY": 54.0, "SDRL": 54.0, "CANC": 54.0, "BNAI": 54.0, "ATLX": 54.0, "NEWP": 54.0, "RCEL": 54.0, "TE": 54.0, "KNTK": 54.0, "CAPL": 54.0, "BG": 54.0, "IAUI": 54.0, "CHD": 54.0, "RAAQ": 53.9, "AMGN": 53.9, "SRVR": 53.9, "CPRX": 53.9, "VAL": 53.9, "CEG": 53.9, "OUST": 53.9, "XPER": 53.9, "DGP": 53.9, "SNDK": 53.8, "SEE": 53.8, "JOE": 53.8, "OMC": 53.8, "FNV": 53.8, "SGOL": 53.8, "TRS": 53.8, "OUNZ": 53.8, "OII": 53.8, "LQDA": 53.8, "TAIL": 53.8, "IHS": 53.8, "DBP": 53.8, "IVVD": 53.7, "HON": 53.7, "SXI": 53.7, "FEIM": 53.7, "SUPN": 53.7, "NG": 53.7, "MKOR": 53.7, "RXT": 53.7, "FNGO": 53.7, "DTCR": 53.7, "SCHH": 53.7, "IAUM": 53.6, "WRLD": 53.6, "USRT": 53.6, "OKE": 53.6, "XWIN": 53.6, "FAST": 53.6, "PPL": 53.6, "AUDC": 53.6, "PL": 53.5, "EBAY": 53.5, "CACC": 53.5, "DFAR": 53.5, "TSLQ": 53.5, "OIH": 53.5, "SPIR": 53.5, "ASO": 53.5, "BAR": 53.5, "ABNB": 53.5, "IKT": 53.5, "BSM": 53.5, "CARG": 53.5, "KIDS": 53.4, "GPRK": 53.4, "MSGS": 53.4, "AAAU": 53.4, "CSGS": 53.4, "CLVT": 53.3, "ULS": 53.3, "FAN": 53.3, "LUCK": 53.3, "LMT": 53.3, "FNGG": 53.3, "CLH": 53.3, "AVNW": 53.2, "CTLP": 53.2, "SPB": 53.2, "PDYN": 53.2, "DLX": 53.2, "IDA": 53.2, "BKSY": 53.2, "LWLG": 53.2, "PRA": 53.2, "REMX": 53.2, "CTRA": 53.2, "BRCB": 53.2, "MOG.A": 53.2, "FIX": 53.2, "MSI": 53.2, "AREC": 53.2, "GCT": 53.2, "AVXL": 53.2, "MKTX": 53.1, "PUMP": 53.1, "HCA": 53.1, "RTX": 53.1, "IAU": 53.1, "FTK": 53.1, "BKTI": 53.1, "VIAV": 53.1, "COST": 53.1, "DBMF": 53.1, "BTSG": 53.0, "AWK": 53.0, "NRC": 53.0, "CW": 53.0, "S": 53.0, "OZ": 53.0, "GEL": 53.0, "BEAG": 53.0, "MTA": 53.0, "ICF": 53.0, "HAL": 53.0, "GLDM": 53.0, "WTM": 53.0, "FCBC": 52.9, "REZ": 52.9, "TR": 52.9, "FTNT": 52.9, "ATAI": 52.9, "NOA": 52.9, "SPH": 52.9, "LTRX": 52.9, "ECG": 52.9, "AIRO": 52.9, "TALO": 52.9, "LBTYA": 52.9, "FNGS": 52.9, "POWW": 52.9, "EIX": 52.9, "JNJ": 52.9, "AKAM": 52.8, "IMAX": 52.8, "FLOC": 52.8, "LBTYK": 52.8, "TWLO": 52.8, "OCS": 52.8, "UNCY": 52.7, "AVR": 52.7, "CAOS": 52.7, "CRWD": 52.7, "EVRG": 52.7, "WM": 52.7, "FGDL": 52.7, "GLDI": 52.7, "FDP": 52.7, "GTIP": 52.7, "GLD": 52.7, "PALI": 52.7, "VVX": 52.6, "TIP": 52.6, "PROP": 52.6, "JXI": 52.6, "SHIP": 52.6, "VRTX": 52.6, "ANDG": 52.6, "NE": 52.6, "IDYA": 52.6, "ASPI": 52.6, "CATX": 52.6, "SGHC": 52.5, "TK": 52.5, "SB": 52.5, "WWD": 52.5, "DNLI": 52.5, "PBF": 52.5, "LPCV": 52.5, "AGEN": 52.5, "SAVA": 52.5, "SCHP": 52.5, "SPOT": 52.5, "RGR": 52.4, "SSRM": 52.4, "ANNX": 52.4, "TDW": 52.4, "ZAP": 52.4, "RCI": 52.4, "WTRG": 52.4, "CABA": 52.4, "TDOC": 52.4, "NKTX": 52.4, "TFPM": 52.4, "AVGX": 52.4, "GSL": 52.4, "ECO": 52.4, "RZLV": 52.3, "ACTG": 52.3, "NATH": 52.3, "GQGU": 52.3, "REPL": 52.3, "MEG": 52.3, "ACIC": 52.2, "IGE": 52.2, "MNR": 52.1, "INFL": 52.1, "PKE": 52.1, "NOC": 52.1, "FFIV": 52.1, "DBX": 52.1, "HUMA": 52.1, "NXST": 52.1, "COHR": 52.1, "ED": 52.1, "HACK": 52.1, "EW": 52.1, "DV": 52.1, "CDNL": 52.1, "FMAR": 52.1, "FPS": 52.0, "LWAC": 52.0, "DFIP": 52.0, "IHPCF": 52.0, "DGII": 52.0, "KEN": 52.0, "BVS": 52.0, "RES": 52.0, "LODE": 52.0, "UTL": 52.0, "PAPR": 52.0, "BGS": 51.9, "TSQ": 51.9, "LQDT": 51.9, "AMJB": 51.9, "LYEL": 51.9, "WTI": 51.9, "CLMT": 51.9, "JHG": 51.8, "LUCD": 51.8, "NMRA": 51.8, "GWRE": 51.8, "KNSA": 51.8, "BCE": 51.8, "PSFE": 51.8, "MPLX": 51.8, "MBAV": 51.7, "GUNR": 51.7, "STNG": 51.7, "LHX": 51.7, "CVI": 51.7, "LB": 51.6, "IYZ": 51.6, "DAC": 51.6, "TRX": 51.6, "AGI": 51.6, "NXE": 51.6, "LOCO": 51.6, "KRP": 51.6, "GRMN": 51.6, "GEV": 51.6, "PDEX": 51.6, "XOMA": 51.5, "AEE": 51.5, "GME": 51.5, "CCSI": 51.5, "LITE": 51.5, "UI": 51.5, "PRE": 51.5, "AMZA": 51.4, "TJX": 51.4, "SDS": 51.4, "WMB": 51.4, "GLNG": 51.4, "SPXU": 51.4, "ROKU": 51.4, "ENSG": 51.4, "TMUS": 51.3, "AVGO": 51.3, "TYGO": 51.3, "FET": 51.3, "DBB": 51.3, "ALLW": 51.3, "PGC": 51.3, "RBC": 51.3, "CAEP": 51.3, "UVXY": 51.3, "TTEC": 51.2, "TTC": 51.2, "SOLT": 51.2, "BLSH": 51.2, "CCO": 51.2, "MCRI": 51.2, "FRO": 51.2, "ZIM": 51.2, "RAAX": 51.2, "ELE": 51.2, "VOXR": 51.2, "ASC": 51.1, "RLY": 51.1, "CHAT": 51.1, "SFM": 51.0, "UTI": 51.0, "AVBC": 51.0, "CGEM": 51.0, "UVIX": 51.0, "WTMF": 51.0, "HIMS": 51.0, "TOLZ": 51.0, "RIVN": 51.0, "FXA": 51.0, "DCO": 51.0, "VLGEA": 51.0, "SLGL": 51.0, "NI": 50.9, "CTRN": 50.9, "WTTR": 50.9, "EVCM": 50.9, "SPXS": 50.9, "FXU": 50.9, "RSPU": 50.9, "GHM": 50.9, "HPK": 50.9, "IMO": 50.8, "ARVN": 50.8, "ATLN": 50.8, "TRMD": 50.8, "EFXT": 50.8, "XEL": 50.8, "PCG": 50.8, "LASR": 50.8, "RILY": 50.8, "HOLX": 50.8, "SABR": 50.8, "CHRS": 50.8, "UVE": 50.8, "CIEN": 50.7, "ASUR": 50.7, "MLTX": 50.7, "EOLS": 50.7, "NKTR": 50.7, "ANDE": 50.7, "GRND": 50.7, "CVEO": 50.7, "HWM": 50.7, "CENX": 50.7, "DMAR": 50.6, "KEYS": 50.6, "ZD": 50.6, "TRP": 50.6, "KDEF": 50.6, "NGNE": 50.6, "HSHP": 50.5, "SHLD": 50.5, "CSRE": 50.5, "ENLT": 50.5, "CINT": 50.5, "MBOT": 50.4, "IDU": 50.4, "ATI": 50.4, "CVE": 50.4, "DVN": 50.4, "ANGX": 50.4, "JAZZ": 50.3, "PNRG": 50.3, "CALM": 50.3, "VRSN": 50.3, "SIXH": 50.3, "CVX": 50.2, "ODV": 50.2, "VOR": 50.2, "VPU": 50.2, "AUGO": 50.2, "VKTX": 50.2, "MLAC": 50.2, "NMAX": 50.2, "VIRT": 50.1, "MLR": 50.1, "XES": 50.1, "CRAQ": 50.1, "ETR": 50.0, "ZURA": 50.0, "QSR": 50.0, "CGNT": 50.0, "EPD": 50.0, "FLYW": 50.0, "BSY": 50.0, "SPRO": 50.0, "NVAX": 50.0, "MDU": 49.9, "SEMR": 49.9, "APEI": 49.9, "BATRA": 49.9, "POET": 49.9, "SU": 49.9, "APGE": 49.9, "FTI": 49.9, "RWM": 49.9, "CFLT": 49.9, "USGO": 49.8, "SO": 49.8, "ATEN": 49.8, "PRMB": 49.8, "GSIT": 49.8, "NOG": 49.8, "DVA": 49.8, "RPRX": 49.7, "XMAR": 49.7, "VAC": 49.7, "LNT": 49.7, "FF": 49.7, "KMI": 49.7, "TZA": 49.7, "FUTY": 49.7, "USDU": 49.7, "IBIG": 49.6, "PPHC": 49.6, "PAA": 49.6, "SPHR": 49.6, "OIS": 49.6, "LBRT": 49.6, "SH": 49.6, "XLU": 49.6, "MAZE": 49.5, "TYRA": 49.5, "DMAA": 49.5, "XYZ": 49.5, "SPDN": 49.5, "TIGO": 49.5, "VIR": 49.5, "VXX": 49.5, "TSAT": 49.5, "SSSS": 49.5, "VNDA": 49.4, "SYRE": 49.4, "AAUC": 49.4, "MLPI": 49.4, "LEE": 49.4, "KYTX": 49.4, "TRGP": 49.3, "CMS": 49.3, "ALLO": 49.3, "IMRX": 49.3, "RELY": 49.3, "WLK": 49.3, "ANAB": 49.2, "ARMP": 49.2, "AEHR": 49.2, "BNTC": 49.1, "CRS": 49.1, "MRNA": 49.1, "ZIP": 49.1, "AEVA": 49.1, "FOLD": 49.1, "DAR": 49.1, "LRMR": 49.1, "FMF": 49.1, "THC": 49.0, "CAVA": 49.0, "ENB": 49.0, "NAT": 49.0, "PNTG": 49.0, "KRMN": 48.9, "SRZN": 48.9, "RNG": 48.9, "GPRE": 48.9, "BRCC": 48.8, "EIPI": 48.8, "PRTA": 48.8, "VIXY": 48.8, "SR": 48.8, "ELVN": 48.7, "TPL": 48.7, "AXTI": 48.7, "CRBU": 48.7, "ONTF": 48.6, "TDTF": 48.6, "RRC": 48.6, "RAPP": 48.6, "PWR": 48.6, "FTDR": 48.6, "HESM": 48.5, "INR": 48.5, "TGT": 48.5, "GANX": 48.5, "TGNA": 48.5, "UAN": 48.5, "MCW": 48.5, "KVHI": 48.4, "NYT": 48.4, "NET": 48.4, "GLDD": 48.4, "NATL": 48.4, "RCAT": 48.4, "ABUS": 48.3, "GEMI": 48.3, "VZ": 48.3, "CHAR": 48.3, "EXAS": 48.3, "EZPW": 48.3, "OS": 48.3, "AMLP": 48.3, "CXDO": 48.3, "TRC": 48.3, "NTCT": 48.3, "CNP": 48.2, "BETR": 48.2, "HVMC": 48.2, "EDGH": 48.2, "RCUS": 48.2, "XLE": 48.2, "COP": 48.2, "OGE": 48.1, "SLAB": 48.1, "REI": 48.1, "KOS": 48.1, "EBF": 48.1, "UMI": 48.0, "VLO": 48.0, "IRDM": 48.0, "NJR": 48.0, "AP": 48.0, "BAND": 48.0, "CZR": 48.0, "NGS": 48.0, "OPTX": 48.0, "SHEN": 48.0, "PBA": 48.0, "SFL": 48.0, "TRDA": 48.0, "PROK": 47.9, "TH": 47.9, "MLPA": 47.9, "CSHI": 47.9, "DHT": 47.8, "SBUX": 47.8, "STPZ": 47.7, "ATEX": 47.7, "ZNTL": 47.7, "PSCE": 47.7, "ANRO": 47.7, "DHIL": 47.6, "EOG": 47.6, "KGS": 47.6, "SMRT": 47.6, "PURR": 47.6, "IDGT": 47.6, "FE": 47.5, "HFGM": 47.4, "DRS": 47.4, "OGS": 47.4, "FIVE": 47.4, "EXC": 47.4, "TIPX": 47.4, "NFG": 47.4, "DELL": 47.4, "DK": 47.4, "OSUR": 47.3, "DTE": 47.3, "ERX": 47.3, "PUBM": 47.3, "NTWO": 47.2, "PSX": 47.2, "ECPG": 47.2, "TATT": 47.1, "AR": 47.1, "FAZ": 47.1, "TTE": 47.1, "CBUS": 47.1, "AEP": 47.1, "CBIO": 47.1, "CASY": 47.0, "HNGE": 47.0, "LYV": 47.0, "ZYME": 47.0, "ESEA": 47.0, "ACRS": 47.0, "TPYP": 47.0, "EGY": 47.0, "USAC": 46.9, "TSSI": 46.9, "GRO": 46.9, "ELTX": 46.9, "CMDT": 46.9, "BATRK": 46.9, "DRLL": 46.9, "DMLP": 46.9, "DUK": 46.9, "ENFR": 46.8, "ITRN": 46.8, "PAGP": 46.8, "RSI": 46.8, "AGX": 46.8, "UAMY": 46.8, "FENY": 46.7, "MDST": 46.7, "LLYVA": 46.7, "INFU": 46.7, "ALEC": 46.6, "CRC": 46.6, "EMA": 46.5, "PNW": 46.5, "NVGS": 46.5, "AROC": 46.5, "INSW": 46.5, "FANG": 46.5, "WIX": 46.4, "VDE": 46.4, "CQP": 46.3, "NWN": 46.3, "NBR": 46.3, "DTM": 46.3, "KOP": 46.2, "AVBP": 46.2, "MTZ": 46.2, "SM": 46.2, "MITK": 46.2, "YANG": 46.2, "RSPG": 46.2, "MPC": 46.1, "ABOS": 46.1, "EQT": 46.1, "IYE": 46.0, "GLRE": 46.0, "IXC": 46.0, "WEAT": 46.0, "PVLA": 46.0, "CELC": 46.0, "IOT": 45.9, "ATO": 45.9, "KW": 45.9, "DFTX": 45.9, "ARLP": 45.9, "KR": 45.9, "LINC": 45.9, "HNST": 45.9, "MANE": 45.8, "MPLT": 45.8, "VTIP": 45.8, "FRPT": 45.7, "RYAM": 45.7, "LLYVK": 45.7, "CCCC": 45.7, "PRDO": 45.7, "AESI": 45.6, "SDOW": 45.5, "VSNT": 45.5, "LNG": 45.5, "TDAY": 45.5, "NFLX": 45.4, "CGON": 45.4, "GASS": 45.4, "IMUX": 45.4, "PBOG": 45.4, "FSLY": 45.4, "AM": 45.3, "CTA": 45.3, "UTHR": 45.3, "RAMP": 45.3, "OMDA": 45.3, "NTR": 45.2, "LXRX": 45.2, "OBE": 45.2, "PARR": 45.1, "ROST": 45.1, "SEM": 45.1, "FXN": 45.1, "ACDC": 45.1, "KURA": 45.1, "QIPT": 45.1, "SOXS": 45.1, "PR": 45.0, "OXY": 45.0, "GCC": 45.0, "ROIV": 45.0, "EPSN": 45.0, "STIP": 44.9, "CLYM": 44.9, "GPAT": 44.9, "PRAA": 44.8, "FCFS": 44.8, "STKL": 44.7, "IEO": 44.7, "MUSA": 44.7, "FTS": 44.7, "HAFN": 44.6, "RNAC": 44.6, "IMPP": 44.6, "EMLP": 44.5, "DYN": 44.5, "MLPX": 44.5, "PRLD": 44.4, "YOU": 44.4, "FRHC": 44.3, "LION": 44.3, "DEC": 44.3, "IMXI": 44.3, "LGND": 44.1, "ADCT": 44.1, "SDCI": 44.1, "EPM": 44.0, "DDD": 44.0, "VG": 44.0, "SMC": 43.9, "SII": 43.9, "PDS": 43.9, "SOBO": 43.9, "PMTS": 43.9, "ARTV": 43.8, "CLDX": 43.8, "TDTT": 43.7, "TBCH": 43.7, "XTL": 43.6, "RLAY": 43.6, "FIGS": 43.6, "HTO": 43.5, "EWCZ": 43.5, "DUST": 43.5, "MTDR": 43.5, "SUN": 43.4, "APA": 43.4, "CODA": 43.4, "ETHM": 43.4, "LMAT": 43.4, "RCKY": 43.3, "BCD": 43.3, "IALT": 43.2, "ACHC": 43.2, "STGW": 43.1, "DOG": 43.1, "CMDY": 43.1, "PTGX": 42.9, "SUNC": 42.9, "MGY": 42.8, "LGCY": 42.8, "CRGY": 42.7, "OVV": 42.7, "ABX": 42.7, "CERY": 42.6, "EHAB": 42.6, "STOK": 42.6, "VRT": 42.5, "APPX": 42.5, "APAD": 42.5, "ACLX": 42.5, "SNDA": 42.4, "TW": 42.4, "ANIK": 42.3, "UUP": 42.2, "UNF": 42.2, "MASI": 42.1, "IRD": 42.1, "CF": 42.1, "SLS": 42.1, "COKE": 41.9, "CNTX": 41.8, "XOP": 41.7, "TNYA": 41.6, "QUIK": 41.6, "ESLT": 41.6, "NPK": 41.5, "BDSX": 41.4, "FCG": 41.4, "GUSH": 41.4, "BBCQ": 41.4, "LXU": 41.3, "LNTH": 41.3, "CNQ": 41.1, "TONX": 41.1, "ERAS": 41.1, "PIT": 41.0, "BTE": 40.9, "REX": 40.9, "VET": 40.8, "DAVE": 40.7, "VTYX": 40.7, "KGEI": 40.7, "RCKT": 40.7, "EDIT": 40.4, "IMMX": 40.3, "VMD": 40.1, "ALM": 40.0, "TPH": 39.9, "USOI": 39.8, "KMLM": 39.6, "HGER": 39.6, "DOW": 39.6, "USCI": 39.5, "NBCM": 39.4, "CRBP": 39.4, "WLY": 39.2, "LFMD": 39.2, "TERN": 39.2, "IPSC": 39.0, "ISSC": 39.0, "ADEA": 38.9, "TECX": 38.7, "CCRN": 38.6, "SENEA": 38.5, "FLNG": 38.5, "SSP": 38.4, "VTEX": 38.0, "TNGX": 37.9, "GTE": 37.8, "EINC": 37.8, "SNDX": 37.7, "BCAX": 37.3, "WHF": 37.1, "KALV": 37.1, "TEN": 37.0, "SLDB": 36.9, "BOXX": 36.9, "NEXN": 36.7, "FRGE": 36.6, "PTEN": 36.6, "MRVL": 36.6, "AGRO": 36.4, "TALK": 36.2, "FTGC": 35.8, "CRCL": 35.8, "IPI": 35.8, "XFOR": 35.8, "STRO": 35.7, "COM": 35.6, "VYGR": 35.3, "UMAC": 35.3, "AAOI": 35.1, "GSG": 34.8, "REPX": 34.5, "BCI": 34.4, "EB": 34.4, "DJP": 34.3, "CHRD": 34.2, "COMB": 34.2, "COMT": 34.2, "STRZ": 34.2, "BNO": 34.1, "DBA": 33.7, "CAPR": 33.5, "BENJ": 33.5, "FAAR": 33.4, "SOC": 33.3, "LYB": 33.3, "ELDN": 32.9, "GEVO": 32.7, "RAPT": 32.7, "AGCC": 32.4, "OOMA": 32.3, "NERV": 32.3, "DBC": 32.1, "USO": 32.0, "PDBC": 31.8, "RLMD": 31.7, "AVIR": 30.9, "BW": 30.7, "IOVA": 30.5, "ZVRA": 30.4, "UCO": 30.2, "SWBI": 30.1, "AMPX": 27.9, "DBO": 26.1, "OVID": 26.0, "STTK": 25.8, "XENE": 24.7, "DAWN": 20.8, "ALTO": 19.1, "DNTH": 17.6, "MGNX": 15.0};
+
+function loadTrades() {
+  const local = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  // Merge: localStorage entry data is authoritative (user may have edited prices/dates)
+  // TRADES_INIT only provides fresh currentZ and currentPrices from last Python run
+  const initMap = {};
+  TRADES_INIT.forEach(t => { initMap[t.id] = t; });
+  const merged = local.map(t => {
+    if (initMap[t.id]) {
+      // Only take live market data from Python — NOT entry fields the user may have edited
+      t.currentZ      = initMap[t.id].currentZ;
+      t.currentPriceA = initMap[t.id].currentPriceA;
+      t.currentPriceB = initMap[t.id].currentPriceB;
+      // Chart data always comes from Python
+      t.chartDates    = initMap[t.id].chartDates || [];
+      t.chartZ        = initMap[t.id].chartZ || [];
+    }
+    // Always recalculate days held and P&L from localStorage entry data
+    try {
+      const entry = new Date(t.entryDate);
+      t.daysHeld = Math.max(0, Math.floor((Date.now() - entry.getTime()) / 86400000));
+    } catch(e) {}
+    const dir = t.direction || "";
+    if (t.entryPriceA > 0 && t.entryPriceB > 0 && t.currentPriceA > 0 && t.currentPriceB > 0) {
+      const hr = t.hedgeRatio || 1.0;
+      const spreadEntry = Math.log(t.entryPriceA) - hr * Math.log(t.entryPriceB);
+      const spreadNow   = Math.log(t.currentPriceA) - hr * Math.log(t.currentPriceB);
+      const spreadChg   = spreadNow - spreadEntry;
+      t.pnlPct = Math.round((dir === "short_a_long_b" ? -spreadChg : spreadChg) * 100 * 100) / 100;
+    }
+    return t;
+  });
+  // Add any TRADES_INIT entries not in local (skip deleted ones)
+  const deleted = JSON.parse(localStorage.getItem("deletedTrades") || "[]");
+  TRADES_INIT.forEach(t => {
+    if (!merged.some(m => String(m.id) === String(t.id)) && !deleted.includes(String(t.id))) merged.push(t);
+  });
+  localStorage.setItem("activeTrades", JSON.stringify(merged));
+  return merged;
+}
+
+function renderTrades() {
+  const trades = loadTrades();
+  const open = trades.filter(t => t.status === "open");
+  const closed = trades.filter(t => t.status === "closed");
+
+  const makeCard = (t) => {
+    const [a, b] = t.pair.split("/");
+    const giA = (t.giA !== undefined && t.giA !== null) ? Number(t.giA) : (GI_MAP[a] ?? null);
+    const giB = (t.giB !== undefined && t.giB !== null) ? Number(t.giB) : (GI_MAP[b] ?? null);
+    const giChip = (v) => {
+      if (v === null || Number.isNaN(v)) return '<span class="tc-gi tc-gi-na">GI —</span>';
+      if (v >= 75) return `<span class="tc-gi tc-gi-strong">GI ${v.toFixed(1)}</span>`;
+      if (v >= 60) return `<span class="tc-gi tc-gi-accum">GI ${v.toFixed(1)}</span>`;
+      if (v >= 43) return `<span class="tc-gi tc-gi-neutral">GI ${v.toFixed(1)}</span>`;
+      if (v >= 28) return `<span class="tc-gi tc-gi-dist">GI ${v.toFixed(1)}</span>`;
+      return `<span class="tc-gi tc-gi-heavy">GI ${v.toFixed(1)}</span>`;
+    };
+    const dir = t.direction === "short_a_long_b" ? `Short ${a} / Long ${b}` : `Long ${a} / Short ${b}`;
+    const dirClass = t.direction === "short_a_long_b" ? "dir-short" : "dir-long";
+    const progress = Math.abs(t.entryZ) > 0 ? Math.min(100, (1 - Math.abs(t.currentZ) / Math.abs(t.entryZ)) * 100) : 0;
+    const pnl = t.pnlPct || 0;
+    const pnlClass = pnl >= 0 ? "pnl-pos" : "pnl-neg";
+    const zColor = Math.abs(t.currentZ) < Math.abs(t.entryZ) ? "#34d399" : "#ef4444";
+    const sA = t.sharesA || 0;
+    const sB = t.sharesB || 0;
+    // Dollar P&L per leg
+    let dollarPnl = 0;
+    if (sA > 0 && sB > 0) {
+      if (t.direction === "short_a_long_b") {
+        dollarPnl = (t.entryPriceA - t.currentPriceA) * sA + (t.currentPriceB - t.entryPriceB) * sB;
+      } else {
+        dollarPnl = (t.currentPriceA - t.entryPriceA) * sA + (t.entryPriceB - t.currentPriceB) * sB;
+      }
+    }
+    const dollarClass = dollarPnl >= 0 ? "pnl-pos" : "pnl-neg";
+    const rawChgA = t.entryPriceA > 0 ? (t.currentPriceA - t.entryPriceA) / t.entryPriceA * 100 : 0;
+    const rawChgB = t.entryPriceB > 0 ? (t.currentPriceB - t.entryPriceB) / t.entryPriceB * 100 : 0;
+    const chgA = t.direction === "short_a_long_b" ? -rawChgA : rawChgA;
+    const chgB = t.direction === "short_a_long_b" ? rawChgB : -rawChgB;
+    const chgAClass = chgA >= 0 ? "pnl-pos" : "pnl-neg";
+    const chgBClass = chgB >= 0 ? "pnl-pos" : "pnl-neg";
+    const cDates = t.chartDates || [];
+    const cZ = t.chartZ || [];
+    const hasChart = cDates.length > 0;
+    const chartPayload = hasChart ? JSON.stringify({pair: t.pair, dates: cDates, z: cZ, currentZ: t.currentZ, entryZ: t.entryZ, zWindow: 100}).replace(/&/g, "&amp;").replace(/'/g, "&#39;") : "";
+    const chartBtn = hasChart ? `<button class="tc-chart" onclick="openTradeChart(this)" data-chart='${chartPayload}'>&#9657; Z-Chart</button>` : "";
+    return `<div class="trade-card">
+      <div class="tc-header">
+        <span class="tc-pair">${t.pair}</span>
+        <span class="tc-dir ${dirClass}">${dir}</span>
+        <span class="tc-days">${t.daysHeld || 0}d held</span>
+        ${hasChart ? chartBtn : ""}
+        ${t.status === "open" ? `<button class="tc-edit" onclick="openEditModal('${t.id}')">&#9998; Edit</button><button class="tc-close" onclick="closeTrade('${t.id}')">&#10005; Close</button>` : `<button class="tc-reopen" onclick="reopenTrade('${t.id}')">&#8634; Reopen</button><button class="tc-delete" onclick="deleteTrade('${t.id}')">&#10005;</button>`}
+      </div>
+      <div class="tc-body">
+        <div class="tc-stat"><div class="tc-label">Entry Z</div><div class="tc-val">${t.entryZ >= 0 ? "+" : ""}${t.entryZ.toFixed(2)}&sigma;</div></div>
+        <div class="tc-stat"><div class="tc-label">Current Z</div><div class="tc-val" style="color:${zColor}">${t.currentZ >= 0 ? "+" : ""}${t.currentZ.toFixed(2)}&sigma;</div></div>
+        <div class="tc-stat"><div class="tc-label">Est P&L</div><div class="tc-val ${pnlClass}">${pnl >= 0 ? "+" : ""}${pnl.toFixed(1)}%</div></div>
+        <div class="tc-stat tc-prices"><div class="tc-label">${a} ${giChip(giA)} <span style="color:var(--cyan);font-size:9px;">${t.direction === "short_a_long_b" ? "-" : "+"}${sA} shares</span></div><div class="tc-val">$${t.entryPriceA.toFixed(2)} &rarr; $${t.currentPriceA.toFixed(2)} <span class="${chgAClass}">${chgA >= 0 ? "+" : ""}${chgA.toFixed(1)}%</span></div></div>
+        <div class="tc-stat tc-prices"><div class="tc-label">${b} ${giChip(giB)} <span style="color:var(--cyan);font-size:9px;">${t.direction === "short_a_long_b" ? "+" : "-"}${sB} shares</span></div><div class="tc-val">$${t.entryPriceB.toFixed(2)} &rarr; $${t.currentPriceB.toFixed(2)} <span class="${chgBClass}">${chgB >= 0 ? "+" : ""}${chgB.toFixed(1)}%</span></div></div>
+        <div class="tc-stat"><div class="tc-label">$ P&L</div><div class="tc-val ${dollarClass}">${dollarPnl >= 0 ? "+":""}$${Math.abs(dollarPnl).toFixed(0)}</div></div>
+      </div>
+      <div class="tc-progress">
+        <div class="tc-pbar-track"><div class="tc-pbar-fill" style="width:${progress > 0 ? progress.toFixed(0) : progress < 0 ? Math.min(Math.abs(progress), 100).toFixed(0) : 0}%;${progress > 0 ? 'background:var(--green);' : progress < 0 ? 'background:var(--red);' : 'background:var(--muted);width:2px;'}"></div></div>
+        <span class="tc-pbar-label" style="color:${progress < 0 ? 'var(--red)' : progress > 0 ? 'var(--green)' : 'var(--muted)'}">${(progress >= 0 ? "+" : "") + progress.toFixed(0)}% to Z=0</span>
+      </div>
+    </div>`;
+  };
+
+  document.getElementById("openTrades").innerHTML = open.length
+    ? open.map(makeCard).join("") : '<div class="no-trades">No open trades.</div>';
+  document.getElementById("closedTrades").innerHTML = closed.length
+    ? closed.map(makeCard).join("") : '<div class="no-trades">No closed trades yet.</div>';
+}
+
+function closeTrade(id) {
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  const t = trades.find(t => t.id === id);
+  if (t) {
+    t.status = "closed";
+    t.closeDate = new Date().toISOString().slice(0,10);
+  }
+  localStorage.setItem("activeTrades", JSON.stringify(trades));
+  renderTrades();
+}
+
+function reopenTrade(id) {
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  const t = trades.find(t => t.id === id);
+  if (t) {
+    t.status = "open";
+    delete t.closeDate;
+  }
+  localStorage.setItem("activeTrades", JSON.stringify(trades));
+  renderTrades();
+}
+
+function deleteTrade(id) {
+  if (!confirm("Delete this trade permanently?")) return;
+  let trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  trades = trades.filter(t => String(t.id) !== String(id));
+  localStorage.setItem("activeTrades", JSON.stringify(trades));
+  // Track deleted IDs so loadTrades() won't re-add from TRADES_INIT
+  const deleted = JSON.parse(localStorage.getItem("deletedTrades") || "[]");
+  if (!deleted.includes(String(id))) deleted.push(String(id));
+  localStorage.setItem("deletedTrades", JSON.stringify(deleted));
+  renderTrades();
+}
+
+function closeAllTrades() {
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  trades.forEach(t => {
+    if (t.status === "open") {
+      t.status = "closed";
+      t.closeDate = new Date().toISOString().slice(0,10);
+    }
+  });
+  localStorage.setItem("activeTrades", JSON.stringify(trades));
+  renderTrades();
+}
+
+function exportTrades() {
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  if (trades.length === 0) { alert("No trades to export."); return; }
+  const blob = new Blob([JSON.stringify(trades, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "active_trades.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function importTrades(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const imported = JSON.parse(reader.result);
+      if (!Array.isArray(imported)) { alert("Invalid file format."); return; }
+      const existing = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+      const ids = new Set(existing.map(t => t.id));
+      imported.forEach(t => { if (!ids.has(t.id)) existing.push(t); });
+      localStorage.setItem("activeTrades", JSON.stringify(existing));
+      renderTrades();
+    } catch(err) { alert("Error reading file: " + err.message); }
+  };
+  reader.readAsText(file);
+}
+
+function openEditModal(id) {
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  const t = trades.find(x => x.id === id);
+  if (!t) return;
+  const [a, b] = t.pair.split("/");
+  document.getElementById("editTradeId").value = id;
+  document.getElementById("editTitle").textContent = "Edit Trade: " + t.pair;
+  document.getElementById("editDate").value = t.entryDate || "";
+  document.getElementById("editPriceA").value = t.entryPriceA || "";
+  document.getElementById("editPriceB").value = t.entryPriceB || "";
+  document.getElementById("editLabelA").textContent = "Entry Price " + a;
+  document.getElementById("editLabelB").textContent = "Entry Price " + b;
+  document.getElementById("editSharesA").value = t.sharesA || 0;
+  document.getElementById("editSharesB").value = t.sharesB || 0;
+  document.getElementById("editLabelSharesA").textContent = "Shares " + a;
+  document.getElementById("editLabelSharesB").textContent = "Shares " + b;
+  document.getElementById("editModal").classList.add("open");
+}
+
+function closeEditModal() {
+  document.getElementById("editModal").classList.remove("open");
+}
+
+function saveTradeEdit() {
+  const id = document.getElementById("editTradeId").value;
+  const trades = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+  const t = trades.find(x => x.id === id);
+  if (!t) return;
+
+  const newDate = document.getElementById("editDate").value;
+  const newPriceA = parseFloat(document.getElementById("editPriceA").value);
+  const newPriceB = parseFloat(document.getElementById("editPriceB").value);
+  const newSharesA = parseInt(document.getElementById("editSharesA").value);
+  const newSharesB = parseInt(document.getElementById("editSharesB").value);
+
+  if (newDate) t.entryDate = newDate;
+  if (!isNaN(newPriceA) && newPriceA > 0) t.entryPriceA = newPriceA;
+  if (!isNaN(newPriceB) && newPriceB > 0) t.entryPriceB = newPriceB;
+  if (!isNaN(newSharesA) && newSharesA >= 0) t.sharesA = newSharesA;
+  if (!isNaN(newSharesB) && newSharesB >= 0) t.sharesB = newSharesB;
+
+  // Recalculate days held
+  try {
+    const entry = new Date(t.entryDate);
+    t.daysHeld = Math.floor((Date.now() - entry.getTime()) / 86400000);
+  } catch(e) {}
+
+  // Recalculate entry Z from chart data if entry date or prices changed
+  if (t.chartDates && t.chartDates.length && t.chartZ && t.chartZ.length) {
+    // Find the Z value closest to the entry date
+    const idx = t.chartDates.indexOf(t.entryDate);
+    if (idx >= 0 && t.chartZ[idx] != null) {
+      t.entryZ = Math.round(t.chartZ[idx] * 100) / 100;
+    } else {
+      // Find nearest date if exact match not found
+      let closest = 0;
+      let minDiff = Infinity;
+      const entryTime = new Date(t.entryDate).getTime();
+      for (let i = 0; i < t.chartDates.length; i++) {
+        const diff = Math.abs(new Date(t.chartDates[i]).getTime() - entryTime);
+        if (diff < minDiff) { minDiff = diff; closest = i; }
+      }
+      if (t.chartZ[closest] != null) {
+        t.entryZ = Math.round(t.chartZ[closest] * 100) / 100;
+      }
+    }
+  }
+
+  // Recalculate P&L with new entry prices
+  const dir = t.direction || "";
+  if (dir === "short_a_long_b") {
+    const pnlA = (t.entryPriceA - t.currentPriceA) / t.entryPriceA * 100;
+    const pnlB = (t.currentPriceB - t.entryPriceB) / t.entryPriceB * 100;
+    t.pnlPct = Math.round((pnlA + pnlB) / 2 * 100) / 100;
+  } else {
+    const pnlA = (t.currentPriceA - t.entryPriceA) / t.entryPriceA * 100;
+    const pnlB = (t.entryPriceB - t.currentPriceB) / t.entryPriceB * 100;
+    t.pnlPct = Math.round((pnlA + pnlB) / 2 * 100) / 100;
+  }
+
+  localStorage.setItem("activeTrades", JSON.stringify(trades));
+  closeEditModal();
+  renderTrades();
+}
+
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeEditModal(); });
+
+window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("update-time").textContent = new Date(1773445791774).toLocaleString();
+  renderTrades();
+});
+</script>
+</body>
+</html>
