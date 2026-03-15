@@ -31518,5 +31518,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "HAO": {
+        "ticker": "HAO",
+        "name": "Haoxi Health Technology Limited",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 70143712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
