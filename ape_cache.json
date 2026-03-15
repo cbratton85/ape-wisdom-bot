@@ -31508,5 +31508,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "LEGN": {
+        "ticker": "LEGN",
+        "name": "Legend Biotech Corporation",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3462929408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
