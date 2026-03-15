@@ -31578,5 +31578,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NNVC": {
+        "ticker": "NNVC",
+        "name": "NanoViricides, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 25482098,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
