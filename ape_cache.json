@@ -31548,5 +31548,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TOON": {
+        "ticker": "TOON",
+        "name": "Kartoon Studios, Inc.",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 29432510,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
