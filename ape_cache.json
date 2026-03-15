@@ -31478,5 +31478,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "XES": {
+        "ticker": "XES",
+        "name": "State Street SPDR S&P Oil & Gas",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 2192581888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "BOBS": {
+        "ticker": "BOBS",
+        "name": "Bob's Discount Furniture, Inc.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 2007652608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GLL": {
+        "ticker": "GLL",
+        "name": "ProShares UltraShort Gold",
+        "meta": "Trading--Inverse Commodities",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
