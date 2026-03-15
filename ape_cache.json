@@ -31558,5 +31558,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "EMBC": {
+        "ticker": "EMBC",
+        "name": "Embecta Corp.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 520542528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
