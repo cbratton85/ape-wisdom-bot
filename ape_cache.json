@@ -31538,5 +31538,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SMRT": {
+        "ticker": "SMRT",
+        "name": "SmartRent, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 321013696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
