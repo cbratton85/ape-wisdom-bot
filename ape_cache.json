@@ -31568,5 +31568,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SCHI": {
+        "ticker": "SCHI",
+        "name": "Schwab 5-10 Year Corporate Bond",
+        "meta": "Corporate Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
