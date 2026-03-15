@@ -31528,5 +31528,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "CGW": {
+        "ticker": "CGW",
+        "name": "Invesco S&P Global Water Index ",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
