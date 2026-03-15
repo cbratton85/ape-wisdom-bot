@@ -31468,5 +31468,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "DFAI": {
+        "ticker": "DFAI",
+        "name": "Dimensional International Core ",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
