@@ -31588,5 +31588,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "SVRE": {
+        "ticker": "SVRE",
+        "name": "SaverOne 2014 Ltd.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 96455224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ESPO": {
+        "ticker": "ESPO",
+        "name": "VanEck Video Gaming and eSports",
+        "meta": "Communications",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "UEIC": {
+        "ticker": "UEIC",
+        "name": "Universal Electronics Inc.",
+        "meta": "Consumer Electronics",
+        "type": "EQUITY",
+        "mcap": 57741580,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
