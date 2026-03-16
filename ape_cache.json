@@ -31788,5 +31788,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ARAY": {
+        "ticker": "ARAY",
+        "name": "Accuray Incorporated",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 49484844,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PYXS": {
+        "ticker": "PYXS",
+        "name": "Pyxis Oncology, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 103981240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
