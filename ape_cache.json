@@ -31658,5 +31658,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "CTMX": {
+        "ticker": "CTMX",
+        "name": "CytomX Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 792957632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ABEV": {
+        "ticker": "ABEV",
+        "name": "Ambev S.A.",
+        "meta": "Beverages - Brewers",
+        "type": "EQUITY",
+        "mcap": 44663955456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
