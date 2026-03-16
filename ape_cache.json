@@ -31808,5 +31808,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SLND": {
+        "ticker": "SLND",
+        "name": "Southland Holdings, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 38203800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "KLTR": {
+        "ticker": "KLTR",
+        "name": "Kaltura, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 214743168,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CATX": {
+        "ticker": "CATX",
+        "name": "Perspective Therapeutics, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 594631488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "PTEN": {
+        "ticker": "PTEN",
+        "name": "Patterson-UTI Energy, Inc.",
+        "meta": "Oil & Gas Drilling",
+        "type": "EQUITY",
+        "mcap": 3848892672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
