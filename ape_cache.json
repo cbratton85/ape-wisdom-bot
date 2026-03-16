@@ -31638,5 +31638,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "IONR": {
+        "ticker": "IONR",
+        "name": "ioneer Ltd",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 258236992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
