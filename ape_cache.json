@@ -31678,5 +31678,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BNED": {
+        "ticker": "BNED",
+        "name": "Barnes & Noble Education, Inc",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 297333920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PTR": {
+        "ticker": "PTR",
+        "name": "PTR",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "AIRS": {
+        "ticker": "AIRS",
+        "name": "AirSculpt Technologies, Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 156403872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ICSH": {
+        "ticker": "ICSH",
+        "name": "iShares Ultra Short Duration Bo",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
