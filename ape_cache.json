@@ -31718,5 +31718,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "MNKD": {
+        "ticker": "MNKD",
+        "name": "MannKind Corporation",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 861140800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "TME": {
+        "ticker": "TME",
+        "name": "Tencent Music Entertainment Gro",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 25524070400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EFG": {
+        "ticker": "EFG",
+        "name": "iShares MSCI EAFE Growth ETF",
+        "meta": "Foreign Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
