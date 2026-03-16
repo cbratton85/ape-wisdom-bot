@@ -31848,5 +31848,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CNDT": {
+        "ticker": "CNDT",
+        "name": "Conduent Incorporated",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 191839376,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
