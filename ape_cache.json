@@ -31628,5 +31628,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "EZU": {
+        "ticker": "EZU",
+        "name": "iShares MSCI Eurozone ETF",
+        "meta": "Europe Stock",
+        "type": "ETF",
+        "mcap": 9518226432,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
