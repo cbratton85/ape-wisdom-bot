@@ -31618,5 +31618,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ULY": {
+        "ticker": "ULY",
+        "name": "Urgent.ly Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 4447618,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
