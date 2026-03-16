@@ -31748,5 +31748,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "CWST": {
+        "ticker": "CWST",
+        "name": "Casella Waste Systems, Inc.",
+        "meta": "Waste Management",
+        "type": "EQUITY",
+        "mcap": 5574690816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
