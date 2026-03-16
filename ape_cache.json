@@ -31758,5 +31758,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "JAGU": {
+        "ticker": "JAGU",
+        "name": "Jaguar Uranium Corp.",
+        "meta": "Uranium",
+        "type": "EQUITY",
+        "mcap": 33521668,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "PSCE": {
+        "ticker": "PSCE",
+        "name": "Invesco S&P SmallCap Energy ETF",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "HUYA": {
+        "ticker": "HUYA",
+        "name": "HUYA Inc.",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 772983360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
