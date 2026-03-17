@@ -31948,5 +31948,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "LNZA": {
+        "ticker": "LNZA",
+        "name": "LanzaTech Global, Inc.",
+        "meta": "Waste Management",
+        "type": "EQUITY",
+        "mcap": 193122336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "BBT": {
+        "ticker": "BBT",
+        "name": "Beacon Financial Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 2404408576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DEW": {
+        "ticker": "DEW",
+        "name": "WisdomTree Global High Dividend",
+        "meta": "Global Large-Stock Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
