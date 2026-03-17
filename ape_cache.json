@@ -31858,5 +31858,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "UNFI": {
+        "ticker": "UNFI",
+        "name": "United Natural Foods, Inc.",
+        "meta": "Food Distribution",
+        "type": "EQUITY",
+        "mcap": 2528061184,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
