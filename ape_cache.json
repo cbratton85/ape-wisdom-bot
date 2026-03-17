@@ -31888,5 +31888,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "KNDI": {
+        "ticker": "KNDI",
+        "name": "Kandi Technologies Group, Inc.",
+        "meta": "Recreational Vehicles",
+        "type": "EQUITY",
+        "mcap": 80826520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
