@@ -31998,5 +31998,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "TRP": {
+        "ticker": "TRP",
+        "name": "TC Energy Corporation",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 66561413120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
