@@ -10,6 +10,7 @@ Usage:
 
 import json
 import math
+import os
 import time
 import requests
 import pandas as pd
@@ -24,6 +25,8 @@ HEADERS = {
     "Authorization":  f"Bearer {API_KEY}",
     "Accept":         "application/json",
     "Accept-Profile": "public",
+    "Cache-Control":  "no-cache",   # bypass CDN cache so gi_date is always fresh
+    "Pragma":         "no-cache",
 }
 
 OUTPUT_FILE = "gekko_screener.html"
@@ -609,7 +612,19 @@ def main():
     df["volume"]   = pd.to_numeric(df["volume"],   errors="coerce")
 
     # Persist machine-readable output used by other scripts.
-    df.to_csv(OUTPUT_CSV_FILE, index=False)
+    # Use a temp file + atomic replace so OneDrive file locks don't silently
+    # leave the old CSV in place.
+    tmp_csv = OUTPUT_CSV_FILE + f".tmp.{os.getpid()}"
+    df.to_csv(tmp_csv, index=False)
+    for attempt in range(10):
+        try:
+            os.replace(tmp_csv, OUTPUT_CSV_FILE)
+            break
+        except PermissionError:
+            if attempt == 9:
+                os.remove(tmp_csv)
+                raise
+            time.sleep(0.8)
     print(f"Saved to {OUTPUT_CSV_FILE}  ({len(df):,} rows)")
 
     if not GENERATE_HTML:
@@ -622,7 +637,7 @@ def main():
         f.write(html)
     print(f"Saved to {OUTPUT_FILE}  ({len(html):,} bytes)")
 
-    import webbrowser, os
+    import webbrowser
     webbrowser.open(f"file:///{os.path.abspath(OUTPUT_FILE)}")
 
 
