@@ -32008,5 +32008,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "LXRX": {
+        "ticker": "LXRX",
+        "name": "Lexicon Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 686362560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ZEUS": {
+        "ticker": "ZEUS",
+        "name": "Olympic Steel, Inc.",
+        "meta": "Steel",
+        "type": "EQUITY",
+        "mcap": 538983936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CBK": {
+        "ticker": "CBK",
+        "name": "Commercial Bancgroup, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 341901728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
