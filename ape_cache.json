@@ -31928,5 +31928,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "LFCR": {
+        "ticker": "LFCR",
+        "name": "Lifecore Biomedical, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 165979680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "UCAR": {
+        "ticker": "UCAR",
+        "name": "U Power Limited",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 5120629,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
