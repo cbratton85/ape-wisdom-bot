@@ -31908,5 +31908,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AXIL": {
+        "ticker": "AXIL",
+        "name": "AXIL Brands, Inc.",
+        "meta": "Consumer Electronics",
+        "type": "EQUITY",
+        "mcap": 38911540,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "CRON": {
+        "ticker": "CRON",
+        "name": "Cronos Group Inc. Common Share",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 976932032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
