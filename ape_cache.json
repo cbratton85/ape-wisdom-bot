@@ -31878,5 +31878,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "IAC": {
+        "ticker": "IAC",
+        "name": "IAC Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 2925420544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
