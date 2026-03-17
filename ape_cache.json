@@ -31868,5 +31868,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MSGY": {
+        "ticker": "MSGY",
+        "name": "Masonglory Limited",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 6099680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
