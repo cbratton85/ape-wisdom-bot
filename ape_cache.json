@@ -31898,5 +31898,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SNEX": {
+        "ticker": "SNEX",
+        "name": "StoneX Group Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 5519665664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
