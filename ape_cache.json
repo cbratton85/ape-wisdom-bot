@@ -32418,5 +32418,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ERUS": {
+        "ticker": "ERUS",
+        "name": "iShares MSCI iShares MSCI Russi",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 133796008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
