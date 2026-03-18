@@ -32198,5 +32198,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HYFT": {
+        "ticker": "HYFT",
+        "name": "MindWalk Holdings Corp.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 55562624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "AMRN": {
+        "ticker": "AMRN",
+        "name": "Amarin Corporation plc",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 315804064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "PLW": {
+        "ticker": "PLW",
+        "name": "Invesco 1-30 Laddered Treasury ",
+        "meta": "Long Government",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SMIN": {
+        "ticker": "SMIN",
+        "name": "Ishares MSCI India Small Cap ET",
+        "meta": "India Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "AVXL": {
+        "ticker": "AVXL",
+        "name": "Anavex Life Sciences Corp.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 406829024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
