@@ -32148,5 +32148,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "MAXN": {
+        "ticker": "MAXN",
+        "name": "Maxeon Solar Technologies, Ltd.",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 40807952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
