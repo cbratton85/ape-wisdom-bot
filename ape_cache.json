@@ -32158,5 +32158,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PERF": {
+        "ticker": "PERF",
+        "name": "Perfect Corp.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 137495712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "INTR": {
+        "ticker": "INTR",
+        "name": "Inter & Co. Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 3574705664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DSS": {
+        "ticker": "DSS",
+        "name": "DSS, Inc.",
+        "meta": "Packaging & Containers",
+        "type": "EQUITY",
+        "mcap": 9602810,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "AGRO": {
+        "ticker": "AGRO",
+        "name": "Adecoagro S.A.",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 1761248512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
