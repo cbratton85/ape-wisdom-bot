@@ -32348,5 +32348,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "URE": {
+        "ticker": "URE",
+        "name": "ProShares Ultra Real Estate",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "EBC": {
+        "ticker": "EBC",
+        "name": "Eastern Bankshares, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 4170569728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ECNS": {
+        "ticker": "ECNS",
+        "name": "iShares MSCI China Small-Cap ET",
+        "meta": "China Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FOSL": {
+        "ticker": "FOSL",
+        "name": "Fossil Group, Inc.",
+        "meta": "Footwear & Accessories",
+        "type": "EQUITY",
+        "mcap": 247540816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LKNCY": {
+        "ticker": "LKNCY",
+        "name": "Luckin Coffee Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 9644413952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
     }
 }
