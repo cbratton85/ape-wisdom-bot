@@ -32038,5 +32038,85 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "IWB": {
+        "ticker": "IWB",
+        "name": "iShares Russell 1000 ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 45902872576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SOI": {
+        "ticker": "SOI",
+        "name": "SOI",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "ONFO": {
+        "ticker": "ONFO",
+        "name": "Onfolio Holdings Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 4041514,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SHIM": {
+        "ticker": "SHIM",
+        "name": "Shimmick Corporation",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 112791304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ATER": {
+        "ticker": "ATER",
+        "name": "Aterian, Inc.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 6168638,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "TXG": {
+        "ticker": "TXG",
+        "name": "10x Genomics, Inc.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 2311038208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "WGO": {
+        "ticker": "WGO",
+        "name": "Winnebago Industries, Inc.",
+        "meta": "Recreational Vehicles",
+        "type": "EQUITY",
+        "mcap": 945955392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PERI": {
+        "ticker": "PERI",
+        "name": "Perion Network Ltd",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 364498304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
