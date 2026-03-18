@@ -281,7 +281,7 @@
     </a>
 
     <!-- 2. BREAKOUT SCANNER -->
-    <a href="stock_dashboard.html" class="card card-green">
+    <a href="stock_dashboard.html" class="card card-green" onclick="return showLoading(event)">
       <div class="card-header">
         <div class="card-icon">&#9650;</div>
         <span class="card-badge">BREAKOUT + MOMENTUM</span>
@@ -309,7 +309,7 @@
     </a>
 
     <!-- 2. PAIRS SCANNER (Z-Score) -->
-    <a href="pairs_scanner.html" class="card card-cyan">
+    <a href="pairs_scanner.html" class="card card-cyan" onclick="return showLoading(event)">
       <div class="card-header">
         <div class="card-icon">&#9889;</div>
         <span class="card-badge">STATISTICAL ARBITRAGE</span>
@@ -336,7 +336,7 @@
     </a>
 
     <!-- 4. PAIRS FINDER (Cointegration) -->
-    <a href="pairs_finder.html" class="card card-purple">
+    <a href="pairs_finder.html" class="card card-purple" onclick="return showLoading(event)">
       <div class="card-header">
         <div class="card-icon">&#9878;</div>
         <span class="card-badge">COINTEGRATION WATCHLIST</span>
@@ -364,5 +364,17 @@
 
   </div>
 </div>
+
+<script>
+function showLoading(event) {
+    const cta = event.currentTarget.querySelector('.card-cta');
+    if (cta) {
+        cta.innerHTML = 'Working on it...';
+        cta.style.color = 'var(--muted)';
+    }
+    return false; 
+}
+</script>
+
 </body>
 </html>
