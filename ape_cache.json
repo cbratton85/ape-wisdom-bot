@@ -32248,5 +32248,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "KNOP": {
+        "ticker": "KNOP",
+        "name": "KNOT Offshore Partners LP",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 360383008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CSW": {
+        "ticker": "CSW",
+        "name": "CSW Industrials, Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 4274133504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SIG": {
+        "ticker": "SIG",
+        "name": "Signet Jewelers Limited",
+        "meta": "Luxury Goods",
+        "type": "EQUITY",
+        "mcap": 3389337088,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DFDV": {
+        "ticker": "DFDV",
+        "name": "DeFi Development Corp.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 135414384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
