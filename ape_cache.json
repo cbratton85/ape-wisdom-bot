@@ -32118,5 +32118,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "BLZE": {
+        "ticker": "BLZE",
+        "name": "Backblaze, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 216624368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
