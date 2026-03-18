@@ -32288,5 +32288,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "NOMA": {
+        "ticker": "NOMA",
+        "name": "NOMADAR Corp.",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 67369904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "FUFU": {
+        "ticker": "FUFU",
+        "name": "BitFuFu Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 392065824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "KRT": {
+        "ticker": "KRT",
+        "name": "Karat Packaging Inc.",
+        "meta": "Packaging & Containers",
+        "type": "EQUITY",
+        "mcap": 562585088,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FXL": {
+        "ticker": "FXL",
+        "name": "First Trust Technology AlphaDEX",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CQP": {
+        "ticker": "CQP",
+        "name": "Cheniere Energy Partners, LP",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 30321149952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
