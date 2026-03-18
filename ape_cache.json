@@ -32398,5 +32398,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PNK"
+    },
+    "RSX": {
+        "ticker": "RSX",
+        "name": "VanEck Russia ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
