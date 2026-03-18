@@ -32338,5 +32338,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "EVA": {
+        "ticker": "EVA",
+        "name": "EVA",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
