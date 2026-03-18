@@ -32128,5 +32128,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "AUTL": {
+        "ticker": "AUTL",
+        "name": "Autolus Therapeutics plc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 401876352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "MAIA": {
+        "ticker": "MAIA",
+        "name": "MAIA Biotechnology, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 87989368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
