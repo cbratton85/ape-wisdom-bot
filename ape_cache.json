@@ -32498,5 +32498,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SPTI": {
+        "ticker": "SPTI",
+        "name": "State Street SPDR Portfolio Int",
+        "meta": "Intermediate Government",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "STIP": {
+        "ticker": "STIP",
+        "name": "iShares 0-5 Year TIPS Bond ETF",
+        "meta": "Short-Term Inflation-Protected Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
