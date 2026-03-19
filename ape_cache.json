@@ -32488,5 +32488,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "VET": {
+        "ticker": "VET",
+        "name": "Vermilion Energy Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 2093672064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
