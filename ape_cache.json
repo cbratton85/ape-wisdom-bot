@@ -32548,5 +32548,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "DLTH": {
+        "ticker": "DLTH",
+        "name": "Duluth Holdings Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 115687512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
