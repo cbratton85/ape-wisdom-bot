@@ -32478,5 +32478,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SLVP": {
+        "ticker": "SLVP",
+        "name": "iShares MSCI Global Silver Mine",
+        "meta": "Equity Precious Metals",
+        "type": "ETF",
+        "mcap": 246015008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }

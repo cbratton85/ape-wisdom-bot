@@ -119,11 +119,6 @@
         "last_checked": "2026-03-19",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-03-19",
-        "reason": "No Price Data"
-    },
     "KIND": {
         "delisted": true,
         "last_checked": "2026-03-19",
@@ -155,6 +150,11 @@
         "reason": "No Price Data"
     },
     "ZEV": {
+        "delisted": true,
+        "last_checked": "2026-03-19",
+        "reason": "No Price Data"
+    },
+    "RE": {
         "delisted": true,
         "last_checked": "2026-03-19",
         "reason": "No Price Data"
