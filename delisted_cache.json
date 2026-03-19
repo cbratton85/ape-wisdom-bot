@@ -79,11 +79,6 @@
         "last_checked": "2026-03-18",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-03-18",
-        "reason": "No Price Data"
-    },
     "FI": {
         "delisted": true,
         "last_checked": "2026-03-18",
@@ -150,6 +145,16 @@
         "reason": "No Price Data"
     },
     "AUD": {
+        "delisted": true,
+        "last_checked": "2026-03-19",
+        "reason": "No Price Data"
+    },
+    "RE": {
+        "delisted": true,
+        "last_checked": "2026-03-19",
+        "reason": "No Price Data"
+    },
+    "KIND": {
         "delisted": true,
         "last_checked": "2026-03-19",
         "reason": "No Price Data"

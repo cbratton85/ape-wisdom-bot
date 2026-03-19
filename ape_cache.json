@@ -32428,5 +32428,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "OLLI": {
+        "ticker": "OLLI",
+        "name": "Ollie's Bargain Outlet Holdings",
+        "meta": "Discount Stores",
+        "type": "EQUITY",
+        "mcap": 6176187392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "APC": {
+        "ticker": "APC",
+        "name": "ARKO Petroleum Corp.",
+        "meta": "Oil & Gas Refining & Marketing",
+        "type": "EQUITY",
+        "mcap": 1520943488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "PACK": {
+        "ticker": "PACK",
+        "name": "Ranpak Holdings Corp",
+        "meta": "Packaging & Containers",
+        "type": "EQUITY",
+        "mcap": 293983168,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GAL": {
+        "ticker": "GAL",
+        "name": "State Street Global Allocation ",
+        "meta": "Global Moderate Allocation",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
