@@ -32558,5 +32558,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "XPEV": {
+        "ticker": "XPEV",
+        "name": "XPeng Inc.",
+        "meta": "Auto Manufacturers",
+        "type": "EQUITY",
+        "mcap": 18604306432,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SCHO": {
+        "ticker": "SCHO",
+        "name": "Schwab Short-Term U.S. Treasury",
+        "meta": "Short Government",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "HASI": {
+        "ticker": "HASI",
+        "name": "HA Sustainable Infrastructure C",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 4712065024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "JMBS": {
+        "ticker": "JMBS",
+        "name": "Janus Henderson Mortgage-Backed",
+        "meta": "Government Mortgage-Backed Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
