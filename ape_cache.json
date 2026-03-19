@@ -32518,5 +32518,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "LUXE": {
+        "ticker": "LUXE",
+        "name": "LuxExperience B.V.",
+        "meta": "Luxury Goods",
+        "type": "EQUITY",
+        "mcap": 1096720128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "USNA": {
+        "ticker": "USNA",
+        "name": "USANA Health Sciences, Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 312054208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EVX": {
+        "ticker": "EVX",
+        "name": "VanEck Environmental Services E",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
