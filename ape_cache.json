@@ -32468,5 +32468,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ACRS": {
+        "ticker": "ACRS",
+        "name": "Aclaris Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 443179328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
