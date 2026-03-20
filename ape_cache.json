@@ -32818,5 +32818,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "EEMA": {
+        "ticker": "EEMA",
+        "name": "iShares MSCI Emerging Markets A",
+        "meta": "Pacific/Asia ex-Japan Stk",
+        "type": "ETF",
+        "mcap": 725496000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
