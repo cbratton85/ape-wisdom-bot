@@ -32858,5 +32858,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "VNOM": {
+        "ticker": "VNOM",
+        "name": "Viper Energy, Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 18030872576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PBW": {
+        "ticker": "PBW",
+        "name": "Invesco WilderHill Clean Energy",
+        "meta": "Small Growth",
+        "type": "ETF",
+        "mcap": 176465808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SCHP": {
+        "ticker": "SCHP",
+        "name": "Schwab U.S. TIPs ETF",
+        "meta": "Inflation-Protected Bond",
+        "type": "ETF",
+        "mcap": 3080622080,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
