@@ -32658,5 +32658,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "YRD": {
+        "ticker": "YRD",
+        "name": "Yiren Digital Ltd.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SBDS": {
+        "ticker": "SBDS",
+        "name": "Solo Brands, Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 7019743,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
