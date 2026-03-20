@@ -32758,5 +32758,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ELA": {
+        "ticker": "ELA",
+        "name": "Envela Corporation",
+        "meta": "Luxury Goods",
+        "type": "EQUITY",
+        "mcap": 437904416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "PPIH": {
+        "ticker": "PPIH",
+        "name": "Perma-Pipe International Holdin",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 236346144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "DOC": {
+        "ticker": "DOC",
+        "name": "Healthpeak Properties, Inc.",
+        "meta": "REIT - Healthcare Facilities",
+        "type": "EQUITY",
+        "mcap": 12160108544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TATT": {
+        "ticker": "TATT",
+        "name": "TAT Technologies Ltd.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 552992192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SFTBF": {
+        "ticker": "SFTBF",
+        "name": "Softbank Group Corp",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 127823273984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
+    },
+    "FLN": {
+        "ticker": "FLN",
+        "name": "First Trust Latin America Alpha",
+        "meta": "Latin America Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
