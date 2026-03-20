@@ -32828,5 +32828,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CNM": {
+        "ticker": "CNM",
+        "name": "Core & Main, Inc.",
+        "meta": "Industrial Distribution",
+        "type": "EQUITY",
+        "mcap": 9265157120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NFG": {
+        "ticker": "NFG",
+        "name": "National Fuel Gas Company",
+        "meta": "Oil & Gas Integrated",
+        "type": "EQUITY",
+        "mcap": 8732452864,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
