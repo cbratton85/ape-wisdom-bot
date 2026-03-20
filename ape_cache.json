@@ -32708,5 +32708,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "NWG": {
+        "ticker": "NWG",
+        "name": "NatWest Group plc",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 60659085312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
