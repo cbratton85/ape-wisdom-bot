@@ -32678,5 +32678,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "INMB": {
+        "ticker": "INMB",
+        "name": "INmune Bio Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 32434018,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ALK": {
+        "ticker": "ALK",
+        "name": "Alaska Air Group, Inc.",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 4348349952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NCL": {
+        "ticker": "NCL",
+        "name": "Northann Corp.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 3420562,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
