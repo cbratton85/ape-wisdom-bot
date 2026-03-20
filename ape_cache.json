@@ -32718,5 +32718,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "OBE": {
+        "ticker": "OBE",
+        "name": "Obsidian Energy Ltd.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 588432576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "IDT": {
+        "ticker": "IDT",
+        "name": "IDT Corporation",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 1200649856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VTR": {
+        "ticker": "VTR",
+        "name": "Ventas, Inc.",
+        "meta": "REIT - Healthcare Facilities",
+        "type": "EQUITY",
+        "mcap": 40433786880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
