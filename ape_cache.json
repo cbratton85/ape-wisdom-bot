@@ -32848,5 +32848,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ELVA": {
+        "ticker": "ELVA",
+        "name": "Electrovaya Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 357540832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
