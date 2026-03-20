@@ -32648,5 +32648,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "REYN": {
+        "ticker": "REYN",
+        "name": "Reynolds Consumer Products Inc.",
+        "meta": "Packaging & Containers",
+        "type": "EQUITY",
+        "mcap": 4389870080,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
