@@ -32638,5 +32638,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HQY": {
+        "ticker": "HQY",
+        "name": "HealthEquity, Inc.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 7015745024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
