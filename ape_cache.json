@@ -32598,5 +32598,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "CPAY": {
+        "ticker": "CPAY",
+        "name": "Corpay, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 19894671360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TRU": {
+        "ticker": "TRU",
+        "name": "TransUnion",
+        "meta": "Financial Data & Stock Exchanges",
+        "type": "EQUITY",
+        "mcap": 13926081536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SCHZ": {
+        "ticker": "SCHZ",
+        "name": "Schwab US Aggregate Bond ETF",
+        "meta": "Intermediate Core Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FMS": {
+        "ticker": "FMS",
+        "name": "Fresenius Medical Care AG",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 12742981632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
