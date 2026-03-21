@@ -109,11 +109,6 @@
         "last_checked": "2026-03-20",
         "reason": "No Price Data"
     },
-    "CN": {
-        "delisted": true,
-        "last_checked": "2026-03-20",
-        "reason": "No Price Data"
-    },
     "MOM": {
         "delisted": true,
         "last_checked": "2026-03-20",
@@ -142,6 +137,11 @@
     "DUAL": {
         "delisted": true,
         "last_checked": "2026-03-20",
+        "reason": "No Price Data"
+    },
+    "CN": {
+        "delisted": true,
+        "last_checked": "2026-03-21",
         "reason": "No Price Data"
     }
 }
