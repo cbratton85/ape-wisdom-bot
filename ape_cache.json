@@ -33078,5 +33078,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TBLT": {
+        "ticker": "TBLT",
+        "name": "ToughBuilt Industries, Inc.",
+        "meta": "Tools & Accessories",
+        "type": "EQUITY",
+        "mcap": 867,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
     }
 }
