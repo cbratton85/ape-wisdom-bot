@@ -33028,5 +33028,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "INO": {
+        "ticker": "INO",
+        "name": "Inovio Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 109014704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SEV": {
+        "ticker": "SEV",
+        "name": "Aptera Motors Corp.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 89979480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
