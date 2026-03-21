@@ -33098,5 +33098,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "INVE": {
+        "ticker": "INVE",
+        "name": "Identiv, Inc.",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 74588784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
