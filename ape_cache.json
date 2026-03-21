@@ -33088,5 +33088,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PNK"
+    },
+    "TEX": {
+        "ticker": "TEX",
+        "name": "Terex Corporation",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 6501366272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
