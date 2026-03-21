@@ -33048,5 +33048,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "TAIL": {
+        "ticker": "TAIL",
+        "name": "Cambria Tail Risk ETF",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "JMIA": {
+        "ticker": "JMIA",
+        "name": "Jumia Technologies AG",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 845913344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GPK": {
+        "ticker": "GPK",
+        "name": "Graphic Packaging Holding Compa",
+        "meta": "Packaging & Containers",
+        "type": "EQUITY",
+        "mcap": 2635051264,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
