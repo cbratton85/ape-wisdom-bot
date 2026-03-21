@@ -32898,5 +32898,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "SWMR": {
+        "ticker": "SWMR",
+        "name": "Swarmer, Inc",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 453316320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "LNAI": {
+        "ticker": "LNAI",
+        "name": "Lunai Bioworks Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 11331776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ABX": {
+        "ticker": "ABX",
+        "name": "Abacus Global Management, Inc.",
+        "meta": "Insurance - Life",
+        "type": "EQUITY",
+        "mcap": 877820608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
