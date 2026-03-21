@@ -32988,5 +32988,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "SMXT": {
+        "ticker": "SMXT",
+        "name": "Solarmax Technology Inc.",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 41644936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "VCLT": {
+        "ticker": "VCLT",
+        "name": "Vanguard Long-Term Corporate Bo",
+        "meta": "Long-Term Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "PSFE": {
+        "ticker": "PSFE",
+        "name": "Paysafe Limited",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 397068832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TWFG": {
+        "ticker": "TWFG",
+        "name": "TWFG, Inc.",
+        "meta": "Insurance Brokers",
+        "type": "EQUITY",
+        "mcap": 277128896,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
