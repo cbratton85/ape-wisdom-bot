@@ -32948,5 +32948,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PBJ": {
+        "ticker": "PBJ",
+        "name": "Invesco Food & Beverage ETF",
+        "meta": "Consumer Defensive",
+        "type": "ETF",
+        "mcap": 99120000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CMDY": {
+        "ticker": "CMDY",
+        "name": "iShares Bloomberg Roll Select C",
+        "meta": "Commodities Broad Basket",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "PYR": {
+        "ticker": "PYR",
+        "name": "PYR",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "COMT": {
+        "ticker": "COMT",
+        "name": "iShares GSCI Commodity Dynamic ",
+        "meta": "Commodities Broad Basket",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
