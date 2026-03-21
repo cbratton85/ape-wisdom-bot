@@ -32928,5 +32928,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VIST": {
+        "ticker": "VIST",
+        "name": "Vista Energy S.A.B. de C.V.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 7649086976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GFR": {
+        "ticker": "GFR",
+        "name": "Greenfire Resources Ltd.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 867796672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
