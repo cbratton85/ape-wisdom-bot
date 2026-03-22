@@ -24,11 +24,6 @@
         "last_checked": "2026-03-20",
         "reason": "No Price Data"
     },
-    "OLD": {
-        "delisted": true,
-        "last_checked": "2026-03-20",
-        "reason": "No Price Data"
-    },
     "ZEV": {
         "delisted": true,
         "last_checked": "2026-03-20",
@@ -155,6 +150,11 @@
         "reason": "No Price Data"
     },
     "CN": {
+        "delisted": true,
+        "last_checked": "2026-03-22",
+        "reason": "No Price Data"
+    },
+    "OLD": {
         "delisted": true,
         "last_checked": "2026-03-22",
         "reason": "No Price Data"
