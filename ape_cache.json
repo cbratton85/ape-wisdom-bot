@@ -33158,5 +33158,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "MHK": {
+        "ticker": "MHK",
+        "name": "Mohawk Industries, Inc.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 5947833344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "JKG": {
+        "ticker": "JKG",
+        "name": "iShares Morningstar Mid-Cap ETF",
+        "meta": "Unknown",
+        "type": "ETF",
+        "mcap": 991762048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
