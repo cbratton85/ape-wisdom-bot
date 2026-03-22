@@ -33178,5 +33178,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "WRAP": {
+        "ticker": "WRAP",
+        "name": "Wrap Technologies, Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 77743680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
