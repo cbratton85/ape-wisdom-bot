@@ -33128,5 +33128,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SLE": {
+        "ticker": "SLE",
+        "name": "Super League Enterprise, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 5452000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
