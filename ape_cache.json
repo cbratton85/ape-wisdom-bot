@@ -33118,5 +33118,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ATHM": {
+        "ticker": "ATHM",
+        "name": "Autohome Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 2140887040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
