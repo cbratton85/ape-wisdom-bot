@@ -33188,5 +33188,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "PFI": {
+        "ticker": "PFI",
+        "name": "Invesco Dorsey Wright Financial",
+        "meta": "Financial",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
