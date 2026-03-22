@@ -33148,5 +33148,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ADPT": {
+        "ticker": "ADPT",
+        "name": "Adaptive Biotechnologies Corpor",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2091069696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
