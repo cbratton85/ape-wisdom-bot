@@ -69,11 +69,6 @@
         "last_checked": "2026-03-21",
         "reason": "No Price Data"
     },
-    "FM": {
-        "delisted": true,
-        "last_checked": "2026-03-21",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-03-21",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "OLD": {
+        "delisted": true,
+        "last_checked": "2026-03-22",
+        "reason": "No Price Data"
+    },
+    "FM": {
         "delisted": true,
         "last_checked": "2026-03-22",
         "reason": "No Price Data"
