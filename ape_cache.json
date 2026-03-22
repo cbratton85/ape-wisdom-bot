@@ -33138,5 +33138,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "IMA": {
+        "ticker": "IMA",
+        "name": "ImageneBio, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 63642624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }

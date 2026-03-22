@@ -114,11 +114,6 @@
         "last_checked": "2026-03-21",
         "reason": "No Price Data"
     },
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-03-21",
-        "reason": "No Price Data"
-    },
     "ZN": {
         "delisted": true,
         "last_checked": "2026-03-21",
@@ -155,6 +150,11 @@
         "reason": "No Price Data"
     },
     "SOL": {
+        "delisted": true,
+        "last_checked": "2026-03-22",
+        "reason": "No Price Data"
+    },
+    "WOW": {
         "delisted": true,
         "last_checked": "2026-03-22",
         "reason": "No Price Data"
