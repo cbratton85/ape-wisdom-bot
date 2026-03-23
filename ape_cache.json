@@ -33318,5 +33318,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "BNGO": {
+        "ticker": "BNGO",
+        "name": "Bionano Genomics, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 12681147,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "HOOK": {
+        "ticker": "HOOK",
+        "name": "HOOKIPA Pharma Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 12700215,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OID"
     }
 }

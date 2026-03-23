@@ -14,11 +14,6 @@
         "last_checked": "2026-03-18",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-03-19",
-        "reason": "No Price Data"
-    },
     "CBD": {
         "delisted": true,
         "last_checked": "2026-03-20",
@@ -165,6 +160,11 @@
         "reason": "No Price Data"
     },
     "OPT": {
+        "delisted": true,
+        "last_checked": "2026-03-23",
+        "reason": "No Price Data"
+    },
+    "AUD": {
         "delisted": true,
         "last_checked": "2026-03-23",
         "reason": "No Price Data"
