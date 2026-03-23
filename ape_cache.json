@@ -33388,5 +33388,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "PNR": {
+        "ticker": "PNR",
+        "name": "Pentair plc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 14472488960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
