@@ -33308,5 +33308,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "GLOO": {
+        "ticker": "GLOO",
+        "name": "Gloo Holdings, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 434207712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
