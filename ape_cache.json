@@ -33298,5 +33298,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BIOX": {
+        "ticker": "BIOX",
+        "name": "Bioceres Crop Solutions Corp.",
+        "meta": "Agricultural Inputs",
+        "type": "EQUITY",
+        "mcap": 23614118,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
