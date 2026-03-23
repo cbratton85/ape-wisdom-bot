@@ -33358,5 +33358,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "VBK": {
+        "ticker": "VBK",
+        "name": "Vanguard Small-Cap Growth ETF",
+        "meta": "Small Growth",
+        "type": "ETF",
+        "mcap": 14864618496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "VOT": {
+        "ticker": "VOT",
+        "name": "Vanguard Mid-Cap Growth ETF",
+        "meta": "Mid-Cap Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
