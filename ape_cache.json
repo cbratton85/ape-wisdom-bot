@@ -33218,5 +33218,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "LAB": {
+        "ticker": "LAB",
+        "name": "Standard BioTools Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 384064416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DFTX": {
+        "ticker": "DFTX",
+        "name": "Definium Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1834445568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FLL": {
+        "ticker": "FLL",
+        "name": "Full House Resorts, Inc.",
+        "meta": "Resorts & Casinos",
+        "type": "EQUITY",
+        "mcap": 83944728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }

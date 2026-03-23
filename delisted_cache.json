@@ -19,11 +19,6 @@
         "last_checked": "2026-03-19",
         "reason": "No Price Data"
     },
-    "SOI": {
-        "delisted": true,
-        "last_checked": "2026-03-20",
-        "reason": "No Price Data"
-    },
     "CBD": {
         "delisted": true,
         "last_checked": "2026-03-20",
@@ -152,6 +147,11 @@
     "FM": {
         "delisted": true,
         "last_checked": "2026-03-22",
+        "reason": "No Price Data"
+    },
+    "SOI": {
+        "delisted": true,
+        "last_checked": "2026-03-23",
         "reason": "No Price Data"
     }
 }
