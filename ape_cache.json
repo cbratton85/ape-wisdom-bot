@@ -33248,5 +33248,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "OTH": {
+        "ticker": "OTH",
+        "name": "Off The Hook YS Inc.",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 48925000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "WWJD": {
+        "ticker": "WWJD",
+        "name": "Inspire International ETF",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CWB": {
+        "ticker": "CWB",
+        "name": "State Street SPDR Bloomberg Con",
+        "meta": "Convertibles",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "XTL": {
+        "ticker": "XTL",
+        "name": "State Street SPDR S&P Telecom E",
+        "meta": "Communications",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SUZ": {
+        "ticker": "SUZ",
+        "name": "Suzano S.A.",
+        "meta": "Paper & Paper Products",
+        "type": "EQUITY",
+        "mcap": 11631671296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
