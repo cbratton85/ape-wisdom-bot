@@ -33378,5 +33378,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "UYG": {
+        "ticker": "UYG",
+        "name": "ProShares Ultra Financials",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
