@@ -59,11 +59,6 @@
         "last_checked": "2026-03-22",
         "reason": "No Price Data"
     },
-    "PYR": {
-        "delisted": true,
-        "last_checked": "2026-03-22",
-        "reason": "No Price Data"
-    },
     "SQ": {
         "delisted": true,
         "last_checked": "2026-03-22",
@@ -165,6 +160,11 @@
         "reason": "No Price Data"
     },
     "RE": {
+        "delisted": true,
+        "last_checked": "2026-03-23",
+        "reason": "No Price Data"
+    },
+    "PYR": {
         "delisted": true,
         "last_checked": "2026-03-23",
         "reason": "No Price Data"

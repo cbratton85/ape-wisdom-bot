@@ -33338,5 +33338,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "OID"
+    },
+    "IUSG": {
+        "ticker": "IUSG",
+        "name": "iShares Core S&P U.S. Growth ET",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 16839630848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "CAST": {
+        "ticker": "CAST",
+        "name": "FreeCast, Inc.",
+        "meta": "Broadcasting",
+        "type": "EQUITY",
+        "mcap": 120664336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
