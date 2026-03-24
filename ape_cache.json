@@ -33468,5 +33468,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FCEL": {
+        "ticker": "FCEL",
+        "name": "FuelCell Energy, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 356016544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ARVN": {
+        "ticker": "ARVN",
+        "name": "Arvinas, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 646738624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
