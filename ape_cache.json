@@ -33518,5 +33518,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "GLSI": {
+        "ticker": "GLSI",
+        "name": "Greenwich LifeSciences, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 352390208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
