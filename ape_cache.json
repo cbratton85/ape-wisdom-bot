@@ -33438,5 +33438,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "NTGR": {
+        "ticker": "NTGR",
+        "name": "NETGEAR, Inc.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 626564800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "INKW": {
+        "ticker": "INKW",
+        "name": "Greene Concepts, Inc.",
+        "meta": "Beverages - Non-Alcoholic",
+        "type": "EQUITY",
+        "mcap": 1681086,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
     }
 }
