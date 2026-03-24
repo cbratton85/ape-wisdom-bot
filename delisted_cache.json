@@ -74,11 +74,6 @@
         "last_checked": "2026-03-22",
         "reason": "No Price Data"
     },
-    "SOI": {
-        "delisted": true,
-        "last_checked": "2026-03-23",
-        "reason": "No Price Data"
-    },
     "JW": {
         "delisted": true,
         "last_checked": "2026-03-23",
@@ -165,6 +160,11 @@
         "reason": "No Price Data"
     },
     "CO": {
+        "delisted": true,
+        "last_checked": "2026-03-24",
+        "reason": "No Price Data"
+    },
+    "SOI": {
         "delisted": true,
         "last_checked": "2026-03-24",
         "reason": "No Price Data"
