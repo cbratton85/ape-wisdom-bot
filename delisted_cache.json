@@ -64,11 +64,6 @@
         "last_checked": "2026-03-23",
         "reason": "No Price Data"
     },
-    "QQC": {
-        "delisted": true,
-        "last_checked": "2026-03-23",
-        "reason": "No Price Data"
-    },
     "OPT": {
         "delisted": true,
         "last_checked": "2026-03-23",
@@ -180,6 +175,11 @@
         "reason": "No Price Data"
     },
     "OLD": {
+        "delisted": true,
+        "last_checked": "2026-03-24",
+        "reason": "No Price Data"
+    },
+    "QQC": {
         "delisted": true,
         "last_checked": "2026-03-24",
         "reason": "No Price Data"
