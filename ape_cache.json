@@ -33428,5 +33428,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "DAN": {
+        "ticker": "DAN",
+        "name": "Dana Incorporated",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 3580306688,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
