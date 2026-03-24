@@ -33398,5 +33398,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SIMS": {
+        "ticker": "SIMS",
+        "name": "State Street SPDR S&P Kensho In",
+        "meta": "Infrastructure",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FLSA": {
+        "ticker": "FLSA",
+        "name": "Franklin FTSE Saudi Arabia ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "DERM": {
+        "ticker": "DERM",
+        "name": "Journey Medical Corporation",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 229470464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
