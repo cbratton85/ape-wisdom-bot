@@ -33458,5 +33458,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PNK"
+    },
+    "PBF": {
+        "ticker": "PBF",
+        "name": "PBF Energy Inc.",
+        "meta": "Oil & Gas Refining & Marketing",
+        "type": "EQUITY",
+        "mcap": 5786943488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
