@@ -33528,5 +33528,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "MDA": {
+        "ticker": "MDA",
+        "name": "MDA Space Ltd.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 3986970624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
