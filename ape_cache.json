@@ -33488,5 +33488,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PFFD": {
+        "ticker": "PFFD",
+        "name": "Global X U.S. Preferred ETF",
+        "meta": "Preferred Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "NNBR": {
+        "ticker": "NNBR",
+        "name": "NN, Inc.",
+        "meta": "Conglomerates",
+        "type": "EQUITY",
+        "mcap": 88846576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GNTA": {
+        "ticker": "GNTA",
+        "name": "Genenta Science S.p.A.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 16744639,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
