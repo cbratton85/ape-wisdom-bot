@@ -33688,5 +33688,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SCVL": {
+        "ticker": "SCVL",
+        "name": "Shoe Carnival, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 489327552,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "WYFI": {
+        "ticker": "WYFI",
+        "name": "WhiteFiber, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 559361024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
