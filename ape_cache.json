@@ -33738,5 +33738,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CMP": {
+        "ticker": "CMP",
+        "name": "Compass Minerals Intl Inc",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 1026068800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
