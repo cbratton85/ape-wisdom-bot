@@ -33578,5 +33578,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "HAIN": {
+        "ticker": "HAIN",
+        "name": "The Hain Celestial Group, Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 64504748,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TROX": {
+        "ticker": "TROX",
+        "name": "Tronox Holdings plc",
+        "meta": "Chemicals",
+        "type": "EQUITY",
+        "mcap": 1349479936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IMNN": {
+        "ticker": "IMNN",
+        "name": "Imunon, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 9997044,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "DNLI": {
+        "ticker": "DNLI",
+        "name": "Denali Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3325663488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }

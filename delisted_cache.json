@@ -34,11 +34,6 @@
         "last_checked": "2026-03-22",
         "reason": "No Price Data"
     },
-    "JW": {
-        "delisted": true,
-        "last_checked": "2026-03-23",
-        "reason": "No Price Data"
-    },
     "DS": {
         "delisted": true,
         "last_checked": "2026-03-23",
@@ -165,6 +160,11 @@
         "reason": "No Price Data"
     },
     "QED": {
+        "delisted": true,
+        "last_checked": "2026-03-25",
+        "reason": "No Price Data"
+    },
+    "JW": {
         "delisted": true,
         "last_checked": "2026-03-25",
         "reason": "No Price Data"
