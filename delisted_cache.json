@@ -34,11 +34,6 @@
         "last_checked": "2026-03-22",
         "reason": "No Price Data"
     },
-    "FFIE": {
-        "delisted": true,
-        "last_checked": "2026-03-22",
-        "reason": "No Price Data"
-    },
     "JW": {
         "delisted": true,
         "last_checked": "2026-03-23",
@@ -170,6 +165,11 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-03-25",
+        "reason": "No Price Data"
+    },
+    "FFIE": {
         "delisted": true,
         "last_checked": "2026-03-25",
         "reason": "No Price Data"
