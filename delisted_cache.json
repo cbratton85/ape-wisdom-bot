@@ -99,11 +99,6 @@
         "last_checked": "2026-03-24",
         "reason": "No Price Data"
     },
-    "HEAR": {
-        "delisted": true,
-        "last_checked": "2026-03-24",
-        "reason": "No Price Data"
-    },
     "ANF": {
         "delisted": true,
         "last_checked": "2026-03-24",
@@ -170,6 +165,11 @@
         "reason": "No Price Data"
     },
     "SLT": {
+        "delisted": true,
+        "last_checked": "2026-03-25",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
         "delisted": true,
         "last_checked": "2026-03-25",
         "reason": "No Price Data"
