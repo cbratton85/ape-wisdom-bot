@@ -33568,5 +33568,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "CPRT": {
+        "ticker": "CPRT",
+        "name": "Copart, Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 31789701120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
