@@ -33618,5 +33618,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CGNT": {
+        "ticker": "CGNT",
+        "name": "Cognyte Software Ltd.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 656612416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LUCD": {
+        "ticker": "LUCD",
+        "name": "Lucid Diagnostics Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 159940496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "BTGO": {
+        "ticker": "BTGO",
+        "name": "BitGo Holdings, Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 1176787584,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KPTI": {
+        "ticker": "KPTI",
+        "name": "Karyopharm Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 106329736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CEY": {
+        "ticker": "CEY",
+        "name": "VictoryShares Emerging Market H",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }

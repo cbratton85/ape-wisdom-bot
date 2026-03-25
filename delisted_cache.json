@@ -159,12 +159,17 @@
         "last_checked": "2026-03-25",
         "reason": "No Price Data"
     },
-    "QED": {
+    "JW": {
         "delisted": true,
         "last_checked": "2026-03-25",
         "reason": "No Price Data"
     },
-    "JW": {
+    "CEY": {
+        "delisted": true,
+        "last_checked": "2026-03-25",
+        "reason": "No Price Data"
+    },
+    "QED": {
         "delisted": true,
         "last_checked": "2026-03-25",
         "reason": "No Price Data"
