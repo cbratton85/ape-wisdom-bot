@@ -33668,5 +33668,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CORT": {
+        "ticker": "CORT",
+        "name": "Corcept Therapeutics Incorporat",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 4572487168,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SNPE": {
+        "ticker": "SNPE",
+        "name": "Xtrackers S&P 500 Scored & Scre",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
