@@ -19,11 +19,6 @@
         "last_checked": "2026-03-22",
         "reason": "No Price Data"
     },
-    "SAVE": {
-        "delisted": true,
-        "last_checked": "2026-03-22",
-        "reason": "No Price Data"
-    },
     "ABB": {
         "delisted": true,
         "last_checked": "2026-03-22",
@@ -165,6 +160,16 @@
         "reason": "No Price Data"
     },
     "QQC": {
+        "delisted": true,
+        "last_checked": "2026-03-25",
+        "reason": "No Price Data"
+    },
+    "SAVE": {
+        "delisted": true,
+        "last_checked": "2026-03-25",
+        "reason": "No Price Data"
+    },
+    "SLT": {
         "delisted": true,
         "last_checked": "2026-03-25",
         "reason": "No Price Data"

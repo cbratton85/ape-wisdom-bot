@@ -33708,5 +33708,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "PAYS": {
+        "ticker": "PAYS",
+        "name": "Paysign, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 283470880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SLT": {
+        "ticker": "SLT",
+        "name": "Pacer Salt High truBeta US Mark",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
