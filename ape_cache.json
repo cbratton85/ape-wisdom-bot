@@ -33728,5 +33728,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "GRC": {
+        "ticker": "GRC",
+        "name": "Gorman-Rupp Company (The)",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 1687179520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
