@@ -33538,5 +33538,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SAA": {
+        "ticker": "SAA",
+        "name": "ProShares Ultra SmallCap600",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
