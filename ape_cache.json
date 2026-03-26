@@ -33948,5 +33948,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SHV": {
+        "ticker": "SHV",
+        "name": "iShares 0-1 Year Treasury Bond ",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "WSM": {
+        "ticker": "WSM",
+        "name": "Williams-Sonoma, Inc.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 21445111808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
