@@ -33908,5 +33908,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FTSM": {
+        "ticker": "FTSM",
+        "name": "First Trust Enhanced Short Matu",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "MCHX": {
+        "ticker": "MCHX",
+        "name": "Marchex, Inc.",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 61249236,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "WFG": {
+        "ticker": "WFG",
+        "name": "West Fraser Timber Co. Ltd",
+        "meta": "Lumber & Wood Production",
+        "type": "EQUITY",
+        "mcap": 4967965184,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
