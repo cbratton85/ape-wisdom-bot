@@ -33888,5 +33888,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "TECS": {
+        "ticker": "TECS",
+        "name": "Direxion Technology Bear 3X ETF",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "LOB": {
+        "ticker": "LOB",
+        "name": "Live Oak Bancshares, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 1501212672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
