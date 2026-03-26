@@ -114,11 +114,6 @@
         "last_checked": "2026-03-25",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-03-25",
-        "reason": "No Price Data"
-    },
     "FFIE": {
         "delisted": true,
         "last_checked": "2026-03-25",
@@ -172,6 +167,11 @@
     "SQ": {
         "delisted": true,
         "last_checked": "2026-03-25",
+        "reason": "No Price Data"
+    },
+    "BABY": {
+        "delisted": true,
+        "last_checked": "2026-03-26",
         "reason": "No Price Data"
     }
 }
