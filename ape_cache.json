@@ -33788,5 +33788,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ASRT": {
+        "ticker": "ASRT",
+        "name": "Assertio Holdings, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 119686640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
