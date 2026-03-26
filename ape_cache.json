@@ -33938,5 +33938,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "WASH": {
+        "ticker": "WASH",
+        "name": "Washington Trust Bancorp, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 631555072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }

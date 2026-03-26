@@ -149,12 +149,22 @@
         "last_checked": "2026-03-26",
         "reason": "No Price Data"
     },
-    "DDG": {
+    "FI": {
         "delisted": true,
         "last_checked": "2026-03-26",
         "reason": "No Price Data"
     },
-    "FI": {
+    "YY": {
+        "delisted": true,
+        "last_checked": "2026-03-26",
+        "reason": "No Price Data"
+    },
+    "TTM": {
+        "delisted": true,
+        "last_checked": "2026-03-26",
+        "reason": "No Price Data"
+    },
+    "DDG": {
         "delisted": true,
         "last_checked": "2026-03-26",
         "reason": "No Price Data"
