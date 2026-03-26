@@ -33778,5 +33778,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "GVA": {
+        "ticker": "GVA",
+        "name": "Granite Construction Incorporat",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 5321784320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
