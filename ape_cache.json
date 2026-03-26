@@ -33828,5 +33828,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "IGSB": {
+        "ticker": "IGSB",
+        "name": "iShares 1-5 Year Investment Gra",
+        "meta": "Short-Term Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ALHC": {
+        "ticker": "ALHC",
+        "name": "Alignment Healthcare, Inc.",
+        "meta": "Healthcare Plans",
+        "type": "EQUITY",
+        "mcap": 3583360768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TSHA": {
+        "ticker": "TSHA",
+        "name": "Taysha Gene Therapies, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1294150912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LGIH": {
+        "ticker": "LGIH",
+        "name": "LGI Homes, Inc.",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 951579456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ADMA": {
+        "ticker": "ADMA",
+        "name": "ADMA Biologics Inc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1989819776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "DUSA": {
+        "ticker": "DUSA",
+        "name": "Davis Select U.S. Equity ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
