@@ -33818,5 +33818,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SNGX": {
+        "ticker": "SNGX",
+        "name": "Soligenix, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 12103356,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
