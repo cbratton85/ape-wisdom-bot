@@ -33968,5 +33968,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "NXPI": {
+        "ticker": "NXPI",
+        "name": "NXP Semiconductors N.V.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 49760276480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
