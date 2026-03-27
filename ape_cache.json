@@ -34048,5 +34048,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "NPO": {
+        "ticker": "NPO",
+        "name": "Enpro Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 5294789632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
