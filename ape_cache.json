@@ -34088,5 +34088,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "KODK": {
+        "ticker": "KODK",
+        "name": "Eastman Kodak Company",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 865800000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VLTO": {
+        "ticker": "VLTO",
+        "name": "Veralto Corp",
+        "meta": "Pollution & Treatment Controls",
+        "type": "EQUITY",
+        "mcap": 21450407936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CLMT": {
+        "ticker": "CLMT",
+        "name": "Calumet, Inc",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 2671850240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
