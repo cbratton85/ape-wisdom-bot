@@ -34208,5 +34208,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FWRG": {
+        "ticker": "FWRG",
+        "name": "First Watch Restaurant Group, I",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 630334272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CHGG": {
+        "ticker": "CHGG",
+        "name": "Chegg, Inc.",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 76537384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ASTC": {
+        "ticker": "ASTC",
+        "name": "Astrotech Corporation",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 4168720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
