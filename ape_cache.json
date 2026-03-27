@@ -34158,5 +34158,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "ADME": {
+        "ticker": "ADME",
+        "name": "Aptus Drawdown Managed Equity E",
+        "meta": "Equity Hedged",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "BSV": {
+        "ticker": "BSV",
+        "name": "Vanguard Short-Term Bond ETF",
+        "meta": "Short-Term Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "LOAR": {
+        "ticker": "LOAR",
+        "name": "Loar Holdings Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 5309798400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NIC": {
+        "ticker": "NIC",
+        "name": "Nicolet Bankshares Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 3117957888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
