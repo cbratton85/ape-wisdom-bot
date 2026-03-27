@@ -33978,5 +33978,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AFG": {
+        "ticker": "AFG",
+        "name": "American Financial Group, Inc.",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 10739718144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PWV": {
+        "ticker": "PWV",
+        "name": "Invesco Large Cap Value ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 1822893056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "EFX": {
+        "ticker": "EFX",
+        "name": "Equifax, Inc.",
+        "meta": "Consulting Services",
+        "type": "EQUITY",
+        "mcap": 21358983168,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MTUM": {
+        "ticker": "MTUM",
+        "name": "iShares MSCI USA Momentum Facto",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "IWO": {
+        "ticker": "IWO",
+        "name": "iShares Russell 2000 Growth Fun",
+        "meta": "Small Growth",
+        "type": "ETF",
+        "mcap": 14037179392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
