@@ -34138,5 +34138,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "EFC": {
+        "ticker": "EFC",
+        "name": "Ellington Financial Inc.",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 1459415808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
