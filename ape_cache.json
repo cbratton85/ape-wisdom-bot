@@ -34038,5 +34038,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "TCOM": {
+        "ticker": "TCOM",
+        "name": "Trip.com Group Limited",
+        "meta": "Travel Services",
+        "type": "EQUITY",
+        "mcap": 32823965696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
