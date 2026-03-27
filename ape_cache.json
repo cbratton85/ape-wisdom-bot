@@ -34198,5 +34198,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TAK": {
+        "ticker": "TAK",
+        "name": "Takeda Pharmaceutical Company L",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 56581144576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
