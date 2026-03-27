@@ -34238,5 +34238,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "TASK": {
+        "ticker": "TASK",
+        "name": "TaskUs, Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 585025664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
