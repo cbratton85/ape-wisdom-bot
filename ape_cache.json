@@ -34248,5 +34248,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "FGI": {
+        "ticker": "FGI",
+        "name": "FGI Industries Ltd.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 7327951,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
