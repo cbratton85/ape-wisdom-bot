@@ -34148,5 +34148,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "EGG": {
+        "ticker": "EGG",
+        "name": "Enigmatig Limited",
+        "meta": "Consulting Services",
+        "type": "EQUITY",
+        "mcap": 169298816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
