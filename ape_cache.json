@@ -34118,5 +34118,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "WVE": {
+        "ticker": "WVE",
+        "name": "Wave Life Sciences Ltd.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1229323648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "MGNI": {
+        "ticker": "MGNI",
+        "name": "Magnite, Inc.",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 1674626688,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
