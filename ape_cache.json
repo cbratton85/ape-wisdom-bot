@@ -34258,5 +34258,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "TBN": {
+        "ticker": "TBN",
+        "name": "Tamboran Resources Corporation",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 982554880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NNOX": {
+        "ticker": "NNOX",
+        "name": "NANO-X IMAGING LTD",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 153794400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "PXE": {
+        "ticker": "PXE",
+        "name": "Invesco Energy Exploration & Pr",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 80598000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "RIGS": {
+        "ticker": "RIGS",
+        "name": "RiverFront Strategic Income Fun",
+        "meta": "Multisector Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
