@@ -34298,5 +34298,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "UDOW": {
+        "ticker": "UDOW",
+        "name": "ProShares UltraPro Dow30",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
