@@ -34368,5 +34368,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "MTZ": {
+        "ticker": "MTZ",
+        "name": "MasTec, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 24933482496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
