@@ -34338,5 +34338,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ELVN": {
+        "ticker": "ELVN",
+        "name": "Enliven Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2322050048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "RWM": {
+        "ticker": "RWM",
+        "name": "ProShares Short Russell2000",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "LJIM": {
+        "ticker": "LJIM",
+        "name": "Northern Lights Fund Trust IV L",
+        "meta": "Long-Short Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
