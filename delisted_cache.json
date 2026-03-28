@@ -109,11 +109,6 @@
         "last_checked": "2026-03-27",
         "reason": "No Price Data"
     },
-    "HEAR": {
-        "delisted": true,
-        "last_checked": "2026-03-27",
-        "reason": "No Price Data"
-    },
     "YY": {
         "delisted": true,
         "last_checked": "2026-03-27",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "OLD": {
+        "delisted": true,
+        "last_checked": "2026-03-28",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
         "delisted": true,
         "last_checked": "2026-03-28",
         "reason": "No Price Data"
