@@ -34308,5 +34308,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "HMC": {
+        "ticker": "HMC",
+        "name": "Honda Motor Company, Ltd.",
+        "meta": "Auto Manufacturers",
+        "type": "EQUITY",
+        "mcap": 31936460800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
