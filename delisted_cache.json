@@ -4,11 +4,6 @@
         "last_checked": "2026-03-23",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-03-23",
-        "reason": "No Price Data"
-    },
     "PYR": {
         "delisted": true,
         "last_checked": "2026-03-23",
@@ -157,6 +152,11 @@
     "OG": {
         "delisted": true,
         "last_checked": "2026-03-28",
+        "reason": "No Price Data"
+    },
+    "RE": {
+        "delisted": true,
+        "last_checked": "2026-03-29",
         "reason": "No Price Data"
     }
 }
