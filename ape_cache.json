@@ -34418,5 +34418,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SDGR": {
+        "ticker": "SDGR",
+        "name": "Schrodinger, Inc.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 817982144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SCHV": {
+        "ticker": "SCHV",
+        "name": "Schwab U.S. Large-Cap Value ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
