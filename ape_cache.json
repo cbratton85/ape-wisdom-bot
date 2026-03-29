@@ -34378,5 +34378,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CGAU": {
+        "ticker": "CGAU",
+        "name": "Centerra Gold Inc.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 3349142272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
