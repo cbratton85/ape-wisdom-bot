@@ -34468,5 +34468,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "BKE": {
+        "ticker": "BKE",
+        "name": "Buckle, Inc. (The)",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 2520998400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
