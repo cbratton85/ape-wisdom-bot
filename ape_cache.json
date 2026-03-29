@@ -34438,5 +34438,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NBR": {
+        "ticker": "NBR",
+        "name": "Nabors Industries Ltd.",
+        "meta": "Oil & Gas Drilling",
+        "type": "EQUITY",
+        "mcap": 1314717440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
