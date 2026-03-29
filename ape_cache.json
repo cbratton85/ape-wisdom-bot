@@ -34388,5 +34388,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HERO": {
+        "ticker": "HERO",
+        "name": "Global X Video Games & Esports ",
+        "meta": "Communications",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "LOOP": {
+        "ticker": "LOOP",
+        "name": "Loop Industries, Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 65739076,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
