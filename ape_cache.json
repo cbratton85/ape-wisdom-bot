@@ -34448,5 +34448,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BURL": {
+        "ticker": "BURL",
+        "name": "Burlington Stores, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 19605491712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MATW": {
+        "ticker": "MATW",
+        "name": "Matthews International Corporat",
+        "meta": "Conglomerates",
+        "type": "EQUITY",
+        "mcap": 784377216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
