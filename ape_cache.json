@@ -34408,5 +34408,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "KBA": {
+        "ticker": "KBA",
+        "name": "KraneShares Bosera MSCI China A",
+        "meta": "China Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
