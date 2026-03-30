@@ -34638,5 +34638,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "UDR": {
+        "ticker": "UDR",
+        "name": "UDR, Inc.",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 12749802496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IVZ": {
+        "ticker": "IVZ",
+        "name": "Invesco Ltd",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 10310978560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
