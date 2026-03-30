@@ -34538,5 +34538,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SDRL": {
+        "ticker": "SDRL",
+        "name": "Seadrill Limited",
+        "meta": "Oil & Gas Drilling",
+        "type": "EQUITY",
+        "mcap": 2835829504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
