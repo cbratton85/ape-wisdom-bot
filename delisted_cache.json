@@ -69,11 +69,6 @@
         "last_checked": "2026-03-29",
         "reason": "No Price Data"
     },
-    "CBD": {
-        "delisted": true,
-        "last_checked": "2026-03-29",
-        "reason": "No Price Data"
-    },
     "CN": {
         "delisted": true,
         "last_checked": "2026-03-29",
@@ -150,6 +145,16 @@
         "reason": "No Price Data"
     },
     "QQC": {
+        "delisted": true,
+        "last_checked": "2026-03-30",
+        "reason": "No Price Data"
+    },
+    "CBD": {
+        "delisted": true,
+        "last_checked": "2026-03-30",
+        "reason": "No Price Data"
+    },
+    "ZEV": {
         "delisted": true,
         "last_checked": "2026-03-30",
         "reason": "No Price Data"

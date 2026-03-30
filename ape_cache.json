@@ -34628,5 +34628,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "RPC": {
+        "ticker": "RPC",
+        "name": "Ridgepost Capital, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 791558592,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
