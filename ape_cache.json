@@ -34668,5 +34668,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CNRG": {
+        "ticker": "CNRG",
+        "name": "State Street SPDR S&P Kensho Cl",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "UNL": {
+        "ticker": "UNL",
+        "name": "United States 12 Month Natural ",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "GBL": {
+        "ticker": "GBL",
+        "name": "GBL",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
