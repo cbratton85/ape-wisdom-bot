@@ -34728,5 +34728,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VFS": {
+        "ticker": "VFS",
+        "name": "VinFast Auto Ltd.",
+        "meta": "Auto Manufacturers",
+        "type": "EQUITY",
+        "mcap": 8445725184,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BBWI": {
+        "ticker": "BBWI",
+        "name": "Bath & Body Works, Inc.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 3822152192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
