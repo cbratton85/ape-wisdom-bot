@@ -34658,5 +34658,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ITW": {
+        "ticker": "ITW",
+        "name": "Illinois Tool Works Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 74029932544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
