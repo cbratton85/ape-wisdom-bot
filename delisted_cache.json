@@ -19,11 +19,6 @@
         "last_checked": "2026-03-25",
         "reason": "No Price Data"
     },
-    "CEY": {
-        "delisted": true,
-        "last_checked": "2026-03-25",
-        "reason": "No Price Data"
-    },
     "QED": {
         "delisted": true,
         "last_checked": "2026-03-26",
@@ -155,6 +150,11 @@
         "reason": "No Price Data"
     },
     "COMM": {
+        "delisted": true,
+        "last_checked": "2026-03-30",
+        "reason": "No Price Data"
+    },
+    "OPT": {
         "delisted": true,
         "last_checked": "2026-03-30",
         "reason": "No Price Data"

@@ -34498,5 +34498,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "LOGI": {
+        "ticker": "LOGI",
+        "name": "Logitech International S.A. - R",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 13273196544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
