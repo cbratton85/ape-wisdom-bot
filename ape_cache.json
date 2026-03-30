@@ -34708,5 +34708,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ANDE": {
+        "ticker": "ANDE",
+        "name": "The Andersons, Inc.",
+        "meta": "Food Distribution",
+        "type": "EQUITY",
+        "mcap": 2437205760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SEM": {
+        "ticker": "SEM",
+        "name": "Select Medical Holdings Corpora",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 2020258304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
