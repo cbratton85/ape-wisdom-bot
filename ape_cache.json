@@ -34488,5 +34488,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "COMM": {
+        "ticker": "COMM",
+        "name": "COMM",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
