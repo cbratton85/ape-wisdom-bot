@@ -34698,5 +34698,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "PRGS": {
+        "ticker": "PRGS",
+        "name": "Progress Software Corporation",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1190552832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
