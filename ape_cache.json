@@ -34508,5 +34508,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CENX": {
+        "ticker": "CENX",
+        "name": "Century Aluminum Company",
+        "meta": "Aluminum",
+        "type": "EQUITY",
+        "mcap": 4914061824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "HUN": {
+        "ticker": "HUN",
+        "name": "Huntsman Corporation",
+        "meta": "Chemicals",
+        "type": "EQUITY",
+        "mcap": 2202958336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KALU": {
+        "ticker": "KALU",
+        "name": "Kaiser Aluminum Corporation",
+        "meta": "Aluminum",
+        "type": "EQUITY",
+        "mcap": 1857068288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
