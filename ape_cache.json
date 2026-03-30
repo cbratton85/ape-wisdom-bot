@@ -34548,5 +34548,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HTLD": {
+        "ticker": "HTLD",
+        "name": "Heartland Express, Inc.",
+        "meta": "Trucking",
+        "type": "EQUITY",
+        "mcap": 791589312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ULH": {
+        "ticker": "ULH",
+        "name": "Universal Logistics Holdings, I",
+        "meta": "Trucking",
+        "type": "EQUITY",
+        "mcap": 526737664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "KNX": {
+        "ticker": "KNX",
+        "name": "Knight-Swift Transportation Hol",
+        "meta": "Trucking",
+        "type": "EQUITY",
+        "mcap": 9022754816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
