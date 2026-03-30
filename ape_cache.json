@@ -34578,5 +34578,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "USFD": {
+        "ticker": "USFD",
+        "name": "US Foods Holding Corp.",
+        "meta": "Food Distribution",
+        "type": "EQUITY",
+        "mcap": 20406941696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PFGC": {
+        "ticker": "PFGC",
+        "name": "Performance Food Group Company",
+        "meta": "Food Distribution",
+        "type": "EQUITY",
+        "mcap": 13359696896,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "INDY": {
+        "ticker": "INDY",
+        "name": "iShares India 50 ETF",
+        "meta": "India Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "PARR": {
+        "ticker": "PARR",
+        "name": "Par Pacific Holdings, Inc. Comm",
+        "meta": "Oil & Gas Refining & Marketing",
+        "type": "EQUITY",
+        "mcap": 3204468736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FATE": {
+        "ticker": "FATE",
+        "name": "Fate Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 131959024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
