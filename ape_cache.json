@@ -34788,5 +34788,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PHR": {
+        "ticker": "PHR",
+        "name": "Phreesia, Inc.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 506410816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
