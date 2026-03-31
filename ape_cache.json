@@ -34838,5 +34838,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "MMLP": {
+        "ticker": "MMLP",
+        "name": "Martin Midstream Partners L.P.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 107792040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
