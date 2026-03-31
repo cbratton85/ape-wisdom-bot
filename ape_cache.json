@@ -34778,5 +34778,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "PFG": {
+        "ticker": "PFG",
+        "name": "Principal Financial Group Inc",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 19383588864,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
