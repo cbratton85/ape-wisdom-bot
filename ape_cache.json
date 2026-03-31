@@ -34798,5 +34798,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "JILL": {
+        "ticker": "JILL",
+        "name": "J. Jill, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 166210576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FRPH": {
+        "ticker": "FRPH",
+        "name": "FRP Holdings, Inc.",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 420445920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "XPEL": {
+        "ticker": "XPEL",
+        "name": "XPEL, Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 1215964288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "MWH": {
+        "ticker": "MWH",
+        "name": "SOLV Energy, Inc.",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 6022065152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
