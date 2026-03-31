@@ -34748,5 +34748,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HTGC": {
+        "ticker": "HTGC",
+        "name": "Hercules Capital, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 2608475136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MHO": {
+        "ticker": "MHO",
+        "name": "M/I Homes, Inc.",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 3101997568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VIS": {
+        "ticker": "VIS",
+        "name": "Vanguard Industrials ETF",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 7375655936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
