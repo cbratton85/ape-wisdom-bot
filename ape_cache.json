@@ -34848,5 +34848,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ALKS": {
+        "ticker": "ALKS",
+        "name": "Alkermes plc",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 5892741632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "APLS": {
+        "ticker": "APLS",
+        "name": "Apellis Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 5142597120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CNTA": {
+        "ticker": "CNTA",
+        "name": "Centessa Pharmaceuticals plc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 5871408128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
