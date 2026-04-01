@@ -34968,5 +34968,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "CYCN": {
+        "ticker": "CYCN",
+        "name": "Cyclerion Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 5899628,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "DAWN": {
+        "ticker": "DAWN",
+        "name": "Day One Biopharmaceuticals, Inc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2214702592,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
