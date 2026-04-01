@@ -35048,5 +35048,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ZIG": {
+        "ticker": "ZIG",
+        "name": "The Acquirers Fund",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "LOCL": {
+        "ticker": "LOCL",
+        "name": "Local Bounti Corporation",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 34946020,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "WLDN": {
+        "ticker": "WLDN",
+        "name": "Willdan Group, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 1164156416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
