@@ -34988,5 +34988,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "BBP": {
+        "ticker": "BBP",
+        "name": "Virtus Biotech ETF",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "STE": {
+        "ticker": "STE",
+        "name": "STERIS plc (Ireland)",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 21703247872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
