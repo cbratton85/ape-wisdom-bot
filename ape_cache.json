@@ -35038,5 +35038,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "EFO": {
+        "ticker": "EFO",
+        "name": "ProShares Ultra MSCI EAFE",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
