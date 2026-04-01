@@ -34908,5 +34908,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "OGE": {
+        "ticker": "OGE",
+        "name": "OGE Energy Corp",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 9892183040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DXLG": {
+        "ticker": "DXLG",
+        "name": "Destination XL Group, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 27953360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "STEX": {
+        "ticker": "STEX",
+        "name": "Streamex Corp.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 226656432,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ABG": {
+        "ticker": "ABG",
+        "name": "Asbury Automotive Group Inc",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 3770576640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "XERS": {
+        "ticker": "XERS",
+        "name": "Xeris Biopharma Holdings, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1000101568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }

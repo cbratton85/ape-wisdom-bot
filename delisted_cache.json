@@ -59,11 +59,6 @@
         "last_checked": "2026-03-30",
         "reason": "No Price Data"
     },
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-03-30",
-        "reason": "No Price Data"
-    },
     "GBL": {
         "delisted": true,
         "last_checked": "2026-03-30",
@@ -155,6 +150,16 @@
         "reason": "No Price Data"
     },
     "MOM": {
+        "delisted": true,
+        "last_checked": "2026-04-01",
+        "reason": "No Price Data"
+    },
+    "WOW": {
+        "delisted": true,
+        "last_checked": "2026-04-01",
+        "reason": "No Price Data"
+    },
+    "FFIE": {
         "delisted": true,
         "last_checked": "2026-04-01",
         "reason": "No Price Data"
