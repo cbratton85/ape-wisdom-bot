@@ -129,11 +129,6 @@
         "last_checked": "2026-04-01",
         "reason": "No Price Data"
     },
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-04-01",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-04-01",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "HEAR": {
+        "delisted": true,
+        "last_checked": "2026-04-01",
+        "reason": "No Price Data"
+    },
+    "SOL": {
         "delisted": true,
         "last_checked": "2026-04-01",
         "reason": "No Price Data"
