@@ -35078,5 +35078,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "MDGL": {
+        "ticker": "MDGL",
+        "name": "Madrigal Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 12154513408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
