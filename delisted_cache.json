@@ -24,11 +24,6 @@
         "last_checked": "2026-03-28",
         "reason": "No Price Data"
     },
-    "CN": {
-        "delisted": true,
-        "last_checked": "2026-03-29",
-        "reason": "No Price Data"
-    },
     "OLD": {
         "delisted": true,
         "last_checked": "2026-03-29",
@@ -157,6 +152,11 @@
     "DS": {
         "delisted": true,
         "last_checked": "2026-03-31",
+        "reason": "No Price Data"
+    },
+    "MOM": {
+        "delisted": true,
+        "last_checked": "2026-04-01",
         "reason": "No Price Data"
     }
 }

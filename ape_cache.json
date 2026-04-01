@@ -34878,5 +34878,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SCLX": {
+        "ticker": "SCLX",
+        "name": "Scilex Holding Company",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 46839804,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "YMM": {
+        "ticker": "YMM",
+        "name": "Full Truck Alliance Co. Ltd.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 8680922112,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "UNTY": {
+        "ticker": "UNTY",
+        "name": "Unity Bancorp, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 520344416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
