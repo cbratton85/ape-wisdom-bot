@@ -34958,5 +34958,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "YYY": {
+        "ticker": "YYY",
+        "name": "Amplify CEF High Income ETF",
+        "meta": "Tactical Allocation",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
