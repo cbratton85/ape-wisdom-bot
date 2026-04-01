@@ -35098,5 +35098,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "AGG": {
+        "ticker": "AGG",
+        "name": "iShares Core U.S. Aggregate Bon",
+        "meta": "Intermediate Core Bond",
+        "type": "ETF",
+        "mcap": 56687398912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }

@@ -104,11 +104,6 @@
         "last_checked": "2026-04-01",
         "reason": "No Price Data"
     },
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-04-01",
-        "reason": "No Price Data"
-    },
     "FFIE": {
         "delisted": true,
         "last_checked": "2026-04-01",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "JPN": {
+        "delisted": true,
+        "last_checked": "2026-04-01",
+        "reason": "No Price Data"
+    },
+    "WOW": {
         "delisted": true,
         "last_checked": "2026-04-01",
         "reason": "No Price Data"
