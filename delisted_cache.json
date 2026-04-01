@@ -1,9 +1,4 @@
 {
-    "QED": {
-        "delisted": true,
-        "last_checked": "2026-03-26",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-03-28",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "WOW": {
+        "delisted": true,
+        "last_checked": "2026-04-01",
+        "reason": "No Price Data"
+    },
+    "QED": {
         "delisted": true,
         "last_checked": "2026-04-01",
         "reason": "No Price Data"
