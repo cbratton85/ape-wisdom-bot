@@ -99,11 +99,6 @@
         "last_checked": "2026-03-31",
         "reason": "No Price Data"
     },
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-03-31",
-        "reason": "No Price Data"
-    },
     "OPT": {
         "delisted": true,
         "last_checked": "2026-03-31",
@@ -155,6 +150,16 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-04-01",
+        "reason": "No Price Data"
+    },
+    "YY": {
+        "delisted": true,
+        "last_checked": "2026-04-01",
+        "reason": "No Price Data"
+    },
+    "TTM": {
         "delisted": true,
         "last_checked": "2026-04-01",
         "reason": "No Price Data"

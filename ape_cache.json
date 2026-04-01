@@ -35008,5 +35008,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ATLX": {
+        "ticker": "ATLX",
+        "name": "Atlas Lithium Corporation",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 122110768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ORIC": {
+        "ticker": "ORIC",
+        "name": "Oric Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1024441984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PVH": {
+        "ticker": "PVH",
+        "name": "PVH Corp.",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 3623660288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
