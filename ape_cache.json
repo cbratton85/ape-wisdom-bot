@@ -35088,5 +35088,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "DNL": {
+        "ticker": "DNL",
+        "name": "WisdomTree Global ex-U.S. Quali",
+        "meta": "Foreign Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
