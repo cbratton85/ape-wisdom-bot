@@ -35338,5 +35338,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "SNBR": {
+        "ticker": "SNBR",
+        "name": "Sleep Number Corporation",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 26293600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
