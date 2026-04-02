@@ -35178,5 +35178,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "CTEV": {
+        "ticker": "CTEV",
+        "name": "Claritev Corporation",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 285553248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NOA": {
+        "ticker": "NOA",
+        "name": "North American Construction Gro",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 384717472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CRLBF": {
+        "ticker": "CRLBF",
+        "name": "Cresco Labs Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 330410656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OQX"
     }
 }
