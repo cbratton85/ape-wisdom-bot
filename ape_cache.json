@@ -35218,5 +35218,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ACDC": {
+        "ticker": "ACDC",
+        "name": "ProFrac Holding Corp.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 1069241600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
