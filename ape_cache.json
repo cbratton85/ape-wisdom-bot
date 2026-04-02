@@ -35348,5 +35348,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ARQ": {
+        "ticker": "ARQ",
+        "name": "Arq, Inc.",
+        "meta": "Pollution & Treatment Controls",
+        "type": "EQUITY",
+        "mcap": 105837656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
