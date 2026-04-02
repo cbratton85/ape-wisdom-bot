@@ -35258,5 +35258,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ABM": {
+        "ticker": "ABM",
+        "name": "ABM Industries Incorporated",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 2239043840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SPRB": {
+        "ticker": "SPRB",
+        "name": "Spruce Biosciences, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 96043008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "BGC": {
+        "ticker": "BGC",
+        "name": "BGC Group, Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 4690451968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "UBFO": {
+        "ticker": "UBFO",
+        "name": "United Security Bancshares",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 185027760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ONTF": {
+        "ticker": "ONTF",
+        "name": "ON24, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 348249024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FFWM": {
+        "ticker": "FFWM",
+        "name": "First Foundation Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 489265120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
