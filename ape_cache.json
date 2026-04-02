@@ -35208,5 +35208,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "OQX"
+    },
+    "CMRC": {
+        "ticker": "CMRC",
+        "name": "Commerce.com, Inc. - Series 1",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 221940000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
