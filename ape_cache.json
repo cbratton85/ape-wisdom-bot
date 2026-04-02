@@ -35228,5 +35228,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "COCP": {
+        "ticker": "COCP",
+        "name": "Cocrystal Pharma, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 14059747,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "VFMF": {
+        "ticker": "VFMF",
+        "name": "Vanguard U.S. Multifactor ETF",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
