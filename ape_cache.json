@@ -35158,5 +35158,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "PMT": {
+        "ticker": "PMT",
+        "name": "PennyMac Mortgage Investment Tr",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 1025055616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VAW": {
+        "ticker": "VAW",
+        "name": "Vanguard Materials ETF",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
