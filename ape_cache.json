@@ -35108,5 +35108,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "VIK": {
+        "ticker": "VIK",
+        "name": "Viking Holdings Ltd",
+        "meta": "Travel Services",
+        "type": "EQUITY",
+        "mcap": 33977812992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "COMB": {
+        "ticker": "COMB",
+        "name": "GraniteShares Bloomberg Commodi",
+        "meta": "Commodities Broad Basket",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SELX": {
+        "ticker": "SELX",
+        "name": "Semilux International Ltd.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 15178475,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "PAYP": {
+        "ticker": "PAYP",
+        "name": "PayPay Corporation - American D",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 14128055296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GNLX": {
+        "ticker": "GNLX",
+        "name": "Genelux Corporation",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 114702880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }

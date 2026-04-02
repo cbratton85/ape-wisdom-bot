@@ -34,11 +34,6 @@
         "last_checked": "2026-03-30",
         "reason": "No Price Data"
     },
-    "GBL": {
-        "delisted": true,
-        "last_checked": "2026-03-30",
-        "reason": "No Price Data"
-    },
     "CO": {
         "delisted": true,
         "last_checked": "2026-03-30",
@@ -152,6 +147,16 @@
     "QED": {
         "delisted": true,
         "last_checked": "2026-04-01",
+        "reason": "No Price Data"
+    },
+    "AAU": {
+        "delisted": true,
+        "last_checked": "2026-04-02",
+        "reason": "No Price Data"
+    },
+    "GBL": {
+        "delisted": true,
+        "last_checked": "2026-04-02",
         "reason": "No Price Data"
     }
 }
