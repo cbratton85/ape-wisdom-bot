@@ -35358,5 +35358,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "OMER": {
+        "ticker": "OMER",
+        "name": "Omeros Corporation",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 772814912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "HEPA": {
+        "ticker": "HEPA",
+        "name": "Hepion Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 639117,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OQB"
     }
 }
