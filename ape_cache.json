@@ -35318,5 +35318,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HOV": {
+        "ticker": "HOV",
+        "name": "Hovnanian Enterprises, Inc.",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 655397888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KZR": {
+        "ticker": "KZR",
+        "name": "Kezar Life Sciences, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 54623012,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
