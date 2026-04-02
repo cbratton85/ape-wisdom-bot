@@ -35248,5 +35248,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "EUM": {
+        "ticker": "EUM",
+        "name": "ProShares Short MSCI Emerging M",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
