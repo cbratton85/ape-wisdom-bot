@@ -35428,5 +35428,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "SMP": {
+        "ticker": "SMP",
+        "name": "Standard Motor Products, Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 787288128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
