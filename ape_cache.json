@@ -35448,5 +35448,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ACES": {
+        "ticker": "ACES",
+        "name": "ALPS Clean Energy ETF",
+        "meta": "Miscellaneous Sector",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SLNH": {
+        "ticker": "SLNH",
+        "name": "Soluna Holdings, Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 78891208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
