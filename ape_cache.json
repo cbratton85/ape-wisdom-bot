@@ -35378,5 +35378,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "OQB"
+    },
+    "DFAU": {
+        "ticker": "DFAU",
+        "name": "Dimensional US Core Equity Mark",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
