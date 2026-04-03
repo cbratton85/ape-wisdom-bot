@@ -35388,5 +35388,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "MDXG": {
+        "ticker": "MDXG",
+        "name": "MiMedx Group, Inc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 582381056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "AIV": {
+        "ticker": "AIV",
+        "name": "Apartment Investment and Manage",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 583505920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
