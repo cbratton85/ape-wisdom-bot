@@ -35438,5 +35438,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MUFG": {
+        "ticker": "MUFG",
+        "name": "Mitsubishi UFJ Financial Group,",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 197307187200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
