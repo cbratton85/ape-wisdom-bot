@@ -35408,5 +35408,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "IYJ": {
+        "ticker": "IYJ",
+        "name": "iShares U.S. Industrials ETF",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 869836544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "MMC": {
+        "ticker": "MMC",
+        "name": "MMC",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
