@@ -35518,5 +35518,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "TWM": {
+        "ticker": "TWM",
+        "name": "ProShares UltraShort Russell200",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "LCTX": {
+        "ticker": "LCTX",
+        "name": "Lineage Cell Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 391067456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
