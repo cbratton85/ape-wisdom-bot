@@ -35548,5 +35548,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "REED": {
+        "ticker": "REED",
+        "name": "Reed's, Inc.",
+        "meta": "Beverages - Non-Alcoholic",
+        "type": "EQUITY",
+        "mcap": 44444812,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
