@@ -29,11 +29,6 @@
         "last_checked": "2026-04-01",
         "reason": "No Price Data"
     },
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-04-01",
-        "reason": "No Price Data"
-    },
     "AAU": {
         "delisted": true,
         "last_checked": "2026-04-02",
@@ -155,6 +150,11 @@
         "reason": "No Price Data"
     },
     "SNP": {
+        "delisted": true,
+        "last_checked": "2026-04-04",
+        "reason": "No Price Data"
+    },
+    "WOW": {
         "delisted": true,
         "last_checked": "2026-04-04",
         "reason": "No Price Data"
