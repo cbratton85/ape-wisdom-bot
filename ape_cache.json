@@ -35558,5 +35558,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "REGN": {
+        "ticker": "REGN",
+        "name": "Regeneron Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 80542629888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
