@@ -35538,5 +35538,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "FHLC": {
+        "ticker": "FHLC",
+        "name": "Fidelity MSCI Health Care Index",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
