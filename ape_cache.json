@@ -35478,5 +35478,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "VIVE": {
+        "ticker": "VIVE",
+        "name": "Viveve Medical, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 2144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
     }
 }

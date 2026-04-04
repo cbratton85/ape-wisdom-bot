@@ -94,11 +94,6 @@
         "last_checked": "2026-04-03",
         "reason": "No Price Data"
     },
-    "DDG": {
-        "delisted": true,
-        "last_checked": "2026-04-03",
-        "reason": "No Price Data"
-    },
     "SAVE": {
         "delisted": true,
         "last_checked": "2026-04-03",
@@ -165,6 +160,11 @@
         "reason": "No Price Data"
     },
     "SOI": {
+        "delisted": true,
+        "last_checked": "2026-04-04",
+        "reason": "No Price Data"
+    },
+    "DDG": {
         "delisted": true,
         "last_checked": "2026-04-04",
         "reason": "No Price Data"
