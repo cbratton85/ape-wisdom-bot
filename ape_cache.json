@@ -35498,5 +35498,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "PFFA": {
+        "ticker": "PFFA",
+        "name": "Virtus InfraCap U.S. Preferred ",
+        "meta": "Preferred Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "PFF": {
+        "ticker": "PFF",
+        "name": "iShares Preferred and Income Se",
+        "meta": "Preferred Stock",
+        "type": "ETF",
+        "mcap": 12733432832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
