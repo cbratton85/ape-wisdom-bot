@@ -35468,5 +35468,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "WFRD": {
+        "ticker": "WFRD",
+        "name": "Weatherford International plc",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 6835154944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
