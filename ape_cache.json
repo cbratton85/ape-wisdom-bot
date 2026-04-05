@@ -35618,5 +35618,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VOR": {
+        "ticker": "VOR",
+        "name": "Vor Biopharma Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 881697408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SBAC": {
+        "ticker": "SBAC",
+        "name": "SBA Communications Corporation",
+        "meta": "REIT - Specialty",
+        "type": "EQUITY",
+        "mcap": 21557641216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
