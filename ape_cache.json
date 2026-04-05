@@ -35568,5 +35568,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "OLN": {
+        "ticker": "OLN",
+        "name": "Olin Corporation",
+        "meta": "Chemicals",
+        "type": "EQUITY",
+        "mcap": 3252895488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IAK": {
+        "ticker": "IAK",
+        "name": "iShares U.S. Insurance ETF",
+        "meta": "Financial",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
