@@ -35598,5 +35598,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "M": {
+        "ticker": "M",
+        "name": "Macy's Inc",
+        "meta": "Department Stores",
+        "type": "EQUITY",
+        "mcap": 4699837440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PBA": {
+        "ticker": "PBA",
+        "name": "Pembina Pipeline Corp.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 25934526464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
