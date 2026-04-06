@@ -35758,5 +35758,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FBND": {
+        "ticker": "FBND",
+        "name": "Fidelity Total Bond ETF",
+        "meta": "Intermediate Core-Plus Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
