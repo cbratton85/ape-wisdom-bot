@@ -35738,5 +35738,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "IJJ": {
+        "ticker": "IJJ",
+        "name": "iShares S&P Mid-Cap 400 Value E",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 5321339904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
