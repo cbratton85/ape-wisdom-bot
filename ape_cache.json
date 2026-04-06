@@ -35698,5 +35698,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "HCI": {
+        "ticker": "HCI",
+        "name": "HCI Group, Inc.",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 1988938368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
