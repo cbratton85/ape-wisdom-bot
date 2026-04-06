@@ -35748,5 +35748,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "KIM": {
+        "ticker": "KIM",
+        "name": "Kimco Realty Corporation (HC)",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 15206391808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
