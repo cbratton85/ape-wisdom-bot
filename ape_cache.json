@@ -35708,5 +35708,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "WBUY": {
+        "ticker": "WBUY",
+        "name": "WEBUY GLOBAL LTD.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 4008753,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "FOXF": {
+        "ticker": "FOXF",
+        "name": "Fox Factory Holding Corp.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 690629760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "WES": {
+        "ticker": "WES",
+        "name": "Western Midstream Partners, LP",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 16768623616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
