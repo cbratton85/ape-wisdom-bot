@@ -114,11 +114,6 @@
         "last_checked": "2026-04-05",
         "reason": "No Price Data"
     },
-    "CBD": {
-        "delisted": true,
-        "last_checked": "2026-04-05",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-04-05",
@@ -140,6 +135,16 @@
         "reason": "No Price Data"
     },
     "MBT": {
+        "delisted": true,
+        "last_checked": "2026-04-06",
+        "reason": "No Price Data"
+    },
+    "CBD": {
+        "delisted": true,
+        "last_checked": "2026-04-06",
+        "reason": "No Price Data"
+    },
+    "AUD": {
         "delisted": true,
         "last_checked": "2026-04-06",
         "reason": "No Price Data"
