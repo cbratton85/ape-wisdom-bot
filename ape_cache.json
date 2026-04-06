@@ -35638,5 +35638,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PDC": {
+        "ticker": "PDC",
+        "name": "Perpetuals.com Ltd",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 15548455,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CWCO": {
+        "ticker": "CWCO",
+        "name": "Consolidated Water Co. Ltd.",
+        "meta": "Utilities - Regulated Water",
+        "type": "EQUITY",
+        "mcap": 542623488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
