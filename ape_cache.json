@@ -35668,5 +35668,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "EIDO": {
+        "ticker": "EIDO",
+        "name": "iShares MSCI Indonesia ETF",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "BSCS": {
+        "ticker": "BSCS",
+        "name": "Invesco BulletShares 2028 Corpo",
+        "meta": "Target Maturity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "EWM": {
+        "ticker": "EWM",
+        "name": "iShares MSCI Malaysia Index Fun",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 422974496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
