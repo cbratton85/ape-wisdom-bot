@@ -35768,5 +35768,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "REPL": {
+        "ticker": "REPL",
+        "name": "Replimune Group, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 705170112,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
