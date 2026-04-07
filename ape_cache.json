@@ -35778,5 +35778,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SNX": {
+        "ticker": "SNX",
+        "name": "TD SYNNEX Corporation",
+        "meta": "Electronics & Computer Distribution",
+        "type": "EQUITY",
+        "mcap": 15569762304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
