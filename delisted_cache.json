@@ -1,9 +1,4 @@
 {
-    "FFIE": {
-        "delisted": true,
-        "last_checked": "2026-04-01",
-        "reason": "No Price Data"
-    },
     "JPN": {
         "delisted": true,
         "last_checked": "2026-04-01",
@@ -170,6 +165,16 @@
         "reason": "No Price Data"
     },
     "QED": {
+        "delisted": true,
+        "last_checked": "2026-04-07",
+        "reason": "No Price Data"
+    },
+    "SQ": {
+        "delisted": true,
+        "last_checked": "2026-04-07",
+        "reason": "No Price Data"
+    },
+    "FFIE": {
         "delisted": true,
         "last_checked": "2026-04-07",
         "reason": "No Price Data"
