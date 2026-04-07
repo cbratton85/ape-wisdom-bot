@@ -35788,5 +35788,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "DTM": {
+        "ticker": "DTM",
+        "name": "DT Midstream, Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 13603584000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HOLX": {
+        "ticker": "HOLX",
+        "name": "Hologic, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 16968846336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
