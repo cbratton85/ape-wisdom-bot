@@ -35808,5 +35808,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "EVH": {
+        "ticker": "EVH",
+        "name": "Evolent Health, Inc",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 286352352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
