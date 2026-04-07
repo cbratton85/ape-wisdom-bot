@@ -35858,5 +35858,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "JELD": {
+        "ticker": "JELD",
+        "name": "JELD-WEN Holding, Inc.",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 82412784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
