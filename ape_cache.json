@@ -35828,5 +35828,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TERN": {
+        "ticker": "TERN",
+        "name": "Terns Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 6071321600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
