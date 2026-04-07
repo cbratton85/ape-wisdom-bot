@@ -35818,5 +35818,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "RLJ": {
+        "ticker": "RLJ",
+        "name": "RLJ Lodging Trust",
+        "meta": "REIT - Hotel & Motel",
+        "type": "EQUITY",
+        "mcap": 1100126976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
