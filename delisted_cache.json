@@ -29,11 +29,6 @@
         "last_checked": "2026-04-04",
         "reason": "No Price Data"
     },
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-04-05",
-        "reason": "No Price Data"
-    },
     "OLD": {
         "delisted": true,
         "last_checked": "2026-04-05",
@@ -180,6 +175,11 @@
         "reason": "No Price Data"
     },
     "FFIE": {
+        "delisted": true,
+        "last_checked": "2026-04-08",
+        "reason": "No Price Data"
+    },
+    "WOW": {
         "delisted": true,
         "last_checked": "2026-04-08",
         "reason": "No Price Data"
