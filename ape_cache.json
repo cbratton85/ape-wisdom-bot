@@ -35898,5 +35898,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "OMEX": {
+        "ticker": "OMEX",
+        "name": "Odyssey Marine Exploration, Inc",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 46346556,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "BBGI": {
+        "ticker": "BBGI",
+        "name": "Beasley Broadcast Group, Inc.",
+        "meta": "Broadcasting",
+        "type": "EQUITY",
+        "mcap": 5664541,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SKIL": {
+        "ticker": "SKIL",
+        "name": "Skillsoft Corp.",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 38625048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
