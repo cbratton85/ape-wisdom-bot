@@ -35878,5 +35878,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "AUSF": {
+        "ticker": "AUSF",
+        "name": "Global X Adaptive U.S. Factor E",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ZEO": {
+        "ticker": "ZEO",
+        "name": "Zeo Energy Corporation",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 69416568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
