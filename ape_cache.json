@@ -35988,5 +35988,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CUE": {
+        "ticker": "CUE",
+        "name": "Cue Biopharma, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 26739524,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
