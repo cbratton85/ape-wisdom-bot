@@ -35868,5 +35868,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FITE": {
+        "ticker": "FITE",
+        "name": "State Street SPDR S&P Kensho Fu",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
