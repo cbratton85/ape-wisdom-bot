@@ -35978,5 +35978,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ACIU": {
+        "ticker": "ACIU",
+        "name": "AC Immune SA",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 329237504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
