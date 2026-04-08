@@ -35968,5 +35968,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "OQB"
+    },
+    "SGMT": {
+        "ticker": "SGMT",
+        "name": "Sagimet Biosciences Inc. - Seri",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 180521504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
