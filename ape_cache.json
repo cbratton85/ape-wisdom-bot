@@ -35958,5 +35958,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "AVAI": {
+        "ticker": "AVAI",
+        "name": "Avai Bio Inc",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 42166940,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OQB"
     }
 }
