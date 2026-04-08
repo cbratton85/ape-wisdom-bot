@@ -35928,5 +35928,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "AEIS": {
+        "ticker": "AEIS",
+        "name": "Advanced Energy Industries, Inc",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 12903529472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CLW": {
+        "ticker": "CLW",
+        "name": "Clearwater Paper Corporation",
+        "meta": "Paper & Paper Products",
+        "type": "EQUITY",
+        "mcap": 232397648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CHMI": {
+        "ticker": "CHMI",
+        "name": "Cherry Hill Mortgage Investment",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 95873032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
