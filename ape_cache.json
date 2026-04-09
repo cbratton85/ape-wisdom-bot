@@ -36118,5 +36118,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "EWUS": {
+        "ticker": "EWUS",
+        "name": "Ishares MSCI",
+        "meta": "Miscellaneous Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "PCTY": {
+        "ticker": "PCTY",
+        "name": "Paylocity Holding Corporation",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 5174953984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SEAT": {
+        "ticker": "SEAT",
+        "name": "Vivid Seats Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 71053992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
