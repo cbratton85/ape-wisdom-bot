@@ -36078,5 +36078,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CCCC": {
+        "ticker": "CCCC",
+        "name": "C4 Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 282976704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GLMD": {
+        "ticker": "GLMD",
+        "name": "Galmed Pharmaceuticals Ltd.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 4107624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
