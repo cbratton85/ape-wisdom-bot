@@ -36098,5 +36098,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "TAL": {
+        "ticker": "TAL",
+        "name": "TAL Education Group",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 6815443456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RAVE": {
+        "ticker": "RAVE",
+        "name": "Rave Restaurant Group, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 34249876,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
