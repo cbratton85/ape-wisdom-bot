@@ -36058,5 +36058,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SPIR": {
+        "ticker": "SPIR",
+        "name": "Spire Global, Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 686833216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NEXN": {
+        "ticker": "NEXN",
+        "name": "Nexxen International Ltd.",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 383358976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
