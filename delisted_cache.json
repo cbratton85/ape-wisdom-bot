@@ -29,11 +29,6 @@
         "last_checked": "2026-04-05",
         "reason": "No Price Data"
     },
-    "SAVE": {
-        "delisted": true,
-        "last_checked": "2026-04-05",
-        "reason": "No Price Data"
-    },
     "SNP": {
         "delisted": true,
         "last_checked": "2026-04-06",
@@ -185,6 +180,16 @@
         "reason": "No Price Data"
     },
     "OG": {
+        "delisted": true,
+        "last_checked": "2026-04-09",
+        "reason": "No Price Data"
+    },
+    "SAVE": {
+        "delisted": true,
+        "last_checked": "2026-04-09",
+        "reason": "No Price Data"
+    },
+    "TGIF": {
         "delisted": true,
         "last_checked": "2026-04-09",
         "reason": "No Price Data"

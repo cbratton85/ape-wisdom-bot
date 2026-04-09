@@ -36048,5 +36048,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "RYE": {
+        "ticker": "RYE",
+        "name": "Invesco S&P 500 Equal Weight En",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
