@@ -35998,5 +35998,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "IEUS": {
+        "ticker": "IEUS",
+        "name": "iShares MSCI Europe Small-Cap E",
+        "meta": "Europe Stock",
+        "type": "ETF",
+        "mcap": 211252800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "IMTM": {
+        "ticker": "IMTM",
+        "name": "iShares MSCI Intl Momentum Fact",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "WCC": {
+        "ticker": "WCC",
+        "name": "WESCO International, Inc.",
+        "meta": "Industrial Distribution",
+        "type": "EQUITY",
+        "mcap": 14234583040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VLUE": {
+        "ticker": "VLUE",
+        "name": "iShares MSCI USA Value Factor E",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
