@@ -36038,5 +36038,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "LTBR": {
+        "ticker": "LTBR",
+        "name": "Lightbridge Corporation",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 364679072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
