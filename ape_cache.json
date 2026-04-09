@@ -36148,5 +36148,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ZNTL": {
+        "ticker": "ZNTL",
+        "name": "Zentalis Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 313515104,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
