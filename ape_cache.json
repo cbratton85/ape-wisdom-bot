@@ -36158,5 +36158,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "PIII": {
+        "ticker": "PIII",
+        "name": "P3 Health Partners Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 536369888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
