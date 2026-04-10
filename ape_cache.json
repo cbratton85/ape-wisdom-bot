@@ -36308,5 +36308,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "JBHT": {
+        "ticker": "JBHT",
+        "name": "J.B. Hunt Transport Services, I",
+        "meta": "Integrated Freight & Logistics",
+        "type": "EQUITY",
+        "mcap": 21618372608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
