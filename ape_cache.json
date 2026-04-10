@@ -36258,5 +36258,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "CDZI": {
+        "ticker": "CDZI",
+        "name": "Cadiz, Inc.",
+        "meta": "Utilities - Regulated Water",
+        "type": "EQUITY",
+        "mcap": 412950592,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
