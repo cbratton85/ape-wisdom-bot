@@ -36228,5 +36228,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "PLT": {
+        "ticker": "PLT",
+        "name": "Defiance Leveraged Long Income ",
+        "meta": "Trading--Miscellaneous",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "BULZ": {
+        "ticker": "BULZ",
+        "name": "MicroSectors FANG & Innovation ",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
