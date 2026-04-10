@@ -36288,5 +36288,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ECVT": {
+        "ticker": "ECVT",
+        "name": "Ecovyst Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 1588290560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PHI": {
+        "ticker": "PHI",
+        "name": "PLDT Inc. Sponsored",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 4577276416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
