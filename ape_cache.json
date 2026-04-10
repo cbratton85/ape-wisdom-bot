@@ -36188,5 +36188,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "OGN": {
+        "ticker": "OGN",
+        "name": "Organon & Co.",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 1798781056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IVVD": {
+        "ticker": "IVVD",
+        "name": "Invivyd, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 503390880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "GEL": {
+        "ticker": "GEL",
+        "name": "Genesis Energy, L.P.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 2198234624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
