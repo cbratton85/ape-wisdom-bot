@@ -36168,5 +36168,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "STEL": {
+        "ticker": "STEL",
+        "name": "Stellar Bancorp, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 1915128064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EXFY": {
+        "ticker": "EXFY",
+        "name": "Expensify, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 73210768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
