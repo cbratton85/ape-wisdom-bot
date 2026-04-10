@@ -36268,5 +36268,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "BFAM": {
+        "ticker": "BFAM",
+        "name": "Bright Horizons Family Solution",
+        "meta": "Personal Services",
+        "type": "EQUITY",
+        "mcap": 4548067840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MITK": {
+        "ticker": "MITK",
+        "name": "Mitek Systems, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 613129344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
