@@ -169,14 +169,14 @@
         "last_checked": "2026-04-09",
         "reason": "No Price Data"
     },
-    "MBT": {
+    "TTM": {
         "delisted": true,
         "last_checked": "2026-04-09",
         "reason": "No Price Data"
     },
-    "TTM": {
+    "MBT": {
         "delisted": true,
-        "last_checked": "2026-04-09",
+        "last_checked": "2026-04-10",
         "reason": "No Price Data"
     }
 }
