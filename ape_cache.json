@@ -36218,5 +36218,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "RAYA": {
+        "ticker": "RAYA",
+        "name": "Erayak Power Solution Group Inc",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 2189349,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
