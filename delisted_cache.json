@@ -79,11 +79,6 @@
         "last_checked": "2026-04-09",
         "reason": "No Price Data"
     },
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-04-10",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-04-10",
@@ -135,6 +130,11 @@
         "reason": "No Price Data"
     },
     "TGIF": {
+        "delisted": true,
+        "last_checked": "2026-04-11",
+        "reason": "No Price Data"
+    },
+    "SOL": {
         "delisted": true,
         "last_checked": "2026-04-11",
         "reason": "No Price Data"
