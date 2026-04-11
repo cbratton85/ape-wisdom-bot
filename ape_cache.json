@@ -36338,5 +36338,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "DNR": {
+        "ticker": "DNR",
+        "name": "DNR",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "NNA": {
+        "ticker": "NNA",
+        "name": "NNA",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }

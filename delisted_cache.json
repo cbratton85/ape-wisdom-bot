@@ -29,11 +29,6 @@
         "last_checked": "2026-04-07",
         "reason": "No Price Data"
     },
-    "CBD": {
-        "delisted": true,
-        "last_checked": "2026-04-07",
-        "reason": "No Price Data"
-    },
     "NH": {
         "delisted": true,
         "last_checked": "2026-04-07",
@@ -135,6 +130,16 @@
         "reason": "No Price Data"
     },
     "GPS": {
+        "delisted": true,
+        "last_checked": "2026-04-11",
+        "reason": "No Price Data"
+    },
+    "DNR": {
+        "delisted": true,
+        "last_checked": "2026-04-11",
+        "reason": "No Price Data"
+    },
+    "NNA": {
         "delisted": true,
         "last_checked": "2026-04-11",
         "reason": "No Price Data"
