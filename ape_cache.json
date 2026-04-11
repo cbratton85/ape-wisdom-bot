@@ -36398,5 +36398,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "TDIV": {
+        "ticker": "TDIV",
+        "name": "First Trust NASDAQ Technology D",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
