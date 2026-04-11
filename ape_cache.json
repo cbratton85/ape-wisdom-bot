@@ -36388,5 +36388,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "DGT": {
+        "ticker": "DGT",
+        "name": "State Street SPDR Global Dow ET",
+        "meta": "Global Large-Stock Value",
+        "type": "ETF",
+        "mcap": 189302480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
