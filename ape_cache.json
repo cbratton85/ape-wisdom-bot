@@ -36358,5 +36358,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "AKAN": {
+        "ticker": "AKAN",
+        "name": "Akanda Corp.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 334546,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "OSG": {
+        "ticker": "OSG",
+        "name": "Octave Specialty Group, Inc.",
+        "meta": "Insurance - Specialty",
+        "type": "EQUITY",
+        "mcap": 177110528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

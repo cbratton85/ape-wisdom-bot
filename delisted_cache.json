@@ -1,9 +1,4 @@
 {
-    "CO": {
-        "delisted": true,
-        "last_checked": "2026-04-04",
-        "reason": "No Price Data"
-    },
     "SNP": {
         "delisted": true,
         "last_checked": "2026-04-06",
@@ -135,6 +130,11 @@
         "reason": "No Price Data"
     },
     "DNR": {
+        "delisted": true,
+        "last_checked": "2026-04-11",
+        "reason": "No Price Data"
+    },
+    "CO": {
         "delisted": true,
         "last_checked": "2026-04-11",
         "reason": "No Price Data"
