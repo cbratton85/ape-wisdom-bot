@@ -36318,5 +36318,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "DEMZ": {
+        "ticker": "DEMZ",
+        "name": "Democratic Large Cap Core ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ETHO": {
+        "ticker": "ETHO",
+        "name": "Amplify Etho Climate Leadership",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
