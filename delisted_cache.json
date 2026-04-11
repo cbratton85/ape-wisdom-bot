@@ -39,11 +39,6 @@
         "last_checked": "2026-04-09",
         "reason": "No Price Data"
     },
-    "OG": {
-        "delisted": true,
-        "last_checked": "2026-04-09",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-04-09",
@@ -135,6 +130,21 @@
         "reason": "No Price Data"
     },
     "CO": {
+        "delisted": true,
+        "last_checked": "2026-04-11",
+        "reason": "No Price Data"
+    },
+    "OG": {
+        "delisted": true,
+        "last_checked": "2026-04-11",
+        "reason": "No Price Data"
+    },
+    "DIVA": {
+        "delisted": true,
+        "last_checked": "2026-04-11",
+        "reason": "No Price Data"
+    },
+    "DDG": {
         "delisted": true,
         "last_checked": "2026-04-11",
         "reason": "No Price Data"
