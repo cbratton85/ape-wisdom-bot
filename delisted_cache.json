@@ -104,11 +104,6 @@
         "last_checked": "2026-04-12",
         "reason": "No Price Data"
     },
-    "NNA": {
-        "delisted": true,
-        "last_checked": "2026-04-12",
-        "reason": "No Price Data"
-    },
     "DIVA": {
         "delisted": true,
         "last_checked": "2026-04-12",
@@ -140,6 +135,11 @@
         "reason": "No Price Data"
     },
     "WOW": {
+        "delisted": true,
+        "last_checked": "2026-04-12",
+        "reason": "No Price Data"
+    },
+    "NNA": {
         "delisted": true,
         "last_checked": "2026-04-12",
         "reason": "No Price Data"

@@ -36448,5 +36448,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "AVD": {
+        "ticker": "AVD",
+        "name": "American Vanguard Corporation",
+        "meta": "Agricultural Inputs",
+        "type": "EQUITY",
+        "mcap": 66497176,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SVC": {
+        "ticker": "SVC",
+        "name": "Service Properties Trust - Shar",
+        "meta": "REIT - Hotel & Motel",
+        "type": "EQUITY",
+        "mcap": 815498752,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
