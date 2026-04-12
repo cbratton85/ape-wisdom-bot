@@ -36418,5 +36418,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "VICE": {
+        "ticker": "VICE",
+        "name": "AdvisorShares Vice ETF",
+        "meta": "Miscellaneous Sector",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
