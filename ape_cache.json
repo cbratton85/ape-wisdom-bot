@@ -36408,5 +36408,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "VEGN": {
+        "ticker": "VEGN",
+        "name": "US Vegan Climate Index",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
