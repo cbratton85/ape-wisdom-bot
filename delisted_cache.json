@@ -34,11 +34,6 @@
         "last_checked": "2026-04-09",
         "reason": "No Price Data"
     },
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-04-10",
-        "reason": "No Price Data"
-    },
     "RE": {
         "delisted": true,
         "last_checked": "2026-04-10",
@@ -140,6 +135,16 @@
         "reason": "No Price Data"
     },
     "SQ": {
+        "delisted": true,
+        "last_checked": "2026-04-12",
+        "reason": "No Price Data"
+    },
+    "TTM": {
+        "delisted": true,
+        "last_checked": "2026-04-12",
+        "reason": "No Price Data"
+    },
+    "ROOF": {
         "delisted": true,
         "last_checked": "2026-04-12",
         "reason": "No Price Data"

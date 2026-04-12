@@ -36468,5 +36468,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ROOF": {
+        "ticker": "ROOF",
+        "name": "NYLI CBRE NextGen Real Estate E",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
