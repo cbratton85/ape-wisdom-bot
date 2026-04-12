@@ -36428,5 +36428,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "TCI": {
+        "ticker": "TCI",
+        "name": "Transcontinental Realty Investo",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 345745472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
