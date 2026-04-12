@@ -79,11 +79,6 @@
         "last_checked": "2026-04-11",
         "reason": "No Price Data"
     },
-    "OG": {
-        "delisted": true,
-        "last_checked": "2026-04-11",
-        "reason": "No Price Data"
-    },
     "REV": {
         "delisted": true,
         "last_checked": "2026-04-11",
@@ -135,6 +130,16 @@
         "reason": "No Price Data"
     },
     "DBS": {
+        "delisted": true,
+        "last_checked": "2026-04-12",
+        "reason": "No Price Data"
+    },
+    "ROLL": {
+        "delisted": true,
+        "last_checked": "2026-04-12",
+        "reason": "No Price Data"
+    },
+    "OG": {
         "delisted": true,
         "last_checked": "2026-04-12",
         "reason": "No Price Data"
