@@ -36478,5 +36478,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "TONX": {
+        "ticker": "TONX",
+        "name": "TON Strategy Company",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 122908280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
