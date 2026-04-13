@@ -36568,5 +36568,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HEFA": {
+        "ticker": "HEFA",
+        "name": "iShares Currency Hedged MSCI EA",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "KARS": {
+        "ticker": "KARS",
+        "name": "KraneShares Electric Vehicles a",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
