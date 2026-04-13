@@ -36528,5 +36528,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "TMCI": {
+        "ticker": "TMCI",
+        "name": "Treace Medical Concepts, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 129568872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "YPF": {
+        "ticker": "YPF",
+        "name": "YPF Sociedad Anonima",
+        "meta": "Oil & Gas Integrated",
+        "type": "EQUITY",
+        "mcap": 18048632832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ORC": {
+        "ticker": "ORC",
+        "name": "Orchid Island Capital, Inc.",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 1404747392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
