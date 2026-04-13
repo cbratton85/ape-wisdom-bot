@@ -36558,5 +36558,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CALY": {
+        "ticker": "CALY",
+        "name": "Callaway Golf Company",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 2594808832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
