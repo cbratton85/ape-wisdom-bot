@@ -36488,5 +36488,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "BKD": {
+        "ticker": "BKD",
+        "name": "Brookdale Senior Living Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 3222479360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SNDA": {
+        "ticker": "SNDA",
+        "name": "Sonida Senior Living, Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 1543902464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IDYA": {
+        "ticker": "IDYA",
+        "name": "IDEAYA Biosciences, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2678327808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FFBC": {
+        "ticker": "FFBC",
+        "name": "First Financial Bancorp.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 3073785344,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
