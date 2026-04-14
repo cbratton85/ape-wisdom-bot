@@ -36698,5 +36698,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CHA": {
+        "ticker": "CHA",
+        "name": "Chagee Holdings Limited",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 1887245312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
