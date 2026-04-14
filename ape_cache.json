@@ -36618,5 +36618,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "CMCL": {
+        "ticker": "CMCL",
+        "name": "Caledonia Mining Corporation Pl",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 490164640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "USAU": {
+        "ticker": "USAU",
+        "name": "U.S. Gold Corp.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 254447936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "GROY": {
+        "ticker": "GROY",
+        "name": "Gold Royalty Corp.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 851623232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
