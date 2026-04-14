@@ -36588,5 +36588,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SNYR": {
+        "ticker": "SNYR",
+        "name": "Synergy CHC Corp.",
+        "meta": "Medical Distribution",
+        "type": "EQUITY",
+        "mcap": 6503106,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
