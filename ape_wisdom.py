@@ -103,7 +103,7 @@ class HistoryTracker:
         precision_map = {
             'price': 2, 'surge': 0, 'mnt_perc': 0, 'squeeze': 0, 
             'conv': 1, 'eff': 1, 'accel': 0, 'velocity': 0, 'heat': 1,
-            'spy_rs': 1
+            'spy_rs': 1, 'gi': 1
         }
 
         # 3. Main Loop: Process each row in the DataFrame
@@ -153,7 +153,7 @@ class HistoryTracker:
         # 5. Update Memory (Wait for flush() to write to disk)
         self.data = new_data_cleaned
 
-    def get_metrics(self, ticker, current_price, current_mnt, current_rank_plus, current_upvotes, current_surge):
+    def get_metrics(self, ticker, current_price, current_mnt, current_rank_plus, current_upvotes, current_surge, current_gi):
         """
         Calculates momentum metrics and builds history strings for tooltips.
         Passes 'current_surge' to ensure tooltip history matches the live SRG column.
@@ -172,6 +172,8 @@ class HistoryTracker:
             current_entry['upvotes'] = int(current_upvotes)
             current_entry['price'] = float(current_price)
             current_entry['surge'] = int(current_surge)  # Syncs real-time SRG to history
+            if current_gi is not None and not pd.isna(current_gi):
+                current_entry['gi'] = round(float(current_gi), 1)
         except (ValueError, TypeError) as e:
             print(f"{C_YELLOW}[!] Warning: Could not sync live data for {ticker}: {e}{C_RESET}") 
 
@@ -211,7 +213,7 @@ class HistoryTracker:
             'rank': [], 'rank_plus': [], 'price': [], 'ment': [], 'upvotes': [], 
             'accel': [], 'velocity': [], 'streak': [], 'upv_plus': [],
             'eff': [], 'conv': [], 'surge': [], 'mnt_perc': [], 'squeeze': [], 'master_score': [],
-            'spy_rs': []
+            'spy_rs': [], 'gi': []
         }
 
         def get_val(entry, key, signed=False, is_perc=False, decimals=2):
@@ -239,7 +241,8 @@ class HistoryTracker:
             history_map['mnt_perc'].append(get_val(entry, 'mnt_perc', is_perc=True))
             history_map['squeeze'].append(get_val(entry, 'squeeze'))
             history_map['master_score'].append(get_val(entry, 'master_score', decimals=1))
-            history_map['spy_rs'].append(get_val(entry, 'spy_rs')) 
+            history_map['spy_rs'].append(get_val(entry, 'spy_rs'))
+            history_map['gi'].append(get_val(entry, 'gi', decimals=1))
     
         final_histories = {k: " → ".join(v) for k, v in history_map.items()}
 
@@ -1010,7 +1013,8 @@ def filter_and_process(stocks):
                 row['MENT'], 
                 row['Rank+'], 
                 row['Upvotes'], 
-                row['Surge']
+                row['Surge'],
+                row['GI']
             )
             
             df.at[index, 'Accel'] = m.get('accel', 0)
@@ -1036,6 +1040,7 @@ def filter_and_process(stocks):
             df.at[index, 'h_squeeze'] = histories.get('squeeze', '')
             df.at[index, 'h_heat'] = histories.get('master_score', '')
             df.at[index, 'h_spy_rs'] = histories.get('spy_rs', '')
+            df.at[index, 'h_gi'] = histories.get('gi', '')
 
         # --- STEP 3: FLUSH TO DISK ---
         tracker.flush()
@@ -1417,13 +1422,14 @@ def export_interactive_html(df):
 
             # --- GI SCORE LOGIC ---
             gi_raw = row.get('GI', None)
+            gi_hist = row.get('h_gi', '')
             try:
                 gi_val = float(gi_raw)
             except (TypeError, ValueError):
                 gi_val = None
 
             if gi_val is None or np.isnan(gi_val):
-                export_df.at[index, 'GI'] = '<span style="color:#666; font-weight:600;">--</span>'
+                export_df.at[index, 'GI'] = with_hist('<span style="color:#666; font-weight:600;">--</span>', gi_hist)
             else:
                 if gi_val >= 75:
                     gi_clr = "#00d97e"
@@ -1435,7 +1441,7 @@ def export_interactive_html(df):
                     gi_clr = "#ff9f4f"
                 else:
                     gi_clr = "#ff4d5a"
-                export_df.at[index, 'GI'] = color_span(f"{gi_val:.1f}", gi_clr)
+                export_df.at[index, 'GI'] = with_hist(color_span(f"{gi_val:.1f}", gi_clr), gi_hist)
 
             # --- RSI COLOR LOGIC ---
             rsi_raw = float(row.get('RSI', 0))
