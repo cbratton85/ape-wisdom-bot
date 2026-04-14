@@ -33,7 +33,7 @@ GEKKO_SCREENER_FILE = os.path.join(SCRIPT_DIR, "gekko_screener.csv")
 CACHE_EXPIRY_SECONDS = 43200  # 12 hours
 RETENTION_DAYS = 3
 DELISTED_RETRY_DAYS = 1
-TOOLTIP_HISTORY_DAYS = 12
+TOOLTIP_HISTORY_DAYS = 24
 
 # ------------------------------------------------------------------------------
 # Filters & Algorithm Tuning
