@@ -36708,5 +36708,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "KNSA": {
+        "ticker": "KNSA",
+        "name": "Kiniksa Pharmaceuticals Interna",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 3544353280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "RSSS": {
+        "ticker": "RSSS",
+        "name": "Research Solutions, Inc",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 76998808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ROIV": {
+        "ticker": "ROIV",
+        "name": "Roivant Sciences Ltd.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 21009405952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "KEN": {
+        "ticker": "KEN",
+        "name": "Kenon Holdings Ltd.",
+        "meta": "Utilities - Independent Power Producers",
+        "type": "EQUITY",
+        "mcap": 4260903424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
