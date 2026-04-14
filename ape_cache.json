@@ -36598,5 +36598,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "SNAL": {
+        "ticker": "SNAL",
+        "name": "Snail, Inc.",
+        "meta": "Electronic Gaming & Multimedia",
+        "type": "EQUITY",
+        "mcap": 14243301,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ROM": {
+        "ticker": "ROM",
+        "name": "ProShares Ultra Technology",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
