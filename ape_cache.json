@@ -36748,5 +36748,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VECO": {
+        "ticker": "VECO",
+        "name": "Veeco Instruments Inc.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 2459164672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BIP": {
+        "ticker": "BIP",
+        "name": "Brookfield Infrastructure Partn",
+        "meta": "Utilities - Diversified",
+        "type": "EQUITY",
+        "mcap": 17307232256,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TYD": {
+        "ticker": "TYD",
+        "name": "Direxion Daily 10-Yr Treasury B",
+        "meta": "Trading--Leveraged Debt",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }

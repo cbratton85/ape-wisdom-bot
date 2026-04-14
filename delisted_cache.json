@@ -39,11 +39,6 @@
         "last_checked": "2026-04-11",
         "reason": "No Price Data"
     },
-    "CO": {
-        "delisted": true,
-        "last_checked": "2026-04-12",
-        "reason": "No Price Data"
-    },
     "OG": {
         "delisted": true,
         "last_checked": "2026-04-12",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "ELP": {
+        "delisted": true,
+        "last_checked": "2026-04-14",
+        "reason": "No Price Data"
+    },
+    "CO": {
         "delisted": true,
         "last_checked": "2026-04-14",
         "reason": "No Price Data"
