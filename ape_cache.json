@@ -36648,5 +36648,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "CATO": {
+        "ticker": "CATO",
+        "name": "Cato Corporation (The)",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 58060908,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BCI": {
+        "ticker": "BCI",
+        "name": "abrdn Bloomberg All Commodity S",
+        "meta": "Commodities Broad Basket",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
