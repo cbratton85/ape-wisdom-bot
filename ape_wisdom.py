@@ -33,7 +33,7 @@ GEKKO_SCREENER_FILE = os.path.join(SCRIPT_DIR, "gekko_screener.csv")
 CACHE_EXPIRY_SECONDS = 43200  # 12 hours
 RETENTION_DAYS = 3
 DELISTED_RETRY_DAYS = 1
-TOOLTIP_HISTORY_DAYS = 36
+TOOLTIP_HISTORY_DAYS = 24
 
 # ------------------------------------------------------------------------------
 # Filters & Algorithm Tuning
@@ -1121,14 +1121,9 @@ def export_interactive_html(df):
         # 1. Use class="d-tooltip" for custom CSS styling (Instant, Black Box)
         # 2. tabindex="0" ensures it works on Mobile taps
         def with_hist(val_str, history_str):
-            if not history_str or history_str == "New" or history_str == "":
+            if not history_str or history_str == "New" or history_str == "": 
                 return val_str
-
-            row_size = 12
-            parts = history_str.split(" → ")
-            rows = [" → ".join(parts[i:i + row_size]) for i in range(0, len(parts), row_size)]
-            safe_hist = "&#10;".join(rows).replace('"', '&quot;')
-
+            safe_hist = history_str.replace('"', '&quot;')
             return f'<span class="d-tooltip" data-tooltip="{safe_hist}" tabindex="0">{val_str}</span>'
 
         for c in ['Accel', 'Velocity', 'Rolling', 'Squeeze', 'Upvotes', 'Rank+', 'Surge', 'Mnt%', 'Master_Score', 'z_Upvotes', 'z_Surge', 'z_Squeeze']:
