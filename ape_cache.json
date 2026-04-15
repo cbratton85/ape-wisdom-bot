@@ -36808,5 +36808,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HSCS": {
+        "ticker": "HSCS",
+        "name": "HeartSciences Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 6305706,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "NPWR": {
+        "ticker": "NPWR",
+        "name": "NET Power Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 139311632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
