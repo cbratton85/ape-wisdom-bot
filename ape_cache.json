@@ -36828,5 +36828,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TRV": {
+        "ticker": "TRV",
+        "name": "The Travelers Companies, Inc.",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 64726487040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EFAV": {
+        "ticker": "EFAV",
+        "name": "iShares MSCI EAFE Min Vol Facto",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "PRME": {
+        "ticker": "PRME",
+        "name": "Prime Medicine, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 684292736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
