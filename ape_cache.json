@@ -36778,5 +36778,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ARRY": {
+        "ticker": "ARRY",
+        "name": "Array Technologies, Inc.",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 1146301568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
