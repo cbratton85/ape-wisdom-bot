@@ -134,17 +134,22 @@
         "last_checked": "2026-04-14",
         "reason": "No Price Data"
     },
-    "MOM": {
-        "delisted": true,
-        "last_checked": "2026-04-14",
-        "reason": "No Price Data"
-    },
     "OG": {
         "delisted": true,
         "last_checked": "2026-04-15",
         "reason": "No Price Data"
     },
     "HEAR": {
+        "delisted": true,
+        "last_checked": "2026-04-15",
+        "reason": "No Price Data"
+    },
+    "MOM": {
+        "delisted": true,
+        "last_checked": "2026-04-15",
+        "reason": "No Price Data"
+    },
+    "KIND": {
         "delisted": true,
         "last_checked": "2026-04-15",
         "reason": "No Price Data"
