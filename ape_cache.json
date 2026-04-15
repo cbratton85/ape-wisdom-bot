@@ -36798,5 +36798,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "UHT": {
+        "ticker": "UHT",
+        "name": "Universal Health Realty Income ",
+        "meta": "REIT - Healthcare Facilities",
+        "type": "EQUITY",
+        "mcap": 593418496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
