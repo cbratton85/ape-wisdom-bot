@@ -36788,5 +36788,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "FSMD": {
+        "ticker": "FSMD",
+        "name": "Fidelity Small-Mid Multifactor ",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
