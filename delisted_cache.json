@@ -34,11 +34,6 @@
         "last_checked": "2026-04-11",
         "reason": "No Price Data"
     },
-    "OG": {
-        "delisted": true,
-        "last_checked": "2026-04-12",
-        "reason": "No Price Data"
-    },
     "WOW": {
         "delisted": true,
         "last_checked": "2026-04-12",
@@ -147,6 +142,16 @@
     "MOM": {
         "delisted": true,
         "last_checked": "2026-04-14",
+        "reason": "No Price Data"
+    },
+    "OG": {
+        "delisted": true,
+        "last_checked": "2026-04-15",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
+        "delisted": true,
+        "last_checked": "2026-04-15",
         "reason": "No Price Data"
     }
 }
