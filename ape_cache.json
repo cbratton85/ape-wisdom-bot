@@ -36858,5 +36858,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CTNT": {
+        "ticker": "CTNT",
+        "name": "Cheetah Net Supply Chain Servic",
+        "meta": "Integrated Freight & Logistics",
+        "type": "EQUITY",
+        "mcap": 6293468,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
