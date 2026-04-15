@@ -34,11 +34,6 @@
         "last_checked": "2026-04-12",
         "reason": "No Price Data"
     },
-    "FI": {
-        "delisted": true,
-        "last_checked": "2026-04-12",
-        "reason": "No Price Data"
-    },
     "SQ": {
         "delisted": true,
         "last_checked": "2026-04-12",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "NH": {
+        "delisted": true,
+        "last_checked": "2026-04-15",
+        "reason": "No Price Data"
+    },
+    "FI": {
         "delisted": true,
         "last_checked": "2026-04-15",
         "reason": "No Price Data"
