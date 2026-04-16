@@ -36888,5 +36888,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "AUGO": {
+        "ticker": "AUGO",
+        "name": "Aura Minerals Inc.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 8867832832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "KRRO": {
+        "ticker": "KRRO",
+        "name": "Korro Bio, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 192974000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "TMHC": {
+        "ticker": "TMHC",
+        "name": "Taylor Morrison Home Corporatio",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 5565591040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CHU": {
+        "ticker": "CHU",
+        "name": "CHU",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "OLMA": {
+        "ticker": "OLMA",
+        "name": "Olema Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1422401536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SOLV": {
+        "ticker": "SOLV",
+        "name": "Solventum Corporation",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 11974401024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
