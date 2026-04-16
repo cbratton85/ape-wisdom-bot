@@ -94,11 +94,6 @@
         "last_checked": "2026-04-15",
         "reason": "No Price Data"
     },
-    "MOM": {
-        "delisted": true,
-        "last_checked": "2026-04-15",
-        "reason": "No Price Data"
-    },
     "KIND": {
         "delisted": true,
         "last_checked": "2026-04-15",
@@ -147,6 +142,11 @@
     "DDG": {
         "delisted": true,
         "last_checked": "2026-04-15",
+        "reason": "No Price Data"
+    },
+    "MOM": {
+        "delisted": true,
+        "last_checked": "2026-04-16",
         "reason": "No Price Data"
     }
 }
