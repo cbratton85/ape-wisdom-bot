@@ -36948,5 +36948,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FITB": {
+        "ticker": "FITB",
+        "name": "Fifth Third Bancorp",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 45029146624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
