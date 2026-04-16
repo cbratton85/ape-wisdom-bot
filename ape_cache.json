@@ -36878,5 +36878,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "WSHP": {
+        "ticker": "WSHP",
+        "name": "WeShop Holdings Limited",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 89957088,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
