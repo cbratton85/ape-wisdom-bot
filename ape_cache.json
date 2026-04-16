@@ -36988,5 +36988,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "FRT": {
+        "ticker": "FRT",
+        "name": "Federal Realty Investment Trust",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 9564393472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
