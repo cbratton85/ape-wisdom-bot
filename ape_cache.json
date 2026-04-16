@@ -36868,5 +36868,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "AXS": {
+        "ticker": "AXS",
+        "name": "Axis Capital Holdings Limited",
+        "meta": "Insurance - Specialty",
+        "type": "EQUITY",
+        "mcap": 7464906240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
