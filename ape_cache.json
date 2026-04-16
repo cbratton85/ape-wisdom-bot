@@ -36978,5 +36978,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AMER": {
+        "ticker": "AMER",
+        "name": "Emles Made in America ETF",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
