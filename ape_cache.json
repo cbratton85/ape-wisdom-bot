@@ -36958,5 +36958,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "MRSH": {
+        "ticker": "MRSH",
+        "name": "Marsh",
+        "meta": "Insurance Brokers",
+        "type": "EQUITY",
+        "mcap": 88529387520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BWIN": {
+        "ticker": "BWIN",
+        "name": "The Baldwin Insurance Group, In",
+        "meta": "Insurance Brokers",
+        "type": "EQUITY",
+        "mcap": 2330010624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
