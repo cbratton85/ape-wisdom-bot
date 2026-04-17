@@ -37058,5 +37058,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "APPS": {
+        "ticker": "APPS",
+        "name": "Digital Turbine, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 464012736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "RPAY": {
+        "ticker": "RPAY",
+        "name": "Repay Holdings Corporation",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 278109504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
