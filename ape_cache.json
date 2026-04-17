@@ -37078,5 +37078,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "BATRA": {
+        "ticker": "BATRA",
+        "name": "Atlanta Braves Holdings, Inc. -",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 3338557696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
