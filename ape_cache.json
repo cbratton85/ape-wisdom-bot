@@ -37038,5 +37038,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "EUDV": {
+        "ticker": "EUDV",
+        "name": "ProShares MSCI Europe Dividend ",
+        "meta": "Europe Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "WINC": {
+        "ticker": "WINC",
+        "name": "Western Asset Short Duration In",
+        "meta": "Short-Term Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
