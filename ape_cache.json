@@ -37098,5 +37098,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "OQB"
+    },
+    "AMPL": {
+        "ticker": "AMPL",
+        "name": "Amplitude, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 934080960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
