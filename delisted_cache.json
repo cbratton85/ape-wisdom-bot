@@ -109,11 +109,6 @@
         "last_checked": "2026-04-16",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-04-16",
-        "reason": "No Price Data"
-    },
     "NNA": {
         "delisted": true,
         "last_checked": "2026-04-16",
@@ -165,6 +160,16 @@
         "reason": "No Price Data"
     },
     "NTP": {
+        "delisted": true,
+        "last_checked": "2026-04-17",
+        "reason": "No Price Data"
+    },
+    "BABY": {
+        "delisted": true,
+        "last_checked": "2026-04-17",
+        "reason": "No Price Data"
+    },
+    "OLD": {
         "delisted": true,
         "last_checked": "2026-04-17",
         "reason": "No Price Data"
