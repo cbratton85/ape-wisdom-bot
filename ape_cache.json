@@ -37028,5 +37028,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MNY": {
+        "ticker": "MNY",
+        "name": "MoneyHero Limited",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 57096012,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
