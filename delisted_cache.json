@@ -154,17 +154,22 @@
         "last_checked": "2026-04-16",
         "reason": "No Price Data"
     },
-    "SNP": {
-        "delisted": true,
-        "last_checked": "2026-04-16",
-        "reason": "No Price Data"
-    },
     "CHU": {
         "delisted": true,
         "last_checked": "2026-04-17",
         "reason": "No Price Data"
     },
     "LAZY": {
+        "delisted": true,
+        "last_checked": "2026-04-17",
+        "reason": "No Price Data"
+    },
+    "SNP": {
+        "delisted": true,
+        "last_checked": "2026-04-17",
+        "reason": "No Price Data"
+    },
+    "NTP": {
         "delisted": true,
         "last_checked": "2026-04-17",
         "reason": "No Price Data"
