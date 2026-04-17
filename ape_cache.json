@@ -37088,5 +37088,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "RBOT": {
+        "ticker": "RBOT",
+        "name": "Vicarious Surgical Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 4986952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OQB"
     }
 }
