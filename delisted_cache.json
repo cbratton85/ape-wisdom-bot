@@ -4,11 +4,6 @@
         "last_checked": "2026-04-11",
         "reason": "No Price Data"
     },
-    "DS": {
-        "delisted": true,
-        "last_checked": "2026-04-11",
-        "reason": "No Price Data"
-    },
     "REV": {
         "delisted": true,
         "last_checked": "2026-04-11",
@@ -175,6 +170,11 @@
         "reason": "No Price Data"
     },
     "KIND": {
+        "delisted": true,
+        "last_checked": "2026-04-17",
+        "reason": "No Price Data"
+    },
+    "DS": {
         "delisted": true,
         "last_checked": "2026-04-17",
         "reason": "No Price Data"
