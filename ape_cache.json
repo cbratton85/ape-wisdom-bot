@@ -37158,5 +37158,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "MXL": {
+        "ticker": "MXL",
+        "name": "MaxLinear, Inc",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 2351932672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
