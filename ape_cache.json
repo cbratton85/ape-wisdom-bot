@@ -37108,5 +37108,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "LZM": {
+        "ticker": "LZM",
+        "name": "Lifezone Metals Limited",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 465586496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "BBUS": {
+        "ticker": "BBUS",
+        "name": "JPMorgan BetaBuilders U.S. Equi",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "ICG": {
+        "ticker": "ICG",
+        "name": "Intchains Group Limited",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 101996032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
