@@ -37148,5 +37148,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SMDD": {
+        "ticker": "SMDD",
+        "name": "UltraPro Short MidCap400",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
