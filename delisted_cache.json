@@ -4,11 +4,6 @@
         "last_checked": "2026-04-11",
         "reason": "No Price Data"
     },
-    "REV": {
-        "delisted": true,
-        "last_checked": "2026-04-11",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-04-13",
@@ -177,6 +172,11 @@
     "DS": {
         "delisted": true,
         "last_checked": "2026-04-17",
+        "reason": "No Price Data"
+    },
+    "REV": {
+        "delisted": true,
+        "last_checked": "2026-04-18",
         "reason": "No Price Data"
     }
 }
