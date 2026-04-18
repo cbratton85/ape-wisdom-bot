@@ -37198,5 +37198,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "EDU": {
+        "ticker": "EDU",
+        "name": "New Oriental Education & Techno",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 9874359296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LNW": {
+        "ticker": "LNW",
+        "name": "Light & Wonder, Inc.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
