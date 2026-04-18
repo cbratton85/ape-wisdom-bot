@@ -37168,5 +37168,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "DGS": {
+        "ticker": "DGS",
+        "name": "WisdomTree Emerging Market Smal",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "IGIB": {
+        "ticker": "IGIB",
+        "name": "iShares 5-10 Year Investment Gr",
+        "meta": "Corporate Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "CNMD": {
+        "ticker": "CNMD",
+        "name": "CONMED Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 1204974592,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
