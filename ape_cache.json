@@ -37248,5 +37248,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "EML": {
+        "ticker": "EML",
+        "name": "Eastern Company (The)",
+        "meta": "Tools & Accessories",
+        "type": "EQUITY",
+        "mcap": 136119824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
