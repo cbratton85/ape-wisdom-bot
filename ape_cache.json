@@ -37228,5 +37228,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SHM": {
+        "ticker": "SHM",
+        "name": "State Street SPDR Nuveen ICE Sh",
+        "meta": "Muni National Short",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
