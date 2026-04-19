@@ -37218,5 +37218,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ZION": {
+        "ticker": "ZION",
+        "name": "Zions Bancorporation N.A.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 9277066240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
