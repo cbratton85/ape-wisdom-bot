@@ -69,11 +69,6 @@
         "last_checked": "2026-04-17",
         "reason": "No Price Data"
     },
-    "DS": {
-        "delisted": true,
-        "last_checked": "2026-04-17",
-        "reason": "No Price Data"
-    },
     "NH": {
         "delisted": true,
         "last_checked": "2026-04-18",
@@ -145,6 +140,16 @@
         "reason": "No Price Data"
     },
     "RENT": {
+        "delisted": true,
+        "last_checked": "2026-04-19",
+        "reason": "No Price Data"
+    },
+    "DS": {
+        "delisted": true,
+        "last_checked": "2026-04-19",
+        "reason": "No Price Data"
+    },
+    "CN": {
         "delisted": true,
         "last_checked": "2026-04-19",
         "reason": "No Price Data"
