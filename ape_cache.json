@@ -37238,5 +37238,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "EWBC": {
+        "ticker": "EWBC",
+        "name": "East West Bancorp, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 16242227200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
