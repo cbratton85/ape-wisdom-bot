@@ -19,11 +19,6 @@
         "last_checked": "2026-04-14",
         "reason": "No Price Data"
     },
-    "HEAR": {
-        "delisted": true,
-        "last_checked": "2026-04-15",
-        "reason": "No Price Data"
-    },
     "AUD": {
         "delisted": true,
         "last_checked": "2026-04-15",
@@ -145,6 +140,11 @@
         "reason": "No Price Data"
     },
     "FI": {
+        "delisted": true,
+        "last_checked": "2026-04-19",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
         "delisted": true,
         "last_checked": "2026-04-19",
         "reason": "No Price Data"
