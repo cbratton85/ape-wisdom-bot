@@ -37288,5 +37288,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "BRF": {
+        "ticker": "BRF",
+        "name": "VanEck Brazil Small-Cap ETF",
+        "meta": "Latin America Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "OGEN": {
+        "ticker": "OGEN",
+        "name": "Oragenics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3100260,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "GDTC": {
+        "ticker": "GDTC",
+        "name": "CytoMed Therapeutics Limited",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 11951163,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "VTEX": {
+        "ticker": "VTEX",
+        "name": "VTEX",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 728443968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VIVS": {
+        "ticker": "VIVS",
+        "name": "VivoSim Labs, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 4660175,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
