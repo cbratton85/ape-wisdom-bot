@@ -37428,5 +37428,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ERAS": {
+        "ticker": "ERAS",
+        "name": "Erasca, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 6747458048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LFVN": {
+        "ticker": "LFVN",
+        "name": "Lifevantage Corporation",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 65688480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
