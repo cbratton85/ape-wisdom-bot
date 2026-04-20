@@ -37258,5 +37258,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "SDP": {
+        "ticker": "SDP",
+        "name": "ProShares UltraShort Utilities",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "OTIS": {
+        "ticker": "OTIS",
+        "name": "Otis Worldwide Corporation",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 31734560768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AXSM": {
+        "ticker": "AXSM",
+        "name": "Axsome Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 9667460096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
