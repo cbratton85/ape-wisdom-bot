@@ -37418,5 +37418,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "KINS": {
+        "ticker": "KINS",
+        "name": "Kingstone Companies, Inc",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 266518352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
