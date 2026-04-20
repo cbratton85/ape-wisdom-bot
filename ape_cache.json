@@ -37358,5 +37358,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "QTRX": {
+        "ticker": "QTRX",
+        "name": "Quanterix Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 160300016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ANAB": {
+        "ticker": "ANAB",
+        "name": "AnaptysBio, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1458111616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VANI": {
+        "ticker": "VANI",
+        "name": "Vivani Medical, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 110693928,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SBGSF": {
+        "ticker": "SBGSF",
+        "name": "Schneider Electric SE",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 186975780864,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
+    },
+    "IGC": {
+        "ticker": "IGC",
+        "name": "IGC Pharma, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 30122926,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "AOSL": {
+        "ticker": "AOSL",
+        "name": "Alpha and Omega Semiconductor L",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 1194897152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
