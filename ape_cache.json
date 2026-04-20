@@ -37338,5 +37338,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "CVM": {
+        "ticker": "CVM",
+        "name": "Cel-Sci Corporation",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 41866936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "MTRX": {
+        "ticker": "MTRX",
+        "name": "Matrix Service Company",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 342885248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
