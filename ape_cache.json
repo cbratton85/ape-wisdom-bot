@@ -37478,5 +37478,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "HIG": {
+        "ticker": "HIG",
+        "name": "The Hartford Insurance Group, I",
+        "meta": "Insurance - Diversified",
+        "type": "EQUITY",
+        "mcap": 38328438784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ADTN": {
+        "ticker": "ADTN",
+        "name": "ADTRAN Holdings, Inc.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 1422709376,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
