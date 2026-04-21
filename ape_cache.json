@@ -37558,5 +37558,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TELO": {
+        "ticker": "TELO",
+        "name": "Telomir Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 49508600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
