@@ -37498,5 +37498,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "LSF": {
+        "ticker": "LSF",
+        "name": "Laird Superfood, Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 34305184,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "AHL": {
+        "ticker": "AHL",
+        "name": "Aspen Insurance Holdings Limite",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 3443938816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
