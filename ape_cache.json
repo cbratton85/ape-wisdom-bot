@@ -37538,5 +37538,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "BETZ": {
+        "ticker": "BETZ",
+        "name": "Roundhill Sports Betting & iGam",
+        "meta": "Consumer Cyclical",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "PKE": {
+        "ticker": "PKE",
+        "name": "Park Aerospace Corp.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 703579968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
