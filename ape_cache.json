@@ -37448,5 +37448,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "XMHQ": {
+        "ticker": "XMHQ",
+        "name": "Invesco S&P MidCap Quality ETF",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "LVS": {
+        "ticker": "LVS",
+        "name": "Las Vegas Sands Corp.",
+        "meta": "Resorts & Casinos",
+        "type": "EQUITY",
+        "mcap": 38426574848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MUB": {
+        "ticker": "MUB",
+        "name": "iShares National Muni Bond ETF",
+        "meta": "Muni National Interm",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
