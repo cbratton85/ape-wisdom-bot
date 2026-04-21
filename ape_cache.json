@@ -37518,5 +37518,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CRUS": {
+        "ticker": "CRUS",
+        "name": "Cirrus Logic, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 8634852352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "MLSS": {
+        "ticker": "MLSS",
+        "name": "Milestone Scientific, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 25165736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
