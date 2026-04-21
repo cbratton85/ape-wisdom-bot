@@ -37568,5 +37568,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "KSCP": {
+        "ticker": "KSCP",
+        "name": "Knightscope, Inc.",
+        "meta": "Security & Protection Services",
+        "type": "EQUITY",
+        "mcap": 52919468,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
