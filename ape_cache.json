@@ -37618,5 +37618,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "UCL": {
+        "ticker": "UCL",
+        "name": "uCloudlink Group Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 49519920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "USVM": {
+        "ticker": "USVM",
+        "name": "VictoryShares US Small Mid Cap ",
+        "meta": "Small Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ROSC": {
+        "ticker": "ROSC",
+        "name": "Hartford Multifactor Small Cap ",
+        "meta": "Small Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
