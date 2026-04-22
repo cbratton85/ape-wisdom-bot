@@ -37578,5 +37578,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "EWV": {
+        "ticker": "EWV",
+        "name": "ProShares UltraShort MSCI Japan",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }

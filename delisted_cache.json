@@ -139,11 +139,6 @@
         "last_checked": "2026-04-21",
         "reason": "No Price Data"
     },
-    "SAVE": {
-        "delisted": true,
-        "last_checked": "2026-04-21",
-        "reason": "No Price Data"
-    },
     "MOM": {
         "delisted": true,
         "last_checked": "2026-04-21",
@@ -157,6 +152,11 @@
     "SQ": {
         "delisted": true,
         "last_checked": "2026-04-21",
+        "reason": "No Price Data"
+    },
+    "SAVE": {
+        "delisted": true,
+        "last_checked": "2026-04-22",
         "reason": "No Price Data"
     }
 }
