@@ -37678,5 +37678,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "XOS": {
+        "ticker": "XOS",
+        "name": "Xos, Inc.",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 20841384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "IMCC": {
+        "ticker": "IMCC",
+        "name": "IM Cannabis Corp.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 2613796,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
