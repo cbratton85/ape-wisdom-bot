@@ -37588,5 +37588,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "OXLC": {
+        "ticker": "OXLC",
+        "name": "Oxford Lane Capital Corp.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 974047936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "FERG": {
+        "ticker": "FERG",
+        "name": "Ferguson Enterprises Inc.",
+        "meta": "Industrial Distribution",
+        "type": "EQUITY",
+        "mcap": 52807471104,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SMID": {
+        "ticker": "SMID",
+        "name": "Smith-Midland Corporation",
+        "meta": "Building Materials",
+        "type": "EQUITY",
+        "mcap": 174479504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
