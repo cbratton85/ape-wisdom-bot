@@ -37658,5 +37658,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "USAI": {
+        "ticker": "USAI",
+        "name": "Pacer American Energy Infrastru",
+        "meta": "Energy Limited Partnership",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "RFL": {
+        "ticker": "RFL",
+        "name": "Rafael Holdings, Inc.",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 66575536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
