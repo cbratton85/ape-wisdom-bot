@@ -37758,5 +37758,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ACHC": {
+        "ticker": "ACHC",
+        "name": "Acadia Healthcare Company, Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 2582851840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
