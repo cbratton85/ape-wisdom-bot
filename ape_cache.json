@@ -37728,5 +37728,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "BIOA": {
+        "ticker": "BIOA",
+        "name": "BioAge Labs, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 814812288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "KMDA": {
+        "ticker": "KMDA",
+        "name": "Kamada Ltd.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 483341856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LECO": {
+        "ticker": "LECO",
+        "name": "Lincoln Electric Holdings, Inc.",
+        "meta": "Tools & Accessories",
+        "type": "EQUITY",
+        "mcap": 14179068928,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
