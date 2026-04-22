@@ -37648,5 +37648,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "CHD": {
+        "ticker": "CHD",
+        "name": "Church & Dwight Company, Inc.",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 22079127552,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
