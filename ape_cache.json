@@ -37698,5 +37698,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "TRUL": {
+        "ticker": "TRUL",
+        "name": "TRULITE INC",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 212013,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
+    },
+    "INBK": {
+        "ticker": "INBK",
+        "name": "First Internet Bancorp",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 201965088,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "MCRI": {
+        "ticker": "MCRI",
+        "name": "Monarch Casino & Resort, Inc.",
+        "meta": "Resorts & Casinos",
+        "type": "EQUITY",
+        "mcap": 2043310336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
