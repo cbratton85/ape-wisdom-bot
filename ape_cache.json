@@ -37908,5 +37908,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ARCB": {
+        "ticker": "ARCB",
+        "name": "ArcBest Corporation",
+        "meta": "Trucking",
+        "type": "EQUITY",
+        "mcap": 2673043968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
