@@ -37868,5 +37868,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "PPC": {
+        "ticker": "PPC",
+        "name": "Pilgrim's Pride Corporation",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 8008452096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
