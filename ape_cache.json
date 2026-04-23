@@ -37878,5 +37878,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "BMR": {
+        "ticker": "BMR",
+        "name": "Beamr Imaging Ltd.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 29817320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
