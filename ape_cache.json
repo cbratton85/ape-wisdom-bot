@@ -37818,5 +37818,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "PMEC": {
+        "ticker": "PMEC",
+        "name": "Primech Holdings Ltd.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 27587958,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "REFI": {
+        "ticker": "REFI",
+        "name": "Chicago Atlantic Real Estate Fi",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 251487648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "PLPC": {
+        "ticker": "PLPC",
+        "name": "Preformed Line Products Company",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 1666595968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
