@@ -37768,5 +37768,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "OGI": {
+        "ticker": "OGI",
+        "name": "Organigram Global Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 223611776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PASG": {
+        "ticker": "PASG",
+        "name": "Passage Bio, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 19663882,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "INDV": {
+        "ticker": "INDV",
+        "name": "Indivior Pharmaceuticals, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 4175928320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
