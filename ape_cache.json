@@ -37848,5 +37848,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "RHI": {
+        "ticker": "RHI",
+        "name": "Robert Half Inc.",
+        "meta": "Staffing & Employment Services",
+        "type": "EQUITY",
+        "mcap": 2786173952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "APPF": {
+        "ticker": "APPF",
+        "name": "AppFolio, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 5445455872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
