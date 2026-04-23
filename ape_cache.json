@@ -37798,5 +37798,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "EPV": {
+        "ticker": "EPV",
+        "name": "ProShares UltraShort FTSE Europ",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
