@@ -29,11 +29,6 @@
         "last_checked": "2026-04-20",
         "reason": "No Price Data"
     },
-    "CN": {
-        "delisted": true,
-        "last_checked": "2026-04-20",
-        "reason": "No Price Data"
-    },
     "AUD": {
         "delisted": true,
         "last_checked": "2026-04-20",
@@ -145,6 +140,11 @@
         "reason": "No Price Data"
     },
     "RESP": {
+        "delisted": true,
+        "last_checked": "2026-04-23",
+        "reason": "No Price Data"
+    },
+    "CN": {
         "delisted": true,
         "last_checked": "2026-04-23",
         "reason": "No Price Data"

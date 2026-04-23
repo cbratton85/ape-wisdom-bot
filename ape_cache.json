@@ -37888,5 +37888,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "MKL": {
+        "ticker": "MKL",
+        "name": "Markel Group Inc.",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 24214657024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SKYW": {
+        "ticker": "SKYW",
+        "name": "SkyWest, Inc.",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 3726330624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
