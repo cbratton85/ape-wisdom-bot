@@ -37808,5 +37808,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "IRBO": {
+        "ticker": "IRBO",
+        "name": "iShares Robotics and Artificial",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
