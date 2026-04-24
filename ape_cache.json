@@ -37918,5 +37918,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CINF": {
+        "ticker": "CINF",
+        "name": "Cincinnati Financial Corporatio",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 26183305216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CABO": {
+        "ticker": "CABO",
+        "name": "Cable One, Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 651053056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
