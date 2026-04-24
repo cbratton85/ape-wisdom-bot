@@ -37988,5 +37988,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "TTGT": {
+        "ticker": "TTGT",
+        "name": "TechTarget, Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 405923232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CXM": {
+        "ticker": "CXM",
+        "name": "Sprinklr, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 1230634240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ABCB": {
+        "ticker": "ABCB",
+        "name": "Ameris Bancorp",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 5737328128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AVO": {
+        "ticker": "AVO",
+        "name": "Mission Produce, Inc.",
+        "meta": "Food Distribution",
+        "type": "EQUITY",
+        "mcap": 980513728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
