@@ -119,11 +119,6 @@
         "last_checked": "2026-04-23",
         "reason": "No Price Data"
     },
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-04-23",
-        "reason": "No Price Data"
-    },
     "DDG": {
         "delisted": true,
         "last_checked": "2026-04-23",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "PLPC": {
+        "delisted": true,
+        "last_checked": "2026-04-24",
+        "reason": "No Price Data"
+    },
+    "WOW": {
         "delisted": true,
         "last_checked": "2026-04-24",
         "reason": "No Price Data"

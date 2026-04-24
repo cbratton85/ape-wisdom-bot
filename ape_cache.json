@@ -37938,5 +37938,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PHG": {
+        "ticker": "PHG",
+        "name": "Koninklijke Philips N.V. NY Reg",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 26284113920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CARZ": {
+        "ticker": "CARZ",
+        "name": "First Trust S-Network Future Ve",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
