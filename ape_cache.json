@@ -38028,5 +38028,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "HRTX": {
+        "ticker": "HRTX",
+        "name": "Heron Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 224359200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "IHRT": {
+        "ticker": "IHRT",
+        "name": "iHeartMedia, Inc.",
+        "meta": "Broadcasting",
+        "type": "EQUITY",
+        "mcap": 818931904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
