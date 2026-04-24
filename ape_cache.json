@@ -37958,5 +37958,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "LIF": {
+        "ticker": "LIF",
+        "name": "Life360, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 3535753472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "WIMI": {
+        "ticker": "WIMI",
+        "name": "WiMi Hologram Cloud Inc.",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 22891442,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
