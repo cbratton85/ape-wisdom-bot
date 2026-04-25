@@ -38098,5 +38098,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "UGP": {
+        "ticker": "UGP",
+        "name": "Ultrapar Participacoes S.A. (Ne",
+        "meta": "Oil & Gas Refining & Marketing",
+        "type": "EQUITY",
+        "mcap": 6208998912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GBTC": {
+        "ticker": "GBTC",
+        "name": "Grayscale Bitcoin Trust (BTC)",
+        "meta": "Digital Assets",
+        "type": "ETF",
+        "mcap": 41798373376,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
