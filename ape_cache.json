@@ -38088,5 +38088,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "AIRR": {
+        "ticker": "AIRR",
+        "name": "First Trust RBA American Indust",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
