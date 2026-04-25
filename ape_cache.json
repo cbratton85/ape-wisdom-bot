@@ -38068,5 +38068,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "POWI": {
+        "ticker": "POWI",
+        "name": "Power Integrations, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 4096470784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
