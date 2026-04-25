@@ -38118,5 +38118,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "VEGI": {
+        "ticker": "VEGI",
+        "name": "iShares MSCI Agriculture Produc",
+        "meta": "Natural Resources",
+        "type": "ETF",
+        "mcap": 46903500,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
