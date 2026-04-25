@@ -38078,5 +38078,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "GXC": {
+        "ticker": "GXC",
+        "name": "State Street SPDR S&P China ETF",
+        "meta": "China Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
