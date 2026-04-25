@@ -39,11 +39,6 @@
         "last_checked": "2026-04-21",
         "reason": "No Price Data"
     },
-    "TGIF": {
-        "delisted": true,
-        "last_checked": "2026-04-21",
-        "reason": "No Price Data"
-    },
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-04-21",
@@ -147,6 +142,16 @@
     "CO": {
         "delisted": true,
         "last_checked": "2026-04-24",
+        "reason": "No Price Data"
+    },
+    "WIZ": {
+        "delisted": true,
+        "last_checked": "2026-04-25",
+        "reason": "No Price Data"
+    },
+    "TGIF": {
+        "delisted": true,
+        "last_checked": "2026-04-25",
         "reason": "No Price Data"
     }
 }

@@ -38048,5 +38048,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "EXAS": {
+        "ticker": "EXAS",
+        "name": "Exact Sciences Corporation",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 20026083328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "WIZ": {
+        "ticker": "WIZ",
+        "name": "Merlyn.AI Bull-Rider Bear-Fight",
+        "meta": "Moderate Allocation",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
