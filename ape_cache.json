@@ -38128,5 +38128,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ARHS": {
+        "ticker": "ARHS",
+        "name": "Arhaus, Inc.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 1086032000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
