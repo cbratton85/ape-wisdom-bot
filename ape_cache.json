@@ -38158,5 +38158,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "TRAK": {
+        "ticker": "TRAK",
+        "name": "ReposiTrak, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 147811696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
