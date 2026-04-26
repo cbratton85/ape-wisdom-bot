@@ -38188,5 +38188,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "VFMO": {
+        "ticker": "VFMO",
+        "name": "Vanguard U.S. Momentum Factor E",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "JQUA": {
+        "ticker": "JQUA",
+        "name": "JPMorgan U.S. Quality Factor ET",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
