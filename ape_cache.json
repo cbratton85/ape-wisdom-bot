@@ -38148,5 +38148,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "IGN": {
+        "ticker": "IGN",
+        "name": "iShares North American Tech-Mul",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 137965712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
