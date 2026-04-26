@@ -38168,5 +38168,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "GPL": {
+        "ticker": "GPL",
+        "name": "GPL",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "OPK": {
+        "ticker": "OPK",
+        "name": "Opko Health, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 944272640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
