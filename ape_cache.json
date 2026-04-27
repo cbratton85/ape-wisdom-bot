@@ -38208,5 +38208,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "HAE": {
+        "ticker": "HAE",
+        "name": "Haemonetics Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 2785028096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RCEL": {
+        "ticker": "RCEL",
+        "name": "Avita Medical, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 137264032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "BTX": {
+        "ticker": "BTX",
+        "name": "BlackRock Technology and Privat",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 926679744,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "INTT": {
+        "ticker": "INTT",
+        "name": "inTest Corporation",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 229418192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "MRCY": {
+        "ticker": "MRCY",
+        "name": "Mercury Systems Inc",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 4680541184,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
