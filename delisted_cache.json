@@ -4,11 +4,6 @@
         "last_checked": "2026-04-17",
         "reason": "No Price Data"
     },
-    "ABB": {
-        "delisted": true,
-        "last_checked": "2026-04-21",
-        "reason": "No Price Data"
-    },
     "RE": {
         "delisted": true,
         "last_checked": "2026-04-22",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "FI": {
+        "delisted": true,
+        "last_checked": "2026-04-27",
+        "reason": "No Price Data"
+    },
+    "ABB": {
         "delisted": true,
         "last_checked": "2026-04-27",
         "reason": "No Price Data"
