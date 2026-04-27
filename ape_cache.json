@@ -38288,5 +38288,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "RMAX": {
+        "ticker": "RMAX",
+        "name": "RE/MAX Holdings, Inc.",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 160938208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

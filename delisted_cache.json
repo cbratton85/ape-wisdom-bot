@@ -79,11 +79,6 @@
         "last_checked": "2026-04-26",
         "reason": "No Price Data"
     },
-    "GPL": {
-        "delisted": true,
-        "last_checked": "2026-04-26",
-        "reason": "No Price Data"
-    },
     "CN": {
         "delisted": true,
         "last_checked": "2026-04-26",
@@ -110,6 +105,16 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-04-27",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
+        "delisted": true,
+        "last_checked": "2026-04-27",
+        "reason": "No Price Data"
+    },
+    "GPL": {
         "delisted": true,
         "last_checked": "2026-04-27",
         "reason": "No Price Data"
