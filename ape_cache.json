@@ -38308,5 +38308,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "CMPX": {
+        "ticker": "CMPX",
+        "name": "Compass Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 317855168,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "INCY": {
+        "ticker": "INCY",
+        "name": "Incyte Corporation",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 19211864064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
