@@ -38298,5 +38298,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CVKD": {
+        "ticker": "CVKD",
+        "name": "Cadrenal Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 14000573,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
