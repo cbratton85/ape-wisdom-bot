@@ -38258,5 +38258,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "DDI": {
+        "ticker": "DDI",
+        "name": "DoubleDown Interactive Co., Ltd",
+        "meta": "Electronic Gaming & Multimedia",
+        "type": "EQUITY",
+        "mcap": 443503264,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "YCL": {
+        "ticker": "YCL",
+        "name": "ProShares Ultra Yen",
+        "meta": "Trading--Miscellaneous",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "IMVT": {
+        "ticker": "IMVT",
+        "name": "Immunovant, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 5816949760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
