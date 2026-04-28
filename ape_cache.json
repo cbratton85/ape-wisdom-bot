@@ -38438,5 +38438,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CINT": {
+        "ticker": "CINT",
+        "name": "CI&T Inc",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 547407744,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
