@@ -38418,5 +38418,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "MINT": {
+        "ticker": "MINT",
+        "name": "PIMCO Enhanced Short Maturity A",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
