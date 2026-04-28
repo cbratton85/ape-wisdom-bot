@@ -38538,5 +38538,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "RYAAY": {
+        "ticker": "RYAAY",
+        "name": "Ryanair Holdings plc",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 28376483840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
