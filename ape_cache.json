@@ -38428,5 +38428,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "TVTX": {
+        "ticker": "TVTX",
+        "name": "Travere Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3812102144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
