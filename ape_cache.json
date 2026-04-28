@@ -38358,5 +38358,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TRTX": {
+        "ticker": "TRTX",
+        "name": "TPG RE Finance Trust, Inc.",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 661308224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "XENE": {
+        "ticker": "XENE",
+        "name": "Xenon Pharmaceuticals Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 5243839488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "EMNT": {
+        "ticker": "EMNT",
+        "name": "PIMCO Enhanced Short Maturity A",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "RFG": {
+        "ticker": "RFG",
+        "name": "Invesco S&P Midcap 400 Pure Gro",
+        "meta": "Mid-Cap Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "VLY": {
+        "ticker": "VLY",
+        "name": "Valley National Bancorp",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 7520471040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FBCG": {
+        "ticker": "FBCG",
+        "name": "Fidelity Blue Chip Growth ETF",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
