@@ -38328,5 +38328,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SLYV": {
+        "ticker": "SLYV",
+        "name": "State Street SPDR S&P 600 Small",
+        "meta": "Small Value",
+        "type": "ETF",
+        "mcap": 3606616320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CPF": {
+        "ticker": "CPF",
+        "name": "Central Pacific Financial Corp ",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 916029056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "QTWO": {
+        "ticker": "QTWO",
+        "name": "Q2 Holdings, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 3030356480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
