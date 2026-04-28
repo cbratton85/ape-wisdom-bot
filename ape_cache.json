@@ -38448,5 +38448,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BIIB": {
+        "ticker": "BIIB",
+        "name": "Biogen Inc.",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 26912579584,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SHYG": {
+        "ticker": "SHYG",
+        "name": "iShares 0-5 Year High Yield Cor",
+        "meta": "High Yield Bond",
+        "type": "ETF",
+        "mcap": 2761452032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "USRT": {
+        "ticker": "USRT",
+        "name": "iShares Core U.S. REIT ETF",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "EXPO": {
+        "ticker": "EXPO",
+        "name": "Exponent, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 3273470208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GPRE": {
+        "ticker": "GPRE",
+        "name": "Green Plains, Inc.",
+        "meta": "Chemicals",
+        "type": "EQUITY",
+        "mcap": 1139473408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BLRX": {
+        "ticker": "BLRX",
+        "name": "BioLineRx Ltd.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 12392728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
