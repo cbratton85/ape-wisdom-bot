@@ -38508,5 +38508,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "WMG": {
+        "ticker": "WMG",
+        "name": "Warner Music Group Corp.",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 14907760640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LIVN": {
+        "ticker": "LIVN",
+        "name": "LivaNova PLC",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 3351942656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "EXTR": {
+        "ticker": "EXTR",
+        "name": "Extreme Networks, Inc.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 2289295360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }

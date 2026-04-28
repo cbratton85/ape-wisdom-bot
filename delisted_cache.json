@@ -84,11 +84,6 @@
         "last_checked": "2026-04-27",
         "reason": "No Price Data"
     },
-    "ABB": {
-        "delisted": true,
-        "last_checked": "2026-04-27",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-04-27",
@@ -125,6 +120,26 @@
         "reason": "No Price Data"
     },
     "OLD": {
+        "delisted": true,
+        "last_checked": "2026-04-28",
+        "reason": "No Price Data"
+    },
+    "ABB": {
+        "delisted": true,
+        "last_checked": "2026-04-28",
+        "reason": "No Price Data"
+    },
+    "DBS": {
+        "delisted": true,
+        "last_checked": "2026-04-28",
+        "reason": "No Price Data"
+    },
+    "AUD": {
+        "delisted": true,
+        "last_checked": "2026-04-28",
+        "reason": "No Price Data"
+    },
+    "SOI": {
         "delisted": true,
         "last_checked": "2026-04-28",
         "reason": "No Price Data"
