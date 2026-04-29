@@ -38548,5 +38548,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "KFRC": {
+        "ticker": "KFRC",
+        "name": "Kforce, Inc.",
+        "meta": "Staffing & Employment Services",
+        "type": "EQUITY",
+        "mcap": 838411840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
