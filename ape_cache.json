@@ -38588,5 +38588,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "OPFI": {
+        "ticker": "OPFI",
+        "name": "OppFi Inc.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 796862144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
