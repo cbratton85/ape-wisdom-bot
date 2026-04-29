@@ -38608,5 +38608,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "EUDA": {
+        "ticker": "EUDA",
+        "name": "Euda Health Holdings Limited",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 27019306,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
