@@ -38618,5 +38618,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "FPA": {
+        "ticker": "FPA",
+        "name": "First Trust Asia Pacific Ex-Jap",
+        "meta": "Pacific/Asia ex-Japan Stk",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "OPER": {
+        "ticker": "OPER",
+        "name": "ETF ClearShares Ultra-Short Mat",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "WWD": {
+        "ticker": "WWD",
+        "name": "Woodward, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 21520136192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
