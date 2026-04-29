@@ -38568,5 +38568,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "VATE": {
+        "ticker": "VATE",
+        "name": "INNOVATE Corp.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 168366928,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
