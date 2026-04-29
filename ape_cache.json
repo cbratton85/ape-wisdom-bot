@@ -38578,5 +38578,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "WALD": {
+        "ticker": "WALD",
+        "name": "Waldencast plc",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 99940096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
