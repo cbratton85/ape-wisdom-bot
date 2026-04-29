@@ -38648,5 +38648,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PHAT": {
+        "ticker": "PHAT",
+        "name": "Phathom Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 935686784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
