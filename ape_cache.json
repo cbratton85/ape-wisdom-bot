@@ -38598,5 +38598,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "NBIX": {
+        "ticker": "NBIX",
+        "name": "Neurocrine Biosciences, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 13167188992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
