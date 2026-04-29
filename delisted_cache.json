@@ -49,11 +49,6 @@
         "last_checked": "2026-04-27",
         "reason": "No Price Data"
     },
-    "RESP": {
-        "delisted": true,
-        "last_checked": "2026-04-27",
-        "reason": "No Price Data"
-    },
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-04-27",
@@ -137,6 +132,16 @@
     "KIND": {
         "delisted": true,
         "last_checked": "2026-04-28",
+        "reason": "No Price Data"
+    },
+    "CBD": {
+        "delisted": true,
+        "last_checked": "2026-04-29",
+        "reason": "No Price Data"
+    },
+    "RESP": {
+        "delisted": true,
+        "last_checked": "2026-04-29",
         "reason": "No Price Data"
     }
 }

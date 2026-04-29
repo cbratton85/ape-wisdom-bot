@@ -38558,5 +38558,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ABEO": {
+        "ticker": "ABEO",
+        "name": "Abeona Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 304890336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
