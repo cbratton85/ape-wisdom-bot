@@ -38718,5 +38718,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "PHDG": {
+        "ticker": "PHDG",
+        "name": "Invesco S&P 500 Downside Hedged",
+        "meta": "Equity Hedged",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "MICC": {
+        "ticker": "MICC",
+        "name": "The Magnum Ice Cream Company N.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 8003653120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
