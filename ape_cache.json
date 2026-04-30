@@ -38778,5 +38778,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "SWKS": {
+        "ticker": "SWKS",
+        "name": "Skyworks Solutions, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 10056142848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "HGBL": {
+        "ticker": "HGBL",
+        "name": "Heritage Global Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 47595928,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "USIO": {
+        "ticker": "USIO",
+        "name": "Usio, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 33017990,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
