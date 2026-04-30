@@ -38878,5 +38878,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "ANL": {
+        "ticker": "ANL",
+        "name": "Adlai Nortye Ltd.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 918958592,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
