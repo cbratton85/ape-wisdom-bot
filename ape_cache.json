@@ -38808,5 +38808,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CAMP": {
+        "ticker": "CAMP",
+        "name": "CAMP4 THERAPEUTICS CORPORATION",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 218088352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
