@@ -38738,5 +38738,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MANU": {
+        "ticker": "MANU",
+        "name": "Manchester",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 3240041728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PAYO": {
+        "ticker": "PAYO",
+        "name": "Payoneer Global Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1681499136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SLAB": {
+        "ticker": "SLAB",
+        "name": "Silicon Laboratories, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 7154146304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SKYY": {
+        "ticker": "SKYY",
+        "name": "First Trust Cloud Computing ETF",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
