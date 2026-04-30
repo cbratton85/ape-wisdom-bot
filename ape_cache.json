@@ -38818,5 +38818,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "NTDOF": {
+        "ticker": "NTDOF",
+        "name": "Nintendo Co., Ltd.",
+        "meta": "Electronic Gaming & Multimedia",
+        "type": "EQUITY",
+        "mcap": 55785390080,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
+    },
+    "PAGP": {
+        "ticker": "PAGP",
+        "name": "Plains GP Holdings, L.P.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 5696860672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "COHU": {
+        "ticker": "COHU",
+        "name": "Cohu, Inc.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 2233323264,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CLBT": {
+        "ticker": "CLBT",
+        "name": "Cellebrite DI Ltd.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 3242717696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
