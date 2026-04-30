@@ -38858,5 +38858,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "QLC": {
+        "ticker": "QLC",
+        "name": "FlexShares US Quality Large Cap",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "OVL": {
+        "ticker": "OVL",
+        "name": "Overlay Shares Large Cap Equity",
+        "meta": "Derivative Income",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
