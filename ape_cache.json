@@ -38658,5 +38658,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CERT": {
+        "ticker": "CERT",
+        "name": "Certara, Inc.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 904617920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TTEK": {
+        "ticker": "TTEK",
+        "name": "Tetra Tech, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 8311937536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TMQ": {
+        "ticker": "TMQ",
+        "name": "Trilogy Metals Inc.",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 686731648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "UMH": {
+        "ticker": "UMH",
+        "name": "UMH Properties, Inc.",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 1314257024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VTSI": {
+        "ticker": "VTSI",
+        "name": "VirTra, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 49737096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "PSNL": {
+        "ticker": "PSNL",
+        "name": "Personalis, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 527576640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
