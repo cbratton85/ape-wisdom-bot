@@ -38978,5 +38978,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "NTRA": {
+        "ticker": "NTRA",
+        "name": "Natera, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 29595125760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ARKO": {
+        "ticker": "ARKO",
+        "name": "ARKO Corp.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 757240000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
