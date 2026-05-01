@@ -14,11 +14,6 @@
         "last_checked": "2026-04-25",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-04-27",
-        "reason": "No Price Data"
-    },
     "APE": {
         "delisted": true,
         "last_checked": "2026-04-27",
@@ -145,6 +140,16 @@
         "reason": "No Price Data"
     },
     "BOSS": {
+        "delisted": true,
+        "last_checked": "2026-05-01",
+        "reason": "No Price Data"
+    },
+    "ARMR": {
+        "delisted": true,
+        "last_checked": "2026-05-01",
+        "reason": "No Price Data"
+    },
+    "BABY": {
         "delisted": true,
         "last_checked": "2026-05-01",
         "reason": "No Price Data"
