@@ -38888,5 +38888,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "PDFS": {
+        "ticker": "PDFS",
+        "name": "PDF Solutions, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 1710459392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ARL": {
+        "ticker": "ARL",
+        "name": "American Realty Investors, Inc.",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 228712928,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
