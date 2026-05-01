@@ -38938,5 +38938,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ESPR": {
+        "ticker": "ESPR",
+        "name": "Esperion Therapeutics, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 514809760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
