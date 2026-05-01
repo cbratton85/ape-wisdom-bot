@@ -38998,5 +38998,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "NWS": {
+        "ticker": "NWS",
+        "name": "News Corporation",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 16658020352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
