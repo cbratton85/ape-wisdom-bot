@@ -38958,5 +38958,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CERS": {
+        "ticker": "CERS",
+        "name": "Cerus Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 532340288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
