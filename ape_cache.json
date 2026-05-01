@@ -38948,5 +38948,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "TPR": {
+        "ticker": "TPR",
+        "name": "Tapestry, Inc.",
+        "meta": "Luxury Goods",
+        "type": "EQUITY",
+        "mcap": 29682399232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
