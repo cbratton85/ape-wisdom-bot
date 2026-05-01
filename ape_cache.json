@@ -38968,5 +38968,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "PHIN": {
+        "ticker": "PHIN",
+        "name": "PHINIA Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 2835864320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
