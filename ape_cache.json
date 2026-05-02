@@ -39058,5 +39058,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "ALRM": {
+        "ticker": "ALRM",
+        "name": "Alarm.com Holdings, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2328178944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
