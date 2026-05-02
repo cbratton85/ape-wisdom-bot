@@ -39068,5 +39068,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "GDEN": {
+        "ticker": "GDEN",
+        "name": "Golden Entertainment, Inc.",
+        "meta": "Resorts & Casinos",
+        "type": "EQUITY",
+        "mcap": 753686080,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
