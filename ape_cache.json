@@ -39008,5 +39008,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CIB": {
+        "ticker": "CIB",
+        "name": "Grupo Cibest S.A.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 15906260992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
