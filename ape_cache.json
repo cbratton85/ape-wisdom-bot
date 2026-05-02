@@ -39018,5 +39018,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ATON": {
+        "ticker": "ATON",
+        "name": "AlphaTON Capital Corp.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 7499068,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
