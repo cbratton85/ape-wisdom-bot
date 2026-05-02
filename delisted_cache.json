@@ -119,17 +119,22 @@
         "last_checked": "2026-05-02",
         "reason": "No Price Data"
     },
-    "REV": {
-        "delisted": true,
-        "last_checked": "2026-05-02",
-        "reason": "No Price Data"
-    },
     "CN": {
         "delisted": true,
         "last_checked": "2026-05-02",
         "reason": "No Price Data"
     },
     "WOW": {
+        "delisted": true,
+        "last_checked": "2026-05-02",
+        "reason": "No Price Data"
+    },
+    "CEA": {
+        "delisted": true,
+        "last_checked": "2026-05-02",
+        "reason": "No Price Data"
+    },
+    "REV": {
         "delisted": true,
         "last_checked": "2026-05-02",
         "reason": "No Price Data"

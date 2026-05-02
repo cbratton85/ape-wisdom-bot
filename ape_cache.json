@@ -39028,5 +39028,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "HIBL": {
+        "ticker": "HIBL",
+        "name": "Direxion Daily S&P 500 High Bet",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SHOO": {
+        "ticker": "SHOO",
+        "name": "Steven Madden, Ltd.",
+        "meta": "Footwear & Accessories",
+        "type": "EQUITY",
+        "mcap": 2739012608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
