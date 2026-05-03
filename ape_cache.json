@@ -39118,5 +39118,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "IXN": {
+        "ticker": "IXN",
+        "name": "iShares Global Tech ETF",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "EXI": {
+        "ticker": "EXI",
+        "name": "iShares Global Industrials ETF",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
