@@ -39098,5 +39098,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "FHI": {
+        "ticker": "FHI",
+        "name": "Federated Hermes, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 4104442624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LTH": {
+        "ticker": "LTH",
+        "name": "Life Time Group Holdings, Inc.",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 5939477504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
