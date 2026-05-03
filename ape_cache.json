@@ -39078,5 +39078,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "PFFR": {
+        "ticker": "PFFR",
+        "name": "InfraCap REIT Preferred ETF",
+        "meta": "Preferred Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }

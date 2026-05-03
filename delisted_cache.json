@@ -89,11 +89,6 @@
         "last_checked": "2026-05-02",
         "reason": "No Price Data"
     },
-    "DTC": {
-        "delisted": true,
-        "last_checked": "2026-05-02",
-        "reason": "No Price Data"
-    },
     "CO": {
         "delisted": true,
         "last_checked": "2026-05-02",
@@ -122,6 +117,16 @@
     "ABB": {
         "delisted": true,
         "last_checked": "2026-05-02",
+        "reason": "No Price Data"
+    },
+    "DTC": {
+        "delisted": true,
+        "last_checked": "2026-05-03",
+        "reason": "No Price Data"
+    },
+    "SLAM": {
+        "delisted": true,
+        "last_checked": "2026-05-03",
         "reason": "No Price Data"
     }
 }
