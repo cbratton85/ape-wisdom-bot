@@ -39138,5 +39138,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "OMH": {
+        "ticker": "OMH",
+        "name": "Ohmyhome Limited",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 26559112,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "OXSQ": {
+        "ticker": "OXSQ",
+        "name": "Oxford Square Capital Corp.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 179422720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
