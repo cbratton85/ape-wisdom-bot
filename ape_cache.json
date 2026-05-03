@@ -39088,5 +39088,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "REZ": {
+        "ticker": "REZ",
+        "name": "iShares Residential and Multise",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
