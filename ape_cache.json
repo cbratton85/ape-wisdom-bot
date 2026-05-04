@@ -39178,5 +39178,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HYFM": {
+        "ticker": "HYFM",
+        "name": "Hydrofarm Holdings Group, Inc.",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 5812827,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ATMU": {
+        "ticker": "ATMU",
+        "name": "Atmus Filtration Technologies I",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 4149367808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NSP": {
+        "ticker": "NSP",
+        "name": "Insperity, Inc.",
+        "meta": "Staffing & Employment Services",
+        "type": "EQUITY",
+        "mcap": 1156907904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
