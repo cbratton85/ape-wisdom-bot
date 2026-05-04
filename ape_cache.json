@@ -39218,5 +39218,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AESI": {
+        "ticker": "AESI",
+        "name": "Atlas Energy Solutions Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 2216391936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
