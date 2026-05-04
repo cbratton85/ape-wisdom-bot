@@ -39158,5 +39158,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "GBTG": {
+        "ticker": "GBTG",
+        "name": "Global Business Travel Group, I",
+        "meta": "Travel Services",
+        "type": "EQUITY",
+        "mcap": 4882789376,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DOUG": {
+        "ticker": "DOUG",
+        "name": "Douglas Elliman Inc.",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 172024016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
