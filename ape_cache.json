@@ -39208,5 +39208,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "QDEL": {
+        "ticker": "QDEL",
+        "name": "QuidelOrtho Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 838595520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
