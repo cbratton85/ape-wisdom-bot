@@ -84,11 +84,6 @@
         "last_checked": "2026-05-04",
         "reason": "No Price Data"
     },
-    "CBD": {
-        "delisted": true,
-        "last_checked": "2026-05-04",
-        "reason": "No Price Data"
-    },
     "FI": {
         "delisted": true,
         "last_checked": "2026-05-04",
@@ -110,6 +105,11 @@
         "reason": "No Price Data"
     },
     "WOW": {
+        "delisted": true,
+        "last_checked": "2026-05-05",
+        "reason": "No Price Data"
+    },
+    "CBD": {
         "delisted": true,
         "last_checked": "2026-05-05",
         "reason": "No Price Data"
