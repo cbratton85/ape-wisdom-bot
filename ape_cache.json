@@ -39278,5 +39278,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "FSTR": {
+        "ticker": "FSTR",
+        "name": "L.B. Foster Company",
+        "meta": "Railroads",
+        "type": "EQUITY",
+        "mcap": 402342016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ALSN": {
+        "ticker": "ALSN",
+        "name": "Allison Transmission Holdings, ",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 10482619392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CHAU": {
+        "ticker": "CHAU",
+        "name": "Direxion Daily CSI 300 China A ",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "FEAM": {
+        "ticker": "FEAM",
+        "name": "5E Advanced Materials, Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 73060912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BRCC": {
+        "ticker": "BRCC",
+        "name": "BRC Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 158412816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
