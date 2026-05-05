@@ -39328,5 +39328,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "NGNE": {
+        "ticker": "NGNE",
+        "name": "Neurogene Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 446455328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "IWD": {
+        "ticker": "IWD",
+        "name": "iShares Russell 1000 Value ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "VONV": {
+        "ticker": "VONV",
+        "name": "Vanguard Russell 1000 Value ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
