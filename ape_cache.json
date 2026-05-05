@@ -39358,5 +39358,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "IQV": {
+        "ticker": "IQV",
+        "name": "IQVIA Holdings, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 29614979072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
