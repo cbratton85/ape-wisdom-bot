@@ -39228,5 +39228,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SITE": {
+        "ticker": "SITE",
+        "name": "SiteOne Landscape Supply, Inc.",
+        "meta": "Industrial Distribution",
+        "type": "EQUITY",
+        "mcap": 5557580800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ARWR": {
+        "ticker": "ARWR",
+        "name": "Arrowhead Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 10697059328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TGTX": {
+        "ticker": "TGTX",
+        "name": "TG Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 5466216960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SPRY": {
+        "ticker": "SPRY",
+        "name": "ARS Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 876824768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "DUSL": {
+        "ticker": "DUSL",
+        "name": "Direxion Daily Industrials Bull",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
