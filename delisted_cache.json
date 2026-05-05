@@ -104,17 +104,27 @@
         "last_checked": "2026-05-05",
         "reason": "No Price Data"
     },
-    "DIDI": {
-        "delisted": true,
-        "last_checked": "2026-05-05",
-        "reason": "No Price Data"
-    },
     "RE": {
         "delisted": true,
         "last_checked": "2026-05-05",
         "reason": "No Price Data"
     },
     "CBD": {
+        "delisted": true,
+        "last_checked": "2026-05-05",
+        "reason": "No Price Data"
+    },
+    "TGIF": {
+        "delisted": true,
+        "last_checked": "2026-05-05",
+        "reason": "No Price Data"
+    },
+    "DIDI": {
+        "delisted": true,
+        "last_checked": "2026-05-05",
+        "reason": "No Price Data"
+    },
+    "CMBT": {
         "delisted": true,
         "last_checked": "2026-05-05",
         "reason": "No Price Data"
