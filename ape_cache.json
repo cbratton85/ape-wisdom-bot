@@ -39508,5 +39508,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "FKU": {
+        "ticker": "FKU",
+        "name": "First Trust",
+        "meta": "Focused Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "HNRG": {
+        "ticker": "HNRG",
+        "name": "Hallador Energy Company",
+        "meta": "Thermal Coal",
+        "type": "EQUITY",
+        "mcap": 874268736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "PLMR": {
+        "ticker": "PLMR",
+        "name": "Palomar Holdings, Inc.",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 2936327424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
