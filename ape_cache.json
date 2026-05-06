@@ -39448,5 +39448,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "WKEY": {
+        "ticker": "WKEY",
+        "name": "WISeKey International Holding L",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 91481808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "GPGI": {
+        "ticker": "GPGI",
+        "name": "GPGI, Inc.",
+        "meta": "Metal Fabrication",
+        "type": "EQUITY",
+        "mcap": 5055176192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AAT": {
+        "ticker": "AAT",
+        "name": "American Assets Trust, Inc.",
+        "meta": "REIT - Diversified",
+        "type": "EQUITY",
+        "mcap": 1642209280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
