@@ -39478,5 +39478,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ANVS": {
+        "ticker": "ANVS",
+        "name": "Annovis Bio, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 81073672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "URTH": {
+        "ticker": "URTH",
+        "name": "iShares MSCI World ETF",
+        "meta": "Global Large-Stock Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
