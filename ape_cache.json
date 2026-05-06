@@ -39538,5 +39538,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "RYAM": {
+        "ticker": "RYAM",
+        "name": "Rayonier Advanced Materials Inc",
+        "meta": "Chemicals",
+        "type": "EQUITY",
+        "mcap": 661804800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
