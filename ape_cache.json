@@ -39498,5 +39498,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "WFCF": {
+        "ticker": "WFCF",
+        "name": "Where Food Comes From, Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 91678640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
