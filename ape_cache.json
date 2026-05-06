@@ -39398,5 +39398,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "EZGO": {
+        "ticker": "EZGO",
+        "name": "EZGO Technologies Ltd.",
+        "meta": "Recreational Vehicles",
+        "type": "EQUITY",
+        "mcap": 39681012,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CEFS": {
+        "ticker": "CEFS",
+        "name": "Saba Closed-End Funds ETF",
+        "meta": "Event Driven",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
