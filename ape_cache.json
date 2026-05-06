@@ -39418,5 +39418,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "HIPO": {
+        "ticker": "HIPO",
+        "name": "Hippo Holdings Inc.",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 742023616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ADEA": {
+        "ticker": "ADEA",
+        "name": "Adeia Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 3160037888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "KLC": {
+        "ticker": "KLC",
+        "name": "KinderCare Learning Companies, ",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 470160352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
