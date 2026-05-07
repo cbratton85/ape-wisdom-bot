@@ -39658,5 +39658,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SXC": {
+        "ticker": "SXC",
+        "name": "SunCoke Energy, Inc.",
+        "meta": "Coking Coal",
+        "type": "EQUITY",
+        "mcap": 621125440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
