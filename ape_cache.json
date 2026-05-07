@@ -39588,5 +39588,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ENGN": {
+        "ticker": "ENGN",
+        "name": "enGene Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 127279984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "LMNR": {
+        "ticker": "LMNR",
+        "name": "Limoneira Co",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 232854416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ATRA": {
+        "ticker": "ATRA",
+        "name": "Atara Biotherapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 59853192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ISPR": {
+        "ticker": "ISPR",
+        "name": "Ispire Technology Inc.",
+        "meta": "Tobacco",
+        "type": "EQUITY",
+        "mcap": 96246968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ALGM": {
+        "ticker": "ALGM",
+        "name": "Allegro MicroSystems, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 8918049792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
