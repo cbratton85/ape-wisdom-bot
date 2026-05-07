@@ -39548,5 +39548,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VSEC": {
+        "ticker": "VSEC",
+        "name": "VSE Corporation",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 5820132352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ERM": {
+        "ticker": "ERM",
+        "name": "EquityCompass Risk Manager ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "GAA": {
+        "ticker": "GAA",
+        "name": "Cambria Global Asset Allocation",
+        "meta": "Global Moderate Allocation",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
