@@ -39668,5 +39668,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HSIC": {
+        "ticker": "HSIC",
+        "name": "Henry Schein, Inc.",
+        "meta": "Medical Distribution",
+        "type": "EQUITY",
+        "mcap": 8031131648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
