@@ -39638,5 +39638,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "KTB": {
+        "ticker": "KTB",
+        "name": "Kontoor Brands, Inc.",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 4531713024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "WTTR": {
+        "ticker": "WTTR",
+        "name": "Select Water Solutions, Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 2307816960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
