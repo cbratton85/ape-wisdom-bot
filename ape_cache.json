@@ -39578,5 +39578,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "MOTO": {
+        "ticker": "MOTO",
+        "name": "Guinness Atkinson Smart Transpo",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
