@@ -39698,5 +39698,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "NATH": {
+        "ticker": "NATH",
+        "name": "Nathan's Famous, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 415500224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
