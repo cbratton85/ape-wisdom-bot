@@ -39678,5 +39678,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ENLT": {
+        "ticker": "ENLT",
+        "name": "Enlight Renewable Energy Ltd.",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 11856150528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
