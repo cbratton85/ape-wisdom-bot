@@ -39748,5 +39748,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NEGG": {
+        "ticker": "NEGG",
+        "name": "Newegg Commerce, Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 540370880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "NHC": {
+        "ticker": "NHC",
+        "name": "National HealthCare Corporation",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 2906804224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "SYNA": {
+        "ticker": "SYNA",
+        "name": "Synaptics Incorporated",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 4997747200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
