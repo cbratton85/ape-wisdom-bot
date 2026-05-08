@@ -39718,5 +39718,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "SACH": {
+        "ticker": "SACH",
+        "name": "Sachem Capital Corp.",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 52524056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "MRVI": {
+        "ticker": "MRVI",
+        "name": "Maravai LifeSciences Holdings, ",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1707841536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "FLYD": {
+        "ticker": "FLYD",
+        "name": "MicroSectors Travel -3x Inverse",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
