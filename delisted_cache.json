@@ -124,11 +124,6 @@
         "last_checked": "2026-05-07",
         "reason": "No Price Data"
     },
-    "CO": {
-        "delisted": true,
-        "last_checked": "2026-05-07",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-05-07",
@@ -167,6 +162,11 @@
     "APE": {
         "delisted": true,
         "last_checked": "2026-05-07",
+        "reason": "No Price Data"
+    },
+    "CO": {
+        "delisted": true,
+        "last_checked": "2026-05-08",
         "reason": "No Price Data"
     }
 }

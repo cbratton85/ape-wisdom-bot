@@ -39688,5 +39688,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PNTG": {
+        "ticker": "PNTG",
+        "name": "The Pennant Group, Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 1242244736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
