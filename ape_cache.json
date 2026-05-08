@@ -39798,5 +39798,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ORLA": {
+        "ticker": "ORLA",
+        "name": "Orla Mining Ltd.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 5196319744,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
