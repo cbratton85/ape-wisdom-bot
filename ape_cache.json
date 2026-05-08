@@ -39708,5 +39708,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "OABI": {
+        "ticker": "OABI",
+        "name": "OmniAb, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 213109696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
