@@ -39818,5 +39818,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "HUBG": {
+        "ticker": "HUBG",
+        "name": "Hub Group, Inc.",
+        "meta": "Integrated Freight & Logistics",
+        "type": "EQUITY",
+        "mcap": 2622262784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SEB": {
+        "ticker": "SEB",
+        "name": "Seaboard Corporation",
+        "meta": "Conglomerates",
+        "type": "EQUITY",
+        "mcap": 4348523520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }

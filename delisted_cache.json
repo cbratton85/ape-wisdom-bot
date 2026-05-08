@@ -14,11 +14,6 @@
         "last_checked": "2026-05-04",
         "reason": "No Price Data"
     },
-    "DDG": {
-        "delisted": true,
-        "last_checked": "2026-05-05",
-        "reason": "No Price Data"
-    },
     "FM": {
         "delisted": true,
         "last_checked": "2026-05-05",
@@ -175,6 +170,11 @@
         "reason": "No Price Data"
     },
     "PYR": {
+        "delisted": true,
+        "last_checked": "2026-05-08",
+        "reason": "No Price Data"
+    },
+    "DDG": {
         "delisted": true,
         "last_checked": "2026-05-08",
         "reason": "No Price Data"
