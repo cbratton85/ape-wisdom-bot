@@ -39778,5 +39778,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PCAR": {
+        "ticker": "PCAR",
+        "name": "PACCAR Inc.",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 60054523904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "EBND": {
+        "ticker": "EBND",
+        "name": "State Street SPDR Bloomberg Eme",
+        "meta": "Emerging-Markets Local-Currency Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
