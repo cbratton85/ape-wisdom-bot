@@ -39808,5 +39808,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "ARGX": {
+        "ticker": "ARGX",
+        "name": "argenx SE",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 48881688576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
