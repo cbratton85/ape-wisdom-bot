@@ -39838,5 +39838,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "APCX": {
+        "ticker": "APCX",
+        "name": "AppTech Payments Corp.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 16080063,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OQB"
     }
 }
