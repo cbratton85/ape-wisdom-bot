@@ -84,11 +84,6 @@
         "last_checked": "2026-05-08",
         "reason": "No Price Data"
     },
-    "HEAR": {
-        "delisted": true,
-        "last_checked": "2026-05-08",
-        "reason": "No Price Data"
-    },
     "QED": {
         "delisted": true,
         "last_checked": "2026-05-08",
@@ -170,6 +165,11 @@
         "reason": "No Price Data"
     },
     "KIND": {
+        "delisted": true,
+        "last_checked": "2026-05-09",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
         "delisted": true,
         "last_checked": "2026-05-09",
         "reason": "No Price Data"
