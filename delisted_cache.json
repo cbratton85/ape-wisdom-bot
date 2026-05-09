@@ -139,11 +139,6 @@
         "last_checked": "2026-05-08",
         "reason": "No Price Data"
     },
-    "ERM": {
-        "delisted": true,
-        "last_checked": "2026-05-08",
-        "reason": "No Price Data"
-    },
     "SNP": {
         "delisted": true,
         "last_checked": "2026-05-08",
@@ -175,6 +170,16 @@
         "reason": "No Price Data"
     },
     "SOL": {
+        "delisted": true,
+        "last_checked": "2026-05-09",
+        "reason": "No Price Data"
+    },
+    "SPI": {
+        "delisted": true,
+        "last_checked": "2026-05-09",
+        "reason": "No Price Data"
+    },
+    "ERM": {
         "delisted": true,
         "last_checked": "2026-05-09",
         "reason": "No Price Data"
