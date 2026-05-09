@@ -39858,5 +39858,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TOUR": {
+        "ticker": "TOUR",
+        "name": "Tuniu Corporation",
+        "meta": "Travel Services",
+        "type": "EQUITY",
+        "mcap": 65725732,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
