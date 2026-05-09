@@ -39848,5 +39848,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "OQB"
+    },
+    "UTL": {
+        "ticker": "UTL",
+        "name": "UNITIL Corporation",
+        "meta": "Utilities - Diversified",
+        "type": "EQUITY",
+        "mcap": 913033728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
