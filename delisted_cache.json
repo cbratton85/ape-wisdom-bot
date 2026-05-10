@@ -59,11 +59,6 @@
         "last_checked": "2026-05-07",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-05-07",
-        "reason": "No Price Data"
-    },
     "IRBT": {
         "delisted": true,
         "last_checked": "2026-05-08",
@@ -165,6 +160,11 @@
         "reason": "No Price Data"
     },
     "CN": {
+        "delisted": true,
+        "last_checked": "2026-05-10",
+        "reason": "No Price Data"
+    },
+    "BABY": {
         "delisted": true,
         "last_checked": "2026-05-10",
         "reason": "No Price Data"
