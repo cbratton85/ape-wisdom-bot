@@ -39878,5 +39878,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CNTX": {
+        "ticker": "CNTX",
+        "name": "Context Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 218672448,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
