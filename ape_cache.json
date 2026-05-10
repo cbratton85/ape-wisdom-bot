@@ -39868,5 +39868,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ACR": {
+        "ticker": "ACR",
+        "name": "ACRES Commercial Realty Corp.",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 164656400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
