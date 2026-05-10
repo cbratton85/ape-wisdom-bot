@@ -39908,5 +39908,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "VRM": {
+        "ticker": "VRM",
+        "name": "Vroom, Inc.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 64196084,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
