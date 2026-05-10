@@ -39918,5 +39918,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "BAX": {
+        "ticker": "BAX",
+        "name": "Baxter International Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 9291277312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
