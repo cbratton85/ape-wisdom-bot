@@ -39928,5 +39928,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CLFD": {
+        "ticker": "CLFD",
+        "name": "Clearfield, Inc.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 544121984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "FLTW": {
+        "ticker": "FLTW",
+        "name": "Franklin FTSE Taiwan ETF",
+        "meta": "Greater China Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
