@@ -39888,5 +39888,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "HIPS": {
+        "ticker": "HIPS",
+        "name": "GraniteShares HIPS US High Inco",
+        "meta": "Aggressive Allocation",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
