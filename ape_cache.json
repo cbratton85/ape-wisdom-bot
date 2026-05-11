@@ -39998,5 +39998,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "HROW": {
+        "ticker": "HROW",
+        "name": "Harrow, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 1417508096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "LII": {
+        "ticker": "LII",
+        "name": "Lennox International, Inc.",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 18149228544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FFIV": {
+        "ticker": "FFIV",
+        "name": "F5, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 20238712832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VSH": {
+        "ticker": "VSH",
+        "name": "Vishay Intertechnology, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 4770828800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ERY": {
+        "ticker": "ERY",
+        "name": "Direxion Daily Energy Bear 2X E",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
