@@ -39948,5 +39948,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "HRTG": {
+        "ticker": "HRTG",
+        "name": "Heritage Insurance Holdings, In",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 678429696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
