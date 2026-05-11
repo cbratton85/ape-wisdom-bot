@@ -39968,5 +39968,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ODYS": {
+        "ticker": "ODYS",
+        "name": "Odysight.ai Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 165992368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
