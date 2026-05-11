@@ -39958,5 +39958,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "AEMD": {
+        "ticker": "AEMD",
+        "name": "Aethlon Medical, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 3530497,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
