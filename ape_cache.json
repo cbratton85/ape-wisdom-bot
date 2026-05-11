@@ -40048,5 +40048,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "BZFD": {
+        "ticker": "BZFD",
+        "name": "BuzzFeed, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 27472508,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "RBB": {
+        "ticker": "RBB",
+        "name": "RBB Bancorp",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 401755008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DD": {
+        "ticker": "DD",
+        "name": "DuPont de Nemours, Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 20733820928,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
