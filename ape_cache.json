@@ -39978,5 +39978,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "NEOV": {
+        "ticker": "NEOV",
+        "name": "NeoVolta Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 120445864,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "VALU": {
+        "ticker": "VALU",
+        "name": "Value Line, Inc.",
+        "meta": "Financial Data & Stock Exchanges",
+        "type": "EQUITY",
+        "mcap": 328224768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
