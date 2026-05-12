@@ -40168,5 +40168,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CDNL": {
+        "ticker": "CDNL",
+        "name": "Cardinal Infrastructure Group I",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 887681216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "HLIT": {
+        "ticker": "HLIT",
+        "name": "Harmonic Inc.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 1476735488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
