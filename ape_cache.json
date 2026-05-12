@@ -40188,5 +40188,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "BWEN": {
+        "ticker": "BWEN",
+        "name": "Broadwind, Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 68457040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "IDX": {
+        "ticker": "IDX",
+        "name": "VanEck Indonesia Index ETF",
+        "meta": "Focused Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "MED": {
+        "ticker": "MED",
+        "name": "MEDIFAST INC",
+        "meta": "Personal Services",
+        "type": "EQUITY",
+        "mcap": 141212752,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
