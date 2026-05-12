@@ -40078,5 +40078,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "GSX": {
+        "ticker": "GSX",
+        "name": "Tradr 2X Long GS Daily ETF",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "TSN": {
+        "ticker": "TSN",
+        "name": "Tyson Foods, Inc.",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 23620841472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
