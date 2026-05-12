@@ -40218,5 +40218,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "STAA": {
+        "ticker": "STAA",
+        "name": "STAAR Surgical Company",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 1405274624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
