@@ -40098,5 +40098,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "GIL": {
+        "ticker": "GIL",
+        "name": "Gildan Activewear, Inc.",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 10681237504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PROK": {
+        "ticker": "PROK",
+        "name": "ProKidney Corp.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 534471168,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SUP": {
+        "ticker": "SUP",
+        "name": "SUP",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "ARKQ": {
+        "ticker": "ARKQ",
+        "name": "ARK Autonomous Technology & Rob",
+        "meta": "Mid-Cap Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "ASYS": {
+        "ticker": "ASYS",
+        "name": "Amtech Systems, Inc.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 328839328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "QUIK": {
+        "ticker": "QUIK",
+        "name": "QuickLogic Corporation",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 366635840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
