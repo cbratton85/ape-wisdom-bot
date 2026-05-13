@@ -40288,5 +40288,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TLSI": {
+        "ticker": "TLSI",
+        "name": "TriSalus Life Sciences, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 173495552,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
