@@ -84,11 +84,6 @@
         "last_checked": "2026-05-10",
         "reason": "No Price Data"
     },
-    "OG": {
-        "delisted": true,
-        "last_checked": "2026-05-10",
-        "reason": "No Price Data"
-    },
     "SPI": {
         "delisted": true,
         "last_checked": "2026-05-10",
@@ -170,6 +165,11 @@
         "reason": "No Price Data"
     },
     "VLD": {
+        "delisted": true,
+        "last_checked": "2026-05-13",
+        "reason": "No Price Data"
+    },
+    "OG": {
         "delisted": true,
         "last_checked": "2026-05-13",
         "reason": "No Price Data"
