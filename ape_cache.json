@@ -40228,5 +40228,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "REPX": {
+        "ticker": "REPX",
+        "name": "Riley Exploration Permian, Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 788647680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "IYC": {
+        "ticker": "IYC",
+        "name": "iShares U.S. Consumer Discretio",
+        "meta": "Consumer Cyclical",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "VLD": {
+        "ticker": "VLD",
+        "name": "VLD",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
