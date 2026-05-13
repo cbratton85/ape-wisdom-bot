@@ -40298,5 +40298,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "LEGR": {
+        "ticker": "LEGR",
+        "name": "First Trust Indxx Innovative Tr",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "MLN": {
+        "ticker": "MLN",
+        "name": "VanEck Long Muni ETF",
+        "meta": "Muni National Long",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }

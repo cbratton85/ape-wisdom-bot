@@ -144,11 +144,6 @@
         "last_checked": "2026-05-13",
         "reason": "No Price Data"
     },
-    "ZN": {
-        "delisted": true,
-        "last_checked": "2026-05-13",
-        "reason": "No Price Data"
-    },
     "VLD": {
         "delisted": true,
         "last_checked": "2026-05-13",
@@ -170,6 +165,16 @@
         "reason": "No Price Data"
     },
     "SUP": {
+        "delisted": true,
+        "last_checked": "2026-05-13",
+        "reason": "No Price Data"
+    },
+    "ZN": {
+        "delisted": true,
+        "last_checked": "2026-05-13",
+        "reason": "No Price Data"
+    },
+    "ZI": {
         "delisted": true,
         "last_checked": "2026-05-13",
         "reason": "No Price Data"
