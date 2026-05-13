@@ -114,11 +114,6 @@
         "last_checked": "2026-05-11",
         "reason": "No Price Data"
     },
-    "SUP": {
-        "delisted": true,
-        "last_checked": "2026-05-12",
-        "reason": "No Price Data"
-    },
     "FFIE": {
         "delisted": true,
         "last_checked": "2026-05-12",
@@ -170,6 +165,11 @@
         "reason": "No Price Data"
     },
     "MOM": {
+        "delisted": true,
+        "last_checked": "2026-05-13",
+        "reason": "No Price Data"
+    },
+    "SUP": {
         "delisted": true,
         "last_checked": "2026-05-13",
         "reason": "No Price Data"
