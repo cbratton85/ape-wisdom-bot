@@ -40258,5 +40258,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "YETI": {
+        "ticker": "YETI",
+        "name": "YETI Holdings, Inc.",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 2949024256,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DOX": {
+        "ticker": "DOX",
+        "name": "Amdocs Limited",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 6426291712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SXT": {
+        "ticker": "SXT",
+        "name": "Sensient Technologies Corporati",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 4962051072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
