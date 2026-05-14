@@ -40368,5 +40368,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CAI": {
+        "ticker": "CAI",
+        "name": "Caris Life Sciences, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 4263964672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BOOT": {
+        "ticker": "BOOT",
+        "name": "Boot Barn Holdings, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 4522909696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "HTHT": {
+        "ticker": "HTHT",
+        "name": "H World Group Limited",
+        "meta": "Lodging",
+        "type": "EQUITY",
+        "mcap": 13973881856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
