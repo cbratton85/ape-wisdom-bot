@@ -40318,5 +40318,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "MYPS": {
+        "ticker": "MYPS",
+        "name": "PLAYSTUDIOS, Inc.",
+        "meta": "Electronic Gaming & Multimedia",
+        "type": "EQUITY",
+        "mcap": 58979228,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "YNDX": {
+        "ticker": "YNDX",
+        "name": "YNDX",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "MDXH": {
+        "ticker": "MDXH",
+        "name": "MDxHealth SA",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 100160816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
