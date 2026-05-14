@@ -40348,5 +40348,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "WSBF": {
+        "ticker": "WSBF",
+        "name": "Waterstone Financial, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 331274048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "APLE": {
+        "ticker": "APLE",
+        "name": "Apple Hospitality REIT, Inc.",
+        "meta": "REIT - Hotel & Motel",
+        "type": "EQUITY",
+        "mcap": 3316749056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
