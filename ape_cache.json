@@ -40408,5 +40408,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "GOGO": {
+        "ticker": "GOGO",
+        "name": "Gogo Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 549068416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
