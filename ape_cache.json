@@ -40398,5 +40398,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "RWL": {
+        "ticker": "RWL",
+        "name": "Invesco S&P 500 Revenue ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
