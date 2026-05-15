@@ -40418,5 +40418,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "FHTX": {
+        "ticker": "FHTX",
+        "name": "Foghorn Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 237204240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
