@@ -14,11 +14,6 @@
         "last_checked": "2026-05-08",
         "reason": "No Price Data"
     },
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-05-08",
-        "reason": "No Price Data"
-    },
     "TGIF": {
         "delisted": true,
         "last_checked": "2026-05-08",
@@ -170,6 +165,11 @@
         "reason": "No Price Data"
     },
     "DBS": {
+        "delisted": true,
+        "last_checked": "2026-05-15",
+        "reason": "No Price Data"
+    },
+    "WOW": {
         "delisted": true,
         "last_checked": "2026-05-15",
         "reason": "No Price Data"

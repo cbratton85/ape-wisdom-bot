@@ -40488,5 +40488,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "RHS": {
+        "ticker": "RHS",
+        "name": "Invesco S&P 500 Equal Weight Co",
+        "meta": "Consumer Defensive",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
