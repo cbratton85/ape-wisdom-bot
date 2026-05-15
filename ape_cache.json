@@ -40498,5 +40498,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "BLV": {
+        "ticker": "BLV",
+        "name": "Vanguard Long-Term Bond ETF",
+        "meta": "Long-Term Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
