@@ -40428,5 +40428,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "MFC": {
+        "ticker": "MFC",
+        "name": "Manulife Financial Corporation",
+        "meta": "Insurance - Life",
+        "type": "EQUITY",
+        "mcap": 62650150912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LVHD": {
+        "ticker": "LVHD",
+        "name": "Franklin U.S. Low Volatility Hi",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "BRNS": {
+        "ticker": "BRNS",
+        "name": "Barinthus Biotherapeutics plc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 29043564,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "BTSG": {
+        "ticker": "BTSG",
+        "name": "BrightSpring Health Services, I",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 11324834816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
