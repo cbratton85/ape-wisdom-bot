@@ -74,11 +74,6 @@
         "last_checked": "2026-05-12",
         "reason": "No Price Data"
     },
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-05-12",
-        "reason": "No Price Data"
-    },
     "ROLL": {
         "delisted": true,
         "last_checked": "2026-05-13",
@@ -160,6 +155,11 @@
         "reason": "No Price Data"
     },
     "AHH": {
+        "delisted": true,
+        "last_checked": "2026-05-15",
+        "reason": "No Price Data"
+    },
+    "SOL": {
         "delisted": true,
         "last_checked": "2026-05-15",
         "reason": "No Price Data"

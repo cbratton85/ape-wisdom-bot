@@ -40508,5 +40508,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "GENB": {
+        "ticker": "GENB",
+        "name": "Generate Biomedicines, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2051079680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GBX": {
+        "ticker": "GBX",
+        "name": "Greenbrier Companies, Inc. (The",
+        "meta": "Railroads",
+        "type": "EQUITY",
+        "mcap": 1473914624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DFJ": {
+        "ticker": "DFJ",
+        "name": "WisdomTree Japan SmallCap Fund",
+        "meta": "Japan Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
