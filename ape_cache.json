@@ -40468,5 +40468,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "FLCH": {
+        "ticker": "FLCH",
+        "name": "Franklin FTSE China ETF",
+        "meta": "Greater China Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CNYA": {
+        "ticker": "CNYA",
+        "name": "iShares MSCI China A ETF",
+        "meta": "Greater China Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
