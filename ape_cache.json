@@ -40558,5 +40558,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "BRSL": {
+        "ticker": "BRSL",
+        "name": "Brightstar Lottery PLC Trading ",
+        "meta": "Gambling",
+        "type": "EQUITY",
+        "mcap": 1979991936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
