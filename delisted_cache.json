@@ -164,12 +164,17 @@
         "last_checked": "2026-05-16",
         "reason": "No Price Data"
     },
-    "DTC": {
+    "TGIF": {
         "delisted": true,
         "last_checked": "2026-05-16",
         "reason": "No Price Data"
     },
-    "TGIF": {
+    "DS": {
+        "delisted": true,
+        "last_checked": "2026-05-16",
+        "reason": "No Price Data"
+    },
+    "DTC": {
         "delisted": true,
         "last_checked": "2026-05-16",
         "reason": "No Price Data"
