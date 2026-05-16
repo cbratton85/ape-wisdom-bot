@@ -40538,5 +40538,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "KRUS": {
+        "ticker": "KRUS",
+        "name": "Kura Sushi USA, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 612982144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
