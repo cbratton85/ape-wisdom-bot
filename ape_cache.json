@@ -40568,5 +40568,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BODI": {
+        "ticker": "BODI",
+        "name": "The Beachbody Company, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 81904352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "NTSX": {
+        "ticker": "NTSX",
+        "name": "WisdomTree U.S. Efficient Core ",
+        "meta": "Multi-Asset Overlay",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }

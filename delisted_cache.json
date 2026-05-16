@@ -89,11 +89,6 @@
         "last_checked": "2026-05-14",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-05-14",
-        "reason": "No Price Data"
-    },
     "MOM": {
         "delisted": true,
         "last_checked": "2026-05-15",
@@ -170,6 +165,16 @@
         "reason": "No Price Data"
     },
     "TSE": {
+        "delisted": true,
+        "last_checked": "2026-05-16",
+        "reason": "No Price Data"
+    },
+    "RE": {
+        "delisted": true,
+        "last_checked": "2026-05-16",
+        "reason": "No Price Data"
+    },
+    "RESP": {
         "delisted": true,
         "last_checked": "2026-05-16",
         "reason": "No Price Data"
