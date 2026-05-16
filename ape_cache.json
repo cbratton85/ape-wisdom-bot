@@ -40548,5 +40548,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "NUTX": {
+        "ticker": "NUTX",
+        "name": "Nutex Health Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 869113152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
