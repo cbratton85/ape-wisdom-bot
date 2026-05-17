@@ -40618,5 +40618,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "OXM": {
+        "ticker": "OXM",
+        "name": "Oxford Industries, Inc.",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 586496256,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
