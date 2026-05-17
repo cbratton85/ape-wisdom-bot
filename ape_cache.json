@@ -40628,5 +40628,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "OWLS": {
+        "ticker": "OWLS",
+        "name": "OBOOK Holdings Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 519837120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
