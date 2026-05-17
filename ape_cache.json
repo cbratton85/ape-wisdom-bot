@@ -40598,5 +40598,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "AXAHY": {
+        "ticker": "AXAHY",
+        "name": "AXA",
+        "meta": "Insurance - Diversified",
+        "type": "EQUITY",
+        "mcap": 92129705984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OQX"
+    },
+    "SPSC": {
+        "ticker": "SPSC",
+        "name": "SPS Commerce, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 1878589056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
