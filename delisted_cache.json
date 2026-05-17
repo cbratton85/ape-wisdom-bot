@@ -1,9 +1,4 @@
 {
-    "OPT": {
-        "delisted": true,
-        "last_checked": "2026-05-06",
-        "reason": "No Price Data"
-    },
     "SNP": {
         "delisted": true,
         "last_checked": "2026-05-10",
@@ -167,6 +162,16 @@
     "DTC": {
         "delisted": true,
         "last_checked": "2026-05-16",
+        "reason": "No Price Data"
+    },
+    "NH": {
+        "delisted": true,
+        "last_checked": "2026-05-17",
+        "reason": "No Price Data"
+    },
+    "USAC": {
+        "delisted": true,
+        "last_checked": "2026-05-17",
         "reason": "No Price Data"
     }
 }
