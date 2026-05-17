@@ -40588,5 +40588,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "AENT": {
+        "ticker": "AENT",
+        "name": "Alliance Entertainment Holding ",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 341414368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
