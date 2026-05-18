@@ -40768,5 +40768,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "AMZA": {
+        "ticker": "AMZA",
+        "name": "InfraCap MLP ETF",
+        "meta": "Energy Limited Partnership",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
