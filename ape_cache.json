@@ -40648,5 +40648,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NIU": {
+        "ticker": "NIU",
+        "name": "Niu Technologies",
+        "meta": "Auto Manufacturers",
+        "type": "EQUITY",
+        "mcap": 222758480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "BBDC": {
+        "ticker": "BBDC",
+        "name": "Barings BDC, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 900479232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AORT": {
+        "ticker": "AORT",
+        "name": "Artivion, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 1105332096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IDAI": {
+        "ticker": "IDAI",
+        "name": "T Stamp Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 11309918,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "YELP": {
+        "ticker": "YELP",
+        "name": "Yelp Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 1190548736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
