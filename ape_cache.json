@@ -40738,5 +40738,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ARTV": {
+        "ticker": "ARTV",
+        "name": "Artiva Biotherapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 443853216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "KYCCF": {
+        "ticker": "KYCCF",
+        "name": "Keyence Corp.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 121262571520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
     }
 }
