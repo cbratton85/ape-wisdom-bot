@@ -59,11 +59,6 @@
         "last_checked": "2026-05-15",
         "reason": "No Price Data"
     },
-    "DPW": {
-        "delisted": true,
-        "last_checked": "2026-05-15",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-05-16",
@@ -147,6 +142,11 @@
     "ABB": {
         "delisted": true,
         "last_checked": "2026-05-17",
+        "reason": "No Price Data"
+    },
+    "DPW": {
+        "delisted": true,
+        "last_checked": "2026-05-18",
         "reason": "No Price Data"
     }
 }
