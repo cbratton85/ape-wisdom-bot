@@ -40758,5 +40758,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PNK"
+    },
+    "IWV": {
+        "ticker": "IWV",
+        "name": "iShares Russell 3000 Fund",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
