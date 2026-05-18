@@ -40708,5 +40708,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "USMV": {
+        "ticker": "USMV",
+        "name": "iShares MSCI USA Min Vol Factor",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "QRVO": {
+        "ticker": "QRVO",
+        "name": "Qorvo, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 8173830144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PEY": {
+        "ticker": "PEY",
+        "name": "Invesco High Yield Equity Divid",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
