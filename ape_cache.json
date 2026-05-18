@@ -40698,5 +40698,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "LUCY": {
+        "ticker": "LUCY",
+        "name": "Innovative Eyewear, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 5859615,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
