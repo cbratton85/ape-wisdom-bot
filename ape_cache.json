@@ -40818,5 +40818,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "AEON": {
+        "ticker": "AEON",
+        "name": "AEON Biopharma, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 22492666,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
