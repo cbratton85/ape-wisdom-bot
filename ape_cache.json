@@ -40778,5 +40778,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "GWW": {
+        "ticker": "GWW",
+        "name": "W.W. Grainger, Inc.",
+        "meta": "Industrial Distribution",
+        "type": "EQUITY",
+        "mcap": 59726016512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NNI": {
+        "ticker": "NNI",
+        "name": "Nelnet, Inc.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 4612491264,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MUNI": {
+        "ticker": "MUNI",
+        "name": "PIMCO Intermediate Municipal Bo",
+        "meta": "Muni National Interm",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "CDNA": {
+        "ticker": "CDNA",
+        "name": "CareDx, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 1063668672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
