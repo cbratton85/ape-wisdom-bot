@@ -40828,5 +40828,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "ANTA": {
+        "ticker": "ANTA",
+        "name": "Antalpha Platform Holding Compa",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 211134144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "BEKE": {
+        "ticker": "BEKE",
+        "name": "KE Holdings Inc",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 20196808704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ACWV": {
+        "ticker": "ACWV",
+        "name": "iShares MSCI Global Min Vol Fac",
+        "meta": "Global Large-Stock Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "TLK": {
+        "ticker": "TLK",
+        "name": "PT Telekomunikasi Indonesia, Tb",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 16963390464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
