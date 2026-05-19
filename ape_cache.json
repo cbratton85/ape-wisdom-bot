@@ -40868,5 +40868,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "OPCH": {
+        "ticker": "OPCH",
+        "name": "Option Care Health, Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 3252039424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "MMYT": {
+        "ticker": "MMYT",
+        "name": "MakeMyTrip Limited",
+        "meta": "Travel Services",
+        "type": "EQUITY",
+        "mcap": 3979678720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
