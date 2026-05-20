@@ -19,11 +19,6 @@
         "last_checked": "2026-05-12",
         "reason": "No Price Data"
     },
-    "ZI": {
-        "delisted": true,
-        "last_checked": "2026-05-13",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-05-14",
@@ -162,6 +157,11 @@
     "CSA": {
         "delisted": true,
         "last_checked": "2026-05-19",
+        "reason": "No Price Data"
+    },
+    "SQ": {
+        "delisted": true,
+        "last_checked": "2026-05-20",
         "reason": "No Price Data"
     }
 }
