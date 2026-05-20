@@ -40888,5 +40888,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CTEC": {
+        "ticker": "CTEC",
+        "name": "Global X ClimateTech ETF",
+        "meta": "Global Small/Mid Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SBIO": {
+        "ticker": "SBIO",
+        "name": "ALPS Medical Breakthroughs ETF",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
