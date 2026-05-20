@@ -40928,5 +40928,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PRAA": {
+        "ticker": "PRAA",
+        "name": "PRA Group, Inc.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 551898688,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "JKHY": {
+        "ticker": "JKHY",
+        "name": "Jack Henry & Associates, Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 9974463488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "RKDA": {
+        "ticker": "RKDA",
+        "name": "Arcadia Biosciences, Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 2128874,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "FTV": {
+        "ticker": "FTV",
+        "name": "Fortive Corporation",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 17857234944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ECPG": {
+        "ticker": "ECPG",
+        "name": "Encore Capital Group Inc",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 1721665152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PRA": {
+        "ticker": "PRA",
+        "name": "ProAssurance Corporation",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 1273678720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
