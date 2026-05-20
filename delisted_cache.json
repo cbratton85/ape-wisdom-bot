@@ -134,11 +134,6 @@
         "last_checked": "2026-05-19",
         "reason": "No Price Data"
     },
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-05-19",
-        "reason": "No Price Data"
-    },
     "SQ": {
         "delisted": true,
         "last_checked": "2026-05-20",
@@ -165,6 +160,26 @@
         "reason": "No Price Data"
     },
     "OPT": {
+        "delisted": true,
+        "last_checked": "2026-05-20",
+        "reason": "No Price Data"
+    },
+    "WOW": {
+        "delisted": true,
+        "last_checked": "2026-05-20",
+        "reason": "No Price Data"
+    },
+    "OPI": {
+        "delisted": true,
+        "last_checked": "2026-05-20",
+        "reason": "No Price Data"
+    },
+    "AAU": {
+        "delisted": true,
+        "last_checked": "2026-05-20",
+        "reason": "No Price Data"
+    },
+    "GPL": {
         "delisted": true,
         "last_checked": "2026-05-20",
         "reason": "No Price Data"

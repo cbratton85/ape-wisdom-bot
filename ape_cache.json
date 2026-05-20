@@ -40988,5 +40988,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BLTE": {
+        "ticker": "BLTE",
+        "name": "Belite Bio, Inc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 5707446272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "USCI": {
+        "ticker": "USCI",
+        "name": "United States Commodity Index F",
+        "meta": "Commodities Broad Basket",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "AIOT": {
+        "ticker": "AIOT",
+        "name": "PowerFleet, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 427259072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "LND": {
+        "ticker": "LND",
+        "name": "Brasilagro Brazilian Agric Real",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 379634528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SDCI": {
+        "ticker": "SDCI",
+        "name": "USCF SummerHaven Dynamic Commod",
+        "meta": "Commodities Broad Basket",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "IVOO": {
+        "ticker": "IVOO",
+        "name": "Vanguard S&P Mid-Cap 400 ETF",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
