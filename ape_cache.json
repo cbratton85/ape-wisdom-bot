@@ -40908,5 +40908,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "EHAB": {
+        "ticker": "EHAB",
+        "name": "Enhabit, Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 706913408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KRYS": {
+        "ticker": "KRYS",
+        "name": "Krystal Biotech, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 8646412288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
