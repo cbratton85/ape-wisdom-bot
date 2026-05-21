@@ -41098,5 +41098,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ARI": {
+        "ticker": "ARI",
+        "name": "Apollo Commercial Real Estate F",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 1459353984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "UFCS": {
+        "ticker": "UFCS",
+        "name": "United Fire Group, Inc",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 1248300672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "GEG": {
+        "ticker": "GEG",
+        "name": "Great Elm Group, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 67339176,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
