@@ -41068,5 +41068,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "XSHQ": {
+        "ticker": "XSHQ",
+        "name": "Invesco S&P SmallCap Quality ET",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
