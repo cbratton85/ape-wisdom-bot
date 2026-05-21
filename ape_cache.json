@@ -41088,5 +41088,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "SNOA": {
+        "ticker": "SNOA",
+        "name": "Sonoma Pharmaceuticals, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 3664599,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
