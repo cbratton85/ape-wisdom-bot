@@ -154,11 +154,6 @@
         "last_checked": "2026-05-20",
         "reason": "No Price Data"
     },
-    "FM": {
-        "delisted": true,
-        "last_checked": "2026-05-21",
-        "reason": "No Price Data"
-    },
     "SAVE": {
         "delisted": true,
         "last_checked": "2026-05-21",
@@ -180,6 +175,16 @@
         "reason": "No Price Data"
     },
     "DBS": {
+        "delisted": true,
+        "last_checked": "2026-05-21",
+        "reason": "No Price Data"
+    },
+    "FM": {
+        "delisted": true,
+        "last_checked": "2026-05-21",
+        "reason": "No Price Data"
+    },
+    "REV": {
         "delisted": true,
         "last_checked": "2026-05-21",
         "reason": "No Price Data"
