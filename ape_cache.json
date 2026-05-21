@@ -41078,5 +41078,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "FAAS": {
+        "ticker": "FAAS",
+        "name": "FAAS",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
