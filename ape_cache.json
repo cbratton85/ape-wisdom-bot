@@ -41128,5 +41128,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "UHAL": {
+        "ticker": "UHAL",
+        "name": "U-Haul Holding Company",
+        "meta": "Rental & Leasing Services",
+        "type": "EQUITY",
+        "mcap": 9664175104,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MCY": {
+        "ticker": "MCY",
+        "name": "Mercury General Corporation",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 5652963328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
