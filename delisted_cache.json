@@ -54,11 +54,6 @@
         "last_checked": "2026-05-18",
         "reason": "No Price Data"
     },
-    "NTP": {
-        "delisted": true,
-        "last_checked": "2026-05-18",
-        "reason": "No Price Data"
-    },
     "QED": {
         "delisted": true,
         "last_checked": "2026-05-18",
@@ -190,6 +185,16 @@
         "reason": "No Price Data"
     },
     "SAVA": {
+        "delisted": true,
+        "last_checked": "2026-05-22",
+        "reason": "No Price Data"
+    },
+    "YY": {
+        "delisted": true,
+        "last_checked": "2026-05-22",
+        "reason": "No Price Data"
+    },
+    "MBT": {
         "delisted": true,
         "last_checked": "2026-05-22",
         "reason": "No Price Data"
