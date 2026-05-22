@@ -41158,5 +41158,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "BJK": {
+        "ticker": "BJK",
+        "name": "VanEck Gaming ETF",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "EZJ": {
+        "ticker": "EZJ",
+        "name": "ProShares Ultra MSCI Japan",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SQNS": {
+        "ticker": "SQNS",
+        "name": "Sequans Communications S.A.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 62450872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SPWH": {
+        "ticker": "SPWH",
+        "name": "Sportsman's Warehouse Holdings,",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 49860288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "NCPL": {
+        "ticker": "NCPL",
+        "name": "Netcapital Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 5691296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }

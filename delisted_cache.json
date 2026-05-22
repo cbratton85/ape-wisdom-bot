@@ -79,11 +79,6 @@
         "last_checked": "2026-05-18",
         "reason": "No Price Data"
     },
-    "MMC": {
-        "delisted": true,
-        "last_checked": "2026-05-19",
-        "reason": "No Price Data"
-    },
     "OG": {
         "delisted": true,
         "last_checked": "2026-05-19",
@@ -190,6 +185,11 @@
         "reason": "No Price Data"
     },
     "OPI": {
+        "delisted": true,
+        "last_checked": "2026-05-22",
+        "reason": "No Price Data"
+    },
+    "SAVA": {
         "delisted": true,
         "last_checked": "2026-05-22",
         "reason": "No Price Data"
