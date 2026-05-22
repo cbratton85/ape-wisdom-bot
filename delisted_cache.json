@@ -89,11 +89,6 @@
         "last_checked": "2026-05-19",
         "reason": "No Price Data"
     },
-    "CO": {
-        "delisted": true,
-        "last_checked": "2026-05-19",
-        "reason": "No Price Data"
-    },
     "CN": {
         "delisted": true,
         "last_checked": "2026-05-19",
@@ -185,6 +180,11 @@
         "reason": "No Price Data"
     },
     "FAAS": {
+        "delisted": true,
+        "last_checked": "2026-05-22",
+        "reason": "No Price Data"
+    },
+    "CO": {
         "delisted": true,
         "last_checked": "2026-05-22",
         "reason": "No Price Data"
