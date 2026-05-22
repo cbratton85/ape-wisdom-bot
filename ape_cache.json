@@ -41208,5 +41208,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "SRL": {
+        "ticker": "SRL",
+        "name": "Scully Royalty Ltd.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 93261400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CGEM": {
+        "ticker": "CGEM",
+        "name": "Cullinan Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 845970048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
