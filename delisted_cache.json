@@ -124,11 +124,6 @@
         "last_checked": "2026-05-20",
         "reason": "No Price Data"
     },
-    "OPI": {
-        "delisted": true,
-        "last_checked": "2026-05-20",
-        "reason": "No Price Data"
-    },
     "AAU": {
         "delisted": true,
         "last_checked": "2026-05-20",
@@ -190,6 +185,11 @@
         "reason": "No Price Data"
     },
     "OPT": {
+        "delisted": true,
+        "last_checked": "2026-05-22",
+        "reason": "No Price Data"
+    },
+    "OPI": {
         "delisted": true,
         "last_checked": "2026-05-22",
         "reason": "No Price Data"
