@@ -41258,5 +41258,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ESTA": {
+        "ticker": "ESTA",
+        "name": "Establishment Labs Holdings Inc",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 2124579968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
