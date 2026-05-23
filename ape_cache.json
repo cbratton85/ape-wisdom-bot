@@ -41248,5 +41248,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PRGO": {
+        "ticker": "PRGO",
+        "name": "Perrigo Company plc",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 1552486528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
