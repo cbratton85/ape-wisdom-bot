@@ -144,11 +144,6 @@
         "last_checked": "2026-05-22",
         "reason": "No Price Data"
     },
-    "MBT": {
-        "delisted": true,
-        "last_checked": "2026-05-22",
-        "reason": "No Price Data"
-    },
     "AAU": {
         "delisted": true,
         "last_checked": "2026-05-22",
@@ -190,6 +185,11 @@
         "reason": "No Price Data"
     },
     "WOW": {
+        "delisted": true,
+        "last_checked": "2026-05-23",
+        "reason": "No Price Data"
+    },
+    "MBT": {
         "delisted": true,
         "last_checked": "2026-05-23",
         "reason": "No Price Data"
