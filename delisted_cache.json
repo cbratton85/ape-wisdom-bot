@@ -9,11 +9,6 @@
         "last_checked": "2026-05-15",
         "reason": "No Price Data"
     },
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-05-15",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-05-16",
@@ -190,6 +185,11 @@
         "reason": "No Price Data"
     },
     "CBD": {
+        "delisted": true,
+        "last_checked": "2026-05-23",
+        "reason": "No Price Data"
+    },
+    "SOL": {
         "delisted": true,
         "last_checked": "2026-05-23",
         "reason": "No Price Data"
