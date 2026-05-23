@@ -41228,5 +41228,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ZVIA": {
+        "ticker": "ZVIA",
+        "name": "Zevia PBC",
+        "meta": "Beverages - Non-Alcoholic",
+        "type": "EQUITY",
+        "mcap": 121300160,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ZBRA": {
+        "ticker": "ZBRA",
+        "name": "Zebra Technologies Corporation",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 12172712960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
