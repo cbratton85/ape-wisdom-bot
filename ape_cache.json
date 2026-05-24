@@ -41278,5 +41278,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "BCH": {
+        "ticker": "BCH",
+        "name": "Banco De Chile",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 18965956608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RCD": {
+        "ticker": "RCD",
+        "name": "Ready Capital Corporation 9.00%",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
