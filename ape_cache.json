@@ -41328,5 +41328,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "STWD": {
+        "ticker": "STWD",
+        "name": "STARWOOD PROPERTY TRUST, INC. S",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 6576227328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MGV": {
+        "ticker": "MGV",
+        "name": "Vanguard Mega Cap Value ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
