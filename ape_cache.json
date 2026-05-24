@@ -41348,5 +41348,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "MORT": {
+        "ticker": "MORT",
+        "name": "VanEck Mortgage REIT Income ETF",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
