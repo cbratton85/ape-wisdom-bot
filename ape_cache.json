@@ -41298,5 +41298,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MRP": {
+        "ticker": "MRP",
+        "name": "Millrose Properties, Inc.",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 4587904000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "QQEW": {
+        "ticker": "QQEW",
+        "name": "First Trust Nasdaq-100 Select E",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
