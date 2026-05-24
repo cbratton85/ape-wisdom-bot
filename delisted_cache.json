@@ -129,11 +129,6 @@
         "last_checked": "2026-05-23",
         "reason": "No Price Data"
     },
-    "BLBX": {
-        "delisted": true,
-        "last_checked": "2026-05-24",
-        "reason": "No Price Data"
-    },
     "RE": {
         "delisted": true,
         "last_checked": "2026-05-24",
@@ -170,6 +165,16 @@
         "reason": "No Price Data"
     },
     "CO": {
+        "delisted": true,
+        "last_checked": "2026-05-24",
+        "reason": "No Price Data"
+    },
+    "FI": {
+        "delisted": true,
+        "last_checked": "2026-05-24",
+        "reason": "No Price Data"
+    },
+    "BLBX": {
         "delisted": true,
         "last_checked": "2026-05-24",
         "reason": "No Price Data"

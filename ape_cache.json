@@ -41358,5 +41358,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "MDU": {
+        "ticker": "MDU",
+        "name": "MDU Resources Group, Inc.",
+        "meta": "Utilities - Regulated Gas",
+        "type": "EQUITY",
+        "mcap": 4631573504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
