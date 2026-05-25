@@ -41368,5 +41368,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "COWZ": {
+        "ticker": "COWZ",
+        "name": "Pacer US Cash Cows 100 ETF",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }

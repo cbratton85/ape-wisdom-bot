@@ -49,11 +49,6 @@
         "last_checked": "2026-05-20",
         "reason": "No Price Data"
     },
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-05-21",
-        "reason": "No Price Data"
-    },
     "DBS": {
         "delisted": true,
         "last_checked": "2026-05-21",
@@ -165,6 +160,21 @@
         "reason": "No Price Data"
     },
     "SOI": {
+        "delisted": true,
+        "last_checked": "2026-05-25",
+        "reason": "No Price Data"
+    },
+    "TTM": {
+        "delisted": true,
+        "last_checked": "2026-05-25",
+        "reason": "No Price Data"
+    },
+    "CSF": {
+        "delisted": true,
+        "last_checked": "2026-05-25",
+        "reason": "No Price Data"
+    },
+    "QQC": {
         "delisted": true,
         "last_checked": "2026-05-25",
         "reason": "No Price Data"
