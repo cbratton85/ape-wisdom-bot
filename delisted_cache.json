@@ -94,11 +94,6 @@
         "last_checked": "2026-05-23",
         "reason": "No Price Data"
     },
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-05-23",
-        "reason": "No Price Data"
-    },
     "MOM": {
         "delisted": true,
         "last_checked": "2026-05-23",
@@ -170,6 +165,16 @@
         "reason": "No Price Data"
     },
     "QQC": {
+        "delisted": true,
+        "last_checked": "2026-05-25",
+        "reason": "No Price Data"
+    },
+    "SOL": {
+        "delisted": true,
+        "last_checked": "2026-05-25",
+        "reason": "No Price Data"
+    },
+    "CN": {
         "delisted": true,
         "last_checked": "2026-05-25",
         "reason": "No Price Data"
