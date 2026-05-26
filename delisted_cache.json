@@ -9,11 +9,6 @@
         "last_checked": "2026-05-16",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-05-16",
-        "reason": "No Price Data"
-    },
     "OLD": {
         "delisted": true,
         "last_checked": "2026-05-17",
@@ -175,6 +170,11 @@
         "reason": "No Price Data"
     },
     "SOI": {
+        "delisted": true,
+        "last_checked": "2026-05-26",
+        "reason": "No Price Data"
+    },
+    "AUD": {
         "delisted": true,
         "last_checked": "2026-05-26",
         "reason": "No Price Data"

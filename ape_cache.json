@@ -41448,5 +41448,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ESML": {
+        "ticker": "ESML",
+        "name": "iShares ESG Aware MSCI USA Smal",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "SUSC": {
+        "ticker": "SUSC",
+        "name": "iShares ESG Aware USD Corporate",
+        "meta": "Corporate Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ESGU": {
+        "ticker": "ESGU",
+        "name": "iShares ESG Aware MSCI USA ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ESGD": {
+        "ticker": "ESGD",
+        "name": "iShares ESG Aware MSCI EAFE ETF",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "EAGG": {
+        "ticker": "EAGG",
+        "name": "iShares ESG Aware U.S. Aggregat",
+        "meta": "Intermediate Core Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "ESGE": {
+        "ticker": "ESGE",
+        "name": "iShares ESG Aware MSCI EM ETF",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
