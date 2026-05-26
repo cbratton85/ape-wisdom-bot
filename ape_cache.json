@@ -41418,5 +41418,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "CNO": {
+        "ticker": "CNO",
+        "name": "CNO Financial Group, Inc.",
+        "meta": "Insurance - Life",
+        "type": "EQUITY",
+        "mcap": 4380845568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "DDEC": {
+        "ticker": "DDEC",
+        "name": "FT Vest U.S. Equity Deep Buffer",
+        "meta": "Defined Outcome",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "ITUB": {
+        "ticker": "ITUB",
+        "name": "Itau Unibanco Banco Holding SA",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 87015489536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
