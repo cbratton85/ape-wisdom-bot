@@ -41388,5 +41388,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "KVHI": {
+        "ticker": "KVHI",
+        "name": "KVH Industries, Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 227928720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
