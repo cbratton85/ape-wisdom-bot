@@ -41378,5 +41378,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "NSPR": {
+        "ticker": "NSPR",
+        "name": "InspireMD Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 46838960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
