@@ -41508,5 +41508,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "FDL": {
+        "ticker": "FDL",
+        "name": "First Trust Morningstar ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SI": {
+        "ticker": "SI",
+        "name": "Shoulder Innovations, Inc.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 312317696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SPUU": {
+        "ticker": "SPUU",
+        "name": "Direxion Daily S&P 500 Bull 2X ",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
