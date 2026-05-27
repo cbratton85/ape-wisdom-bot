@@ -41578,5 +41578,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MNA": {
+        "ticker": "MNA",
+        "name": "NYLI Merger Arbitrage ETF",
+        "meta": "Event Driven",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "NAAS": {
+        "ticker": "NAAS",
+        "name": "Naas Technology Inc.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 37612224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "OSUR": {
+        "ticker": "OSUR",
+        "name": "OraSure Technologies, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 274017248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
