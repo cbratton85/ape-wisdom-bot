@@ -79,11 +79,6 @@
         "last_checked": "2026-05-24",
         "reason": "No Price Data"
     },
-    "FI": {
-        "delisted": true,
-        "last_checked": "2026-05-24",
-        "reason": "No Price Data"
-    },
     "BLBX": {
         "delisted": true,
         "last_checked": "2026-05-24",
@@ -195,6 +190,11 @@
         "reason": "No Price Data"
     },
     "APE": {
+        "delisted": true,
+        "last_checked": "2026-05-27",
+        "reason": "No Price Data"
+    },
+    "FI": {
         "delisted": true,
         "last_checked": "2026-05-27",
         "reason": "No Price Data"
