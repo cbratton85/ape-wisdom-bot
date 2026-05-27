@@ -41538,5 +41538,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "MYY": {
+        "ticker": "MYY",
+        "name": "ProShares Short MidCap400",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
