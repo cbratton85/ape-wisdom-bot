@@ -41568,5 +41568,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "ELS": {
+        "ticker": "ELS",
+        "name": "Equity Lifestyle Properties, In",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 12567073792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

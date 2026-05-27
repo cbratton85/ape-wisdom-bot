@@ -79,11 +79,6 @@
         "last_checked": "2026-05-24",
         "reason": "No Price Data"
     },
-    "CO": {
-        "delisted": true,
-        "last_checked": "2026-05-24",
-        "reason": "No Price Data"
-    },
     "FI": {
         "delisted": true,
         "last_checked": "2026-05-24",
@@ -165,6 +160,26 @@
         "reason": "No Price Data"
     },
     "HEAR": {
+        "delisted": true,
+        "last_checked": "2026-05-27",
+        "reason": "No Price Data"
+    },
+    "ZN": {
+        "delisted": true,
+        "last_checked": "2026-05-27",
+        "reason": "No Price Data"
+    },
+    "NTP": {
+        "delisted": true,
+        "last_checked": "2026-05-27",
+        "reason": "No Price Data"
+    },
+    "CO": {
+        "delisted": true,
+        "last_checked": "2026-05-27",
+        "reason": "No Price Data"
+    },
+    "FFIE": {
         "delisted": true,
         "last_checked": "2026-05-27",
         "reason": "No Price Data"
