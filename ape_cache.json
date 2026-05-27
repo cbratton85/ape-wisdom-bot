@@ -41548,5 +41548,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "MLKN": {
+        "ticker": "MLKN",
+        "name": "MillerKnoll, Inc.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 1121003776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DOOO": {
+        "ticker": "DOOO",
+        "name": "DOOO",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }

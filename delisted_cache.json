@@ -139,11 +139,6 @@
         "last_checked": "2026-05-26",
         "reason": "No Price Data"
     },
-    "HEAR": {
-        "delisted": true,
-        "last_checked": "2026-05-26",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-05-26",
@@ -162,6 +157,16 @@
     "AUD": {
         "delisted": true,
         "last_checked": "2026-05-26",
+        "reason": "No Price Data"
+    },
+    "DOOO": {
+        "delisted": true,
+        "last_checked": "2026-05-27",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
+        "delisted": true,
+        "last_checked": "2026-05-27",
         "reason": "No Price Data"
     }
 }
