@@ -41618,5 +41618,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PNK"
+    },
+    "SFIX": {
+        "ticker": "SFIX",
+        "name": "Stitch Fix, Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 481924512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "DSX": {
+        "ticker": "DSX",
+        "name": "Diana Shipping inc.",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 311325024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

@@ -154,11 +154,6 @@
         "last_checked": "2026-05-27",
         "reason": "No Price Data"
     },
-    "ZN": {
-        "delisted": true,
-        "last_checked": "2026-05-27",
-        "reason": "No Price Data"
-    },
     "NTP": {
         "delisted": true,
         "last_checked": "2026-05-27",
@@ -197,6 +192,11 @@
     "FI": {
         "delisted": true,
         "last_checked": "2026-05-27",
+        "reason": "No Price Data"
+    },
+    "ZN": {
+        "delisted": true,
+        "last_checked": "2026-05-28",
         "reason": "No Price Data"
     }
 }
