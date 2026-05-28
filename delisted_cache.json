@@ -49,11 +49,6 @@
         "last_checked": "2026-05-23",
         "reason": "No Price Data"
     },
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-05-23",
-        "reason": "No Price Data"
-    },
     "MBT": {
         "delisted": true,
         "last_checked": "2026-05-23",
@@ -195,6 +190,11 @@
         "reason": "No Price Data"
     },
     "DTC": {
+        "delisted": true,
+        "last_checked": "2026-05-28",
+        "reason": "No Price Data"
+    },
+    "WOW": {
         "delisted": true,
         "last_checked": "2026-05-28",
         "reason": "No Price Data"
