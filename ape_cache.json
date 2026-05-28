@@ -41678,5 +41678,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SVV": {
+        "ticker": "SVV",
+        "name": "Savers Value Village, Inc.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 1387415296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
