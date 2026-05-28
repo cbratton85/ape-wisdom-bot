@@ -41688,5 +41688,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FLYT": {
+        "ticker": "FLYT",
+        "name": "Tradr 2X Long FLY Daily ETF",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "CNXN": {
+        "ticker": "CNXN",
+        "name": "PC Connection, Inc.",
+        "meta": "Electronics & Computer Distribution",
+        "type": "EQUITY",
+        "mcap": 1714109824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
