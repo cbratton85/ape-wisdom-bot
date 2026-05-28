@@ -41658,5 +41658,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "FHN": {
+        "ticker": "FHN",
+        "name": "First Horizon Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 11440662528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
