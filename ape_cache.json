@@ -41668,5 +41668,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "GCO": {
+        "ticker": "GCO",
+        "name": "Genesco Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 404251680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
