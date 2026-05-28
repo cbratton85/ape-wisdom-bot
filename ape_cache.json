@@ -41638,5 +41638,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "WCLD": {
+        "ticker": "WCLD",
+        "name": "WisdomTree Cloud Computing Fund",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "TAYD": {
+        "ticker": "TAYD",
+        "name": "Taylor Devices, Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 170612928,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
