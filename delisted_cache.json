@@ -154,11 +154,6 @@
         "last_checked": "2026-05-28",
         "reason": "No Price Data"
     },
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-05-28",
-        "reason": "No Price Data"
-    },
     "OG": {
         "delisted": true,
         "last_checked": "2026-05-28",
@@ -205,6 +200,16 @@
         "reason": "No Price Data"
     },
     "CN": {
+        "delisted": true,
+        "last_checked": "2026-05-29",
+        "reason": "No Price Data"
+    },
+    "WOW": {
+        "delisted": true,
+        "last_checked": "2026-05-29",
+        "reason": "No Price Data"
+    },
+    "QED": {
         "delisted": true,
         "last_checked": "2026-05-29",
         "reason": "No Price Data"

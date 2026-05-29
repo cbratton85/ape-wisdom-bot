@@ -41808,5 +41808,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "IWR": {
+        "ticker": "IWR",
+        "name": "iShares Russell Mid-Cap ETF",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "BUR": {
+        "ticker": "BUR",
+        "name": "Burford Capital Limited",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 1016481600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IWS": {
+        "ticker": "IWS",
+        "name": "iShares Russell Mid-cap Value E",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
