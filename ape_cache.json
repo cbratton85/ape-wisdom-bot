@@ -41708,5 +41708,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AHT": {
+        "ticker": "AHT",
+        "name": "Ashford Hospitality Trust Inc",
+        "meta": "REIT - Hotel & Motel",
+        "type": "EQUITY",
+        "mcap": 19771558,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EQWL": {
+        "ticker": "EQWL",
+        "name": "Invesco S&P 100 Equal Weight ET",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "DVY": {
+        "ticker": "DVY",
+        "name": "iShares Select Dividend ETF",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
