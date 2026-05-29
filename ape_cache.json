@@ -41778,5 +41778,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "PNRG": {
+        "ticker": "PNRG",
+        "name": "PrimeEnergy Resources Corporati",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 260562704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
