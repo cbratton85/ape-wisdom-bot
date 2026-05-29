@@ -41788,5 +41788,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ALNT": {
+        "ticker": "ALNT",
+        "name": "Allient Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 1323858304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "RSI": {
+        "ticker": "RSI",
+        "name": "Rush Street Interactive, Inc.",
+        "meta": "Gambling",
+        "type": "EQUITY",
+        "mcap": 5972300288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
