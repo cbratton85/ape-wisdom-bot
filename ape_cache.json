@@ -41738,5 +41738,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "BRSP": {
+        "ticker": "BRSP",
+        "name": "BrightSpire Capital, Inc.",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 749098880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RXL": {
+        "ticker": "RXL",
+        "name": "ProShares Ultra Health Care",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "GBDC": {
+        "ticker": "GBDC",
+        "name": "Golub Capital BDC, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 3409882112,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }

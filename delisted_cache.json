@@ -34,11 +34,6 @@
         "last_checked": "2026-05-22",
         "reason": "No Price Data"
     },
-    "SAVE": {
-        "delisted": true,
-        "last_checked": "2026-05-23",
-        "reason": "No Price Data"
-    },
     "CBD": {
         "delisted": true,
         "last_checked": "2026-05-23",
@@ -195,6 +190,16 @@
         "reason": "No Price Data"
     },
     "RE": {
+        "delisted": true,
+        "last_checked": "2026-05-29",
+        "reason": "No Price Data"
+    },
+    "SPCX": {
+        "delisted": true,
+        "last_checked": "2026-05-29",
+        "reason": "No Price Data"
+    },
+    "SAVE": {
         "delisted": true,
         "last_checked": "2026-05-29",
         "reason": "No Price Data"
