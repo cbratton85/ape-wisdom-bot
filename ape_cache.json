@@ -41768,5 +41768,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "QMOM": {
+        "ticker": "QMOM",
+        "name": "Alpha Architect U.S. Quantitati",
+        "meta": "Mid-Cap Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
