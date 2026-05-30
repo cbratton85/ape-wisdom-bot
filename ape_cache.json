@@ -41878,5 +41878,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "IXJ": {
+        "ticker": "IXJ",
+        "name": "iShares Global Healthcare ETF",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
