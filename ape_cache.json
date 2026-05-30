@@ -41888,5 +41888,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NVEC": {
+        "ticker": "NVEC",
+        "name": "NVE Corporation",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 473752160,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
