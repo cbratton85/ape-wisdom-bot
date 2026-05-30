@@ -41858,5 +41858,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "HLAL": {
+        "ticker": "HLAL",
+        "name": "Wahed FTSE USA Shariah ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "OPAL": {
+        "ticker": "OPAL",
+        "name": "OPAL Fuels Inc.",
+        "meta": "Utilities - Regulated Gas",
+        "type": "EQUITY",
+        "mcap": 394949856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
