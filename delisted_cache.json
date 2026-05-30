@@ -189,11 +189,6 @@
         "last_checked": "2026-05-29",
         "reason": "No Price Data"
     },
-    "QED": {
-        "delisted": true,
-        "last_checked": "2026-05-29",
-        "reason": "No Price Data"
-    },
     "ABCL": {
         "delisted": true,
         "last_checked": "2026-05-29",
@@ -220,6 +215,11 @@
         "reason": "No Price Data"
     },
     "NAVN": {
+        "delisted": true,
+        "last_checked": "2026-05-30",
+        "reason": "No Price Data"
+    },
+    "QED": {
         "delisted": true,
         "last_checked": "2026-05-30",
         "reason": "No Price Data"
