@@ -149,11 +149,6 @@
         "last_checked": "2026-05-28",
         "reason": "No Price Data"
     },
-    "OG": {
-        "delisted": true,
-        "last_checked": "2026-05-28",
-        "reason": "No Price Data"
-    },
     "OLD": {
         "delisted": true,
         "last_checked": "2026-05-28",
@@ -217,6 +212,11 @@
     "SI": {
         "delisted": true,
         "last_checked": "2026-05-29",
+        "reason": "No Price Data"
+    },
+    "OG": {
+        "delisted": true,
+        "last_checked": "2026-05-30",
         "reason": "No Price Data"
     }
 }
