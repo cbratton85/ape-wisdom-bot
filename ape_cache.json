@@ -41848,5 +41848,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "VRIG": {
+        "ticker": "VRIG",
+        "name": "Invesco Variable Rate Investmen",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
