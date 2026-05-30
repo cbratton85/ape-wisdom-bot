@@ -41838,5 +41838,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "QQD": {
+        "ticker": "QQD",
+        "name": "Simplify Nasdaq 100 PLUS Downsi",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
