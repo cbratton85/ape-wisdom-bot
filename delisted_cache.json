@@ -84,11 +84,6 @@
         "last_checked": "2026-05-27",
         "reason": "No Price Data"
     },
-    "CO": {
-        "delisted": true,
-        "last_checked": "2026-05-27",
-        "reason": "No Price Data"
-    },
     "REV": {
         "delisted": true,
         "last_checked": "2026-05-27",
@@ -215,6 +210,11 @@
         "reason": "No Price Data"
     },
     "SAVA": {
+        "delisted": true,
+        "last_checked": "2026-05-30",
+        "reason": "No Price Data"
+    },
+    "CO": {
         "delisted": true,
         "last_checked": "2026-05-30",
         "reason": "No Price Data"
