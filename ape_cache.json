@@ -41898,5 +41898,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "RWK": {
+        "ticker": "RWK",
+        "name": "Invesco S&P MidCap 400 Revenue ",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "RWJ": {
+        "ticker": "RWJ",
+        "name": "Invesco S&P SmallCap 600 Revenu",
+        "meta": "Small Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "RDIV": {
+        "ticker": "RDIV",
+        "name": "Invesco S&P Ultra Dividend Reve",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
