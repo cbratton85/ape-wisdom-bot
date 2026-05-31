@@ -41928,5 +41928,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "PLXS": {
+        "ticker": "PLXS",
+        "name": "Plexus Corp.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 7180352512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }

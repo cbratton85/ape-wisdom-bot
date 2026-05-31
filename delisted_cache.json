@@ -99,11 +99,6 @@
         "last_checked": "2026-05-28",
         "reason": "No Price Data"
     },
-    "DTC": {
-        "delisted": true,
-        "last_checked": "2026-05-28",
-        "reason": "No Price Data"
-    },
     "OLD": {
         "delisted": true,
         "last_checked": "2026-05-28",
@@ -212,6 +207,11 @@
     "SAVA": {
         "delisted": true,
         "last_checked": "2026-05-30",
+        "reason": "No Price Data"
+    },
+    "DTC": {
+        "delisted": true,
+        "last_checked": "2026-05-31",
         "reason": "No Price Data"
     }
 }
