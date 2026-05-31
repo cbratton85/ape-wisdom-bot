@@ -114,11 +114,6 @@
         "last_checked": "2026-05-29",
         "reason": "No Price Data"
     },
-    "MOM": {
-        "delisted": true,
-        "last_checked": "2026-05-29",
-        "reason": "No Price Data"
-    },
     "WOW": {
         "delisted": true,
         "last_checked": "2026-05-29",
@@ -210,6 +205,11 @@
         "reason": "No Price Data"
     },
     "CN": {
+        "delisted": true,
+        "last_checked": "2026-05-31",
+        "reason": "No Price Data"
+    },
+    "MOM": {
         "delisted": true,
         "last_checked": "2026-05-31",
         "reason": "No Price Data"
