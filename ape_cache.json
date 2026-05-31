@@ -41938,5 +41938,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "JAZZ": {
+        "ticker": "JAZZ",
+        "name": "Jazz Pharmaceuticals plc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 14838049792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
