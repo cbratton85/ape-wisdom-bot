@@ -41998,5 +41998,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "VTS": {
+        "ticker": "VTS",
+        "name": "Vitesse Energy, Inc.",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 736224256,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EKSO": {
+        "ticker": "EKSO",
+        "name": "Ekso Bionics Holdings, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 42047896,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ARLO": {
+        "ticker": "ARLO",
+        "name": "Arlo Technologies, Inc.",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 1502073728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "QTTB": {
+        "ticker": "QTTB",
+        "name": "Q32 Bio Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 205596544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ACIW": {
+        "ticker": "ACIW",
+        "name": "ACI Worldwide, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 4605777408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "HPP": {
+        "ticker": "HPP",
+        "name": "Hudson Pacific Properties, Inc.",
+        "meta": "REIT - Office",
+        "type": "EQUITY",
+        "mcap": 5446887424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
