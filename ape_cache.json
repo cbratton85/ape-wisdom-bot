@@ -42118,5 +42118,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VTHR": {
+        "ticker": "VTHR",
+        "name": "Vanguard Russell 3000 ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "REVS": {
+        "ticker": "REVS",
+        "name": "Columbia Research Enhanced Valu",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }

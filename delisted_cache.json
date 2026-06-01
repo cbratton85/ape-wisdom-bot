@@ -124,11 +124,6 @@
         "last_checked": "2026-05-30",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-05-30",
-        "reason": "No Price Data"
-    },
     "SQ": {
         "delisted": true,
         "last_checked": "2026-05-30",
@@ -190,6 +185,11 @@
         "reason": "No Price Data"
     },
     "REV": {
+        "delisted": true,
+        "last_checked": "2026-06-01",
+        "reason": "No Price Data"
+    },
+    "BABY": {
         "delisted": true,
         "last_checked": "2026-06-01",
         "reason": "No Price Data"
