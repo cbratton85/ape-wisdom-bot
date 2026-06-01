@@ -41948,5 +41948,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "LOMA": {
+        "ticker": "LOMA",
+        "name": "Loma Negra Compania Industrial ",
+        "meta": "Building Materials",
+        "type": "EQUITY",
+        "mcap": 1400359552,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TKC": {
+        "ticker": "TKC",
+        "name": "Turkcell Iletisim Hizmetleri AS",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 4979700224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ZGN": {
+        "ticker": "ZGN",
+        "name": "Ermenegildo Zegna N.V.",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 3943134208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EXEL": {
+        "ticker": "EXEL",
+        "name": "Exelixis, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 12688404480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "VERA": {
+        "ticker": "VERA",
+        "name": "Vera Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2549728768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
