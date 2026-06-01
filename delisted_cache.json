@@ -79,11 +79,6 @@
         "last_checked": "2026-05-28",
         "reason": "No Price Data"
     },
-    "PTR": {
-        "delisted": true,
-        "last_checked": "2026-05-28",
-        "reason": "No Price Data"
-    },
     "RE": {
         "delisted": true,
         "last_checked": "2026-05-29",
@@ -190,6 +185,11 @@
         "reason": "No Price Data"
     },
     "QQD": {
+        "delisted": true,
+        "last_checked": "2026-06-01",
+        "reason": "No Price Data"
+    },
+    "REV": {
         "delisted": true,
         "last_checked": "2026-06-01",
         "reason": "No Price Data"

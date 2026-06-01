@@ -42058,5 +42058,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HERD": {
+        "ticker": "HERD",
+        "name": "Pacer Cash Cows Fund of Funds E",
+        "meta": "Global Large-Stock Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "WPC": {
+        "ticker": "WPC",
+        "name": "W. P. Carey Inc. REIT",
+        "meta": "REIT - Diversified",
+        "type": "EQUITY",
+        "mcap": 16230999040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SLMT": {
+        "ticker": "SLMT",
+        "name": "Brera Holdings PLC",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 53864924,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "YEXT": {
+        "ticker": "YEXT",
+        "name": "Yext, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 459515200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SUI": {
+        "ticker": "SUI",
+        "name": "Sun Communities, Inc.",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 15388048384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ANRO": {
+        "ticker": "ANRO",
+        "name": "Alto Neuroscience, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 694859968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
