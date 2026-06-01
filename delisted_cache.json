@@ -119,11 +119,6 @@
         "last_checked": "2026-05-30",
         "reason": "No Price Data"
     },
-    "QQD": {
-        "delisted": true,
-        "last_checked": "2026-05-30",
-        "reason": "No Price Data"
-    },
     "CSA": {
         "delisted": true,
         "last_checked": "2026-05-30",
@@ -195,6 +190,11 @@
         "reason": "No Price Data"
     },
     "DS": {
+        "delisted": true,
+        "last_checked": "2026-06-01",
+        "reason": "No Price Data"
+    },
+    "QQD": {
         "delisted": true,
         "last_checked": "2026-06-01",
         "reason": "No Price Data"
