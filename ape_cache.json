@@ -42198,5 +42198,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NAVI": {
+        "ticker": "NAVI",
+        "name": "Navient Corporation",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 794680512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TUSK": {
+        "ticker": "TUSK",
+        "name": "Mammoth Energy Services, Inc.",
+        "meta": "Conglomerates",
+        "type": "EQUITY",
+        "mcap": 168838128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "RDWR": {
+        "ticker": "RDWR",
+        "name": "Radware Ltd.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1324756736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "HURN": {
+        "ticker": "HURN",
+        "name": "Huron Consulting Group Inc.",
+        "meta": "Consulting Services",
+        "type": "EQUITY",
+        "mcap": 1685381760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
