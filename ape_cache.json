@@ -42238,5 +42238,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AVIR": {
+        "ticker": "AVIR",
+        "name": "Atea Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 341715712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SLDB": {
+        "ticker": "SLDB",
+        "name": "Solid Biosciences Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 647798400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "COYA": {
+        "ticker": "COYA",
+        "name": "Coya Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 110952480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
