@@ -42178,5 +42178,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "XHR": {
+        "ticker": "XHR",
+        "name": "Xenia Hotels & Resorts, Inc.",
+        "meta": "REIT - Hotel & Motel",
+        "type": "EQUITY",
+        "mcap": 1712580736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PGX": {
+        "ticker": "PGX",
+        "name": "Invesco Preferred ETF",
+        "meta": "Preferred Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
