@@ -42168,5 +42168,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "KBWY": {
+        "ticker": "KBWY",
+        "name": "Invesco KBW Premium Yield Equit",
+        "meta": "Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
