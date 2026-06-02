@@ -42268,5 +42268,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "HRMY": {
+        "ticker": "HRMY",
+        "name": "Harmony Biosciences Holdings, I",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1789462656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
