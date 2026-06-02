@@ -42138,5 +42138,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "OPTU": {
+        "ticker": "OPTU",
+        "name": "Optimum Communications, Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 552703616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "WLTH": {
+        "ticker": "WLTH",
+        "name": "Wealthfront Corporation",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 1822434432,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "CWEB": {
+        "ticker": "CWEB",
+        "name": "Direxion Daily CSI China Intern",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
