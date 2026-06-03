@@ -42378,5 +42378,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "UFPI": {
+        "ticker": "UFPI",
+        "name": "UFP Industries, Inc.",
+        "meta": "Lumber & Wood Production",
+        "type": "EQUITY",
+        "mcap": 4534233088,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
