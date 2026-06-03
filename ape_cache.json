@@ -42298,5 +42298,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "RDN": {
+        "ticker": "RDN",
+        "name": "Radian Group Inc.",
+        "meta": "Insurance - Specialty",
+        "type": "EQUITY",
+        "mcap": 4493232128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ETD": {
+        "ticker": "ETD",
+        "name": "Ethan Allen Interiors Inc.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 520123200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
