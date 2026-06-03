@@ -42368,5 +42368,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "VFQY": {
+        "ticker": "VFQY",
+        "name": "Vanguard U.S. Quality Factor ET",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
