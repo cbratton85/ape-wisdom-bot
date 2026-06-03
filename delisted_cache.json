@@ -104,11 +104,6 @@
         "last_checked": "2026-05-30",
         "reason": "No Price Data"
     },
-    "SAVA": {
-        "delisted": true,
-        "last_checked": "2026-05-30",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-05-31",
@@ -200,6 +195,16 @@
         "reason": "No Price Data"
     },
     "MOM": {
+        "delisted": true,
+        "last_checked": "2026-06-03",
+        "reason": "No Price Data"
+    },
+    "SAVA": {
+        "delisted": true,
+        "last_checked": "2026-06-03",
+        "reason": "No Price Data"
+    },
+    "ZEV": {
         "delisted": true,
         "last_checked": "2026-06-03",
         "reason": "No Price Data"

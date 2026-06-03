@@ -42318,5 +42318,55 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TPH": {
+        "ticker": "TPH",
+        "name": "Tri Pointe Homes, Inc.",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 3998444288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "NVST": {
+        "ticker": "NVST",
+        "name": "Envista Holdings Corporation",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 3710196480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "XOUT": {
+        "ticker": "XOUT",
+        "name": "GraniteShares XOUT U.S. Large C",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "INN": {
+        "ticker": "INN",
+        "name": "Summit Hotel Properties, Inc.",
+        "meta": "REIT - Hotel & Motel",
+        "type": "EQUITY",
+        "mcap": 650244672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FULC": {
+        "ticker": "FULC",
+        "name": "Fulcrum Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 212227120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
