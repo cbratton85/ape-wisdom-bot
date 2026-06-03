@@ -42278,5 +42278,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "GITS": {
+        "ticker": "GITS",
+        "name": "Global Interactive Technologies",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 8524162,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "NTCT": {
+        "ticker": "NTCT",
+        "name": "NetScout Systems, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 3105037312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
