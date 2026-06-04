@@ -42398,5 +42398,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "UVE": {
+        "ticker": "UVE",
+        "name": "UNIVERSAL INSURANCE HOLDINGS IN",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 995868672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
