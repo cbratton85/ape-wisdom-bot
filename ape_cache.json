@@ -42388,5 +42388,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "WOR": {
+        "ticker": "WOR",
+        "name": "Worthington Enterprises, Inc.",
+        "meta": "Metal Fabrication",
+        "type": "EQUITY",
+        "mcap": 2821678080,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
