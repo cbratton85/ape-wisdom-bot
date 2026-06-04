@@ -42428,5 +42428,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "VERU": {
+        "ticker": "VERU",
+        "name": "Veru Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 70141504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "BCC": {
+        "ticker": "BCC",
+        "name": "Boise Cascade, L.L.C.",
+        "meta": "Lumber & Wood Production",
+        "type": "EQUITY",
+        "mcap": 2403282944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
