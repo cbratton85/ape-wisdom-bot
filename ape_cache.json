@@ -42448,5 +42448,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "GIII": {
+        "ticker": "GIII",
+        "name": "G-III Apparel Group, LTD.",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 1351744768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
