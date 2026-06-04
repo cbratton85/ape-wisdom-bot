@@ -104,11 +104,6 @@
         "last_checked": "2026-05-31",
         "reason": "No Price Data"
     },
-    "ABB": {
-        "delisted": true,
-        "last_checked": "2026-05-31",
-        "reason": "No Price Data"
-    },
     "DS": {
         "delisted": true,
         "last_checked": "2026-06-01",
@@ -215,6 +210,16 @@
         "reason": "No Price Data"
     },
     "ATNF": {
+        "delisted": true,
+        "last_checked": "2026-06-04",
+        "reason": "No Price Data"
+    },
+    "ABB": {
+        "delisted": true,
+        "last_checked": "2026-06-04",
+        "reason": "No Price Data"
+    },
+    "AUD": {
         "delisted": true,
         "last_checked": "2026-06-04",
         "reason": "No Price Data"

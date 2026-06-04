@@ -42408,5 +42408,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FNGR": {
+        "ticker": "FNGR",
+        "name": "FingerMotion, Inc.",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 58793288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "BAOS": {
+        "ticker": "BAOS",
+        "name": "Baosheng Media Group Holdings L",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 5677602,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
