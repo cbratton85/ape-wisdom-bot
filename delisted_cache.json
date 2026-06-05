@@ -29,11 +29,6 @@
         "last_checked": "2026-05-29",
         "reason": "No Price Data"
     },
-    "HEAR": {
-        "delisted": true,
-        "last_checked": "2026-05-29",
-        "reason": "No Price Data"
-    },
     "WOW": {
         "delisted": true,
         "last_checked": "2026-05-29",
@@ -240,6 +235,11 @@
         "reason": "No Price Data"
     },
     "TTM": {
+        "delisted": true,
+        "last_checked": "2026-06-05",
+        "reason": "No Price Data"
+    },
+    "RESP": {
         "delisted": true,
         "last_checked": "2026-06-05",
         "reason": "No Price Data"
