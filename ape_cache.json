@@ -42468,5 +42468,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MLCO": {
+        "ticker": "MLCO",
+        "name": "Melco Resorts & Entertainment L",
+        "meta": "Resorts & Casinos",
+        "type": "EQUITY",
+        "mcap": 2217144832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "JBGS": {
+        "ticker": "JBGS",
+        "name": "JBG SMITH Properties",
+        "meta": "REIT - Diversified",
+        "type": "EQUITY",
+        "mcap": 895222336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KRP": {
+        "ticker": "KRP",
+        "name": "Kimbell Royalty Partners",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 1656495488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "EVR": {
+        "ticker": "EVR",
+        "name": "Evercore Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 13400092672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
