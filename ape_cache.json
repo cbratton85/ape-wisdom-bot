@@ -42458,5 +42458,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ALG": {
+        "ticker": "ALG",
+        "name": "Alamo Group, Inc.",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 1845694208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
