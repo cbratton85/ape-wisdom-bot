@@ -42558,5 +42558,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HTFL": {
+        "ticker": "HTFL",
+        "name": "Heartflow, Inc.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 2423367424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
