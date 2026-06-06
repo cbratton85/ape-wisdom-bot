@@ -42518,5 +42518,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "XTN": {
+        "ticker": "XTN",
+        "name": "State Street SPDR S&P Transport",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
