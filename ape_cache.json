@@ -42568,5 +42568,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SIFY": {
+        "ticker": "SIFY",
+        "name": "Sify Technologies Limited - Ame",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 1053421824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "PSL": {
+        "ticker": "PSL",
+        "name": "Invesco Dorsey Wright Consumer ",
+        "meta": "Consumer Defensive",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
