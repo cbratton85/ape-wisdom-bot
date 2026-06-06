@@ -42548,5 +42548,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "WSR": {
+        "ticker": "WSR",
+        "name": "Whitestone REIT",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 991654336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
