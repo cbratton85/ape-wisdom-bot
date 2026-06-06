@@ -42588,5 +42588,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "EPRT": {
+        "ticker": "EPRT",
+        "name": "Essential Properties Realty Tru",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 6563103232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
