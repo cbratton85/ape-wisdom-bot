@@ -42528,5 +42528,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "CTRE": {
+        "ticker": "CTRE",
+        "name": "CareTrust REIT, Inc.",
+        "meta": "REIT - Healthcare Facilities",
+        "type": "EQUITY",
+        "mcap": 8970042368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VAMO": {
+        "ticker": "VAMO",
+        "name": "Cambria Value and Momentum ETF",
+        "meta": "Equity Hedged",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
