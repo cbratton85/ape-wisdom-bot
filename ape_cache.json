@@ -42618,5 +42618,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SLP": {
+        "ticker": "SLP",
+        "name": "Simulations Plus, Inc.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 320863072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "UCC": {
+        "ticker": "UCC",
+        "name": "ProShares Ultra Consumer Discre",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }

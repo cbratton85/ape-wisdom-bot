@@ -179,11 +179,6 @@
         "last_checked": "2026-06-05",
         "reason": "No Price Data"
     },
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-06-05",
-        "reason": "No Price Data"
-    },
     "RESP": {
         "delisted": true,
         "last_checked": "2026-06-05",
@@ -235,6 +230,16 @@
         "reason": "No Price Data"
     },
     "WOW": {
+        "delisted": true,
+        "last_checked": "2026-06-07",
+        "reason": "No Price Data"
+    },
+    "TTM": {
+        "delisted": true,
+        "last_checked": "2026-06-07",
+        "reason": "No Price Data"
+    },
+    "CEL": {
         "delisted": true,
         "last_checked": "2026-06-07",
         "reason": "No Price Data"
