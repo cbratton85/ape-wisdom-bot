@@ -42658,5 +42658,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "GSEW": {
+        "ticker": "GSEW",
+        "name": "Goldman Sachs Equal Weight U.S.",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "EUSA": {
+        "ticker": "EUSA",
+        "name": "iShares MSCI USA Equal Weighted",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
