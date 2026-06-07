@@ -42678,5 +42678,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "AGZ": {
+        "ticker": "AGZ",
+        "name": "iShares  Agency Bond ETF",
+        "meta": "Short Government",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
