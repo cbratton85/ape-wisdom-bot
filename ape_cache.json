@@ -42638,5 +42638,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "QQQE": {
+        "ticker": "QQQE",
+        "name": "Direxion NASDAQ-100 Equal Weigh",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
