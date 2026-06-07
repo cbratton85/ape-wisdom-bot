@@ -204,11 +204,6 @@
         "last_checked": "2026-06-06",
         "reason": "No Price Data"
     },
-    "TIO": {
-        "delisted": true,
-        "last_checked": "2026-06-06",
-        "reason": "No Price Data"
-    },
     "FI": {
         "delisted": true,
         "last_checked": "2026-06-06",
@@ -230,6 +225,11 @@
         "reason": "No Price Data"
     },
     "SOL": {
+        "delisted": true,
+        "last_checked": "2026-06-07",
+        "reason": "No Price Data"
+    },
+    "TIO": {
         "delisted": true,
         "last_checked": "2026-06-07",
         "reason": "No Price Data"
