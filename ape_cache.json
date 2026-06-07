@@ -42648,5 +42648,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ACU": {
+        "ticker": "ACU",
+        "name": "Acme",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 166626992,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
