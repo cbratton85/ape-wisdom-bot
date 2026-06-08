@@ -42718,5 +42718,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CURV": {
+        "ticker": "CURV",
+        "name": "Torrid Holdings Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 163177488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
