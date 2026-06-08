@@ -42728,5 +42728,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PHB": {
+        "ticker": "PHB",
+        "name": "Invesco Fundamental High Yield ",
+        "meta": "High Yield Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "HZO": {
+        "ticker": "HZO",
+        "name": "MarineMax, Inc.  (FL)",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 733096960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "VENU": {
+        "ticker": "VENU",
+        "name": "Venu Holding Corporation",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 202807136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "NKTX": {
+        "ticker": "NKTX",
+        "name": "Nkarta, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 174212944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
