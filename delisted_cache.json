@@ -219,11 +219,6 @@
         "last_checked": "2026-06-07",
         "reason": "No Price Data"
     },
-    "LILM": {
-        "delisted": true,
-        "last_checked": "2026-06-08",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-06-08",
@@ -235,6 +230,11 @@
         "reason": "No Price Data"
     },
     "OLD": {
+        "delisted": true,
+        "last_checked": "2026-06-08",
+        "reason": "No Price Data"
+    },
+    "LILM": {
         "delisted": true,
         "last_checked": "2026-06-08",
         "reason": "No Price Data"

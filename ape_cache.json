@@ -42768,5 +42768,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "MDIA": {
+        "ticker": "MDIA",
+        "name": "Mediaco Holding Inc.",
+        "meta": "Broadcasting",
+        "type": "EQUITY",
+        "mcap": 63748880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
