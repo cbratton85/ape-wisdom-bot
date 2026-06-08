@@ -42778,5 +42778,95 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "MRLN": {
+        "ticker": "MRLN",
+        "name": "Merlin, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 761574720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "NRIX": {
+        "ticker": "NRIX",
+        "name": "Nurix Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1617266944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "NXXT": {
+        "ticker": "NXXT",
+        "name": "NextNRG, Inc.",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 93089904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "MAIR": {
+        "ticker": "MAIR",
+        "name": "Madison Air Solutions Corporati",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 19847149568,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AVEX": {
+        "ticker": "AVEX",
+        "name": "AEVEX Corp.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 1299382400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FTW": {
+        "ticker": "FTW",
+        "name": "Presidio Production Company",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 345097792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CCTG": {
+        "ticker": "CCTG",
+        "name": "CCSC Technology International H",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 1875347,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "CBRS": {
+        "ticker": "CBRS",
+        "name": "Cerebras Systems Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 52229931008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PS": {
+        "ticker": "PS",
+        "name": "Pershing Square Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 13408000000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
