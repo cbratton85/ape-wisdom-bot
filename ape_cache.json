@@ -42708,5 +42708,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "CPK": {
+        "ticker": "CPK",
+        "name": "Chesapeake Utilities Corporatio",
+        "meta": "Utilities - Regulated Gas",
+        "type": "EQUITY",
+        "mcap": 2971309056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
