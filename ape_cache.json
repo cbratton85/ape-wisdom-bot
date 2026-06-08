@@ -42688,5 +42688,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "LILM": {
+        "ticker": "LILM",
+        "name": "LILM",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "NUWE": {
+        "ticker": "NUWE",
+        "name": "Nuwellis, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 491910,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
