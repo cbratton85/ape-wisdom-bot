@@ -42868,5 +42868,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "NCTY": {
+        "ticker": "NCTY",
+        "name": "The9 Limited - American Deposit",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 72242080,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
