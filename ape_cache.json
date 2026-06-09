@@ -42928,5 +42928,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ELY": {
+        "ticker": "ELY",
+        "name": "ELY",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "NUVL": {
+        "ticker": "NUVL",
+        "name": "Nuvalent, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 9723457536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TOELF": {
+        "ticker": "TOELF",
+        "name": "Tokyo Electron Ltd.",
+        "meta": "Semiconductor Equipment & Materials",
+        "type": "EQUITY",
+        "mcap": 170567843840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
+    },
+    "MUX": {
+        "ticker": "MUX",
+        "name": "McEwen Inc.",
+        "meta": "Other Precious Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 1064867136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
