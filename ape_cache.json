@@ -42878,5 +42878,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "WTM": {
+        "ticker": "WTM",
+        "name": "White Mountains Insurance Group",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 5012037120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "RGNT": {
+        "ticker": "RGNT",
+        "name": "Regentis Biomaterials Ltd.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 6629603,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
