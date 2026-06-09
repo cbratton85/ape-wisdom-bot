@@ -42968,5 +42968,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "YOUL": {
+        "ticker": "YOUL",
+        "name": "Youlife Group Inc.",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 31940368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "EEMO": {
+        "ticker": "EEMO",
+        "name": "Invesco S&P Emerging Markets Mo",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
