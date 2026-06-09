@@ -49,11 +49,6 @@
         "last_checked": "2026-06-02",
         "reason": "No Price Data"
     },
-    "EXAS": {
-        "delisted": true,
-        "last_checked": "2026-06-02",
-        "reason": "No Price Data"
-    },
     "SAVA": {
         "delisted": true,
         "last_checked": "2026-06-03",
@@ -220,6 +215,11 @@
         "reason": "No Price Data"
     },
     "SAVE": {
+        "delisted": true,
+        "last_checked": "2026-06-09",
+        "reason": "No Price Data"
+    },
+    "EXAS": {
         "delisted": true,
         "last_checked": "2026-06-09",
         "reason": "No Price Data"

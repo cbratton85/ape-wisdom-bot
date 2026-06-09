@@ -42988,5 +42988,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "KOSS": {
+        "ticker": "KOSS",
+        "name": "Koss Corporation",
+        "meta": "Consumer Electronics",
+        "type": "EQUITY",
+        "mcap": 37676424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
