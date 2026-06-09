@@ -42898,5 +42898,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "FRVO": {
+        "ticker": "FRVO",
+        "name": "Fervo Energy Company",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 9986356224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "INIO": {
+        "ticker": "INIO",
+        "name": "INNIO N.V.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 25290000384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ZLAB": {
+        "ticker": "ZLAB",
+        "name": "Zai Lab Limited",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1851607936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
