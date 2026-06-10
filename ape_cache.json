@@ -43078,5 +43078,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "VTGN": {
+        "ticker": "VTGN",
+        "name": "VistaGen Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 20828400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "PGC": {
+        "ticker": "PGC",
+        "name": "Peapack-Gladstone Financial Cor",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 804680128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
