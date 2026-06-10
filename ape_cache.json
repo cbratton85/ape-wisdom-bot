@@ -43018,5 +43018,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "QNT": {
+        "ticker": "QNT",
+        "name": "Quantinuum Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 1723077504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "AMSS": {
+        "ticker": "AMSS",
+        "name": "AMASS Brands Inc.",
+        "meta": "Beverages - Wineries & Distilleries",
+        "type": "EQUITY",
+        "mcap": 46431768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
