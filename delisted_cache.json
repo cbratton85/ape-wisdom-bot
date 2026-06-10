@@ -174,11 +174,6 @@
         "last_checked": "2026-06-08",
         "reason": "No Price Data"
     },
-    "DTC": {
-        "delisted": true,
-        "last_checked": "2026-06-08",
-        "reason": "No Price Data"
-    },
     "OLD": {
         "delisted": true,
         "last_checked": "2026-06-08",
@@ -217,6 +212,16 @@
     "EXAS": {
         "delisted": true,
         "last_checked": "2026-06-09",
+        "reason": "No Price Data"
+    },
+    "MOM": {
+        "delisted": true,
+        "last_checked": "2026-06-10",
+        "reason": "No Price Data"
+    },
+    "DTC": {
+        "delisted": true,
+        "last_checked": "2026-06-10",
         "reason": "No Price Data"
     }
 }

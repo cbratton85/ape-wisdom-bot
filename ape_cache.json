@@ -42998,5 +42998,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "MEC": {
+        "ticker": "MEC",
+        "name": "Mayville Engineering Company, I",
+        "meta": "Metal Fabrication",
+        "type": "EQUITY",
+        "mcap": 885661824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "JAN": {
+        "ticker": "JAN",
+        "name": "Janus Living, Inc.",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 5394708480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
