@@ -43038,5 +43038,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ALH": {
+        "ticker": "ALH",
+        "name": "Alliance Laundry Holdings Inc.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 5063527936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "INTA": {
+        "ticker": "INTA",
+        "name": "Intapp, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 1858340224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "ACVA": {
+        "ticker": "ACVA",
+        "name": "ACV Auctions Inc.",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 1022194560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "IETC": {
+        "ticker": "IETC",
+        "name": "iShares U.S. Tech Independence ",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
