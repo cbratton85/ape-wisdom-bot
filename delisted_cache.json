@@ -104,11 +104,6 @@
         "last_checked": "2026-06-07",
         "reason": "No Price Data"
     },
-    "TIO": {
-        "delisted": true,
-        "last_checked": "2026-06-07",
-        "reason": "No Price Data"
-    },
     "OG": {
         "delisted": true,
         "last_checked": "2026-06-07",
@@ -215,6 +210,16 @@
         "reason": "No Price Data"
     },
     "CO": {
+        "delisted": true,
+        "last_checked": "2026-06-11",
+        "reason": "No Price Data"
+    },
+    "GPS": {
+        "delisted": true,
+        "last_checked": "2026-06-11",
+        "reason": "No Price Data"
+    },
+    "SBRCY": {
         "delisted": true,
         "last_checked": "2026-06-11",
         "reason": "No Price Data"
