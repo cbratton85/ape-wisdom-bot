@@ -43108,5 +43108,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ALOT": {
+        "ticker": "ALOT",
+        "name": "AstroNova, Inc.",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 123344528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
