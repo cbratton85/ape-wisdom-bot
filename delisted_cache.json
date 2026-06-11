@@ -4,11 +4,6 @@
         "last_checked": "2026-05-29",
         "reason": "No Price Data"
     },
-    "CO": {
-        "delisted": true,
-        "last_checked": "2026-05-30",
-        "reason": "No Price Data"
-    },
     "APE": {
         "delisted": true,
         "last_checked": "2026-05-31",
@@ -215,6 +210,11 @@
         "reason": "No Price Data"
     },
     "ABB": {
+        "delisted": true,
+        "last_checked": "2026-06-11",
+        "reason": "No Price Data"
+    },
+    "CO": {
         "delisted": true,
         "last_checked": "2026-06-11",
         "reason": "No Price Data"

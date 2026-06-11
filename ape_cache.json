@@ -43128,5 +43128,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NYF": {
+        "ticker": "NYF",
+        "name": "iShares New York Muni Bond ETF",
+        "meta": "Muni New York Long",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "GELS": {
+        "ticker": "GELS",
+        "name": "Gelteq Limited",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 12973235,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "VMD": {
+        "ticker": "VMD",
+        "name": "Viemed Healthcare, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 395060736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
