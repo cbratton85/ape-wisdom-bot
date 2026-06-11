@@ -1,9 +1,4 @@
 {
-    "DDG": {
-        "delisted": true,
-        "last_checked": "2026-05-26",
-        "reason": "No Price Data"
-    },
     "SI": {
         "delisted": true,
         "last_checked": "2026-05-29",
@@ -215,6 +210,11 @@
         "reason": "No Price Data"
     },
     "TSE": {
+        "delisted": true,
+        "last_checked": "2026-06-11",
+        "reason": "No Price Data"
+    },
+    "ABB": {
         "delisted": true,
         "last_checked": "2026-06-11",
         "reason": "No Price Data"

@@ -43118,5 +43118,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "FNDC": {
+        "ticker": "FNDC",
+        "name": "Schwab Fundamental Internationa",
+        "meta": "Foreign Small/Mid Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
