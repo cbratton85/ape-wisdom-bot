@@ -119,11 +119,6 @@
         "last_checked": "2026-06-07",
         "reason": "No Price Data"
     },
-    "PYR": {
-        "delisted": true,
-        "last_checked": "2026-06-07",
-        "reason": "No Price Data"
-    },
     "OLD": {
         "delisted": true,
         "last_checked": "2026-06-08",
@@ -220,6 +215,16 @@
         "reason": "No Price Data"
     },
     "RESP": {
+        "delisted": true,
+        "last_checked": "2026-06-11",
+        "reason": "No Price Data"
+    },
+    "TGIF": {
+        "delisted": true,
+        "last_checked": "2026-06-11",
+        "reason": "No Price Data"
+    },
+    "VLD": {
         "delisted": true,
         "last_checked": "2026-06-11",
         "reason": "No Price Data"
