@@ -43208,5 +43208,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "XNDU": {
+        "ticker": "XNDU",
+        "name": "Xanadu Quantum Technologies Lim",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 3597061632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "GOTU": {
+        "ticker": "GOTU",
+        "name": "Gaotu Techedu Inc.",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 367218784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ABTC": {
+        "ticker": "ABTC",
+        "name": "American Bitcoin Corp.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 1550726656,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
