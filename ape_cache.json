@@ -43188,5 +43188,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "SPGP": {
+        "ticker": "SPGP",
+        "name": "Invesco S&P 500 GARP ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SUNE": {
+        "ticker": "SUNE",
+        "name": "SUNation Energy, Inc.",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 10596549,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
