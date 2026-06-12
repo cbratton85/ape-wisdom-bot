@@ -3,8 +3,8 @@ name: Momentum Scanner
 on:
   workflow_dispatch:
   schedule:
-    # Runs at minute 0 (the top of the hour) every hour of every day
-    - cron: '0 * * * *'
+    # Runs every 30 minutes
+    - cron: '*/30 * * * *'
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
