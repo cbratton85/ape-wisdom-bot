@@ -43238,5 +43238,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "RAL": {
+        "ticker": "RAL",
+        "name": "Ralliant Corporation",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 7415571456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
