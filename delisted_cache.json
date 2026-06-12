@@ -214,11 +214,6 @@
         "last_checked": "2026-06-12",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-06-12",
-        "reason": "No Price Data"
-    },
     "DS": {
         "delisted": true,
         "last_checked": "2026-06-12",
@@ -230,6 +225,16 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-06-12",
+        "reason": "No Price Data"
+    },
+    "RE": {
+        "delisted": true,
+        "last_checked": "2026-06-12",
+        "reason": "No Price Data"
+    },
+    "QQC": {
         "delisted": true,
         "last_checked": "2026-06-12",
         "reason": "No Price Data"
