@@ -43168,5 +43168,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "AADX": {
+        "ticker": "AADX",
+        "name": "Applied Aerospace & Defense, In",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "KEEL": {
+        "ticker": "KEEL",
+        "name": "Keel Infrastructure Corp.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 3333134336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
