@@ -43158,5 +43158,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "FJP": {
+        "ticker": "FJP",
+        "name": "First Trust Japan AlphaDEX Fund",
+        "meta": "Japan Stock",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
