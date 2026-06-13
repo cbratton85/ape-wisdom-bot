@@ -43298,5 +43298,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "WPS": {
+        "ticker": "WPS",
+        "name": "iShares International Developed",
+        "meta": "Global Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }

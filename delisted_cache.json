@@ -34,11 +34,6 @@
         "last_checked": "2026-06-04",
         "reason": "No Price Data"
     },
-    "QED": {
-        "delisted": true,
-        "last_checked": "2026-06-04",
-        "reason": "No Price Data"
-    },
     "IRBT": {
         "delisted": true,
         "last_checked": "2026-06-04",
@@ -240,6 +235,11 @@
         "reason": "No Price Data"
     },
     "RESP": {
+        "delisted": true,
+        "last_checked": "2026-06-13",
+        "reason": "No Price Data"
+    },
+    "WPS": {
         "delisted": true,
         "last_checked": "2026-06-13",
         "reason": "No Price Data"
