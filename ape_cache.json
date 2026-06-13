@@ -43278,5 +43278,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "FCOM": {
+        "ticker": "FCOM",
+        "name": "Fidelity MSCI Communication Ser",
+        "meta": "Communications",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "MLAB": {
+        "ticker": "MLAB",
+        "name": "Mesa Laboratories, Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 582769728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
