@@ -43268,5 +43268,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "XE": {
+        "ticker": "XE",
+        "name": "X-Energy, Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 5343857664,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
