@@ -179,11 +179,6 @@
         "last_checked": "2026-06-11",
         "reason": "No Price Data"
     },
-    "SBRCY": {
-        "delisted": true,
-        "last_checked": "2026-06-11",
-        "reason": "No Price Data"
-    },
     "RESP": {
         "delisted": true,
         "last_checked": "2026-06-11",
@@ -237,6 +232,16 @@
     "YY": {
         "delisted": true,
         "last_checked": "2026-06-12",
+        "reason": "No Price Data"
+    },
+    "SBRCY": {
+        "delisted": true,
+        "last_checked": "2026-06-13",
+        "reason": "No Price Data"
+    },
+    "JPN": {
+        "delisted": true,
+        "last_checked": "2026-06-13",
         "reason": "No Price Data"
     }
 }

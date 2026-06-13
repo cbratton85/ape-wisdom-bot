@@ -43248,5 +43248,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "EXYN": {
+        "ticker": "EXYN",
+        "name": "Exyn Technologies, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 45628164,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "VRA": {
+        "ticker": "VRA",
+        "name": "Vera Bradley, Inc.",
+        "meta": "Footwear & Accessories",
+        "type": "EQUITY",
+        "mcap": 107780976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
