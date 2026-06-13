@@ -214,11 +214,6 @@
         "last_checked": "2026-06-12",
         "reason": "No Price Data"
     },
-    "QQC": {
-        "delisted": true,
-        "last_checked": "2026-06-12",
-        "reason": "No Price Data"
-    },
     "YY": {
         "delisted": true,
         "last_checked": "2026-06-12",
@@ -240,6 +235,11 @@
         "reason": "No Price Data"
     },
     "ZI": {
+        "delisted": true,
+        "last_checked": "2026-06-13",
+        "reason": "No Price Data"
+    },
+    "QQC": {
         "delisted": true,
         "last_checked": "2026-06-13",
         "reason": "No Price Data"
