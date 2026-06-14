@@ -43308,5 +43308,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "AURE": {
+        "ticker": "AURE",
+        "name": "Aurelion Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 90160000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
