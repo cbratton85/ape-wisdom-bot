@@ -139,11 +139,6 @@
         "last_checked": "2026-06-12",
         "reason": "No Price Data"
     },
-    "JPN": {
-        "delisted": true,
-        "last_checked": "2026-06-13",
-        "reason": "No Price Data"
-    },
     "ZI": {
         "delisted": true,
         "last_checked": "2026-06-13",
@@ -210,6 +205,16 @@
         "reason": "No Price Data"
     },
     "CBD": {
+        "delisted": true,
+        "last_checked": "2026-06-15",
+        "reason": "No Price Data"
+    },
+    "HLG": {
+        "delisted": true,
+        "last_checked": "2026-06-15",
+        "reason": "No Price Data"
+    },
+    "MOM": {
         "delisted": true,
         "last_checked": "2026-06-15",
         "reason": "No Price Data"

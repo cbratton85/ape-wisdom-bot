@@ -43358,5 +43358,65 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "HLG": {
+        "ticker": "HLG",
+        "name": "HLG",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "REET": {
+        "ticker": "REET",
+        "name": "iShares Global REIT ETF",
+        "meta": "Global Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "THG": {
+        "ticker": "THG",
+        "name": "Hanover Insurance Group Inc",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 6981088768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CMTL": {
+        "ticker": "CMTL",
+        "name": "Comtech Telecommunications Corp",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 83549904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "NXDR": {
+        "ticker": "NXDR",
+        "name": "Nextdoor Holdings, Inc.",
+        "meta": "Internet Content & Information",
+        "type": "EQUITY",
+        "mcap": 835239104,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ARXS": {
+        "ticker": "ARXS",
+        "name": "Arxis, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 16883222528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
