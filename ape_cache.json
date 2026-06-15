@@ -43418,5 +43418,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CRVO": {
+        "ticker": "CRVO",
+        "name": "CervoMed Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 22961624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
