@@ -814,16 +814,26 @@ def filter_and_process(stocks):
             # 4. CALCULATE RSI & STOCHASTIC
             if not hist.empty and len(hist) >= 15:
                 rsi_val = calculate_rsi(hist['Close'])
-                stoch_k, stoch_d = calculate_stochastic(hist, k_period=5, d_period=1)
+                stoch_k, stoch_d = calculate_stochastic(hist, k_period=14, d_period=3)
+
+                # --- NEW: EMA Calculations ---
+                ema9 = hist['Close'].ewm(span=9, adjust=False).mean().iloc[-1]
+                ema21 = hist['Close'].ewm(span=21, adjust=False).mean().iloc[-1]
+                ema50 = hist['Close'].ewm(span=50, adjust=False).mean().iloc[-1]
+                
+                # Bullish: 9 > 21 > 50 | Bearish: 9 < 21 < 50
+                if ema9 > ema21 > ema50: crossover_signal = 1
+                elif ema9 < ema21 < ema50: crossover_signal = -1
+                else: crossover_signal = 0
+                
                 raw_sctr = calculate_raw_sctr(hist, t)
                 raw_ibd = calculate_raw_ibd_rs(hist, t)
                 raw_spy = calculate_raw_spy_rs(hist, spy_hist, t)
             else:
-                rsi_val = 0
-                stoch_k, stoch_d = 50.0, 50.0
-                raw_sctr = -9999.0
-                raw_ibd = -9999.0
-                raw_spy = -9999.0
+                # Fallback if < 50 days of data
+                rsi_val, stoch_k, stoch_d, ema9, ema21, ema50, crossover_signal = 0, 50.0, 50.0, 0, 0, 0, 0
+                raw_sctr, raw_ibd, raw_spy = -9999.0, -9999.0, -9999.0
+
             clean_hist = hist['Volume'] 
             actual_vol_days = min(len(clean_hist), AVG_VOLUME_DAYS)
             avg_v = clean_hist.tail(actual_vol_days).mean()
@@ -923,6 +933,10 @@ def filter_and_process(stocks):
                 "RSI": rsi_val,
                 "Stoch_K": stoch_k,
                 "Stoch_D": stoch_d,
+                "EMA9": ema9,
+                "EMA21": ema21,
+                "EMA50": ema50,
+                "Trend": crossover_signal,
                 "Raw_SCTR": raw_sctr,
                 "Raw_IBD": raw_ibd,
                 "IBD_RS": 0.0,
