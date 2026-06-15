@@ -43348,5 +43348,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "AKBA": {
+        "ticker": "AKBA",
+        "name": "Akebia Therapeutics, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 248004736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
