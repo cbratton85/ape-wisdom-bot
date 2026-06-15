@@ -43338,5 +43338,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NPCE": {
+        "ticker": "NPCE",
+        "name": "Neuropace, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 533226176,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
