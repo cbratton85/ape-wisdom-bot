@@ -392,7 +392,7 @@ def calculate_rsi(series, period=14):
     except Exception:
         return 0
 
-def calculate_stochastic(df, k_period=5, d_period=1, smooth_k=3):
+def calculate_stochastic(df, k_period=14, d_period=3, smooth_k=3):
     """
     Calculates the Stochastic Oscillator accurately, preventing NaN warmup pollution.
     """
