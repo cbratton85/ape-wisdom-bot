@@ -2376,6 +2376,7 @@ def export_interactive_html(df):
                 <button class="btn btn-sm btn-reset" onclick="openHeatmapModal('etf')" title="ETF Heatmap" style="background: linear-gradient(135deg, #c43000, #ff4422); color: white; font-weight: 700; border: none; font-family:var(--font-ui); font-size:0.7rem; letter-spacing:0.06em;">📈 ETFs</button>
                 <button class="btn btn-sm btn-reset" onclick="exportTickers()" title="Download Ticker List" style="font-family:var(--font-ui); font-size:0.7rem;">.TXT</button>
                 <button class="btn btn-sm btn-reset" onclick="copyTableToClipboard(event)" title="Copy Table" style="font-family:var(--font-ui); font-size:0.7rem;">📋 Copy</button>
+                <button class="btn btn-sm btn-reset" onclick="copySymbolsToClipboard(event)" title="Copy Symbols Only" style="font-family:var(--font-ui); font-size:0.7rem;">📋 Syms</button>
 
                 <span id="stockCounter">Loading...</span>
             </div>
@@ -2987,15 +2988,66 @@ def export_interactive_html(df):
     }}
 
     function copyTableToClipboard(event) {{ 
-        const btn = event.currentTarget; const table = document.querySelector(".table");
+        const btn = event.currentTarget; 
         if (!table) return;
-        let rows = Array.from(table.querySelectorAll("tr"));
-        let textToCopy = rows.map(row => {{
-            let cells = Array.from(row.querySelectorAll("th, td"));
-            return cells.map(cell => cell.innerText.trim()).join("\\t");
-        }}).join("\\n");
+
+        // 1. Get Header Names (only visible columns)
+        let headers = [];
+        table.columns().every(function() {{
+            if (this.visible()) {{
+                // Extract text and strip HTML tags
+                let headerText = this.header().innerHTML.replace(/<[^>]+>/g, '').trim();
+                headers.push(headerText);
+            }}
+        }});
+        
+        let textToCopy = headers.join("\\t") + "\\n";
+
+        // 2. Get all row data passing the current filters (across all pages)
+        let rowData = table.rows({{ search: 'applied' }}).data();
+        
+        rowData.each(function(row) {{
+            let rowVals = [];
+            table.columns().every(function(colIdx) {{
+                if (this.visible()) {{
+                    // Strip HTML tags from the data cell
+                    let cellText = String(row[colIdx]).replace(/<[^>]+>/g, '').trim();
+                    rowVals.push(cellText);
+                }}
+            }});
+            textToCopy += rowVals.join("\\t") + "\\n";
+        }});
+
         navigator.clipboard.writeText(textToCopy).then(() => {{
-            const originalText = btn.innerHTML; btn.innerHTML = "✅ Copied!"; btn.style.color = "#00ff00";
+            const originalText = btn.innerHTML; 
+            btn.innerHTML = "✅ Copied!"; 
+            btn.style.color = "#00d97e"; // Matches your Ape Wisdom theme green
+            setTimeout(() => {{ btn.innerHTML = originalText; btn.style.color = ""; }}, 2000);
+        }});
+    }}
+
+    function copySymbolsToClipboard(event) {{
+        const btn = event.currentTarget;
+        if (!table) return;
+        
+        // Grabs all symbols currently passing the active filters
+        var data = table.rows({{ search: 'applied' }}).data();
+        var tickers = []; 
+        data.each(function (value) {{ 
+            var clean = String(value[4]).replace(/<[^>]+>/g, '').trim(); 
+            if(clean) tickers.push(clean); 
+        }});
+        
+        if (tickers.length === 0) {{ 
+            alert("No visible tickers!"); 
+            return; 
+        }}
+        
+        // Joins them with a comma and space for easy TradingView pasting
+        navigator.clipboard.writeText(tickers.join(", ")).then(() => {{
+            const originalText = btn.innerHTML; 
+            btn.innerHTML = "✅ Copied!"; 
+            btn.style.color = "#00d97e"; // Matches your Ape Wisdom theme green
             setTimeout(() => {{ btn.innerHTML = originalText; btn.style.color = ""; }}, 2000);
         }});
     }}
