@@ -3109,11 +3109,11 @@ def export_interactive_html(df):
             }},
 
             "columnDefs": [ 
-                // Metadata: Type_Tag (27), AvgVol (28), MCap (29) hidden
-                {{ "visible": false, "targets": [27, 28, 29] }}, 
+                // Metadata: Type_Tag (28), AvgVol (29), MCap (30) hidden
+                {{ "visible": false, "targets": [28, 29, 30] }}, 
                 
                 // Numeric sorting: Includes GI and shifted technical columns
-                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26], 
+                {{ "targets": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27], 
                    "type": "num", 
                    "render": function(data, type) {{ 
                        if (type === 'sort' || type === 'type') {{ return parseVal(data); }} 
@@ -3136,9 +3136,9 @@ def export_interactive_html(df):
         // --- CUSTOM FILTERING LOGIC ---
         $.fn.dataTable.ext.search.push(function(settings, data) {{
             // UPDATED INDICES:
-            var typeTag = data[27] || "";
-            var avgVol  = parseVal(data[28]);
-            var mcap    = parseVal(data[29]);
+            var typeTag = data[28] || "";
+            var avgVol  = parseVal(data[29]);
+            var mcap    = parseVal(data[30]);
             
             var viewMode = $('input[name="btnradio"]:checked').attr('id');
             var isETF = typeTag.includes("ETF");
