@@ -169,11 +169,6 @@
         "last_checked": "2026-06-15",
         "reason": "No Price Data"
     },
-    "HLG": {
-        "delisted": true,
-        "last_checked": "2026-06-15",
-        "reason": "No Price Data"
-    },
     "MOM": {
         "delisted": true,
         "last_checked": "2026-06-15",
@@ -187,6 +182,16 @@
     "RE": {
         "delisted": true,
         "last_checked": "2026-06-15",
+        "reason": "No Price Data"
+    },
+    "HLG": {
+        "delisted": true,
+        "last_checked": "2026-06-16",
+        "reason": "No Price Data"
+    },
+    "BODY": {
+        "delisted": true,
+        "last_checked": "2026-06-16",
         "reason": "No Price Data"
     }
 }
