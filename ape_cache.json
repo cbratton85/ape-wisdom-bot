@@ -43568,5 +43568,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "XNTK": {
+        "ticker": "XNTK",
+        "name": "State Street SPDR NYSE Technolo",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
