@@ -14,11 +14,6 @@
         "last_checked": "2026-06-11",
         "reason": "No Price Data"
     },
-    "FI": {
-        "delisted": true,
-        "last_checked": "2026-06-13",
-        "reason": "No Price Data"
-    },
     "YY": {
         "delisted": true,
         "last_checked": "2026-06-13",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "JW": {
+        "delisted": true,
+        "last_checked": "2026-06-16",
+        "reason": "No Price Data"
+    },
+    "FI": {
         "delisted": true,
         "last_checked": "2026-06-16",
         "reason": "No Price Data"
