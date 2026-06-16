@@ -2625,9 +2625,9 @@ def export_interactive_html(df):
             "watchlist": [],
             "compareSymbols": [],
             "studies": [
-                {{"id": "STD;Moving_Average_Exponential", "inputs": {{"length": 9}}, "override": {{"Plot.color": "#4CAF50", "Plot.linewidth": 1}}}},
-                {{"id": "STD;Moving_Average_Exponential", "inputs": {{"length": 21}}, "override": {{"Plot.color": "#00BCD4", "Plot.linewidth": 1}}}},
-                {{"id": "STD;Moving_Average_Exponential", "inputs": {{"length": 50}}, "override": {{"Plot.color": "#2979FF", "Plot.linewidth": 2}}}}
+                {{"id": "MAExp@tv-basicstudies", "inputs": {{"length": 9}}, "overrides": {{"Plot.color": "#4CAF50", "Plot.linewidth": 1}}}},
+                {{"id": "MAExp@tv-basicstudies", "inputs": {{"length": 21}}, "overrides": {{"Plot.color": "#00BCD4", "Plot.linewidth": 1}}}},
+                {{"id": "MAExp@tv-basicstudies", "inputs": {{"length": 50}}, "overrides": {{"Plot.color": "#2979FF", "Plot.linewidth": 2}}}}
             ]
         }});
 
