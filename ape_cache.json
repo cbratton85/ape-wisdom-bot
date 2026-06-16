@@ -43438,5 +43438,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "WTFC": {
+        "ticker": "WTFC",
+        "name": "Wintrust Financial Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 10569063424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PSTL": {
+        "ticker": "PSTL",
+        "name": "Postal Realty Trust, Inc.",
+        "meta": "REIT - Office",
+        "type": "EQUITY",
+        "mcap": 813112128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CBSH": {
+        "ticker": "CBSH",
+        "name": "Commerce Bancshares, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 7976925696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
