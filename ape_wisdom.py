@@ -1470,15 +1470,29 @@ def export_interactive_html(df):
             rsi_str = color_span(f"{rsi_raw:.1f}", rsi_clr)
             export_df.at[index, 'RSI'] = rsi_str
 
-            # --- EMA TREND BADGE ---
-            trend_val = row.get('Trend', 0)
-            if trend_val == 1:
-                trend_str = '<span style="color:#00d97e; font-weight:bold; letter-spacing:-1px;">▲▲▲</span>'
-            elif trend_val == -1:
-                trend_str = '<span style="color:#ff4d5a; font-weight:bold; letter-spacing:-1px;">▼▼▼</span>'
-            else:
-                trend_str = '<span style="color:#555568; font-weight:bold; letter-spacing:-1px;">---</span>'
-            export_df.at[index, 'Trend'] = trend_str
+            # --- 3-ARROW EMA SYSTEM ---
+            p_clean = float(row.get('Price', 0))
+            ema9 = float(row.get('EMA9', 0))
+            ema21 = float(row.get('EMA21', 0))
+            ema50 = float(row.get('EMA50', 0))
+
+            # Determine individual arrow colors
+            a1_clr = "#00d97e" if p_clean >= ema9 else "#ff4d5a"
+            a2_clr = "#00d97e" if ema9 >= ema21 else "#ff4d5a"
+            a3_clr = "#00d97e" if ema21 >= ema50 else "#ff4d5a"
+            
+            # Determine individual arrow directions
+            a1_sym = "▲" if p_clean >= ema9 else "▼"
+            a2_sym = "▲" if ema9 >= ema21 else "▼"
+            a3_sym = "▲" if ema21 >= ema50 else "▼"
+
+            # Construct the final 3-part badge
+            trend_str = (
+                f'<span style="color:{a1_clr};">{a1_sym}</span>'
+                f'<span style="color:{a2_clr};">{a2_sym}</span>'
+                f'<span style="color:{a3_clr};">{a3_sym}</span>'
+            )
+            export_df.at[index, 'Trend'] = f'<div style="font-size:11px; font-weight:bold; letter-spacing:1px; text-align:center;">{trend_str}</div>'
 
             # --- SCTR COLOR LOGIC ---
             sctr_global = float(row.get('SCTR', 0.0))
@@ -1575,7 +1589,7 @@ def export_interactive_html(df):
             '<th>Sym</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Ticker symbol for trading.">&nbsp;SYM</span></th>',
             '<th>Price</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Real-time trading price.">&nbsp;&nbsp;PRICE</span></th>',
             '<th>Day%</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Daily % change since last close.\nGreen: Positive | Red: Negative">&nbsp;&nbsp;DAY%</span></th>',
-            '<th>Trend</th>': '<th><span class="d-tooltip header-fix" data-tooltip="9/21/50 EMA Crossover\nGreen ▲: Bullish (9>21>50)\nRed ▼: Bearish (9<21<50)">TREND</span></th>',
+            '<th>Trend</th>': '<th><span class="d-tooltip header-fix" data-tooltip="3-Arrow Trend System (9/21/50)\nArrow 1: Price vs 9 EMA\nArrow 2: 9 EMA vs 21 EMA\nArrow 3: 21 EMA vs 50 EMA\n▲▲▲ = Full Bullish Alignment">TREND</span></th>',
             '<th>Acc</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Vel(Now) - Vel(1h ago)\nMag: Expl. | Cyan: Fast | Red: Slow">ACC</span></th>',
             '<th>Eff</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Rank gain per unit of volume.\nGrn: >1.0 | Yel: >0.5 | Red: <0">&nbsp;&nbsp;EFF</span></th>',
             '<th>Conv</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Upvotes / Mentions ratio.\nGold: >1.0x | White: Diluted">&nbsp;CONV</span></th>',
