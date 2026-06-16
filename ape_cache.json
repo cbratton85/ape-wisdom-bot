@@ -43518,5 +43518,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ORN": {
+        "ticker": "ORN",
+        "name": "Orion Group Holdings, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 627024064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GMRS": {
+        "ticker": "GMRS",
+        "name": "GMR Solutions Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 647060288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
