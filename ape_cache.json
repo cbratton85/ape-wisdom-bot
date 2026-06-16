@@ -43538,5 +43538,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "DSEP": {
+        "ticker": "DSEP",
+        "name": "FT Vest U.S. Equity Deep Buffer",
+        "meta": "Defined Outcome",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "PSCX": {
+        "ticker": "PSCX",
+        "name": "Pacer Swan SOS Conservative (Ja",
+        "meta": "Defined Outcome",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
