@@ -43498,5 +43498,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "OPLN": {
+        "ticker": "OPLN",
+        "name": "OPENLANE, Inc.",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 4088460288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
