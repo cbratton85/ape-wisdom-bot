@@ -33771,13 +33771,13 @@
     },
     "SPCX": {
         "ticker": "SPCX",
-        "name": "SPAC and New Issue ETF",
-        "meta": "Event Driven",
-        "type": "ETF",
-        "mcap": 0,
+        "name": "Space Exploration Technologies Corp.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 2100000000000,
         "currency": "USD",
         "description": "",
-        "exchange": "NGM"
+        "exchange": "NMS"
     },
     "GVA": {
         "ticker": "GVA",
