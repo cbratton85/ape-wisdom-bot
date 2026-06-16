@@ -43508,5 +43508,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CRMT": {
+        "ticker": "CRMT",
+        "name": "America's Car-Mart, Inc.",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 20008906,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
