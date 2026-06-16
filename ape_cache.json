@@ -43428,5 +43428,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "L": {
+        "ticker": "L",
+        "name": "Loews Corporation",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 22280654848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
