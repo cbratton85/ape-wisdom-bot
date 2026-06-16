@@ -1607,9 +1607,9 @@ def export_interactive_html(df):
             '<th>GI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Gekko GI score (0-100).\nGreen: strong accumulation | Red: heavy distribution" style="margin-left:4px;">GI</span></th>',
             '<th>RSI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Relative Strength Index (14d).\nRed: Overbought | Green: Oversold" style="margin-left:3px;">RSI</span></th>',
             '<th>STOCH</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Slow Stochastic Oscillator (%K14, %D3) developed by George Lane.\nLogic: Measures momentum by comparing the closing price to the 14-day price range. It assumes prices tend to close near their highs in an uptrend and lows in a downtrend.\nZones: &le; 20 is Oversold (Buy Zone, Green) | &ge; 80 is Overbought (Sell Zone, Red).">&nbsp;STOCH</span></th>',
-            '<th>SCTR</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="sctr-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 24, \'sctr-toggle\')" style="background:#111118; border:1px solid #00d97e; border-radius:4px; padding:1px 5px; font-size:9px; cursor:pointer; color:#00d97e; line-height:1; transition:all 0.2s; font-family:Inter,sans-serif; font-weight:700; letter-spacing:0.06em;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="StockCharts Technical Rank (SCTR) created by John Murphy.\nLogic: A percentile ranking (0-99.9) of a stock\'s technical strength versus its peers.\nFormula: Heavily weights long-term trends (200d EMA, 125d ROC), while factoring in medium-term (50d EMA, 20d ROC) and short-term (RSI, PPO slope) momentum." style="line-height:1;">SCTR</span></div></th>',
-            '<th>IBD_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="ibd-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 25, \'ibd-toggle\')" style="background:#111118; border:1px solid #00d97e; border-radius:4px; padding:1px 5px; font-size:9px; cursor:pointer; color:#00d97e; line-height:1; transition:all 0.2s; font-family:Inter,sans-serif; font-weight:700; letter-spacing:0.06em;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength (RS) Rating developed by William O\'Neil (IBD).\nLogic: A percentile rank (0-99.9) of a stock\'s 52-week price performance.\nFormula: Emphasizes recent momentum by weighting the most recent quarter (3 months) at 40%, and the prior three quarters at 20% each." style="line-height:1;">IBD</span></div></th>',
-            '<th>SPY_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="spy-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 26, \'spy-toggle\')" style="background:#111118; border:1px solid #00d97e; border-radius:4px; padding:1px 5px; font-size:9px; cursor:pointer; color:#00d97e; line-height:1; transition:all 0.2s; font-family:Inter,sans-serif; font-weight:700; letter-spacing:0.06em;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength against SPY (0-99.9).\nLogic: A percentile rank of the stock\'s 1-year performance compared to the SPY baseline." style="line-height:1;">vsSPY</span></div></th>'
+            '<th>SCTR</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="sctr-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 25, \'sctr-toggle\')" style="background:#111118; border:1px solid #00d97e; border-radius:4px; padding:1px 5px; font-size:9px; cursor:pointer; color:#00d97e; line-height:1; transition:all 0.2s; font-family:Inter,sans-serif; font-weight:700; letter-spacing:0.06em;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="StockCharts Technical Rank (SCTR) created by John Murphy.\nLogic: A percentile ranking (0-99.9) of a stock\'s technical strength versus its peers.\nFormula: Heavily weights long-term trends (200d EMA, 125d ROC), while factoring in medium-term (50d EMA, 20d ROC) and short-term (RSI, PPO slope) momentum." style="line-height:1;">SCTR</span></div></th>',
+            '<th>IBD_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="ibd-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 26, \'ibd-toggle\')" style="background:#111118; border:1px solid #00d97e; border-radius:4px; padding:1px 5px; font-size:9px; cursor:pointer; color:#00d97e; line-height:1; transition:all 0.2s; font-family:Inter,sans-serif; font-weight:700; letter-spacing:0.06em;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength (RS) Rating developed by William O\'Neil (IBD).\nLogic: A percentile rank (0-99.9) of a stock\'s 52-week price performance.\nFormula: Emphasizes recent momentum by weighting the most recent quarter (3 months) at 40%, and the prior three quarters at 20% each." style="line-height:1;">IBD</span></div></th>',
+            '<th>SPY_RS</th>': '<th style="text-align:center; padding:2px !important;"><div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;"><div id="spy-toggle" class="d-tooltip" data-tooltip="Toggle Ranking Mode:\nGLOBAL: Ranks against the entire table.\nDYNAMIC: Re-ranks only the visable." onclick="toggleColumnMode(event, 27, \'spy-toggle\')" style="background:#111118; border:1px solid #00d97e; border-radius:4px; padding:1px 5px; font-size:9px; cursor:pointer; color:#00d97e; line-height:1; transition:all 0.2s; font-family:Inter,sans-serif; font-weight:700; letter-spacing:0.06em;">GLOBAL</div><span class="d-tooltip header-fix" data-tooltip="Relative Strength against SPY (0-99.9).\nLogic: A percentile rank of the stock\'s 1-year performance compared to the SPY baseline." style="line-height:1;">vsSPY</span></div></th>'
         }
         for old_tag, new_tag in header_map.items():
             raw_table = raw_table.replace(old_tag, new_tag)
@@ -2701,7 +2701,7 @@ def export_interactive_html(df):
         function getTopSectors(metricIdx) {{
             var sectorData = {{}};
             allData.each(function(row) {{
-                var rawType = row[27].toString().replace(/<[^>]+>/g, ''); 
+                var rawType = row[28].toString().replace(/<[^>]+>/g, ''); 
                 if (topSwitchIsETF && !rawType.includes('ETF')) return;
                 if (!topSwitchIsETF && rawType.includes('ETF')) return;
 
@@ -2888,11 +2888,11 @@ def export_interactive_html(df):
         }}
     }});
 
-    // Track modes for columns 24 (SCTR), 25 (IBD), and 26 (SPY) independently
+    // Track modes for columns 25 (SCTR), 26 (IBD), and 27 (SPY) independently
     let columnModes = {{
-        24: "global",
         25: "global",
-        26: "global"
+        26: "global",
+        27: "global"
     }};
 
     function toggleColumnMode(event, colIdx, btnId) {{
@@ -2928,9 +2928,9 @@ def export_interactive_html(df):
         if (!$.fn.DataTable.isDataTable('.table')) return;
         var api = $('.table').DataTable();
         
-        // Target columns: 24 (SCTR), 25 (IBD RS), 26 (SPY RS)
-        [24, 25, 26].forEach(function(colIdx) {{
-            let valClass = (colIdx === 24) ? 'sctr-val' : (colIdx === 25 ? 'ibd-val' : 'spy-val');
+        // Target columns: 25 (SCTR), 26 (IBD RS), 27 (SPY RS)
+        [25, 26, 27].forEach(function(colIdx) {{
+            let valClass = (colIdx === 25) ? 'sctr-val' : (colIdx === 26 ? 'ibd-val' : 'spy-val');
             
             // Look up the specific mode for this column
             let currentMode = columnModes[colIdx];
