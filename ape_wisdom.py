@@ -1622,7 +1622,7 @@ def export_interactive_html(df):
         # ---------------------------------------------------------
         html_content = f"""<!DOCTYPE html><html lang="en"><head>
         <meta charset="UTF-8">
-        <meta http-equiv="refresh" content="600">
+        <meta http-equiv="refresh" content="300">
         <title>Ape Wisdom Analysis</title>
         <link rel="icon" type="image/x-icon" href="favicon.ico?v=1">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=1">
@@ -2619,7 +2619,10 @@ def export_interactive_html(df):
             "watchlist": [],
             "compareSymbols": [],
             "studies": [
-                "STD;VWMA" ]
+                {{"id": "STD;Moving_Average_Exponential", "inputs": {{"length": 9}}, "override": {{"Plot.color": "#4CAF50", "Plot.linewidth": 1}}}},
+                {{"id": "STD;Moving_Average_Exponential", "inputs": {{"length": 21}}, "override": {{"Plot.color": "#00BCD4", "Plot.linewidth": 1}}}},
+                {{"id": "STD;Moving_Average_Exponential", "inputs": {{"length": 50}}, "override": {{"Plot.color": "#2979FF", "Plot.linewidth": 2}}}}
+            ]
         }});
 
         widgetContainer.appendChild(script);
