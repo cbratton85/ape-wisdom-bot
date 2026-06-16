@@ -734,13 +734,13 @@ def filter_and_process(stocks):
             try:
                 if len(batch) == 1:
                     # Single ticker handling
-                    batch_data: pd.DataFrame = _as_dataframe(yf.download(batch[0], period="2y", interval="1d", progress=False))
+                    batch_data: pd.DataFrame = _as_dataframe(yf.download(batch[0], period="2y", interval="1d", progress=False, auto_adjust=False))
                     if not batch_data.empty:
                         # Normalize format to match multi-index batch
                         batch_data.columns = pd.MultiIndex.from_product([[batch[0]], batch_data.columns])
                 else:
                     # Multi ticker handling
-                    batch_data: pd.DataFrame = _as_dataframe(yf.download(batch, period="2y", interval="1d", group_by='ticker', progress=False, threads=True))
+                    batch_data: pd.DataFrame = _as_dataframe(yf.download(batch, period="2y", interval="1d", group_by='ticker', progress=False, threads=True, auto_adjust=False))
 
                 if not batch_data.empty:
                     if market_data.empty: market_data = batch_data
@@ -770,12 +770,18 @@ def filter_and_process(stocks):
             
             # 1. EXTRACT FROM BATCH DATA
             if isinstance(market_data.columns, pd.MultiIndex):
-                if t in market_data.columns.get_level_values(0):
+                lvl0 = market_data.columns.get_level_values(0)
+                lvl1 = market_data.columns.get_level_values(1)
+                if t in lvl0:
+                    # Standard (ticker, field) layout -- group_by='ticker'
                     selected = market_data[t]
                     if isinstance(selected, pd.DataFrame):
-                        # Only keep rows with complete OHLCV data for indicator calculations.
-                        selected_df = pd.DataFrame(selected)
-                        hist = selected_df[['High', 'Low', 'Close', 'Volume']].dropna()
+                        hist = selected[['High', 'Low', 'Close', 'Volume']].dropna()
+                elif t in lvl1:
+                    # Newer yfinance (field, ticker) layout
+                    selected = market_data.xs(t, axis=1, level=1)
+                    if isinstance(selected, pd.DataFrame):
+                        hist = selected[['High', 'Low', 'Close', 'Volume']].dropna()
             else:
                 if t in market_data.columns:
                     hist = market_data[[t]].dropna() # Fallback for single-column DF
@@ -784,7 +790,7 @@ def filter_and_process(stocks):
             if hist.empty or len(hist) < 2:
                 try:
                     # If batch failed, we need 20 days for a healthy 14-period RSI
-                    retry_data: pd.DataFrame = _as_dataframe(yf.download(t, period="1y", interval="1d", progress=False))
+                    retry_data: pd.DataFrame = _as_dataframe(yf.download(t, period="2y", interval="1d", progress=False, auto_adjust=False))
                     if not retry_data.empty:
                         hist = retry_data
                         if isinstance(hist.columns, pd.MultiIndex):
