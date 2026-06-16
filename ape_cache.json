@@ -43488,5 +43488,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "DCI": {
+        "ticker": "DCI",
+        "name": "Donaldson Company, Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 10018192384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
