@@ -1470,6 +1470,16 @@ def export_interactive_html(df):
             rsi_str = color_span(f"{rsi_raw:.1f}", rsi_clr)
             export_df.at[index, 'RSI'] = rsi_str
 
+            # --- EMA TREND BADGE ---
+            trend_val = row.get('Trend', 0)
+            if trend_val == 1:
+                trend_str = '<span style="color:#00d97e; font-weight:bold; letter-spacing:-1px;">▲▲▲</span>'
+            elif trend_val == -1:
+                trend_str = '<span style="color:#ff4d5a; font-weight:bold; letter-spacing:-1px;">▼▼▼</span>'
+            else:
+                trend_str = '<span style="color:#555568; font-weight:bold; letter-spacing:-1px;">---</span>'
+            export_df.at[index, 'Trend'] = trend_str
+
             # --- SCTR COLOR LOGIC ---
             sctr_global = float(row.get('SCTR', 0.0))
             sctr_raw_math = float(row.get('Raw_SCTR', -9999.0)) # Grab the hidden raw math
@@ -1545,7 +1555,7 @@ def export_interactive_html(df):
         export_df.rename(columns={'Meta': 'INDUSTRY', 'Vol_Display': 'VOL(30)', 'CurVol_Disp': 'VOL'}, inplace=True)
 
         cols = [
-            'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Day%', 'Acc', 'Eff', 'Conv', 'Upvs', 
+            'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Day%', 'Trend', 'Acc', 'Eff', 'Conv', 'Upvs', 
             'Upv+', 'VOL', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY',
             'GI', 'RSI', 'STOCH', 'SCTR', 'IBD_RS', 'SPY_RS', 'Type_Tag', 'AvgVol', 'MCap'
         ]
@@ -1565,6 +1575,7 @@ def export_interactive_html(df):
             '<th>Sym</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Ticker symbol for trading.">&nbsp;SYM</span></th>',
             '<th>Price</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Real-time trading price.">&nbsp;&nbsp;PRICE</span></th>',
             '<th>Day%</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Daily % change since last close.\nGreen: Positive | Red: Negative">&nbsp;&nbsp;DAY%</span></th>',
+            '<th>Trend</th>': '<th><span class="d-tooltip header-fix" data-tooltip="9/21/50 EMA Crossover\nGreen ▲: Bullish (9>21>50)\nRed ▼: Bearish (9<21<50)">TREND</span></th>',
             '<th>Acc</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Vel(Now) - Vel(1h ago)\nMag: Expl. | Cyan: Fast | Red: Slow">ACC</span></th>',
             '<th>Eff</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Rank gain per unit of volume.\nGrn: >1.0 | Yel: >0.5 | Red: <0">&nbsp;&nbsp;EFF</span></th>',
             '<th>Conv</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Upvotes / Mentions ratio.\nGold: >1.0x | White: Diluted">&nbsp;CONV</span></th>',
