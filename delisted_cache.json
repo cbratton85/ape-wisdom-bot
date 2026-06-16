@@ -29,11 +29,6 @@
         "last_checked": "2026-06-11",
         "reason": "No Price Data"
     },
-    "CO": {
-        "delisted": true,
-        "last_checked": "2026-06-11",
-        "reason": "No Price Data"
-    },
     "VLD": {
         "delisted": true,
         "last_checked": "2026-06-11",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "TTM": {
+        "delisted": true,
+        "last_checked": "2026-06-16",
+        "reason": "No Price Data"
+    },
+    "CO": {
         "delisted": true,
         "last_checked": "2026-06-16",
         "reason": "No Price Data"
