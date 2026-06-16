@@ -43478,5 +43478,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "ZEPP": {
+        "ticker": "ZEPP",
+        "name": "Zepp Health Corporation",
+        "meta": "Consumer Electronics",
+        "type": "EQUITY",
+        "mcap": 73911504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
