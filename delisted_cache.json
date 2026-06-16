@@ -4,11 +4,6 @@
         "last_checked": "2026-05-31",
         "reason": "No Price Data"
     },
-    "FM": {
-        "delisted": true,
-        "last_checked": "2026-06-03",
-        "reason": "No Price Data"
-    },
     "AHH": {
         "delisted": true,
         "last_checked": "2026-06-04",
@@ -165,6 +160,16 @@
         "reason": "No Price Data"
     },
     "DTC": {
+        "delisted": true,
+        "last_checked": "2026-06-16",
+        "reason": "No Price Data"
+    },
+    "CAR": {
+        "delisted": true,
+        "last_checked": "2026-06-16",
+        "reason": "No Price Data"
+    },
+    "FM": {
         "delisted": true,
         "last_checked": "2026-06-16",
         "reason": "No Price Data"
