@@ -43558,5 +43558,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "HAWK": {
+        "ticker": "HAWK",
+        "name": "HawkEye 360, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 2273121536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
