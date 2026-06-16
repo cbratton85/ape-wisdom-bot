@@ -1569,9 +1569,9 @@ def export_interactive_html(df):
         export_df.rename(columns={'Meta': 'INDUSTRY', 'Vol_Display': 'VOL(30)', 'CurVol_Disp': 'VOL'}, inplace=True)
 
         cols = [
-            'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Day%', 'Trend', 'Acc', 'Eff', 'Conv', 'Upvs', 
+            'Rank', 'Rank+', 'Heat', 'Name', 'Sym', 'Price', 'Day%', 'Acc', 'Eff', 'Conv', 'Upvs', 
             'Upv+', 'VOL', 'VOL(30)', 'Srg', 'Vel', 'Strk', 'MENT', 'Mnt%', 'Sqz', 'INDUSTRY',
-            'GI', 'RSI', 'STOCH', 'SCTR', 'IBD_RS', 'SPY_RS', 'Type_Tag', 'AvgVol', 'MCap'
+            'Trend', 'GI', 'RSI', 'STOCH', 'SCTR', 'IBD_RS', 'SPY_RS', 'Type_Tag', 'AvgVol', 'MCap'
         ]
         for c in cols:
             if c not in export_df.columns:
@@ -1589,7 +1589,6 @@ def export_interactive_html(df):
             '<th>Sym</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Ticker symbol for trading.">&nbsp;SYM</span></th>',
             '<th>Price</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Real-time trading price.">&nbsp;&nbsp;PRICE</span></th>',
             '<th>Day%</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Daily % change since last close.\nGreen: Positive | Red: Negative">&nbsp;&nbsp;DAY%</span></th>',
-            '<th>Trend</th>': '<th><span class="d-tooltip header-fix" data-tooltip="3-Arrow Trend System (9/21/50)\nArrow 1: Price vs 9 EMA\nArrow 2: 9 EMA vs 21 EMA\nArrow 3: 21 EMA vs 50 EMA\n▲▲▲ = Full Bullish Alignment">TREND</span></th>',
             '<th>Acc</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Vel(Now) - Vel(1h ago)\nMag: Expl. | Cyan: Fast | Red: Slow">ACC</span></th>',
             '<th>Eff</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Rank gain per unit of volume.\nGrn: >1.0 | Yel: >0.5 | Red: <0">&nbsp;&nbsp;EFF</span></th>',
             '<th>Conv</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Upvotes / Mentions ratio.\nGold: >1.0x | White: Diluted">&nbsp;CONV</span></th>',
@@ -1604,6 +1603,7 @@ def export_interactive_html(df):
             '<th>Mnt%</th>': '<th><span class="d-tooltip header-fix" data-tooltip="% change in mentions (24h).\nYel: >2σ | Green: >1σ">&nbsp;MNT%</span></th>',
             '<th>Sqz</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Mentions * Surge / log(MCap)\nCyan: >1.5σ | White: Normal">&nbsp;SQZ</span></th>',
             '<th>INDUSTRY</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Industry category group.">INDUSTRY</span></th>',
+            '<th>Trend</th>': '<th><span class="d-tooltip header-fix" data-tooltip="3-Arrow Trend System (9/21/50)\nArrow 1: Price vs 9 EMA\nArrow 2: 9 EMA vs 21 EMA\nArrow 3: 21 EMA vs 50 EMA\n▲▲▲ = Full Bullish Alignment">TREND</span></th>',
             '<th>GI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Gekko GI score (0-100).\nGreen: strong accumulation | Red: heavy distribution" style="margin-left:4px;">GI</span></th>',
             '<th>RSI</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Relative Strength Index (14d).\nRed: Overbought | Green: Oversold" style="margin-left:3px;">RSI</span></th>',
             '<th>STOCH</th>': '<th><span class="d-tooltip header-fix" data-tooltip="Slow Stochastic Oscillator (%K14, %D3) developed by George Lane.\nLogic: Measures momentum by comparing the closing price to the 14-day price range. It assumes prices tend to close near their highs in an uptrend and lows in a downtrend.\nZones: &le; 20 is Oversold (Buy Zone, Green) | &ge; 80 is Overbought (Sell Zone, Red).">&nbsp;STOCH</span></th>',
