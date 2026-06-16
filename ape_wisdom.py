@@ -1859,7 +1859,7 @@ def export_interactive_html(df):
         th:nth-child(20), td:nth-child(20) {{ width: 1%; text-align: center; }}
 
         th:nth-child(21), td:nth-child(21) {{
-            width: 60px; min-width: 60px; max-width: 60px;
+            width: auto; min-width: 60px;
             overflow: hidden; text-overflow: ellipsis;
             white-space: nowrap; text-align: left;
         }}
@@ -1869,7 +1869,8 @@ def export_interactive_html(df):
         th:nth-child(24), td:nth-child(24) {{ width: 1%; text-align: center; font-weight: 600; }}
         th:nth-child(25), td:nth-child(25) {{ width: 1%; text-align: center; font-weight: 600; }}
         th:nth-child(26), td:nth-child(26) {{ width: 1%; text-align: center; font-weight: 600; }}
-        th:nth-child(27), td:nth-child(27) {{ width: 1%; text-align: center; font-weight: 600; border-right: 1px solid var(--border-mid) !important; }}
+        th:nth-child(27), td:nth-child(27) {{ width: 1%; text-align: center; font-weight: 600; }}
+        th:nth-child(28), td:nth-child(28) {{ width: 1%; text-align: center; font-weight: 600; border-right: 1px solid var(--border-mid) !important; }}
 
         /* ── LINKS & COLORS ───────────────────────────────────────── */
         a {{ color: var(--accent-blue); text-decoration: none; }}
