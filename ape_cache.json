@@ -43618,5 +43618,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "MPAA": {
+        "ticker": "MPAA",
+        "name": "Motorcar Parts of America, Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 275923840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
