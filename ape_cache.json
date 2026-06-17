@@ -43608,5 +43608,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "EYPT": {
+        "ticker": "EYPT",
+        "name": "EyePoint, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1079875840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
