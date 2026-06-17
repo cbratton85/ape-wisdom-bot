@@ -43588,5 +43588,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SPSM": {
+        "ticker": "SPSM",
+        "name": "State Street SPDR Portfolio S&P",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
