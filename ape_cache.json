@@ -43668,5 +43668,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "PVI": {
+        "ticker": "PVI",
+        "name": "Invesco Floating Rate Municipal",
+        "meta": "Muni National Short",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
