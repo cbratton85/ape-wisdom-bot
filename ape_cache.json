@@ -43598,5 +43598,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "VAC": {
+        "ticker": "VAC",
+        "name": "Marriott Vacations Worldwide Co",
+        "meta": "Resorts & Casinos",
+        "type": "EQUITY",
+        "mcap": 3241298176,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
