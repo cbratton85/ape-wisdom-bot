@@ -43578,5 +43578,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "JHG": {
+        "ticker": "JHG",
+        "name": "Janus Henderson Group plc",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 7984198144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
