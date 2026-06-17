@@ -43678,5 +43678,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "DIT": {
+        "ticker": "DIT",
+        "name": "AMCON Distributing Company",
+        "meta": "Food Distribution",
+        "type": "EQUITY",
+        "mcap": 68207280,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
