@@ -43658,5 +43658,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "DBE": {
+        "ticker": "DBE",
+        "name": "Invesco DB Energy Fund",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
