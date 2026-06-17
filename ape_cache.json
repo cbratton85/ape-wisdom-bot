@@ -43648,5 +43648,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "MGTX": {
+        "ticker": "MGTX",
+        "name": "MeiraGTx Holdings plc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 981660928,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
