@@ -64,11 +64,6 @@
         "last_checked": "2026-06-16",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-06-16",
-        "reason": "No Price Data"
-    },
     "QQC": {
         "delisted": true,
         "last_checked": "2026-06-16",
@@ -137,6 +132,11 @@
     "CBD": {
         "delisted": true,
         "last_checked": "2026-06-16",
+        "reason": "No Price Data"
+    },
+    "BABY": {
+        "delisted": true,
+        "last_checked": "2026-06-17",
         "reason": "No Price Data"
     }
 }
