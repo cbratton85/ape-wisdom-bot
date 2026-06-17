@@ -43628,5 +43628,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "DTN": {
+        "ticker": "DTN",
+        "name": "WisdomTree U.S. Dividend ex-Fin",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
