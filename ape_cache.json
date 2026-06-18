@@ -43688,5 +43688,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "GINN": {
+        "ticker": "GINN",
+        "name": "Goldman Sachs Innovate Equity E",
+        "meta": "Global Large-Stock Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
