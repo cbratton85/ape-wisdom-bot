@@ -43748,5 +43748,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "MGAM": {
+        "ticker": "MGAM",
+        "name": "Mobile Global Esports Inc.",
+        "meta": "Electronic Gaming & Multimedia",
+        "type": "EQUITY",
+        "mcap": 271648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OID"
     }
 }
