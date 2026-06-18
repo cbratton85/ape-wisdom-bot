@@ -43718,5 +43718,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "JKF": {
+        "ticker": "JKF",
+        "name": "iShares Morningstar Large-Cap  ",
+        "meta": "Unknown",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
