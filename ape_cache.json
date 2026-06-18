@@ -43768,5 +43768,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "SPAB": {
+        "ticker": "SPAB",
+        "name": "State Street SPDR Portfolio Agg",
+        "meta": "Intermediate Core Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "AUNA": {
+        "ticker": "AUNA",
+        "name": "Auna SA",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 387314560,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
