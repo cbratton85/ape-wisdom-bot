@@ -43838,5 +43838,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "LFTO": {
+        "ticker": "LFTO",
+        "name": "Liftoff Mobile, Inc.",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 4512658432,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
