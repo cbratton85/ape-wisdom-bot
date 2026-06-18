@@ -43728,5 +43728,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "UXIN": {
+        "ticker": "UXIN",
+        "name": "Uxin Limited",
+        "meta": "Auto & Truck Dealerships",
+        "type": "EQUITY",
+        "mcap": 400364064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "WPRT": {
+        "ticker": "WPRT",
+        "name": "Westport Fuel Systems Inc",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 32356066,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
