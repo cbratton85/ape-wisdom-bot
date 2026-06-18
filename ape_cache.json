@@ -43818,5 +43818,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "GATX": {
+        "ticker": "GATX",
+        "name": "GATX Corporation",
+        "meta": "Rental & Leasing Services",
+        "type": "EQUITY",
+        "mcap": 6290023936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PULM": {
+        "ticker": "PULM",
+        "name": "Pulmatrix, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 5332336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
