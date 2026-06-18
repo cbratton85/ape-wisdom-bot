@@ -43708,5 +43708,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "IWN": {
+        "ticker": "IWN",
+        "name": "iShares Russell 2000 Value ETF",
+        "meta": "Small Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
