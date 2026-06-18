@@ -43758,5 +43758,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "OID"
+    },
+    "RVYL": {
+        "ticker": "RVYL",
+        "name": "Ryvyl Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 9994965,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
