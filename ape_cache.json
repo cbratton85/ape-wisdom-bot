@@ -43798,5 +43798,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CUBE": {
+        "ticker": "CUBE",
+        "name": "CubeSmart",
+        "meta": "REIT - Industrial",
+        "type": "EQUITY",
+        "mcap": 9238622208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "LEA": {
+        "ticker": "LEA",
+        "name": "Lear Corporation",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 7009306112,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
