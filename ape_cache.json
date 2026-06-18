@@ -43788,5 +43788,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "UVV": {
+        "ticker": "UVV",
+        "name": "Universal Corporation",
+        "meta": "Tobacco",
+        "type": "EQUITY",
+        "mcap": 1289915520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
