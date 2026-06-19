@@ -43878,5 +43878,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "LXEO": {
+        "ticker": "LXEO",
+        "name": "Lexeo Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 387111648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "EOLS": {
+        "ticker": "EOLS",
+        "name": "Evolus, Inc. Common Stock",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 436617024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
