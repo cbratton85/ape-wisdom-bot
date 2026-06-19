@@ -43848,5 +43848,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PSEC": {
+        "ticker": "PSEC",
+        "name": "Prospect Capital Corporation",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 1107226880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
