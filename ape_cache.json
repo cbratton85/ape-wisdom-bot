@@ -43898,5 +43898,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "PEB": {
+        "ticker": "PEB",
+        "name": "Pebblebrook Hotel Trust",
+        "meta": "REIT - Hotel & Motel",
+        "type": "EQUITY",
+        "mcap": 2160817408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
