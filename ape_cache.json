@@ -43868,5 +43868,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "BNKU": {
+        "ticker": "BNKU",
+        "name": "MicroSectors U.S. Big Banks 3 L",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
