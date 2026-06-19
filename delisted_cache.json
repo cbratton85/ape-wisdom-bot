@@ -69,11 +69,6 @@
         "last_checked": "2026-06-18",
         "reason": "No Price Data"
     },
-    "YY": {
-        "delisted": true,
-        "last_checked": "2026-06-18",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-06-18",
@@ -140,6 +135,16 @@
         "reason": "No Price Data"
     },
     "ABB": {
+        "delisted": true,
+        "last_checked": "2026-06-19",
+        "reason": "No Price Data"
+    },
+    "YY": {
+        "delisted": true,
+        "last_checked": "2026-06-19",
+        "reason": "No Price Data"
+    },
+    "SAVA": {
         "delisted": true,
         "last_checked": "2026-06-19",
         "reason": "No Price Data"
