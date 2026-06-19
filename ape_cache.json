@@ -43858,5 +43858,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "DES": {
+        "ticker": "DES",
+        "name": "WisdomTree U.S. SmallCap Divide",
+        "meta": "Small Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
