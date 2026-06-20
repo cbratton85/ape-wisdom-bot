@@ -43938,5 +43938,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "AIZ": {
+        "ticker": "AIZ",
+        "name": "Assurant, Inc.",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 12875448320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
