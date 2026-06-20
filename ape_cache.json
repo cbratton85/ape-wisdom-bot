@@ -43928,5 +43928,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "TMCR": {
+        "ticker": "TMCR",
+        "name": "The Metals Royalty Company Inc.",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 459760320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
