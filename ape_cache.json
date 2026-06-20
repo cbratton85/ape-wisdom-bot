@@ -43918,5 +43918,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "TFI": {
+        "ticker": "TFI",
+        "name": "State Street SPDR Nuveen ICE Mu",
+        "meta": "Muni National Long",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
