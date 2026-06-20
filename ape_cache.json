@@ -43958,5 +43958,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "AUPH": {
+        "ticker": "AUPH",
+        "name": "Aurinia Pharmaceuticals Inc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2116783360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "WPP": {
+        "ticker": "WPP",
+        "name": "WPP plc",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 3876217088,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
