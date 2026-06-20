@@ -114,11 +114,6 @@
         "last_checked": "2026-06-19",
         "reason": "No Price Data"
     },
-    "ZN": {
-        "delisted": true,
-        "last_checked": "2026-06-19",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-06-19",
@@ -142,6 +137,11 @@
     "SNP": {
         "delisted": true,
         "last_checked": "2026-06-19",
+        "reason": "No Price Data"
+    },
+    "ZN": {
+        "delisted": true,
+        "last_checked": "2026-06-20",
         "reason": "No Price Data"
     }
 }
