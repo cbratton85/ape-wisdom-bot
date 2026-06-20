@@ -49,11 +49,6 @@
         "last_checked": "2026-06-19",
         "reason": "No Price Data"
     },
-    "TSE": {
-        "delisted": true,
-        "last_checked": "2026-06-19",
-        "reason": "No Price Data"
-    },
     "ERM": {
         "delisted": true,
         "last_checked": "2026-06-19",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "CO": {
+        "delisted": true,
+        "last_checked": "2026-06-20",
+        "reason": "No Price Data"
+    },
+    "TSE": {
         "delisted": true,
         "last_checked": "2026-06-20",
         "reason": "No Price Data"
