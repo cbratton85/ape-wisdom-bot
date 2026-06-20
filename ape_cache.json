@@ -43908,5 +43908,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "APGE": {
+        "ticker": "APGE",
+        "name": "Apogee Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 6813691392,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
