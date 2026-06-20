@@ -59,11 +59,6 @@
         "last_checked": "2026-06-19",
         "reason": "No Price Data"
     },
-    "CO": {
-        "delisted": true,
-        "last_checked": "2026-06-19",
-        "reason": "No Price Data"
-    },
     "BOSS": {
         "delisted": true,
         "last_checked": "2026-06-19",
@@ -135,6 +130,11 @@
         "reason": "No Price Data"
     },
     "CN": {
+        "delisted": true,
+        "last_checked": "2026-06-20",
+        "reason": "No Price Data"
+    },
+    "CO": {
         "delisted": true,
         "last_checked": "2026-06-20",
         "reason": "No Price Data"
