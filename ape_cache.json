@@ -43948,5 +43948,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ASGN": {
+        "ticker": "ASGN",
+        "name": "ASGN Incorporated",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 833931008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
