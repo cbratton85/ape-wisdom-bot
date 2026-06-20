@@ -89,11 +89,6 @@
         "last_checked": "2026-06-20",
         "reason": "No Price Data"
     },
-    "SQ": {
-        "delisted": true,
-        "last_checked": "2026-06-20",
-        "reason": "No Price Data"
-    },
     "WOW": {
         "delisted": true,
         "last_checked": "2026-06-20",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-06-20",
+        "reason": "No Price Data"
+    },
+    "SQ": {
         "delisted": true,
         "last_checked": "2026-06-20",
         "reason": "No Price Data"
