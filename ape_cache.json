@@ -44028,5 +44028,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "AMBQ": {
+        "ticker": "AMBQ",
+        "name": "Ambiq Micro, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 1934078336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
