@@ -64,12 +64,17 @@
         "last_checked": "2026-06-21",
         "reason": "No Price Data"
     },
+    "TTM": {
+        "delisted": true,
+        "last_checked": "2026-06-21",
+        "reason": "No Price Data"
+    },
     "WOW": {
         "delisted": true,
         "last_checked": "2026-06-21",
         "reason": "No Price Data"
     },
-    "TTM": {
+    "MBT": {
         "delisted": true,
         "last_checked": "2026-06-21",
         "reason": "No Price Data"
