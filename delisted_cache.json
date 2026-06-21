@@ -14,11 +14,6 @@
         "last_checked": "2026-06-21",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-06-21",
-        "reason": "No Price Data"
-    },
     "TSE": {
         "delisted": true,
         "last_checked": "2026-06-21",
@@ -70,6 +65,11 @@
         "reason": "No Price Data"
     },
     "MBT": {
+        "delisted": true,
+        "last_checked": "2026-06-21",
+        "reason": "No Price Data"
+    },
+    "BABY": {
         "delisted": true,
         "last_checked": "2026-06-21",
         "reason": "No Price Data"
