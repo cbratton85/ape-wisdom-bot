@@ -43988,5 +43988,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SPH": {
+        "ticker": "SPH",
+        "name": "Suburban Propane Partners, L.P.",
+        "meta": "Utilities - Regulated Gas",
+        "type": "EQUITY",
+        "mcap": 1097977472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
