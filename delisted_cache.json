@@ -4,11 +4,6 @@
         "last_checked": "2026-06-19",
         "reason": "No Price Data"
     },
-    "RESP": {
-        "delisted": true,
-        "last_checked": "2026-06-19",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-06-19",
@@ -105,6 +100,11 @@
         "reason": "No Price Data"
     },
     "CN": {
+        "delisted": true,
+        "last_checked": "2026-06-21",
+        "reason": "No Price Data"
+    },
+    "RESP": {
         "delisted": true,
         "last_checked": "2026-06-21",
         "reason": "No Price Data"
