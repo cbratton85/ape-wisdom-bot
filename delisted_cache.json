@@ -4,11 +4,6 @@
         "last_checked": "2026-06-19",
         "reason": "No Price Data"
     },
-    "SAVA": {
-        "delisted": true,
-        "last_checked": "2026-06-20",
-        "reason": "No Price Data"
-    },
     "DS": {
         "delisted": true,
         "last_checked": "2026-06-20",
@@ -80,6 +75,11 @@
         "reason": "No Price Data"
     },
     "HEAR": {
+        "delisted": true,
+        "last_checked": "2026-06-21",
+        "reason": "No Price Data"
+    },
+    "SAVA": {
         "delisted": true,
         "last_checked": "2026-06-21",
         "reason": "No Price Data"
