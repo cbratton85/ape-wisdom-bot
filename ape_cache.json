@@ -43998,5 +43998,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PSHZF": {
+        "ticker": "PSHZF",
+        "name": "Pershing Square Holdings Ltd.",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
     }
 }
