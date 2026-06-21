@@ -44008,5 +44008,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PNK"
+    },
+    "TSQ": {
+        "ticker": "TSQ",
+        "name": "Townsquare Media, Inc.",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 113467968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
