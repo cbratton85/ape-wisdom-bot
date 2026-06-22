@@ -39,11 +39,6 @@
         "last_checked": "2026-06-22",
         "reason": "No Price Data"
     },
-    "GPS": {
-        "delisted": true,
-        "last_checked": "2026-06-22",
-        "reason": "No Price Data"
-    },
     "YNDX": {
         "delisted": true,
         "last_checked": "2026-06-22",
@@ -55,6 +50,11 @@
         "reason": "No Price Data"
     },
     "TSE": {
+        "delisted": true,
+        "last_checked": "2026-06-22",
+        "reason": "No Price Data"
+    },
+    "GPS": {
         "delisted": true,
         "last_checked": "2026-06-22",
         "reason": "No Price Data"
