@@ -44108,5 +44108,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "RMCF": {
+        "ticker": "RMCF",
+        "name": "Rocky Mountain Chocolate Factor",
+        "meta": "Confectioners",
+        "type": "EQUITY",
+        "mcap": 13816274,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
