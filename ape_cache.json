@@ -44058,5 +44058,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "INCR": {
+        "ticker": "INCR",
+        "name": "Intercure Ltd.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 60295776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "USXF": {
+        "ticker": "USXF",
+        "name": "iShares ESG Advanced MSCI USA E",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "ALFA": {
+        "ticker": "ALFA",
+        "name": "AlphaClone Alternative Alpha ET",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
