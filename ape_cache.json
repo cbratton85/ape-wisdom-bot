@@ -44048,5 +44048,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "MWC": {
+        "ticker": "MWC",
+        "name": "Micware Co., Ltd.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 221809584,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
