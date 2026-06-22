@@ -44038,5 +44038,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PXI": {
+        "ticker": "PXI",
+        "name": "Invesco Dorsey Wright Energy Mo",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
