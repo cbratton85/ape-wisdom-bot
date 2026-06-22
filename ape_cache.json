@@ -44088,5 +44088,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "SLDE": {
+        "ticker": "SLDE",
+        "name": "Slide Insurance Holdings, Inc.",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 1930896128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "BFRI": {
+        "ticker": "BFRI",
+        "name": "Biofrontera Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 13763595,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
