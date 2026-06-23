@@ -44158,5 +44158,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AMBP": {
+        "ticker": "AMBP",
+        "name": "Ardagh Metal Packaging S.A.",
+        "meta": "Packaging & Containers",
+        "type": "EQUITY",
+        "mcap": 2737494784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
