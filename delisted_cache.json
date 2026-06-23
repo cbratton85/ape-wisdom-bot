@@ -1,9 +1,4 @@
 {
-    "MBT": {
-        "delisted": true,
-        "last_checked": "2026-06-22",
-        "reason": "No Price Data"
-    },
     "TSE": {
         "delisted": true,
         "last_checked": "2026-06-22",
@@ -92,6 +87,11 @@
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-06-22",
+        "reason": "No Price Data"
+    },
+    "MBT": {
+        "delisted": true,
+        "last_checked": "2026-06-23",
         "reason": "No Price Data"
     }
 }
