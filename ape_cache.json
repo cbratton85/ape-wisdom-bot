@@ -44138,5 +44138,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "DJCO": {
+        "ticker": "DJCO",
+        "name": "Daily Journal Corp. (S.C.)",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 726376320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
