@@ -44128,5 +44128,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "KFY": {
+        "ticker": "KFY",
+        "name": "Korn Ferry",
+        "meta": "Staffing & Employment Services",
+        "type": "EQUITY",
+        "mcap": 3516387840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
