@@ -44148,5 +44148,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "RNW": {
+        "ticker": "RNW",
+        "name": "ReNew Energy Global plc",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 2278056192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
