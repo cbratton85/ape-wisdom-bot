@@ -44118,5 +44118,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ALLT": {
+        "ticker": "ALLT",
+        "name": "Allot Ltd.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 342950944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
