@@ -109,11 +109,6 @@
         "last_checked": "2026-06-23",
         "reason": "No Price Data"
     },
-    "LYFE": {
-        "delisted": true,
-        "last_checked": "2026-06-23",
-        "reason": "No Price Data"
-    },
     "SAVE": {
         "delisted": true,
         "last_checked": "2026-06-23",
@@ -125,6 +120,11 @@
         "reason": "No Price Data"
     },
     "FFIE": {
+        "delisted": true,
+        "last_checked": "2026-06-23",
+        "reason": "No Price Data"
+    },
+    "LYFE": {
         "delisted": true,
         "last_checked": "2026-06-23",
         "reason": "No Price Data"
