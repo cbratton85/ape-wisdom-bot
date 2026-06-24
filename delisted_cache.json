@@ -54,11 +54,6 @@
         "last_checked": "2026-06-23",
         "reason": "No Price Data"
     },
-    "MBT": {
-        "delisted": true,
-        "last_checked": "2026-06-23",
-        "reason": "No Price Data"
-    },
     "PS": {
         "delisted": true,
         "last_checked": "2026-06-23",
@@ -140,6 +135,11 @@
         "reason": "No Price Data"
     },
     "PSTG": {
+        "delisted": true,
+        "last_checked": "2026-06-24",
+        "reason": "No Price Data"
+    },
+    "MBT": {
         "delisted": true,
         "last_checked": "2026-06-24",
         "reason": "No Price Data"
