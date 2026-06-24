@@ -44228,5 +44228,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "ZYME": {
+        "ticker": "ZYME",
+        "name": "Zymeworks Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1787846784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }

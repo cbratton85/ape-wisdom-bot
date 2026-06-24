@@ -34,11 +34,6 @@
         "last_checked": "2026-06-23",
         "reason": "No Price Data"
     },
-    "ALFA": {
-        "delisted": true,
-        "last_checked": "2026-06-23",
-        "reason": "No Price Data"
-    },
     "LYFE": {
         "delisted": true,
         "last_checked": "2026-06-24",
@@ -150,6 +145,16 @@
         "reason": "No Price Data"
     },
     "PSTG": {
+        "delisted": true,
+        "last_checked": "2026-06-24",
+        "reason": "No Price Data"
+    },
+    "SQ": {
+        "delisted": true,
+        "last_checked": "2026-06-24",
+        "reason": "No Price Data"
+    },
+    "ALFA": {
         "delisted": true,
         "last_checked": "2026-06-24",
         "reason": "No Price Data"
