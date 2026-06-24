@@ -908,6 +908,24 @@ def filter_and_process(stocks):
             except Exception as e:
                 pass
 
+            # --- RECONCILE EMAs WITH THE FINAL DISPLAYED PRICE ---
+            # ema9/21/50 above were computed from hist['Close'].iloc[-1], which can be
+            # stale relative to curr_p (the live quote we may have just fetched, or the
+            # close from a market_data cache that's reused for up to 12h). That mismatch
+            # is what made the Trend arrows (Price vs EMA9 vs EMA21 vs EMA50) look wrong
+            # intermittently. Recompute the EMAs with curr_p standing in for "today's
+            # close" so Price is always self-consistent with the EMAs it's compared to.
+            if not hist.empty and len(hist) >= 15:
+                close_live = hist['Close'].copy()
+                close_live.iloc[-1] = curr_p
+                ema9 = close_live.ewm(span=9, adjust=False).mean().iloc[-1]
+                ema21 = close_live.ewm(span=21, adjust=False).mean().iloc[-1]
+                ema50 = close_live.ewm(span=50, adjust=False).mean().iloc[-1]
+
+                if ema9 > ema21 > ema50: crossover_signal = 1
+                elif ema9 < ema21 < ema50: crossover_signal = -1
+                else: crossover_signal = 0
+
             s_perc = int((curr_v / avg_v * 100)) if avg_v > 0 else 0
             
             final_list.append({
@@ -1482,23 +1500,28 @@ def export_interactive_html(df):
             ema21 = float(row.get('EMA21', 0))
             ema50 = float(row.get('EMA50', 0))
 
-            # Determine individual arrow colors
-            a1_clr = "#00d97e" if p_clean >= ema9 else "#ff4d5a"
-            a2_clr = "#00d97e" if ema9 >= ema21 else "#ff4d5a"
-            a3_clr = "#00d97e" if ema21 >= ema50 else "#ff4d5a"
-            
-            # Determine individual arrow directions
-            a1_sym = "▲" if p_clean >= ema9 else "▼"
-            a2_sym = "▲" if ema9 >= ema21 else "▼"
-            a3_sym = "▲" if ema21 >= ema50 else "▼"
+            if ema9 == 0 and ema21 == 0 and ema50 == 0:
+                # Sentinel from the <15-day-history fallback in filter_and_process -
+                # there's no real trend to show, so don't fake a bullish ▲▲▲.
+                export_df.at[index, 'Trend'] = '<div style="font-size:11px; font-weight:bold; text-align:center; color:#555568;">N/A</div>'
+            else:
+                # Determine individual arrow colors
+                a1_clr = "#00d97e" if p_clean >= ema9 else "#ff4d5a"
+                a2_clr = "#00d97e" if ema9 >= ema21 else "#ff4d5a"
+                a3_clr = "#00d97e" if ema21 >= ema50 else "#ff4d5a"
 
-            # Construct the final 3-part badge
-            trend_str = (
-                f'<span style="color:{a1_clr};">{a1_sym}</span>'
-                f'<span style="color:{a2_clr};">{a2_sym}</span>'
-                f'<span style="color:{a3_clr};">{a3_sym}</span>'
-            )
-            export_df.at[index, 'Trend'] = f'<div style="font-size:11px; font-weight:bold; letter-spacing:1px; text-align:center;">{trend_str}</div>'
+                # Determine individual arrow directions
+                a1_sym = "▲" if p_clean >= ema9 else "▼"
+                a2_sym = "▲" if ema9 >= ema21 else "▼"
+                a3_sym = "▲" if ema21 >= ema50 else "▼"
+
+                # Construct the final 3-part badge
+                trend_str = (
+                    f'<span style="color:{a1_clr};">{a1_sym}</span>'
+                    f'<span style="color:{a2_clr};">{a2_sym}</span>'
+                    f'<span style="color:{a3_clr};">{a3_sym}</span>'
+                )
+                export_df.at[index, 'Trend'] = f'<div style="font-size:11px; font-weight:bold; letter-spacing:1px; text-align:center;">{trend_str}</div>'
 
             # --- SCTR COLOR LOGIC ---
             sctr_global = float(row.get('SCTR', 0.0))
