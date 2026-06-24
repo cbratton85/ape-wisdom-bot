@@ -44208,5 +44208,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CWAN": {
+        "ticker": "CWAN",
+        "name": "Clearwater Analytics Holdings, ",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 7326394880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
