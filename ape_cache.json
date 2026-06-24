@@ -44168,5 +44168,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ARKW": {
+        "ticker": "ARKW",
+        "name": "ARK Next Generation Internet ET",
+        "meta": "Mid-Cap Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
