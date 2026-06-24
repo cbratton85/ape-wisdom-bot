@@ -44198,5 +44198,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SHEN": {
+        "ticker": "SHEN",
+        "name": "Shenandoah Telecommunications C",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 782253120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
