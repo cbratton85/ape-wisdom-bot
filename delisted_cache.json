@@ -89,11 +89,6 @@
         "last_checked": "2026-06-23",
         "reason": "No Price Data"
     },
-    "DS": {
-        "delisted": true,
-        "last_checked": "2026-06-23",
-        "reason": "No Price Data"
-    },
     "ALFA": {
         "delisted": true,
         "last_checked": "2026-06-23",
@@ -135,6 +130,16 @@
         "reason": "No Price Data"
     },
     "YNDX": {
+        "delisted": true,
+        "last_checked": "2026-06-24",
+        "reason": "No Price Data"
+    },
+    "SOL": {
+        "delisted": true,
+        "last_checked": "2026-06-24",
+        "reason": "No Price Data"
+    },
+    "DS": {
         "delisted": true,
         "last_checked": "2026-06-24",
         "reason": "No Price Data"
