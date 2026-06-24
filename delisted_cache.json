@@ -59,11 +59,6 @@
         "last_checked": "2026-06-24",
         "reason": "No Price Data"
     },
-    "YY": {
-        "delisted": true,
-        "last_checked": "2026-06-24",
-        "reason": "No Price Data"
-    },
     "CO": {
         "delisted": true,
         "last_checked": "2026-06-24",
@@ -140,6 +135,21 @@
         "reason": "No Price Data"
     },
     "FI": {
+        "delisted": true,
+        "last_checked": "2026-06-24",
+        "reason": "No Price Data"
+    },
+    "YY": {
+        "delisted": true,
+        "last_checked": "2026-06-24",
+        "reason": "No Price Data"
+    },
+    "GLDD": {
+        "delisted": true,
+        "last_checked": "2026-06-24",
+        "reason": "No Price Data"
+    },
+    "FAAS": {
         "delisted": true,
         "last_checked": "2026-06-24",
         "reason": "No Price Data"
