@@ -44178,5 +44178,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "QNRX": {
+        "ticker": "QNRX",
+        "name": "Quoin Pharmaceuticals, Ltd.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 6527358,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
