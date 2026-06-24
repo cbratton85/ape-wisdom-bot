@@ -777,11 +777,13 @@ def filter_and_process(stocks):
                     selected = market_data[t]
                     if isinstance(selected, pd.DataFrame):
                         hist = selected[['High', 'Low', 'Close', 'Volume']].dropna()
+                        hist = hist[~hist.index.duplicated(keep='last')].sort_index()
                 elif t in lvl1:
                     # Newer yfinance (field, ticker) layout
                     selected = market_data.xs(t, axis=1, level=1)
                     if isinstance(selected, pd.DataFrame):
                         hist = selected[['High', 'Low', 'Close', 'Volume']].dropna()
+                        hist = hist[~hist.index.duplicated(keep='last')].sort_index()
             else:
                 if t in market_data.columns:
                     hist = market_data[[t]].dropna() # Fallback for single-column DF
@@ -795,6 +797,7 @@ def filter_and_process(stocks):
                         hist = retry_data
                         if isinstance(hist.columns, pd.MultiIndex):
                             hist.columns = hist.columns.droplevel(1)
+                        hist = hist[~hist.index.duplicated(keep='last')].sort_index()
                 except:
                     pass
 
@@ -1500,10 +1503,15 @@ def export_interactive_html(df):
             ema21 = float(row.get('EMA21', 0))
             ema50 = float(row.get('EMA50', 0))
 
+            # DIAGNOSTIC: expose the exact numbers feeding the arrows so a reported
+            # ticker can be checked against this instead of guessing. Hover the
+            # arrows in the dashboard to see this.
+            diag_tip = f"Price: {p_clean:.2f}\nEMA9: {ema9:.2f}\nEMA21: {ema21:.2f}\nEMA50: {ema50:.2f}"
+
             if ema9 == 0 and ema21 == 0 and ema50 == 0:
                 # Sentinel from the <15-day-history fallback in filter_and_process -
                 # there's no real trend to show, so don't fake a bullish ▲▲▲.
-                export_df.at[index, 'Trend'] = '<div style="font-size:11px; font-weight:bold; text-align:center; color:#555568;">N/A</div>'
+                export_df.at[index, 'Trend'] = f'<div class="d-tooltip" data-tooltip="{diag_tip}" tabindex="0" style="font-size:11px; font-weight:bold; text-align:center; color:#555568;">N/A</div>'
             else:
                 # Determine individual arrow colors
                 a1_clr = "#00d97e" if p_clean >= ema9 else "#ff4d5a"
@@ -1521,7 +1529,7 @@ def export_interactive_html(df):
                     f'<span style="color:{a2_clr};">{a2_sym}</span>'
                     f'<span style="color:{a3_clr};">{a3_sym}</span>'
                 )
-                export_df.at[index, 'Trend'] = f'<div style="font-size:11px; font-weight:bold; letter-spacing:1px; text-align:center;">{trend_str}</div>'
+                export_df.at[index, 'Trend'] = f'<div class="d-tooltip" data-tooltip="{diag_tip}" tabindex="0" style="font-size:11px; font-weight:bold; letter-spacing:1px; text-align:center;">{trend_str}</div>'
 
             # --- SCTR COLOR LOGIC ---
             sctr_global = float(row.get('SCTR', 0.0))
