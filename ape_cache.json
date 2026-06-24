@@ -44188,5 +44188,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "HLLY": {
+        "ticker": "HLLY",
+        "name": "Holley Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 292498752,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
