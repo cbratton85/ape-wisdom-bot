@@ -4,11 +4,6 @@
         "last_checked": "2026-06-22",
         "reason": "No Price Data"
     },
-    "APE": {
-        "delisted": true,
-        "last_checked": "2026-06-23",
-        "reason": "No Price Data"
-    },
     "ARMR": {
         "delisted": true,
         "last_checked": "2026-06-23",
@@ -155,6 +150,11 @@
         "reason": "No Price Data"
     },
     "FAAS": {
+        "delisted": true,
+        "last_checked": "2026-06-24",
+        "reason": "No Price Data"
+    },
+    "APE": {
         "delisted": true,
         "last_checked": "2026-06-24",
         "reason": "No Price Data"
