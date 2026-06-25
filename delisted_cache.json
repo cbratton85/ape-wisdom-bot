@@ -69,11 +69,6 @@
         "last_checked": "2026-06-24",
         "reason": "No Price Data"
     },
-    "SQ": {
-        "delisted": true,
-        "last_checked": "2026-06-24",
-        "reason": "No Price Data"
-    },
     "FAAS": {
         "delisted": true,
         "last_checked": "2026-06-24",
@@ -165,6 +160,11 @@
         "reason": "No Price Data"
     },
     "DAWN": {
+        "delisted": true,
+        "last_checked": "2026-06-25",
+        "reason": "No Price Data"
+    },
+    "SQ": {
         "delisted": true,
         "last_checked": "2026-06-25",
         "reason": "No Price Data"
