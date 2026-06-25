@@ -54,11 +54,6 @@
         "last_checked": "2026-06-24",
         "reason": "No Price Data"
     },
-    "BOSS": {
-        "delisted": true,
-        "last_checked": "2026-06-24",
-        "reason": "No Price Data"
-    },
     "TSE": {
         "delisted": true,
         "last_checked": "2026-06-24",
@@ -165,6 +160,11 @@
         "reason": "No Price Data"
     },
     "GPS": {
+        "delisted": true,
+        "last_checked": "2026-06-25",
+        "reason": "No Price Data"
+    },
+    "BOSS": {
         "delisted": true,
         "last_checked": "2026-06-25",
         "reason": "No Price Data"
