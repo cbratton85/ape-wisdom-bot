@@ -89,11 +89,6 @@
         "last_checked": "2026-06-25",
         "reason": "No Price Data"
     },
-    "PSTG": {
-        "delisted": true,
-        "last_checked": "2026-06-25",
-        "reason": "No Price Data"
-    },
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-06-25",
@@ -170,6 +165,11 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-06-25",
+        "reason": "No Price Data"
+    },
+    "PSTG": {
         "delisted": true,
         "last_checked": "2026-06-25",
         "reason": "No Price Data"
