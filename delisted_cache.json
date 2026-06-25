@@ -19,11 +19,6 @@
         "last_checked": "2026-06-24",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-06-24",
-        "reason": "No Price Data"
-    },
     "WOW": {
         "delisted": true,
         "last_checked": "2026-06-24",
@@ -170,6 +165,11 @@
         "reason": "No Price Data"
     },
     "PSTG": {
+        "delisted": true,
+        "last_checked": "2026-06-25",
+        "reason": "No Price Data"
+    },
+    "RE": {
         "delisted": true,
         "last_checked": "2026-06-25",
         "reason": "No Price Data"
