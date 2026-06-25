@@ -44238,5 +44238,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PUBM": {
+        "ticker": "PUBM",
+        "name": "PubMatic, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 550121216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
