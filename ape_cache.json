@@ -44248,5 +44248,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ROMO": {
+        "ticker": "ROMO",
+        "name": "Strategy Shares Newfound/ReSolv",
+        "meta": "Moderately Aggressive Allocation",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
