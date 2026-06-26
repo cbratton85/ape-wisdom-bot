@@ -44338,5 +44338,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ASB": {
+        "ticker": "ASB",
+        "name": "Associated Banc-Corp",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 5834701824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
