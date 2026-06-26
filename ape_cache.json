@@ -44268,5 +44268,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "USHY": {
+        "ticker": "USHY",
+        "name": "iShares Broad USD High Yield Co",
+        "meta": "High Yield Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
