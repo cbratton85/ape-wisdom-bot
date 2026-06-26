@@ -134,11 +134,6 @@
         "last_checked": "2026-06-26",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-06-26",
-        "reason": "No Price Data"
-    },
     "AUD": {
         "delisted": true,
         "last_checked": "2026-06-26",
@@ -155,6 +150,16 @@
         "reason": "No Price Data"
     },
     "TIO": {
+        "delisted": true,
+        "last_checked": "2026-06-26",
+        "reason": "No Price Data"
+    },
+    "RE": {
+        "delisted": true,
+        "last_checked": "2026-06-26",
+        "reason": "No Price Data"
+    },
+    "OLD": {
         "delisted": true,
         "last_checked": "2026-06-26",
         "reason": "No Price Data"
