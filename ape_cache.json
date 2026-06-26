@@ -44358,5 +44358,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "JUSHF": {
+        "ticker": "JUSHF",
+        "name": "Jushi Holdings Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 96054064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OQX"
     }
 }
