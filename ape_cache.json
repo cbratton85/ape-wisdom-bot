@@ -44258,5 +44258,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "ISRA": {
+        "ticker": "ISRA",
+        "name": "VanEck Israel ETF",
+        "meta": "Focused Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
