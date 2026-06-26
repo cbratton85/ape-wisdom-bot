@@ -44298,5 +44298,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CNXU": {
+        "ticker": "CNXU",
+        "name": "Conexeu Sciences Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 273470144,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
