@@ -44278,5 +44278,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "PROF": {
+        "ticker": "PROF",
+        "name": "Profound Medical Corp.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 231470736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "RCUS": {
+        "ticker": "RCUS",
+        "name": "Arcus Biosciences, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3804638208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
