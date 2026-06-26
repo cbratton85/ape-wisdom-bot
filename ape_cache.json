@@ -44348,5 +44348,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SLY": {
+        "ticker": "SLY",
+        "name": "SPDR S&P 600 Small Cap ETF (bas",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
