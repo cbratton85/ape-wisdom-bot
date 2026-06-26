@@ -149,12 +149,17 @@
         "last_checked": "2026-06-26",
         "reason": "No Price Data"
     },
+    "BABY": {
+        "delisted": true,
+        "last_checked": "2026-06-26",
+        "reason": "No Price Data"
+    },
     "GLDD": {
         "delisted": true,
         "last_checked": "2026-06-26",
         "reason": "No Price Data"
     },
-    "BABY": {
+    "TIO": {
         "delisted": true,
         "last_checked": "2026-06-26",
         "reason": "No Price Data"
