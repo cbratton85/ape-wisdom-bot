@@ -44318,5 +44318,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "LABT": {
+        "ticker": "LABT",
+        "name": "Lakewood-Amedex Biotherapeutics",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 5934902,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SONM": {
+        "ticker": "SONM",
+        "name": "DNA X, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 8484250,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
