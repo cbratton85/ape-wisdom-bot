@@ -44308,5 +44308,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "FTRE": {
+        "ticker": "FTRE",
+        "name": "Fortrea Holdings Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1628748928,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
