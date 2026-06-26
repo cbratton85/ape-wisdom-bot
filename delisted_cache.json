@@ -34,11 +34,6 @@
         "last_checked": "2026-06-24",
         "reason": "No Price Data"
     },
-    "GLDD": {
-        "delisted": true,
-        "last_checked": "2026-06-24",
-        "reason": "No Price Data"
-    },
     "APE": {
         "delisted": true,
         "last_checked": "2026-06-24",
@@ -165,6 +160,11 @@
         "reason": "No Price Data"
     },
     "FI": {
+        "delisted": true,
+        "last_checked": "2026-06-26",
+        "reason": "No Price Data"
+    },
+    "GLDD": {
         "delisted": true,
         "last_checked": "2026-06-26",
         "reason": "No Price Data"
