@@ -154,11 +154,6 @@
         "last_checked": "2026-06-25",
         "reason": "No Price Data"
     },
-    "FI": {
-        "delisted": true,
-        "last_checked": "2026-06-25",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-06-25",
@@ -167,6 +162,11 @@
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-06-25",
+        "reason": "No Price Data"
+    },
+    "FI": {
+        "delisted": true,
+        "last_checked": "2026-06-26",
         "reason": "No Price Data"
     }
 }
