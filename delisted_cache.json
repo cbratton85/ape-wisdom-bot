@@ -139,11 +139,6 @@
         "last_checked": "2026-06-26",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-06-26",
-        "reason": "No Price Data"
-    },
     "VVPR": {
         "delisted": true,
         "last_checked": "2026-06-26",
@@ -167,6 +162,16 @@
     "DTC": {
         "delisted": true,
         "last_checked": "2026-06-26",
+        "reason": "No Price Data"
+    },
+    "RE": {
+        "delisted": true,
+        "last_checked": "2026-06-27",
+        "reason": "No Price Data"
+    },
+    "MOM": {
+        "delisted": true,
+        "last_checked": "2026-06-27",
         "reason": "No Price Data"
     }
 }
