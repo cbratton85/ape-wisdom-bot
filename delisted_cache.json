@@ -119,11 +119,6 @@
         "last_checked": "2026-06-27",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-06-27",
-        "reason": "No Price Data"
-    },
     "SLY": {
         "delisted": true,
         "last_checked": "2026-06-27",
@@ -175,6 +170,11 @@
         "reason": "No Price Data"
     },
     "BODY": {
+        "delisted": true,
+        "last_checked": "2026-06-27",
+        "reason": "No Price Data"
+    },
+    "BABY": {
         "delisted": true,
         "last_checked": "2026-06-27",
         "reason": "No Price Data"
