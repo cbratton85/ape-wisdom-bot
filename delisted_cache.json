@@ -134,11 +134,6 @@
         "last_checked": "2026-06-27",
         "reason": "No Price Data"
     },
-    "VVPR": {
-        "delisted": true,
-        "last_checked": "2026-06-27",
-        "reason": "No Price Data"
-    },
     "CO": {
         "delisted": true,
         "last_checked": "2026-06-27",
@@ -165,6 +160,11 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-06-27",
+        "reason": "No Price Data"
+    },
+    "VVPR": {
         "delisted": true,
         "last_checked": "2026-06-27",
         "reason": "No Price Data"
