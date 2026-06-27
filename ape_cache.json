@@ -44388,5 +44388,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "GERM": {
+        "ticker": "GERM",
+        "name": "Amplify ETF Trust Amplify Treat",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
