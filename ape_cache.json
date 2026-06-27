@@ -44368,5 +44368,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "OQX"
+    },
+    "DVOL": {
+        "ticker": "DVOL",
+        "name": "First Trust Dorsey Wright Momen",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
