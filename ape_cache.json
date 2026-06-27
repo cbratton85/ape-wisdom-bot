@@ -44418,5 +44418,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "UPW": {
+        "ticker": "UPW",
+        "name": "ProShares Ultra Utilities",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
