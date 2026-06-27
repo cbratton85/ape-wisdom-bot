@@ -44378,5 +44378,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CRNC": {
+        "ticker": "CRNC",
+        "name": "Cerence Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 479442624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
