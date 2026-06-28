@@ -44448,5 +44448,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FAMI": {
+        "ticker": "FAMI",
+        "name": "Farmmi, Inc. Ordinary Shares",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 16854556,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
