@@ -59,11 +59,6 @@
         "last_checked": "2026-06-27",
         "reason": "No Price Data"
     },
-    "VVPR": {
-        "delisted": true,
-        "last_checked": "2026-06-27",
-        "reason": "No Price Data"
-    },
     "TGIF": {
         "delisted": true,
         "last_checked": "2026-06-27",
@@ -145,6 +140,11 @@
         "reason": "No Price Data"
     },
     "DS": {
+        "delisted": true,
+        "last_checked": "2026-06-28",
+        "reason": "No Price Data"
+    },
+    "VVPR": {
         "delisted": true,
         "last_checked": "2026-06-28",
         "reason": "No Price Data"
