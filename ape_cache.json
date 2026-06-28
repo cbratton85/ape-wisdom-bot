@@ -44428,5 +44428,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "RHHBY": {
+        "ticker": "RHHBY",
+        "name": "Roche Holding Ltd",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 333251575808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OQX"
     }
 }
