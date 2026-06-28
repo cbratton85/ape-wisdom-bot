@@ -44438,5 +44438,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "OQX"
+    },
+    "DBD": {
+        "ticker": "DBD",
+        "name": "Diebold Nixdorf Incorporated",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 2942720768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
