@@ -144,11 +144,6 @@
         "last_checked": "2026-06-27",
         "reason": "No Price Data"
     },
-    "DBS": {
-        "delisted": true,
-        "last_checked": "2026-06-27",
-        "reason": "No Price Data"
-    },
     "TGIF": {
         "delisted": true,
         "last_checked": "2026-06-27",
@@ -167,6 +162,11 @@
     "SQ": {
         "delisted": true,
         "last_checked": "2026-06-27",
+        "reason": "No Price Data"
+    },
+    "DBS": {
+        "delisted": true,
+        "last_checked": "2026-06-28",
         "reason": "No Price Data"
     }
 }
