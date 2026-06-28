@@ -54,11 +54,6 @@
         "last_checked": "2026-06-28",
         "reason": "No Price Data"
     },
-    "SAVA": {
-        "delisted": true,
-        "last_checked": "2026-06-28",
-        "reason": "No Price Data"
-    },
     "SQ": {
         "delisted": true,
         "last_checked": "2026-06-28",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "GPS": {
+        "delisted": true,
+        "last_checked": "2026-06-28",
+        "reason": "No Price Data"
+    },
+    "SAVA": {
         "delisted": true,
         "last_checked": "2026-06-28",
         "reason": "No Price Data"
