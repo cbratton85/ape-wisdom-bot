@@ -119,11 +119,6 @@
         "last_checked": "2026-06-29",
         "reason": "No Price Data"
     },
-    "SNP": {
-        "delisted": true,
-        "last_checked": "2026-06-29",
-        "reason": "No Price Data"
-    },
     "GPL": {
         "delisted": true,
         "last_checked": "2026-06-29",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "OG": {
+        "delisted": true,
+        "last_checked": "2026-06-29",
+        "reason": "No Price Data"
+    },
+    "SNP": {
         "delisted": true,
         "last_checked": "2026-06-29",
         "reason": "No Price Data"
