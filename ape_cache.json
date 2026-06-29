@@ -44478,5 +44478,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FAF": {
+        "ticker": "FAF",
+        "name": "First American Corporation (New",
+        "meta": "Insurance - Specialty",
+        "type": "EQUITY",
+        "mcap": 6986263552,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
