@@ -44488,5 +44488,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CNXC": {
+        "ticker": "CNXC",
+        "name": "Concentrix Corporation",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 1539151744,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
