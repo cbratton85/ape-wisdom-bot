@@ -44468,5 +44468,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "G": {
+        "ticker": "G",
+        "name": "Genpact Limited",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 4758895616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
