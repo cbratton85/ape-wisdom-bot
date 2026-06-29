@@ -44458,5 +44458,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "LYTS": {
+        "ticker": "LYTS",
+        "name": "LSI Industries Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 975081408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
