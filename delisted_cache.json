@@ -59,11 +59,6 @@
         "last_checked": "2026-06-30",
         "reason": "No Price Data"
     },
-    "RESP": {
-        "delisted": true,
-        "last_checked": "2026-06-30",
-        "reason": "No Price Data"
-    },
     "FI": {
         "delisted": true,
         "last_checked": "2026-06-30",
@@ -110,6 +105,11 @@
         "reason": "No Price Data"
     },
     "SNP": {
+        "delisted": true,
+        "last_checked": "2026-06-30",
+        "reason": "No Price Data"
+    },
+    "RESP": {
         "delisted": true,
         "last_checked": "2026-06-30",
         "reason": "No Price Data"
