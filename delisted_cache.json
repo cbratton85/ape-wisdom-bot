@@ -119,11 +119,6 @@
         "last_checked": "2026-06-29",
         "reason": "No Price Data"
     },
-    "ZN": {
-        "delisted": true,
-        "last_checked": "2026-06-29",
-        "reason": "No Price Data"
-    },
     "MOM": {
         "delisted": true,
         "last_checked": "2026-06-29",
@@ -132,6 +127,11 @@
     "GPS": {
         "delisted": true,
         "last_checked": "2026-06-29",
+        "reason": "No Price Data"
+    },
+    "ZN": {
+        "delisted": true,
+        "last_checked": "2026-06-30",
         "reason": "No Price Data"
     }
 }
