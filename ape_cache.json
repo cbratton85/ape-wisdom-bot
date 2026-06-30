@@ -44498,5 +44498,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "STTK": {
+        "ticker": "STTK",
+        "name": "Shattuck Labs, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 670467328,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "PALL": {
+        "ticker": "PALL",
+        "name": "abrdn Physical Palladium Shares",
+        "meta": "Commodities Focused",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
