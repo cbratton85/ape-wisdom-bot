@@ -44518,5 +44518,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "FDMT": {
+        "ticker": "FDMT",
+        "name": "4D Molecular Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 709388800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
