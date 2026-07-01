@@ -44588,5 +44588,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SRRK": {
+        "ticker": "SRRK",
+        "name": "Scholar Rock Holding Corporatio",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 6331729408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
