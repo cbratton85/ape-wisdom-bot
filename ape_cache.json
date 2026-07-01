@@ -44598,5 +44598,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "NVX": {
+        "ticker": "NVX",
+        "name": "NOVONIX Limited - American Depo",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 95211504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
