@@ -44558,5 +44558,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "IHAK": {
+        "ticker": "IHAK",
+        "name": "iShares Cybersecurity and Tech ",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "TGLS": {
+        "ticker": "TGLS",
+        "name": "Tecnoglass Inc.",
+        "meta": "Building Materials",
+        "type": "EQUITY",
+        "mcap": 2101783168,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TACE": {
+        "ticker": "TACE",
+        "name": "Trend Aggregation Conservative ",
+        "meta": "Tactical Allocation",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
