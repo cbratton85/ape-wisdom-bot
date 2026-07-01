@@ -44538,5 +44538,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ESNT": {
+        "ticker": "ESNT",
+        "name": "Essent Group Ltd.",
+        "meta": "Insurance - Specialty",
+        "type": "EQUITY",
+        "mcap": 5923586048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "MEGL": {
+        "ticker": "MEGL",
+        "name": "Magic Empire Global Limited",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 6431343,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
