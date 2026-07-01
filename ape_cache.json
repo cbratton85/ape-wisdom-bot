@@ -44608,5 +44608,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "POR": {
+        "ticker": "POR",
+        "name": "Portland General Electric Co",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 5955466240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
