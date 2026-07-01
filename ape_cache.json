@@ -44528,5 +44528,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "NOVT": {
+        "ticker": "NOVT",
+        "name": "Novanta Inc.",
+        "meta": "Scientific & Technical Instruments",
+        "type": "EQUITY",
+        "mcap": 5777902592,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
