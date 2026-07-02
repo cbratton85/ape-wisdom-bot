@@ -1,9 +1,4 @@
 {
-    "OLD": {
-        "delisted": true,
-        "last_checked": "2026-06-27",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-07-01",
@@ -80,6 +75,11 @@
         "reason": "No Price Data"
     },
     "TTM": {
+        "delisted": true,
+        "last_checked": "2026-07-02",
+        "reason": "No Price Data"
+    },
+    "OLD": {
         "delisted": true,
         "last_checked": "2026-07-02",
         "reason": "No Price Data"
