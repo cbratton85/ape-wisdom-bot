@@ -44688,5 +44688,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "RLI": {
+        "ticker": "RLI",
+        "name": "RLI Corp.",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 5716265472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
