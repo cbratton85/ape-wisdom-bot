@@ -44698,5 +44698,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ALAR": {
+        "ticker": "ALAR",
+        "name": "Alarum Technologies Ltd.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 46656840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SEER": {
+        "ticker": "SEER",
+        "name": "Seer, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 89070112,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
