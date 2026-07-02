@@ -44668,5 +44668,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PMVP": {
+        "ticker": "PMVP",
+        "name": "PMV Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 64526108,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
