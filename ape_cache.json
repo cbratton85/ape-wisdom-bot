@@ -44628,5 +44628,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "FLTB": {
+        "ticker": "FLTB",
+        "name": "Fidelity Limited Term Bond ETF",
+        "meta": "Short-Term Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
