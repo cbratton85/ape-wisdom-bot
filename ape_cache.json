@@ -44638,5 +44638,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "COLL": {
+        "ticker": "COLL",
+        "name": "Collegium Pharmaceutical, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 1163399680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
