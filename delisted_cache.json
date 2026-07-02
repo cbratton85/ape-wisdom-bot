@@ -64,11 +64,6 @@
         "last_checked": "2026-07-02",
         "reason": "No Price Data"
     },
-    "DS": {
-        "delisted": true,
-        "last_checked": "2026-07-02",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-07-02",
@@ -85,6 +80,16 @@
         "reason": "No Price Data"
     },
     "DTC": {
+        "delisted": true,
+        "last_checked": "2026-07-02",
+        "reason": "No Price Data"
+    },
+    "SOL": {
+        "delisted": true,
+        "last_checked": "2026-07-02",
+        "reason": "No Price Data"
+    },
+    "DS": {
         "delisted": true,
         "last_checked": "2026-07-02",
         "reason": "No Price Data"
