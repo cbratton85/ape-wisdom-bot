@@ -44658,5 +44658,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "IART": {
+        "ticker": "IART",
+        "name": "Integra LifeSciences Holdings C",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 1391786624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
