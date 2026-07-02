@@ -79,12 +79,12 @@
         "last_checked": "2026-07-02",
         "reason": "No Price Data"
     },
-    "DTC": {
+    "TTM": {
         "delisted": true,
         "last_checked": "2026-07-02",
         "reason": "No Price Data"
     },
-    "TTM": {
+    "DTC": {
         "delisted": true,
         "last_checked": "2026-07-02",
         "reason": "No Price Data"
