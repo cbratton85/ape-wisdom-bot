@@ -44618,5 +44618,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FXG": {
+        "ticker": "FXG",
+        "name": "First Trust Cons. Staples Alpha",
+        "meta": "Consumer Defensive",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
