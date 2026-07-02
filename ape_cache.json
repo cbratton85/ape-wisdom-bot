@@ -44678,5 +44678,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "GALT": {
+        "ticker": "GALT",
+        "name": "Galectin Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 293721760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
