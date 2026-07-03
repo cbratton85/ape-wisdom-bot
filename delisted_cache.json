@@ -1,9 +1,4 @@
 {
-    "SNP": {
-        "delisted": true,
-        "last_checked": "2026-07-02",
-        "reason": "No Price Data"
-    },
     "SOL": {
         "delisted": true,
         "last_checked": "2026-07-02",
@@ -100,6 +95,11 @@
         "reason": "No Price Data"
     },
     "OG": {
+        "delisted": true,
+        "last_checked": "2026-07-03",
+        "reason": "No Price Data"
+    },
+    "SNP": {
         "delisted": true,
         "last_checked": "2026-07-03",
         "reason": "No Price Data"
