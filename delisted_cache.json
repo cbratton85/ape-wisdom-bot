@@ -14,11 +14,6 @@
         "last_checked": "2026-07-02",
         "reason": "No Price Data"
     },
-    "CHU": {
-        "delisted": true,
-        "last_checked": "2026-07-03",
-        "reason": "No Price Data"
-    },
     "APE": {
         "delisted": true,
         "last_checked": "2026-07-03",
@@ -100,6 +95,11 @@
         "reason": "No Price Data"
     },
     "MOM": {
+        "delisted": true,
+        "last_checked": "2026-07-03",
+        "reason": "No Price Data"
+    },
+    "CHU": {
         "delisted": true,
         "last_checked": "2026-07-03",
         "reason": "No Price Data"
