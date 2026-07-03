@@ -44728,5 +44728,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "IMMX": {
+        "ticker": "IMMX",
+        "name": "Immix Biopharma, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 736104128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
