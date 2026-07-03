@@ -44718,5 +44718,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "VOYA": {
+        "ticker": "VOYA",
+        "name": "Voya Financial, Inc.",
+        "meta": "Financial Conglomerates",
+        "type": "EQUITY",
+        "mcap": 8556179968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
