@@ -44748,5 +44748,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "VXRT": {
+        "ticker": "VXRT",
+        "name": "Vaxart, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 154908688,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OQX"
     }
 }
