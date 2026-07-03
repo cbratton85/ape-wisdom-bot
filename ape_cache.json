@@ -44738,5 +44738,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ISTR": {
+        "ticker": "ISTR",
+        "name": "Investar Holding Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 406772832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
