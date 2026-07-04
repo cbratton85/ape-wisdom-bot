@@ -99,12 +99,12 @@
         "last_checked": "2026-07-04",
         "reason": "No Price Data"
     },
-    "OG": {
+    "TTM": {
         "delisted": true,
         "last_checked": "2026-07-04",
         "reason": "No Price Data"
     },
-    "TTM": {
+    "OG": {
         "delisted": true,
         "last_checked": "2026-07-04",
         "reason": "No Price Data"
