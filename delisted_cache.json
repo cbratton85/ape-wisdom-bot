@@ -29,11 +29,6 @@
         "last_checked": "2026-07-03",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-07-03",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-07-04",
@@ -100,6 +95,11 @@
         "reason": "No Price Data"
     },
     "SOL": {
+        "delisted": true,
+        "last_checked": "2026-07-04",
+        "reason": "No Price Data"
+    },
+    "AUD": {
         "delisted": true,
         "last_checked": "2026-07-04",
         "reason": "No Price Data"
