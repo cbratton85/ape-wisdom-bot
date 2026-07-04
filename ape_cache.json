@@ -44758,5 +44758,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "OQX"
+    },
+    "PRT": {
+        "ticker": "PRT",
+        "name": "PermRock Royalty Trust",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 28346154,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
