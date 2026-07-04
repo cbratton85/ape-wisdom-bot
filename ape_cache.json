@@ -44768,5 +44768,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "NTES": {
+        "ticker": "NTES",
+        "name": "NetEase, Inc.",
+        "meta": "Electronic Gaming & Multimedia",
+        "type": "EQUITY",
+        "mcap": 81524629504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
