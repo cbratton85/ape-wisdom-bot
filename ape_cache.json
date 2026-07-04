@@ -44778,5 +44778,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "EVTC": {
+        "ticker": "EVTC",
+        "name": "Evertec, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1825810688,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SFD": {
+        "ticker": "SFD",
+        "name": "Smithfield Foods, Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 9671670784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
