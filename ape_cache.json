@@ -44798,5 +44798,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "BGIN": {
+        "ticker": "BGIN",
+        "name": "Bgin Blockchain Limited",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 222877808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
