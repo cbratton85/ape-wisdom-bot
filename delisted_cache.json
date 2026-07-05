@@ -69,11 +69,6 @@
         "last_checked": "2026-07-05",
         "reason": "No Price Data"
     },
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-07-05",
-        "reason": "No Price Data"
-    },
     "DBS": {
         "delisted": true,
         "last_checked": "2026-07-05",
@@ -90,6 +85,16 @@
         "reason": "No Price Data"
     },
     "WOW": {
+        "delisted": true,
+        "last_checked": "2026-07-05",
+        "reason": "No Price Data"
+    },
+    "TTM": {
+        "delisted": true,
+        "last_checked": "2026-07-05",
+        "reason": "No Price Data"
+    },
+    "MTL": {
         "delisted": true,
         "last_checked": "2026-07-05",
         "reason": "No Price Data"

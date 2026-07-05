@@ -44808,5 +44808,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "MTL": {
+        "ticker": "MTL",
+        "name": "MTL",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
