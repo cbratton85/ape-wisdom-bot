@@ -64,11 +64,6 @@
         "last_checked": "2026-07-04",
         "reason": "No Price Data"
     },
-    "DBS": {
-        "delisted": true,
-        "last_checked": "2026-07-04",
-        "reason": "No Price Data"
-    },
     "AHH": {
         "delisted": true,
         "last_checked": "2026-07-04",
@@ -100,6 +95,11 @@
         "reason": "No Price Data"
     },
     "PSTG": {
+        "delisted": true,
+        "last_checked": "2026-07-05",
+        "reason": "No Price Data"
+    },
+    "DBS": {
         "delisted": true,
         "last_checked": "2026-07-05",
         "reason": "No Price Data"
