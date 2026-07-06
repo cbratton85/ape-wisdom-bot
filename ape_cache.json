@@ -44858,5 +44858,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "EWH": {
+        "ticker": "EWH",
+        "name": "iShares MSCI Hong Kong Index Fu",
+        "meta": "Greater China Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "WBX": {
+        "ticker": "WBX",
+        "name": "Wallbox N.V.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 97572080,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
