@@ -44828,5 +44828,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "TIVC": {
+        "ticker": "TIVC",
+        "name": "TIVC",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "MDWD": {
+        "ticker": "MDWD",
+        "name": "MediWound Ltd.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 189827808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
