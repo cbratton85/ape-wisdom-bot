@@ -44848,5 +44848,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CYTK": {
+        "ticker": "CYTK",
+        "name": "Cytokinetics, Incorporated",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 11750944768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
