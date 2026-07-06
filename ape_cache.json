@@ -44878,5 +44878,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CRNX": {
+        "ticker": "CRNX",
+        "name": "Crinetics Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 4431651840,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
