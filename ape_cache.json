@@ -44928,5 +44928,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "KBWB": {
+        "ticker": "KBWB",
+        "name": "Invesco KBW Bank ETF",
+        "meta": "Financial",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
