@@ -44888,5 +44888,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "GVAL": {
+        "ticker": "GVAL",
+        "name": "Cambria Global Value ETF",
+        "meta": "Foreign Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
