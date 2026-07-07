@@ -44898,5 +44898,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "FYLD": {
+        "ticker": "FYLD",
+        "name": "Cambria Foreign Shareholder Yie",
+        "meta": "Foreign Small/Mid Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
