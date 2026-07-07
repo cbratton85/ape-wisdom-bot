@@ -44908,5 +44908,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "APTV": {
+        "ticker": "APTV",
+        "name": "Aptiv PLC",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 12370278400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
