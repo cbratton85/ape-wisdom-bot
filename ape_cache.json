@@ -44918,5 +44918,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HELE": {
+        "ticker": "HELE",
+        "name": "Helen of Troy Limited",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 646121728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
