@@ -44938,5 +44938,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "YCS": {
+        "ticker": "YCS",
+        "name": "ProShares UltraShort Yen New",
+        "meta": "Trading--Miscellaneous",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
