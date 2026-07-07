@@ -104,17 +104,17 @@
         "last_checked": "2026-07-07",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-07-07",
-        "reason": "No Price Data"
-    },
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-07-07",
         "reason": "No Price Data"
     },
     "MEG": {
+        "delisted": true,
+        "last_checked": "2026-07-07",
+        "reason": "No Price Data"
+    },
+    "RE": {
         "delisted": true,
         "last_checked": "2026-07-07",
         "reason": "No Price Data"
