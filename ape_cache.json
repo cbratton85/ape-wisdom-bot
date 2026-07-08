@@ -44948,5 +44948,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SKYH": {
+        "ticker": "SKYH",
+        "name": "Sky Harbour Group Corporation",
+        "meta": "Real Estate - Development",
+        "type": "EQUITY",
+        "mcap": 774462784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
