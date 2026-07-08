@@ -104,11 +104,6 @@
         "last_checked": "2026-07-08",
         "reason": "No Price Data"
     },
-    "SQ": {
-        "delisted": true,
-        "last_checked": "2026-07-08",
-        "reason": "No Price Data"
-    },
     "DS": {
         "delisted": true,
         "last_checked": "2026-07-08",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "SLAM": {
+        "delisted": true,
+        "last_checked": "2026-07-08",
+        "reason": "No Price Data"
+    },
+    "SQ": {
         "delisted": true,
         "last_checked": "2026-07-08",
         "reason": "No Price Data"
