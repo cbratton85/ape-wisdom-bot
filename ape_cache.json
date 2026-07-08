@@ -44968,5 +44968,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "AQB": {
+        "ticker": "AQB",
+        "name": "AquaBounty Technologies, Inc.",
+        "meta": "Farm Products",
+        "type": "EQUITY",
+        "mcap": 5044774,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
