@@ -44978,5 +44978,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "HSDT": {
+        "ticker": "HSDT",
+        "name": "Solana Company",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 98089616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
