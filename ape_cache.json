@@ -45038,5 +45038,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "LIEN": {
+        "ticker": "LIEN",
+        "name": "Chicago Atlantic BDC, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 225930128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
