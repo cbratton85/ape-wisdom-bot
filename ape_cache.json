@@ -44998,5 +44998,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "TKR": {
+        "ticker": "TKR",
+        "name": "Timken Company (The)",
+        "meta": "Tools & Accessories",
+        "type": "EQUITY",
+        "mcap": 9653135360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
