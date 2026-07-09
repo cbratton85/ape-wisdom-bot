@@ -45008,5 +45008,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "NVCT": {
+        "ticker": "NVCT",
+        "name": "Nuvectis Pharma, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 599615616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
