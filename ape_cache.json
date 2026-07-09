@@ -44988,5 +44988,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "GNOM": {
+        "ticker": "GNOM",
+        "name": "Global X Genomics & Biotechnolo",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
