@@ -45018,5 +45018,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ASHS": {
+        "ticker": "ASHS",
+        "name": "Xtrackers Harvest CSI 500 China",
+        "meta": "Greater China Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "SOBO": {
+        "ticker": "SOBO",
+        "name": "South Bow Corporation",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 7582050816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
