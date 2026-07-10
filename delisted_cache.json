@@ -54,11 +54,6 @@
         "last_checked": "2026-07-10",
         "reason": "No Price Data"
     },
-    "DTC": {
-        "delisted": true,
-        "last_checked": "2026-07-10",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-07-10",
@@ -90,6 +85,21 @@
         "reason": "No Price Data"
     },
     "AUD": {
+        "delisted": true,
+        "last_checked": "2026-07-10",
+        "reason": "No Price Data"
+    },
+    "DTC": {
+        "delisted": true,
+        "last_checked": "2026-07-10",
+        "reason": "No Price Data"
+    },
+    "SPLG": {
+        "delisted": true,
+        "last_checked": "2026-07-10",
+        "reason": "No Price Data"
+    },
+    "VSCO": {
         "delisted": true,
         "last_checked": "2026-07-10",
         "reason": "No Price Data"
