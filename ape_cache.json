@@ -45048,5 +45048,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "TROW": {
+        "ticker": "TROW",
+        "name": "T. Rowe Price Group, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 25079906304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
