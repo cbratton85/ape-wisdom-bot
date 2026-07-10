@@ -45058,5 +45058,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ATAT": {
+        "ticker": "ATAT",
+        "name": "Atour Lifestyle Holdings Limite",
+        "meta": "Lodging",
+        "type": "EQUITY",
+        "mcap": 4394313216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
