@@ -9,11 +9,6 @@
         "last_checked": "2026-07-09",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-07-09",
-        "reason": "No Price Data"
-    },
     "WOW": {
         "delisted": true,
         "last_checked": "2026-07-10",
@@ -90,6 +85,11 @@
         "reason": "No Price Data"
     },
     "DDG": {
+        "delisted": true,
+        "last_checked": "2026-07-10",
+        "reason": "No Price Data"
+    },
+    "AUD": {
         "delisted": true,
         "last_checked": "2026-07-10",
         "reason": "No Price Data"
