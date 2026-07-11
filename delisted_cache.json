@@ -1,9 +1,4 @@
 {
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-07-10",
-        "reason": "No Price Data"
-    },
     "ROLL": {
         "delisted": true,
         "last_checked": "2026-07-10",
@@ -95,6 +90,16 @@
         "reason": "No Price Data"
     },
     "AAIC": {
+        "delisted": true,
+        "last_checked": "2026-07-11",
+        "reason": "No Price Data"
+    },
+    "MOM": {
+        "delisted": true,
+        "last_checked": "2026-07-11",
+        "reason": "No Price Data"
+    },
+    "WOW": {
         "delisted": true,
         "last_checked": "2026-07-11",
         "reason": "No Price Data"
