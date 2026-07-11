@@ -45068,5 +45068,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AWR": {
+        "ticker": "AWR",
+        "name": "American States Water Company",
+        "meta": "Utilities - Regulated Water",
+        "type": "EQUITY",
+        "mcap": 3316873984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
