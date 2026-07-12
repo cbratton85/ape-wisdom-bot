@@ -1,9 +1,4 @@
 {
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-07-11",
-        "reason": "No Price Data"
-    },
     "CBD": {
         "delisted": true,
         "last_checked": "2026-07-12",
@@ -80,6 +75,11 @@
         "reason": "No Price Data"
     },
     "MOM": {
+        "delisted": true,
+        "last_checked": "2026-07-12",
+        "reason": "No Price Data"
+    },
+    "RE": {
         "delisted": true,
         "last_checked": "2026-07-12",
         "reason": "No Price Data"
