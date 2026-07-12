@@ -39,11 +39,6 @@
         "last_checked": "2026-07-11",
         "reason": "No Price Data"
     },
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-07-11",
-        "reason": "No Price Data"
-    },
     "AUD": {
         "delisted": true,
         "last_checked": "2026-07-11",
@@ -90,6 +85,11 @@
         "reason": "No Price Data"
     },
     "CBD": {
+        "delisted": true,
+        "last_checked": "2026-07-12",
+        "reason": "No Price Data"
+    },
+    "WOW": {
         "delisted": true,
         "last_checked": "2026-07-12",
         "reason": "No Price Data"
