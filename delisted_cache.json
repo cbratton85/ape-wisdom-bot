@@ -9,11 +9,6 @@
         "last_checked": "2026-07-11",
         "reason": "No Price Data"
     },
-    "ABB": {
-        "delisted": true,
-        "last_checked": "2026-07-11",
-        "reason": "No Price Data"
-    },
     "SOL": {
         "delisted": true,
         "last_checked": "2026-07-11",
@@ -85,6 +80,11 @@
         "reason": "No Price Data"
     },
     "GPS": {
+        "delisted": true,
+        "last_checked": "2026-07-12",
+        "reason": "No Price Data"
+    },
+    "ABB": {
         "delisted": true,
         "last_checked": "2026-07-12",
         "reason": "No Price Data"
