@@ -59,11 +59,6 @@
         "last_checked": "2026-07-12",
         "reason": "No Price Data"
     },
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-07-12",
-        "reason": "No Price Data"
-    },
     "MOM": {
         "delisted": true,
         "last_checked": "2026-07-12",
@@ -85,6 +80,11 @@
         "reason": "No Price Data"
     },
     "ABB": {
+        "delisted": true,
+        "last_checked": "2026-07-12",
+        "reason": "No Price Data"
+    },
+    "SOL": {
         "delisted": true,
         "last_checked": "2026-07-12",
         "reason": "No Price Data"
