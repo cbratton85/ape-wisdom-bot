@@ -24,11 +24,6 @@
         "last_checked": "2026-07-12",
         "reason": "No Price Data"
     },
-    "DTC": {
-        "delisted": true,
-        "last_checked": "2026-07-12",
-        "reason": "No Price Data"
-    },
     "AAIC": {
         "delisted": true,
         "last_checked": "2026-07-12",
@@ -80,6 +75,11 @@
         "reason": "No Price Data"
     },
     "TGIF": {
+        "delisted": true,
+        "last_checked": "2026-07-12",
+        "reason": "No Price Data"
+    },
+    "DTC": {
         "delisted": true,
         "last_checked": "2026-07-12",
         "reason": "No Price Data"
