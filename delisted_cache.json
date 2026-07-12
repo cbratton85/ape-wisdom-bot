@@ -59,11 +59,6 @@
         "last_checked": "2026-07-11",
         "reason": "No Price Data"
     },
-    "CBD": {
-        "delisted": true,
-        "last_checked": "2026-07-12",
-        "reason": "No Price Data"
-    },
     "ROLL": {
         "delisted": true,
         "last_checked": "2026-07-12",
@@ -90,6 +85,11 @@
         "reason": "No Price Data"
     },
     "FI": {
+        "delisted": true,
+        "last_checked": "2026-07-12",
+        "reason": "No Price Data"
+    },
+    "CBD": {
         "delisted": true,
         "last_checked": "2026-07-12",
         "reason": "No Price Data"
