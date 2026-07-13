@@ -45088,5 +45088,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "JKL": {
+        "ticker": "JKL",
+        "name": "iShares Morningstar Small-Cap V",
+        "meta": "Unknown",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
