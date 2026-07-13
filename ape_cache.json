@@ -45108,5 +45108,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ROBT": {
+        "ticker": "ROBT",
+        "name": "First Trust Nasdaq Artificial I",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
