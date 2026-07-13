@@ -45148,5 +45148,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "EHC": {
+        "ticker": "EHC",
+        "name": "Encompass Health Corporation",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 10915866624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
