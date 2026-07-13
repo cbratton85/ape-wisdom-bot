@@ -45098,5 +45098,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "PRG": {
+        "ticker": "PRG",
+        "name": "PROG Holdings, Inc.",
+        "meta": "Rental & Leasing Services",
+        "type": "EQUITY",
+        "mcap": 1772500608,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
