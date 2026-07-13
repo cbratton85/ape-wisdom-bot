@@ -45118,5 +45118,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "GII": {
+        "ticker": "GII",
+        "name": "State Street SPDR S&P Global In",
+        "meta": "Infrastructure",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
