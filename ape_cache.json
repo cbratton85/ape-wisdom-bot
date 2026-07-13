@@ -45128,5 +45128,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "LVLU": {
+        "ticker": "LVLU",
+        "name": "Lulu's Fashion Lounge Holdings,",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 23834320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "BNBX": {
+        "ticker": "BNBX",
+        "name": "BNB Plus Corp.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 1173148,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
