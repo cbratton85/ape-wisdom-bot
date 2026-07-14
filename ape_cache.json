@@ -45188,5 +45188,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "RWAY": {
+        "ticker": "RWAY",
+        "name": "Runway Growth Finance Corp.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 244595776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
