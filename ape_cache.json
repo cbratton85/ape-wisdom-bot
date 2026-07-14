@@ -45168,5 +45168,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MTNB": {
+        "ticker": "MTNB",
+        "name": "Matinas Biopharma Holdings, Inc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 3074971,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
