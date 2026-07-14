@@ -1,9 +1,4 @@
 {
-    "CBD": {
-        "delisted": true,
-        "last_checked": "2026-07-12",
-        "reason": "No Price Data"
-    },
     "SOL": {
         "delisted": true,
         "last_checked": "2026-07-13",
@@ -125,6 +120,16 @@
         "reason": "No Price Data"
     },
     "DTC": {
+        "delisted": true,
+        "last_checked": "2026-07-14",
+        "reason": "No Price Data"
+    },
+    "YY": {
+        "delisted": true,
+        "last_checked": "2026-07-14",
+        "reason": "No Price Data"
+    },
+    "CBD": {
         "delisted": true,
         "last_checked": "2026-07-14",
         "reason": "No Price Data"
