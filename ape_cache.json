@@ -45178,5 +45178,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "FLMI": {
+        "ticker": "FLMI",
+        "name": "Franklin Dynamic Municipal Bond",
+        "meta": "High Yield Muni",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
