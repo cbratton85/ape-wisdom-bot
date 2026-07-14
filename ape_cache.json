@@ -45198,5 +45198,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PXED": {
+        "ticker": "PXED",
+        "name": "Phoenix Education Partners, Inc",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 1237985408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
