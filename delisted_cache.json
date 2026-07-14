@@ -4,11 +4,6 @@
         "last_checked": "2026-07-12",
         "reason": "No Price Data"
     },
-    "SPI": {
-        "delisted": true,
-        "last_checked": "2026-07-13",
-        "reason": "No Price Data"
-    },
     "QED": {
         "delisted": true,
         "last_checked": "2026-07-13",
@@ -100,6 +95,11 @@
         "reason": "No Price Data"
     },
     "CO": {
+        "delisted": true,
+        "last_checked": "2026-07-14",
+        "reason": "No Price Data"
+    },
+    "SPI": {
         "delisted": true,
         "last_checked": "2026-07-14",
         "reason": "No Price Data"
