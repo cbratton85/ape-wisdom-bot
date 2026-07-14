@@ -45158,5 +45158,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "IBN": {
+        "ticker": "IBN",
+        "name": "ICICI Bank Limited",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 104941453312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
