@@ -45208,5 +45208,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SNAX": {
+        "ticker": "SNAX",
+        "name": "Stryve Foods, Inc.",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 178622,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
     }
 }
