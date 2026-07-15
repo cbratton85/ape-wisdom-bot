@@ -45228,5 +45228,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VYNE": {
+        "ticker": "VYNE",
+        "name": "VYNE Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 23736776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
