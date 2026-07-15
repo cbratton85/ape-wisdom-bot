@@ -79,11 +79,6 @@
         "last_checked": "2026-07-15",
         "reason": "No Price Data"
     },
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-07-15",
-        "reason": "No Price Data"
-    },
     "DS": {
         "delisted": true,
         "last_checked": "2026-07-15",
@@ -125,6 +120,21 @@
         "reason": "No Price Data"
     },
     "FI": {
+        "delisted": true,
+        "last_checked": "2026-07-15",
+        "reason": "No Price Data"
+    },
+    "SHOP": {
+        "delisted": true,
+        "last_checked": "2026-07-15",
+        "reason": "No Price Data"
+    },
+    "SOL": {
+        "delisted": true,
+        "last_checked": "2026-07-15",
+        "reason": "No Price Data"
+    },
+    "ARKK": {
         "delisted": true,
         "last_checked": "2026-07-15",
         "reason": "No Price Data"
