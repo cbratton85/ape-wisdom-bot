@@ -45218,5 +45218,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PNK"
+    },
+    "NPKI": {
+        "ticker": "NPKI",
+        "name": "NPK International Inc.",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 1225326592,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
