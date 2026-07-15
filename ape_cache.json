@@ -45238,5 +45238,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "JBI": {
+        "ticker": "JBI",
+        "name": "Janus International Group, Inc.",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 732427520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
