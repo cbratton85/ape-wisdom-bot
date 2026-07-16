@@ -45278,5 +45278,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "JSPR": {
+        "ticker": "JSPR",
+        "name": "Jasper Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 21679586,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
