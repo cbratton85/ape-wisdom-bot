@@ -45268,5 +45268,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "FNI": {
+        "ticker": "FNI",
+        "name": "First Trust Chindia ETF",
+        "meta": "Focused Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
