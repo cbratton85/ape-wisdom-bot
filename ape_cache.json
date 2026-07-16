@@ -45258,5 +45258,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "STXS": {
+        "ticker": "STXS",
+        "name": "Stereotaxis, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 159587056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
