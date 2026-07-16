@@ -14,11 +14,6 @@
         "last_checked": "2026-07-15",
         "reason": "No Price Data"
     },
-    "HEAR": {
-        "delisted": true,
-        "last_checked": "2026-07-15",
-        "reason": "No Price Data"
-    },
     "FI": {
         "delisted": true,
         "last_checked": "2026-07-15",
@@ -130,6 +125,11 @@
         "reason": "No Price Data"
     },
     "SAVA": {
+        "delisted": true,
+        "last_checked": "2026-07-16",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
         "delisted": true,
         "last_checked": "2026-07-16",
         "reason": "No Price Data"
