@@ -84,11 +84,6 @@
         "last_checked": "2026-07-16",
         "reason": "No Price Data"
     },
-    "REV": {
-        "delisted": true,
-        "last_checked": "2026-07-16",
-        "reason": "No Price Data"
-    },
     "DIDI": {
         "delisted": true,
         "last_checked": "2026-07-16",
@@ -135,6 +130,11 @@
         "reason": "No Price Data"
     },
     "WOW": {
+        "delisted": true,
+        "last_checked": "2026-07-16",
+        "reason": "No Price Data"
+    },
+    "REV": {
         "delisted": true,
         "last_checked": "2026-07-16",
         "reason": "No Price Data"
