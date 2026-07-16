@@ -45288,5 +45288,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "IYH": {
+        "ticker": "IYH",
+        "name": "iShares U.S. Healthcare ETF",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
