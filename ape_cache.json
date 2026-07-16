@@ -45248,5 +45248,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "LVWR": {
+        "ticker": "LVWR",
+        "name": "LiveWire Group, Inc.",
+        "meta": "Auto Manufacturers",
+        "type": "EQUITY",
+        "mcap": 148349936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
