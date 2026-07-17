@@ -114,11 +114,6 @@
         "last_checked": "2026-07-17",
         "reason": "No Price Data"
     },
-    "FUT": {
-        "delisted": true,
-        "last_checked": "2026-07-17",
-        "reason": "No Price Data"
-    },
     "RESP": {
         "delisted": true,
         "last_checked": "2026-07-17",
@@ -140,6 +135,11 @@
         "reason": "No Price Data"
     },
     "AUD": {
+        "delisted": true,
+        "last_checked": "2026-07-17",
+        "reason": "No Price Data"
+    },
+    "FUT": {
         "delisted": true,
         "last_checked": "2026-07-17",
         "reason": "No Price Data"
