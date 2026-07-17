@@ -45308,5 +45308,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MAGN": {
+        "ticker": "MAGN",
+        "name": "Magnera Corporation",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 491458016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
