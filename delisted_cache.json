@@ -84,11 +84,6 @@
         "last_checked": "2026-07-17",
         "reason": "No Price Data"
     },
-    "YY": {
-        "delisted": true,
-        "last_checked": "2026-07-17",
-        "reason": "No Price Data"
-    },
     "PIN": {
         "delisted": true,
         "last_checked": "2026-07-17",
@@ -140,6 +135,11 @@
         "reason": "No Price Data"
     },
     "GPS": {
+        "delisted": true,
+        "last_checked": "2026-07-17",
+        "reason": "No Price Data"
+    },
+    "YY": {
         "delisted": true,
         "last_checked": "2026-07-17",
         "reason": "No Price Data"
