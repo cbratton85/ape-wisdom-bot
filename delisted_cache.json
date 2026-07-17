@@ -109,11 +109,6 @@
         "last_checked": "2026-07-17",
         "reason": "No Price Data"
     },
-    "RESP": {
-        "delisted": true,
-        "last_checked": "2026-07-17",
-        "reason": "No Price Data"
-    },
     "BODY": {
         "delisted": true,
         "last_checked": "2026-07-17",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "MOM": {
+        "delisted": true,
+        "last_checked": "2026-07-17",
+        "reason": "No Price Data"
+    },
+    "RESP": {
         "delisted": true,
         "last_checked": "2026-07-17",
         "reason": "No Price Data"
