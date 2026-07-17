@@ -9,11 +9,6 @@
         "last_checked": "2026-07-16",
         "reason": "No Price Data"
     },
-    "DTC": {
-        "delisted": true,
-        "last_checked": "2026-07-16",
-        "reason": "No Price Data"
-    },
     "ABB": {
         "delisted": true,
         "last_checked": "2026-07-16",
@@ -145,6 +140,16 @@
         "reason": "No Price Data"
     },
     "FUT": {
+        "delisted": true,
+        "last_checked": "2026-07-17",
+        "reason": "No Price Data"
+    },
+    "DTC": {
+        "delisted": true,
+        "last_checked": "2026-07-17",
+        "reason": "No Price Data"
+    },
+    "NXXT": {
         "delisted": true,
         "last_checked": "2026-07-17",
         "reason": "No Price Data"
