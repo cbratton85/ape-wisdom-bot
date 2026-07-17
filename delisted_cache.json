@@ -114,11 +114,6 @@
         "last_checked": "2026-07-17",
         "reason": "No Price Data"
     },
-    "FUT": {
-        "delisted": true,
-        "last_checked": "2026-07-17",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-07-17",
@@ -145,6 +140,11 @@
         "reason": "No Price Data"
     },
     "TTM": {
+        "delisted": true,
+        "last_checked": "2026-07-17",
+        "reason": "No Price Data"
+    },
+    "FUT": {
         "delisted": true,
         "last_checked": "2026-07-17",
         "reason": "No Price Data"
