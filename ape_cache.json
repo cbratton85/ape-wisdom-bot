@@ -45298,5 +45298,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "TNET": {
+        "ticker": "TNET",
+        "name": "TriNet Group, Inc.",
+        "meta": "Staffing & Employment Services",
+        "type": "EQUITY",
+        "mcap": 2778272768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
