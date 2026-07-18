@@ -45368,5 +45368,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ANIX": {
+        "ticker": "ANIX",
+        "name": "Anixa Biosciences, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 115678424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
