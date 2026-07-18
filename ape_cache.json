@@ -45358,5 +45358,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "DYNF": {
+        "ticker": "DYNF",
+        "name": "iShares U.S. Equity Factor Rota",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
