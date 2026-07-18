@@ -45378,5 +45378,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "LGLV": {
+        "ticker": "LGLV",
+        "name": "State Street SPDR US Large Cap ",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
