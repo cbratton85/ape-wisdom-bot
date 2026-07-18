@@ -1,9 +1,4 @@
 {
-    "SPI": {
-        "delisted": true,
-        "last_checked": "2026-07-17",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-07-17",
@@ -140,6 +135,11 @@
         "reason": "No Price Data"
     },
     "FI": {
+        "delisted": true,
+        "last_checked": "2026-07-18",
+        "reason": "No Price Data"
+    },
+    "SPI": {
         "delisted": true,
         "last_checked": "2026-07-18",
         "reason": "No Price Data"
