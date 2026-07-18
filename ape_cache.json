@@ -45328,5 +45328,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "IDNA": {
+        "ticker": "IDNA",
+        "name": "iShares Genomics Immunology and",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
