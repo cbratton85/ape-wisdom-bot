@@ -45338,5 +45338,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "DAKT": {
+        "ticker": "DAKT",
+        "name": "Daktronics, Inc.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 923206272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "RVLV": {
+        "ticker": "RVLV",
+        "name": "Revolve Group, Inc.",
+        "meta": "Internet Retail",
+        "type": "EQUITY",
+        "mcap": 1780301824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
