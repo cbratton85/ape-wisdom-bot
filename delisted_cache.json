@@ -124,11 +124,6 @@
         "last_checked": "2026-07-18",
         "reason": "No Price Data"
     },
-    "PIN": {
-        "delisted": true,
-        "last_checked": "2026-07-18",
-        "reason": "No Price Data"
-    },
     "SOL": {
         "delisted": true,
         "last_checked": "2026-07-18",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "DS": {
+        "delisted": true,
+        "last_checked": "2026-07-18",
+        "reason": "No Price Data"
+    },
+    "PIN": {
         "delisted": true,
         "last_checked": "2026-07-18",
         "reason": "No Price Data"
