@@ -24,11 +24,6 @@
         "last_checked": "2026-07-18",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-07-18",
-        "reason": "No Price Data"
-    },
     "ABB": {
         "delisted": true,
         "last_checked": "2026-07-18",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "JW": {
+        "delisted": true,
+        "last_checked": "2026-07-19",
+        "reason": "No Price Data"
+    },
+    "BABY": {
         "delisted": true,
         "last_checked": "2026-07-19",
         "reason": "No Price Data"
