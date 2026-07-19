@@ -45398,5 +45398,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SOPH": {
+        "ticker": "SOPH",
+        "name": "SOPHiA GENETICS SA",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 492465184,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
