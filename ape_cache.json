@@ -45418,5 +45418,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CORZQ": {
+        "ticker": "CORZQ",
+        "name": "CORZQ",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
+    },
+    "KREF": {
+        "ticker": "KREF",
+        "name": "KKR Real Estate Finance Trust I",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 468750016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
