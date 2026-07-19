@@ -45388,5 +45388,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ANEW": {
+        "ticker": "ANEW",
+        "name": "ProShares MSCI Transformational",
+        "meta": "Large Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
