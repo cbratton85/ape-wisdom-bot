@@ -89,11 +89,6 @@
         "last_checked": "2026-07-19",
         "reason": "No Price Data"
     },
-    "BOSS": {
-        "delisted": true,
-        "last_checked": "2026-07-19",
-        "reason": "No Price Data"
-    },
     "RE": {
         "delisted": true,
         "last_checked": "2026-07-19",
@@ -130,6 +125,11 @@
         "reason": "No Price Data"
     },
     "JW": {
+        "delisted": true,
+        "last_checked": "2026-07-19",
+        "reason": "No Price Data"
+    },
+    "BOSS": {
         "delisted": true,
         "last_checked": "2026-07-19",
         "reason": "No Price Data"
