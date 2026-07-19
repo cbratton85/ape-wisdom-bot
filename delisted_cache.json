@@ -49,11 +49,6 @@
         "last_checked": "2026-07-19",
         "reason": "No Price Data"
     },
-    "HEAR": {
-        "delisted": true,
-        "last_checked": "2026-07-19",
-        "reason": "No Price Data"
-    },
     "KIND": {
         "delisted": true,
         "last_checked": "2026-07-19",
@@ -130,6 +125,11 @@
         "reason": "No Price Data"
     },
     "CORZQ": {
+        "delisted": true,
+        "last_checked": "2026-07-19",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
         "delisted": true,
         "last_checked": "2026-07-19",
         "reason": "No Price Data"
