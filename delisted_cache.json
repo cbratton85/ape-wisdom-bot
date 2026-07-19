@@ -104,11 +104,6 @@
         "last_checked": "2026-07-18",
         "reason": "No Price Data"
     },
-    "JW": {
-        "delisted": true,
-        "last_checked": "2026-07-18",
-        "reason": "No Price Data"
-    },
     "SUP": {
         "delisted": true,
         "last_checked": "2026-07-18",
@@ -142,6 +137,11 @@
     "AUD": {
         "delisted": true,
         "last_checked": "2026-07-18",
+        "reason": "No Price Data"
+    },
+    "JW": {
+        "delisted": true,
+        "last_checked": "2026-07-19",
         "reason": "No Price Data"
     }
 }
