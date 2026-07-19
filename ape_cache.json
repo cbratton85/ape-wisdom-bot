@@ -45408,5 +45408,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "BNR": {
+        "ticker": "BNR",
+        "name": "Burning Rock Biotech Limited",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 105147040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
