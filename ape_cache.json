@@ -45438,5 +45438,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ENIC": {
+        "ticker": "ENIC",
+        "name": "Enel Chile S.A.",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 6100490240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "FMB": {
+        "ticker": "FMB",
+        "name": "First Trust Managed Municipal E",
+        "meta": "Muni National Interm",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
