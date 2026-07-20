@@ -44,11 +44,6 @@
         "last_checked": "2026-07-19",
         "reason": "No Price Data"
     },
-    "KIND": {
-        "delisted": true,
-        "last_checked": "2026-07-19",
-        "reason": "No Price Data"
-    },
     "SPI": {
         "delisted": true,
         "last_checked": "2026-07-19",
@@ -125,6 +120,16 @@
         "reason": "No Price Data"
     },
     "AHH": {
+        "delisted": true,
+        "last_checked": "2026-07-20",
+        "reason": "No Price Data"
+    },
+    "SNP": {
+        "delisted": true,
+        "last_checked": "2026-07-20",
+        "reason": "No Price Data"
+    },
+    "KIND": {
         "delisted": true,
         "last_checked": "2026-07-20",
         "reason": "No Price Data"
