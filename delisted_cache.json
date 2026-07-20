@@ -1,9 +1,4 @@
 {
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-07-17",
-        "reason": "No Price Data"
-    },
     "CN": {
         "delisted": true,
         "last_checked": "2026-07-18",
@@ -125,6 +120,16 @@
         "reason": "No Price Data"
     },
     "RE": {
+        "delisted": true,
+        "last_checked": "2026-07-20",
+        "reason": "No Price Data"
+    },
+    "TTM": {
+        "delisted": true,
+        "last_checked": "2026-07-20",
+        "reason": "No Price Data"
+    },
+    "WOW": {
         "delisted": true,
         "last_checked": "2026-07-20",
         "reason": "No Price Data"
