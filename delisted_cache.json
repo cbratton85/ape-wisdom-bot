@@ -54,11 +54,6 @@
         "last_checked": "2026-07-19",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-07-19",
-        "reason": "No Price Data"
-    },
     "SAVE": {
         "delisted": true,
         "last_checked": "2026-07-19",
@@ -125,6 +120,11 @@
         "reason": "No Price Data"
     },
     "GPS": {
+        "delisted": true,
+        "last_checked": "2026-07-20",
+        "reason": "No Price Data"
+    },
+    "BABY": {
         "delisted": true,
         "last_checked": "2026-07-20",
         "reason": "No Price Data"
