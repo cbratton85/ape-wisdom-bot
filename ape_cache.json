@@ -45488,5 +45488,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PINE": {
+        "ticker": "PINE",
+        "name": "Alpine Income Property Trust, I",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 374849696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
