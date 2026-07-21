@@ -45458,5 +45458,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ERIE": {
+        "ticker": "ERIE",
+        "name": "Erie Indemnity Company",
+        "meta": "Insurance Brokers",
+        "type": "EQUITY",
+        "mcap": 11765742592,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
