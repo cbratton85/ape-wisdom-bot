@@ -45498,5 +45498,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SOND": {
+        "ticker": "SOND",
+        "name": "SOND",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
