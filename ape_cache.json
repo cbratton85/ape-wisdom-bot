@@ -45478,5 +45478,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CALX": {
+        "ticker": "CALX",
+        "name": "Calix, Inc",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 2446051072,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
