@@ -45468,5 +45468,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ZBIO": {
+        "ticker": "ZBIO",
+        "name": "Zenas BioPharma, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
