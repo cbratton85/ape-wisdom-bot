@@ -45548,5 +45548,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "PEI": {
+        "ticker": "PEI",
+        "name": "PEI",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
