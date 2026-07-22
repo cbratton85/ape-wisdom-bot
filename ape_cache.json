@@ -45518,5 +45518,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "SLGL": {
+        "ticker": "SLGL",
+        "name": "Sol-Gel Technologies Ltd.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 293359232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
