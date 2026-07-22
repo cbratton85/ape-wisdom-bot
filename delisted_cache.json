@@ -19,11 +19,6 @@
         "last_checked": "2026-07-21",
         "reason": "No Price Data"
     },
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-07-21",
-        "reason": "No Price Data"
-    },
     "ROLL": {
         "delisted": true,
         "last_checked": "2026-07-21",
@@ -135,6 +130,11 @@
         "reason": "No Price Data"
     },
     "SNP": {
+        "delisted": true,
+        "last_checked": "2026-07-22",
+        "reason": "No Price Data"
+    },
+    "WOW": {
         "delisted": true,
         "last_checked": "2026-07-22",
         "reason": "No Price Data"
