@@ -45528,5 +45528,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "SGRP": {
+        "ticker": "SGRP",
+        "name": "SPAR Group, Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 8516728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
