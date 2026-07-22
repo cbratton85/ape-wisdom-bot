@@ -49,11 +49,6 @@
         "last_checked": "2026-07-21",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-07-22",
-        "reason": "No Price Data"
-    },
     "MPX": {
         "delisted": true,
         "last_checked": "2026-07-22",
@@ -125,6 +120,11 @@
         "reason": "No Price Data"
     },
     "JW": {
+        "delisted": true,
+        "last_checked": "2026-07-22",
+        "reason": "No Price Data"
+    },
+    "AUD": {
         "delisted": true,
         "last_checked": "2026-07-22",
         "reason": "No Price Data"
