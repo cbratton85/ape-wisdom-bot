@@ -45578,5 +45578,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NEUP": {
+        "ticker": "NEUP",
+        "name": "Neuphoria Therapeutics Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 17997154,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }

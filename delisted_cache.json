@@ -19,11 +19,6 @@
         "last_checked": "2026-07-22",
         "reason": "No Price Data"
     },
-    "CO": {
-        "delisted": true,
-        "last_checked": "2026-07-22",
-        "reason": "No Price Data"
-    },
     "MOM": {
         "delisted": true,
         "last_checked": "2026-07-22",
@@ -140,6 +135,11 @@
         "reason": "No Price Data"
     },
     "LAZY": {
+        "delisted": true,
+        "last_checked": "2026-07-23",
+        "reason": "No Price Data"
+    },
+    "CO": {
         "delisted": true,
         "last_checked": "2026-07-23",
         "reason": "No Price Data"
