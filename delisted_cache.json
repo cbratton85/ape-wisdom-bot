@@ -19,11 +19,6 @@
         "last_checked": "2026-07-22",
         "reason": "No Price Data"
     },
-    "CBD": {
-        "delisted": true,
-        "last_checked": "2026-07-22",
-        "reason": "No Price Data"
-    },
     "CN": {
         "delisted": true,
         "last_checked": "2026-07-22",
@@ -145,6 +140,11 @@
         "reason": "No Price Data"
     },
     "FI": {
+        "delisted": true,
+        "last_checked": "2026-07-23",
+        "reason": "No Price Data"
+    },
+    "CBD": {
         "delisted": true,
         "last_checked": "2026-07-23",
         "reason": "No Price Data"
