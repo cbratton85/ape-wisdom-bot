@@ -9,11 +9,6 @@
         "last_checked": "2026-07-21",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-07-21",
-        "reason": "No Price Data"
-    },
     "LAZY": {
         "delisted": true,
         "last_checked": "2026-07-22",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "JPN": {
+        "delisted": true,
+        "last_checked": "2026-07-23",
+        "reason": "No Price Data"
+    },
+    "RE": {
         "delisted": true,
         "last_checked": "2026-07-23",
         "reason": "No Price Data"
