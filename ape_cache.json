@@ -45598,5 +45598,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "IMNM": {
+        "ticker": "IMNM",
+        "name": "Immunome, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2515291136,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
