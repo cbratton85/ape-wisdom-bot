@@ -45558,5 +45558,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "OUSA": {
+        "ticker": "OUSA",
+        "name": "ALPS O'Shares U.S. Quality Divi",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "OUSM": {
+        "ticker": "OUSM",
+        "name": "ALPS O'Shares U.S. Small-Cap Qu",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
