@@ -34,11 +34,6 @@
         "last_checked": "2026-07-22",
         "reason": "No Price Data"
     },
-    "BCOM": {
-        "delisted": true,
-        "last_checked": "2026-07-22",
-        "reason": "No Price Data"
-    },
     "CN": {
         "delisted": true,
         "last_checked": "2026-07-22",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "DS": {
+        "delisted": true,
+        "last_checked": "2026-07-23",
+        "reason": "No Price Data"
+    },
+    "BCOM": {
         "delisted": true,
         "last_checked": "2026-07-23",
         "reason": "No Price Data"
