@@ -45608,5 +45608,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "IBHF": {
+        "ticker": "IBHF",
+        "name": "iShares iBonds 2026 Term High Y",
+        "meta": "Target Maturity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
