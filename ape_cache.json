@@ -45588,5 +45588,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "FXN": {
+        "ticker": "FXN",
+        "name": "First Trust Energy AlphaDEX Fun",
+        "meta": "Equity Energy",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
