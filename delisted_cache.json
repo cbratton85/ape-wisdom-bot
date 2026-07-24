@@ -134,11 +134,6 @@
         "last_checked": "2026-07-24",
         "reason": "No Price Data"
     },
-    "REV": {
-        "delisted": true,
-        "last_checked": "2026-07-24",
-        "reason": "No Price Data"
-    },
     "JPN": {
         "delisted": true,
         "last_checked": "2026-07-24",
@@ -155,6 +150,11 @@
         "reason": "No Price Data"
     },
     "DS": {
+        "delisted": true,
+        "last_checked": "2026-07-24",
+        "reason": "No Price Data"
+    },
+    "REV": {
         "delisted": true,
         "last_checked": "2026-07-24",
         "reason": "No Price Data"
