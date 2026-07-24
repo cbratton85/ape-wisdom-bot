@@ -149,11 +149,6 @@
         "last_checked": "2026-07-24",
         "reason": "No Price Data"
     },
-    "CN": {
-        "delisted": true,
-        "last_checked": "2026-07-24",
-        "reason": "No Price Data"
-    },
     "FI": {
         "delisted": true,
         "last_checked": "2026-07-24",
@@ -165,6 +160,11 @@
         "reason": "No Price Data"
     },
     "ZI": {
+        "delisted": true,
+        "last_checked": "2026-07-24",
+        "reason": "No Price Data"
+    },
+    "CN": {
         "delisted": true,
         "last_checked": "2026-07-24",
         "reason": "No Price Data"
