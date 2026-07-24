@@ -45628,5 +45628,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "GRWG": {
+        "ticker": "GRWG",
+        "name": "GrowGeneration Corp.",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 83225904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
