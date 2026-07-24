@@ -45638,5 +45638,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "WINA": {
+        "ticker": "WINA",
+        "name": "Winmark Corporation",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 1194467968,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
