@@ -24,11 +24,6 @@
         "last_checked": "2026-07-23",
         "reason": "No Price Data"
     },
-    "OG": {
-        "delisted": true,
-        "last_checked": "2026-07-23",
-        "reason": "No Price Data"
-    },
     "JW": {
         "delisted": true,
         "last_checked": "2026-07-23",
@@ -155,6 +150,16 @@
         "reason": "No Price Data"
     },
     "DS": {
+        "delisted": true,
+        "last_checked": "2026-07-24",
+        "reason": "No Price Data"
+    },
+    "OG": {
+        "delisted": true,
+        "last_checked": "2026-07-24",
+        "reason": "No Price Data"
+    },
+    "SNP": {
         "delisted": true,
         "last_checked": "2026-07-24",
         "reason": "No Price Data"
