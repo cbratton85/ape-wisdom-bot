@@ -45688,5 +45688,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "EIG": {
+        "ticker": "EIG",
+        "name": "Employers Holdings Inc",
+        "meta": "Insurance - Specialty",
+        "type": "EQUITY",
+        "mcap": 908315008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

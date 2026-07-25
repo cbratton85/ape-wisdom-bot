@@ -104,11 +104,6 @@
         "last_checked": "2026-07-25",
         "reason": "No Price Data"
     },
-    "MOM": {
-        "delisted": true,
-        "last_checked": "2026-07-25",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-07-25",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "CHIC": {
+        "delisted": true,
+        "last_checked": "2026-07-25",
+        "reason": "No Price Data"
+    },
+    "MOM": {
         "delisted": true,
         "last_checked": "2026-07-25",
         "reason": "No Price Data"
