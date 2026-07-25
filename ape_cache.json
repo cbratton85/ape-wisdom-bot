@@ -45648,5 +45648,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "DRH": {
+        "ticker": "DRH",
+        "name": "Diamondrock Hospitality Company",
+        "meta": "REIT - Hotel & Motel",
+        "type": "EQUITY",
+        "mcap": 2637771264,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
