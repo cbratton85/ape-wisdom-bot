@@ -45658,5 +45658,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "RZG": {
+        "ticker": "RZG",
+        "name": "Invesco S&P Smallcap 600 Pure G",
+        "meta": "Small Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "VTWG": {
+        "ticker": "VTWG",
+        "name": "Vanguard Russell 2000 Growth ET",
+        "meta": "Small Growth",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SMLF": {
+        "ticker": "SMLF",
+        "name": "iShares U.S. Small-Cap Equity F",
+        "meta": "Small Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
