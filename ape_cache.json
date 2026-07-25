@@ -45698,5 +45698,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "UJAN": {
+        "ticker": "UJAN",
+        "name": "Innovator U.S. Equity Ultra Buf",
+        "meta": "Defined Outcome",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "UJUL": {
+        "ticker": "UJUL",
+        "name": "Innovator U.S. Equity Ultra Buf",
+        "meta": "Defined Outcome",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
