@@ -69,11 +69,6 @@
         "last_checked": "2026-07-24",
         "reason": "No Price Data"
     },
-    "PEI": {
-        "delisted": true,
-        "last_checked": "2026-07-24",
-        "reason": "No Price Data"
-    },
     "FI": {
         "delisted": true,
         "last_checked": "2026-07-24",
@@ -162,6 +157,11 @@
     "SNP": {
         "delisted": true,
         "last_checked": "2026-07-24",
+        "reason": "No Price Data"
+    },
+    "PEI": {
+        "delisted": true,
+        "last_checked": "2026-07-25",
         "reason": "No Price Data"
     }
 }
