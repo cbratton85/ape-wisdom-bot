@@ -45718,5 +45718,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "AMCX": {
+        "ticker": "AMCX",
+        "name": "AMC Global Media Inc.",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 430052288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
