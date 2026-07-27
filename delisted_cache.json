@@ -64,11 +64,6 @@
         "last_checked": "2026-07-27",
         "reason": "No Price Data"
     },
-    "SAVA": {
-        "delisted": true,
-        "last_checked": "2026-07-27",
-        "reason": "No Price Data"
-    },
     "MOM": {
         "delisted": true,
         "last_checked": "2026-07-27",
@@ -95,6 +90,11 @@
         "reason": "No Price Data"
     },
     "WOW": {
+        "delisted": true,
+        "last_checked": "2026-07-27",
+        "reason": "No Price Data"
+    },
+    "SAVA": {
         "delisted": true,
         "last_checked": "2026-07-27",
         "reason": "No Price Data"
