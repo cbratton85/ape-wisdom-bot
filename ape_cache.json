@@ -45738,5 +45738,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "IQMX": {
+        "ticker": "IQMX",
+        "name": "IQM Quantum Computers Oyj",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 2278677760,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "USAR": {
+        "ticker": "USAR",
+        "name": "USA Rare Earth, Inc.",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 3652940032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "INFQ": {
+        "ticker": "INFQ",
+        "name": "Infleqtion, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 2129601792,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "ECHO": {
+        "ticker": "ECHO",
+        "name": "EchoStar Corporation",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 25123934208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
