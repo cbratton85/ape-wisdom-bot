@@ -45778,5 +45778,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "TRGP": {
+        "ticker": "TRGP",
+        "name": "Targa Resources, Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 56161574912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
