@@ -9,11 +9,6 @@
         "last_checked": "2026-07-26",
         "reason": "No Price Data"
     },
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-07-27",
-        "reason": "No Price Data"
-    },
     "FI": {
         "delisted": true,
         "last_checked": "2026-07-27",
@@ -97,6 +92,11 @@
     "SAVA": {
         "delisted": true,
         "last_checked": "2026-07-27",
+        "reason": "No Price Data"
+    },
+    "TTM": {
+        "delisted": true,
+        "last_checked": "2026-07-28",
         "reason": "No Price Data"
     }
 }
