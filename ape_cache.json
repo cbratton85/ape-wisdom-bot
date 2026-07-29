@@ -45818,5 +45818,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CLOU": {
+        "ticker": "CLOU",
+        "name": "Global X Cloud Computing ETF",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
