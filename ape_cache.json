@@ -45828,5 +45828,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ALKT": {
+        "ticker": "ALKT",
+        "name": "Alkami Technology, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 1961661440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
