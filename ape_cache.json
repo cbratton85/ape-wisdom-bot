@@ -45808,5 +45808,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "MNRO": {
+        "ticker": "MNRO",
+        "name": "Monro, Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 441205888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
