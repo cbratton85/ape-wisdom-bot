@@ -1,9 +1,4 @@
 {
-    "DTC": {
-        "delisted": true,
-        "last_checked": "2026-07-28",
-        "reason": "No Price Data"
-    },
     "ABB": {
         "delisted": true,
         "last_checked": "2026-07-28",
@@ -130,6 +125,11 @@
         "reason": "No Price Data"
     },
     "OLD": {
+        "delisted": true,
+        "last_checked": "2026-07-29",
+        "reason": "No Price Data"
+    },
+    "DTC": {
         "delisted": true,
         "last_checked": "2026-07-29",
         "reason": "No Price Data"
