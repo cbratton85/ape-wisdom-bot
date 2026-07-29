@@ -45838,5 +45838,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "GMF": {
+        "ticker": "GMF",
+        "name": "State Street SPDR S&P Emerging ",
+        "meta": "Pacific/Asia ex-Japan Stk",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
