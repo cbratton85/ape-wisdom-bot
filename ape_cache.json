@@ -45798,5 +45798,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "ALVO": {
+        "ticker": "ALVO",
+        "name": "Alvotech",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 1205753728,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
