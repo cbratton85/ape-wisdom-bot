@@ -45788,5 +45788,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "HYMTF": {
+        "ticker": "HYMTF",
+        "name": "HYMTF",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }

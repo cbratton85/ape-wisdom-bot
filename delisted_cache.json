@@ -119,6 +119,11 @@
         "last_checked": "2026-07-29",
         "reason": "No Price Data"
     },
+    "HYMTF": {
+        "delisted": true,
+        "last_checked": "2026-07-29",
+        "reason": "No Price Data"
+    },
     "QED": {
         "delisted": true,
         "last_checked": "2026-07-29",
