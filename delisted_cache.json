@@ -119,17 +119,27 @@
         "last_checked": "2026-07-29",
         "reason": "No Price Data"
     },
-    "QED": {
-        "delisted": true,
-        "last_checked": "2026-07-29",
-        "reason": "No Price Data"
-    },
     "FI": {
         "delisted": true,
         "last_checked": "2026-07-30",
         "reason": "No Price Data"
     },
     "MOM": {
+        "delisted": true,
+        "last_checked": "2026-07-30",
+        "reason": "No Price Data"
+    },
+    "SOL": {
+        "delisted": true,
+        "last_checked": "2026-07-30",
+        "reason": "No Price Data"
+    },
+    "QED": {
+        "delisted": true,
+        "last_checked": "2026-07-30",
+        "reason": "No Price Data"
+    },
+    "JW": {
         "delisted": true,
         "last_checked": "2026-07-30",
         "reason": "No Price Data"
