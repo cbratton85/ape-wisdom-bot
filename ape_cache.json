@@ -45868,5 +45868,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "BKLC": {
+        "ticker": "BKLC",
+        "name": "BNY Mellon US Large Cap Core Eq",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
