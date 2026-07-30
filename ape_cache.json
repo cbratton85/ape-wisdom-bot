@@ -45858,5 +45858,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "KG": {
+        "ticker": "KG",
+        "name": "Kestrel Group, Ltd.",
+        "meta": "Insurance - Reinsurance",
+        "type": "EQUITY",
+        "mcap": 66738972,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
