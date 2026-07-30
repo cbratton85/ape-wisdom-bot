@@ -45848,5 +45848,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "HONA": {
+        "ticker": "HONA",
+        "name": "Honeywell Aerospace Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 64604995584,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
