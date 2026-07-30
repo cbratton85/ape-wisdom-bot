@@ -4,11 +4,6 @@
         "last_checked": "2026-07-29",
         "reason": "No Price Data"
     },
-    "GPS": {
-        "delisted": true,
-        "last_checked": "2026-07-29",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-07-29",
@@ -130,6 +125,11 @@
         "reason": "No Price Data"
     },
     "SQ": {
+        "delisted": true,
+        "last_checked": "2026-07-30",
+        "reason": "No Price Data"
+    },
+    "ARKK": {
         "delisted": true,
         "last_checked": "2026-07-30",
         "reason": "No Price Data"
