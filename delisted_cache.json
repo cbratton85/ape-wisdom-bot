@@ -74,11 +74,6 @@
         "last_checked": "2026-07-30",
         "reason": "No Price Data"
     },
-    "QED": {
-        "delisted": true,
-        "last_checked": "2026-07-30",
-        "reason": "No Price Data"
-    },
     "SQ": {
         "delisted": true,
         "last_checked": "2026-07-30",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "CN": {
+        "delisted": true,
+        "last_checked": "2026-07-31",
+        "reason": "No Price Data"
+    },
+    "QED": {
         "delisted": true,
         "last_checked": "2026-07-31",
         "reason": "No Price Data"

@@ -45878,5 +45878,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "REA": {
+        "ticker": "REA",
+        "name": "Rare Earths Americas, Inc.",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 200665408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
