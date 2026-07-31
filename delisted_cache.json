@@ -9,11 +9,6 @@
         "last_checked": "2026-07-29",
         "reason": "No Price Data"
     },
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-07-29",
-        "reason": "No Price Data"
-    },
     "HYMTF": {
         "delisted": true,
         "last_checked": "2026-07-29",
@@ -132,6 +127,11 @@
     "FI": {
         "delisted": true,
         "last_checked": "2026-07-30",
+        "reason": "No Price Data"
+    },
+    "TTM": {
+        "delisted": true,
+        "last_checked": "2026-07-31",
         "reason": "No Price Data"
     }
 }
