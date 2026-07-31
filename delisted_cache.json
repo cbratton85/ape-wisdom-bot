@@ -9,11 +9,6 @@
         "last_checked": "2026-07-29",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-07-29",
-        "reason": "No Price Data"
-    },
     "SOL": {
         "delisted": true,
         "last_checked": "2026-07-30",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "BOSS": {
+        "delisted": true,
+        "last_checked": "2026-07-31",
+        "reason": "No Price Data"
+    },
+    "RE": {
         "delisted": true,
         "last_checked": "2026-07-31",
         "reason": "No Price Data"
