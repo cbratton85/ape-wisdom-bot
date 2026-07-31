@@ -114,6 +114,11 @@
         "last_checked": "2026-07-31",
         "reason": "No Price Data"
     },
+    "ZEUS": {
+        "delisted": true,
+        "last_checked": "2026-07-31",
+        "reason": "No Price Data"
+    },
     "SQ": {
         "delisted": true,
         "last_checked": "2026-07-31",
