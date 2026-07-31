@@ -45898,5 +45898,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "IHG": {
+        "ticker": "IHG",
+        "name": "Intercontinental Hotels Group",
+        "meta": "Lodging",
+        "type": "EQUITY",
+        "mcap": 23910266880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
