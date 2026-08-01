@@ -19,11 +19,6 @@
         "last_checked": "2026-07-31",
         "reason": "No Price Data"
     },
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-07-31",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-07-31",
@@ -125,6 +120,11 @@
         "reason": "No Price Data"
     },
     "OG": {
+        "delisted": true,
+        "last_checked": "2026-08-01",
+        "reason": "No Price Data"
+    },
+    "WOW": {
         "delisted": true,
         "last_checked": "2026-08-01",
         "reason": "No Price Data"
