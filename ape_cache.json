@@ -45918,5 +45918,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BJRI": {
+        "ticker": "BJRI",
+        "name": "BJ's Restaurants, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 1420954240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
