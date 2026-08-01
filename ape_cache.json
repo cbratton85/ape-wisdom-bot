@@ -45908,5 +45908,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ENVA": {
+        "ticker": "ENVA",
+        "name": "Enova International, Inc.",
+        "meta": "Credit Services",
+        "type": "EQUITY",
+        "mcap": 6327672320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
