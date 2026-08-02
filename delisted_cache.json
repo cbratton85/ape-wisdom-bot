@@ -54,11 +54,6 @@
         "last_checked": "2026-08-01",
         "reason": "No Price Data"
     },
-    "QED": {
-        "delisted": true,
-        "last_checked": "2026-08-01",
-        "reason": "No Price Data"
-    },
     "ZN": {
         "delisted": true,
         "last_checked": "2026-08-01",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "OLD": {
+        "delisted": true,
+        "last_checked": "2026-08-02",
+        "reason": "No Price Data"
+    },
+    "QED": {
         "delisted": true,
         "last_checked": "2026-08-02",
         "reason": "No Price Data"
