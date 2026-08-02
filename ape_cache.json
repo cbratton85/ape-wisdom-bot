@@ -45928,5 +45928,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "HERE": {
+        "ticker": "HERE",
+        "name": "Here Group Limited",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 104418464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
