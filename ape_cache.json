@@ -45938,5 +45938,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "LEND": {
+        "ticker": "LEND",
+        "name": "SEI High Yield Bond & Alternati",
+        "meta": "High Yield Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
