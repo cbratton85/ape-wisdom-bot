@@ -45948,5 +45948,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "JMKE": {
+        "ticker": "JMKE",
+        "name": "Jersey Mike's Subs Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 5355186176,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
