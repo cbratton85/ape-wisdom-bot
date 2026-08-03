@@ -39,11 +39,6 @@
         "last_checked": "2026-08-02",
         "reason": "No Price Data"
     },
-    "JPN": {
-        "delisted": true,
-        "last_checked": "2026-08-03",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-08-03",
@@ -90,6 +85,11 @@
         "reason": "No Price Data"
     },
     "RE": {
+        "delisted": true,
+        "last_checked": "2026-08-03",
+        "reason": "No Price Data"
+    },
+    "JPN": {
         "delisted": true,
         "last_checked": "2026-08-03",
         "reason": "No Price Data"
