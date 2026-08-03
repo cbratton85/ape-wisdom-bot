@@ -45988,5 +45988,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "IONS": {
+        "ticker": "IONS",
+        "name": "Ionis Pharmaceuticals, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 9055383552,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
