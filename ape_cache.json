@@ -45958,5 +45958,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CYAB": {
+        "ticker": "CYAB",
+        "name": "Cyabra, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 4266998,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
