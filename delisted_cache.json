@@ -103,10 +103,5 @@
         "delisted": true,
         "last_checked": "2026-08-02",
         "reason": "No Price Data"
-    },
-    "ZEUS": {
-        "delisted": true,
-        "last_checked": "2026-08-03",
-        "reason": "No Price Data"
     }
 }
