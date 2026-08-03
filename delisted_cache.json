@@ -59,11 +59,6 @@
         "last_checked": "2026-08-03",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-08-03",
-        "reason": "No Price Data"
-    },
     "DDG": {
         "delisted": true,
         "last_checked": "2026-08-03",
@@ -90,6 +85,11 @@
         "reason": "No Price Data"
     },
     "SQ": {
+        "delisted": true,
+        "last_checked": "2026-08-03",
+        "reason": "No Price Data"
+    },
+    "RE": {
         "delisted": true,
         "last_checked": "2026-08-03",
         "reason": "No Price Data"
