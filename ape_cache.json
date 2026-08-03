@@ -45978,5 +45978,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "XBIO": {
+        "ticker": "XBIO",
+        "name": "Xenetic Biosciences, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 6094209,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
