@@ -45998,5 +45998,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "WSC": {
+        "ticker": "WSC",
+        "name": "WillScot Holdings Corporation",
+        "meta": "Rental & Leasing Services",
+        "type": "EQUITY",
+        "mcap": 4825317888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ACAD": {
+        "ticker": "ACAD",
+        "name": "ACADIA Pharmaceuticals Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 4649053696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
