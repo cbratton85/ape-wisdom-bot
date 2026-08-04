@@ -46018,5 +46018,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "GAMI": {
+        "ticker": "GAMI",
+        "name": "GAMCO Investors, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 536244096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "OQX"
     }
 }
