@@ -46048,5 +46048,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "FNX": {
+        "ticker": "FNX",
+        "name": "FNX",
+        "meta": "Mid-Cap Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
