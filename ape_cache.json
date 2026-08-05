@@ -46058,5 +46058,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "HYBB": {
+        "ticker": "HYBB",
+        "name": "iShares BB Rated Corporate Bond",
+        "meta": "High Yield Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
