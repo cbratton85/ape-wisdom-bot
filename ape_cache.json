@@ -46068,5 +46068,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "IOND": {
+        "ticker": "IOND",
+        "name": "Ionic Digital Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 2659348480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
