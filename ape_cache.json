@@ -46038,5 +46038,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "OESX": {
+        "ticker": "OESX",
+        "name": "Orion Energy Systems, Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 69547832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
