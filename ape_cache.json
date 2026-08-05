@@ -46028,5 +46028,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "OQX"
+    },
+    "BVN": {
+        "ticker": "BVN",
+        "name": "Buenaventura Mining Company Inc",
+        "meta": "Other Precious Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 8193615872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
