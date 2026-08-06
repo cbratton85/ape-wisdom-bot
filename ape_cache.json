@@ -46138,5 +46138,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ILLM": {
+        "ticker": "ILLM",
+        "name": "ILLM",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
