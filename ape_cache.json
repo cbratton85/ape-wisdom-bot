@@ -46148,5 +46148,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "ALGT": {
+        "ticker": "ALGT",
+        "name": "Allegiant Travel Company",
+        "meta": "Airlines",
+        "type": "EQUITY",
+        "mcap": 2611552256,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
