@@ -109,12 +109,27 @@
         "last_checked": "2026-08-06",
         "reason": "No Price Data"
     },
+    "CO": {
+        "delisted": true,
+        "last_checked": "2026-08-06",
+        "reason": "No Price Data"
+    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-08-06",
         "reason": "No Price Data"
     },
-    "CO": {
+    "SEM": {
+        "delisted": true,
+        "last_checked": "2026-08-06",
+        "reason": "No Price Data"
+    },
+    "FM": {
+        "delisted": true,
+        "last_checked": "2026-08-06",
+        "reason": "No Price Data"
+    },
+    "PIN": {
         "delisted": true,
         "last_checked": "2026-08-06",
         "reason": "No Price Data"
