@@ -46118,5 +46118,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "P": {
+        "ticker": "P",
+        "name": "Everpure, Inc.",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GAUZ": {
+        "ticker": "GAUZ",
+        "name": "Gauzy Ltd.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 14331001,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
