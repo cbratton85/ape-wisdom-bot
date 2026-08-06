@@ -46078,5 +46078,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "LXP": {
+        "ticker": "LXP",
+        "name": "LXP Industrial Trust",
+        "meta": "REIT - Industrial",
+        "type": "EQUITY",
+        "mcap": 3575168512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
