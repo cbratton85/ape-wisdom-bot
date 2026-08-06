@@ -46108,5 +46108,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "JKE": {
+        "ticker": "JKE",
+        "name": "iShares Morningstar Large-Cap G",
+        "meta": "Unknown",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
