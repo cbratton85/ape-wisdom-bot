@@ -74,11 +74,6 @@
         "last_checked": "2026-08-05",
         "reason": "No Price Data"
     },
-    "ABB": {
-        "delisted": true,
-        "last_checked": "2026-08-05",
-        "reason": "No Price Data"
-    },
     "MOM": {
         "delisted": true,
         "last_checked": "2026-08-06",
@@ -130,6 +125,11 @@
         "reason": "No Price Data"
     },
     "PIN": {
+        "delisted": true,
+        "last_checked": "2026-08-06",
+        "reason": "No Price Data"
+    },
+    "ABB": {
         "delisted": true,
         "last_checked": "2026-08-06",
         "reason": "No Price Data"

@@ -46088,5 +46088,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "NATR": {
+        "ticker": "NATR",
+        "name": "Nature's Sunshine Products, Inc",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 352752512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "PRTA": {
+        "ticker": "PRTA",
+        "name": "Prothena Corporation plc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 444478976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
