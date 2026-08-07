@@ -46208,5 +46208,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "SLGN": {
+        "ticker": "SLGN",
+        "name": "Silgan Holdings Inc.",
+        "meta": "Packaging & Containers",
+        "type": "EQUITY",
+        "mcap": 4416357376,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
