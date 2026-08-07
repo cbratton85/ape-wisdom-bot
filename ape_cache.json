@@ -46218,5 +46218,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MPT": {
+        "ticker": "MPT",
+        "name": "Medical Properties Trust, Inc.",
+        "meta": "REIT - Healthcare Facilities",
+        "type": "EQUITY",
+        "mcap": 2811069696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
