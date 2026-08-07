@@ -46158,5 +46158,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PWZ": {
+        "ticker": "PWZ",
+        "name": "Invesco California AMT-Free Mun",
+        "meta": "Muni California Long",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
