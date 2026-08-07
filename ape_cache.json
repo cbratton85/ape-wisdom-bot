@@ -46178,5 +46178,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "TBBB": {
+        "ticker": "TBBB",
+        "name": "BBB Foods Inc.",
+        "meta": "Discount Stores",
+        "type": "EQUITY",
+        "mcap": 4887614976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "TRUP": {
+        "ticker": "TRUP",
+        "name": "Trupanion, Inc.",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 1183859584,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
