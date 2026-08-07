@@ -46168,5 +46168,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "GYGY": {
+        "ticker": "GYGY",
+        "name": "Game Your Game, Inc. Common Stock",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 45034440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
