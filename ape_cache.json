@@ -46198,5 +46198,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "HTZZ": {
+        "ticker": "HTZZ",
+        "name": "HTZZ",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
