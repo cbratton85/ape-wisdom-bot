@@ -49,11 +49,6 @@
         "last_checked": "2026-08-07",
         "reason": "No Price Data"
     },
-    "QED": {
-        "delisted": true,
-        "last_checked": "2026-08-07",
-        "reason": "No Price Data"
-    },
     "DOOO": {
         "delisted": true,
         "last_checked": "2026-08-07",
@@ -145,6 +140,16 @@
         "reason": "No Price Data"
     },
     "SNP": {
+        "delisted": true,
+        "last_checked": "2026-08-08",
+        "reason": "No Price Data"
+    },
+    "SPI": {
+        "delisted": true,
+        "last_checked": "2026-08-08",
+        "reason": "No Price Data"
+    },
+    "ZN": {
         "delisted": true,
         "last_checked": "2026-08-08",
         "reason": "No Price Data"
