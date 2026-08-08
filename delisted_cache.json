@@ -84,11 +84,6 @@
         "last_checked": "2026-08-07",
         "reason": "No Price Data"
     },
-    "OG": {
-        "delisted": true,
-        "last_checked": "2026-08-07",
-        "reason": "No Price Data"
-    },
     "AUD": {
         "delisted": true,
         "last_checked": "2026-08-07",
@@ -167,6 +162,11 @@
     "UROY": {
         "delisted": true,
         "last_checked": "2026-08-07",
+        "reason": "No Price Data"
+    },
+    "OG": {
+        "delisted": true,
+        "last_checked": "2026-08-08",
         "reason": "No Price Data"
     }
 }
