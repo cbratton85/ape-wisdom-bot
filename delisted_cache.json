@@ -49,11 +49,6 @@
         "last_checked": "2026-08-07",
         "reason": "No Price Data"
     },
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-08-07",
-        "reason": "No Price Data"
-    },
     "OLD": {
         "delisted": true,
         "last_checked": "2026-08-07",
@@ -155,6 +150,16 @@
         "reason": "No Price Data"
     },
     "GPS": {
+        "delisted": true,
+        "last_checked": "2026-08-08",
+        "reason": "No Price Data"
+    },
+    "TTM": {
+        "delisted": true,
+        "last_checked": "2026-08-08",
+        "reason": "No Price Data"
+    },
+    "NTP": {
         "delisted": true,
         "last_checked": "2026-08-08",
         "reason": "No Price Data"
