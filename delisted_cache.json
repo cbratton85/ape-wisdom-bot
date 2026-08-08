@@ -39,11 +39,6 @@
         "last_checked": "2026-08-07",
         "reason": "No Price Data"
     },
-    "GPS": {
-        "delisted": true,
-        "last_checked": "2026-08-07",
-        "reason": "No Price Data"
-    },
     "ILLM": {
         "delisted": true,
         "last_checked": "2026-08-07",
@@ -155,6 +150,11 @@
         "reason": "No Price Data"
     },
     "HTZZ": {
+        "delisted": true,
+        "last_checked": "2026-08-08",
+        "reason": "No Price Data"
+    },
+    "GPS": {
         "delisted": true,
         "last_checked": "2026-08-08",
         "reason": "No Price Data"
