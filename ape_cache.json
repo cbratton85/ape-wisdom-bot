@@ -46228,5 +46228,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MVV": {
+        "ticker": "MVV",
+        "name": "ProShares Ultra MidCap400",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
