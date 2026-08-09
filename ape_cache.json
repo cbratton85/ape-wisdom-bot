@@ -46238,5 +46238,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "GAIA": {
+        "ticker": "GAIA",
+        "name": "Gaia, Inc.",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 48350076,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
