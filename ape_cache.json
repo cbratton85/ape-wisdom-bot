@@ -46258,5 +46258,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NEU": {
+        "ticker": "NEU",
+        "name": "NewMarket Corp",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 8182134784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
