@@ -9,11 +9,6 @@
         "last_checked": "2026-08-07",
         "reason": "No Price Data"
     },
-    "KIND": {
-        "delisted": true,
-        "last_checked": "2026-08-07",
-        "reason": "No Price Data"
-    },
     "SOL": {
         "delisted": true,
         "last_checked": "2026-08-07",
@@ -145,6 +140,11 @@
         "reason": "No Price Data"
     },
     "CEL": {
+        "delisted": true,
+        "last_checked": "2026-08-09",
+        "reason": "No Price Data"
+    },
+    "KIND": {
         "delisted": true,
         "last_checked": "2026-08-09",
         "reason": "No Price Data"
