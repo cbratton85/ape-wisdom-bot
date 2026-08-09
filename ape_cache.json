@@ -46248,5 +46248,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ITEQ": {
+        "ticker": "ITEQ",
+        "name": "Amplify BlueStar Israel Technol",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
