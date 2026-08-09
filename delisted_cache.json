@@ -69,11 +69,6 @@
         "last_checked": "2026-08-08",
         "reason": "No Price Data"
     },
-    "OLD": {
-        "delisted": true,
-        "last_checked": "2026-08-08",
-        "reason": "No Price Data"
-    },
     "ILLM": {
         "delisted": true,
         "last_checked": "2026-08-09",
@@ -135,6 +130,11 @@
         "reason": "No Price Data"
     },
     "SOL": {
+        "delisted": true,
+        "last_checked": "2026-08-09",
+        "reason": "No Price Data"
+    },
+    "OLD": {
         "delisted": true,
         "last_checked": "2026-08-09",
         "reason": "No Price Data"
