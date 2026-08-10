@@ -46338,5 +46338,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "GCL": {
+        "ticker": "GCL",
+        "name": "GCL Global Holdings Ltd",
+        "meta": "Electronic Gaming & Multimedia",
+        "type": "EQUITY",
+        "mcap": 69931152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
