@@ -46308,5 +46308,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "SCKT": {
+        "ticker": "SCKT",
+        "name": "Socket Mobile, Inc.",
+        "meta": "Computer Hardware",
+        "type": "EQUITY",
+        "mcap": 21508900,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
