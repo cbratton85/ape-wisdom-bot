@@ -79,11 +79,6 @@
         "last_checked": "2026-08-09",
         "reason": "No Price Data"
     },
-    "KIND": {
-        "delisted": true,
-        "last_checked": "2026-08-09",
-        "reason": "No Price Data"
-    },
     "SAVE": {
         "delisted": true,
         "last_checked": "2026-08-09",
@@ -110,6 +105,11 @@
         "reason": "No Price Data"
     },
     "TTM": {
+        "delisted": true,
+        "last_checked": "2026-08-10",
+        "reason": "No Price Data"
+    },
+    "KIND": {
         "delisted": true,
         "last_checked": "2026-08-10",
         "reason": "No Price Data"
