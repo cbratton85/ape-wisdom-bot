@@ -46288,5 +46288,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "DFH": {
+        "ticker": "DFH",
+        "name": "Dream Finders Homes, Inc.",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 1363579904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
