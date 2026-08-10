@@ -46358,5 +46358,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SOHO": {
+        "ticker": "SOHO",
+        "name": "SOHO",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
