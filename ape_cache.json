@@ -46298,5 +46298,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SION": {
+        "ticker": "SION",
+        "name": "Sionna Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2307640832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
