@@ -19,11 +19,6 @@
         "last_checked": "2026-08-10",
         "reason": "No Price Data"
     },
-    "KIND": {
-        "delisted": true,
-        "last_checked": "2026-08-10",
-        "reason": "No Price Data"
-    },
     "ROLL": {
         "delisted": true,
         "last_checked": "2026-08-10",
@@ -115,6 +110,11 @@
         "reason": "No Price Data"
     },
     "WOW": {
+        "delisted": true,
+        "last_checked": "2026-08-10",
+        "reason": "No Price Data"
+    },
+    "KIND": {
         "delisted": true,
         "last_checked": "2026-08-10",
         "reason": "No Price Data"
