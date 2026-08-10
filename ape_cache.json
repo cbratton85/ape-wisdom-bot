@@ -46348,5 +46348,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "BSP": {
+        "ticker": "BSP",
+        "name": "Bending Spoons S.p.A.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 35654860800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
