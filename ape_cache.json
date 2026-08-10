@@ -46318,5 +46318,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "OCEA": {
+        "ticker": "OCEA",
+        "name": "Ocean Biomediacal, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 278838,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
     }
 }
