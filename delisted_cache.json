@@ -49,11 +49,6 @@
         "last_checked": "2026-08-10",
         "reason": "No Price Data"
     },
-    "DBS": {
-        "delisted": true,
-        "last_checked": "2026-08-10",
-        "reason": "No Price Data"
-    },
     "SOL": {
         "delisted": true,
         "last_checked": "2026-08-10",
@@ -85,6 +80,16 @@
         "reason": "No Price Data"
     },
     "AUD": {
+        "delisted": true,
+        "last_checked": "2026-08-10",
+        "reason": "No Price Data"
+    },
+    "SNP": {
+        "delisted": true,
+        "last_checked": "2026-08-10",
+        "reason": "No Price Data"
+    },
+    "DBS": {
         "delisted": true,
         "last_checked": "2026-08-10",
         "reason": "No Price Data"
