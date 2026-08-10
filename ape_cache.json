@@ -46278,5 +46278,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "CPRI": {
+        "ticker": "CPRI",
+        "name": "Capri Holdings Limited",
+        "meta": "Luxury Goods",
+        "type": "EQUITY",
+        "mcap": 1757528448,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
