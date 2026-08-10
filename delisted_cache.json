@@ -59,11 +59,6 @@
         "last_checked": "2026-08-10",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-08-10",
-        "reason": "No Price Data"
-    },
     "THR": {
         "delisted": true,
         "last_checked": "2026-08-10",
@@ -110,6 +105,16 @@
         "reason": "No Price Data"
     },
     "DTC": {
+        "delisted": true,
+        "last_checked": "2026-08-10",
+        "reason": "No Price Data"
+    },
+    "AUD": {
+        "delisted": true,
+        "last_checked": "2026-08-10",
+        "reason": "No Price Data"
+    },
+    "LTMAQ": {
         "delisted": true,
         "last_checked": "2026-08-10",
         "reason": "No Price Data"
