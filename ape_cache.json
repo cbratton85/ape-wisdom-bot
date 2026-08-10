@@ -46328,5 +46328,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PNK"
+    },
+    "STDN": {
+        "ticker": "STDN",
+        "name": "Standard Nuclear, Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 1656672640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
