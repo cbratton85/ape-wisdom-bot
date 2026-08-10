@@ -46378,5 +46378,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "SLF": {
+        "ticker": "SLF",
+        "name": "Sun Life Financial Inc.",
+        "meta": "Insurance - Diversified",
+        "type": "EQUITY",
+        "mcap": 45755441152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
