@@ -94,11 +94,6 @@
         "last_checked": "2026-08-11",
         "reason": "No Price Data"
     },
-    "DS": {
-        "delisted": true,
-        "last_checked": "2026-08-11",
-        "reason": "No Price Data"
-    },
     "NTP": {
         "delisted": true,
         "last_checked": "2026-08-11",
@@ -110,6 +105,11 @@
         "reason": "No Price Data"
     },
     "OG": {
+        "delisted": true,
+        "last_checked": "2026-08-11",
+        "reason": "No Price Data"
+    },
+    "DS": {
         "delisted": true,
         "last_checked": "2026-08-11",
         "reason": "No Price Data"
