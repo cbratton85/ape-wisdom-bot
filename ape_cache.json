@@ -46418,5 +46418,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "EROC": {
+        "ticker": "EROC",
+        "name": "ERock, Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 3074631936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
