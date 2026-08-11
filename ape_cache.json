@@ -46398,5 +46398,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "GLND": {
+        "ticker": "GLND",
+        "name": "Greenland Energy Company",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 87897688,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
