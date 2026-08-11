@@ -46408,5 +46408,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "BDN": {
+        "ticker": "BDN",
+        "name": "Brandywine Realty Trust",
+        "meta": "REIT - Office",
+        "type": "EQUITY",
+        "mcap": 535419232,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
