@@ -9,11 +9,6 @@
         "last_checked": "2026-08-10",
         "reason": "No Price Data"
     },
-    "OG": {
-        "delisted": true,
-        "last_checked": "2026-08-10",
-        "reason": "No Price Data"
-    },
     "SOHO": {
         "delisted": true,
         "last_checked": "2026-08-10",
@@ -110,6 +105,11 @@
         "reason": "No Price Data"
     },
     "SOL": {
+        "delisted": true,
+        "last_checked": "2026-08-11",
+        "reason": "No Price Data"
+    },
+    "OG": {
         "delisted": true,
         "last_checked": "2026-08-11",
         "reason": "No Price Data"
