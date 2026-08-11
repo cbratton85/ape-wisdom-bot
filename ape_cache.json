@@ -46388,5 +46388,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "AIAI": {
+        "ticker": "AIAI",
+        "name": "AIAI Holdings Corporation",
+        "meta": "Conglomerates",
+        "type": "EQUITY",
+        "mcap": 342429120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
