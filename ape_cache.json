@@ -46438,5 +46438,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "ELMT": {
+        "ticker": "ELMT",
+        "name": "The Elmet Group Co.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 494967552,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
