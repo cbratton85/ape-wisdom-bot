@@ -89,11 +89,6 @@
         "last_checked": "2026-08-12",
         "reason": "No Price Data"
     },
-    "YNDX": {
-        "delisted": true,
-        "last_checked": "2026-08-12",
-        "reason": "No Price Data"
-    },
     "RVYL": {
         "delisted": true,
         "last_checked": "2026-08-12",
@@ -130,6 +125,11 @@
         "reason": "No Price Data"
     },
     "WOW": {
+        "delisted": true,
+        "last_checked": "2026-08-12",
+        "reason": "No Price Data"
+    },
+    "YNDX": {
         "delisted": true,
         "last_checked": "2026-08-12",
         "reason": "No Price Data"
