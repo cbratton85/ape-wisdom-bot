@@ -46448,5 +46448,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "IUS": {
+        "ticker": "IUS",
+        "name": "Invesco RAFI Strategic US ETF",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }

@@ -19,11 +19,6 @@
         "last_checked": "2026-08-11",
         "reason": "No Price Data"
     },
-    "DBS": {
-        "delisted": true,
-        "last_checked": "2026-08-11",
-        "reason": "No Price Data"
-    },
     "SNP": {
         "delisted": true,
         "last_checked": "2026-08-11",
@@ -130,6 +125,11 @@
         "reason": "No Price Data"
     },
     "DS": {
+        "delisted": true,
+        "last_checked": "2026-08-12",
+        "reason": "No Price Data"
+    },
+    "BOSS": {
         "delisted": true,
         "last_checked": "2026-08-12",
         "reason": "No Price Data"
