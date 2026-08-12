@@ -74,11 +74,6 @@
         "last_checked": "2026-08-11",
         "reason": "No Price Data"
     },
-    "KIND": {
-        "delisted": true,
-        "last_checked": "2026-08-11",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-08-11",
@@ -115,6 +110,11 @@
         "reason": "No Price Data"
     },
     "LTMAQ": {
+        "delisted": true,
+        "last_checked": "2026-08-12",
+        "reason": "No Price Data"
+    },
+    "KIND": {
         "delisted": true,
         "last_checked": "2026-08-12",
         "reason": "No Price Data"
