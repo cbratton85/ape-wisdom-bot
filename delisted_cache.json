@@ -89,11 +89,6 @@
         "last_checked": "2026-08-12",
         "reason": "No Price Data"
     },
-    "BOSS": {
-        "delisted": true,
-        "last_checked": "2026-08-12",
-        "reason": "No Price Data"
-    },
     "KW": {
         "delisted": true,
         "last_checked": "2026-08-12",
@@ -135,6 +130,11 @@
         "reason": "No Price Data"
     },
     "FI": {
+        "delisted": true,
+        "last_checked": "2026-08-12",
+        "reason": "No Price Data"
+    },
+    "BOSS": {
         "delisted": true,
         "last_checked": "2026-08-12",
         "reason": "No Price Data"
