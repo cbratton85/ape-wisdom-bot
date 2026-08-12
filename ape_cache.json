@@ -46428,5 +46428,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ORMP": {
+        "ticker": "ORMP",
+        "name": "Oramed Pharmaceuticals Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 176788752,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
