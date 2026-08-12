@@ -119,11 +119,6 @@
         "last_checked": "2026-08-12",
         "reason": "No Price Data"
     },
-    "UHG": {
-        "delisted": true,
-        "last_checked": "2026-08-12",
-        "reason": "No Price Data"
-    },
     "JPN": {
         "delisted": true,
         "last_checked": "2026-08-12",
@@ -135,6 +130,11 @@
         "reason": "No Price Data"
     },
     "NTP": {
+        "delisted": true,
+        "last_checked": "2026-08-12",
+        "reason": "No Price Data"
+    },
+    "UHG": {
         "delisted": true,
         "last_checked": "2026-08-12",
         "reason": "No Price Data"
