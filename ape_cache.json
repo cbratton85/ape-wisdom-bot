@@ -46488,5 +46488,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "AVAH": {
+        "ticker": "AVAH",
+        "name": "Aveanna Healthcare Holdings Inc",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 2261387776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "APM": {
+        "ticker": "APM",
+        "name": "Aptorum Group Limited",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 570062,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
