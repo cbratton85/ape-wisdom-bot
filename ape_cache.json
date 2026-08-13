@@ -46508,5 +46508,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "SBGI": {
+        "ticker": "SBGI",
+        "name": "Sinclair, Inc.",
+        "meta": "Broadcasting",
+        "type": "EQUITY",
+        "mcap": 1013204800,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
