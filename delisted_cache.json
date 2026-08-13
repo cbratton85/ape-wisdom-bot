@@ -14,11 +14,6 @@
         "last_checked": "2026-08-12",
         "reason": "No Price Data"
     },
-    "YNDX": {
-        "delisted": true,
-        "last_checked": "2026-08-12",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-08-12",
@@ -115,6 +110,11 @@
         "reason": "No Price Data"
     },
     "SAVE": {
+        "delisted": true,
+        "last_checked": "2026-08-13",
+        "reason": "No Price Data"
+    },
+    "YNDX": {
         "delisted": true,
         "last_checked": "2026-08-13",
         "reason": "No Price Data"
