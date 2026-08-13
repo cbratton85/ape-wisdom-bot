@@ -46518,5 +46518,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AVB": {
+        "ticker": "AVB",
+        "name": "AvalonBay Communities, Inc.",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 26261975040,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
