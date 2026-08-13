@@ -1,9 +1,4 @@
 {
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-08-11",
-        "reason": "No Price Data"
-    },
     "WOW": {
         "delisted": true,
         "last_checked": "2026-08-12",
@@ -110,6 +105,11 @@
         "reason": "No Price Data"
     },
     "FM": {
+        "delisted": true,
+        "last_checked": "2026-08-13",
+        "reason": "No Price Data"
+    },
+    "RE": {
         "delisted": true,
         "last_checked": "2026-08-13",
         "reason": "No Price Data"
