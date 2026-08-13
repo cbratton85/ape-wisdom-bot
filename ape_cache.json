@@ -46468,5 +46468,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "RPRX": {
+        "ticker": "RPRX",
+        "name": "Royalty Pharma plc",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 34219415552,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LGND": {
+        "ticker": "LGND",
+        "name": "Ligand Pharmaceuticals Incorpor",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 5846515712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
