@@ -46558,5 +46558,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "OSPN": {
+        "ticker": "OSPN",
+        "name": "OneSpan Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 602164480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
