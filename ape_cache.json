@@ -46528,5 +46528,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VNET": {
+        "ticker": "VNET",
+        "name": "VNET Group, Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 2120952704,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
