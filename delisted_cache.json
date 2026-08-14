@@ -44,11 +44,6 @@
         "last_checked": "2026-08-13",
         "reason": "No Price Data"
     },
-    "OG": {
-        "delisted": true,
-        "last_checked": "2026-08-13",
-        "reason": "No Price Data"
-    },
     "SAVE": {
         "delisted": true,
         "last_checked": "2026-08-13",
@@ -112,6 +107,11 @@
     "WOW": {
         "delisted": true,
         "last_checked": "2026-08-13",
+        "reason": "No Price Data"
+    },
+    "OG": {
+        "delisted": true,
+        "last_checked": "2026-08-14",
         "reason": "No Price Data"
     }
 }
