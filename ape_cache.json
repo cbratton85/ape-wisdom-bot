@@ -46568,5 +46568,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "OPTH": {
+        "ticker": "OPTH",
+        "name": "Optimi Health Corp.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 27426902,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
