@@ -46548,5 +46548,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "IMXI": {
+        "ticker": "IMXI",
+        "name": "International Money Express, In",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 353476032,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
