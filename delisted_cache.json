@@ -59,11 +59,6 @@
         "last_checked": "2026-08-13",
         "reason": "No Price Data"
     },
-    "RVYL": {
-        "delisted": true,
-        "last_checked": "2026-08-13",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-08-13",
@@ -110,6 +105,11 @@
         "reason": "No Price Data"
     },
     "DTC": {
+        "delisted": true,
+        "last_checked": "2026-08-14",
+        "reason": "No Price Data"
+    },
+    "RVYL": {
         "delisted": true,
         "last_checked": "2026-08-14",
         "reason": "No Price Data"
