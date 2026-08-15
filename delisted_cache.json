@@ -89,11 +89,6 @@
         "last_checked": "2026-08-15",
         "reason": "No Price Data"
     },
-    "MOM": {
-        "delisted": true,
-        "last_checked": "2026-08-15",
-        "reason": "No Price Data"
-    },
     "DBS": {
         "delisted": true,
         "last_checked": "2026-08-15",
@@ -110,6 +105,11 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-08-15",
+        "reason": "No Price Data"
+    },
+    "MOM": {
         "delisted": true,
         "last_checked": "2026-08-15",
         "reason": "No Price Data"
