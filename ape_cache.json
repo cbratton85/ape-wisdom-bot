@@ -46578,5 +46578,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "CHIM": {
+        "ticker": "CHIM",
+        "name": "Global X MSCI China Materials E",
+        "meta": "Greater China Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
