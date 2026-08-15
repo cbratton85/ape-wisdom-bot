@@ -99,11 +99,6 @@
         "last_checked": "2026-08-14",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-08-14",
-        "reason": "No Price Data"
-    },
     "DRW": {
         "delisted": true,
         "last_checked": "2026-08-14",
@@ -112,6 +107,11 @@
     "FI": {
         "delisted": true,
         "last_checked": "2026-08-14",
+        "reason": "No Price Data"
+    },
+    "BABY": {
+        "delisted": true,
+        "last_checked": "2026-08-15",
         "reason": "No Price Data"
     }
 }
