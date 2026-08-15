@@ -29,11 +29,6 @@
         "last_checked": "2026-08-14",
         "reason": "No Price Data"
     },
-    "CO": {
-        "delisted": true,
-        "last_checked": "2026-08-14",
-        "reason": "No Price Data"
-    },
     "YNDX": {
         "delisted": true,
         "last_checked": "2026-08-14",
@@ -110,6 +105,16 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-08-15",
+        "reason": "No Price Data"
+    },
+    "DS": {
+        "delisted": true,
+        "last_checked": "2026-08-15",
+        "reason": "No Price Data"
+    },
+    "CO": {
         "delisted": true,
         "last_checked": "2026-08-15",
         "reason": "No Price Data"
