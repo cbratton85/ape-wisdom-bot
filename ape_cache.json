@@ -46598,5 +46598,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "DCGO": {
+        "ticker": "DCGO",
+        "name": "DocGo Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 65924716,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
