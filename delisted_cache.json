@@ -89,11 +89,6 @@
         "last_checked": "2026-08-15",
         "reason": "No Price Data"
     },
-    "OG": {
-        "delisted": true,
-        "last_checked": "2026-08-15",
-        "reason": "No Price Data"
-    },
     "ZN": {
         "delisted": true,
         "last_checked": "2026-08-16",
@@ -105,6 +100,11 @@
         "reason": "No Price Data"
     },
     "RE": {
+        "delisted": true,
+        "last_checked": "2026-08-16",
+        "reason": "No Price Data"
+    },
+    "OG": {
         "delisted": true,
         "last_checked": "2026-08-16",
         "reason": "No Price Data"
