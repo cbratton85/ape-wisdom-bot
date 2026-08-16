@@ -34,11 +34,6 @@
         "last_checked": "2026-08-15",
         "reason": "No Price Data"
     },
-    "SPI": {
-        "delisted": true,
-        "last_checked": "2026-08-15",
-        "reason": "No Price Data"
-    },
     "CO": {
         "delisted": true,
         "last_checked": "2026-08-15",
@@ -95,6 +90,11 @@
         "reason": "No Price Data"
     },
     "TTM": {
+        "delisted": true,
+        "last_checked": "2026-08-16",
+        "reason": "No Price Data"
+    },
+    "SPI": {
         "delisted": true,
         "last_checked": "2026-08-16",
         "reason": "No Price Data"
