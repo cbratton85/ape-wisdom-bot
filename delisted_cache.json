@@ -79,17 +79,17 @@
         "last_checked": "2026-08-16",
         "reason": "No Price Data"
     },
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-08-16",
-        "reason": "No Price Data"
-    },
     "OZON": {
         "delisted": true,
         "last_checked": "2026-08-16",
         "reason": "No Price Data"
     },
     "RE": {
+        "delisted": true,
+        "last_checked": "2026-08-16",
+        "reason": "No Price Data"
+    },
+    "SOL": {
         "delisted": true,
         "last_checked": "2026-08-16",
         "reason": "No Price Data"
