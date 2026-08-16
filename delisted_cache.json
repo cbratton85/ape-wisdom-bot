@@ -44,11 +44,6 @@
         "last_checked": "2026-08-15",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-08-15",
-        "reason": "No Price Data"
-    },
     "DS": {
         "delisted": true,
         "last_checked": "2026-08-15",
@@ -102,6 +97,16 @@
     "OG": {
         "delisted": true,
         "last_checked": "2026-08-15",
+        "reason": "No Price Data"
+    },
+    "ZN": {
+        "delisted": true,
+        "last_checked": "2026-08-16",
+        "reason": "No Price Data"
+    },
+    "AUD": {
+        "delisted": true,
+        "last_checked": "2026-08-16",
         "reason": "No Price Data"
     }
 }
