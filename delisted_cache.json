@@ -4,11 +4,6 @@
         "last_checked": "2026-08-15",
         "reason": "No Price Data"
     },
-    "OG": {
-        "delisted": true,
-        "last_checked": "2026-08-16",
-        "reason": "No Price Data"
-    },
     "DS": {
         "delisted": true,
         "last_checked": "2026-08-16",
@@ -70,6 +65,11 @@
         "reason": "No Price Data"
     },
     "VETS": {
+        "delisted": true,
+        "last_checked": "2026-08-17",
+        "reason": "No Price Data"
+    },
+    "OG": {
         "delisted": true,
         "last_checked": "2026-08-17",
         "reason": "No Price Data"
