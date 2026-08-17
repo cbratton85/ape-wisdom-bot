@@ -54,11 +54,6 @@
         "last_checked": "2026-08-17",
         "reason": "No Price Data"
     },
-    "VETS": {
-        "delisted": true,
-        "last_checked": "2026-08-17",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-08-17",
@@ -75,6 +70,11 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-08-17",
+        "reason": "No Price Data"
+    },
+    "VETS": {
         "delisted": true,
         "last_checked": "2026-08-17",
         "reason": "No Price Data"
