@@ -9,11 +9,6 @@
         "last_checked": "2026-08-16",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-08-16",
-        "reason": "No Price Data"
-    },
     "SPI": {
         "delisted": true,
         "last_checked": "2026-08-16",
@@ -75,6 +70,11 @@
         "reason": "No Price Data"
     },
     "HEAR": {
+        "delisted": true,
+        "last_checked": "2026-08-17",
+        "reason": "No Price Data"
+    },
+    "RE": {
         "delisted": true,
         "last_checked": "2026-08-17",
         "reason": "No Price Data"
