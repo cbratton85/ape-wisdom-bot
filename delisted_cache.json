@@ -24,11 +24,6 @@
         "last_checked": "2026-08-17",
         "reason": "No Price Data"
     },
-    "HEAR": {
-        "delisted": true,
-        "last_checked": "2026-08-17",
-        "reason": "No Price Data"
-    },
     "ZN": {
         "delisted": true,
         "last_checked": "2026-08-17",
@@ -95,6 +90,16 @@
         "reason": "No Price Data"
     },
     "KIND": {
+        "delisted": true,
+        "last_checked": "2026-08-17",
+        "reason": "No Price Data"
+    },
+    "SAVE": {
+        "delisted": true,
+        "last_checked": "2026-08-17",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
         "delisted": true,
         "last_checked": "2026-08-17",
         "reason": "No Price Data"
