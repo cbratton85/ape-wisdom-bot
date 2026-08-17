@@ -46618,5 +46618,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "FISN": {
+        "ticker": "FISN",
+        "name": "Deep Fission, Inc.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 508947296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
