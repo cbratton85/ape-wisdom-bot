@@ -46638,5 +46638,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "HBB": {
+        "ticker": "HBB",
+        "name": "Hamilton Beach Brands Holding C",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 457039296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
