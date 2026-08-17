@@ -39,11 +39,6 @@
         "last_checked": "2026-08-17",
         "reason": "No Price Data"
     },
-    "VETS": {
-        "delisted": true,
-        "last_checked": "2026-08-17",
-        "reason": "No Price Data"
-    },
     "RE": {
         "delisted": true,
         "last_checked": "2026-08-17",
@@ -70,6 +65,16 @@
         "reason": "No Price Data"
     },
     "DBS": {
+        "delisted": true,
+        "last_checked": "2026-08-17",
+        "reason": "No Price Data"
+    },
+    "SCM": {
+        "delisted": true,
+        "last_checked": "2026-08-17",
+        "reason": "No Price Data"
+    },
+    "VETS": {
         "delisted": true,
         "last_checked": "2026-08-17",
         "reason": "No Price Data"

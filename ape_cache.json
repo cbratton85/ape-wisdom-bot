@@ -46628,5 +46628,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "SCSC": {
+        "ticker": "SCSC",
+        "name": "ScanSource, Inc.",
+        "meta": "Electronics & Computer Distribution",
+        "type": "EQUITY",
+        "mcap": 1035144512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
