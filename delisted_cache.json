@@ -24,11 +24,6 @@
         "last_checked": "2026-08-16",
         "reason": "No Price Data"
     },
-    "CN": {
-        "delisted": true,
-        "last_checked": "2026-08-16",
-        "reason": "No Price Data"
-    },
     "OLD": {
         "delisted": true,
         "last_checked": "2026-08-16",
@@ -75,6 +70,11 @@
         "reason": "No Price Data"
     },
     "SOL": {
+        "delisted": true,
+        "last_checked": "2026-08-17",
+        "reason": "No Price Data"
+    },
+    "CN": {
         "delisted": true,
         "last_checked": "2026-08-17",
         "reason": "No Price Data"
