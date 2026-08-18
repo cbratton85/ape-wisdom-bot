@@ -46658,5 +46658,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "APYX": {
+        "ticker": "APYX",
+        "name": "Apyx Medical Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 128899512,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
