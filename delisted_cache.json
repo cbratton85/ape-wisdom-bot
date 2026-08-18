@@ -54,11 +54,6 @@
         "last_checked": "2026-08-17",
         "reason": "No Price Data"
     },
-    "SAVE": {
-        "delisted": true,
-        "last_checked": "2026-08-17",
-        "reason": "No Price Data"
-    },
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-08-17",
@@ -97,6 +92,16 @@
     "WOW": {
         "delisted": true,
         "last_checked": "2026-08-17",
+        "reason": "No Price Data"
+    },
+    "SAVE": {
+        "delisted": true,
+        "last_checked": "2026-08-18",
+        "reason": "No Price Data"
+    },
+    "OLD": {
+        "delisted": true,
+        "last_checked": "2026-08-18",
         "reason": "No Price Data"
     }
 }
