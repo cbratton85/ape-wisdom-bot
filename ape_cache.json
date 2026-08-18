@@ -46648,5 +46648,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CZNC": {
+        "ticker": "CZNC",
+        "name": "Citizens & Northern Corp",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 466127200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
