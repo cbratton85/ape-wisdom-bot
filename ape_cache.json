@@ -46668,5 +46668,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "TISI": {
+        "ticker": "TISI",
+        "name": "Team, Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 102216104,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
