@@ -1,9 +1,4 @@
 {
-    "DTC": {
-        "delisted": true,
-        "last_checked": "2026-08-16",
-        "reason": "No Price Data"
-    },
     "ZN": {
         "delisted": true,
         "last_checked": "2026-08-17",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "WOW": {
+        "delisted": true,
+        "last_checked": "2026-08-18",
+        "reason": "No Price Data"
+    },
+    "MBT": {
         "delisted": true,
         "last_checked": "2026-08-18",
         "reason": "No Price Data"
