@@ -46678,5 +46678,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "EEX": {
+        "ticker": "EEX",
+        "name": "Emerald Holding, Inc.",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 995526784,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
