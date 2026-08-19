@@ -46688,5 +46688,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ARCT": {
+        "ticker": "ARCT",
+        "name": "Arcturus Therapeutics Holdings ",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 292189120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
