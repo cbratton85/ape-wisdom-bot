@@ -29,11 +29,6 @@
         "last_checked": "2026-08-18",
         "reason": "No Price Data"
     },
-    "MBT": {
-        "delisted": true,
-        "last_checked": "2026-08-18",
-        "reason": "No Price Data"
-    },
     "DS": {
         "delisted": true,
         "last_checked": "2026-08-18",
@@ -140,6 +135,21 @@
         "reason": "No Price Data"
     },
     "ELY": {
+        "delisted": true,
+        "last_checked": "2026-08-19",
+        "reason": "No Price Data"
+    },
+    "MBT": {
+        "delisted": true,
+        "last_checked": "2026-08-19",
+        "reason": "No Price Data"
+    },
+    "PIN": {
+        "delisted": true,
+        "last_checked": "2026-08-19",
+        "reason": "No Price Data"
+    },
+    "LAZY": {
         "delisted": true,
         "last_checked": "2026-08-19",
         "reason": "No Price Data"
