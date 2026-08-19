@@ -34,11 +34,6 @@
         "last_checked": "2026-08-18",
         "reason": "No Price Data"
     },
-    "KIND": {
-        "delisted": true,
-        "last_checked": "2026-08-18",
-        "reason": "No Price Data"
-    },
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-08-18",
@@ -122,6 +117,21 @@
     "GPS": {
         "delisted": true,
         "last_checked": "2026-08-18",
+        "reason": "No Price Data"
+    },
+    "SNP": {
+        "delisted": true,
+        "last_checked": "2026-08-19",
+        "reason": "No Price Data"
+    },
+    "HYMTF": {
+        "delisted": true,
+        "last_checked": "2026-08-19",
+        "reason": "No Price Data"
+    },
+    "KIND": {
+        "delisted": true,
+        "last_checked": "2026-08-19",
         "reason": "No Price Data"
     }
 }
