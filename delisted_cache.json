@@ -69,11 +69,6 @@
         "last_checked": "2026-08-19",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-08-19",
-        "reason": "No Price Data"
-    },
     "FFIE": {
         "delisted": true,
         "last_checked": "2026-08-19",
@@ -135,6 +130,16 @@
         "reason": "No Price Data"
     },
     "KIND": {
+        "delisted": true,
+        "last_checked": "2026-08-19",
+        "reason": "No Price Data"
+    },
+    "AUD": {
+        "delisted": true,
+        "last_checked": "2026-08-19",
+        "reason": "No Price Data"
+    },
+    "CO": {
         "delisted": true,
         "last_checked": "2026-08-19",
         "reason": "No Price Data"
