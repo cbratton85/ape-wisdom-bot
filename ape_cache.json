@@ -46698,5 +46698,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "RETL": {
+        "ticker": "RETL",
+        "name": "Direxion Daily Retail Bull 3X E",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
