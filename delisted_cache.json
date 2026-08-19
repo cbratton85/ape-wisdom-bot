@@ -119,17 +119,17 @@
         "last_checked": "2026-08-19",
         "reason": "No Price Data"
     },
-    "VETS": {
-        "delisted": true,
-        "last_checked": "2026-08-19",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-08-19",
         "reason": "No Price Data"
     },
     "RE": {
+        "delisted": true,
+        "last_checked": "2026-08-19",
+        "reason": "No Price Data"
+    },
+    "VETS": {
         "delisted": true,
         "last_checked": "2026-08-19",
         "reason": "No Price Data"
