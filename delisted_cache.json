@@ -89,11 +89,6 @@
         "last_checked": "2026-08-18",
         "reason": "No Price Data"
     },
-    "GPS": {
-        "delisted": true,
-        "last_checked": "2026-08-18",
-        "reason": "No Price Data"
-    },
     "HYMTF": {
         "delisted": true,
         "last_checked": "2026-08-19",
@@ -135,6 +130,11 @@
         "reason": "No Price Data"
     },
     "ELY": {
+        "delisted": true,
+        "last_checked": "2026-08-19",
+        "reason": "No Price Data"
+    },
+    "GPS": {
         "delisted": true,
         "last_checked": "2026-08-19",
         "reason": "No Price Data"
