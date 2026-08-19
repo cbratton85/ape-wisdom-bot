@@ -14,11 +14,6 @@
         "last_checked": "2026-08-18",
         "reason": "No Price Data"
     },
-    "EVA": {
-        "delisted": true,
-        "last_checked": "2026-08-18",
-        "reason": "No Price Data"
-    },
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-08-18",
@@ -135,6 +130,11 @@
         "reason": "No Price Data"
     },
     "EEX": {
+        "delisted": true,
+        "last_checked": "2026-08-19",
+        "reason": "No Price Data"
+    },
+    "EVA": {
         "delisted": true,
         "last_checked": "2026-08-19",
         "reason": "No Price Data"
