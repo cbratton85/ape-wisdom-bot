@@ -144,12 +144,12 @@
         "last_checked": "2026-08-19",
         "reason": "No Price Data"
     },
-    "WOW": {
+    "OLD": {
         "delisted": true,
-        "last_checked": "2026-08-19",
+        "last_checked": "2026-08-20",
         "reason": "No Price Data"
     },
-    "OLD": {
+    "WOW": {
         "delisted": true,
         "last_checked": "2026-08-20",
         "reason": "No Price Data"
