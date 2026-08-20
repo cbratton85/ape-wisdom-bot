@@ -46728,5 +46728,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "SGDM": {
+        "ticker": "SGDM",
+        "name": "Sprott Gold Miners ETF",
+        "meta": "Equity Precious Metals",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
