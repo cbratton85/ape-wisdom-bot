@@ -46718,5 +46718,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "LONA": {
+        "ticker": "LONA",
+        "name": "LeonaBio, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 73771624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
