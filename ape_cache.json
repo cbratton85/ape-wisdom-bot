@@ -46708,5 +46708,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "DXC": {
+        "ticker": "DXC",
+        "name": "DXC Technology Company",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 1733598848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
