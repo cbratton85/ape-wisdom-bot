@@ -24,11 +24,6 @@
         "last_checked": "2026-08-20",
         "reason": "No Price Data"
     },
-    "DNR": {
-        "delisted": true,
-        "last_checked": "2026-08-20",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-08-20",
@@ -155,6 +150,16 @@
         "reason": "No Price Data"
     },
     "LAZY": {
+        "delisted": true,
+        "last_checked": "2026-08-21",
+        "reason": "No Price Data"
+    },
+    "DNR": {
+        "delisted": true,
+        "last_checked": "2026-08-21",
+        "reason": "No Price Data"
+    },
+    "PIN": {
         "delisted": true,
         "last_checked": "2026-08-21",
         "reason": "No Price Data"
