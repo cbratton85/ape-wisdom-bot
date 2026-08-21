@@ -46758,5 +46758,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ADXN": {
+        "ticker": "ADXN",
+        "name": "Addex Therapeutics Ltd",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 6373524,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
