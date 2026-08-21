@@ -74,11 +74,6 @@
         "last_checked": "2026-08-21",
         "reason": "No Price Data"
     },
-    "ZEUS": {
-        "delisted": true,
-        "last_checked": "2026-08-21",
-        "reason": "No Price Data"
-    },
     "CO": {
         "delisted": true,
         "last_checked": "2026-08-21",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "KIND": {
+        "delisted": true,
+        "last_checked": "2026-08-21",
+        "reason": "No Price Data"
+    },
+    "ZEUS": {
         "delisted": true,
         "last_checked": "2026-08-21",
         "reason": "No Price Data"
