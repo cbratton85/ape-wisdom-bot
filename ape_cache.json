@@ -46748,5 +46748,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "BIBL": {
+        "ticker": "BIBL",
+        "name": "Inspire 100 ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
