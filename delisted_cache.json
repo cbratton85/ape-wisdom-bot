@@ -49,11 +49,6 @@
         "last_checked": "2026-08-20",
         "reason": "No Price Data"
     },
-    "QED": {
-        "delisted": true,
-        "last_checked": "2026-08-20",
-        "reason": "No Price Data"
-    },
     "AHH": {
         "delisted": true,
         "last_checked": "2026-08-20",
@@ -167,6 +162,11 @@
     "EEX": {
         "delisted": true,
         "last_checked": "2026-08-20",
+        "reason": "No Price Data"
+    },
+    "QED": {
+        "delisted": true,
+        "last_checked": "2026-08-21",
         "reason": "No Price Data"
     }
 }
