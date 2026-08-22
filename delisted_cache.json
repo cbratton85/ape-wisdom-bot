@@ -39,11 +39,6 @@
         "last_checked": "2026-08-21",
         "reason": "No Price Data"
     },
-    "CO": {
-        "delisted": true,
-        "last_checked": "2026-08-21",
-        "reason": "No Price Data"
-    },
     "LAZY": {
         "delisted": true,
         "last_checked": "2026-08-21",
@@ -130,6 +125,11 @@
         "reason": "No Price Data"
     },
     "AHH": {
+        "delisted": true,
+        "last_checked": "2026-08-22",
+        "reason": "No Price Data"
+    },
+    "CO": {
         "delisted": true,
         "last_checked": "2026-08-22",
         "reason": "No Price Data"
