@@ -114,12 +114,17 @@
         "last_checked": "2026-08-22",
         "reason": "No Price Data"
     },
-    "WOW": {
+    "CN": {
         "delisted": true,
         "last_checked": "2026-08-22",
         "reason": "No Price Data"
     },
-    "CN": {
+    "PIN": {
+        "delisted": true,
+        "last_checked": "2026-08-22",
+        "reason": "No Price Data"
+    },
+    "WOW": {
         "delisted": true,
         "last_checked": "2026-08-22",
         "reason": "No Price Data"
