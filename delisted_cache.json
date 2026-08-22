@@ -49,11 +49,6 @@
         "last_checked": "2026-08-21",
         "reason": "No Price Data"
     },
-    "ABB": {
-        "delisted": true,
-        "last_checked": "2026-08-21",
-        "reason": "No Price Data"
-    },
     "HYMTF": {
         "delisted": true,
         "last_checked": "2026-08-21",
@@ -140,6 +135,11 @@
         "reason": "No Price Data"
     },
     "ZN": {
+        "delisted": true,
+        "last_checked": "2026-08-22",
+        "reason": "No Price Data"
+    },
+    "ABB": {
         "delisted": true,
         "last_checked": "2026-08-22",
         "reason": "No Price Data"
