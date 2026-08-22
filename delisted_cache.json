@@ -104,11 +104,6 @@
         "last_checked": "2026-08-21",
         "reason": "No Price Data"
     },
-    "APE": {
-        "delisted": true,
-        "last_checked": "2026-08-21",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-08-22",
@@ -130,6 +125,11 @@
         "reason": "No Price Data"
     },
     "SNP": {
+        "delisted": true,
+        "last_checked": "2026-08-22",
+        "reason": "No Price Data"
+    },
+    "APE": {
         "delisted": true,
         "last_checked": "2026-08-22",
         "reason": "No Price Data"
