@@ -46778,5 +46778,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "PRKS": {
+        "ticker": "PRKS",
+        "name": "United Parks & Resorts Inc.",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 2055321600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
