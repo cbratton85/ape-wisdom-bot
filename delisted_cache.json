@@ -94,11 +94,6 @@
         "last_checked": "2026-08-23",
         "reason": "No Price Data"
     },
-    "HEAR": {
-        "delisted": true,
-        "last_checked": "2026-08-23",
-        "reason": "No Price Data"
-    },
     "PIN": {
         "delisted": true,
         "last_checked": "2026-08-23",
@@ -110,6 +105,11 @@
         "reason": "No Price Data"
     },
     "AHH": {
+        "delisted": true,
+        "last_checked": "2026-08-23",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
         "delisted": true,
         "last_checked": "2026-08-23",
         "reason": "No Price Data"
