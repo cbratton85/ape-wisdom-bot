@@ -49,11 +49,6 @@
         "last_checked": "2026-08-22",
         "reason": "No Price Data"
     },
-    "APE": {
-        "delisted": true,
-        "last_checked": "2026-08-22",
-        "reason": "No Price Data"
-    },
     "SOL": {
         "delisted": true,
         "last_checked": "2026-08-22",
@@ -120,6 +115,16 @@
         "reason": "No Price Data"
     },
     "QED": {
+        "delisted": true,
+        "last_checked": "2026-08-23",
+        "reason": "No Price Data"
+    },
+    "FI": {
+        "delisted": true,
+        "last_checked": "2026-08-23",
+        "reason": "No Price Data"
+    },
+    "APE": {
         "delisted": true,
         "last_checked": "2026-08-23",
         "reason": "No Price Data"
