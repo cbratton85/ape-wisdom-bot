@@ -46798,5 +46798,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "NHP": {
+        "ticker": "NHP",
+        "name": "National Healthcare Properties,",
+        "meta": "REIT - Healthcare Facilities",
+        "type": "EQUITY",
+        "mcap": 750903936,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
