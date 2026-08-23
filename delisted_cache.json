@@ -59,11 +59,6 @@
         "last_checked": "2026-08-23",
         "reason": "No Price Data"
     },
-    "GPS": {
-        "delisted": true,
-        "last_checked": "2026-08-23",
-        "reason": "No Price Data"
-    },
     "OG": {
         "delisted": true,
         "last_checked": "2026-08-23",
@@ -100,6 +95,11 @@
         "reason": "No Price Data"
     },
     "RE": {
+        "delisted": true,
+        "last_checked": "2026-08-23",
+        "reason": "No Price Data"
+    },
+    "GPS": {
         "delisted": true,
         "last_checked": "2026-08-23",
         "reason": "No Price Data"
