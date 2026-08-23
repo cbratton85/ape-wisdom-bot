@@ -46788,5 +46788,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ESEA": {
+        "ticker": "ESEA",
+        "name": "Euroseas Ltd.",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 529365216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
