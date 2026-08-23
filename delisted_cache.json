@@ -64,11 +64,6 @@
         "last_checked": "2026-08-23",
         "reason": "No Price Data"
     },
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-08-23",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-08-23",
@@ -95,6 +90,16 @@
         "reason": "No Price Data"
     },
     "PIN": {
+        "delisted": true,
+        "last_checked": "2026-08-23",
+        "reason": "No Price Data"
+    },
+    "FUT": {
+        "delisted": true,
+        "last_checked": "2026-08-23",
+        "reason": "No Price Data"
+    },
+    "WOW": {
         "delisted": true,
         "last_checked": "2026-08-23",
         "reason": "No Price Data"
