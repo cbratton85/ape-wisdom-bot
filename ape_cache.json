@@ -46828,5 +46828,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "GAMR": {
+        "ticker": "GAMR",
+        "name": "Amplify Video Game Leaders ETF",
+        "meta": "Communications",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
