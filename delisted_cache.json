@@ -1,9 +1,4 @@
 {
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-08-19",
-        "reason": "No Price Data"
-    },
     "SNP": {
         "delisted": true,
         "last_checked": "2026-08-22",
@@ -95,6 +90,11 @@
         "reason": "No Price Data"
     },
     "KW": {
+        "delisted": true,
+        "last_checked": "2026-08-24",
+        "reason": "No Price Data"
+    },
+    "TTM": {
         "delisted": true,
         "last_checked": "2026-08-24",
         "reason": "No Price Data"
