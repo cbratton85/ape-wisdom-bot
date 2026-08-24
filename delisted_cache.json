@@ -79,11 +79,6 @@
         "last_checked": "2026-08-24",
         "reason": "No Price Data"
     },
-    "FUT": {
-        "delisted": true,
-        "last_checked": "2026-08-24",
-        "reason": "No Price Data"
-    },
     "CN": {
         "delisted": true,
         "last_checked": "2026-08-24",
@@ -110,6 +105,11 @@
         "reason": "No Price Data"
     },
     "VSCO": {
+        "delisted": true,
+        "last_checked": "2026-08-24",
+        "reason": "No Price Data"
+    },
+    "FUT": {
         "delisted": true,
         "last_checked": "2026-08-24",
         "reason": "No Price Data"
