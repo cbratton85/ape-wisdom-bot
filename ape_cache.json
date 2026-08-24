@@ -46818,5 +46818,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "APRE": {
+        "ticker": "APRE",
+        "name": "Aprea Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 10072909,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
