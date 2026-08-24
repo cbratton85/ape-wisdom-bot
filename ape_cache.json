@@ -46808,5 +46808,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CVRX": {
+        "ticker": "CVRX",
+        "name": "CVRx, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 82588944,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
