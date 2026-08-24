@@ -64,11 +64,6 @@
         "last_checked": "2026-08-24",
         "reason": "No Price Data"
     },
-    "CO": {
-        "delisted": true,
-        "last_checked": "2026-08-24",
-        "reason": "No Price Data"
-    },
     "NH": {
         "delisted": true,
         "last_checked": "2026-08-24",
@@ -100,6 +95,16 @@
         "reason": "No Price Data"
     },
     "ABB": {
+        "delisted": true,
+        "last_checked": "2026-08-24",
+        "reason": "No Price Data"
+    },
+    "VSCO": {
+        "delisted": true,
+        "last_checked": "2026-08-24",
+        "reason": "No Price Data"
+    },
+    "CO": {
         "delisted": true,
         "last_checked": "2026-08-24",
         "reason": "No Price Data"
