@@ -46868,5 +46868,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VRCA": {
+        "ticker": "VRCA",
+        "name": "Verrica Pharmaceuticals Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 84863216,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
