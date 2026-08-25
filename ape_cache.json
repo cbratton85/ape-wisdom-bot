@@ -46878,5 +46878,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "FDXF": {
+        "ticker": "FDXF",
+        "name": "FedEx Freight Holding Company, ",
+        "meta": "Integrated Freight & Logistics",
+        "type": "EQUITY",
+        "mcap": 19250458624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AMRZ": {
+        "ticker": "AMRZ",
+        "name": "Amrize Ltd",
+        "meta": "Building Materials",
+        "type": "EQUITY",
+        "mcap": 24201459712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
