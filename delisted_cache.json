@@ -49,11 +49,6 @@
         "last_checked": "2026-08-25",
         "reason": "No Price Data"
     },
-    "FI": {
-        "delisted": true,
-        "last_checked": "2026-08-25",
-        "reason": "No Price Data"
-    },
     "FUT": {
         "delisted": true,
         "last_checked": "2026-08-25",
@@ -115,6 +110,11 @@
         "reason": "No Price Data"
     },
     "PIN": {
+        "delisted": true,
+        "last_checked": "2026-08-25",
+        "reason": "No Price Data"
+    },
+    "FI": {
         "delisted": true,
         "last_checked": "2026-08-25",
         "reason": "No Price Data"
