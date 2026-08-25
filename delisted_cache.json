@@ -69,11 +69,6 @@
         "last_checked": "2026-08-25",
         "reason": "No Price Data"
     },
-    "PIN": {
-        "delisted": true,
-        "last_checked": "2026-08-25",
-        "reason": "No Price Data"
-    },
     "DS": {
         "delisted": true,
         "last_checked": "2026-08-25",
@@ -105,6 +100,11 @@
         "reason": "No Price Data"
     },
     "OZON": {
+        "delisted": true,
+        "last_checked": "2026-08-25",
+        "reason": "No Price Data"
+    },
+    "PIN": {
         "delisted": true,
         "last_checked": "2026-08-25",
         "reason": "No Price Data"
