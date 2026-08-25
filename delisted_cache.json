@@ -44,11 +44,6 @@
         "last_checked": "2026-08-25",
         "reason": "No Price Data"
     },
-    "SPI": {
-        "delisted": true,
-        "last_checked": "2026-08-25",
-        "reason": "No Price Data"
-    },
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-08-25",
@@ -110,6 +105,11 @@
         "reason": "No Price Data"
     },
     "QED": {
+        "delisted": true,
+        "last_checked": "2026-08-25",
+        "reason": "No Price Data"
+    },
+    "SPI": {
         "delisted": true,
         "last_checked": "2026-08-25",
         "reason": "No Price Data"
