@@ -46858,5 +46858,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SECZ": {
+        "ticker": "SECZ",
+        "name": "Securitize Corp.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 1084900480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
