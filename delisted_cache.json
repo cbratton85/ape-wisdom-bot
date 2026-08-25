@@ -29,11 +29,6 @@
         "last_checked": "2026-08-25",
         "reason": "No Price Data"
     },
-    "OZON": {
-        "delisted": true,
-        "last_checked": "2026-08-25",
-        "reason": "No Price Data"
-    },
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-08-25",
@@ -120,6 +115,16 @@
         "reason": "No Price Data"
     },
     "KW": {
+        "delisted": true,
+        "last_checked": "2026-08-25",
+        "reason": "No Price Data"
+    },
+    "TTM": {
+        "delisted": true,
+        "last_checked": "2026-08-25",
+        "reason": "No Price Data"
+    },
+    "OZON": {
         "delisted": true,
         "last_checked": "2026-08-25",
         "reason": "No Price Data"
