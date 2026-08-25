@@ -46838,5 +46838,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NVRI": {
+        "ticker": "NVRI",
+        "name": "Enviri Corporation",
+        "meta": "Waste Management",
+        "type": "EQUITY",
+        "mcap": 595375360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
