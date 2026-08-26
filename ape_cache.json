@@ -46918,5 +46918,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "BANR": {
+        "ticker": "BANR",
+        "name": "Banner Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 2391178240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }

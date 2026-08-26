@@ -84,11 +84,6 @@
         "last_checked": "2026-08-26",
         "reason": "No Price Data"
     },
-    "QED": {
-        "delisted": true,
-        "last_checked": "2026-08-26",
-        "reason": "No Price Data"
-    },
     "OTH": {
         "delisted": true,
         "last_checked": "2026-08-26",
@@ -150,6 +145,16 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-08-26",
+        "reason": "No Price Data"
+    },
+    "PIN": {
+        "delisted": true,
+        "last_checked": "2026-08-26",
+        "reason": "No Price Data"
+    },
+    "QED": {
         "delisted": true,
         "last_checked": "2026-08-26",
         "reason": "No Price Data"
