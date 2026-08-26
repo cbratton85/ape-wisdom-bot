@@ -39,11 +39,6 @@
         "last_checked": "2026-08-25",
         "reason": "No Price Data"
     },
-    "QED": {
-        "delisted": true,
-        "last_checked": "2026-08-25",
-        "reason": "No Price Data"
-    },
     "PIN": {
         "delisted": true,
         "last_checked": "2026-08-25",
@@ -125,6 +120,11 @@
         "reason": "No Price Data"
     },
     "OG": {
+        "delisted": true,
+        "last_checked": "2026-08-26",
+        "reason": "No Price Data"
+    },
+    "QED": {
         "delisted": true,
         "last_checked": "2026-08-26",
         "reason": "No Price Data"
