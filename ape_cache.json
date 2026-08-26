@@ -46898,5 +46898,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "LQDH": {
+        "ticker": "LQDH",
+        "name": "iShares Interest Rate Hedged Co",
+        "meta": "Ultrashort Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
