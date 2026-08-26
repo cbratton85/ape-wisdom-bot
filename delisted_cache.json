@@ -29,11 +29,6 @@
         "last_checked": "2026-08-25",
         "reason": "No Price Data"
     },
-    "SLT": {
-        "delisted": true,
-        "last_checked": "2026-08-25",
-        "reason": "No Price Data"
-    },
     "FI": {
         "delisted": true,
         "last_checked": "2026-08-25",
@@ -145,6 +140,11 @@
         "reason": "No Price Data"
     },
     "KW": {
+        "delisted": true,
+        "last_checked": "2026-08-26",
+        "reason": "No Price Data"
+    },
+    "SLT": {
         "delisted": true,
         "last_checked": "2026-08-26",
         "reason": "No Price Data"
