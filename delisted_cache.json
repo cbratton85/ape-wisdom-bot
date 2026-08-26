@@ -84,11 +84,6 @@
         "last_checked": "2026-08-25",
         "reason": "No Price Data"
     },
-    "OZON": {
-        "delisted": true,
-        "last_checked": "2026-08-25",
-        "reason": "No Price Data"
-    },
     "OLD": {
         "delisted": true,
         "last_checked": "2026-08-25",
@@ -125,6 +120,11 @@
         "reason": "No Price Data"
     },
     "WOW": {
+        "delisted": true,
+        "last_checked": "2026-08-26",
+        "reason": "No Price Data"
+    },
+    "OZON": {
         "delisted": true,
         "last_checked": "2026-08-26",
         "reason": "No Price Data"
