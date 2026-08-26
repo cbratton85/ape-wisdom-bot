@@ -46908,5 +46908,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "IMOM": {
+        "ticker": "IMOM",
+        "name": "Alpha Architect International Q",
+        "meta": "Foreign Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
