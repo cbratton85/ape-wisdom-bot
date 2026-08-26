@@ -69,11 +69,6 @@
         "last_checked": "2026-08-26",
         "reason": "No Price Data"
     },
-    "REV": {
-        "delisted": true,
-        "last_checked": "2026-08-26",
-        "reason": "No Price Data"
-    },
     "KW": {
         "delisted": true,
         "last_checked": "2026-08-26",
@@ -140,6 +135,16 @@
         "reason": "No Price Data"
     },
     "SQ": {
+        "delisted": true,
+        "last_checked": "2026-08-26",
+        "reason": "No Price Data"
+    },
+    "DS": {
+        "delisted": true,
+        "last_checked": "2026-08-26",
+        "reason": "No Price Data"
+    },
+    "REV": {
         "delisted": true,
         "last_checked": "2026-08-26",
         "reason": "No Price Data"
