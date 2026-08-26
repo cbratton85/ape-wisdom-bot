@@ -104,11 +104,6 @@
         "last_checked": "2026-08-26",
         "reason": "No Price Data"
     },
-    "OG": {
-        "delisted": true,
-        "last_checked": "2026-08-26",
-        "reason": "No Price Data"
-    },
     "BOSS": {
         "delisted": true,
         "last_checked": "2026-08-26",
@@ -135,6 +130,16 @@
         "reason": "No Price Data"
     },
     "CO": {
+        "delisted": true,
+        "last_checked": "2026-08-26",
+        "reason": "No Price Data"
+    },
+    "OG": {
+        "delisted": true,
+        "last_checked": "2026-08-26",
+        "reason": "No Price Data"
+    },
+    "SQ": {
         "delisted": true,
         "last_checked": "2026-08-26",
         "reason": "No Price Data"
