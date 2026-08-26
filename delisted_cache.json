@@ -89,11 +89,6 @@
         "last_checked": "2026-08-26",
         "reason": "No Price Data"
     },
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-08-26",
-        "reason": "No Price Data"
-    },
     "EVA": {
         "delisted": true,
         "last_checked": "2026-08-26",
@@ -130,6 +125,11 @@
         "reason": "No Price Data"
     },
     "BOSS": {
+        "delisted": true,
+        "last_checked": "2026-08-26",
+        "reason": "No Price Data"
+    },
+    "TTM": {
         "delisted": true,
         "last_checked": "2026-08-26",
         "reason": "No Price Data"
