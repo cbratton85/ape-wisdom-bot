@@ -1,9 +1,4 @@
 {
-    "OG": {
-        "delisted": true,
-        "last_checked": "2026-08-24",
-        "reason": "No Price Data"
-    },
     "FM": {
         "delisted": true,
         "last_checked": "2026-08-24",
@@ -127,6 +122,11 @@
     "TTM": {
         "delisted": true,
         "last_checked": "2026-08-25",
+        "reason": "No Price Data"
+    },
+    "OG": {
+        "delisted": true,
+        "last_checked": "2026-08-26",
         "reason": "No Price Data"
     }
 }
