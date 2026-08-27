@@ -46938,5 +46938,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MNSO": {
+        "ticker": "MNSO",
+        "name": "MINISO Group Holding Limited",
+        "meta": "Specialty Retail",
+        "type": "EQUITY",
+        "mcap": 3226791680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
