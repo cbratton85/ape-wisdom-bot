@@ -64,11 +64,6 @@
         "last_checked": "2026-08-26",
         "reason": "No Price Data"
     },
-    "PIN": {
-        "delisted": true,
-        "last_checked": "2026-08-26",
-        "reason": "No Price Data"
-    },
     "EVA": {
         "delisted": true,
         "last_checked": "2026-08-26",
@@ -155,6 +150,11 @@
         "reason": "No Price Data"
     },
     "WOW": {
+        "delisted": true,
+        "last_checked": "2026-08-27",
+        "reason": "No Price Data"
+    },
+    "PIN": {
         "delisted": true,
         "last_checked": "2026-08-27",
         "reason": "No Price Data"
