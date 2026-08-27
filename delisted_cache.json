@@ -94,11 +94,6 @@
         "last_checked": "2026-08-27",
         "reason": "No Price Data"
     },
-    "REV": {
-        "delisted": true,
-        "last_checked": "2026-08-27",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-08-27",
@@ -155,6 +150,16 @@
         "reason": "No Price Data"
     },
     "GPS": {
+        "delisted": true,
+        "last_checked": "2026-08-27",
+        "reason": "No Price Data"
+    },
+    "REV": {
+        "delisted": true,
+        "last_checked": "2026-08-27",
+        "reason": "No Price Data"
+    },
+    "OPT": {
         "delisted": true,
         "last_checked": "2026-08-27",
         "reason": "No Price Data"
