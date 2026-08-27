@@ -109,11 +109,6 @@
         "last_checked": "2026-08-27",
         "reason": "No Price Data"
     },
-    "DBS": {
-        "delisted": true,
-        "last_checked": "2026-08-27",
-        "reason": "No Price Data"
-    },
     "BOSS": {
         "delisted": true,
         "last_checked": "2026-08-27",
@@ -155,6 +150,11 @@
         "reason": "No Price Data"
     },
     "CO": {
+        "delisted": true,
+        "last_checked": "2026-08-27",
+        "reason": "No Price Data"
+    },
+    "DBS": {
         "delisted": true,
         "last_checked": "2026-08-27",
         "reason": "No Price Data"
