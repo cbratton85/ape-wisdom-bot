@@ -46928,5 +46928,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "HLN": {
+        "ticker": "HLN",
+        "name": "Haleon plc",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 44152074240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
