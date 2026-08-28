@@ -94,11 +94,6 @@
         "last_checked": "2026-08-27",
         "reason": "No Price Data"
     },
-    "DBS": {
-        "delisted": true,
-        "last_checked": "2026-08-27",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-08-28",
@@ -145,6 +140,11 @@
         "reason": "No Price Data"
     },
     "DS": {
+        "delisted": true,
+        "last_checked": "2026-08-28",
+        "reason": "No Price Data"
+    },
+    "DBS": {
         "delisted": true,
         "last_checked": "2026-08-28",
         "reason": "No Price Data"
