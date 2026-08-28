@@ -54,11 +54,6 @@
         "last_checked": "2026-08-28",
         "reason": "No Price Data"
     },
-    "PIN": {
-        "delisted": true,
-        "last_checked": "2026-08-28",
-        "reason": "No Price Data"
-    },
     "DBS": {
         "delisted": true,
         "last_checked": "2026-08-28",
@@ -135,6 +130,11 @@
         "reason": "No Price Data"
     },
     "AUD": {
+        "delisted": true,
+        "last_checked": "2026-08-28",
+        "reason": "No Price Data"
+    },
+    "PIN": {
         "delisted": true,
         "last_checked": "2026-08-28",
         "reason": "No Price Data"
