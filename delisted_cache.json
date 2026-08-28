@@ -1,9 +1,4 @@
 {
-    "APE": {
-        "delisted": true,
-        "last_checked": "2026-08-27",
-        "reason": "No Price Data"
-    },
     "SAVE": {
         "delisted": true,
         "last_checked": "2026-08-27",
@@ -135,6 +130,16 @@
         "reason": "No Price Data"
     },
     "SOL": {
+        "delisted": true,
+        "last_checked": "2026-08-28",
+        "reason": "No Price Data"
+    },
+    "EXAS": {
+        "delisted": true,
+        "last_checked": "2026-08-28",
+        "reason": "No Price Data"
+    },
+    "APE": {
         "delisted": true,
         "last_checked": "2026-08-28",
         "reason": "No Price Data"
