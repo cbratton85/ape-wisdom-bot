@@ -46948,5 +46948,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "XTNT": {
+        "ticker": "XTNT",
+        "name": "Xtant Medical Holdings, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 51134964,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
