@@ -119,11 +119,6 @@
         "last_checked": "2026-08-28",
         "reason": "No Price Data"
     },
-    "EXAS": {
-        "delisted": true,
-        "last_checked": "2026-08-28",
-        "reason": "No Price Data"
-    },
     "APE": {
         "delisted": true,
         "last_checked": "2026-08-28",
@@ -140,6 +135,11 @@
         "reason": "No Price Data"
     },
     "EVA": {
+        "delisted": true,
+        "last_checked": "2026-08-28",
+        "reason": "No Price Data"
+    },
+    "EXAS": {
         "delisted": true,
         "last_checked": "2026-08-28",
         "reason": "No Price Data"
