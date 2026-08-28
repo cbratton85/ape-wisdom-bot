@@ -84,11 +84,6 @@
         "last_checked": "2026-08-27",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-08-27",
-        "reason": "No Price Data"
-    },
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-08-27",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "TTM": {
+        "delisted": true,
+        "last_checked": "2026-08-28",
+        "reason": "No Price Data"
+    },
+    "RE": {
         "delisted": true,
         "last_checked": "2026-08-28",
         "reason": "No Price Data"
