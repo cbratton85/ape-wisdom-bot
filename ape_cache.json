@@ -46958,5 +46958,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "BLDG": {
+        "ticker": "BLDG",
+        "name": "Cambria Global Real Estate ETF",
+        "meta": "Global Real Estate",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
