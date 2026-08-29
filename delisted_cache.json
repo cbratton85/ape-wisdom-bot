@@ -1,9 +1,4 @@
 {
-    "DTC": {
-        "delisted": true,
-        "last_checked": "2026-08-27",
-        "reason": "No Price Data"
-    },
     "OG": {
         "delisted": true,
         "last_checked": "2026-08-27",
@@ -130,6 +125,11 @@
         "reason": "No Price Data"
     },
     "APE": {
+        "delisted": true,
+        "last_checked": "2026-08-29",
+        "reason": "No Price Data"
+    },
+    "DTC": {
         "delisted": true,
         "last_checked": "2026-08-29",
         "reason": "No Price Data"
