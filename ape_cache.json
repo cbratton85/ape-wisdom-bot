@@ -46968,5 +46968,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "QNST": {
+        "ticker": "QNST",
+        "name": "QuinStreet, Inc.",
+        "meta": "Advertising Agencies",
+        "type": "EQUITY",
+        "mcap": 1094917376,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
