@@ -46978,5 +46978,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "DCOM": {
+        "ticker": "DCOM",
+        "name": "Dime Commercial Bancshares, Inc",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 1787017472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
