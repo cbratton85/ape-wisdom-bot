@@ -46988,5 +46988,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "YTRA": {
+        "ticker": "YTRA",
+        "name": "Yatra Online, Inc.",
+        "meta": "Travel Services",
+        "type": "EQUITY",
+        "mcap": 63990176,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
