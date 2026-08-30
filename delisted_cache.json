@@ -19,11 +19,6 @@
         "last_checked": "2026-08-29",
         "reason": "No Price Data"
     },
-    "EXAS": {
-        "delisted": true,
-        "last_checked": "2026-08-29",
-        "reason": "No Price Data"
-    },
     "EVA": {
         "delisted": true,
         "last_checked": "2026-08-29",
@@ -110,6 +105,11 @@
         "reason": "No Price Data"
     },
     "WOW": {
+        "delisted": true,
+        "last_checked": "2026-08-30",
+        "reason": "No Price Data"
+    },
+    "EXAS": {
         "delisted": true,
         "last_checked": "2026-08-30",
         "reason": "No Price Data"
