@@ -34,11 +34,6 @@
         "last_checked": "2026-08-30",
         "reason": "No Price Data"
     },
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-08-30",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-08-30",
@@ -90,6 +85,11 @@
         "reason": "No Price Data"
     },
     "EXAS": {
+        "delisted": true,
+        "last_checked": "2026-08-30",
+        "reason": "No Price Data"
+    },
+    "TTM": {
         "delisted": true,
         "last_checked": "2026-08-30",
         "reason": "No Price Data"
