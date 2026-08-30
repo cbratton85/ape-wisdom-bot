@@ -54,11 +54,6 @@
         "last_checked": "2026-08-30",
         "reason": "No Price Data"
     },
-    "GPS": {
-        "delisted": true,
-        "last_checked": "2026-08-30",
-        "reason": "No Price Data"
-    },
     "FM": {
         "delisted": true,
         "last_checked": "2026-08-30",
@@ -90,6 +85,11 @@
         "reason": "No Price Data"
     },
     "TTM": {
+        "delisted": true,
+        "last_checked": "2026-08-30",
+        "reason": "No Price Data"
+    },
+    "GPS": {
         "delisted": true,
         "last_checked": "2026-08-30",
         "reason": "No Price Data"
