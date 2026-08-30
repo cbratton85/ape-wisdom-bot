@@ -34,11 +34,6 @@
         "last_checked": "2026-08-30",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-08-30",
-        "reason": "No Price Data"
-    },
     "WOW": {
         "delisted": true,
         "last_checked": "2026-08-30",
@@ -85,6 +80,16 @@
         "reason": "No Price Data"
     },
     "GPS": {
+        "delisted": true,
+        "last_checked": "2026-08-30",
+        "reason": "No Price Data"
+    },
+    "BABY": {
+        "delisted": true,
+        "last_checked": "2026-08-30",
+        "reason": "No Price Data"
+    },
+    "EPOW": {
         "delisted": true,
         "last_checked": "2026-08-30",
         "reason": "No Price Data"
