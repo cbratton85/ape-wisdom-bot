@@ -104,6 +104,11 @@
         "last_checked": "2026-08-30",
         "reason": "No Price Data"
     },
+    "PIN": {
+        "delisted": true,
+        "last_checked": "2026-08-30",
+        "reason": "No Price Data"
+    },
     "WOW": {
         "delisted": true,
         "last_checked": "2026-08-30",
