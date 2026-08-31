@@ -59,11 +59,6 @@
         "last_checked": "2026-08-31",
         "reason": "No Price Data"
     },
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-08-31",
-        "reason": "No Price Data"
-    },
     "EVA": {
         "delisted": true,
         "last_checked": "2026-08-31",
@@ -80,6 +75,11 @@
         "reason": "No Price Data"
     },
     "CBD": {
+        "delisted": true,
+        "last_checked": "2026-08-31",
+        "reason": "No Price Data"
+    },
+    "SOL": {
         "delisted": true,
         "last_checked": "2026-08-31",
         "reason": "No Price Data"
