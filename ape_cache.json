@@ -47048,5 +47048,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "TRN": {
+        "ticker": "TRN",
+        "name": "Trinity Industries, Inc.",
+        "meta": "Railroads",
+        "type": "EQUITY",
+        "mcap": 2296074496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
