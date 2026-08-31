@@ -47008,5 +47008,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "CNCR": {
+        "ticker": "CNCR",
+        "name": "Range Cancer Therapeutics ETF",
+        "meta": "Health",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
