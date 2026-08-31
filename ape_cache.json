@@ -47018,5 +47018,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "PTGX": {
+        "ticker": "PTGX",
+        "name": "Protagonist Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 9349052416,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
