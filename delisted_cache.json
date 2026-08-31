@@ -54,11 +54,6 @@
         "last_checked": "2026-08-31",
         "reason": "No Price Data"
     },
-    "SQ": {
-        "delisted": true,
-        "last_checked": "2026-08-31",
-        "reason": "No Price Data"
-    },
     "CO": {
         "delisted": true,
         "last_checked": "2026-08-31",
@@ -80,6 +75,11 @@
         "reason": "No Price Data"
     },
     "MOM": {
+        "delisted": true,
+        "last_checked": "2026-08-31",
+        "reason": "No Price Data"
+    },
+    "SQ": {
         "delisted": true,
         "last_checked": "2026-08-31",
         "reason": "No Price Data"
