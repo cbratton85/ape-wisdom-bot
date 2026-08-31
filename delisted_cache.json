@@ -74,17 +74,17 @@
         "last_checked": "2026-08-31",
         "reason": "No Price Data"
     },
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-08-31",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-08-31",
         "reason": "No Price Data"
     },
     "DTC": {
+        "delisted": true,
+        "last_checked": "2026-08-31",
+        "reason": "No Price Data"
+    },
+    "TTM": {
         "delisted": true,
         "last_checked": "2026-08-31",
         "reason": "No Price Data"
