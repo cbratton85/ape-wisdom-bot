@@ -79,17 +79,17 @@
         "last_checked": "2026-08-30",
         "reason": "No Price Data"
     },
-    "CO": {
-        "delisted": true,
-        "last_checked": "2026-08-30",
-        "reason": "No Price Data"
-    },
     "SOL": {
         "delisted": true,
         "last_checked": "2026-08-30",
         "reason": "No Price Data"
     },
     "WOW": {
+        "delisted": true,
+        "last_checked": "2026-08-31",
+        "reason": "No Price Data"
+    },
+    "CO": {
         "delisted": true,
         "last_checked": "2026-08-31",
         "reason": "No Price Data"
