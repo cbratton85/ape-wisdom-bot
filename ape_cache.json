@@ -47028,5 +47028,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "SUJA": {
+        "ticker": "SUJA",
+        "name": "Suja Life, Inc.",
+        "meta": "Beverages - Non-Alcoholic",
+        "type": "EQUITY",
+        "mcap": 380456384,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
