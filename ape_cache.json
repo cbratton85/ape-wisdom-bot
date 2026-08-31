@@ -47038,5 +47038,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "MMED": {
+        "ticker": "MMED",
+        "name": "MiniMed Group, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 5700149248,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
