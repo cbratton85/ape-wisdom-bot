@@ -46998,5 +46998,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "RDHL": {
+        "ticker": "RDHL",
+        "name": "Redhill Biopharma Ltd.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 4019488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
