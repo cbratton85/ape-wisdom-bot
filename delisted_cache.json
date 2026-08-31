@@ -1,9 +1,4 @@
 {
-    "FFR": {
-        "delisted": true,
-        "last_checked": "2026-08-29",
-        "reason": "No Price Data"
-    },
     "OG": {
         "delisted": true,
         "last_checked": "2026-08-30",
@@ -80,6 +75,11 @@
         "reason": "No Price Data"
     },
     "MOM": {
+        "delisted": true,
+        "last_checked": "2026-08-31",
+        "reason": "No Price Data"
+    },
+    "FFR": {
         "delisted": true,
         "last_checked": "2026-08-31",
         "reason": "No Price Data"
