@@ -49,11 +49,6 @@
         "last_checked": "2026-09-01",
         "reason": "No Price Data"
     },
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-09-01",
-        "reason": "No Price Data"
-    },
     "EVA": {
         "delisted": true,
         "last_checked": "2026-09-01",
@@ -90,6 +85,11 @@
         "reason": "No Price Data"
     },
     "SAVE": {
+        "delisted": true,
+        "last_checked": "2026-09-01",
+        "reason": "No Price Data"
+    },
+    "SOL": {
         "delisted": true,
         "last_checked": "2026-09-01",
         "reason": "No Price Data"
