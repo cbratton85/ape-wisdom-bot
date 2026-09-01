@@ -47058,5 +47058,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PXS": {
+        "ticker": "PXS",
+        "name": "Pyxis Tankers Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 54882080,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
