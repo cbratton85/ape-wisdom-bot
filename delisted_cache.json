@@ -39,11 +39,6 @@
         "last_checked": "2026-09-01",
         "reason": "No Price Data"
     },
-    "CN": {
-        "delisted": true,
-        "last_checked": "2026-09-01",
-        "reason": "No Price Data"
-    },
     "KW": {
         "delisted": true,
         "last_checked": "2026-09-01",
@@ -90,6 +85,16 @@
         "reason": "No Price Data"
     },
     "SOL": {
+        "delisted": true,
+        "last_checked": "2026-09-01",
+        "reason": "No Price Data"
+    },
+    "JPN": {
+        "delisted": true,
+        "last_checked": "2026-09-01",
+        "reason": "No Price Data"
+    },
+    "CN": {
         "delisted": true,
         "last_checked": "2026-09-01",
         "reason": "No Price Data"
