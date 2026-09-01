@@ -47078,5 +47078,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "FLYE": {
+        "ticker": "FLYE",
+        "name": "Fly-E Group, Inc.",
+        "meta": "Auto Manufacturers",
+        "type": "EQUITY",
+        "mcap": 3379039,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
