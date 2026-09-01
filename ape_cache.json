@@ -47068,5 +47068,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "IMC": {
+        "ticker": "IMC",
+        "name": "IMC Rare Earths Ltd",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 1034803008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
