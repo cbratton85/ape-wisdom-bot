@@ -44,11 +44,6 @@
         "last_checked": "2026-09-01",
         "reason": "No Price Data"
     },
-    "FWRG": {
-        "delisted": true,
-        "last_checked": "2026-09-01",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-09-01",
@@ -110,6 +105,11 @@
         "reason": "No Price Data"
     },
     "NXT": {
+        "delisted": true,
+        "last_checked": "2026-09-01",
+        "reason": "No Price Data"
+    },
+    "MBT": {
         "delisted": true,
         "last_checked": "2026-09-01",
         "reason": "No Price Data"
