@@ -24,11 +24,6 @@
         "last_checked": "2026-08-31",
         "reason": "No Price Data"
     },
-    "VSCO": {
-        "delisted": true,
-        "last_checked": "2026-08-31",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-08-31",
@@ -82,6 +77,16 @@
     "BABY": {
         "delisted": true,
         "last_checked": "2026-08-31",
+        "reason": "No Price Data"
+    },
+    "ZN": {
+        "delisted": true,
+        "last_checked": "2026-09-01",
+        "reason": "No Price Data"
+    },
+    "VSCO": {
+        "delisted": true,
+        "last_checked": "2026-09-01",
         "reason": "No Price Data"
     }
 }
