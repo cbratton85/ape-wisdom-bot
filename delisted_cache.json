@@ -54,11 +54,6 @@
         "last_checked": "2026-09-01",
         "reason": "No Price Data"
     },
-    "BOSS": {
-        "delisted": true,
-        "last_checked": "2026-09-01",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-09-01",
@@ -110,6 +105,16 @@
         "reason": "No Price Data"
     },
     "APE": {
+        "delisted": true,
+        "last_checked": "2026-09-02",
+        "reason": "No Price Data"
+    },
+    "SNP": {
+        "delisted": true,
+        "last_checked": "2026-09-02",
+        "reason": "No Price Data"
+    },
+    "BOSS": {
         "delisted": true,
         "last_checked": "2026-09-02",
         "reason": "No Price Data"
