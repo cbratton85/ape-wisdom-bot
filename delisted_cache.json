@@ -109,17 +109,17 @@
         "last_checked": "2026-09-02",
         "reason": "No Price Data"
     },
-    "OG": {
-        "delisted": true,
-        "last_checked": "2026-09-02",
-        "reason": "No Price Data"
-    },
     "SNP": {
         "delisted": true,
         "last_checked": "2026-09-02",
         "reason": "No Price Data"
     },
     "OTH": {
+        "delisted": true,
+        "last_checked": "2026-09-02",
+        "reason": "No Price Data"
+    },
+    "OG": {
         "delisted": true,
         "last_checked": "2026-09-02",
         "reason": "No Price Data"
