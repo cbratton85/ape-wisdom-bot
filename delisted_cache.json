@@ -64,11 +64,6 @@
         "last_checked": "2026-09-01",
         "reason": "No Price Data"
     },
-    "EVA": {
-        "delisted": true,
-        "last_checked": "2026-09-01",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-09-01",
@@ -112,6 +107,11 @@
     "SQ": {
         "delisted": true,
         "last_checked": "2026-09-01",
+        "reason": "No Price Data"
+    },
+    "EVA": {
+        "delisted": true,
+        "last_checked": "2026-09-02",
         "reason": "No Price Data"
     }
 }
