@@ -104,12 +104,12 @@
         "last_checked": "2026-09-01",
         "reason": "No Price Data"
     },
-    "EVA": {
+    "OTH": {
         "delisted": true,
         "last_checked": "2026-09-02",
         "reason": "No Price Data"
     },
-    "OTH": {
+    "EVA": {
         "delisted": true,
         "last_checked": "2026-09-02",
         "reason": "No Price Data"
