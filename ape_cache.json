@@ -47098,5 +47098,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "MZTI": {
+        "ticker": "MZTI",
+        "name": "The Marzetti Company",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 3068054272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
