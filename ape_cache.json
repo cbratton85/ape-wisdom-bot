@@ -47088,5 +47088,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "MTEK": {
+        "ticker": "MTEK",
+        "name": "Maris-Tech Ltd.",
+        "meta": "Electronic Components",
+        "type": "EQUITY",
+        "mcap": 11679773,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
