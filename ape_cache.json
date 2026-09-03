@@ -47118,5 +47118,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "NYXH": {
+        "ticker": "NYXH",
+        "name": "Nyxoah SA",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 153778720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
