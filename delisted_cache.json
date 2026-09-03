@@ -59,11 +59,6 @@
         "last_checked": "2026-09-03",
         "reason": "No Price Data"
     },
-    "OG": {
-        "delisted": true,
-        "last_checked": "2026-09-03",
-        "reason": "No Price Data"
-    },
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-09-03",
@@ -100,6 +95,21 @@
         "reason": "No Price Data"
     },
     "CN": {
+        "delisted": true,
+        "last_checked": "2026-09-03",
+        "reason": "No Price Data"
+    },
+    "OG": {
+        "delisted": true,
+        "last_checked": "2026-09-03",
+        "reason": "No Price Data"
+    },
+    "GPS": {
+        "delisted": true,
+        "last_checked": "2026-09-03",
+        "reason": "No Price Data"
+    },
+    "SAVE": {
         "delisted": true,
         "last_checked": "2026-09-03",
         "reason": "No Price Data"
