@@ -47108,5 +47108,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "GMTL": {
+        "ticker": "GMTL",
+        "name": "Guardian Metal Resources PLC",
+        "meta": "Other Precious Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 417668320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
