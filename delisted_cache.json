@@ -49,11 +49,6 @@
         "last_checked": "2026-09-02",
         "reason": "No Price Data"
     },
-    "HEAR": {
-        "delisted": true,
-        "last_checked": "2026-09-02",
-        "reason": "No Price Data"
-    },
     "SNP": {
         "delisted": true,
         "last_checked": "2026-09-02",
@@ -115,6 +110,11 @@
         "reason": "No Price Data"
     },
     "ZN": {
+        "delisted": true,
+        "last_checked": "2026-09-03",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
         "delisted": true,
         "last_checked": "2026-09-03",
         "reason": "No Price Data"
