@@ -47138,5 +47138,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "NORW": {
+        "ticker": "NORW",
+        "name": "Global X MSCI Norway ETF",
+        "meta": "Focused Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
