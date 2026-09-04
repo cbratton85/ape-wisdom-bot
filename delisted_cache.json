@@ -64,11 +64,6 @@
         "last_checked": "2026-09-03",
         "reason": "No Price Data"
     },
-    "DS": {
-        "delisted": true,
-        "last_checked": "2026-09-04",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-09-04",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "SAVE": {
+        "delisted": true,
+        "last_checked": "2026-09-04",
+        "reason": "No Price Data"
+    },
+    "DS": {
         "delisted": true,
         "last_checked": "2026-09-04",
         "reason": "No Price Data"
