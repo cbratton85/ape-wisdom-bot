@@ -9,11 +9,6 @@
         "last_checked": "2026-09-03",
         "reason": "No Price Data"
     },
-    "HEAR": {
-        "delisted": true,
-        "last_checked": "2026-09-03",
-        "reason": "No Price Data"
-    },
     "ZN": {
         "delisted": true,
         "last_checked": "2026-09-03",
@@ -110,6 +105,11 @@
         "reason": "No Price Data"
     },
     "CEA": {
+        "delisted": true,
+        "last_checked": "2026-09-04",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
         "delisted": true,
         "last_checked": "2026-09-04",
         "reason": "No Price Data"
