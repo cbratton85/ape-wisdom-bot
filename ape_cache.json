@@ -47158,5 +47158,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CSB": {
+        "ticker": "CSB",
+        "name": "VictoryShares US Small Cap High",
+        "meta": "Small Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
