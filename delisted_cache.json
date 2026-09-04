@@ -59,11 +59,6 @@
         "last_checked": "2026-09-04",
         "reason": "No Price Data"
     },
-    "APE": {
-        "delisted": true,
-        "last_checked": "2026-09-04",
-        "reason": "No Price Data"
-    },
     "AUD": {
         "delisted": true,
         "last_checked": "2026-09-04",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "CEA": {
+        "delisted": true,
+        "last_checked": "2026-09-04",
+        "reason": "No Price Data"
+    },
+    "APE": {
         "delisted": true,
         "last_checked": "2026-09-04",
         "reason": "No Price Data"
