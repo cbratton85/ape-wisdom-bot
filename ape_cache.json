@@ -47148,5 +47148,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "REF": {
+        "ticker": "REF",
+        "name": "Reformation Inc.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 818205504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
