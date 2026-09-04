@@ -47128,5 +47128,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ACLX": {
+        "ticker": "ACLX",
+        "name": "ACLX",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
