@@ -1,9 +1,4 @@
 {
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-09-02",
-        "reason": "No Price Data"
-    },
     "SOL": {
         "delisted": true,
         "last_checked": "2026-09-03",
@@ -112,6 +107,11 @@
     "APE": {
         "delisted": true,
         "last_checked": "2026-09-04",
+        "reason": "No Price Data"
+    },
+    "WOW": {
+        "delisted": true,
+        "last_checked": "2026-09-05",
         "reason": "No Price Data"
     }
 }
