@@ -1,9 +1,4 @@
 {
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-09-03",
-        "reason": "No Price Data"
-    },
     "ZN": {
         "delisted": true,
         "last_checked": "2026-09-03",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "SEM": {
+        "delisted": true,
+        "last_checked": "2026-09-05",
+        "reason": "No Price Data"
+    },
+    "SOL": {
         "delisted": true,
         "last_checked": "2026-09-05",
         "reason": "No Price Data"
