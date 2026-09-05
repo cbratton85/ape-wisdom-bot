@@ -47178,5 +47178,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "PCEF": {
+        "ticker": "PCEF",
+        "name": "Invesco CEF Income Composite ET",
+        "meta": "Global Moderate Allocation",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
