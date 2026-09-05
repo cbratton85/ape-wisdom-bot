@@ -89,11 +89,6 @@
         "last_checked": "2026-09-05",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-09-05",
-        "reason": "No Price Data"
-    },
     "SEM": {
         "delisted": true,
         "last_checked": "2026-09-05",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "VSCO": {
+        "delisted": true,
+        "last_checked": "2026-09-05",
+        "reason": "No Price Data"
+    },
+    "BABY": {
         "delisted": true,
         "last_checked": "2026-09-05",
         "reason": "No Price Data"
