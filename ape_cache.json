@@ -47168,5 +47168,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CYTO": {
+        "ticker": "CYTO",
+        "name": "CYTO",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
