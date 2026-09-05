@@ -109,6 +109,11 @@
         "last_checked": "2026-09-04",
         "reason": "No Price Data"
     },
+    "TTM": {
+        "delisted": true,
+        "last_checked": "2026-09-05",
+        "reason": "No Price Data"
+    },
     "WOW": {
         "delisted": true,
         "last_checked": "2026-09-05",
