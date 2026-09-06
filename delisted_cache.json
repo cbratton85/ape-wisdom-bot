@@ -44,11 +44,6 @@
         "last_checked": "2026-09-05",
         "reason": "No Price Data"
     },
-    "ACLX": {
-        "delisted": true,
-        "last_checked": "2026-09-05",
-        "reason": "No Price Data"
-    },
     "WOW": {
         "delisted": true,
         "last_checked": "2026-09-05",
@@ -115,6 +110,11 @@
         "reason": "No Price Data"
     },
     "CEA": {
+        "delisted": true,
+        "last_checked": "2026-09-06",
+        "reason": "No Price Data"
+    },
+    "ACLX": {
         "delisted": true,
         "last_checked": "2026-09-06",
         "reason": "No Price Data"
