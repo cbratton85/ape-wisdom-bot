@@ -47188,5 +47188,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ACIC": {
+        "ticker": "ACIC",
+        "name": "American Coastal Insurance Corp",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 450951168,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
