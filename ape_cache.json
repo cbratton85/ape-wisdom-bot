@@ -47198,5 +47198,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "LAMR": {
+        "ticker": "LAMR",
+        "name": "Lamar Advertising Company",
+        "meta": "REIT - Specialty",
+        "type": "EQUITY",
+        "mcap": 15309629440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
