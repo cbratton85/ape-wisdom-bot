@@ -34,11 +34,6 @@
         "last_checked": "2026-09-05",
         "reason": "No Price Data"
     },
-    "CYTO": {
-        "delisted": true,
-        "last_checked": "2026-09-05",
-        "reason": "No Price Data"
-    },
     "SOL": {
         "delisted": true,
         "last_checked": "2026-09-05",
@@ -122,6 +117,11 @@
     "BABY": {
         "delisted": true,
         "last_checked": "2026-09-05",
+        "reason": "No Price Data"
+    },
+    "CYTO": {
+        "delisted": true,
+        "last_checked": "2026-09-06",
         "reason": "No Price Data"
     }
 }
