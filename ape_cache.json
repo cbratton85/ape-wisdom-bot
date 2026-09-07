@@ -47208,5 +47208,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CSTE": {
+        "ticker": "CSTE",
+        "name": "Caesarstone Ltd.",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 102693920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
