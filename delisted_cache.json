@@ -1,9 +1,4 @@
 {
-    "KIND": {
-        "delisted": true,
-        "last_checked": "2026-09-06",
-        "reason": "No Price Data"
-    },
     "ZN": {
         "delisted": true,
         "last_checked": "2026-09-07",
@@ -95,6 +90,11 @@
         "reason": "No Price Data"
     },
     "TTM": {
+        "delisted": true,
+        "last_checked": "2026-09-08",
+        "reason": "No Price Data"
+    },
+    "KIND": {
         "delisted": true,
         "last_checked": "2026-09-08",
         "reason": "No Price Data"
