@@ -54,11 +54,6 @@
         "last_checked": "2026-09-08",
         "reason": "No Price Data"
     },
-    "CO": {
-        "delisted": true,
-        "last_checked": "2026-09-08",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-09-08",
@@ -85,6 +80,16 @@
         "reason": "No Price Data"
     },
     "EVA": {
+        "delisted": true,
+        "last_checked": "2026-09-08",
+        "reason": "No Price Data"
+    },
+    "CO": {
+        "delisted": true,
+        "last_checked": "2026-09-08",
+        "reason": "No Price Data"
+    },
+    "PAY": {
         "delisted": true,
         "last_checked": "2026-09-08",
         "reason": "No Price Data"
