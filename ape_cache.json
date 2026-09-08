@@ -47218,5 +47218,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "FDEM": {
+        "ticker": "FDEM",
+        "name": "Fidelity Emerging Markets Multi",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
