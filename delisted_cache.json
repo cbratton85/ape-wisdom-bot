@@ -9,11 +9,6 @@
         "last_checked": "2026-09-07",
         "reason": "No Price Data"
     },
-    "CYTO": {
-        "delisted": true,
-        "last_checked": "2026-09-07",
-        "reason": "No Price Data"
-    },
     "APE": {
         "delisted": true,
         "last_checked": "2026-09-07",
@@ -95,6 +90,11 @@
         "reason": "No Price Data"
     },
     "OG": {
+        "delisted": true,
+        "last_checked": "2026-09-08",
+        "reason": "No Price Data"
+    },
+    "KW": {
         "delisted": true,
         "last_checked": "2026-09-08",
         "reason": "No Price Data"
