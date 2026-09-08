@@ -47228,5 +47228,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "MTLS": {
+        "ticker": "MTLS",
+        "name": "Materialise NV",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 440031456,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
