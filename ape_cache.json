@@ -47238,5 +47238,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "MPB": {
+        "ticker": "MPB",
+        "name": "Mid Penn Bancorp",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 935376128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
