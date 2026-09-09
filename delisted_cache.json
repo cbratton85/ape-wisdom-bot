@@ -1,9 +1,4 @@
 {
-    "DS": {
-        "delisted": true,
-        "last_checked": "2026-09-07",
-        "reason": "No Price Data"
-    },
     "CO": {
         "delisted": true,
         "last_checked": "2026-09-08",
@@ -100,6 +95,11 @@
         "reason": "No Price Data"
     },
     "BLD": {
+        "delisted": true,
+        "last_checked": "2026-09-09",
+        "reason": "No Price Data"
+    },
+    "DS": {
         "delisted": true,
         "last_checked": "2026-09-09",
         "reason": "No Price Data"
