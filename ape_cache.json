@@ -47288,5 +47288,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PRLD": {
+        "ticker": "PRLD",
+        "name": "Prelude Therapeutics Incorporat",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 422958496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
