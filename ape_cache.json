@@ -47278,5 +47278,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CBU": {
+        "ticker": "CBU",
+        "name": "Community Financial System, Inc",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 3322694400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
