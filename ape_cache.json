@@ -47268,5 +47268,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SANG": {
+        "ticker": "SANG",
+        "name": "Sangoma Technologies Corporatio",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 124129888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
