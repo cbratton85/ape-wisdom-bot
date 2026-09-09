@@ -64,11 +64,6 @@
         "last_checked": "2026-09-08",
         "reason": "No Price Data"
     },
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-09-08",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-09-09",
@@ -100,6 +95,16 @@
         "reason": "No Price Data"
     },
     "MBT": {
+        "delisted": true,
+        "last_checked": "2026-09-09",
+        "reason": "No Price Data"
+    },
+    "AUD": {
+        "delisted": true,
+        "last_checked": "2026-09-09",
+        "reason": "No Price Data"
+    },
+    "WOW": {
         "delisted": true,
         "last_checked": "2026-09-09",
         "reason": "No Price Data"
