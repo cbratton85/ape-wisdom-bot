@@ -14,11 +14,6 @@
         "last_checked": "2026-09-08",
         "reason": "No Price Data"
     },
-    "SAVE": {
-        "delisted": true,
-        "last_checked": "2026-09-08",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-09-08",
@@ -100,6 +95,11 @@
         "reason": "No Price Data"
     },
     "SNBR": {
+        "delisted": true,
+        "last_checked": "2026-09-09",
+        "reason": "No Price Data"
+    },
+    "SAVE": {
         "delisted": true,
         "last_checked": "2026-09-09",
         "reason": "No Price Data"
