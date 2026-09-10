@@ -1,9 +1,4 @@
 {
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-09-08",
-        "reason": "No Price Data"
-    },
     "ZN": {
         "delisted": true,
         "last_checked": "2026-09-08",
@@ -100,6 +95,11 @@
         "reason": "No Price Data"
     },
     "FFIE": {
+        "delisted": true,
+        "last_checked": "2026-09-10",
+        "reason": "No Price Data"
+    },
+    "SOL": {
         "delisted": true,
         "last_checked": "2026-09-10",
         "reason": "No Price Data"
