@@ -59,11 +59,6 @@
         "last_checked": "2026-09-09",
         "reason": "No Price Data"
     },
-    "BLD": {
-        "delisted": true,
-        "last_checked": "2026-09-09",
-        "reason": "No Price Data"
-    },
     "WOW": {
         "delisted": true,
         "last_checked": "2026-09-09",
@@ -110,6 +105,11 @@
         "reason": "No Price Data"
     },
     "KW": {
+        "delisted": true,
+        "last_checked": "2026-09-10",
+        "reason": "No Price Data"
+    },
+    "BLD": {
         "delisted": true,
         "last_checked": "2026-09-10",
         "reason": "No Price Data"
