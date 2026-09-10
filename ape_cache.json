@@ -47338,5 +47338,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MLPA": {
+        "ticker": "MLPA",
+        "name": "Global X MLP ETF",
+        "meta": "Energy Limited Partnership",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
