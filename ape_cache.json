@@ -47308,5 +47308,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "EFNL": {
+        "ticker": "EFNL",
+        "name": "iShares MSCI Finland ETF",
+        "meta": "Focused Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
