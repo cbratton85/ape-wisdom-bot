@@ -47328,5 +47328,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "BKV": {
+        "ticker": "BKV",
+        "name": "BKV Corporation",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 2659339264,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
