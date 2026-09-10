@@ -47298,5 +47298,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "IYF": {
+        "ticker": "IYF",
+        "name": "iShares U.S. Financial ETF",
+        "meta": "Financial",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
