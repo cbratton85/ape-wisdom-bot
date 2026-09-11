@@ -47358,5 +47358,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VFVA": {
+        "ticker": "VFVA",
+        "name": "Vanguard Wellington Fund ETF",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
