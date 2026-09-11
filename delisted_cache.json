@@ -4,11 +4,6 @@
         "last_checked": "2026-09-08",
         "reason": "No Price Data"
     },
-    "ABB": {
-        "delisted": true,
-        "last_checked": "2026-09-09",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-09-09",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "SNBR": {
+        "delisted": true,
+        "last_checked": "2026-09-11",
+        "reason": "No Price Data"
+    },
+    "FI": {
         "delisted": true,
         "last_checked": "2026-09-11",
         "reason": "No Price Data"
