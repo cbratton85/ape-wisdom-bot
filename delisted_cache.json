@@ -1,9 +1,4 @@
 {
-    "CO": {
-        "delisted": true,
-        "last_checked": "2026-09-10",
-        "reason": "No Price Data"
-    },
     "FI": {
         "delisted": true,
         "last_checked": "2026-09-11",
@@ -95,6 +90,11 @@
         "reason": "No Price Data"
     },
     "JPN": {
+        "delisted": true,
+        "last_checked": "2026-09-12",
+        "reason": "No Price Data"
+    },
+    "CO": {
         "delisted": true,
         "last_checked": "2026-09-12",
         "reason": "No Price Data"
