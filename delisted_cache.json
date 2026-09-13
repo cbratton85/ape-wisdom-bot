@@ -24,11 +24,6 @@
         "last_checked": "2026-09-13",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-09-13",
-        "reason": "No Price Data"
-    },
     "NTP": {
         "delisted": true,
         "last_checked": "2026-09-13",
@@ -90,6 +85,16 @@
         "reason": "No Price Data"
     },
     "FI": {
+        "delisted": true,
+        "last_checked": "2026-09-13",
+        "reason": "No Price Data"
+    },
+    "BCOM": {
+        "delisted": true,
+        "last_checked": "2026-09-13",
+        "reason": "No Price Data"
+    },
+    "BABY": {
         "delisted": true,
         "last_checked": "2026-09-13",
         "reason": "No Price Data"
