@@ -47418,5 +47418,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AD": {
+        "ticker": "AD",
+        "name": "Array Digital Infrastructure, I",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 3296577536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
