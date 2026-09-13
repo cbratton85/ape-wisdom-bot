@@ -47378,5 +47378,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "AIRJ": {
+        "ticker": "AIRJ",
+        "name": "AirJoule Technologies Corporati",
+        "meta": "Building Products & Equipment",
+        "type": "EQUITY",
+        "mcap": 313926848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "IA": {
+        "ticker": "IA",
+        "name": "Innovative Solutions and Suppor",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 341516192,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "TP": {
+        "ticker": "TP",
+        "name": "Ticketplus Ltd.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 103151688,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "CARE": {
+        "ticker": "CARE",
+        "name": "Carter Bankshares, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 723409600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
