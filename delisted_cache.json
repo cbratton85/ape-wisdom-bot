@@ -19,11 +19,6 @@
         "last_checked": "2026-09-12",
         "reason": "No Price Data"
     },
-    "WOW": {
-        "delisted": true,
-        "last_checked": "2026-09-12",
-        "reason": "No Price Data"
-    },
     "AHH": {
         "delisted": true,
         "last_checked": "2026-09-12",
@@ -80,6 +75,11 @@
         "reason": "No Price Data"
     },
     "JPN": {
+        "delisted": true,
+        "last_checked": "2026-09-13",
+        "reason": "No Price Data"
+    },
+    "WOW": {
         "delisted": true,
         "last_checked": "2026-09-13",
         "reason": "No Price Data"
