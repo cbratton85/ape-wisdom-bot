@@ -29,11 +29,6 @@
         "last_checked": "2026-09-12",
         "reason": "No Price Data"
     },
-    "SQ": {
-        "delisted": true,
-        "last_checked": "2026-09-12",
-        "reason": "No Price Data"
-    },
     "OG": {
         "delisted": true,
         "last_checked": "2026-09-12",
@@ -97,6 +92,11 @@
     "MOM": {
         "delisted": true,
         "last_checked": "2026-09-12",
+        "reason": "No Price Data"
+    },
+    "SQ": {
+        "delisted": true,
+        "last_checked": "2026-09-13",
         "reason": "No Price Data"
     }
 }
