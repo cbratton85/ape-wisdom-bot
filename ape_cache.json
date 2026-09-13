@@ -47368,5 +47368,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "PTLC": {
+        "ticker": "PTLC",
+        "name": "Pacer Trendpilot US Large Cap E",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
