@@ -47428,5 +47428,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SHAZ": {
+        "ticker": "SHAZ",
+        "name": "SharonAI Holdings, Inc.",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 2127086208,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
