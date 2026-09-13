@@ -47438,5 +47438,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "AII": {
+        "ticker": "AII",
+        "name": "American Integrity Insurance Gr",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 508057600,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
