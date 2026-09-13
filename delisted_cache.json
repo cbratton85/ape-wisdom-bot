@@ -89,12 +89,17 @@
         "last_checked": "2026-09-13",
         "reason": "No Price Data"
     },
-    "BABY": {
+    "SOL": {
         "delisted": true,
         "last_checked": "2026-09-13",
         "reason": "No Price Data"
     },
-    "SOL": {
+    "DPW": {
+        "delisted": true,
+        "last_checked": "2026-09-13",
+        "reason": "No Price Data"
+    },
+    "BABY": {
         "delisted": true,
         "last_checked": "2026-09-13",
         "reason": "No Price Data"
