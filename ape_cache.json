@@ -47498,5 +47498,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "FBDT": {
+        "ticker": "FBDT",
+        "name": "First Breach Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 35758120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "ADBT": {
+        "ticker": "ADBT",
+        "name": "Advasa Holdings, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
