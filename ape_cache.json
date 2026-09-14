@@ -47448,5 +47448,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MH": {
+        "ticker": "MH",
+        "name": "McGraw Hill, Inc.",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 2356924672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
