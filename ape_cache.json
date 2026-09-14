@@ -47478,5 +47478,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "EMAT": {
+        "ticker": "EMAT",
+        "name": "Evolution Metals & Technologies",
+        "meta": "Other Industrial Metals & Mining",
+        "type": "EQUITY",
+        "mcap": 2058160128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
