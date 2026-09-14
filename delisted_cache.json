@@ -24,11 +24,6 @@
         "last_checked": "2026-09-14",
         "reason": "No Price Data"
     },
-    "FI": {
-        "delisted": true,
-        "last_checked": "2026-09-14",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-09-14",
@@ -130,6 +125,21 @@
         "reason": "No Price Data"
     },
     "DTC": {
+        "delisted": true,
+        "last_checked": "2026-09-14",
+        "reason": "No Price Data"
+    },
+    "ZI": {
+        "delisted": true,
+        "last_checked": "2026-09-14",
+        "reason": "No Price Data"
+    },
+    "IBA": {
+        "delisted": true,
+        "last_checked": "2026-09-14",
+        "reason": "No Price Data"
+    },
+    "FI": {
         "delisted": true,
         "last_checked": "2026-09-14",
         "reason": "No Price Data"

@@ -47488,5 +47488,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "IBA": {
+        "ticker": "IBA",
+        "name": "IBA",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
