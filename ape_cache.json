@@ -47468,5 +47468,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PNK"
+    },
+    "TMS": {
+        "ticker": "TMS",
+        "name": "Teamshares Inc.",
+        "meta": "Financial Conglomerates",
+        "type": "EQUITY",
+        "mcap": 541773056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
