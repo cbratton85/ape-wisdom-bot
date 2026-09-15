@@ -47518,5 +47518,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "FG": {
+        "ticker": "FG",
+        "name": "F&G Annuities & Life, Inc.",
+        "meta": "Insurance - Life",
+        "type": "EQUITY",
+        "mcap": 3027222016,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
