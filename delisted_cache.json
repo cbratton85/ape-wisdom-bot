@@ -89,11 +89,6 @@
         "last_checked": "2026-09-14",
         "reason": "No Price Data"
     },
-    "IBA": {
-        "delisted": true,
-        "last_checked": "2026-09-14",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-09-14",
@@ -140,6 +135,11 @@
         "reason": "No Price Data"
     },
     "OG": {
+        "delisted": true,
+        "last_checked": "2026-09-15",
+        "reason": "No Price Data"
+    },
+    "IBA": {
         "delisted": true,
         "last_checked": "2026-09-15",
         "reason": "No Price Data"

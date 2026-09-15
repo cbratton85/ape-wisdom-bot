@@ -47528,5 +47528,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "CSTL": {
+        "ticker": "CSTL",
+        "name": "Castle Biosciences, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 1021575488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
