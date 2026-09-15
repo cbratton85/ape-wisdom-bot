@@ -47538,5 +47538,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "VSXY": {
+        "ticker": "VSXY",
+        "name": "Victorias Secret & Co.",
+        "meta": "Apparel Retail",
+        "type": "EQUITY",
+        "mcap": 5821578752,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
