@@ -1,9 +1,4 @@
 {
-    "ZN": {
-        "delisted": true,
-        "last_checked": "2026-09-14",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-09-14",
@@ -135,6 +130,11 @@
         "reason": "No Price Data"
     },
     "FFIE": {
+        "delisted": true,
+        "last_checked": "2026-09-15",
+        "reason": "No Price Data"
+    },
+    "ZN": {
         "delisted": true,
         "last_checked": "2026-09-15",
         "reason": "No Price Data"
