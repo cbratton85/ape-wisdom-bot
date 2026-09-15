@@ -47548,5 +47548,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MEDS": {
+        "ticker": "MEDS",
+        "name": "DataMeds AI, Inc.",
+        "meta": "Medical Distribution",
+        "type": "EQUITY",
+        "mcap": 7501701,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
