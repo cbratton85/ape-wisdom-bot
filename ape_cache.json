@@ -47568,5 +47568,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "BRUN": {
+        "ticker": "BRUN",
+        "name": "Boost Run Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 1078644480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "BXBL": {
+        "ticker": "BXBL",
+        "name": "BOXABL, Inc.",
+        "meta": "Residential Construction",
+        "type": "EQUITY",
+        "mcap": 1405438976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "SPTX": {
+        "ticker": "SPTX",
+        "name": "Seaport Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1229061376,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
