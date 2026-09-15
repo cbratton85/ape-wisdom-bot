@@ -47558,5 +47558,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "DVLT": {
+        "ticker": "DVLT",
+        "name": "Datavault AI Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 134576912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
