@@ -47598,5 +47598,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "IRD": {
+        "ticker": "IRD",
+        "name": "Opus Genetics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 484199712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
