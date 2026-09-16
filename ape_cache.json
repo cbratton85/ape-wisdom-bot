@@ -47608,5 +47608,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "TPST": {
+        "ticker": "TPST",
+        "name": "Tempest Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 12494140,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
