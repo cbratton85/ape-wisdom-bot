@@ -54,11 +54,6 @@
         "last_checked": "2026-09-16",
         "reason": "No Price Data"
     },
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-09-16",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-09-16",
@@ -140,6 +135,16 @@
         "reason": "No Price Data"
     },
     "KW": {
+        "delisted": true,
+        "last_checked": "2026-09-16",
+        "reason": "No Price Data"
+    },
+    "SOL": {
+        "delisted": true,
+        "last_checked": "2026-09-16",
+        "reason": "No Price Data"
+    },
+    "MBT": {
         "delisted": true,
         "last_checked": "2026-09-16",
         "reason": "No Price Data"
