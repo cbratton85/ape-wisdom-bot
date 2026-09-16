@@ -59,11 +59,6 @@
         "last_checked": "2026-09-15",
         "reason": "No Price Data"
     },
-    "ZI": {
-        "delisted": true,
-        "last_checked": "2026-09-15",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-09-15",
@@ -120,6 +115,16 @@
         "reason": "No Price Data"
     },
     "KW": {
+        "delisted": true,
+        "last_checked": "2026-09-16",
+        "reason": "No Price Data"
+    },
+    "ZI": {
+        "delisted": true,
+        "last_checked": "2026-09-16",
+        "reason": "No Price Data"
+    },
+    "MOM": {
         "delisted": true,
         "last_checked": "2026-09-16",
         "reason": "No Price Data"
