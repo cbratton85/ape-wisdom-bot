@@ -47618,5 +47618,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "KDK": {
+        "ticker": "KDK",
+        "name": "Kodiak AI, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 756330496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
