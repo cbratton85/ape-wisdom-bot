@@ -94,11 +94,6 @@
         "last_checked": "2026-09-16",
         "reason": "No Price Data"
     },
-    "PIN": {
-        "delisted": true,
-        "last_checked": "2026-09-16",
-        "reason": "No Price Data"
-    },
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-09-16",
@@ -130,6 +125,16 @@
         "reason": "No Price Data"
     },
     "ZN": {
+        "delisted": true,
+        "last_checked": "2026-09-16",
+        "reason": "No Price Data"
+    },
+    "PIN": {
+        "delisted": true,
+        "last_checked": "2026-09-16",
+        "reason": "No Price Data"
+    },
+    "OPT": {
         "delisted": true,
         "last_checked": "2026-09-16",
         "reason": "No Price Data"
