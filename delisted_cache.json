@@ -114,12 +114,17 @@
         "last_checked": "2026-09-16",
         "reason": "No Price Data"
     },
-    "HEAR": {
+    "GPS": {
         "delisted": true,
         "last_checked": "2026-09-16",
         "reason": "No Price Data"
     },
-    "GPS": {
+    "PIN": {
+        "delisted": true,
+        "last_checked": "2026-09-16",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
         "delisted": true,
         "last_checked": "2026-09-16",
         "reason": "No Price Data"
