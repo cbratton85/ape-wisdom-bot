@@ -47628,5 +47628,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "WTID": {
+        "ticker": "WTID",
+        "name": "MicroSectors Energy 3X Inverse ",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "EDOW": {
+        "ticker": "EDOW",
+        "name": "First Trust Dow 30 Equal Weight",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
