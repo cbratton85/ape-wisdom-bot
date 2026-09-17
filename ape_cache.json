@@ -47658,5 +47658,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "MNOV": {
+        "ticker": "MNOV",
+        "name": "MediciNova, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 139788336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
