@@ -47668,5 +47668,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "DBI": {
+        "ticker": "DBI",
+        "name": "Designer Brands Inc.",
+        "meta": "Footwear & Accessories",
+        "type": "EQUITY",
+        "mcap": 311597152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
