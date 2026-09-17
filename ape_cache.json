@@ -47648,5 +47648,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "DGXX": {
+        "ticker": "DGXX",
+        "name": "Digi Power X Inc.",
+        "meta": "Utilities - Independent Power Producers",
+        "type": "EQUITY",
+        "mcap": 371111872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
