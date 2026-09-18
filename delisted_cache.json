@@ -1,9 +1,4 @@
 {
-    "DUAL": {
-        "delisted": true,
-        "last_checked": "2026-09-16",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-09-17",
@@ -140,6 +135,16 @@
         "reason": "No Price Data"
     },
     "NCL": {
+        "delisted": true,
+        "last_checked": "2026-09-18",
+        "reason": "No Price Data"
+    },
+    "PTR": {
+        "delisted": true,
+        "last_checked": "2026-09-18",
+        "reason": "No Price Data"
+    },
+    "DUAL": {
         "delisted": true,
         "last_checked": "2026-09-18",
         "reason": "No Price Data"
