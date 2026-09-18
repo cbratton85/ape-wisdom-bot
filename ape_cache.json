@@ -47688,5 +47688,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TIC": {
+        "ticker": "TIC",
+        "name": "TIC Solutions, Inc.",
+        "meta": "Specialty Business Services",
+        "type": "EQUITY",
+        "mcap": 1963983104,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
