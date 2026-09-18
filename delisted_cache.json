@@ -1,9 +1,4 @@
 {
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-09-15",
-        "reason": "No Price Data"
-    },
     "SAVE": {
         "delisted": true,
         "last_checked": "2026-09-16",
@@ -132,6 +127,11 @@
     "OPT": {
         "delisted": true,
         "last_checked": "2026-09-17",
+        "reason": "No Price Data"
+    },
+    "RE": {
+        "delisted": true,
+        "last_checked": "2026-09-18",
         "reason": "No Price Data"
     }
 }
