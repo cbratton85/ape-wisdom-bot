@@ -47728,5 +47728,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "BXMT": {
+        "ticker": "BXMT",
+        "name": "Blackstone Mortgage Trust, Inc.",
+        "meta": "REIT - Mortgage",
+        "type": "EQUITY",
+        "mcap": 2236573440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
