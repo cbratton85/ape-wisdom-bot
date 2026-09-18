@@ -4,11 +4,6 @@
         "last_checked": "2026-09-16",
         "reason": "No Price Data"
     },
-    "PIN": {
-        "delisted": true,
-        "last_checked": "2026-09-16",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-09-16",
@@ -135,6 +130,11 @@
         "reason": "No Price Data"
     },
     "AUD": {
+        "delisted": true,
+        "last_checked": "2026-09-18",
+        "reason": "No Price Data"
+    },
+    "PIN": {
         "delisted": true,
         "last_checked": "2026-09-18",
         "reason": "No Price Data"
