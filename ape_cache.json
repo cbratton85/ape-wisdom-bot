@@ -47698,5 +47698,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TCRT": {
+        "ticker": "TCRT",
+        "name": "Alaunos Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 4064768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
