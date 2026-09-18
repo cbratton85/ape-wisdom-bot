@@ -47678,5 +47678,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SPRU": {
+        "ticker": "SPRU",
+        "name": "Spruce Power Holding Corporatio",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 31381064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
