@@ -47708,5 +47708,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "WYNN": {
+        "ticker": "WYNN",
+        "name": "Wynn Resorts, Limited",
+        "meta": "Resorts & Casinos",
+        "type": "EQUITY",
+        "mcap": 8525208064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
