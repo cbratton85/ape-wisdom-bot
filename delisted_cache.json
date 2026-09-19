@@ -9,11 +9,6 @@
         "last_checked": "2026-09-17",
         "reason": "No Price Data"
     },
-    "GPL": {
-        "delisted": true,
-        "last_checked": "2026-09-17",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-09-17",
@@ -147,6 +142,16 @@
     "OP": {
         "delisted": true,
         "last_checked": "2026-09-18",
+        "reason": "No Price Data"
+    },
+    "TGIF": {
+        "delisted": true,
+        "last_checked": "2026-09-19",
+        "reason": "No Price Data"
+    },
+    "GPL": {
+        "delisted": true,
+        "last_checked": "2026-09-19",
         "reason": "No Price Data"
     }
 }
