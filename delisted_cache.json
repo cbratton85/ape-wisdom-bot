@@ -94,11 +94,6 @@
         "last_checked": "2026-09-18",
         "reason": "No Price Data"
     },
-    "TGIF": {
-        "delisted": true,
-        "last_checked": "2026-09-19",
-        "reason": "No Price Data"
-    },
     "GPL": {
         "delisted": true,
         "last_checked": "2026-09-19",
@@ -145,6 +140,11 @@
         "reason": "No Price Data"
     },
     "DTC": {
+        "delisted": true,
+        "last_checked": "2026-09-19",
+        "reason": "No Price Data"
+    },
+    "TGIF": {
         "delisted": true,
         "last_checked": "2026-09-19",
         "reason": "No Price Data"
