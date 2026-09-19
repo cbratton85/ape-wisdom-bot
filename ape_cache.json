@@ -47748,5 +47748,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "FIBK": {
+        "ticker": "FIBK",
+        "name": "First Interstate BancSystem, In",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 3559627008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "KNTK": {
+        "ticker": "KNTK",
+        "name": "Kinetik Holdings Inc.",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 9052192768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
