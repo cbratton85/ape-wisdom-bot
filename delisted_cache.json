@@ -49,11 +49,6 @@
         "last_checked": "2026-09-18",
         "reason": "No Price Data"
     },
-    "DTC": {
-        "delisted": true,
-        "last_checked": "2026-09-18",
-        "reason": "No Price Data"
-    },
     "FFR": {
         "delisted": true,
         "last_checked": "2026-09-18",
@@ -145,6 +140,11 @@
         "reason": "No Price Data"
     },
     "OPT": {
+        "delisted": true,
+        "last_checked": "2026-09-19",
+        "reason": "No Price Data"
+    },
+    "DTC": {
         "delisted": true,
         "last_checked": "2026-09-19",
         "reason": "No Price Data"
