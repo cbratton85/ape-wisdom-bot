@@ -47738,5 +47738,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "FIGR": {
+        "ticker": "FIGR",
+        "name": "Figure Technology Solutions, In",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 7963170816,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
