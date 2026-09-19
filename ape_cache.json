@@ -47768,5 +47768,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PRK": {
+        "ticker": "PRK",
+        "name": "Park National Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 3312424960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
