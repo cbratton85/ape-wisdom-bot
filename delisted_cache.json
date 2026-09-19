@@ -99,17 +99,17 @@
         "last_checked": "2026-09-19",
         "reason": "No Price Data"
     },
-    "OP": {
-        "delisted": true,
-        "last_checked": "2026-09-19",
-        "reason": "No Price Data"
-    },
     "TGIF": {
         "delisted": true,
         "last_checked": "2026-09-19",
         "reason": "No Price Data"
     },
     "DTC": {
+        "delisted": true,
+        "last_checked": "2026-09-19",
+        "reason": "No Price Data"
+    },
+    "OP": {
         "delisted": true,
         "last_checked": "2026-09-19",
         "reason": "No Price Data"
