@@ -79,11 +79,6 @@
         "last_checked": "2026-09-19",
         "reason": "No Price Data"
     },
-    "THR": {
-        "delisted": true,
-        "last_checked": "2026-09-19",
-        "reason": "No Price Data"
-    },
     "RE": {
         "delisted": true,
         "last_checked": "2026-09-19",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "SPXC": {
+        "delisted": true,
+        "last_checked": "2026-09-20",
+        "reason": "No Price Data"
+    },
+    "THR": {
         "delisted": true,
         "last_checked": "2026-09-20",
         "reason": "No Price Data"
