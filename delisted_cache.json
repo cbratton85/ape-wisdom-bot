@@ -24,11 +24,6 @@
         "last_checked": "2026-09-19",
         "reason": "No Price Data"
     },
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-09-19",
-        "reason": "No Price Data"
-    },
     "OG": {
         "delisted": true,
         "last_checked": "2026-09-19",
@@ -125,6 +120,11 @@
         "reason": "No Price Data"
     },
     "PTR": {
+        "delisted": true,
+        "last_checked": "2026-09-20",
+        "reason": "No Price Data"
+    },
+    "TTM": {
         "delisted": true,
         "last_checked": "2026-09-20",
         "reason": "No Price Data"
