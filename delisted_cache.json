@@ -84,11 +84,6 @@
         "last_checked": "2026-09-19",
         "reason": "No Price Data"
     },
-    "TGIF": {
-        "delisted": true,
-        "last_checked": "2026-09-19",
-        "reason": "No Price Data"
-    },
     "THR": {
         "delisted": true,
         "last_checked": "2026-09-19",
@@ -100,6 +95,16 @@
         "reason": "No Price Data"
     },
     "CO": {
+        "delisted": true,
+        "last_checked": "2026-09-20",
+        "reason": "No Price Data"
+    },
+    "ROLL": {
+        "delisted": true,
+        "last_checked": "2026-09-20",
+        "reason": "No Price Data"
+    },
+    "TGIF": {
         "delisted": true,
         "last_checked": "2026-09-20",
         "reason": "No Price Data"
