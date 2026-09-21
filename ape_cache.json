@@ -47788,5 +47788,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "NUAI": {
+        "ticker": "NUAI",
+        "name": "New Era Energy & Digital, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 624437696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
