@@ -47808,5 +47808,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "RMR": {
+        "ticker": "RMR",
+        "name": "The RMR Group Inc.",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 323304768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
