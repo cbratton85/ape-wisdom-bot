@@ -14,11 +14,6 @@
         "last_checked": "2026-09-21",
         "reason": "No Price Data"
     },
-    "LIV": {
-        "delisted": true,
-        "last_checked": "2026-09-21",
-        "reason": "No Price Data"
-    },
     "AUD": {
         "delisted": true,
         "last_checked": "2026-09-21",
@@ -70,6 +65,11 @@
         "reason": "No Price Data"
     },
     "TTM": {
+        "delisted": true,
+        "last_checked": "2026-09-21",
+        "reason": "No Price Data"
+    },
+    "LIV": {
         "delisted": true,
         "last_checked": "2026-09-21",
         "reason": "No Price Data"

@@ -47818,5 +47818,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "QMLS": {
+        "ticker": "QMLS",
+        "name": "QumulusAI, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 246314912,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
