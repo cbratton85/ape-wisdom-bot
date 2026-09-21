@@ -47828,5 +47828,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "KWY": {
+        "ticker": "KWY",
+        "name": "Kingsway Corporation",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 283523808,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "CLPT": {
+        "ticker": "CLPT",
+        "name": "ClearPoint Neuro Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 427364256,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
