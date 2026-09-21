@@ -47798,5 +47798,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "SBET": {
+        "ticker": "SBET",
+        "name": "SharpLink, Inc.",
+        "meta": "Capital Markets",
+        "type": "EQUITY",
+        "mcap": 2031040768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
