@@ -47878,5 +47878,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "FLNA": {
+        "ticker": "FLNA",
+        "name": "Filana Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 45022960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
