@@ -47888,5 +47888,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "MSGE": {
+        "ticker": "MSGE",
+        "name": "Madison Square Garden Entertain",
+        "meta": "Entertainment",
+        "type": "EQUITY",
+        "mcap": 3802394368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
