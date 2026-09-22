@@ -29,11 +29,6 @@
         "last_checked": "2026-09-22",
         "reason": "No Price Data"
     },
-    "CN": {
-        "delisted": true,
-        "last_checked": "2026-09-22",
-        "reason": "No Price Data"
-    },
     "FM": {
         "delisted": true,
         "last_checked": "2026-09-22",
@@ -70,6 +65,16 @@
         "reason": "No Price Data"
     },
     "ZN": {
+        "delisted": true,
+        "last_checked": "2026-09-22",
+        "reason": "No Price Data"
+    },
+    "CN": {
+        "delisted": true,
+        "last_checked": "2026-09-22",
+        "reason": "No Price Data"
+    },
+    "FARM": {
         "delisted": true,
         "last_checked": "2026-09-22",
         "reason": "No Price Data"
