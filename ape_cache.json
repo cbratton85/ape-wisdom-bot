@@ -47858,5 +47858,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ORBS": {
+        "ticker": "ORBS",
+        "name": "Eightco Holdings Inc.",
+        "meta": "Packaging & Containers",
+        "type": "EQUITY",
+        "mcap": 451266272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
