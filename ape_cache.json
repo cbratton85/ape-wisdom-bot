@@ -47918,5 +47918,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "VYGR": {
+        "ticker": "VYGR",
+        "name": "Voyager Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 193480368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
