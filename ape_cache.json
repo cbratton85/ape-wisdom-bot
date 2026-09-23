@@ -47928,5 +47928,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "LNN": {
+        "ticker": "LNN",
+        "name": "Lindsay Corporation",
+        "meta": "Farm & Heavy Construction Machinery",
+        "type": "EQUITY",
+        "mcap": 1168506624,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
