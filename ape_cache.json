@@ -47898,5 +47898,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ETON": {
+        "ticker": "ETON",
+        "name": "Eton Pharmaceuticals, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 1631811200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
