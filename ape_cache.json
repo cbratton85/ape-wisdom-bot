@@ -47908,5 +47908,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "JOET": {
+        "ticker": "JOET",
+        "name": "Virtus Terranova U.S. Quality M",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
