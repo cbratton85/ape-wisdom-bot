@@ -47968,5 +47968,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SPPL": {
+        "ticker": "SPPL",
+        "name": "SIMPPLE LTD.",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 22899672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SNSC": {
+        "ticker": "SNSC",
+        "name": "SunScout Holding Limited",
+        "meta": "Solar",
+        "type": "EQUITY",
+        "mcap": 47625000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
