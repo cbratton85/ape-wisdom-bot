@@ -47948,5 +47948,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "MMI": {
+        "ticker": "MMI",
+        "name": "Marcus & Millichap, Inc.",
+        "meta": "Real Estate Services",
+        "type": "EQUITY",
+        "mcap": 1144465536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
