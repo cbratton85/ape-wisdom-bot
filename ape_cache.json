@@ -47958,5 +47958,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "MBGL": {
+        "ticker": "MBGL",
+        "name": "Mobility Global Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 5607941120,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
