@@ -47938,5 +47938,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "RYU": {
+        "ticker": "RYU",
+        "name": "RYU",
+        "meta": "Unknown",
+        "type": "NONE",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
