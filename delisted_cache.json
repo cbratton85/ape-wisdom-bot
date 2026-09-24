@@ -39,11 +39,6 @@
         "last_checked": "2026-09-24",
         "reason": "No Price Data"
     },
-    "ROOF": {
-        "delisted": true,
-        "last_checked": "2026-09-24",
-        "reason": "No Price Data"
-    },
     "FI": {
         "delisted": true,
         "last_checked": "2026-09-24",
@@ -85,6 +80,11 @@
         "reason": "No Price Data"
     },
     "KW": {
+        "delisted": true,
+        "last_checked": "2026-09-24",
+        "reason": "No Price Data"
+    },
+    "ROOF": {
         "delisted": true,
         "last_checked": "2026-09-24",
         "reason": "No Price Data"
