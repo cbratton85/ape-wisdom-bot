@@ -48018,5 +48018,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "RDY": {
+        "ticker": "RDY",
+        "name": "Dr. Reddy's Laboratories Ltd",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 10320729088,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
