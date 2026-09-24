@@ -48048,5 +48048,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BNY": {
+        "ticker": "BNY",
+        "name": "The Bank of New York Mellon Cor",
+        "meta": "Banks - Diversified",
+        "type": "EQUITY",
+        "mcap": 101565284352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "PRLB": {
+        "ticker": "PRLB",
+        "name": "Proto Labs, Inc.",
+        "meta": "Metal Fabrication",
+        "type": "EQUITY",
+        "mcap": 2281670400,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
