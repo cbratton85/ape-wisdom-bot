@@ -84,17 +84,27 @@
         "last_checked": "2026-09-24",
         "reason": "No Price Data"
     },
-    "KW": {
-        "delisted": true,
-        "last_checked": "2026-09-24",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-09-24",
         "reason": "No Price Data"
     },
     "GSX": {
+        "delisted": true,
+        "last_checked": "2026-09-24",
+        "reason": "No Price Data"
+    },
+    "QED": {
+        "delisted": true,
+        "last_checked": "2026-09-24",
+        "reason": "No Price Data"
+    },
+    "KW": {
+        "delisted": true,
+        "last_checked": "2026-09-24",
+        "reason": "No Price Data"
+    },
+    "YELL": {
         "delisted": true,
         "last_checked": "2026-09-24",
         "reason": "No Price Data"

@@ -48068,5 +48068,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "LGCY": {
+        "ticker": "LGCY",
+        "name": "Legacy Education Inc.",
+        "meta": "Education & Training Services",
+        "type": "EQUITY",
+        "mcap": 133099448,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
