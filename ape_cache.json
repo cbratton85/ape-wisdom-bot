@@ -48028,5 +48028,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BDSX": {
+        "ticker": "BDSX",
+        "name": "Biodesix, Inc.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 311257984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "QGEN": {
+        "ticker": "QGEN",
+        "name": "Qiagen N.V.",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 9168378880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

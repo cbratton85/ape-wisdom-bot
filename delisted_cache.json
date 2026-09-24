@@ -19,11 +19,6 @@
         "last_checked": "2026-09-24",
         "reason": "No Price Data"
     },
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-09-24",
-        "reason": "No Price Data"
-    },
     "JW": {
         "delisted": true,
         "last_checked": "2026-09-24",
@@ -85,6 +80,11 @@
         "reason": "No Price Data"
     },
     "DTN": {
+        "delisted": true,
+        "last_checked": "2026-09-24",
+        "reason": "No Price Data"
+    },
+    "SOL": {
         "delisted": true,
         "last_checked": "2026-09-24",
         "reason": "No Price Data"
