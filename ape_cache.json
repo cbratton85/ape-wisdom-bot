@@ -47988,5 +47988,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "TRLV": {
+        "ticker": "TRLV",
+        "name": "Trulieve Cannabis Corp. Subordi",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 2414767872,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GLAS": {
+        "ticker": "GLAS",
+        "name": "Glass House Brands Inc. Subordi",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 739803648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
