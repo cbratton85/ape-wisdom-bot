@@ -48108,5 +48108,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "ACET": {
+        "ticker": "ACET",
+        "name": "Adicet Bio, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 84440648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
