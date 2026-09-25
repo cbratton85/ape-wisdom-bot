@@ -74,11 +74,6 @@
         "last_checked": "2026-09-24",
         "reason": "No Price Data"
     },
-    "FARM": {
-        "delisted": true,
-        "last_checked": "2026-09-24",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-09-24",
@@ -100,6 +95,11 @@
         "reason": "No Price Data"
     },
     "RTM": {
+        "delisted": true,
+        "last_checked": "2026-09-25",
+        "reason": "No Price Data"
+    },
+    "FARM": {
         "delisted": true,
         "last_checked": "2026-09-25",
         "reason": "No Price Data"
