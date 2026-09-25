@@ -84,11 +84,6 @@
         "last_checked": "2026-09-25",
         "reason": "No Price Data"
     },
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-09-25",
-        "reason": "No Price Data"
-    },
     "QED": {
         "delisted": true,
         "last_checked": "2026-09-25",
@@ -100,6 +95,11 @@
         "reason": "No Price Data"
     },
     "CN": {
+        "delisted": true,
+        "last_checked": "2026-09-25",
+        "reason": "No Price Data"
+    },
+    "TTM": {
         "delisted": true,
         "last_checked": "2026-09-25",
         "reason": "No Price Data"
