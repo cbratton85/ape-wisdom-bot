@@ -48128,5 +48128,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "SNY": {
+        "ticker": "SNY",
+        "name": "Sanofi",
+        "meta": "Drug Manufacturers - General",
+        "type": "EQUITY",
+        "mcap": 98505211904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
