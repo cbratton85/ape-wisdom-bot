@@ -29,11 +29,6 @@
         "last_checked": "2026-09-25",
         "reason": "No Price Data"
     },
-    "DTN": {
-        "delisted": true,
-        "last_checked": "2026-09-25",
-        "reason": "No Price Data"
-    },
     "FARM": {
         "delisted": true,
         "last_checked": "2026-09-25",
@@ -95,6 +90,11 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-09-25",
+        "reason": "No Price Data"
+    },
+    "DTN": {
         "delisted": true,
         "last_checked": "2026-09-25",
         "reason": "No Price Data"
