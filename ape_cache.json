@@ -48098,5 +48098,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "MGLD": {
+        "ticker": "MGLD",
+        "name": "The Marygold Companies, Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 83894000,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
     }
 }
