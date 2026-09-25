@@ -48078,5 +48078,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "ASE"
+    },
+    "MLYS": {
+        "ticker": "MLYS",
+        "name": "Mineralys Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2344133888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
