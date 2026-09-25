@@ -1,9 +1,4 @@
 {
-    "KW": {
-        "delisted": true,
-        "last_checked": "2026-09-24",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-09-24",
@@ -95,6 +90,11 @@
         "reason": "No Price Data"
     },
     "DTN": {
+        "delisted": true,
+        "last_checked": "2026-09-25",
+        "reason": "No Price Data"
+    },
+    "KW": {
         "delisted": true,
         "last_checked": "2026-09-25",
         "reason": "No Price Data"
