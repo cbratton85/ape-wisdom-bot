@@ -48118,5 +48118,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "FRHC": {
+        "ticker": "FRHC",
+        "name": "Freedom Holding Corp.",
+        "meta": "Financial Conglomerates",
+        "type": "EQUITY",
+        "mcap": 10976581632,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
