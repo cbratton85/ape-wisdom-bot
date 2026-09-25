@@ -48088,5 +48088,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "BIV": {
+        "ticker": "BIV",
+        "name": "Vanguard Intermediate-Term Bond",
+        "meta": "Intermediate Core Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
