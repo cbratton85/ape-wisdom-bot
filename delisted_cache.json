@@ -24,11 +24,6 @@
         "last_checked": "2026-09-24",
         "reason": "No Price Data"
     },
-    "PWC": {
-        "delisted": true,
-        "last_checked": "2026-09-24",
-        "reason": "No Price Data"
-    },
     "AUD": {
         "delisted": true,
         "last_checked": "2026-09-24",
@@ -100,6 +95,11 @@
         "reason": "No Price Data"
     },
     "GPS": {
+        "delisted": true,
+        "last_checked": "2026-09-25",
+        "reason": "No Price Data"
+    },
+    "PWC": {
         "delisted": true,
         "last_checked": "2026-09-25",
         "reason": "No Price Data"
