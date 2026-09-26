@@ -89,11 +89,6 @@
         "last_checked": "2026-09-26",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-09-26",
-        "reason": "No Price Data"
-    },
     "DTN": {
         "delisted": true,
         "last_checked": "2026-09-26",
@@ -105,6 +100,11 @@
         "reason": "No Price Data"
     },
     "YELL": {
+        "delisted": true,
+        "last_checked": "2026-09-26",
+        "reason": "No Price Data"
+    },
+    "AUD": {
         "delisted": true,
         "last_checked": "2026-09-26",
         "reason": "No Price Data"
