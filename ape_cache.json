@@ -48178,5 +48178,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "FNDB": {
+        "ticker": "FNDB",
+        "name": "Schwab Fundamental U.S. Broad M",
+        "meta": "Large Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
