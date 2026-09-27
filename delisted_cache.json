@@ -34,11 +34,6 @@
         "last_checked": "2026-09-27",
         "reason": "No Price Data"
     },
-    "CBD": {
-        "delisted": true,
-        "last_checked": "2026-09-27",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-09-27",
@@ -90,6 +85,11 @@
         "reason": "No Price Data"
     },
     "HOOK": {
+        "delisted": true,
+        "last_checked": "2026-09-27",
+        "reason": "No Price Data"
+    },
+    "CBD": {
         "delisted": true,
         "last_checked": "2026-09-27",
         "reason": "No Price Data"
