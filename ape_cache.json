@@ -48168,5 +48168,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "DFAE": {
+        "ticker": "DFAE",
+        "name": "Dimensional Emerging Core Equit",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
