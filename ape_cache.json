@@ -48148,5 +48148,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "FAC": {
+        "ticker": "FAC",
+        "name": "Factorial Energy Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 674572480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
