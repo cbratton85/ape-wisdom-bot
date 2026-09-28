@@ -48188,5 +48188,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ATKR": {
+        "ticker": "ATKR",
+        "name": "Atkore Inc.",
+        "meta": "Electrical Equipment & Parts",
+        "type": "EQUITY",
+        "mcap": 3195607296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "SPNT": {
+        "ticker": "SPNT",
+        "name": "SiriusPoint Ltd.",
+        "meta": "Insurance - Reinsurance",
+        "type": "EQUITY",
+        "mcap": 2941298176,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "AMSC": {
+        "ticker": "AMSC",
+        "name": "American Superconductor Corpora",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 1433403008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "SKWD": {
+        "ticker": "SKWD",
+        "name": "Skyward Specialty Insurance Gro",
+        "meta": "Insurance - Property & Casualty",
+        "type": "EQUITY",
+        "mcap": 2413615360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
