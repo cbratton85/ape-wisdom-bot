@@ -48228,5 +48228,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SUSA": {
+        "ticker": "SUSA",
+        "name": "iShares ESG Optimized MSCI USA ",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
+    },
+    "VRTS": {
+        "ticker": "VRTS",
+        "name": "Virtus Investment Partners, Inc",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 857969536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
