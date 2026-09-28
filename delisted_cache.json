@@ -1,9 +1,4 @@
 {
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-09-27",
-        "reason": "No Price Data"
-    },
     "LBJ": {
         "delisted": true,
         "last_checked": "2026-09-28",
@@ -95,6 +90,11 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-09-28",
+        "reason": "No Price Data"
+    },
+    "TTM": {
         "delisted": true,
         "last_checked": "2026-09-28",
         "reason": "No Price Data"
