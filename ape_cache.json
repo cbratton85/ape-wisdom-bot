@@ -48278,5 +48278,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ALIZF": {
+        "ticker": "ALIZF",
+        "name": "Allianz SE",
+        "meta": "Insurance - Diversified",
+        "type": "EQUITY",
+        "mcap": 182057402368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
     }
 }
