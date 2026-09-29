@@ -48258,5 +48258,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "IRT": {
+        "ticker": "IRT",
+        "name": "Independence Realty Trust, Inc.",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 3540264960,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
