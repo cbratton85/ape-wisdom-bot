@@ -48248,5 +48248,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "IDN": {
+        "ticker": "IDN",
+        "name": "Intellicheck, Inc.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 47424180,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
