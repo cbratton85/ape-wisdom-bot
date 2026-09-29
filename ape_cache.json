@@ -48268,5 +48268,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "JMST": {
+        "ticker": "JMST",
+        "name": "JPMorgan Ultra-Short Municipal ",
+        "meta": "Muni National Short",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
