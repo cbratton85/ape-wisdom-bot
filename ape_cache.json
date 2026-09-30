@@ -48348,5 +48348,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "PKB": {
+        "ticker": "PKB",
+        "name": "Invesco Building & Construction",
+        "meta": "Industrials",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
