@@ -79,11 +79,6 @@
         "last_checked": "2026-09-29",
         "reason": "No Price Data"
     },
-    "OTH": {
-        "delisted": true,
-        "last_checked": "2026-09-29",
-        "reason": "No Price Data"
-    },
     "BABY": {
         "delisted": true,
         "last_checked": "2026-09-29",
@@ -110,6 +105,11 @@
         "reason": "No Price Data"
     },
     "SOL": {
+        "delisted": true,
+        "last_checked": "2026-09-30",
+        "reason": "No Price Data"
+    },
+    "OTH": {
         "delisted": true,
         "last_checked": "2026-09-30",
         "reason": "No Price Data"

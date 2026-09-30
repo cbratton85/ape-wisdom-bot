@@ -48288,5 +48288,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PNK"
+    },
+    "MBI": {
+        "ticker": "MBI",
+        "name": "MBIA Inc.",
+        "meta": "Insurance - Specialty",
+        "type": "EQUITY",
+        "mcap": 218860544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
