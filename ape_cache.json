@@ -48338,5 +48338,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "WHK": {
+        "ticker": "WHK",
+        "name": "WhiteHawk Minerals Corp",
+        "meta": "Oil & Gas Midstream",
+        "type": "EQUITY",
+        "mcap": 586557824,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
