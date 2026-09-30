@@ -48308,5 +48308,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "HYDB": {
+        "ticker": "HYDB",
+        "name": "iShares High Yield Systematic B",
+        "meta": "High Yield Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
+    },
+    "GOOD": {
+        "ticker": "GOOD",
+        "name": "Gladstone Commercial Corporatio",
+        "meta": "REIT - Diversified",
+        "type": "EQUITY",
+        "mcap": 616180864,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
