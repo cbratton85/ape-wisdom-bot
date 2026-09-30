@@ -48298,5 +48298,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "IBDU": {
+        "ticker": "IBDU",
+        "name": "iShares iBonds Dec 2029 Term Co",
+        "meta": "Target Maturity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
