@@ -48328,5 +48328,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "RSKD": {
+        "ticker": "RSKD",
+        "name": "Riskified Ltd.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 1045738880,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

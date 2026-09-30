@@ -114,12 +114,12 @@
         "last_checked": "2026-09-30",
         "reason": "No Price Data"
     },
-    "DTC": {
+    "OTH": {
         "delisted": true,
         "last_checked": "2026-09-30",
         "reason": "No Price Data"
     },
-    "OTH": {
+    "DTC": {
         "delisted": true,
         "last_checked": "2026-09-30",
         "reason": "No Price Data"
