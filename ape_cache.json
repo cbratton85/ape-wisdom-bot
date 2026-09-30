@@ -48358,5 +48358,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NUSI": {
+        "ticker": "NUSI",
+        "name": "NUSI",
+        "meta": "Unknown",
+        "type": "EQUITY",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "Unknown"
     }
 }
