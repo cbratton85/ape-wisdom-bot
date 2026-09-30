@@ -104,12 +104,12 @@
         "last_checked": "2026-09-29",
         "reason": "No Price Data"
     },
-    "GPS": {
+    "SOL": {
         "delisted": true,
-        "last_checked": "2026-09-29",
+        "last_checked": "2026-09-30",
         "reason": "No Price Data"
     },
-    "SOL": {
+    "GPS": {
         "delisted": true,
         "last_checked": "2026-09-30",
         "reason": "No Price Data"
