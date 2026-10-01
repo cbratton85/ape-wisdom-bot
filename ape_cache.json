@@ -48378,5 +48378,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NMIH": {
+        "ticker": "NMIH",
+        "name": "NMI Holdings Inc",
+        "meta": "Insurance - Specialty",
+        "type": "EQUITY",
+        "mcap": 2832704256,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
