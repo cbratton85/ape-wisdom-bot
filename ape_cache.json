@@ -48388,5 +48388,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "AIRG": {
+        "ticker": "AIRG",
+        "name": "Airgain, Inc.",
+        "meta": "Communication Equipment",
+        "type": "EQUITY",
+        "mcap": 54693480,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
