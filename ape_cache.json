@@ -48438,5 +48438,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CNL": {
+        "ticker": "CNL",
+        "name": "Collective Mining Ltd.",
+        "meta": "Gold",
+        "type": "EQUITY",
+        "mcap": 1118477056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
