@@ -109,11 +109,6 @@
         "last_checked": "2026-10-01",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-10-01",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-10-01",
@@ -137,6 +132,16 @@
     "SNP": {
         "delisted": true,
         "last_checked": "2026-10-01",
+        "reason": "No Price Data"
+    },
+    "CO": {
+        "delisted": true,
+        "last_checked": "2026-10-02",
+        "reason": "No Price Data"
+    },
+    "BABY": {
+        "delisted": true,
+        "last_checked": "2026-10-02",
         "reason": "No Price Data"
     }
 }
