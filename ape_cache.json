@@ -48398,5 +48398,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "OFRM": {
+        "ticker": "OFRM",
+        "name": "Once Upon a Farm, PBC",
+        "meta": "Packaged Foods",
+        "type": "EQUITY",
+        "mcap": 673949952,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
