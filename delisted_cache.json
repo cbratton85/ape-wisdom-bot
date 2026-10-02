@@ -94,11 +94,6 @@
         "last_checked": "2026-10-02",
         "reason": "No Price Data"
     },
-    "MBT": {
-        "delisted": true,
-        "last_checked": "2026-10-02",
-        "reason": "No Price Data"
-    },
     "NUSI": {
         "delisted": true,
         "last_checked": "2026-10-02",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "CEA": {
+        "delisted": true,
+        "last_checked": "2026-10-02",
+        "reason": "No Price Data"
+    },
+    "MBT": {
         "delisted": true,
         "last_checked": "2026-10-02",
         "reason": "No Price Data"
