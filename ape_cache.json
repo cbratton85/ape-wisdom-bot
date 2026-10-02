@@ -48408,5 +48408,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BBCP": {
+        "ticker": "BBCP",
+        "name": "Concrete Pumping Holdings, Inc.",
+        "meta": "Engineering & Construction",
+        "type": "EQUITY",
+        "mcap": 497887008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "SYLD": {
+        "ticker": "SYLD",
+        "name": "Cambria Shareholder Yield ETF",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
