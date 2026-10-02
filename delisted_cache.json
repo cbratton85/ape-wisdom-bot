@@ -64,11 +64,6 @@
         "last_checked": "2026-10-01",
         "reason": "No Price Data"
     },
-    "BODY": {
-        "delisted": true,
-        "last_checked": "2026-10-01",
-        "reason": "No Price Data"
-    },
     "RE": {
         "delisted": true,
         "last_checked": "2026-10-01",
@@ -140,6 +135,11 @@
         "reason": "No Price Data"
     },
     "CEL": {
+        "delisted": true,
+        "last_checked": "2026-10-02",
+        "reason": "No Price Data"
+    },
+    "BODY": {
         "delisted": true,
         "last_checked": "2026-10-02",
         "reason": "No Price Data"
