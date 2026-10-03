@@ -79,11 +79,6 @@
         "last_checked": "2026-10-02",
         "reason": "No Price Data"
     },
-    "CN": {
-        "delisted": true,
-        "last_checked": "2026-10-02",
-        "reason": "No Price Data"
-    },
     "MBT": {
         "delisted": true,
         "last_checked": "2026-10-02",
@@ -117,6 +112,16 @@
     "SOL": {
         "delisted": true,
         "last_checked": "2026-10-02",
+        "reason": "No Price Data"
+    },
+    "GPS": {
+        "delisted": true,
+        "last_checked": "2026-10-03",
+        "reason": "No Price Data"
+    },
+    "CN": {
+        "delisted": true,
+        "last_checked": "2026-10-03",
         "reason": "No Price Data"
     }
 }
