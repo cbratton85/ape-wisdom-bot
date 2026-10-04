@@ -49,11 +49,6 @@
         "last_checked": "2026-10-03",
         "reason": "No Price Data"
     },
-    "OLD": {
-        "delisted": true,
-        "last_checked": "2026-10-03",
-        "reason": "No Price Data"
-    },
     "MBT": {
         "delisted": true,
         "last_checked": "2026-10-03",
@@ -107,6 +102,11 @@
     "SOL": {
         "delisted": true,
         "last_checked": "2026-10-03",
+        "reason": "No Price Data"
+    },
+    "OLD": {
+        "delisted": true,
+        "last_checked": "2026-10-04",
         "reason": "No Price Data"
     }
 }
