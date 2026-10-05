@@ -48448,5 +48448,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "ATRC": {
+        "ticker": "ATRC",
+        "name": "AtriCure, Inc.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 2804767488,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
