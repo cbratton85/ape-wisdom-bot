@@ -48488,5 +48488,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "BGLC": {
+        "ticker": "BGLC",
+        "name": "BioNexus Gene Lab Corp",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 3738085,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
