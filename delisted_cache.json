@@ -9,11 +9,6 @@
         "last_checked": "2026-10-04",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-10-04",
-        "reason": "No Price Data"
-    },
     "APM": {
         "delisted": true,
         "last_checked": "2026-10-04",
@@ -60,6 +55,11 @@
         "reason": "No Price Data"
     },
     "OG": {
+        "delisted": true,
+        "last_checked": "2026-10-05",
+        "reason": "No Price Data"
+    },
+    "BABY": {
         "delisted": true,
         "last_checked": "2026-10-05",
         "reason": "No Price Data"
