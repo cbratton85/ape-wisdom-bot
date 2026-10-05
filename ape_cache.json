@@ -48468,5 +48468,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "LSAK": {
+        "ticker": "LSAK",
+        "name": "Lesaka Technologies, Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 371618336,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
