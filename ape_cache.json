@@ -48498,5 +48498,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "IDA": {
+        "ticker": "IDA",
+        "name": "IDACORP, Inc.",
+        "meta": "Utilities - Regulated Electric",
+        "type": "EQUITY",
+        "mcap": 7619532288,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
