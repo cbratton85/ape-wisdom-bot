@@ -49,12 +49,12 @@
         "last_checked": "2026-10-05",
         "reason": "No Price Data"
     },
-    "AUD": {
+    "TTM": {
         "delisted": true,
         "last_checked": "2026-10-05",
         "reason": "No Price Data"
     },
-    "TTM": {
+    "AUD": {
         "delisted": true,
         "last_checked": "2026-10-05",
         "reason": "No Price Data"
