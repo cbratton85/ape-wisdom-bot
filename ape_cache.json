@@ -48478,5 +48478,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PCVX": {
+        "ticker": "PCVX",
+        "name": "Vaxcyte, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 8404521984,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
