@@ -48458,5 +48458,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "OMDA": {
+        "ticker": "OMDA",
+        "name": "Omada Health, Inc.",
+        "meta": "Health Information Services",
+        "type": "EQUITY",
+        "mcap": 1246984320,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
