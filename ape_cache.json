@@ -48508,5 +48508,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "IWL": {
+        "ticker": "IWL",
+        "name": "iShares Russell Top 200 ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
