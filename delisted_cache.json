@@ -39,11 +39,6 @@
         "last_checked": "2026-10-05",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-10-05",
-        "reason": "No Price Data"
-    },
     "ORGN": {
         "delisted": true,
         "last_checked": "2026-10-05",
@@ -65,6 +60,16 @@
         "reason": "No Price Data"
     },
     "OG": {
+        "delisted": true,
+        "last_checked": "2026-10-06",
+        "reason": "No Price Data"
+    },
+    "BOSS": {
+        "delisted": true,
+        "last_checked": "2026-10-06",
+        "reason": "No Price Data"
+    },
+    "AUD": {
         "delisted": true,
         "last_checked": "2026-10-06",
         "reason": "No Price Data"
