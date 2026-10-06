@@ -48538,5 +48538,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "NEWT": {
+        "ticker": "NEWT",
+        "name": "NewtekOne, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 323797856,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
