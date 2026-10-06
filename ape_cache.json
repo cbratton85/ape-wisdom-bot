@@ -48558,5 +48558,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "DOV": {
+        "ticker": "DOV",
+        "name": "Dover Corporation",
+        "meta": "Specialty Industrial Machinery",
+        "type": "EQUITY",
+        "mcap": 25842442240,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
