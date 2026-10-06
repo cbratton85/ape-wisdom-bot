@@ -48548,5 +48548,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "NTZ": {
+        "ticker": "NTZ",
+        "name": "Natuzzi, S.p.A.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 11014609,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
