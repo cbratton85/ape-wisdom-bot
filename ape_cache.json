@@ -48568,5 +48568,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ALMR": {
+        "ticker": "ALMR",
+        "name": "Alamar Biosciences, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 2238610688,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
