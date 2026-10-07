@@ -48578,5 +48578,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "COPR": {
+        "ticker": "COPR",
+        "name": "Idaho Copper Corporation",
+        "meta": "Copper",
+        "type": "EQUITY",
+        "mcap": 60122980,
+        "currency": "USD",
+        "description": "",
+        "exchange": "ASE"
+    },
+    "STLN": {
+        "ticker": "STLN",
+        "name": "Starling Oncology, Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 674684672,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
