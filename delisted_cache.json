@@ -94,11 +94,6 @@
         "last_checked": "2026-10-07",
         "reason": "No Price Data"
     },
-    "JW": {
-        "delisted": true,
-        "last_checked": "2026-10-07",
-        "reason": "No Price Data"
-    },
     "TBLT": {
         "delisted": true,
         "last_checked": "2026-10-07",
@@ -115,6 +110,11 @@
         "reason": "No Price Data"
     },
     "LYFE": {
+        "delisted": true,
+        "last_checked": "2026-10-07",
+        "reason": "No Price Data"
+    },
+    "JW": {
         "delisted": true,
         "last_checked": "2026-10-07",
         "reason": "No Price Data"
