@@ -48608,5 +48608,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "XLAB": {
+        "ticker": "XLAB",
+        "name": "Exascale Labs Holdings Inc.",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 65621484,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
