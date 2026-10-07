@@ -48598,5 +48598,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "TRON": {
+        "ticker": "TRON",
+        "name": "Tron Inc.",
+        "meta": "Leisure",
+        "type": "EQUITY",
+        "mcap": 609580928,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
