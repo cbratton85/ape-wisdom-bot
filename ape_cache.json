@@ -48648,5 +48648,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PNK"
+    },
+    "EWQ": {
+        "ticker": "EWQ",
+        "name": "iShares MSCI France Index Fund",
+        "meta": "Focused Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
