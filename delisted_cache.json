@@ -79,11 +79,6 @@
         "last_checked": "2026-10-08",
         "reason": "No Price Data"
     },
-    "OPT": {
-        "delisted": true,
-        "last_checked": "2026-10-08",
-        "reason": "No Price Data"
-    },
     "LYFE": {
         "delisted": true,
         "last_checked": "2026-10-08",
@@ -135,6 +130,16 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-10-08",
+        "reason": "No Price Data"
+    },
+    "QED": {
+        "delisted": true,
+        "last_checked": "2026-10-08",
+        "reason": "No Price Data"
+    },
+    "OPT": {
         "delisted": true,
         "last_checked": "2026-10-08",
         "reason": "No Price Data"
