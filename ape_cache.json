@@ -48668,5 +48668,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "HIBS": {
+        "ticker": "HIBS",
+        "name": "Direxion Daily S&P 500 High Bet",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
