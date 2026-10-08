@@ -48638,5 +48638,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "PTPI": {
+        "ticker": "PTPI",
+        "name": "Petros Pharmaceuticals, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 127116,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
     }
 }
