@@ -84,11 +84,6 @@
         "last_checked": "2026-10-07",
         "reason": "No Price Data"
     },
-    "FM": {
-        "delisted": true,
-        "last_checked": "2026-10-07",
-        "reason": "No Price Data"
-    },
     "XLF": {
         "delisted": true,
         "last_checked": "2026-10-07",
@@ -140,6 +135,11 @@
         "reason": "No Price Data"
     },
     "MTL": {
+        "delisted": true,
+        "last_checked": "2026-10-08",
+        "reason": "No Price Data"
+    },
+    "FM": {
         "delisted": true,
         "last_checked": "2026-10-08",
         "reason": "No Price Data"
