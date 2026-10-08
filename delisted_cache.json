@@ -129,17 +129,17 @@
         "last_checked": "2026-10-08",
         "reason": "No Price Data"
     },
-    "SQ": {
-        "delisted": true,
-        "last_checked": "2026-10-08",
-        "reason": "No Price Data"
-    },
     "OG": {
         "delisted": true,
         "last_checked": "2026-10-08",
         "reason": "No Price Data"
     },
     "TBLT": {
+        "delisted": true,
+        "last_checked": "2026-10-08",
+        "reason": "No Price Data"
+    },
+    "SQ": {
         "delisted": true,
         "last_checked": "2026-10-08",
         "reason": "No Price Data"
