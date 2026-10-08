@@ -48618,5 +48618,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "PHAR": {
+        "ticker": "PHAR",
+        "name": "Pharming Group N.V.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 683008896,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "KYTX": {
+        "ticker": "KYTX",
+        "name": "Kyverna Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 381574048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
