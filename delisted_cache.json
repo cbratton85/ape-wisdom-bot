@@ -19,11 +19,6 @@
         "last_checked": "2026-10-07",
         "reason": "No Price Data"
     },
-    "KIND": {
-        "delisted": true,
-        "last_checked": "2026-10-07",
-        "reason": "No Price Data"
-    },
     "TBLT": {
         "delisted": true,
         "last_checked": "2026-10-07",
@@ -132,6 +127,16 @@
     "CN": {
         "delisted": true,
         "last_checked": "2026-10-07",
+        "reason": "No Price Data"
+    },
+    "SAVE": {
+        "delisted": true,
+        "last_checked": "2026-10-08",
+        "reason": "No Price Data"
+    },
+    "KIND": {
+        "delisted": true,
+        "last_checked": "2026-10-08",
         "reason": "No Price Data"
     }
 }
