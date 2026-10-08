@@ -48658,5 +48658,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "FDM": {
+        "ticker": "FDM",
+        "name": "First Trust DJ Select MicroCap ",
+        "meta": "Small Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
