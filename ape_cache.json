@@ -48678,5 +48678,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "IBTK": {
+        "ticker": "IBTK",
+        "name": "iShares iBonds Dec 2030 Term Tr",
+        "meta": "Target Maturity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
