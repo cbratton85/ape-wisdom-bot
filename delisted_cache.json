@@ -123,5 +123,10 @@
         "delisted": true,
         "last_checked": "2026-10-09",
         "reason": "No Price Data"
+    },
+    "RSX": {
+        "delisted": true,
+        "last_checked": "2026-10-09",
+        "reason": "No Price Data"
     }
 }
