@@ -89,11 +89,6 @@
         "last_checked": "2026-10-09",
         "reason": "No Price Data"
     },
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-10-09",
-        "reason": "No Price Data"
-    },
     "ZN": {
         "delisted": true,
         "last_checked": "2026-10-09",
@@ -120,6 +115,16 @@
         "reason": "No Price Data"
     },
     "HEAR": {
+        "delisted": true,
+        "last_checked": "2026-10-09",
+        "reason": "No Price Data"
+    },
+    "SOL": {
+        "delisted": true,
+        "last_checked": "2026-10-09",
+        "reason": "No Price Data"
+    },
+    "DIVA": {
         "delisted": true,
         "last_checked": "2026-10-09",
         "reason": "No Price Data"
