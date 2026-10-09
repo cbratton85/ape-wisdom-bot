@@ -48688,5 +48688,35 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "IBTH": {
+        "ticker": "IBTH",
+        "name": "iShares iBonds Dec 2027 Term Tr",
+        "meta": "Target Maturity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "IBTI": {
+        "ticker": "IBTI",
+        "name": "iShares iBonds Dec 2028 Term Tr",
+        "meta": "Target Maturity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "IBTJ": {
+        "ticker": "IBTJ",
+        "name": "iShares iBonds Dec 2029 Term Tr",
+        "meta": "Target Maturity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
