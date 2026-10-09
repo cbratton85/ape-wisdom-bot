@@ -48718,5 +48718,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CRBG": {
+        "ticker": "CRBG",
+        "name": "Corebridge Financial Inc.",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 15098314752,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
