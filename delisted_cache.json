@@ -119,12 +119,12 @@
         "last_checked": "2026-10-09",
         "reason": "No Price Data"
     },
-    "OLD": {
+    "TTM": {
         "delisted": true,
         "last_checked": "2026-10-09",
         "reason": "No Price Data"
     },
-    "TTM": {
+    "OLD": {
         "delisted": true,
         "last_checked": "2026-10-09",
         "reason": "No Price Data"
