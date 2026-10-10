@@ -54,11 +54,6 @@
         "last_checked": "2026-10-09",
         "reason": "No Price Data"
     },
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-10-09",
-        "reason": "No Price Data"
-    },
     "RSX": {
         "delisted": true,
         "last_checked": "2026-10-09",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "CN": {
+        "delisted": true,
+        "last_checked": "2026-10-10",
+        "reason": "No Price Data"
+    },
+    "SOL": {
         "delisted": true,
         "last_checked": "2026-10-10",
         "reason": "No Price Data"
