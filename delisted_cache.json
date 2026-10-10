@@ -99,11 +99,6 @@
         "last_checked": "2026-10-10",
         "reason": "No Price Data"
     },
-    "RSX": {
-        "delisted": true,
-        "last_checked": "2026-10-10",
-        "reason": "No Price Data"
-    },
     "FI": {
         "delisted": true,
         "last_checked": "2026-10-10",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "OG": {
+        "delisted": true,
+        "last_checked": "2026-10-10",
+        "reason": "No Price Data"
+    },
+    "RSX": {
         "delisted": true,
         "last_checked": "2026-10-10",
         "reason": "No Price Data"
