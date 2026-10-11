@@ -48758,5 +48758,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "FWDI": {
+        "ticker": "FWDI",
+        "name": "Forward Industries, Inc.",
+        "meta": "Footwear & Accessories",
+        "type": "EQUITY",
+        "mcap": 559955520,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
