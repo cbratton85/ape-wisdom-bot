@@ -48748,5 +48748,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CSWC": {
+        "ticker": "CSWC",
+        "name": "Capital Southwest Corporation",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 1500295296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
