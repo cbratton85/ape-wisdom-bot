@@ -48828,5 +48828,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "NUS": {
+        "ticker": "NUS",
+        "name": "Nu Skin Enterprises, Inc.",
+        "meta": "Household & Personal Products",
+        "type": "EQUITY",
+        "mcap": 238028720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
