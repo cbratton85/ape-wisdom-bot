@@ -48778,5 +48778,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "Unknown"
+    },
+    "PATK": {
+        "ticker": "PATK",
+        "name": "Patrick Industries, Inc.",
+        "meta": "Recreational Vehicles",
+        "type": "EQUITY",
+        "mcap": 2038225024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "LFST": {
+        "ticker": "LFST",
+        "name": "LifeStance Health Group, Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 4721514496,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
