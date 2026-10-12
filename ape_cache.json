@@ -48798,5 +48798,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AKTS": {
+        "ticker": "AKTS",
+        "name": "Aktis Oncology, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1009493888,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
