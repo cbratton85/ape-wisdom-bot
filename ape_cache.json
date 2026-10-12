@@ -48838,5 +48838,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "NSIT": {
+        "ticker": "NSIT",
+        "name": "Insight Enterprises, Inc.",
+        "meta": "Electronics & Computer Distribution",
+        "type": "EQUITY",
+        "mcap": 4874844160,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
