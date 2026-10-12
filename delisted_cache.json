@@ -29,11 +29,6 @@
         "last_checked": "2026-10-11",
         "reason": "No Price Data"
     },
-    "CO": {
-        "delisted": true,
-        "last_checked": "2026-10-11",
-        "reason": "No Price Data"
-    },
     "SNP": {
         "delisted": true,
         "last_checked": "2026-10-11",
@@ -100,6 +95,11 @@
         "reason": "No Price Data"
     },
     "CHIK": {
+        "delisted": true,
+        "last_checked": "2026-10-12",
+        "reason": "No Price Data"
+    },
+    "CO": {
         "delisted": true,
         "last_checked": "2026-10-12",
         "reason": "No Price Data"
