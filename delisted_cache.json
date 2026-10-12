@@ -14,11 +14,6 @@
         "last_checked": "2026-10-11",
         "reason": "No Price Data"
     },
-    "RSX": {
-        "delisted": true,
-        "last_checked": "2026-10-11",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-10-11",
@@ -100,6 +95,11 @@
         "reason": "No Price Data"
     },
     "GPS": {
+        "delisted": true,
+        "last_checked": "2026-10-12",
+        "reason": "No Price Data"
+    },
+    "RSX": {
         "delisted": true,
         "last_checked": "2026-10-12",
         "reason": "No Price Data"
