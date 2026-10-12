@@ -48808,5 +48808,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "GPOR": {
+        "ticker": "GPOR",
+        "name": "Gulfport Energy Corporation",
+        "meta": "Oil & Gas E&P",
+        "type": "EQUITY",
+        "mcap": 2922941696,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
