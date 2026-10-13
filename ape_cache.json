@@ -48858,5 +48858,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "YSWY": {
+        "ticker": "YSWY",
+        "name": "Yesway, Inc.",
+        "meta": "Grocery Stores",
+        "type": "EQUITY",
+        "mcap": 678130048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
