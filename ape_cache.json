@@ -48908,5 +48908,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "VNCE": {
+        "ticker": "VNCE",
+        "name": "Vince Holding Corp.",
+        "meta": "Apparel Manufacturing",
+        "type": "EQUITY",
+        "mcap": 152683312,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
+    },
+    "VCTR": {
+        "ticker": "VCTR",
+        "name": "Victory Capital Holdings, Inc. ",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 6510788096,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
