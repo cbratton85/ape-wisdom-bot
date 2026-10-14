@@ -9,11 +9,6 @@
         "last_checked": "2026-10-14",
         "reason": "No Price Data"
     },
-    "ZN": {
-        "delisted": true,
-        "last_checked": "2026-10-14",
-        "reason": "No Price Data"
-    },
     "AUD": {
         "delisted": true,
         "last_checked": "2026-10-14",
@@ -75,6 +70,36 @@
         "reason": "No Price Data"
     },
     "DTC": {
+        "delisted": true,
+        "last_checked": "2026-10-14",
+        "reason": "No Price Data"
+    },
+    "CN": {
+        "delisted": true,
+        "last_checked": "2026-10-14",
+        "reason": "No Price Data"
+    },
+    "QED": {
+        "delisted": true,
+        "last_checked": "2026-10-14",
+        "reason": "No Price Data"
+    },
+    "ZN": {
+        "delisted": true,
+        "last_checked": "2026-10-14",
+        "reason": "No Price Data"
+    },
+    "FI": {
+        "delisted": true,
+        "last_checked": "2026-10-14",
+        "reason": "No Price Data"
+    },
+    "GPL": {
+        "delisted": true,
+        "last_checked": "2026-10-14",
+        "reason": "No Price Data"
+    },
+    "PLT": {
         "delisted": true,
         "last_checked": "2026-10-14",
         "reason": "No Price Data"

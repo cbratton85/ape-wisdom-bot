@@ -48868,5 +48868,45 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "THRM": {
+        "ticker": "THRM",
+        "name": "Gentherm Inc",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 1663665920,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
+    },
+    "NAMS": {
+        "ticker": "NAMS",
+        "name": "NewAmsterdam Pharma Company N.V",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2348600832,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "MTUS": {
+        "ticker": "MTUS",
+        "name": "Metallus Inc.",
+        "meta": "Steel",
+        "type": "EQUITY",
+        "mcap": 852611776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
+    },
+    "GGR": {
+        "ticker": "GGR",
+        "name": "Gogoro Inc.",
+        "meta": "Auto Manufacturers",
+        "type": "EQUITY",
+        "mcap": 66042076,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
