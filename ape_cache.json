@@ -48928,5 +48928,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "HCSG": {
+        "ticker": "HCSG",
+        "name": "Healthcare Services Group, Inc.",
+        "meta": "Medical Care Facilities",
+        "type": "EQUITY",
+        "mcap": 1469072256,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
