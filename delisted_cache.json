@@ -109,12 +109,17 @@
         "last_checked": "2026-10-15",
         "reason": "No Price Data"
     },
-    "BABY": {
+    "KIND": {
         "delisted": true,
         "last_checked": "2026-10-15",
         "reason": "No Price Data"
     },
-    "KIND": {
+    "DS": {
+        "delisted": true,
+        "last_checked": "2026-10-15",
+        "reason": "No Price Data"
+    },
+    "BABY": {
         "delisted": true,
         "last_checked": "2026-10-15",
         "reason": "No Price Data"
