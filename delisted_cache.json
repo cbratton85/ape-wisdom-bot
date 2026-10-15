@@ -39,11 +39,6 @@
         "last_checked": "2026-10-14",
         "reason": "No Price Data"
     },
-    "QED": {
-        "delisted": true,
-        "last_checked": "2026-10-14",
-        "reason": "No Price Data"
-    },
     "GPL": {
         "delisted": true,
         "last_checked": "2026-10-14",
@@ -100,6 +95,11 @@
         "reason": "No Price Data"
     },
     "PLT": {
+        "delisted": true,
+        "last_checked": "2026-10-15",
+        "reason": "No Price Data"
+    },
+    "QED": {
         "delisted": true,
         "last_checked": "2026-10-15",
         "reason": "No Price Data"
