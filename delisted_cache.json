@@ -39,11 +39,6 @@
         "last_checked": "2026-10-14",
         "reason": "No Price Data"
     },
-    "GPL": {
-        "delisted": true,
-        "last_checked": "2026-10-14",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-10-15",
@@ -100,6 +95,21 @@
         "reason": "No Price Data"
     },
     "AUD": {
+        "delisted": true,
+        "last_checked": "2026-10-15",
+        "reason": "No Price Data"
+    },
+    "ABB": {
+        "delisted": true,
+        "last_checked": "2026-10-15",
+        "reason": "No Price Data"
+    },
+    "GPL": {
+        "delisted": true,
+        "last_checked": "2026-10-15",
+        "reason": "No Price Data"
+    },
+    "KIND": {
         "delisted": true,
         "last_checked": "2026-10-15",
         "reason": "No Price Data"
