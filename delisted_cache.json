@@ -4,11 +4,6 @@
         "last_checked": "2026-10-14",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-10-14",
-        "reason": "No Price Data"
-    },
     "CHIK": {
         "delisted": true,
         "last_checked": "2026-10-14",
@@ -112,6 +107,11 @@
     "KW": {
         "delisted": true,
         "last_checked": "2026-10-14",
+        "reason": "No Price Data"
+    },
+    "RE": {
+        "delisted": true,
+        "last_checked": "2026-10-15",
         "reason": "No Price Data"
     }
 }
