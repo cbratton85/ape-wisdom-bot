@@ -44,11 +44,6 @@
         "last_checked": "2026-10-16",
         "reason": "No Price Data"
     },
-    "REC": {
-        "delisted": true,
-        "last_checked": "2026-10-16",
-        "reason": "No Price Data"
-    },
     "SOL": {
         "delisted": true,
         "last_checked": "2026-10-16",
@@ -145,6 +140,11 @@
         "reason": "No Price Data"
     },
     "DTC": {
+        "delisted": true,
+        "last_checked": "2026-10-16",
+        "reason": "No Price Data"
+    },
+    "REC": {
         "delisted": true,
         "last_checked": "2026-10-16",
         "reason": "No Price Data"
