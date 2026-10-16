@@ -59,11 +59,6 @@
         "last_checked": "2026-10-16",
         "reason": "No Price Data"
     },
-    "DS": {
-        "delisted": true,
-        "last_checked": "2026-10-16",
-        "reason": "No Price Data"
-    },
     "JW": {
         "delisted": true,
         "last_checked": "2026-10-16",
@@ -155,6 +150,16 @@
         "reason": "No Price Data"
     },
     "PLT": {
+        "delisted": true,
+        "last_checked": "2026-10-16",
+        "reason": "No Price Data"
+    },
+    "DS": {
+        "delisted": true,
+        "last_checked": "2026-10-16",
+        "reason": "No Price Data"
+    },
+    "KW": {
         "delisted": true,
         "last_checked": "2026-10-16",
         "reason": "No Price Data"
