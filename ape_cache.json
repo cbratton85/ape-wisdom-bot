@@ -48948,5 +48948,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "FNB": {
+        "ticker": "FNB",
+        "name": "F.N.B. Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 6057496576,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
