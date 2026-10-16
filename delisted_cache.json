@@ -54,11 +54,6 @@
         "last_checked": "2026-10-16",
         "reason": "No Price Data"
     },
-    "FI": {
-        "delisted": true,
-        "last_checked": "2026-10-16",
-        "reason": "No Price Data"
-    },
     "PLT": {
         "delisted": true,
         "last_checked": "2026-10-16",
@@ -145,6 +140,11 @@
         "reason": "No Price Data"
     },
     "CO": {
+        "delisted": true,
+        "last_checked": "2026-10-16",
+        "reason": "No Price Data"
+    },
+    "FI": {
         "delisted": true,
         "last_checked": "2026-10-16",
         "reason": "No Price Data"
