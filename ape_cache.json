@@ -48968,5 +48968,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "REW": {
+        "ticker": "REW",
+        "name": "ProShares UltraShort Technology",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
