@@ -48958,5 +48958,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SABS": {
+        "ticker": "SABS",
+        "name": "SAB Biotherapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 230195504,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
