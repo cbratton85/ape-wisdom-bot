@@ -59,11 +59,6 @@
         "last_checked": "2026-10-17",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-10-17",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-10-17",
@@ -135,6 +130,11 @@
         "reason": "No Price Data"
     },
     "ABB": {
+        "delisted": true,
+        "last_checked": "2026-10-17",
+        "reason": "No Price Data"
+    },
+    "AUD": {
         "delisted": true,
         "last_checked": "2026-10-17",
         "reason": "No Price Data"
