@@ -134,11 +134,6 @@
         "last_checked": "2026-10-16",
         "reason": "No Price Data"
     },
-    "JW": {
-        "delisted": true,
-        "last_checked": "2026-10-16",
-        "reason": "No Price Data"
-    },
     "SAVE": {
         "delisted": true,
         "last_checked": "2026-10-16",
@@ -155,6 +150,11 @@
         "reason": "No Price Data"
     },
     "GPS": {
+        "delisted": true,
+        "last_checked": "2026-10-17",
+        "reason": "No Price Data"
+    },
+    "JW": {
         "delisted": true,
         "last_checked": "2026-10-17",
         "reason": "No Price Data"
