@@ -119,11 +119,6 @@
         "last_checked": "2026-10-17",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-10-17",
-        "reason": "No Price Data"
-    },
     "HEAR": {
         "delisted": true,
         "last_checked": "2026-10-17",
@@ -145,6 +140,11 @@
         "reason": "No Price Data"
     },
     "ROLL": {
+        "delisted": true,
+        "last_checked": "2026-10-17",
+        "reason": "No Price Data"
+    },
+    "AUD": {
         "delisted": true,
         "last_checked": "2026-10-17",
         "reason": "No Price Data"
