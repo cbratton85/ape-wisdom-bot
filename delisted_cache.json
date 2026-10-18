@@ -129,12 +129,17 @@
         "last_checked": "2026-10-18",
         "reason": "No Price Data"
     },
+    "FI": {
+        "delisted": true,
+        "last_checked": "2026-10-18",
+        "reason": "No Price Data"
+    },
     "MOM": {
         "delisted": true,
         "last_checked": "2026-10-18",
         "reason": "No Price Data"
     },
-    "FI": {
+    "QED": {
         "delisted": true,
         "last_checked": "2026-10-18",
         "reason": "No Price Data"
