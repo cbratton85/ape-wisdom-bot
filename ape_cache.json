@@ -49008,5 +49008,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PNK"
+    },
+    "KARO": {
+        "ticker": "KARO",
+        "name": "Karooooo Ltd.",
+        "meta": "Software - Application",
+        "type": "EQUITY",
+        "mcap": 1865337472,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
