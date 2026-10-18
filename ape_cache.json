@@ -48988,5 +48988,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "OCSL": {
+        "ticker": "OCSL",
+        "name": "Oaktree Specialty Lending Corpo",
+        "meta": "Asset Management",
+        "type": "EQUITY",
+        "mcap": 1019149440,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
