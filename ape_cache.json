@@ -48998,5 +48998,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "SYBX": {
+        "ticker": "SYBX",
+        "name": "Synlogic, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 12248950,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
     }
 }
