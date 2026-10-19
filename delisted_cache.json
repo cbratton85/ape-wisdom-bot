@@ -14,11 +14,6 @@
         "last_checked": "2026-10-18",
         "reason": "No Price Data"
     },
-    "MOM": {
-        "delisted": true,
-        "last_checked": "2026-10-18",
-        "reason": "No Price Data"
-    },
     "CO": {
         "delisted": true,
         "last_checked": "2026-10-18",
@@ -100,6 +95,11 @@
         "reason": "No Price Data"
     },
     "SKLZ": {
+        "delisted": true,
+        "last_checked": "2026-10-19",
+        "reason": "No Price Data"
+    },
+    "MOM": {
         "delisted": true,
         "last_checked": "2026-10-19",
         "reason": "No Price Data"
