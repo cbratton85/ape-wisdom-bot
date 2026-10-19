@@ -49058,5 +49058,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "REBN": {
+        "ticker": "REBN",
+        "name": "Reborn Coffee, Inc.",
+        "meta": "Restaurants",
+        "type": "EQUITY",
+        "mcap": 14568007,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
