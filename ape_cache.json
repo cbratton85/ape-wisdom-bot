@@ -49048,5 +49048,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PNK"
+    },
+    "XBIT": {
+        "ticker": "XBIT",
+        "name": "XBiotech Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 61127908,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
