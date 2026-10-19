@@ -14,11 +14,6 @@
         "last_checked": "2026-10-17",
         "reason": "No Price Data"
     },
-    "SOL": {
-        "delisted": true,
-        "last_checked": "2026-10-17",
-        "reason": "No Price Data"
-    },
     "REC": {
         "delisted": true,
         "last_checked": "2026-10-17",
@@ -135,6 +130,11 @@
         "reason": "No Price Data"
     },
     "SKLZ": {
+        "delisted": true,
+        "last_checked": "2026-10-19",
+        "reason": "No Price Data"
+    },
+    "SOL": {
         "delisted": true,
         "last_checked": "2026-10-19",
         "reason": "No Price Data"
