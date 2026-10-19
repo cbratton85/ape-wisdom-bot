@@ -124,11 +124,6 @@
         "last_checked": "2026-10-18",
         "reason": "No Price Data"
     },
-    "JPN": {
-        "delisted": true,
-        "last_checked": "2026-10-18",
-        "reason": "No Price Data"
-    },
     "SKLZ": {
         "delisted": true,
         "last_checked": "2026-10-18",
@@ -142,6 +137,11 @@
     "QED": {
         "delisted": true,
         "last_checked": "2026-10-18",
+        "reason": "No Price Data"
+    },
+    "JPN": {
+        "delisted": true,
+        "last_checked": "2026-10-19",
         "reason": "No Price Data"
     }
 }
