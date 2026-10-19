@@ -49038,5 +49038,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "LYRA": {
+        "ticker": "LYRA",
+        "name": "Lyra Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 337227,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PNK"
     }
 }
