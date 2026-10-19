@@ -49018,5 +49018,25 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "SLN": {
+        "ticker": "SLN",
+        "name": "Silence Therapeutics Plc - Amer",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1216977024,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
+    },
+    "CCB": {
+        "ticker": "CCB",
+        "name": "Coastal Financial Corporation",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 646764544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
