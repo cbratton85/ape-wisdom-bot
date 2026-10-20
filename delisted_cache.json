@@ -79,11 +79,6 @@
         "last_checked": "2026-10-20",
         "reason": "No Price Data"
     },
-    "NH": {
-        "delisted": true,
-        "last_checked": "2026-10-20",
-        "reason": "No Price Data"
-    },
     "SQ": {
         "delisted": true,
         "last_checked": "2026-10-20",
@@ -95,6 +90,11 @@
         "reason": "No Price Data"
     },
     "MBT": {
+        "delisted": true,
+        "last_checked": "2026-10-20",
+        "reason": "No Price Data"
+    },
+    "NH": {
         "delisted": true,
         "last_checked": "2026-10-20",
         "reason": "No Price Data"
