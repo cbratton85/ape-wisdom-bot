@@ -49068,5 +49068,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "WKC": {
+        "ticker": "WKC",
+        "name": "World Kinect Corporation",
+        "meta": "Oil & Gas Refining & Marketing",
+        "type": "EQUITY",
+        "mcap": 1826368640,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
