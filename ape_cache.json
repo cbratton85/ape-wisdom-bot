@@ -49098,5 +49098,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "SJNK": {
+        "ticker": "SJNK",
+        "name": "State Street SPDR Bloomberg Sho",
+        "meta": "High Yield Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
