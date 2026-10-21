@@ -114,12 +114,12 @@
         "last_checked": "2026-10-21",
         "reason": "No Price Data"
     },
-    "OLD": {
+    "REV": {
         "delisted": true,
         "last_checked": "2026-10-21",
         "reason": "No Price Data"
     },
-    "REV": {
+    "OLD": {
         "delisted": true,
         "last_checked": "2026-10-21",
         "reason": "No Price Data"
