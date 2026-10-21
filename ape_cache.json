@@ -49088,5 +49088,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "AIRO": {
+        "ticker": "AIRO",
+        "name": "AIRO Group Holdings, Inc.",
+        "meta": "Aerospace & Defense",
+        "type": "EQUITY",
+        "mcap": 161250736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
