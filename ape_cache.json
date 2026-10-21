@@ -49078,5 +49078,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TEO": {
+        "ticker": "TEO",
+        "name": "Telecom Argentina SA",
+        "meta": "Telecom Services",
+        "type": "EQUITY",
+        "mcap": 5522055680,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
