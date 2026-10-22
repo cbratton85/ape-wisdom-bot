@@ -49118,5 +49118,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "KOP": {
+        "ticker": "KOP",
+        "name": "Koppers Holdings Inc.",
+        "meta": "Specialty Chemicals",
+        "type": "EQUITY",
+        "mcap": 781804224,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
