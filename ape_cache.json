@@ -49128,5 +49128,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "BHVN": {
+        "ticker": "BHVN",
+        "name": "Biohaven Ltd.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 2426065152,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
