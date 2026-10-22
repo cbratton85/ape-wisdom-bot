@@ -9,11 +9,6 @@
         "last_checked": "2026-10-20",
         "reason": "No Price Data"
     },
-    "HEAR": {
-        "delisted": true,
-        "last_checked": "2026-10-20",
-        "reason": "No Price Data"
-    },
     "JPN": {
         "delisted": true,
         "last_checked": "2026-10-21",
@@ -140,6 +135,11 @@
         "reason": "No Price Data"
     },
     "FI": {
+        "delisted": true,
+        "last_checked": "2026-10-22",
+        "reason": "No Price Data"
+    },
+    "HEAR": {
         "delisted": true,
         "last_checked": "2026-10-22",
         "reason": "No Price Data"
