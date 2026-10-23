@@ -49168,5 +49168,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "IVT": {
+        "ticker": "IVT",
+        "name": "InvenTrust Properties Corp.",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 2345591296,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
