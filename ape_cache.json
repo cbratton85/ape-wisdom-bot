@@ -49138,5 +49138,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VIVO": {
+        "ticker": "VIVO",
+        "name": "VivoPower PLC",
+        "meta": "Software - Infrastructure",
+        "type": "EQUITY",
+        "mcap": 72945304,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
