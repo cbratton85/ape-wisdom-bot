@@ -49148,5 +49148,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "MEOH": {
+        "ticker": "MEOH",
+        "name": "Methanex Corporation",
+        "meta": "Chemicals",
+        "type": "EQUITY",
+        "mcap": 4880911360,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
