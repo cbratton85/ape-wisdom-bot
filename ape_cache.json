@@ -49158,5 +49158,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "AGBK": {
+        "ticker": "AGBK",
+        "name": "AGI Inc",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 1986706048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
