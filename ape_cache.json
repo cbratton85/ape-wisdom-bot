@@ -49178,5 +49178,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "RAPP": {
+        "ticker": "RAPP",
+        "name": "Rapport Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1244077056,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
