@@ -34,11 +34,6 @@
         "last_checked": "2026-10-23",
         "reason": "No Price Data"
     },
-    "MTL": {
-        "delisted": true,
-        "last_checked": "2026-10-23",
-        "reason": "No Price Data"
-    },
     "TTM": {
         "delisted": true,
         "last_checked": "2026-10-23",
@@ -125,6 +120,11 @@
         "reason": "No Price Data"
     },
     "AHH": {
+        "delisted": true,
+        "last_checked": "2026-10-24",
+        "reason": "No Price Data"
+    },
+    "MTL": {
         "delisted": true,
         "last_checked": "2026-10-24",
         "reason": "No Price Data"
