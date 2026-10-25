@@ -49198,5 +49198,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "IMDX": {
+        "ticker": "IMDX",
+        "name": "Insight Molecular Diagnostics I",
+        "meta": "Diagnostics & Research",
+        "type": "EQUITY",
+        "mcap": 92609720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
