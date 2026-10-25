@@ -49188,5 +49188,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "FPH": {
+        "ticker": "FPH",
+        "name": "Five Point Holdings, LLC",
+        "meta": "Real Estate - Development",
+        "type": "EQUITY",
+        "mcap": 621190464,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
