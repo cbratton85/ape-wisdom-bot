@@ -49238,5 +49238,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "ECH": {
+        "ticker": "ECH",
+        "name": "iShares MSCI Chile ETF",
+        "meta": "Focused Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
