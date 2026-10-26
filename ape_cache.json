@@ -49218,5 +49218,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "DVYE": {
+        "ticker": "DVYE",
+        "name": "iShares Emerging Markets Divide",
+        "meta": "Diversified Emerging Mkts",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
