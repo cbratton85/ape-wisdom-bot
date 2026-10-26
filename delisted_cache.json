@@ -73,5 +73,10 @@
         "delisted": true,
         "last_checked": "2026-10-26",
         "reason": "No Price Data"
+    },
+    "SOL": {
+        "delisted": true,
+        "last_checked": "2026-10-26",
+        "reason": "No Price Data"
     }
 }
