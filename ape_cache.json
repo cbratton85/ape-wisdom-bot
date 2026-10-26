@@ -49228,5 +49228,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "MCFT": {
+        "ticker": "MCFT",
+        "name": "MasterCraft Boat Holdings, Inc.",
+        "meta": "Recreational Vehicles",
+        "type": "EQUITY",
+        "mcap": 477051712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
