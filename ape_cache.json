@@ -49208,5 +49208,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "GIX": {
+        "ticker": "GIX",
+        "name": "GigCapital9 Corp.",
+        "meta": "Shell Companies",
+        "type": "EQUITY",
+        "mcap": 365468128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
