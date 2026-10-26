@@ -34,11 +34,6 @@
         "last_checked": "2026-10-25",
         "reason": "No Price Data"
     },
-    "TTM": {
-        "delisted": true,
-        "last_checked": "2026-10-25",
-        "reason": "No Price Data"
-    },
     "NH": {
         "delisted": true,
         "last_checked": "2026-10-25",
@@ -67,6 +62,11 @@
     "ABB": {
         "delisted": true,
         "last_checked": "2026-10-25",
+        "reason": "No Price Data"
+    },
+    "TTM": {
+        "delisted": true,
+        "last_checked": "2026-10-26",
         "reason": "No Price Data"
     }
 }
