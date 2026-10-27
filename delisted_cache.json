@@ -79,6 +79,11 @@
         "last_checked": "2026-10-27",
         "reason": "No Price Data"
     },
+    "MOM": {
+        "delisted": true,
+        "last_checked": "2026-10-27",
+        "reason": "No Price Data"
+    },
     "OPT": {
         "delisted": true,
         "last_checked": "2026-10-27",
