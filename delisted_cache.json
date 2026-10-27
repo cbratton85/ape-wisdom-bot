@@ -34,11 +34,6 @@
         "last_checked": "2026-10-27",
         "reason": "No Price Data"
     },
-    "CSA": {
-        "delisted": true,
-        "last_checked": "2026-10-27",
-        "reason": "No Price Data"
-    },
     "TSE": {
         "delisted": true,
         "last_checked": "2026-10-27",
@@ -85,6 +80,11 @@
         "reason": "No Price Data"
     },
     "SOL": {
+        "delisted": true,
+        "last_checked": "2026-10-27",
+        "reason": "No Price Data"
+    },
+    "CSA": {
         "delisted": true,
         "last_checked": "2026-10-27",
         "reason": "No Price Data"
