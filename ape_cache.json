@@ -49258,5 +49258,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "CLMB": {
+        "ticker": "CLMB",
+        "name": "Climb Global Solutions, Inc.",
+        "meta": "Electronics & Computer Distribution",
+        "type": "EQUITY",
+        "mcap": 618227008,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
