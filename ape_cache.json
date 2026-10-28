@@ -49248,5 +49248,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "AXGN": {
+        "ticker": "AXGN",
+        "name": "AxoGen, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 2822099712,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
