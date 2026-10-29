@@ -59,11 +59,6 @@
         "last_checked": "2026-10-29",
         "reason": "No Price Data"
     },
-    "REV": {
-        "delisted": true,
-        "last_checked": "2026-10-29",
-        "reason": "No Price Data"
-    },
     "RE": {
         "delisted": true,
         "last_checked": "2026-10-29",
@@ -90,6 +85,11 @@
         "reason": "No Price Data"
     },
     "ELY": {
+        "delisted": true,
+        "last_checked": "2026-10-29",
+        "reason": "No Price Data"
+    },
+    "REV": {
         "delisted": true,
         "last_checked": "2026-10-29",
         "reason": "No Price Data"
