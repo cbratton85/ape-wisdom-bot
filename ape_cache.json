@@ -49268,5 +49268,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "INVX": {
+        "ticker": "INVX",
+        "name": "Innovex International, Inc.",
+        "meta": "Oil & Gas Equipment & Services",
+        "type": "EQUITY",
+        "mcap": 2126398720,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
