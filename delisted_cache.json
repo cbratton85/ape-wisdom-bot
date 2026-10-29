@@ -19,11 +19,6 @@
         "last_checked": "2026-10-29",
         "reason": "No Price Data"
     },
-    "OPT": {
-        "delisted": true,
-        "last_checked": "2026-10-29",
-        "reason": "No Price Data"
-    },
     "FI": {
         "delisted": true,
         "last_checked": "2026-10-29",
@@ -85,6 +80,16 @@
         "reason": "No Price Data"
     },
     "RE": {
+        "delisted": true,
+        "last_checked": "2026-10-29",
+        "reason": "No Price Data"
+    },
+    "DTC": {
+        "delisted": true,
+        "last_checked": "2026-10-29",
+        "reason": "No Price Data"
+    },
+    "OPT": {
         "delisted": true,
         "last_checked": "2026-10-29",
         "reason": "No Price Data"
