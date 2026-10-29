@@ -83,5 +83,10 @@
         "delisted": true,
         "last_checked": "2026-10-29",
         "reason": "No Price Data"
+    },
+    "BABY": {
+        "delisted": true,
+        "last_checked": "2026-10-29",
+        "reason": "No Price Data"
     }
 }
