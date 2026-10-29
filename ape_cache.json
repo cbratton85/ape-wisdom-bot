@@ -49278,5 +49278,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "STOK": {
+        "ticker": "STOK",
+        "name": "Stoke Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1703815424,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
