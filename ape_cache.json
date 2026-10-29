@@ -49288,5 +49288,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "CMDB": {
+        "ticker": "CMDB",
+        "name": "Costamare Bulkers Holdings Limi",
+        "meta": "Marine Shipping",
+        "type": "EQUITY",
+        "mcap": 489918048,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
