@@ -49348,5 +49348,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CHRN": {
+        "ticker": "CHRN",
+        "name": "ChronoScale Holdings Corporatio",
+        "meta": "Information Technology Services",
+        "type": "EQUITY",
+        "mcap": 2120481408,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
