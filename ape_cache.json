@@ -49328,5 +49328,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "KYMR": {
+        "ticker": "KYMR",
+        "name": "Kymera Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 10464826368,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
