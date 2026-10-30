@@ -49308,5 +49308,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "THNQ": {
+        "ticker": "THNQ",
+        "name": "ROBO Global Artificial Intellig",
+        "meta": "Technology",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
