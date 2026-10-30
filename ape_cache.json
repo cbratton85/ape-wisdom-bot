@@ -49338,5 +49338,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "FDIV": {
+        "ticker": "FDIV",
+        "name": "MarketDesk Focused U.S. Dividen",
+        "meta": "Mid-Cap Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
