@@ -89,17 +89,17 @@
         "last_checked": "2026-10-30",
         "reason": "No Price Data"
     },
-    "RE": {
-        "delisted": true,
-        "last_checked": "2026-10-30",
-        "reason": "No Price Data"
-    },
     "AHH": {
         "delisted": true,
         "last_checked": "2026-10-30",
         "reason": "No Price Data"
     },
     "SSSS": {
+        "delisted": true,
+        "last_checked": "2026-10-30",
+        "reason": "No Price Data"
+    },
+    "RE": {
         "delisted": true,
         "last_checked": "2026-10-30",
         "reason": "No Price Data"
