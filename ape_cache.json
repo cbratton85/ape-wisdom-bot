@@ -49318,5 +49318,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "AMAL": {
+        "ticker": "AMAL",
+        "name": "Amalgamated Financial Corp.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 1534475648,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
