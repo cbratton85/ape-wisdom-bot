@@ -49298,5 +49298,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "GKOS": {
+        "ticker": "GKOS",
+        "name": "Glaukos Corporation",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 14302424064,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
