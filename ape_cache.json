@@ -49358,5 +49358,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "LIME": {
+        "ticker": "LIME",
+        "name": "Neutron Holdings, Inc.",
+        "meta": "Rental & Leasing Services",
+        "type": "EQUITY",
+        "mcap": 1492444544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
