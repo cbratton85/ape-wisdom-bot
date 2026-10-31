@@ -49368,5 +49368,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "IPSC": {
+        "ticker": "IPSC",
+        "name": "Century Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 266180736,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
