@@ -49,11 +49,6 @@
         "last_checked": "2026-10-30",
         "reason": "No Price Data"
     },
-    "SEM": {
-        "delisted": true,
-        "last_checked": "2026-10-30",
-        "reason": "No Price Data"
-    },
     "GPL": {
         "delisted": true,
         "last_checked": "2026-10-30",
@@ -120,6 +115,11 @@
         "reason": "No Price Data"
     },
     "FI": {
+        "delisted": true,
+        "last_checked": "2026-10-31",
+        "reason": "No Price Data"
+    },
+    "SEM": {
         "delisted": true,
         "last_checked": "2026-10-31",
         "reason": "No Price Data"
