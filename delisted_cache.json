@@ -9,11 +9,6 @@
         "last_checked": "2026-10-30",
         "reason": "No Price Data"
     },
-    "GPL": {
-        "delisted": true,
-        "last_checked": "2026-10-30",
-        "reason": "No Price Data"
-    },
     "OG": {
         "delisted": true,
         "last_checked": "2026-10-30",
@@ -115,6 +110,11 @@
         "reason": "No Price Data"
     },
     "PIN": {
+        "delisted": true,
+        "last_checked": "2026-11-01",
+        "reason": "No Price Data"
+    },
+    "GPL": {
         "delisted": true,
         "last_checked": "2026-11-01",
         "reason": "No Price Data"
