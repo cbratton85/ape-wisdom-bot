@@ -49378,5 +49378,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "WEYS": {
+        "ticker": "WEYS",
+        "name": "Weyco Group, Inc.",
+        "meta": "Footwear & Accessories",
+        "type": "EQUITY",
+        "mcap": 501044544,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
