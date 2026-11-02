@@ -99,17 +99,17 @@
         "last_checked": "2026-11-02",
         "reason": "No Price Data"
     },
-    "TGIF": {
-        "delisted": true,
-        "last_checked": "2026-11-02",
-        "reason": "No Price Data"
-    },
     "SPLG": {
         "delisted": true,
         "last_checked": "2026-11-02",
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-11-02",
+        "reason": "No Price Data"
+    },
+    "TGIF": {
         "delisted": true,
         "last_checked": "2026-11-02",
         "reason": "No Price Data"
