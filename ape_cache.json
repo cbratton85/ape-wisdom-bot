@@ -49388,5 +49388,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "MERC": {
+        "ticker": "MERC",
+        "name": "Mercer International Inc.",
+        "meta": "Paper & Paper Products",
+        "type": "EQUITY",
+        "mcap": 8444272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
