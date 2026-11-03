@@ -49398,5 +49398,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "STVN": {
+        "ticker": "STVN",
+        "name": "Stevanato Group S.p.A.",
+        "meta": "Medical Instruments & Supplies",
+        "type": "EQUITY",
+        "mcap": 5389092352,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
