@@ -49408,5 +49408,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "SBB": {
+        "ticker": "SBB",
+        "name": "ProShares Short SmallCap600",
+        "meta": "Trading--Inverse Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
