@@ -49418,5 +49418,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "CBL": {
+        "ticker": "CBL",
+        "name": "CBL & Associates Properties, In",
+        "meta": "REIT - Retail",
+        "type": "EQUITY",
+        "mcap": 1537854976,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
