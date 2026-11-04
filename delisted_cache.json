@@ -29,11 +29,6 @@
         "last_checked": "2026-11-04",
         "reason": "No Price Data"
     },
-    "SPLG": {
-        "delisted": true,
-        "last_checked": "2026-11-04",
-        "reason": "No Price Data"
-    },
     "NH": {
         "delisted": true,
         "last_checked": "2026-11-04",
@@ -75,6 +70,11 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-11-04",
+        "reason": "No Price Data"
+    },
+    "SPLG": {
         "delisted": true,
         "last_checked": "2026-11-04",
         "reason": "No Price Data"
