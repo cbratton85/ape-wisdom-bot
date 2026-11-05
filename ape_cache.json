@@ -49448,5 +49448,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "VMRK": {
+        "ticker": "VMRK",
+        "name": "Vivmark Residential",
+        "meta": "REIT - Residential",
+        "type": "EQUITY",
+        "mcap": 50311118848,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
