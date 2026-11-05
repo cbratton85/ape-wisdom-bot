@@ -49438,5 +49438,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "ANDG": {
+        "ticker": "ANDG",
+        "name": "Andersen Group Inc.",
+        "meta": "Personal Services",
+        "type": "EQUITY",
+        "mcap": 1239611776,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
