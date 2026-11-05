@@ -49428,5 +49428,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "KIE": {
+        "ticker": "KIE",
+        "name": "State Street SPDR S&P Insurance",
+        "meta": "Financial",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }

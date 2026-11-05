@@ -1,9 +1,4 @@
 {
-    "REV": {
-        "delisted": true,
-        "last_checked": "2026-11-04",
-        "reason": "No Price Data"
-    },
     "JW": {
         "delisted": true,
         "last_checked": "2026-11-04",
@@ -70,6 +65,31 @@
         "reason": "No Price Data"
     },
     "HEAR": {
+        "delisted": true,
+        "last_checked": "2026-11-05",
+        "reason": "No Price Data"
+    },
+    "SAVE": {
+        "delisted": true,
+        "last_checked": "2026-11-05",
+        "reason": "No Price Data"
+    },
+    "ROOF": {
+        "delisted": true,
+        "last_checked": "2026-11-05",
+        "reason": "No Price Data"
+    },
+    "TGIF": {
+        "delisted": true,
+        "last_checked": "2026-11-05",
+        "reason": "No Price Data"
+    },
+    "REV": {
+        "delisted": true,
+        "last_checked": "2026-11-05",
+        "reason": "No Price Data"
+    },
+    "DTC": {
         "delisted": true,
         "last_checked": "2026-11-05",
         "reason": "No Price Data"
