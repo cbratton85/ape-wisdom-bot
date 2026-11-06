@@ -49478,5 +49478,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "LTPZ": {
+        "ticker": "LTPZ",
+        "name": "Pimco 15  Year U.S. TIPS Index ",
+        "meta": "Inflation-Protected Bond",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
