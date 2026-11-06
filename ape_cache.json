@@ -49458,5 +49458,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "IYY": {
+        "ticker": "IYY",
+        "name": "iShares Dow Jones U.S. ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
