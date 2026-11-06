@@ -49488,5 +49488,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SPXE": {
+        "ticker": "SPXE",
+        "name": "ProShares S&P 500 Ex-Energy ETF",
+        "meta": "Large Blend",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
