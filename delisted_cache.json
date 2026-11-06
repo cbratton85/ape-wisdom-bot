@@ -34,11 +34,6 @@
         "last_checked": "2026-11-06",
         "reason": "No Price Data"
     },
-    "REV": {
-        "delisted": true,
-        "last_checked": "2026-11-06",
-        "reason": "No Price Data"
-    },
     "JW": {
         "delisted": true,
         "last_checked": "2026-11-06",
@@ -145,6 +140,11 @@
         "reason": "No Price Data"
     },
     "LUNA": {
+        "delisted": true,
+        "last_checked": "2026-11-06",
+        "reason": "No Price Data"
+    },
+    "REV": {
         "delisted": true,
         "last_checked": "2026-11-06",
         "reason": "No Price Data"
