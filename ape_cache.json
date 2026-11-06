@@ -49498,5 +49498,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "SUPN": {
+        "ticker": "SUPN",
+        "name": "Supernus Pharmaceuticals, Inc.",
+        "meta": "Drug Manufacturers - Specialty & Generic",
+        "type": "EQUITY",
+        "mcap": 1523446272,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
