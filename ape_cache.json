@@ -49468,5 +49468,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "DRN": {
+        "ticker": "DRN",
+        "name": "Direxion Daily Real Estate Bull",
+        "meta": "Trading--Leveraged Equity",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
