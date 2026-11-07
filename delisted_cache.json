@@ -134,17 +134,22 @@
         "last_checked": "2026-11-06",
         "reason": "No Price Data"
     },
-    "JW": {
-        "delisted": true,
-        "last_checked": "2026-11-06",
-        "reason": "No Price Data"
-    },
     "YY": {
         "delisted": true,
         "last_checked": "2026-11-07",
         "reason": "No Price Data"
     },
     "BOSS": {
+        "delisted": true,
+        "last_checked": "2026-11-07",
+        "reason": "No Price Data"
+    },
+    "LBJ": {
+        "delisted": true,
+        "last_checked": "2026-11-07",
+        "reason": "No Price Data"
+    },
+    "JW": {
         "delisted": true,
         "last_checked": "2026-11-07",
         "reason": "No Price Data"
