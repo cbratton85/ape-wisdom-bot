@@ -49508,5 +49508,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "BANC": {
+        "ticker": "BANC",
+        "name": "Banc of California, Inc.",
+        "meta": "Banks - Regional",
+        "type": "EQUITY",
+        "mcap": 2849104128,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
