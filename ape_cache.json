@@ -49518,5 +49518,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "TTAM": {
+        "ticker": "TTAM",
+        "name": "Titan America SA",
+        "meta": "Building Materials",
+        "type": "EQUITY",
+        "mcap": 2076043904,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }

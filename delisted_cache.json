@@ -74,11 +74,6 @@
         "last_checked": "2026-11-08",
         "reason": "No Price Data"
     },
-    "SNP": {
-        "delisted": true,
-        "last_checked": "2026-11-08",
-        "reason": "No Price Data"
-    },
     "OG": {
         "delisted": true,
         "last_checked": "2026-11-08",
@@ -115,6 +110,11 @@
         "reason": "No Price Data"
     },
     "CO": {
+        "delisted": true,
+        "last_checked": "2026-11-08",
+        "reason": "No Price Data"
+    },
+    "SNP": {
         "delisted": true,
         "last_checked": "2026-11-08",
         "reason": "No Price Data"
