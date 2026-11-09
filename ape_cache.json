@@ -49538,5 +49538,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NMS"
+    },
+    "DCTH": {
+        "ticker": "DCTH",
+        "name": "Delcath Systems, Inc.",
+        "meta": "Medical Devices",
+        "type": "EQUITY",
+        "mcap": 657195200,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
