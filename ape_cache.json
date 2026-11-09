@@ -49548,5 +49548,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "CAAS": {
+        "ticker": "CAAS",
+        "name": "China Automotive Systems, Inc.",
+        "meta": "Auto Parts",
+        "type": "EQUITY",
+        "mcap": 126113528,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
