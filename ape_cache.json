@@ -49528,5 +49528,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "KLRA": {
+        "ticker": "KLRA",
+        "name": "Kailera Therapeutics, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1684160768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NMS"
     }
 }
