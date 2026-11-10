@@ -34,11 +34,6 @@
         "last_checked": "2026-11-09",
         "reason": "No Price Data"
     },
-    "AUD": {
-        "delisted": true,
-        "last_checked": "2026-11-09",
-        "reason": "No Price Data"
-    },
     "GPS": {
         "delisted": true,
         "last_checked": "2026-11-09",
@@ -110,6 +105,16 @@
         "reason": "No Price Data"
     },
     "BABY": {
+        "delisted": true,
+        "last_checked": "2026-11-10",
+        "reason": "No Price Data"
+    },
+    "SLY": {
+        "delisted": true,
+        "last_checked": "2026-11-10",
+        "reason": "No Price Data"
+    },
+    "AUD": {
         "delisted": true,
         "last_checked": "2026-11-10",
         "reason": "No Price Data"
