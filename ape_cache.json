@@ -49558,5 +49558,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "EWG": {
+        "ticker": "EWG",
+        "name": "iShares MSCI Germany Index Fund",
+        "meta": "Focused Region",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "PCX"
     }
 }
