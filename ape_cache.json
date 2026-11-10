@@ -49568,5 +49568,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "PCX"
+    },
+    "PXLW": {
+        "ticker": "PXLW",
+        "name": "Pixelworks, Inc.",
+        "meta": "Semiconductors",
+        "type": "EQUITY",
+        "mcap": 31547586,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
