@@ -49578,5 +49578,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "KARD": {
+        "ticker": "KARD",
+        "name": "Kardigan, Inc.",
+        "meta": "Biotechnology",
+        "type": "EQUITY",
+        "mcap": 1472683264,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NGM"
     }
 }
