@@ -49588,5 +49588,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NGM"
+    },
+    "CALF": {
+        "ticker": "CALF",
+        "name": "Pacer US Small Cap Cash Cows ET",
+        "meta": "Small Value",
+        "type": "ETF",
+        "mcap": 0,
+        "currency": "USD",
+        "description": "",
+        "exchange": "BTS"
     }
 }
