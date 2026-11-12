@@ -119,17 +119,22 @@
         "last_checked": "2026-11-12",
         "reason": "No Price Data"
     },
-    "NH": {
-        "delisted": true,
-        "last_checked": "2026-11-12",
-        "reason": "No Price Data"
-    },
     "DTC": {
         "delisted": true,
         "last_checked": "2026-11-12",
         "reason": "No Price Data"
     },
     "HEAR": {
+        "delisted": true,
+        "last_checked": "2026-11-12",
+        "reason": "No Price Data"
+    },
+    "LBJ": {
+        "delisted": true,
+        "last_checked": "2026-11-12",
+        "reason": "No Price Data"
+    },
+    "NH": {
         "delisted": true,
         "last_checked": "2026-11-12",
         "reason": "No Price Data"
