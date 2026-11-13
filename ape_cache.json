@@ -49608,5 +49608,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NCM"
+    },
+    "XIFR": {
+        "ticker": "XIFR",
+        "name": "XPLR Infrastructure, LP",
+        "meta": "Utilities - Renewable",
+        "type": "EQUITY",
+        "mcap": 711759616,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
