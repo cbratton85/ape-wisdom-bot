@@ -49598,5 +49598,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "BTS"
+    },
+    "CRWS": {
+        "ticker": "CRWS",
+        "name": "Crown Crafts, Inc.",
+        "meta": "Furnishings, Fixtures & Appliances",
+        "type": "EQUITY",
+        "mcap": 27546334,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NCM"
     }
 }
