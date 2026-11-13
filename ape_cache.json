@@ -49618,5 +49618,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "ONT": {
+        "ticker": "ONT",
+        "name": "Onterris, Inc.",
+        "meta": "Waste Management",
+        "type": "EQUITY",
+        "mcap": 816529536,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
