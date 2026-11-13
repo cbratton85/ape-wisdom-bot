@@ -69,11 +69,6 @@
         "last_checked": "2026-11-13",
         "reason": "No Price Data"
     },
-    "GPS": {
-        "delisted": true,
-        "last_checked": "2026-11-13",
-        "reason": "No Price Data"
-    },
     "CEI": {
         "delisted": true,
         "last_checked": "2026-11-13",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "FM": {
+        "delisted": true,
+        "last_checked": "2026-11-13",
+        "reason": "No Price Data"
+    },
+    "GPS": {
         "delisted": true,
         "last_checked": "2026-11-13",
         "reason": "No Price Data"
