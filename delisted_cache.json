@@ -44,11 +44,6 @@
         "last_checked": "2026-11-12",
         "reason": "No Price Data"
     },
-    "FI": {
-        "delisted": true,
-        "last_checked": "2026-11-12",
-        "reason": "No Price Data"
-    },
     "JW": {
         "delisted": true,
         "last_checked": "2026-11-12",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "CEI": {
+        "delisted": true,
+        "last_checked": "2026-11-13",
+        "reason": "No Price Data"
+    },
+    "FI": {
         "delisted": true,
         "last_checked": "2026-11-13",
         "reason": "No Price Data"
