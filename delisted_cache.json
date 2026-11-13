@@ -9,11 +9,6 @@
         "last_checked": "2026-11-12",
         "reason": "No Price Data"
     },
-    "ZI": {
-        "delisted": true,
-        "last_checked": "2026-11-12",
-        "reason": "No Price Data"
-    },
     "SAVE": {
         "delisted": true,
         "last_checked": "2026-11-12",
@@ -150,6 +145,11 @@
         "reason": "No Price Data"
     },
     "CO": {
+        "delisted": true,
+        "last_checked": "2026-11-13",
+        "reason": "No Price Data"
+    },
+    "ZI": {
         "delisted": true,
         "last_checked": "2026-11-13",
         "reason": "No Price Data"
