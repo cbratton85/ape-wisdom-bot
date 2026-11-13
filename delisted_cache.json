@@ -149,12 +149,17 @@
         "last_checked": "2026-11-13",
         "reason": "No Price Data"
     },
-    "JW": {
+    "IGN": {
         "delisted": true,
         "last_checked": "2026-11-13",
         "reason": "No Price Data"
     },
-    "IGN": {
+    "LIV": {
+        "delisted": true,
+        "last_checked": "2026-11-13",
+        "reason": "No Price Data"
+    },
+    "JW": {
         "delisted": true,
         "last_checked": "2026-11-13",
         "reason": "No Price Data"
