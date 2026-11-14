@@ -129,11 +129,6 @@
         "last_checked": "2026-11-14",
         "reason": "No Price Data"
     },
-    "MOM": {
-        "delisted": true,
-        "last_checked": "2026-11-14",
-        "reason": "No Price Data"
-    },
     "PIN": {
         "delisted": true,
         "last_checked": "2026-11-14",
@@ -165,6 +160,11 @@
         "reason": "No Price Data"
     },
     "DS": {
+        "delisted": true,
+        "last_checked": "2026-11-14",
+        "reason": "No Price Data"
+    },
+    "MOM": {
         "delisted": true,
         "last_checked": "2026-11-14",
         "reason": "No Price Data"
