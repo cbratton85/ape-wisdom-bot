@@ -49628,5 +49628,15 @@
         "currency": "USD",
         "description": "",
         "exchange": "NYQ"
+    },
+    "OGS": {
+        "ticker": "OGS",
+        "name": "ONE Gas, Inc.",
+        "meta": "Utilities - Regulated Gas",
+        "type": "EQUITY",
+        "mcap": 5271200768,
+        "currency": "USD",
+        "description": "",
+        "exchange": "NYQ"
     }
 }
