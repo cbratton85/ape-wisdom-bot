@@ -14,11 +14,6 @@
         "last_checked": "2026-11-12",
         "reason": "No Price Data"
     },
-    "BABY": {
-        "delisted": true,
-        "last_checked": "2026-11-12",
-        "reason": "No Price Data"
-    },
     "CN": {
         "delisted": true,
         "last_checked": "2026-11-13",
@@ -165,6 +160,11 @@
         "reason": "No Price Data"
     },
     "PIN": {
+        "delisted": true,
+        "last_checked": "2026-11-14",
+        "reason": "No Price Data"
+    },
+    "BABY": {
         "delisted": true,
         "last_checked": "2026-11-14",
         "reason": "No Price Data"
