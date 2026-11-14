@@ -139,11 +139,6 @@
         "last_checked": "2026-11-13",
         "reason": "No Price Data"
     },
-    "LBJ": {
-        "delisted": true,
-        "last_checked": "2026-11-13",
-        "reason": "No Price Data"
-    },
     "AUD": {
         "delisted": true,
         "last_checked": "2026-11-13",
@@ -167,6 +162,11 @@
     "DS": {
         "delisted": true,
         "last_checked": "2026-11-13",
+        "reason": "No Price Data"
+    },
+    "LBJ": {
+        "delisted": true,
+        "last_checked": "2026-11-14",
         "reason": "No Price Data"
     }
 }
